@@ -92,6 +92,7 @@ GEM
     json (1.8.3)
     kramdown (1.10.0)
     liquid (3.0.6)
+    liquid-inheritance (0.1.1)
     listen (3.0.6)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9.7)
@@ -128,6 +129,7 @@ PLATFORMS
 
 DEPENDENCIES
   github-pages
+  liquid-inheritance
 
 BUNDLED WITH
    1.11.2

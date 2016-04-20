@@ -1,21 +1,19 @@
 ---
 layout: default
+title: eQ Prototypes
+html_class: index
 ---
 
-<div class="home">
+<h1>ONS Electronic Questionnaire Project—UX Research</h1>
 
-  <ul class="page-list">
-    {% for page in site.html_pages|reverse %}
+<nav class="prototype-list">
+  <ul>
+    {% for prototype in site.prototypes %}
+      {% if prototype.title %}
       <li>
-        <h2>
-          <a class="page-link" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
-        </h2>
+        <a href="{{ prototype.url | prepend: site.baseurl }}">{{ prototype.title }}</a>
       </li>
+      {% endif %}
     {% endfor %}
   </ul>
-
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
-  <p>
-    {{site.baseurl}}
-  </p>
-</div>
+</nav>
