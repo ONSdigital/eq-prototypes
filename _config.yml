@@ -8,4 +8,6 @@ url: "http://onsdigital.github.io" # the base hostname & protocol for your site
 collections:
   prototypes:
     output: true
+    permalink: /:path/
+
 markdown: kramdown
