@@ -5,14 +5,14 @@ title: eQ Prototypes
 
 <h1>ONS Electronic Questionnaire Project—UX Research</h1>
 
-{% for file in site.collections.prototypes %}
+{% for file in site.static_pages %}
   {{file}}
 {% endfor %}
 
 <nav class="prototype-list">
   <ul>
     {% for prototype in site.prototypes %}
-      {% if prototype.title %}
+      {% if prototype.path contains 'index.html' %}
       <li>
         <a href="{{ prototype.url | prepend: site.baseurl }}">{{ prototype.title }}</a>
       </li>
