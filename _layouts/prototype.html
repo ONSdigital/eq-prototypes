@@ -5,6 +5,23 @@
 
   <body>
     {{ content }}
+
+    <div class="hidden-nav">
+      {% include prototype_nav.html %}
+    </div>
   </body>
+
+  <script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
+
+  <script>
+    $(function(){
+      var $hiddenNavBtn = $('<div/>')
+        .addClass('hidden-nav-btn')
+        .on('click', function() {
+          $('.hidden-nav').toggleClass('is-open');
+        })
+      $('body').append($hiddenNavBtn);
+    });
+  </script>
 
 </html>
