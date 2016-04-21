@@ -10,4 +10,11 @@ collections:
     output: true
     permalink: /:path/
 
+defaults:
+  - scope:
+      path: ""
+      type: prototypes
+    values:
+      layout: prototype
+
 markdown: kramdown
