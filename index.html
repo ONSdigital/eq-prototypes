@@ -5,18 +5,23 @@ title: eQ Prototypes
 
 <h1>ONS Electronic Questionnaire Project—UX Research</h1>
 
-{% for file in site.static_pages %}
-  {{file}}
-{% endfor %}
+{% assign all_categories = site.prototypes | map: "project" | uniq %}
 
 <nav class="prototype-list">
+
   <ul>
+
+  {% for cat in all_categories %}
+
+    <li><strong>{{cat}}</strong></li>
     {% for prototype in site.prototypes %}
-      {% if prototype.path contains 'index.html' %}
-      <li>
-        <a href="{{ prototype.url | prepend: site.baseurl }}">{{ prototype.title }}</a>
-      </li>
+      {% if prototype.path contains 'index.html' and prototype.project == cat %}
+      <li><a href="{{ prototype.url | prepend: site.baseurl }}">{{ prototype.title }}</a></li>
       {% endif %}
     {% endfor %}
+
+  {% endfor %}
+
   </ul>
+
 </nav>
