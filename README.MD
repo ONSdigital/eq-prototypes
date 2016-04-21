@@ -2,6 +2,7 @@
 
 
 ## Install
+- `gem install bundler`
 - `git clone https://github.com/ONSdigital/eq-prototypes.git`
 - `bundle install`
 
