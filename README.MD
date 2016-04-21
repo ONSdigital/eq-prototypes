@@ -1,8 +1,9 @@
 # eQ prototypes
 
-## Install
 
-`bundle Install`
+## Install
+`git clone https://github.com/ONSdigital/eq-prototypes.git`
+`bundle install`
 
 ## Run
 
