@@ -1,0 +1,60 @@
+---
+title: Numbers Proto
+project: Numbers
+---
+
+<div class="question">
+  <label>How much money is in your pocket?</label>
+  <div class="input-wrap symbol currency">
+    <input type="text" placeholder="e.g. 10.00" pattern="\d*" inputmode="numeric" maxlength="6" class="input">
+    <span class="hint">e.g. 10.00</span>
+  </div>
+  <div>
+    <a href="#" class="help-cta">
+      <i class="fa fa-chevron-right" aria-hidden="true"></i>
+ Show help for this question</a>
+    <div class="help-text">
+      <p>Please enter the figure as per the guidance. If zero, enter 0</p>
+    </div>
+  </div>
+</div>
+
+<div class="question error">
+  <label>How much money is in your pocket?</label>
+  <div class="input-wrap symbol currency">
+    <input type="text" placeholder="e.g. 10.00" pattern="\d*" inputmode="numeric" maxlength="6" class="input">
+    <span class="hint">e.g. 10.00</span>
+  </div>
+  <div>
+    <a href="#" class="help-cta">
+      <i class="fa fa-chevron-right" aria-hidden="true"></i>
+ Show help for this question</a>
+    <div class="help-text">
+      <p>Please enter the figure as per the guidance. If zero, enter 0</p>
+    </div>
+  </div>
+</div>
+
+<script>
+$(function() {
+
+$('.input-wrap').append("<div class=\"close\"><img src=\"https://s3-us-west-2.amazonaws.com/s.cdpn.io/66278/clear.svg\"></div>");
+
+$('.question').on('click', '.close', function() {
+  $(this).closest('.input-wrap').find('.input').val("").focus();
+});
+
+$('.percent').blur(function() {
+  var raw = $(this).find(".input").val();
+  $(this).find(".input").val(raw + '%');
+  //var str = raw.replace('%', '');
+  //$(this).find(".input").val(str + '%');
+});
+
+$('.help-cta').click(function() {
+  $(this).closest('.question').find('.help-text').fadeToggle();
+  $(this).closest('.question').find('.fa-chevron-right').toggleClass('chevron-rotate');
+});
+
+});
+</script>
