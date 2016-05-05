@@ -1,0 +1,171 @@
+---
+---
+
+* {
+ box-sizing: border-box;
+ font-family: 'Open Sans', sans-serif;
+ font-size: 1.125rem;
+}
+
+.question {
+ padding: 1rem;
+ margin:1.5rem 0;
+}
+
+.help-text {
+ display:none;
+}
+
+.fa-chevron-right {
+ -webkit-transition: .3s;
+ transition: .3s;
+ margin-right:3px;
+}
+
+.chevron-rotate {
+ -webkit-transform: rotate(90deg);
+         transform: rotate(90deg);
+}
+
+.help-text {
+ background:#e9e9e9;
+ padding:0.75rem;
+ margin-top:10px;
+}
+
+.help-text p {
+ margin:0;
+}
+
+.input-wrap {
+ position: relative;
+}
+
+input:focus::-webkit-input-placeholder { color:transparent; }
+input:focus:-moz-placeholder { color:transparent; }
+
+input[type=text] {
+ -webkit-appearance: none;
+    -moz-appearance: none;
+         appearance: none;
+ padding: 1rem;
+ width: 100%;
+ margin: 10px 0;
+ border: 2px solid #ccc;
+ -webkit-transition: padding .15s;
+ transition: padding .15s;
+ border-radius:0;
+}
+
+/* TODO */
+
+input[type=text]:focus::valid + .hint:after {
+   content: "\f00c";
+   font-family: FontAwesome;
+   font-style: normal;
+   font-weight: normal;
+   text-decoration: inherit;
+/*--adjust as necessary--*/
+   color: green;
+   font-size: 18px;
+   padding-right: 0.5em;
+   position: absolute;
+   top: 10px;
+   right: 30px;
+}
+
+input[type=text]:invalid + .hint {
+ color: red;
+ font-weight:bold;
+}
+
+input[type=text]:invalid + .hint:after {
+ content:" - Please check the format of your entry";
+}
+
+.input-wrap.symbol .input {
+ padding-left:45px;
+}
+
+.input-wrap.symbol.end .input {
+ padding-right:45px;
+ padding-left:1rem;
+}
+
+.input-wrap:after {
+ position:absolute;
+ bottom:30px;
+ left:20px;
+}
+
+.input-wrap.end:after {
+ left:100px;
+}
+
+.error {
+ outline:2px solid red;
+ background:rgba(255,0,0,0.15);
+}
+
+.currency:after {
+  content:"£";
+}
+
+.percent {
+ /*direction:rtl;*/
+}
+
+
+label {
+ font-weight: 600;
+ font-size: 1.2rem;
+}
+
+input[type=text]:focus {
+ padding: 2rem 1rem 1rem 1rem;
+}
+
+input:focus + .hint {
+ opacity: 1;
+}
+
+.hint {
+ color: #487899;
+ font-size: 14px;
+ font-weight: 400;
+ position: absolute;
+ top: 25px;
+ left: 20px;
+ z-index: 10;
+ opacity: 0;
+ -webkit-transition: opacity .2s;
+ transition: opacity .2s;
+}
+
+.close {
+ position:absolute;
+ z-index:100;
+ right:10px;
+ top:40px;
+ opacity:0;
+ padding:10px;
+}
+
+.close img {
+ width:20px;
+ cursor:pointer;
+}
+
+.input:focus ~ .close {
+ opacity: 0.6;
+}
+
+.input:focus ~ .close:hover {
+ opacity: 1;
+}
+
+a {
+ text-decoration: none;
+ font-size: 0.9rem;
+ color: #487899;
+}
