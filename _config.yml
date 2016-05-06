@@ -16,5 +16,6 @@ defaults:
       type: prototypes
     values:
       layout: prototype
+      globalcss: true
 
 markdown: kramdown
