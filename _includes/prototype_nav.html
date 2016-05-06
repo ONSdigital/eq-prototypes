@@ -4,6 +4,11 @@
 
   <ul>
 
+  {% if page.url != "/" %}
+    <li><strong>Shortcuts</strong></li>
+    <li><a href="/eq-prototypes/index.html">Prototypes Home</a></li>
+  {% endif %}
+
   {% for cat in all_categories %}
 
     <li><strong>{{cat}}</strong></li>
