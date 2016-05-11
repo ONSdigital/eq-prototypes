@@ -43,8 +43,12 @@
 
 input:focus::-webkit-input-placeholder { color:transparent; }
 input:focus:-moz-placeholder { color:transparent; }
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none;
+  margin: 0;
+}
 
-input[type=text] {
+.numericentry {
  -webkit-appearance: none;
     -moz-appearance: none;
          appearance: none;
@@ -59,7 +63,7 @@ input[type=text] {
 
 /* TODO */
 
-input[type=text]:focus::valid + .hint:after {
+.numericentry:focus::valid + .hint:after {
    content: "\f00c";
    font-family: FontAwesome;
    font-style: normal;
@@ -74,12 +78,16 @@ input[type=text]:focus::valid + .hint:after {
    right: 30px;
 }
 
-input[type=text]:invalid + .hint {
+.numericentry:invalid + .hint {
  color: red;
  font-weight:bold;
 }
 
-input[type=text]:invalid + .hint:after {
+.numericentry:invalid + .hint:after {
+ content:" - Please check the format of your entry";
+}
+
+.numericentry:invalid + .hint:after {
  content:" - Please check the format of your entry";
 }
 
@@ -121,11 +129,11 @@ label {
  font-size: 1.2rem;
 }
 
-input[type=text]:focus {
+.numericentry:focus {
  padding: 2rem 1rem 1rem 1rem;
 }
 
-input:focus + .hint {
+.numericentry:focus + .hint {
  opacity: 1;
 }
 

@@ -5,10 +5,10 @@ globalcss: false
 ---
 
 <div class="question">
-  <label>How much money is in your pocket?</label>
+  <label>How many whole pounds are in your pocket?</label>
   <div class="input-wrap symbol currency">
-    <input type="text" placeholder="e.g. 10.00" pattern="\d*" inputmode="numeric" maxlength="6" class="input">
-    <span class="hint">e.g. 10.00</span>
+    <input type="text" placeholder="e.g. 100" pattern="\d*" inputmode="numeric" maxlength="6" class="input numericentry">
+    <span class="hint">e.g. 100</span>
   </div>
   <div>
     <a href="#" class="help-cta">
@@ -20,11 +20,11 @@ globalcss: false
   </div>
 </div>
 
-<div class="question error">
-  <label>How much money is in your pocket?</label>
+<div class="question">
+  <label>How much money is in your pocket including change?</label>
   <div class="input-wrap symbol currency">
-    <input type="text" placeholder="e.g. 10.00" pattern="\d*" inputmode="numeric" maxlength="6" class="input">
-    <span class="hint">e.g. 10.00</span>
+    <input type="text" placeholder="e.g. 2.50" pattern="\d+(\.\d{2})?" inputmode="numeric" maxlength="6" class="input numericentry">
+    <span class="hint">e.g. 2.50</span>
   </div>
   <div>
     <a href="#" class="help-cta">
