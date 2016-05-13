@@ -21,6 +21,22 @@ globalcss: false
 </div>
 
 <div class="question">
+  <label>How many whole pounds are in your pocket?</label>
+  <div class="input-wrap symbol currency">
+    <input type="text" placeholder="e.g. 100" pattern="\d*" inputmode="numeric" maxlength="6" class="input numericentry block">
+    <span class="hint">e.g. 100</span>
+  </div>
+  <div>
+    <a href="#" class="help-cta">
+      <i class="fa fa-chevron-right" aria-hidden="true"></i>
+ Show help for this question</a>
+    <div class="help-text">
+      <p>Please enter the figure as per the guidance. If zero, enter 0</p>
+    </div>
+  </div>
+</div>
+
+<div class="question">
   <label>How much money is in your pocket including change?</label>
   <div class="input-wrap symbol currency">
     <input type="text" placeholder="e.g. 2.50" pattern="\d+(\.\d{2})?" inputmode="numeric" maxlength="6" class="input numericentry">
@@ -36,36 +52,75 @@ globalcss: false
   </div>
 </div>
 
+<div class="question">
+  <label>What percentage of your salary do you save each month?</label>
+  <div class="input-wrap symbol percent end">
+    <input type="text" placeholder="e.g. 10" pattern="[-+]?[0-9]*[.,]?[0-9]+" inputmode="numeric" maxlength="6" class="input numericentry">
+    <span class="hint">e.g. 10</span>
+  </div>
+  <div>
+    <a href="#" class="help-cta">
+      <i class="fa fa-chevron-right" aria-hidden="true"></i>
+ Show help for this question</a>
+    <div class="help-text">
+      <p>Please enter the figure as per the guidance. If zero, enter 0</p>
+    </div>
+  </div>
+</div>
+
+<div class="question">
+  <label>What percentage of your salary do you save each month?</label>
+  <div class="range-holder">
+    <input type="range" value="0" max="100" min="0" step="1"><input type="text" class="range" value="0">
+    <span>%</span>
+  </div>
+  <div>
+    <a href="#" class="help-cta">
+      <i class="fa fa-chevron-right" aria-hidden="true"></i>
+ Show help for this question</a>
+    <div class="help-text">
+      <p>Please enter the figure as per the guidance. If zero, enter 0</p>
+    </div>
+  </div>
+</div>
+
 <script>
 $(function() {
 
-$('.input-wrap').append("<div class=\"close\"><img src=\"https://s3-us-west-2.amazonaws.com/s.cdpn.io/66278/clear.svg\"></div>");
+  $('.help-cta').click(function(e) {
+    $(this).closest('.question').find('.help-text').fadeToggle();
+    $(this).closest('.question').find('.fa-chevron-right').toggleClass('chevron-rotate');
+    e.preventDefault();
+  });
 
-$('.question').on('click', '.close', function() {
-  $(this).closest('.input-wrap').find('.input').val("").focus();
-});
+  // cheeky hack to force numeric keyboard on iOS
 
-$('.percent').blur(function() {
-  var raw = $(this).find(".input").val();
-  $(this).find(".input").val(raw + '%');
-  //var str = raw.replace('%', '');
-  //$(this).find(".input").val(str + '%');
-});
+  $('input[type="text"]').on('touchstart', function() {
+    $(this).attr('type', 'number');
+  });
 
-$('.help-cta').click(function() {
-  $(this).closest('.question').find('.help-text').fadeToggle();
-  $(this).closest('.question').find('.fa-chevron-right').toggleClass('chevron-rotate');
-});
+  $('input[type="text"]').on('keydown blur', function() {
+    $(this).attr('type', 'text');
+  });
 
-// cheeky hack to force numeric keyboard on iOS
+  // range slider
 
-$('input[type="text"]').on('touchstart', function() {
-  $(this).attr('type', 'number');
-});
+  $('input[type=range]').on('input change', function() {
+    $('.range').val($(this).val());
+  });
 
-$('input[type="text"]').on('keydown blur', function() {
-  $(this).attr('type', 'text');
-});
+  $('.range').on('input change', function() {
+    $('input[type=range]').val($(this).val());
+  });
+
+  // block non numerics - test to see if this is too heavy handed
+
+  $('.block').keyup(function() {
+    var field = $(this).val();
+    if (!$.isNumeric(field)) {
+      $(this).val("");
+    }
+  });
 
 });
 </script>
