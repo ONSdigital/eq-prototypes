@@ -207,6 +207,9 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
   content:"%";
   font-weight: bold;
 }
+div.input-wrap.symbol.percent.end {
+  width:250px;
+}
 
 label {
  font-weight: 600;
