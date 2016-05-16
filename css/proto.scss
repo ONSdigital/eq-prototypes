@@ -14,8 +14,10 @@ body {
 .question {
  padding: 1.5rem;
  margin:1.5rem auto;
- width:320px;
+ width:100%;
+ max-width:500px;
  background: #fff;
+ border:1px solid #ccc;
 }
 
 .help-text {
@@ -34,18 +36,34 @@ body {
 }
 
 .help-text {
- background:#fff;
  margin-top:10px;
- font-size: 14px;
+ font-size: 12px;
  color:#444;
 }
 
 .help-text p {
  margin:0;
+ font-size: 16px;
 }
 
 .input-wrap {
  position: relative;
+ font-family: 'Open Sans', sans-serif;
+}
+
+.input-wrap.compact {
+ width:100px;
+ display:inline-block;
+ vertical-align: top;
+ text-align: center;
+}
+
+.separator {
+  font-size: 22px;
+  display:inline-block;
+  vertical-align: top;
+  text-align: center;
+  font-weight: bold;
 }
 
 input:focus::-webkit-input-placeholder { color:transparent; }
@@ -67,6 +85,29 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
  transition: padding .15s;
  border-radius:0;
 }
+
+.smallentry {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  padding: 1rem 0.5rem;
+  width: 50px;
+  border:0;
+  border-radius:0;
+  text-align: center;
+}
+
+.dualinput {
+  display: inline-flex;
+  align-items: center;
+  border: 2px solid #ccc;
+  margin:1rem 0;
+}
+
+.preset {
+
+}
+
 
 /* TODO */
 
@@ -93,6 +134,18 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 .numericentry:invalid + .hint:after {
  content:" - Please use this format";
 }
+
+.smallentry:invalid ~ .hint {
+ color: red;
+ font-weight:bold;
+}
+
+.smallentry:invalid ~ .hint:after {
+ content:" - Please use this format";
+}
+
+
+
 
 .input-wrap .input {
  padding:1rem 1rem 1rem 2.25rem;
@@ -121,9 +174,28 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
  background:rgba(255,0,0,0.15);
 }
 
+.errortext {
+  display:none;
+}
+
+.error .errortext {
+  background:rgba(255,0,0,1);
+  display: block;
+  margin-top: -28px;
+  margin-left: -28px;
+  margin-right: -28px;
+  margin-bottom: 1rem;
+  padding:1rem;
+  color:white;
+}
+
 .currency:after {
   content:"£";
-  font-family: sans-serif;
+  font-weight: bold;
+}
+
+.euro:after {
+  content:"€";
   font-weight: bold;
 }
 
@@ -133,17 +205,21 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 
 .percent:after {
   content:"%";
-  font-family: sans-serif;
   font-weight: bold;
 }
 
 label {
  font-weight: 600;
  font-size: 1rem;
+ display: block;
 }
 
 .numericentry:focus {
  padding: 2rem 1rem 1rem 2.25rem;
+}
+
+.numericentry.small:focus {
+ padding: 2rem 1rem 1rem 1rem;
 }
 
 .end .numericentry:focus {
@@ -167,7 +243,14 @@ label {
  transition: opacity .2s;
 }
 
-a {
+.dualinput .hint {
+  display:block;
+  opacity:1;
+  position: static;
+  padding: 0 1rem;
+}
+
+a, .trigger-label {
  text-decoration: none;
  font-size: 0.9rem;
  color: #487899;
@@ -180,8 +263,10 @@ a {
   margin:10px 0 10px 10px;
   padding:3px;
   text-align: center;
-  border:1px solid #eee;
+  border: 2px solid #ccc;
   border-radius: 2px;
+  appearance:none;
+  -webkit-appearance:none;
 }
 
 .range-holder {
@@ -196,7 +281,6 @@ a {
       -ms-flex-item-align:center;
           align-self:center;
   margin-left:5px;
-  font-family:sans-serif;
   font-weight:bold;
 }
 
@@ -238,8 +322,4 @@ input[type=range]::-webkit-slider-thumb {
 }
 input[type=range]::-webkit-slider-thumb:active {
   background: #ccc;
-}
-
-input[type=range]:focus::-webkit-slider-runnable-track {
-  background: red;
 }
