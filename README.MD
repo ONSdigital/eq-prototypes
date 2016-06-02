@@ -9,8 +9,8 @@
 
 ## Run
 
-`bundle exec jekyll serv
+`bundle exec jekyll serve`
 
-## View Prototypes 
+## View Prototypes
 
 [http://onsdigital.github.io/eq-prototypes/](http://onsdigital.github.io/eq-prototypes/)
