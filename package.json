@@ -1,0 +1,38 @@
+{
+  "name": "eq-prototypes",
+  "version": "1.0.0",
+  "description": "Survey Runner Prototype",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ONSdigital/eq-prototypes.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ONSdigital/eq-prototypes/issues"
+  },
+  "homepage": "https://github.com/ONSdigital/eq-prototypes#readme",
+  "devDependencies": {
+    "autoprefixer": "^6.3.6",
+    "browser-sync": "^2.13.0",
+    "eq-sass": "^2.0.0",
+    "gfm.css": "^1.1.1",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-flatten": "^0.3.0",
+    "gulp-postcss": "^6.1.1",
+    "gulp-sass": "^2.3.2",
+    "gulp-sass-glob": "^1.0.6",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-util": "^3.0.7",
+    "pixrem": "^3.0.1",
+    "postcss-inline-block": "^1.0.0",
+    "postcss-pseudoelements": "^3.0.0",
+    "postcss-reporter": "^1.3.3",
+    "postcss-scss": "^0.1.8"
+  }
+}

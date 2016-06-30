@@ -1,0 +1,94 @@
+.progress {
+  padding-left: 8px;
+  ol {
+    // counter-reset: item;
+  }
+  li {
+    position: relative;
+    display: block;
+    // &:before {
+    //   content: counters(item, ".") " ";
+    //   counter-increment: item;
+    // }
+  }
+  nav {
+    > ol {
+      padding: 0 0 0 16px;
+      border-left: 1px solid $color-grey;
+      > li {
+        &:first-child:before{
+          content: "";
+          display: block;
+          width: 16px;
+          height: 6px;
+          background-color: $color-white;
+          position: absolute;
+          left: -24px;
+          top: 0px;
+        }
+        &:after{
+          content: "";
+          display: block;
+          width: 16px;
+          height: 16px;
+          background-color: $color-grey;
+          position: absolute;
+          left: -24px;
+          top: 6px;
+          border-radius: 100%;
+        }
+        &:last-child:before{
+          content: "";
+          display: block;
+          width: 16px;
+          height: 6px;
+          background-color: $color-white;
+          position: absolute;
+          left: -24px;
+          top: 22px;
+        }
+        &.active:after{
+          background-color: $color-dark-highlight;
+        }
+        &.complete:after{
+          background-color: $color-dark-blue;
+        }
+        &.disabled{
+          pointer-events: none;
+          cursor: default;
+        }
+        span{
+          cursor: pointer;
+        }
+        > ol {
+          padding-left: 8px;
+          > li {
+            display: none;
+            &:after{
+              content: "";
+              display: inline-block;
+              height: 1px;
+              width: 16px;
+              background-color: $color-grey;
+              position: absolute;
+              top: 12px;
+              left: -24px;
+            }
+            a {
+              text-decoration: none;
+              //color: $color-very-dark-grey;
+              display: block;
+            }
+          }
+        }
+        &.is-open{
+          > ol{
+            > li {
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
+}
