@@ -31,6 +31,13 @@
   display: block;
   color: inherit;
   margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.question__title__number {
+  position: absolute;
+  top: 4px;
+  left: -48px;
 }
 
 .question__subtitle {

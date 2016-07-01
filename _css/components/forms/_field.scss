@@ -1,5 +1,6 @@
 .field {
   background: none;
+  max-width: 320px;
 }
 
 .field__item {
@@ -15,6 +16,18 @@
     border: 1px solid $color-borders;
     border-radius: $input-radius;
     flex-direction: row-reverse;
+  }
+}
+
+.field--radio {
+  .field__item {
+    border: 1px solid $color-borders;
+    border-radius: $input-radius;
+  }
+}
+.response--textarea{
+  .field{
+    max-width: 100%;
   }
 }
 
