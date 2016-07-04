@@ -1,7 +1,7 @@
 .header {
   margin: 1rem 0;
   @include mq(s) {
-    text-align: center;
+    text-align: left;
     margin: 2rem 0;
   }
 }

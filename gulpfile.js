@@ -15,6 +15,43 @@ const pseudoelements = require('postcss-pseudoelements');
 const reporter = require('postcss-reporter');
 const inlineblock = require('postcss-inline-block');
 const sourcemaps = require('gulp-sourcemaps');
+const svgSprite = require('gulp-svg-sprite');
+
+// SVG Sprite
+gulp.task('sprite', () => {
+  gulp.src('./_img/**/*.svg')
+    .pipe(svgSprite({
+      shape: {
+        dimension: {
+          maxWidth: 32,
+          maxHeight: 32
+        },
+        spacing: {
+          padding: 10
+        },
+        dest: './img/icons/'
+      },
+      mode: {
+        inline: true,
+        view: {
+          bust: false,
+          dest: '.',
+          sprite: '../img/sprite.svg',
+          render: {
+            scss: {
+              dest: './_css/base/_sprite.scss'
+            }
+          }
+        }
+      }
+    }))
+    .on('error', function(err) {
+      gutil.log(err.message.toString())
+      browserSync.notify('Browserify Error!')
+      this.emit('end')
+    })
+    .pipe(gulp.dest('.'))
+});
 
 gulp.task('css', () => {
   gulp.src('./_css/**/*.scss')
@@ -81,4 +118,4 @@ gulp.task('serve', () => {
   gulp.watch('./_css/**/*.scss', ['css']);
 });
 
-gulp.task('default', ['css', 'jekyll', 'serve']);
+gulp.task('default', ['sprite', 'css', 'jekyll', 'serve']);
