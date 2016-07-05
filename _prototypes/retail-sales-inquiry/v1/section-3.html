@@ -4,12 +4,12 @@ project: Retail Sales Inquiry
 globalcss: false
 ---
 
+{% include survey-header.html %}
+{% include bar.html %}
+
 <div class="container">
-  <div class="grid grid--reverse">
-    <div class="grid__col col-3@s">
-      {% include progress.html %}
-    </div>
-    <div class="grid__col col-8@s pull-1@s">
+  <div class="grid">
+    <div class="grid__col col-8@s">
       <div role="main" class="panel__body" id="main">
         <a class="mars" href="../section-2">Previous</a><br/><br/>
         <form action="" class="form qa-questionnaire-form" role="form" method="POST" novalidate="">
@@ -31,7 +31,7 @@ globalcss: false
                           <div class="subfields">
                             <div class="field field--day">
                               <label class="label label--small venus" for="6fd644b0-798e-4a58-a393-a438b32fe637-day">Day</label>
-                              <input class="input input--number" name="6fd644b0-798e-4a58-a393-a438b32fe637-day" id="6fd644b0-798e-4a58-a393-a438b32fe637-day">
+                              <input class="input input--number" placeholder="DD" name="6fd644b0-798e-4a58-a393-a438b32fe637-day" id="6fd644b0-798e-4a58-a393-a438b32fe637-day">
                             </div>
                             <div class="field field--month">
                               <label class="label label--small venus" for="6fd644b0-798e-4a58-a393-a438b32fe637-month">Month</label>
@@ -53,7 +53,7 @@ globalcss: false
                           <div class="subfields">
                             <div class="field field--day">
                               <label class="label label--small venus" for="06a6a4b7-6ce4-4687-879d-3443cd8e2ff0-day">Day</label>
-                              <input class="input input--number venus" name="06a6a4b7-6ce4-4687-879d-3443cd8e2ff0-day" id="06a6a4b7-6ce4-4687-879d-3443cd8e2ff0-day">
+                              <input class="input input--number venus" placeholder="DD" name="06a6a4b7-6ce4-4687-879d-3443cd8e2ff0-day" id="06a6a4b7-6ce4-4687-879d-3443cd8e2ff0-day">
                             </div>
                             <div class="field field--month">
                               <label class="label label--small venus" for="06a6a4b7-6ce4-4687-879d-3443cd8e2ff0-month">Month</label>
@@ -77,6 +77,9 @@ globalcss: false
             <br/><a class="mars" href="../section-2">Previous</a>
           </form>
       </div>
+    </div>
+    <div class="grid__col col-3@s push-1@s">
+      {% include progress.html %}
     </div>
   </div>
 </div>

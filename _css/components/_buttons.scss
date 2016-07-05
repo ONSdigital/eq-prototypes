@@ -2,7 +2,7 @@
   background-color: $bg;
   color: $color;
   border: none;
-  padding: 9px 18px;
+  padding: 10px 48px;
   margin: 0 0 18px 0;
   border-radius: 3px;
   display: inline-block;
@@ -23,6 +23,11 @@
 
 .btn--secondary {
   @include btn($color-secondary, $color-white);
+}
+
+.btn--tertiary {
+  @include btn($color-secondary, $color-white);
+  padding: 14px 74px;
 }
 
 .btn--neutral {

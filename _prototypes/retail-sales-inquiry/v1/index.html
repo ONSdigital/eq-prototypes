@@ -4,80 +4,52 @@ project: Retail Sales Inquiry
 globalcss: false
 ---
 
+{% include survey-header.html %}
+{% include bar-hero.html %}
+
 <div class="container">
     <div role="main" class="panel__body" id="main">
+      <div class="header">
+          <h2 class="saturn">NB: Your response is legally required</h2>
           <div class="grid grid--align-mid">
             <div class="grid__col col-6@s">
-              <div class="u-mb-s u-mb-no@s">
-                <h5 class="u-mb-no">To be completed by</h5>
-                <div class="u-fs-xs">Apple</div>
-                <div class="u-mt-xs">
-                  <h5 class="u-mb-no">Trading as</h5>
-                  <div class="u-fs-xs">Apple</div>
-                </div>
-              </div>
+              <dl>
+                <dt class="mercury u-tt-u">Business name</dt>
+                <dd class="mars">Bolts and Rachets Ltd.</dd>
+                <dt class="mercury u-tt-u">Business address</dt>
+                <dd class="mars">23 Primrose  Avenue, Hoddingbridge, Wessex WE11 2DO</dd>
+              </dl>
             </div>
             <div class="grid__col col-6@s ">
-              <div>
-                <div class="u-mb-xs">
-                  <h5 class="u-mb-no u-fs-xxs">PLEASE SUBMIT BY</h5>
-                  <div class="u-fs-xs u-mb-xs">12 June 2016</div>
-                </div>
-                <div class="u-mb-xs">
-                  <h5 class="u-mb-no u-fs-xxs">PERIOD</h5>
-                  <div>
-                    <span class="u-fs-xs">1 May 2016</span> <span class="u-fs-xs">to</span> <span class="u-fs-xs">31 May 2016</span>
-                  </div>
-                </div>
-                <div><strong class="u-fs-xs">NB: Your response is legally required</strong></div>
-              </div>
+              <dl>
+                <dt class="mercury u-tt-u">Period</dt>
+                <dd class="mars">29 May 2016 to 2 July 2016</dd>
+                <dt class="mercury u-tt-u">Please submit by</dt>
+                <dd class="mars">9 July 2016</dd>
+              </dl>
             </div>
-
           </div>
-
-        <div>
-
-          <div class="header">
-            <h1 class="header__title">Star Wars</h1>
-            <h2 class="header__subtitle">Notice is given under section 1 of the Statistics of Trade Act 1947</h2>
+          <h2 class="header__title saturn">You will be asked to provide information for the business, including:</h2>
+          <ul>
+            <li>value of total retail turnover</li>
+            <li>value of internet sales</li>
+            <li>numbers of employees</li>
+            <li>reasons for changes to figures</li>
+          </ul>
+          <div class="notice u-mb-s u-mb-m@s">
+            <div class="notice__text">If actual figures are not available, please provide informed estimates.</div>
           </div>
-
           <div>
-            <p><strong>You are required by law to complete this questionnaire.</strong> If you do not submit this
-              questionnaire by 12 June 2016, penalties may be incurred (under section 4 of the Statistics of
-              Trade Act 1947). All the information you provide is kept strictly confidential. It is illegal for us to
-              reveal your data or identify your business to unauthorised persons.</p>
-
-            <div class="notice u-mb-s u-mb-m@s">
-              <div class="notice__text">If actual figures are not available, please provide informed estimates.</div>
-            </div>
-
-
-            <div class="u-mb-s u-mb-m@s">
-              <div class="accordion js-accordion">
-
-        <div class="accordion__item js-accordion-item has-js is-closed">
-          <button class="accordion__head js-accordion-trigger" aria-controls="accordion-1">
-            <h3 class="accordion__title">How is your information used?</h3>
-          </button>
-          <div class="accordion__body js-accordion-body" id="accordion-1" aria-hidden="true">
-            <div class="accordion__content">
-              May the force be with you
-            </div>
-          </div>
-        </div>
-
-    </div>
-            </div>
-
-
-            <p><b>Office for National Statistics</b></p>
-
         </div>
 
         <form action="" class="form" role="form" method="POST" novalidate="">
-          <a href="../section-2"class="btn btn--secondary qa-btn-get-started" type="submit" name="action[start_questionnaire]">Get Started</a>
+          <a href="../section-2"class="btn btn--tertiary qa-btn-get-started neptune" type="submit" name="action[start_questionnaire]">Start survey</a>
         </form>
+        <div class="lock u-mb-s u-mb-m@s">
+          <div class="venus lock__text">We will treat your data securely and confidentially</div>
+        </div>
+        <h2 class="saturn">Legal Information</h2>
+        <p class="mars">You are required to complete this questionnaire. If you do not complete and return this questionnaire by 9 February 2016, penalties may be incurred (under section 4 of the Statistics of Trade Act 1947).</p>
       </div>
 
 

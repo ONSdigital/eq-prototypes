@@ -12,16 +12,10 @@
 
 .section__title {
   position: relative;
-}
-
-.section__title__number {
-  color: $color-white;
-  width: 48px;
-  height: 48px;
-  position: absolute;
-  text-align: center;
-  top: 8px;
-  left: -69px;
+  padding-left: 64px;
+  @include mq(xl) {
+    padding-left: 0px;
+  }
   &:after {
     content: "";
     background-color: $color-dark-blue;
@@ -29,10 +23,29 @@
     width: 48px;
     height: 48px;
     position: absolute;
-    top: -13px;
-    left: 0px;
     display: block;
-    z-index: -1;
+    z-index: 0;
+    top: -7px;
+    left: 0px;
+    @include mq(xl) {
+      top: -7px;
+      left: -69px;
+    }
+  }
+}
+.section__title__number {
+  color: $color-white;
+  position: absolute;
+  text-align: center;
+  width: 48px;
+  height: 48px;
+  z-index: 1;
+  display: inline-block;
+  top: 6px;
+  left: 0px;
+  @include mq(xl) {
+    top: 8px;
+    left: -69px;
   }
 }
 

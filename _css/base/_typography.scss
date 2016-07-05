@@ -18,8 +18,11 @@ p {
 }
 
 .jupiter {
-  font-size: 2rem;
-  font-weight: 600;
+  font-size: 1.8rem;
+  font-weight: 900;
+  @include mq(m) {
+    font-size: 2rem;
+  }
 }
 
 .saturn {

@@ -4,12 +4,12 @@ project: Retail Sales Inquiry
 globalcss: false
 ---
 
+{% include survey-header.html %}
+{% include bar.html %}
+
 <div class="container">
-  <div class="grid grid--reverse">
-    <div class="grid__col col-3@s">
-      {% include progress.html %}
-    </div>
-    <div class="grid__col col-8@s pull-1@s">
+  <div class="grid">
+    <div class="grid__col col-8@s">
       <div role="main" class="panel__body" id="main">
         <a class="mars" href="../section-8">Previous</a><br/><br/>
         <form action="" class="form qa-questionnaire-form" role="form" method="POST" novalidate="">
@@ -19,7 +19,7 @@ globalcss: false
                 <h2 class="section__title saturn"><span class="section__title__number venus">6</span> Changes in number of employees</h2>
                 <div class="question question--textarea" id="fef6edc2-d98c-4d4d-9a7c-997ce10c361f">
                   <legend class="question__legend">
-                    <div class="question__title neptune"><span class="question__title__number venus">6.1</span> Please explain any changes in employee numbers for the business</div>
+                    <div class="question__title neptune"><span class="question__title__number venus">6.1</span> Please explain any significant changes in employee numbers for the business</div>
                   </legend>
                   <div class="question__responses">
                     <div class="response response--textarea" id="215015b1-f87c-4740-9fd4-f01f707ef558">
@@ -41,6 +41,9 @@ globalcss: false
           <br /><a class="mars" href="../section-8">Previous</a>
         </form>
       </div>
+    </div>
+    <div class="grid__col col-3@s push-1@s">
+      {% include progress.html %}
     </div>
   </div>
 </div>

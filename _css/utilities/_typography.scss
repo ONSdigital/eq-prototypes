@@ -21,7 +21,11 @@ $sizes: (
 }
 
 .u-fs-i {
-  font-style: italic;
+  font-style: italic; 
+}
+
+.u-tt-u {
+  text-transform: uppercase;
 }
 
 @include bp-suffix(u-ta-c) {

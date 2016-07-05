@@ -4,12 +4,12 @@ project: Retail Sales Inquiry
 globalcss: false
 ---
 
+{% include survey-header.html %}
+{% include bar.html %}
+
 <div class="container">
-  <div class="grid grid--reverse">
-    <div class="grid__col col-3@s">
-      {% include progress.html %}
-    </div>
-    <div class="grid__col col-8@s pull-1@s">
+  <div class="grid">
+    <div class="grid__col col-8@s">
       <div role="main" class="panel__body" id="main">
         <a class="mars" href="../section-6">Previous</a><br/><br/>
         <form action="" class="form qa-questionnaire-form" role="form" method="POST" novalidate="">
@@ -17,7 +17,7 @@ globalcss: false
             <div class="block" id="cd3b74d1-b687-4051-9634-a8f9ce10a27d">
               <div class="section" id="017880bc-752d-4a6b-83df-e130409ee660">
                 <h2 class="section__title saturn"><span class="section__title__number venus">4</span> Changes in total turnover</h2>
-                <div class="section__description mars">This information will help us to validate your data and should reduce the need to query the figures with you<br><br></div>
+                <div class="section__description mars">We rely on your commentary to ‘tell the story’ behind your business’s figures. By commenting here, it will reduce the need for us to call you.<br><br></div>
                 <div class="question question--textarea" id="fef6edc2-d98c-4d4d-9a7c-997ce10c361f">
                   <legend class="question__legend">
                     <div class="question__title neptune"><span class="question__title__number venus">4.2</span> Describe the changes in the business’s total turnover in more detail</div>
@@ -41,6 +41,9 @@ globalcss: false
           <br/><a class="mars" href="../section-6">Previous</a>
         </form>
       </div>
+    </div>
+    <div class="grid__col col-3@s push-1@s">
+      {% include progress.html %}
     </div>
   </div>
 </div>

@@ -4,12 +4,12 @@ project: Retail Sales Inquiry
 globalcss: false
 ---
 
+{% include survey-header.html %}
+{% include bar.html %}
+
 <div class="container">
-  <div class="grid grid--reverse">
-    <div class="grid__col col-3@s">
-      {% include progress.html %}
-    </div>
-    <div class="grid__col col-8@s pull-1@s">
+  <div class="grid ">
+    <div class="grid__col col-8@s">
       <div role="main" class="panel__body" id="main">
         <a class="mars" href="../index">Previous</a><br/><br/>
         <form action="" class="form qa-questionnaire-form" role="form" method="POST" novalidate="">
@@ -18,7 +18,7 @@ globalcss: false
               <div class="section" id="017880bc-752d-4a6b-83df-e130409ee660">
                 <h2 class="section__title saturn"><span class="section__title__number venus">1</span> Reporting period</h2>
                 <div class="question question--radios" id="def61645-c231-4522-ba2f-273b25507e53">
-                  <div class="question__title neptune"><span class="question__title__number venus">1.1</span> Are you able to report for the period from 4 January 2016 to 31 January 2016 (4 weeks)? </div>
+                  <div class="question__title neptune"><span class="question__title__number venus">1.1</span> Are you able to report for the period from 29 May 2016 to 2 July 2016? </div>
                   <div class="question__responses">
                     <div class="response response--radio" id="7587eb9b-f24e-4dc0-ac94-66118b896c10">
                       <div class="field field--multi field--radio ">
@@ -45,6 +45,9 @@ globalcss: false
           </div>
         </form>
       </div>
+    </div>
+    <div class="grid__col col-3@s push-1@s">
+      {% include progress.html %}
     </div>
   </div>
 </div>

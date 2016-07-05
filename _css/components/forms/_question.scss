@@ -35,9 +35,12 @@
 }
 
 .question__title__number {
-  position: absolute;
-  top: 4px;
-  left: -48px;
+  padding-right: 0.5rem;
+  @include mq(xl) {
+    position: absolute;
+    top: 4px;
+    left: -48px;
+  }
 }
 
 .question__subtitle {

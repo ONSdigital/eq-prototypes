@@ -4,12 +4,12 @@ project: Retail Sales Inquiry
 globalcss: false
 ---
 
+{% include survey-header.html %}
+{% include bar.html %}
+
 <div class="container">
-  <div class="grid grid--reverse">
-    <div class="grid__col col-3@s">
-      {% include progress.html %}
-    </div>
-    <div class="grid__col col-8@s pull-1@s">
+  <div class="grid">
+    <div class="grid__col col-8@s">
       <div role="main" class="panel__body" id="main">
         <a class="mars" href="../section-4">Previous</a><br/><br/>
         <form action="" class="form qa-questionnaire-form" role="form" method="POST" novalidate="">
@@ -46,6 +46,9 @@ globalcss: false
             <br/><a class="mars" href="../section-4">Previous</a>
           </form>
       </div>
+    </div>
+    <div class="grid__col col-3@s push-1@s">
+      {% include progress.html %}
     </div>
   </div>
 </div>

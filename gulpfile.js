@@ -29,14 +29,14 @@ gulp.task('sprite', () => {
         spacing: {
           padding: 10
         },
-        dest: './img/icons/'
+        dest: './s/img/icons/'
       },
       mode: {
         inline: true,
         view: {
           bust: false,
           dest: '.',
-          sprite: '../img/sprite.svg',
+          sprite: './img/sprite.svg',
           render: {
             scss: {
               dest: './_css/base/_sprite.scss'
@@ -52,6 +52,7 @@ gulp.task('sprite', () => {
     })
     .pipe(gulp.dest('.'))
 });
+
 
 gulp.task('css', () => {
   gulp.src('./_css/**/*.scss')
