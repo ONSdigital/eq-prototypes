@@ -15,43 +15,69 @@
     > ol {
       padding: 0 0 0 16px;
       border-left: 1px solid $color-grey;
+      position: relative;
+      &:before{
+        content: "";
+        display: block;
+        width: 16px;
+        height: 6px;
+        background-color: $color-white;
+        position: absolute;
+        left: -8px;
+        top: 0px;
+      }
+      &:after{
+        content: "";
+        display: block;
+        width: 16px;
+        height: 6px;
+        background-color: $color-white;
+        position: absolute;
+        left: -8px;
+        bottom: 0px;
+      }
       > li {
-        &:first-child:before{
-          content: "";
-          display: block;
-          width: 16px;
-          height: 6px;
-          background-color: $color-white;
-          position: absolute;
-          left: -24px;
-          top: 0px;
-        }
+        color: $color-dark-grey;
         &:after{
           content: "";
           display: block;
           width: 16px;
           height: 16px;
-          background-color: $color-grey;
+          background-color: $color-white;
+          border: 3px solid $color-grey;
           position: absolute;
           left: -24px;
           top: 6px;
           border-radius: 100%;
         }
-        &:last-child:before{
+        &.active{
+          color: $color-blue;
+          .mars{
+            font-weight: 600;
+          }
+          &:after{
+            background-color: $color-white;
+            border: 3px solid $color-blue;
+          }
+        }
+        &.complete{
+        color: $color-blue;
+          &:after{
+            background-color: $color-blue;
+            border: 0px solid $color-grey;
+          }
+        }
+        &.complete:before{
           content: "";
-          display: block;
-          width: 16px;
-          height: 6px;
-          background-color: $color-white;
-          position: absolute;
-          left: -24px;
-          top: 22px;
-        }
-        &.active:after{
-          background-color: $color-dark-highlight;
-        }
-        &.complete:after{
-          background-color: $color-dark-blue;
+          @include icon('check');
+          filter: invert(100%);
+          vertical-align: middle;
+          width: 1em;
+          height: 1em;
+          z-index: 1;
+          background-size: 1em;position: absolute;
+    left: -24px;
+    top: 6px;
         }
         &.disabled{
           pointer-events: none;

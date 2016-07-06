@@ -105,8 +105,10 @@ gulp.task('jekyll', () => {
 
 gulp.task('serve', () => {
   browserSync.init({
-    files: ['_site/**'],
+    files: ['_site/**/*'],
     port: 4000,
+    browser: 'false',
+    reloadDebounce: 1000,
     server: {
       baseDir: '_site',
       routes: {
@@ -117,6 +119,7 @@ gulp.task('serve', () => {
   });
 
   gulp.watch('./_css/**/*.scss', ['css']);
+  // gulp.watch('_site/**/*.*').on('change', browserSync.reload);
 });
 
 gulp.task('default', ['sprite', 'css', 'jekyll', 'serve']);
