@@ -54,9 +54,13 @@ globalcss: false
                           <label class="label label--inline" for="5587eb9b-f24e-4dc0-ac94-66117b896c10-55"><span class="label__inner mars">Store openings</span></label>
                           <input class="input input--checkbox" type="checkbox" name="5587eb9b-f24e-4dc0-ac94-66117b896c10[]" id="5587eb9b-f24e-4dc0-ac94-66117b896c10-55" value="Senator Amidala" title="Senator Amidala">
                         </div>
-                        <div class="field__item">
+                        <div class="field__item field__item--other">
                           <label class="label label--inline" for="5587eb9b-f24e-4dc0-ac94-66117b896c10-6"><span class="label__inner mars">Other</span></label>
-                          <input class="input input--checkbox" type="checkbox" name="5587eb9b-f24e-4dc0-ac94-66117b896c10[]" id="5587eb9b-f24e-4dc0-ac94-66117b896c10-6" value="Yoda" title="Yoda">
+                          <input class="input input--checkbox input--other" type="checkbox" name="5587eb9b-f24e-4dc0-ac94-66117b896c10[]" id="5587eb9b-f24e-4dc0-ac94-66117b896c10-6" value="Yoda" title="Yoda">
+                          <div class="field__item--other__text">
+                            <span class="pluto">Please specify other</span><br />
+                            <input class="input input--text" type="text" value="">
+                          </div>
                         </div>
                         <br />
                         <h4 class="neptune">Or</h4>
@@ -83,3 +87,15 @@ globalcss: false
     </div>
   </div>
 </div>
+
+
+<script>
+$('.input--other').click(function(e) {
+  if($(this).prop('checked')) {
+    console.log("checked");
+    $('.field__item--other__text').addClass('field__item--other__text--open');
+  } else {
+  $('.field__item--other__text').removeClass('field__item--other__text--open');
+  }
+});
+</script>

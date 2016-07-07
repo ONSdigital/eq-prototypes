@@ -20,7 +20,9 @@
     flex-direction: row-reverse;
   }
 }
-
+.field--checkbox + input:checked {
+  background-color: $color-lighter-grey;
+}
 .field--radio {
   .field__item {
     max-width: 320px;
@@ -40,6 +42,9 @@
   }
 }
 .field--multi {
+  .field__item{
+    max-width: 320px;
+  }
   &.field--cols {
     @include mq(s) {
       display: flex;
@@ -124,5 +129,24 @@
   }
 }
 .input-type--currency{
-  max-width: 320px;
+  input{
+    max-width: 280px;
+  }
+}
+.field__item--other{
+  display: block;
+  .input--checkbox{
+    float: left;
+    top: 3px;
+    left: 7px;
+  }
+  .label__inner{
+    left: 7px;
+  }
+  .field__item--other__text {
+    display: none;
+  }
+  .field__item--other__text--open {
+    display: block;
+  }
 }
