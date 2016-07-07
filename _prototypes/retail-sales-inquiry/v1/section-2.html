@@ -23,7 +23,7 @@ globalcss: false
                     <div class="response response--radio" id="7587eb9b-f24e-4dc0-ac94-66118b896c10">
                       <div class="field field--multi field--radio ">
                         <div class="field__item">
-                          <input class="input input--radio" type="radio" name="7587eb9b-f24e-4dc0-ac94-66118b896c10" id="7587eb9b-f24e-4dc0-ac94-66118b896c10-1" value="I've been waiting for you, Obi-Wan" title="I've been waiting for you, Obi-Wan">
+                          <input class="input input--radio yes" type="radio" name="7587eb9b-f24e-4dc0-ac94-66118b896c10" id="7587eb9b-f24e-4dc0-ac94-66118b896c10-1" value="I've been waiting for you, Obi-Wan" title="I've been waiting for you, Obi-Wan">
                           <label class="label label--inline" for="7587eb9b-f24e-4dc0-ac94-66118b896c10-1"><span class="label__inner">Yes</span></label>
                         </div>
                         <div class="field__item">
@@ -56,44 +56,52 @@ globalcss: false
 
 
 <script>
-$(function() {
 
-  $('.help-cta').click(function(e) {
-    var txt = $(this).next('.help-text').is(':visible') ? "Show" : "Hide";
-    $(this).closest('.question').find('.trigger-label').text(txt);
-    $(this).closest('.question').find('.help-text').fadeToggle();
-    $(this).closest('.question').find('.fa-chevron-right').toggleClass('chevron-rotate');
-    e.preventDefault();
-  });
 
-  // cheeky hack to force numeric keyboard on iOS
-
-  $('input[type="text"]').on('touchstart', function() {
-    $(this).attr('type', 'number');
-  });
-
-  $('input[type="text"]').on('keydown blur', function() {
-    $(this).attr('type', 'text');
-  });
-
-  // range slider
-
-  $('input[type=range]').on('input change', function() {
-    $('.range').val($(this).val());
-  });
-
-  $('.range').on('input change', function() {
-    $('input[type=range]').val($(this).val());
-  });
-
-  // block non numerics - test to see if this is too heavy handed
-
-  $('.block').keyup(function() {
-    var field = $(this).val();
-    if (!$.isNumeric(field)) {
-      $(this).val("");
+  $('.qa-btn-get-started').click(function(e) {
+    if($('.yes').prop('checked')) {
+      e.preventDefault();
+      window.location.href = "../section-4";
+    } else {
+      window.location.href = "../section-3";
     }
   });
 
-});
+  // $('.help-cta').click(function(e) {
+  //   var txt = $(this).next('.help-text').is(':visible') ? "Show" : "Hide";
+  //   $(this).closest('.question').find('.trigger-label').text(txt);
+  //   $(this).closest('.question').find('.help-text').fadeToggle();
+  //   $(this).closest('.question').find('.fa-chevron-right').toggleClass('chevron-rotate');
+  //   e.preventDefault();
+  // });
+  //
+  // // cheeky hack to force numeric keyboard on iOS
+  //
+  // $('input[type="text"]').on('touchstart', function() {
+  //   $(this).attr('type', 'number');
+  // });
+  //
+  // $('input[type="text"]').on('keydown blur', function() {
+  //   $(this).attr('type', 'text');
+  // });
+  //
+  // // range slider
+  //
+  // $('input[type=range]').on('input change', function() {
+  //   $('.range').val($(this).val());
+  // });
+  //
+  // $('.range').on('input change', function() {
+  //   $('input[type=range]').val($(this).val());
+  // });
+  //
+  // // block non numerics - test to see if this is too heavy handed
+  //
+  // $('.block').keyup(function() {
+  //   var field = $(this).val();
+  //   if (!$.isNumeric(field)) {
+  //     $(this).val("");
+  //   }
+  // });
+
 </script>

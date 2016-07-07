@@ -37,6 +37,23 @@ globalcss: false
               </div>
             </div>
           </div>
+
+          <div>
+            <a href="#" class="help-cta mars">
+            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            <span class="trigger-label mars">Show</span> guidance on how you should write the commentary</a>
+            <div class="help-text">
+              <p class="mars">Examples of commentary:</p>
+              <p class="mars">‘In-store promotion’</p>
+              <p class="mars">“Offer on wine for the whole month (save 25% when you buy 6 bottles). The promotion was available in-store and online, contributing to an increase in both total turnover and internet sales.” </p>
+              <p class="mars">‘Special events (e.g. sporting events)’</p>
+              <p class="mars">“This was the month before the start of  Euro 2016 (football), we recorded an increase in sales of audio-visual equipment (e.g., televisions and audio equipment). This led to an increase in sales both in-store and online.”</p>
+              <p class="mars">‘Weather’</p>
+              <p class="mars">“The bad weather has decreased our sales of summer clothing. This has led to a reduction in total turnover and internet sales this month.”</p>
+            </div>
+          </div>
+          <br/><br/>
+
           <a href="../section-8" class="btn btn--secondary qa-btn-submit venus" type="submit" name="action[save_continue]">Save and continue</a>
           <br/><a class="mars" href="../section-6">Previous</a>
         </form>
@@ -47,3 +64,17 @@ globalcss: false
     </div>
   </div>
 </div>
+
+
+<script>
+
+$('.help-cta').click(function(e) {
+  var txt = $(this).next('.help-text').is(':visible') ? "Show" : "Hide";
+    console.log(txt);
+  $('.trigger-label').text(txt);
+  $('.help-text').fadeToggle();
+  $('.fa-chevron-right').toggleClass('chevron-rotate');
+  e.preventDefault();
+});
+
+</script>

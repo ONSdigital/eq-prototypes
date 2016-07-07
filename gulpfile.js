@@ -105,10 +105,9 @@ gulp.task('jekyll', () => {
 
 gulp.task('serve', () => {
   browserSync.init({
-    files: ['_site/**/*'],
+    files: ['_site/css/**/*'],
     port: 4000,
     browser: 'false',
-    reloadDebounce: 1000,
     server: {
       baseDir: '_site',
       routes: {

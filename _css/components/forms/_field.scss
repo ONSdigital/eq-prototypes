@@ -1,6 +1,5 @@
 .field {
   background: none;
-  max-width: 320px;
 }
 
 .field__item {
@@ -12,6 +11,9 @@
 }
 
 .field--checkbox {
+  .field{
+    max-width: 320px;
+  }
   .field__item {
     border: 1px solid $color-borders;
     border-radius: $input-radius;
@@ -21,6 +23,7 @@
 
 .field--radio {
   .field__item {
+    max-width: 320px;
     border: 1px solid $color-borders;
     border-radius: $input-radius;
   }
@@ -31,6 +34,11 @@
   }
 }
 
+.response--textfield{
+  input{
+    max-width: 320px;
+  }
+}
 .field--multi {
   &.field--cols {
     @include mq(s) {
@@ -114,4 +122,7 @@
       width: 7rem;
     }
   }
+}
+.input-type--currency{
+  max-width: 320px;
 }
