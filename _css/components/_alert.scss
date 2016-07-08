@@ -62,7 +62,7 @@
 
 .numericentry:invalid + .hint { color: red; font-weight: bold; }
 
-.numericentry:invalid + .hint:after { content: ""; }
+.numericentry:invalid + .hint:after { content: " - Please use this format"; }
 
 .alert--sticky {
   background-color: $color-red;
