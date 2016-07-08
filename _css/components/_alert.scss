@@ -1,5 +1,6 @@
 .alert {
   border-radius: 0px;
+  overflow: hidden;
 }
 
 .alert__header {
@@ -10,6 +11,7 @@
 .alert__title {
   margin: 0;
   padding: 0;
+  position: relative;
 }
 
 .alert__body {
@@ -60,4 +62,30 @@
 
 .numericentry:invalid + .hint { color: red; font-weight: bold; }
 
-.numericentry:invalid + .hint:after { content: " - Please use this format"; }
+.numericentry:invalid + .hint:after { content: ""; }
+
+.alert--sticky {
+  background-color: $color-red;
+  color: $color-white;
+  position: fixed;
+  height: 48px;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  .alert__title{
+    max-width: 57.445rem;
+    margin: auto;
+    padding: 0 1rem;
+  }
+  .alert__title__anchor{
+    display: inline-block;
+  }
+}
+.alert__title__anchor{
+  display: none;
+  color: $color-white;
+  position: absolute;
+  right: 0;
+}
