@@ -30,7 +30,7 @@
         content: "";
         display: block;
         width: 16px;
-        height: 34px;
+        height: 6px;
         background-color: $color-white;
         position: absolute;
         left: -8px;
@@ -76,12 +76,16 @@
           height: 1em;
           z-index: 1;
           background-size: 1em;position: absolute;
-    left: -24px;
-    top: 6px;
+          left: -24px;
+          top: 6px;
         }
         &.disabled{
           pointer-events: none;
           cursor: default;
+        }
+        > span > a {
+          color: $color-dark-grey;
+          text-decoration: none;
         }
         span{
           cursor: pointer;
