@@ -17,7 +17,7 @@
   .field__item {
     border: 1px solid $color-borders;
     border-radius: $input-radius;
-    flex-direction: row-reverse;
+    // flex-direction: row-reverse;
   }
 }
 .field--checkbox + input:checked {
@@ -135,13 +135,16 @@
 }
 .field__item--other{
   display: block;
+  span{
+    position: relative;
+  }
   .input--checkbox{
     float: left;
     top: 3px;
-    left: 7px;
+    left: 0px;
   }
   .label__inner{
-    left: 7px;
+    left: 0px;
   }
   .field__item--other__text {
     display: none;
