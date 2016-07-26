@@ -34,6 +34,21 @@
   @include btn($color-dark-grey, $color-white);
 }
 
+.btn--border {
+  @include btn($color-white, $color-lighter-blue);
+  border: 3px solid $color-lighter-blue;
+  &:focus,
+  &:hover {
+    text-decoration: none;
+    color: $color-white;
+    background-color: $color-lighter-blue;
+  }
+}
+
+.btn--delete {
+  @include btn($color-red, $color-white);
+}
+
 .btn-group {
   font-size: 0;
   .btn {
