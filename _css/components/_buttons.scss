@@ -23,6 +23,7 @@
 
 .btn--secondary {
   @include btn($color-secondary, $color-white);
+  margin-right: 1rem;
 }
 
 .btn--tertiary {
@@ -37,6 +38,7 @@
 .btn--border {
   @include btn($color-white, $color-lighter-blue);
   border: 3px solid $color-lighter-blue;
+  padding: 10px 42px;
   &:focus,
   &:hover {
     text-decoration: none;

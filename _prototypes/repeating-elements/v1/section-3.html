@@ -1,5 +1,5 @@
 ---
-title: Repeating elements V1
+title: Repeating elements and relationships prototype
 project: Repeating elements
 globalcss: false
 ---
@@ -16,31 +16,30 @@ globalcss: false
           <div class="group" id="14ba4707-321d-441d-8d21-b8367366e766">
             <div class="block" id="cd3b74d1-b687-4051-9634-a8f9ce10a27d">
               <div class="section" id="017880bc-752d-4a6b-83df-e130409ee660">
-                <h2 class="section__title saturn"><span class="section__title__number venus">1</span> Household</h2>
+                <h2 class="section__title saturn">Household</h2>
                 <div class="question question--radios" id="def61645-c231-4522-ba2f-273b25507e53">
-                  <div class="question__title neptune"><span class="question__title__number venus">1.2</span> Who lives in your household? </div>
+                  <div class="question__title neptune">Who lives in your household? </div>
                   <div class="question__responses">
-                    <div class="response response--repeating-element" id="response1">
-                      <h3 class="response__title venus" ><input id="response1-i" name="response1-i" class="input input--text" type="text" value="Person"></h3>
+                    <div class="response response--repeating-element" id="response--id">
+                      <h3 class="response__title venus" ><input id="nameOfPersonTitle" name="nameOfPersonTitle" class="input input--text" type="text" value=""></h3>
                       <div class="field">
-                        <label class="label venus" for="response1-i1" id="">First name</label>
-                        <input aria-describedby="description-question-i1 guidance-response1-i1-trigger" id="response1-i1" name="response1-i1" class="input input--text" type="text" value="">
+                        <label class="label venus" for="nameOfPerson" id="">First name</label>
+                        <input id="nameOfPerson" name="nameOfPerson" class="input input--text" type="text" value="">
                       </div>
                       <div class="field">
-                        <label class="label venus" for="response1-i2" id="">Surname</label>
-                        <input aria-describedby="description-question-i1 guidance-response1-i2-trigger" id="response1-i2" name="response1-i2" class="input input--text" type="text" value="">
+                        <label class="label venus" for="surnameOfPerson" id="">Surname</label>
+                        <input id="surnameOfPerson" name="surnameOfPerson" class="input input--text" type="text" value="">
                       </div>
                     </div>
                   </div>
                 </div>
+                <button class="btn btn--border add-another-entity venus" type="submit" name="">Add another entity</button>
               </div>
-              <button class="btn btn--border add-another-entity venus" type="submit" name="">Add another entity</button>
-              <br/>
               <br/>
               <br/>
               <button href="../section-2" class="btn btn--secondary qa-btn-get-started venus" type="submit" name="">Save and continue</button>
               <br/><a class="mars" href="../section-2">Previous</a>
-              <input aria-describedby="description-question-i1 guidance-numberOfEntities-trigger" id="numberOfEntities" name="numberOfEntities" class="input input--text" type="text" value="">
+              <input id="numberOfEntities" name="numberOfEntities" class="input input--text visually-hidden" type="text" value="">
 
             </div>
           </div>
@@ -83,22 +82,27 @@ if (QueryString.numberOfEntities) {
   var ents = parseInt(QueryString.numberOfEntities);
   for (i = 0; i < ents; i++) {
     if (i === 0) {
+      $( "#response--id" ).find("h3").prepend( "Person <span>" + (i + 1) + "</span>");
     } else {
-      $( "#response1" ).clone().appendTo( ".question__responses" )
+      $( "#response--id" ).clone().appendTo( ".question__responses" )
         .append("<span class='remove-entity'>Remove</span>")
+        .find("h3 span")
+        .html( (i + 1) )
+        .parent()
+        .parent()
         .find("input")
-        .attr( "id", "response1-i-" + i ).attr( "name", "response1-i-" + i )
+        .attr( "id", "nameOfPersonTitle" + i ).attr( "name", "nameOfPersonTitle" + i )
         .parent()
         .find(".label")
-        .attr( "for", "response1-i1-" + i )
+        .attr( "for", "nameOfPerson" + i )
         .next(".input")
-        .attr( "id", "response1-i1-" + i ).attr( "name", "response1-i1-" + i )
+        .attr( "id", "nameOfPerson" + i ).attr( "name", "nameOfPerson" + i )
         .parent(".field")
         .next()
         .find(".label")
-        .attr( "for", "response1-i2-" + i )
+        .attr( "for", "surnameOfPerson" + i )
         .next(".input")
-        .attr( "id", "response1-i2-" + i ).attr( "name", "response1-i2-" + i );
+        .attr( "id", "surnameOfPerson" + i ).attr( "name", "surnameOfPerson" + i );
     }
   }
 }

@@ -4,9 +4,6 @@
   @include mq(m) {
     margin-bottom: 1rem;
   }
-  &:last-of-type {
-    margin-bottom: 0;
-  }
   &.response--repeating-element{
     background-color: $color-light-grey;
     border: 1px solid $color-grey;
@@ -16,7 +13,7 @@
     }
     .remove-entity{
       position: absolute;
-      top: 0.5rem;
+      top: 0.9rem;
       right: 1rem;
       color: $color-blue;
       text-decoration: underline;
@@ -24,7 +21,7 @@
     }
     .edit-entity{
       position: absolute;
-      top: 0.5rem;
+      top: 0.9rem;
       right: 1rem;
       color: $color-blue;
       text-decoration: underline;
@@ -36,6 +33,15 @@
 .response--closed{
   height: 60px;
   overflow: hidden;
+}
+.response--border {
+  border: 1px solid $color-grey;
+  border-bottom: 0px solid $color-grey;
+  background-color: $color-lighter-grey;
+  .field {
+    border-bottom: 1px solid $color-grey;
+    padding: 1rem;
+  }
 }
 
 .response__guidance {
@@ -52,5 +58,6 @@
     font-size: 1rem;
     padding: 0;
     width: 300px;
+    display: inline;
   }
 }

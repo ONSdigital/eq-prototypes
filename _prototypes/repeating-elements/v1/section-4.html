@@ -1,5 +1,5 @@
 ---
-title: Repeating elements V1
+title: Repeating elements and relationships prototype
 project: Repeating elements
 globalcss: false
 ---
@@ -12,24 +12,24 @@ globalcss: false
     <div class="grid__col col-8@s">
       <div role="main" class="panel__body" id="main">
         <a class="mars" href="../section-3">Previous</a><br/><br/>
-        <form action="../section-4" class="form qa-questionnaire-form" role="form" novalidate="">
+        <form action="../section-5" class="form qa-questionnaire-form" role="form" novalidate="">
           <div class="group" id="14ba4707-321d-441d-8d21-b8367366e766">
             <div class="block" id="cd3b74d1-b687-4051-9634-a8f9ce10a27d">
               <div class="section" id="017880bc-752d-4a6b-83df-e130409ee660">
-                <h2 class="section__title saturn"><span class="section__title__number venus">1</span> Household</h2>
+                <h2 class="section__title saturn">Household</h2>
                 <div class="question question--radios" id="def61645-c231-4522-ba2f-273b25507e53">
-                  <div class="question__title neptune"><span class="question__title__number venus">1.3</span> Confirm who lives in your household? </div>
+                  <div class="question__title neptune">Confirm who lives in your household? </div>
                   <div class="question__responses">
                     <div class="response response--repeating-element response--closed" id="response1">
                       <span class='edit-entity'>Edit</span>
-                      <h3 class="response__title venus" ><input id="response1-i" name="response1-i" class="input input--text" type="text" value="Person"></h3>
+                      <h3 class="response__title venus" ><input id="nameOfPersonTitle" name="nameOfPersonTitle" class="input input--text" type="text" value="Person"></h3>
                       <div class="field">
-                        <label class="label venus" for="response1-i1" id="">First name</label>
-                        <input aria-describedby="description-question-i1 guidance-response1-i1-trigger" id="response1-i1" name="response1-i1" class="input input--text" type="text" value="">
+                        <label class="label venus" for="nameOfPerson" id="">First name</label>
+                        <input id="nameOfPerson" name="nameOfPerson" class="input input--text" type="text" value="">
                       </div>
                       <div class="field">
-                        <label class="label venus" for="response1-i2" id="">Surname</label>
-                        <input aria-describedby="description-question-i1 guidance-response1-i2-trigger" id="response1-i2" name="response1-i2" class="input input--text" type="text" value="">
+                        <label class="label venus" for="surnameOfPerson" id="">Surname</label>
+                        <input id="surnameOfPerson" name="surnameOfPerson" class="input input--text" type="text" value="">
                       </div>
                       <div class="field">
                         <button class="btn btn--secondary venus" >Save entity</button>
@@ -38,16 +38,16 @@ globalcss: false
                     </div>
                   </div>
                 </div>
-              </div>
               <button class="btn btn--border add-another-entity venus" type="submit" name="">Add another entity</button>
-              <br/>
+              </div>
               <br/>
               <br/>
               <button href="../section-2" class="btn btn--secondary qa-btn-get-started venus" type="submit" name="">Save and continue</button>
               <br/><a class="mars" href="../section-3">Previous</a>
             </div>
           </div>
-          <input aria-describedby="description-question-i1 guidance-numberOfEntities-trigger" id="numberOfEntities" name="numberOfEntities" class="input input--text" type="text" value="">
+          <input id="numberOfEntities" name="numberOfEntities" class="input input--text visually-hidden" type="text" value="">
+          <input id="currentNumber" name="currentNumber" class="input input--text visually-hidden" type="text" value="0">
         </form>
       </div>
     </div>
@@ -91,18 +91,18 @@ if (QueryString.numberOfEntities) {
       $( "#response1" ).clone().appendTo( ".question__responses" )
         // .append("<span class='remove-entity'>Remove</span>")
         .find("input")
-        .attr( "id", "response1-i-" + i ).attr( "name", "response1-i-" + i )
+        .attr( "id", "nameOfPersonTitle" + i ).attr( "name", "nameOfPersonTitle" + i )
         .parent()
         .find(".label")
-        .attr( "for", "response1-i1-" + i )
+        .attr( "for", "nameOfPerson" + i )
         .next(".input")
-        .attr( "id", "response1-i1-" + i ).attr( "name", "response1-i1-" + i )
+        .attr( "id", "nameOfPerson" + i ).attr( "name", "nameOfPerson" + i )
         .parent(".field")
         .next()
         .find(".label")
-        .attr( "for", "response1-i2-" + i )
+        .attr( "for", "surnameOfPerson" + i )
         .next(".input")
-        .attr( "id", "response1-i2-" + i ).attr( "name", "response1-i2-" + i );
+        .attr( "id", "surnameOfPerson" + i ).attr( "name", "surnameOfPerson" + i );
     }
   }
 }
@@ -123,7 +123,7 @@ $('.remove-entity').click(function(e) {
     e.preventDefault();
     var x = parseInt(QueryString.numberOfEntities);
     var y = parseInt(1);
-    var total = x - y;
+    var total = x;
     window.location.href = "../section-3/?numberOfEntities=" + total + "";
 });
 $( document ).ready(function() {
@@ -134,12 +134,22 @@ $( document ).ready(function() {
       console.log(decodeURIComponent(p[1]));
   }
 
-  var value = $( "#response1-i1" ).val();
-  $( "#response1-i" ).val( value );
-  var value = $( "#response1-i1-1" ).val();
-  $( "#response1-i-1" ).val( value );
-  var value = $( "#response1-i1-2" ).val();
-  $( "#response1-i-2" ).val( value );
+  // var value = $( "#nameOfPerson" ).val();
+  // $( "#nameOfPersonTitle" ).val( value );
+  // var value = $( "#nameOfPerson1" ).val();
+  // $( "#nameOfPersonTitle1" ).val( value );
+  // var value = $( "#nameOfPerson2" ).val();
+  // $( "#nameOfPersonTitle2" ).val( value );
+
+  for (var i = 0; i < ents; i++) {
+    if (i === 0) {
+      var value = $( "#nameOfPerson" ).val();
+      $( "#nameOfPersonTitle" ).val( value );
+    } else {
+      var value = $( "#nameOfPerson" + i ).val();
+      $( "#nameOfPersonTitle" + i ).val( value );
+    }
+  }
 
   function toggleClass(thisItem, thatItem) {
     $(thisItem).toggleClass("response--closed");
