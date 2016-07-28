@@ -1,0 +1,575 @@
+---
+title: Numbers Proto
+project: Numbers
+globalcss: false
+---
+
+
+<style type="text/css" media="all">
+
+  /*main.scss*/
+  html.prototypes-home {
+    font-size: 18px;
+    body {
+      background: white;
+    }
+
+    h1 {
+      font-size: 1.2rem;
+    }
+  }
+
+  .site-header {
+    background: #222;
+    color: white;
+    padding: 0.3rem 0;
+    margin-bottom: 3rem;
+    a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2rem;
+    }
+  }
+
+  .prototype-list {
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    li {
+      padding: 1rem 0;
+      border-bottom: 1px solid #efefef;
+    }
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  .hidden-nav-btn {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 25px;
+    height: 25px;
+    background: rgba(0,0,0,0);
+    cursor: pointer;
+    &:hover {
+      background: rgba(0,0,0, 0.2);
+    }
+  }
+
+  .hidden-nav {
+    $width: 20rem;
+    position: fixed;
+    padding: 1rem;
+    top: 0;
+    right: 0;
+    width: $width;
+    height: 100%;
+    background: rgba(#222, 0.9);
+    color: white;
+    z-index: 10;
+    transform: translateX($width);
+    transition: all 100ms ease-out;
+    &.is-open {
+      transform: translateX(0);
+    }
+    a {
+      color: white;
+    }
+    li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(#efefef, 0.1);
+    }
+  }
+
+/*proto.scss*/
+* {
+ box-sizing: border-box;
+ font-family: 'Open Sans', sans-serif;
+ font-size: 1.125rem;
+}
+
+body {
+  background: #e8e8e8;
+}
+
+.question {
+ padding: 1.5rem;
+ margin:1.5rem auto;
+ width:100%;
+ max-width:500px;
+ background: #fff;
+ border:1px solid #ccc;
+}
+
+.help-text {
+ display:none;
+}
+
+.fa-chevron-right {
+ -webkit-transition: .3s;
+ transition: .3s;
+ margin-right:3px;
+}
+
+.chevron-rotate {
+ -webkit-transform: rotate(90deg);
+         transform: rotate(90deg);
+}
+
+.help-text {
+ margin-top:10px;
+ font-size: 12px;
+ color:#444;
+}
+
+.help-text p {
+ margin:0;
+ font-size: 16px;
+}
+
+.input-wrap {
+ position: relative;
+ font-family: 'Open Sans', sans-serif;
+}
+
+.input-wrap.compact {
+ width:100px;
+ display:inline-block;
+ vertical-align: top;
+ text-align: center;
+}
+
+.separator {
+  font-size: 22px;
+  display:inline-block;
+  vertical-align: top;
+  text-align: center;
+  font-weight: bold;
+}
+
+input:focus::-webkit-input-placeholder { color:transparent; }
+input:focus:-moz-placeholder { color:transparent; }
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.numericentry {
+ -webkit-appearance: none;
+    -moz-appearance: none;
+         appearance: none;
+ padding: 1rem;
+ width: 100%;
+ margin: 10px 0;
+ border: 2px solid #ccc;
+ -webkit-transition: padding .15s;
+ transition: padding .15s;
+ border-radius:0;
+}
+
+.smallentry {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  padding: 1rem 0.5rem;
+  width: 50px;
+  border:0;
+  border-radius:0;
+  text-align: center;
+}
+
+.dualinput {
+  display: inline-flex;
+  align-items: center;
+  border: 2px solid #ccc;
+  margin:1rem 0;
+}
+
+.preset {
+
+}
+
+
+/* TODO */
+
+.numericentry:focus::valid + .hint:after {
+   content: "\f00c";
+   font-family: FontAwesome;
+   font-style: normal;
+   font-weight: normal;
+   text-decoration: inherit;
+/*--adjust as necessary--*/
+   color: green;
+   font-size: 18px;
+   padding-right: 0.5em;
+   position: absolute;
+   top: 10px;
+   right: 30px;
+}
+
+.numericentry:invalid + .hint {
+ color: red;
+ font-weight:bold;
+}
+
+.numericentry:invalid + .hint:after {
+ content:" - Please use this format";
+}
+
+.smallentry:invalid ~ .hint {
+ color: red;
+ font-weight:bold;
+}
+
+.smallentry:invalid ~ .hint:after {
+ content:" - Please use this format";
+}
+
+
+
+
+.input-wrap .input {
+ padding:1rem 1rem 1rem 2.25rem;
+}
+
+.input-wrap.end .input {
+ padding:1rem 2.45rem 1rem 1rem;
+}
+
+.input-wrap:after {
+ position:absolute;
+ bottom: 15px;
+ left: 20px;
+ z-index: 3;
+}
+
+.input-wrap.end:after {
+ position:absolute;
+ bottom:16px;
+ right:20px;
+ left:auto;
+ width:20px;
+}
+
+.error {
+ outline:2px solid red;
+ background:rgba(255,0,0,0.15);
+}
+
+.errortext {
+  display:none;
+}
+
+.error .errortext {
+  background:rgba(255,0,0,1);
+  display: block;
+  margin-top: -28px;
+  margin-left: -28px;
+  margin-right: -28px;
+  margin-bottom: 1rem;
+  padding:1rem;
+  color:white;
+}
+
+.currency:after {
+  content:"£";
+  font-weight: bold;
+}
+
+.euro:after {
+  content:"€";
+  font-weight: bold;
+}
+
+.percent .numericentry {
+  text-align: right!important;
+}
+
+.percent:after {
+  content:"%";
+  font-weight: bold;
+}
+div.input-wrap.symbol.percent.end {
+  width:250px;
+}
+
+label {
+ font-weight: 600;
+ font-size: 1rem;
+ display: block;
+}
+
+.numericentry:focus {
+ padding: 2rem 1rem 1rem 2.25rem;
+}
+
+.numericentry.small:focus {
+ padding: 2rem 1rem 1rem 1rem;
+}
+
+.end .numericentry:focus {
+ padding: 2rem 2.45rem 1rem 1rem;
+}
+
+.numericentry:focus + .hint {
+ opacity: 1;
+}
+
+.hint {
+ color: #487899;
+ font-size: 14px;
+ font-weight: 400;
+ position: absolute;
+ top: 13px;
+ left: 20px;
+ z-index: 10;
+ opacity: 0;
+ -webkit-transition: opacity .2s;
+ transition: opacity .2s;
+}
+
+.dualinput .hint {
+  display:block;
+  opacity:1;
+  position: static;
+  padding: 0 1rem;
+}
+
+a, .trigger-label {
+ text-decoration: none;
+ font-size: 0.9rem;
+ color: #487899;
+}
+
+/* range */
+
+.range {
+  width:70px;
+  margin:10px 0 10px 10px;
+  padding:3px;
+  text-align: center;
+  border: 2px solid #ccc;
+  border-radius: 2px;
+  appearance:none;
+  -webkit-appearance:none;
+}
+
+.range-holder {
+  display:-webkit-box;
+  display:-webkit-flex;
+  display:-ms-flexbox;
+  display:flex;
+}
+
+.range-holder span {
+  -webkit-align-self:center;
+      -ms-flex-item-align:center;
+          align-self:center;
+  margin-left:5px;
+  font-weight:bold;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  background:transparent;
+  display:block;
+}
+
+input[type=range]:focus {
+  outline: none;
+}
+
+input[type=range]::-webkit-slider-container {
+  background:rgba(255,255,255,0);
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 12px;
+  cursor: pointer;
+  animate: 0.2s;
+  border:1px solid #ccc;
+  border-radius: 50px;
+  background:#fff;
+}
+input[type=range]::-webkit-slider-thumb {
+  border: 2px solid #ccc;
+  height: 30px;
+  width: 30px;
+  border-radius: 100px;
+  background: #eee;
+  cursor: pointer;
+  -webkit-appearance: none;
+          appearance: none;
+  margin-top:-10px;
+  box-shadow: inset 0px 0px 0px 2px #fff;
+}
+input[type=range]::-webkit-slider-thumb:active {
+  background: #ccc;
+}
+</style>
+
+
+<div class="question">
+  <span class="errortext">This is a verbose description of the error</span>
+  <label>How many whole pounds are in your wallet?</label>
+  <div class="input-wrap symbol currency">
+    <input type="text" placeholder="e.g. 100" pattern="\d*" inputmode="numeric" maxlength="6" class="input numericentry">
+    <span class="hint">e.g. 100</span>
+  </div>
+  <div>
+    <a href="#" class="help-cta">
+      <i class="fa fa-chevron-right" aria-hidden="true"></i>
+ <span class="trigger-label">Show</span> help for this question</a>
+    <div class="help-text">
+      <p>Please enter the figure as per the guidance. If zero, enter 0</p>
+    </div>
+  </div>
+</div>
+
+<div class="question">
+  <span class="errortext">This is a verbose description of the error</span>
+  <label>How many Euros do you take on holieday?</label>
+  <div class="input-wrap symbol euro">
+    <input type="text" placeholder="e.g. 100" pattern="\d*" inputmode="numeric" maxlength="6" class="input numericentry">
+    <span class="hint">e.g. 100</span>
+  </div>
+  <div>
+    <a href="#" class="help-cta">
+      <i class="fa fa-chevron-right" aria-hidden="true"></i>
+ <span class="trigger-label">Show</span> help for this question</a>
+    <div class="help-text">
+      <p>Please enter the figure as per the guidance. If zero, enter 0</p>
+    </div>
+  </div>
+</div>
+
+<div class="question">
+  <span class="errortext">This is a verbose description of the error</span>
+  <label>How much did you spend on lunch today?</label>
+  <div class="input-wrap symbol currency">
+    <input type="text" placeholder="e.g. 100" pattern="\d*" inputmode="numeric" maxlength="6" class="input numericentry block">
+    <span class="hint">e.g. 100</span>
+  </div>
+  <div>
+    <a href="#" class="help-cta">
+      <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      <span class="trigger-label">Show</span> help for this question</a>
+    <div class="help-text">
+      <p>Please enter the figure as per the guidance. If zero, enter 0</p>
+    </div>
+  </div>
+</div>
+
+<div class="question">
+  <span class="errortext">This is a verbose description of the error</span>
+  <label>How much money is in your pocket including change?</label>
+  <div class="input-wrap symbol currency">
+    <input type="text" placeholder="e.g. 2.50" pattern="\d+(\.\d{2})?" inputmode="numeric" maxlength="6" class="input numericentry">
+    <span class="hint">e.g. 2.50</span>
+  </div>
+  <div>
+    <a href="#" class="help-cta">
+      <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      <span class="trigger-label">Show</span> help for this question</a>
+    <div class="help-text">
+      <p>Please enter the figure as per the guidance. If zero, enter 0</p>
+    </div>
+  </div>
+</div>
+
+<div class="question">
+  <span class="errortext">This is a verbose description of the error</span>
+  <label>What percentage of your salary do you save each month?</label>
+  <div class="input-wrap symbol percent end">
+    <input type="text" placeholder="e.g. 10" pattern="[-+]?[0-9]*[.,]?[0-9]+" inputmode="numeric" maxlength="6" class="input numericentry">
+    <span class="hint">e.g. 10</span>
+  </div>
+  <div>
+    <a href="#" class="help-cta">
+      <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      <span class="trigger-label">Show</span> help for this question</a>
+    <div class="help-text">
+      <p>Please enter the figure as per the guidance. If zero, enter 0</p>
+    </div>
+  </div>
+</div>
+
+<div class="question">
+  <span class="errortext">This is a verbose description of the error</span>
+  <label>What percentage of your salary do you save each month?</label>
+  <div class="range-holder">
+    <input type="range" value="0" max="100" min="0" step="1">
+    <input type="number" min="1" max="100" step="1" maxlength="3" class="range" value="0">
+    <span>%</span>
+  </div>
+  <div>
+    <a href="#" class="help-cta">
+      <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      <span class="trigger-label">Show</span> help for this question</a>
+    <div class="help-text">
+      <p>Please enter the figure as per the guidance. If zero, enter 0</p>
+    </div>
+  </div>
+</div>
+
+<div class="question">
+  <span class="errortext">This is a verbose description of the error</span>
+  <label>How much pizza do you eat?</label>
+  <div class="dualinput">
+    <input type="text" placeholder="1" pattern="[-+]?[0-9]*[.,]?[0-9]+" inputmode="numeric" maxlength="2" class="smallentry">
+    <div class="separator">  / </div>
+    <input type="text" placeholder="8" pattern="[-+]?[0-9]*[.,]?[0-9]+" inputmode="numeric" maxlength="2" class="smallentry preset" value="7" disabled>
+    <span class="hint pad">e.g. 2 / 3</span>
+  </div>
+  <div>
+    <a href="#" class="help-cta">
+      <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      <span class="trigger-label">Show</span> help for this question</a>
+    <div class="help-text">
+      <p>Please enter the figure as per the guidance. If zero, enter 0</p>
+    </div>
+  </div>
+</div>
+
+
+<script>
+$(function() {
+  $('.help-cta').click(function(e) {
+    var txt = $(this).next('.help-text').is(':visible') ? "Show" : "Hide";
+    $(this).closest('.question').find('.trigger-label').text(txt);
+    $(this).closest('.question').find('.help-text').fadeToggle();
+    $(this).closest('.question').find('.fa-chevron-right').toggleClass('chevron-rotate');
+    e.preventDefault();
+  });
+  // cheeky hack to force numeric keyboard on iOS
+  $('input[type="text"]').on('touchstart', function() {
+    $(this).attr('type', 'number');
+  });
+  $('input[type="text"]').on('keydown blur', function() {
+    $(this).attr('type', 'text');
+  });
+  // range slider
+  $('input[type=range]').on('input change', function() {
+    $('.range').val($(this).val());
+  });
+  $('.range').on('input change', function() {
+    $('input[type=range]').val($(this).val());
+  });
+  // block non numerics - test to see if this is too heavy handed
+  $('.block').keyup(function() {
+    var field = $(this).val();
+    if (!$.isNumeric(field)) {
+      $(this).val("");
+    }
+  });
+});
+</script>
