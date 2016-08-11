@@ -10,67 +10,16 @@
       {% include prototype_nav.html %}
     </div>
   </body>
+<script>
 
-  <script>
-    var QueryString = function () {
-      // This function is anonymous, is executed immediately and
-      // the return value is assigned to QueryString!
-      var query_string = {};
-      var query = window.location.search.substring(1);
-      var vars = query.split("&");
-      for (var i=0;i<vars.length;i++) {
-        var pair = vars[i].split("=");
-            // If first entry with this name
-        if (typeof query_string[pair[0]] === "undefined") {
-          query_string[pair[0]] = decodeURIComponent(pair[1]);
-            // If second entry with this name
-        } else if (typeof query_string[pair[0]] === "string") {
-          var arr = [ query_string[pair[0]],decodeURIComponent(pair[1]) ];
-          query_string[pair[0]] = arr;
-            // If third or later entry with this name
-        } else {
-          query_string[pair[0]].push(decodeURIComponent(pair[1]));
-        }
-      }
-      return query_string;
-    }();
+$(function(){
+  var $hiddenNavBtn = $('<div/>')
+    .addClass('hidden-nav-btn')
+    .on('click', function() {
+      $('.hidden-nav').toggleClass('is-open');
+    })
+  $('body').append($hiddenNavBtn);
+});
 
-    if (QueryString.progress === '0') {
-      $('.progress').css('display', 'none');
-    }
-    $(function() {
-       $("a").attr('href', function(i, h) {
-         return h + (h.indexOf('?') != -1 ? "&address=" + QueryString.address : "?address=" + QueryString.address);
-       });
-    });
-    $('.progress ol li span').on('click', function() {
-      if ($(this).parent().hasClass("is-open")) {
-        $('.progress ol li').removeClass('is-open');
-      } else {
-        $('.progress ol li').removeClass('is-open');
-        $(this).parent().addClass('is-open');
-      }
-    });
-    $(function(){
-      var pathArray = window.location.pathname.split( '/' );
-      var fourthLevelLocation = pathArray[4];
-      if (QueryString.progressOpen === '1') {
-        $('.' + fourthLevelLocation).addClass('active is-open').prevAll().addClass('complete');
-      } else {
-        $('.' + fourthLevelLocation).addClass('active').prevAll().addClass('complete');
-      }
-      // $('.' + fourthLevelLocation).addClass('active').nextAll().addClass('disabled');
-    });
-    $(function(){
-      var $hiddenNavBtn = $('<div/>')
-        .addClass('hidden-nav-btn')
-        .on('click', function() {
-          $('.hidden-nav').toggleClass('is-open');
-        })
-      $('body').append($hiddenNavBtn);
-    });
-
-
-  </script>
-
+</script>
 </html>
