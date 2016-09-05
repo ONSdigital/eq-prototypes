@@ -7,16 +7,16 @@
   margin-bottom: 0.5rem;
   position: relative;
   display: flex;
-  align-items: flex-start;;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 .field--checkbox {
   .field{
-    max-width: 320px;
+    max-width: 480px;
   }
   .field__item {
     border: 1px solid $color-borders;
-    border-radius: $input-radius;
     // flex-direction: row-reverse;
   }
 }
@@ -25,9 +25,8 @@
 }
 .field--radio {
   .field__item {
-    max-width: 320px;
+    max-width: 480px;
     border: 1px solid $color-borders;
-    border-radius: $input-radius;
   }
 }
 .response--textarea{
@@ -38,12 +37,12 @@
 
 .response--textfield{
   input{
-    max-width: 320px;
+    max-width: 480px;
   }
 }
 .field--multi {
   .field__item{
-    max-width: 320px;
+    max-width: 480px;
   }
   &.field--cols {
     @include mq(s) {
@@ -143,6 +142,11 @@
     top: 3px;
     left: 0px;
   }
+  .input--radio{
+    float: left;
+    top: 3px;
+    left: 0px;
+  }
   .label__inner{
     left: 0px;
   }
@@ -152,4 +156,11 @@
   .field__item--other__text--open {
     display: block;
   }
+}
+
+.input--description{
+  margin-top:  $base-line-height / 4 + rem;
+  position: relative;
+  z-index: 1;
+  display: block;
 }
