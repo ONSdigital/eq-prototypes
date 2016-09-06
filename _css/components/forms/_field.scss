@@ -132,6 +132,38 @@
     max-width: 280px;
   }
 }
+.input-type--percent{
+  input{
+    max-width: 280px;
+  }
+  &.input-type .input{
+    border-radius: $input-radius 0 0 $input-radius;
+  }
+  &.input-type:before {
+    display: none;
+  }
+  &.input-type:after {
+    content: attr(data-type);
+    display: inline-block;
+    background-color: $color-lighter-grey;
+    border: 1px solid $color-borders;
+    border-left: none;
+    border-radius: 0 $input-radius $input-radius 0;
+    padding: 0.6rem 0.9rem;
+    font-weight: 600;
+    font-size: 1rem;
+    text-align: center;
+    line-height: normal;
+    @include fixed {
+      position: absolute;
+      left: 0;
+      width: 2.5rem;
+      height: 100%;
+      border: 1px solid $color-borders;
+      z-index: 2;
+    }
+  }
+}
 .field__item--other{
   display: block;
   span{
