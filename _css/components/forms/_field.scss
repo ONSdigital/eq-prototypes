@@ -7,16 +7,16 @@
   margin-bottom: 0.5rem;
   position: relative;
   display: flex;
-  align-items: flex-start;;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 .field--checkbox {
   .field{
-    max-width: 320px;
+    max-width: 480px;
   }
   .field__item {
     border: 1px solid $color-borders;
-    border-radius: $input-radius;
     // flex-direction: row-reverse;
   }
 }
@@ -25,9 +25,8 @@
 }
 .field--radio {
   .field__item {
-    max-width: 320px;
+    max-width: 480px;
     border: 1px solid $color-borders;
-    border-radius: $input-radius;
   }
 }
 .response--textarea{
@@ -38,12 +37,12 @@
 
 .response--textfield{
   input{
-    max-width: 320px;
+    max-width: 480px;
   }
 }
 .field--multi {
   .field__item{
-    max-width: 320px;
+    max-width: 480px;
   }
   &.field--cols {
     @include mq(s) {
@@ -133,12 +132,49 @@
     max-width: 280px;
   }
 }
+.input-type--percent{
+  input{
+    max-width: 280px;
+  }
+  &.input-type .input{
+    border-radius: $input-radius 0 0 $input-radius;
+  }
+  &.input-type:before {
+    display: none;
+  }
+  &.input-type:after {
+    content: attr(data-type);
+    display: inline-block;
+    background-color: $color-lighter-grey;
+    border: 1px solid $color-borders;
+    border-left: none;
+    border-radius: 0 $input-radius $input-radius 0;
+    padding: 0.6rem 0.9rem;
+    font-weight: 600;
+    font-size: 1rem;
+    text-align: center;
+    line-height: normal;
+    @include fixed {
+      position: absolute;
+      left: 0;
+      width: 2.5rem;
+      height: 100%;
+      border: 1px solid $color-borders;
+      z-index: 2;
+    }
+  }
+}
 .field__item--other{
   display: block;
   span{
     position: relative;
   }
   .input--checkbox{
+    float: left;
+    top: 3px;
+    left: 0px;
+  }
+  .input--radio{
     float: left;
     top: 3px;
     left: 0px;
@@ -152,4 +188,11 @@
   .field__item--other__text--open {
     display: block;
   }
+}
+
+.input--description{
+  margin-top:  $base-line-height / 4 + rem;
+  position: relative;
+  z-index: 1;
+  display: block;
 }
