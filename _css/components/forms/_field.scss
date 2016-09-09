@@ -9,11 +9,11 @@
   display: flex;
   align-items: flex-start;
   flex-wrap: wrap;
+  border-radius: 3px;
 }
 
 .field--checkbox {
   .field{
-    max-width: 480px;
   }
   .field__item {
     border: 1px solid $color-borders;
@@ -25,7 +25,6 @@
 }
 .field--radio {
   .field__item {
-    max-width: 480px;
     border: 1px solid $color-borders;
   }
 }
@@ -42,8 +41,15 @@
 }
 .field--multi {
   .field__item{
-    max-width: 480px;
+    min-width: 330px;
+    display: inline-block;
   }
+  // @include mq(s) {
+  //   .field__item{
+  //     min-width: auto;
+  //     display: block;
+  //   }
+  // }
   &.field--cols {
     @include mq(s) {
       display: flex;
@@ -194,5 +200,5 @@
   margin-top:  $base-line-height / 4 + rem;
   position: relative;
   z-index: 1;
-  display: block;
+  display: inline-block;
 }
