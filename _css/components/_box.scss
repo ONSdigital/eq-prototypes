@@ -1,5 +1,5 @@
 .box {
-  padding: 2rem;
+  padding: 1.7rem;
   border: 1px solid $color-borders;
   border-radius: 3px;
   max-width: 40rem;
@@ -44,4 +44,26 @@
     padding: 0.5rem 1rem;
     margin: 0 0.5rem;
   }
+}
+.box--promo{
+  background-color: $color-light-purple;
+  border: 0px;
+  border-left: 8px solid $color-blue;
+  border-radius: 0px;
+  max-width: 100%;
+  margin-bottom: 2rem;
+  display: block;
+  padding-bottom: 8px;
+}
+.box--incude-exclude{
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 8px;
+  border: 0px;
+  border-top: 1px solid $color-grey;
+  border-bottom: 1px solid $color-grey;
+  border-radius: 0px;
+  max-width: 100%;
+  margin-bottom: 2rem;
+  display: block;
 }

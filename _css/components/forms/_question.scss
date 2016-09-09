@@ -28,9 +28,9 @@
 
 .question__title {
   clear: both;
-  display: block;
+  display: flex;
   color: inherit;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   position: relative;
 }
 
@@ -38,7 +38,7 @@
   padding-right: 0.5rem;
   @include mq(xl) {
     position: absolute;
-    top: 4px;
+    top: 0px;
     left: -48px;
   }
 }
