@@ -31,7 +31,10 @@
   width: 1.5em;
   height: 1.5em;
 }
-
+.info__tel a {
+  text-decoration: none;
+  color: $color-text;
+}
 .info__list {
   display: flex;
   border-top: 1px solid $color-borders;
