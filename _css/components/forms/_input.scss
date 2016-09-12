@@ -1,4 +1,4 @@
-$input-padding: 0.6rem;
+$input-padding: 0.667rem;
 
 .input {
   position: relative;
@@ -46,8 +46,10 @@ $input-padding: 0.6rem;
   box-shadow: inset 0 0 0 3px white;
   // transition: background 300ms;
   cursor: pointer;
-  position: relative;
   display: inline-block;
+  position: absolute;
+  top: 9px;
+  left: 9px;
   &:focus {
     border: 2px solid tint($color-blue, 50%);
     box-shadow: inset 0 0 0 3px white;
