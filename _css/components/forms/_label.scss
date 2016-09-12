@@ -13,12 +13,13 @@
 
 .label--inline {
   font-weight: 400;
-  padding: 0 0.5rem;
-  // width: calc(100% - 1.5rem);
-  display: inline;
   vertical-align: text-bottom;
   margin: 0;
   z-index: 1;
+  display: block;
+  width: 100%;
+  padding: 9px 16px 9px 40px;
+  cursor: pointer;
   &::before {
     transition: background-color 200ms ease-in-out;
   }
