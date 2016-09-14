@@ -51,12 +51,6 @@ globalcss: false
                         </div>
                       </div>
                       <div class="box box--fullwidth box--total">
-                        <!-- <div class="field">
-                          <label class="label venus" for="form-input-5" >Total turnover</label>
-                          <div class="input-type input-type--percent" data-type="%">
-                            <input id="form-input-5" name="q-1" class="input input--text" type="text" value="">
-                          </div>
-                        </div> -->
                         <div class="field">
                           <label class="label venus" for="form-input-5" >Total turnover</label></br>
                           <div class="input-type input-type--percent" data-type="%">
@@ -81,7 +75,7 @@ globalcss: false
 </div>
 
 <script>
-$('.input--text').on('change', function() {
+$('.input--text').keyup( function() {
   var inputOne = document.getElementById("form-input-1").value;
   var inputTwo = document.getElementById("form-input-2").value;
   var inputThree = document.getElementById("form-input-3").value;
