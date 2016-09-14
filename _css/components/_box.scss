@@ -75,3 +75,7 @@
   border-top: 0px;
   background-color: #FBFBFB;
 }
+.box--census{
+  border-left: 8px solid $color-purple;
+  background-color: lighten($color-purple, 64%);
+}

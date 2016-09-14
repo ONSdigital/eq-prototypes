@@ -3,3 +3,21 @@
   margin-top: 4rem;
   background-color: $color-light-grey;
 }
+
+.footer--census{
+  height: auto;
+  padding: 2rem 0;
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    display: inline-block;
+  }
+  a {
+    color: #4A4A4A;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}

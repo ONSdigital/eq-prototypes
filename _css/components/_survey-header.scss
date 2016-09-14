@@ -49,3 +49,101 @@ $bp: 36em;
     position: relative;
   }
 }
+// Census
+.census-header{
+  color: white;
+  background-color: $color-purple;
+  .survey-header{
+    display: block;
+    height: 182px;
+    @include mq(m) {
+      display: flex;
+    }
+  }
+  .panel{
+    background-color: transparent;
+  }
+  .panel__header {
+    border-bottom: 0px;
+    padding: 1rem 0rem;
+    text-align: right;
+    &:before{
+      content: none;
+    }
+  }
+  @include mq(m) {
+    .panel__header {
+      text-align: left;
+      padding: 2.5rem 0rem;
+    }
+  }
+  .survey-header__logo{
+    position: absolute;
+    top: 0;
+    left: 0;
+    svg{
+      height: 182px;
+    }
+  }
+  .survey-header__info{
+    display: block;
+    &:before{
+      content: none;
+    }
+  }
+  .survey-header__title{
+    margin-bottom: 0;
+    font-weight: 700;
+    margin-left: 80px;
+    @include mq(m) {
+      margin-left: 150px;
+    }
+    @include mq(l) {
+      margin-left: 150px;
+    }
+    @include mq(1350px) {
+      margin-left: 0px;
+    }
+  }
+  .survey-header__subtitle{
+    margin-bottom: 0.5rem;
+    font-weight: 300;
+    margin-left: 80px;
+    @include mq(m) {
+      margin-left: 150px;
+    }
+    @include mq(l) {
+      margin-left: 150px;
+    }
+    @include mq(1350px) {
+      margin-left: 0px;
+    }
+  }
+  .survey-header__list{
+    list-style: none;
+    margin: 8px 0 0 0;
+    padding: 0;
+    li{
+      display: inline-block;
+      a {
+        color: white;
+        font-weight: 300;
+        text-decoration: none;
+      }
+    }
+    li:first-child {
+      border-right: 1px solid rgba(255,255,255,0.5);
+      margin-right: 16px;
+      padding-right: 16px;
+    }
+  }
+  .info__tel {
+    &:before{
+      content: none;
+      filter: invert(100%);
+    }
+    a {
+    color: white;
+    }
+  }
+}
