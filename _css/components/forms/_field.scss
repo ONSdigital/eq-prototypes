@@ -47,6 +47,9 @@
       min-width: 330px;
       display: inline-block;
     }
+    .field__item--census{
+      min-width: 320px;
+    }
   }
   &.field--cols {
     @include mq(s) {

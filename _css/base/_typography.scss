@@ -38,6 +38,9 @@ p {
     background-color: #EEF2D8;
     margin: 0px -2px;
     padding: 0 2px;
+    &.strong-census {
+      background-color: rgba(110, 34, 133, 0.1);
+    }
   }
 }
 
