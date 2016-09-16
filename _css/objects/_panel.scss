@@ -20,12 +20,10 @@
     left: 0;
   }
 }
-.panel__header
 
 .panel__body {
-  padding: 1rem 0rem;
-
+  padding: 0 0 3rem 0rem;
   @include mq(m) {
-    padding: 2rem 0rem;
+    padding: 0 0 3rem 0rem;
   }
 }

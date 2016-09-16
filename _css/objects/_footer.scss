@@ -1,6 +1,5 @@
 .footer {
   height: 5rem;
-  margin-top: 4rem;
   background-color: $color-light-grey;
 }
 
@@ -9,15 +8,32 @@
   padding: 2rem 0;
   ul {
     list-style-type: none;
-    margin: 0;
+    margin: 0 0 1rem 0;
     padding: 0;
   }
   li {
     display: inline-block;
+    margin-right: 0.5rem;
+    padding-right: 0.5rem;
+    border-right: 1px solid #ccc;
+    &:last-child{
+      border-right: 0px;
+    }
   }
   a {
     color: #4A4A4A;
     text-decoration: none;
     cursor: pointer;
+  }
+  .footer--census__logo{
+    padding: 1rem 0;
+    @include mq(m) {
+      float:left;
+    }
+  }
+  .footer--census__crest{
+    @include mq(m) {
+      float:right;
+    }
   }
 }

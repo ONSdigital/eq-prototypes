@@ -1,0 +1,112 @@
+---
+title: Household Questionnaire
+subtitle: England
+project: 2017 Census
+globalcss: false
+---
+
+{% include survey-header-census.html %}
+
+<div class="container">
+  <div class="grid ">
+    <div class="grid__col col-8@s">
+      <div role="main" class="panel__body" id="main">
+        <a class="mars" href="">Previous</a><br/><br/>
+        <form action="../section-6" class="form qa-questionnaire-form" role="form" novalidate="">
+          <div class="hidden-form">
+          </div>
+          <div class="group" id="14ba4707-321d-441d-8d21-b8367366e766">
+            <div class="block" id="cd3b74d1-b687-4051-9634-a8f9ce10a27d">
+              <div class="section" id="017880bc-752d-4a6b-83df-e130409ee660">
+                <h2 class="section__title saturn"><span class="section__title__number question__title__number--census venus">2</span>Household</h2>
+                <div class="question">
+                  <h3 class="question__title neptune"><span class="question__title__number venus">2.2</span>Who lives here?</h3>
+                  <div class="question__description mars" id="description-6cc86b54-330c-4465-99b2-34cc7073dc2c">
+                    <div class="box box--promo">
+                      <h3 class="venus">Include:</h3>
+                      <ul>
+                        <li>Yourself if this is your permanent family home </li>
+                        <li>Family members including partners, children and babies born on or before 24 June 2016</li>
+                        <li>Students and or schoolchildren who live away from home during term time</li>
+                        <li>Housemates tenants or lodgers</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="question__responses">
+                    <div class="response response--textfield response--repeating-elements">
+                      <h3 class="neptune">Person <span>1</span></h3>
+                      <div class="field">
+                        <label class="label venus" for="form-input-1" >First name</label>
+                        <input id="form-input-1" name="q6" class="input input--text" type="text" value="">
+                      </div>
+                      <div class="field">
+                        <label class="label venus" for="form-input-2" >Middle name</label>
+                        <input id="form-input-2" name="q7" class="input input--text" type="text" value="">
+                      </div>
+                      <div class="field">
+                        <label class="label venus" for="form-input-3" id="">Surname</label>
+                        <input id="form-input-3" name="q8" class="input input--text" type="text" value="">
+                      </div>
+                    </div>
+                  </div>
+                  <button class="btn btn--border--census add-entity venus" type="submit" name="">Add another person</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn--census qa-btn-get-started venus" type="submit" name="">Save and continue</button><br/><br/>
+          <a class="mars" href="">Save and complete later</a><br/><br/>
+          <a class="mars" href="">Previous</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include footer-census.html %}
+
+<script>
+
+$( document ).ready(function() {
+  populateHiddenForm();
+});
+
+
+var addEntity = function(numberOfEntities){
+  $( '.question__responses' ).append( '' +
+  '<div class="response response--textfield response--repeating-elements">' +
+    '<h3 class="neptune">Person <span>' + numberOfEntities + '</span> <span class="pluto">(<a class="remove-entity" >Remove</a>)</span></h3>' +
+    '<div class="field">' +
+      '<label class="label venus" for="form-input-1' + numberOfEntities + '" >First name</label>' +
+      '<input id="form-input-1' + numberOfEntities + '" name="q6' + numberOfEntities + '" class="input input--text" type="text" value="">' +
+    '</div>' +
+    '<div class="field">' +
+      '<label class="label venus" for="form-input-2' + numberOfEntities + '" >Middle name</label>' +
+      '<input id="form-input-2' + numberOfEntities + '" name="q7' + numberOfEntities + '" class="input input--text" type="text" value="">' +
+    '</div>' +
+    '<div class="field">' +
+      '<label class="label venus" for="form-input-3' + numberOfEntities + '" id="">Surname</label>' +
+      '<input id="form-input-3' + numberOfEntities + '" name="q8' + numberOfEntities + '" class="input input--text" type="text" value="">' +
+    '</div>' +
+  '</div>');
+
+  $('.remove-entity').click(function(e) {
+    e.preventDefault();
+    $(this).closest('.response--repeating-elements').remove();
+    console.log("asdfdsf");
+  });
+};
+$( document ).ready(function() {
+  $('.add-entity').click(function(e) {
+    e.preventDefault();
+    var numberOfEntities = $('.response--repeating-elements').length + 1;
+    addEntity(numberOfEntities);
+  });
+});
+
+// From section 6 to section 5
+$( document ).ready(function() {
+
+});
+
+</script>

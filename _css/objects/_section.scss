@@ -44,6 +44,11 @@
     left: 0px;
   }
 }
+.question__title__number--census{
+  &:after {
+    background-color: $color-purple; 
+  }
+}
 
 .section__description {
   @include mq(s) {

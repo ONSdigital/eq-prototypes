@@ -66,6 +66,22 @@
   }
 }
 
+.btn--border--census {
+  @include btn($color-white, $color-purple);
+  border: 3px solid $color-purple;
+  padding: 10px 42px;
+  width: 100%;
+  @include mq(s) {
+    width: auto;
+  }
+  &:focus,
+  &:hover {
+    text-decoration: none;
+    color: $color-white;
+    background-color: $color-purple;
+  }
+}
+
 .btn--delete {
   @include btn($color-red, $color-white);
 }

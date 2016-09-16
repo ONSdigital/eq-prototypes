@@ -201,3 +201,10 @@
   z-index: 1;
   display: inline-block;
 }
+
+.response.response--repeating-elements{
+  margin: 2rem 0 2rem 0;
+  .field{
+    margin-bottom: 1rem;
+  }
+}
