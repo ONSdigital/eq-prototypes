@@ -99,30 +99,85 @@ globalcss: false
 {% include footer-census.html %}
 
 <script>
-
 $( document ).ready(function() {
-  populateHiddenForm();
-});
 
-$( document ).ready(function() {
-  var count = 0;
-  Object.keys(QueryString).forEach(function (i) {
-    if (i != "q0" && i != "q1" && i != "q2" && i != "q3" && i != "q4" && i != "q5" && i != "q6" ) {
-      if (count === 0) {
-        $( '.first-person' ).append(QueryString[i].replace(/[ ,]+/g, " "));
-      }
-      if (count === 1) {
-        $( '.second-person' ).append(QueryString[i].replace(/[ ,]+/g, " "));
-      }
-      console.log(i + " " + QueryString[i]);
-      count++
-    }
+  // var numberOfEntities = sessionStorage.getItem('numberOfEntities');
+  // for (var i = 0; i < numberOfEntities; i++) {
+  //   console.log(numberOfEntities);
+  // }
+
+  $('input').on('change', function() {
+    $( '.relationship' ).html($(this).val());
   });
-});
 
 
-$('input').on('change', function() {
-  $( '.relationship' ).html($(this).val());
+  // Get arrays of people
+  var numberOfEntities = sessionStorage.getItem('numberOfEntities');
+  var personArray = [];
+  for (var i = 0; i < numberOfEntities; i++) {
+    personArray.push(sessionStorage.getItem('firstName' + i));
+  }
+  sessionStorage.setItem('personArray', personArray);
+
+
+  $('.qa-btn-get-started').click(function(e) {
+    e.preventDefault();
+    window.location.href = "../section-9";
+  });
+
 });
+
+  // var count = 0;
+  // Object.keys(QueryString).forEach(function (i) {
+  //   if (i != "q0" && i != "q1" && i != "q2" && i != "q4" && i != "q5" && i != "q6" ) {
+  //     if (count === 0) {
+  //       $( '.first-person' ).append(QueryString[i].replace(/[ ,]+/g, " "));
+  //     }
+  //     if (count === 1) {
+  //       $( '.second-person' ).append(QueryString[i].replace(/[ ,]+/g, " "));
+  //     }
+  //     console.log(i + " " + QueryString[i]);
+  //     count++
+  //   }
+  // });
+
+  // var numperOfEntities = Object.keys(QueryString).length - 5;
+  // var count = 0;
+  // console.log(numperOfEntities);
+  // Object.keys(QueryString).forEach(function (i) {
+  //   if (i != "q0" && i != "q1" && i != "q2" && i != "q4" && i != "q5" && i != "q6" ) {
+  //     console.log(count + i );
+  //     if(++count === numperOfEntities) {
+  //       console.log("last entry: " + i );
+  //     }
+  //   }
+  // });
+
+// $( document ).ready(function() {
+//   var numperOfEntities = document.getElementById('idq3a').value;
+//   var currentEntryNumber = document.getElementById('idq3b').value;
+//   if (currentEntryNumber == numperOfEntities) {
+//
+//   } else {
+//     var currentPerson = "q3" + currentEntryNumber;
+//     var nextPerson = "q3" + (parseInt(currentEntryNumber) + 1);
+//     console.log(nextPerson);
+//     $( '.first-person' ).html(QueryString[currentPerson].replace(/[ ,]+/g, " "));
+//     $( '.second-person' ).html(QueryString[nextPerson].replace(/[ ,]+/g, " "));
+//   }
+// });
+//
+//
+//
+// $('.qa-btn-get-started').click(function(e) {
+//   // var numperOfEntities = document.getElementById('idq3a').value;
+//   var currentEntryNumber = document.getElementById('idq3b').value;
+//   // if (currentEntryNumber == numperOfEntities - 1) {
+//   //   e.preventDefault();
+//   //   window.location.href = "../section-9" + window.location.search;
+//   // } else {
+//     $( '#idq3b' ).val(parseInt(currentEntryNumber) + 1);
+//   // }
+// });
 
 </script>

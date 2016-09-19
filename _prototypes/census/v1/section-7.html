@@ -22,7 +22,7 @@ globalcss: false
                 <div class="question">
                   <h3 class="question__title neptune"><span class="question__title__number venus">2.4</span>How many visitors are staying overnight here on 24th of June 2016?</h3>
                   <div class="question__description mars" id="description-6cc86b54-330c-4465-99b2-34cc7073dc2c">
-                    <div class="box box--promo">
+                    <div class="box box--promo box--census">
                       <h3 class="venus">Include:</h3>
                       <ul>
                         <li>People who usually live somewhere else in the UK. For example, boy or girl friends and relatives</li>
@@ -58,8 +58,11 @@ globalcss: false
 
 <script>
 
-$( document ).ready(function() {
-  populateHiddenForm();
+$('.qa-btn-get-started').click(function(e) {
+  e.preventDefault();
+  var inputValue = $("input[name='q5']"). val();
+  sessionStorage.setItem('visitors', inputValue);
+  window.location.href = "../section-8";
 });
 
 </script>

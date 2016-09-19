@@ -12,7 +12,7 @@ globalcss: false
     <div class="grid__col col-8@s">
       <div role="main" class="panel__body" id="main">
         <a class="mars" href="">Previous</a><br/><br/>
-        <form action="../section-4" class="form qa-questionnaire-form" role="form" novalidate="">
+        <form class="form qa-questionnaire-form" role="form" novalidate="">
           <div class="hidden-form">
           </div>
           <div class="group" id="14ba4707-321d-441d-8d21-b8367366e766">
@@ -29,16 +29,16 @@ globalcss: false
                           <input class="input input--text" id="form-input-1" name="q1" type="text" value="">
                         </div><br/>
                         <div class="field">
-                          <label class="label venus" for="form-input-1" >Town or city</label>
-                          <input class="input input--text" id="form-input-1" name="q1" type="text" value="">
+                          <label class="label venus" for="form-input-2" >Town or city</label>
+                          <input class="input input--text" id="form-input-2" name="q1" type="text" value="">
                         </div><br/>
                         <div class="field">
-                          <label class="label venus" for="form-input-1" >County</label>
-                          <input class="input input--text" id="form-input-1" name="q1" type="text" value="">
+                          <label class="label venus" for="form-input-3" >County</label>
+                          <input class="input input--text" id="form-input-3" name="q1" type="text" value="">
                         </div><br/>
                         <div class="field">
-                          <label class="label venus" for="form-input-1" >Postcode</label>
-                          <input class="input input--text" id="form-input-1" name="q1" type="text" value="">
+                          <label class="label venus" for="form-input-4" >Postcode</label>
+                          <input class="input input--text" id="form-input-4" name="q1" type="text" value="">
                         </div>
                       </div>
                     </div>
@@ -60,8 +60,17 @@ globalcss: false
 
 <script>
 
-$( document ).ready(function() {
-  populateHiddenForm();
+$('.qa-btn-get-started').click(function(e) {
+  e.preventDefault();
+  var formBuilding = $("input[id='form-input-1']"). val();
+  var formTown = $("input[id='form-input-2']"). val();
+  var formCounty = $("input[id='form-input-3']"). val();
+  var formPostcode = $("input[id='form-input-4']"). val();
+  sessionStorage.setItem('formBuilding', formBuilding);
+  sessionStorage.setItem('formTown', formTown);
+  sessionStorage.setItem('formCounty', formCounty);
+  sessionStorage.setItem('formPostcode', formPostcode);
+  window.location.href = "../section-4";
 });
 
 </script>

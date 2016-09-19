@@ -12,7 +12,7 @@ globalcss: false
     <div class="grid__col col-8@s">
       <div role="main" class="panel__body" id="main">
         <a class="mars" href="">Previous</a><br/><br/>
-        <form action="../section-6" class="form qa-questionnaire-form" role="form" novalidate="">
+        <form class="form qa-questionnaire-form" role="form" novalidate="">
           <div class="hidden-form">
           </div>
           <div class="group" id="14ba4707-321d-441d-8d21-b8367366e766">
@@ -22,7 +22,7 @@ globalcss: false
                 <div class="question">
                   <h3 class="question__title neptune"><span class="question__title__number venus">2.2</span>Who lives here?</h3>
                   <div class="question__description mars" id="description-6cc86b54-330c-4465-99b2-34cc7073dc2c">
-                    <div class="box box--promo">
+                    <div class="box box--promo box--census">
                       <h3 class="venus">Include:</h3>
                       <ul>
                         <li>Yourself if this is your permanent family home </li>
@@ -33,21 +33,21 @@ globalcss: false
                     </div>
                   </div>
                   <div class="question__responses">
-                    <div class="response response--textfield response--repeating-elements">
+                    <!-- <div class="response response--textfield response--repeating-elements">
                       <h3 class="neptune">Person <span>1</span></h3>
                       <div class="field">
                         <label class="label venus" for="form-input-1" >First name</label>
-                        <input id="form-input-1" name="q61" class="input input--text" type="text" value="">
+                        <input id="form-input-1" name="q31" class="input input--text" type="text" value="">
                       </div>
                       <div class="field">
                         <label class="label venus" for="form-input-2" >Middle name</label>
-                        <input id="form-input-2" name="q61" class="input input--text" type="text" value="">
+                        <input id="form-input-2" name="q31" class="input input--text" type="text" value="">
                       </div>
                       <div class="field">
                         <label class="label venus" for="form-input-3" id="">Surname</label>
-                        <input id="form-input-3" name="q61" class="input input--text" type="text" value="">
+                        <input id="form-input-3" name="q31" class="input input--text" type="text" value="">
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                   <button class="btn btn--border--census add-entity venus" type="submit" name="">Add another person</button>
                 </div>
@@ -67,46 +67,72 @@ globalcss: false
 
 <script>
 
-$( document ).ready(function() {
-  populateHiddenForm();
-});
 
-
-var addEntity = function(numberOfEntities){
+var addEntity = function(idNumber, firstNameValue, middleNameValue, lastNameValue){
   $( '.question__responses' ).append( '' +
   '<div class="response response--textfield response--repeating-elements">' +
-    '<h3 class="neptune">Person <span>' + numberOfEntities + '</span> <span class="pluto">(<a class="remove-entity" >Remove</a>)</span></h3>' +
+    '<h3 class="neptune">Person <span>' + idNumber + '</span> <span class="pluto">(<a class="remove-entity" >Remove</a>)</span></h3>' +
     '<div class="field">' +
-      '<label class="label venus" for="form-input-1' + numberOfEntities + '" >First name</label>' +
-      '<input id="form-input-1' + numberOfEntities + '" name="q3' + numberOfEntities + '" class="input input--text" type="text" value="">' +
+      '<label class="label venus" for="form-input-1' + idNumber + '" >First name</label>' +
+      '<input id="form-input-1' + idNumber + '" name="q3' + idNumber + '" class="input input--text" type="text" value="' + firstNameValue + '">' +
     '</div>' +
     '<div class="field">' +
-      '<label class="label venus" for="form-input-2' + numberOfEntities + '" >Middle name</label>' +
-      '<input id="form-input-2' + numberOfEntities + '" name="q3' + numberOfEntities + '" class="input input--text" type="text" value="">' +
+      '<label class="label venus" for="form-input-2' + idNumber + '" >Middle name</label>' +
+      '<input id="form-input-2' + idNumber + '" name="q3' + idNumber + '" class="input input--text" type="text" value="' + middleNameValue + '">' +
     '</div>' +
     '<div class="field">' +
-      '<label class="label venus" for="form-input-3' + numberOfEntities + '" id="">Surname</label>' +
-      '<input id="form-input-3' + numberOfEntities + '" name="q3' + numberOfEntities + '" class="input input--text" type="text" value="">' +
+      '<label class="label venus" for="form-input-3' + idNumber + '" id="">Surname</label>' +
+      '<input id="form-input-3' + idNumber + '" name="q3' + idNumber + '" class="input input--text" type="text" value="' + lastNameValue + '">' +
     '</div>' +
   '</div>');
 
   $('.remove-entity').click(function(e) {
     e.preventDefault();
     $(this).closest('.response--repeating-elements').remove();
-    console.log("asdfdsf");
+    var numberOfEntities = $('.response--repeating-elements').length;
+    sessionStorage.setItem('numberOfEntities', numberOfEntities);
   });
 };
 $( document ).ready(function() {
+  if (sessionStorage.getItem('numberOfEntities')) {
+    for (var i = 0; i < sessionStorage.getItem('numberOfEntities'); i++) {
+      var firstNameValue = "";
+      var middleNameValue = "";
+      var lastNameValue = "";
+      if (sessionStorage.getItem('firstName' + i)) {
+        var firstNameValue = sessionStorage.getItem('firstName' + i);
+      }
+      if (sessionStorage.getItem('middleName' + i)) {
+        var middleNameValue = sessionStorage.getItem('middleName' + i);
+      }
+      if (sessionStorage.getItem('lastName' + i)) {
+        var lastNameValue = sessionStorage.getItem('lastName' + i);
+      }
+      addEntity(i + 1, firstNameValue, middleNameValue, lastNameValue);
+    }
+  } else {
+    addEntity(1,"","","");
+  }
   $('.add-entity').click(function(e) {
     e.preventDefault();
     var numberOfEntities = $('.response--repeating-elements').length + 1;
-    addEntity(numberOfEntities);
-  });
+    sessionStorage.setItem('numberOfEntities', numberOfEntities);
+    addEntity(numberOfEntities,"","","");
+  })
 });
 
-// From section 6 to section 5
-$( document ).ready(function() {
-
+$('.qa-btn-get-started').click(function(e) {
+  e.preventDefault();
+  for (var i = 0; i < sessionStorage.getItem('numberOfEntities'); i++) {
+    entityIdNumber = i + 1;
+    var firstName = document.getElementById('form-input-1' + entityIdNumber).value;
+    var middleName = document.getElementById('form-input-2' + entityIdNumber).value;
+    var lastName = document.getElementById('form-input-3' + entityIdNumber).value;
+    sessionStorage.setItem('firstName' + i, firstName);
+    sessionStorage.setItem('middleName' + i, middleName);
+    sessionStorage.setItem('lastName' + i, lastName);
+  }
+  window.location.href = "../section-6";
 });
 
 </script>

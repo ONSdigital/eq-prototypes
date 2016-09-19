@@ -12,7 +12,7 @@ globalcss: false
     <div class="grid__col col-8@s">
       <div role="main" class="panel__body" id="main">
         <a class="mars" href="">Previous</a><br/><br/>
-        <form action="../section-3" class="form qa-questionnaire-form" role="form" novalidate="">
+        <form class="form qa-questionnaire-form" role="form" novalidate="">
           <div class="group" id="14ba4707-321d-441d-8d21-b8367366e766">
             <div class="block" id="cd3b74d1-b687-4051-9634-a8f9ce10a27d">
               <div class="section" id="017880bc-752d-4a6b-83df-e130409ee660">
@@ -60,9 +60,13 @@ globalcss: false
 
 <script>
   $('.qa-btn-get-started').click(function(e) {
+    e.preventDefault();
+    var radioValue = $("input[name='q0']:checked"). val();
+    sessionStorage.setItem('correctAddress', radioValue);
     if($('.yes').prop('checked')) {
-      e.preventDefault();
       window.location.href = "../section-4";
+    } else {
+      window.location.href = "../section-3";
     }
   });
 </script>

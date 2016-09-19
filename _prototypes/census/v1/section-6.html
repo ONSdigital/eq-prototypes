@@ -22,7 +22,7 @@ globalcss: false
                 <div class="question">
                   <h3 class="question__title neptune"><span class="question__title__number venus">2.3</span>Is there anyone else for whom this address is their permanent or family home?</h3>
                   <div class="question__description mars" id="description-6cc86b54-330c-4465-99b2-34cc7073dc2c">
-                    <div class="box box--promo">
+                    <div class="box box--promo box--census">
                       <h3 class="venus">Include:</h3>
                       <ul>
                         <li>People who live outside the UK who are staying in the UK for three months or more </li>
@@ -63,15 +63,14 @@ globalcss: false
 
 <script>
 
-$( document ).ready(function() {
-  populateHiddenForm();
-});
-
-
 $('.qa-btn-get-started').click(function(e) {
+  e.preventDefault();
+  var radioValue = $("input[name='q4']:checked"). val();
+  sessionStorage.setItem('addPerson', radioValue);
   if($('.yes').prop('checked')) {
-    e.preventDefault();
-    window.location.href = "../section-5" + window.location.search;
+    window.location.href = "../section-5";
+  } else {
+    window.location.href = "../section-7";
   }
 });
 
