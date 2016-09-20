@@ -23,7 +23,7 @@ globalcss: false
                   <h3 class="question__title neptune"><span class="question__title__number venus">2.5</span>How are members of this household related to each other?</h3>
                   <div class="question__description mars" id="description-6cc86b54-330c-4465-99b2-34cc7073dc2c">
                     <p class="mars">If members are not related, select the ‘unrelated’ option</p>
-                    <h2 class="neptune"><span class="first-person"></span> is the <strong class="strong-census"><span class="relationship">…</span></strong> of <span class="second-person"></span> </h2>
+                    <h2 class="neptune"><span class="first-person"></span> is <strong class="strong-census"><span class="relationship">…</span></strong> of <span class="second-person"></span> </h2>
                   </div>
                   <div class="question__responses">
                     <div class="response response--radio">
@@ -74,7 +74,7 @@ globalcss: false
                         </div>
                         <div class="field__item field__item--census">
                           <input class="input input--radio" type="radio" name="q6" id="form-input-12" value="relation - other" title="Relation - other">
-                          <label class="label label--inline" for="form-input-12"><span class="label__inner">Relation - other</span></label>
+                          <label class="label label--inline" for="form-input-12"><span class="label__inner">relation - other</span></label>
                         </div>
                         <div class="field__item field__item--census">
                           <input class="input input--radio" type="radio" name="q6" id="form-input-13" value="unrelated" title="Unrelated">
@@ -99,85 +99,64 @@ globalcss: false
 {% include footer-census.html %}
 
 <script>
-$( document ).ready(function() {
 
-  // var numberOfEntities = sessionStorage.getItem('numberOfEntities');
-  // for (var i = 0; i < numberOfEntities; i++) {
-  //   console.log(numberOfEntities);
-  // }
+$( document ).ready(function() {
 
   $('input').on('change', function() {
     $( '.relationship' ).html($(this).val());
   });
 
-
-  // Get arrays of people
+  // Create person objects in array on first load
   var numberOfEntities = sessionStorage.getItem('numberOfEntities');
-  var personArray = [];
-  for (var i = 0; i < numberOfEntities; i++) {
-    personArray.push(sessionStorage.getItem('firstName' + i));
+  console.log(sessionStorage.getItem('object'));
+  if (sessionStorage.getItem('object') == null) {
+    var personObject = [];
+    var counter = 0;
+    for (var i = 0; i < numberOfEntities; i++) {
+      personObject[i] = {};
+      for (var y = 0; y < numberOfEntities; y++) {
+        if (y != counter) {
+          personObject[i][sessionStorage.getItem('firstName' + y)] = "";
+        }
+      }
+      ++counter
+      // console.log(personObject[i][sessionStorage.getItem('firstName' + i)]);
+      // console.log(personObject[i]);
+    };
+  } else {
+    var personObject = JSON.parse(sessionStorage.object);
   }
-  sessionStorage.setItem('personArray', personArray);
 
+  // Add first and second person to form question
+  function addPeopleToQuestion(relValue) {
+    var count = 0;
+    for (var i = 0; i < numberOfEntities; i++) {
+      for (var z = 0; z < numberOfEntities; z++) {
+        if (personObject[i][sessionStorage.getItem('firstName' + z)] == "") {
+          if (count == 0) {
+            $( '.first-person' ).html(sessionStorage.getItem('firstName' + i) + " " + sessionStorage.getItem('lastName' + i));
+            $( '.second-person' ).html(sessionStorage.getItem('firstName' + z) + " " + sessionStorage.getItem('lastName' + z));
+            if (relValue) {
+              personObject[i][sessionStorage.getItem('firstName' + z)] = relValue;
+              personObject[z][sessionStorage.getItem('firstName' + i)] = relValue;
+            }
+          }
+          ++count;
+        }
+      }
+    }
+  }
+  addPeopleToQuestion();
 
   $('.qa-btn-get-started').click(function(e) {
     e.preventDefault();
-    window.location.href = "../section-9";
+    var relValue = $("input[name='q6']").val();
+    addPeopleToQuestion(relValue);
+    console.log(personObject);
+    sessionStorage.setItem('object', JSON.stringify(personObject));
+    window.location.href = "../section-8";
   });
 
 });
-
-  // var count = 0;
-  // Object.keys(QueryString).forEach(function (i) {
-  //   if (i != "q0" && i != "q1" && i != "q2" && i != "q4" && i != "q5" && i != "q6" ) {
-  //     if (count === 0) {
-  //       $( '.first-person' ).append(QueryString[i].replace(/[ ,]+/g, " "));
-  //     }
-  //     if (count === 1) {
-  //       $( '.second-person' ).append(QueryString[i].replace(/[ ,]+/g, " "));
-  //     }
-  //     console.log(i + " " + QueryString[i]);
-  //     count++
-  //   }
-  // });
-
-  // var numperOfEntities = Object.keys(QueryString).length - 5;
-  // var count = 0;
-  // console.log(numperOfEntities);
-  // Object.keys(QueryString).forEach(function (i) {
-  //   if (i != "q0" && i != "q1" && i != "q2" && i != "q4" && i != "q5" && i != "q6" ) {
-  //     console.log(count + i );
-  //     if(++count === numperOfEntities) {
-  //       console.log("last entry: " + i );
-  //     }
-  //   }
-  // });
-
-// $( document ).ready(function() {
-//   var numperOfEntities = document.getElementById('idq3a').value;
-//   var currentEntryNumber = document.getElementById('idq3b').value;
-//   if (currentEntryNumber == numperOfEntities) {
-//
-//   } else {
-//     var currentPerson = "q3" + currentEntryNumber;
-//     var nextPerson = "q3" + (parseInt(currentEntryNumber) + 1);
-//     console.log(nextPerson);
-//     $( '.first-person' ).html(QueryString[currentPerson].replace(/[ ,]+/g, " "));
-//     $( '.second-person' ).html(QueryString[nextPerson].replace(/[ ,]+/g, " "));
-//   }
-// });
-//
-//
-//
-// $('.qa-btn-get-started').click(function(e) {
-//   // var numperOfEntities = document.getElementById('idq3a').value;
-//   var currentEntryNumber = document.getElementById('idq3b').value;
-//   // if (currentEntryNumber == numperOfEntities - 1) {
-//   //   e.preventDefault();
-//   //   window.location.href = "../section-9" + window.location.search;
-//   // } else {
-//     $( '#idq3b' ).val(parseInt(currentEntryNumber) + 1);
-//   // }
-// });
 
 </script>
