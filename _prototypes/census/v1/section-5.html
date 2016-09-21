@@ -25,9 +25,9 @@ globalcss: false
                     <div class="box box--promo box--census">
                       <h3 class="venus">Include:</h3>
                       <ul>
-                        <li>Yourself if this is your permanent family home </li>
-                        <li>Family members including partners, children and babies born on or before 24 June 2016</li>
-                        <li>Students and or schoolchildren who live away from home during term time</li>
+                        <li>Yourself, if this is your permanent family home </li>
+                        <li>Family members including partners, children and babies born on or before 24 June 2017</li>
+                        <li>Students and or school children who live away from home during term time</li>
                         <li>Housemates tenants or lodgers</li>
                       </ul>
                     </div>
@@ -71,7 +71,7 @@ globalcss: false
 var addEntity = function(idNumber, firstNameValue, middleNameValue, lastNameValue){
   $( '.question__responses' ).append( '' +
   '<div class="response response--textfield response--repeating-elements">' +
-    '<h3 class="neptune">Person <span>' + idNumber + '</span> <span class="pluto">(<a class="remove-entity" >Remove</a>)</span></h3>' +
+    '<h3 class="neptune">Person <span>' + idNumber + '</span> <span class="pluto remove-span">(<a class="remove-entity" >Remove</a>)</span></h3>' +
     '<div class="field">' +
       '<label class="label venus" for="form-input-1' + idNumber + '" >First name</label>' +
       '<input id="form-input-1' + idNumber + '" name="q3' + idNumber + '" class="input input--text" type="text" value="' + firstNameValue + '">' +
@@ -86,6 +86,9 @@ var addEntity = function(idNumber, firstNameValue, middleNameValue, lastNameValu
     '</div>' +
   '</div>');
 
+  if (idNumber == 1) {
+    $('.remove-span').remove();
+  }
   $('.remove-entity').click(function(e) {
     e.preventDefault();
     $(this).closest('.response--repeating-elements').remove();
@@ -119,10 +122,21 @@ $( document ).ready(function() {
     sessionStorage.setItem('numberOfEntities', numberOfEntities);
     addEntity(numberOfEntities,"","","");
   })
+  if (sessionStorage.getItem('addPerson') == "yes") {
+    var numberOfEntities = $('.response--repeating-elements').length + 1;
+    sessionStorage.setItem('numberOfEntities', numberOfEntities);
+    addEntity(numberOfEntities,"","","");
+    $('#form-input-1' + numberOfEntities).focus();
+  }
 });
 
 $('.qa-btn-get-started').click(function(e) {
   e.preventDefault();
+  for (var i = 0; i < 28; i++) {
+    sessionStorage.removeItem('firstName' + i);
+    sessionStorage.removeItem('middleName' + i);
+    sessionStorage.removeItem('lastName' + i);
+  }
   for (var i = 0; i < sessionStorage.getItem('numberOfEntities'); i++) {
     entityIdNumber = i + 1;
     var firstName = document.getElementById('form-input-1' + entityIdNumber).value;

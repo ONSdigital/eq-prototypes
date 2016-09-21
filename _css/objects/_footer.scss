@@ -34,6 +34,15 @@
   .footer--census__crest{
     @include mq(m) {
       float:right;
+      position: absolute;
+      top: 13px;
+      right: 0;
     }
   }
+}
+.footer--logo-wrapper{
+  position: relative;
+  display: block;
+  float: left;
+  width: 100%;
 }
