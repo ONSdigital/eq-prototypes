@@ -108,7 +108,6 @@ $( document ).ready(function() {
 
   // Create person objects in array on first load
   var numberOfEntities = sessionStorage.getItem('numberOfEntities');
-  console.log(sessionStorage.getItem('object'));
   if (sessionStorage.getItem('object') == null) {
     var personObject = [];
     var counter = 0;
@@ -147,14 +146,26 @@ $( document ).ready(function() {
     }
   }
   addPeopleToQuestion();
-
+  function isEmpty(obj) {
+      for(var prop in obj) {
+          if(obj.hasOwnProperty(prop))
+              return false;
+      }
+      return true;
+  }
   $('.qa-btn-get-started').click(function(e) {
     e.preventDefault();
     var relValue = $("input[name='q6']").val();
     addPeopleToQuestion(relValue);
-    console.log(personObject);
     sessionStorage.setItem('object', JSON.stringify(personObject));
-    window.location.href = "../section-8";
+    var empty = isEmpty(personObject);
+    console.log(empty);
+    if (empty == "True") {
+      console.log("9999");
+        window.location.href = "../section-8";
+    } else {
+      window.location.href = "../section-8";
+    }
   });
 
 });
