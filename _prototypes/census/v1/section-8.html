@@ -138,6 +138,16 @@ $( document ).ready(function() {
             if (relValue) {
               personObject[i][sessionStorage.getItem('firstName' + z)] = relValue;
               personObject[z][sessionStorage.getItem('firstName' + i)] = relValue;
+              console.log(i + " : " + z);
+              console.log(numberOfEntities);
+              var penultimateEntity = numberOfEntities - 2;
+              var ultimateEntity = numberOfEntities - 1;
+              // 2 3
+              if (i == penultimateEntity && ultimateEntity) {
+                window.location.href = "../thank-you";
+              } else {
+                window.location.href = "../section-8";
+              }
             }
           }
           ++count;
@@ -146,26 +156,11 @@ $( document ).ready(function() {
     }
   }
   addPeopleToQuestion();
-  function isEmpty(obj) {
-      for(var prop in obj) {
-          if(obj.hasOwnProperty(prop))
-              return false;
-      }
-      return true;
-  }
   $('.qa-btn-get-started').click(function(e) {
     e.preventDefault();
     var relValue = $("input[name='q6']").val();
     addPeopleToQuestion(relValue);
     sessionStorage.setItem('object', JSON.stringify(personObject));
-    var empty = isEmpty(personObject);
-    console.log(empty);
-    if (empty == "True") {
-      console.log("9999");
-        window.location.href = "../section-8";
-    } else {
-      window.location.href = "../section-8";
-    }
   });
 
 });
