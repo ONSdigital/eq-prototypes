@@ -139,12 +139,24 @@ $('.qa-btn-get-started').click(function(e) {
   }
   for (var i = 0; i < sessionStorage.getItem('numberOfEntities'); i++) {
     entityIdNumber = i + 1;
+    console.log(document.getElementById('form-input-1' + entityIdNumber).value);
+    if (document.getElementById('form-input-1' + entityIdNumber).value == "") {
+      console.log('#form-input-1' + entityIdNumber + "empty");
+      $('#form-input-1' + entityIdNumber).closest('.response--repeating-elements').remove();
+    }
+  }
+  var numberOfEntities = $('.response--repeating-elements').length;
+  sessionStorage.setItem('numberOfEntities', numberOfEntities);
+  console.log($('.response--repeating-elements').length);
+  for (var i = 0; i < sessionStorage.getItem('numberOfEntities'); i++) {
+    entityIdNumber = i + 1;
     var firstName = document.getElementById('form-input-1' + entityIdNumber).value;
     var middleName = document.getElementById('form-input-2' + entityIdNumber).value;
     var lastName = document.getElementById('form-input-3' + entityIdNumber).value;
     sessionStorage.setItem('firstName' + i, firstName);
     sessionStorage.setItem('middleName' + i, middleName);
     sessionStorage.setItem('lastName' + i, lastName);
+    console.log(entityIdNumber);
   }
   window.location.href = "../section-6";
 });

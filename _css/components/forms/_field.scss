@@ -48,7 +48,8 @@
       display: inline-block;
     }
     .field__item--census{
-      min-width: 320px;
+      min-width: 310px;
+      margin: 0 16px 16px 0;
     }
   }
   &.field--cols {
