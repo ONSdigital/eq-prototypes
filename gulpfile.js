@@ -121,4 +121,11 @@ gulp.task('serve', () => {
   // gulp.watch('_site/**/*.*').on('change', browserSync.reload);
 });
 
-gulp.task('default', ['sprite', 'css', 'jekyll', 'serve']);
+gulp.task('py-server', () => {
+  gulp.src('./server.py')
+  .pipe(gulp.dest('./_site'));
+  gulp.src('./prototype.command')
+  .pipe(gulp.dest('./_site'));
+});
+
+gulp.task('default', ['sprite', 'css', 'jekyll', 'serve', 'py-server']);

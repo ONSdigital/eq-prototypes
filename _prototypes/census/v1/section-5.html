@@ -158,7 +158,11 @@ $('.qa-btn-get-started').click(function(e) {
     sessionStorage.setItem('lastName' + i, lastName);
     console.log(entityIdNumber);
   }
-  window.location.href = "../section-6";
+  if (sessionStorage.getItem('addPerson') == "yes") {
+    window.location.href = "../section-7";
+  } else {
+    window.location.href = "../section-6";
+  }
 });
 
 </script>
