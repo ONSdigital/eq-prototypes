@@ -27,11 +27,11 @@ globalcss: false
                     <div class="response response--radio" id="7587eb9b-f24e-4dc0-ac94-66118b896c10">
                       <div class="field field--multi field--radio">
                         <div class="field__item">
-                          <input class="input input--radio yes" type="radio" name="q-1" id="form-input-1" value="a-1" title="Yes">
+                          <input class="input input--radio yes" type="radio" name="q0" id="form-input-1" value="yes" title="Yes">
                           <label class="label label--inline" for="form-input-1"><span class="label__inner">Yes</span></label>
                         </div>
                         <div class="field__item">
-                          <input class="input input--radio no" type="radio" name="q-1" id="form-input-2" value="a-2" title="No">
+                          <input class="input input--radio no" type="radio" name="q0" id="form-input-2" value="no" title="No">
                           <label class="label label--inline" for="form-input-2"><span class="label__inner">No</span></label>
                         </div>
                         <br/>
@@ -53,9 +53,15 @@ globalcss: false
 
 <script>
   $('.qa-btn-get-started').click(function(e) {
-    if($('.no').prop('checked')) {
-      e.preventDefault();
+    e.preventDefault();
+    var radioValue = $("input[name='q0']:checked"). val();
+    sessionStorage.setItem('services', radioValue);
+    if (sessionStorage.getItem('goods') == "no" && sessionStorage.getItem('services') == "no" ) {
+      window.location.href = "../section-14";
+    } else if (sessionStorage.getItem('services') == "no") {
       window.location.href = "../section-12";
+    } else {
+      window.location.href = "../section-11a";
     }
   });
-  </script>
+</script>
