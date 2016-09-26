@@ -54,10 +54,12 @@ $bp: 36em;
   color: white;
   background-color: $color-purple;
   margin-bottom: 2rem;
+  overflow: hidden;
+  position: relative;
   .survey-header{
     display: block;
     height: 182px;
-    @include mq(m) {
+    @include mq(1400px) {
       display: flex;
     }
   }
@@ -72,7 +74,7 @@ $bp: 36em;
       content: none;
     }
   }
-  @include mq(m) {
+  @include mq(1400px) {
     .panel__header {
       text-align: left;
       padding: 2.5rem 0rem;
@@ -83,7 +85,10 @@ $bp: 36em;
     top: 0;
     left: 0;
     svg{
-      height: 182px;
+      height: 180px;
+      @include mq(s) {
+        height: 243px;
+      }
     }
   }
   .survey-header__info{
@@ -96,13 +101,13 @@ $bp: 36em;
     margin-bottom: 0;
     font-weight: 700;
     margin-left: 80px;
-    @include mq(m) {
-      margin-left: 150px;
-    }
-    @include mq(l) {
-      margin-left: 150px;
-    }
-    @include mq(1350px) {
+    // @include mq(m) {
+    //   margin-left: 190px;
+    // }
+    // @include mq(l) {
+    //   margin-left: 190px;
+    // }
+    @include mq(1400px) {
       margin-left: 0px;
     }
   }
@@ -110,13 +115,13 @@ $bp: 36em;
     margin-bottom: 0.5rem;
     font-weight: 300;
     margin-left: 80px;
-    @include mq(m) {
-      margin-left: 150px;
-    }
-    @include mq(l) {
-      margin-left: 150px;
-    }
-    @include mq(1350px) {
+    // @include mq(m) {
+    //   margin-left: 190px;
+    // }
+    // @include mq(l) {
+    //   margin-left: 190px;
+    // }
+    @include mq(1400px) {
       margin-left: 0px;
     }
   }
