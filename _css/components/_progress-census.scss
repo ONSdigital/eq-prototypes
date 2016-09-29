@@ -1,0 +1,123 @@
+.progress-census {
+  padding-left: 8px;
+  ol {
+    // counter-reset: item;
+  }
+  li {
+    position: relative;
+    display: block;
+    // &:before {
+    //   content: counters(item, ".") " ";
+    //   counter-increment: item;
+    // }
+  }
+  nav {
+    > ol {
+      padding: 0 0 0 16px;
+      position: relative;
+      &:before{
+        content: "";
+        display: block;
+        width: 16px;
+        height: 6px;
+        background-color: $color-white;
+        position: absolute;
+        left: -8px;
+        top: 0px;
+      }
+      &:after{
+        content: "";
+        display: block;
+        width: 16px;
+        height: 6px;
+        background-color: $color-white;
+        position: absolute;
+        left: -8px;
+        bottom: 0px;
+      }
+      > li {
+        color: $color-dark-grey;
+        &:after{
+          content: "";
+          display: block;
+          width: 16px;
+          height: 16px;
+          background-color: $color-white;
+          border: 3px solid $color-grey;
+          position: absolute;
+          left: -24px;
+          top: 6px;
+          border-radius: 100%;
+        }
+        &.active{
+          color: $color-purple;
+          .mars{
+            font-weight: 600;
+          }
+          &:after{
+            background-color: $color-white;
+            border: 3px solid $color-purple;
+          }
+        }
+        &.complete{
+        color: $color-purple;
+          &:after{
+            background-color: $color-purple;
+            border: 0px solid $color-grey;
+          }
+        }
+        &.complete:before{
+          content: "";
+          @include icon('check');
+          filter: invert(100%);
+          vertical-align: middle;
+          width: 1em;
+          height: 1em;
+          z-index: 1;
+          background-size: 1em;position: absolute;
+          left: -24px;
+          top: 6px;
+        }
+        &.disabled{
+          pointer-events: none;
+          cursor: default;
+        }
+        > span > a {
+          color: $color-dark-grey;
+          text-decoration: none;
+        }
+        span{
+          cursor: pointer;
+        }
+        > ol {
+          padding-left: 8px;
+          > li {
+            display: none;
+            &:after{
+              content: "";
+              display: inline-block;
+              height: 1px;
+              width: 16px;
+              background-color: $color-grey;
+              position: absolute;
+              top: 12px;
+              left: -24px;
+            }
+            a {
+              text-decoration: none;
+              //color: $color-very-dark-grey;
+              display: block;
+            }
+          }
+        }
+        &.is-open{
+          > ol{
+            > li {
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,168 @@
+---
+title: Household Questionnaire
+subtitle: England
+project: 2017 Census
+globalcss: false
+---
+
+{% include survey-header-census.html %}
+
+<div class="container">
+  <div class="grid ">
+    <div class="grid__col col-8@s">
+      <div role="main" class="panel__body" id="main">
+        <a class="mars" href="">Previous</a><br/><br/>
+        <form class="form qa-questionnaire-form" role="form" novalidate="">
+          <div class="hidden-form">
+          </div>
+          <div class="group" id="14ba4707-321d-441d-8d21-b8367366e766">
+            <div class="block" id="cd3b74d1-b687-4051-9634-a8f9ce10a27d">
+              <div class="section" id="017880bc-752d-4a6b-83df-e130409ee660">
+                <h2 class="section__title saturn"><span class="section__title__number question__title__number--census venus">2</span>Household</h2>
+                <div class="question">
+                  <h3 class="question__title neptune"><span class="question__title__number venus">2.2</span>Who lives here?</h3>
+                  <div class="question__description mars" id="description-6cc86b54-330c-4465-99b2-34cc7073dc2c">
+                    <div class="box box--promo box--census">
+                      <h3 class="venus">Include:</h3>
+                      <ul>
+                        <li>Yourself, if this is your permanent family home </li>
+                        <li>Family members including partners, children and babies born on or before 24 June 2017</li>
+                        <li>Students and or school children who live away from home during term time</li>
+                        <li>Housemates tenants or lodgers</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="question__responses">
+                    <!-- <div class="response response--textfield response--repeating-elements">
+                      <h3 class="neptune">Person <span>1</span></h3>
+                      <div class="field">
+                        <label class="label venus" for="form-input-1" >First name</label>
+                        <input id="form-input-1" name="q31" class="input input--text" type="text" value="">
+                      </div>
+                      <div class="field">
+                        <label class="label venus" for="form-input-2" >Middle name</label>
+                        <input id="form-input-2" name="q31" class="input input--text" type="text" value="">
+                      </div>
+                      <div class="field">
+                        <label class="label venus" for="form-input-3" id="">Surname</label>
+                        <input id="form-input-3" name="q31" class="input input--text" type="text" value="">
+                      </div>
+                    </div> -->
+                  </div>
+                  <button class="btn btn--border--census add-entity venus" type="submit" name="">Add another person</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn--census qa-btn-get-started venus" type="submit" name="">Save and continue</button><br/><br/>
+          <a class="mars" href="">Save and complete later</a><br/><br/>
+          <a class="mars" href="">Previous</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include footer-census.html %}
+
+<script>
+
+
+var addEntity = function(idNumber, firstNameValue, middleNameValue, lastNameValue){
+  $( '.question__responses' ).append( '' +
+  '<div class="response response--textfield response--repeating-elements">' +
+    '<h3 class="neptune">Person <span>' + idNumber + '</span> <span class="pluto remove-span">(<a class="remove-entity" >Remove</a>)</span></h3>' +
+    '<div class="field">' +
+      '<label class="label venus" for="form-input-1' + idNumber + '" >First name</label>' +
+      '<input id="form-input-1' + idNumber + '" name="q3' + idNumber + '" class="input input--text" type="text" value="' + firstNameValue + '">' +
+    '</div>' +
+    '<div class="field">' +
+      '<label class="label venus" for="form-input-2' + idNumber + '" >Middle name</label>' +
+      '<input id="form-input-2' + idNumber + '" name="q3' + idNumber + '" class="input input--text" type="text" value="' + middleNameValue + '">' +
+    '</div>' +
+    '<div class="field">' +
+      '<label class="label venus" for="form-input-3' + idNumber + '" id="">Surname</label>' +
+      '<input id="form-input-3' + idNumber + '" name="q3' + idNumber + '" class="input input--text" type="text" value="' + lastNameValue + '">' +
+    '</div>' +
+  '</div>');
+
+  if (idNumber == 1) {
+    $('.remove-span').remove();
+  }
+  $('.remove-entity').click(function(e) {
+    e.preventDefault();
+    $(this).closest('.response--repeating-elements').remove();
+    var numberOfEntities = $('.response--repeating-elements').length;
+    sessionStorage.setItem('numberOfEntities', numberOfEntities);
+  });
+};
+$( document ).ready(function() {
+  if (sessionStorage.getItem('numberOfEntities')) {
+    for (var i = 0; i < sessionStorage.getItem('numberOfEntities'); i++) {
+      var firstNameValue = "";
+      var middleNameValue = "";
+      var lastNameValue = "";
+      if (sessionStorage.getItem('firstName' + i)) {
+        var firstNameValue = sessionStorage.getItem('firstName' + i);
+      }
+      if (sessionStorage.getItem('middleName' + i)) {
+        var middleNameValue = sessionStorage.getItem('middleName' + i);
+      }
+      if (sessionStorage.getItem('lastName' + i)) {
+        var lastNameValue = sessionStorage.getItem('lastName' + i);
+      }
+      addEntity(i + 1, firstNameValue, middleNameValue, lastNameValue);
+    }
+  } else {
+    addEntity(1,"","","");
+  }
+  $('.add-entity').click(function(e) {
+    e.preventDefault();
+    var numberOfEntities = $('.response--repeating-elements').length + 1;
+    sessionStorage.setItem('numberOfEntities', numberOfEntities);
+    addEntity(numberOfEntities,"","","");
+  })
+  if (sessionStorage.getItem('addPerson') == "yes") {
+    var numberOfEntities = $('.response--repeating-elements').length + 1;
+    sessionStorage.setItem('numberOfEntities', numberOfEntities);
+    addEntity(numberOfEntities,"","","");
+    $('#form-input-1' + numberOfEntities).focus();
+  }
+});
+
+$('.qa-btn-get-started').click(function(e) {
+  e.preventDefault();
+  for (var i = 0; i < 28; i++) {
+    sessionStorage.removeItem('firstName' + i);
+    sessionStorage.removeItem('middleName' + i);
+    sessionStorage.removeItem('lastName' + i);
+  }
+  for (var i = 0; i < sessionStorage.getItem('numberOfEntities'); i++) {
+    entityIdNumber = i + 1;
+    console.log(document.getElementById('form-input-1' + entityIdNumber).value);
+    if (document.getElementById('form-input-1' + entityIdNumber).value == "") {
+      console.log('#form-input-1' + entityIdNumber + "empty");
+      $('#form-input-1' + entityIdNumber).closest('.response--repeating-elements').remove();
+    }
+  }
+  var numberOfEntities = $('.response--repeating-elements').length;
+  sessionStorage.setItem('numberOfEntities', numberOfEntities);
+  console.log($('.response--repeating-elements').length);
+  for (var i = 0; i < sessionStorage.getItem('numberOfEntities'); i++) {
+    entityIdNumber = i + 1;
+    var firstName = document.getElementById('form-input-1' + entityIdNumber).value;
+    var middleName = document.getElementById('form-input-2' + entityIdNumber).value;
+    var lastName = document.getElementById('form-input-3' + entityIdNumber).value;
+    sessionStorage.setItem('firstName' + i, firstName);
+    sessionStorage.setItem('middleName' + i, middleName);
+    sessionStorage.setItem('lastName' + i, lastName);
+    console.log(entityIdNumber);
+  }
+  if (sessionStorage.getItem('addPerson') == "yes") {
+    window.location.href = "../section-7";
+  } else {
+    window.location.href = "../section-6";
+  }
+});
+
+</script>
