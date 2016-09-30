@@ -56,6 +56,9 @@ globalcss: false
         </form>
       </div>
     </div>
+    <div class="grid__col col-3@s push-1@s">
+      {% include progress-census.html %}
+    </div>
   </div>
 </div>
 
@@ -68,9 +71,9 @@ $('.qa-btn-get-started').click(function(e) {
   var radioValue = $("input[name='q4']:checked"). val();
   sessionStorage.setItem('addPerson', radioValue);
   if($('.yes').prop('checked')) {
-    window.location.href = "../section-5";
+    window.location.href = "../section-5/?progressOpen=1";
   } else {
-    window.location.href = "../section-7";
+    window.location.href = "../section-7/?progressOpen=1";
   }
 });
 

@@ -3,23 +3,27 @@
     <ol>
       <li class="section-2 section-3"><span class="mars">Your details</span>
         <ol>
-          <li><a href="../section-2?progressOpen=1" class="pluto">Are you able to report for the period from 29 May 2016 to 2 July 2016?</a></li>
-          <li><a href="../section-3?progressOpen=1" class="pluto">What are the dates of the period that you will be reporting for?</a></li>
+          <li><a href="../section-2?progressOpen=1" class="pluto">1.1 Is the address on the letter you received correct?</a></li>
+          <li><a href="../section-3?progressOpen=1" class="pluto">1.2 What is your current UK address?</a></li>
         </ol>
       </li>
-      <li class="section-4"><span class="mars">Household</span>
+      <li class="section-4 section-5 section-6 section-7 section-8"><span class="mars">Household</span>
         <ol>
-          <li><a href="../section-4?progressOpen=1" class="pluto">For the reporting period, what was the value of the business’s total retail turnover?</a></li>
+          <li><a href="../section-4?progressOpen=1" class="pluto">2.1 Is this your permanent home?</a></li>
+          <li><a href="../section-5?progressOpen=1" class="pluto">2.2 Who lives here?</a></li>
+          <li><a href="../section-6?progressOpen=1" class="pluto">2.3 Is there anyone else for whom this address is their permanent or family home?</a></li>
+          <li><a href="../section-7?progressOpen=1" class="pluto">2.4 How many visitors are staying overnight here on 24th of June 2016?</a></li>
+          <li><a href="../section-8?progressOpen=1" class="pluto">2.5 How are people related?</a></li>
         </ol>
       </li>
-      <li class="section-5"><span class="mars">Individuals</span>
+      <li class="section-9"><span class="mars">Individuals</span>
         <ol>
-          <li><a href="../section-5?progressOpen=1" class="pluto">Of your retail turnover, what was the value of internet sales?</a></li>
+          <li><a href="../section-9?progressOpen=1" class="pluto">Q?</a></li>
         </ol>
       </li>
-      <li class="section-8"><span class="mars">Visitors</span>
+      <li class="section-9"><span class="mars">Visitors</span>
         <ol>
-          <li><a href="../section-8?progressOpen=1" class="pluto">On 10 June 2016 what was the number of employees for your business?</a></li>
+          <li><a href="../section-10?progressOpen=1" class="pluto">Q?</a></li>
         </ol>
       </li>
     </ol>
@@ -51,18 +55,14 @@
   }();
 
   if (QueryString.progress === '0') {
-    $('.progress').css('display', 'none');
+    $('.progress-census').css('display', 'none');
   }
-  // $(function() {
-  //    $("a").attr('href', function(i, h) {
-  //      return h + (h.indexOf('?') != -1 ? "&address=" + QueryString.address : "?address=" + QueryString.address);
-  //    });
-  // });
-  $('.progress ol li span').on('click', function() {
+
+  $('.progress-census ol li span').on('click', function() {
     if ($(this).parent().hasClass("is-open")) {
-      $('.progress ol li').removeClass('is-open');
+      $('.progress-census ol li').removeClass('is-open');
     } else {
-      $('.progress ol li').removeClass('is-open');
+      $('.progress-census ol li').removeClass('is-open');
       $(this).parent().addClass('is-open');
     }
   });

@@ -51,6 +51,9 @@ globalcss: false
         </form>
       </div>
     </div>
+    <div class="grid__col col-3@s push-1@s">
+      {% include progress-census.html %}
+    </div>
   </div>
 </div>
 
@@ -62,7 +65,7 @@ $('.qa-btn-get-started').click(function(e) {
   e.preventDefault();
   var inputValue = $("input[name='q5']"). val();
   sessionStorage.setItem('visitors', inputValue);
-  window.location.href = "../section-8";
+  window.location.href = "../section-8/?progressOpen=1";
 });
 
 </script>
