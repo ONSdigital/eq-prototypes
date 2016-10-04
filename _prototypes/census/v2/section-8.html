@@ -1,7 +1,7 @@
 ---
-title: Household Questionnaire
+title: Household Questionnaire v2
 subtitle: England
-project: 2017 Census
+project: 2017 Census wave 1
 globalcss: false
 ---
 
@@ -20,7 +20,7 @@ globalcss: false
               <div class="section" id="017880bc-752d-4a6b-83df-e130409ee660">
                 <h2 class="section__title saturn"><span class="section__title__number question__title__number--census venus">2</span>Household</h2>
                 <div class="question">
-                  <h3 class="question__title neptune"><span class="question__title__number venus">2.5</span>How is <span class="first-person"></span> related to <span class="second-person"></span>?</h3>
+                  <h3 class="question__title neptune"><span class="question__title__number venus">2.5</span>How is <strong class="strong-census"><span class="first-person"></span></strong> related to <strong class="strong-census"><span class="second-person"></span></strong>?</h3>
                   <div class="question__description mars" id="description-6cc86b54-330c-4465-99b2-34cc7073dc2c">
                     <p class="mars">If they are not related, select the ‘unrelated’ option</p>
                   </div>
@@ -93,9 +93,6 @@ globalcss: false
         </form>
       </div>
     </div>
-    <div class="grid__col col-3@s push-1@s">
-      {% include progress-census.html %}
-    </div>
   </div>
 </div>
 
@@ -149,7 +146,7 @@ $( document ).ready(function() {
               if (i == penultimateEntity && ultimateEntity) {
                 window.location.href = "../thank-you";
               } else {
-                window.location.href = "../section-8/?progressOpen=1";
+                window.location.href = "../section-8";
               }
             }
           }
@@ -161,7 +158,7 @@ $( document ).ready(function() {
   addPeopleToQuestion();
   $('.qa-btn-get-started').click(function(e) {
     e.preventDefault();
-    var relValue = $("input[name='q6']").val();
+    var relValue = $("input[name='q6']:checked").val();
     addPeopleToQuestion(relValue);
     sessionStorage.setItem('object', JSON.stringify(personObject));
   });

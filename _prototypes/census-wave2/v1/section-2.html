@@ -1,7 +1,7 @@
 ---
-title: Household Questionnaire v2
+title: Household Questionnaire
 subtitle: England
-project: 2017 Census wave 1
+project: 2017 Census wave 2
 globalcss: false
 ---
 
@@ -58,9 +58,9 @@ globalcss: false
     var radioValue = $("input[name='q0']:checked"). val();
     sessionStorage.setItem('correctAddress', radioValue);
     if($('.yes').prop('checked')) {
-      window.location.href = "../section-4";
+      window.location.href = "../section-4/?progressOpen=1";
     } else {
-      window.location.href = "../section-3";
+      window.location.href = "../section-3/?progressOpen=1";
     }
   });
 </script>

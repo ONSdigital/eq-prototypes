@@ -1,7 +1,7 @@
 ---
-title: Household Questionnaire
+title: Household Questionnaire v2
 subtitle: England
-project: 2017 Census
+project: 2017 Census wave 1
 globalcss: false
 ---
 
@@ -20,7 +20,7 @@ globalcss: false
               <div class="section" id="017880bc-752d-4a6b-83df-e130409ee660">
                 <h2 class="section__title saturn"><span class="section__title__number question__title__number--census venus">2</span>Household</h2>
                 <div class="question">
-                  <h3 class="question__title neptune"><span class="question__title__number venus">2.2</span>Who lives here?</h3>
+                  <h3 class="question__title neptune"><span class="question__title__number venus">2.2</span>Who usually lives here?</h3>
                   <div class="question__description mars" id="description-6cc86b54-330c-4465-99b2-34cc7073dc2c">
                     <div class="box box--promo box--census">
                       <h3 class="venus">Include:</h3>
@@ -60,9 +60,6 @@ globalcss: false
         </form>
       </div>
     </div>
-    <div class="grid__col col-3@s push-1@s">
-      {% include progress-census.html %}
-    </div>
   </div>
 </div>
 
@@ -90,7 +87,8 @@ var addEntity = function(idNumber, firstNameValue, middleNameValue, lastNameValu
   '</div>');
 
   if (idNumber == 1) {
-    $('.remove-span').remove();
+    $('.remove-span .remove-entity').remove();
+    $('.remove-span').html("(You)");
   }
   $('.remove-entity').click(function(e) {
     e.preventDefault();
@@ -162,9 +160,9 @@ $('.qa-btn-get-started').click(function(e) {
     console.log(entityIdNumber);
   }
   if (sessionStorage.getItem('addPerson') == "yes") {
-    window.location.href = "../section-7/?progressOpen=1";
+    window.location.href = "../section-7";
   } else {
-    window.location.href = "../section-6/?progressOpen=1";
+    window.location.href = "../section-6";
   }
 });
 

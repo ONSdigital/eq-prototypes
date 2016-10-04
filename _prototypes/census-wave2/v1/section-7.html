@@ -1,7 +1,7 @@
 ---
-title: Household Questionnaire v2
+title: Household Questionnaire
 subtitle: England
-project: 2017 Census wave 1
+project: 2017 Census wave 2
 globalcss: false
 ---
 
@@ -62,7 +62,7 @@ $('.qa-btn-get-started').click(function(e) {
   e.preventDefault();
   var inputValue = $("input[name='q5']"). val();
   sessionStorage.setItem('visitors', inputValue);
-  window.location.href = "../section-8";
+  window.location.href = "../section-8/?progressOpen=1";
 });
 
 </script>

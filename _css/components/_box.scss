@@ -79,3 +79,18 @@
   border-left: 8px solid $color-purple;
   background-color: lighten($color-purple, 64%);
 }
+
+.box--entity {
+  margin: 16px 0;
+}
+.box--entity__person{
+  vertical-align: text-bottom;
+  margin: 0 0 8px 0;
+  width: 100%;
+  padding: 9px 16px 9px 16px;
+  border: 1px solid #ccc;
+  min-width: 330px;
+  display: table-caption;
+  border-radius: 3px;
+  background-color: #fbfbfb
+}
