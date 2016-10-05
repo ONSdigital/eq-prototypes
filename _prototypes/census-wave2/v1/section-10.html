@@ -58,7 +58,11 @@ $('.qa-btn-get-started').click(function(e) {
   e.preventDefault();
   var radioValue = $("input[name='q2']:checked"). val();
   sessionStorage.setItem('detachedSemiTerraced', radioValue);
-  window.location.href = "../section-11/";
+  if (sessionStorage.getItem('typeOfHome') == "House or bungalow") {
+    window.location.href = "../section-12";
+  } else {
+    window.location.href = "../section-11";
+  }
 });
 
 </script>
