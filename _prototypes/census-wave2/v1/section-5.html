@@ -133,6 +133,7 @@ $( document ).ready(function() {
 
 $('.qa-btn-get-started').click(function(e) {
   e.preventDefault();
+  sessionStorage.removeItem('object');
   for (var i = 0; i < 28; i++) {
     sessionStorage.removeItem('firstName' + i);
     sessionStorage.removeItem('middleName' + i);
@@ -160,9 +161,9 @@ $('.qa-btn-get-started').click(function(e) {
     console.log(entityIdNumber);
   }
   if (sessionStorage.getItem('addPerson') == "yes") {
-    window.location.href = "../section-7/?progressOpen=1";
+    window.location.href = "../section-7";
   } else {
-    window.location.href = "../section-6/?progressOpen=1";
+    window.location.href = "../section-6";
   }
 });
 

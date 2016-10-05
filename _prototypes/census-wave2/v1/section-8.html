@@ -118,9 +118,7 @@ $( document ).ready(function() {
           personObject[i][sessionStorage.getItem('firstName' + y)] = "";
         }
       }
-      ++counter
-      // console.log(personObject[i][sessionStorage.getItem('firstName' + i)]);
-      // console.log(personObject[i]);
+      ++counter;
     };
   } else {
     var personObject = JSON.parse(sessionStorage.object);
@@ -146,7 +144,7 @@ $( document ).ready(function() {
               if (i == penultimateEntity && ultimateEntity) {
                 window.location.href = "../section-9";
               } else {
-                window.location.href = "../section-8/?progressOpen=1";
+                window.location.href = "../section-8";
               }
             }
           }

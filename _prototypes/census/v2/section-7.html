@@ -62,7 +62,11 @@ $('.qa-btn-get-started').click(function(e) {
   e.preventDefault();
   var inputValue = $("input[name='q5']"). val();
   sessionStorage.setItem('visitors', inputValue);
-  window.location.href = "../section-8";
+  if (sessionStorage.getItem('numberOfEntities') == "1") {
+    window.location.href = "../section-9";
+  } else {
+    window.location.href = "../section-8/";
+  }
 });
 
 </script>
