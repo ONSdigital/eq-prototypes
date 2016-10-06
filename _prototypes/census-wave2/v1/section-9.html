@@ -54,18 +54,22 @@ globalcss: false
 
 <script>
 
-$('.qa-btn-get-started').click(function(e) {
-  e.preventDefault();
-  var radioValue = $("input[name='q2']:checked"). val();
-  sessionStorage.setItem('typeOfHome', radioValue);
-  if (sessionStorage.getItem('typeOfHome') == "Flat, maisonette or apartment") {
-    window.location.href = "../section-11b";
-  } else if (sessionStorage.getItem('typeOfHome') == "Mobile or temporary structure") {
-    window.location.href = "../section-12";
-  }
-  else {
-    window.location.href = "../section-10";
-  }
-});
+$( document ).ready(function() {
+  sessionStorage.removeItem('object');
 
+  $('.qa-btn-get-started').click(function(e) {
+    e.preventDefault();
+    var radioValue = $("input[name='q2']:checked"). val();
+    sessionStorage.setItem('typeOfHome', radioValue);
+    if (sessionStorage.getItem('typeOfHome') == "Flat, maisonette or apartment") {
+      window.location.href = "../section-11b";
+    } else if (sessionStorage.getItem('typeOfHome') == "Mobile or temporary structure") {
+      window.location.href = "../section-12";
+    }
+    else {
+      window.location.href = "../section-10";
+    }
+  });
+
+});
 </script>

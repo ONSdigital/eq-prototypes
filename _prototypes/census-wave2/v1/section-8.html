@@ -101,7 +101,6 @@ globalcss: false
 <script>
 
 $( document ).ready(function() {
-
   $('input').on('change', function() {
     $( '.relationship' ).html($(this).val());
   });
@@ -136,8 +135,6 @@ $( document ).ready(function() {
             if (relValue) {
               personObject[i][sessionStorage.getItem('firstName' + z)] = relValue;
               personObject[z][sessionStorage.getItem('firstName' + i)] = relValue;
-              console.log(i + " : " + z);
-              console.log(numberOfEntities);
               var penultimateEntity = numberOfEntities - 2;
               var ultimateEntity = numberOfEntities - 1;
               // 2 3
