@@ -1,5 +1,5 @@
 ---
-title: Household Questionnaire v1
+title: Household Questionnaire v2
 subtitle: England
 project: 2017 Census wave 2
 globalcss: false
@@ -20,7 +20,7 @@ globalcss: false
               <div class="section" id="017880bc-752d-4a6b-83df-e130409ee660">
                 <h2 class="section__title saturn"><span class="section__title__number question__title__number--census venus">2</span>Household</h2>
                 <div class="question question--radios">
-                  <h3 class="question__title neptune"><span class="question__title__number venus">2.11</span>Does your accommodation have a central heating system?</h3>
+                  <h3 class="question__title neptune"><span class="question__title__number venus">2.1</span>Is this your permanent home?</h3>
                   <div class="response response--radio">
                     <div class="field field--multi field--radio">
                       <div class="field__item">
@@ -29,7 +29,7 @@ globalcss: false
                       </div>
                       <div class="field__item">
                         <input class="input input--radio no" type="radio" name="q2" id="form-input-2" value="no" title="No">
-                        <label class="label label--inline" for="form-input-2"><span class="label__inner">No</span></label>
+                        <label class="label label--inline" for="form-input-2"><span class="label__inner">No - For example this is a holiday home</span></label>
                       </div>
                     </div>
                   </div>
@@ -53,12 +53,8 @@ globalcss: false
 $('.qa-btn-get-started').click(function(e) {
   e.preventDefault();
   var radioValue = $("input[name='q2']:checked"). val();
-  sessionStorage.setItem('heatingSystem', radioValue);
-  if (sessionStorage.getItem('heatingSystem') == "no") {
-    window.location.href = "../section-16";
-  } else {
-    window.location.href = "../section-15";
-  }
+  sessionStorage.setItem('permanentAddress', radioValue);
+  window.location.href = "../section-5";
 });
 
 </script>

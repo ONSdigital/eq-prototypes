@@ -1,5 +1,5 @@
 ---
-title: Household Questionnaire v1
+title: Household Questionnaire v2
 subtitle: England
 project: 2017 Census wave 2
 globalcss: false
@@ -20,24 +20,20 @@ globalcss: false
               <div class="section" id="017880bc-752d-4a6b-83df-e130409ee660">
                 <h2 class="section__title saturn"><span class="section__title__number question__title__number--census venus">2</span>Household</h2>
                 <div class="question">
-                  <h3 class="question__title neptune"><span class="question__title__number venus">2.4</span>How many visitors are staying overnight here on <strong class="strong-census">24th of June 2016?</strong></h3>
+                  <h3 class="question__title neptune"><span class="question__title__number venus">2.10</span>How many bedrooms are available for use only by this household?</h3>
                   <div class="question__description mars" id="description-6cc86b54-330c-4465-99b2-34cc7073dc2c">
                     <div class="box box--promo box--census">
                       <h3 class="venus">Include:</h3>
                       <ul>
-                        <li>People who usually live somewhere else in the UK. For example, boy or girl friends and relatives</li>
-                        <li>Children or babies with shared parentage</li>
-                        <li>People staying here because it is their second address, for example, for work. Their permanent or family home is elsewhere</li>
-                        <li>People who usually live outside the UK who are visiting the UK for less than three months</li>
-                        <li>People here on holiday</li>
+                        <li>All rooms built or converted for use as bedrooms, even if they’re not currently used as bedrooms</li>
                       </ul>
                     </div>
                   </div>
                   <div class="question__responses">
                     <div class="response response--textfield">
                       <div class="field">
-                        <label class="label venus" for="form-input-1">Number of visitors</label>
-                        <input class="input input--text" id="form-input-1" type="text" name="q5" value="" title="Number of visitors">
+                        <label class="label venus" for="form-input-1">Number of bedrooms</label>
+                        <input class="input input--text" id="form-input-1" type="text" name="q5" value="" title="Number of bedrooms">
                       </div>
                     </div>
                   </div>
@@ -57,20 +53,12 @@ globalcss: false
 {% include footer-census.html %}
 
 <script>
-$( document ).ready(function() {
-  sessionStorage.removeItem('object');
 
-  $('.qa-btn-get-started').click(function(e) {
-    e.preventDefault();
-    var inputValue = $("input[name='q5']"). val();
-    sessionStorage.setItem('visitors', inputValue);
-    if (sessionStorage.getItem('numberOfEntities') == "1") {
-      window.location.href = "../section-9";
-    } else {
-      window.location.href = "../section-8";
-    }
-  });
-
+$('.qa-btn-get-started').click(function(e) {
+  e.preventDefault();
+  var inputValue = $("input[name='q5']"). val();
+  sessionStorage.setItem('bedrooms', inputValue);
+  window.location.href = "../section-14";
 });
 
 </script>
