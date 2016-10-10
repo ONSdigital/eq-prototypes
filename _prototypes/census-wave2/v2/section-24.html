@@ -74,7 +74,11 @@ $('.qa-btn-get-started').click(function(e) {
   e.preventDefault();
   var inputValue = $("input[name='q4']:checked"). val();
   sessionStorage.setItem('otherAddress', inputValue);
-  window.location.href = "../section-25";
+  if (sessionStorage.getItem('otherAddress') == "no") {
+    window.location.href = "../section-26";
+  } else {
+    window.location.href = "../section-25";
+  }
 });
 
 </script>
