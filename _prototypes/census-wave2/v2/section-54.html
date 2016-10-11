@@ -67,6 +67,10 @@ $('.qa-btn-get-started').click(function(e) {
   e.preventDefault();
   var radioValue = $("input[name='q0']:checked"). val();
   sessionStorage.setItem('everWorked', radioValue);
-  window.location.href = "../section-55";
+  if (sessionStorage.getItem('everWorked') == 'No') {
+    window.location.href = "../thank-you";
+  } else {
+    window.location.href = "../section-55";
+  }
 });
 </script>
