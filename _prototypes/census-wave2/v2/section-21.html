@@ -1,5 +1,3 @@
-
-
 ---
 title: Household Questionnaire v2
 subtitle: England
@@ -19,17 +17,17 @@ globalcss: false
             <div class="block" id="cd3b74d1-b687-4051-9634-a8f9ce10a27d">
               <div class="section" id="017880bc-752d-4a6b-83df-e130409ee660">
                 <h2 class="section__title saturn"><span class="section__title__number question__title__number--census venus">3</span> John Doe</h2>
-                <div class="question question--radiobuttons">
+                <div class="question question--radios">
                   <h3 class="question__title neptune"><span class="question__title__number venus">3.3</span>What is your sex?</h3>
                   <div class="question__responses">
-                    <div class="response response--radiobutton">
-                      <div class="field field--multi field--radiobutton">
+                    <div class="response response--radio">
+                      <div class="field field--multi field--radio">
                         <div class="field__item">
-                          <input class="input input--radiobutton yes" type="radiobutton" name="q0" id="form-input-1" value="Male" title="Male">
+                          <input class="input input--radio" type="radio" name="q0" id="form-input-1" value="Male" title="Male">
                           <label class="label label--inline" for="form-input-1"><span class="label__inner">Male</span></label>
                         </div>
                         <div class="field__item">
-                          <input class="input input--radiobutton no" type="radiobutton" name="q0" id="form-input-2" value="Female" title="Female">
+                          <input class="input input--radio" type="radio" name="q0" id="form-input-2" value="Female" title="Female">
                           <label class="label label--inline" for="form-input-2"><span class="label__inner">Female</span></label>
                         </div>
                       </div>
@@ -51,9 +49,11 @@ globalcss: false
 {% include footer-census.html %}
 
 <script>
+
 $( document ).ready(function() {
   $('.section__title').html('<span class="section__title__number question__title__number--census venus">3</span>' + sessionStorage.getItem('firstName0') + ' '  + sessionStorage.getItem('lastName0'));
 });
+
 $('.qa-btn-get-started').click(function(e) {
   e.preventDefault();
   var radioValue = $("input[name='q0']:checked"). val();
@@ -61,5 +61,3 @@ $('.qa-btn-get-started').click(function(e) {
   window.location.href = "../section-22";
 });
 </script>
-Contact GitHub API Training Shop Blog About
-© 2016 GitHub, Inc. Terms Privacy Security Status Help
