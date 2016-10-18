@@ -20,20 +20,20 @@ globalcss: false
               <div class="section" id="017880bc-752d-4a6b-83df-e130409ee660">
                 <h2 class="section__title saturn"><span class="section__title__number question__title__number--census venus">2</span>Household</h2>
                 <div class="question question--radios">
-                  <h3 class="question__title neptune"><span class="question__title__number venus">2.6</span>What type of accommodation is this?</h3>
+                  <h3 class="question__title neptune"><span class="question__title__number venus">2.7</span>Is your house or bungalow:</h3>
                   <div class="response response--radio">
                     <div class="field field--multi field--radio">
                       <div class="field__item">
-                        <input class="input input--radio yes" type="radio" name="q2" id="form-input-1" value="House or bungalow" title="House or bungalow">
-                        <label class="label label--inline" for="form-input-1"><span class="label__inner">House or bungalow</span></label>
+                        <input class="input input--radio yes" type="radio" name="q2" id="form-input-1" value="detached" title="detached">
+                        <label class="label label--inline" for="form-input-1"><span class="label__inner">detached</span></label>
                       </div>
                       <div class="field__item">
-                        <input class="input input--radio no" type="radio" name="q2" id="form-input-2" value="Flat, maisonette or apartment" title="Flat, maisonette or apartment">
-                        <label class="label label--inline" for="form-input-2"><span class="label__inner">Flat, maisonette or apartment</span></label>
+                        <input class="input input--radio no" type="radio" name="q2" id="form-input-2" value="semi-detached" title="semi-detached">
+                        <label class="label label--inline" for="form-input-2"><span class="label__inner">semi-detached</span></label>
                       </div>
                       <div class="field__item">
-                        <input class="input input--radio no" type="radio" name="q2" id="form-input-3" value="Mobile or temporary structure" title="Mobile or temporary structure">
-                        <label class="label label--inline" for="form-input-3"><span class="label__inner">Mobile or temporary structure</span></label>
+                        <input class="input input--radio no" type="radio" name="q2" id="form-input-3" value="terraced (including end-terrace)" title="terraced (including end-terrace)">
+                        <label class="label label--inline" for="form-input-3"><span class="label__inner">terraced (including end-terrace)</span></label>
                       </div>
                     </div>
                   </div>
@@ -54,22 +54,15 @@ globalcss: false
 
 <script>
 
-$( document ).ready(function() {
-  sessionStorage.removeItem('object');
-
-  $('.qa-btn-get-started').click(function(e) {
-    e.preventDefault();
-    var radioValue = $("input[name='q2']:checked"). val();
-    sessionStorage.setItem('typeOfHome', radioValue);
-    if (sessionStorage.getItem('typeOfHome') == "Flat, maisonette or apartment") {
-      window.location.href = "../section-11b";
-    } else if (sessionStorage.getItem('typeOfHome') == "Mobile or temporary structure") {
-      window.location.href = "../section-9-inter";
-    }
-    else {
-      window.location.href = "../section-10";
-    }
-  });
-
+$('.qa-btn-get-started').click(function(e) {
+  e.preventDefault();
+  var radioValue = $("input[name='q2']:checked"). val();
+  sessionStorage.setItem('detachedSemiTerraced', radioValue);
+  if (sessionStorage.getItem('typeOfHome') == "House or bungalow") {
+    window.location.href = "../section-9-inter";
+  } else {
+    window.location.href = "../section-11";
+  }
 });
+
 </script>

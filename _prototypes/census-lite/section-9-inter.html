@@ -25,11 +25,11 @@ globalcss: false
                     <li class="complete mars"><a href="">Household section</a></li>
                   </ul>
                   <h3 class="question__title saturn">Remaining sections</h3>
-                  <ul class="interstitial">
+                  <ul class="">
                     <div class="box--entity"></div>
                   </ul>
                   <h3 class="question__title saturn">The next section</h3>
-                  <p class="mars">The next section covers individual questions for <strong>John Doe</strong></p>
+                  <p class="mars">The next section covers individual questions for <strong class="next-section">John Doe</strong></p>
                 </div>
               </div>
             </div>
@@ -55,6 +55,8 @@ var listEntity = function(idNumber, firstNameValue, middleNameValue, lastNameVal
   '</li>');
 };
 $( document ).ready(function() {
+  $('.next-section').html(sessionStorage.getItem('firstName0') + ' '  + sessionStorage.getItem('lastName0'));
+
   if (sessionStorage.getItem('numberOfEntities')) {
     for (var i = 0; i < sessionStorage.getItem('numberOfEntities'); i++) {
       var firstNameValue = "";
