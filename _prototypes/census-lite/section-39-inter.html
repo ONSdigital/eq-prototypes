@@ -23,10 +23,7 @@ globalcss: false
                   <h3 class="question__title saturn">Completed sections</h3>
                   <ul class="interstitial">
                     <li class="complete mars"><a href="">Household section</a></li>
-                    <li class="complete mars"><a href="">John Doe</a></li>
-                    <li class="complete mars"><a href="">Jane Doe</a></li>
-                    <li class="complete mars"><a href="">Billy Doe</a></li>
-                    <li class="complete mars"><a href="">Jilly Doe</a></li>
+                    <div class="box--entity" style="margin: 0px;"></div>
                   </ul>
                   <div class="grid ">
                     <div class="grid__col col-8@s">
@@ -56,6 +53,32 @@ globalcss: false
 {% include footer-census.html %}
 
 <script>
+
+var listEntity = function(idNumber, firstNameValue, middleNameValue, lastNameValue){
+  $( '.box--entity' ).append( '' +
+  '<li class="" >' +
+  '<div class="complete mars"><a href=""> ' + firstNameValue + " " + middleNameValue + " "  + lastNameValue + ' </a></div>' +
+  '</li>');
+};
+$( document ).ready(function() {
+  if (sessionStorage.getItem('numberOfEntities')) {
+    for (var i = 0; i < sessionStorage.getItem('numberOfEntities'); i++) {
+      var firstNameValue = "";
+      var middleNameValue = "";
+      var lastNameValue = "";
+      if (sessionStorage.getItem('firstName' + i)) {
+        var firstNameValue = sessionStorage.getItem('firstName' + i);
+      }
+      if (sessionStorage.getItem('middleName' + i)) {
+        var middleNameValue = sessionStorage.getItem('middleName' + i);
+      }
+      if (sessionStorage.getItem('lastName' + i)) {
+        var lastNameValue = sessionStorage.getItem('lastName' + i);
+      }
+      listEntity(i + 1, firstNameValue, middleNameValue, lastNameValue);
+    }
+  }
+});
 
 $( document ).ready(function() {
   sessionStorage.removeItem('object');

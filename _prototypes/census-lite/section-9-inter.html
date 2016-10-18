@@ -26,10 +26,7 @@ globalcss: false
                   </ul>
                   <h3 class="question__title saturn">Remaining sections</h3>
                   <ul class="interstitial">
-                    <li class="mars"><a href="">John Doe</a></li>
-                    <li class="mars"><a href="">Jane Doe</a></li>
-                    <li class="mars"><a href="">Billy Doe</a></li>
-                    <li class="mars"><a href="">Jilly Doe</a></li>
+                    <div class="box--entity"></div>
                   </ul>
                   <h3 class="question__title saturn">The next section</h3>
                   <p class="mars">The next section covers individual questions for <strong>John Doe</strong></p>
@@ -50,9 +47,36 @@ globalcss: false
 
 <script>
 
+
+var listEntity = function(idNumber, firstNameValue, middleNameValue, lastNameValue){
+  $( '.box--entity' ).append( '' +
+  '<li class="" >' +
+  '<div class="mars"><a href=""> ' + firstNameValue + " " + middleNameValue + " "  + lastNameValue + ' </a></div>' +
+  '</li>');
+};
+$( document ).ready(function() {
+  if (sessionStorage.getItem('numberOfEntities')) {
+    for (var i = 0; i < sessionStorage.getItem('numberOfEntities'); i++) {
+      var firstNameValue = "";
+      var middleNameValue = "";
+      var lastNameValue = "";
+      if (sessionStorage.getItem('firstName' + i)) {
+        var firstNameValue = sessionStorage.getItem('firstName' + i);
+      }
+      if (sessionStorage.getItem('middleName' + i)) {
+        var middleNameValue = sessionStorage.getItem('middleName' + i);
+      }
+      if (sessionStorage.getItem('lastName' + i)) {
+        var lastNameValue = sessionStorage.getItem('lastName' + i);
+      }
+      listEntity(i + 1, firstNameValue, middleNameValue, lastNameValue);
+    }
+  }
+});
+
+
 $( document ).ready(function() {
   sessionStorage.removeItem('object');
-
   $('.qa-btn-get-started').click(function(e) {
     e.preventDefault();
     window.location.href = "../section-19";
