@@ -1,0 +1,31 @@
+.interstitial {
+  padding-left: 32px;
+  .complete{
+    position: relative;
+    &:before {
+      content: "";
+      @include icon('check');
+      filter: invert(100%);
+      vertical-align: middle;
+      width: 1.3em;
+      height: 1.3em;
+      z-index: 1;
+      background-size: 1.3em;
+      position: absolute;
+      left: -31px;
+      top: 4px;
+    }
+    &:after{
+      content: "";
+      display: block;
+      width: 24px;
+      height: 24px;
+      background-color: $color-blue;
+      border: 0px solid $color-grey;
+      position: absolute;
+      left: -32px;
+      top: 4px;
+      border-radius: 100%;
+    }
+  }
+}
