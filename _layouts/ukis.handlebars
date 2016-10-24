@@ -1,0 +1,145 @@
+---
+title: UK Innovation Survey v2
+project: UKIS
+globalcss: false
+---
+{% raw %}
+
+{% include survey-header.html %}
+{{#if hompepage}}
+{% include bar-hero.html %}
+{{else}}
+{% include bar.html %}
+{{/if}}
+{% endraw %}
+
+{% block content %}
+<div class="container">
+  {{#if html}}
+    {{{html}}}
+  {{else}}
+  <div class="grid ">
+    <div class="grid__col col-8@s">
+      <div role="main" class="panel__body" id="main">
+        {{#if prev}}
+        <a class="mars" href="../{{prev}}">Previous</a><br/><br/>
+        {{/if}}
+        <form class="form qa-questionnaire-form" role="form" novalidate="">
+          <div class="hidden-form">
+          </div>
+          <div class="group" id="14ba4707-321d-441d-8d21-b8367366e766">
+            <div class="block" id="cd3b74d1-b687-4051-9634-a8f9ce10a27d">
+              <div class="section" id="017880bc-752d-4a6b-83df-e130409ee660">
+                <h2 class="section__title saturn">{{#if sectionVersion}}<span class="section__title__number venus">{{sectionVersion}}</span>{{/if}}{{sectionTitle}}</h2>
+                {{#if sectionDescription}}
+                <div class="section__description">
+                  {{{ sectionDescription}}}
+                </div>
+                {{/if}}
+                <div class="question">
+                  <h3 class="question__title neptune"><span class="question__title__number venus">{{questionVersion}}</span>{{{questionTitle}}}</h3>
+                  {{#if questionDescription}}
+                  <div class="question__description">
+                    {{{questionDescription}}}
+                  </div>
+                  {{/if}}
+                  <div class="response response--{{answerType}}">
+
+                  {{#if radios}}
+                    <!-- Radios -->
+                    <div class="field field--multi field--radio">
+                      {{#each radios}}
+                        {{#if other}}
+                      <div class="field__item field__item--other">
+                        <input class="input input--radio input--radio--change input--other" type="{{type}}" name="{{qId}}" id="form-input-{{@index}}" value="{{label}}" title="{{label}}">
+                        <label class="label label--inline" for="form-input-{{@index}}"><span class="label__inner mars">{{label}}</span></label>
+                        <div class="field__item--other__text">
+                          <span class="pluto">{{other}}</span><br />
+                          <input class="input input--text" type="text" value="">
+                        </div>
+                      </div>
+                        {{else}}
+                      {{#if groupName}}<h4 class="mars" style="margin-top: 32px;">{{{groupName}}}</h4>{{/if}}
+                      <div class="field__item">
+                        <input class="input input--radio" type="{{type}}" name="{{qId}}" id="form-input-{{@index}}" value="{{label}}" title="{{label}}">
+                        <label class="label label--inline" for="form-input-{{@index}}"><span class="label__inner">{{label}}</span></label>
+                      </div>
+                        {{/if}}
+                      {{/each}}
+                    </div>
+                  {{/if}}
+
+                  {{#if checkboxs}}
+                  <!-- Checkboxs -->
+                    <div class="field field--multi field--checkbox">
+                      {{#each checkboxs}}
+                        {{#if other}}
+                      <div class="field__item field__item--other">
+                        <input class="input input--checkbox input--checkbox--change input--other" type="{{type}}" name="{{#if qId}}{{qId}}{{else}}1{{/if}}" id="form-input-{{@index}}" value="{{label}}" title="{{label}}">
+                        <label class="label label--inline" for="form-input-{{@index}}"><span class="label__inner mars">{{label}}</span></label>
+                        <div class="field__item--other__text">
+                          <span class="pluto">{{other}}</span><br />
+                          <input class="input input--text" type="text" value="">
+                        </div>
+                      </div>
+                        {{else}}
+                      <div class="field__item">
+                        <input class="input input--{{type}}" type="{{type}}" name="{{#if qId}}{{qId}}{{else}}1{{/if}}" id="form-input-{{@index}}" value="{{label}}" title="{{label}}">
+                        <label class="label label--inline" for="form-input-{{@index}}"><span class="label__inner">{{label}}</span></label>
+                      </div>
+                        {{/if}}
+                      {{/each}}
+                    </div>
+                  {{/if}}
+
+                  {{#if currency}}
+                  <!-- Text currency -->
+                    <div class="response response--currency">
+                      {{#each currency}}
+                      <div class="field">
+                        <label class="label venus" for="form-input-{{@index}}" >{{label}}</label><br>
+                        <div class="input-type input-type--currency" data-type="£">
+                        <input class="input input--text numericentry mars" pattern="\d*" aria-describedby="description-form-input-1" id="form-input-{{@index}}" name="{{#if qId}}{{qId}}{{else}}1{{/if}}" type="{{type}}" value="">
+                        <span class="hint pluto">{{validation}}</span>
+                        </div>
+                      </div>
+                      {{/each}}
+                    </div>
+                  {{/if}}
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn--secondary qa-btn-get-started venus" type="submit" name="">Save and continue</button><br/><br/>
+          <a class="mars" href="../{{prev}}">Previous</a>
+        </form>
+      </div>
+    </div>
+  </div>
+  {{/if}}
+</div>
+
+<script>
+$( document ).ready(function() {
+  $('.qa-btn-get-started').click(function(e) {
+    e.preventDefault();
+    {{#if route}}
+      {{#each route}}
+      var checkedVal = $("input[value='{{label}}']:checked").val();
+      if (checkedVal == "{{label}}") {
+        window.location.href = "../{{link}}";
+      }
+      {{/each}}
+      else {
+          window.location.href = "../{{next}}";
+      }
+    {{else}}
+        window.location.href = "../{{next}}";
+    {{/if}}
+  });
+});
+
+</script>
+{% endblock %}

@@ -1,0 +1,298 @@
+[
+  {
+    "url": "index",
+    "next": "section-2",
+    "html": "<div class='header'><h2 class='saturn'>Your response to this survey is of great value to government, whether or not you carry out innovation activities.</h2><div class='grid '><div class='grid__col col-6@s'><dl><dt class='mercury u-tt-u'>Business name</dt><dd class='mars'>Your business</dd><dt class='mercury u-tt-u'>Have your details changed?</dt><dd class='mars'>Telephone <a href='tel:03001234931'>0300 1234 931</a> or alternatively email <a href=''>info@ons.gov.uk</a></dd></dl></div><div class='grid__col col-6@s '><dl><dt class='mercury u-tt-u'>Period</dt><dd class='mars'>1 January 2012 to 31 December 2014</dd><dt class='mercury u-tt-u'>Please submit by</dt><dd class='mars'>9 October 2016</dd></dl></div></div><h2 class='header__title saturn'>Basis for completion</h2><ul><li>Please complete this questionnaire for the business named above.</li><li>If this business is part of an enterprise group, please answer all questions for this business in the UK only.</li><li>Do not include results for subsidiaries or parent enterprises.</li></ul><div class='box box--promo'><h2 class='saturn'>Definition of innovation</h2><p class='mars'>Innovation, for the purpose of this survey, is defined as <strong>new</strong> or <strong>significantly improved goods or services</strong> and / or processes used to produce or supply all goods or services that the business has introduced, regardless of their origin. These may be new to the business or new to the market. Investments for future innovation and changes that the business has introduced at a <strong>strategic</strong> level (in organisation and practices) are also covered.</p></div><h2 class='saturn'>You will be asked to provide information for the business, including:</h2><ul><li>General Business Information</li><li>Innovation Activities</li><li>Context for Innovation</li><li>General Economic Information</li></ul><div class='u-mb-s u-mb-m@s'><div class='u-fw-b'>If actual figures are not available, please provide informed estimates.</div></div><div></div><form action='' class='form' role='form' method='POST' novalidate=''><a href='../section-1'class='btn btn--tertiary qa-btn-get-started neptune' type='submit' name='action[start_questionnaire]'>Start survey</a></form><div class='lock u-mb-s u-mb-m@s'><div class='venus lock__text'>We will treat your data securely and confidentially</div></div></div>"
+  },
+  {
+    "prev": "index",
+    "url": "section-2",
+    "next": "section-3",
+    "sectionVersion": 1,
+    "sectionTitle": "General Business Information",
+    "sectionDescription": "<p class='mars'>This section covers general information relating to your business including geographic markets and significant changes in circumstance.</p>"
+  },
+  {
+    "prev": "section-2",
+    "url": "section-3",
+    "next": "section-4",
+    "sectionVersion": 1,
+    "sectionTitle": "General Business Information",
+    "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
+    "questionVersion": 1.1,
+    "questionTitle": "In which geographic markets did this business sell goods and/or services?",
+    "questionDescription": "<p class='mars'>Select all that apply</p>",
+    "answerType": "checkbox",
+    "checkboxs": [
+      {
+        "type": "checkbox",
+        "label": "UK regional within approximately 100 miles of this business"
+      },
+      {
+        "type": "checkbox",
+        "label": "UK national"
+      },
+      {
+        "type": "checkbox",
+        "label": "European countries"
+      },
+      {
+        "type": "checkbox",
+        "label": "All other countries",
+        "other": "Please specify other"
+      }
+    ]
+  },
+  {
+    "prev": "section-3",
+    "url": "section-4",
+    "next": "section-5",
+    "sectionVersion": 1,
+    "sectionTitle": "General Business Information",
+    "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
+    "questionVersion": 1.2,
+    "questionTitle": "Did any of the following significant changes occur to [BUSINESS NAME]?",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "yes",
+        "qId": "1",
+        "groupName": "The business was established"
+      },
+      {
+        "type": "radio",
+        "label": "no",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "yes",
+        "qId": "2",
+        "groupName": "Turnover increased by at least 10% due to merger with another business or part of it"
+      },
+      {
+        "type": "radio",
+        "label": "no",
+        "qId": "2"
+      },
+      {
+        "type": "radio",
+        "label": "yes",
+        "qId": "3",
+        "groupName": "Turnover decreased by at least 10% due to merger with another business or part of it"
+      },
+      {
+        "type": "radio",
+        "label": "no",
+        "qId": "3"
+      }
+    ]
+  },
+  {
+    "prev": "section-4",
+    "url": "section-5",
+    "next": "section-6",
+    "sectionVersion": 2,
+    "sectionTitle": "Business Strategy and Practices",
+    "sectionDescription": "<p class='mars'>This section covers changes in business strategy and practices, for example, implementing changes to marketing concepts or strategies.</p>"
+  },
+  {
+    "prev": "section-4",
+    "url": "section-6",
+    "next": "section-7",
+    "sectionVersion": 2,
+    "sectionTitle": "General Business Information",
+    "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
+    "questionVersion": 2.1,
+    "questionTitle": "Did [BUSINESS NAME] make changes in the following areas?",
+    "questionDescription": "<div class='box box--promo'><div class='grid'><div class='grid__col col-6@s'><h3 class='venus'>Include:</h3><ul><li>all <strong>new</strong> and <strong>significantly improved</strong> forms of organisation, business structures or practices aimed at raising internal efficiency or the effectiveness of approaching markets and customers.</li><li>changes that have been implemented during the 3 year period.</li></ul></div><div class='grid__col col-6@s'><h3 class='venus'>Exclude:</h3><ul><li>ongoing changes.</li></ul></div></div></div>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "yes",
+        "qId": "1",
+        "groupName": "New <strong>business practices</strong> for organising procedures<span class='input--description pluto'>(For example first use of supply chain management, business re-engineering, knowledge management, lean production or quality management)</span>"
+      },
+      {
+        "type": "radio",
+        "label": "no",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "yes",
+        "qId": "2",
+        "groupName": "New methods of <strong>organising work responsibilities and decision making</strong> <span class='input--description pluto'>(For example first use of a new system of employee responsibilities, team work, decentralisation, integration or de-integration of departments or education / training systems)</span>"
+      },
+      {
+        "type": "radio",
+        "label": "no",
+        "qId": "2"
+      },
+      {
+        "type": "radio",
+        "label": "yes",
+        "qId": "3",
+        "groupName": "New methods of <strong>organising external relationships</strong> with other firms or public institutions <span class='input--description pluto'>(For example first use of alliances, partnerships, outsourcing or subcontracting)</span>"
+      },
+      {
+        "type": "radio",
+        "label": "no",
+        "qId": "3"
+      },
+      {
+        "type": "radio",
+        "label": "yes",
+        "qId": "4",
+        "groupName": "Implementation of significant <strong>changes to marketing concepts or strategies</strong>. <span class='input--description pluto'>(For example marketing concepts or strategies that differ significantly from your enterprise’s existing marketing methods and which has not been used before)</span>"
+      },
+      {
+        "type": "radio",
+        "label": "no",
+        "qId": "4"
+      }
+    ]
+  },
+  {
+    "prev": "section-6",
+    "url": "section-7",
+    "next": "section-8",
+    "sectionVersion": 3,
+    "sectionTitle": "Business Strategy and Practices",
+    "sectionDescription": "<p class='mars'>TThis section covers investments in innovation.</p><div class='box--promo'><ul><li>You will be asked to provide figures for expenditure on innovation activities in the calendar year 2016.</li></ul></div>"
+  },
+  {
+    "prev": "section-7",
+    "url": "section-8",
+    "next": "section-9",
+    "sectionVersion": 3,
+    "sectionTitle": "Innovation Investment",
+    "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
+    "questionVersion": 3.1,
+    "questionTitle": "Did [BUSINESS NAME] invest in <strong>internal Research and Development</strong> for the purposes of current or future innovation?",
+    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Definition of ‘internal Research and Development’:</h3><ul><li>Creative work undertaken within your business that increases knowledge for developing new and improved goods or services and processes</li></ul></div>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "yes",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "no",
+        "qId": "1"
+      }
+    ],
+    "route": [
+      {
+        "label": "UK national",
+        "link": "section-3"
+      },
+      {
+        "label": "All other countries",
+        "link": "section-3"
+      }
+    ]
+  },
+  {
+    "prev": "section-8",
+    "url": "section-9",
+    "next": "section-11",
+    "sectionVersion": 3,
+    "sectionTitle": "Innovation Investment",
+    "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
+    "questionVersion": 3.2,
+    "questionTitle": "In which of the following years did [BUSINESS NAME] invest in <strong>internal Research & Development?</strong>",
+    "questionDescription": "<p class='mars'>Select all that apply</p>",
+    "answerType": "checkbox",
+    "checkboxs": [
+      {
+        "type": "checkbox",
+        "label": "2014",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "2015",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "2016",
+        "qId": "1"
+      }
+    ],
+    "route": [
+      {
+        "label": "2016",
+        "link": "section-10",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-9",
+    "url": "section-10",
+    "next": "section-11",
+    "sectionVersion": 3,
+    "sectionTitle": "Innovation Investment",
+    "sectionDescription": "<p class='mars'>1 year period 1 January 2016 to 31 December 2016.</p>",
+    "questionVersion": 3.3,
+    "questionTitle": "Please estimate the amount of expenditure on internal Research & Development the <strong>calendar year 2016 only</strong>?",
+    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Internal costs and purchase from outside the business</li></ul></div>",
+    "answerType": "currency",
+    "currency": [
+      {
+        "type": "text",
+        "label": "Total internal Research and Development",
+        "validation": "Round to the nearest £ thousand, for example 100000"
+      }
+    ]
+  },
+  {
+    "prev": "section-10",
+    "url": "section-11",
+    "next": "section-12",
+    "sectionVersion": 3,
+    "sectionTitle": "Innovation Investment",
+    "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
+    "questionVersion": 3.4,
+    "questionTitle": "Did [BUSINESS NAME] invest in the <strong>acquisition of Research and Development</strong> for the purposes of current or future innovation?",
+    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Creative work undertaken  by companies, including other businesses within your group, or by public or private research organisations and purchased by your business</li></ul></div>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "yes",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "no",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-11",
+    "url": "section-12",
+    "next": "section-13",
+    "sectionVersion": 3,
+    "sectionTitle": "Innovation Investment",
+    "sectionDescription": "<p class='mars'>1 year period 1 January 2016 to 31 December 2016.</p>",
+    "questionVersion": 3.5,
+    "questionTitle": "Please estimate the amount of expenditure on the acquisition of  Research & Development for the <strong>calendar year 2016 only?</strong>",
+    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Internal costs and purchase from outside the business</li></ul></div>",
+    "answerType": "currency",
+    "currency": [
+      {
+        "type": "text",
+        "label": "Total acquisition of Research and Development",
+        "validation": "Round to the nearest £ thousand, for example 100000"
+      }
+    ]
+  }
+]
