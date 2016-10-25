@@ -48,6 +48,7 @@ globalcss: false
 
 
 
+
                   </div>
                 </div>
               </div>
@@ -65,17 +66,7 @@ globalcss: false
 $( document ).ready(function() {
   $('.qa-btn-get-started').click(function(e) {
     e.preventDefault();
-      var checkedVal = $("input[value='UK national']:checked").val();
-      if (checkedVal == "UK national") {
-        window.location.href = "../section-3";
-      }
-      var checkedVal = $("input[value='All other countries']:checked").val();
-      if (checkedVal == "All other countries") {
-        window.location.href = "../section-3";
-      }
-      else {
-          window.location.href = "../section-9";
-      }
+    window.location.href = "../section-9";
   });
 });
 

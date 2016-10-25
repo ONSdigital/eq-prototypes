@@ -50,6 +50,7 @@ globalcss: false
                     </div>
 
 
+
                   </div>
                 </div>
               </div>
@@ -67,12 +68,11 @@ globalcss: false
 $( document ).ready(function() {
   $('.qa-btn-get-started').click(function(e) {
     e.preventDefault();
+    window.location.href = "../section-11";
       var checkedVal = $("input[value='2016']:checked").val();
-      if (checkedVal == "2016") {
+      var checkedName = $("input[value='2016']:checked").attr("name");
+      if (checkedVal == "2016" && checkedName == "1") {
         window.location.href = "../section-10";
-      }
-      else {
-          window.location.href = "../section-11";
       }
   });
 });

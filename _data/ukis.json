@@ -19,7 +19,7 @@
     "sectionVersion": 1,
     "sectionTitle": "General Business Information",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
-    "questionVersion": 1.1,
+    "questionVersion": "1.1",
     "questionTitle": "In which geographic markets did this business sell goods and/or services?",
     "questionDescription": "<p class='mars'>Select all that apply</p>",
     "answerType": "checkbox",
@@ -50,7 +50,7 @@
     "sectionVersion": 1,
     "sectionTitle": "General Business Information",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
-    "questionVersion": 1.2,
+    "questionVersion": "1.2",
     "questionTitle": "Did any of the following significant changes occur to [BUSINESS NAME]?",
     "answerType": "radio",
     "radios": [
@@ -104,7 +104,7 @@
     "sectionVersion": 2,
     "sectionTitle": "General Business Information",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
-    "questionVersion": 2.1,
+    "questionVersion": "2.1",
     "questionTitle": "Did [BUSINESS NAME] make changes in the following areas?",
     "questionDescription": "<div class='box box--promo'><div class='grid'><div class='grid__col col-6@s'><h3 class='venus'>Include:</h3><ul><li>all <strong>new</strong> and <strong>significantly improved</strong> forms of organisation, business structures or practices aimed at raising internal efficiency or the effectiveness of approaching markets and customers.</li><li>changes that have been implemented during the 3 year period.</li></ul></div><div class='grid__col col-6@s'><h3 class='venus'>Exclude:</h3><ul><li>ongoing changes.</li></ul></div></div></div>",
     "answerType": "radio",
@@ -170,7 +170,7 @@
     "sectionVersion": 3,
     "sectionTitle": "Innovation Investment",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
-    "questionVersion": 3.1,
+    "questionVersion": "3.1",
     "questionTitle": "Did [BUSINESS NAME] invest in <strong>internal Research and Development</strong> for the purposes of current or future innovation?",
     "questionDescription": "<div class='box box--promo'><h3 class='venus'>Definition of ‘internal Research and Development’:</h3><ul><li>Creative work undertaken within your business that increases knowledge for developing new and improved goods or services and processes</li></ul></div>",
     "answerType": "radio",
@@ -185,16 +185,6 @@
         "label": "no",
         "qId": "1"
       }
-    ],
-    "route": [
-      {
-        "label": "UK national",
-        "link": "section-3"
-      },
-      {
-        "label": "All other countries",
-        "link": "section-3"
-      }
     ]
   },
   {
@@ -204,7 +194,7 @@
     "sectionVersion": 3,
     "sectionTitle": "Innovation Investment",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
-    "questionVersion": 3.2,
+    "questionVersion": "3.2",
     "questionTitle": "In which of the following years did [BUSINESS NAME] invest in <strong>internal Research & Development?</strong>",
     "questionDescription": "<p class='mars'>Select all that apply</p>",
     "answerType": "checkbox",
@@ -240,7 +230,7 @@
     "sectionVersion": 3,
     "sectionTitle": "Innovation Investment",
     "sectionDescription": "<p class='mars'>1 year period 1 January 2016 to 31 December 2016.</p>",
-    "questionVersion": 3.3,
+    "questionVersion": "3.3",
     "questionTitle": "Please estimate the amount of expenditure on internal Research & Development the <strong>calendar year 2016 only</strong>?",
     "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Internal costs and purchase from outside the business</li></ul></div>",
     "answerType": "currency",
@@ -259,7 +249,7 @@
     "sectionVersion": 3,
     "sectionTitle": "Innovation Investment",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
-    "questionVersion": 3.4,
+    "questionVersion": "3.4",
     "questionTitle": "Did [BUSINESS NAME] invest in the <strong>acquisition of Research and Development</strong> for the purposes of current or future innovation?",
     "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Creative work undertaken  by companies, including other businesses within your group, or by public or private research organisations and purchased by your business</li></ul></div>",
     "answerType": "radio",
@@ -283,7 +273,7 @@
     "sectionVersion": 3,
     "sectionTitle": "Innovation Investment",
     "sectionDescription": "<p class='mars'>1 year period 1 January 2016 to 31 December 2016.</p>",
-    "questionVersion": 3.5,
+    "questionVersion": "3.5",
     "questionTitle": "Please estimate the amount of expenditure on the acquisition of  Research & Development for the <strong>calendar year 2016 only?</strong>",
     "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Internal costs and purchase from outside the business</li></ul></div>",
     "answerType": "currency",
@@ -302,7 +292,7 @@
     "sectionVersion": 3,
     "sectionTitle": "Innovation Investment",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
-    "questionVersion": 3.4,
+    "questionVersion": "3.4",
     "questionTitle": "Did [BUSINESS NAME] invest in <strong>acquisition of advanced machinery, equipment or software</strong> for the purposes of current or future innovation?",
     "answerType": "radio",
     "radios": [
@@ -325,7 +315,7 @@
     "sectionVersion": 3,
     "sectionTitle": "Innovation Investment",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
-    "questionVersion": 3.7,
+    "questionVersion": "3.7",
     "questionTitle": "Which of the following did [BUSINESS NAME] invest in for the purposes of current or future innovation?",
     "answerType": "checkbox",
     "checkboxs": [
@@ -353,7 +343,7 @@
     "sectionVersion": 3,
     "sectionTitle": "Innovation Investment",
     "sectionDescription": "<p class='mars'>1 year period 1 January 2016 to 31 December 2016.</p>",
-    "questionVersion": 3.8,
+    "questionVersion": "3.8",
     "questionTitle": "Please estimate the amount of expenditure for the total acquisition of advanced machinery, equipment and software for  the <strong>calendar year 2016 only</strong>?",
     "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Internal costs and purchase from outside the business</li></ul></div>",
     "answerType": "currency",
@@ -362,6 +352,2331 @@
         "type": "text",
         "label": "Total acquisition of advanced machinery, equipment and software",
         "validation": "Round to the nearest £ thousand, for example 100000"
+      }
+    ]
+  },
+  {
+    "prev": "section-15",
+    "url": "section-16",
+    "next": "section-17",
+    "sectionVersion": 3,
+    "sectionTitle": "Innovation Investment",
+    "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
+    "questionVersion": "3.9",
+    "questionTitle": "Did [BUSINESS NAME] invest in the acquisition of existing knowledge for the purposes of current or future innovation?",
+    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Purchase or licensing of patents and non-patented inventions, know-how and other types of knowledge from other businesses or organisations</li></ul></div>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "yes",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "no",
+        "qId": "1"
+      }
+    ],
+    "route": [
+      {
+        "label": "no",
+        "link": "section-18",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-16",
+    "url": "section-17",
+    "next": "section-18",
+    "sectionVersion": 3,
+    "sectionTitle": "Innovation Investment",
+    "sectionDescription": "<p class='mars'>1 year period 1 January 2016 to 31 December 2016.</p>",
+    "questionVersion": "3.10",
+    "questionTitle": "Please estimate the amount of expenditure for acquisition of existing knowledge for the <strong>calendar year 2016 only?</strong>",
+    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Internal costs and purchase from outside the business</li></ul></div>",
+    "answerType": "currency",
+    "currency": [
+      {
+        "type": "text",
+        "label": "Total acquisition of existing knowledge",
+        "validation": "Round to the nearest £ thousand, for example 100000"
+      }
+    ]
+  },
+  {
+    "prev": "section-17",
+    "url": "section-18",
+    "next": "section-19",
+    "sectionVersion": 3,
+    "sectionTitle": "Innovation Investment",
+    "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
+    "questionVersion": "3.11",
+    "questionTitle": "Did [BUSINESS NAME] invest in <strong>training for innovative activities</strong> for the purposes of current or future innovation?",
+    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Internal or external training for your personnel, specifically for the development or implementation of new or improved goods, services and processes.</li></ul></div>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "yes",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "no",
+        "qId": "1"
+      }
+    ],
+    "route": [
+      {
+        "label": "no",
+        "link": "section-20",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-18",
+    "url": "section-19",
+    "next": "section-20",
+    "sectionVersion": 3,
+    "sectionTitle": "Innovation Investment",
+    "sectionDescription": "<p class='mars'>1 year period 1 January 2016 to 31 December 2016.</p>",
+    "questionVersion": "3.12",
+    "questionTitle": "Please estimate the amount of expenditure for training for innovative activities for the <strong>calendar year 2016 only?</strong>",
+    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Internal costs and purchase from outside the business</li></ul></div>",
+    "answerType": "currency",
+    "currency": [
+      {
+        "type": "text",
+        "label": "Total training for innovative activities",
+        "validation": "Round to the nearest £ thousand, for example 100000"
+      }
+    ]
+  },
+  {
+    "prev": "section-19",
+    "url": "section-20",
+    "next": "section-21",
+    "sectionVersion": 3,
+    "sectionTitle": "Innovation Investment",
+    "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
+    "questionVersion": "3.13",
+    "questionTitle": "Did [BUSINESS NAME] invest in <strong>all forms of design</strong> for the purposes of current or future innovation?",
+    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Engagement in all design activities, including strategic, for the development or implementation of new or improved goods, services and processes.</li></ul></div>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "yes",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "no",
+        "qId": "1"
+      }
+    ],
+    "route": [
+      {
+        "label": "no",
+        "link": "section-22",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-20",
+    "url": "section-21",
+    "next": "section-22",
+    "sectionVersion": 3,
+    "sectionTitle": "Innovation Investment",
+    "sectionDescription": "<p class='mars'>1 year period 1 January 2016 to 31 December 2016.</p>",
+    "questionVersion": "3.14",
+    "questionTitle": "Please estimate the amount of expenditure for all forms of design for the <strong>calendar year 2016 only?</strong>",
+    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Internal costs and purchase from outside the business.</li></ul></div>",
+    "answerType": "currency",
+    "currency": [
+      {
+        "type": "text",
+        "label": "Total training for all forms of design",
+        "validation": "Round to the nearest £ thousand, for example 100000"
+      }
+    ]
+  },
+  {
+    "prev": "section-21",
+    "url": "section-22",
+    "next": "section-23",
+    "sectionVersion": 3,
+    "sectionTitle": "Innovation Investment",
+    "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
+    "questionVersion": "3.15",
+    "questionTitle": "Did [BUSINESS NAME] invest in <strong>market introduction of innovations</strong> for the purposes of current or future innovation?",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "yes",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "no",
+        "qId": "1"
+      }
+    ],
+    "route": [
+      {
+        "label": "no",
+        "link": "section-25",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-22",
+    "url": "section-23",
+    "next": "section-25",
+    "sectionVersion": 3,
+    "sectionTitle": "Innovation Investment",
+    "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
+    "questionVersion": "3.16",
+    "questionTitle": "Which of the following did [BUSINESS NAME] invest in for the purposes of current or future innovation?",
+    "answerType": "checkbox",
+    "checkboxs": [
+      {
+        "type": "checkbox",
+        "label": "Changes to product or service design",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "Market research",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "Changes to marketing methods",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "Launch advertising",
+        "qId": "1"
+      }
+    ],
+    "route": [
+      {
+        "label": "Changes to product or service design",
+        "link": "section-24",
+        "qId": "1"
+      },
+      {
+        "label": "Market research",
+        "link": "section-24",
+        "qId": "1"
+      },
+      {
+        "label": "Changes to marketing methods",
+        "link": "section-24",
+        "qId": "1"
+      },
+      {
+        "label": "Launch advertising",
+        "link": "section-24",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-23",
+    "url": "section-24",
+    "next": "section-25",
+    "sectionVersion": 3,
+    "sectionTitle": "Innovation Investment",
+    "sectionDescription": "<p class='mars'>1 year period 1 January 2016 to 31 December 2016.</p>",
+    "questionVersion": "3.17",
+    "questionTitle": "Please estimate the amount of expenditure for market introduction of innovations for the <strong>calendar year 2016 only?</strong></strong>",
+    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Internal costs and purchase from outside the business.</li></ul></div>",
+    "answerType": "currency",
+    "currency": [
+      {
+        "type": "text",
+        "label": "Total market introduction of innovations",
+        "validation": "Round to the nearest £ thousand, for example 100000"
+      }
+    ]
+  },
+  {
+    "prev": "section-24",
+    "url": "section-25",
+    "next": "section-26",
+    "sectionVersion": 4,
+    "sectionTitle": "Goods and Services Innovation",
+    "sectionDescription": "<p class='mars'>This section covers innovation relating to goods and services</p><div class=''><ul><li class='mars'>You will firstly be asked to provide information about any new or significantly improved goods introduced by your business and secondly to provide information relating to any new or significantly improved services.</li><li class='mars'>You will also be asked to provide estimates for turnover in the calendar year 2016 relating to new or improved goods or services introduced during the period 1 January 2014 to 31 December 2016.</li></ul></div>"
+  },
+  {
+    "prev": "section-25",
+    "url": "section-26",
+    "next": "section-27",
+    "sectionVersion": 4,
+    "sectionTitle": "Goods and Services Innovation",
+    "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
+    "questionVersion": "4.1",
+    "questionTitle": "Did [BUSINESS NAME] introduce new or significantly improved <strong>goods</strong>?",
+    "questionDescription": "<div class='box box--promo'><div class='grid'><div class='grid__col col-6@s'><h3 class='venus'>Include:</h3><ul><li class='mars'>all <strong>new</strong> and <strong>significantly improved</strong> goods (for example, improvement in quality or distinct user benefits)</li><li class='mars'>goods innovations that are new to the business, even if they are not new to the market</li><li class='mars'>all product innovations, regardless of their origin</li></ul></div><div class='grid__col col-6@s'><h3 class='venus'>Exclude:</h3><ul><li class='mars'>the simple resale of goods purchased from other businesses and changes of a solely aesthetic nature</li></ul></div></div></div>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "yes",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "no",
+        "qId": "1"
+      }
+    ],
+    "route": [
+      {
+        "label": "no",
+        "link": "section-28",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-26",
+    "url": "section-27",
+    "next": "section-28",
+    "sectionVersion": 4,
+    "sectionTitle": "Goods and Services Innovation",
+    "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
+    "questionVersion": "4.2",
+    "questionTitle": "Which entity mainly developed these <strong>goods</strong>?",
+    "questionDescription": "Select all that apply",
+    "answerType": "checkbox",
+    "checkboxs": [
+      {
+        "type": "checkbox",
+        "label": "This business or enterprise group",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "This business with other businesses or organisations",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "Other businesses or organisations",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-27",
+    "url": "section-28",
+    "next": "section-29",
+    "sectionVersion": 4,
+    "sectionTitle": "Goods and Services Innovation",
+    "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
+    "questionVersion": "4.3",
+    "questionTitle": "Did [BUSINESS NAME] introduce new or significantly improved <strong>services</strong>?",
+    "questionDescription": "<div class='box box--promo'><div class='grid'><div class='grid__col '><h3 class='venus'>Include:</h3><ul><li class='mars'>all <strong>new</strong> and <strong>significantly improved</strong> services (for example, improvement in quality or distinct user benefits)</li><li class='mars'>services innovations that are new to the business, even if they are not new to the market</li></ul></div></div></div>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "yes",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "no",
+        "qId": "1"
+      }
+    ],
+    "route": [
+      {
+        "label": "no",
+        "link": "section-32",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-28",
+    "url": "section-29",
+    "next": "section-30",
+    "sectionVersion": 4,
+    "sectionTitle": "Goods and Services Innovation",
+    "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
+    "questionVersion": "4.3",
+    "questionTitle": "Which entity mainly developed these <strong>services</strong>?",
+    "questionDescription": "Select all that apply",
+    "answerType": "checkbox",
+    "checkboxs": [
+      {
+        "type": "checkbox",
+        "label": "This business or enterprise group",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "This business with other businesses or organisations",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "Other businesses or organisations",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-29",
+    "url": "section-30",
+    "next": "section-31",
+    "sectionVersion": 4,
+    "sectionTitle": "Goods and Services Innovation",
+    "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
+    "questionVersion": "4.5",
+    "questionTitle": "Were any of your <strong>goods and services innovations</strong> new to the market?",
+    "questionDescription": "<div class='box box--promo'><div class='grid'><div class='grid__col '><h3 class='venus'>Include:</h3><ul><li class='mars'>Goods or services this business introduced to the market before competitors</li></ul></div></div></div>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "yes",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "no",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-30",
+    "url": "section-31",
+    "next": "section-32",
+    "sectionVersion": 4,
+    "sectionTitle": "Goods and Services Innovation",
+    "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
+    "questionVersion": "4.6",
+    "questionTitle": "Were any of your <strong>goods and services innovations</strong> only new to [BUSINESS NAME]?",
+    "questionDescription": "<div class='box box--promo'><div class='grid'><div class='grid__col '><h3 class='venus'>Include:</h3><ul><li class='mars'>New goods or services that were essentially the same as a good or service already available from competitors</li></ul></div></div></div>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "yes",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "no",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-31",
+    "url": "section-32",
+    "next": "section-33",
+    "sectionVersion": 4,
+    "sectionTitle": "Goods and Services Innovation",
+    "sectionDescription": "<div class='box box--promo'><div class='grid'><div class=' '><ul><li class='mars'>The following question refers to turnover for the calendar year 1st January to 31st December 2016, based on goods or services introduced during the period 1st January 2014 to 31st December 2016.</li><li class='mars'>If the business did not introduce any new or significantly improved goods or services, please enter 100% in the ‘Unchanged or only marginally modified’ answer field.</li><li class='mars'>Please note that estimates are acceptable and percentages must total 100%.</li></ul></div></div></div></br></br>",
+    "questionVersion": "4.7",
+    "questionTitle": "Please <strong>ESTIMATE</strong> the percentage of [BUSINESS NAME]’s total turnover in <strong>calendar year 2016 only</strong> from goods and services that were:",
+    "answerType": "text",
+    "calculation": [
+      {
+        "type": "text",
+        "label": "New to the market in 2014 - 2016"
+      },
+      {
+        "type": "text",
+        "label": "Only new to this business in 2014 - 2016"
+      },
+      {
+        "type": "text",
+        "label": "Significantly improved in 2014 - 2016"
+      },
+      {
+        "type": "text",
+        "label": "Unchanged or only marginally modified",
+        "labelInfo": "Include the resale of goods and services purchased from other business"
+      }
+    ]
+  },
+  {
+    "prev": "section-32",
+    "url": "section-33",
+    "next": "section-34",
+    "sectionVersion": 5,
+    "sectionTitle": "Process Innovation",
+    "sectionDescription": "<p class='mars'>This section covers innovation relating to processes for the production or supply of goods or services including all new or significantly improved methods of production.</p><div class=''><ul><li class='mars'>You will be asked to provide general information about process innovation conducted by your business.</li></ul></div>"
+  },
+  {
+    "prev": "section-33",
+    "url": "section-34",
+    "next": "section-35",
+    "sectionVersion": 5,
+    "sectionTitle": "Process Innovation",
+    "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
+    "questionVersion": "5.1",
+    "questionTitle": "Did [BUSINESS NAME] introduce any new or significantly improved processes for producing or supplying goods or services?",
+    "questionDescription": "<div class='box box--promo'><div class='grid'><div class='grid__col '><h3 class='venus'>Include:</h3><ul><li class='mars'>all <strong>new</strong> or <strong>significantly improved</strong> methods for the production or supply of goods or services</li><li class='mars'>process innovations that are new to the business, even if they are not new to your industry</li><li class='mars'>all process innovations, regardless of their origin</li></ul></div></div></div>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "yes",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "no",
+        "qId": "1"
+      }
+    ],
+    "route": [
+      {
+        "label": "no",
+        "link": "section-37",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-34",
+    "url": "section-35",
+    "next": "section-36",
+    "sectionVersion": 5,
+    "sectionTitle": "Process Innovation",
+    "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
+    "questionVersion": "5.2",
+    "questionTitle": "Which entity mainly developed these processes?",
+    "questionDescription": "<p class='mars'>Select all that apply</p>",
+    "answerType": "checkbox",
+    "checkboxs": [
+      {
+        "type": "checkbox",
+        "label": "This business or enterprise group",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "This business with other businesses or organisations",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "Other businesses or organisations",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-35",
+    "url": "section-36",
+    "next": "section-37",
+    "sectionVersion": 5,
+    "sectionTitle": "Process Innovation",
+    "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
+    "questionVersion": "5.3",
+    "questionTitle": "Did [BUSINESS NAME] introduce any new or significantly improved processes for producing or supplying goods or services which were new to your industry?",
+    "questionDescription": "<p class='mars'>Select all that apply</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "Yes",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "No",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-36",
+    "url": "section-37",
+    "next": "section-38",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "sectionDescription": "<p class='mars'>This section covers the context for innovation activities at your business.</p><div class='box box--promo'><p class='mars'>You will be asked to provide information on:</p><ul><li class='mars'>factors deemed important when deciding to initiate or terminate innovation;</li><li class='mars'>the importance of various information sources to your business’s innovation activities;</li><li class='mars'>cooperation on innovation activities with external bodies and protection of your innovations, for example, trademarks or patents.</li></ul></div>"
+  },
+  {
+    "prev": "section-37",
+    "url": "section-38",
+    "next": "section-40",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
+    "questionVersion": "6.1",
+    "questionTitle": "Did [BUSINESS NAME] have any innovation activities that were:",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "Yes",
+        "qId": "1",
+        "groupName": "abandoned"
+      },
+      {
+        "type": "radio",
+        "label": "No",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Yes",
+        "qId": "2",
+        "groupName": "scaled back?"
+      },
+      {
+        "type": "radio",
+        "label": "No",
+        "qId": "2"
+      },
+      {
+        "type": "radio",
+        "label": "Yes",
+        "qId": "3",
+        "groupName": "still ongoing at the end of 2016?"
+      },
+      {
+        "type": "radio",
+        "label": "No",
+        "qId": "3"
+      }
+    ],
+    "route": [
+      {
+        "label": "Yes",
+        "link": "section-39",
+        "qId": "1"
+      },
+      {
+        "label": "Yes",
+        "link": "section-39",
+        "qId": "2"
+      }
+    ]
+  },
+  {
+    "prev": "section-38",
+    "url": "section-39",
+    "next": "section-40",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
+    "questionVersion": "6.2",
+    "questionTitle": "Were innovation activities abandoned and/or scaled back as a result of the outcome of the EU referendum?",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "Yes",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "No",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-39",
+    "url": "section-40",
+    "next": "section-41",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p><p class='mars'>The following question asks about perceived economic risks. Please note that what constitutes a high or low economic risk is dependent on your own interpretation in relation to your business.</p>",
+    "questionVersion": "6.3",
+    "questionTitle": "How important were the following factors in constraining innovation activities?",
+    "questionDescription": "<p class='mars'>Excessive perceived economic risks</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-40",
+    "url": "section-41",
+    "next": "section-42",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.4",
+    "questionTitle": "How important were the following factors in constraining innovation activities?",
+    "questionDescription": "<p class='mars'>Direct innovation costs too high</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-41",
+    "url": "section-42",
+    "next": "section-43",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.5",
+    "questionTitle": "How important were the following factors in constraining innovation activities?",
+    "questionDescription": "<p class='mars'>Cost of finance</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-42",
+    "url": "section-43",
+    "next": "section-44",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.6",
+    "questionTitle": "How important were the following factors in constraining innovation activities?",
+    "questionDescription": "<p class='mars'>Availability of finance</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-43",
+    "url": "section-44",
+    "next": "section-45",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.7",
+    "questionTitle": "How important were the following factors in constraining innovation activities?",
+    "questionDescription": "<p class='mars'>Lack of qualified personnel</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-44",
+    "url": "section-45",
+    "next": "section-46",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.8",
+    "questionTitle": "How important were the following factors in constraining innovation activities?",
+    "questionDescription": "<p class='mars'>Lack of information on technology</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-45",
+    "url": "section-46",
+    "next": "section-47",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.9",
+    "questionTitle": "How important were the following factors in constraining innovation activities?",
+    "questionDescription": "<p class='mars'>Lack of information on markets</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-46",
+    "url": "section-47",
+    "next": "section-48",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.10",
+    "questionTitle": "How important were the following factors in constraining innovation activities?",
+    "questionDescription": "<p class='mars'>Market dominated by established businesses</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-47",
+    "url": "section-48",
+    "next": "section-49",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.11",
+    "questionTitle": "How important were the following factors in constraining innovation activities?",
+    "questionDescription": "<p class='mars'>Uncertain demand for innovative goods or services</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-48",
+    "url": "section-49",
+    "next": "section-50",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.12",
+    "questionTitle": "How important were the following factors in constraining innovation activities?",
+    "questionDescription": "<p class='mars'>UK government regulations</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-49",
+    "url": "section-50",
+    "next": "section-51",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.13",
+    "questionTitle": "How important were the following factors in constraining innovation activities?",
+    "questionDescription": "<p class='mars'>EU regulations (including standards)</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-50",
+    "url": "section-51",
+    "next": "section-52",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.14",
+    "questionTitle": "How important were the following factors in your decision to innovate in goods or services and/or processes?",
+    "questionDescription": "<p class='mars'>Increasing range of goods or services</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-51",
+    "url": "section-52",
+    "next": "section-53",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.15",
+    "questionTitle": "How important were the following factors in your decision to innovate in goods or services and/or processes?",
+    "questionDescription": "<p class='mars'>Entering new markets</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-52",
+    "url": "section-53",
+    "next": "section-54",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.16",
+    "questionTitle": "How important were the following factors in your decision to innovate in goods or services and/or processes?",
+    "questionDescription": "<p class='mars'>Increasing market share</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-53",
+    "url": "section-54",
+    "next": "section-55",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.17",
+    "questionTitle": "How important were the following factors in your decision to innovate in goods or services and/or processes?",
+    "questionDescription": "<p class='mars'>Improving quality of goods or services</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-54",
+    "url": "section-55",
+    "next": "section-56",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.18",
+    "questionTitle": "How important were the following factors in your decision to innovate in goods or services and/or processes?",
+    "questionDescription": "<p class='mars'>Improving flexibility for producing goods or services</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-55",
+    "url": "section-56",
+    "next": "section-57",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.19",
+    "questionTitle": "How important were the following factors in your decision to innovate in goods or services and/or processes?",
+    "questionDescription": "<p class='mars'>Improving capacity for producing goods or services</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-56",
+    "url": "section-57",
+    "next": "section-58",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.20",
+    "questionTitle": "How important were the following factors in your decision to innovate in goods or services and/or processes?",
+    "questionDescription": "<p class='mars'>Increasing value added</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-57",
+    "url": "section-58",
+    "next": "section-59",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.21",
+    "questionTitle": "How important were the following factors in your decision to innovate in goods or services and/or processes?",
+    "questionDescription": "<p class='mars'>Reducing costs per unit produced or provided</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-58",
+    "url": "section-59",
+    "next": "section-60",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.22",
+    "questionTitle": "How important were the following factors in your decision to innovate in goods or services and/or processes?",
+    "questionDescription": "<p class='mars'>Improving health and safety</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-59",
+    "url": "section-60",
+    "next": "section-61",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.23",
+    "questionTitle": "How important were the following factors in your decision to innovate in goods or services and/or processes?",
+    "questionDescription": "<p class='mars'>Reducing environmental impacts</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-60",
+    "url": "section-61",
+    "next": "section-62",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.24",
+    "questionTitle": "How important were the following factors in your decision to innovate in goods or services and/or processes?",
+    "questionDescription": "<p class='mars'>Replacing outdated products or processes</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-61",
+    "url": "section-62",
+    "next": "section-63",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.25",
+    "questionTitle": "How important were the following factors in your decision to innovate in goods or services and/or processes?",
+    "questionDescription": "<p class='mars'>Meeting regulatory requirements (including standards)</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-62",
+    "url": "section-63",
+    "next": "section-64",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.26",
+    "questionTitle": "How important to [BUSINESS NAME]’s innovation activities was information from:",
+    "questionDescription": "<p class='mars'>within your business or enterprise group?</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-63",
+    "url": "section-64",
+    "next": "section-65",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.27",
+    "questionTitle": "How important to [BUSINESS NAME]’s innovation activities was information from:",
+    "questionDescription": "<p class='mars'>suppliers of equipment, materials, services or software?</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-64",
+    "url": "section-65",
+    "next": "section-66",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.28",
+    "questionTitle": "How important to [BUSINESS NAME]’s innovation activities was information from:",
+    "questionDescription": "<p class='mars'>clients or customers from the private sector?</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-65",
+    "url": "section-66",
+    "next": "section-67",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.29",
+    "questionTitle": "How important to [BUSINESS NAME]’s innovation activities was information from:",
+    "questionDescription": "<p class='mars'>clients or customers from the public sector?</p><div class='box box--promo'><p class='mars'>The public sector includes government owned organisations such as local, regional and national administrations and agencies, schools, hospitals and government providers of services such as security, transport, housing and energy etc.</p></div>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-66",
+    "url": "section-67",
+    "next": "section-68",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.30",
+    "questionTitle": "How important to [BUSINESS NAME]’s innovation activities was information from:",
+    "questionDescription": "<p class='mars'>competitors or other businesses in your industry?</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-67",
+    "url": "section-68",
+    "next": "section-69",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.31",
+    "questionTitle": "How important to [BUSINESS NAME]’s innovation activities was information from:",
+    "questionDescription": "<p class='mars'>consultants, commercial labs or private Research and Development institutes?</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-68",
+    "url": "section-69",
+    "next": "section-70",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.32",
+    "questionTitle": "How important to [BUSINESS NAME]’s innovation activities was information from:",
+    "questionDescription": "<p class='mars'>universities or other higher education institutes?</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-69",
+    "url": "section-70",
+    "next": "section-71",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.33",
+    "questionTitle": "How important to [BUSINESS NAME]’s innovation activities was information from:",
+    "questionDescription": "<p class='mars'>government or public research institutes?</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-70",
+    "url": "section-71",
+    "next": "section-72",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.34",
+    "questionTitle": "How important to [BUSINESS NAME]’s innovation activities was information from:",
+    "questionDescription": "<p class='mars'>conferences, trade fairs or exhibitions?</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-71",
+    "url": "section-72",
+    "next": "section-73",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.35",
+    "questionTitle": "How important to [BUSINESS NAME]’s innovation activities was information from:",
+    "questionDescription": "<p class='mars'>professional and industry associations?</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-72",
+    "url": "section-73",
+    "next": "section-74",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.36",
+    "questionTitle": "How important to [BUSINESS NAME]’s innovation activities was information from:",
+    "questionDescription": "<p class='mars'>technical, industry or service standards?</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-73",
+    "url": "section-74",
+    "next": "section-75",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.37",
+    "questionTitle": "How important to [BUSINESS NAME]’s innovation activities was information from:",
+    "questionDescription": "<p class='mars'>scientific journals and trade or technical publications?</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "High",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Not Applicable",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-74",
+    "url": "section-75",
+    "next": "section-76",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.38",
+    "questionTitle": "Did [BUSINESS NAME] co-operate on any innovation activities with:",
+    "questionDescription": "<p class='mars'>other businesses within your enterprise group?</p><p class='mars'>Please select all that apply</p>",
+    "answerType": "checkbox",
+    "checkboxs": [
+      {
+        "type": "checkbox",
+        "label": "UK Regional",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "UK National",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "European Countries",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "Other Countries",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-75",
+    "url": "section-76",
+    "next": "section-77",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.39",
+    "questionTitle": "Did [BUSINESS NAME] co-operate on any innovation activities with:",
+    "questionDescription": "<p class='mars'>suppliers of equipment, materials, services or software?</p><p class='mars'>Please select all that apply</p>",
+    "answerType": "checkbox",
+    "checkboxs": [
+      {
+        "type": "checkbox",
+        "label": "UK Regional",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "UK National",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "European Countries",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "Other Countries",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-76",
+    "url": "section-77",
+    "next": "section-78",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.40",
+    "questionTitle": "Did [BUSINESS NAME] co-operate on any innovation activities with:",
+    "questionDescription": "<p class='mars'>clients or customers from the private sector?</p><p class='mars'>Please select all that apply</p>",
+    "answerType": "checkbox",
+    "checkboxs": [
+      {
+        "type": "checkbox",
+        "label": "UK Regional",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "UK National",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "European Countries",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "Other Countries",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-77",
+    "url": "section-78",
+    "next": "section-79",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.41",
+    "questionTitle": "Did [BUSINESS NAME] co-operate on any innovation activities with:",
+    "questionDescription": "<p class='mars'>clients or customers from the public sector?</p><div class='box box--promo'><p class='venus'>Definition of ‘public sector’</p><p class='mars'>The public sector includes government owned organisations such as local, regional and national administrations and agencies, schools, hospitals and government providers of services such as security, transport, housing and energy etc.</p></div><p class='mars'>Please select all that apply</p>",
+    "answerType": "checkbox",
+    "checkboxs": [
+      {
+        "type": "checkbox",
+        "label": "UK Regional",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "UK National",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "European Countries",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "Other Countries",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-78",
+    "url": "section-79",
+    "next": "section-80",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.42",
+    "questionTitle": "Did [BUSINESS NAME] co-operate on any innovation activities with:",
+    "questionDescription": "<p class='mars'>competitors or other businesses in your industry?</p><p class='mars'>Please select all that apply</p>",
+    "answerType": "checkbox",
+    "checkboxs": [
+      {
+        "type": "checkbox",
+        "label": "UK Regional",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "UK National",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "European Countries",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "Other Countries",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-79",
+    "url": "section-80",
+    "next": "section-81",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.43",
+    "questionTitle": "Did [BUSINESS NAME] co-operate on any innovation activities with:",
+    "questionDescription": "<p class='mars'>consultants, commercial labs or private Research and Development institutes?</p><p class='mars'>Please select all that apply</p>",
+    "answerType": "checkbox",
+    "checkboxs": [
+      {
+        "type": "checkbox",
+        "label": "UK Regional",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "UK National",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "European Countries",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "Other Countries",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-80",
+    "url": "section-81",
+    "next": "section-82",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.44",
+    "questionTitle": "Did [BUSINESS NAME] co-operate on any innovation activities with:",
+    "questionDescription": "<p class='mars'>universities or other higher education institutions?</p><p class='mars'>Please select all that apply</p>",
+    "answerType": "checkbox",
+    "checkboxs": [
+      {
+        "type": "checkbox",
+        "label": "UK Regional",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "UK National",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "European Countries",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "Other Countries",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-81",
+    "url": "section-82",
+    "next": "section-83",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.45",
+    "questionTitle": "Did [BUSINESS NAME] co-operate on any innovation activities with:",
+    "questionDescription": "<p class='mars'>government or public research institutes?</p><p class='mars'>Please select all that apply</p>",
+    "answerType": "checkbox",
+    "checkboxs": [
+      {
+        "type": "checkbox",
+        "label": "UK Regional",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "UK National",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "European Countries",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "Other Countries",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-82",
+    "url": "section-83",
+    "next": "section-84",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.46",
+    "questionTitle": "If [BUSINESS NAME] had no innovation activity, please indicate why it has not been necessary or possible to innovate",
+    "questionDescription": "<p class='mars'>Select all that apply</p>",
+    "answerType": "checkbox",
+    "checkboxs": [
+      {
+        "type": "checkbox",
+        "label": "No need due to previous innovations",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "No need due to market conditions",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "The UK does not have a business environment which encourages companies to innovate",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "Other",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-83",
+    "url": "section-84",
+    "next": "section-85",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.47",
+    "questionTitle": "What proportions of your innovations were protected by:",
+    "questionDescription": "<p class='mars'>patents?</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "None (not used)",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low (less than 40%)",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium (40-90%)",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "High (over 90%)",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-84",
+    "url": "section-85",
+    "next": "section-86",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.48",
+    "questionTitle": "What proportions of your innovations were protected by:",
+    "questionDescription": "<p class='mars'>design registration?</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "None (not used)",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low (less than 40%)",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium (40-90%)",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "High (over 90%)",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-85",
+    "url": "section-86",
+    "next": "section-87",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.49",
+    "questionTitle": "What proportions of your innovations were protected by:",
+    "questionDescription": "<p class='mars'>copyright?</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "None (not used)",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low (less than 40%)",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium (40-90%)",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "High (over 90%)",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-86",
+    "url": "section-87",
+    "next": "section-88",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.50",
+    "questionTitle": "What proportions of your innovations were protected by:",
+    "questionDescription": "<p class='mars'>trademarks?</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "None (not used)",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low (less than 40%)",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium (40-90%)",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "High (over 90%)",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-87",
+    "url": "section-88",
+    "next": "section-89",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.51",
+    "questionTitle": "What proportions of your innovations were protected by:",
+    "questionDescription": "<p class='mars'>lead time advantages?</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "None (not used)",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low (less than 40%)",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium (40-90%)",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "High (over 90%)",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-87",
+    "url": "section-89",
+    "next": "section-90",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.52",
+    "questionTitle": "What proportions of your innovations were protected by:",
+    "questionDescription": "<p class='mars'>complexity of goods or services?</p>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "None (not used)",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low (less than 40%)",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium (40-90%)",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "High (over 90%)",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-89",
+    "url": "section-90",
+    "next": "section-91",
+    "sectionVersion": 6,
+    "sectionTitle": "Context for Innovation",
+    "questionVersion": "6.53",
+    "questionTitle": "What proportions of your innovations were protected by:",
+    "questionDescription": "<p class='mars'>secrecy?</p><div class='box--promo'><p class='mars'>Include:</p><ul><li class='mars'>Non-disclosure agreements</li></ul></div>",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "None (not used)",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Low (less than 40%)",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "Medium (40-90%)",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "High (over 90%)",
+        "qId": "1"
       }
     ]
   }

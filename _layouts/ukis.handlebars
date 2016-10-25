@@ -107,6 +107,33 @@ globalcss: false
                     </div>
                   {{/if}}
 
+                  {{#if calculation}}
+                  <!-- Text currency -->
+                    <div class="response response--textfield">
+                      <div class="box box--fullwidth">
+                        {{#each calculation}}
+                        <div class="field">
+                          <label class="label venus" for="form-input-{{@index}}">{{label}}</label>
+                          {{#if labelInfo}}<p class="mars">{{labelInfo}}</p>{{/if}}
+                          <div class="input-type input-type--percent" data-type="%">
+                            <input id="form-input-{{@index}}" name="{{#if qId}}{{qId}}{{else}}1{{/if}}" type="{{type}}" class="input input--text" value="">
+                          </div>
+                        </div>
+                        <br/>
+                        {{/each}}
+                      </div>
+                      <div class="box box--fullwidth box--total">
+                        <div class="field">
+                          <label class="label venus" for="form-input-5">Total turnover</label><br>
+                          <div class="input-type input-type--percent" data-type="%">
+                          <input id="form-input-5" class="input input--text numericentry mars" name="1" type="text" value="" pattern="100" aria-describedby="description-form-input-1">
+                          <span class="hint pluto">Total should add up to 100%</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  {{/if}}
+
                   </div>
                 </div>
               </div>
@@ -125,20 +152,27 @@ globalcss: false
 $( document ).ready(function() {
   $('.qa-btn-get-started').click(function(e) {
     e.preventDefault();
+    window.location.href = "../{{next}}";
     {{#if route}}
       {{#each route}}
       var checkedVal = $("input[value='{{label}}']:checked").val();
-      if (checkedVal == "{{label}}") {
+      var checkedName = $("input[value='{{label}}']:checked").attr("name");
+      if (checkedVal == "{{label}}" && checkedName == "{{qId}}") {
         window.location.href = "../{{link}}";
       }
       {{/each}}
-      else {
-          window.location.href = "../{{next}}";
-      }
-    {{else}}
-        window.location.href = "../{{next}}";
     {{/if}}
   });
+  {{#if calculation}}
+  $('.input--text').keyup( function() {
+    var inputOne = document.getElementById("form-input-0").value;
+    var inputTwo = document.getElementById("form-input-1").value;
+    var inputThree = document.getElementById("form-input-2").value;
+    var inputFour = document.getElementById("form-input-3").value;
+    var totalGoods = Number(inputOne) + Number(inputTwo) + Number(inputThree) + Number(inputFour);
+    document.getElementById("form-input-5").value = totalGoods;
+  });
+  {{/if}}
 });
 
 </script>
