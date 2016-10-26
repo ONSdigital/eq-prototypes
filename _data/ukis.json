@@ -2835,5 +2835,257 @@
         "qId": "2"
       }
     ]
+  },
+  {
+    "prev": "section-93",
+    "url": "section-94",
+    "next": "section-95",
+    "sectionVersion": 8,
+    "sectionTitle": "Turnover",
+    "sectionDescription": "<p class='mars'>This section covers turnover for your business.</p><p class='mars'>You will be asked to provide total turnover excluding VAT for calendar years 2014 and 2016.</p>"
+  },
+  {
+    "prev": "section-94",
+    "url": "section-95",
+    "next": "section-96",
+    "sectionVersion": 8,
+    "sectionTitle": "Turnover",
+    "sectionDescription": "<p class='mars'>1 year period 1 January 2014 to 31 December 2014.</p>",
+    "questionVersion": "8.1",
+    "questionTitle": "Please <strong>estimate</strong> [BUSINESS NAME]’s total turnover for the <strong>calendar year 2014 only</strong>, excluding VAT",
+    "answerType": "currency",
+    "currency": [
+      {
+        "type": "text",
+        "label": "Total turnover for 2014, excluding VAT",
+        "validation": "Round to the nearest £ thousand, for example 100000"
+      }
+    ]
+  },
+  {
+    "prev": "section-95",
+    "url": "section-96",
+    "next": "section-97",
+    "sectionVersion": 8,
+    "sectionTitle": "Turnover",
+    "sectionDescription": "<p class='mars'>1 year period 1 January 2016 to 31 December 2016.</p>",
+    "questionVersion": "8.2",
+    "questionTitle": "Please <strong>estimate</strong> [BUSINESS NAME]’s total turnover for the <strong>calendar year 2016 only</strong>, excluding VAT",
+    "answerType": "currency",
+    "currency": [
+      {
+        "type": "text",
+        "label": "Total turnover for 2016, excluding VAT",
+        "validation": "Round to the nearest £ thousand, for example 100000"
+      }
+    ]
+  },
+  {
+    "prev": "section-96",
+    "url": "section-97",
+    "next": "section-98",
+    "sectionVersion": 9,
+    "sectionTitle": "Exports",
+    "sectionDescription": "<p class='mars'>This section covers exports.</p><p class='mars'>You will be asked to provide an estimate for the total value of your business’s exports for the calendar year 2016.</p>"
+  },
+  {
+    "prev": "section-97",
+    "url": "section-98",
+    "next": "section-99",
+    "sectionVersion": 9,
+    "sectionTitle": "Exports",
+    "sectionDescription": "<p class='mars'>1 year period 1 January 2016 to 31 December 2016.</p>",
+    "questionVersion": "8.2",
+    "questionTitle": "Please <strong>estimate</strong> [BUSINESS NAME]’s total value of exports for the <strong>calendar year 2016 only</strong>, excluding VAT",
+    "answerType": "currency",
+    "currency": [
+      {
+        "type": "text",
+        "label": "Total value of exports for 2016",
+        "validation": "Round to the nearest £ thousand, for example 100000"
+      }
+    ]
+  },
+  {
+    "prev": "section-98",
+    "url": "section-99",
+    "next": "section-100",
+    "sectionVersion": 10,
+    "sectionTitle": "Employees",
+    "sectionDescription": "<p class='mars'>This section covers information relating to persons employed by your business.</p><p class='mars'>You will be asked to provide estimates for the total number of employees for the calendar years 2014 and 2016.</p>"
+  },
+  {
+    "prev": "section-99",
+    "url": "section-100",
+    "next": "section-101",
+    "sectionVersion": 10,
+    "sectionTitle": "Exports",
+    "sectionDescription": "<p class='mars'>1 year period 1 January 2014 to 31 December 2014.</p>",
+    "questionVersion": "10.1",
+    "questionTitle": "Please <strong>estimate</strong> [BUSINESS NAME]’s average number of employees for the <strong>calendar year 2014 only</strong>",
+    "answerType": "currency",
+    "currency": [
+      {
+        "type": "text",
+        "label": "Total number of employees for 2014"
+      }
+    ]
+  },
+  {
+    "prev": "section-100",
+    "url": "section-101",
+    "next": "section-102",
+    "sectionVersion": 10,
+    "sectionTitle": "Exports",
+    "sectionDescription": "<p class='mars'>1 year period 1 January 2016 to 31 December 2016.</p>",
+    "questionVersion": "10.2",
+    "questionTitle": "Please <strong>estimate</strong> [BUSINESS NAME]’s average number of employees for the <strong>calendar year 2016 only</strong>",
+    "answerType": "currency",
+    "currency": [
+      {
+        "type": "text",
+        "label": "Total number of employees for 2016"
+      }
+    ]
+  },
+  {
+    "prev": "section-101",
+    "url": "section-102",
+    "next": "section-103",
+    "sectionVersion": 11,
+    "sectionTitle": "Skills",
+    "sectionDescription": "<p class='mars'>This section covers the skills of persons employed by your business.</p><p class='mars'>You will be asked to estimate the proportion of your workforce who hold a degree or higher qualification and provide information regarding the skills possessed by employees, for example, mathematics or statistics.</p>"
+  },
+  {
+    "prev": "section-102",
+    "url": "section-103",
+    "next": "section-104",
+    "sectionVersion": 11,
+    "sectionTitle": "Skills",
+    "sectionDescription": "<p class='mars'>1 year period 1 January 2016 to 31 December 2016.</p>",
+    "questionVersion": "11.1",
+    "questionTitle": "Please <strong>estimate</strong> the proportion of employees that hold a degree or higher qualification in the following areas for the <strong>calendar year 2016 only</strong>:",
+    "questionDescription": "<div class='box box--promo'><h3 class='venus'>For example:</h3><ul><li>BA, BSc, MA, PhD, PGCE</li></ul></div>",
+    "answerType": "percentage",
+    "percentage": [
+      {
+        "type": "percentage",
+        "label": "Science or engineering subjects"
+      },
+      {
+        "type": "percentage",
+        "label": "Other subjects"
+      }
+    ]
+  },
+  {
+    "prev": "section-103",
+    "url": "section-104",
+    "next": "section-105",
+    "sectionVersion": 11,
+    "sectionTitle": "Skills",
+    "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
+    "questionVersion": "11.2",
+    "questionTitle": "Did [BUSINESS NAME] employ individuals in-house with the following skills at any level, or obtain these skills from external sources?",
+    "questionDescription": "<p class='mars'>Select all that apply</p>",
+    "answerType": "checkbox",
+    "checkboxs": [
+      {
+        "type": "checkbox",
+        "label": "Graphic arts / layout / advertising",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "Design of objects or services",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "Multimedia / web design (for example audio, graphics, text, still pictures, animation, video etc)",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "Software development / database management",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "Engineering / applied sciences",
+        "qId": "1"
+      },
+      {
+        "type": "checkbox",
+        "label": "Mathematics / statistics",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-104",
+    "url": "section-105",
+    "next": "section-106",
+    "sectionVersion": 12,
+    "sectionTitle": "General Information",
+    "questionVersion": "12.1",
+    "questionTitle": "Please write any additional comments you would like to make on the information you have provided.",
+    "answerType": "textarea",
+    "comments": [
+      {
+        "type": "textarea",
+        "label": "Comments",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-105",
+    "url": "section-106",
+    "next": "section-107",
+    "sectionVersion": 12,
+    "sectionTitle": "General Information",
+    "questionVersion": "12.2",
+    "questionTitle": "How long has it taken you to complete this questionnaire?",
+    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Any time spent extracting information from your accounting systems and collating data over and above normal accounting operations</li></ul></div>",
+    "answerType": "text",
+    "textfield": [
+      {
+        "type": "text",
+        "label": "Hours",
+        "qId": "1"
+      },
+      {
+        "type": "text",
+        "label": "Minutes",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "prev": "section-106",
+    "url": "section-107",
+    "next": "section-108",
+    "sectionVersion": 12,
+    "sectionTitle": "General Information",
+    "questionVersion": "12.3",
+    "questionTitle": "Would this business be willing to be approached by telephone by the Department for Business Innovation and Skills or its appointed agents, to ask some questions about their most valuable innovation and the impact of the EU referendum?",
+    "answerType": "radio",
+    "radios": [
+      {
+        "type": "radio",
+        "label": "Yes",
+        "qId": "1"
+      },
+      {
+        "type": "radio",
+        "label": "No",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "url": "section-108",
+    "html": "<div role='main' class='panel__body' id='main'><div class='header u-mb-m u-mb-l@s'><h1 class='saturn'>Thank You</h1><div class='mars'>UK innovation survey</div><div class='venus'>Successfully Received</div></div><div class='box box--confirm u-mb-s u-mb-l@s'><strong> Submitted on Wednesday 13 July 2016 at 08:32</strong><p>Transaction ID (Please quote this reference for any support queries)</p><ul class='box__list'><li class='box__list__item'>D1C5</li><li class='box__list__item'>B0AE</li><li class='box__list__item'>9A04</li><li class='box__list__item'>4E94</li></ul><p class='u-mb-no'>You may wish to save or print this page for your records.</p></div><div class=''><div>For more information on how we use this data.</div><p class='u-mb-m@s'><a href='https://www.ons.gov.uk/surveys'>https://www.ons.gov.uk/surveys</a></p><p>It is now to safe to close this window.</p></div></div>"
   }
 ]
