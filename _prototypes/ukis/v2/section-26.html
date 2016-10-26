@@ -26,7 +26,7 @@ globalcss: false
                   <p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>
                 </div>
                 <div class="question">
-                  <h3 class="question__title neptune"><span class="question__title__number venus">4.1</span>Did [BUSINESS NAME] introduce new or significantly improved <strong>goods</strong>?</h3>
+                  <h3 class="question__title neptune"><span class="question__title__number venus">4.1</span>Did <span class='business-name'>[BUSINESS NAME]</span> introduce new or significantly improved <strong>goods</strong>?</h3>
                   <div class="question__description">
                     <div class='box box--promo'><div class='grid'><div class='grid__col col-6@s'><h3 class='venus'>Include:</h3><ul><li class='mars'>all <strong>new</strong> and <strong>significantly improved</strong> goods (for example, improvement in quality or distinct user benefits)</li><li class='mars'>goods innovations that are new to the business, even if they are not new to the market</li><li class='mars'>all product innovations, regardless of their origin</li></ul></div><div class='grid__col col-6@s'><h3 class='venus'>Exclude:</h3><ul><li class='mars'>the simple resale of goods purchased from other businesses and changes of a solely aesthetic nature</li></ul></div></div></div>
                   </div>
@@ -65,10 +65,17 @@ globalcss: false
 </div>
 
 <script>
+
 $( document ).ready(function() {
+  if ($('.business-name').length > 0) {
+    var businessName = sessionStorage.getItem('Business name');
+    $('.business-name').html(businessName);
+  }
   $('.qa-btn-get-started').click(function(e) {
     e.preventDefault();
     window.location.href = "../section-27";
+
+
       var checkedVal = $("input[value='no']:checked").val();
       var checkedName = $("input[value='no']:checked").attr("name");
       if (checkedVal == "no" && checkedName == "1") {

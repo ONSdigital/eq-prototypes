@@ -1,7 +1,27 @@
 [
   {
     "url": "index",
+    "next": "section-1",
+    "answerType": "text",
+    "textfield": [
+      {
+        "type": "text",
+        "label": "Business name",
+        "qId": "1"
+      }
+    ],
+    "sessionStorage": [
+      {
+        "type": "text",
+        "label": "Business name",
+        "qId": "1"
+      }
+    ]
+  },
+  {
+    "url": "section-1",
     "next": "section-2",
+    "homepage": "true",
     "html": "<div class='header'><h2 class='saturn'>Your response to this survey is of great value to government, whether or not you carry out innovation activities.</h2><div class='grid '><div class='grid__col col-6@s'><dl><dt class='mercury u-tt-u'>Business name</dt><dd class='mars'>Your business</dd><dt class='mercury u-tt-u'>Have your details changed?</dt><dd class='mars'>Telephone <a href='tel:03001234931'>0300 1234 931</a> or alternatively email <a href=''>info@ons.gov.uk</a></dd></dl></div><div class='grid__col col-6@s '><dl><dt class='mercury u-tt-u'>Period</dt><dd class='mars'>1 January 2012 to 31 December 2014</dd><dt class='mercury u-tt-u'>Please submit by</dt><dd class='mars'>9 October 2016</dd></dl></div></div><h2 class='header__title saturn'>Basis for completion</h2><ul><li>Please complete this questionnaire for the business named above.</li><li>If this business is part of an enterprise group, please answer all questions for this business in the UK only.</li><li>Do not include results for subsidiaries or parent enterprises.</li></ul><div class='box box--promo'><h2 class='saturn'>Definition of innovation</h2><p class='mars'>Innovation, for the purpose of this survey, is defined as <strong>new</strong> or <strong>significantly improved goods or services</strong> and / or processes used to produce or supply all goods or services that the business has introduced, regardless of their origin. These may be new to the business or new to the market. Investments for future innovation and changes that the business has introduced at a <strong>strategic</strong> level (in organisation and practices) are also covered.</p></div><h2 class='saturn'>You will be asked to provide information for the business, including:</h2><ul><li>General Business Information</li><li>Innovation Activities</li><li>Context for Innovation</li><li>General Economic Information</li></ul><div class='u-mb-s u-mb-m@s'><div class='u-fw-b'>If actual figures are not available, please provide informed estimates.</div></div><div></div><form action='' class='form' role='form' method='POST' novalidate=''><a href='../section-1'class='btn btn--tertiary qa-btn-get-started neptune' type='submit' name='action[start_questionnaire]'>Start survey</a></form><div class='lock u-mb-s u-mb-m@s'><div class='venus lock__text'>We will treat your data securely and confidentially</div></div></div>"
   },
   {
@@ -51,7 +71,7 @@
     "sectionTitle": "General Business Information",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "1.2",
-    "questionTitle": "Did any of the following significant changes occur to [BUSINESS NAME]?",
+    "questionTitle": "Did any of the following significant changes occur to <span class='business-name'>[BUSINESS NAME]</span>?",
     "answerType": "radio",
     "radios": [
       {
@@ -105,7 +125,7 @@
     "sectionTitle": "General Business Information",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "2.1",
-    "questionTitle": "Did [BUSINESS NAME] make changes in the following areas?",
+    "questionTitle": "Did <span class='business-name'>[BUSINESS NAME]</span> make changes in the following areas?",
     "questionDescription": "<div class='box box--promo'><div class='grid'><div class='grid__col col-6@s'><h3 class='venus'>Include:</h3><ul><li>all <strong>new</strong> and <strong>significantly improved</strong> forms of organisation, business structures or practices aimed at raising internal efficiency or the effectiveness of approaching markets and customers.</li><li>changes that have been implemented during the 3 year period.</li></ul></div><div class='grid__col col-6@s'><h3 class='venus'>Exclude:</h3><ul><li>ongoing changes.</li></ul></div></div></div>",
     "answerType": "radio",
     "radios": [
@@ -171,7 +191,7 @@
     "sectionTitle": "Innovation Investment",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "3.1",
-    "questionTitle": "Did [BUSINESS NAME] invest in <strong>internal Research and Development</strong> for the purposes of current or future innovation?",
+    "questionTitle": "Did <span class='business-name'>[BUSINESS NAME]</span> invest in <strong>internal Research and Development</strong> for the purposes of current or future innovation?",
     "questionDescription": "<div class='box box--promo'><h3 class='venus'>Definition of ‘internal Research and Development’:</h3><ul><li>Creative work undertaken within your business that increases knowledge for developing new and improved goods or services and processes</li></ul></div>",
     "answerType": "radio",
     "radios": [
@@ -195,7 +215,7 @@
     "sectionTitle": "Innovation Investment",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "3.2",
-    "questionTitle": "In which of the following years did [BUSINESS NAME] invest in <strong>internal Research & Development?</strong>",
+    "questionTitle": "In which of the following years did <span class='business-name'>[BUSINESS NAME]</span> invest in <strong>internal Research & Development?</strong>",
     "questionDescription": "<p class='mars'>Select all that apply</p>",
     "answerType": "checkbox",
     "checkboxs": [
@@ -250,7 +270,7 @@
     "sectionTitle": "Innovation Investment",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "3.4",
-    "questionTitle": "Did [BUSINESS NAME] invest in the <strong>acquisition of Research and Development</strong> for the purposes of current or future innovation?",
+    "questionTitle": "Did <span class='business-name'>[BUSINESS NAME]</span> invest in the <strong>acquisition of Research and Development</strong> for the purposes of current or future innovation?",
     "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Creative work undertaken  by companies, including other businesses within your group, or by public or private research organisations and purchased by your business</li></ul></div>",
     "answerType": "radio",
     "radios": [
@@ -293,7 +313,7 @@
     "sectionTitle": "Innovation Investment",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "3.4",
-    "questionTitle": "Did [BUSINESS NAME] invest in <strong>acquisition of advanced machinery, equipment or software</strong> for the purposes of current or future innovation?",
+    "questionTitle": "Did <span class='business-name'>[BUSINESS NAME]</span> invest in <strong>acquisition of advanced machinery, equipment or software</strong> for the purposes of current or future innovation?",
     "answerType": "radio",
     "radios": [
       {
@@ -316,7 +336,7 @@
     "sectionTitle": "Innovation Investment",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "3.7",
-    "questionTitle": "Which of the following did [BUSINESS NAME] invest in for the purposes of current or future innovation?",
+    "questionTitle": "Which of the following did <span class='business-name'>[BUSINESS NAME]</span> invest in for the purposes of current or future innovation?",
     "answerType": "checkbox",
     "checkboxs": [
       {
@@ -363,7 +383,7 @@
     "sectionTitle": "Innovation Investment",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "3.9",
-    "questionTitle": "Did [BUSINESS NAME] invest in the acquisition of existing knowledge for the purposes of current or future innovation?",
+    "questionTitle": "Did <span class='business-name'>[BUSINESS NAME]</span> invest in the acquisition of existing knowledge for the purposes of current or future innovation?",
     "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Purchase or licensing of patents and non-patented inventions, know-how and other types of knowledge from other businesses or organisations</li></ul></div>",
     "answerType": "radio",
     "radios": [
@@ -413,7 +433,7 @@
     "sectionTitle": "Innovation Investment",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "3.11",
-    "questionTitle": "Did [BUSINESS NAME] invest in <strong>training for innovative activities</strong> for the purposes of current or future innovation?",
+    "questionTitle": "Did <span class='business-name'>[BUSINESS NAME]</span> invest in <strong>training for innovative activities</strong> for the purposes of current or future innovation?",
     "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Internal or external training for your personnel, specifically for the development or implementation of new or improved goods, services and processes.</li></ul></div>",
     "answerType": "radio",
     "radios": [
@@ -463,7 +483,7 @@
     "sectionTitle": "Innovation Investment",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "3.13",
-    "questionTitle": "Did [BUSINESS NAME] invest in <strong>all forms of design</strong> for the purposes of current or future innovation?",
+    "questionTitle": "Did <span class='business-name'>[BUSINESS NAME]</span> invest in <strong>all forms of design</strong> for the purposes of current or future innovation?",
     "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Engagement in all design activities, including strategic, for the development or implementation of new or improved goods, services and processes.</li></ul></div>",
     "answerType": "radio",
     "radios": [
@@ -513,7 +533,7 @@
     "sectionTitle": "Innovation Investment",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "3.15",
-    "questionTitle": "Did [BUSINESS NAME] invest in <strong>market introduction of innovations</strong> for the purposes of current or future innovation?",
+    "questionTitle": "Did <span class='business-name'>[BUSINESS NAME]</span> invest in <strong>market introduction of innovations</strong> for the purposes of current or future innovation?",
     "answerType": "radio",
     "radios": [
       {
@@ -543,7 +563,7 @@
     "sectionTitle": "Innovation Investment",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "3.16",
-    "questionTitle": "Which of the following did [BUSINESS NAME] invest in for the purposes of current or future innovation?",
+    "questionTitle": "Which of the following did <span class='business-name'>[BUSINESS NAME]</span> invest in for the purposes of current or future innovation?",
     "answerType": "checkbox",
     "checkboxs": [
       {
@@ -625,7 +645,7 @@
     "sectionTitle": "Goods and Services Innovation",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "4.1",
-    "questionTitle": "Did [BUSINESS NAME] introduce new or significantly improved <strong>goods</strong>?",
+    "questionTitle": "Did <span class='business-name'>[BUSINESS NAME]</span> introduce new or significantly improved <strong>goods</strong>?",
     "questionDescription": "<div class='box box--promo'><div class='grid'><div class='grid__col col-6@s'><h3 class='venus'>Include:</h3><ul><li class='mars'>all <strong>new</strong> and <strong>significantly improved</strong> goods (for example, improvement in quality or distinct user benefits)</li><li class='mars'>goods innovations that are new to the business, even if they are not new to the market</li><li class='mars'>all product innovations, regardless of their origin</li></ul></div><div class='grid__col col-6@s'><h3 class='venus'>Exclude:</h3><ul><li class='mars'>the simple resale of goods purchased from other businesses and changes of a solely aesthetic nature</li></ul></div></div></div>",
     "answerType": "radio",
     "radios": [
@@ -685,7 +705,7 @@
     "sectionTitle": "Goods and Services Innovation",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "4.3",
-    "questionTitle": "Did [BUSINESS NAME] introduce new or significantly improved <strong>services</strong>?",
+    "questionTitle": "Did <span class='business-name'>[BUSINESS NAME]</span> introduce new or significantly improved <strong>services</strong>?",
     "questionDescription": "<div class='box box--promo'><div class='grid'><div class='grid__col '><h3 class='venus'>Include:</h3><ul><li class='mars'>all <strong>new</strong> and <strong>significantly improved</strong> services (for example, improvement in quality or distinct user benefits)</li><li class='mars'>services innovations that are new to the business, even if they are not new to the market</li></ul></div></div></div>",
     "answerType": "radio",
     "radios": [
@@ -769,7 +789,7 @@
     "sectionTitle": "Goods and Services Innovation",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "4.6",
-    "questionTitle": "Were any of your <strong>goods and services innovations</strong> only new to [BUSINESS NAME]?",
+    "questionTitle": "Were any of your <strong>goods and services innovations</strong> only new to <span class='business-name'>[BUSINESS NAME]</span>?",
     "questionDescription": "<div class='box box--promo'><div class='grid'><div class='grid__col '><h3 class='venus'>Include:</h3><ul><li class='mars'>New goods or services that were essentially the same as a good or service already available from competitors</li></ul></div></div></div>",
     "answerType": "radio",
     "radios": [
@@ -793,7 +813,7 @@
     "sectionTitle": "Goods and Services Innovation",
     "sectionDescription": "<div class='box box--promo'><div class='grid'><div class=' '><ul><li class='mars'>The following question refers to turnover for the calendar year 1st January to 31st December 2016, based on goods or services introduced during the period 1st January 2014 to 31st December 2016.</li><li class='mars'>If the business did not introduce any new or significantly improved goods or services, please enter 100% in the ‘Unchanged or only marginally modified’ answer field.</li><li class='mars'>Please note that estimates are acceptable and percentages must total 100%.</li></ul></div></div></div></br></br>",
     "questionVersion": "4.7",
-    "questionTitle": "Please <strong>ESTIMATE</strong> the percentage of [BUSINESS NAME]’s total turnover in <strong>calendar year 2016 only</strong> from goods and services that were:",
+    "questionTitle": "Please <strong>ESTIMATE</strong> the percentage of <span class='business-name'>[BUSINESS NAME]</span>’s total turnover in <strong>calendar year 2016 only</strong> from goods and services that were:",
     "answerType": "text",
     "calculation": [
       {
@@ -831,7 +851,7 @@
     "sectionTitle": "Process Innovation",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "5.1",
-    "questionTitle": "Did [BUSINESS NAME] introduce any new or significantly improved processes for producing or supplying goods or services?",
+    "questionTitle": "Did <span class='business-name'>[BUSINESS NAME]</span> introduce any new or significantly improved processes for producing or supplying goods or services?",
     "questionDescription": "<div class='box box--promo'><div class='grid'><div class='grid__col '><h3 class='venus'>Include:</h3><ul><li class='mars'>all <strong>new</strong> or <strong>significantly improved</strong> methods for the production or supply of goods or services</li><li class='mars'>process innovations that are new to the business, even if they are not new to your industry</li><li class='mars'>all process innovations, regardless of their origin</li></ul></div></div></div>",
     "answerType": "radio",
     "radios": [
@@ -891,7 +911,7 @@
     "sectionTitle": "Process Innovation",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "5.3",
-    "questionTitle": "Did [BUSINESS NAME] introduce any new or significantly improved processes for producing or supplying goods or services which were new to your industry?",
+    "questionTitle": "Did <span class='business-name'>[BUSINESS NAME]</span> introduce any new or significantly improved processes for producing or supplying goods or services which were new to your industry?",
     "questionDescription": "<p class='mars'>Select all that apply</p>",
     "answerType": "radio",
     "radios": [
@@ -923,7 +943,7 @@
     "sectionTitle": "Context for Innovation",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "6.1",
-    "questionTitle": "Did [BUSINESS NAME] have any innovation activities that were:",
+    "questionTitle": "Did <span class='business-name'>[BUSINESS NAME]</span> have any innovation activities that were:",
     "answerType": "radio",
     "radios": [
       {
@@ -1786,7 +1806,7 @@
     "sectionTitle": "Context for Innovation",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "6.26",
-    "questionTitle": "How important to [BUSINESS NAME]’s innovation activities was information from:",
+    "questionTitle": "How important to <span class='business-name'>[BUSINESS NAME]</span>’s innovation activities was information from:",
     "questionDescription": "<p class='mars'>within your business or enterprise group?</p>",
     "answerType": "radio",
     "radios": [
@@ -1820,7 +1840,7 @@
     "sectionTitle": "Context for Innovation",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "6.27",
-    "questionTitle": "How important to [BUSINESS NAME]’s innovation activities was information from:",
+    "questionTitle": "How important to <span class='business-name'>[BUSINESS NAME]</span>’s innovation activities was information from:",
     "questionDescription": "<p class='mars'>suppliers of equipment, materials, services or software?</p>",
     "answerType": "radio",
     "radios": [
@@ -1854,7 +1874,7 @@
     "sectionTitle": "Context for Innovation",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "6.28",
-    "questionTitle": "How important to [BUSINESS NAME]’s innovation activities was information from:",
+    "questionTitle": "How important to <span class='business-name'>[BUSINESS NAME]</span>’s innovation activities was information from:",
     "questionDescription": "<p class='mars'>clients or customers from the private sector?</p>",
     "answerType": "radio",
     "radios": [
@@ -1888,7 +1908,7 @@
     "sectionTitle": "Context for Innovation",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "6.29",
-    "questionTitle": "How important to [BUSINESS NAME]’s innovation activities was information from:",
+    "questionTitle": "How important to <span class='business-name'>[BUSINESS NAME]</span>’s innovation activities was information from:",
     "questionDescription": "<p class='mars'>clients or customers from the public sector?</p><div class='box box--promo'><p class='mars'>The public sector includes government owned organisations such as local, regional and national administrations and agencies, schools, hospitals and government providers of services such as security, transport, housing and energy etc.</p></div>",
     "answerType": "radio",
     "radios": [
@@ -1922,7 +1942,7 @@
     "sectionTitle": "Context for Innovation",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "6.30",
-    "questionTitle": "How important to [BUSINESS NAME]’s innovation activities was information from:",
+    "questionTitle": "How important to <span class='business-name'>[BUSINESS NAME]</span>’s innovation activities was information from:",
     "questionDescription": "<p class='mars'>competitors or other businesses in your industry?</p>",
     "answerType": "radio",
     "radios": [
@@ -1956,7 +1976,7 @@
     "sectionTitle": "Context for Innovation",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "6.31",
-    "questionTitle": "How important to [BUSINESS NAME]’s innovation activities was information from:",
+    "questionTitle": "How important to <span class='business-name'>[BUSINESS NAME]</span>’s innovation activities was information from:",
     "questionDescription": "<p class='mars'>consultants, commercial labs or private Research and Development institutes?</p>",
     "answerType": "radio",
     "radios": [
@@ -1990,7 +2010,7 @@
     "sectionTitle": "Context for Innovation",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "6.32",
-    "questionTitle": "How important to [BUSINESS NAME]’s innovation activities was information from:",
+    "questionTitle": "How important to <span class='business-name'>[BUSINESS NAME]</span>’s innovation activities was information from:",
     "questionDescription": "<p class='mars'>universities or other higher education institutes?</p>",
     "answerType": "radio",
     "radios": [
@@ -2024,7 +2044,7 @@
     "sectionTitle": "Context for Innovation",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "6.33",
-    "questionTitle": "How important to [BUSINESS NAME]’s innovation activities was information from:",
+    "questionTitle": "How important to <span class='business-name'>[BUSINESS NAME]</span>’s innovation activities was information from:",
     "questionDescription": "<p class='mars'>government or public research institutes?</p>",
     "answerType": "radio",
     "radios": [
@@ -2058,7 +2078,7 @@
     "sectionTitle": "Context for Innovation",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "6.34",
-    "questionTitle": "How important to [BUSINESS NAME]’s innovation activities was information from:",
+    "questionTitle": "How important to <span class='business-name'>[BUSINESS NAME]</span>’s innovation activities was information from:",
     "questionDescription": "<p class='mars'>conferences, trade fairs or exhibitions?</p>",
     "answerType": "radio",
     "radios": [
@@ -2092,7 +2112,7 @@
     "sectionTitle": "Context for Innovation",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "6.35",
-    "questionTitle": "How important to [BUSINESS NAME]’s innovation activities was information from:",
+    "questionTitle": "How important to <span class='business-name'>[BUSINESS NAME]</span>’s innovation activities was information from:",
     "questionDescription": "<p class='mars'>professional and industry associations?</p>",
     "answerType": "radio",
     "radios": [
@@ -2126,7 +2146,7 @@
     "sectionTitle": "Context for Innovation",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "6.36",
-    "questionTitle": "How important to [BUSINESS NAME]’s innovation activities was information from:",
+    "questionTitle": "How important to <span class='business-name'>[BUSINESS NAME]</span>’s innovation activities was information from:",
     "questionDescription": "<p class='mars'>technical, industry or service standards?</p>",
     "answerType": "radio",
     "radios": [
@@ -2160,7 +2180,7 @@
     "sectionTitle": "Context for Innovation",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "6.37",
-    "questionTitle": "How important to [BUSINESS NAME]’s innovation activities was information from:",
+    "questionTitle": "How important to <span class='business-name'>[BUSINESS NAME]</span>’s innovation activities was information from:",
     "questionDescription": "<p class='mars'>scientific journals and trade or technical publications?</p>",
     "answerType": "radio",
     "radios": [
@@ -2194,7 +2214,7 @@
     "sectionTitle": "Context for Innovation",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "6.38",
-    "questionTitle": "Did [BUSINESS NAME] co-operate on any innovation activities with:",
+    "questionTitle": "Did <span class='business-name'>[BUSINESS NAME]</span> co-operate on any innovation activities with:",
     "questionDescription": "<p class='mars'>other businesses within your enterprise group?</p><p class='mars'>Please select all that apply</p>",
     "answerType": "checkbox",
     "checkboxs": [
@@ -2228,7 +2248,7 @@
     "sectionTitle": "Context for Innovation",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "6.39",
-    "questionTitle": "Did [BUSINESS NAME] co-operate on any innovation activities with:",
+    "questionTitle": "Did <span class='business-name'>[BUSINESS NAME]</span> co-operate on any innovation activities with:",
     "questionDescription": "<p class='mars'>suppliers of equipment, materials, services or software?</p><p class='mars'>Please select all that apply</p>",
     "answerType": "checkbox",
     "checkboxs": [
@@ -2262,7 +2282,7 @@
     "sectionTitle": "Context for Innovation",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "6.40",
-    "questionTitle": "Did [BUSINESS NAME] co-operate on any innovation activities with:",
+    "questionTitle": "Did <span class='business-name'>[BUSINESS NAME]</span> co-operate on any innovation activities with:",
     "questionDescription": "<p class='mars'>clients or customers from the private sector?</p><p class='mars'>Please select all that apply</p>",
     "answerType": "checkbox",
     "checkboxs": [
@@ -2296,7 +2316,7 @@
     "sectionTitle": "Context for Innovation",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "6.41",
-    "questionTitle": "Did [BUSINESS NAME] co-operate on any innovation activities with:",
+    "questionTitle": "Did <span class='business-name'>[BUSINESS NAME]</span> co-operate on any innovation activities with:",
     "questionDescription": "<p class='mars'>clients or customers from the public sector?</p><div class='box box--promo'><p class='venus'>Definition of ‘public sector’</p><p class='mars'>The public sector includes government owned organisations such as local, regional and national administrations and agencies, schools, hospitals and government providers of services such as security, transport, housing and energy etc.</p></div><p class='mars'>Please select all that apply</p>",
     "answerType": "checkbox",
     "checkboxs": [
@@ -2330,7 +2350,7 @@
     "sectionTitle": "Context for Innovation",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "6.42",
-    "questionTitle": "Did [BUSINESS NAME] co-operate on any innovation activities with:",
+    "questionTitle": "Did <span class='business-name'>[BUSINESS NAME]</span> co-operate on any innovation activities with:",
     "questionDescription": "<p class='mars'>competitors or other businesses in your industry?</p><p class='mars'>Please select all that apply</p>",
     "answerType": "checkbox",
     "checkboxs": [
@@ -2364,7 +2384,7 @@
     "sectionTitle": "Context for Innovation",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "6.43",
-    "questionTitle": "Did [BUSINESS NAME] co-operate on any innovation activities with:",
+    "questionTitle": "Did <span class='business-name'>[BUSINESS NAME]</span> co-operate on any innovation activities with:",
     "questionDescription": "<p class='mars'>consultants, commercial labs or private Research and Development institutes?</p><p class='mars'>Please select all that apply</p>",
     "answerType": "checkbox",
     "checkboxs": [
@@ -2398,7 +2418,7 @@
     "sectionTitle": "Context for Innovation",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "6.44",
-    "questionTitle": "Did [BUSINESS NAME] co-operate on any innovation activities with:",
+    "questionTitle": "Did <span class='business-name'>[BUSINESS NAME]</span> co-operate on any innovation activities with:",
     "questionDescription": "<p class='mars'>universities or other higher education institutions?</p><p class='mars'>Please select all that apply</p>",
     "answerType": "checkbox",
     "checkboxs": [
@@ -2432,7 +2452,7 @@
     "sectionTitle": "Context for Innovation",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "6.45",
-    "questionTitle": "Did [BUSINESS NAME] co-operate on any innovation activities with:",
+    "questionTitle": "Did <span class='business-name'>[BUSINESS NAME]</span> co-operate on any innovation activities with:",
     "questionDescription": "<p class='mars'>government or public research institutes?</p><p class='mars'>Please select all that apply</p>",
     "answerType": "checkbox",
     "checkboxs": [
@@ -2466,7 +2486,7 @@
     "sectionTitle": "Context for Innovation",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "6.46",
-    "questionTitle": "If [BUSINESS NAME] had no innovation activity, please indicate why it has not been necessary or possible to innovate",
+    "questionTitle": "If <span class='business-name'>[BUSINESS NAME]</span> had no innovation activity, please indicate why it has not been necessary or possible to innovate",
     "questionDescription": "<p class='mars'>Select all that apply</p>",
     "answerType": "checkbox",
     "checkboxs": [
@@ -2746,7 +2766,7 @@
     "sectionTitle": "Public Financial Support for Innovation",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "7.1",
-    "questionTitle": "Did [BUSINESS NAME] receive public financial support for innovation activities from the following levels of government?",
+    "questionTitle": "Did <span class='business-name'>[BUSINESS NAME]</span> receive public financial support for innovation activities from the following levels of government?",
     "questionDescription": "<div class='box box--promo'><div class='grid'><div class='grid__col col-6@s'><h3 class='venus'>Include:</h3><ul><li>financial support via tax credits or deductions, grants, subsidised loans and loan guarantees</li></ul></div><div class='grid__col col-6@s'><h3 class='venus'>Exclude:</h3><ul><li>Research and Development and other innovations activities conducted entirely for the public sector* under contract.</li><li>The public sector includes government owned organisations such as local, regional and national administrations and agencies, schools, hospitals and government providers of services such as security, transport, housing and energy etc.</li></ul></div></div></div>",
     "answerType": "radio",
     "radios": [
@@ -2799,7 +2819,7 @@
     "sectionTitle": "Public Financial Support for Innovation",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "7.2",
-    "questionTitle": "What kind of financial support was received by [BUSINESS NAME] from UK <strong>central government</strong>?",
+    "questionTitle": "What kind of financial support was received by <span class='business-name'>[BUSINESS NAME]</span> from UK <strong>central government</strong>?",
     "answerType": "radio",
     "radios": [
       {
@@ -2852,7 +2872,7 @@
     "sectionTitle": "Turnover",
     "sectionDescription": "<p class='mars'>1 year period 1 January 2014 to 31 December 2014.</p>",
     "questionVersion": "8.1",
-    "questionTitle": "Please <strong>estimate</strong> [BUSINESS NAME]’s total turnover for the <strong>calendar year 2014 only</strong>, excluding VAT",
+    "questionTitle": "Please <strong>estimate</strong> <span class='business-name'>[BUSINESS NAME]</span>’s total turnover for the <strong>calendar year 2014 only</strong>, excluding VAT",
     "answerType": "currency",
     "currency": [
       {
@@ -2870,7 +2890,7 @@
     "sectionTitle": "Turnover",
     "sectionDescription": "<p class='mars'>1 year period 1 January 2016 to 31 December 2016.</p>",
     "questionVersion": "8.2",
-    "questionTitle": "Please <strong>estimate</strong> [BUSINESS NAME]’s total turnover for the <strong>calendar year 2016 only</strong>, excluding VAT",
+    "questionTitle": "Please <strong>estimate</strong> <span class='business-name'>[BUSINESS NAME]</span>’s total turnover for the <strong>calendar year 2016 only</strong>, excluding VAT",
     "answerType": "currency",
     "currency": [
       {
@@ -2896,7 +2916,7 @@
     "sectionTitle": "Exports",
     "sectionDescription": "<p class='mars'>1 year period 1 January 2016 to 31 December 2016.</p>",
     "questionVersion": "8.2",
-    "questionTitle": "Please <strong>estimate</strong> [BUSINESS NAME]’s total value of exports for the <strong>calendar year 2016 only</strong>, excluding VAT",
+    "questionTitle": "Please <strong>estimate</strong> <span class='business-name'>[BUSINESS NAME]</span>’s total value of exports for the <strong>calendar year 2016 only</strong>, excluding VAT",
     "answerType": "currency",
     "currency": [
       {
@@ -2922,7 +2942,7 @@
     "sectionTitle": "Exports",
     "sectionDescription": "<p class='mars'>1 year period 1 January 2014 to 31 December 2014.</p>",
     "questionVersion": "10.1",
-    "questionTitle": "Please <strong>estimate</strong> [BUSINESS NAME]’s average number of employees for the <strong>calendar year 2014 only</strong>",
+    "questionTitle": "Please <strong>estimate</strong> <span class='business-name'>[BUSINESS NAME]</span>’s average number of employees for the <strong>calendar year 2014 only</strong>",
     "answerType": "currency",
     "currency": [
       {
@@ -2939,7 +2959,7 @@
     "sectionTitle": "Exports",
     "sectionDescription": "<p class='mars'>1 year period 1 January 2016 to 31 December 2016.</p>",
     "questionVersion": "10.2",
-    "questionTitle": "Please <strong>estimate</strong> [BUSINESS NAME]’s average number of employees for the <strong>calendar year 2016 only</strong>",
+    "questionTitle": "Please <strong>estimate</strong> <span class='business-name'>[BUSINESS NAME]</span>’s average number of employees for the <strong>calendar year 2016 only</strong>",
     "answerType": "currency",
     "currency": [
       {
@@ -2986,7 +3006,7 @@
     "sectionTitle": "Skills",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "11.2",
-    "questionTitle": "Did [BUSINESS NAME] employ individuals in-house with the following skills at any level, or obtain these skills from external sources?",
+    "questionTitle": "Did <span class='business-name'>[BUSINESS NAME]</span> employ individuals in-house with the following skills at any level, or obtain these skills from external sources?",
     "questionDescription": "<p class='mars'>Select all that apply</p>",
     "answerType": "checkbox",
     "checkboxs": [

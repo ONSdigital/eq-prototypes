@@ -32,16 +32,12 @@ globalcss: false
                     <div class="response response--textfield">
                       <div class="field">
                         <label class="label venus" for="form-input-0" >Hours</label>
-                        <div class="input-type input-type--textfield" data-type="£">
-                        <input class="input input--text  mars" pattern="\d*" id="form-input-0" name="1" type="text" value="">
-                        </div>
+                        <input class="input input--text mars" pattern="\d*" id="form-input-0" name="1" type="text" value="">
                       </div>
                       <br/>
                       <div class="field">
                         <label class="label venus" for="form-input-1" >Minutes</label>
-                        <div class="input-type input-type--textfield" data-type="£">
-                        <input class="input input--text  mars" pattern="\d*" id="form-input-1" name="1" type="text" value="">
-                        </div>
+                        <input class="input input--text mars" pattern="\d*" id="form-input-1" name="1" type="text" value="">
                       </div>
                       <br/>
                     </div>
@@ -66,10 +62,17 @@ globalcss: false
 </div>
 
 <script>
+
 $( document ).ready(function() {
+  if ($('.business-name').length > 0) {
+    var businessName = sessionStorage.getItem('Business name');
+    $('.business-name').html(businessName);
+  }
   $('.qa-btn-get-started').click(function(e) {
     e.preventDefault();
     window.location.href = "../section-107";
+
+
   });
 });
 

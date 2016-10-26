@@ -26,7 +26,7 @@ globalcss: false
                   <p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>
                 </div>
                 <div class="question">
-                  <h3 class="question__title neptune"><span class="question__title__number venus">6.1</span>Did [BUSINESS NAME] have any innovation activities that were:</h3>
+                  <h3 class="question__title neptune"><span class="question__title__number venus">6.1</span>Did <span class='business-name'>[BUSINESS NAME]</span> have any innovation activities that were:</h3>
                   <div class="response response--radio">
 
 
@@ -82,10 +82,17 @@ globalcss: false
 </div>
 
 <script>
+
 $( document ).ready(function() {
+  if ($('.business-name').length > 0) {
+    var businessName = sessionStorage.getItem('Business name');
+    $('.business-name').html(businessName);
+  }
   $('.qa-btn-get-started').click(function(e) {
     e.preventDefault();
     window.location.href = "../section-40";
+
+
       var checkedVal = $("input[value='Yes']:checked").val();
       var checkedName = $("input[value='Yes']:checked").attr("name");
       if (checkedVal == "Yes" && checkedName == "1") {

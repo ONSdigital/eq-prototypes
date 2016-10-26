@@ -75,10 +75,17 @@ globalcss: false
 </div>
 
 <script>
+
 $( document ).ready(function() {
+  if ($('.business-name').length > 0) {
+    var businessName = sessionStorage.getItem('Business name');
+    $('.business-name').html(businessName);
+  }
   $('.qa-btn-get-started').click(function(e) {
     e.preventDefault();
     window.location.href = "../section-54";
+
+
   });
 });
 

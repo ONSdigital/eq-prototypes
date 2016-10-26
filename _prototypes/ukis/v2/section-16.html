@@ -26,7 +26,7 @@ globalcss: false
                   <p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>
                 </div>
                 <div class="question">
-                  <h3 class="question__title neptune"><span class="question__title__number venus">3.9</span>Did [BUSINESS NAME] invest in the acquisition of existing knowledge for the purposes of current or future innovation?</h3>
+                  <h3 class="question__title neptune"><span class="question__title__number venus">3.9</span>Did <span class='business-name'>[BUSINESS NAME]</span> invest in the acquisition of existing knowledge for the purposes of current or future innovation?</h3>
                   <div class="question__description">
                     <div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Purchase or licensing of patents and non-patented inventions, know-how and other types of knowledge from other businesses or organisations</li></ul></div>
                   </div>
@@ -65,10 +65,17 @@ globalcss: false
 </div>
 
 <script>
+
 $( document ).ready(function() {
+  if ($('.business-name').length > 0) {
+    var businessName = sessionStorage.getItem('Business name');
+    $('.business-name').html(businessName);
+  }
   $('.qa-btn-get-started').click(function(e) {
     e.preventDefault();
     window.location.href = "../section-17";
+
+
       var checkedVal = $("input[value='no']:checked").val();
       var checkedName = $("input[value='no']:checked").attr("name");
       if (checkedVal == "no" && checkedName == "1") {

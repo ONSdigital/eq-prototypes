@@ -26,7 +26,7 @@ globalcss: false
                   <p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>
                 </div>
                 <div class="question">
-                  <h3 class="question__title neptune"><span class="question__title__number venus">11.2</span>Did [BUSINESS NAME] employ individuals in-house with the following skills at any level, or obtain these skills from external sources?</h3>
+                  <h3 class="question__title neptune"><span class="question__title__number venus">11.2</span>Did <span class='business-name'>[BUSINESS NAME]</span> employ individuals in-house with the following skills at any level, or obtain these skills from external sources?</h3>
                   <div class="question__description">
                     <p class='mars'>Select all that apply</p>
                   </div>
@@ -79,10 +79,17 @@ globalcss: false
 </div>
 
 <script>
+
 $( document ).ready(function() {
+  if ($('.business-name').length > 0) {
+    var businessName = sessionStorage.getItem('Business name');
+    $('.business-name').html(businessName);
+  }
   $('.qa-btn-get-started').click(function(e) {
     e.preventDefault();
     window.location.href = "../section-105";
+
+
   });
 });
 

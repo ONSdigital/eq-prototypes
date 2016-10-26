@@ -26,7 +26,7 @@ globalcss: false
                   <p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>
                 </div>
                 <div class="question">
-                  <h3 class="question__title neptune"><span class="question__title__number venus">3.16</span>Which of the following did [BUSINESS NAME] invest in for the purposes of current or future innovation?</h3>
+                  <h3 class="question__title neptune"><span class="question__title__number venus">3.16</span>Which of the following did <span class='business-name'>[BUSINESS NAME]</span> invest in for the purposes of current or future innovation?</h3>
                   <div class="response response--checkbox">
 
 
@@ -68,10 +68,17 @@ globalcss: false
 </div>
 
 <script>
+
 $( document ).ready(function() {
+  if ($('.business-name').length > 0) {
+    var businessName = sessionStorage.getItem('Business name');
+    $('.business-name').html(businessName);
+  }
   $('.qa-btn-get-started').click(function(e) {
     e.preventDefault();
     window.location.href = "../section-25";
+
+
       var checkedVal = $("input[value='Changes to product or service design']:checked").val();
       var checkedName = $("input[value='Changes to product or service design']:checked").attr("name");
       if (checkedVal == "Changes to product or service design" && checkedName == "1") {

@@ -26,7 +26,7 @@ globalcss: false
                   <p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>
                 </div>
                 <div class="question">
-                  <h3 class="question__title neptune"><span class="question__title__number venus">5.3</span>Did [BUSINESS NAME] introduce any new or significantly improved processes for producing or supplying goods or services which were new to your industry?</h3>
+                  <h3 class="question__title neptune"><span class="question__title__number venus">5.3</span>Did <span class='business-name'>[BUSINESS NAME]</span> introduce any new or significantly improved processes for producing or supplying goods or services which were new to your industry?</h3>
                   <div class="question__description">
                     <p class='mars'>Select all that apply</p>
                   </div>
@@ -65,10 +65,17 @@ globalcss: false
 </div>
 
 <script>
+
 $( document ).ready(function() {
+  if ($('.business-name').length > 0) {
+    var businessName = sessionStorage.getItem('Business name');
+    $('.business-name').html(businessName);
+  }
   $('.qa-btn-get-started').click(function(e) {
     e.preventDefault();
     window.location.href = "../section-37";
+
+
   });
 });
 

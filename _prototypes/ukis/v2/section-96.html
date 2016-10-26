@@ -26,7 +26,7 @@ globalcss: false
                   <p class='mars'>1 year period 1 January 2016 to 31 December 2016.</p>
                 </div>
                 <div class="question">
-                  <h3 class="question__title neptune"><span class="question__title__number venus">8.2</span>Please <strong>estimate</strong> [BUSINESS NAME]’s total turnover for the <strong>calendar year 2016 only</strong>, excluding VAT</h3>
+                  <h3 class="question__title neptune"><span class="question__title__number venus">8.2</span>Please <strong>estimate</strong> <span class='business-name'>[BUSINESS NAME]</span>’s total turnover for the <strong>calendar year 2016 only</strong>, excluding VAT</h3>
                   <div class="response response--currency">
 
 
@@ -59,10 +59,17 @@ globalcss: false
 </div>
 
 <script>
+
 $( document ).ready(function() {
+  if ($('.business-name').length > 0) {
+    var businessName = sessionStorage.getItem('Business name');
+    $('.business-name').html(businessName);
+  }
   $('.qa-btn-get-started').click(function(e) {
     e.preventDefault();
     window.location.href = "../section-97";
+
+
   });
 });
 

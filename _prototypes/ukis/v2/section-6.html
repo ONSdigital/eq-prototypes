@@ -26,7 +26,7 @@ globalcss: false
                   <p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>
                 </div>
                 <div class="question">
-                  <h3 class="question__title neptune"><span class="question__title__number venus">2.1</span>Did [BUSINESS NAME] make changes in the following areas?</h3>
+                  <h3 class="question__title neptune"><span class="question__title__number venus">2.1</span>Did <span class='business-name'>[BUSINESS NAME]</span> make changes in the following areas?</h3>
                   <div class="question__description">
                     <div class='box box--promo'><div class='grid'><div class='grid__col col-6@s'><h3 class='venus'>Include:</h3><ul><li>all <strong>new</strong> and <strong>significantly improved</strong> forms of organisation, business structures or practices aimed at raising internal efficiency or the effectiveness of approaching markets and customers.</li><li>changes that have been implemented during the 3 year period.</li></ul></div><div class='grid__col col-6@s'><h3 class='venus'>Exclude:</h3><ul><li>ongoing changes.</li></ul></div></div></div>
                   </div>
@@ -95,10 +95,17 @@ globalcss: false
 </div>
 
 <script>
+
 $( document ).ready(function() {
+  if ($('.business-name').length > 0) {
+    var businessName = sessionStorage.getItem('Business name');
+    $('.business-name').html(businessName);
+  }
   $('.qa-btn-get-started').click(function(e) {
     e.preventDefault();
     window.location.href = "../section-7";
+
+
   });
 });
 
