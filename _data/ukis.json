@@ -309,7 +309,7 @@
     "sectionVersion": 3,
     "sectionTitle": "Innovation Investment",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
-    "questionVersion": "3.4",
+    "questionVersion": "3.6",
     "questionTitle": "Did <strong><span class='business-name'>[BUSINESS NAME]</span></strong> invest in <strong>acquisition of advanced machinery, equipment or software</strong> for the purposes of current or future innovation?",
     "answerType": "radio",
     "radios": [
@@ -2932,8 +2932,8 @@
     "sectionDescription": "<p class='mars'>1 year period 1 January 2014 to 31 December 2014.</p>",
     "questionVersion": "10.1",
     "questionTitle": "Please <strong>estimate</strong> <strong><span class='business-name'>[BUSINESS NAME]</span>’s</strong> average number of employees for the <strong>calendar year 2014 only</strong>",
-    "answerType": "currency",
-    "currency": [
+    "answerType": "text",
+    "textfield": [
       {
         "type": "text",
         "label": "Total number of employees for 2014"
@@ -2950,7 +2950,7 @@
     "questionVersion": "10.2",
     "questionTitle": "Please <strong>estimate</strong> <strong><span class='business-name'>[BUSINESS NAME]</span>’s</strong> average number of employees for the <strong>calendar year 2016 only</strong>",
     "answerType": "currency",
-    "currency": [
+    "textfield": [
       {
         "type": "text",
         "label": "Total number of employees for 2016"
