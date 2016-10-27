@@ -22,13 +22,12 @@
     "url": "section-1",
     "next": "section-3",
     "homepage": "true",
-    "html": "<div class='header'><h2 class='saturn'>Your response to this survey is of great value to government, whether or not you carry out innovation activities.</h2><div class='grid '><div class='grid__col col-6@s'><dl><dt class='mercury u-tt-u'>Business name</dt><dd class='mars'><span class='business-name'>Your business</span></dd><dt class='mercury u-tt-u'>Have your details changed?</dt><dd class='mars'>Telephone <a href='tel:03001234931'>0300 1234 931</a> or alternatively email <a href=''>info@ons.gov.uk</a></dd></dl></div><div class='grid__col col-6@s '><dl><dt class='mercury u-tt-u'>Complete survey by</dt><dd class='mars'>30 January 2016</dd><dt class='mercury u-tt-u'>For the period</dt><dd class='mars'>1 January 2014 to 31 December 2016</dd></dl></div></div><p class='header__title mars'>The aim of the UK Innovation Survey (UKIS) is to collect data from businesses about various aspects of their innovation related activities to enable measurement of the extent, types and trends in innovation.</p><p class='mars'>The UKIS data provides a major source of evidence to inform government policy for promoting innovation activities among businesses to boost economic growth. The data collected also serves as an important contributor to the Community Innovation Survey conducted across Europe, which is used for international benchmarking and comparison purposes. We are interested in responses from both businesses conducting innovation and businesses not currently engaged in innovation as this can help to inform our wider understanding of the constraining factors.</p><h2 class='saturn'>Basis for completion</h2><ul><li>Please complete this questionnaire for the business named above.</li><li>If this business is part of an enterprise group, please answer all questions for this business in the UK only.</li><li>Do not include results for subsidiaries or parent enterprises.</li></ul><div class='box box--promo'><h2 class='saturn'>Definition of innovation</h2><ul><li class='mars'>Innovation, for the purpose of this survey, is defined as <strong>new</strong> or <strong>significantly improved goods or services</strong> as well as <strong>processes</strong> used to produce or supply all goods or services that the business has introduced, regardless of their origin.</li><li class='mars'>These innovations may be new to the business or new to the market.</li><li class='mars'>Investments for future innovation and changes that the business has introduced at a <strong>strategic</strong> level (in organisation and practices) are also covered.</li></ul></div><h2 class='saturn'>You will be asked to provide information for the business, including:</h2><ul><li>General Business Information</li><li>Innovation Activities</li><li>Context for Innovation</li><li>General Economic Information</li></ul><div class='u-mb-s u-mb-m@s'><div class='u-fw-b'>If actual figures are not available, please provide informed estimates.</div></div><div></div><form action='' class='form' role='form' method='POST' novalidate=''><a href='../section-1'class='btn btn--quinary qa-btn-get-started neptune' type='submit' name='action[start_questionnaire]'>Start survey</a></form><div class='lock u-mb-s u-mb-m@s'><div class='venus lock__text'>We will treat your data securely and confidentially</div></div></div>"
+    "html": "<div class='header'><h2 class='saturn'>Your response to this survey is of great value to government, whether or not you carry out innovation activities.</h2><div class='grid '><div class='grid__col col-6@s'><dl><dt class='mercury u-tt-u'>Business name</dt><dd class='mars'><span class='business-name'>Your business</span></dd><dt class='mercury u-tt-u'>Have your details changed?</dt><dd class='mars'>Telephone <a href='tel:03001234931'>0300 1234 931</a> or alternatively email <a href=''>info@ons.gov.uk</a></dd></dl></div><div class='grid__col col-6@s '><dl><dt class='mercury u-tt-u'>Complete survey by</dt><dd class='mars'>30 January 2016</dd><dt class='mercury u-tt-u'>For the period</dt><dd class='mars'>1 January 2014 to 31 December 2016</dd></dl></div></div><h2 class='header__title saturn'>Basis for completion</h2><ul><li>Please complete this questionnaire for <strong><span class='business-name'>the business</span></strong> named above.</li><li>If this business is part of an enterprise group, please answer all questions for this business in the UK only.</li><li>Do not include results for subsidiaries or parent enterprises.</li></ul><div class='box box--promo'><h2 class='saturn'>Definition of innovation</h2><ul><li class='mars'>Innovation, for the purpose of this survey, is defined as <strong>new</strong> or <strong>significantly improved goods or services</strong> as well as <strong>processes</strong> used to produce or supply all goods or services that <strong><span class='business-name'>the business</span></strong> has introduced, regardless of their origin.</li><li class='mars'>These innovations may be new to <strong><span class='business-name'>the business</span></strong> or new to the market.</li><li class='mars'>Investments for future innovation and changes that <strong><span class='business-name'>the business</span></strong> has introduced at a <strong>strategic</strong> level (in organisation and practices) are also covered.</li></ul></div><h2 class='saturn'>You will be asked to provide information for <strong><span class='business-name'>the business</span></strong>, including:</h2><ul><li>General Business Information</li><li>Innovation Activities</li><li>Context for Innovation</li><li>General Economic Information</li></ul><div class='u-mb-s u-mb-m@s'><div class='u-fw-b'>If actual figures are not available, please provide informed estimates.</div></div><div></div><form action='' class='form' role='form' method='POST' novalidate=''><a href='../section-1'class='btn btn--quinary qa-btn-get-started neptune' type='submit' name='action[start_questionnaire]'>Start survey</a></form><div class='lock u-mb-s u-mb-m@s'><div class='venus lock__text'>We will treat your data securely and confidentially</div></div><h3 class='saturn'>Aim of this survey</h2><p class='mars'>The aim of the UK Innovation Survey (UKIS) is to collect data from businesses about various aspects of their innovation related activities to enable measurement of the extent, types and trends in innovation.</p><p class='mars'>The UKIS data provides a major source of evidence to inform government policy for promoting innovation activities among businesses to boost economic growth. The data collected also serves as an important contributor to the Community Innovation Survey conducted across Europe, which is used for international benchmarking and comparison purposes. We are interested in responses from both businesses conducting innovation and businesses not currently engaged in innovation as this can help to inform our wider understanding of the constraining factors.</p></div>"
   },
   {
     "prev": "index",
     "url": "section-2",
     "next": "section-3",
-    "sectionVersion": 1,
     "sectionTitle": "General Business Information",
     "sectionDescription": "<p class='mars'>This section covers general information relating to your business including geographic markets and significant changes in circumstance.</p>"
   },
@@ -78,7 +77,7 @@
         "type": "radio",
         "label": "Yes",
         "qId": "1",
-        "groupName": "The business was established"
+        "groupName": "<strong><span class='business-name'>the business</span></strong> was established"
       },
       {
         "type": "radio",
@@ -113,27 +112,26 @@
     "prev": "section-4",
     "url": "section-5",
     "next": "section-6",
-    "sectionVersion": 2,
-    "sectionTitle": "Business Strategy and Practices",
-    "sectionDescription": "<p class='mars'>This section covers changes in business strategy and practices, for example, implementing changes to marketing concepts or strategies.</p>"
+    "sectionTitle": "You have successfully completed the General Business Information section",
+    "sectionDescription": "<h3 class='header__title saturn' style='margin-top: 1rem;'>Completed sections</h3><ul class='interstitial'><li class='complete mars'><a href='../section-3'>General Business Information section</a></li></ul><h3 class='question__title saturn'>Remaining sections</h3><ul class=''><li class='mars'><a href='../section-6'>Business Strategy and Practices</a></li><li class='mars'>Innovation Investment</li><li class='mars'>Goods and Services Innovation</li><li class='mars'>Process Innovation</li><li class='mars'>Context for Innovation</li><li class='mars'>Public Financial Support for Innovation</li><li class='mars'>Turnover</li><li class='mars'>Exports</li><li class='mars'>Employees</li><li class='mars'>Skills</li><li class='mars'>General Information</li><li class='mars'>Summary</li></ul><h3 class='question__title saturn'>The next section</h3><p class='mars'>The next section covers changes in business strategy and practices, for example, implementing changes to marketing concepts or strategies.</p>"
   },
   {
     "prev": "section-4",
     "url": "section-6",
     "next": "section-7",
     "sectionVersion": 2,
-    "sectionTitle": "General Business Information",
+    "sectionTitle": "Business Strategy and Practices",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "2.1",
     "questionTitle": "Did <strong><span class='business-name'>[BUSINESS NAME]</span></strong> make changes in the following areas?",
-    "questionDescription": "<div class='box box--promo'><div class='grid'><div class='grid__col col-6@s'><h3 class='venus'>Include:</h3><ul><li>all <strong>new</strong> and <strong>significantly improved</strong> forms of organisation, business structures or practices aimed at raising internal efficiency or the effectiveness of approaching markets and customers.</li><li>changes that have been implemented during the 3 year period.</li></ul></div><div class='grid__col col-6@s'><h3 class='venus'>Exclude:</h3><ul><li>ongoing changes.</li></ul></div></div></div>",
+    "questionDescription": "<div class='box box--promo'><div class='grid'><div class='grid__col col-6@s'><h3 class='venus'>Include:</h3><ul><li>all <strong>new</strong> and <strong>significantly improved</strong> forms of organisation, business structures or practices aimed at raising internal efficiency or the effectiveness of approaching markets and customers</li><li>changes that have been implemented during the 3 year period</li></ul></div><div class='grid__col col-6@s'><h3 class='venus'>Exclude:</h3><ul><li>ongoing changes</li></ul></div></div></div>",
     "answerType": "radio",
     "radios": [
       {
         "type": "radio",
         "label": "Yes",
         "qId": "1",
-        "groupName": "New <strong>business practices</strong> for organising procedures<span class='input--description pluto'>(For example first use of supply chain management, business re-engineering, knowledge management, lean production or quality management)</span>"
+        "groupName": "New <strong>business practices</strong> for organising procedures<span class='input--description pluto'>For example first use of supply chain management, business re-engineering, knowledge management, lean production or quality management</span>"
       },
       {
         "type": "radio",
@@ -144,7 +142,7 @@
         "type": "radio",
         "label": "Yes",
         "qId": "2",
-        "groupName": "New methods of <strong>organising work responsibilities and decision making</strong> <span class='input--description pluto'>(For example first use of a new system of employee responsibilities, team work, decentralisation, integration or de-integration of departments or education / training systems)</span>"
+        "groupName": "New methods of <strong>organising work responsibilities and decision making</strong> <span class='input--description pluto'>For example first use of a new system of employee responsibilities, team work, decentralisation, integration or de-integration of departments or education / training systems</span>"
       },
       {
         "type": "radio",
@@ -155,7 +153,7 @@
         "type": "radio",
         "label": "Yes",
         "qId": "3",
-        "groupName": "New methods of <strong>organising external relationships</strong> with other firms or public institutions <span class='input--description pluto'>(For example first use of alliances, partnerships, outsourcing or subcontracting)</span>"
+        "groupName": "New methods of <strong>organising external relationships</strong> with other firms or public institutions <br/><span class='input--description pluto'>For example first use of alliances, partnerships, outsourcing or subcontracting</span>"
       },
       {
         "type": "radio",
@@ -166,7 +164,7 @@
         "type": "radio",
         "label": "Yes",
         "qId": "4",
-        "groupName": "Implementation of significant changes to marketing concepts or strategies. <span class='input--description pluto'>(For example a marketing concept or strategy that differs significantly from your enterprise’s existing marketing methods and which has not been used before)</span>"
+        "groupName": "Implementation of significant changes to marketing concepts or strategies. <span class='input--description pluto'>For example a marketing concept or strategy that differs significantly from your enterprise’s existing marketing methods and which has not been used before)</span>"
       },
       {
         "type": "radio",
@@ -179,9 +177,8 @@
     "prev": "section-6",
     "url": "section-7",
     "next": "section-8",
-    "sectionVersion": 3,
-    "sectionTitle": "Business Strategy and Practices",
-    "sectionDescription": "<p class='mars'>This section covers investments in innovation.</p><div class='box--promo'><ul><li>You will be asked to provide figures for expenditure on innovation activities in the calendar year 2016.</li></ul></div>"
+    "sectionTitle": "You have successfully completed the Business Strategy and Practices section",
+    "sectionDescription": "<h3 class='header__title saturn' style='margin-top: 1rem;'>Completed sections</h3><ul class='interstitial'><li class='complete mars'><a href='../section-3'>General Business Information section</a></li><li class='complete mars'><a href='../section-6'>Business Strategy and Practices</a></li></ul><h3 class='question__title saturn'>Remaining sections</h3><ul class=''><li class='mars'><a href='../section-8'>Innovation Investment</a></li><li class='mars'>Goods and Services Innovation</li><li class='mars'>Process Innovation</li><li class='mars'>Context for Innovation</li><li class='mars'>Public Financial Support for Innovation</li><li class='mars'>Turnover</li><li class='mars'>Exports</li><li class='mars'>Employees</li><li class='mars'>Skills</li><li class='mars'>General Information</li><li class='mars'>Summary</li></ul><h3 class='question__title saturn'>The next section</h3><p class='mars'>The next section covers investments in innovation. You will be asked to provide figures for expenditure on innovation activities in the calendar year 2016.</p>"
   },
   {
     "prev": "section-7",
@@ -192,7 +189,7 @@
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "3.1",
     "questionTitle": "Did <strong><span class='business-name'>[BUSINESS NAME]</span></strong> invest in <strong>internal Research and Development</strong> for the purposes of current or future innovation?",
-    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Definition of ‘internal Research and Development’:</h3><ul><li>Creative work undertaken within your business that increases knowledge for developing new and improved goods or services and processes</li></ul></div>",
+    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Definition of ‘internal Research and Development’:</h3><ul><li>creative work undertaken within your business that increases knowledge for developing new and improved goods or services and processes</li></ul></div>",
     "answerType": "radio",
     "radios": [
       {
@@ -252,13 +249,13 @@
     "sectionDescription": "<p class='mars'>1 year period 1 January 2016 to 31 December 2016.</p>",
     "questionVersion": "3.3",
     "questionTitle": "Please estimate the amount of expenditure on internal Research & Development the <strong>calendar year 2016 only</strong>?",
-    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Internal costs and purchase from outside the business</li></ul></div>",
+    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>internal costs and purchase from outside </li></ul></div>",
     "answerType": "currency",
     "currency": [
       {
         "type": "text",
         "label": "Total internal Research and Development",
-        "validation": "Round to the nearest £ thousand, for example 100000"
+        "validation": "Round to the nearest £ thousand, for example 100,000"
       }
     ]
   },
@@ -271,7 +268,7 @@
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "3.4",
     "questionTitle": "Did <strong><span class='business-name'>[BUSINESS NAME]</span></strong> invest in the <strong>acquisition of Research and Development</strong> for the purposes of current or future innovation?",
-    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Creative work undertaken  by companies, including other businesses within your group, or by public or private research organisations and purchased by your business</li></ul></div>",
+    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>creative work undertaken  by companies, including other businesses within your group, or by public or private research organisations and purchased by your business</li></ul></div>",
     "answerType": "radio",
     "radios": [
       {
@@ -295,13 +292,13 @@
     "sectionDescription": "<p class='mars'>1 year period 1 January 2016 to 31 December 2016.</p>",
     "questionVersion": "3.5",
     "questionTitle": "Please estimate the amount of expenditure on the acquisition of  Research & Development for the <strong>calendar year 2016 only?</strong>",
-    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Internal costs and purchases from outside the business</li></ul></div>",
+    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>internal costs and purchases from outside <strong><span class='business-name'>the business</span></strong></li></ul></div>",
     "answerType": "currency",
     "currency": [
       {
         "type": "text",
         "label": "Total acquisition of Research and Development",
-        "validation": "Round to the nearest £ thousand, for example 100000"
+        "validation": "Round to the nearest £ thousand, for example 100,000"
       }
     ]
   },
@@ -365,13 +362,13 @@
     "sectionDescription": "<p class='mars'>1 year period 1 January 2016 to 31 December 2016.</p>",
     "questionVersion": "3.8",
     "questionTitle": "Please estimate the amount of expenditure for the total acquisition of advanced machinery, equipment and software for  the <strong>calendar year 2016 only</strong>?",
-    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Internal costs and purchases from outside the business</li></ul></div>",
+    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>internal costs and purchases from outside <strong><span class='business-name'>the business</span></strong></li></ul></div>",
     "answerType": "currency",
     "currency": [
       {
         "type": "text",
         "label": "Total acquisition of advanced machinery, equipment and software",
-        "validation": "Round to the nearest £ thousand, for example 100000"
+        "validation": "Round to the nearest £ thousand, for example 100,000"
       }
     ]
   },
@@ -384,7 +381,7 @@
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "3.9",
     "questionTitle": "Did <strong><span class='business-name'>[BUSINESS NAME]</span></strong> invest in the acquisition of existing knowledge for the purposes of current or future innovation?",
-    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Purchase or licensing of patents and non-patented inventions, know-how and other types of knowledge from other businesses or organisations</li></ul></div>",
+    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>purchase or licensing of patents and non-patented inventions, know-how and other types of knowledge from other businesses or organisations</li></ul></div>",
     "answerType": "radio",
     "radios": [
       {
@@ -415,13 +412,13 @@
     "sectionDescription": "<p class='mars'>1 year period 1 January 2016 to 31 December 2016.</p>",
     "questionVersion": "3.10",
     "questionTitle": "Please estimate the amount of expenditure for acquisition of existing knowledge for the <strong>calendar year 2016 only?</strong>",
-    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Internal costs and purchases from outside the business</li></ul></div>",
+    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>internal costs and purchases from outside <strong><span class='business-name'>the business</span></strong></li></ul></div>",
     "answerType": "currency",
     "currency": [
       {
         "type": "text",
         "label": "Total acquisition of existing knowledge",
-        "validation": "Round to the nearest £ thousand, for example 100000"
+        "validation": "Round to the nearest £ thousand, for example 100,000"
       }
     ]
   },
@@ -434,7 +431,7 @@
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "3.11",
     "questionTitle": "Did <strong><span class='business-name'>[BUSINESS NAME]</span></strong> invest in <strong>training for innovative activities</strong> for the purposes of current or future innovation?",
-    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Internal or external training for your personnel, specifically for the development or implementation of new or improved goods, services and processes.</li></ul></div>",
+    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>internal or external training for your personnel, specifically for the development or implementation of new or improved goods, services and processes</li></ul></div>",
     "answerType": "radio",
     "radios": [
       {
@@ -465,13 +462,13 @@
     "sectionDescription": "<p class='mars'>1 year period 1 January 2016 to 31 December 2016.</p>",
     "questionVersion": "3.12",
     "questionTitle": "Please estimate the amount of expenditure for training for innovative activities for the <strong>calendar year 2016 only?</strong>",
-    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Internal costs and purchases from outside the business</li></ul></div>",
+    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>internal costs and purchases from outside <strong><span class='business-name'>the business</span></strong></li></ul></div>",
     "answerType": "currency",
     "currency": [
       {
         "type": "text",
         "label": "Total training for innovative activities",
-        "validation": "Round to the nearest £ thousand, for example 100000"
+        "validation": "Round to the nearest £ thousand, for example 100,000"
       }
     ]
   },
@@ -484,7 +481,7 @@
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "3.13",
     "questionTitle": "Did <strong><span class='business-name'>[BUSINESS NAME]</span></strong> invest in <strong>all forms of design</strong> for the purposes of current or future innovation?",
-    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Engagement in all design activities, including strategic, for the development or implementation of new or improved goods, services and processes.</li></ul></div>",
+    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>engagement in all design activities, including strategic, for the development or implementation of new or improved goods, services and processes</li></ul></div>",
     "answerType": "radio",
     "radios": [
       {
@@ -515,13 +512,13 @@
     "sectionDescription": "<p class='mars'>1 year period 1 January 2016 to 31 December 2016.</p>",
     "questionVersion": "3.14",
     "questionTitle": "Please estimate the amount of expenditure for all forms of design for the <strong>calendar year 2016 only?</strong>",
-    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Internal costs and purchases from outside the business.</li></ul></div>",
+    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>internal costs and purchases from outside <strong><span class='business-name'>the business</span></strong></li></ul></div>",
     "answerType": "currency",
     "currency": [
       {
         "type": "text",
         "label": "Total training for all forms of design",
-        "validation": "Round to the nearest £ thousand, for example 100000"
+        "validation": "Round to the nearest £ thousand, for example 100,000"
       }
     ]
   },
@@ -619,13 +616,13 @@
     "sectionDescription": "<p class='mars'>1 year period 1 January 2016 to 31 December 2016.</p>",
     "questionVersion": "3.17",
     "questionTitle": "Please estimate the amount of expenditure for market introduction of innovations for the <strong>calendar year 2016 only?</strong></strong>",
-    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Internal costs and purchase from outside the business.</li></ul></div>",
+    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>internal costs and purchase from outside <strong><span class='business-name'>the business</span></strong></li></ul></div>",
     "answerType": "currency",
     "currency": [
       {
         "type": "text",
         "label": "Total market introduction of innovations",
-        "validation": "Round to the nearest £ thousand, for example 100000"
+        "validation": "Round to the nearest £ thousand, for example 100,000"
       }
     ]
   },
@@ -633,9 +630,8 @@
     "prev": "section-24",
     "url": "section-25",
     "next": "section-26",
-    "sectionVersion": 4,
-    "sectionTitle": "Goods and Services Innovation",
-    "sectionDescription": "<p class='mars'>This section covers innovation relating to goods and services</p><div class=''><ul><li class='mars'>You will firstly be asked to provide information about any new or significantly improved goods introduced by your business and secondly to provide information relating to any new or significantly improved services.</li><li class='mars'>You will also be asked to provide estimates for turnover in the calendar year 2016 relating to new or improved goods or services introduced during the period 1 January 2014 to 31 December 2016.</li></ul></div>"
+    "sectionTitle": "You have successfully completed the Innovation Investment section",
+    "sectionDescription": "<h3 class='header__title saturn' style='margin-top: 1rem;'>Completed sections</h3><ul class='interstitial'><li class='complete mars'><a href='../section-3'>General Business Information section</a></li><li class='complete mars'><a href='../section-6'>Business Strategy and Practices</a></li><li class='complete mars'><a href='../section-8'>Innovation Investment</a></li></ul><h3 class='question__title saturn'>Remaining sections</h3><ul class=''><li class='mars'><a href='../section-26'>Goods and Services Innovation</a></li><li class='mars'>Process Innovation</li><li class='mars'>Context for Innovation</li><li class='mars'>Public Financial Support for Innovation</li><li class='mars'>Turnover</li><li class='mars'>Exports</li><li class='mars'>Employees</li><li class='mars'>Skills</li><li class='mars'>General Information</li><li class='mars'>Summary</li></ul><h3 class='question__title saturn'>The next section</h3><p class='mars'>The next section covers innovation relating to goods and services. You will firstly be asked to provide information about any new or significantly improved goods introduced by your business and secondly to provide information relating to any new or significantly improved services. You will also be asked to provide estimates for turnover in the calendar year 2016 relating to new or improved goods or services introduced during the period 1 January 2014 to 31 December 2016.</p>"
   },
   {
     "prev": "section-25",
@@ -646,7 +642,7 @@
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "4.1",
     "questionTitle": "Did <strong><span class='business-name'>[BUSINESS NAME]</span></strong> introduce new or significantly improved <strong>goods</strong>?",
-    "questionDescription": "<div class='box box--promo'><div class='grid'><div class='grid__col col-6@s'><h3 class='venus'>Include:</h3><ul><li class='mars'>all <strong>new</strong> and <strong>significantly improved</strong> goods (for example, improvement in quality or distinct user benefits)</li><li class='mars'>goods innovations that are new to the business, even if they are not new to the market</li><li class='mars'>all product innovations, regardless of their origin</li></ul></div><div class='grid__col col-6@s'><h3 class='venus'>Exclude:</h3><ul><li class='mars'>the simple resale of goods purchased from other businesses and changes of a solely aesthetic nature</li></ul></div></div></div>",
+    "questionDescription": "<div class='box box--promo'><div class='grid'><div class='grid__col col-6@s'><h3 class='venus'>Include:</h3><ul><li class='mars'>all <strong>new</strong> and <strong>significantly improved</strong> goods (for example, improvement in quality or distinct user benefits)</li><li class='mars'>goods innovations that are new to <strong><span class='business-name'>the business</span></strong>, even if they are not new to the market</li><li class='mars'>all product innovations, regardless of their origin</li></ul></div><div class='grid__col col-6@s'><h3 class='venus'>Exclude:</h3><ul><li class='mars'>the simple resale of goods purchased from other businesses and changes of a solely aesthetic nature</li></ul></div></div></div>",
     "answerType": "radio",
     "radios": [
       {
@@ -706,7 +702,7 @@
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "4.3",
     "questionTitle": "Did <strong><span class='business-name'>[BUSINESS NAME]</span></strong> introduce new or significantly improved <strong>services</strong>?",
-    "questionDescription": "<div class='box box--promo'><div class='grid'><div class='grid__col '><h3 class='venus'>Include:</h3><ul><li class='mars'>all <strong>new</strong> and <strong>significantly improved</strong> services (for example, improvement in quality or distinct user benefits)</li><li class='mars'>services innovations that are new to the business, even if they are not new to the market</li></ul></div></div></div>",
+    "questionDescription": "<div class='box box--promo'><div class='grid'><div class='grid__col '><h3 class='venus'>Include:</h3><ul><li class='mars'>all <strong>new</strong> and <strong>significantly improved</strong> services (for example, improvement in quality or distinct user benefits)</li><li class='mars'>services innovations that are new to <strong><span class='business-name'>the business</span></strong>, even if they are not new to the market</li></ul></div></div></div>",
     "answerType": "radio",
     "radios": [
       {
@@ -766,7 +762,7 @@
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "4.5",
     "questionTitle": "Were any of your <strong>goods and services innovations</strong> new to the market?",
-    "questionDescription": "<div class='box box--promo'><div class='grid'><div class='grid__col '><h3 class='venus'>Include:</h3><ul><li class='mars'>Goods or services this business introduced to the market before competitors</li></ul></div></div></div>",
+    "questionDescription": "<div class='box box--promo'><div class='grid'><div class='grid__col '><h3 class='venus'>Include:</h3><ul><li class='mars'>goods or services this business introduced to the market before competitors</li></ul></div></div></div>",
     "answerType": "radio",
     "radios": [
       {
@@ -790,7 +786,7 @@
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "4.6",
     "questionTitle": "Were any of your <strong>goods and services innovations</strong> only new to <strong><span class='business-name'>[BUSINESS NAME]</span></strong>?",
-    "questionDescription": "<div class='box box--promo'><div class='grid'><div class='grid__col '><h3 class='venus'>Include:</h3><ul><li class='mars'>New goods or services that were essentially the same as a good or service already available from competitors</li></ul></div></div></div>",
+    "questionDescription": "<div class='box box--promo'><div class='grid'><div class='grid__col '><h3 class='venus'>Include:</h3><ul><li class='mars'>new goods or services that were essentially the same as a good or service already available from competitors</li></ul></div></div></div>",
     "answerType": "radio",
     "radios": [
       {
@@ -811,7 +807,7 @@
     "next": "section-33",
     "sectionVersion": 4,
     "sectionTitle": "Goods and Services Innovation",
-    "sectionDescription": "<div class='box box--promo'><div class='grid'><div class=' '><ul><li class='mars'>The following question refers to turnover for the calendar year 1st January to 31st December 2016, based on goods or services introduced during the period 1st January 2014 to 31st December 2016.</li><li class='mars'>If the business did not introduce any new or significantly improved goods or services, please enter 100% in the ‘Unchanged or only marginally modified’ answer field.</li><li class='mars'>Please note that estimates are acceptable and percentages must total 100%.</li></ul></div></div></div></br></br>",
+    "sectionDescription": "<div class='box box--promo'><div class='grid'><div class=' '><ul><li class='mars'>The following question refers to turnover for the calendar year 1st January to 31st December 2016, based on goods or services introduced during the period 1st January 2014 to 31st December 2016.</li><li class='mars'>If <strong><span class='business-name'>the business</span></strong> did not introduce any new or significantly improved goods or services, please enter 100% in the ‘Unchanged or only marginally modified’ answer field.</li><li class='mars'>Please note that estimates are acceptable and percentages must total 100%.</li></ul></div></div></div></br></br>",
     "questionVersion": "4.7",
     "questionTitle": "Please <strong>ESTIMATE</strong> the percentage of <strong><span class='business-name'>[BUSINESS NAME]</span>’s</strong> total turnover in <strong>calendar year 2016 only</strong> from goods and services that were:",
     "answerType": "text",
@@ -839,9 +835,8 @@
     "prev": "section-32",
     "url": "section-33",
     "next": "section-34",
-    "sectionVersion": 5,
-    "sectionTitle": "Process Innovation",
-    "sectionDescription": "<p class='mars'>This section covers innovation relating to processes for the production or supply of goods or services including all new or significantly improved methods of production.</p><div class=''><ul><li class='mars'>You will be asked to provide general information about process innovation conducted by your business.</li></ul></div>"
+    "sectionTitle": "You have successfully completed the Goods and Services Innovation section",
+    "sectionDescription": "<h3 class='header__title saturn' style='margin-top: 1rem;'>Completed sections</h3><ul class='interstitial'><li class='complete mars'><a href='../section-3'>General Business Information section</a></li><li class='complete mars'><a href='../section-6'>Business Strategy and Practices</a></li><li class='complete mars'><a href='../section-8'>Innovation Investment</a></li><li class='complete mars'><a href='../section-26'>Goods and Services Innovation</a></li></ul><h3 class='question__title saturn'>Remaining sections</h3><ul class=''><li class='mars'><a href='../section-34'>Process Innovation</a></li><li class='mars'>Context for Innovation</li><li class='mars'>Public Financial Support for Innovation</li><li class='mars'>Turnover</li><li class='mars'>Exports</li><li class='mars'>Employees</li><li class='mars'>Skills</li><li class='mars'>General Information</li><li class='mars'>Summary</li></ul><h3 class='question__title saturn'>The next section</h3><p class='mars'>The next section covers innovation relating to processes for the production or supply of goods or services including all new or significantly improved methods of production. You will be asked to provide general information about process innovation for your business.</p>"
   },
   {
     "prev": "section-33",
@@ -852,7 +847,7 @@
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "5.1",
     "questionTitle": "Did <strong><span class='business-name'>[BUSINESS NAME]</span></strong> introduce any new or significantly improved processes for producing or supplying goods or services?",
-    "questionDescription": "<div class='box box--promo'><div class='grid'><div class='grid__col '><h3 class='venus'>Include:</h3><ul><li class='mars'>all <strong>new</strong> or <strong>significantly improved</strong> methods for the production or supply of goods or services</li><li class='mars'>process innovations that are new to the business, even if they are not new to your industry</li><li class='mars'>all process innovations, regardless of their origin</li></ul></div></div></div>",
+    "questionDescription": "<div class='box box--promo'><div class='grid'><div class='grid__col '><h3 class='venus'>Include:</h3><ul><li class='mars'>all <strong>new</strong> or <strong>significantly improved</strong> methods for the production or supply of goods or services</li><li class='mars'>process innovations that are new to <strong><span class='business-name'>the business</span></strong>, even if they are not new to your industry</li><li class='mars'>all process innovations, regardless of their origin</li></ul></div></div></div>",
     "answerType": "radio",
     "radios": [
       {
@@ -930,9 +925,8 @@
     "prev": "section-36",
     "url": "section-37",
     "next": "section-38",
-    "sectionVersion": 6,
-    "sectionTitle": "Context for Innovation",
-    "sectionDescription": "<p class='mars'>This section covers the context for innovation activities at your business.</p><div class='box box--promo'><p class='mars'>You will be asked to provide information on:</p><ul><li class='mars'>factors deemed important when deciding to initiate or terminate innovation;</li><li class='mars'>the importance of various information sources to your business’s innovation activities;</li><li class='mars'>co-operation on innovation activities with external bodies and protection of your innovations, for example, trademarks or patents.</li></ul></div>"
+    "sectionTitle": "You have successfully completed the Process Innovation section",
+    "sectionDescription": "<h3 class='header__title saturn' style='margin-top: 1rem;'>Completed sections</h3><ul class='interstitial'><li class='complete mars'><a href='../section-3'>General Business Information section</a></li><li class='complete mars'><a href='../section-6'>Business Strategy and Practices</a></li><li class='complete mars'><a href='../section-8'>Innovation Investment</a></li><li class='complete mars'><a href='../section-26'>Goods and Services Innovation</a></li><li class='complete mars'><a href='../section-34'>Process Innovation</a></li></ul><h3 class='question__title saturn'>Remaining sections</h3><ul class=''><li class='mars'><a href='../section-38'>Context for Innovation</a></li><li class='mars'>Public Financial Support for Innovation</li><li class='mars'>Turnover</li><li class='mars'>Exports</li><li class='mars'>Employees</li><li class='mars'>Skills</li><li class='mars'>General Information</li><li class='mars'>Summary</li></ul><h3 class='question__title saturn'>The next section</h3><p class='mars'>The next section covers the context for innovation activities at your business. You will be asked to provide information on: factors deemed important when deciding to initiate or terminate innovation; the importance of various information sources to your business’s innovation activities; co-operation on innovation activities with external bodies and protection of your innovations, for example, trademarks or patents.</p>"
   },
   {
     "prev": "section-37",
@@ -2724,7 +2718,7 @@
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "6.53",
     "questionTitle": "What proportions of your innovations were protected by:",
-    "questionDescription": "<p class='mars'>secrecy?</p><div class='box box--promo'><p class='mars'>Include:</p><ul><li class='mars'>Non-disclosure agreements</li></ul></div>",
+    "questionDescription": "<p class='mars'>secrecy?</p><div class='box box--promo'><p class='mars'>Include:</p><ul><li class='mars'>non-disclosure agreements</li></ul></div>",
     "answerType": "radio",
     "radios": [
       {
@@ -2753,9 +2747,8 @@
     "prev": "section-90",
     "url": "section-91",
     "next": "section-92",
-    "sectionVersion": 7,
-    "sectionTitle": "Public Financial Support for Innovation",
-    "sectionDescription": "<p class='mars'>This section covers public financial support for innovation received from government.</p><p class='mars'>You will be asked to provide information specifying the type, if any,  of public financial support your business received and the source; for example, Research & Development tax credits received from UK central government.</p>"
+    "sectionTitle": "You have successfully completed the Context for Innovation section",
+    "sectionDescription": "<h3 class='header__title saturn' style='margin-top: 1rem;'>Completed sections</h3><ul class='interstitial'><li class='complete mars'><a href='../section-3'>General Business Information section</a></li><li class='complete mars'><a href='../section-6'>Business Strategy and Practices</a></li><li class='complete mars'><a href='../section-8'>Innovation Investment</a></li><li class='complete mars'><a href='../section-26'>Goods and Services Innovation</a></li><li class='complete mars'><a href='../section-34'>Process Innovation</a></li><li class='complete mars'><a href='../section-38'>Context for Innovation</a></li></ul><h3 class='question__title saturn'>Remaining sections</h3><ul class=''><li class='mars'><a href='../section-92'>Public Financial Support for Innovation</a></li><li class='mars'>Turnover</li><li class='mars'>Exports</li><li class='mars'>Employees</li><li class='mars'>Skills</li><li class='mars'>General Information</li><li class='mars'>Summary</li></ul><h3 class='question__title saturn'>The next section</h3><p class='mars'>The next section covers public financial support for innovation received from government. You will be asked to provide information specifying the type, if any, of public financial support your business received and the source; for example, Research & Development tax credits received from UK central government.</p>"
   },
   {
     "prev": "section-91",
@@ -2766,7 +2759,7 @@
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
     "questionVersion": "7.1",
     "questionTitle": "Did <strong><span class='business-name'>[BUSINESS NAME]</span></strong> receive public financial support for innovation activities from the following levels of government?",
-    "questionDescription": "<div class='box box--promo'><div class='grid'><div class='grid__col col-6@s'><h3 class='venus'>Include:</h3><ul><li>financial support via tax credits or deductions, grants, subsidised loans and loan guarantees</li></ul></div><div class='grid__col col-6@s'><h3 class='venus'>Exclude:</h3><ul><li>Research and Development and other innovations activities conducted entirely for the public sector* under contract.</li><li>The public sector includes government owned organisations such as local, regional and national administrations and agencies, schools, hospitals and government providers of services such as security, transport, housing and energy etc.</li></ul></div></div></div>",
+    "questionDescription": "<div class='box box--promo'><div class='grid'><div class='grid__col col-6@s'><h3 class='venus'>Include:</h3><ul><li>financial support via tax credits or deductions, grants, subsidised loans and loan guarantees</li></ul></div><div class='grid__col col-6@s'><h3 class='venus'>Exclude:</h3><ul><li>Research and Development and other innovations activities conducted entirely for the public sector* under contract</li><li>the public sector includes government owned organisations such as local, regional and national administrations and agencies, schools, hospitals and government providers of services such as security, transport, housing and energy etc</li></ul></div></div></div>",
     "answerType": "radio",
     "radios": [
       {
@@ -2825,7 +2818,7 @@
         "type": "radio",
         "label": "Yes",
         "qId": "1",
-        "groupName": "Direct financial support </br><p class='pluto' style='margin-top: 8px;'>(For example Smart or Collaborative Research and Development grants, work with Catapult centres, Innovation vouchers)</p>"
+        "groupName": "Direct financial support </br><p class='pluto' style='margin-top: 8px;'>For example Smart or Collaborative Research and Development grants, work with Catapult centres, Innovation vouchers</p>"
       },
       {
         "type": "radio",
@@ -2841,7 +2834,7 @@
         "type": "radio",
         "label": "Yes",
         "qId": "2",
-        "groupName": "Indirect financial support </br><p class='pluto' style='margin-top: 8px;'>(For example Research and Development tax credits, Patent box)</p>"
+        "groupName": "Indirect financial support </br><p class='pluto' style='margin-top: 8px;'>For example Research and Development tax credits, Patent box</p>"
       },
       {
         "type": "radio",
@@ -2859,9 +2852,8 @@
     "prev": "section-93",
     "url": "section-94",
     "next": "section-95",
-    "sectionVersion": 8,
-    "sectionTitle": "Turnover",
-    "sectionDescription": "<p class='mars'>This section covers turnover for your business.</p><p class='mars'>You will be asked to provide total turnover excluding VAT for calendar years 2014 and 2016.</p>"
+    "sectionTitle": "You have successfully completed the Public Financial Support for Innovation section",
+    "sectionDescription": "<h3 class='header__title saturn' style='margin-top: 1rem;'>Completed sections</h3><ul class='interstitial'><li class='complete mars'><a href='../section-3'>General Business Information section</a></li><li class='complete mars'><a href='../section-6'>Business Strategy and Practices</a></li><li class='complete mars'><a href='../section-8'>Innovation Investment</a></li><li class='complete mars'><a href='../section-26'>Goods and Services Innovation</a></li><li class='complete mars'><a href='../section-34'>Process Innovation</a></li><li class='complete mars'><a href='../section-38'>Context for Innovation</a></li><li class='complete mars'><a href='../section-92'>Public Financial Support for Innovation</a></li></ul><h3 class='question__title saturn'>Remaining sections</h3><ul class=''><li class='mars'><a href='../section-95'>Turnover</a></li><li class='mars'>Exports</li><li class='mars'>Employees</li><li class='mars'>Skills</li><li class='mars'>General Information</li><li class='mars'>Summary</li></ul><h3 class='question__title saturn'>The next section</h3><p class='mars'>The next section covers turnover for your business. You will be asked to provide total turnover excluding VAT for calendar years 2014 and 2016.</p>"
   },
   {
     "prev": "section-94",
@@ -2877,7 +2869,7 @@
       {
         "type": "text",
         "label": "Total turnover for 2014, excluding VAT",
-        "validation": "Round to the nearest £ thousand, for example 100000"
+        "validation": "Round to the nearest £ thousand, for example 100,000"
       }
     ]
   },
@@ -2895,7 +2887,7 @@
       {
         "type": "text",
         "label": "Total turnover for 2016, excluding VAT",
-        "validation": "Round to the nearest £ thousand, for example 100000"
+        "validation": "Round to the nearest £ thousand, for example 100,000"
       }
     ]
   },
@@ -2903,15 +2895,14 @@
     "prev": "section-96",
     "url": "section-97",
     "next": "section-98",
-    "sectionVersion": 9,
-    "sectionTitle": "Exports",
-    "sectionDescription": "<p class='mars'>This section covers exports.</p><p class='mars'>You will be asked to provide an estimate for the total value of your business’s exports for the calendar year 2016.</p>"
+    "sectionTitle": "You have successfully completed the Turnover section",
+    "sectionDescription": "<h3 class='header__title saturn' style='margin-top: 1rem;'>Completed sections</h3><ul class='interstitial'><li class='complete mars'><a href='../section-3'>General Business Information section</a></li><li class='complete mars'><a href='../section-6'>Business Strategy and Practices</a></li><li class='complete mars'><a href='../section-8'>Innovation Investment</a></li><li class='complete mars'><a href='../section-26'>Goods and Services Innovation</a></li><li class='complete mars'><a href='../section-34'>Process Innovation</a></li><li class='complete mars'><a href='../section-38'>Context for Innovation</a></li><li class='complete mars'><a href='../section-92'>Public Financial Support for Innovation</a></li><li class='complete mars'><a href='../section-95'>Turnover</a></li></ul><h3 class='question__title saturn'>Remaining sections</h3><ul class=''><li class='mars'><a href='../section-98'>Exports</a></li><li class='mars'>Employees</li><li class='mars'>Skills</li><li class='mars'>General Information</li><li class='mars'>Summary</li></ul><h3 class='question__title saturn'>The next section</h3><p class='mars'>The next section covers exports. You will be asked to provide an estimate for the total value of your business’s exports for the calendar year 2016.</p>"
   },
   {
     "prev": "section-97",
     "url": "section-98",
     "next": "section-99",
-    "sectionVersion": 9,
+    "sectionVersion": 9.1,
     "sectionTitle": "Exports",
     "sectionDescription": "<p class='mars'>1 year period 1 January 2016 to 31 December 2016.</p>",
     "questionVersion": "8.2",
@@ -2921,7 +2912,7 @@
       {
         "type": "text",
         "label": "Total value of exports for 2016",
-        "validation": "Round to the nearest £ thousand, for example 100000"
+        "validation": "Round to the nearest £ thousand, for example 100,000"
       }
     ]
   },
@@ -2929,16 +2920,15 @@
     "prev": "section-98",
     "url": "section-99",
     "next": "section-100",
-    "sectionVersion": 10,
-    "sectionTitle": "Employees",
-    "sectionDescription": "<p class='mars'>This section covers information relating to persons employed by your business.</p><p class='mars'>You will be asked to provide estimates for the total number of employees for the calendar years 2014 and 2016.</p>"
+    "sectionTitle": "You have successfully completed the Exports section",
+    "sectionDescription": "<h3 class='header__title saturn' style='margin-top: 1rem;'>Completed sections</h3><ul class='interstitial'><li class='complete mars'><a href='../section-3'>General Business Information section</a></li><li class='complete mars'><a href='../section-6'>Business Strategy and Practices</a></li><li class='complete mars'><a href='../section-8'>Innovation Investment</a></li><li class='complete mars'><a href='../section-26'>Goods and Services Innovation</a></li><li class='complete mars'><a href='../section-34'>Process Innovation</a></li><li class='complete mars'><a href='../section-38'>Context for Innovation</a></li><li class='complete mars'><a href='../section-92'>Public Financial Support for Innovation</a></li><li class='complete mars'><a href='../section-95'>Turnover</a></li><li class='complete mars'><a href='../section-98'>Exports</a></li></ul><h3 class='question__title saturn'>Remaining sections</h3><ul class=''><li class='mars'><a href='../section-100'>Employees</a></li><li class='mars'>Skills</li><li class='mars'>General Information</li><li class='mars'>Summary</li></ul><h3 class='question__title saturn'>The next section</h3><p class='mars'>The next section covers information relating to persons employed by your business. You will be asked to provide estimates for the total number of employees for the calendar years 2014 and 2016.</p>"
   },
   {
     "prev": "section-99",
     "url": "section-100",
     "next": "section-101",
     "sectionVersion": 10,
-    "sectionTitle": "Exports",
+    "sectionTitle": "Employees",
     "sectionDescription": "<p class='mars'>1 year period 1 January 2014 to 31 December 2014.</p>",
     "questionVersion": "10.1",
     "questionTitle": "Please <strong>estimate</strong> <strong><span class='business-name'>[BUSINESS NAME]</span>’s</strong> average number of employees for the <strong>calendar year 2014 only</strong>",
@@ -2955,7 +2945,7 @@
     "url": "section-101",
     "next": "section-102",
     "sectionVersion": 10,
-    "sectionTitle": "Exports",
+    "sectionTitle": "Employees",
     "sectionDescription": "<p class='mars'>1 year period 1 January 2016 to 31 December 2016.</p>",
     "questionVersion": "10.2",
     "questionTitle": "Please <strong>estimate</strong> <strong><span class='business-name'>[BUSINESS NAME]</span>’s</strong> average number of employees for the <strong>calendar year 2016 only</strong>",
@@ -2971,9 +2961,8 @@
     "prev": "section-101",
     "url": "section-102",
     "next": "section-103",
-    "sectionVersion": 11,
-    "sectionTitle": "Skills",
-    "sectionDescription": "<p class='mars'>This section covers the skills of persons employed by your business.</p><p class='mars'>You will be asked to estimate the proportion of your workforce who hold a degree or higher qualification and provide information regarding the skills possessed by employees, for example, mathematics or statistics.</p>"
+    "sectionTitle": "You have successfully completed the Employees section",
+    "sectionDescription": "<h3 class='header__title saturn' style='margin-top: 1rem;'>Completed sections</h3><ul class='interstitial'><li class='complete mars'><a href='../section-3'>General Business Information section</a></li><li class='complete mars'><a href='../section-6'>Business Strategy and Practices</a></li><li class='complete mars'><a href='../section-8'>Innovation Investment</a></li><li class='complete mars'><a href='../section-26'>Goods and Services Innovation</a></li><li class='complete mars'><a href='../section-34'>Process Innovation</a></li><li class='complete mars'><a href='../section-38'>Context for Innovation</a></li><li class='complete mars'><a href='../section-92'>Public Financial Support for Innovation</a></li><li class='complete mars'><a href='../section-95'>Turnover</a></li><li class='complete mars'><a href='../section-98'>Exports</a></li><li class='complete mars'><a href='../section-100'>Employees</a></li></ul><h3 class='question__title saturn'>Remaining sections</h3><ul class=''><li class='mars'><a href='../section-103'>Skills</a></li><li class='mars'>General Information</li><li class='mars'>Summary</li></ul><h3 class='question__title saturn'>The next section</h3><p class='mars'>The next section covers the skills of persons employed by your business. You will be asked to estimate the proportion of your workforce who hold a degree or higher qualification and provide information regarding the skills possessed by employees, for example, mathematics or statistics.</p>"
   },
   {
     "prev": "section-102",
@@ -3000,7 +2989,7 @@
   {
     "prev": "section-103",
     "url": "section-104",
-    "next": "section-105",
+    "next": "section-104b",
     "sectionVersion": 11,
     "sectionTitle": "Skills",
     "sectionDescription": "<p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>",
@@ -3043,6 +3032,13 @@
   },
   {
     "prev": "section-104",
+    "url": "section-104b",
+    "next": "section-105",
+    "sectionTitle": "You have successfully completed the Skills section",
+    "sectionDescription": "<h3 class='header__title saturn' style='margin-top: 1rem;'>Completed sections</h3><ul class='interstitial'><li class='complete mars'><a href='../section-3'>General Business Information section</a></li><li class='complete mars'><a href='../section-6'>Business Strategy and Practices</a></li><li class='complete mars'><a href='../section-8'>Innovation Investment</a></li><li class='complete mars'><a href='../section-26'>Goods and Services Innovation</a></li><li class='complete mars'><a href='../section-34'>Process Innovation</a></li><li class='complete mars'><a href='../section-38'>Context for Innovation</a></li><li class='complete mars'><a href='../section-92'>Public Financial Support for Innovation</a></li><li class='complete mars'><a href='../section-95'>Turnover</a></li><li class='complete mars'><a href='../section-98'>Exports</a></li><li class='complete mars'><a href='../section-100'>Employees</a></li><li class='complete mars'><a href='../section-103'>Skills</a></li></ul><h3 class='question__title saturn'>Remaining sections</h3><ul class=''><li class='mars'><a href='../section-105'>General Information</a></li><li class='mars'>Summary</li></ul><h3 class='question__title saturn'>The next section</h3><p class='mars'>The next section covers General Information about this survey.</p>"
+  },
+  {
+    "prev": "section-104b",
     "url": "section-105",
     "next": "section-106",
     "sectionVersion": 12,
@@ -3066,7 +3062,7 @@
     "sectionTitle": "General Information",
     "questionVersion": "12.2",
     "questionTitle": "How long has it taken you to complete this questionnaire?",
-    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Any time spent extracting information from your accounting systems and collating data over and above normal accounting operations</li></ul></div>",
+    "questionDescription": "<div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>any time spent extracting information from your accounting systems and collating data over and above normal accounting operations</li></ul></div>",
     "answerType": "text",
     "textfield": [
       {
@@ -3104,7 +3100,14 @@
     ]
   },
   {
+    "prev": "section-107",
     "url": "section-108",
+    "next": "section-109",
+    "sectionTitle": "You have now completed this survey",
+    "sectionDescription": "<h3 class='header__title saturn' style='margin-top: 1rem;'>Completed sections</h3><ul class='interstitial'><li class='complete mars'><a href='../section-3'>General Business Information section</a></li><li class='complete mars'><a href='../section-6'>Business Strategy and Practices</a></li><li class='complete mars'><a href='../section-8'>Innovation Investment</a></li><li class='complete mars'><a href='../section-26'>Goods and Services Innovation</a></li><li class='complete mars'><a href='../section-34'>Process Innovation</a></li><li class='complete mars'><a href='../section-38'>Context for Innovation</a></li><li class='complete mars'><a href='../section-92'>Public Financial Support for Innovation</a></li><li class='complete mars'><a href='../section-95'>Turnover</a></li><li class='complete mars'><a href='../section-98'>Exports</a></li><li class='complete mars'><a href='../section-100'>Employees</a></li><li class='complete mars'><a href='../section-103'>Skills</a></li><li class='complete mars'><a href='../section-105'>General Information</a></li><li class='complete mars'><a href=''>Summary</a></li></ul><span class='box box--promo'><h2 class='neptune'>Submission</h2><ul><li class='mars'>You will not be able to access or change your answers on submitting the questionnaire</li><li class='mars'>If you wish to review your answers please select the relevant Completed sections</li><li class='mars'>If you do not submit your questionnaire, your responses will be collected when the online questionnaire closes</li></ul></span>"
+  },
+  {
+    "url": "section-109",
     "html": "<div role='main' class='panel__body' id='main'><div class='header u-mb-m u-mb-l@s'><h1 class='saturn'>Thank You</h1><div class='mars'>UK innovation survey</div><div class='venus'>Successfully Received</div></div><div class='box box--confirm u-mb-s u-mb-l@s'><strong> Submitted on Wednesday 13 July 2016 at 08:32</strong><p>Transaction ID (Please quote this reference for any support queries)</p><ul class='box__list'><li class='box__list__item'>D1C5</li><li class='box__list__item'>B0AE</li><li class='box__list__item'>9A04</li><li class='box__list__item'>4E94</li></ul><p class='u-mb-no'>You may wish to save or print this page for your records.</p></div><div class=''><div>For more information on how we use this data.</div><p class='u-mb-m@s'><a href='https://www.ons.gov.uk/surveys'>https://www.ons.gov.uk/surveys</a></p><p>It is now to safe to close this window.</p></div></div>"
   }
 ]

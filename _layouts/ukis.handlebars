@@ -111,7 +111,7 @@ globalcss: false
                       <div class="field">
                         <label class="label venus" for="form-input-{{@index}}" >{{label}}</label>{{#if validation}}<br/>{{/if}}
                         <div class="input-type input-type--currency" data-type="£">
-                        <input class="input input--text numericentry mars" pattern="\d*" id="form-input-{{@index}}" name="{{#if qId}}{{qId}}{{else}}1{{/if}}" type="{{type}}" value="">
+                        <input class="input input--text numericentry mars" pattern="^\d+(,\d+)*$" id="form-input-{{@index}}" name="{{#if qId}}{{qId}}{{else}}1{{/if}}" type="{{type}}" value="">
                         {{#if validation}}
                           <span class="hint pluto">{{validation}}</span>
                         {{/if}}

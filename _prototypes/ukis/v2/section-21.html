@@ -28,7 +28,7 @@ globalcss: false
                 <div class="question">
                   <h3 class="question__title neptune"><span class="question__title__number venus">3.14</span>Please estimate the amount of expenditure for all forms of design for the <strong>calendar year 2016 only?</strong></h3>
                   <div class="question__description">
-                    <div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>Internal costs and purchases from outside the business.</li></ul></div>
+                    <div class='box box--promo'><h3 class='venus'>Include:</h3><ul><li>internal costs and purchases from outside <strong><span class='business-name'>the business</span></strong></li></ul></div>
                   </div>
                   <div class="response response--currency">
 
@@ -39,8 +39,8 @@ globalcss: false
                       <div class="field">
                         <label class="label venus" for="form-input-0" >Total training for all forms of design</label><br/>
                         <div class="input-type input-type--currency" data-type="£">
-                        <input class="input input--text numericentry mars" pattern="\d*" id="form-input-0" name="1" type="text" value="">
-                          <span class="hint pluto">Round to the nearest £ thousand, for example 100000</span>
+                        <input class="input input--text numericentry mars" pattern="^\d+(,\d+)*$" id="form-input-0" name="1" type="text" value="">
+                          <span class="hint pluto">Round to the nearest £ thousand, for example 100,000</span>
                         </div>
                       </div>
                     </div>

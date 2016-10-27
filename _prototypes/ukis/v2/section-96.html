@@ -36,8 +36,8 @@ globalcss: false
                       <div class="field">
                         <label class="label venus" for="form-input-0" >Total turnover for 2016, excluding VAT</label><br/>
                         <div class="input-type input-type--currency" data-type="£">
-                        <input class="input input--text numericentry mars" pattern="\d*" id="form-input-0" name="1" type="text" value="">
-                          <span class="hint pluto">Round to the nearest £ thousand, for example 100000</span>
+                        <input class="input input--text numericentry mars" pattern="^\d+(,\d+)*$" id="form-input-0" name="1" type="text" value="">
+                          <span class="hint pluto">Round to the nearest £ thousand, for example 100,000</span>
                         </div>
                       </div>
                     </div>
