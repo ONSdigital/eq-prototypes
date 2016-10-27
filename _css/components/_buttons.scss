@@ -40,6 +40,24 @@
   }
 }
 
+.btn--quaternary {
+  @include btn(#0F8243, $color-white);
+  width: 100%;
+  @include mq(s) {
+    width: auto;
+  }
+}
+
+.btn--quinary {
+  @include btn(#0F8243, $color-white);
+  padding: 14px 74px;
+  width: 100%;
+  @include mq(s) {
+    width: auto;
+
+  }
+}
+
 .btn--census {
   @include btn($color-purple, $color-white);
   padding: 14px 74px;

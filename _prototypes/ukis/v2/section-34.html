@@ -26,7 +26,7 @@ globalcss: false
                   <p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>
                 </div>
                 <div class="question">
-                  <h3 class="question__title neptune"><span class="question__title__number venus">5.1</span>Did <span class='business-name'>[BUSINESS NAME]</span> introduce any new or significantly improved processes for producing or supplying goods or services?</h3>
+                  <h3 class="question__title neptune"><span class="question__title__number venus">5.1</span>Did <strong><span class='business-name'>[BUSINESS NAME]</span></strong> introduce any new or significantly improved processes for producing or supplying goods or services?</h3>
                   <div class="question__description">
                     <div class='box box--promo'><div class='grid'><div class='grid__col '><h3 class='venus'>Include:</h3><ul><li class='mars'>all <strong>new</strong> or <strong>significantly improved</strong> methods for the production or supply of goods or services</li><li class='mars'>process innovations that are new to the business, even if they are not new to your industry</li><li class='mars'>all process innovations, regardless of their origin</li></ul></div></div></div>
                   </div>
@@ -36,13 +36,13 @@ globalcss: false
                     <div class="field field--multi field--radio">
                       
                       <div class="field__item">
-                        <input class="input input--radio" type="radio" name="1" id="form-input-0" value="yes" title="yes">
-                        <label class="label label--inline" for="form-input-0"><span class="label__inner">yes</span></label>
+                        <input class="input input--radio" type="radio" name="1" id="form-input-0" value="Yes" title="Yes">
+                        <label class="label label--inline" for="form-input-0"><span class="label__inner">Yes</span></label>
                       </div>
                       
                       <div class="field__item">
-                        <input class="input input--radio" type="radio" name="1" id="form-input-1" value="no" title="no">
-                        <label class="label label--inline" for="form-input-1"><span class="label__inner">no</span></label>
+                        <input class="input input--radio" type="radio" name="1" id="form-input-1" value="No" title="No">
+                        <label class="label label--inline" for="form-input-1"><span class="label__inner">No</span></label>
                       </div>
                     </div>
 
@@ -56,7 +56,7 @@ globalcss: false
               </div>
             </div>
           </div>
-          <button class="btn btn--secondary qa-btn-get-started venus" type="submit" name="">Save and continue</button><br/><br/>
+          <button class="btn btn--quaternary qa-btn-get-started venus" type="submit" name="">Save and continue</button><br/><br/>
           <a class="mars" href="../section-33">Previous</a>
         </form>
       </div>
@@ -76,9 +76,9 @@ $( document ).ready(function() {
     window.location.href = "../section-35";
 
 
-      var checkedVal = $("input[value='no']:checked").val();
-      var checkedName = $("input[value='no']:checked").attr("name");
-      if (checkedVal == "no" && checkedName == "1") {
+      var checkedVal = $("input[value='No']:checked").val();
+      var checkedName = $("input[value='No']:checked").attr("name");
+      if (checkedVal == "No" && checkedName == "1") {
         window.location.href = "../section-37";
       }
   });
