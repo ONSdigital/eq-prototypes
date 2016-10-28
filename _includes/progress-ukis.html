@@ -1,0 +1,95 @@
+<aside class="progress-ukis">
+  <nav>
+    <ol>
+      <li class="section-3 section-4">
+        <a class="mars" href="../section-3">General Business Information</a>
+      </li>
+      <li class="section-5 section-6">
+        <a class="mars" href="../section-6">Business Strategy and Practices</a>
+      </li>
+      <li class="section-7 section-8 section-9 section-10 section-11 section-12 section-13 section-14 section-15 section-16 section-17 section-18 section-19 section-20 section-21 section-22 section-23 section-24 ">
+        <a class="mars" href="../section-8">Innovation Investment</a>
+      </li>
+      <li class="section-25 section-26 section-27 section-28 section-29 section-30 section-31 section-32">
+        <a class="mars" href="../section-26">Goods and Services Innovation</a>
+      </li>
+      <li class="section-33 section-34 section-35 section-36">
+        <a class="mars" href="../section-34">Process Innovation</a>
+      </li>
+      <li class="section-37 section-38 section-39 section-40 section-41 section-42 section-43 section-44 section-45 section-46 section-47 section-48 section-49 section-50 section-51 section-52 section-53 section-54 section-55 section-56 section-57 section-58 section-59 section-60 section-61 section-62 section-63 section-64 section-65 section-66 section-67 section-68 section-69 section-70 section-71 section-72 section-73 section-74 section-75 section-76 section-77 section-78 section-79 section-80 section-81 section-82 section-83 section-84 section-85 section-86 section-87 section-88 section-89 section-90">
+        <a class="mars" href="../section-38">Context for Innovation</a>
+      </li>
+      <li class="section-91 section-92 section-93">
+        <a class="mars" href="../section-92">Public Financial Support for Innovation</a>
+      </li>
+      <li class="section-94 section-95 section-96">
+        <a class="mars" href="../section-95">Turnover</a>
+      </li>
+      <li class="section-97 section-98">
+        <a class="mars" href="../section-98">Exports</a>
+      </li>
+      <li class="section-99 section-100 section-101">
+        <a class="mars" href="../section-100">Employees</a>
+      </li>
+      <li class="section-102 section-103 section-104">
+        <a class="mars" href="../section-103">Skills</a>
+      </li>
+      <li class="section-104b section-105 section-106 section-107">
+        <a class="mars" href="../section-105">General Information</a>
+      </li>
+      <li class="section-108">
+        <a class="mars" href="">Summary</a>
+      </li>
+    </ol>
+  </nav>
+</aside>
+
+<script>
+  var QueryString = function () {
+    // This function is anonymous, is executed immediately and
+    // the return value is assigned to QueryString!
+    var query_string = {};
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i=0;i<vars.length;i++) {
+      var pair = vars[i].split("=");
+          // If first entry with this name
+      if (typeof query_string[pair[0]] === "undefined") {
+        query_string[pair[0]] = decodeURIComponent(pair[1]);
+          // If second entry with this name
+      } else if (typeof query_string[pair[0]] === "string") {
+        var arr = [ query_string[pair[0]],decodeURIComponent(pair[1]) ];
+        query_string[pair[0]] = arr;
+          // If third or later entry with this name
+      } else {
+        query_string[pair[0]].push(decodeURIComponent(pair[1]));
+      }
+    }
+    return query_string;
+  }();
+
+
+
+  // if (QueryString.progress === '0') {
+  //   $('.progress-census').css('display', 'none');
+  // }
+  //
+  // $('.progress-census ol li span').on('click', function() {
+  //   if ($(this).parent().hasClass("is-open")) {
+  //     $('.progress-census ol li').removeClass('is-open');
+  //   } else {
+  //     $('.progress-census ol li').removeClass('is-open');
+  //     $(this).parent().addClass('is-open');
+  //   }
+  // });
+  $(function(){
+    var pathArray = window.location.pathname.split( '/' );
+    var fourthLevelLocation = pathArray[4];
+    $('.' + fourthLevelLocation).addClass('active is-open').prevAll().addClass('complete');
+
+    // $('.' + fourthLevelLocation).addClass('active').nextAll().addClass('disabled');
+  });
+
+
+
+</script>
