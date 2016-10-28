@@ -60,6 +60,19 @@ globalcss: false
                     </div>
                   {{/if}}
 
+                  {{#if time}}
+                    <div class="response response--time">
+                      {{#each time}}
+                      <div class="field field--time">
+                        <label class="label venus" for="form-input-{{@index}}">{{label}}</label>
+                        <div class="input-type input-type--percent" {{#if icon}}data-type="{{icon}}"{{/if}}>
+                          <input id="form-input-{{@index}}" name="{{#if qId}}{{qId}}{{else}}1{{/if}}" type="{{type}}" class="input input--text" value="">
+                        </div>
+                      </div>
+                      {{/each}}
+                    </div>
+                  {{/if}}
+
                   {{#if radios}}
                     <div class="field field--multi field--radio">
                       {{#each radios}}

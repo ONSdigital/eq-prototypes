@@ -135,6 +135,13 @@
     }
   }
 }
+.field--time{
+  width: 50%;
+  float: left;
+  margin-bottom: 56px;
+  max-width: 210px;
+  padding-right: 24px;
+}
 .input-type--currency{
   input{
     max-width: 100%;
@@ -182,6 +189,7 @@
     }
   }
 }
+
 .field__item--other{
   display: block;
   span{

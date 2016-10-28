@@ -29,17 +29,20 @@ globalcss: false
                   </div>
                   <div class="response response--text">
 
-                    <div class="response response--textfield">
-                      <div class="field">
-                        <label class="label venus" for="form-input-0" >Hours</label>
-                        <input class="input input--text mars" pattern="\d*" id="form-input-0" name="1" type="text" value="">
+
+                    <div class="response response--time">
+                      <div class="field field--time">
+                        <label class="label venus" for="form-input-0">Hours</label>
+                        <div class="input-type input-type--percent" data-type="hrs">
+                          <input id="form-input-0" name="1" type="text" class="input input--text" value="">
+                        </div>
                       </div>
-                      <br/>
-                      <div class="field">
-                        <label class="label venus" for="form-input-1" >Minutes</label>
-                        <input class="input input--text mars" pattern="\d*" id="form-input-1" name="1" type="text" value="">
+                      <div class="field field--time">
+                        <label class="label venus" for="form-input-1">Minutes</label>
+                        <div class="input-type input-type--percent" data-type="mins">
+                          <input id="form-input-1" name="1" type="text" class="input input--text" value="">
+                        </div>
                       </div>
-                      <br/>
                     </div>
 
 
