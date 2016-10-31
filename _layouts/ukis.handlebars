@@ -1,5 +1,5 @@
 ---
-title: UK Innovation Survey v2
+title: UK Innovation Survey
 project: UKIS
 globalcss: false
 ---
@@ -86,7 +86,7 @@ globalcss: false
                         </div>
                       </div>
                         {{else}}
-                      {{#if groupName}}<h4 class="venus" style="margin-top: 32px;">{{{groupName}}}</h4>{{/if}}
+                      {{#if groupName}}<h4 class="mars" style="margin-top: 32px;">{{{groupName}}}</h4>{{/if}}
                       <div class="field__item">
                         <input class="input input--radio" type="{{type}}" name="{{qId}}" id="form-input-{{@index}}" value="{{label}}" title="{{label}}">
                         <label class="label label--inline" for="form-input-{{@index}}"><span class="label__inner">{{label}}</span></label>
@@ -195,9 +195,11 @@ globalcss: false
       </div>
     </div>
     <div class="grid__col col-4@s">
+      {{#if navigation}}
       {% raw %}
       {% include progress-ukis.html %}
       {% endraw %}
+      {{/if}}
     </div>
   </div>
   {{/if}}
@@ -210,6 +212,11 @@ $( document ).ready(function() {
     var businessName = sessionStorage.getItem('Business name');
     $('.business-name').html(businessName);
   }
+  {{#if navigation}}
+  var pathArray = window.location.pathname.split( '/' );
+  var fourthLevelLocation = pathArray[4];
+  $('.' + fourthLevelLocation).addClass('active is-open').prevAll().addClass('complete');
+  {{/if}}
   $('.qa-btn-get-started').click(function(e) {
     e.preventDefault();
     window.location.href = "../{{next}}";
@@ -241,6 +248,8 @@ $( document ).ready(function() {
     document.getElementById("form-input-5").value = totalGoods;
   });
   {{/if}}
+
+
 });
 
 </script>

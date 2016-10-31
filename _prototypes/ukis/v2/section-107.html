@@ -1,5 +1,5 @@
 ---
-title: UK Innovation Survey v2
+title: UK Innovation Survey
 project: UKIS
 globalcss: false
 ---
@@ -23,7 +23,7 @@ globalcss: false
               <div class="section" id="017880bc-752d-4a6b-83df-e130409ee660">
                 <h2 class="section__title saturn"><span class="section__title__number venus">12</span>General Information</h2>
                 <div class="question">
-                  <h3 class="question__title neptune"><span class="question__title__number venus">12.3</span>Would this business be willing to be approached by telephone by the Department for Business Innovation and Skills or its appointed agents, to ask some questions about their most valuable innovation and the impact of the EU referendum?</h3>
+                  <h3 class="question__title neptune"><span class="question__title__number venus">12.3</span>Would <span class='business-name'>[BUSINESS NAME]</span> be willing to be approached by telephone by the Department for Business, Energy & Industrial Strategy or its appointed agents, to ask some questions about their most valuable innovation and the impact of the EU referendum?</h3>
                   <div class="response response--radio">
 
 
@@ -71,12 +71,17 @@ $( document ).ready(function() {
     var businessName = sessionStorage.getItem('Business name');
     $('.business-name').html(businessName);
   }
+  var pathArray = window.location.pathname.split( '/' );
+  var fourthLevelLocation = pathArray[4];
+  $('.' + fourthLevelLocation).addClass('active is-open').prevAll().addClass('complete');
   $('.qa-btn-get-started').click(function(e) {
     e.preventDefault();
     window.location.href = "../section-108";
 
 
   });
+
+
 });
 
 </script>

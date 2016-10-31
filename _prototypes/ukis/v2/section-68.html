@@ -1,5 +1,5 @@
 ---
-title: UK Innovation Survey v2
+title: UK Innovation Survey
 project: UKIS
 globalcss: false
 ---
@@ -26,7 +26,7 @@ globalcss: false
                   <p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>
                 </div>
                 <div class="question">
-                  <h3 class="question__title neptune"><span class="question__title__number venus">6.31</span>How important to <strong><span class='business-name'>[BUSINESS NAME]</span>’s</strong> innovation activities was information from:</h3>
+                  <h3 class="question__title neptune"><span class="question__title__number venus">6.31</span>How important to <span class='business-name'>[BUSINESS NAME]</span>’s innovation activities was information from:</h3>
                   <div class="question__description">
                     <p class='mars'>consultants, commercial labs or private Research and Development institutes?</p>
                   </div>
@@ -87,12 +87,17 @@ $( document ).ready(function() {
     var businessName = sessionStorage.getItem('Business name');
     $('.business-name').html(businessName);
   }
+  var pathArray = window.location.pathname.split( '/' );
+  var fourthLevelLocation = pathArray[4];
+  $('.' + fourthLevelLocation).addClass('active is-open').prevAll().addClass('complete');
   $('.qa-btn-get-started').click(function(e) {
     e.preventDefault();
     window.location.href = "../section-69";
 
 
   });
+
+
 });
 
 </script>

@@ -1,5 +1,5 @@
 ---
-title: UK Innovation Survey v2
+title: UK Innovation Survey
 project: UKIS
 globalcss: false
 ---
@@ -26,7 +26,7 @@ globalcss: false
                   <p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>
                 </div>
                 <div class="question">
-                  <h3 class="question__title neptune"><span class="question__title__number venus">4.3</span>Did <strong><span class='business-name'>[BUSINESS NAME]</span></strong> introduce new or significantly improved <strong>services</strong>?</h3>
+                  <h3 class="question__title neptune"><span class="question__title__number venus">4.3</span>Did <span class='business-name'>[BUSINESS NAME]</span> introduce new or significantly improved <strong>services</strong>?</h3>
                   <div class="question__description">
                     <div class='box box--promo'><div class='grid'><div class='grid__col '><h3 class='venus'>Include:</h3><ul><li class='mars'>all <strong>new</strong> and <strong>significantly improved</strong> services (for example, improvement in quality or distinct user benefits)</li><li class='mars'>services innovations that are new to <strong><span class='business-name'>the business</span></strong>, even if they are not new to the market</li></ul></div></div></div>
                   </div>
@@ -77,6 +77,9 @@ $( document ).ready(function() {
     var businessName = sessionStorage.getItem('Business name');
     $('.business-name').html(businessName);
   }
+  var pathArray = window.location.pathname.split( '/' );
+  var fourthLevelLocation = pathArray[4];
+  $('.' + fourthLevelLocation).addClass('active is-open').prevAll().addClass('complete');
   $('.qa-btn-get-started').click(function(e) {
     e.preventDefault();
     window.location.href = "../section-29";
@@ -88,6 +91,8 @@ $( document ).ready(function() {
         window.location.href = "../section-32";
       }
   });
+
+
 });
 
 </script>

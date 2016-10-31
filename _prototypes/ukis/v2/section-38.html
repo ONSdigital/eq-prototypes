@@ -1,5 +1,5 @@
 ---
-title: UK Innovation Survey v2
+title: UK Innovation Survey
 project: UKIS
 globalcss: false
 ---
@@ -26,13 +26,13 @@ globalcss: false
                   <p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>
                 </div>
                 <div class="question">
-                  <h3 class="question__title neptune"><span class="question__title__number venus">6.1</span>Did <strong><span class='business-name'>[BUSINESS NAME]</span></strong> have any innovation activities that were:</h3>
+                  <h3 class="question__title neptune"><span class="question__title__number venus">6.1</span>Did <span class='business-name'>[BUSINESS NAME]</span> have any innovation activities that were:</h3>
                   <div class="response response--radio">
 
 
 
                     <div class="field field--multi field--radio">
-                      <h4 class="venus" style="margin-top: 32px;">abandoned?</h4>
+                      <h4 class="mars" style="margin-top: 32px;">abandoned?</h4>
                       <div class="field__item">
                         <input class="input input--radio" type="radio" name="1" id="form-input-0" value="Yes" title="Yes">
                         <label class="label label--inline" for="form-input-0"><span class="label__inner">Yes</span></label>
@@ -42,7 +42,7 @@ globalcss: false
                         <input class="input input--radio" type="radio" name="1" id="form-input-1" value="No" title="No">
                         <label class="label label--inline" for="form-input-1"><span class="label__inner">No</span></label>
                       </div>
-                      <h4 class="venus" style="margin-top: 32px;">scaled back?</h4>
+                      <h4 class="mars" style="margin-top: 32px;">scaled back?</h4>
                       <div class="field__item">
                         <input class="input input--radio" type="radio" name="2" id="form-input-2" value="Yes" title="Yes">
                         <label class="label label--inline" for="form-input-2"><span class="label__inner">Yes</span></label>
@@ -52,7 +52,7 @@ globalcss: false
                         <input class="input input--radio" type="radio" name="2" id="form-input-3" value="No" title="No">
                         <label class="label label--inline" for="form-input-3"><span class="label__inner">No</span></label>
                       </div>
-                      <h4 class="venus" style="margin-top: 32px;">still ongoing at the end of 2016?</h4>
+                      <h4 class="mars" style="margin-top: 32px;">still ongoing at the end of 2016?</h4>
                       <div class="field__item">
                         <input class="input input--radio" type="radio" name="3" id="form-input-4" value="Yes" title="Yes">
                         <label class="label label--inline" for="form-input-4"><span class="label__inner">Yes</span></label>
@@ -94,6 +94,9 @@ $( document ).ready(function() {
     var businessName = sessionStorage.getItem('Business name');
     $('.business-name').html(businessName);
   }
+  var pathArray = window.location.pathname.split( '/' );
+  var fourthLevelLocation = pathArray[4];
+  $('.' + fourthLevelLocation).addClass('active is-open').prevAll().addClass('complete');
   $('.qa-btn-get-started').click(function(e) {
     e.preventDefault();
     window.location.href = "../section-40";
@@ -110,6 +113,8 @@ $( document ).ready(function() {
         window.location.href = "../section-39";
       }
   });
+
+
 });
 
 </script>
