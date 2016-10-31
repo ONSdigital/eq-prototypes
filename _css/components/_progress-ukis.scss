@@ -1,6 +1,7 @@
 .progress-ukis {
   ol{
-    border-left: 1px solid #eee;
+    border-left: 1px solid #EEEEEE;
+    padding-left: 40px;
   }
   li{
     position: relative;
@@ -27,13 +28,13 @@
       @include icon('check');
       background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="52" height="45.41" viewBox="-10.62 -10.62 55.25 48.25"><title>check</title><path d="M27.205.803l-2.828 2.951-11.393 11.393-3.32-3.197-2.951-2.951-5.779 5.779 2.951 2.951 6.148 6.148 2.828 2.951 2.951-2.951L30.156 9.533l2.951-2.951L27.205.803z" style="&#10;    fill: #0F8243;&#10;"/></svg>');
       vertical-align: middle;
-      width: 1.8em;
-      height: 1.8em;
+      width: 1.5rem;
+      height: 1.5rem;
       z-index: 1;
-      background-size: 1.8em;
+      background-size: 1.5rem;
       position: absolute;
-      left: -34px;
-      top: 6px;
+      left: -32px;
+      top: 8px;
     }
   }
   .active{
@@ -44,7 +45,7 @@
       height: 100%;
       z-index: 0;
       position: absolute;
-      left: -46px;
+      left: -48px;
       top: 1px;
       background-color: #f5f6ff;
       border-left: 8px solid #033e58;
