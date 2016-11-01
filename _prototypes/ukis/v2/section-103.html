@@ -40,16 +40,18 @@ globalcss: false
 
                     <div class="response response--currency">
                       <div class="field">
-                        <label class="label venus" for="form-input-0">Science or engineering subjects</label>
+                        <label class="label venus" for="form-input-0" >Science or engineering subjects</label><br/>
                         <div class="input-type input-type--percent" data-type="%">
-                          <input id="form-input-0" name="1" type="percentage" class="input input--text" value="">
+                          <input class="input input--text numericentry mars" pattern="^(100|[1-9]?[0-9])$" id="form-input-0" name="1" type="percentage" value="">
+                            <span class="hint pluto">100% max value</span>
                         </div>
                       </div>
                       <br/>
                       <div class="field">
-                        <label class="label venus" for="form-input-1">Other subjects</label>
+                        <label class="label venus" for="form-input-1" >Other subjects</label><br/>
                         <div class="input-type input-type--percent" data-type="%">
-                          <input id="form-input-1" name="1" type="percentage" class="input input--text" value="">
+                          <input class="input input--text numericentry mars" pattern="^(100|[1-9]?[0-9])$" id="form-input-1" name="1" type="percentage" value="">
+                            <span class="hint pluto">100% max value</span>
                         </div>
                       </div>
                       <br/>
