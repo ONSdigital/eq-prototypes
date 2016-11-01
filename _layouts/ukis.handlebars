@@ -37,7 +37,9 @@ globalcss: false
                 </div>
                 {{/if}}
                 <div class="question">
+                  {{#if questionTitle}}
                   <h3 class="question__title neptune"><span class="question__title__number venus">{{questionVersion}}</span>{{{questionTitle}}}</h3>
+                  {{/if}}
                   {{#if questionDescription}}
                   <div class="question__description">
                     {{{questionDescription}}}
