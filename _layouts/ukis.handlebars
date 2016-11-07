@@ -88,7 +88,7 @@ globalcss: false
                         </div>
                       </div>
                         {{else}}
-                      {{#if groupName}}<h4 class="mars" style="margin-top: 32px;">{{{groupName}}}</h4>{{/if}}
+                      {{#if groupName}}<p class="mars" style="margin-top: 32px;line-height:1.3rem;">{{{groupName}}}</p>{{/if}}
                       <div class="field__item">
                         <input class="input input--radio" type="{{type}}" name="{{qId}}" id="form-input-{{@index}}" value="{{label}}" title="{{label}}">
                         <label class="label label--inline" for="form-input-{{@index}}"><span class="label__inner">{{label}}</span></label>
@@ -194,7 +194,7 @@ globalcss: false
               </div>
             </div>
           </div>
-          <button class="btn btn--quaternary qa-btn-get-started venus" type="submit" name="">Save and continue</button><br/><br/>
+          <button class="btn btn--quaternary qa-btn-get-started venus" type="submit" name="">{{#if submitButton}}{{submitButton}}{{else}}Save and continue{{/if}}</button><br/><br/>
           <a class="mars" href="../{{prev}}">Previous</a>
         </form>
       </div>

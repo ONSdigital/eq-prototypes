@@ -32,7 +32,7 @@
   font-family: monaco, Consolas, "Lucida Console", monospace;
   list-style-type: none;
   padding: 0;
-  margin: 2rem auto;
+  margin: 1rem auto;
 }
 .box__list__item {
   border: 1px solid #ccc;
@@ -40,9 +40,13 @@
   padding: 0.2rem 0.2rem;
   text-align: center;
   margin: 0.2rem;
+  background: rgba(255, 255, 255, 0.5);
   @include mq(m) {
     padding: 0.5rem 1rem;
     margin: 0 0.5rem;
+  }
+  &:first-child{
+    margin-left: 0px;
   }
 }
 .box--promo{

@@ -33,6 +33,16 @@
     }
   }
 }
+.alert--simple{
+  border-color: #677424;
+}
+.alert--success{
+  background: #f0f1e9;
+}
+
+.alert--spacious{
+  padding: 2rem;
+}
 
 @mixin alert_type($name, $color) {
   .alert--#{$name} {
