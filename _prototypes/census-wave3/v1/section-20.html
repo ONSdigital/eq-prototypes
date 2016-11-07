@@ -1,0 +1,69 @@
+---
+title: Household Questionnaire v2
+subtitle: England
+project: 2017 Census wave 2
+globalcss: false
+---
+
+{% include survey-header-census.html %}
+
+<div class="container">
+  <div class="grid ">
+    <div class="grid__col col-8@s">
+      <div role="main" class="panel__body" id="main">
+        <a class="mars" href="">Previous</a><br/><br/>
+        <form class="form qa-questionnaire-form" role="form" novalidate="">
+          <div class="hidden-form">
+          </div>
+          <div class="group" id="14ba4707-321d-441d-8d21-b8367366e766">
+            <div class="block" id="cd3b74d1-b687-4051-9634-a8f9ce10a27d">
+              <div class="section" id="017880bc-752d-4a6b-83df-e130409ee660">
+                <h2 class="section__title saturn"><span class="section__title__number question__title__number--census venus">3</span> Individual questions</h2>
+                <div class="question">
+                  <h3 class="question__title neptune"><span class="question__title__number venus">3.2</span>What is your name?</h3>
+                  <div class="question__responses">
+                    <div class="response response--textfield response--repeating-elements">
+                      <div class="field">
+                        <label class="label venus" for="form-input-1" >First name</label>
+                        <input id="form-input-1" name="q31" class="input input--text" type="text" value="">
+                      </div>
+                      <div class="field">
+                        <label class="label venus" for="form-input-2" >Middle name</label>
+                        <input id="form-input-2" name="q31" class="input input--text" type="text" value="">
+                      </div>
+                      <div class="field">
+                        <label class="label venus" for="form-input-3" id="">Surname</label>
+                        <input id="form-input-3" name="q31" class="input input--text" type="text" value="">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn--census qa-btn-get-started venus" type="submit" name="">Save and continue</button><br/><br/>
+          <a class="mars" href="">Save and complete later</a><br/><br/>
+          <a class="mars" href="">Previous</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include footer-census.html %}
+
+<script>
+
+
+$('.qa-btn-get-started').click(function(e) {
+  e.preventDefault();
+  var firstName = $("input[id='form-input-1']"). val();
+  var middleName = $("input[id='form-input-2']"). val();
+  var lastName = $("input[id='form-input-3']"). val();
+  sessionStorage.setItem('firstName0', firstName);
+  sessionStorage.setItem('middleName0', middleName);
+  sessionStorage.setItem('lastName0', lastName);
+  window.location.href = "../section-21";
+});
+
+</script>
