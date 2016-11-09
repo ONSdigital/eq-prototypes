@@ -33,12 +33,12 @@ var listEntityNavigation = function(idNumber, firstNameValue, middleNameValue, l
   }
 };
 $( document ).ready(function() {
-  if (sessionStorage.getItem('lastName0')) {
+  if (sessionStorage.getItem('firstName0')) {
     $('.this-section').html(sessionStorage.getItem('firstName0') + ' '  + sessionStorage.getItem('lastName0'));
   } else {
     $('.this-section').remove();
   }
-  if (sessionStorage.getItem('lastName1')) {
+  if (sessionStorage.getItem('firstName1')) {
     $('.next-section').html(sessionStorage.getItem('firstName1') + ' '  + sessionStorage.getItem('lastName1'));
   } else {
     $('.next-section').remove();
