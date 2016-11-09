@@ -17,22 +17,16 @@ globalcss: false
             <div class="block" id="cd3b74d1-b687-4051-9634-a8f9ce10a27d">
               <div class="section" id="017880bc-752d-4a6b-83df-e130409ee660">
                 <h2 class="section__title saturn"><span class="section__title__number question__title__number--census venus">2</span> Individual questions</h2>
-                <div class="question question--checkboxs">
-                  <h3 class="question__title neptune"><span class="question__title__number venus">2.38</span>What is (was) your full and specific job title?</h3>
-                  <div class="question__description">
-                    <p class="mars">For example, Primary school teacher, car mechanic, district nurse, structural engineer</p>
-                    <div class="box box--promo box--census">
-                      <h3 class="venus">Exclude:</h3>
-                      <ul>
-                        <li>Your grade or pay band</li>
-                      </ul>
-                    </div>
-                  </div>
+                <div class="question question--radios">
+                  <h3 class="question__title neptune"><span class="question__title__number venus">2.33</span>What was the name of the organisation or business you worked for:</h3>
+                  <p class="mars">If you were self-employed in your own business write in the business name</p>
                   <div class="question__responses">
-                    <div class="response response--textfield">
-                      <div class="field">
-                        <label class="label venus" for="form-input-1">Job title</label>
-                        <input class="input input--text" id="form-input-1" type="text" name="q0" value="" title="Number of visitors">
+                    <div class="response response--radio">
+                      <div class="response response--textfield response--repeating-elements">
+                        <div class="field">
+                          <label class="label venus" for="form-input-1" >Business or organisation name</label>
+                          <input id="form-input-1" name="q31" class="input input--text" type="text" value="">
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -53,19 +47,10 @@ globalcss: false
 
 <script>
 
-$('.input--other').click(function(e) {
-  if($(this).prop('checked')) {
-    console.log("checked");
-    $('.field__item--other__text').addClass('field__item--other__text--open');
-  } else {
-  $('.field__item--other__text').removeClass('field__item--other__text--open');
-  }
-});
-
 $('.qa-btn-get-started').click(function(e) {
   e.preventDefault();
-  var radioValue = $("input[name='q0']"). val();
-  sessionStorage.setItem('jobTitle', radioValue);
-  window.location.href = "../section-57";
+  var radioValue = $("input[name='q0']:checked"). val();
+  sessionStorage.setItem('nameOfOrg', radioValue);
+  window.location.href = "../section-58";
 });
 </script>
