@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+  {% include head.html %}
+
+  <body>
+    {% include survey_runner/top_bar.html %}
+
+    <div class="container">
+
+      <div class="panel">
+
+        {% include survey_runner/survey_header.html %}
+
+        <div class="panel__body">
+
+          <form class="form" action="" method="post">
+
+            <div class="group">
+
+              <div class="block">
+
+                {{content}}
+
+              </div>
+
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+    <div class="hidden-nav">
+      {% include prototype_nav.html %}
+    </div>
+  </body>
+
+  <script>
+    $(function(){
+      var $hiddenNavBtn = $('<div/>')
+        .addClass('hidden-nav-btn')
+        .on('click', function() {
+          $('.hidden-nav').toggleClass('is-open');
+        })
+      $('body').append($hiddenNavBtn);
+    });
+  </script>
+
+  {{scripts}}
+
+</html>

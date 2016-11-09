@@ -51,6 +51,10 @@
       min-width: 310px;
       margin: 0 16px 16px 0;
     }
+    .field__item--tight {
+      min-width: 322px;
+      margin: 0 5px 5px 0;
+    }
   }
   &.field--cols {
     @include mq(s) {

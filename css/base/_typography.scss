@@ -1,0 +1,68 @@
+html {
+  font-size: 18px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  @include mq(xs, s) {
+    font-size: 16px;
+  }
+}
+
+body {
+  font-family: $font-sans;
+  color: $color-text;
+}
+
+p {
+  max-width: 50rem;
+  margin: 0 0 1rem 0;
+}
+
+h1,
+.h1 {
+  font-size: $font-size-h1;
+  font-weight: 700;
+}
+
+h2,
+.h2 {
+  font-size: $font-size-h2;
+  font-weight: 600;
+}
+
+h3,
+.h3 {
+  font-size: $font-size-h3;
+  font-weight: 600;
+}
+
+h4,
+.h4 {
+  font-size: $font-size-h4;
+  font-weight: 700;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5 {
+  margin: 0 0 1rem;
+  line-height: 1.2;
+}
+
+code {
+  font-size: 0.8rem;
+}
+
+ul {
+  margin-bottom: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.3rem;
+}

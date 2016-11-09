@@ -9,7 +9,8 @@
 
 ## Run
 
-`bundle exec jekyll serve`
+- `bundle exec jekyll serve`
+- run `gulp` in a separate tab
 
 ## View Prototypes
 
