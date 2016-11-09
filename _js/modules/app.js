@@ -140,7 +140,7 @@
               return (
                 <QuestionAccordion isOpen={i === this.state.openResponse} key={i}
                   title={
-                  <h3 className="neptune">{activePerson.firstName} is <strong className="neptune strong-census" onClick={e => this.editRelationship(i)}>{this.state.relationships[i] ? this.state.relationships[i] : '...'}</strong> to {person.firstName}</h3>
+                  <h3 className="neptune">{activePerson.firstName} is <strong className="neptune strong-census" onClick={e => this.editRelationship(i)}>{this.state.relationships[i] ? this.state.relationships[i].toLowerCase() : '...'}</strong> to {person.firstName}</h3>
                 } body={
                   <QuestionResponses setRelationship={this.setRelationship} confirmRelationship={this.confirmRelationship} index={i}/>
                 }>
@@ -157,6 +157,16 @@
 
     constructor(props) {
       super()
+
+      const appState = sessionStorage.getItem('appState')
+
+      if (appState) {
+        this.state = JSON.parse(appState)
+        if (this.state.people.length === 0) {
+          this.navigateToNextSection()
+        }
+        return
+      }
 
       const people = []
       const getPeople = () => {
@@ -180,6 +190,11 @@
       }
     }
 
+    navigateToNextSection() {
+      sessionStorage.removeItem('appState')
+      window.location = '../section-9'
+    }
+
     onRelationshipConfirmed = () => {
       const numConfirmed = this.state.numConfirmed + 1
 
@@ -193,16 +208,26 @@
     }
 
     onSave = (e) => {
-
       if (this.state.canContinue) {
+        if (this.state.people.length === 1) {
+          e.preventDefault()
+          this.navigateToNextSection()
+        }
 
-
+        const activePerson = this.state.people.shift()
+        sessionStorage.setItem('appState', JSON.stringify({
+          ...this.state,
+          numConfirmed: 0,
+          canContinue: false,
+          people: this.state.people,
+          activePerson: activePerson
+        }))
       }
     }
 
     render() {
       return (
-        <form action="../section-9" className="form qa-questionnaire-form" role="form" noValidate="">
+        <form action="../section-8" className="form qa-questionnaire-form" role="form" noValidate="">
           <div className="hidden-form">
           </div>
           <div className="group" id="14ba4707-321d-441d-8d21-b8367366e766">

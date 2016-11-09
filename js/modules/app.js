@@ -1,5 +1,7 @@
 "use strict";
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -248,7 +250,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                     { className: "neptune strong-census", onClick: function onClick(e) {
                         return _this6.editRelationship(i);
                       } },
-                    _this6.state.relationships[i] ? _this6.state.relationships[i] : '...'
+                    _this6.state.relationships[i] ? _this6.state.relationships[i].toLowerCase() : '...'
                   ),
                   " to ",
                   person.firstName
@@ -283,9 +285,31 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       };
 
       _this7.onSave = function (e) {
+        if (_this7.state.canContinue) {
+          if (_this7.state.people.length === 1) {
+            e.preventDefault();
+            _this7.navigateToNextSection();
+          }
 
-        if (_this7.state.canContinue) {}
+          var activePerson = _this7.state.people.shift();
+          sessionStorage.setItem('appState', JSON.stringify(_extends({}, _this7.state, {
+            numConfirmed: 0,
+            canContinue: false,
+            people: _this7.state.people,
+            activePerson: activePerson
+          })));
+        }
       };
+
+      var appState = sessionStorage.getItem('appState');
+
+      if (appState) {
+        _this7.state = JSON.parse(appState);
+        if (_this7.state.people.length === 0) {
+          _this7.navigateToNextSection();
+        }
+        return _possibleConstructorReturn(_this7);
+      }
 
       var people = [];
       var getPeople = function getPeople() {
@@ -311,11 +335,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     }
 
     _createClass(App, [{
+      key: "navigateToNextSection",
+      value: function navigateToNextSection() {
+        sessionStorage.removeItem('appState');
+        window.location = '../section-9';
+      }
+    }, {
       key: "render",
       value: function render() {
         return React.createElement(
           "form",
-          { action: "../section-9", className: "form qa-questionnaire-form", role: "form", noValidate: "" },
+          { action: "../section-8", className: "form qa-questionnaire-form", role: "form", noValidate: "" },
           React.createElement("div", { className: "hidden-form" }),
           React.createElement(
             "div",
