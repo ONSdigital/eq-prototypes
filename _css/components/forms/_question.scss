@@ -63,8 +63,23 @@
 }
 
 .question__accordion {
-  padding: 1rem 0 0;
   border-top: 1px solid $color-borders;
+  padding: 1rem 0 0;
+}
+
+.question__accordion-body {
+  max-height: 0;
+  height: 0;
+	overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  &.is-open {
+    max-height: 100rem;
+    height: auto;
+    opacity: 1;
+    transition: all 1s ease-out;
+    pointer-events: auto;
+  }
 }
 
 .question__response {

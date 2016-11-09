@@ -86,13 +86,11 @@
   class QuestionAccordion extends Component {
     render() {
       const {isOpen, title, body} = this.props
-      const bodyStyles = {
-        display: isOpen ? "block" : "none"
-      }
+
       return (
         <div className="question__accordion">
           <div>{title}</div>
-          <div style={bodyStyles}>{body}</div>
+          <div className={`question__accordion-body ${isOpen ? 'is-open' : 'is-closed'}`}>{body}</div>
         </div>
       )
     }
@@ -109,8 +107,6 @@
     }
 
     setRelationship = (relationship, index) => {
-      console.log("setRelationship");
-      console.log(relationship, index);
       const relationships = this.state.relationships
       relationships[index] = relationship
       this.setState({
@@ -122,6 +118,7 @@
       this.setState({
         openResponse: index + 1
       })
+      this.props.onConfirm()
     }
 
     editRelationship = (index) => {
@@ -176,14 +173,53 @@
       getPeople()
 
       this.state = {
-        currentPerson: 0,
+        numConfirmed: 0,
+        canContinue: false,
         people: people,
         activePerson: people.shift()
       }
     }
 
+    onRelationshipConfirmed = () => {
+      const numConfirmed = this.state.numConfirmed + 1
+
+      this.setState({
+        numConfirmed: numConfirmed
+      })
+
+      if (numConfirmed === this.state.people.length) {
+        this.setState({canContinue: true})
+      }
+    }
+
+    onSave = (e) => {
+
+      if (this.state.canContinue) {
+
+
+      }
+    }
+
     render() {
-      return <Question activePerson={this.state.activePerson} people={this.state.people} />
+      return (
+        <form action="../section-9" className="form qa-questionnaire-form" role="form" noValidate="">
+          <div className="hidden-form">
+          </div>
+          <div className="group" id="14ba4707-321d-441d-8d21-b8367366e766">
+            <div className="block" id="cd3b74d1-b687-4051-9634-a8f9ce10a27d">
+              <div className="section" id="017880bc-752d-4a6b-83df-e130409ee660">
+                <h2 className="section__title saturn"><span className="section__title__number question__title__number--census venus">2</span>Household</h2>
+                <Question activePerson={this.state.activePerson} people={this.state.people} onConfirm={this.onRelationshipConfirmed}/>
+              </div>
+            </div>
+          </div>
+
+          <button className="btn btn--census qa-btn-get-started venus" disabled={!this.state.canContinue} type="submit" name="" onClick={this.onSave}>Save and continue</button><br/><br/>
+          <a className="mars" href="">Save and complete later</a><br/><br/>
+          <a className="mars" href="">Previous</a>
+        </form>
+      )
+
     }
   }
 
