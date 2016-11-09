@@ -2,16 +2,16 @@
   <nav>
     <ol>
       <li class="section-4 section-5 section-6 section-8">
-        <a class="mars" href="../section-3">Who lives here?</a>
+        <a class="mars" href="../section-4">Who lives here?</a>
       </li>
       <li class="section-9 section-10 section-11 section-11b section-14 section-15">
-        <a class="mars" href="../section-6">Accommodation</a>
+        <a class="mars" href="../section-9">Accommodation</a>
       </li>
       <li class="section-19 section-20 section-21 section-22 section-34 section-35 section-36 section-37 section-38 section-38b">
-        <a class="mars" href="../section-8"><span class="this-section">John Doe</span></a>
+        <a class="mars" href="../section-19"><span class="this-section">John Doe</span></a>
       </li>
       <li class="section-41">
-        <a class="mars" href="../section-8"><span class="next-section">John Doe</span></a>
+        <a class="mars" href="../section-41"><span class="next-section">John Doe</span></a>
       </li>
       <span class="box--entity"></span>
     </ol>
@@ -33,8 +33,16 @@ var listEntityNavigation = function(idNumber, firstNameValue, middleNameValue, l
   }
 };
 $( document ).ready(function() {
-  $('.this-section').html(sessionStorage.getItem('firstName0') + ' '  + sessionStorage.getItem('lastName0'));
-  $('.next-section').html(sessionStorage.getItem('firstName1') + ' '  + sessionStorage.getItem('lastName1'));
+  if (sessionStorage.getItem('lastName0')) {
+    $('.this-section').html(sessionStorage.getItem('firstName0') + ' '  + sessionStorage.getItem('lastName0'));
+  } else {
+    $('.this-section').remove();
+  }
+  if (sessionStorage.getItem('lastName1')) {
+    $('.next-section').html(sessionStorage.getItem('firstName1') + ' '  + sessionStorage.getItem('lastName1'));
+  } else {
+    $('.next-section').remove();
+  }
   if (sessionStorage.getItem('numberOfEntities')) {
     for (var i = 0; i < sessionStorage.getItem('numberOfEntities'); i++) {
       var firstNameValue = "";

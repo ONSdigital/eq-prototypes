@@ -59,5 +59,21 @@
       background-color: tint($color-purple, 90%);
       border-left: 8px solid $color-purple;
     }
+    a{
+      position: relative;
+      z-index: 1;
+      text-decoration: none;
+      color: #060606;
+      cursor: default;
+      pointer-events: none;
+    }
+  }
+  a{
+    position: relative;
+    z-index: 1;
+    text-decoration: underline;
+    color: #4263C2;
+    cursor: pointer;
+    pointer-events: auto;
   }
 }
