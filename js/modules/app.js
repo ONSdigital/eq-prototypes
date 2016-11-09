@@ -148,9 +148,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
             title = _props2.title,
             body = _props2.body;
 
-        var bodyStyles = {
-          display: isOpen ? "block" : "none"
-        };
+
         return React.createElement(
           "div",
           { className: "question__accordion" },
@@ -161,7 +159,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
           ),
           React.createElement(
             "div",
-            { style: bodyStyles },
+            { className: "question__accordion-body " + (isOpen ? 'is-open' : 'is-closed') },
             body
           )
         );
@@ -180,8 +178,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       var _this5 = _possibleConstructorReturn(this, (Question.__proto__ || Object.getPrototypeOf(Question)).call(this));
 
       _this5.setRelationship = function (relationship, index) {
-        console.log("setRelationship");
-        console.log(relationship, index);
         var relationships = _this5.state.relationships;
         relationships[index] = relationship;
         _this5.setState({
@@ -193,6 +189,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         _this5.setState({
           openResponse: index + 1
         });
+        _this5.props.onConfirm();
       };
 
       _this5.editRelationship = function (index) {
@@ -273,6 +270,23 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
       var _this7 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
 
+      _this7.onRelationshipConfirmed = function () {
+        var numConfirmed = _this7.state.numConfirmed + 1;
+
+        _this7.setState({
+          numConfirmed: numConfirmed
+        });
+
+        if (numConfirmed === _this7.state.people.length) {
+          _this7.setState({ canContinue: true });
+        }
+      };
+
+      _this7.onSave = function (e) {
+
+        if (_this7.state.canContinue) {}
+      };
+
       var people = [];
       var getPeople = function getPeople() {
         var numPeople = parseInt(sessionStorage.getItem('numberOfEntities'), 10);
@@ -288,7 +302,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       getPeople();
 
       _this7.state = {
-        currentPerson: 0,
+        numConfirmed: 0,
+        canContinue: false,
         people: people,
         activePerson: people.shift()
       };
@@ -298,7 +313,53 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     _createClass(App, [{
       key: "render",
       value: function render() {
-        return React.createElement(Question, { activePerson: this.state.activePerson, people: this.state.people });
+        return React.createElement(
+          "form",
+          { action: "../section-9", className: "form qa-questionnaire-form", role: "form", noValidate: "" },
+          React.createElement("div", { className: "hidden-form" }),
+          React.createElement(
+            "div",
+            { className: "group", id: "14ba4707-321d-441d-8d21-b8367366e766" },
+            React.createElement(
+              "div",
+              { className: "block", id: "cd3b74d1-b687-4051-9634-a8f9ce10a27d" },
+              React.createElement(
+                "div",
+                { className: "section", id: "017880bc-752d-4a6b-83df-e130409ee660" },
+                React.createElement(
+                  "h2",
+                  { className: "section__title saturn" },
+                  React.createElement(
+                    "span",
+                    { className: "section__title__number question__title__number--census venus" },
+                    "2"
+                  ),
+                  "Household"
+                ),
+                React.createElement(Question, { activePerson: this.state.activePerson, people: this.state.people, onConfirm: this.onRelationshipConfirmed })
+              )
+            )
+          ),
+          React.createElement(
+            "button",
+            { className: "btn btn--census qa-btn-get-started venus", disabled: !this.state.canContinue, type: "submit", name: "", onClick: this.onSave },
+            "Save and continue"
+          ),
+          React.createElement("br", null),
+          React.createElement("br", null),
+          React.createElement(
+            "a",
+            { className: "mars", href: "" },
+            "Save and complete later"
+          ),
+          React.createElement("br", null),
+          React.createElement("br", null),
+          React.createElement(
+            "a",
+            { className: "mars", href: "" },
+            "Previous"
+          )
+        );
       }
     }]);
 

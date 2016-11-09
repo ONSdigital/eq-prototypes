@@ -16,6 +16,11 @@
     color: $color;
     background-color: darken($bg, 5%);
   }
+  &[disabled] {
+    background: $color-grey;
+    color: $color-very-dark-grey;
+    opacity: 0.3;
+  }
 }
 
 .btn {
