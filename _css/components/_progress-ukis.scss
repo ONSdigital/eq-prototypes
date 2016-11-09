@@ -1,4 +1,4 @@
-.progress-ukis {
+.progress-ukis, .progress-censusv2 {
   ol{
     border-left: 1px solid #CCCCCC;
     padding-left: 40px;
@@ -49,6 +49,15 @@
       top: 1px;
       background-color: #f5f6ff;
       border-left: 8px solid #033e58;
+    }
+  }
+}
+
+.progress-censusv2 {
+  .active{
+    &:after {
+      background-color: tint($color-purple, 90%);
+      border-left: 8px solid $color-purple;
     }
   }
 }

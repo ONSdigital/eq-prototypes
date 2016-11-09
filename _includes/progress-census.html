@@ -1,82 +1,58 @@
-<aside class="progress-census">
+<aside class="progress-censusv2">
   <nav>
     <ol>
-      <li class="section-2 section-3"><span class="mars">Your details</span>
-        <ol>
-          <li class="section-2"><a href="../section-2?progressOpen=1" class="pluto">1.1 Is the address on the letter you received correct?</a></li>
-          <li class="section-3"><a href="../section-3?progressOpen=1" class="pluto">1.2 What is your current UK address?</a></li>
-        </ol>
+      <li class="section-4 section-5 section-6 section-8">
+        <a class="mars" href="../section-3">Who lives here?</a>
       </li>
-      <li class="section-4 section-5 section-6 section-7 section-8"><span class="mars">Household</span>
-        <ol>
-          <li class="section-4"><a href="../section-4?progressOpen=1" class="pluto">2.1 Is this your permanent home?</a></li>
-          <li class="section-5"><a href="../section-5?progressOpen=1" class="pluto">2.2 Who lives here?</a></li>
-          <li class="section-6"><a href="../section-6?progressOpen=1" class="pluto">2.3 Is there anyone else for whom this address is their permanent or family home?</a></li>
-          <li class="section-7"><a href="../section-7?progressOpen=1" class="pluto">2.4 How many visitors are staying overnight here on 24th of June 2016?</a></li>
-          <li class="section-8"><a href="../section-8?progressOpen=1" class="pluto">2.5 How are people related?</a></li>
-        </ol>
+      <li class="section-9 section-10 section-11 section-11b section-14 section-15">
+        <a class="mars" href="../section-6">Accommodation</a>
       </li>
-      <li class="section-9"><span class="mars">Individuals</span>
-        <ol>
-          <li><a href="../section-9?progressOpen=1" class="pluto">Q?</a></li>
-        </ol>
+      <li class="section-19 section-20 section-21 section-22 section-34 section-35 section-36 section-37 section-38 section-38b">
+        <a class="mars" href="../section-8"><span class="this-section">John Doe</span></a>
       </li>
-      <li class="section-9"><span class="mars">Visitors</span>
-        <ol>
-          <li><a href="../section-10?progressOpen=1" class="pluto">Q?</a></li>
-        </ol>
+      <li class="section-41">
+        <a class="mars" href="../section-8"><span class="next-section">John Doe</span></a>
       </li>
+      <span class="box--entity"></span>
     </ol>
   </nav>
 </aside>
 
 <script>
-  var QueryString = function () {
-    // This function is anonymous, is executed immediately and
-    // the return value is assigned to QueryString!
-    var query_string = {};
-    var query = window.location.search.substring(1);
-    var vars = query.split("&");
-    for (var i=0;i<vars.length;i++) {
-      var pair = vars[i].split("=");
-          // If first entry with this name
-      if (typeof query_string[pair[0]] === "undefined") {
-        query_string[pair[0]] = decodeURIComponent(pair[1]);
-          // If second entry with this name
-      } else if (typeof query_string[pair[0]] === "string") {
-        var arr = [ query_string[pair[0]],decodeURIComponent(pair[1]) ];
-        query_string[pair[0]] = arr;
-          // If third or later entry with this name
-      } else {
-        query_string[pair[0]].push(decodeURIComponent(pair[1]));
-      }
-    }
-    return query_string;
-  }();
+var pathArray = window.location.pathname.split( '/' );
+var fourthLevelLocation = pathArray[4];
+$('.' + fourthLevelLocation).addClass('active is-open').prevAll().addClass('complete');
 
-  if (QueryString.progress === '0') {
-    $('.progress-census').css('display', 'none');
+var listEntity = function(idNumber, firstNameValue, middleNameValue, lastNameValue){
+  if (idNumber == 1 || idNumber == 2) {
+  } else {
+    $( '.box--entity' ).append( '' +
+    '<li class="" >' +
+    '<div class="mars"><a href=""> ' + firstNameValue + " " + middleNameValue + " "  + lastNameValue + ' </a></div>' +
+    '</li>');
   }
-
-  $('.progress-census ol li span').on('click', function() {
-    if ($(this).parent().hasClass("is-open")) {
-      $('.progress-census ol li').removeClass('is-open');
-    } else {
-      $('.progress-census ol li').removeClass('is-open');
-      $(this).parent().addClass('is-open');
+};
+$( document ).ready(function() {
+  $('.this-section').html(sessionStorage.getItem('firstName0') + ' '  + sessionStorage.getItem('lastName0'));
+  $('.next-section').html(sessionStorage.getItem('firstName1') + ' '  + sessionStorage.getItem('lastName1'));
+  if (sessionStorage.getItem('numberOfEntities')) {
+    for (var i = 0; i < sessionStorage.getItem('numberOfEntities'); i++) {
+      var firstNameValue = "";
+      var middleNameValue = "";
+      var lastNameValue = "";
+      if (sessionStorage.getItem('firstName' + i)) {
+        var firstNameValue = sessionStorage.getItem('firstName' + i);
+      }
+      if (sessionStorage.getItem('middleName' + i)) {
+        var middleNameValue = sessionStorage.getItem('middleName' + i);
+      }
+      if (sessionStorage.getItem('lastName' + i)) {
+        var lastNameValue = sessionStorage.getItem('lastName' + i);
+      }
+      listEntity(i + 1, firstNameValue, middleNameValue, lastNameValue);
     }
-  });
-  $(function(){
-    var pathArray = window.location.pathname.split( '/' );
-    var fourthLevelLocation = pathArray[4];
-    if (QueryString.progressOpen === '1') {
-      $('.' + fourthLevelLocation).addClass('active is-open').prevAll().addClass('complete');
-    } else {
-      $('.' + fourthLevelLocation).addClass('active').prevAll().addClass('complete');
-    }
-    // $('.' + fourthLevelLocation).addClass('active').nextAll().addClass('disabled');
-  });
-
+  }
+});
 
 
 </script>
