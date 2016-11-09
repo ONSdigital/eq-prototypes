@@ -61,6 +61,9 @@
         isAnswered: true
       })
       this.props.setRelationship(relationship, index)
+      if (!this.props.requiresConfirm) {
+        this.props.confirmRelationship(index)
+      }
     }
     onConfirm(e) {
       e.preventDefault()
@@ -75,7 +78,7 @@
               return <Field relationship={relationship} index={index} key={index} setRelationship={e => this.setRelationship(relationship, this.props.index)} />
             })}
           </div>
-          {this.state.isAnswered
+          {this.state.isAnswered && this.props.requiresConfirm
             ? <button className="btn btn--border--census u-mt-s" onClick={e => this.onConfirm(e)}>Confirm relationship</button>
             : null}
         </div>
@@ -136,17 +139,27 @@
             <p className="mars">If they are not related, select the ‘unrelated’ option</p>
           </div>
           <div className="question__responses">
-            {people.map((person, i) => {
-              return (
-                <QuestionAccordion isOpen={i === this.state.openResponse} key={i}
-                  title={
-                  <h3 className="neptune">{activePerson.firstName} is <strong className="neptune strong-census" onClick={e => this.editRelationship(i)}>{this.state.relationships[i] ? this.state.relationships[i].toLowerCase() : '...'}</strong> to {person.firstName}</h3>
-                } body={
-                  <QuestionResponses setRelationship={this.setRelationship} confirmRelationship={this.confirmRelationship} index={i}/>
-                }>
-                </QuestionAccordion>
-              )
-            })}
+            {people.length > 1
+              ?
+                people.map((person, i) => {
+                  return (
+                    <QuestionAccordion isOpen={i === this.state.openResponse} key={i}
+                      title={
+                      <h3 className="neptune">{activePerson.firstName} is <strong className="neptune strong-census" onClick={e => this.editRelationship(i)}>{this.state.relationships[i] ? this.state.relationships[i].toLowerCase() : '...'}</strong> to {person.firstName}</h3>
+                    } body={
+                      <QuestionResponses setRelationship={this.setRelationship} confirmRelationship={this.confirmRelationship} requiresConfirm index={i}/>
+                    }>
+                    </QuestionAccordion>
+                  )
+                })
+              :
+                <div>
+                  <h3 className="neptune">{activePerson.firstName} is <strong className="neptune strong-census">{this.state.relationships[0] ? this.state.relationships[0].toLowerCase() : '...'}</strong> to {people[0].firstName}</h3>
+                  <QuestionResponses setRelationship={this.setRelationship} confirmRelationship={this.confirmRelationship} requiresConfirm={false} index={0} />
+                </div>
+
+
+            }
           </div>
         </div>
       )

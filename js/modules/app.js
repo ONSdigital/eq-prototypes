@@ -94,6 +94,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
           isAnswered: true
         });
         this.props.setRelationship(relationship, index);
+        if (!this.props.requiresConfirm) {
+          this.props.confirmRelationship(index);
+        }
       }
     }, {
       key: "onConfirm",
@@ -119,7 +122,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                 } });
             })
           ),
-          this.state.isAnswered ? React.createElement(
+          this.state.isAnswered && this.props.requiresConfirm ? React.createElement(
             "button",
             { className: "btn btn--border--census u-mt-s", onClick: function onClick(e) {
                 return _this3.onConfirm(e);
@@ -238,7 +241,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
           React.createElement(
             "div",
             { className: "question__responses" },
-            people.map(function (person, i) {
+            people.length > 1 ? people.map(function (person, i) {
               return React.createElement(QuestionAccordion, { isOpen: i === _this6.state.openResponse, key: i,
                 title: React.createElement(
                   "h3",
@@ -254,8 +257,25 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                   ),
                   " to ",
                   person.firstName
-                ), body: React.createElement(QuestionResponses, { setRelationship: _this6.setRelationship, confirmRelationship: _this6.confirmRelationship, index: i }) });
-            })
+                ), body: React.createElement(QuestionResponses, { setRelationship: _this6.setRelationship, confirmRelationship: _this6.confirmRelationship, requiresConfirm: true, index: i }) });
+            }) : React.createElement(
+              "div",
+              null,
+              React.createElement(
+                "h3",
+                { className: "neptune" },
+                activePerson.firstName,
+                " is ",
+                React.createElement(
+                  "strong",
+                  { className: "neptune strong-census" },
+                  this.state.relationships[0] ? this.state.relationships[0].toLowerCase() : '...'
+                ),
+                " to ",
+                people[0].firstName
+              ),
+              React.createElement(QuestionResponses, { setRelationship: this.setRelationship, confirmRelationship: this.confirmRelationship, requiresConfirm: false, index: 0 })
+            )
           )
         );
       }
