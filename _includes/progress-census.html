@@ -23,7 +23,7 @@ var pathArray = window.location.pathname.split( '/' );
 var fourthLevelLocation = pathArray[4];
 $('.' + fourthLevelLocation).addClass('active is-open').prevAll().addClass('complete');
 
-var listEntity = function(idNumber, firstNameValue, middleNameValue, lastNameValue){
+var listEntityNavigation = function(idNumber, firstNameValue, middleNameValue, lastNameValue){
   if (idNumber == 1 || idNumber == 2) {
   } else {
     $( '.box--entity' ).append( '' +
@@ -49,7 +49,7 @@ $( document ).ready(function() {
       if (sessionStorage.getItem('lastName' + i)) {
         var lastNameValue = sessionStorage.getItem('lastName' + i);
       }
-      listEntity(i + 1, firstNameValue, middleNameValue, lastNameValue);
+      listEntityNavigation(i + 1, firstNameValue, middleNameValue, lastNameValue);
     }
   }
 });
