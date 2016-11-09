@@ -56,100 +56,61 @@ $bp: 36em;
   margin-bottom: 2rem;
   overflow: hidden;
   position: relative;
-  .survey-header{
-    display: block;
-    height: 182px;
-    @include mq(1400px) {
-      display: flex;
-    }
+  .survey-header {
+    display: flex;
+    align-items: center;
   }
   .panel{
     background-color: transparent;
   }
-  .panel__header {
-    border-bottom: 0px;
-    padding: 1rem 0rem;
-    text-align: right;
-    &:before{
+  .panel__header{
+    border: 0px;
+    padding: 4px 0;
+    @include mq(s){
+      padding: 10px 0;
+    }
+    @include mq(s){
+      padding: 20px 0;
+    }
+    &:before {
       content: none;
     }
   }
-  @include mq(1400px) {
-    .panel__header {
-      text-align: left;
-      padding: 2.5rem 0rem;
-    }
-  }
-  .survey-header__logo{
-    position: absolute;
-    top: 0;
-    left: 0;
-    svg{
-      height: 180px;
-      @include mq(s) {
-        height: 243px;
-      }
-    }
-  }
   .survey-header__info{
-    display: block;
-    &:before{
+    @include mq(xs){
+      margin-left: auto;
+      float: right;
+      flex: 1 1 10rem;
+      margin-left: 2rem;
+      position: relative;
+      text-align: right;
+    }
+    &:before {
       content: none;
     }
   }
   .survey-header__title{
-    margin-bottom: 0;
-    font-weight: 700;
-    margin-left: 80px;
-    // @include mq(m) {
-    //   margin-left: 190px;
-    // }
-    // @include mq(l) {
-    //   margin-left: 190px;
-    // }
-    @include mq(1400px) {
-      margin-left: 0px;
-    }
+    margin: 0;
+    display: inline;
   }
-  .survey-header__subtitle{
-    margin-bottom: 0.5rem;
-    font-weight: 300;
-    margin-left: 80px;
-    // @include mq(m) {
-    //   margin-left: 190px;
-    // }
-    // @include mq(l) {
-    //   margin-left: 190px;
-    // }
-    @include mq(1400px) {
-      margin-left: 0px;
-    }
-  }
-  .survey-header__list{
-    list-style: none;
-    margin: 8px 0 0 0;
-    padding: 0;
-    li{
-      display: inline-block;
-      a {
-        color: white;
-        font-weight: 300;
-        text-decoration: none;
-      }
-    }
-    li:first-child {
-      border-right: 1px solid rgba(255,255,255,0.5);
-      margin-right: 16px;
-      padding-right: 16px;
-    }
-  }
-  .info__tel {
-    &:before{
-      content: none;
-      filter: invert(100%);
-    }
-    a {
+  .info__title a{
     color: white;
+    text-decoration: none;
+    font-size: 14px;
+    @include mq(s) {
+      font-size: 20px;
+    }
+  }
+  svg {
+    width: 105px;
+    height: 26px;
+    @include mq(s) {
+      width: 168px;
+      height: 41px;
+    }
+    @include mq(m) {
+      width: 221px;
+      height: 54px;
     }
   }
 }
