@@ -18,21 +18,15 @@ globalcss: false
               <div class="section" id="017880bc-752d-4a6b-83df-e130409ee660">
                 <h2 class="section__title saturn"><span class="section__title__number question__title__number--census venus">2</span> Individual questions</h2>
                 <div class="question question--checkboxs">
-                  <h3 class="question__title neptune"><span class="question__title__number venus">2.38</span>What is (was) your full and specific job title?</h3>
-                  <div class="question__description">
-                    <p class="mars">For example, Primary school teacher, car mechanic, district nurse, structural engineer</p>
-                    <div class="box box--promo box--census">
-                      <h3 class="venus">Exclude:</h3>
-                      <ul>
-                        <li>Your grade or pay band</li>
-                      </ul>
-                    </div>
-                  </div>
+                  <h3 class="question__title neptune"><span class="question__title__number venus">2.39</span>At your workplace what is (was) the main activity of your employer or business?</h3>
+                  <p class="mars">For example, Primary education, repairing cars, contract catering, computer servicing</p>
+                  <p class="mars">If you are (were) a civil servant, write government</p>
+                  <p class="mars">If you are (were) a local government officer, write local government officer, write local government and give the name of the department within the local authority</p>
                   <div class="question__responses">
-                    <div class="response response--textfield">
+                    <div class="response response--textarea" id="215015b1-f87c-4740-9fd4-f01f707ef558">
                       <div class="field">
-                        <label class="label venus" for="form-input-1">Job title</label>
-                        <input class="input input--text" id="form-input-1" type="text" name="q0" value="" title="Number of visitors">
+                        <label class="label mars" for="form-input-1" id="label-form-input-1"></label>
+                        <textarea aria-describedby="form-input-1-helper" id="form-input-1" name="q0" class="input input--textarea js-charlimit-input" data-maxlength="2000" rows="8" cols="60"></textarea>
                       </div>
                     </div>
                   </div>
@@ -53,19 +47,11 @@ globalcss: false
 
 <script>
 
-$('.input--other').click(function(e) {
-  if($(this).prop('checked')) {
-    console.log("checked");
-    $('.field__item--other__text').addClass('field__item--other__text--open');
-  } else {
-  $('.field__item--other__text').removeClass('field__item--other__text--open');
-  }
-});
 
 $('.qa-btn-get-started').click(function(e) {
   e.preventDefault();
   var radioValue = $("input[name='q0']"). val();
-  sessionStorage.setItem('jobTitle', radioValue);
-  window.location.href = "../section-57";
+  sessionStorage.setItem('mainActivity', radioValue);
+  window.location.href = "../section-57b";
 });
 </script>

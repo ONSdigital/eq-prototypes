@@ -18,34 +18,24 @@ globalcss: false
               <div class="section" id="017880bc-752d-4a6b-83df-e130409ee660">
                 <h2 class="section__title saturn"><span class="section__title__number question__title__number--census venus">2</span> Individual questions</h2>
                 <div class="question question--radios">
-                  <h3 class="question__title neptune"><span class="question__title__number venus">2.41</span>In your main job, do or did you work for an organisation or business</h3>
-                  <div class="box box--promo box--census">
-                    <div class="grid ">
-                      <div class="grid__col col-6@s">
-                        <h3 class="venus">Include:</h3>
-                        <ul>
-                          <li class="mars">Self employment within your own business</li>
-                        </ul>
-                      </div>
-                      <div class="grid__col col-6@s">
-                        <h3 class="venus">Exclude:</h3>
-                        <ul>
-                          <li class="mars">Freelance</li>
-                          <li class="mars">Working for a private individual</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
+                  <h3 class="question__title neptune"><span class="question__title__number venus">2.33</span>In your main job are (were) you:</h3>
                   <div class="question__responses">
                     <div class="response response--radio">
                       <div class="field field--multi field--radio">
                         <div class="field__item">
-                          <input class="input input--radio" type="radio" name="q0" id="form-input-1" value="Yes" title="Yes">
-                          <label class="label label--inline" for="form-input-1"><span class="label__inner">Yes</span></label>
+                          <input class="input input--radio" type="radio" name="q0" id="form-input-1" value="Employed by an organisation or business" title="Employed by an organisation or business">
+                          <label class="label label--inline" for="form-input-1"><span class="label__inner">Employed by an organisation or business</span></label>
                         </div>
                         <div class="field__item">
-                          <input class="input input--radio" type="radio" name="q0" id="form-input-2" value="No" title="No">
-                          <label class="label label--inline" for="form-input-2"><span class="label__inner">No</span></label>
+                          <input class="input input--radio" type="radio" name="q0" id="form-input-2" value="Self-employed in your own business" title="Self-employed in your own business">
+                          <label class="label label--inline" for="form-input-2"><span class="label__inner">Self-employed in your own business</span></label>
+                        </div>
+                        <div class="field__item">
+                          <input class="input input--radio" type="radio" name="q0" id="form-input-3" value="Not working for an organisation" title="Not working for an organisation">
+                          <label class="label label--inline" for="form-input-3">
+                            <span class="label__inner">Not working for an organisation</span><br/>
+                            <span class="label__inner pluto">For example self-employed freelance or work (worked) for a private individual</span>
+                          </label>
                         </div>
                       </div>
                     </div>
@@ -67,19 +57,10 @@ globalcss: false
 
 <script>
 
-$('.input--other').click(function(e) {
-  if($(this).prop('checked')) {
-    console.log("checked");
-    $('.field__item--other__text').addClass('field__item--other__text--open');
-  } else {
-  $('.field__item--other__text').removeClass('field__item--other__text--open');
-  }
-});
-
 $('.qa-btn-get-started').click(function(e) {
   e.preventDefault();
   var radioValue = $("input[name='q0']:checked"). val();
-  sessionStorage.setItem('workForOrg', radioValue);
-  window.location.href = "../section-60";
+  sessionStorage.setItem('workStartDate', radioValue);
+  window.location.href = "../section-57c";
 });
 </script>

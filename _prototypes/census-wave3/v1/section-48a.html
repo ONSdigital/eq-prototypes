@@ -17,35 +17,25 @@ globalcss: false
             <div class="block" id="cd3b74d1-b687-4051-9634-a8f9ce10a27d">
               <div class="section" id="017880bc-752d-4a6b-83df-e130409ee660">
                 <h2 class="section__title saturn"><span class="section__title__number question__title__number--census venus">2</span> Individual questions</h2>
-                <div class="question question--radios">
-                  <h3 class="question__title neptune"><span class="question__title__number venus">2.41</span>In your main job, do or did you work for an organisation or business</h3>
-                  <div class="box box--promo box--census">
-                    <div class="grid ">
-                      <div class="grid__col col-6@s">
-                        <h3 class="venus">Include:</h3>
-                        <ul>
-                          <li class="mars">Self employment within your own business</li>
-                        </ul>
-                      </div>
-                      <div class="grid__col col-6@s">
-                        <h3 class="venus">Exclude:</h3>
-                        <ul>
-                          <li class="mars">Freelance</li>
-                          <li class="mars">Working for a private individual</li>
-                        </ul>
-                      </div>
-                    </div>
+                <div class="question question--checkboxs">
+                  <h3 class="question__title neptune"><span class="question__title__number venus">2.30</span>Thinking of the last 12 months, have you taken part in any unpaid volunteering for any groups, clubs or organisations?</h3>
+                  <div class="question__description">
+                    <p class="mars">Exclude any Court ordered acivities.</p>
                   </div>
                   <div class="question__responses">
-                    <div class="response response--radio">
-                      <div class="field field--multi field--radio">
+                    <div class="response response--checkbox">
+                      <div class="field field--multi field--checkbox">
                         <div class="field__item">
-                          <input class="input input--radio" type="radio" name="q0" id="form-input-1" value="Yes" title="Yes">
-                          <label class="label label--inline" for="form-input-1"><span class="label__inner">Yes</span></label>
+                          <input class="input input--checkbox" type="checkbox" name="q0" id="form-input-1" value="No" title="No">
+                          <label class="label label--inline" for="form-input-1"><span class="label__inner">No</span></label>
                         </div>
                         <div class="field__item">
-                          <input class="input input--radio" type="radio" name="q0" id="form-input-2" value="No" title="No">
-                          <label class="label label--inline" for="form-input-2"><span class="label__inner">No</span></label>
+                          <input class="input input--checkbox" type="checkbox" name="q0" id="form-input-2" value="Yes, less than 12 hours a month on average" title="Yes, less than 12 hours a month on average">
+                          <label class="label label--inline" for="form-input-2"><span class="label__inner">Yes, less than 12 hours a month on average</span></label>
+                        </div>
+                        <div class="field__item">
+                          <input class="input input--checkbox" type="checkbox" name="q0" id="form-input-3" value="Yes, 12 hours or more a month on average" title="Yes, 12 hours or more a month on average">
+                          <label class="label label--inline" for="form-input-3"><span class="label__inner">Yes, 12 hours or more a month on average</span></label>
                         </div>
                       </div>
                     </div>
@@ -79,7 +69,7 @@ $('.input--other').click(function(e) {
 $('.qa-btn-get-started').click(function(e) {
   e.preventDefault();
   var radioValue = $("input[name='q0']:checked"). val();
-  sessionStorage.setItem('workForOrg', radioValue);
-  window.location.href = "../section-60";
+  sessionStorage.setItem('volunteeringGroups', radioValue);
+  window.location.href = "../section-49";
 });
 </script>

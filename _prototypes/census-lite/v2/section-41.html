@@ -54,8 +54,8 @@ globalcss: false
 
 <script>
 $( document ).ready(function() {
-  $('.section__title').html('<span class="section__title__number question__title__number--census venus">3</span>' + sessionStorage.getItem('firstName0') + ' '  + sessionStorage.getItem('lastName0'));
-  $('.box--entity').html('<div class="" id="entity-list__0"><div class="box--entity__person mars">' + sessionStorage.getItem('firstName0') + ' ' + sessionStorage.getItem('middleName0') + ' '  + sessionStorage.getItem('lastName0') + '</div></div>');
+  $('.section__title').html('<span class="section__title__number question__title__number--census venus">3</span>' + sessionStorage.getItem('firstName1') + ' '  + sessionStorage.getItem('lastName1'));
+  $('.box--entity').html('<div class="" id="entity-list__0"><div class="box--entity__person mars">' + sessionStorage.getItem('firstName1') + ' ' + sessionStorage.getItem('middleName1') + ' '  + sessionStorage.getItem('lastName1') + '</div></div>');
 });
 
 $('.qa-btn-get-started').click(function(e) {
@@ -63,9 +63,9 @@ $('.qa-btn-get-started').click(function(e) {
   var inputValue = $("input[name='q4']:checked"). val();
   sessionStorage.setItem('namesCorrect', inputValue);
   if (sessionStorage.getItem('namesCorrect') == "yes") {
-    window.location.href = "../section-21";
+    window.location.href = "../summary";
   } else {
-    window.location.href = "../section-20";
+    window.location.href = "../summary";
   }
 });
 

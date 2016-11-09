@@ -9,7 +9,7 @@ globalcss: false
 
 <div class="container">
   <div class="grid ">
-    <div class="grid__col col-8@s">
+    <div class="grid__col  col-8@s">
       <div role="main" class="panel__body" id="main">
         <a class="mars" href="">Previous</a><br/><br/>
         <form class="form qa-questionnaire-form" role="form" novalidate="">
@@ -21,19 +21,20 @@ globalcss: false
                 <div class="question question--radios">
                   <h3 class="question__title saturn">You have completed:</h3>
                   <ul class="interstitial">
-                    <li class="complete mars"><a href="">Who lives here</a></li>
+                    <li class="complete mars"><a href="">Who usually lives here</a></li>
+                    <li class="complete mars"><a href="">Accommodation</a></li>
                   </ul>
-                  <h3 class="question__title saturn">Next section:</h3>
+                  <h3 class="question__title saturn">Next sections:</h3>
                   <ul class="">
-                    <li class="mars"><a href="../section-9">Accommodation</a></li>
+                    <li class="complete mars"><a href="../section-19"><span class="this-section">John Doe</span></a></li>
                   </ul>
-                  <p class="mars">In this section  we are going to ask you details about the type of <strong>accommodation</strong> you live in.</p>
+                  <p class="mars">In this section  we are going to ask you questions about <strong class="this-section">John Doe</strong></p>
+                  <p class="mars">Any resident aged 16 or over who wishes to complete a separate questionnaire can request a form <a href="">here</a>.</p>
 
                   <h3 class="question__title saturn">Remaining sections:</h3>
                   <ul class="">
                     <div class="box--entity"></div>
                   </ul>
-                  <p class="mars">You will be asked to provide information for everyone who lives at this address. Any resident aged 16 or over wishes to complete a separate questionnaire can request a form <a href="">here</a>.</p>
                 </div>
               </div>
             </div>
@@ -52,14 +53,17 @@ globalcss: false
 
 
 var listEntity = function(idNumber, firstNameValue, middleNameValue, lastNameValue){
-  $( '.box--entity' ).append( '' +
-  '<li class="" >' +
-  '<div class="mars"><a href=""> ' + firstNameValue + " " + middleNameValue + " "  + lastNameValue + ' </a></div>' +
-  '</li>');
+  if (idNumber == 1) {
+  } else {
+    $( '.box--entity' ).append( '' +
+    '<li class="" >' +
+    '<div class="mars"><a href=""> ' + firstNameValue + " " + middleNameValue + " "  + lastNameValue + ' </a></div>' +
+    '</li>');
+  }
 };
 $( document ).ready(function() {
-  $('.next-section').html(sessionStorage.getItem('firstName0') + ' '  + sessionStorage.getItem('lastName0'));
-
+  $('.this-section').html(sessionStorage.getItem('firstName0') + ' '  + sessionStorage.getItem('lastName0'));
+  $('.next-section').html(sessionStorage.getItem('firstName1') + ' '  + sessionStorage.getItem('lastName1'));
   if (sessionStorage.getItem('numberOfEntities')) {
     for (var i = 0; i < sessionStorage.getItem('numberOfEntities'); i++) {
       var firstNameValue = "";
@@ -84,7 +88,7 @@ $( document ).ready(function() {
   sessionStorage.removeItem('object');
   $('.qa-btn-get-started').click(function(e) {
     e.preventDefault();
-    window.location.href = "../section-19";
+    window.location.href = "../summary";
   });
 
 });
