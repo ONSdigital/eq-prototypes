@@ -22,7 +22,7 @@ globalcss: false
                 <div class="section__description">
                   <p class="venus">The following questions are for:</p>
                 </div>
-                <div class="box--entity"></div>
+                <div class="name-of-this-person"></div>
                 <div class="question">
                   <h3 class="question__title neptune"><span class="question__title__number venus">3.1</span>Are these details correct, including any middle name(s)?</h3>
                   <div class="question__responses">
@@ -47,6 +47,9 @@ globalcss: false
         </form>
       </div>
     </div>
+    <div class="grid__col col-4@s">
+    {% include progress-census.html %}
+    </div>
   </div>
 </div>
 
@@ -55,7 +58,7 @@ globalcss: false
 <script>
 $( document ).ready(function() {
   $('.section__title').html('<span class="section__title__number question__title__number--census venus">3</span>' + sessionStorage.getItem('firstName1') + ' '  + sessionStorage.getItem('lastName1'));
-  $('.box--entity').html('<div class="" id="entity-list__0"><div class="box--entity__person mars">' + sessionStorage.getItem('firstName1') + ' ' + sessionStorage.getItem('middleName1') + ' '  + sessionStorage.getItem('lastName1') + '</div></div>');
+  $('.name-of-this-person').html('<div class="" id="entity-list__0"><div class="box--entity__person mars">' + sessionStorage.getItem('firstName1') + ' ' + sessionStorage.getItem('middleName1') + ' '  + sessionStorage.getItem('lastName1') + '</div></div>');
 });
 
 $('.qa-btn-get-started').click(function(e) {
