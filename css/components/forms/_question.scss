@@ -29,18 +29,13 @@
 .question__title {
   clear: both;
   display: block;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.3;
   color: inherit;
-  margin-bottom: 1rem;
-  position: relative;
-}
-
-.question__title__number {
-  padding-right: 0.5rem;
-  // display: block;
-  @include mq(xl) {
-    position: absolute;
-    top: 0px;
-    left: -48px;
+  margin-bottom: 0.5rem;
+  @include mq(s) {
+    font-size: 1.3rem;
   }
 }
 
@@ -57,14 +52,8 @@
   margin-bottom: 1rem;
   clear: both;
 }
-
 .question__responses {
   clear: both;
-}
-
-.question__accordion {
-  padding: 1rem 0 0;
-  border-top: 1px solid $color-borders;
 }
 
 .question__response {

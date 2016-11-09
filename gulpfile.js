@@ -25,6 +25,9 @@ const data = require('gulp-data');
 const handlebars = require('gulp-compile-handlebars');
 const ukisData = require('./_data/ukis.json');
 
+const babel = require('gulp-babel')
+const plumber = require('gulp-plumber')
+
 // SVG Sprite
 gulp.task('sprite', () => {
   gulp.src('./_img/**/*.svg')
@@ -152,12 +155,18 @@ gulp.task('serve', () => {
   });
 
   gulp.watch('./_css/**/*.scss', ['css']);
+  gulp.watch('./_js/**/*.js', ['js']);
   // gulp.watch('_site/**/*.*').on('change', browserSync.reload);
 });
 
 
 gulp.task('js', () => {
   gulp.src('./_js/**/*.js')
+  .on('error', function(err) {
+    gutil.log(err.message)
+  })
+  .pipe(babel())
+  .pipe(plumber())
   .pipe(gulp.dest('js'))
 });
 
