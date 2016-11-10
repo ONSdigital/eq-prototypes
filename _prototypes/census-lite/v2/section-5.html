@@ -153,7 +153,11 @@ $('.qa-btn-get-started').click(function(e) {
     console.log(entityIdNumber);
   }
   if (sessionStorage.getItem('addPerson') == "yes") {
-    window.location.href = "../section-8";
+    if (sessionStorage.getItem('numberOfEntities') == 1) {
+      window.location.href = "../section-9-inter";
+    } else {
+      window.location.href = "../section-8";
+    }
   } else {
     window.location.href = "../section-6";
   }
