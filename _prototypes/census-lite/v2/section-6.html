@@ -101,7 +101,11 @@ $('.qa-btn-get-started').click(function(e) {
   if($('.yes').prop('checked')) {
     window.location.href = "../section-5";
   } else {
-    window.location.href = "../section-8";
+    if (sessionStorage.getItem('numberOfEntities') == 1) {
+      window.location.href = "../section-9-inter";
+    } else {
+      window.location.href = "../section-8";
+    }
   }
 });
 
