@@ -235,7 +235,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
             React.createElement(
               "p",
               { className: "mars" },
-              "If they are not related, select the \u2018unrelated\u2019 option"
+              "If members are not related, select the \u2018unrelated\u2019 option, including foster parents and foster children."
             )
           ),
           React.createElement(
@@ -358,7 +358,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       key: "navigateToNextSection",
       value: function navigateToNextSection() {
         sessionStorage.removeItem('appState');
-        window.location = '../section-9';
+        window.location = '../section-9-inter';
       }
     }, {
       key: "render",
@@ -382,7 +382,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                   React.createElement(
                     "span",
                     { className: "section__title__number question__title__number--census venus" },
-                    "2"
+                    "1"
                   ),
                   "Household"
                 ),
