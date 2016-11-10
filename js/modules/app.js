@@ -384,7 +384,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                     { className: "section__title__number question__title__number--census venus" },
                     "1"
                   ),
-                  "Household"
+                  "Who lives here?"
                 ),
                 React.createElement(Question, { activePerson: this.state.activePerson, people: this.state.people, onConfirm: this.onRelationshipConfirmed })
               )

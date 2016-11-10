@@ -246,7 +246,7 @@
           <div className="group" id="14ba4707-321d-441d-8d21-b8367366e766">
             <div className="block" id="cd3b74d1-b687-4051-9634-a8f9ce10a27d">
               <div className="section" id="017880bc-752d-4a6b-83df-e130409ee660">
-                <h2 className="section__title saturn"><span className="section__title__number question__title__number--census venus">1</span>Household</h2>
+                <h2 className="section__title saturn"><span className="section__title__number question__title__number--census venus">1</span>Who lives here?</h2>
                 <Question activePerson={this.state.activePerson} people={this.state.people} onConfirm={this.onRelationshipConfirmed}/>
               </div>
             </div>
