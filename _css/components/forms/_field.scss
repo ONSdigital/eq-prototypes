@@ -43,7 +43,7 @@
     display: block;
   }
   @include mq(s) {
-    .field__item{
+    .field__item {
       min-width: 330px;
       display: inline-block;
     }
@@ -52,8 +52,13 @@
       margin: 0 16px 16px 0;
     }
     .field__item--tight {
-      min-width: 322px;
-      margin: 0 5px 5px 0;
+      width: calc(50% - 0.3rem);
+      min-width: 0;
+      margin: 0 0.3rem 0.3rem 0;
+      vertical-align: top;
+      &:nth-child(2n) {
+        margin-right: 0;
+      }
     }
   }
   &.field--cols {
