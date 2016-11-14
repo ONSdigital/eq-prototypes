@@ -1,0 +1,71 @@
+---
+title: Individual Questionnaire
+subtitle: England
+project: 2017 Census wave 3
+globalcss: false
+---
+
+{% include survey-header-census.html %}
+
+<div class="container">
+  <div class="grid ">
+    <div class="grid__col col-8@s">
+      <div role="main" class="panel__body" id="main">
+        <a class="mars" href="">Previous</a><br/><br/>
+        <form class="form qa-questionnaire-form" role="form" novalidate="">
+          <div class="group" id="14ba4707-321d-441d-8d21-b8367366e766">
+            <div class="block" id="cd3b74d1-b687-4051-9634-a8f9ce10a27d">
+              <div class="section" id="017880bc-752d-4a6b-83df-e130409ee660">
+                <h2 class="section__title saturn"><span class="section__title__number question__title__number--census venus">2</span> Individual questions</h2>
+                <div class="question question--radios">
+                  <h3 class="question__title neptune"><span class="question__title__number venus">2.12</span>If you were not born in the United Kingdom, when did you most recently arrive to live here?</h3>
+                  <div class="question__description mars" id="description-6cc86b54-330c-4465-99b2-34cc7073dc2c">
+                    <div class="box box--promo box--census">
+                      <h3 class="venus">Exclude:</h3>
+                      <ul>
+                        <li>Short visits away from the UK</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="question__responses">
+                    <div class="response response date" id="94f368e4-7c6c-4272-a780-8c46328626a2">
+                      <fieldset class="fieldset fieldset--date">
+                        <div class="subfields">
+                          <div class="field field--month">
+                            <label class="label label--small venus" for="form-input-2">Month</label>
+                            <select class="input input--select mars" name="q1" id="form-input-2">
+                              <option value="0">Select month</option><option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select>
+                          </div>
+                          <div class="field field--year">
+                            <label class="label label--small venus" for="form-input-3">Year</label>
+                            <input class="input input--number" type="number" name="q1" id="form-input-3" value="" placeholder="YYYY">
+                          </div>
+                        </div>
+                      </fieldset>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn--census qa-btn-get-started venus" type="submit" name="">Save and continue</button><br/><br/>
+          <a class="mars" href="">Save and complete later</a><br/><br/>
+          <a class="mars" href="">Previous</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include footer-census.html %}
+
+<script>
+
+
+$('.qa-btn-get-started').click(function(e) {
+  e.preventDefault();
+  var inputValue = $("input[name='q1']"). val();
+  sessionStorage.setItem('arrivalDate', inputValue);
+  window.location.href = "../section-31";
+});
+</script>

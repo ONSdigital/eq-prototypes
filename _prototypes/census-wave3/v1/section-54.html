@@ -1,5 +1,5 @@
 ---
-title: Individual Questionnaire
+title: Individual Questionnaire v1
 subtitle: England
 project: 2017 Census wave 3
 globalcss: false
@@ -63,7 +63,7 @@ $('.qa-btn-get-started').click(function(e) {
   e.preventDefault();
   var radioValue = $("input[name='q0']:checked"). val();
   sessionStorage.setItem('everWorked', radioValue);
-  if (sessionStorage.getItem('everWorked') == 'No') {
+  if (sessionStorage.getItem('everWorked') == 'No, have never worked') {
     window.location.href = "../thank-you";
   } else {
     window.location.href = "../section-55";

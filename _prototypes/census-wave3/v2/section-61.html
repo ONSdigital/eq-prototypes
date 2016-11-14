@@ -1,0 +1,56 @@
+---
+title: Individual Questionnaire
+subtitle: England
+project: 2017 Census wave 3
+globalcss: false
+---
+
+{% include survey-header-census.html %}
+<div class="container">
+  <div class="grid ">
+    <div class="grid__col col-8@s">
+      <div role="main" class="panel__body" id="main">
+        <a class="mars" href="">Previous</a><br/><br/>
+
+
+        <div class="section__description">
+          <h3 class="section__title saturn">You have now completed the Census</h3>
+
+
+        </div>
+        <div class="box box--promo box--census">
+          <h3 class="venus">Submission</h3>
+          <ul>
+            <li class="mars">You and other members will not be able to access or change your answers on submitting the questionnaire</li>
+            <li class="mars">If you wish to review your answers please select the relevant Completed sections</li>
+            <li class="mars">If you do not submit your questionnaire, your responses will be collected when the online questionnaire closes</li>
+          </ul>
+        </div>
+        <br/>
+        <button class="btn btn--census qa-btn-get-started venus" type="submit" name="">Submit answers</button><br/>
+        <ul class="interstitial">
+          <li class="complete mars">
+            <a href="../section-1">Accommodation</a>
+          </li>
+          <li class="complete mars">
+            <a href="../section-20">Individual questions</a>
+          </li>
+        </ul>
+        <br/><br/>
+        <a class="mars" href="">Save and complete later</a><br/><br/>
+        <a class="mars" href="">Previous</a><br/><br/>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include footer-census.html %}
+
+<script>
+
+$('.qa-btn-get-started').click(function(e) {
+  e.preventDefault();
+  window.location.href = "../thank-you";
+});
+
+</script>
