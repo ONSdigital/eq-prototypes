@@ -263,3 +263,12 @@
     }
   }
 }
+
+.v5 {
+  @include mq(s) {
+    .field__item {
+      display: block;
+      width: 66.66666%;
+    }
+  }
+}
