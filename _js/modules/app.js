@@ -12,21 +12,7 @@
     return text;
   }
 
-  const relationshipTypes = [
-    "Husband or wife",
-    "Partner",
-    "Unrelated",
-    "Same sex civil-partner",
-    "Mother or father",
-    "Son or daughter",
-    "Step-mother or step-father",
-    "Step-child",
-    "Brother or sister",
-    "Step–brother or step–sister",
-    "Grandparent",
-    "Grandchild",
-    "Relation - other",
-  ]
+  const relationshipTypes = window.__RELATIONSHIP_TYPES__
 
   class Field extends Component {
     constructor() {
@@ -38,11 +24,12 @@
     render() {
       const {relationship, index, setRelationship} = this.props
       const id = `form-input-${index}-${makeid()}`
+      const type = relationship.split(" ")[0].toLowerCase()
       return (
-        <div className="field__item field__item--tight">
+        <div className={`field__item field__item--tight ${type}`}>
           <input onChange={e => {
-           setRelationship(relationship, index)
-         }} className="input input--radio" type="radio" name="q6" id={id} value={relationship} title={relationship} />
+            setRelationship(relationship, index)
+          }} className="input input--radio" type="radio" name="q6" id={id} value={relationship} title={relationship} />
           <label className="label label--inline" htmlFor={id}><span className="label__inner">{relationship}</span></label>
         </div>
       )

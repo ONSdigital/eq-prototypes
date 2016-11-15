@@ -26,7 +26,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     }return text;
   }
 
-  var relationshipTypes = ["Husband or wife", "Partner", "Unrelated", "Same sex civil-partner", "Mother or father", "Son or daughter", "Step-mother or step-father", "Step-child", "Brother or sister", "Step–brother or step–sister", "Grandparent", "Grandchild", "Relation - other"];
+  var relationshipTypes = window.__RELATIONSHIP_TYPES__;
 
   var Field = function (_Component) {
     _inherits(Field, _Component);
@@ -51,9 +51,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
             setRelationship = _props.setRelationship;
 
         var id = "form-input-" + index + "-" + makeid();
+        var type = relationship.split(" ")[0].toLowerCase();
         return React.createElement(
           "div",
-          { className: "field__item field__item--tight" },
+          { className: "field__item field__item--tight " + type },
           React.createElement("input", { onChange: function onChange(e) {
               setRelationship(relationship, index);
             }, className: "input input--radio", type: "radio", name: "q6", id: id, value: relationship, title: relationship }),

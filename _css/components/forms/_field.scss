@@ -225,10 +225,41 @@
 
 .response.response--repeating-elements{
   margin: 2rem 0 2rem 0;
-  .field{
+  .field {
     margin-bottom: 1rem;
   }
 }
 .response--textfield .input--census-number{
   max-width: 80px;
+}
+
+
+.v4 {
+
+  @include mq(s) {
+    .husband,
+    .same,
+    .step-father,
+    .step-child,
+    .brother,
+    .partner,
+    .step-brother,
+    .mother,
+    .grandparent,
+    .grandchild {
+      margin-bottom: 0.4rem;
+    }
+
+    .partner {
+      display: block;
+    }
+
+    .son,
+    .step-child,
+    .step-brother,
+    .grandchild,
+    .unrelated {
+      margin-left: 0.3rem;
+    }
+  }
 }
