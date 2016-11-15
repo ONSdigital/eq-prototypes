@@ -7,6 +7,7 @@ Install [RVM](https://rvm.io/) and run:
 - `git clone https://github.com/ONSdigital/eq-prototypes.git`
 - `cd eq-prototypes`
 - `bundle install`
+- `npm install`
 
 ## Run
 Install [node](https://nodejs.org/en/) and [gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md) and then run:
