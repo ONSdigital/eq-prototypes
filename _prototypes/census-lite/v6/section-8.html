@@ -1,5 +1,5 @@
 ---
-title: Household Questionnaire
+title: Household Questionnaire lite v6
 subtitle: England
 project: 2017 Census lite
 globalcss: false
@@ -50,6 +50,11 @@ globalcss: false
 <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script> -->
 <script src="{{ "/js/modules/app.js" | prepend: site.baseurl }}"></script>
 
+<style>
+  .btn--border--census {
+    display: none;
+  };
+</style>
 <script>
 var buttonHack = function(){
   $('.question__accordion-body.is-open .btn--border--census').trigger('click');

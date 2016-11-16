@@ -99,6 +99,6 @@
     display: inline-block;
   }
 }
-.btn--border--census{
-  display: none !important;
+.btn--border--census.btn-hidden{
+  display: none;
 }
