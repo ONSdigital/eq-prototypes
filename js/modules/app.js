@@ -251,13 +251,19 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                   " is ",
                   React.createElement(
                     "strong",
-                    { className: "neptune strong-census", onClick: function onClick(e) {
-                        return _this6.editRelationship(i);
-                      } },
+                    { className: "neptune strong-census" },
                     _this6.state.relationships[i] ? _this6.state.relationships[i].toLowerCase() : '...'
                   ),
                   " to ",
-                  person.firstName
+                  person.firstName,
+                  " ",
+                  React.createElement(
+                    "span",
+                    { className: "accordion__edit pluto", onClick: function onClick(e) {
+                        return _this6.editRelationship(i);
+                      } },
+                    "Edit"
+                  )
                 ), body: React.createElement(QuestionResponses, { setRelationship: _this6.setRelationship, confirmRelationship: _this6.confirmRelationship, requiresConfirm: true, index: i }) });
             }) : React.createElement(
               "div",

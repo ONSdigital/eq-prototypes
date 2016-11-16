@@ -64,6 +64,7 @@
             {relationshipTypes.map((relationship, index) => {
               return <Field relationship={relationship} index={index} key={index} setRelationship={e => this.setRelationship(relationship, this.props.index)} />
             })}
+
           </div>
           {this.state.isAnswered && this.props.requiresConfirm
             ? <button className="btn btn--border--census u-mt-s" onClick={e => this.onConfirm(e)}>Confirm relationship</button>
@@ -132,7 +133,7 @@
                   return (
                     <QuestionAccordion isOpen={i === this.state.openResponse} key={i}
                       title={
-                      <h3 className="neptune">{activePerson.firstName} is <strong className="neptune strong-census" onClick={e => this.editRelationship(i)}>{this.state.relationships[i] ? this.state.relationships[i].toLowerCase() : '...'}</strong> to {person.firstName}</h3>
+                      <h3 className="neptune">{activePerson.firstName} is <strong className="neptune strong-census" >{this.state.relationships[i] ? this.state.relationships[i].toLowerCase() : '...'}</strong> to {person.firstName} <span className="accordion__edit pluto" onClick={e => this.editRelationship(i)}>Edit</span></h3>
                     } body={
                       <QuestionResponses setRelationship={this.setRelationship} confirmRelationship={this.confirmRelationship} requiresConfirm index={i}/>
                     }>

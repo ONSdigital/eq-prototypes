@@ -83,3 +83,22 @@
     padding: 1rem;
   }
 }
+
+.accordion__edit{
+  float: right;
+  text-decoration: underline;
+  color: $color-links;
+  cursor: pointer;
+  display: none;
+  &.btn-visible{
+    display: inline-block;
+  }
+}
+.question__accordion-body.is-closed {
+  .accordion__edit{
+    display: inline-block;
+  }
+}
+.btn--border--census{
+  display: none !important;
+}
