@@ -1,0 +1,72 @@
+---
+title: Household Questionnaire lite v7
+subtitle: England
+project: 2017 Census lite
+globalcss: false
+---
+
+{% include survey-header-census.html %}
+
+<div class="container">
+  <div class="grid ">
+    <div class="grid__col col-7@s">
+      <div role="main" class="panel__body" id="main">
+        <a class="mars" href="">Previous</a><br/><br/>
+
+        <div id="root"></div>
+
+      </div>
+    </div>
+    <div class="grid__col push-1@s col-3@s">
+    {% include progress-census.html %}
+    </div>
+  </div>
+</div>
+
+
+{% include footer-census.html %}
+
+<script type="text/javascript">
+  window.__RELATIONSHIP_TYPES__ = [
+    "Husband or wife",
+    "Same sex civil-partner",
+    "Partner",
+    "Son or daughter",
+    "Step-child",
+    "Brother or sister",
+    "Step–brother or step–sister",
+    "Mother or father",
+    "Step-mother or step-father",
+    "Grandchild",
+    "Grandparent",
+    "Relation - other",
+    "Unrelated (including foster child)",
+  ]
+</script>
+
+<script src="https://unpkg.com/react@15/dist/react.js"></script>
+<script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+<!-- <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+<script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script> -->
+<script src="{{ "/js/modules/app.js" | prepend: site.baseurl }}"></script>
+
+<style>
+  .btn--border--census {
+    display: none;
+  }
+  .label {
+    padding-left: 16px;
+  }
+  .input {
+    opacity: 0;
+  }
+</style>
+<script>
+var buttonHack = function(){
+  $('.question__accordion-body.is-open .btn--border--census').trigger('click');
+};
+$('.question__accordion-body input').click(function(e) {
+  $('.question__accordion-body.is-open').closest('.question__accordion').find('.accordion__edit').addClass('btn-visible');
+  setTimeout(buttonHack, 100);
+});
+</script>
