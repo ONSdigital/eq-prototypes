@@ -99,7 +99,7 @@ gulp.task('css', () => {
 
 // Handlebars html generator
 gulp.task('clean-handlebars', function() {
-  del(['./_prototypes/ukis/v2/*.html']);
+  del(['./_prototypes/ukis/v3/*.html']);
 });
 gulp.task('handlebars', ['clean-handlebars'], function() {
   nunjucksRender.nunjucks.configure(['./_layouts/'], {
@@ -119,7 +119,7 @@ gulp.task('handlebars', ['clean-handlebars'], function() {
       .pipe(handlebars(page, options))
       .pipe(rename(fileName + ".html"))
       .pipe(nunjucksRender())
-      .pipe(gulp.dest('./_prototypes/ukis/v2/'));
+      .pipe(gulp.dest('./_prototypes/ukis/v3/'));
   });
 });
 

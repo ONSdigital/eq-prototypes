@@ -19,7 +19,7 @@ globalcss: false
     {{{html}}}
   {{else}}
   <div class="grid ">
-    <div class="grid__col col-8@s">
+    <div class="grid__col col-7@s">
       <div role="main" class="panel__body" id="main">
         {{#if prev}}
         <a class="mars" href="../{{prev}}">Previous</a><br/><br/>
@@ -199,7 +199,7 @@ globalcss: false
         </form>
       </div>
     </div>
-    <div class="grid__col col-4@s">
+    <div class="grid__col push-1@s col-3@s">
       {{#if navigation}}
       {% raw %}
       {% include progress-ukis.html %}
@@ -221,6 +221,9 @@ $( document ).ready(function() {
   var pathArray = window.location.pathname.split( '/' );
   var fourthLevelLocation = pathArray[4];
   $('.' + fourthLevelLocation).addClass('active is-open').prevAll().addClass('complete');
+  if ( fourthLevelLocation === "section-5" || fourthLevelLocation === "section-7" || fourthLevelLocation === "section-25" || fourthLevelLocation === "section-33" || fourthLevelLocation === "section-37" || fourthLevelLocation === "section-91") {
+    $('.' + fourthLevelLocation).addClass('complete');
+  }
   {{/if}}
   $('.qa-btn-get-started').click(function(e) {
     e.preventDefault();
