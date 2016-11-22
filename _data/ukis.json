@@ -118,7 +118,7 @@
     "sectionVersion": 1,
     "sectionTitle": "General Business Information",
     "sectionDescription": "<p class='neptune'>You have successfully completed this section</p>",
-    "questionDescription": "<p class='mars'>The next section covers changes in business strategy and practices, for example, implementing changes to marketing concepts or strategies.</p>"
+    "questionDescription": "<p class='mars'>The next section covers information relating to innovation activities undertaken by your business. You will be asked to supply information about your business’s strategy and practices, figures for investment in innovation for the calendar year 2016 and information regarding goods, services and process innovation.</p>"
 
   },
   {
@@ -185,10 +185,9 @@
     "prev": "section-6",
     "url": "section-7",
     "next": "section-8",
-    "sectionVersion": 2,
-    "sectionTitle": "Business Strategy and Practices",
-    "sectionDescription": "<p class='neptune'>You have successfully completed this section</p>",
-    "questionDescription": "<p class='mars'>The next section covers investments in innovation. You will be asked to provide figures for expenditure on innovation activities in the calendar year 2016.</p>"
+    "sectionVersion": 3,
+    "sectionTitle": "Innovation Investment",
+    "questionDescription": "<p class='mars'>This section covers investments in innovation. You will be asked to provide figures for expenditure on innovation activities in the calendar year 2016.</p>"
   },
   {
     "navigation": "true",
@@ -211,6 +210,13 @@
       {
         "type": "radio",
         "label": "No",
+        "qId": "1"
+      }
+    ],
+    "route": [
+      {
+        "label": "No",
+        "link": "section-11",
         "qId": "1"
       }
     ]
@@ -295,6 +301,13 @@
         "label": "No",
         "qId": "1"
       }
+    ],
+    "route": [
+      {
+        "label": "No",
+        "link": "section-13",
+        "qId": "1"
+      }
     ]
   },
   {
@@ -337,6 +350,13 @@
       {
         "type": "radio",
         "label": "No",
+        "qId": "1"
+      }
+    ],
+    "route": [
+      {
+        "label": "No",
+        "link": "section-16",
         "qId": "1"
       }
     ]
@@ -658,10 +678,9 @@
     "prev": "section-24",
     "url": "section-25",
     "next": "section-26",
-    "sectionVersion": 3,
-    "sectionTitle": "Innovation Investment",
-    "sectionDescription": "<p class='neptune'>You have successfully completed this section</p>",
-    "questionDescription": "<p class='mars'>The next section covers innovation relating to goods and services. First, you will be asked to provide information about any new or significantly improved goods introduced by your business; second, to provide information relating to any new or significantly improved services. You will also be asked to provide estimates for turnover in the calendar year 2016 relating to new or improved goods or services introduced during the period 1 January 2014 to 31 December 2016.</p>"
+    "sectionVersion": 4,
+    "sectionTitle": "Goods and Services Innovation",
+    "questionDescription": "<p class='mars'>This section covers innovation relating to goods and services.</p><p class='mars'>You will first be asked to provide information about any new or significantly improved goods introduced by your business; and second to provide information relating to any new or significantly improved services.</p><p class='mars'>You will also be asked to provide estimates for turnover in the calendar year 2016 relating to new or improved goods or services introduced during the period 1 January 2014 to 31 December 2016.</p>"
   },
   {
     "navigation": "true",
@@ -752,7 +771,7 @@
     "route": [
       {
         "label": "No",
-        "link": "section-32",
+        "link": "section-33",
         "qId": "1"
       }
     ]
@@ -874,10 +893,9 @@
     "prev": "section-32",
     "url": "section-33",
     "next": "section-34",
-    "sectionVersion": 4,
-    "sectionTitle": "Goods and Services Innovation",
-    "sectionDescription": "<p class='neptune'>You have successfully completed this section</p>",
-    "questionDescription": "<p class='mars'>The next section covers innovation relating to processes for the production or supply of goods or services including all new or significantly improved methods of production. You will be asked to provide general information about process innovation for your business.</p>"
+    "sectionVersion": 5,
+    "sectionTitle": "Process Innovation",
+    "questionDescription": "<p class='mars'>This section covers innovation relating to processes for the production or supply of goods or services including all new or significantly improved methods of production.</p><p class='mars'>You will be asked to provide general information about process innovation for your business.</p>"
   },
   {
     "navigation": "true",

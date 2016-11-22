@@ -27,7 +27,7 @@ globalcss: false
                 </div>
                 <div class="question">
                   <div class="question__description">
-                    <p class='mars'>The next section covers changes in business strategy and practices, for example, implementing changes to marketing concepts or strategies.</p>
+                    <p class='mars'>The next section covers information relating to innovation activities undertaken by your business. You will be asked to supply information about your business’s strategy and practices, figures for investment in innovation for the calendar year 2016 and information regarding goods, services and process innovation.</p>
                   </div>
                   <div class="response response--">
 
@@ -67,7 +67,7 @@ $( document ).ready(function() {
   var pathArray = window.location.pathname.split( '/' );
   var fourthLevelLocation = pathArray[4];
   $('.' + fourthLevelLocation).addClass('active is-open').prevAll().addClass('complete');
-  if ( fourthLevelLocation === "section-5" || fourthLevelLocation === "section-7" || fourthLevelLocation === "section-25" || fourthLevelLocation === "section-33" || fourthLevelLocation === "section-37" || fourthLevelLocation === "section-91") {
+  if ( fourthLevelLocation === "section-5" || fourthLevelLocation === "section-37" || fourthLevelLocation === "section-91") {
     $('.' + fourthLevelLocation).addClass('complete');
   }
   $('.qa-btn-get-started').click(function(e) {
