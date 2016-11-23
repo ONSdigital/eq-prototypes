@@ -23,7 +23,7 @@ globalcss: false
               <div class="section" id="017880bc-752d-4a6b-83df-e130409ee660">
                 <h2 class="section__title saturn">You are now ready to submit this survey</h2>
                 <div class="section__description">
-                  <h3 class='header__title saturn' style='margin-top: 1rem;'>Completed sections</h3><ul class='interstitial'><li class='complete mars'><a href='../section-3'>General Business Information</a></li><li class='complete mars'><a href='../section-6'>Business Strategy and Practices</a></li><li class='complete mars'><a href='../section-8'>Innovation Investment</a></li><li class='complete mars'><a href='../section-26'>Goods and Services Innovation</a></li><li class='complete mars'><a href='../section-34'>Process Innovation</a></li><li class='complete mars'><a href='../section-38'>Context for Innovation</a></li><li class='complete mars'><a href='../section-92'>Public Financial Support for Innovation</a></li><li class='complete mars'><a href='../section-95'>Turnover</a></li><li class='complete mars'><a href='../section-98'>Exports</a></li><li class='complete mars'><a href='../section-100'>Employees</a></li><li class='complete mars'><a href='../section-103'>Skills</a></li><li class='complete mars'><a href='../section-105'>General Information</a></li><li class='complete mars'><a href=''>Summary</a></li></ul><span class='box box--promo' style='margin-bottom: 0;'><h2 class='neptune'>Submission</h2><ul><li class='mars'>You will not be able to access or change your answers on submitting the questionnaire</li><li class='mars'>If you wish to review your answers please select the relevant Completed sections</li><li class='mars'>If you do not submit your questionnaire, your responses will be collected when the online questionnaire closes</li></ul></span>
+                  <h2 class='neptune'>Submission</h2><ul><li class='mars'>You will not be able to access or change your answers on submitting the questionnaire</li><li class='mars'>If you wish to review your answers please select the relevant Completed sections</li><li class='mars'>If you do not submit your questionnaire, your responses will be collected when the online questionnaire closes</li></ul>
                 </div>
                 <div class="question">
                   <div class="response response--">
@@ -47,6 +47,9 @@ globalcss: false
       </div>
     </div>
     <div class="grid__col push-1@s col-3@s">
+      
+      {% include progress-ukis.html %}
+      
     </div>
   </div>
 </div>
@@ -57,6 +60,12 @@ $( document ).ready(function() {
   if ($('.business-name').length > 0) {
     var businessName = sessionStorage.getItem('Business name');
     $('.business-name').html(businessName);
+  }
+  var pathArray = window.location.pathname.split( '/' );
+  var fourthLevelLocation = pathArray[4];
+  $('.' + fourthLevelLocation).addClass('active is-open').prevAll().addClass('complete');
+  if ( fourthLevelLocation === "section-5" || fourthLevelLocation === "section-37" || fourthLevelLocation === "section-50b" || fourthLevelLocation === "section-91" || fourthLevelLocation === "section-94" || fourthLevelLocation === "section-99" || fourthLevelLocation === "section-104b") {
+    $('.' + fourthLevelLocation).addClass('complete');
   }
   $('.qa-btn-get-started').click(function(e) {
     e.preventDefault();

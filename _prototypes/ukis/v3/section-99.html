@@ -21,11 +21,14 @@ globalcss: false
           <div class="group" id="14ba4707-321d-441d-8d21-b8367366e766">
             <div class="block" id="cd3b74d1-b687-4051-9634-a8f9ce10a27d">
               <div class="section" id="017880bc-752d-4a6b-83df-e130409ee660">
-                <h2 class="section__title saturn">You have successfully completed the Exports section</h2>
+                <h2 class="section__title saturn"><span class="section__title__number venus">5</span>Turnover and Exports</h2>
                 <div class="section__description">
-                  <h3 class='header__title saturn' style='margin-top: 1rem;'>Completed sections</h3><ul class='interstitial'><li class='complete mars'><a href='../section-3'>General Business Information</a></li><li class='complete mars'><a href='../section-6'>Business Strategy and Practices</a></li><li class='complete mars'><a href='../section-8'>Innovation Investment</a></li><li class='complete mars'><a href='../section-26'>Goods and Services Innovation</a></li><li class='complete mars'><a href='../section-34'>Process Innovation</a></li><li class='complete mars'><a href='../section-38'>Context for Innovation</a></li><li class='complete mars'><a href='../section-92'>Public Financial Support for Innovation</a></li><li class='complete mars'><a href='../section-95'>Turnover</a></li><li class='complete mars'><a href='../section-98'>Exports</a></li></ul><h3 class='question__title saturn'>Remaining sections</h3><ul class=''><li class='mars'><a href='../section-100'>Employees</a></li><li class='mars'>Skills</li><li class='mars'>General Information</li><li class='mars'>Summary</li></ul><h3 class='question__title saturn'>The next section</h3><span class='mars'>The next section covers information relating to persons employed by your business. You will be asked to provide estimates for the total number of employees for the calendar years 2014 and 2016.</span>
+                  <p class='neptune'>You have successfully completed this section</p>
                 </div>
                 <div class="question">
+                  <div class="question__description">
+                    <p class='mars'>The next section covers information relating to persons employed by your business. You will be asked to provide estimates for the total number of employees for the calendar years 2014 and 2016, an estimate of the proportion of your workforce who hold a degree or higher qualification and information regarding the skills possessed by employees, for example, mathematics or statistics.</p>
+                  </div>
                   <div class="response response--">
 
 
@@ -47,6 +50,9 @@ globalcss: false
       </div>
     </div>
     <div class="grid__col push-1@s col-3@s">
+      
+      {% include progress-ukis.html %}
+      
     </div>
   </div>
 </div>
@@ -57,6 +63,12 @@ $( document ).ready(function() {
   if ($('.business-name').length > 0) {
     var businessName = sessionStorage.getItem('Business name');
     $('.business-name').html(businessName);
+  }
+  var pathArray = window.location.pathname.split( '/' );
+  var fourthLevelLocation = pathArray[4];
+  $('.' + fourthLevelLocation).addClass('active is-open').prevAll().addClass('complete');
+  if ( fourthLevelLocation === "section-5" || fourthLevelLocation === "section-37" || fourthLevelLocation === "section-50b" || fourthLevelLocation === "section-91" || fourthLevelLocation === "section-94" || fourthLevelLocation === "section-99" || fourthLevelLocation === "section-104b") {
+    $('.' + fourthLevelLocation).addClass('complete');
   }
   $('.qa-btn-get-started').click(function(e) {
     e.preventDefault();
