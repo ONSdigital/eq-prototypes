@@ -26,7 +26,7 @@ globalcss: false
                   <p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>
                 </div>
                 <div class="question">
-                  <h3 class="question__title neptune"><span class="question__title__number venus">6.21</span>How important were the following factors in your decision to innovate in goods or services and/or processes?</h3>
+                  <h3 class="question__title neptune"><span class="question__title__number venus">3.8</span>How important were the following factors in your decision to innovate in goods or services and/or processes?</h3>
                   <div class="question__description">
                     <p class='mars'>Reducing costs per unit produced or provided</p>
                   </div>
@@ -90,7 +90,7 @@ $( document ).ready(function() {
   var pathArray = window.location.pathname.split( '/' );
   var fourthLevelLocation = pathArray[4];
   $('.' + fourthLevelLocation).addClass('active is-open').prevAll().addClass('complete');
-  if ( fourthLevelLocation === "section-5" || fourthLevelLocation === "section-37" || fourthLevelLocation === "section-50b" || fourthLevelLocation === "section-91" || fourthLevelLocation === "section-94" || fourthLevelLocation === "section-99" || fourthLevelLocation === "section-104b") {
+  if ( fourthLevelLocation === "section-5" || fourthLevelLocation === "section-37" || fourthLevelLocation === "section-50c" || fourthLevelLocation === "section-50b" || fourthLevelLocation === "section-91" || fourthLevelLocation === "section-94" || fourthLevelLocation === "section-99" || fourthLevelLocation === "section-104b") {
     $('.' + fourthLevelLocation).addClass('complete');
   }
   $('.qa-btn-get-started').click(function(e) {
@@ -98,6 +98,9 @@ $( document ).ready(function() {
     window.location.href = "../section-59";
 
 
+    if ( fourthLevelLocation === "section-50" && sessionStorage.getItem('section-6a') === "No" && sessionStorage.getItem('section-6b') === "No" && sessionStorage.getItem('section-6c') === "No" && sessionStorage.getItem('section-6d') === "No" && sessionStorage.getItem('section-8') === "No" && sessionStorage.getItem('section-11') === "No" && sessionStorage.getItem('section-13') === "No" && sessionStorage.getItem('section-16') === "No" && sessionStorage.getItem('section-18') === "No" && sessionStorage.getItem('section-20') === "No" && sessionStorage.getItem('section-22') === "No" && sessionStorage.getItem('section-26') === "No" && sessionStorage.getItem('section-28') === "No" && sessionStorage.getItem('section-34') === "No" && sessionStorage.getItem('section-38a') === "No" && sessionStorage.getItem('section-38b') === "No" && sessionStorage.getItem('section-38c') === "No" ) {
+      window.location.href = "../section-50a";
+    }
   });
 
 

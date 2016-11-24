@@ -26,7 +26,7 @@ globalcss: false
                   <p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>
                 </div>
                 <div class="question">
-                  <h3 class="question__title neptune"><span class="question__title__number venus">7.1</span>Did <span class='business-name'>[BUSINESS NAME]</span> receive public financial support for innovation activities from the following levels of government?</h3>
+                  <h3 class="question__title neptune"><span class="question__title__number venus">4.1</span>Did <span class='business-name'>[BUSINESS NAME]</span> receive public financial support for innovation activities from the following levels of government?</h3>
                   <div class="question__description">
                     <div class='box box--promo'><div class='grid'><div class='grid__col col-6@s'><h3 class='venus'>Include:</h3><ul><li class='mars'>financial support via tax credits or deductions, grants, subsidised loans and loan guarantees</li></ul></div><div class='grid__col col-6@s'><h3 class='venus'>Exclude:</h3><ul><li class='mars'>Research and Development and other innovations activities conducted entirely for the public sector under contract (the public sector includes government owned organisations such as local, regional and national administrations and agencies, schools, hospitals and government providers of services such as security, transport, housing and energy)</li></ul></div></div></div>
                   </div>
@@ -100,7 +100,7 @@ $( document ).ready(function() {
   var pathArray = window.location.pathname.split( '/' );
   var fourthLevelLocation = pathArray[4];
   $('.' + fourthLevelLocation).addClass('active is-open').prevAll().addClass('complete');
-  if ( fourthLevelLocation === "section-5" || fourthLevelLocation === "section-37" || fourthLevelLocation === "section-50b" || fourthLevelLocation === "section-91" || fourthLevelLocation === "section-94" || fourthLevelLocation === "section-99" || fourthLevelLocation === "section-104b") {
+  if ( fourthLevelLocation === "section-5" || fourthLevelLocation === "section-37" || fourthLevelLocation === "section-50c" || fourthLevelLocation === "section-50b" || fourthLevelLocation === "section-91" || fourthLevelLocation === "section-94" || fourthLevelLocation === "section-99" || fourthLevelLocation === "section-104b") {
     $('.' + fourthLevelLocation).addClass('complete');
   }
   $('.qa-btn-get-started').click(function(e) {
@@ -108,11 +108,14 @@ $( document ).ready(function() {
     window.location.href = "../section-94";
 
 
-      var checkedVal = $("input[value='Yes']:checked").val();
-      var checkedName = $("input[value='Yes']:checked").attr("name");
-      if (checkedVal == "Yes" && checkedName == "2") {
-        window.location.href = "../section-93";
-      }
+        var checkedVal = $("input[name='2']:checked").val();
+        var checkedName = $("input[name='2']:checked").attr("name");
+        if (checkedVal == "Yes" && checkedName == "2") {
+          window.location.href = "../section-93";
+        }
+    if ( fourthLevelLocation === "section-50" && sessionStorage.getItem('section-6a') === "No" && sessionStorage.getItem('section-6b') === "No" && sessionStorage.getItem('section-6c') === "No" && sessionStorage.getItem('section-6d') === "No" && sessionStorage.getItem('section-8') === "No" && sessionStorage.getItem('section-11') === "No" && sessionStorage.getItem('section-13') === "No" && sessionStorage.getItem('section-16') === "No" && sessionStorage.getItem('section-18') === "No" && sessionStorage.getItem('section-20') === "No" && sessionStorage.getItem('section-22') === "No" && sessionStorage.getItem('section-26') === "No" && sessionStorage.getItem('section-28') === "No" && sessionStorage.getItem('section-34') === "No" && sessionStorage.getItem('section-38a') === "No" && sessionStorage.getItem('section-38b') === "No" && sessionStorage.getItem('section-38c') === "No" ) {
+      window.location.href = "../section-50a";
+    }
   });
 
 

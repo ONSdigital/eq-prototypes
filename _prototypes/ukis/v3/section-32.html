@@ -26,7 +26,7 @@ globalcss: false
                   <div class='box box--promo'><div class='grid'><div class=' '><ul><li class='mars'>The following question refers to turnover for the <strong>calendar year 1st January to 31st December 2016</strong>, based on goods or services introduced during the period 1st January 2014 to 31st December 2016.</li><li class='mars'>If <strong><span class='business-name'>the business</span></strong> did not introduce any new or significantly improved goods or services, please enter 100% in the ‘Unchanged or only marginally modified’ answer field.</li><li class='mars'>Please note that estimates are acceptable and percentages must total 100%.</li></ul></div></div></div></br></br>
                 </div>
                 <div class="question">
-                  <h3 class="question__title neptune"><span class="question__title__number venus">4.7</span>Please <strong>ESTIMATE</strong> the percentage of <span class='business-name'>[BUSINESS NAME]</span>’s total <strong>turnover</strong> in <strong>calendar year 2016 only</strong> from goods and services that were:</h3>
+                  <h3 class="question__title neptune"><span class="question__title__number venus">2.25</span>Please <strong>ESTIMATE</strong> the percentage of <span class='business-name'>[BUSINESS NAME]</span>’s total <strong>turnover</strong> in <strong>calendar year 2016 only</strong> from goods and services that were:</h3>
                   <div class="question__description">
                     <div class='box box--promo'><h3 class='venus'>Definition of 'turnover':</h3><ul><li class='mars'>the market sales of goods and services (including all taxes except VAT)</li></ul></div>
                   </div>
@@ -68,7 +68,7 @@ globalcss: false
                         <br/>
                         <div class="field">
                           <label class="label venus" for="form-input-3">Unchanged or only marginally modified</label>
-                          <p class="mars">Include the resale of goods and services purchased from other business</p>
+                          <p class="mars">Include the resale of goods and services purchased from other businesses</p>
                           <div class="input-type input-type--percent" data-type="%">
                             <input id="form-input-3" name="1" type="text" class="input input--text" value="">
                           </div>
@@ -114,7 +114,7 @@ $( document ).ready(function() {
   var pathArray = window.location.pathname.split( '/' );
   var fourthLevelLocation = pathArray[4];
   $('.' + fourthLevelLocation).addClass('active is-open').prevAll().addClass('complete');
-  if ( fourthLevelLocation === "section-5" || fourthLevelLocation === "section-37" || fourthLevelLocation === "section-50b" || fourthLevelLocation === "section-91" || fourthLevelLocation === "section-94" || fourthLevelLocation === "section-99" || fourthLevelLocation === "section-104b") {
+  if ( fourthLevelLocation === "section-5" || fourthLevelLocation === "section-37" || fourthLevelLocation === "section-50c" || fourthLevelLocation === "section-50b" || fourthLevelLocation === "section-91" || fourthLevelLocation === "section-94" || fourthLevelLocation === "section-99" || fourthLevelLocation === "section-104b") {
     $('.' + fourthLevelLocation).addClass('complete');
   }
   $('.qa-btn-get-started').click(function(e) {
@@ -122,6 +122,9 @@ $( document ).ready(function() {
     window.location.href = "../section-33";
 
 
+    if ( fourthLevelLocation === "section-50" && sessionStorage.getItem('section-6a') === "No" && sessionStorage.getItem('section-6b') === "No" && sessionStorage.getItem('section-6c') === "No" && sessionStorage.getItem('section-6d') === "No" && sessionStorage.getItem('section-8') === "No" && sessionStorage.getItem('section-11') === "No" && sessionStorage.getItem('section-13') === "No" && sessionStorage.getItem('section-16') === "No" && sessionStorage.getItem('section-18') === "No" && sessionStorage.getItem('section-20') === "No" && sessionStorage.getItem('section-22') === "No" && sessionStorage.getItem('section-26') === "No" && sessionStorage.getItem('section-28') === "No" && sessionStorage.getItem('section-34') === "No" && sessionStorage.getItem('section-38a') === "No" && sessionStorage.getItem('section-38b') === "No" && sessionStorage.getItem('section-38c') === "No" ) {
+      window.location.href = "../section-50a";
+    }
   });
   $('.input--text').keyup( function() {
     var inputOne = document.getElementById("form-input-0").value;

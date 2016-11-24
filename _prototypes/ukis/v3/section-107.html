@@ -23,7 +23,7 @@ globalcss: false
               <div class="section" id="017880bc-752d-4a6b-83df-e130409ee660">
                 <h2 class="section__title saturn"><span class="section__title__number venus">7</span>General Information</h2>
                 <div class="question">
-                  <h3 class="question__title neptune"><span class="question__title__number venus">12.3</span>Would <span class='business-name'>[BUSINESS NAME]</span> be willing to be approached by telephone by the Department for Business, Energy & Industrial Strategy or its appointed agents, to ask some questions about their most valuable innovation and the impact of the EU referendum?</h3>
+                  <h3 class="question__title neptune"><span class="question__title__number venus">7.3</span>Would <span class='business-name'>[BUSINESS NAME]</span> be willing to be approached by telephone by the Department for Business, Energy & Industrial Strategy or its appointed agents, to ask some questions about their most valuable innovation and the impact of the EU referendum?</h3>
                   <div class="response response--radio">
 
 
@@ -74,7 +74,7 @@ $( document ).ready(function() {
   var pathArray = window.location.pathname.split( '/' );
   var fourthLevelLocation = pathArray[4];
   $('.' + fourthLevelLocation).addClass('active is-open').prevAll().addClass('complete');
-  if ( fourthLevelLocation === "section-5" || fourthLevelLocation === "section-37" || fourthLevelLocation === "section-50b" || fourthLevelLocation === "section-91" || fourthLevelLocation === "section-94" || fourthLevelLocation === "section-99" || fourthLevelLocation === "section-104b") {
+  if ( fourthLevelLocation === "section-5" || fourthLevelLocation === "section-37" || fourthLevelLocation === "section-50c" || fourthLevelLocation === "section-50b" || fourthLevelLocation === "section-91" || fourthLevelLocation === "section-94" || fourthLevelLocation === "section-99" || fourthLevelLocation === "section-104b") {
     $('.' + fourthLevelLocation).addClass('complete');
   }
   $('.qa-btn-get-started').click(function(e) {
@@ -82,6 +82,9 @@ $( document ).ready(function() {
     window.location.href = "../section-108";
 
 
+    if ( fourthLevelLocation === "section-50" && sessionStorage.getItem('section-6a') === "No" && sessionStorage.getItem('section-6b') === "No" && sessionStorage.getItem('section-6c') === "No" && sessionStorage.getItem('section-6d') === "No" && sessionStorage.getItem('section-8') === "No" && sessionStorage.getItem('section-11') === "No" && sessionStorage.getItem('section-13') === "No" && sessionStorage.getItem('section-16') === "No" && sessionStorage.getItem('section-18') === "No" && sessionStorage.getItem('section-20') === "No" && sessionStorage.getItem('section-22') === "No" && sessionStorage.getItem('section-26') === "No" && sessionStorage.getItem('section-28') === "No" && sessionStorage.getItem('section-34') === "No" && sessionStorage.getItem('section-38a') === "No" && sessionStorage.getItem('section-38b') === "No" && sessionStorage.getItem('section-38c') === "No" ) {
+      window.location.href = "../section-50a";
+    }
   });
 
 

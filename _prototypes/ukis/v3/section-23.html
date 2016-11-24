@@ -26,7 +26,7 @@ globalcss: false
                   <p class='mars'>3 year period 1 January 2014 to 31 December 2016.</p>
                 </div>
                 <div class="question">
-                  <h3 class="question__title neptune"><span class="question__title__number venus">3.16</span>Which of the following did <span class='business-name'>[BUSINESS NAME]</span> invest in for the purposes of current or future innovation?</h3>
+                  <h3 class="question__title neptune"><span class="question__title__number venus">2.17</span>Which of the following did <span class='business-name'>[BUSINESS NAME]</span> invest in for the purposes of current or future innovation?</h3>
                   <div class="response response--checkbox">
 
 
@@ -83,7 +83,7 @@ $( document ).ready(function() {
   var pathArray = window.location.pathname.split( '/' );
   var fourthLevelLocation = pathArray[4];
   $('.' + fourthLevelLocation).addClass('active is-open').prevAll().addClass('complete');
-  if ( fourthLevelLocation === "section-5" || fourthLevelLocation === "section-37" || fourthLevelLocation === "section-50b" || fourthLevelLocation === "section-91" || fourthLevelLocation === "section-94" || fourthLevelLocation === "section-99" || fourthLevelLocation === "section-104b") {
+  if ( fourthLevelLocation === "section-5" || fourthLevelLocation === "section-37" || fourthLevelLocation === "section-50c" || fourthLevelLocation === "section-50b" || fourthLevelLocation === "section-91" || fourthLevelLocation === "section-94" || fourthLevelLocation === "section-99" || fourthLevelLocation === "section-104b") {
     $('.' + fourthLevelLocation).addClass('complete');
   }
   $('.qa-btn-get-started').click(function(e) {
@@ -91,26 +91,29 @@ $( document ).ready(function() {
     window.location.href = "../section-25";
 
 
-      var checkedVal = $("input[value='Changes to product or service design']:checked").val();
-      var checkedName = $("input[value='Changes to product or service design']:checked").attr("name");
-      if (checkedVal == "Changes to product or service design" && checkedName == "1") {
-        window.location.href = "../section-24";
-      }
-      var checkedVal = $("input[value='Market research']:checked").val();
-      var checkedName = $("input[value='Market research']:checked").attr("name");
-      if (checkedVal == "Market research" && checkedName == "1") {
-        window.location.href = "../section-24";
-      }
-      var checkedVal = $("input[value='Changes to marketing methods']:checked").val();
-      var checkedName = $("input[value='Changes to marketing methods']:checked").attr("name");
-      if (checkedVal == "Changes to marketing methods" && checkedName == "1") {
-        window.location.href = "../section-24";
-      }
-      var checkedVal = $("input[value='Launch advertising']:checked").val();
-      var checkedName = $("input[value='Launch advertising']:checked").attr("name");
-      if (checkedVal == "Launch advertising" && checkedName == "1") {
-        window.location.href = "../section-24";
-      }
+        var checkedVal = $("input[name='1']:checked").val();
+        var checkedName = $("input[name='1']:checked").attr("name");
+        if (checkedVal == "Changes to product or service design" && checkedName == "1") {
+          window.location.href = "../section-24";
+        }
+        var checkedVal = $("input[name='1']:checked").val();
+        var checkedName = $("input[name='1']:checked").attr("name");
+        if (checkedVal == "Market research" && checkedName == "1") {
+          window.location.href = "../section-24";
+        }
+        var checkedVal = $("input[name='1']:checked").val();
+        var checkedName = $("input[name='1']:checked").attr("name");
+        if (checkedVal == "Changes to marketing methods" && checkedName == "1") {
+          window.location.href = "../section-24";
+        }
+        var checkedVal = $("input[name='1']:checked").val();
+        var checkedName = $("input[name='1']:checked").attr("name");
+        if (checkedVal == "Launch advertising" && checkedName == "1") {
+          window.location.href = "../section-24";
+        }
+    if ( fourthLevelLocation === "section-50" && sessionStorage.getItem('section-6a') === "No" && sessionStorage.getItem('section-6b') === "No" && sessionStorage.getItem('section-6c') === "No" && sessionStorage.getItem('section-6d') === "No" && sessionStorage.getItem('section-8') === "No" && sessionStorage.getItem('section-11') === "No" && sessionStorage.getItem('section-13') === "No" && sessionStorage.getItem('section-16') === "No" && sessionStorage.getItem('section-18') === "No" && sessionStorage.getItem('section-20') === "No" && sessionStorage.getItem('section-22') === "No" && sessionStorage.getItem('section-26') === "No" && sessionStorage.getItem('section-28') === "No" && sessionStorage.getItem('section-34') === "No" && sessionStorage.getItem('section-38a') === "No" && sessionStorage.getItem('section-38b') === "No" && sessionStorage.getItem('section-38c') === "No" ) {
+      window.location.href = "../section-50a";
+    }
   });
 
 
