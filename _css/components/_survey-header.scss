@@ -150,6 +150,77 @@ $bp: 36em;
     margin-left: 8px;
   }
 }
+.ukis-header{
+  .survey-header__title{
+    margin-bottom: 0;
+  }
+  .panel__header{
+    padding: 1rem 0rem;
+    &:before{
+      display: none;
+    }
+  }
+  .survey-header__info:before{
+    display: none;
+  }
+  .info__title a{
+    text-decoration: none;
+    font-size: 14px;
+    border: 2px solid #537ACD;
+    padding: 8px 32px;
+    border-radius: 4px;
+    @include mq(s) {
+      font-size: 20px;
+    }
+  }
+  .info__list{
+    display: inline-block;
+    padding-top: 0px;
+    margin-top: 0px;
+  }
+  .info__tel {
+    margin-left: 5px;
+    &:before{
+      width: 1rem;
+      height: 1rem;
+      background-size: 1.9em;
+    }
+  }
+}
+.ukis-header__help{
+  background-color: #EEEEEE;
+  height: 0px;
+  overflow: hidden;
+  text-align: right;
+  transition: height 0.2s ease-in-out;
+  &.is-open{
+    height: 78px;
+  }
+  ul{
+    display: block;
+    padding: 8px 0 0 0;
+    margin: 0;
+    li {
+      display: inline-block;
+      margin: 0;
+      margin-left: 0.5rem;
+      padding-left: 0.5rem;
+      border-left: 1px solid #ccc;
+      &:first-child{
+        border-left: 0px;
+        margin-left: 0;
+        padding-left: 0;
+      }
+    }
+  }
+  a{
+    text-decoration: none;
+    color: #000000;
+  }
+  svg{
+    margin-left: 8px;
+  }
+}
 #help-and-support-btn{
   cursor: pointer;
 }

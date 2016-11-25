@@ -100,3 +100,17 @@
   width: 100%;
   float:none;
 }
+.footer--help-and-support{
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  width: 100%;
+  .info__tel{
+    margin-left: 5px;
+    &:before{
+      width: 1rem;
+      height: 1rem;
+      background-size: 1.9em;
+    }
+  }
+}
