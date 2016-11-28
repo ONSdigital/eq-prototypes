@@ -10,3 +10,18 @@
     vertical-align: bottom;
   }
 }
+
+@include bp-suffix(grid--bordered, false) {
+  margin-left: 0;
+  .grid__col {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-top: 1px solid $color-borders;
+    border-bottom: 1px solid $color-borders;
+    flex: 1 1 auto;
+    &:first-of-type {
+      border-right: 1px solid $color-borders;
+      padding-left: 0;
+    }
+  }
+}
