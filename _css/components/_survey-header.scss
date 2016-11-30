@@ -50,6 +50,7 @@ $bp: 36em;
   }
 }
 // Census
+
 .census-header{
   color: white;
   background-color: $color-purple;
@@ -148,6 +149,15 @@ $bp: 36em;
   }
   svg{
     margin-left: 8px;
+  }
+}
+.census-header--hero{
+  background-color: white;
+  border-bottom: 3px solid $color-purple;
+  color: $color-purple;
+  .census-header .info__title a{
+    color: $color-purple;
+    border-color: $color-purple;
   }
 }
 .ukis-header{
