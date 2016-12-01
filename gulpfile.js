@@ -177,4 +177,9 @@ gulp.task('py-server', () => {
   .pipe(gulp.dest('./_site'));
 });
 
-gulp.task('default', ['sprite', 'css', 'js', 'jekyll', 'serve', 'py-server']);
+gulp.task('img', () => {
+  gulp.src('./_img/**/*')
+  .pipe(gulp.dest('./img'));
+});
+
+gulp.task('default', ['sprite', 'css', 'js', 'jekyll', 'serve', 'py-server', 'img']);
