@@ -123,7 +123,7 @@ $bp: 36em;
   height: 0px;
   overflow: hidden;
   text-align: right;
-  transition: height 150ms ease-in-out;
+  transition: height 0.2s ease-in-out;
   color: #fff;
   &.is-open{
     height: 64px;
