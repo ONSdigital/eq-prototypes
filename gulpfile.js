@@ -22,7 +22,6 @@ const rename = require('gulp-rename');
 const del = require('del');
 const nunjucksRender = require('gulp-nunjucks-render');
 const data = require('gulp-data');
-const handlebars = require('gulp-compile-handlebars');
 const ukisData = require('./_data/ukis.json');
 
 const babel = require('gulp-babel')
@@ -95,32 +94,6 @@ gulp.task('css', () => {
     ]))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('css'));
-});
-
-// Handlebars html generator
-gulp.task('clean-handlebars', function() {
-  del(['./_prototypes/ukis/v3/*.html']);
-});
-gulp.task('handlebars', ['clean-handlebars'], function() {
-  nunjucksRender.nunjucks.configure(['./_layouts/'], {
-    watch: false
-  });
-  options = {
-    helpers : {
-      capitals : function(str){
-          return str.toUpperCase();
-      }
-    }
-  }
-  ukisData.forEach(function(page) {
-    var fileName = page.url.replace(/ +/g, '-').toLowerCase();
-    page.pageName = fileName.replace(/[^a-z0-9]+/gi, '-');
-    gulp.src('./_layouts/ukis.handlebars')
-      .pipe(handlebars(page, options))
-      .pipe(rename(fileName + ".html"))
-      .pipe(nunjucksRender())
-      .pipe(gulp.dest('./_prototypes/ukis/v3/'));
-  });
 });
 
 gulp.task('jekyll', () => {

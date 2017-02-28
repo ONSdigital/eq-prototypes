@@ -8,12 +8,11 @@ html {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  background-color: $color-light-grey;
 }
 
 body {
+  height: 100%;
   margin: 0;
-  background: $color-white;
   position: relative;
 }
 
@@ -21,14 +20,22 @@ img {
   vertical-align: middle;
   max-width: 100%;
   height: auto;
-  // margin-bottom: $base-line-height;
+}
+
+abbr[title] {
+  border: none;
 }
 
 a {
   color: $color-links;
-  text-decoration: underline;
   &:hover {
     text-decoration: underline;
+    color: $color-links-hover;
+  }
+  &:focus {
+    color: white;
+    background-color: $color-focus;
+    outline: 3px solid $color-focus;
   }
 }
 
@@ -37,4 +44,10 @@ main,
   &:focus {
     outline: none;
   }
+}
+
+legend {
+  // http://www.456bereastreet.com/archive/201210/how_to_line_wrap_text_in_legend_elements_even_in_ie/
+  white-space: normal;
+  display: table;
 }
