@@ -1,21 +1,15 @@
 <!DOCTYPE html>
 <html class="prototypes-home">
-
   {% include head.html %}
-
   <body>
-
-    {% include header.html %}
- 
-    <div class="container">
-
-      {{ content }}
-
+    <div class="page">
+      <div class="page__content">
+        <div class="skip">
+          <a class="skip__link" href="#main">Skip to content</a>
+        </div>
+        {{ content }}
+      </div>
+      {% include footer.html %}
     </div>
-
-    {% include footer.html %}
-
-
   </body>
-
 </html>

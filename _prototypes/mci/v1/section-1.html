@@ -2,6 +2,7 @@
 title: MCI v1
 project: MCI
 globalcss: false
+
 ---
 
 <header class="page__header">
@@ -9,60 +10,79 @@ globalcss: false
 {% include bar.html %}
 </header>
 
-<div class="container">
-  <div class="grid ">
-    <div class="grid__col col-8@s">
-      <div role="main" class="panel__body" id="main">
-        <a class="mars" href="../index">Previous</a><br/><br/>
-        <form action="../thankyou" class="form qa-questionnaire-form" role="form" novalidate="">
-          <div class="group" id="14ba4707-321d-441d-8d21-b8367366e766">
-            <div class="block" id="cd3b74d1-b687-4051-9634-a8f9ce10a27d">
-              <div class="section" id="017880bc-752d-4a6b-83df-e130409ee660">
-                <h2 class="section__title saturn"><span class="section__title__number venus">1</span> General Business Information</h2>
-                <div class="section__description mars">3 year period 1 January 2012 to 31 December 2014<br><br></div>
-                <div class="question question--checkbox" id="def61645-c231-4522-ba2f-273b25507e53">
-                  <h3 class="question__title neptune"><span class="question__title__number venus">1.1</span> In which geographic markets did this business sell goods and/or services? </h3>
-                  <div class="question__description mars" id="description-6cc86b54-330c-4465-99b2-34cc7073dc2c">
-                    Select all that apply
+<div class="page__subheader">
+  <div class="container">
+    <a class="mars" href="../index">Previous</a>
+  </div>
+</div>
+
+<div class="page__container container">
+  <div class="grid grid--reverse">
+    <div class="grid__col col-4@m">
+    </div>
+    <div class="grid__col col-7@m pull-1@m">
+      <main role="main" id="main" class="page__main">
+        <form action="../thankyou" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
+          <div class="group" id="rsi">
+            <div class="block" id="total-retail-turnover">
+              <section class="section" id="total-retail-turnover-section">
+                <h1 class="section__title saturn">
+                  Retail turnover
+                </h1>
+                <div class="question" id="total-retail-turnover-question">
+                  <h2 class="question__title neptune">
+                    For the reporting period, what was the value of the business’s total retail turnover?
+                  </h2>
+                  <div class="question__description mars" id="description-total-retail-turnover-question">
+                    <p>Round your figures to the nearest whole pound (£). Even if your figures are zero, please still complete.</p>
                   </div>
-                  <div class="question__responses">
-                    <div class="response response--checkbox" id="7587eb9b-f24e-4dc0-ac94-66118b896c10">
-                      <div class="field field--multi field--checkbox ">
-                        <div class="field__item">
-                          <input class="input input--checkbox" type="checkbox" name="q-1" id="form-input-1" value="a-1" title="UK regional within approximately 100 miles of this business">
-                          <label class="label label--inline" for="form-input-1"><span class="label__inner">UK regional within approximately 100 miles of this business</span></label>
-                        </div>
-                        <div class="field__item">
-                          <input class="input input--checkbox" type="checkbox" name="q-1" id="form-input-2" value="a-2" title="Store closures">
-                          <label class="label label--inline" for="form-input-2"><span class="label__inner">UK national</span></label>
-                        </div>
-                        <div class="field__item">
-                          <input class="input input--checkbox" type="checkbox" name="q-1" id="form-input-3" value="a-3" title="Store closures">
-                          <label class="label label--inline" for="form-input-3"><span class="label__inner">European countries</span></label>
-                        </div>
-                        <div class="field__item field__item--other">
-                          <input class="input input--checkbox input--checkbox--change input--other" type="checkbox" name="q-1" id="form-input-4" value="a-4" title="Other">
-                          <label class="label label--inline" for="form-input-4"><span class="label__inner mars">All other countries</span></label>
-                          <div class="field__item--other__text">
-                            <span class="pluto">Please specify other</span><br>
-                            <input class="input input--text" type="text" value="">
+                  <aside class="question__guidance">
+                    <div class="panel panel--simple panel--info" id="question-guidance-total-retail-turnover-question">
+                      <h3 class="venus">Include</h3>
+                      <ul class="mars">
+                        <li>VAT</li>
+                        <li>internet sales</li>
+                      </ul>
+                      <h3 class="venus">Exclude</h3>
+                      <ul class="mars">
+                        <li>revenue from mobile phone network commission and top up </li>
+                        <li>sales from catering facilities used by customers</li>
+                        <li>lottery sales and commission from lottery sales</li>
+                        <li>sales of car accessories and motor vehicles</li>
+                        <li>NHS receipts</li>
+                      </ul>
+                    </div>
+                  </aside>
+                  <div class="question__answers">
+                    <div class="question__answer">
+                      <div class="answer answer--currency  " id="total-retail-turnover-answer">
+                        <div class="answer__fields js-fields">
+                          <div class="field">
+                            <label for="input-total-retail-turnover-answer" id="label-total-retail-turnover-answer" class="label venus ">
+                              <div class="label__inner">
+                                Total retail turnover
+                              </div>
+                            </label>
+                            <div class="input-type input-type--currency">
+                              <span class="input-type__type" id="total-retail-turnover-answer-type">£</span>
+                              <input id="input-total-retail-turnover-answer" value="" data-qa="input-text" name="total-retail-turnover-answer" class="input input--text input-type__input">
+                            </div>
                           </div>
                         </div>
-                        <form action="" class="form" role="form" method="POST" novalidate="">
-                          <br/>
-                          <br/>
-                          <button href="../thankyou" class="btn btn--secondary qa-btn-get-started venus" type="submit" name="">Save and continue</button>
-                          <br/><a class="mars" href="../index">Previous</a>
-                        </form>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </section>
             </div>
           </div>
+          <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Save and continue</button>
+          <div class="u-mb-m">
+            <button class="btn btn--link mars js-btn-save" type="submit" name="action[save_sign_out]">Save and complete later</button>
+          </div>
         </form>
-      </div>
+        <a class="page__previous page__previous--bottom js-previous-link" href="../index" id="bottom-previous">Previous</a>
+      </main>
     </div>
   </div>
 </div>

@@ -1,40 +1,20 @@
 <!DOCTYPE html>
 <html>
-
   {% include head.html %}
-
   <body>
     <div class="page">
-
       <div class="page__content">
         <div class="skip">
           <a class="skip__link" href="#main">Skip to content</a>
         </div>
         {{ content }}
-        {% include footer.html %}
       </div>
+      {% include footer.html %}
     </div>
-    <div class="hidden-nav">
-      {% include prototype_nav.html %}
-    </div>
-
     <script type="text/javascript">
       var loop11_key = "0104054b3b56d396b42e668dfe096cee161454a8";
       var l11_clientOptions = {"cookieDomain":".github.io"};
       document.write(unescape("%3cscript src='//cdn.loop11.com/my/loop11.js' type='text/javascript'%3e%3c/script%3e"));
     </script>
-
   </body>
-<script>
-
-// $(function(){
-//   var $hiddenNavBtn = $('<div/>')
-//     .addClass('hidden-nav-btn')
-//     .on('click', function() {
-//       $('.hidden-nav').toggleClass('is-open');
-//     })
-//   $('body').append($hiddenNavBtn);
-// });
-
-</script>
 </html>

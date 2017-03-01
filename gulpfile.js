@@ -143,11 +143,9 @@ gulp.task('js', () => {
   .pipe(gulp.dest('js'))
 });
 
-gulp.task('py-server', () => {
-  gulp.src('./server.py')
-  .pipe(gulp.dest('./_site'));
-  gulp.src('./prototype.command')
-  .pipe(gulp.dest('./_site'));
+gulp.task('fonts', () => {
+  gulp.src('./_fonts/**/*')
+  .pipe(gulp.dest('./s/fonts/'));
 });
 
 gulp.task('img', () => {
@@ -155,4 +153,4 @@ gulp.task('img', () => {
   .pipe(gulp.dest('./img'));
 });
 
-gulp.task('default', ['sprite', 'css', 'js', 'jekyll', 'serve', 'py-server', 'img']);
+gulp.task('default', ['sprite', 'css', 'js', 'jekyll', 'serve', 'img', 'fonts']);
