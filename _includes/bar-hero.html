@@ -1,0 +1,9 @@
+<div class="bar bar--hero" role="banner">
+  <div class="bar__inner container">
+    <div class="badge badge--amber u-mr-xs">BETA</div>
+    <h1 class="bar__title jupiter">{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</h1>
+    {% if page.subtitle %}
+    <h2 class="venus">{{ page.subtitle }}</h2>
+    {% endif %}
+  </div>
+</div>

@@ -16,5 +16,13 @@ defaults:
       type: prototypes
     values:
       layout: prototype
+      globalcss: true
 
 markdown: kramdown
+sass:
+  sass_dir: _sass
+
+exclude:
+  - package.json
+  - node_modules
+  - gulpfile.js

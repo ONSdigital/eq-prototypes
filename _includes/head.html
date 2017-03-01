@@ -4,9 +4,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
   <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,700,' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="{{ "/css/responsive.min.css" | prepend: site.baseurl }}">
+
+  {% if page.globalcss == true %}
+    <!-- if you want global css on a page add globalcss true to frontmatter -->
+  {% endif %}
+
   <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
+  <link rel="stylesheet" href="{{ "/css/responsive.css" | prepend: site.baseurl }}">
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}">
+  <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Lato:300,400,600,700,900'>
+  <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css'>
+  <script src="{{ "/js/jquery.min.js" | prepend: site.baseurl }}"></script>
+  <script type="text/javascript">
+    document.addEventListener("touchstart", function(){}, true);
+  </script>
 </head>
