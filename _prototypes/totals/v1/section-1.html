@@ -1,6 +1,6 @@
 ---
-title: MCI v1
-project: MCI
+title: Totals v1
+project: Totals
 globalcss: false
 
 ---
@@ -34,7 +34,7 @@ globalcss: false
                     How many of the staff were in your employment on 12 December 2016?
                   </h2>
                   <div class="question__description mars" id="description-total-retail-turnover-question">
-                    <p>Include employees at all sites working for the business named on the front of the questionnaire.</p>
+                    <p>Include employees at all sites working for <span class="config1">the business names on the front of this questionnaire</span>.</p>
                   </div>
                   <!-- <aside class="question__guidance">
                     <div class="panel panel--simple panel--info" id="question-guidance-total-retail-turnover-question">
@@ -95,6 +95,10 @@ $( document ).ready(function() {
   var q1var = sessionStorage.getItem('q1r1');
   if(q1var!==null){
     $('#q1r1').val(q1var);
+  }
+  if ($('.config1').length>0){
+    var config1 = sessionStorage.getItem('config1');
+    $('.config1').html(config1);
   }
 
   console.info(sessionStorage);
