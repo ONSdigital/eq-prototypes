@@ -27,11 +27,11 @@ globalcss: false
             <div class="block" id="total-retail-turnover">
               <section class="section" id="total-retail-turnover-section">
                 <h1 class="section__title neptune">
-                  Turnover
+                  Outgoings
                 </h1>
                 <div class="question" id="total-retail-turnover-question">
                   <h2 class="question__title saturn">
-                    Of the total turnover, <span class="highlight"><span class="q3r6"></span></span>, what was the value of internet sales?
+                    Of the total outgoings, <span class="highlight"><span class="q3r6"></span></span>, what were the total outgoings for February 2017?
                   </h2>
                   <div class="question__description mars" id="description-total-retail-turnover-question">
                     <p>Round your figures to the nearest whole pound (£). Even if your figures are zero, please still complete.</p>
@@ -60,7 +60,7 @@ globalcss: false
                           <div class="field">
                             <label for="q4r1" id="label-total-retail-turnover-answer" class="label venus ">
                               <div class="label__inner">
-                                Internet sales
+                                February 2017
                               </div>
                             </label>
                             <div class="input-type input-type--currency">
@@ -120,21 +120,9 @@ $( document ).ready(function() {
     window.location.href = "../thankyou"; // target of save and continue
 
         if ("text" === "text") {
-          // var inputValue = $("input[name='q1']").val();
-          // sessionStorage.setItem('q1', inputValue);
           var inputValue = $("input[name='q4r1']").val();
           sessionStorage.setItem('q4r1', inputValue);
-          // var inputValue = $("input[name='q4r2']").val();
-          // sessionStorage.setItem('q4r2', inputValue);
-          // var inputValue = $("input[name='q4r3']").val();
-          // sessionStorage.setItem('q4r3', inputValue);
-          // var inputValue = $("input[name='q4r4']").val();
-          // sessionStorage.setItem('q4r4', inputValue);
-          // var inputValue = $("input[name='q4r5']").val();
-          // sessionStorage.setItem('q4r5', inputValue);
         } else {
-          // var inputValue = $("input[name='q1']:checked").val();
-          // sessionStorage.setItem('q1', inputValue);
           var inputValue = $("input[name='q4r1']:checked").val();
           sessionStorage.setItem('q4r1', inputValue);
         }

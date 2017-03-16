@@ -26,13 +26,12 @@ globalcss: false
           <div class="group" id="rsi">
             <div class="block" id="total-retail-turnover">
               <section class="section" id="total-retail-turnover-section">
-                <h1 class="section__title neptune">
-                  Breakdown of turnover
-                </h1>
+                <h2 class="section__title neptune">Breakdown of outgoings</h2>
+                <div class="section__description mars"><p>1 April 2016 to 31 March 2017</p></div>
                 <div class="question" id="total-retail-turnover-question">
-                  <h2 class="question__title saturn">
-                    How much of the business's total turnover was spent on:
-                  </h2>
+                  <h1 class="question__title saturn">
+                    For the reporting period what was the business&rsquo;s outgoings for:
+                  </h1>
                   <!-- <div class="question__description mars" id="description-total-retail-turnover-question">
                     <p>Include VAT and internet sales. Exclude National lotter</p>
                   </div> -->
@@ -40,6 +39,7 @@ globalcss: false
                     <div class="panel panel--simple panel--info" id="question-guidance-total-retail-turnover-question">
                       <h3 class="venus">Include</h3>
                       <ul class="mars">
+                        <li>Fixtures, fittings and equipment</li>
                         <li>overtime and shift allowances</li>
                         <li>pay awards</li>
                         <li>bonuses or commissions</li>
@@ -60,7 +60,7 @@ globalcss: false
                               <div class="label__inner">
                                 Utilities
                               </div>
-                              <div class="question__description mars" id="description-reason-for-change-question">Round to the nearest pound (£).</div>
+                              <div class="question__description mars" id="description-reason-for-change-question">Round to the nearest pound. Do not include pence.</div>
                             </label>
                             <div class="input-type input-type--currency">
                               <span class="input-type__type" id="total-retail-turnover-answer-type">£</span>
@@ -78,7 +78,7 @@ globalcss: false
                               <div class="label__inner">
                                 Wages
                               </div>
-                              <div class="question__description mars" id="description-reason-for-change-question">Round to the nearest pound (£).</div>
+                              <div class="question__description mars" id="description-reason-for-change-question">Round to the nearest pound. Do not include pence.</div>
                             </label>
                             <div class="input-type input-type--currency">
                               <span class="input-type__type" id="total-retail-turnover-answer-type">£</span>
@@ -94,9 +94,9 @@ globalcss: false
                           <div class="field">
                             <label for="q3r3" id="label-total-retail-turnover-answer" class="label venus ">
                               <div class="label__inner">
-                                Vehicle costs
+                                Motor vehicles
                               </div>
-                              <div class="question__description mars" id="description-reason-for-change-question">Round to the nearest pound (£).</div>
+                              <div class="question__description mars" id="description-reason-for-change-question">Round to the nearest pound. Do not include pence.</div>
                             </label>
                             <div class="input-type input-type--currency">
                               <span class="input-type__type" id="total-retail-turnover-answer-type">£</span>
@@ -112,9 +112,9 @@ globalcss: false
                           <div class="field">
                             <label for="q3r4" id="label-total-retail-turnover-answer" class="label venus ">
                               <div class="label__inner">
-                                Rent
+                                Rent / property charges
                               </div>
-                              <div class="question__description mars" id="description-reason-for-change-question">Round to the nearest pound (£).</div>
+                              <div class="question__description mars" id="description-reason-for-change-question">Round to the nearest pound. Do not include pence.</div>
                             </label>
                             <div class="input-type input-type--currency">
                               <span class="input-type__type" id="total-retail-turnover-answer-type">£</span>
@@ -130,13 +130,31 @@ globalcss: false
                           <div class="field">
                             <label for="q3r5" id="label-total-retail-turnover-answer" class="label venus ">
                               <div class="label__inner">
-                                Other items
+                                Stock
                               </div>
-                              <div class="question__description mars" id="description-reason-for-change-question">Round to the nearest pound (£).</div>
+                              <div class="question__description mars" id="description-reason-for-change-question">Round to the nearest pound. Do not include pence.</div>
                             </label>
                             <div class="input-type input-type--currency">
                               <span class="input-type__type" id="total-retail-turnover-answer-type">£</span>
                               <input id="q3r5" value="" data-qa="input-text" name="q3r5" class="input input--text input-type__input">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="question__answer">
+                      <div class="answer answer--currency" id="total-retail-turnover-answer">
+                        <div class="answer__fields js-fields">
+                          <div class="field">
+                            <label for="q3r6" id="label-total-retail-turnover-answer" class="label venus ">
+                              <div class="label__inner">
+                                Other items
+                              </div>
+                              <div class="question__description mars" id="description-reason-for-change-question">Round to the nearest pound. Do not include pence.</div>
+                            </label>
+                            <div class="input-type input-type--currency">
+                              <span class="input-type__type" id="total-retail-turnover-answer-type">£</span>
+                              <input id="q3r6" value="" data-qa="input-text" name="q3r6" class="input input--text input-type__input">
                             </div>
                           </div>
                         </div>
@@ -181,12 +199,17 @@ $( document ).ready(function() {
     var q1var = sessionStorage.getItem('q1r1');
     $('.q1').text(q1var);
   }
+  if ($('.config1').length>0){
+    var config1 = sessionStorage.getItem('config1');
+    $('.config1').html(config1);
+  }
 
   var q3r1_answer = sessionStorage.getItem('q3r1');
   var q3r2_answer = sessionStorage.getItem('q3r2');
   var q3r3_answer = sessionStorage.getItem('q3r3');
   var q3r4_answer = sessionStorage.getItem('q3r4');
   var q3r5_answer = sessionStorage.getItem('q3r5');
+  var q3r6_answer = sessionStorage.getItem('q3r6');
 
   if(q3r1_answer!==""){
     $('#q3r1').val(q3r1_answer);
@@ -202,6 +225,9 @@ $( document ).ready(function() {
   }
   if(q3r5_answer!=""){
     $('#q3r5').val(q3r5_answer);
+  }
+  if(q3r6_answer!=""){
+    $('#q3r6').val(q3r6_answer);
   }
 
   console.info(sessionStorage);
@@ -221,6 +247,8 @@ $( document ).ready(function() {
           sessionStorage.setItem('q3r4', inputValue);
           var inputValue = $("input[name='q3r5']").val();
           sessionStorage.setItem('q3r5', inputValue);
+          var inputValue = $("input[name='q3r6']").val();
+          sessionStorage.setItem('q3r6', inputValue);
           // var inputValue = $("input[name='q3r6']").val();
           // sessionStorage.setItem('q3r6', inputValue);
 

@@ -27,11 +27,12 @@ globalcss: false
             <div class="block" id="total-retail-turnover">
               <section class="section" id="total-retail-turnover-section">
                 <h1 class="section__title neptune">
-                  Turnover
+                  Outgoings
                 </h1>
+                <div class="section__description mars"><p>1 April 2016 to 31 March 2017</p></div>
                 <div class="question" id="total-retail-turnover-question">
                   <h2 class="question__title saturn">
-                    From your previous answers the total turnover for Apple has been calculated as: <span class="highlight"><span class="q3r6"></span></span>
+                    From your previous answers the total turnover for <span class="config1">Apple</span> has been calculated as: <span class="highlight"><span class="retailTotal"></span></span>
                   </h2>
                   <div class="question__description mars" id="description-total-retail-turnover-question">
                     <p>To reach this total we used the values provided below. Please review and amend as necessary.</p>
@@ -115,7 +116,7 @@ globalcss: false
           </div>
         </div>
         <div class="summary__question" id="reporting-period-question">
-          Vehicle costs
+          Motor vehicles
         </div>
         <div class="summary__answer">
           <div class="summary__answer-text" id="q3r3-answer" data-qa="period-from-answer"></div>
@@ -124,7 +125,7 @@ globalcss: false
           </div>
         </div>
         <div class="summary__question" id="reporting-period-question">
-          Rent
+          Rent / property charges
         </div>
         <div class="summary__answer">
           <div class="summary__answer-text" id="q3r4-answer" data-qa="period-from-answer"></div>
@@ -133,10 +134,19 @@ globalcss: false
           </div>
         </div>
         <div class="summary__question" id="reporting-period-question">
-          Other items
+          Stock
         </div>
         <div class="summary__answer">
           <div class="summary__answer-text" id="q3r5-answer" data-qa="period-from-answer"></div>
+          <div class="summary__edit">
+            <a href="../section-3" class="summary__edit-link" aria-describedby="period-from period-from-answer" data-qa="period-from-edit">Edit<span class="u-vh"> your answer</span></a>
+          </div>
+        </div>
+        <div class="summary__question" id="reporting-period-question">
+          Other items
+        </div>
+        <div class="summary__answer">
+          <div class="summary__answer-text" id="q3r6-answer" data-qa="period-from-answer"></div>
           <div class="summary__edit">
             <a href="../section-3" class="summary__edit-link" aria-describedby="period-from period-from-answer" data-qa="period-from-edit">Edit<span class="u-vh"> your answer</span></a>
           </div>
@@ -161,13 +171,19 @@ globalcss: false
 </div>
 <script>
 $( document ).ready(function() {
-  if ($('.q3r6').length > 0) {
-    var retailTotal = (Number(sessionStorage.getItem('q3r5'))+Number(sessionStorage.getItem('q3r4'))+Number(sessionStorage.getItem('q3r3'))+Number(sessionStorage.getItem('q3r2'))+Number(sessionStorage.getItem('q3r1'))).toLocaleString('en-gb',{ style: 'currency', currency: 'GBP', minimumFractionDigits: '2' });
+  if ($('.config1').length>0){
+    var config1 = sessionStorage.getItem('config1');
+    $('.config1').html(config1);
+  }
+
+  if ($('.retailTotal').length > 0) {
+    var retailTotal = (Number(sessionStorage.getItem('q3r6'))+Number(sessionStorage.getItem('q3r5'))+Number(sessionStorage.getItem('q3r4'))+Number(sessionStorage.getItem('q3r3'))+Number(sessionStorage.getItem('q3r2'))+Number(sessionStorage.getItem('q3r1'))).toLocaleString('en-gb',{ style: 'currency', currency: 'GBP', minimumFractionDigits: '2' });
     var q3r1_answer = (Number(sessionStorage.getItem('q3r1'))).toLocaleString('en-gb',{ style: 'currency', currency: 'GBP', minimumFractionDigits: '2' });
     var q3r2_answer = (Number(sessionStorage.getItem('q3r2'))).toLocaleString('en-gb',{ style: 'currency', currency: 'GBP', minimumFractionDigits: '2' });
     var q3r3_answer = (Number(sessionStorage.getItem('q3r3'))).toLocaleString('en-gb',{ style: 'currency', currency: 'GBP', minimumFractionDigits: '2' });
     var q3r4_answer = (Number(sessionStorage.getItem('q3r4'))).toLocaleString('en-gb',{ style: 'currency', currency: 'GBP', minimumFractionDigits: '2' });
     var q3r5_answer = (Number(sessionStorage.getItem('q3r5'))).toLocaleString('en-gb',{ style: 'currency', currency: 'GBP', minimumFractionDigits: '2' });
+    var q3r6_answer = (Number(sessionStorage.getItem('q3r6'))).toLocaleString('en-gb',{ style: 'currency', currency: 'GBP', minimumFractionDigits: '2' });
 
     if(q3r1_answer=='£0.00') {
       q3r1_answer = q3r1_answer+' (Nil return)';
@@ -184,13 +200,17 @@ $( document ).ready(function() {
     if(q3r5_answer=='£0.00') {
       q3r5_answer = q3r5_answer+' (Nil return)';
     }
-//    console.info(retailTotal);
+    if(q3r6_answer=='£0.00') {
+      q3r6_answer = q3r6_answer+' (Nil return)';
+    }
+    console.info('Calc\'d total:'+retailTotal);
     $('#q3r1-answer').text(q3r1_answer);
     $('#q3r2-answer').text(q3r2_answer);
     $('#q3r3-answer').text(q3r3_answer);
     $('#q3r4-answer').text(q3r4_answer);
     $('#q3r5-answer').text(q3r5_answer);
-    $('.q3r6').text(retailTotal);
+    $('#q3r6-answer').text(q3r6_answer);
+    $('.retailTotal').text(retailTotal);
 
 // console.log(retailTotal.toLocaleString('en-gb',{ style: 'currency', currency: 'GBP' }));
 
