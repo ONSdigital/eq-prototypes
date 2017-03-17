@@ -74,7 +74,14 @@ globalcss: false
                           <div class="panel panel--simple panel--info">  <a class="guidance__link js-details-trigger js-details-label mars" href="#guidance-permanent-or-family-home-answer" aria-expanded="false" data-guidance-trigger="true" aria-controls="guidance-permanent-or-family-home-answer-body" id="guidance-permanent-or-family-home-answer-trigger" data-ga-category="Help" data-ga-label="permanent-or-family-home-answer" data-ga="click" data-ga-action="Guidance click">Show further guidance</a>
                             <div class="guidance__main js-details-body" id="guidance-permanent-or-family-home-answer-body" aria-hidden="true">
                               <div class="guidance__content mars">
-                                <p>Include total number of employees at all sites.</p>
+                                <h3 class="venus">Exclude</h3>
+                                <ul>
+                                  <li class="mars">Apprenticeships</li>
+                                </ul>
+                                <h3 class="venus">Include</h3>
+                                <ul>
+                                  <li class="mars">Maternity leave</li>
+                                </ul>
                               </div>
                             </div>
                           </div>
@@ -127,11 +134,12 @@ $( document ).ready(function() {
   });
 
   $('.js-details-trigger').click(function(e) {
-    // var txt = $(this).next('.js-details-body').is(':visible') ? "Show" : "Hide";
-    //   console.log(txt);
-    // $('.trigger-label').text(txt);
-    // $('.js-details-body').fadeToggle();
-    // $('.fa-chevron-right').toggleClass('chevron-rotate');
+    var text = $(this).text();
+    if ($('.js-details').hasClass('is-expanded')){
+      $(this).text(text.replace('Hide', 'Show'));
+    } else {
+      $(this).text(text.replace('Show', 'Hide'));
+    }
     e.preventDefault();
     $('.js-details').toggleClass('is-expanded');
 

@@ -1,5 +1,5 @@
 .guidance {
-  margin: 0.7rem 0 0 -0.1rem;
+  margin: 1rem 0 1rem -0.1rem;
 }
 
 .guidance__link {
@@ -17,7 +17,7 @@
   &::before {
     $size: 1rem;
     transition: transform 300ms ease-in-out;
-    transform-origin: 0.46rem;
+    transform-origin: 0.42rem;
     speak: none;
     content: "";
     background: url("../s/img/icons/icons--guidance-white.svg") no-repeat center center;
@@ -26,7 +26,6 @@
     width: $size;
     height: $size;
     position: relative;
-    left: -0.3rem;
     vertical-align: middle;
     display: inline-block;
     z-index: 1;
