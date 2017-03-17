@@ -34,7 +34,7 @@
 .input--select {
   appearance: none;
   padding: $input-padding 2rem $input-padding 0.5rem;
-  background: $color-white url("/s/img/icons/icons--chevron-down.svg") no-repeat center right 6px;
+  background: $color-white url("#{$s}/img/icons/icons--chevron-down.svg") no-repeat center right 6px;
   background-size: 1.5rem;
   line-height: 1.25rem;
   &::-ms-expand {
@@ -102,7 +102,7 @@
 }
 
 .input--checkbox {
-  background: url("/s/img/icons/icons--check.svg") no-repeat center center;
+  background: url("#{$s}/img/icons/icons--check.svg") no-repeat center center;
   background-size: 0;
   transition: background-size 50ms ease-out;
   &:checked {
