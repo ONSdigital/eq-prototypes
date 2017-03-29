@@ -1,0 +1,102 @@
+---
+title: Totals v1 (of which) - Configuration
+project: Totals
+globalcss: false
+
+---
+
+<header class="page__header">
+{% include survey-header.html %}
+{% include bar.html %}
+</header>
+
+<div class="page__subheader">
+  <div class="container">
+    <a class="mars" href="../index">Previous</a>
+  </div>
+</div>
+
+<div class="page__container container">
+  <div class="grid grid--reverse">
+    <div class="grid__col col-4@m">
+    </div>
+    <div class="grid__col col-7@m pull-1@m">
+      <main role="main" id="main" class="page__main">
+        <form action="../section-2" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
+          <div class="group" id="rsi">
+            <div class="block" id="total-retail-turnover">
+              <section class="section" id="total-retail-turnover-section">
+                <h1 class="section__title neptune">
+                  Setup
+                </h1>
+                <div class="question" id="total-retail-turnover-question">
+                  <h2 class="question__title saturn">
+                    Enter the business name
+                  </h2>
+                  <!-- <div class="question__description mars" id="description-total-retail-turnover-question">
+                    <p>Include employees at all sites working for the business named on the front of the questionnaire.</p>
+                  </div> -->
+                  <div class="question__answers">
+                    <div class="question__answer">
+                      <div class="answer answer--currency  " id="total-retail-turnover-answer">
+                        <div class="answer__fields js-fields">
+                          <div class="field">
+                            <label for="config1" id="label-total-retail-turnover-answer" class="label venus ">
+                              <div class="label__inner">
+                                Business name
+                              </div>
+                            </label>
+                            <div class="input-type">
+                              <!-- <span class="input-type__type" id="total-retail-turnover-answer-type">£</span> -->
+                              <input id="config1" value="" data-qa="input-text" name="config1" class="input input--text">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+          <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Save and continue</button>
+          <div class="u-mb-m">
+            <button class="btn btn--link mars js-btn-save" type="submit" name="action[save_sign_out]">Save and complete later</button>
+          </div>
+        </form>
+        <a class="page__previous page__previous--bottom js-previous-link" href="../index" id="bottom-previous">Previous</a>
+      </main>
+    </div>
+  </div>
+</div>
+<script>
+$( document ).ready(function() {
+  sessionStorage.clear();
+
+  // if ($('.q1').length > 0) {
+  //   var q1var = sessionStorage.getItem('q1r1');
+  //   $('.q1').text(q1var);
+  // }
+  var config1 = sessionStorage.getItem('config1');
+  if(config1!==null){
+    $('#config1').val(config1);
+  }
+
+  console.info(sessionStorage);
+  // $('.qa-btn-get-started').click(function(e) {
+  $('.qa-btn-submit').click(function(e) {
+    e.preventDefault();
+    window.location.href = "../index"; // target of save and continue
+
+        if ("text" === "text") {
+          var inputValue = $("input[name='config1']").val();
+            sessionStorage.setItem('config1', inputValue);
+        } else {
+          var inputValue = $("input[name='q1r1']:checked").val();
+          sessionStorage.setItem('q1r1', inputValue);
+        }
+  });
+
+
+});
+</script>
