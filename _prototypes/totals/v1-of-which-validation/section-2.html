@@ -226,28 +226,28 @@ $( document ).ready(function() {
         $('#aq2r1 .answer__fields').wrap('<div class="panel__body" data-qa="error-body">').prepend(errorPrep);
         $('#aq2r1').wrap('<div class="answer answer--date js-has-errors" id="errorq2r1"><aside class="panel panel--simple panel--error" data-qa="error">');
         $(window).scrollTop(0); // faux submission behaviour - top of page.
-        preventDefault();
+        e.preventDefault();
       }
       if (val2 > totalVal) {
         $("#errorLink").attr('href','#errorq2r2');
         $('#aq2r2 .answer__fields').wrap('<div class="panel__body" data-qa="error-body">').prepend(errorPrep);
         $('#aq2r2').wrap('<div class="answer answer--date js-has-errors" id="errorq2r2"><aside class="panel panel--simple panel--error" data-qa="error">');
         $(window).scrollTop(0); // faux submission behaviour - top of page.
-        preventDefault();
+        e.preventDefault();
       }
       if (val3 > totalVal) {
         $("#errorLink").attr('href','#errorq2r3');
         $('#aq2r3 .answer__fields').wrap('<div class="panel__body" data-qa="error-body">').prepend(errorPrep);
         $('#aq2r3').wrap('<div class="answer answer--date js-has-errors" id="errorq2r3"><aside class="panel panel--simple panel--error" data-qa="error">');
         $(window).scrollTop(0); // faux submission behaviour - top of page.
-        preventDefault();
+        e.preventDefault();
       }
       if (val4>totalVal) {
         $("#errorLink").attr('href','#errorq2r4');
         $('#aq2r4 .answer__fields').wrap('<div class="panel__body" data-qa="error-body">').prepend(errorPrep);
         $('#aq2r4').wrap('<div class="answer answer--date js-has-errors" id="errorq2r4"><aside class="panel panel--simple panel--error" data-qa="error">');
         $(window).scrollTop(0); // faux submission behaviour - top of page.
-        preventDefault();
+        e.preventDefault();
       }
       window.location.href = "";
     }
@@ -255,7 +255,7 @@ $( document ).ready(function() {
       if ((val1+val2+val3+val4)>totalVal) {
         //alert('Total error to be fired now please!');
         $('.panel--error').toggleClass('hidden');
-        preventDefault();
+        e.preventDefault();
       }
     }
     window.location.href = "../thankyou"; // target of save and continue
