@@ -207,7 +207,7 @@ $( document ).ready(function() {
   }
 
   console.info(sessionStorage);
-  // $('.qa-btn-get-started').click(function(e) {
+
   $('.qa-btn-submit').click(function(e) {
     e.preventDefault();
 
@@ -227,6 +227,7 @@ $( document ).ready(function() {
         $('#aq2r1').wrap('<div class="answer answer--date js-has-errors" id="errorq2r1"><aside class="panel panel--simple panel--error" data-qa="error">');
         $(window).scrollTop(0); // faux submission behaviour - top of page.
         e.preventDefault();
+        return false;
       }
       if (val2 > totalVal) {
         $("#errorLink").attr('href','#errorq2r2');
@@ -234,6 +235,7 @@ $( document ).ready(function() {
         $('#aq2r2').wrap('<div class="answer answer--date js-has-errors" id="errorq2r2"><aside class="panel panel--simple panel--error" data-qa="error">');
         $(window).scrollTop(0); // faux submission behaviour - top of page.
         e.preventDefault();
+        return false;
       }
       if (val3 > totalVal) {
         $("#errorLink").attr('href','#errorq2r3');
@@ -241,6 +243,7 @@ $( document ).ready(function() {
         $('#aq2r3').wrap('<div class="answer answer--date js-has-errors" id="errorq2r3"><aside class="panel panel--simple panel--error" data-qa="error">');
         $(window).scrollTop(0); // faux submission behaviour - top of page.
         e.preventDefault();
+        return false;
       }
       if (val4>totalVal) {
         $("#errorLink").attr('href','#errorq2r4');
@@ -248,8 +251,10 @@ $( document ).ready(function() {
         $('#aq2r4').wrap('<div class="answer answer--date js-has-errors" id="errorq2r4"><aside class="panel panel--simple panel--error" data-qa="error">');
         $(window).scrollTop(0); // faux submission behaviour - top of page.
         e.preventDefault();
+        return false;
       }
       window.location.href = "";
+      return false;
     }
     else {
       if ((val1+val2+val3+val4)>totalVal) {
@@ -258,7 +263,7 @@ $( document ).ready(function() {
         e.preventDefault();
       }
     }
-    window.location.href = "../thankyou"; // target of save and continue
+
         if ("text" === "text") {
 
           var inputValue = $("input[name='q2r1']").val();
@@ -279,7 +284,7 @@ $( document ).ready(function() {
           var inputValue = $("input[name='q2r2']:checked").val();
           sessionStorage.setItem('q2r2', inputValue);
         }
-
+window.location.href = "../thankyou"; // target of save and continue
   });
 
 });
