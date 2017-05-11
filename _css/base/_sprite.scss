@@ -132,9 +132,19 @@
 	height: 52px;
 }
 
+.svg-icons--download {
+	@extend %svg-common;
+	background-position: 98.29830508474576% 62.34817813765182%;
+}
+
+.svg-icons--download-dims {
+	width: 36px;
+	height: 36px;
+}
+
 .svg-icons--external-link {
 	@extend %svg-common;
-	background-position: 70.94020147174395% 45.02164502164502%;
+	background-position: 70.94020147174395% 56.26839826839826%;
 }
 
 .svg-icons--external-link-dims {
@@ -264,7 +274,7 @@
 
 .svg-logo-welsh-reversed {
 	@extend %svg-common;
-	background-position: 71.17921146953405% 60.69566570694888%;
+	background-position: 71.17921146953405% 40.46377713796592%;
 }
 
 .svg-logo-welsh-reversed-dims {
