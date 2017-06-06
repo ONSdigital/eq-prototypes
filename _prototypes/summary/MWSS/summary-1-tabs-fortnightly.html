@@ -10,13 +10,16 @@ globalcss: false
 {% include bar.html %}
 </header>
 
+
+
 <style type="text/css">
 
+
   .response_date_outline{
-    background-color: #F5F6FF;
-    border-left: 5px solid #003C57;
+    background-color: #FDF6EC;
+    border-left: 5px solid #F99C21;
     float: right;
-    font-size: 18px;font-weight: normal; line-height: 26px;
+    font-size: 18px;font-weight: bold; line-height: 26px;
     padding: 16px 24px;
   }
   .review_control{
@@ -42,6 +45,21 @@ globalcss: false
   .hidden_text.show{
     display: block;
   }
+  .tabs_not_selected_1{
+    font-weight: normal;
+    text-decoration: underline;
+  }
+  .tabs_not_selected_2{
+    padding-left: 30px;
+    font-weight: normal;
+    text-decoration: underline;
+  }
+  .tabs_selected{
+    padding-left: 30px;
+  }
+  .tab_select{
+    cursor: pointer;
+  }
   .summary__question_left_block_completed {
   border-left: 5px solid #0F8243
   }
@@ -65,8 +83,8 @@ globalcss: false
     display: inline-block;
      width: 105px;
     height: 40px;
-    margin-left: 160px;
-    background-color: #F99C21;
+    margin-left: 135px;
+    background-color: #0F8243;
     float: right;
     font-size: 18px; font-weight: bold; line-height: 26px;
     padding: 8px 8px;
@@ -75,18 +93,18 @@ globalcss: false
     display: inline-block;
      width: 105px;
     height: 40px;
-    margin-left: 145px;
-    background-color: #F99C21;
+    margin-left: 115px;
+    background-color: #0F8243;
     float: right;
     font-size: 18px; font-weight: bold; line-height: 26px;
     padding: 8px 8px;
   }
   .summary__question_status_completed_weekly_amount_was {
     display: inline-block;
-     width: 105px;
+    width: 105px;
     height: 40px;
-    margin-left: 95px;
-    background-color: #F99C21;
+    margin-left: 70px;
+    background-color: #0F8243;
     float: right;
     font-size: 18px; font-weight: bold; line-height: 26px;
     padding: 8px 8px;
@@ -95,8 +113,8 @@ globalcss: false
     display: inline-block;
      width: 105px;
     height: 40px;
-    margin-left: 227px;
-    background-color: #F99C21;
+    margin-left: 205px;
+    background-color: #0F8243;
     float: right;
     font-size: 18px; font-weight: bold; line-height: 26px;
     padding: 8px 8px;
@@ -105,8 +123,8 @@ globalcss: false
     display: inline-block;
      width: 105px;
     height: 40px;
-    margin-left: 55px;
-    background-color: #F99C21;
+    margin-left: 35px;
+    background-color: #0F8243;
     float: right;
     font-size: 18px; font-weight: bold; line-height: 26px;
     padding: 8px 8px;
@@ -115,8 +133,8 @@ globalcss: false
     display: inline-block;
      width: 105px;
     height: 40px;
-    margin-left: 137px;
-    background-color: #F99C21;
+    margin-left: 115px;
+    background-color: #0F8243;
     float: right;
     font-size: 18px; font-weight: bold; line-height: 26px;
     padding: 8px 8px;
@@ -125,8 +143,8 @@ globalcss: false
     display: inline-block;
      width: 105px;
     height: 40px;
-    margin-left: 135px;
-    background-color: #F99C21;
+    margin-left: 110px;
+    background-color: #0F8243;
     float: right;
     font-size: 18px; font-weight: bold; line-height: 26px;
     padding: 8px 8px;
@@ -135,8 +153,8 @@ globalcss: false
     display: inline-block;
      width: 105px;
     height: 40px;
-    margin-left: 95px;
-    background-color: #F99C21;
+    margin-left: 70px;
+    background-color: #0F8243;
     float: right;
     font-size: 18px; font-weight: bold; line-height: 26px;
     padding: 8px 8px;
@@ -145,8 +163,8 @@ globalcss: false
     display: inline-block;
      width: 105px;
     height: 40px;
-    margin-left: 220px;
-    background-color: #F99C21;
+    margin-left: 195px;
+    background-color: #0F8243;
     float: right;
     font-size: 18px; font-weight: bold; line-height: 26px;
     padding: 8px 8px;
@@ -165,7 +183,7 @@ globalcss: false
     display: inline-block;
      width: 105px;
     height: 40px;
-    margin-left: 142px;
+    margin-left: 115px;
     background-color: #F99C21;
     float: right;
     font-size: 18px; font-weight: bold; line-height: 26px;
@@ -175,7 +193,7 @@ globalcss: false
     display: inline-block;
      width: 105px;
     height: 40px;
-    margin-left: 130px;
+    margin-left: 100px;
     background-color: #F99C21;
     float: right;
     font-size: 18px; font-weight: bold; line-height: 26px;
@@ -185,7 +203,7 @@ globalcss: false
     display: inline-block;
      width: 105px;
     height: 40px;
-    margin-left: 96px;
+    margin-left: 70px;
     background-color: #F99C21;
     float: right;
     font-size: 18px; font-weight: bold; line-height: 26px;
@@ -206,6 +224,8 @@ globalcss: false
     padding: 8px 16px;
   }
   </style>
+
+
 
 
 <div class="page__subheader">
@@ -273,6 +293,10 @@ globalcss: false
                   <div class="summary__answer">
                     <div class="summary__answer-text" id="pay-pattern-frequency-answer-answer" data-qa="pay-pattern-frequency-answer-answer"><ul class="u-m-no">
                     <li>Weekly</li>
+                    <li>Fortnightly</li>
+                    <li>Calendar monthly</li>
+                    <li>Four weekly</li>
+                    <li>Five weekly</li>
                     </ul></div>
 
                     <div class="summary__edit">
@@ -288,22 +312,22 @@ globalcss: false
 
 
 
-      <h2 class="summary__title saturn" id="weekly-pay">Weekly Pay</h2>
+      <h2 class="summary__title saturn" id="weekly-pay"><span class="tabs_not_selected_1 tab_select">Weekly</span><span class="summary__title saturn tabs_selected" id="weekly-pay">Fortnightly</span><span class="summary__title saturn tabs_not_selected_2 tab_select" id="weekly-pay">Calendar monthly</span><span class="summary__title saturn tabs_not_selected_2 tab_select" id="weekly-pay">Four weekly</span><span class="summary__title saturn tabs_not_selected_2 tab_select" id="weekly-pay">Five weekly</span></h2>
 
       <div class="summary__block">
 
         <div class="summary__items">
 
-                <div class="summary__question summary__question_left_block_incomplete" id="weekly-pay-paid-employees-question">
-                  What was the number of weekly paid employees paid in the last week of May 2016?
-                <span class="summary__question_status_completed_weekly_number status_label_color">Incomplete</span>
+                <div class="summary__question summary__question_left_block_completed" id="weekly-pay-paid-employees-question">
+                  What was the number of fortnightly paid employees paid in the last week of May 2016?
+                <span class="summary__question_status_completed_weekly_number status_label_color">Completed</span>
                 </div>
 
                   <div class="summary__answer">
-                    <div class="summary__answer-text summary__answer-text_colour" id="weekly-pay-paid-employees-answer-answer" data-qa="weekly-pay-paid-employees-answer-answer">-</div>
+                    <div class="summary__answer-text" id="weekly-pay-paid-employees-answer-answer" data-qa="weekly-pay-paid-employees-answer-answer">100</div>
                     <div class="summary__edit">
                       <a href="../weekly-pay-1" class="summary__edit-link" aria-describedby="weekly-pay-paid-employees-answer weekly-pay-paid-employees-answer-answer" data-qa="weekly-pay-paid-employees-answer-edit" 
-   data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">add response<span class="u-vh">your answer</span></a>
+   data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">edit response<span class="u-vh">your answer</span></a>
                     </div>
                   </div>
 
@@ -311,26 +335,26 @@ globalcss: false
 
         <div class="summary__items">
 
-                <div class="summary__question summary__question_left_block_incomplete" id="weekly-pay-gross-pay-question">
-                  What was the total gross weekly pay paid to employees in the last week of May 2016?
-                  <span class="summary__question_status_completed_weekly_total_gross status_label_color">Incomplete</span>
+                <div class="summary__question summary__question_left_block_completed" id="weekly-pay-gross-pay-question">
+                  What was the total gross fortnightly pay paid to employees in the last week of May 2016?
+                  <span class="summary__question_status_completed_weekly_total_gross status_label_color">Completed</span>
                 </div>
 
                   <div class="summary__answer">
-                    <div class="summary__answer-text summary__answer-text_colour" id="weekly-pay-gross-pay-answer-answer" data-qa="weekly-pay-gross-pay-answer-answer">-</div>
+                    <div class="summary__answer-text" id="weekly-pay-gross-pay-answer-answer" data-qa="weekly-pay-gross-pay-answer-answer">£100</div>
                     <div class="summary__edit">
                       <a href="../weekly-pay-2" class="summary__edit-link" aria-describedby="weekly-pay-gross-pay-answer weekly-pay-gross-pay-answer-answer" data-qa="weekly-pay-gross-pay-answer-edit" 
-   data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">add response<span class="u-vh">your answer</span></a>
+   data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">edit response<span class="u-vh">your answer</span></a>
                     </div>
                   </div>
 
         </div>
 
-        <!-- <div class="summary__items">
+        <div class="summary__items">
 
-                <div class="summary__question summary__question_left_block_incomplete" id="weekly-pay-breakdown-question">
-                  Of the £100 paid to weekly paid employees in the last week of May 2016, what amount was:
-                  <span class="summary__question_status_completed_weekly_amount_was status_label_color">Incomplete</span>
+                <div class="summary__question summary__question_left_block_completed" id="weekly-pay-breakdown-question">
+                  Of the £100 paid to fortnightly paid employees in the last week of May 2016, what amount was:
+                  <span class="summary__question_status_completed_weekly_amount_was status_label_color">Completed</span>
                 </div>
                   
                     <div class="summary__question summary__question--sub">
@@ -338,10 +362,10 @@ globalcss: false
                     </div>
                   
                   <div class="summary__answer">
-                    <div class="summary__answer-text summary__answer-text_colour" id="weekly-pay-breakdown-holiday-answer-answer" data-qa="weekly-pay-breakdown-holiday-answer-answer">-</div>
+                    <div class="summary__answer-text" id="weekly-pay-breakdown-holiday-answer-answer" data-qa="weekly-pay-breakdown-holiday-answer-answer">£100</div>
                     <div class="summary__edit">
                       <a href="../weekly-pay-3" class="summary__edit-link" aria-describedby="weekly-pay-breakdown-holiday-answer weekly-pay-breakdown-holiday-answer-answer" data-qa="weekly-pay-breakdown-holiday-answer-edit" 
-   data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">add response<span class="u-vh">your answer</span></a>
+   data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">edit response<span class="u-vh">your answer</span></a>
                     </div>
                   </div>
                   
@@ -351,10 +375,10 @@ globalcss: false
                   
 
                   <div class="summary__answer">
-                    <div class="summary__answer-text summary__answer-text_colour" id="weekly-pay-breakdown-arrears-answer-answer" data-qa="weekly-pay-breakdown-arrears-answer-answer">-</div>
+                    <div class="summary__answer-text" id="weekly-pay-breakdown-arrears-answer-answer" data-qa="weekly-pay-breakdown-arrears-answer-answer">£100</div>
                     <div class="summary__edit">
                       <a href="../weekly-pay-3" class="summary__edit-link" aria-describedby="weekly-pay-breakdown-arrears-answer weekly-pay-breakdown-arrears-answer-answer" data-qa="weekly-pay-breakdown-arrears-answer-edit" 
-   data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">add response<span class="u-vh">your answer</span></a>
+   data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">edit response<span class="u-vh">your answer</span></a>
                     </div>
                   </div>
                 
@@ -363,25 +387,25 @@ globalcss: false
                     </div>
 
                   <div class="summary__answer">
-                    <div class="summary__answer-text summary__answer-text_colour" id="weekly-pay-breakdown-prp-answer-answer" data-qa="weekly-pay-breakdown-prp-answer-answer">-</div>
+                    <div class="summary__answer-text" id="weekly-pay-breakdown-prp-answer-answer" data-qa="weekly-pay-breakdown-prp-answer-answer">£100</div>
                     <div class="summary__edit">
                       <a href="../weekly-pay-3" class="summary__edit-link" aria-describedby="weekly-pay-breakdown-prp-answer weekly-pay-breakdown-prp-answer-answer" data-qa="weekly-pay-breakdown-prp-answer-edit" 
-   data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">add response<span class="u-vh">your answer</span></a>
+   data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">edit response<span class="u-vh">your answer</span></a>
                     </div>
                   </div>
 
-        </div> -->
+        </div>
         <div class="summary__items">
 
-                <div class="summary__question summary__question_left_block_incomplete" id="weekly-pay-significant-changes-paid-employees-question">
-                  Did any significant changes occur to the number of weekly paid employees?
-                  <span class="summary__question_status_completed_weekly_sig_changes status_label_color">Incomplete</span>
+                <div class="summary__question summary__question_left_block_completed" id="weekly-pay-significant-changes-paid-employees-question">
+                  Did any significant changes occur to the number of fortnightly paid employees?
+                  <span class="summary__question_status_completed_weekly_sig_changes status_label_color">Completed</span>
                 </div>
                   <div class="summary__answer">
-                    <div class="summary__answer-text summary__answer-text_colour" id="weekly-pay-significant-changes-paid-employees-answer-answer" data-qa="weekly-pay-significant-changes-paid-employees-answer-answer">-</div>
+                    <div class="summary__answer-text" id="weekly-pay-significant-changes-paid-employees-answer-answer" data-qa="weekly-pay-significant-changes-paid-employees-answer-answer">Yes</div>
                     <div class="summary__edit">
                       <a href="../weekly-pay-4" class="summary__edit-link" aria-describedby="weekly-pay-significant-changes-paid-employees-answer weekly-pay-significant-changes-paid-employees-answer-answer" data-qa="weekly-pay-significant-changes-paid-employees-answer-edit" 
-   data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">add response<span class="u-vh">your answer</span></a>
+   data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">edit response<span class="u-vh">your answer</span></a>
                     </div>
                   </div>
 
@@ -389,16 +413,16 @@ globalcss: false
 
         <div class="summary__items">
 
-                <div class="summary__question summary__question_left_block_incomplete" id="weekly-pay-significant-changes-redundancies-question">
-                  Did any significant changes occur to the number of redundancies among weekly paid employees?
-                  <span class="summary__question_status_completed_weekly_sig_redund status_label_color">Incomplete</span>
+                <div class="summary__question summary__question_left_block_completed" id="weekly-pay-significant-changes-redundancies-question">
+                  Did any significant changes occur to the number of redundancies among fortnightly paid employees?
+                  <span class="summary__question_status_completed_weekly_sig_redund status_label_color">Completed</span>
                 </div>
 
                   <div class="summary__answer">
-                    <div class="summary__answer-text summary__answer-text_colour" id="weekly-pay-significant-changes-redundancies-answer-answer" data-qa="weekly-pay-significant-changes-redundancies-answer-answer">-</div>
+                    <div class="summary__answer-text" id="weekly-pay-significant-changes-redundancies-answer-answer" data-qa="weekly-pay-significant-changes-redundancies-answer-answer">Yes</div>
                     <div class="summary__edit">
                       <a href="../weekly-pay-5" class="summary__edit-link" aria-describedby="weekly-pay-significant-changes-redundancies-answer weekly-pay-significant-changes-redundancies-answer-answer" data-qa="weekly-pay-significant-changes-redundancies-answer-edit" 
-   data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">add response<span class="u-vh">your answer</span></a>
+   data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">edit response<span class="u-vh">your answer</span></a>
                     </div>
                   </div>
 
@@ -406,16 +430,16 @@ globalcss: false
 
         <div class="summary__items">
 
-                <div class="summary__question summary__question_left_block_incomplete" id="weekly-pay-significant-changes-temp-employees-question">
-                  Did any significant changes occur to the number of temporary weekly paid employees?
-                  <span class="summary__question_status_completed_weekly_sig_temp status_label_color">Incomplete</span>
+                <div class="summary__question summary__question_left_block_completed" id="weekly-pay-significant-changes-temp-employees-question">
+                  Did any significant changes occur to the number of temporary fortnightly paid employees?
+                  <span class="summary__question_status_completed_weekly_sig_temp status_label_color">Completed</span>
                 </div>    
 
                   <div class="summary__answer">
-                    <div class="summary__answer-text summary__answer-text_colour" id="weekly-pay-significant-changes-temp-employees-answer-answer" data-qa="weekly-pay-significant-changes-temp-employees-answer-answer">-</div>
+                    <div class="summary__answer-text" id="weekly-pay-significant-changes-temp-employees-answer-answer" data-qa="weekly-pay-significant-changes-temp-employees-answer-answer">More temporary staff</div>
                     <div class="summary__edit">
                       <a href="../weekly-pay-6" class="summary__edit-link" aria-describedby="weekly-pay-significant-changes-temp-employees-answer weekly-pay-significant-changes-temp-employees-answer-answer" data-qa="weekly-pay-significant-changes-temp-employees-answer-edit" 
-   data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">add response<span class="u-vh">your answer</span></a>
+   data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">edit response<span class="u-vh">your answer</span></a>
                     </div>
                   </div>
 
@@ -423,31 +447,31 @@ globalcss: false
 
         <div class="summary__items">
 
-                <div class="summary__question summary__question_left_block_incomplete" id="weekly-pay-significant-changes-gross-pay-question">
-                  Did any significant changes occur to the total gross pay paid to weekly paid employees?
-                  <span class="summary__question_status_completed_weekly_sig_pay_weekly status_label_color">Incomplete</span>
+                <div class="summary__question summary__question_left_block_completed" id="weekly-pay-significant-changes-gross-pay-question">
+                  Did any significant changes occur to the total gross pay paid to fortnightly paid employees?
+                  <span class="summary__question_status_completed_weekly_sig_pay_weekly status_label_color">Completed</span>
                 </div>
                   <div class="summary__answer">
-                    <div class="summary__answer-text summary__answer-text_colour" id="weekly-pay-significant-changes-gross-pay-answer-answer" data-qa="weekly-pay-significant-changes-gross-pay-answer-answer">-</div>
+                    <div class="summary__answer-text" id="weekly-pay-significant-changes-gross-pay-answer-answer" data-qa="weekly-pay-significant-changes-gross-pay-answer-answer">Yes</div>
                     <div class="summary__edit">
                       <a href="../weekly-pay-7" class="summary__edit-link" aria-describedby="weekly-pay-significant-changes-gross-pay-answer weekly-pay-significant-changes-gross-pay-answer-answer" data-qa="weekly-pay-significant-changes-gross-pay-answer-edit" 
-   data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">add response<span class="u-vh">your answer</span></a>
+   data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">edit response<span class="u-vh">your answer</span></a>
                     </div>
                   </div>
 
         </div>
 
         <div class="summary__items">
-         <div class="summary__question summary__question_left_block_incomplete" id="weekly-pay-significant-changes-overtime-question">
-                  Did any significant changes occur to the amount of overtime paid to weekly paid employees?
-                  <span class="summary__question_status_completed_weekly_sig_over_weekly status_label_color">Incomplete</span>
+         <div class="summary__question summary__question_left_block_completed" id="weekly-pay-significant-changes-overtime-question">
+                  Did any significant changes occur to the amount of overtime paid to fortnightly paid employees?
+                  <span class="summary__question_status_completed_weekly_sig_over_weekly status_label_color">Completed</span>
                 </div>
 
                   <div class="summary__answer">
-                    <div class="summary__answer-text summary__answer-text_colour" id="weekly-pay-significant-changes-overtime-answer-answer" data-qa="weekly-pay-significant-changes-overtime-answer-answer">-</div>
+                    <div class="summary__answer-text" id="weekly-pay-significant-changes-overtime-answer-answer" data-qa="weekly-pay-significant-changes-overtime-answer-answer">More overtime</div>
                     <div class="summary__edit">
                       <a href="../weekly-pay-8" class="summary__edit-link" aria-describedby="weekly-pay-significant-changes-overtime-answer weekly-pay-significant-changes-overtime-answer-answer" data-qa="weekly-pay-significant-changes-overtime-answer-edit" 
-   data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">add response<span class="u-vh">your answer</span></a>
+   data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">edit response<span class="u-vh">your answer</span></a>
                     </div>
                   </div>
 
@@ -455,23 +479,23 @@ globalcss: false
 
         <div class="summary__items">
 
-                <div class="summary__question summary__question_left_block_incomplete" id="weekly-pay-significant-changes-pay-rates-question">
-                  Did any significant changes occur to the pay rates of weekly paid employees?
-                  <span class="summary__question_status_completed_weekly_sig_rates_weekly status_label_color">Incomplete</span>
+                <div class="summary__question summary__question_left_block_completed" id="weekly-pay-significant-changes-pay-rates-question">
+                  Did any significant changes occur to the pay rates of fortnightly paid employees?
+                  <span class="summary__question_status_completed_weekly_sig_rates_weekly status_label_color">Completed</span>
                 </div>
 
                   <div class="summary__answer">
-                    <div class="summary__answer-text summary__answer-text_colour" id="weekly-pay-significant-changes-pay-rates-answer-answer" data-qa="weekly-pay-significant-changes-pay-rates-answer-answer">-</div>
+                    <div class="summary__answer-text" id="weekly-pay-significant-changes-pay-rates-answer-answer" data-qa="weekly-pay-significant-changes-pay-rates-answer-answer">Yes</div>
                     <div class="summary__edit">
                       <a href="../weekly-pay-9" class="summary__edit-link" aria-describedby="weekly-pay-significant-changes-pay-rates-answer weekly-pay-significant-changes-pay-rates-answer-answer" data-qa="weekly-pay-significant-changes-pay-rates-answer-edit" 
-   data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">add response<span class="u-vh">your answer</span></a>
+   data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">edit response<span class="u-vh">your answer</span></a>
                     </div>
                   </div>
 
         </div>
 
 
-        <!-- <div class="summary__items">
+        <div class="summary__items">
 
                 <div class="summary__question summary__question_left_block_incomplete" id="weekly-pay-significant-changes-pay-rates-increase-question">
                   Please enter the percentage increase of new pay rates, if possible:
@@ -503,7 +527,7 @@ globalcss: false
                   </div>
       
                     <div class="summary__question summary__question--sub">
-                      What was the percentage or number of weekly paid employees who received this new pay rate?
+                      What was the percentage or number of fortnightly paid employees who received this new pay rate?
                     </div>
                   
 
@@ -515,13 +539,13 @@ globalcss: false
                     </div>
                   </div>
 
-        </div> -->
+        </div>
 
 
         <div class="summary__items">
 
                 <div class="summary__question summary__question_left_block_incomplete" id="weekly-pay-significant-changes-industrial-action-question">
-                  Did industrial action significantly affect total gross pay paid to weekly paid employees?
+                  Did industrial action significantly affect total gross pay paid to fortnightly paid employees?
                   <span class="summary__question_status_incomplete_industrial_action status_label_color">Incomplete</span>
                 </div>
 
@@ -538,7 +562,7 @@ globalcss: false
         <div class="summary__items">
 
                 <div class="summary__question summary__question_left_block_incomplete" id="weekly-pay-significant-changes-other-question">
-                  Did any other significant changes occur to the pay or number of weekly paid employees?
+                  Did any other significant changes occur to the pay or number of fortnightly paid employees?
                 <span class="summary__question_status_incomplete_sig_changes status_label_color">Incomplete</span>
                 </div>
 
@@ -556,7 +580,7 @@ globalcss: false
         <div class="summary__items">
 
                 <div class="summary__question summary__question_left_block_incomplete" id="weekly-pay-significant-changes-other-specify-question">
-                  Please specify any other significant changes to the pay or number of weekly paid employees:
+                  Please specify any other significant changes to the pay or number of fortnightly paid employees:
                   <span class="summary__question_status_incomplete_spec_sig_changes status_label_color">Incomplete</span>
                 </div>
 
@@ -645,4 +669,6 @@ $( document ).ready(function() {
 
 
 });
+
+
 </script>

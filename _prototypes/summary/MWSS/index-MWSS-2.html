@@ -13,10 +13,10 @@ subtitle: Notice is given under section 1 of the Statistics of Trade Act 1947
 <style type="text/css">
 
   .response_date_outline{
-    background-color: #F5F6FF;
-    border-left: 5px solid #003C57;
+    background-color: #FDF6EC;
+    border-left: 5px solid #F99C21;
     float: right;
-    font-size: 18px;font-weight: normal; line-height: 26px;
+    font-size: 18px;font-weight: bold; line-height: 26px;
     padding: 16px 24px;
   }
   .review_control{
@@ -24,19 +24,27 @@ subtitle: Notice is given under section 1 of the Statistics of Trade Act 1947
     float: right;
     font-size: 18px;font-weight: bold; line-height: 26px;
   }
-  .review_control::after {
+
+  .preview_list {
+
+  }
+  .preview_list::before {
     content: ">";
     /*content: url('/sdfdsf/dsf');*/
     transform: rotate(90deg);
     display: inline-block;
-    margin-left: 1rem;
+    margin-right: 0.5rem;
   }
-   .review_control.show::after {
+   .preview_list.show::before {
     transform: rotate(270deg);
   }
+
+    
+
+
   .hidden_text{
     display: none;
-    font-weight: lighter;
+    font-weight: normal;
 
   }
   .hidden_text.show{
@@ -100,12 +108,12 @@ subtitle: Notice is given under section 1 of the Statistics of Trade Act 1947
           <h2 class="saturn">2. Review questions to complete</h2>
 <div>
           <div class="preview_list">Pay patterns for employees<span class="review_control">Preview</span></div>
-          <div class="hidden_text">
+          <div class="hidden_text panel panel--simple panel--info">
           <br>
           <p>Please indicate how frequently employees are paid: weekly, fortnightly, calendar monthly, four weekly or five weekly</p></div>
           <br>
           <div class="preview_list">Dependent on pay pattern, details of pay paid to employees<span class="review_control">Preview</span></div>
-          <div class="hidden_text">
+          <div class="hidden_text panel panel--simple panel--info">
           <br>
           <p>For all pay patterns in a given period, please provide:</p>
           <ul>
@@ -121,7 +129,7 @@ subtitle: Notice is given under section 1 of the Statistics of Trade Act 1947
           </div>
           <br>
           <div class="preview_list">Dependent on pay pattern, details of any significant changes<span class="review_control">Preview</span></div>
-          <div class="hidden_text">
+          <div class="hidden_text panel panel--simple panel--info">
           <br>
           <p>For all pay patterns in a given period, were there any significant changes to the number of:</p>
           <ul>
@@ -134,13 +142,13 @@ subtitle: Notice is given under section 1 of the Statistics of Trade Act 1947
           </div>
           <br>
           <div class="preview_list">Dependent on pay pattern, details of any significant change to the pay rate<span class="review_control">Preview</span></div>
-          <div class="hidden_text">
+          <div class="hidden_text panel panel--simple panel--info">
             <br>
             <p>For all pay patterns in a given period, were there any significant changes to the pay rates. If possible, please include the percentage increase of new pay rates</p>
             </div>
             <br>
           <div class="preview_list">Any other significant changes<span class="review_control">Preview</span></div>
-          <div class="hidden_text">
+          <div class="hidden_text panel panel--simple panel--info">
             <br>
           <p>For all pay patterns, did any other sigificant changes such as industrial action affect the total gross pay paid or number of employees</p>
           </div>
@@ -176,10 +184,8 @@ $('.preview_list').click( function(){
   sessionStorage.clear();
   console.info(sessionStorage);
 
-  $('.review_control').on("click", function(e) {
+  $('.preview_list').on("click", function(e) {
     $(this)
-    .toggleClass('show')
-    .parent()
     .toggleClass('show')
     .next('.hidden_text')
     .toggleClass('show')
