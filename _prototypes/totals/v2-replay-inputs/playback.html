@@ -26,14 +26,14 @@ globalcss: false
           <div class="group" id="rsi">
             <div class="block" id="total-retail-turnover">
               <section class="section" id="total-retail-turnover-section">
-                <h1 class="section__title neptune">
+                <h2 class="section__title neptune">
                   Commodities Retail Turnover
-                </h1>
+                </h2>
                 <div class="section__description mars"><p>1 April 2016 to 31 March 2017</p></div>
                 <div class="question" id="total-retail-turnover-question">
-                  <h2 class="question__title saturn">
+                  <h1 class="question__title saturn">
                     From your previous answers the total retail turnover for <span class="config1">Apple</span> has been calculated as: <span class="highlight"><span class="retailTotal"></span></span>
-                  </h2>
+                  </h1>
                   <div class="question__description mars" id="description-total-retail-turnover-question">
                     <p>To reach this total we used the values provided below. Please review and amend as necessary.</p>
                   </div>
@@ -157,6 +157,25 @@ globalcss: false
   </div>
                 </div>
               </section>
+              <!-- checkbox to confirm review of the total -->
+
+              <div class="question" id="total-retail-turnover-question">
+                <h1 class="question__title neptune">
+                  Does this total <!--(<span class="retailTotal"></span>)--> match your records?
+                </h1>
+                <div class="question__description mars" id="description-total-retail-turnover-question">
+                  <p>The total (<span class="retailTotal"></span>) should be the same as your total retail turnover. If it does not match please review your answers to ensure all previously entered values are correct.</p>
+                </div>
+
+                <div class="field field--checkbox field--multiplechoice">
+                  <div class="field__item js-focusable-box">
+                    <input class="input input--checkbox js-focusable" type="checkbox" id="checkbox">
+                    <label class="label label--inline venus" for="checkbox">Yes, this total matches</label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- / checkbox to confirm review of the total -->
             </div>
           </div>
           <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Save and continue</button>
