@@ -35,7 +35,7 @@ globalcss: false
                     From your previous answers the total retail turnover for <span class="config1">Apple</span> has been calculated as: <span class="highlight"><span class="retailTotal"></span></span>
                   </h1>
                   <div class="question__description mars" id="description-total-retail-turnover-question">
-                    <p>To reach this total we used the values provided below. Please review and amend as necessary.</p>
+                    <p>To reach this total we used the values you provided in previous questions. Please review them and amend as necessary.</p>
                   </div>
                   <!-- <aside class="question__guidance">
                     <div class="panel panel--simple panel--info" id="question-guidance-total-retail-turnover-question">
@@ -94,7 +94,7 @@ globalcss: false
 <!--£ 1000s-->
                   <!-- </div> -->
   <div class="summary">
-    <h2 class="summary__title saturn" id="reporting-period-section">Total retail turnover</h2>
+    <h2 class="summary__title saturn" id="reporting-period-section">Retail turnover elements</h2>
     <div class="summary__block">
       <div class="summary__items">
         <div class="summary__question" id="reporting-period-question">
@@ -142,15 +142,12 @@ globalcss: false
             <a href="../section-5" class="summary__edit-link" aria-describedby="period-from period-from-answer" data-qa="period-from-edit">Edit<span class="u-vh"> your answer</span></a>
           </div>
         </div>
-        <div class="summary__question" id="reporting-period-question">
+        <!--<div class="summary__question" id="reporting-period-question">
           Total retail turnover
         </div>
         <div class="summary__answer">
           <div class="summary__answer-text" id="q3r0-answer" data-qa="period-from-answer"><span class="retailTotal neptune"></span></div>
-          <!-- <div class="summary__edit">
-            <a href="../section-1" class="summary__edit-link" aria-describedby="period-from period-from-answer" data-qa="period-from-edit">Edit<span class="u-vh"> your answer</span></a>
-          </div> -->
-        </div>
+        </div>-->
       </div>
     </div>
 
@@ -158,22 +155,41 @@ globalcss: false
                 </div>
               </section>
               <!-- checkbox to confirm review of the total -->
-
-              <div class="question" id="total-retail-turnover-question">
-                <h1 class="question__title neptune">
-                  Does this total <!--(<span class="retailTotal"></span>)--> match your records?
-                </h1>
-                <div class="question__description mars" id="description-total-retail-turnover-question">
-                  <p>The total (<span class="retailTotal"></span>) should be the same as your total retail turnover. If it does not match please review your answers to ensure all previously entered values are correct.</p>
-                </div>
-
-                <div class="field field--checkbox field--multiplechoice">
-                  <div class="field__item js-focusable-box">
-                    <input class="input input--checkbox js-focusable" type="checkbox" id="checkbox">
-                    <label class="label label--inline venus" for="checkbox">Yes, this total matches</label>
-                  </div>
+        <div class="summary">
+          <h2 class="summary__title saturn" id="reporting-period-section">Calculated total retail turnover</h2>
+          <div class="summary__block">
+            <div class="summary__items">
+              <div class="summary__question" id="reporting-period-question">
+                Calculated total
+              </div>
+              <div class="summary__answer">
+                <div class="summary__answer-text" id="q3r0-answer" data-qa="period-from-answer">
+                  <span class="retailTotal neptune"></span>
+                  <p class="mars" style="word-break:break-word">If this calculated total <strong>does not match</strong> the total retail turnover you hold on file please review your <a href="#reporting-period-section">previous answers</a> to ensure the values are correct.</p>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="question" id="total-retail-turnover-question">
+          <h1 class="question__title neptune">
+            Does the calculated total match your records?
+          </h1>
+          <!--<div class="question__description mars" id="description-total-retail-turnover-question">
+            <p>The total (<span class="retailTotal"></span>) should be the same as your total retail turnover. If it does not match please review your answers to ensure all previously entered values are correct.</p>
+          </div>-->
+
+          <div class="field field--checkbox field--multiplechoice">
+            <div class="field__item js-focusable-box">
+              <input class="input input--checkbox js-focusable" type="checkbox" id="checkbox">
+              <label class="label label--inline venus" for="checkbox">Yes, this total matches my records</label>
+            </div>
+          </div>
+          <div class="" style="margin-top: 1rem;">
+              <p class="mars"><a href="#reporting-period-section">No, review your answers for retail turnover elements</a></p>
+          </div>
+        </div>
 
               <!-- / checkbox to confirm review of the total -->
             </div>
