@@ -9,7 +9,9 @@ globalcss: false
 {% include survey-header.html %}
 {% include bar.html %}
 </header>
-
+<style>
+.hidden {display: none;}
+</style>
 <div class="page__subheader">
   <div class="container">
     <a class="mars" href="../playback">Previous</a>
@@ -22,6 +24,24 @@ globalcss: false
     </div>
     <div class="grid__col col-7@m pull-1@m">
       <main role="main" id="main" class="page__main">
+        <!-- Error head start -->
+            <div class="panel panel--error u-mb-s hidden" data-qa="error">
+              <div class="panel__header">
+                <h1 class="panel__title venus">This page has 1 error</h1>
+              </div>
+              <div class="panel__body" data-qa="error-body">
+                <p class="mars">These <strong>must be corrected</strong> to continue.</p>
+                <ul class="list list--bare">
+
+                    <li class="list__item mars">
+                      1) <a class="js-inpagelink" id="errorLink" href="#q4r1">Please amend this answer to continue.</a>
+                    </li>
+
+                  </ul>
+                </div>
+              </div>
+        <!-- End error head -->
+
         <form action="../thankyou" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
           <div class="group" id="rsi">
             <div class="block" id="total-retail-turnover">
@@ -108,21 +128,40 @@ globalcss: false
 </div>
 <script>
 $( document ).ready(function() {
+  console.info(sessionStorage);
+
+  var errorPrep = '<div class="panel__header"><ul class="list list--bare list--errors"><li class="list__item mars" data-ga-action="Please correct an answer to continue." data-ga-label="single-date-question" data-ga="error" data-ga-category="Error"><p>Your answer is greater than the total.</p><p>Please correct an answer to continue.</p></li></ul></div>';
+
   if ($('.q3r6').length > 0) {
     var retailTotal = sessionStorage.getItem('retailTotal');
     $('.q3r6').text(retailTotal);
-
   }
+
   var q4r1_answer = sessionStorage.getItem('q4r1');
 
   if(q4r1_answer!==""){
     $('#q4r1').val(q4r1_answer);
   }
-  console.info(sessionStorage);
-  // $('.qa-btn-get-started').click(function(e) {
+
   $('.qa-btn-submit').click(function(e) {
-    e.preventDefault();
-    window.location.href = "../feedback/"; // target of save and continue
+    var t = retailTotal.replace(',','');
+    var t = Number(t.slice(1));
+
+    if( ($("#q4r1").val()) > t ) {
+
+      $(".panel--error").toggleClass("hidden");
+      $('#errorLink').attr('href','#total-retail-turnover-answer');
+      $('#total-retail-turnover-answer .answer__fields').wrap('<div class="panel__body" data-qa="error-body">').prepend(errorPrep);
+      $('#total-retail-turnover-answer').wrap('<div class="answer answer--date js-has-errors" id="errorq2r1"><aside class="panel panel--simple panel--error" data-qa="error">');
+      $(window).scrollTop(0); // faux submission behaviour - top of page.
+
+      e.preventDefault();
+
+    } else {
+      window.location.href = "../feedback/"; // target of save and continue
+    }
+
+    //window.location.href = "../feedback/"; // target of save and continue
 
         if ("text" === "text") {
           var inputValue = $("input[name='q4r1']").val();
@@ -131,6 +170,8 @@ $( document ).ready(function() {
           var inputValue = $("input[name='q4r1']:checked").val();
           sessionStorage.setItem('q4r1', inputValue);
         }
+
+    e.preventDefault();
   });
 
 // Experiment #1

@@ -9,7 +9,9 @@ globalcss: false
 {% include survey-header.html %}
 {% include bar.html %}
 </header>
-
+<style>
+.hidden {display: none;}
+</style>
 <div class="page__subheader">
   <div class="container">
     <a class="mars" href="../section-1">Previous</a>
@@ -22,6 +24,23 @@ globalcss: false
     </div>
     <div class="grid__col col-7@m pull-1@m">
       <main role="main" id="main" class="page__main">
+        <!-- Error head start -->
+            <div class="panel panel--error u-mb-s hidden" data-qa="error">
+              <div class="panel__header">
+                <h1 class="panel__title venus">This page has 1 error</h1>
+              </div>
+              <div class="panel__body" data-qa="error-body">
+                <p class="mars">These <strong>must be corrected</strong> to continue.</p>
+                <ul class="list list--bare">
+
+                    <li class="list__item mars">
+                      1) <a class="js-inpagelink" id="errorLink" href="#q4r1">Please amend this answer to continue.</a>
+                    </li>
+
+                  </ul>
+                </div>
+              </div>
+        <!-- End error head -->
         <form action="../thankyou" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
           <div class="group" id="rsi">
             <div class="block" id="total-retail-turnover">
@@ -35,7 +54,7 @@ globalcss: false
                     From your previous answers the total retail turnover for <span class="config1">Apple</span> has been calculated as: <span class="highlight"><span class="retailTotal"></span></span>
                   </h1>
                   <div class="question__description mars" id="description-total-retail-turnover-question">
-                    <p>To reach this total we used the values provided below. Please review and amend as necessary.</p>
+                    <p>To reach this total we used the values you provided in previous questions. Please review them and amend as necessary.</p>
                   </div>
                   <!-- <aside class="question__guidance">
                     <div class="panel panel--simple panel--info" id="question-guidance-total-retail-turnover-question">
@@ -94,7 +113,7 @@ globalcss: false
 <!--£ 1000s-->
                   <!-- </div> -->
   <div class="summary">
-    <h2 class="summary__title saturn" id="reporting-period-section">Total retail turnover</h2>
+    <h2 class="summary__title saturn" id="reporting-period-section">Retail turnover elements</h2>
     <div class="summary__block">
       <div class="summary__items">
         <div class="summary__question" id="reporting-period-question">
@@ -142,15 +161,12 @@ globalcss: false
             <a href="../section-5" class="summary__edit-link" aria-describedby="period-from period-from-answer" data-qa="period-from-edit">Edit<span class="u-vh"> your answer</span></a>
           </div>
         </div>
-        <div class="summary__question" id="reporting-period-question">
+        <!--<div class="summary__question" id="reporting-period-question">
           Total retail turnover
         </div>
         <div class="summary__answer">
           <div class="summary__answer-text" id="q3r0-answer" data-qa="period-from-answer"><span class="retailTotal neptune"></span></div>
-          <!-- <div class="summary__edit">
-            <a href="../section-1" class="summary__edit-link" aria-describedby="period-from period-from-answer" data-qa="period-from-edit">Edit<span class="u-vh"> your answer</span></a>
-          </div> -->
-        </div>
+        </div>-->
       </div>
     </div>
 
@@ -158,23 +174,42 @@ globalcss: false
                 </div>
               </section>
               <!-- checkbox to confirm review of the total -->
-
-              <div class="question" id="total-retail-turnover-question">
-                <h1 class="question__title neptune">
-                  Does this total <!--(<span class="retailTotal"></span>)--> match your records?
-                </h1>
-                <div class="question__description mars" id="description-total-retail-turnover-question">
-                  <p>The total (<span class="retailTotal"></span>) should be the same as your total retail turnover. If it does not match please review your answers to ensure all previously entered values are correct.</p>
-                </div>
-
-                <div class="field field--checkbox field--multiplechoice">
-                  <div class="field__item js-focusable-box">
-                    <input class="input input--checkbox js-focusable" type="checkbox" id="checkbox">
-                    <label class="label label--inline venus" for="checkbox">Yes, this total matches</label>
-                  </div>
+        <div class="summary">
+          <h2 class="summary__title saturn" id="reporting-period-section">Calculated total retail turnover</h2>
+          <div class="summary__block">
+            <div class="summary__items">
+              <div class="summary__question" id="reporting-period-question">
+                Calculated total
+              </div>
+              <div class="summary__answer">
+                <div class="summary__answer-text" id="q3r0-answer" data-qa="period-from-answer">
+                  <span class="retailTotal neptune"></span>
+                  <p class="mars" style="word-break:break-word">If this calculated total <strong>does not match</strong> the total retail turnover you hold on file please review your <a href="#reporting-period-section">previous answers</a> to ensure the values are correct.</p>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
 
+        <div class="question" id="total-retail-turnover-question-check">
+          <h1 class="question__title neptune">
+            Does the calculated total match your records?
+          </h1>
+          <!--<div class="question__description mars" id="description-total-retail-turnover-question">
+            <p>The total (<span class="retailTotal"></span>) should be the same as your total retail turnover. If it does not match please review your answers to ensure all previously entered values are correct.</p>
+          </div>-->
+          <div class="answer__fields">
+            <div class="field field--checkbox field--multiplechoice">
+              <div class="field__item js-focusable-box">
+                <input class="input input--checkbox js-focusable" type="checkbox" id="answer-checked">
+                <label class="label label--inline venus" for="answer-checked">Yes, this total matches my records</label>
+              </div>
+            </div>
+            <div class="" style="margin-top: 1rem;">
+                <p class="mars"><a href="#reporting-period-section">No, review your answers for retail turnover elements</a></p>
+            </div>
+          </div>
+        </div>
               <!-- / checkbox to confirm review of the total -->
             </div>
           </div>
@@ -241,9 +276,23 @@ $( document ).ready(function() {
   console.info(sessionStorage);
   // $('.qa-btn-get-started').click(function(e) {
   $('.qa-btn-submit').click(function(e) {
-    e.preventDefault();
-    window.location.href = "../of-which/"; // target of save and continue
+    var errorPrep = '<div class="panel__header"><ul class="list list--bare list--errors"><li class="list__item mars" data-ga-action="Please confirm that your answers match" data-ga-label="single-date-question" data-ga="error" data-ga-category="Error"><p>Please confirm that you have checked that the calculated total and the total you <strong>hold on file</strong> match to continue.</p></li></ul></div>';
+    var inputValue = $("input[id='answer-checked']:checked").val();;
 
+    if(inputValue!=='on'){
+
+      $(".panel--error").toggleClass("hidden");
+      $('#errorLink').attr('href','#total-retail-turnover-question-check');
+      $('#total-retail-turnover-question-check .answer__fields').wrap('<div class="panel__body" data-qa="error-body">').prepend(errorPrep);
+      $('#total-retail-turnover-question-check').wrap('<div class="answer answer--date js-has-errors" id="errorq2r1"><aside class="panel panel--simple panel--error" data-qa="error">');
+      $(window).scrollTop(0); // faux submission behaviour - top of page.
+      e.preventDefault();
+    } else {
+      //alert('checked');
+      window.location.href = "../of-which/"; // target of save and continue
+    }
+
+e.preventDefault();
   });
 
 });

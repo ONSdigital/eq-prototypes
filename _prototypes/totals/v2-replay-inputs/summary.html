@@ -8,7 +8,9 @@ globalcss: false
 {% include survey-header.html %}
 {% include bar.html %}
 </header>
-
+<style>
+#retailTotal {word-wrap: normal; word-break: normal;}
+</style>
 <div class="page__subheader">
   <div class="container">
     <!-- <a class="mars" href="../section-4">Previous</a> -->
@@ -23,33 +25,22 @@ globalcss: false
       <main role="main" id="main" class="page__main">
         <h2 class="section__title neptune">Summary</h2>
       <div>
-  <h1 class="saturn">Your responses</h1>
+  <h1 class="saturn">Your answers</h1>
   <!-- <div class="print__message panel panel--simple panel--error">
     <h2 class="saturn">Please remember to submit these responses.</h2>
   </div> -->
   <div class="print__hidden panel panel--simple panel--warn">
-    <h2 class="neptune">Please check your responses carefully before submitting.</h2>
+    <h2 class="neptune">Please check your answers carefully before submitting.</h2>
   </div>
 </div>
-<div class="download u-mb-s u-mb-m@s">
-  <div class="venus download__text">You will have the opportunity to download your responses after submitting this questionnaire</div>
-</div>
+<!-- <div class="download u-mb-s u-mb-m@s">
+  <div class="venus download__text">You will have the opportunity to download your answers after submitting this questionnaire.</div>
+</div> -->
 <div>
   <div class="summary">
 
-      <h2 class="summary__title saturn" id="mci"></h2>
+      <h2 class="summary__title saturn" id="mci">Elements of total retail turnover</h2>
       <div class="summary__block">
-        <!-- <div class="summary__items">
-                <div class="summary__question" id="reporting-period-question">
-                   What are the dates of the sales period you are reporting for?
-                </div>
-                  <div class="summary__answer">
-                    <div class="summary__answer-text" id="period-from-answer" data-qa="period-from-answer">    01 January 2016 to 01 February 2016</div>
-                    <div class="summary__edit">
-                      <a href="/questionnaire/1/0203/DdW67qjc/mci/0/reporting-period#period-from" class="summary__edit-link" aria-describedby="period-from period-from-answer" data-qa="period-from-edit" data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">Edit <span class="u-vh">your answer</span></a>
-                    </div>
-                  </div>
-        </div> -->
 
         <div class="summary__items">
                 <div class="summary__question" id="total-sales-food-question">
@@ -104,16 +95,26 @@ globalcss: false
                     </div>
                   </div>
 
+        </div> <!-- Summary items -->
+      </div> <!-- Summary block -->
+
+      <h2 class="summary__title saturn" id="mci">Calculated total retail turnover</h2>
+      <div class="summary__block">
+        <div class="summary__items">
                 <div class="summary__question" id="total-retail-turnover-question">
                    Total retail turnover
                 </div>
                   <div class="summary__answer">
-                    <div class="summary__answer-text retailTotal" id="retailTotal"> </div>
-                    <!-- <div class="summary__edit">
-                      <a href="/questionnaire/1/0203/DdW67qjc/mci/0/reporting-period#total-retail-turnover" class="summary__edit-link" aria-describedby="total-retail-turnover total-retail-turnover-answer" data-qa="total-retail-turnover-edit" data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">Edit <span class="u-vh">your answer</span></a>
-                    </div> -->
+                    <div class="summary__answer-text" id="retailTotal"><p>You have cofirmed that the calculated total retail turnover of&nbsp;<span class="retailTotal neptune"></span> is correct and matches your records.</p></div>
+                    <div class="summary__edit">
+                      <a href="../playback/" class="summary__edit-link" aria-describedby="internet-sales internet-sales-answer" data-qa="internet-sales-edit" data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">Edit <span class="u-vh">your answer</span></a>
+                    </div>
                   </div>
-
+        </div>
+      </div>
+      <h2 class="summary__title saturn" id="mci">Internet sales</h2>
+      <div class="summary__block">
+        <div class="summary__items">
                 <div class="summary__question" id="internet-sales-question">
                    Of your total retail turnover, how much were from internet sales?
                 </div>
@@ -125,8 +126,10 @@ globalcss: false
                     </div>
                   </div>
 
-        </div>
-
+         </div>
+       </div>
+       <h2 class="summary__title saturn" id="mci">Comments</h2>
+       <div class="summary__block">
         <div class="summary__items">
                 <div class="summary__question" id="reason-for-change-question">
                    Comments
@@ -152,7 +155,7 @@ globalcss: false
 
   <button class="btn btn--primary btn--lg btn--loader qa-btn-submit" data-qa="btn-submit" data-loading-msg="Submitting…" type="submit">Submit answers</button>
   <div class="download u-mb-s u-mb-m@s">
-    <div class="venus download__text">You will have the opportunity to download your responses after submitting this questionnaire</div>
+    <div class="venus download__text">You will have the opportunity to download your answers after submitting this questionnaire.</div>
   </div>
 
       <div class="u-mb-m">
