@@ -144,7 +144,7 @@ $( document ).ready(function() {
   }
 
   $('.qa-btn-submit').click(function(e) {
-    var t = retailTotal.replace(',','');
+    var t = retailTotal.replace(/,/g,'');
     var t = Number(t.slice(1));
 
     if( ($("#q4r1").val()) > t ) {
