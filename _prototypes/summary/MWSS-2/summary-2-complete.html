@@ -68,10 +68,12 @@ globalcss: false
 }
 
   .summary__question_left_block_completed {
-  border-left: 5px solid #0F8243
+  border-left: 5px solid #0F8243;
+  position: relative;
   }
 .summary__question_left_block_incomplete {
-  border-left: 5px solid #F99C21
+  border-left: 5px solid #F99C21;
+  position: relative;
   }
   .summary__answer-text_colour {
     color: #FFFFFF
@@ -218,6 +220,13 @@ globalcss: false
   }
   .status_label_color{
     color: #FFFFFF;
+    position: absolute;
+    top: 8px; 
+    right: 42px;
+    font-size: 16px;
+    padding: 1px 8px;
+    height: auto;
+    width: auto;
   }
 
   .preview_list_download::before {
