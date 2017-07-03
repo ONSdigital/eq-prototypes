@@ -25,17 +25,18 @@ globalcss: false
 
       }
       .autocomplete__wrapper{position:relative}
-      .autocomplete__hint,.autocomplete__input{-webkit-appearance:none;border:2px solid;border-radius:0;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;margin-bottom:0;width:100%}
-      .autocomplete__input{background-color:transparent;position:relative}
+      .autocomplete__hint,
+      .autocomplete__input{-webkit-appearance:none;border:1px solid;border-radius:3px;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;margin-bottom:0;width:100%; width: 20rem;}
+      .autocomplete__input{background-color:transparent;position:relative; padding: 0.6rem 2rem 0.6rem 0.5rem;}
       .autocomplete__hint{color:#bfc1c3;position:absolute}
-      .autocomplete__input--focused{outline-offset:0;outline:1px solid #4263c2; border-color: #4263c2;}
+      .autocomplete__input--focused{outline-offset:0;outline: 2px solid #4263c2;box-shadow:0 0 0 2px solid #4263c2; border:1px solid #4263c2;}
       /*.autocomplete__menu{background-color:#fff;border:2px solid #0b0c0c;border-top:0;color:#34384b;margin:0;max-height:342px;overflow-x:hidden;padding:0;width:100%;width:calc(100% - 4px)}*/
-      .autocomplete__menu{background-color:#fff;border:2px solid #4263c2;border-top:0;color:#34384b;margin:0;max-height:342px;overflow-x:hidden;padding:0;width:100%;width:calc(100% - 4px)}
+      .autocomplete__menu{background-color:#fff;border:2px solid #4263c2;border-top:0;color:#34384b;margin:0;max-height:342px;overflow-x:hidden;padding:0;width:100%;width:calc(100% - 4px); border-radius: 0 0 3px 3px;}
       .autocomplete__menu--visible{display:block}
       .autocomplete__menu--hidden{display:none}
       .autocomplete__menu--overlay{box-shadow:rgba(0,0,0,.256863) 0 2px 6px;left:0;position:absolute;top:100%;z-index:100}
       .autocomplete__menu--inline{position:relative}
-      .autocomplete__option{border-bottom:solid #4263c2;border-width:1px 0;cursor:pointer;display:block;position:relative}
+      .autocomplete__option{border-bottom:solid #4263c2;border-width:1px 0;cursor:pointer;display:block;position:relative; margin: 0;}
       .autocomplete__option>*{pointer-events:none}
       .autocomplete__option:first-of-type{border-top-width:0}
       .autocomplete__option:last-of-type{border-bottom-width:0}
@@ -86,15 +87,15 @@ globalcss: false
                     <div class="question__answer">
                       <div class="answer answer--currency" id="total-retail-turnover-answer">
                         <div class="answer__fields js-fields">
-                          <div class="field">
+                          <div class="field field--select">
                             <label for="q3r1" id="label-total-retail-turnover-answer" class="label venus ">
                               <div class="label__inner">
                                 Type and select your country
                               </div>
                               <!-- <div class="question__description mars" id="description-reason-for-change-question">Question description</div> -->
                             </label>
-                            <div class="input-type">
-                              <select name="last-location" class="input--select input" id="last-country">
+                            <div class="field input-type">
+                              <select name="last-location" class="input input--select" id="last-country">
 <option value=""></option>
             <option value="territory:AE-AZ">Abu Dhabi</option>
             <option value="country:AF">Afghanistan</option>
