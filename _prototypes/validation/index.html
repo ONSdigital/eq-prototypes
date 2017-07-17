@@ -13,6 +13,10 @@ globalcss: false
 .has-error {
   color: #D0121E;
   font-weight: 700;
+  transition: all 0.3s ease-in-out;
+  display: inline-block;
+  /*border-left: 3px solid #d0121e;*/
+  /*padding-left: 0.5rem;*/
 }
 .input--has-error {
   background-color: #fff;
@@ -160,10 +164,18 @@ $( document ).ready(function() {
   $('#q3r2').keyup(function(){
     validate2()
   });
+var errortype = '';
 
   function validate(){
     var str = $('#q3r1').val();
       if(str.search(/\D/i)>=0){ // Check for any non digit
+        errortype="Enter a valid number";
+        if(str.search(/\w/i)>=0){ // Check for any word character
+          errortype="Use numbers only"
+          if(str.indexOf('.')>= 0){ // Check for decimal place
+            errortype="Do not enter decimal values";
+          }
+        }
         doError();
       } else {
         removeError();
@@ -173,7 +185,7 @@ $( document ).ready(function() {
     var elem = $('#q3r1');
     var className = "input--has-error";
     if(!elem.hasClass(className)){
-        $('#q3r1_description').prepend('Error:&nbsp;').addClass('has-error');
+        $('#q3r1_description').append('<span class="has-error">Error:&nbsp;'+errortype+'</span>');//.addClass('has-error');
       }
     $('#q3r1').addClass('input--has-error');
   }
