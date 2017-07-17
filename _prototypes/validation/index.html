@@ -163,7 +163,7 @@ $( document ).ready(function() {
 
   function validate(){
     var str = $('#q3r1').val();
-      if(str.search(/\D/i)>=0){
+      if(str.search(/\D/i)>=0){ // Check for any non digit
         doError();
       } else {
         removeError();
