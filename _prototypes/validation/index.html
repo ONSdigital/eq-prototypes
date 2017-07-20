@@ -13,6 +13,10 @@ globalcss: false
 .has-error {
   color: #D0121E;
   font-weight: 700;
+  transition: all 0.3s ease-in-out;
+  display: inline-block;
+  /*border-left: 3px solid #d0121e;*/
+  /*padding-left: 0.5rem;*/
 }
 .input--has-error {
   background-color: #fff;
@@ -30,6 +34,10 @@ globalcss: false
 .input--has-error-old {
   background-color: #fbecec;
   transition: background-color 1s ease-in-out;
+}
+.input-validation {
+  /*display: none;*/
+  margin-top: 0.5rem
 }
 </style>
 <div class="page__subheader">
@@ -69,9 +77,12 @@ globalcss: false
                               <div class="question__description mars" id="q3r1_description">Round to the nearest pound. Do not include pence.</div>
                             </label>
                             <div class="input-type input-type--currency">
-                              <span class="input-type__type" id="q3r1type">£</span>
-                              <input id="q3r1" value="" data-qa="input-text" name="q3r1" class="input input--text input-type__input">
+                              <abbr title="Pounds sterling" class="input-type__type" id="q3r2type">£</abbr>
+                              <input id="q3r1" value="" name="q3r1" class="input input--text input-type__input">
                             </div>
+                            <!-- Validation message -->
+                            <div class="input-validation has-error u-vh" role="alert" aria-live="assertive"></div>
+                            <!-- / Validation message -->
                           </div>
                         </div>
                       </div>
@@ -113,7 +124,7 @@ globalcss: false
                           <div class="question__description mars" id="q3r1_description">Round to the nearest pound. Do not include pence.</div>
                         </label>
                         <div class="input-type input-type--currency">
-                          <span class="input-type__type" id="q3r2type">£</span>
+                          <abbr title="Pounds sterling" class="input-type__type" id="q3r2type">£</abbr>
                           <input id="q3r2" value="" data-qa="input-text" name="q3r2" class="input input--text input-type__input">
                         </div>
                       </div>
@@ -160,10 +171,18 @@ $( document ).ready(function() {
   $('#q3r2').keyup(function(){
     validate2()
   });
+var errortype = '';
 
   function validate(){
     var str = $('#q3r1').val();
       if(str.search(/\D/i)>=0){ // Check for any non digit
+        errortype="Enter a valid number";
+        if(str.search(/\w/i)>=0){ // Check for any word character
+          errortype="Use numbers only (1-0)"
+          if(str.indexOf('.')>= 0){ // Check for decimal place
+            errortype="Enter whole pounds only. Do not enter pence.";
+          }
+        }
         doError();
       } else {
         removeError();
@@ -173,14 +192,14 @@ $( document ).ready(function() {
     var elem = $('#q3r1');
     var className = "input--has-error";
     if(!elem.hasClass(className)){
-        $('#q3r1_description').prepend('Error:&nbsp;').addClass('has-error');
+        $('.input-validation').html('Error:&nbsp;'+errortype).removeClass('u-vh');
       }
     $('#q3r1').addClass('input--has-error');
   }
 
   function removeError(){
+    $('.input-validation').addClass('u-vh').text('');
     $('#q3r1').removeClass('input--has-error');
-    $('#q3r1_description').removeClass('has-error').html('Round to the nearest pound. Do not include pence.');
   }
 
   function validate2(){
