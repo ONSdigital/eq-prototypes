@@ -6,7 +6,7 @@ globalcss: false
 ---
 
 <header class="page__header">
-{% include survey-header.html %}
+{% include survey-header-2.html %}
 {% include bar.html %}
 </header>
 
@@ -68,10 +68,12 @@ globalcss: false
 }
 
   .summary__question_left_block_completed {
-  border-left: 5px solid #0F8243
+  border-left: 5px solid #0F8243;
+  position: relative;
   }
 .summary__question_left_block_incomplete {
-  border-left: 5px solid #F99C21
+  border-left: 5px solid #F99C21;
+  position: relative;
   }
   .summary__answer-text_colour {
     color: #FFFFFF
@@ -218,7 +220,21 @@ globalcss: false
   }
   .status_label_color{
     color: #FFFFFF;
+    position: absolute;
+    top: 8px; 
+    right: 42px;
+    font-size: 16px;
+    padding: 1px 8px;
+    height: auto;
+    width: auto;
   }
+
+  .preview_list_download::before {
+    content: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHdpZHRoPSIxN3B4IiBoZWlnaHQ9IjE3cHgiIHZpZXdCb3g9IjAgMCAxNyAxNyIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4gICAgICAgIDx0aXRsZT5kb3dubG9hZDwvdGl0bGU+ICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPiAgICA8ZGVmcz48L2RlZnM+ICAgIDxnIGlkPSJQYWdlLTEiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPiAgICAgICAgPGcgaWQ9IkFydGJvYXJkIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTIzLjAwMDAwMCwgLTk0LjAwMDAwMCkiIGZpbGw9IiMwMDAwMDAiPiAgICAgICAgICAgIDxwYXRoIGQ9Ik0xMzEuMDcxNzkzLDEwOC4wMDU5NTkgTDEyMy4xODAyOTgsMTAwLjA4NDA5OSBDMTIyLjk0NDUyNCw5OS44NDc0MTgxIDEyMi45NDQ1MjQsOTkuNDcxNTEyNyAxMjMuMTgwMjk4LDk5LjIzNDgzMTUgQzEyMy40MTYwNzIsOTguOTk4MTUwMyAxMjMuNzkwNTM2LDk4Ljk5ODE1MDMgMTI0LjAyNjMxLDk5LjIzNDgzMTUgTDEzMC44OTE0OTUsMTA2LjE0MDM1NCBMMTMwLjg5MTQ5NSw5NC41OTg2NjQyIEMxMzAuODkxNDk1LDk0LjI2NDUyNjEgMTMxLjE1NTAwNyw5NCAxMzEuNDg3ODY1LDk0IEMxMzEuODIwNzIyLDk0IDEzMi4wODQyMzQsOTQuMjY0NTI2MSAxMzIuMDg0MjM0LDk0LjU5ODY2NDIgTDEzMi4wODQyMzQsMTA2LjEyNjQzMSBMMTM4Ljk3NzE1Nyw5OS4yMzQ4MzE1IEMxMzkuMjEyOTMxLDk4Ljk5ODE1MDMgMTM5LjU4NzM5NSw5OC45OTgxNTAzIDEzOS44MjMxNjksOTkuMjM0ODMxNSBDMTQwLjA1ODk0NCw5OS40NzE1MTI3IDE0MC4wNTg5NDQsOTkuODQ3NDE4MSAxMzkuODIzMTY5LDEwMC4wODQwOTkgTDEzMS45MzE2NzQsMTA4LjAwNTk1OSBDMTMxLjg3NjE5OCwxMDguMDYxNjQ4IDEzMS44MDY4NTMsMTA4LjEwMzQxNiAxMzEuNzM3NTA4LDEwOC4xMzEyNjEgTDEzMS43MjM2MzksMTA4LjEzMTI2MSBDMTMxLjY1NDI5MywxMDguMTU5MTA1IDEzMS41ODQ5NDgsMTA4LjE3MzAyOCAxMzEuNTAxNzM0LDEwOC4xNzMwMjggQzEzMS40MTg1MTksMTA4LjE3MzAyOCAxMzEuMzQ5MTc0LDEwOC4xNTkxMDUgMTMxLjI3OTgyOSwxMDguMTMxMjYxIEwxMzEuMjY1OTYsMTA4LjEzMTI2MSBDMTMxLjE5NjYxNCwxMDguMTAzNDE2IDEzMS4xMjcyNjksMTA4LjA2MTY0OCAxMzEuMDcxNzkzLDEwOC4wMDU5NTkgWiBNMTIzLjU5NjM3LDExMC4xNjM5MzQgTDEyMy41OTYzNywxMTAuMTYzOTM0IEMxMjMuMjYzNTEyLDExMC4xNjM5MzQgMTIzLDEwOS44ODU0ODYgMTIzLDEwOS41NjUyNyBDMTIzLDEwOS4yMzExMzIgMTIzLjI2MzUxMiwxMDguOTY2NjA2IDEyMy41OTYzNywxMDguOTY2NjA2IEwxMzkuMzc5MzYsMTA4Ljk2NjYwNiBDMTM5LjcxMjIxNywxMDguOTY2NjA2IDEzOS45NzU3MjksMTA5LjIzMTEzMiAxMzkuOTc1NzI5LDEwOS41NjUyNyBDMTM5Ljk3NTcyOSwxMDkuODk5NDA4IDEzOS43MTIyMTcsMTEwLjE2MzkzNCAxMzkuMzc5MzYsMTEwLjE2MzkzNCBMMTIzLjU5NjM3LDExMC4xNjM5MzQgWiIgaWQ9ImRvd25sb2FkIj48L3BhdGg+ICAgICAgICA8L2c+ICAgIDwvZz48L3N2Zz4=);
+    display: inline-block;
+    margin-right: 0.5rem;
+  }
+
   /*.complete_label{
     display: inline-block;
     width: 150px;
@@ -300,9 +316,9 @@ globalcss: false
 
                   <div class="summary__answer">
                     <div class="summary__answer-text" id="pay-pattern-frequency-answer-answer" data-qa="pay-pattern-frequency-answer-answer">
-                    <span class="summary__answer_styling"<p><b>Weekly</b></p></span>
-                    <a href="../summary-2-fortnightly" class="nav_not_selected summary__answer_styling"><p>Fortnightly</p></a>
-                    <a href="../" class="nav_not_selected summary__answer_styling"><p>Calendar monthly</p></a>
+                    <a href="../" class="nav_not_selected summary__answer_styling"><p>Weekly</p></a>
+                    <a href="../summary-2-fortnightly-2" class="nav_not_selected summary__answer_styling"><p>Fortnightly</p></a>
+                    <span class="summary__answer_styling"><p><b>Calendar monthly</b></p></a>
                     <a href="../" class="nav_not_selected summary__answer_styling"><p>Four weekly</p></a>
                     <a href="../" class="nav_not_selected summary__answer_styling"><p>Five weekly</p></a>
                     </div>
@@ -328,7 +344,7 @@ globalcss: false
 
 
 
-      <h2 class="summary__title saturn" id="weekly-pay">Weekly</h2>
+      <h2 class="summary__title saturn" id="weekly-pay">Calendar monthly</h2>
 
 <p>Please <b>exclude</b> the following from your figures for this section:</p>
 <ul>
@@ -351,7 +367,7 @@ globalcss: false
         <div class="summary__items">
 
                 <div class="summary__question summary__question_left_block_completed" id="weekly-pay-paid-employees-question">
-                  What was the number of weekly paid employees paid in the last week of May 2016?
+                  What was the number of monthly paid employees paid in the last week of May 2016?
                 <span class="summary__question_status_completed_weekly_number status_label_color">Completed</span>
                 </div>
 
@@ -368,7 +384,7 @@ globalcss: false
         <div class="summary__items">
 
                 <div class="summary__question summary__question_left_block_completed" id="weekly-pay-gross-pay-question">
-                  What was the total gross weekly pay paid to employees in the last week of May 2016?
+                  What was the total gross monthly pay paid to employees in the last week of May 2016?
                   <span class="summary__question_status_completed_weekly_total_gross status_label_color">Completed</span>
                 </div>
 
@@ -385,7 +401,7 @@ globalcss: false
         <div class="summary__items">
 
                 <div class="summary__question summary__question_left_block_completed" id="weekly-pay-breakdown-question">
-                  Of the £100 paid to weekly paid employees in the last week of May 2016, what amount was:
+                  Of the £100 paid to monthly paid employees in the last week of May 2016, what amount was:
                   <span class="summary__question_status_completed_weekly_amount_was status_label_color">Completed</span>
                 </div>
                   
@@ -430,7 +446,7 @@ globalcss: false
         <div class="summary__items">
 
                 <div class="summary__question summary__question_left_block_completed" id="weekly-pay-significant-changes-paid-employees-question">
-                  Did any significant changes occur to the number of weekly paid employees?
+                  Did any significant changes occur to the number of monthly paid employees?
                   <span class="summary__question_status_completed_weekly_sig_changes status_label_color">Completed</span>
                 </div>
                   <div class="summary__answer">
@@ -446,7 +462,7 @@ globalcss: false
         <div class="summary__items">
 
                 <div class="summary__question summary__question_left_block_completed" id="weekly-pay-significant-changes-redundancies-question">
-                  Did any significant changes occur to the number of redundancies among weekly paid employees?
+                  Did any significant changes occur to the number of redundancies among monthly paid employees?
                   <span class="summary__question_status_completed_weekly_sig_redund status_label_color">Completed</span>
                 </div>
 
@@ -463,7 +479,7 @@ globalcss: false
         <div class="summary__items">
 
                 <div class="summary__question summary__question_left_block_complete" id="weekly-pay-significant-changes-temp-employees-question">
-                  Did any significant changes occur to the number of temporary weekly paid employees?
+                  Did any significant changes occur to the number of temporary monthly paid employees?
                   <span class="summary__question_status_completed_weekly_sig_temp status_label_color">Completed</span>
                 </div>    
 
@@ -480,7 +496,7 @@ globalcss: false
         <div class="summary__items">
 
                 <div class="summary__question summary__question_left_block_completed" id="weekly-pay-significant-changes-gross-pay-question">
-                  Did any significant changes occur to the total gross pay paid to weekly paid employees?
+                  Did any significant changes occur to the total gross pay paid to monthly paid employees?
                   <span class="summary__question_status_completed_weekly_sig_pay_weekly status_label_color">Completed</span>
                 </div>
                   <div class="summary__answer">
@@ -495,7 +511,7 @@ globalcss: false
 
         <div class="summary__items">
          <div class="summary__question summary__question_left_block_completed" id="weekly-pay-significant-changes-overtime-question">
-                  Did any significant changes occur to the amount of overtime paid to weekly paid employees?
+                  Did any significant changes occur to the amount of overtime paid to monthly paid employees?
                   <span class="summary__question_status_completed_weekly_sig_over_weekly status_label_color">Completed</span>
                 </div>
 
@@ -512,7 +528,7 @@ globalcss: false
         <div class="summary__items">
 
                 <div class="summary__question summary__question_left_block_completed" id="weekly-pay-significant-changes-pay-rates-question">
-                  Did any significant changes occur to the pay rates of weekly paid employees?
+                  Did any significant changes occur to the pay rates of monthly paid employees?
                   <span class="summary__question_status_completed_weekly_sig_rates_weekly status_label_color">Completed</span>
                 </div>
 
@@ -577,7 +593,7 @@ globalcss: false
         <div class="summary__items">
 
                 <div class="summary__question summary__question_left_block_incomplete" id="weekly-pay-significant-changes-industrial-action-question">
-                  Did industrial action significantly affect total gross pay paid to weekly paid employees?
+                  Did industrial action significantly affect total gross pay paid to monthly paid employees?
                   <span class="summary__question_status_incomplete_industrial_action status_label_color">Incomplete</span>
                 </div>
 
@@ -594,7 +610,7 @@ globalcss: false
         <div class="summary__items">
 
                 <div class="summary__question summary__question_left_block_incomplete" id="weekly-pay-significant-changes-other-question">
-                  Did any other significant changes occur to the pay or number of weekly paid employees?
+                  Did any other significant changes occur to the pay or number of monthly paid employees?
                 <span class="summary__question_status_incomplete_sig_changes status_label_color">Incomplete</span>
                 </div>
 
@@ -612,7 +628,7 @@ globalcss: false
         <div class="summary__items">
 
                 <div class="summary__question summary__question_left_block_incomplete" id="weekly-pay-significant-changes-other-specify-question">
-                  Please specify any other significant changes to the pay or number of weekly paid employees:
+                  Please specify any other significant changes to the pay or number of monthly paid employees:
                   <span class="summary__question_status_incomplete_spec_sig_changes status_label_color">Incomplete</span>
                 </div>
 
@@ -630,7 +646,7 @@ globalcss: false
 
       <h2 class="summary__title saturn" id="general-comments-group">General Comments</h2>
 
-      <p>The next section covers general comments about this survey. Please include any details in regard to all the pay patterns you have completed.</p>
+      <p>Please include any details in regard to all the pay patterns you have completed.</p>
 
       <div class="summary__block">
 
@@ -669,6 +685,8 @@ globalcss: false
           <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Save and continue later</button>
           <div class="u-mb-m">
 
+          <div class="preview_list_download">You will have the opportunity to download your submissions as a PDF when you complete this questionnaire.</div>
+
           </div>
         </form>
       </main>
@@ -690,7 +708,7 @@ $( document ).ready(function() {
   // $('.qa-btn-get-started').click(function(e) {
   $('.qa-btn-submit').click(function(e) {
     e.preventDefault();
-    window.location.href = "../index-MWSS-2"; // target of save and continue
+    window.location.href = "../index-MWSS-3"; // target of save and continue
 
         if ("text" === "text") {
           var inputValue = $("input[name='q1r1']").val();

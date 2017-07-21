@@ -6,7 +6,7 @@ globalcss: false
 ---
 
 <header class="page__header">
-{% include survey-header.html %}
+{% include survey-header-2.html %}
 {% include bar.html %}
 </header>
 
@@ -31,7 +31,7 @@ globalcss: false
 <div class="page__subheader">
   <div class="container">
 
-    <a class="page_previous" href="../weekly-pay-12.2">Previous</a>      <a class="page_next" href="../">Next</a>
+    <a class="page_previous" href="../weekly-pay-12.2">Previous</a>      <a class="page_next" href="../summary-2-complete">Next</a>
 
   </div>
 </div>
@@ -48,7 +48,7 @@ globalcss: false
     
     <li class="nav__item  pluto ">
       
-        <a class="nav__link" href="../index-MWSS-2"
+        <a class="nav__link" href="../index-MWSS-3"
           
    data-ga-action="Section link click" data-ga="click" data-ga-category="Navigation" data-ga-label="/questionnaire/1/0005/jN4AAK9U/pay-pattern/0/pay-pattern-frequency">Introduction</a>
       
@@ -73,9 +73,9 @@ globalcss: false
       
       </li>
     
-    <li class="nav__item  pluto nav__item--current ">
+    <li class="nav__item  pluto  ">
       
-        <a class="nav__link" href="../weekly-pay-13.2"
+        <a class="nav__link" href="../"
           
    data-ga-action="Section link click" data-ga="click" data-ga-category="Navigation" data-ga-label="/questionnaire/1/0005/jN4AAK9U/weekly-pay/0/weekly-pay-introduction">Weekly Pay</a>
       
@@ -83,15 +83,15 @@ globalcss: false
 
       <li class="nav__item  pluto  ">
       
-        <a class="nav__link" href="../"
+        <a class="nav__link" href="../summary-2-fortnightly-2/"
           
    data-ga-action="Section link click" data-ga="click" data-ga-category="Navigation" data-ga-label="/questionnaire/1/0005/jN4AAK9U/weekly-pay/0/weekly-pay-introduction">Fortnightly Pay</a>
       
       </li>
 
-      <li class="nav__item  pluto  ">
+      <li class="nav__item  pluto  nav__item--current">
       
-        <a class="nav__link" href="../"
+        <a class="nav__link" href="../summary-2-complete"
           
    data-ga-action="Section link click" data-ga="click" data-ga-category="Navigation" data-ga-label="/questionnaire/1/0005/jN4AAK9U/weekly-pay/0/weekly-pay-introduction">Calendar Monthly Pay</a>
       
@@ -133,11 +133,11 @@ globalcss: false
             <div class="block" id="">
               <section class="section" id="">
                 <h1 class="section__title neptune">
-                  Weekly pay
+                  Calendar monthly
                 </h1>
                 <div class="question" id="">
                   <h2 class="question__title saturn">
-                     Please specify any other significant changes to the pay or number of  weekly paid employees:
+                     Please specify any other significant changes to the pay or number of monthly paid employees:
                   </h2>
 
                   <div class="question__description mars" id="">
@@ -211,7 +211,7 @@ globalcss: false
 
           <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Save and continue</button>
           <div class="u-mb-m">
-            <a class="" href="../index-MWSS-2">Save and complete later</a>
+            <a class="" href="../index-MWSS-3">Save and complete later</a>
           </div>
         </form>
       </main>
@@ -237,7 +237,7 @@ $( document ).ready(function() {
   // $('.qa-btn-get-started').click(function(e) {
   $('.qa-btn-submit').click(function(e) {
     e.preventDefault();
-    window.location.href = "../general-comments-intro-2"; // target of save and continue
+    window.location.href = "../summary-2-complete"; // target of save and continue
 
         if ("text" === "text") {
           var inputValue = $("input[name='q1r1']").val();
