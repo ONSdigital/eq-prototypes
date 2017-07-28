@@ -46,7 +46,7 @@ globalcss: false
                             <label id="label-answer" class="label venus " for="answer">
                               <div class="label__inner">Enter your comments</div>
                             </label>
-                            <textarea aria-describedby="description-question guidance-answer-trigger" rows="8" id="answer" class="input input--textarea js-charlimit-input" maxlength="20" name="answer" cols="60" data-maxlength="20"></textarea>
+                            <textarea aria-describedby="description-question guidance-answer-trigger" rows="8" id="comments" class="input input--textarea js-charlimit-input" maxlength="20" name="answer" cols="60" data-maxlength="20"></textarea>
                             <div id="answer-remaining" class="input__limit u-mt-xs mercury">Characters remaining: <span>200</span></div>
                           </div>
                         </div>
@@ -106,7 +106,8 @@ $( document ).ready(function() {
   $('.qa-btn-submit').click(function(e) {
     e.preventDefault();
 
-
+    var significantChangesComment = $('#comments').val();
+    sessionStorage.setItem('significantChangesComment',significantChangesComment);
 
       window.location.href = "../summary/"; // Answers turnover
 
