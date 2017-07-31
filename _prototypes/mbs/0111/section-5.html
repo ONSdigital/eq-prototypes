@@ -46,7 +46,7 @@ globalcss: false
                             <label id="label-answer" class="label venus " for="answer">
                               <div class="label__inner">Enter your comments</div>
                             </label>
-                            <textarea aria-describedby="description-question guidance-answer-trigger" rows="8" id="comments" class="input input--textarea js-charlimit-input" maxlength="20" name="answer" cols="60" data-maxlength="20"></textarea>
+                            <textarea aria-describedby="description-question guidance-answer-trigger" rows="8" id="comments" class="input input--textarea js-charlimit-input" maxlength="200" name="answer" cols="60" data-maxlength="20"></textarea>
                             <div id="answer-remaining" class="input__limit u-mt-xs mercury">Characters remaining: <span>200</span></div>
                           </div>
                         </div>
@@ -100,6 +100,8 @@ $( document ).ready(function() {
   if(config2!==''){
     $('.config2').html(config2);
   }
+  //var comments = sessionStorage.getItem('significantChangesComment');
+  $('#comments').val((sessionStorage.getItem('significantChangesComment')));
 
   console.info(sessionStorage);
 

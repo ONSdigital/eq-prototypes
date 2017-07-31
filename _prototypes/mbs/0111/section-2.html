@@ -65,7 +65,7 @@ globalcss: false
                               <div class="label__inner">
                                 Total turnover excluding VAT
                               </div>
-                              <div class="question__description mars" id="description-reason-for-change-question">Round to the nearest pound. Do not include pence.</div>
+                              <!-- <div class="question__description mars" id="description-reason-for-change-question">Round to the nearest pound. Do not include pence.</div> -->
                             </label>
                             <div class="input-type input-type--currency">
                               <span class="input-type__type" id="total-retail-turnover-answer-type">£</span>
@@ -148,7 +148,7 @@ $( document ).ready(function() {
 
     var editing = sessionStorage.getItem('editing');
     if(editing=='true'){
-      window.location.href="../playback/";
+      window.location.href="../summary/";
     } else {
       window.location.href = "../section-3/"; // target of save and continue
     }
