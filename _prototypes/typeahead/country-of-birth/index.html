@@ -1,13 +1,35 @@
 ---
-title: Typeahead
-project: Typeahead
+title: Typeahead Country of Birth
+project: Typeahead Country og Birth
 globalcss: false
 
 ---
 
+<link href="/css/census.css" rel="stylesheet">
 <header class="page__header">
-{% include survey-header.html %}
-{% include bar.html %}
+  <header class="header header--census">
+  <div class="header__help is-closed js-help-body">
+    <div class="header__container container">
+      <div class="header__title ">Help and support –</div>
+      <ul class="header__nav nav nav--horizontal">
+        <li class="nav__item">
+          <span class="mars" role="presentation">Call </span> <a class="venus nav__link" href="tel:03000683001"><span class="u-vh">For help call </span>0300 068 3001</a>
+        </li>
+        <li class="nav__item">
+          <a class="venus nav__link external" href="http://www.ons.gov.uk/census/help" target="_blank" rel="noopener noreferrer">Online Help</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="header__container container">
+    <div class="header__logo">
+      <img src="/img/census-logo.svg" alt="2017 Census">
+    </div>
+    <button class="header__btn btn btn--light btn--border js-help-btn" data-ga-action="Help and support" data-ga="click" data-ga-category="Help">
+      Help and support
+    </button>
+  </div>
+</header>
 </header>
 <style>
       /* Example page specific styling. */
@@ -21,22 +43,18 @@ globalcss: false
       .autocomplete__menu {
         list-style: none;
       }
-      .autocomplete__input {
-
-      }
       .autocomplete__wrapper{position:relative}
-      .autocomplete__hint,
-      .autocomplete__input{-webkit-appearance:none;border:1px solid;border-radius:3px;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;margin-bottom:0;width:100%; width: 20rem;}
-      .autocomplete__input{background-color:transparent;position:relative; padding: 0.6rem 2rem 0.6rem 0.5rem;}
+      .autocomplete__hint,.autocomplete__input{-webkit-appearance:none;border:1px solid grey ;border-radius:0;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;margin-bottom:0;width:100%}
+      .autocomplete__input{background-color:transparent;position:relative}
       .autocomplete__hint{color:#bfc1c3;position:absolute}
-      .autocomplete__input--focused{outline-offset:0;outline: 2px solid #4263c2;box-shadow:0 0 0 2px solid #4263c2; border:1px solid #4263c2;}
+      .autocomplete__input--focused{outline-offset:0;outline:1px solid #6E2585; border-color: #6E2585;}
       /*.autocomplete__menu{background-color:#fff;border:2px solid #0b0c0c;border-top:0;color:#34384b;margin:0;max-height:342px;overflow-x:hidden;padding:0;width:100%;width:calc(100% - 4px)}*/
-      .autocomplete__menu{background-color:#fff;border:2px solid #4263c2;border-top:0;color:#34384b;margin:0;max-height:342px;overflow-x:hidden;padding:0;width:100%;width:calc(100% - 4px); border-radius: 0 0 3px 3px;}
+      .autocomplete__menu{background-color:#fff;border:2px solid #6E2585;border-top:0;color:#34384b;margin:0;max-height:342px;overflow-x:hidden;padding:0;width:100%;width:calc(100% - 4px)}
       .autocomplete__menu--visible{display:block}
       .autocomplete__menu--hidden{display:none}
       .autocomplete__menu--overlay{box-shadow:rgba(0,0,0,.256863) 0 2px 6px;left:0;position:absolute;top:100%;z-index:100}
       .autocomplete__menu--inline{position:relative}
-      .autocomplete__option{border-bottom:solid #4263c2;border-width:1px 0;cursor:pointer;display:block;position:relative; margin: 0;}
+      .autocomplete__option{border-bottom:solid #6E2585;border-width:1px 0;cursor:pointer;display:block;position:relative}
       .autocomplete__option>*{pointer-events:none}
       .autocomplete__option:first-of-type{border-top-width:0}
       .autocomplete__option:last-of-type{border-bottom-width:0}
@@ -45,7 +63,7 @@ globalcss: false
       .autocomplete__option:hover{background-color:#005ea5;border-color:#005ea5;color:#fff;outline:0}*/
 
       .autocomplete__option--focused,
-      .autocomplete__option:hover{background-color:#4263c2;border-color:#4263c2;color:#fff;outline:0}
+      .autocomplete__option:hover{background-color:#6E2585;border-color:#6E2585;color:#fff;outline:0}
 
       .autocomplete__option--no-results{background-color:#fafafa;color:#646b6f;cursor:not-allowed}
       .autocomplete__hint,
@@ -57,6 +75,20 @@ globalcss: false
         .autocomplete__option{font-size:19px;line-height:1.31579}
       }
     </style>
+
+
+<!-- Leannes Css -->
+<style>
+.panel--simple {
+  padding-top:2rem;
+  margin-bottom:1rem;
+}
+      .autocomplete__input {
+        width: 350px;
+      }
+</style>
+
+
 <div class="page__subheader">
   <div class="container">
     <a class="mars" href="../index">Previous</a>
@@ -66,14 +98,31 @@ globalcss: false
 <div class="page__container container">
   <div class="grid grid--reverse">
     <div class="grid__col col-4@m">
-    </div>
+
+    <!-- right aligned side nav -->
+      <div class="nav nav--sections nav--vertical js-nav page__nav" id="section-nav">
+    <h2 class="nav__title venus">Sections</h2>
+    <ul class="nav__list js-nav-list">
+        <li class="nav__item pluto nav__item--completed">
+            <a class="nav__link" href="#item1">Who lives here?</a>
+        </li>
+        <li class="nav__item pluto nav__item--completed">
+            <a class="nav__link" href="#item2">Household and Accomodation</a>
+        </li>
+        <li class="nav__item pluto nav__item--current">
+            <a class="nav__link" href="#item3">Leanne Cook</a>
+        </li>
+    </ul>
+</div>
+
+</div>
     <div class="grid__col col-7@m pull-1@m">
       <main role="main" id="main" class="page__main">
         <form action="../thankyou" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
           <div class="group" id="rsi">
             <div class="block" id="total-retail-turnover">
               <section class="section" id="total-retail-turnover-section">
-                <h2 class="section__title neptune">Business Location</h2>
+                <h2 class="section__title neptune">Leanne Cook</h2>
                 <!-- <div class="section__description mars">
                   <p>1 April 2016 to 31 March 2017</p>
                   <p>- You should enter figures for the reporting period stated above
@@ -81,24 +130,195 @@ globalcss: false
                 </div> -->
                 <div class="question" id="total-retail-turnover-question">
                   <h1 class="question__title saturn">
-                    In what country is your business located?
+                    36. What is (was) your full and specific job title?
                   </h1>
+
+                  <div class="panel panel--simple panel--info">
+                      <div class="panel__body">
+                        
+                          <p>For example, <b>primary school teacher, car mechanic, district nurse, structural engineer</b>
+                           <br> 
+                           <br>
+                          <b>Do not</b> state your pay grade or pay band</p>
+                      </div>
+                  </div>
+
+                  <!-- Auto complete form -->
                   <div class="question__answers">
                     <div class="question__answer">
                       <div class="answer answer--currency" id="total-retail-turnover-answer">
                         <div class="answer__fields js-fields">
-                          <div class="field field--select">
+                          <div class="field">
                             <label for="q3r1" id="label-total-retail-turnover-answer" class="label venus ">
+
+
                               <div class="label__inner">
-                                Type and select your country
+                                Type and select your job title
                               </div>
                               <!-- <div class="question__description mars" id="description-reason-for-change-question">Question description</div> -->
                             </label>
-                            <div class="field input-type">
-                              <select name="last-location" class="input input--select" id="last-country">
+                            <div class="input-type">
+                              <select name="last-location" class="input--select input" id="last-country">
 <option value=""></option>
-            <option value="territory:AE-AZ">Abu Dhabi</option>
-            <option value="country:AF">Afghanistan</option>
+           <option>accountant</option>
+<option>administrative services department manager</option>
+<option>agricultural advisor</option>
+<option>air-conditioning installer or mechanic</option>
+<option>aircraft service technician</option>
+<option>ambulance driver (non paramedic)</option>
+<option>animal carer (not in farms)</option>
+<option>arable farm manager, field crop or vegetable</option>
+<option>arable farmer, field crop or vegetable</option>
+<option>architect</option>
+<option>asbestos removal worker</option>
+<option>assembler</option>
+<option>assembly team leader</option>
+<option>bank clerk (back-office)</option>
+<option>beauty therapist</option>
+<option>beverage production process controller</option>
+<option>boring machine operator</option>
+<option>bricklayer</option>
+<option>butcher</option>
+<option>car mechanic</option>
+<option>carpenter</option>
+<option>charge nurse</option>
+<option>check-out operator</option>
+<option>child care services manager</option>
+<option>child-carer</option>
+<option>civil engineering technician</option>
+<option>cleaning supervisor</option>
+<option>climatologist</option>
+<option>cloak room attendant</option>
+<option>cnc operator</option>
+<option>community health worker</option>
+<option>company director, 10-50 employees</option>
+<option>confectionery maker</option>
+<option>construction operative</option>
+<option>cooling or freezing installer or mechanic</option>
+<option>database designer</option>
+<option>dental hygienist</option>
+<option>dental prosthesis technician</option>
+<option>department store manager</option>
+<option>dietician</option>
+<option>display designer</option>
+<option>domestic housekeeper</option>
+<option>education advisor</option>
+<option>electrical engineer </option>
+<option>electrical mechanic or fitter</option>
+<option>engineering maintenance supervisor</option>
+<option>estate agent</option>
+<option>executive secretary</option>
+<option>felt roofer</option>
+<option>filing clerk</option>
+<option>financial clerk</option>
+<option>financial services manager</option>
+<option>fire fighter</option>
+<option>first line supervisor beverages workers</option>
+<option>first line supervisor of cleaning workers</option>
+<option>flight attendant</option>
+<option>floral arranger</option>
+<option>food scientist</option>
+<option>garage supervisor</option>
+<option>gardener, all other</option>
+<option>general practitioner</option>
+<option>hairdresser</option>
+<option>head groundsman</option>
+<option>horse riding instructor</option>
+<option>hospital nurse</option>
+<option>hotel manager</option>
+<option>house painter</option>
+<option>hr manager</option>
+<option>it applications programmer</option>
+<option>it systems administrator</option>
+<option>journalist</option>
+<option>judge</option>
+<option>kitchen assistant</option>
+<option>lathe setter-operator</option>
+<option>lawyer</option>
+<option>legal secretary</option>
+<option>local police officer</option>
+<option>logistics manager</option>
+<option>machine tool operator</option>
+<option>manager, all other health services</option>
+<option>meat processing operator</option>
+<option>mechanical engineering technician</option>
+<option>medical laboratory technician</option>
+<option>medical radiography equipment operator</option>
+<option>metal moulder</option>
+<option>metal production process operator</option>
+<option>meteorologist</option>
+<option>midwifery <option>l</option>
+<option>mortgage clerk</option>
+<option>musical instrument maker</option>
+<option>non-commissioned officer armed forces</option>
+<option>nursery school teacher</option>
+<option>nursing aid</option>
+<option>ophthalmic optician</option>
+<option>payroll clerk</option>
+<option>personal carer in an institution for the elderly</option>
+<option>personal carer in an institution for the handicapped</option>
+<option>personal carer in private homes</option>
+<option>personnel clerk</option>
+<option>pest controller</option>
+<option>physician assistant</option>
+<option>pipe fitter</option>
+<option>plant maintenance mechanic</option>
+<option>plumber</option>
+<option>police inspector</option>
+<option>policy advisor</option>
+<option>post secondary education teacher</option>
+<option>post sorting or distributing clerk</option>
+<option>power plant operator</option>
+<option>primary school head</option>
+<option>primary school teacher</option>
+<option>printing machine operator</option>
+<option>psychologist</option>
+<option>quality inspector, all other products</option>
+<option>receptionist</option>
+<option>restaurant cook</option>
+<option>road paviour</option>
+<option>roofer</option>
+<option>sailor</option>
+<option>sales assistant, all other</option>
+<option>sales or marketing manager</option>
+<option>sales representative</option>
+<option>sales support clerk</option>
+<option>seaman (armed forces)</option>
+<option>secondary school manager</option>
+<option>secondary school teacher</option>
+<option>secretary</option>
+<option>security guard</option>
+<option>sheet metal worker</option>
+<option>ship mechanic</option>
+<option>shoe repairer, leather repairer</option>
+<option>socialphotographer</option>
+<option>soldier</option>
+<option>speech therapist</option>
+<option>steel fixer</option>
+<option>stockman</option>
+<option>structural engineer</option>
+<option>surgeon</option>
+<option>surgical footwear maker</option>
+<option>swimming instructor</option>
+<option>tailor, seamstress</option>
+<option>tax inspector</option>
+<option>taxi driver</option>
+<option>tile layer</option>
+<option>transport clerk</option>
+<option>travel agency clerk</option>
+<option>truck driver long distances</option>
+<option>university professor</option>
+<option>university researcher</option>
+<option>user researcher</option>
+<option>user experience designer</option>
+<option>veterinary practitioner</option>
+<option>vocational education teacher</option>
+<option>waiting staff</option>
+<option>web developer</option>
+<option>welder, all other</option>
+<option>wood processing plant operator</option>
+              
+            <!-- <option value="country:AF">Afghanistan</option> 
             <option value="territory:AE-AJ">Ajman</option>
             <option value="territory:XQZ">Akrotiri</option>
             <option value="country:AL">Albania</option>
@@ -374,7 +594,7 @@ globalcss: false
             <option value="country:YU">Yugoslavia</option>
             <option value="country:ZM">Zambia</option>
             <option value="country:ZW">Zimbabwe</option>
-            <option value="territory:AX">Åland Islands</option>
+            <option value="territory:AX">Åland Islands</option>-->
           </select>
                             </div>
                           </div>
@@ -527,6 +747,8 @@ globalcss: false
 //# sourceMappingURL=accessible-autocomplete.min.js.map
 </script>
 <script type="text/javascript">
+
+      // JS to change country dropdown into autocomplete
       var selectEl = document.querySelector('#last-country')
       accessibleAutocomplete.enhanceSelectElement({
         autoselect: true,
