@@ -8,7 +8,6 @@ globalcss: false
 {% include survey-header.html %}
 {% include bar.html %}
 </header>
-
 <style type="text/css">
 
   .date_stamp{
@@ -21,9 +20,11 @@ globalcss: false
   .color{
     color: #000000;
   }
+
   .seconds_color{
     color: #D0121E
   }
+
   .right_align{
     float: left;
   }
@@ -34,6 +35,51 @@ globalcss: false
     font-size: 14px; font-weight: lighter;
     padding-bottom: 10px;
   }
+  .print::before {
+      content: /s/img/icons/ic_print_black_24dp_1x.png;
+      display: inline-block;
+      margin-right: 0.5rem;
+    }
+
+  .print-icon {
+    margin-right: 4px;
+    margin-left: 4px;
+  }
+
+  .print-page {
+
+  }
+
+  ul.nav__list.transaction-id {
+    border-left: none;
+    padding-left: 0;
+    margin-left: 0;
+  }
+
+  ul.nav__list.transaction-id li {
+    margin-bottom: 0;
+  }
+
+  .transaction-id-col {
+    margin-top: -45px;
+  }
+
+  .nav__title {
+    margin-bottom: 0;
+  }
+
+  @media only screen and (max-width: 740px) {
+    .transaction-id-col {
+      margin-top: inherit;
+    }
+  }
+
+  @media print {
+    .transaction-id-col {
+      margin-top: inherit;
+    }
+  }
+
   </style>
 
 <div class="page__subheader">
@@ -44,11 +90,14 @@ globalcss: false
 
 <div class="page__container container">
   <div class="grid grid--reverse">
-    <div class="grid__col col-4@m">
+  <div class="grid__col col-12@m">
+    <h1 class="saturn">Submitted responses</h1>
+  </div>
+    <div class="grid__col col-4@m transaction-id-col">
 
-      <nav class="nav nav--sections nav--vertical js-nav page__nav" id="section-nav">
+      <nav class="nav nav--sections js-nav page__nav" id="section-nav">
       <p class="nav__title venus">Transaction ID</p>
-        <ul class="nav__list ">
+        <ul class="nav__list transaction-id">
 
           <li class=" ">
               <span class="color">296C - 3442 - BBBA - 3442</span>
@@ -67,11 +116,19 @@ globalcss: false
     <div class="grid__col col-7@m pull-1@m">
       <main role="main" id="main" class="page__main">
         <div class="u-mb-s">
-  <h1 class="saturn">Submitted responses</h1>
 
   <dd class="dl__data mars">Below are your responses to the <b>Monthly Wages and Salaries Survey</b></dd>
 
-  <dd class="dl__data mars">If you would like to retain a copy of your responses <button type="button" style="border-radius:5px;" onclick="print()"><img src="{{site.baseurl}}/s/img/icons/ic_print_black_24dp_1x.png"  /> print this page</button></dd>
+  <dt class="dl__title mercury">Business name</dt>
+  <dd class="dl__data mars">Bolts & Ratchets Ltd</dd>
+
+    <dt class="dl__title mercury">Trading as</dt>
+    <dd class="dl__data mars">Bolts & Ratchets Ltd</dd>
+
+    <dt class="dl__title mercury">Business address</dt>
+    <dd class="dl__data mars">23 Primrose Avenue, Hoddingbridge, Wessex WE11 2DO</dd>
+
+  <dd class="dl__data mars">If you would like to retain a copy of your responses <img class="print-icon" src="{{site.baseurl}}/s/img/icons/ic_print_black_24dp_1x.png"/><a class="print-page" href="#" onclick="window.print();return false;">print this page</a></dd>
 
   <dd class="dl__data mars information_availablity seconds_color">This information will no longer be available in 16 seconds</dd>
 
@@ -555,7 +612,7 @@ $( document ).ready(function() {
   // $('.qa-btn-get-started').click(function(e) {
   $('.qa-btn-submit').click(function(e) {
     e.preventDefault();
-    window.location.href = "../thankyou/"; // target of save and continue
+    window.location.href = "../your-responses-feedback-complete/"; // target of save and continue
 
   });
 

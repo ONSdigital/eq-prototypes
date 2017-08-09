@@ -15,6 +15,9 @@ globalcss: false
     font-size: 14px;font-weight: lighter;
     color: #000000;
   }
+  .information_availablity{
+   font-size: 14px;
+  }
   .color{
     color: #000000;
   }
@@ -34,6 +37,51 @@ globalcss: false
   .btn--secondary {
     transition: none;
   }
+}
+.print::before {
+    content: /s/img/icons/ic_print_black_24dp_1x.png;
+    display: inline-block;
+    margin-right: 0.5rem;
+  }
+
+.print-icon {
+  margin-right: 4px;
+  margin-left: 4px;
+}
+
+.print-page {
+
+}
+
+ul.nav__list.transaction-id {
+  border-left: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+ul.nav__list.transaction-id li {
+  margin-bottom: 0;
+}
+
+.transaction-id-col {
+  margin-top: -45px;
+}
+
+.nav__title {
+  margin-bottom: 0;
+}
+
+@media only screen and (max-width: 740px) {
+  .transaction-id-col {
+    margin-top: inherit;
+  }
+}
+
+@media print {
+  .transaction-id-col {
+    margin-top: inherit;
+  }
+}
   </style>
 
 <div class="page__subheader">
@@ -44,11 +92,14 @@ globalcss: false
 
 <div class="page__container container">
   <div class="grid grid--reverse">
-    <div class="grid__col col-4@m">
+    <div class="grid__col col-12@m">
+      <h1 class="saturn">Submission Successful</h1>
+    </div>
+<div class="grid__col col-4@m transaction-id-col">
 
-      <nav class="nav nav--sections nav--vertical js-nav page__nav" id="section-nav">
+      <nav class="nav nav--sections js-nav page__nav" id="section-nav">
       <p class="nav__title venus">Transaction ID</p>
-        <ul class="nav__list ">
+        <ul class="nav__list transaction-id">
 
           <li class=" ">
               <span class="color">296C - 3442 - BBBA - 3442</span>
@@ -67,7 +118,7 @@ globalcss: false
     <div class="grid__col col-7@m pull-1@m">
       <main role="main" id="main" class="page__main">
         <div class="u-mb-s">
-          <h1 class="saturn">Submission Successful</h1>
+
 
           <dd class="dl__data mars">Thank you for submitting this survey, your resposes have been successfully received. Your answers will be processed in the next few weeks. We may contact you to query your responses via phone or secure message.</dd>
 

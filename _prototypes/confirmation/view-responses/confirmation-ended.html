@@ -15,14 +15,17 @@ globalcss: false
     font-size: 14px;font-weight: lighter;
     color: #000000;
   }
-  .color{
-    color: #000000;
+  .information_availablity{
+   font-size: 14px;
   }
   .countdown_text{
     color: #D0121E
   }
   .countdown_ended{
     opacity: 0.3;
+  }
+  .color{
+    color: #000000;
   }
   .right_align{
     float: left;
@@ -40,6 +43,51 @@ globalcss: false
   .btn--secondary {
     transition: none;
   }
+}
+.print::before {
+    content: /s/img/icons/ic_print_black_24dp_1x.png;
+    display: inline-block;
+    margin-right: 0.5rem;
+  }
+
+.print-icon {
+  margin-right: 4px;
+  margin-left: 4px;
+}
+
+.print-page {
+
+}
+
+ul.nav__list.transaction-id {
+  border-left: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+ul.nav__list.transaction-id li {
+  margin-bottom: 0;
+}
+
+.transaction-id-col {
+  margin-top: -45px;
+}
+
+.nav__title {
+  margin-bottom: 0;
+}
+
+@media only screen and (max-width: 740px) {
+  .transaction-id-col {
+    margin-top: inherit;
+  }
+}
+
+@media print {
+  .transaction-id-col {
+    margin-top: inherit;
+  }
+}
   </style>
 
 <div class="page__subheader">
@@ -50,11 +98,14 @@ globalcss: false
 
 <div class="page__container container">
   <div class="grid grid--reverse">
-    <div class="grid__col col-4@m">
+    <div class="grid__col col-12@m">
+      <h1 class="saturn">Submission Successful</h1>
+    </div>
+<div class="grid__col col-4@m transaction-id-col">
 
-      <nav class="nav nav--sections nav--vertical js-nav page__nav" id="section-nav">
+      <nav class="nav nav--sections js-nav page__nav" id="section-nav">
       <p class="nav__title venus">Transaction ID</p>
-        <ul class="nav__list ">
+        <ul class="nav__list transaction-id">
 
           <li class=" ">
               <span class="color">296C - 3442 - BBBA - 3442</span>
@@ -73,7 +124,7 @@ globalcss: false
     <div class="grid__col col-7@m pull-1@m">
       <main role="main" id="main" class="page__main">
         <div class="u-mb-s">
-          <h1 class="saturn">Submission Successful</h1>
+
 
           <dd class="dl__data mars">Thank you for submitting this survey, your resposes have been successfully received. Your answers will be processed in the next few weeks. We may contact you to query your responses via phone or secure message.</dd>
 
@@ -201,12 +252,80 @@ globalcss: false
 </div>
 <script>
 $( document ).ready(function() {
-  if ($('.q1').length > 0) {
-    var q1var = sessionStorage.getItem('q1r1');
-    $('.q1').text(q1var);
+  var editing = true;
+  sessionStorage.setItem('editing', editing);
+  if ($('.config1').length>0){
+    var config1 = sessionStorage.getItem('config1');
+    $('.config1').html(config1);
+  }
+
+  if ($('.retailTotal').length > 0) {
+    var retailTotal = (Number(sessionStorage.getItem('q3r6'))+Number(sessionStorage.getItem('q3r5'))+Number(sessionStorage.getItem('q3r4'))+Number(sessionStorage.getItem('q3r3'))+Number(sessionStorage.getItem('q3r2'))+Number(sessionStorage.getItem('q3r1'))).toLocaleString('en-gb',{ style: 'currency', currency: 'GBP', minimumFractionDigits: '2' });
+    var q3r1_answer = (Number(sessionStorage.getItem('q3r1'))).toLocaleString('en-gb',{ style: 'currency', currency: 'GBP', minimumFractionDigits: '2' });
+    var q3r2_answer = (Number(sessionStorage.getItem('q3r2'))).toLocaleString('en-gb',{ style: 'currency', currency: 'GBP', minimumFractionDigits: '2' });
+    var q3r3_answer = (Number(sessionStorage.getItem('q3r3'))).toLocaleString('en-gb',{ style: 'currency', currency: 'GBP', minimumFractionDigits: '2' });
+    var q3r4_answer = (Number(sessionStorage.getItem('q3r4'))).toLocaleString('en-gb',{ style: 'currency', currency: 'GBP', minimumFractionDigits: '2' });
+    var q3r5_answer = (Number(sessionStorage.getItem('q3r5'))).toLocaleString('en-gb',{ style: 'currency', currency: 'GBP', minimumFractionDigits: '2' });
+    var q3r6_answer = (Number(sessionStorage.getItem('q3r6'))).toLocaleString('en-gb',{ style: 'currency', currency: 'GBP', minimumFractionDigits: '2' });
+    var q4r1_answer = (Number(sessionStorage.getItem('q4r1'))).toLocaleString('en-gb',{ style: 'currency', currency: 'GBP', minimumFractionDigits: '2' });
+    var q5r1_answer = sessionStorage.getItem('q5r1');
+
+    if(q3r1_answer=='£0.00') {
+      q3r1_answer = q3r1_answer+' (Nil return)';
+    }
+    if(q3r2_answer=='£0.00') {
+      q3r2_answer = q3r2_answer+' (Nil return)';
+    }
+    if(q3r3_answer=='£0.00') {
+      q3r3_answer = q3r3_answer+' (Nil return)';
+    }
+    if(q3r4_answer=='£0.00') {
+      q3r4_answer = q3r4_answer+' (Nil return)';
+    }
+    if(q3r5_answer=='£0.00') {
+      q3r5_answer = q3r5_answer+' (Nil return)';
+    }
+    if(q3r6_answer=='£0.00') {
+      q3r6_answer = q3r6_answer+' (Nil return)';
+    }
+    if(q4r1_answer=='£0.00') {
+      q4r1_answer = q4r1_answer+' (Nil return)';
+    }
+    console.info('Calc\'d total:'+retailTotal);
+    $('#q3r1-answer').text(q3r1_answer);
+    $('#q3r2-answer').text(q3r2_answer);
+    $('#q3r3-answer').text(q3r3_answer);
+    $('#q3r4-answer').text(q3r4_answer);
+    $('#q3r5-answer').text(q3r5_answer);
+    $('#q3r6-answer').text(q3r6_answer);
+    $('#q4r1-answer').text(q4r1_answer);
+    $('.retailTotal').text(retailTotal);
+    $('#q5r1-answer').text(q5r1_answer);
+
+// console.log(retailTotal.toLocaleString('en-gb',{ style: 'currency', currency: 'GBP' }));
+
+    sessionStorage.setItem('retailTotal', retailTotal);
 
   }
   console.info(sessionStorage);
+  // $('.qa-btn-get-started').click(function(e) {
+  $('.qa-btn-submit').click(function(e) {
+    e.preventDefault();
+    window.location.href = "../confirmation-feedback-complete/"; // target of save and continue
+
+  });
+
+  $('.js-details-trigger').click(function(e) {
+    var text = $(this).text();
+    if ($('.js-details').hasClass('is-expanded')){
+      $(this).text(text.replace('Hide', 'Show'));
+    } else {
+      $(this).text(text.replace('Show', 'Hide'));
+    }
+    e.preventDefault();
+    $('.js-details').toggleClass('is-expanded');
+
+  });
 
 });
 </script>
