@@ -6,8 +6,8 @@ globalcss: false
 ---
 
 <header class="page__header">
-{% include survey-header-2.html %}
-{% include bar.html %}
+{% include survey-header-3.html %}
+{% include bar-2.html %}
 </header>
 
 <style type="text/css">
@@ -26,11 +26,89 @@ globalcss: false
     margin-left: .5rem;
     }
 
+    .badge {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.8;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+
+.badge--amber {
+  background-color: $color-amber;
+}
+
+.badge--blue {
+  color: white;
+  background-color: rgb(12, 96, 162);
+}
+.footer {
+  padding: 36px 0;
+  padding: 2rem 0;
+  margin-top: 36px;
+  margin-top: 2rem;
+  background-color: #595959;
+  color: #e4e8eb;
+}
+
+.footer__link {
+  color: #e4e8eb;
+}
+
+
+.footer__link:focus {
+  color: white;
+}
+
+.footer__link:hover {
+  color: white;
+}
+.footer a{
+    color: #e4e8eb;
+    text-decoration: underline
+ }
+
+.footer a:hover{
+    color:#e4e8eb
+}
+
+.footer a:focus{
+    color:#4263C2;
+    background-color:#fff
+}
+
+.footer-nav{
+    padding:0 0 40px 0;
+    padding:0 0 2rem 0
+}
+.footer-nav__heading{
+    margin-top:32px;
+    margin-top:2rem;
+    margin-bottom:0
+}
+.footer-nav__list{
+    list-style:none;
+    margin:0;
+    padding:0
+}
+.footer-nav__item{
+    margin:0;
+    padding:6px 0 2px 0;
+    list-style: none
+}
+.page__content+ footer{
+  display: none;
+}
+
 </style>
 
 <div class="page__subheader">
   <div class="container">
-
+    <div class="feedback__action"><span class="badge badge--blue u-mr-xs">Beta</span><span class="pluto">This is a new service. <a href="{{ url_for('feedback.send_feedback') }}" target="_blank" rel="noopener norefer\
+    rer" class="feedback__open">Help us improve it</a></span></div>
   </div>
 </div>
 
@@ -45,11 +123,19 @@ globalcss: false
 
   </div>
     <div class="grid__col col-7@m pull-1@m">
+
+
+
       <main role="main" id="main" class="page__main">
+
         <form action="../section-2" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
           <div class="group" id="rsi">
             <div class="block" id="">
+
               <section class="section" id="">
+
+
+
                 <h1 class="section__title saturn">
                   Contact us
                 </h1>
@@ -98,6 +184,65 @@ globalcss: false
     </div>
   </div>
 </div>
+<footer class="footer page__footer">
+      <div class="footer-nav container" role="contentinfo">
+
+          <div class="grid container">
+            <div class="">
+
+                  <div class="grid__col col-4@m">
+                    <div class="footer-nav__heading">
+                      <h3 class="venus">Legal information</h3>
+                    </div>
+                    <ul class="footer-nav list">
+                      <li class="footer-nav__item">
+                        <a href="" class="footer__link">Terms and conditions</a>
+                      </li>
+                      <li class="footer-nav__item">
+                        <a href="" class="footer__link">Cookies and privacy</a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="grid__col col-4@m">
+                    <div class="footer-nav__heading">
+                      <h3 class="venus">About ONS</h3>
+                    </div>
+                    <ul class="footer-nav list">
+                      <li class="footer-nav__item">
+                        <a href="https://www.ons.gov.uk/aboutus/whatwedo" class="footer__link">What we do</a>
+                      </li>
+                      <li class="footer-nav__item">
+                        <a href="" class="footer__link">Contact us</a>
+                      </li>
+                      <li class="footer-nav__item">
+                        <a href="https://www.ons.gov.uk/help/accessibility" class="footer__link">Accessibility</a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="grid__col col-4@m">
+                    <div class="footer-nav__heading">
+                      <h3 class="venus">Statistics</h3>
+                    </div>
+                    <ul class="footer-nav list">
+                      <li class="footer-nav__item">
+                        <a href="https://www.statisticsauthority.gov.uk/about-the-authority/" class="footer__link">UK Statistics Authority</a>
+                      </li>
+                      <li class="footer-nav__item">
+                        <a href="https://www.ons.gov.uk/releasecalendar" class="footer__link">Release calendar</a>
+                      </li>
+                      <li class="footer-nav__item">
+                          <a href="https://www.ons.gov.uk/news">News</a>
+                      </li>
+                    </ul>
+                  </div>
+
+            </div>
+          </div>
+
+        </div>
+    </footer>
 <script>
 $( document ).ready(function() {
   if ($('.q1').length > 0) {
