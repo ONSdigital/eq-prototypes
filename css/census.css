@@ -5096,7 +5096,7 @@ input:checked ~ .field__other {
   margin-right: 0.3rem;
   speak: none;
   content: "";
-  background: url("/s/img/icons/icons--guidance.svg") no-repeat center center;
+  background: url("../s/img/icons/icons--guidance.svg") no-repeat center center;
   background-size: auto;
   text-align: center;
   width: 18px;
