@@ -6,8 +6,8 @@ globalcss: false
 ---
 
 <header class="page__header">
-{% include survey-header.html %}
-{% include bar.html %}
+  {% include survey-header-3.html %}
+  {% include bar-2.html %}
 </header>
 <style>
       /* Example page specific styling. */
@@ -114,6 +114,12 @@ globalcss: false
       .page__content+ footer{
         display: none;
       }
+
+      .ogl-icon {
+        margin-right: 10px;
+        margin-left: 12px;
+      }
+
     </style>
 
 <div class="page__subheader">
@@ -640,6 +646,8 @@ globalcss: false
                       </li>
                     </ul>
                   </div>
+
+                  <div class="dl__data mars"><img class="ogl-icon" src="{{site.baseurl}}/s/img/icons/ogl.svg"/>All content is available under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open Government Licence v3.0</a>, except where otherwise stated</dd>
 
             </div>
           </div>
