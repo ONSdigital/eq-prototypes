@@ -95,11 +95,11 @@ select:disabled:hover {
                             <div class="fieldgroup__fields">
                               <div class="field field--input field--day">
                                 <label class="label mercury" for="period-to-day" id="label-period-to-day" data-qa="label-day">Day</label>
-                                <input id="period-to-day" name="period-to-day" placeholder="DD" value="" class="input input--StringField " data-qa="input-StringField">
+                                <input id="period-to-day" disabled name="period-to-day" placeholder="DD" value="" class="input input--StringField " data-qa="input-StringField">
                               </div>
                               <div class="field field--select field--month">
                                 <label class="label mercury" for="period-to-month" id="label-period-to-month" data-qa="label-month">Month</label>
-                                <select class="input input--select" id="period-to-month" name="period-to-month">
+                                <select disabled class="input input--select" id="period-to-month" name="period-to-month">
                                   <option disabled="disabled" selected="selected" value="">Select month</option>
                                   <option value="1">January</option>
                                   <option value="2">February</option>
@@ -117,7 +117,7 @@ select:disabled:hover {
                               </div>
                               <div class="field field--input field--year">
                                 <label class="label mercury" for="period-to-year" id="label-period-to-year" data-qa="label-year">Year</label>
-                                  <input id="period-to-year" name="period-to-year" placeholder="YYYY" value="" class="input input--StringField " data-qa="input-StringField">
+                                  <input disabled id="period-to-year" name="period-to-year" placeholder="YYYY" value="" class="input input--StringField " data-qa="input-StringField">
                               </div>
                             </div>
                           </fieldset>
@@ -128,7 +128,7 @@ select:disabled:hover {
               </section>
             </div>
           </div>
-          <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Save and continue</button>
+          <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Next</button>
           <div class="u-mb-m">
             <button class="btn btn--link mars js-btn-save" type="submit" name="action[save_sign_out]">Save and complete later</button>
           </div>
