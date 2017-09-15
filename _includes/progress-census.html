@@ -1,0 +1,76 @@
+<aside class="progress-censusv2">
+  <nav>
+    <h4 class="venus"><span>Sections</span></h4>
+    <ol>
+      <li class="section-4 section-5 section-6 section-8 section-9-inter">
+        <a class="mars" href="../section-4">Who lives here?</a>
+      </li>
+      <li class="section-16-inter section-9 section-10 section-11 section-11b section-14 section-15">
+        <a class="mars" href="../section-9">Accommodation</a>
+      </li>
+      <li class="section-39-inter section-40-inter section-19 section-20 section-21 section-22 section-33 section-34 section-35 section-36 section-37 section-38 section-38b section-39">
+        <a class="mars" href="../section-19"><span class="this-section">John Doe</span></a>
+      </li>
+      <li class="section-41 section-42-inter last-person">
+        <a class="mars" href="../section-41"><span class="next-section">John Doe</span></a>
+      </li>
+      <span class="box--entity"></span>
+    </ol>
+  </nav>
+</aside>
+
+<script>
+
+var listEntityNavigation = function(idNumber, firstNameValue, middleNameValue, lastNameValue){
+  if (idNumber == 1 || idNumber == 2) {
+  } else {
+    $( '.box--entity' ).append( '' +
+    '<li class="" >' +
+    '<div class="mars"><a href=""> ' + firstNameValue + " " + middleNameValue + " "  + lastNameValue + ' </a></div>' +
+    '</li>');
+  }
+};
+$( document ).ready(function() {
+  if (sessionStorage.getItem('firstName0')) {
+    $('.this-section').html(sessionStorage.getItem('firstName0') + ' '  + sessionStorage.getItem('lastName0'));
+  } else {
+    $('.this-section').remove();
+  }
+  if (sessionStorage.getItem('firstName1')) {
+    $('.next-section').html(sessionStorage.getItem('firstName1') + ' '  + sessionStorage.getItem('lastName1'));
+  } else {
+    $('.next-section').remove();
+  }
+  if (sessionStorage.getItem('numberOfEntities')) {
+    for (var i = 0; i < sessionStorage.getItem('numberOfEntities'); i++) {
+      var firstNameValue = "";
+      var middleNameValue = "";
+      var lastNameValue = "";
+      if (sessionStorage.getItem('firstName' + i)) {
+        var firstNameValue = sessionStorage.getItem('firstName' + i);
+      }
+      if (sessionStorage.getItem('middleName' + i)) {
+        var middleNameValue = sessionStorage.getItem('middleName' + i);
+      }
+      if (sessionStorage.getItem('lastName' + i)) {
+        var lastNameValue = sessionStorage.getItem('lastName' + i);
+      }
+      listEntityNavigation(i + 1, firstNameValue, middleNameValue, lastNameValue);
+    }
+  }
+  var pathArray = window.location.pathname.split( '/' );
+  var fourthLevelLocation = pathArray[4];
+  $('.' + fourthLevelLocation).addClass('active is-open').prevAll().addClass('complete');
+  if ( fourthLevelLocation === "section-9-inter" || fourthLevelLocation === "section-16-inter" || fourthLevelLocation === "section-39-inter" || fourthLevelLocation === "section-40-inter" || fourthLevelLocation === "section-42-inter" || fourthLevelLocation === "section-42-inter" ) {
+    $('.' + fourthLevelLocation).addClass('complete');
+  }
+  if (fourthLevelLocation === "summary" ) {
+    $('.progress-censusv2 li').addClass('complete');
+  }
+  if (fourthLevelLocation === "summary" &&  sessionStorage.getItem('numberOfEntities') === "1") {
+    $('.progress-censusv2 .last-person').removeClass('complete');
+  }
+});
+
+
+</script>

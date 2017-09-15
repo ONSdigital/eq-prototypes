@@ -1,0 +1,225 @@
+.progress-census {
+  padding-left: 8px;
+  ol {
+    // counter-reset: item;
+  }
+  li {
+    position: relative;
+    display: block;
+    // &:before {
+    //   content: counters(item, ".") " ";
+    //   counter-increment: item;
+    // }
+  }
+  nav {
+    > ol {
+      padding: 0 0 0 16px;
+      position: relative;
+      &:before{
+        content: "";
+        display: block;
+        width: 16px;
+        height: 6px;
+        background-color: $color-white;
+        position: absolute;
+        left: -8px;
+        top: 0px;
+      }
+      &:after{
+        content: "";
+        display: block;
+        width: 16px;
+        height: 6px;
+        background-color: $color-white;
+        position: absolute;
+        left: -8px;
+        bottom: 0px;
+      }
+      li {
+        color: $color-dark-grey;
+        &:after{
+          content: "";
+          display: block;
+          width: 16px;
+          height: 16px;
+          background-color: $color-white;
+          border: 3px solid $color-grey;
+          position: absolute;
+          left: -24px;
+          top: 6px;
+          border-radius: 100%;
+        }
+        &.active{
+          color: $color-purple;
+          .mars{
+            font-weight: 600;
+          }
+          &:after{
+            background-color: $color-white;
+            border: 3px solid $color-purple;
+          }
+        }
+        &.complete{
+        color: $color-purple;
+          &:after{
+            background-color: $color-purple;
+            border: 0px solid $color-grey;
+          }
+        }
+        &.complete:before{
+          content: "";
+          @include icon('check');
+          filter: invert(100%);
+          vertical-align: middle;
+          width: 1em;
+          height: 1em;
+          z-index: 1;
+          background-size: 1em;position: absolute;
+          left: -24px;
+          top: 6px;
+        }
+        &.disabled{
+          pointer-events: none;
+          cursor: default;
+        }
+        > span > a {
+          color: $color-dark-grey;
+          text-decoration: none;
+        }
+        span{
+          cursor: pointer;
+        }
+        > ol {
+          padding-left: 0px;
+          > li {
+            display: none;
+            // &:after{
+            //   content: "";
+            //   display: inline-block;
+            //   height: 1px;
+            //   width: 16px;
+            //   background-color: $color-grey;
+            //   position: absolute;
+            //   top: 12px;
+            //   left: -24px;
+            // }
+            a {
+              text-decoration: none;
+              //color: $color-very-dark-grey;
+              display: block;
+            }
+          }
+        }
+        &.is-open{
+          > ol{
+            > li {
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.progress-censusv2 {
+  h4{
+    position: relative;
+    padding: 0px 0  8px 41px;
+    margin-bottom: 0;
+    span{
+      position: relative;
+      z-index: 1;
+    }
+    &:before {
+      content: "";
+      vertical-align: middle;
+      width: 313px;
+      height: 100%;
+      z-index: 0;
+      position: absolute;
+      left: 0px;
+      top: 5px;
+      z-index: 0;
+      border-left: 1px solid #CCCCCC;
+    }
+  }
+  ol{
+    border-left: 1px solid #CCCCCC;
+    padding-left: 40px;
+    margin-top: 0;
+  }
+  li{
+    position: relative;
+    margin: 4px 0;
+    padding: 4px 0;
+  }
+  a{
+    position: relative;
+    z-index: 1;
+    text-decoration: none;
+    color: #060606;
+    cursor: default;
+    pointer-events: none;
+  }
+  .complete {
+    a{
+      text-decoration: underline;
+      color: #4263C2;
+      cursor: pointer;
+      pointer-events: auto;
+    }
+    &:before {
+      content: "";
+      @include icon('check');
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="52" height="45.41" viewBox="-10.62 -10.62 55.25 48.25"><title>check</title><path d="M27.205.803l-2.828 2.951-11.393 11.393-3.32-3.197-2.951-2.951-5.779 5.779 2.951 2.951 6.148 6.148 2.828 2.951 2.951-2.951L30.156 9.533l2.951-2.951L27.205.803z" style="&#10;    fill: #0F8243;&#10;"/></svg>');
+      vertical-align: middle;
+      width: 1.5rem;
+      height: 1.5rem;
+      z-index: 1;
+      background-size: 1.5rem;
+      position: absolute;
+      left: -32px;
+      top: 8px;
+    }
+  }
+  .active{
+    &:after {
+      content: "";
+      vertical-align: middle;
+      width: 320px;
+      height: 100%;
+      z-index: 0;
+      position: absolute;
+      left: -48px;
+      top: 1px;
+      background-color: #f5f6ff;
+      border-left: 8px solid #033e58;
+    }
+  }
+}
+
+.progress-censusv2 {
+  .active{
+    &:after {
+      background-color: tint($color-purple, 90%);
+      border-left: 8px solid $color-purple;
+    }
+    a{
+      position: relative;
+      z-index: 1;
+      text-decoration: none;
+      color: #060606;
+      cursor: default;
+      pointer-events: none;
+    }
+  }
+  a{
+    position: relative;
+    z-index: 1;
+    text-decoration: underline;
+    color: #4263C2;
+    cursor: pointer;
+    pointer-events: auto;
+  }
+}
