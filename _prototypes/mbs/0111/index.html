@@ -7,7 +7,7 @@ subtitle: Notice is given under section 1 of the Statistics of Trade Act 1947
 
 <header class="page__header">
 {% include survey-header-no-info-panel.html %}
-{% include bar-2.html %}
+{% include bar-2-intro.html %}
 </header>
 
 <div class="page__subheader">
@@ -17,36 +17,29 @@ subtitle: Notice is given under section 1 of the Statistics of Trade Act 1947
 </div>
 <div class="page__container container">
   <div class="grid">
-    <div class="grid__col col-8@xs">
+    <div class="grid__col col-7@m">
       <main role="main" id="main" class="page__main">
         <div class="u-mt-s">
-          <p class="mars u-mb-xs">You are completing this survey for <span class="venus config1"></span>.</p>
-
-          <!-- Show/hide to go here -->
-          <div class="guidance js-details u-mb-l" data-show-label="Show further guidance" data-hide-label="Hide further guidance">
-            <a class="guidance__link js-details-trigger js-details-label mars" href="#guidance-permanent-or-family-home-answer" aria-expanded="false" data-guidance-trigger="true" aria-controls="guidance-permanent-or-family-home-answer-body" id="guidance-permanent-or-family-home-answer-trigger" data-ga-category="Help" data-ga-label="permanent-or-family-home-answer" data-ga="click" data-ga-action="Guidance click">Tell us about a change of details</a>
-              <div class="guidance__main js-details-body" id="guidance-permanent-or-family-home-answer-body" aria-hidden="true">
-                <div class="guidance__content mars">
-                  Call 0300 1234 931 or email <a href="mailto:surveys@ons.gov.uk">surveys@ons.gov.uk</a> if there have been any changes to your business name, address or structure.
-              </div>
-            </div>
-          </div>
-          <!-- End show hide -->
-
-          <h1 class="jupiter col-10@l u-mb-xs">Your response is legally required</h1>
-          <p class="pluto u-mb-xl u-mb-l@s">Notice is given under section 1 of the Statistics of Trade Act 1947</p>
-          <p class="mars">On average it takes ten minutes to complete this survey.</p>
-          <p class="mars">You can provide informed estimates if actual figures aren't available.</p>
-          <div class="lock u-mb-s u-mb-m@s">
-            <div class="venus lock__text">We will treat your data securely and confidentially</div>
-          </div>
+          <h2 class="saturn">You are completing this for <span class="config1"></span> <span class="trading_as">(trading as&nbsp;<span class="trad_as"></span>)</span></h2>
+          <p class="mars">If the company details or structure have changed contact us on&nbsp;<a href="tel:03001234931">0300&nbsp;1234&nbsp;931</a> or email <a href="mailto:surveys@ons.gov.uk?subject=Change%20of%20details%20reference%">surveys@ons.gov.uk</a>.</p>
+          <ul class="list list--bullets u-mb-m">
+            <li>On average it takes 10 minutes to complete this survey once you’ve collected the information.</li>
+            <li>Data should relate to all sites in England, Scotland and Wales.</li>
+            <li>You can provide informed estimates if actual figures aren&rsquo;t available.</li>
+            <li>We will treat your data securely and confidentially.</li>
+          </ul>
+          <h3 class="neptune u-mb-xs">Your response is legally required</h2>
+          <p class="mars u-mb-m">Notice is given under section 1 of the Statistics of Trade Act 1947.</p>
         </div>
-
         <form class="form" action="../section-1" autocomplete="off" novalidate="">
           <button class="btn btn--primary btn--lg qa-btn-get-started" type="submit" name="">Start survey</button>
         </form>
-        
+
+        <h3 class="neptune">Information you need</h3>
+        <p class="mars qa-intro-description">The total retail turnover must be less than or equal to the value of food sales, alcohol, confectionary and tobacco sales, clothing and footwear sales,  household goods, and other goods.</p>
       </main>
+      <p class="mars qa-intro-description">You can select the dates of the period you are reporting for, if the given dates are not appropriate.</p>
+
     </div>
   </div>
 </div>
@@ -70,6 +63,12 @@ $( document ).ready(function() {
     $('.reporting-period').html(config2);
     $('.config2').html(config2);
   }
+  var trad_as = sessionStorage.getItem('trad_as');
+  $('.trad_as').text(trad_as);
+  if(trad_as==""){
+    $(".trading_as").hide();
+  }
+
   var submitBy = new Date();
   var dd = submitBy.getDate();
   var month = new Array();

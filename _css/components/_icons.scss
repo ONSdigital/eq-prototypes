@@ -1,0 +1,49 @@
+.clock {
+  display: block;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  &::before {
+    $size: 2rem;
+    content: " ";
+    display: inline-block;
+    vertical-align: middle;
+    background: $color-white url("../s/img/icons/icons--clock.svg") no-repeat center center;
+    background-size: 2.2rem;
+    min-width: $size;
+    height: $size;
+    margin-right: 0.5em;
+  }
+}
+
+.clock__text {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.calculator {
+  display: block;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  &::before {
+    $size: 2rem;
+    content: " ";
+    display: inline-block;
+    vertical-align: middle;
+    background: $color-white url("../s/img/icons/icons--calculator.svg") no-repeat center center;
+    background-size: 2.2rem;
+    min-width: $size;
+    height: $size;
+    margin-right: 0.5em;
+  }
+}
+
+.calculator__text {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1rem;
+  line-height: 1.2;
+}
