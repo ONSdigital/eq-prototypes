@@ -1,0 +1,322 @@
+---
+title: Passport questions v1
+project: Typeahead
+globalcss: false
+
+---
+
+    <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <script>document.documentElement.className = document.documentElement.className.replace('no-js','has-js')</script>
+    <!--<![endif]-->
+
+
+    <link href="../css/autocomplete.css" rel="stylesheet">
+    <link href="../css/typeahead.css" rel="stylesheet">
+    <link href="../css/responsive.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <style>
+        /**
+         * Reset guidence styles
+         */
+        .guidance.guidance--basic-toggle {
+            margin-left : 0;
+        }
+        .guidance--basic-toggle .guidance__link {
+            padding-left : 0;
+        }
+        .guidance--basic-toggle .guidance__link::before {
+            width : 0;
+        }
+        .guidance--basic-toggle .guidance__main {
+            margin-left : 0;
+        }
+        .guidance--basic-toggle .guidance__content {
+            margin-left : 0;
+            padding-left : 0;
+            border-left : none;
+        }
+        /**
+         * End reset guidence styles
+         */
+        @media only screen and (max-width: 500px) {
+            .pac-container {
+                width : auto;
+            }
+        }
+    </style>
+
+<header class="page__header">
+{% include bar.html %}
+</header>
+
+<div class="page">
+    <div class="page__content">
+        <header class="page__header">
+            <header class="header header--census">
+                <div class="header__container container">
+                    <div class="header__logo">
+                        <img src="../img/census-logo.svg?q=afe0c3fc5f881be5a231a218296436c68cc7fa26" alt="2017 Census" />
+                    </div>
+                    <button class="header__btn btn btn--light btn--border js-help-btn u-hidden"
+
+                            data-ga="click" data-ga-category="Help" data-ga-action="Help and support">
+                        Help and support
+                    </button>
+                </div>
+            </header>
+        </header>
+        <div class="page__subheader">
+            <div class="container">
+                <a class="mars" href="../passport-type-v1-page1">Previous</a>
+            </div>
+        </div>
+        <div class="page__container container">
+            <div class="grid grid--reverse">
+                <div class="grid__col col-4@m"></div>
+                <div class="grid__col col-7@m pull-1@m">
+                    <main role="main" id="main" class="page__main">
+                        <form class="form qa-questionnaire-form" role="form" method="POST" autocomplete="off" novalidate>
+                            <input id="csrf_token" name="csrf_token" type="hidden" value="ImUyNGQ4ZTliMTQxZDY4MGI3NzgyYjkyMjI4M2Y3ZWRmMGJlZmZjZWYi.DKKFlA.U3YKd3C5S0R9193pylUknvdyOTc">
+                            <div class="group u-m-no" id="who-lives-here-relationship">
+                                <div class="block" id="household-relationships">
+                                    <p class="block__title neptune" data-qa="block-title"></p>
+                                    <div class="question question--repeatinganswer" id="household-relationships-question">
+                                        <h1 class="question__title saturn">What passports does Bob Smith hold? </h1>
+                                        <fieldset>
+                                            <div class="question__answers">
+                                                <div class="question__answer">
+                                                    <div class="question__description mars">
+                                                      To add more than one passport add each one in turn.
+                                                    </div>
+                                                    <div class="answer">
+                                                        <div class="answer__fields">
+                                                            <div class="field field--select">
+                                                                <label class="label venus">
+                                                                    Start entering the country of the passport and select
+                                                                </label>
+                                                                <div class="js-typeahead-component typeahead-component">
+                                                                    <input class="input input--text js-typeahead-input" placeholder=""type="text" />
+
+                                                                    <div class="pac-container-wrapper">
+                                                                        <div class="pac-container pac-logo hide"></div>
+                                                                    </div>
+                                                                </div>
+                                                                <button class="mars btn btn--link hide js-address-start-again-trigger" href="#guidance-permanent-or-family-home-answer">Remove all</button>
+                                                                <a class="mars btn btn--link hide js--add-playback-item">Add playback item</a>
+                                                                <div id="guidance" class="guidance guidance--basic-toggle js-details address-details" data-hide-label="Enter your address manually" data-show-label="Enter your address manually">
+                                                                    <div class="guidance__main js-manual-address" aria-hidden="true" id="guidance-permanent-or-family-home-answer-body">
+                                                                        <div class="mars">
+                                                                          <div id="passport-types-country-playback u-cf">
+                                                                            <div class="playback u-mt-m">
+                                                                              <h2 class="playback__title mars u-fw-b" id="all-passports-heading">All passports held by Bob Smith</h2>
+                                                                              <div id="playback-container" class="playback__block">
+                                                                                <div id="playback__item-0" class="playback_item">
+    <div class="playback__answer-text u-dib" id="passport-types-playback-answer" data-qa="passport-types-playback-answer">
+      <ul class="u-pl-no u-mb-xs list--bare">
+        <li>Country name</li>
+      </ul>
+    </div>
+    <div class="playback__remove u-fr">
+      <a href="javascript:removePlaybackItem()" class="playback__remove-link" aria-describedby="passport-types-playback-answer" data-qa="passport-types-playback-answer-remove"
+   data-ga-action="Remove click" data-ga-category="Playback" data-ga="click">Remove <span class="u-vh">your answer</span></a>
+    </div>
+  </div>
+                                                                              </div>
+                                                                            </div>
+                                                                          </div>
+                                                                           <!-- <div id="address">
+                                                                                <p class="neptune">Your Address</p>
+                                                                                <label class="label venus" for="street_number">House name or number</label>
+                                                                                <input class="input input--text" id="street_number" /><br />
+
+                                                                                <label class="label venus" for="organisation_name">Organisation name</label>
+                                                                                <input class="input input--text" id="organisation_name" /><br />
+
+                                                                                <label class="label venus" for="route">Street address</label>
+                                                                                <input class="input input--text" id="route" /><br />
+
+                                                                                <label class="label venus" for="postal_town">City or town</label>
+                                                                                <input class="input input--text" id="postal_town" /><br />
+
+                                                                                <label class="label venus" for="county">County (Optional)</label>
+                                                                                <input class="input input--text" id="county" /><br />
+
+                                                                                <label class="label venus" for="postal_code">Post code</label>
+                                                                                <input class="input input--text" id="postal_code" /><br />
+
+                                                                                <label class="label venus" for="country">Country</label>
+                                                                                <input class="input input--text" id="country" /><br />
+                                                                            </div>-->
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <br />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn--primary btn--lg" data-qa="btn-submit" type="submit" name="action[save_continue]">Save and continue</button>
+                            <div class="u-mb-m">
+                                <button class="btn btn--link mars js-btn-save" type="submit" name="action[save_sign_out]" data-ga="click" data-ga-category="Navigation" data-ga-action="Save and complete later click">Save and complete later</button>
+                            </div>
+                        </form>
+                        <a class="page__previous page__previous--bottom"  data-ga="click" data-ga-label="bottom" data-ga-category="Navigation" data-ga-action="Previous link click" href="../passport-type-v1-page1" id="bottom-previous">Previous</a>
+                    </main>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="page__footer">
+        <footer class="footer2 page__footer2">
+            <div class="footer2-nav container" role="contentinfo">
+                <div class="grid container">
+                    <div class>
+                        <div class="grid__col col-4@m">
+                            <div class="footer2-nav__heading">
+                                <p class="venus"><strong>Legal information</strong></p>
+                            </div>
+                            <ul class="list footer__list">
+                                <li class="footer2-nav__item">
+                                    <a href="/cookies-privacy"
+                                       class="footer2__link" target="_blank">Cookies and privacy</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="grid__col col-4@m">
+                            <div class="footer2-nav__heading">
+                                <p class="venus"><strong>About ONS</strong></p>
+                            </div>
+                            <ul class="list footer__list">
+                                <li class="footer2-nav__item">
+                                    <a href="https://www.ons.gov.uk/aboutus/whatwedo" target="_blank" class="footer2__link">What
+                                        we
+                                        do</a>
+                                </li>
+                                <li class="footer2-nav__item">
+                                    <a href="/contact-us" target="_blank"
+                                       class="footer2__link">Contact us</a>
+                                </li>
+                                <li class="footer2-nav__item">
+                                    <a href="https://www.ons.gov.uk/help/accessibility" target="_blank"
+                                       class="footer2__link">Accessibility</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="grid__col col-4@m">
+                            <div class="footer2-nav__heading">
+                                <p class="venus"><strong>Statistics</strong></p>
+                            </div>
+                            <ul class="list footer__list">
+                                <li class="footer2-nav__item">
+                                    <a href="https://www.statisticsauthority.gov.uk/about-the-authority/" target="_blank"
+                                       class="footer2__link">UK Statistics Authority</a>
+                                </li>
+                                <li class="footer2-nav__item">
+                                    <a href="https://www.ons.gov.uk/releasecalendar" target="_blank" class="footer2__link">Release
+                                        calendar</a>
+                                </li>
+                                <li class="footer2-nav__item">
+                                    <a class="footer2__link" href="https://www.ons.gov.uk/news" target="_blank">News</a>
+                                </li>
+                            </ul>
+                            </br>
+                        </div>
+                        <div class="dl__data mars"><img src="/s/img/ogl.svg?q=afe0c3fc5f881be5a231a218296436c68cc7fa26" class="ogl__img"/>
+                            All content is available under
+                            the <a class="footer2__link"
+                                   href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+                                   target="_blank">Open
+                                Government Licence v3.0</a>, except where otherwise stated
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </footer>
+
+</div>
+
+<div class="dialog js-dialog" id="dialog" aria-hidden="true"
+     data-ga="visible" data-ga-category="Timeout" data-ga-action="Timeout window visible">
+
+    <div class="dialog__overlay" tabindex="-1"></div>
+
+    <div class="dialog__body" role="dialog" aria-labelledby="dialog-title">
+        <div role="document">
+
+            <div class="mars u-mb-s">2017 Census Test</div>
+            <h1 class="saturn dialog__title" id="dialog-title" tabindex="0">Your session is about to expire</h1>
+
+            <div class="time js-timeout">
+
+                <svg class="time__visual" width="80px" height="80px" viewBox="0 0 80 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <circle cx="40" cy="40" r="40" stroke="#D3D3D3" stroke-width="6" fill="none"></circle>
+                    <circle class="time__circle js-timeout-circle" cx="40" cy="40" r="40" transform="rotate(-90 40 40)" fill="none" stroke="red" stroke-width="6" stroke-linecap="round"></circle>
+                </svg>
+
+                <div class="time__text venus js-timeout-time">0:00</div>
+
+            </div>
+
+            <form class="" action="/" method="post">
+                <button class="btn btn--primary btn--loader js-timeout-continue" type="button" data-loading-msg="Continuing&hellip;">Continue survey</button>
+                <br/>
+                <button class="btn btn--secondary btn--border js-timeout-save" type="submit">Save and sign out</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<script src="../js/OrdnanceSurveyService.js"></script>
+<script src="../js/AddressService.js"></script>
+
+<script src="../js/Typeahead.js"></script>
+<script src="../js/passport-types.js"></script>
+
+<script src="../js/SearchAddressesPostcodeController.js"></script> 
+
+<script>
+  /**
+     * Controller bindings
+   */
+  $(document).ready(function() {
+    new SearchAddressesPostcodeController(
+            $('#who-lives-here-relationship')[0],
+            addressService
+        )
+        .init();
+  });
+</script>
+<!-- Script to pull country names from JSON file -->
+<!-- <script>
+    var result;
+    $(document).ready(function () {
+        var countryNames = $.getJSON("/data/records.json") {
+            $.each(countryNames, function (i, item) {
+              $(".passport-types").html("<option>"+name+"</option>");
+            });
+        };
+    });
+</script>
+<script>
+$.each(data.Countries, function(key, val) {
+    items.append('<option value="' + val.country + '">' + val.name + '</option>');
+  });
+</script>
+-->
