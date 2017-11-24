@@ -114,16 +114,16 @@ globalcss: false
                                                                               <h2 class="playback__title mars u-fw-b" id="all-passports-heading">All passports held by Bob Smith</h2>
                                                                               <div id="playback-container" class="playback__block">
                                                                                 <div id="playback__item-0" class="playback_item">
-    <div class="playback__answer-text u-dib" id="passport-types-playback-answer" data-qa="passport-types-playback-answer">
-      <ul class="u-pl-no u-mb-xs list--bare">
-        <li>Country name</li>
-      </ul>
-    </div>
-    <div class="playback__remove u-fr">
-      <a href="javascript:removePlaybackItem()" class="playback__remove-link" aria-describedby="passport-types-playback-answer" data-qa="passport-types-playback-answer-remove"
+                                                                                  <div class="playback__answer-text u-dib" id="passport-types-playback-answer" data-qa="passport-types-playback-answer">
+                                                                                    <ul class="u-pl-no u-mb-xs list--bare">
+                                                                                      <li>Country name</li>
+                                                                                    </ul>
+                                                                                  </div>
+                                                                                  <div class="playback__remove u-fr">
+                                                                                    <a href="javascript:removePlaybackItem()" class="playback__remove-link" aria-describedby="passport-types-playback-answer" data-qa="passport-types-playback-answer-remove"
    data-ga-action="Remove click" data-ga-category="Playback" data-ga="click">Remove <span class="u-vh">your answer</span></a>
-    </div>
-  </div>
+                                                                                  </div>
+                                                                                </div>
                                                                               </div>
                                                                             </div>
                                                                           </div>
@@ -283,24 +283,26 @@ globalcss: false
 <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
-<script src="../js/OrdnanceSurveyService.js"></script>
-<script src="../js/AddressService.js"></script>
+<!-- <script src="../js/OrdnanceSurveyService.js"></script>
+<script src="../js/AddressService.js"></script> 
+<script src="../js/SearchAddressesPostcodeController.js"></script> -->
 
 <script src="../js/Typeahead.js"></script>
 <script src="../js/passport-types.js"></script>
-
-<script src="../js/SearchAddressesPostcodeController.js"></script> 
+<script src="../js/CountryService.js"></script>
 
 <script>
   /**
      * Controller bindings
    */
   $(document).ready(function() {
-    new SearchAddressesPostcodeController(
+    new SearchAddressesPostcodeController (
             $('#who-lives-here-relationship')[0],
             addressService
         )
         .init();
+
+    TypeaheadComponent.update({ fullAddress: 'List item title' })
   });
 </script>
 <!-- Script to pull country names from JSON file -->
