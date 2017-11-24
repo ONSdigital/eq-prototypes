@@ -169,6 +169,7 @@ globalcss: false
                             </div>
                         </form>
                         <a class="page__previous page__previous--bottom"  data-ga="click" data-ga-label="bottom" data-ga-category="Navigation" data-ga-action="Previous link click" href="../passport-type-v1-page1" id="bottom-previous">Previous</a>
+                        <button onclick="alertTest()">Try data</button>
                     </main>
                 </div>
             </div>
@@ -283,10 +284,11 @@ globalcss: false
 <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
-<!-- <script src="../js/OrdnanceSurveyService.js"></script>
+<script src="../js/OrdnanceSurveyService.js"></script>
 <script src="../js/AddressService.js"></script> 
-<script src="../js/SearchAddressesPostcodeController.js"></script> -->
+<script src="../js/SearchAddressesPostcodeController.js"></script> 
 
+<script src="../js/p5.js"></script>
 <script src="../js/Typeahead.js"></script>
 <script src="../js/passport-types.js"></script>
 <script src="../js/CountryService.js"></script>
@@ -301,8 +303,8 @@ globalcss: false
             addressService
         )
         .init();
-
-    TypeaheadComponent.update({ fullAddress: 'List item title' })
+    
+    //TypeaheadComponent.update({ fullAddress: 'List item title' })
   });
 </script>
 <!-- Script to pull country names from JSON file -->

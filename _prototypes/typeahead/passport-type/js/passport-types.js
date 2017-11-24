@@ -14,13 +14,20 @@
 		});
 	}
 
+// check page for playback items 
+	var $playbackItem= $('.playback_item');
+	if (jQuery.contains(document, $playbackItem[0])) { 
+
+	} else {
+		$("#all-passports-heading").css({"display":"none"});
+	}
 
 
 	// data from https://country.register.gov.uk/records.json
 	// use "name" as options 
 	// "name" must map to "country" "official-name" and "citizen-names" 
 	// allowing the "name" to appear when any of those values are entered 
-	
+
 	// can we add in an "abbreviation" value for each entry? eg. USA
 	// can we add in a "translation" value for each entry? eg. Francais
 
