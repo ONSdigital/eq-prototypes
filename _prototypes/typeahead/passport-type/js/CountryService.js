@@ -1,8 +1,9 @@
 /**
  * Country Register service 
  */
-/*
-function setup() {
+
+
+/*function setup() {
   noLoop();
   var url = 'https://country.register.gov.uk/records.json';
   loadJSON(url, typeaheadData);
@@ -22,7 +23,7 @@ var countryData = {
 		"entry-number": "146",
 		"entry-timestamp": "2016-04-05T13:23:05Z",
 		"key": "PL",
-		"item": { // remove [] here as stopped query working 
+		"item": { // removed [] here as stopped query working 
 			"country": "PL",
 			"officialName": "The Republic of Poland",
 			"name": "Poland",
