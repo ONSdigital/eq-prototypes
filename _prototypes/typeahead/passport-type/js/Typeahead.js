@@ -24,6 +24,8 @@ function TypeaheadComponent ($scope, $inputEl) {
 
 	function render () {
 
+		console.log($container);
+
 		var data = _this.data;
 
 		$container.html('');

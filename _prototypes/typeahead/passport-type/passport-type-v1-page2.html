@@ -304,6 +304,39 @@ globalcss: false
         )
         .init();
     */
+
+    var typeaheadInputEl = $('.js-typeahead-input');
+
+    var typeaheadComponent = TypeaheadComponent.create({
+		scopeElement: $('.js-typeahead-component')[0],
+		inputElement: $('.js-typeahead-input')[0]
+    });
+
+	  $.getJSON("/data/records.json").done(function () {
+        console.log('working');
+      });
+
+    typeaheadComponent.emitter.on('itemSelected', function (item) {
+    	alert('You have selected item: ', item);
+    });
+
+    typeaheadInputEl.on('keydown', function (e) {
+
+	  $.getJSON("/data/records.json")
+        .done(function (data) {
+
+          console.log(data);
+
+          /**
+           * Make data into an array and pass it to the typeahead component
+           */
+          typeaheadComponent.update([{
+            fullAddress: 'List item title',
+            secondaryText: ''
+          }]);
+      });
+    });
+
     //TypeaheadComponent.update({ fullAddress: 'List item title' })
   });
 </script>
