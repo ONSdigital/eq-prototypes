@@ -1,5 +1,5 @@
 ---
-title: Passport country typeahead
+title: Passport questions v1
 project: Typeahead
 globalcss: false
 
@@ -17,6 +17,36 @@ globalcss: false
     <link href="../css/typeahead.css" rel="stylesheet">
     <link href="../css/responsive.css" rel="stylesheet">
     <link href="../css/passport-types.css" rel="stylesheet">
+    <style>
+        /**
+         * Reset guidence styles
+         */
+        .guidance.guidance--basic-toggle {
+            margin-left : 0;
+        }
+        .guidance--basic-toggle .guidance__link {
+            padding-left : 0;
+        }
+        .guidance--basic-toggle .guidance__link::before {
+            width : 0;
+        }
+        .guidance--basic-toggle .guidance__main {
+            margin-left : 0;
+        }
+        .guidance--basic-toggle .guidance__content {
+            margin-left : 0;
+            padding-left : 0;
+            border-left : none;
+        }
+        /**
+         * End reset guidence styles
+         */
+        @media only screen and (max-width: 500px) {
+            .pac-container {
+                width : auto;
+            }
+        }
+    </style>
 
 <header class="page__header">
 {% include bar.html %}
@@ -38,41 +68,115 @@ globalcss: false
                 </div>
             </header>
         </header>
-
         <div class="page__subheader">
-          <div class="container">
-            <a class="mars" href="../index"></a>
-          </div>
-        </div>
-
-<div class="page__container container">
-  <div class="grid grid--reverse">
-    <div class="grid__col col-4@m">
-    </div>
-    <div class="grid__col col-7@m pull-1@m u-cf">
-      <main role="main" id="main" class="page__main">
-        <form action="../passport-type-v1-page1" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
-          <div class="group" id="rsi">
-            <div class="block" id="passport-types-opener">
-              <section class="section" id="passport-types-opener-section">
-                <div class="question" id="passport-types-opener-question">
-                  <h1 class="question__title saturn">
-                    Page 2
-                  </h1>
-              </section>
+            <div class="container">
+                <a class="mars" href="../passport-type-v2-page1">Previous</a>
             </div>
-          </div>
-          <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Start prototype 1</button>
-        </form>
-      <main role="main" id="main" class="page__main">
-        <form action="../passport-type-v2-page1" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
-          <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Start prototype 2</button>
-        </form>
-      </main>
+        </div>
+        <div class="page__container container">
+            <div class="grid grid--reverse">
+                <div class="grid__col col-4@m"></div>
+                <div class="grid__col col-7@m pull-1@m">
+                    <main role="main" id="main" class="page__main">
+                        <form class="form qa-questionnaire-form" role="form" method="POST" autocomplete="off" novalidate>
+                            <input id="csrf_token" name="csrf_token" type="hidden" value="ImUyNGQ4ZTliMTQxZDY4MGI3NzgyYjkyMjI4M2Y3ZWRmMGJlZmZjZWYi.DKKFlA.U3YKd3C5S0R9193pylUknvdyOTc">
+                            <div class="group u-m-no" id="who-lives-here-relationship">
+                                <div class="block" id="household-relationships">
+                                    <p class="block__title neptune" data-qa="block-title"></p>
+                                    <div class="question question--repeatinganswer" id="household-relationships-question">
+                                        <h1 class="question__title saturn">What passports does Bob Smith hold? </h1>
+                                        <fieldset>
+                                            <div class="question__answers">
+                                                <div class="question__answer">
+                                                    <!-- Default Dynamic Section -->
+                                                    <div id="nothing-selected" class="dynamic-content">nothing
+                                                    </div>
+                                                    <!-- Dynamic Section 1 -->
+                                                    <div id="uk-selected" class="question__description mars dynamic-content">
+                                                      <span><span class="highlight q1">United Kingdom</span> has already been selected.</span>
+                                                    </div>
+                                                    <!-- Dynamic Section 2 -->
+                                                    <div id="ireland-selected" class="question__description mars dynamic-content">
+                                                      <span><span class="highlight q1">Ireland</span> has already been selected.</span>
+                                                    </div>
+                                                    <!-- Dynamic Section 3 -->
+                                                    <div id="uk-ireland-selected" class="question__description mars dynamic-content">
+                                                      <span><span class="highlight q1">Ireland</span> and <span class="highlight q1">United Kingdom</span> have already been selected.</span>
+                                                    </div>
+                                                    <div class="question__description mars">
+                                                      To add more than one passport add each one in turn.
+                                                    </div>
+                                                    <div class="answer">
+                                                        <div class="answer__fields">
+                                                            <div class="field field--select">
+                                                                <label class="label venus">
+                                                                    Start entering the country of the passport and select
+                                                                </label>
+                                                                <div class="js-typeahead-component typeahead-component">
+                                                                    <input class="input input--text js-typeahead-input" placeholder=""type="text" />
+
+                                                                    <div class="pac-container-wrapper">
+                                                                        <div class="pac-container pac-logo hide"></div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- <button class="mars btn btn--link hide js-address-start-again-trigger" href="#guidance-permanent-or-family-home-answer">Remove all</button>-->
+                                                                <a class="mars btn btn--link hide js--add-playback-item">Add playback item</a>
+                                                                <div id="playback" class="playback playback--basic-toggle">
+                                                                    <div class="playback__main" aria-hidden="true" id="">
+                                                                        <div class="mars">
+                                                                          <div id="passport-types-country-playback u-cf">
+                                                                            <div class="playback u-mt-m">
+                                                                              <h2 class="playback__title mars u-fw-b" id="all-passports-heading">All passports held by Bob Smith</h2>
+                                                                              <div id="playback-container" class="playback__block">
+                                                                                <div id="playback__item-0" class="playback_item">
+                                                                                  <div class="playback__answer-text u-dib" id="passport-types-playback-answer" data-qa="passport-types-playback-answer">
+                                                                                    <ul class="u-pl-no u-mb-xs list--bare">
+                                                                                      <li>Country name</li>
+                                                                                    </ul>
+                                                                                  </div>
+                                                                                  <div class="playback__remove u-fr">
+                                                                                    <a href="javascript:removePlaybackItem()" class="js--playback__remove-link" aria-describedby="passport-types-playback-answer" data-qa="passport-types-playback-answer-remove"
+   data-ga-action="Remove click" data-ga-category="Playback" data-ga="click">Remove <span class="u-vh">your answer</span></a>
+                                                                                  </div>
+                                                                                </div>
+                                                                              </div>
+                                                                            </div>
+                                                                          </div>
+                                                                            <div id="address">
+                                                                              <p></p>
+                                                                                <p class="neptune">Countries selected</p>
+                                                                                <label class="label venus" for="country_name">Country name </label>
+                                                                                <input class="input input--text" id="country_name" /><br />
+                                                                            </div>
+                                                                            
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <br />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                            <p id="demo"></p>
+                            <p id="demo2"></p>
+                            <button class="btn btn--primary btn--lg" data-qa="btn-submit" type="submit" name="action[save_continue]">Save and continue</button>
+                            <div class="u-mb-m">
+                                <button class="btn btn--link mars js-btn-save" type="submit" name="action[save_sign_out]" data-ga="click" data-ga-category="Navigation" data-ga-action="Save and complete later click">Save and complete later</button>
+                            </div>
+                        </form>
+                        <a class="page__previous page__previous--bottom"  data-ga="click" data-ga-label="bottom" data-ga-category="Navigation" data-ga-action="Previous link click" href="../passport-type-v2-page1" id="bottom-previous">Previous</a>
+                    </main>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
-<footer class="page__footer">
+
+    <footer class="page__footer">
         <footer class="footer2 page__footer2">
             <div class="footer2-nav container" role="contentinfo">
                 <div class="grid container">
@@ -175,3 +279,97 @@ globalcss: false
         </div>
     </div>
 </div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<!-- <script src="../js/OrdnanceSurveyService.js"></script>
+<script src="../js/AddressService.js"></script> 
+<script src="../js/SearchAddressesPostcodeController.js"></script> 
+<script src="../js/p5.js"></script> 
+<script src="../js/CountryService.js"></script> -->
+<script src="../js/Typeahead.js"></script>
+<script src="../js/passport-types.js"></script>
+
+<script>
+  $(document).ready(function() {
+    var $typeaheadInputEl = $('.js-typeahead-input'),
+      countriesList = [];
+
+    var typeaheadComponent = TypeaheadComponent.create({
+        scopeElement: $('.js-typeahead-component')[0],
+        inputElement: $typeaheadInputEl[0]
+    });
+
+    typeaheadComponent.emitter.on('itemSelected', function (e, item) {
+        alert('You have selected item: ' + item.primaryText);
+        console.log('Item selected: ', item);
+    });
+
+    function convertCountryToTypeahead (country) {
+      return {
+
+        /**
+         * Not sure why item is an array - could change this?
+         */
+        primaryText: country.item[0].name,
+        secondaryText: country.item[0]["citizen-names"],
+        data: country
+      };
+    }
+
+    function init() {
+      $.getJSON("../data/records.json")
+        .done(function (countryData) {
+
+          /**
+           * Declare all variable used in a function up front.
+           * If not these will get attached as global object properties.
+           */
+          var country,
+
+            /**
+             * All countries appear to be stored in the first object of the array - could change this?
+             */
+            countries = countryData.Countries[0];
+
+          for (country in countries) {
+            countriesList.push(countries[country]);
+          }
+
+          /**
+           * After arranging the countries into an array, we need to map the data to an array with properties
+           * that are compatible with the Typeahead's update interface.
+           */
+          typeaheadComponent.update(
+            countriesList.map(convertCountryToTypeahead)
+          );
+      });
+    }
+
+    $typeaheadInputEl.on('keydown', function (e) {
+
+      if (TypeaheadComponent.isKeyPressClean(e)) {
+        return;
+      }
+
+      setTimeout(function () {
+        typeaheadComponent.update(
+          countriesList.filter(function (country) {
+
+            /**
+             * Return items that match the input element value.
+             */
+            return country.item[0].name.toLowerCase().match($typeaheadInputEl.val().toLowerCase());
+          })
+          .map(function (country) {
+            return convertCountryToTypeahead(country);
+          })
+        );
+      }, 0);
+    });
+
+    init();
+  });
+</script>

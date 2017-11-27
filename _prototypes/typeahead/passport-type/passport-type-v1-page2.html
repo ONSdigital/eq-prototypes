@@ -300,7 +300,7 @@ globalcss: false
          * Not sure why item is an array - could change this?
          */
         primaryText: country.item[0].name,
-        secondaryText: '',
+        secondaryText: country.item[0]["citizen-names"],
         data: country
       };
     }
@@ -331,41 +331,6 @@ globalcss: false
           typeaheadComponent.update(
             countriesList.map(convertCountryToTypeahead)
           );
-
-            /*console.log(data);
-            var countryData = JSON.parse(data);
-            for (i in countryData.Countries) {
-              x += countryData.Countries[i] + "<br>";
-            }*/
-
-            /*
-            var countryData = JSON.parse(data);
-            for (var i = 0; i < countryData.Countries.length; i++) {
-              var countryList = countryData.Countries[i];
-              console.log(countryList);
-            }
-
-            var countryAllInfo = JSON.parse(countryList);
-            for (var i = 0; i < countryAllInfo.item.length; i++) {
-              var countryItem = countryAllInfo.item[i];
-              console.log(countryItem);
-            }
-
-            var countryAllItems = JSON.parse(countryItem);
-            for (var i = 0; i < countryAllItems.name.length; i++) {
-              var countryNames = countryAllItems.name[i];
-              console.log(countryNames);
-            }*/
-
-            // document.getElementById("demo").innerHTML = x;
-
-            /**
-             * Make data into an array and pass it to the typeahead component
-             */
-            /*typeaheadComponent.update([{
-              primaryText: 'List item title',
-              secondaryText: ''
-            }]);*/
       });
     }
 
@@ -392,36 +357,5 @@ globalcss: false
     });
 
     init();
-
-/*
-    var myObj, i, x = "";
-myObj = {
-    "name":"John",
-    "age":30,
-    "cars":[ "Ford", "BMW", "Fiat" ]
-};
-
-for (i in myObj.cars) {
-    x += myObj.cars[i] + "<br>";
-}
-
-document.getElementById("demo2").innerHTML = x; */
   });
 </script>
-<!-- Script to pull country names from JSON file -->
-<!-- <script>
-    var result;
-    $(document).ready(function () {
-        var countryNames = $.getJSON("/data/records.json") {
-            $.each(countryNames, function (i, item) {
-              $(".passport-types").html("<option>"+name+"</option>");
-            });
-        };
-    });
-</script>
-<script>
-$.each(data.Countries, function(key, val) {
-    items.append('<option value="' + val.country + '">' + val.name + '</option>');
-  });
-</script>
--->

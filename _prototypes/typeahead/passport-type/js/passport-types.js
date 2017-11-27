@@ -1,3 +1,19 @@
+// Check URL for parameters and dynamically change content 
+// (for version2 of prototype to display eg. 'UK aleady selected')
+	$(document).ready(function () {
+    	if (window.location.href.indexOf("?passport-type-opener-answer=United+Kingdom&passport-type-opener-answer=Ireland") > -1) {
+       		$("#uk-ireland-selected").show();
+    	}
+    	else if (window.location.href.indexOf("Ireland") > -1) {
+       		$("#ireland-selected").show();
+    	} else if (window.location.href.indexOf("United+Kingdom") > -1) {
+       		$("#uk-selected").show();
+    	}
+    	else {
+    		$('#nothing-selected').show();
+    	}
+	});
+
 // Adding playback items (for test)
 	var _counter = 0;
 	$('.js--add-playback-item').on('click', function(){
@@ -31,14 +47,16 @@
 
 
 
+
 	// - data from downloaded records.json file from https://country.register.gov.uk/records.json
-	// use "name" as options 
+	// - use "name" as options 
 	// "name" must map to "country" "official-name" and "citizen-names" 
 	// allowing the "name" to appear when any of those values are entered 
 
 	// can we add in an "abbreviation" value for each entry? eg. USA
 	// can we add in a "translation" value for each entry? eg. Francais
 
+	// Options to appear A-Z on focus 
 	// Ireland and United Kingdom to appear as soon as focus is in input box 
 
 	// when country is selected 
@@ -60,4 +78,4 @@
 	// version 2 page 2
 	// if Ireland or UK are selected on first screen 
 	// pass through those values to appear in the playback 
-	// add a message above the typeahead "{{United Kingdom}} has already been selected" (Highlight the country name)
+	// - add a message above the typeahead "{{United Kingdom}} has already been selected" (Highlight the country name)

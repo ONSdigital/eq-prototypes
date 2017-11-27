@@ -35,7 +35,7 @@ function TypeaheadComponent ($scope, $inputEl) {
 				// '<span class="pac-item-query">' +
 					'<span class="pac-matched">' + item.primaryText + '</span>' +
 				// '</span>' +
-				(item.secondaryText ? '<span>' + item.secondaryText + '</span>' : '') +
+				(item.secondaryText ? '<span>' + ' / ' + item.secondaryText + '</span>' : '') +
 			'</button>');
 
 			$item.on('click', function (e) {
