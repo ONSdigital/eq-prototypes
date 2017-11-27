@@ -280,25 +280,33 @@ globalcss: false
 
 <script>
   $(document).ready(function() {
-    var typeaheadInputEl = $('.js-typeahead-input');
+    var $typeaheadInputEl = $('.js-typeahead-input'),
+      countriesList = [];
 
     var typeaheadComponent = TypeaheadComponent.create({
 		scopeElement: $('.js-typeahead-component')[0],
-		inputElement: $('.js-typeahead-input')[0]
+		inputElement: $typeaheadInputEl[0]
     });
-
-	  $.getJSON("../data/records.json").done(function () {
-        console.log('working');
-      });
 
     typeaheadComponent.emitter.on('itemSelected', function (e, item) {
     	alert('You have selected item: ' + item.primaryText);
     	console.log('Item selected: ', item);
     });
 
-    typeaheadInputEl.on('keydown', function (e) {
+    function convertCountryToTypeahead (country) {
+      return {
 
-	  $.getJSON("../data/records.json")
+        /**
+         * Not sure why item is an array - could change this?
+         */
+        primaryText: country.item[0].name,
+        secondaryText: '',
+        data: country
+      };
+    }
+
+    function init() {
+      $.getJSON("../data/records.json")
         .done(function (countryData) {
 
           /**
@@ -306,7 +314,6 @@ globalcss: false
            * If not these will get attached as global object properties.
            */
           var country,
-            items = [],
 
             /**
              * All countries appear to be stored in the first object of the array - could change this?
@@ -314,61 +321,77 @@ globalcss: false
             countries = countryData.Countries[0];
 
           for (country in countries) {
-            items.push(countries[country]);
+            countriesList.push(countries[country]);
           }
 
           /**
            * After arranging the countries into an array, we need to map the data to an array with properties
            * that are compatible with the Typeahead's update interface.
            */
-          typeaheadComponent.update(items.map(function (country) {
-          	return {
+          typeaheadComponent.update(
+            countriesList.map(convertCountryToTypeahead)
+          );
 
-              /**
-               * Not sure why item is an array - could change this?
-               */
-              primaryText: country.item[0].name,
-              secondaryText: '',
-              data: country
-            };
-          }));
+            /*console.log(data);
+            var countryData = JSON.parse(data);
+            for (i in countryData.Countries) {
+              x += countryData.Countries[i] + "<br>";
+            }*/
 
-          /*console.log(data);
-          var countryData = JSON.parse(data);
-          for (i in countryData.Countries) {
-            x += countryData.Countries[i] + "<br>";
-          }*/
+            /*
+            var countryData = JSON.parse(data);
+            for (var i = 0; i < countryData.Countries.length; i++) {
+              var countryList = countryData.Countries[i];
+              console.log(countryList);
+            }
 
-          /*
-          var countryData = JSON.parse(data);
-          for (var i = 0; i < countryData.Countries.length; i++) {
-            var countryList = countryData.Countries[i];
-            console.log(countryList);
-          }
+            var countryAllInfo = JSON.parse(countryList);
+            for (var i = 0; i < countryAllInfo.item.length; i++) {
+              var countryItem = countryAllInfo.item[i];
+              console.log(countryItem);
+            }
 
-          var countryAllInfo = JSON.parse(countryList);
-          for (var i = 0; i < countryAllInfo.item.length; i++) {
-            var countryItem = countryAllInfo.item[i];
-            console.log(countryItem);
-          }
+            var countryAllItems = JSON.parse(countryItem);
+            for (var i = 0; i < countryAllItems.name.length; i++) {
+              var countryNames = countryAllItems.name[i];
+              console.log(countryNames);
+            }*/
 
-          var countryAllItems = JSON.parse(countryItem);
-          for (var i = 0; i < countryAllItems.name.length; i++) {
-            var countryNames = countryAllItems.name[i];
-            console.log(countryNames);
-          }*/
+            // document.getElementById("demo").innerHTML = x;
 
-          // document.getElementById("demo").innerHTML = x;
-
-          /**
-           * Make data into an array and pass it to the typeahead component
-           */
-          /*typeaheadComponent.update([{
-            primaryText: 'List item title',
-            secondaryText: ''
-          }]);*/
+            /**
+             * Make data into an array and pass it to the typeahead component
+             */
+            /*typeaheadComponent.update([{
+              primaryText: 'List item title',
+              secondaryText: ''
+            }]);*/
       });
+    }
+
+    $typeaheadInputEl.on('keydown', function (e) {
+
+      if (TypeaheadComponent.isKeyPressClean(e)) {
+        return;
+      }
+
+      setTimeout(function () {
+        typeaheadComponent.update(
+          countriesList.filter(function (country) {
+
+            /**
+             * Return items that match the input element value.
+             */
+            return country.item[0].name.toLowerCase().match($typeaheadInputEl.val().toLowerCase());
+          })
+          .map(function (country) {
+            return convertCountryToTypeahead(country);
+          })
+        );
+      }, 0);
     });
+
+    init();
 
 /*
     var myObj, i, x = "";
