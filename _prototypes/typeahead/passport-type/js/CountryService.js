@@ -18,22 +18,30 @@ function typeaheadData(records) {
 }*/
 
 var countryData = {
-	"PL":{
-		"index-entry-number": "146",
-		"entry-number": "146",
-		"entry-timestamp": "2016-04-05T13:23:05Z",
-		"key": "PL",
-		"item": { // removed [] here as stopped query working 
-			"country": "PL",
-			"officialName": "The Republic of Poland",
-			"name": "Poland",
-			"citizen-names": "Pole"
+	"Countries":[{
+		"PL":{
+			"index-entry-number":"146",
+			"entry-number":"146",
+			"entry-timestamp":"2016-04-05T13:23:05Z",
+			"key":"PL",
+			"item":[{
+				"country":"PL",
+				"official-name":"The Republic of Poland",
+				"name":"Poland",
+				"citizen-names":"Pole"
+			}]
 		}
-	}
+	}]
 }
+
+     for (var i = 0; i < countryData.Countries.length; i++) {
+          var countryList = countryData.Countries[i];
+          console.log(countryList.item);
+          }
 
 //countryData = JSON.parse(countryData);
 
 function alertTest () {
-	alert('I am in ' + countryData.PL.item.name);
+	alert('I am in ' + countryData.Countries.PL.item.name);
 }
+

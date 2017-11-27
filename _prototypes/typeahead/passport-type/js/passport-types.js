@@ -5,25 +5,33 @@
     	var oClone = document.getElementById("playback__item-0").cloneNode(true);
     	oClone.id += (_counter + "");
     	document.getElementById("playback-container").appendChild(oClone);
+    	// add passports heading
+    	var $playbackItem= $('.playback_item');
+    	if (jQuery.contains(document, $playbackItem[0])) {
+			$("#all-passports-heading").css({"display":"block"}); 
+		} else {
+			$("#all-passports-heading").css({"display":"none"});
+		}
     });
 
 // Removing playback items
 	function removePlaybackItem () {
-		$('.playback__remove-link').on('click', function(){
+		$('.js--playback__remove-link').on('click', function(){
     		$(this).closest('.playback_item').remove();
 		});
+		// remove passports heading if no passports listed
+		var $playbackItem= $('.playback_item');
+		if (jQuery.contains(document, $playbackItem[0])) {
+			$("#all-passports-heading").css({"display":"block"}); 
+		} else {
+			$("#all-passports-heading").css({"display":"none"});
+		}
 	}
 
-// check page for playback items 
-	var $playbackItem= $('.playback_item');
-	if (jQuery.contains(document, $playbackItem[0])) { 
-
-	} else {
-		$("#all-passports-heading").css({"display":"none"});
-	}
 
 
-	// data from https://country.register.gov.uk/records.json
+
+	// - data from downloaded records.json file from https://country.register.gov.uk/records.json
 	// use "name" as options 
 	// "name" must map to "country" "official-name" and "citizen-names" 
 	// allowing the "name" to appear when any of those values are entered 
@@ -36,12 +44,12 @@
 	// when country is selected 
 	// add playback__item 
 	// append {{name}} to ID of each playback__item eg. playback__item__united_kingdom
-	// if it is the first playback__item then #all-passports-heading needs to appear at the same time
+	// - if it is the first playback__item then #all-passports-heading needs to appear at the same time
 	// if more than one playback__item, the countries should appear A-Z 
 
-	// when remove button is pressed 
-	// remove that #playback__item
-	// if there was only 1 playback__item also remove #all-passports-heading
+	// - when remove button is pressed 
+	// - remove that #playback__item
+	// - if there was only 1 playback__item also remove #all-passports-heading
 
 
 	// non-JS version 

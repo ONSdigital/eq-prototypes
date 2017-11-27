@@ -120,36 +120,20 @@ globalcss: false
                                                                                     </ul>
                                                                                   </div>
                                                                                   <div class="playback__remove u-fr">
-                                                                                    <a href="javascript:removePlaybackItem()" class="playback__remove-link" aria-describedby="passport-types-playback-answer" data-qa="passport-types-playback-answer-remove"
+                                                                                    <a href="javascript:removePlaybackItem()" class="js--playback__remove-link" aria-describedby="passport-types-playback-answer" data-qa="passport-types-playback-answer-remove"
    data-ga-action="Remove click" data-ga-category="Playback" data-ga="click">Remove <span class="u-vh">your answer</span></a>
                                                                                   </div>
                                                                                 </div>
                                                                               </div>
                                                                             </div>
                                                                           </div>
-                                                                           <!-- <div id="address">
-                                                                                <p class="neptune">Your Address</p>
-                                                                                <label class="label venus" for="street_number">House name or number</label>
-                                                                                <input class="input input--text" id="street_number" /><br />
-
-                                                                                <label class="label venus" for="organisation_name">Organisation name</label>
-                                                                                <input class="input input--text" id="organisation_name" /><br />
-
-                                                                                <label class="label venus" for="route">Street address</label>
-                                                                                <input class="input input--text" id="route" /><br />
-
-                                                                                <label class="label venus" for="postal_town">City or town</label>
-                                                                                <input class="input input--text" id="postal_town" /><br />
-
-                                                                                <label class="label venus" for="county">County (Optional)</label>
-                                                                                <input class="input input--text" id="county" /><br />
-
-                                                                                <label class="label venus" for="postal_code">Post code</label>
-                                                                                <input class="input input--text" id="postal_code" /><br />
-
-                                                                                <label class="label venus" for="country">Country</label>
-                                                                                <input class="input input--text" id="country" /><br />
-                                                                            </div>-->
+                                                                            <div id="address">
+                                                                              <p></p>
+                                                                                <p class="neptune">Countries selected</p>
+                                                                                <label class="label venus" for="country_name">Country name </label>
+                                                                                <input class="input input--text" id="country_name" /><br />
+                                                                            </div>
+                                                                            
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -163,6 +147,8 @@ globalcss: false
                                     </div>
                                 </div>
                             </div>
+                            <p id="demo"></p>
+                            <p id="demo2"></p>
                             <button class="btn btn--primary btn--lg" data-qa="btn-submit" type="submit" name="action[save_continue]">Save and continue</button>
                             <div class="u-mb-m">
                                 <button class="btn btn--link mars js-btn-save" type="submit" name="action[save_sign_out]" data-ga="click" data-ga-category="Navigation" data-ga-action="Save and complete later click">Save and complete later</button>
@@ -286,25 +272,14 @@ globalcss: false
 
 <!-- <script src="../js/OrdnanceSurveyService.js"></script>
 <script src="../js/AddressService.js"></script> 
-<script src="../js/SearchAddressesPostcodeController.js"></script> -->
-
-<script src="../js/p5.js"></script>
+<script src="../js/SearchAddressesPostcodeController.js"></script> 
+<script src="../js/p5.js"></script> 
+<script src="../js/CountryService.js"></script> -->
 <script src="../js/Typeahead.js"></script>
 <script src="../js/passport-types.js"></script>
-<script src="../js/CountryService.js"></script>
 
 <script>
-  /**
-     * Controller bindings
-   */
   $(document).ready(function() {
-    /* new SearchAddressesPostcodeController (
-            $('#who-lives-here-relationship')[0],
-            addressService
-        )
-        .init();
-    */
-
     var typeaheadInputEl = $('.js-typeahead-input');
 
     var typeaheadComponent = TypeaheadComponent.create({
@@ -312,7 +287,7 @@ globalcss: false
 		inputElement: $('.js-typeahead-input')[0]
     });
 
-	  $.getJSON("/data/records.json").done(function () {
+	  $.getJSON("../data/records.json").done(function () {
         console.log('working');
       });
 
@@ -322,10 +297,35 @@ globalcss: false
 
     typeaheadInputEl.on('keydown', function (e) {
 
-	  $.getJSON("/data/records.json")
+	  $.getJSON("../data/records.json")
         .done(function (data) {
 
           console.log(data);
+          var countryData = JSON.parse(data);
+          for (i in countryData.Countries) {
+            x += countryData.Countries[i] + "<br>";
+          }
+
+          /*
+          var countryData = JSON.parse(data);
+          for (var i = 0; i < countryData.Countries.length; i++) {
+            var countryList = countryData.Countries[i];
+            console.log(countryList);
+          }
+
+          var countryAllInfo = JSON.parse(countryList);
+          for (var i = 0; i < countryAllInfo.item.length; i++) {
+            var countryItem = countryAllInfo.item[i];
+            console.log(countryItem);
+          }
+
+          var countryAllItems = JSON.parse(countryItem);
+          for (var i = 0; i < countryAllItems.name.length; i++) {
+            var countryNames = countryAllItems.name[i];
+            console.log(countryNames);
+          }*/
+
+          document.getElementById("demo").innerHTML = x;
 
           /**
            * Make data into an array and pass it to the typeahead component
@@ -337,7 +337,19 @@ globalcss: false
       });
     });
 
-    //TypeaheadComponent.update({ fullAddress: 'List item title' })
+/*
+    var myObj, i, x = "";
+myObj = {
+    "name":"John",
+    "age":30,
+    "cars":[ "Ford", "BMW", "Fiat" ]
+};
+
+for (i in myObj.cars) {
+    x += myObj.cars[i] + "<br>";
+}
+
+document.getElementById("demo2").innerHTML = x; */
   });
 </script>
 <!-- Script to pull country names from JSON file -->
