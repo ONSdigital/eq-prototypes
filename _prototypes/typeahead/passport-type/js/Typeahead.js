@@ -35,7 +35,7 @@ function TypeaheadComponent ($scope, $inputEl) {
 		$(data).each(function (key, item) {
 			var $item = $('<button class="pac-item">' +
 				'<span class="pac-item-query">' +
-				'<span class="pac-matched">' + item.fullAddress + '</span>' +
+				'<span class="pac-matched">' + item.primaryText + '</span>' +
 				'</span>' +
 				'<span>' + item.secondaryText + '</span>' +
 				'</button>');

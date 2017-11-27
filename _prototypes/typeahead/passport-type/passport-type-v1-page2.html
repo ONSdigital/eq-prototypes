@@ -291,20 +291,53 @@ globalcss: false
         console.log('working');
       });
 
-    typeaheadComponent.emitter.on('itemSelected', function (item) {
-    	alert('You have selected item: ', item);
+    typeaheadComponent.emitter.on('itemSelected', function (e, item) {
+    	alert('You have selected item: ' + item.primaryText);
+    	console.log('Item selected: ', item);
     });
 
     typeaheadInputEl.on('keydown', function (e) {
 
 	  $.getJSON("../data/records.json")
-        .done(function (data) {
+        .done(function (countryData) {
 
-          console.log(data);
+          /**
+           * Declare all variable used in a function up front.
+           * If not these will get attached as global object properties.
+           */
+          var country,
+            items = [],
+
+            /**
+             * All countries appear to be stored in the first object of the array - could change this?
+             */
+            countries = countryData.Countries[0];
+
+          for (country in countries) {
+            items.push(countries[country]);
+          }
+
+          /**
+           * After arranging the countries into an array, we need to map the data to an array with properties
+           * that are compatible with the Typeahead's update interface.
+           */
+          typeaheadComponent.update(items.map(function (country) {
+          	return {
+
+              /**
+               * Not sure why item is an array - could change this?
+               */
+              primaryText: country.item[0].name,
+              secondaryText: '',
+              data: country
+            };
+          }));
+
+          /*console.log(data);
           var countryData = JSON.parse(data);
           for (i in countryData.Countries) {
             x += countryData.Countries[i] + "<br>";
-          }
+          }*/
 
           /*
           var countryData = JSON.parse(data);
@@ -325,15 +358,15 @@ globalcss: false
             console.log(countryNames);
           }*/
 
-          document.getElementById("demo").innerHTML = x;
+          // document.getElementById("demo").innerHTML = x;
 
           /**
            * Make data into an array and pass it to the typeahead component
            */
-          typeaheadComponent.update([{
-            fullAddress: 'List item title',
+          /*typeaheadComponent.update([{
+            primaryText: 'List item title',
             secondaryText: ''
-          }]);
+          }]);*/
       });
     });
 
