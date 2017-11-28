@@ -14,3 +14,15 @@
 .dynamic-content {
 	display: none;
 }
+
+#playback__item {
+	display: none;
+}
+
+#playback-heading {
+	display: none;
+}
+
+.js-address-start-again-trigger {
+	display: none;
+}

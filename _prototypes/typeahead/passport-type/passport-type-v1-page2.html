@@ -2,7 +2,6 @@
 title: Passport questions v1
 project: Typeahead
 globalcss: false
-
 ---
 
     <!--[if lt IE 9]>
@@ -11,7 +10,6 @@ globalcss: false
     <!--[if gt IE 8]><!-->
     <script>document.documentElement.className = document.documentElement.className.replace('no-js','has-js')</script>
     <!--<![endif]-->
-
 
     <link href="../css/autocomplete.css" rel="stylesheet">
     <link href="../css/typeahead.css" rel="stylesheet">
@@ -60,9 +58,7 @@ globalcss: false
                     <div class="header__logo">
                         <img src="../img/census-logo.svg?q=afe0c3fc5f881be5a231a218296436c68cc7fa26" alt="2017 Census" />
                     </div>
-                    <button class="header__btn btn btn--light btn--border js-help-btn u-hidden"
-
-                            data-ga="click" data-ga-category="Help" data-ga-action="Help and support">
+                    <button class="header__btn btn btn--light btn--border js-help-btn u-hidden" data-ga="click" data-ga-category="Help" data-ga-action="Help and support">
                         Help and support
                     </button>
                 </div>
@@ -78,7 +74,7 @@ globalcss: false
                 <div class="grid__col col-4@m"></div>
                 <div class="grid__col col-7@m pull-1@m">
                     <main role="main" id="main" class="page__main">
-                        <form class="form qa-questionnaire-form" role="form" method="POST" autocomplete="off" novalidate>
+                        <form name="otherPassports" class="form qa-questionnaire-form" role="form" autocomplete="off">
                             <input id="csrf_token" name="csrf_token" type="hidden" value="ImUyNGQ4ZTliMTQxZDY4MGI3NzgyYjkyMjI4M2Y3ZWRmMGJlZmZjZWYi.DKKFlA.U3YKd3C5S0R9193pylUknvdyOTc">
                             <div class="group u-m-no" id="who-lives-here-relationship">
                                 <div class="block" id="household-relationships">
@@ -104,36 +100,28 @@ globalcss: false
                                                                         <div class="pac-container pac-logo hide"></div>
                                                                     </div>
                                                                 </div>
-                                                                <!-- <button class="mars btn btn--link hide js-address-start-again-trigger" href="#guidance-permanent-or-family-home-answer">Remove all</button>-->
-                                                                <a class="mars btn btn--link hide js--add-playback-item">Add playback item</a>
+                                                                <a href="javascript:removeAllPlayback()" class="mars btn btn--link hide js-address-start-again-trigger">Remove all</a>
                                                                 <div id="playback" class="playback playback--basic-toggle">
                                                                     <div class="playback__main" aria-hidden="true" id="">
                                                                         <div class="mars">
                                                                           <div id="passport-types-country-playback u-cf">
                                                                             <div class="playback u-mt-m">
-                                                                              <h2 class="playback__title mars u-fw-b" id="all-passports-heading">All passports held by Bob Smith</h2>
+                                                                              <h2 class="playback__title mars u-fw-b" id="playback-heading">All passports held by Bob Smith</h2>
                                                                               <div id="playback-container" class="playback__block">
-                                                                                <div id="playback__item-0" class="playback_item">
-                                                                                  <div class="playback__answer-text u-dib" id="passport-types-playback-answer" data-qa="passport-types-playback-answer">
-                                                                                    <ul class="u-pl-no u-mb-xs list--bare">
-                                                                                      <li>Country name</li>
-                                                                                    </ul>
-                                                                                  </div>
-                                                                                  <div class="playback__remove u-fr">
-                                                                                    <a href="javascript:removePlaybackItem()" class="js--playback__remove-link" aria-describedby="passport-types-playback-answer" data-qa="passport-types-playback-answer-remove"
+                                                                                <div id="playback__item" class="playback_item">
+                                                                                    <div class="playback__answer-text u-dib" id="passport-types-playback-answer" data-qa="passport-types-playback-answer">
+                                                                                        <ul class="u-pl-no u-mb-xs list--bare">
+                                                                                            <li class="playback-list-value"></li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                    <div class="playback__remove u-fr">
+                                                                                        <a href="javascript:removePlaybackItem()" class="js--playback__remove-link" aria-describedby="passport-types-playback-answer" data-qa="passport-types-playback-answer-remove"
    data-ga-action="Remove click" data-ga-category="Playback" data-ga="click">Remove <span class="u-vh">your answer</span></a>
-                                                                                  </div>
-                                                                                </div>
+                                                                                    </div>
+                                                                                </div> 
                                                                               </div>
                                                                             </div>
                                                                           </div>
-                                                                            <div id="address">
-                                                                              <p></p>
-                                                                                <p class="neptune">Countries selected</p>
-                                                                                <label class="label venus" for="country_name">Country name </label>
-                                                                                <input class="input input--text" id="country_name" /><br />
-                                                                            </div>
-                                                                            
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -147,15 +135,12 @@ globalcss: false
                                     </div>
                                 </div>
                             </div>
-                            <p id="demo"></p>
-                            <p id="demo2"></p>
-                            <button class="btn btn--primary btn--lg" data-qa="btn-submit" type="submit" name="action[save_continue]">Save and continue</button>
+                            <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Save and continue</button>
                             <div class="u-mb-m">
                                 <button class="btn btn--link mars js-btn-save" type="submit" name="action[save_sign_out]" data-ga="click" data-ga-category="Navigation" data-ga-action="Save and complete later click">Save and complete later</button>
                             </div>
                         </form>
                         <a class="page__previous page__previous--bottom"  data-ga="click" data-ga-label="bottom" data-ga-category="Navigation" data-ga-action="Previous link click" href="../passport-type-v1-page1" id="bottom-previous">Previous</a>
-                        <button onclick="alertTest()">Try data</button>
                     </main>
                 </div>
             </div>
@@ -224,7 +209,6 @@ globalcss: false
                                    href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
                                    target="_blank">Open
                                 Government Licence v3.0</a>, except where otherwise stated
-
                         </div>
                     </div>
                 </div>
@@ -270,92 +254,11 @@ globalcss: false
 <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
-<!-- <script src="../js/OrdnanceSurveyService.js"></script>
-<script src="../js/AddressService.js"></script> 
-<script src="../js/SearchAddressesPostcodeController.js"></script> 
-<script src="../js/p5.js"></script> 
-<script src="../js/CountryService.js"></script> -->
 <script src="../js/Typeahead.js"></script>
 <script src="../js/passport-types.js"></script>
 
 <script>
-  $(document).ready(function() {
-    var $typeaheadInputEl = $('.js-typeahead-input'),
-      countriesList = [];
-
-    var typeaheadComponent = TypeaheadComponent.create({
-		scopeElement: $('.js-typeahead-component')[0],
-		inputElement: $typeaheadInputEl[0]
-    });
-
-    typeaheadComponent.emitter.on('itemSelected', function (e, item) {
-    	alert('You have selected item: ' + item.primaryText);
-    	console.log('Item selected: ', item);
-    });
-
-    function convertCountryToTypeahead (country) {
-      return {
-
-        /**
-         * Not sure why item is an array - could change this?
-         */
-        primaryText: country.item[0].name,
-        secondaryText: country.item[0]["citizen-names"],
-        data: country
-      };
-    }
-
-    function init() {
-      $.getJSON("../data/records.json")
-        .done(function (countryData) {
-
-          /**
-           * Declare all variable used in a function up front.
-           * If not these will get attached as global object properties.
-           */
-          var country,
-
-            /**
-             * All countries appear to be stored in the first object of the array - could change this?
-             */
-            countries = countryData.Countries[0];
-
-          for (country in countries) {
-            countriesList.push(countries[country]);
-          }
-
-          /**
-           * After arranging the countries into an array, we need to map the data to an array with properties
-           * that are compatible with the Typeahead's update interface.
-           */
-          typeaheadComponent.update(
-            countriesList.map(convertCountryToTypeahead)
-          );
-      });
-    }
-
-    $typeaheadInputEl.on('keydown', function (e) {
-
-      if (TypeaheadComponent.isKeyPressClean(e)) {
-        return;
-      }
-
-      setTimeout(function () {
-        typeaheadComponent.update(
-          countriesList.filter(function (country) {
-
-            /**
-             * Return items that match the input element value.
-             */
-            return country.item[0].name.toLowerCase().match($typeaheadInputEl.val().toLowerCase());
-          })
-          .map(function (country) {
-            return convertCountryToTypeahead(country);
-          })
-        );
-      }, 0);
-    });
-
-    init();
+  $('.qa-btn-submit').click(function(e) {
+      document.otherPassports.action = "../end-page";
   });
 </script>
