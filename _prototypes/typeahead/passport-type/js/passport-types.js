@@ -16,9 +16,14 @@ $(document).ready(function() {
         var oClone = document.getElementById("playback__item").cloneNode(true);
         oClone.id += ('-' + primaryTextNoSpaces);
         document.getElementById("playback-container").appendChild(oClone);
+
+        var newestPlaybackItem = $(oClone.id).find('.playback-list-value')
+        newestPlaybackItem.id += ('-' + primaryTextNoSpaces);
+        //var playbackListValue = document.getElementByID("newestPlaybackItem.id");
+        //$(playbackListValue).append(primaryTextNoSpaces); 
         // selected.item to appear in playback item playback-list-value
-        var playbackListValue = document.getElementsByClassName("playback-list-value");
-        $(playbackListValue).append(item.primaryText); 
+        // var playbackListValue = document.getElementsByClassName("playback-list-value");
+        // $(playbackListValue).append(item.primaryText); 
  
         // add playback heading and remove all button if this is the first playback_item
         addRemovePlaybackHeading();
@@ -138,7 +143,7 @@ $(document).ready(function() {
 	function removePlaybackItem () {
 		$('.js--playback__remove-link').on('click', function(){
     		$(this).closest('.playback_item').remove();
-    		// remove playback heading if no passports listed
+    		// remove playback heading if no playback_item listed
     		addRemovePlaybackHeading();
     		removeAllButton();
 		});
