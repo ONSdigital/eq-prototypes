@@ -82,7 +82,11 @@ $(document).ready(function() {
             /**
              * Return items that match the input element value.
              */
-            return country.item[0].name.toLowerCase().match($typeaheadInputEl.val().toLowerCase());
+            var val = $typeaheadInputEl.val().toLowerCase(),
+				countryName = country.item[0].name.toLowerCase(),
+				citizenName = country.item[0]['citizen-names'].toLowerCase();
+
+            return countryName.match(val) || citizenName.match(val);
           })
           .map(function (country) {
             return convertCountryToTypeahead(country);
