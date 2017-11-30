@@ -5,15 +5,7 @@ globalcss: false
 ---
 
 
-</head>
-
-  <body>
-
-
-
-<link rel="stylesheet" href="{{ "/css/census.css" | prepend: site.baseurl }}">
-
-<header class="page__header">
+<link rel="stylesheet" href="{{ "/css/census-header-footer.css" | prepend: site.baseurl }}">
 
 <style>
 
@@ -105,31 +97,9 @@ globalcss: false
 
 </style>
   
-<header class="header header--census">
-  <div class="header__help is-closed js-help-body">
-    <div class="header__container container">
-      <div class="header__title ">Help and support &ndash;</div>
-      <ul class="header__nav nav nav--horizontal">
-        <li class="nav__item">
-          <span class="mars" role="presentation">Call </span> <a class="venus nav__link" href="tel:03000683001"><span class="u-vh">For help call </span>0300 068 3001</a>
-        </li>
-        <li class="nav__item">
-          <a class="venus nav__link external" href="http://www.ons.gov.uk/census/help" target="_blank" rel="noopener noreferrer">Online Help</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <div class="header__container container">
-    <div class="header__logo">
-      <img src="{{ "/img/census-logo.svg" | prepend: site.baseurl }}" alt="2017 Census">
-    </div>
-    <button class="header__btn btn btn--light btn--border js-help-btn u-hidden"
-      
-   data-ga-category="Help" data-ga-action="Help and support" data-ga="click">
-      Help and support
-    </button>
-  </div>
-</header>
+<header class="page__header">
+  {% include bar.html %}
+  {% include header-census.html %}
 </header>
         <div class="page__subheader">
           <div class="container">
@@ -283,44 +253,7 @@ globalcss: false
 
 
 
-    <script>
 
-function initialize() {
-
-
-    var autocomplete = new google.maps.places.Autocomplete(
-    (document.getElementById('autocomplete')), {
-        // types: ['geocode'],
-        componentRestrictions: { country: 'uk' }  
-      });
-          autocomplete.addListener('place_changed', fillInAddress);
-
-          function fillInAddress() {
-
-            var place = autocomplete.getPlace();
-            console.log(place);
-
-            var address = place.adr_address.replace(/\>, \</g, '><');
-            address = address.replace(/<span class="([^"]+)">([^<]+)<\/span>/g, '<input type="text" name="$1" value="$2" />');
-            if (address.indexOf(place.name) === -1) {
-            address = '<input type="text" value="' + place.name + '" />' + address;
-}
-            //address = address.replace('<span class="country-name">UK</span>', '');
-            document.getElementById('address-card-output').innerHTML=address;
-
-            document.getElementById('address-card').style.display = 'block';
-  
-}
-}
-
-
-
-window.addEventListener("load", initialize, false);
-
-
-</script>
-
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyBMLQamD0AiEJavr9U0FvElw7s25rjyZEM"></script>
 
 </div>
     </div>
@@ -378,45 +311,9 @@ window.addEventListener("load", initialize, false);
         </div>
       </div>
 
-      <footer class="page__footer">
-        
-          <div class="footer footer--census" id="footer" role="contentinfo">
-  <div class="container footer__container">
-    
-    </a>
-    <nav>
-      <ul class="footer__nav nav nav--horizontal nav--dark">
-        <li class="nav__item">
-          <a class="nav__link" target="_blank" rel="noopener noreferrer" href="https://www.ons.gov.uk/census/help/cookiesandprivacy">Privacy</a>
-        </li>
-        <li class="nav__item">
-          <a class="nav__link" target="_blank" rel="noopener noreferrer" href="https://www.ons.gov.uk/census/help/termsandconditions">Terms and Conditions</a>
-        </li>
-        <li class="nav__item">
-          <a class="nav__link" target="_blank" rel="noopener noreferrer" href="https://www.ons.gov.uk/help/accessibility">Accessibility</a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-  <div class="footer__help">
-    <div class="container">
-      <div class="mars">Help and Support &ndash;
-        <nav>
-          <ul class="footer__helpnav nav nav--horizontal">
-            <li class="nav__item">
-              <span class="mars" role="presentation">Call </span> <a class="venus nav__link" href="tel:03000683001"><span class="u-vh">For help call </span>0300 068 3001</a>
-            </li>
-            <li class="nav__item">
-              <a class="venus nav__link external" href="http://www.ons.gov.uk/census/help" target="_blank" rel="noopener noreferrer">Online Help</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </div>
-  </div>
+{% include footer-census.html %}
 </div>
-        
-      </footer>
+{% include timeout-census.html %}
 
     </div>
     
@@ -424,5 +321,42 @@ window.addEventListener("load", initialize, false);
     
   	<![endif]-->
 
-    </body>
+        <script>
+
+function initialize() {
+
+
+    var autocomplete = new google.maps.places.Autocomplete(
+    (document.getElementById('autocomplete')), {
+        // types: ['geocode'],
+        componentRestrictions: { country: 'uk' }  
+      });
+          autocomplete.addListener('place_changed', fillInAddress);
+
+          function fillInAddress() {
+
+            var place = autocomplete.getPlace();
+            console.log(place);
+
+            var address = place.adr_address.replace(/\>, \</g, '><');
+            address = address.replace(/<span class="([^"]+)">([^<]+)<\/span>/g, '<input type="text" name="$1" value="$2" />');
+            if (address.indexOf(place.name) === -1) {
+            address = '<input type="text" value="' + place.name + '" />' + address;
+}
+            //address = address.replace('<span class="country-name">UK</span>', '');
+            document.getElementById('address-card-output').innerHTML=address;
+
+            document.getElementById('address-card').style.display = 'block';
+  
+}
+}
+
+
+
+window.addEventListener("load", initialize, false);
+
+
+</script>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyBMLQamD0AiEJavr9U0FvElw7s25rjyZEM"></script>
 </html>
