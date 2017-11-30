@@ -1,3 +1,7 @@
+.page__header .bar {
+  background: #420754;
+}
+
 .header {
   background: #6e2585;
   margin: 0;
@@ -101,6 +105,11 @@
       display: none !important; }
     .footer--census .footer__help {
       display: none !important; }
+
+
+.footer {
+  display: none;
+}
 .footer--census {
   background: white;
   height: auto;
@@ -213,3 +222,7 @@ a {
 
 .panel--simple.panel--neutral {
   border-color: #6e2585; }
+
+.header--census .btn--light.btn--border:hover, .btn--light.btn--border:focus {
+    color: #6e2585;
+}
