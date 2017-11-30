@@ -16,21 +16,13 @@ $(document).ready(function() {
         var oClone = document.getElementById("playback__item").cloneNode(true);
         oClone.id += ('-' + primaryTextNoSpaces);
         document.getElementById("playback-container").appendChild(oClone);
-
-        var newestPlaybackItem = $(oClone.id).find('.playback-list-value')
-        newestPlaybackItem.id += ('-' + primaryTextNoSpaces);
-        //var playbackListValue = document.getElementByID("newestPlaybackItem.id");
-        //$(playbackListValue).append(primaryTextNoSpaces); 
-        // selected.item to appear in playback item playback-list-value
-        // var playbackListValue = document.getElementsByClassName("playback-list-value");
-        // $(playbackListValue).append(item.primaryText); 
  
         // add playback heading and remove all button if this is the first playback_item
         addRemovePlaybackHeading();
         removeAllButton();
 
         // selected.item to appear in playback item playback-list-value
-        //$('.playback-list-value').append(item.primaryText);
+        $('.playback-list-value').append(item.primaryText);
     });
 
     function convertCountryToTypeahead (country) {
@@ -160,36 +152,3 @@ $(document).ready(function() {
     	addRemovePlaybackHeading();
     	removeAllButton();
 	}
-
-
-	// - data from downloaded records.json file from https://country.register.gov.uk/records.json
-	// - use "name" as options 
-	// "name" must map to "country" "official-name" and "citizen-names" 
-	// allowing the "name" to appear when any of those values are entered 
-
-	// can we add in an "abbreviation" value for each entry? eg. USA
-	// can we add in a "translation" value for each entry? eg. Francais
-
-	// Options to appear A-Z on focus 
-	// Ireland and United Kingdom to appear as soon as focus is in input box 
-
-	// - when country is selected 
-	// - add playback__item 
-	// - append {{name}} to ID of each playback__item eg. playback__item__united_kingdom
-	// - if it is the first playback__item then #all-passports-heading needs to appear at the same time
-	// if more than one playback__item, the countries should appear A-Z 
-
-	// - when remove button is pressed 
-	// - remove that #playback__item
-	// - if there was only 1 playback__item also remove #all-passports-heading
-
-
-	// non-JS version 
-	// displays just as dropdown 
-	// using "name" as select options
-
-
-	// version 2 page 2
-	// if Ireland or UK are selected on first screen 
-	// pass through those values to appear in the playback 
-	// - add a message above the typeahead "{{United Kingdom}} has already been selected" (Highlight the country name)
