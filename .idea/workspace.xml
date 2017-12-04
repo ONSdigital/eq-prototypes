@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b27a8702-90fc-47d4-8307-ba01f0f47d40" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_prototypes/typeahead/passport-type/js/passport-types.js" afterPath="$PROJECT_DIR$/_prototypes/typeahead/passport-type/js/passport-types.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_prototypes/typeahead/passport-type/passport-type-v1-page2.html" afterPath="$PROJECT_DIR$/_prototypes/typeahead/passport-type/passport-type-v1-page2.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_prototypes/typeahead/passport-type/passport-type-v2-page2.html" afterPath="$PROJECT_DIR$/_prototypes/typeahead/passport-type/passport-type-v2-page2.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -15,14 +17,24 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.41034484">
+    <splitter split-orientation="horizontal" split-proportion="0.649962">
       <split-first>
         <leaf>
-          <file leaf-file-name="passport-type-v1-page2.html" pinned="false" current-in-tab="true">
+          <file leaf-file-name="passport-type-v1-page2.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/_prototypes/typeahead/passport-type/passport-type-v1-page2.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="210">
-                  <caret line="76" column="70" lean-forward="true" selection-start-line="76" selection-start-column="70" selection-end-line="76" selection-end-column="70" />
+                <state relative-caret-position="470">
+                  <caret line="63" column="86" lean-forward="true" selection-start-line="63" selection-start-column="86" selection-end-line="63" selection-end-column="86" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="passport-type-v2-page2.html" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/_prototypes/typeahead/passport-type/passport-type-v2-page2.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="351">
+                  <caret line="83" column="131" lean-forward="false" selection-start-line="83" selection-start-column="131" selection-end-line="83" selection-end-column="131" />
                   <folding />
                 </state>
               </provider>
@@ -32,22 +44,28 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="passport-types.js" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/_prototypes/typeahead/passport-type/js/passport-types.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="261">
-                  <caret line="101" column="12" lean-forward="false" selection-start-line="101" selection-start-column="12" selection-end-line="101" selection-end-column="12" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="records.json" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/_prototypes/typeahead/passport-type/data/records.json">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="0">
                   <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
                   <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="passport-types.js" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/_prototypes/typeahead/passport-type/js/passport-types.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="447">
+                  <caret line="155" column="48" lean-forward="true" selection-start-line="155" selection-start-column="48" selection-end-line="155" selection-end-column="48" />
+                  <folding>
+                    <element signature="e#325#565#0" expanded="false" />
+                    <element signature="e#624#872#0" expanded="false" />
+                    <element signature="e#894#1786#0" expanded="false" />
+                    <element signature="e#1854#3091#0" expanded="false" />
+                    <element signature="e#3144#3883#0" expanded="false" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -62,8 +80,12 @@
       <find>passport-types-playback-answer</find>
       <find>listbare</find>
       <find>playback-list-value</find>
-      <find>addRemovePlaybackHeading</find>
       <find>removePlaybackItem</find>
+      <find>removeAllButton</find>
+      <find>addRemovePlaybackHeading</find>
+      <find>removeAllPlayback</find>
+      <find>remove all</find>
+      <find>remove</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -74,6 +96,7 @@
       <list>
         <option value="$PROJECT_DIR$/_prototypes/typeahead/passport-type/passport-type-v1-page2.html" />
         <option value="$PROJECT_DIR$/_prototypes/typeahead/passport-type/js/passport-types.js" />
+        <option value="$PROJECT_DIR$/_prototypes/typeahead/passport-type/passport-type-v2-page2.html" />
       </list>
     </option>
   </component>
@@ -216,19 +239,19 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1512399528326</updated>
-      <workItem from="1512399531459" duration="6980000" />
+      <workItem from="1512399531459" duration="9061000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6980000" />
+    <option name="totallyTimeSpent" value="9061000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-274" y="-1057" width="1784" height="1053" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14180374" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25297788" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
@@ -255,7 +278,9 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -263,14 +288,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="287">
           <caret line="142" column="24" lean-forward="true" selection-start-line="142" selection-start-column="24" selection-end-line="142" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_prototypes/typeahead/passport-type/passport-type-v1-page2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="76" column="70" lean-forward="true" selection-start-line="76" selection-start-column="70" selection-end-line="76" selection-end-column="70" />
           <folding />
         </state>
       </provider>
@@ -285,8 +302,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/_prototypes/typeahead/passport-type/js/passport-types.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="101" column="12" lean-forward="false" selection-start-line="101" selection-start-column="12" selection-end-line="101" selection-end-column="12" />
+        <state relative-caret-position="447">
+          <caret line="155" column="48" lean-forward="true" selection-start-line="155" selection-start-column="48" selection-end-line="155" selection-end-column="48" />
+          <folding>
+            <element signature="e#325#565#0" expanded="false" />
+            <element signature="e#624#872#0" expanded="false" />
+            <element signature="e#894#1786#0" expanded="false" />
+            <element signature="e#1854#3091#0" expanded="false" />
+            <element signature="e#3144#3883#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_prototypes/typeahead/passport-type/passport-type-v1-page2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="470">
+          <caret line="63" column="86" lean-forward="true" selection-start-line="63" selection-start-column="86" selection-end-line="63" selection-end-column="86" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_prototypes/typeahead/passport-type/passport-type-v2-page2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="83" column="131" lean-forward="false" selection-start-line="83" selection-start-column="131" selection-end-line="83" selection-end-column="131" />
           <folding />
         </state>
       </provider>
