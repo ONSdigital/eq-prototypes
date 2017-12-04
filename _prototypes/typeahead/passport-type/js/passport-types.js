@@ -11,18 +11,40 @@ $(document).ready(function() {
         console.log('Item selected: ', item);
 
         // remove any white space from the selected item
-        var primaryTextNoSpaces = item.primaryText.split(' ').join('-');
-        // add playback item when selection is made, with selected.item as part of unique ID
-        var oClone = document.getElementById("playback__item").cloneNode(true);
-        oClone.id += ('-' + primaryTextNoSpaces);
-        document.getElementById("playback-container").appendChild(oClone);
- 
-        // add playback heading and remove all button if this is the first playback_item
-        addRemovePlaybackHeading();
-        removeAllButton();
+        var primaryTextNoSpaces = item.primaryText.split(' ').join('-'),
+			id = 'passport-types-playback-answer-' + primaryTextNoSpaces,
+			$playbackContainer = $("#playback-container"),
 
-        // selected.item to appear in playback item playback-list-value
-        $('.playback-list-value').append(item.primaryText);
+			$templateEl = $('<div class="playback_item">' +
+				'<div class="playback__answer-text u-dib"' +
+					'id="' + id + '"' +
+					'data-qa="' + id + '">' +
+					'<ul class="u-pl-no u-mb-xs list--bare">' +
+						'<li id="playback-value" class="playback-list-value">' + item.primaryText + '</li>' +
+					'</ul>' +
+				'</div>' +
+			'</div>'),
+
+			$removeButtonWrapper = $('<div class="playback__remove u-fr"></div>'),
+
+			$removeButton = $('<a href="#"' +
+				'class="js--playback__remove-link"' +
+				'aria-describedby="' + id + '"' +
+				'data-qa="passport-types-playback-answer-remove"' +
+				'data-ga-action="Remove click"' +
+				'data-ga-category="Playback"' +
+				'data-ga="click">Remove <span class="u-vh">your answer</span></a>');
+
+			$removeButton.on('click', removePlaybackItem_handler);
+
+		/**
+		 * Bind it all up
+		 */
+        $templateEl.append($removeButtonWrapper.append($removeButton));
+
+		$playbackContainer.html($($templateEl));
+
+		addRemovePlaybackHeading();
     });
 
     function convertCountryToTypeahead (country) {
@@ -119,26 +141,23 @@ $(document).ready(function() {
 		} else {
 			$(".js-address-start-again-trigger").css({"display":"none"});
 		}
-	};
+	}
 
 // add/remove playback heading
 	function addRemovePlaybackHeading () {
-		var $playbackItem = $('*[id^="playback__item-"]');
-    	if (jQuery.contains(document, $playbackItem[0])) {
-			$("#playback-heading").css({"display":"block"});
-		} else {
-			$("#playback-heading").css({"display":"none"});
-		}
-	};
+	  $("#playback-heading").css({
+		"display": $("#playback-container").children().length ? "block" : "none"
+	  });
+	}
 
 // Removing playback items
-	function removePlaybackItem () {
-		$('.js--playback__remove-link').on('click', function(){
-    		$(this).closest('.playback_item').remove();
-    		// remove playback heading if no playback_item listed
-    		addRemovePlaybackHeading();
-    		removeAllButton();
-		});
+	function removePlaybackItem_handler (e) {
+		e.preventDefault();
+
+		$(this).closest('.playback_item').remove();
+		// remove playback heading if no playback_item listed
+		addRemovePlaybackHeading();
+		removeAllButton();
 	}
 
 // Remove all selected values
