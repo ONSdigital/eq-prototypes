@@ -59,6 +59,21 @@ $(document).ready(function() {
       };
     }
 
+    function sortCountriesByPrimaryTextComparator (a, b) {
+		var nameA = a.primaryText.toUpperCase(),
+			nameB = b.primaryText.toUpperCase();
+
+		// console.log(nameA, nameB, (nameA < nameB), (nameA > nameB));
+
+		if (nameA < nameB) {
+			return -1;
+		}
+		if (nameA > nameB) {
+			return 1;
+		}
+		return 0;
+	}
+
     function init() {
       $.getJSON("../data/records.json")
         .done(function (countryData) {
@@ -110,6 +125,7 @@ $(document).ready(function() {
           .map(function (country) {
             return convertCountryToTypeahead(country);
           })
+		  .sort(sortCountriesByPrimaryTextComparator)
         );
       }, 0);
     });
