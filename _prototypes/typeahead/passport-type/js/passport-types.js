@@ -1,10 +1,12 @@
 $(document).ready(function() {
     var $typeaheadInputEl = $('.js-typeahead-input'),
-      countriesList = [];
+      countriesList = [],
+	  countryPriority = ['GB', 'IE'];
 
     var typeaheadComponent = TypeaheadComponent.create({
         scopeElement: $('.js-typeahead-component')[0],
-        inputElement: $typeaheadInputEl[0]
+        inputElement: $typeaheadInputEl[0],
+		showWhenEmpty: true
     });
 
     function convertCountryToTypeahead (country) {
@@ -23,8 +25,6 @@ $(document).ready(function() {
 		var nameA = a.primaryText.toUpperCase(),
 			nameB = b.primaryText.toUpperCase();
 
-		// console.log(nameA, nameB, (nameA < nameB), (nameA > nameB));
-
 		if (nameA < nameB) {
 			return -1;
 		}
@@ -32,6 +32,24 @@ $(document).ready(function() {
 			return 1;
 		}
 		return 0;
+	}
+
+	function sortCountriesByPriority (item) {
+		var index = countryPriority.indexOf(item.data.key);
+
+		if (countryPriority[index]) {
+			return -(index+1);
+		}
+
+		return false;
+	}
+
+	function transformSortCountries (countryList) {
+
+		return _.sortBy(
+			countryList.map(convertCountryToTypeahead)
+				.sort(sortCountriesByPrimaryTextComparator),
+			sortCountriesByPriority);
 	}
 
     function init() {
@@ -58,7 +76,7 @@ $(document).ready(function() {
            * that are compatible with the Typeahead's update interface.
            */
           typeaheadComponent.update(
-            countriesList.map(convertCountryToTypeahead)
+		  	transformSortCountries(countriesList)
           );
       });
     }
@@ -111,21 +129,19 @@ $(document).ready(function() {
 
       setTimeout(function () {
         typeaheadComponent.update(
-          countriesList.filter(function (country) {
+		  transformSortCountries(
+		  	countriesList.filter(function (country) {
 
-            /**
-             * Return items that match the input element value.
-             */
-            var val = $typeaheadInputEl.val().toLowerCase(),
-				countryName = country.item[0].name.toLowerCase(),
+			  /**
+			   * Return items that match the input element value.
+			   */
+			  var val = $typeaheadInputEl.val().toLowerCase(),
+			    countryName = country.item[0].name.toLowerCase(),
 				citizenName = country.item[0]['citizen-names'].toLowerCase();
 
-            return countryName.match(val) || citizenName.match(val);
-          })
-          .map(function (country) {
-            return convertCountryToTypeahead(country);
-          })
-		  .sort(sortCountriesByPrimaryTextComparator)
+				return countryName.match(val) || citizenName.match(val);
+		    }
+          ))
         );
       }, 0);
     });

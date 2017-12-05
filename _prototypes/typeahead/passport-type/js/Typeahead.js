@@ -4,6 +4,8 @@ function TypeaheadComponent ($scope, $inputEl) {
 		emitter = $({}),
 		$container = $scope.find('.pac-container'),
 
+		showWhenEmpty = false,
+
 		/**
 		 * If user has not typed anything new
 		 */
@@ -28,8 +30,6 @@ function TypeaheadComponent ($scope, $inputEl) {
 
 		$container.html('');
 
-		!data.length ? hide() : show();
-
 		$(data).each(function (key, item) {
 			var $item = $('<button class="pac-item">' +
 				// '<span class="pac-item-query">' +
@@ -46,6 +46,8 @@ function TypeaheadComponent ($scope, $inputEl) {
 
 			$container.append($item);
 		});
+
+		!data.length ? hide() : show();
 	}
 
 	function hide () {
@@ -57,7 +59,9 @@ function TypeaheadComponent ($scope, $inputEl) {
 	}
 
 	function show () {
-		if (!isClean) {
+		if (
+			(showWhenEmpty && ($inputEl.val() === '') && $inputEl.is(':active')) ||
+			!isClean) {
 			$container.removeClass('hide');
 		}
 	}
@@ -149,6 +153,10 @@ function TypeaheadComponent ($scope, $inputEl) {
 		isClean = false;
 	});
 
+	this.showListWhenEmpty = function (val) {
+		showWhenEmpty = !!val;
+	};
+
 	this.update = function (dataArr) {
 		if (!dataArr || dataArr.length === undefined) {
 			return;
@@ -179,12 +187,19 @@ TypeaheadComponent.isKeyPressClean = function (e) {
  * opts example
  * {
  *   scopeElement: <HTML element>,
- *   inputElement: <HTML element>
+ *   inputElement: <HTML element>,
+ *   showWhenEmpty: <Boolean>
  * }
  */
 TypeaheadComponent.create = function (opts) {
 	var $scope = $(opts.scopeElement),
-		$inputEl = $(opts.inputElement);
+		$inputEl = $(opts.inputElement),
+		showWhenEmpty = opts.showWhenEmpty,
+		component = new TypeaheadComponent($scope, $inputEl);
 
-	return new TypeaheadComponent($scope, $inputEl);
+	if (showWhenEmpty) {
+		component.showListWhenEmpty(showWhenEmpty);
+	}
+
+	return component;
 };
