@@ -60,8 +60,9 @@ function TypeaheadComponent ($scope, $inputEl) {
 
 	function show () {
 		if (
-			(showWhenEmpty && ($inputEl.val() === '') && $inputEl.is(':active')) ||
+			(showWhenEmpty && ($inputEl.val() === '') && $inputEl.is(':active') && _this.data.length) ||
 			!isClean) {
+
 			$container.removeClass('hide');
 		}
 	}
@@ -195,11 +196,10 @@ TypeaheadComponent.create = function (opts) {
 	var $scope = $(opts.scopeElement),
 		$inputEl = $(opts.inputElement),
 		showWhenEmpty = opts.showWhenEmpty,
+
 		component = new TypeaheadComponent($scope, $inputEl);
 
-	if (showWhenEmpty) {
-		component.showListWhenEmpty(showWhenEmpty);
-	}
+	component.showListWhenEmpty(showWhenEmpty);
 
 	return component;
 };

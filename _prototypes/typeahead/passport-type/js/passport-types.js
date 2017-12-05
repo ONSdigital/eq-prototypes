@@ -1,27 +1,27 @@
-$(document).ready(function() {
-    var $typeaheadInputEl = $('.js-typeahead-input'),
-      countriesList = [],
-	  countryPriority = ['GB', 'IE'];
+$(document).ready(function () {
+	var $typeaheadInputEl = $('.js-typeahead-input'),
+		countriesList = [],
+		countryPriority = ['GB', 'IE'];
 
-    var typeaheadComponent = TypeaheadComponent.create({
-        scopeElement: $('.js-typeahead-component')[0],
-        inputElement: $typeaheadInputEl[0],
+	var typeaheadComponent = TypeaheadComponent.create({
+		scopeElement: $('.js-typeahead-component')[0],
+		inputElement: $typeaheadInputEl[0],
 		showWhenEmpty: true
-    });
+	});
 
-    function convertCountryToTypeahead (country) {
-      return {
+	function convertCountryToTypeahead(country) {
+		return {
 
-        /**
-         * Not sure why item is an array - could change this?
-         */
-        primaryText: country.item[0].name,
-        secondaryText: country.item[0]["citizen-names"],
-        data: country
-      };
-    }
+			/**
+			 * Not sure why item is an array - could change this?
+			 */
+			primaryText: country.item[0].name,
+			secondaryText: country.item[0]["citizen-names"],
+			data: country
+		};
+	}
 
-    function sortCountriesByPrimaryTextComparator (a, b) {
+	function sortCountriesByPrimaryTextComparator(a, b) {
 		var nameA = a.primaryText.toUpperCase(),
 			nameB = b.primaryText.toUpperCase();
 
@@ -34,17 +34,17 @@ $(document).ready(function() {
 		return 0;
 	}
 
-	function sortCountriesByPriority (item) {
+	function sortCountriesByPriority(item) {
 		var index = countryPriority.indexOf(item.data.key);
 
 		if (countryPriority[index]) {
-			return -(index+1);
+			return -(index + 1);
 		}
 
 		return false;
 	}
 
-	function transformSortCountries (countryList) {
+	function transformSortCountries(countryList) {
 
 		return _.sortBy(
 			countryList.map(convertCountryToTypeahead)
@@ -52,34 +52,76 @@ $(document).ready(function() {
 			sortCountriesByPriority);
 	}
 
-    function init() {
-      $.getJSON("../data/records.json")
-        .done(function (countryData) {
+	function checkSetupPlayback() {
+		var shouldShow = $("#playback-container").children().length;
 
-          /**
-           * Declare all variable used in a function up front.
-           * If not these will get attached as global object properties.
-           */
-          var country,
+		$("#playback-heading").css({
+			"display": shouldShow ? "block" : "none"
+		});
 
-            /**
-             * All countries appear to be stored in the first object of the array - could change this?
-             */
-            countries = countryData.Countries[0];
+		$(".js-address-start-again-trigger").css({
+			"display": shouldShow ? "inline-block" : "none"
+		});
 
-          for (country in countries) {
-            countriesList.push(countries[country]);
-          }
+		if (!shouldShow) {
 
-          /**
-           * After arranging the countries into an array, we need to map the data to an array with properties
-           * that are compatible with the Typeahead's update interface.
-           */
-          typeaheadComponent.update(
-		  	transformSortCountries(countriesList)
-          );
-      });
-    }
+			/**
+			 * Reset selection
+			 */
+			typeaheadComponent.update(
+				transformSortCountries(countriesList)
+			);
+		}
+	}
+
+	// Removing playback items
+	function removePlaybackItem_handler(e) {
+		e.preventDefault();
+
+		$(this).closest('.playback_item').remove();
+		// remove playback heading if no playback_item listed
+		checkSetupPlayback();
+	}
+
+	// Remove all selected values
+	function removeAllPlayback(e) {
+		e.preventDefault();
+
+		$("#playback-container").children().remove();
+		checkSetupPlayback();
+	}
+
+
+	function init() {
+		$.getJSON("../data/records.json")
+			.done(function (countryData) {
+
+				/**
+				 * Declare all variable used in a function up front.
+				 * If not these will get attached as global object properties.
+				 */
+				var country,
+
+					/**
+					 * All countries appear to be stored in the first object of the array - could change this?
+					 */
+					countries = countryData.Countries[0];
+
+				for (country in countries) {
+					if (countries.hasOwnProperty(country)) {
+						countriesList.push(countries[country]);
+					}
+				}
+
+				/**
+				 * After arranging the countries into an array, we need to map the data to an array with properties
+				 * that are compatible with the Typeahead's update interface.
+				 */
+				typeaheadComponent.update(
+					transformSortCountries(countriesList)
+				);
+			});
+	}
 
 	typeaheadComponent.emitter.on('itemSelected', function (e, item) {
 		console.log('Item selected: ', item);
@@ -115,38 +157,51 @@ $(document).ready(function() {
 		 * Bind it all up
 		 */
 		$templateEl.append($removeButtonWrapper.append($removeButton));
-
 		$playbackContainer.html($($templateEl));
 
 		checkSetupPlayback();
+
+		typeaheadComponent.update(
+			transformSortCountries(
+				countriesList.filter(function (countryItem) {
+
+					/**
+					 * Remove the selected country from the list
+					 */
+					return countryItem.key !== item.data.key;
+				})
+			)
+		);
 	});
 
-    $typeaheadInputEl.on('keydown', function (e) {
+	$typeaheadInputEl.on('keydown', function (e) {
 
-      if (TypeaheadComponent.isKeyPressClean(e)) {
-        return;
-      }
+		if (TypeaheadComponent.isKeyPressClean(e)) {
+			return;
+		}
 
-      setTimeout(function () {
-        typeaheadComponent.update(
-		  transformSortCountries(
-		  	countriesList.filter(function (country) {
+		setTimeout(function () {
+			typeaheadComponent.update(
+				transformSortCountries(
+					countriesList.filter(function (country) {
 
-			  /**
-			   * Return items that match the input element value.
-			   */
-			  var val = $typeaheadInputEl.val().toLowerCase(),
-			    countryName = country.item[0].name.toLowerCase(),
-				citizenName = country.item[0]['citizen-names'].toLowerCase();
+							/**
+							 * Return items that match the input element value.
+							 */
+							var val = $typeaheadInputEl.val().toLowerCase(),
+								countryName = country.item[0].name.toLowerCase(),
+								citizenName = country.item[0]['citizen-names'].toLowerCase();
 
-				return countryName.match(val) || citizenName.match(val);
-		    }
-          ))
-        );
-      }, 0);
-    });
+							return countryName.match(val) || citizenName.match(val);
+						}
+					))
+			);
+		}, 0);
+	});
 
-    init();
+	$('.js-address-start-again-trigger').on('click', removeAllPlayback);
+
+	init();
 });
 
 // Check URL for parameters and dynamically change content
@@ -164,32 +219,3 @@ $(document).ready(function () {
 		$('#nothing-selected').show();
 	}
 });
-
-function checkSetupPlayback () {
-	var shouldShow = $("#playback-container").children().length;
-
-	$("#playback-heading").css({
-		"display": shouldShow ? "block" : "none"
-	});
-
-	$(".js-address-start-again-trigger").css({
-		"display": shouldShow ? "inline-block" : "none"
-	});
-}
-
-// Removing playback items
-function removePlaybackItem_handler (e) {
-	e.preventDefault();
-
-	$(this).closest('.playback_item').remove();
-	// remove playback heading if no playback_item listed
-	checkSetupPlayback();
-}
-
-// Remove all selected values
-function removeAllPlayback (){
-	$("#playback-container").children().remove();
-	//console.clear()
-	// remove playback heading
-	checkSetupPlayback();
-}
