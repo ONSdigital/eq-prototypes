@@ -172,6 +172,11 @@ $(document).ready(function () {
 				})
 			)
 		);
+
+		/**
+		 * Clear typeahead value
+		 */
+		$typeaheadInputEl.val('');
 	});
 
 	$typeaheadInputEl.on('keydown', function (e) {
