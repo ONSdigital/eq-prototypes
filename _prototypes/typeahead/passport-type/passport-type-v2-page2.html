@@ -118,6 +118,37 @@ globalcss: false
 
 <script src="../js/Typeahead.js"></script>
 <script src="../js/passport-types.js"></script>
+<script>
+    $(document).ready(function () {
+
+    	var countriesSelected = [];
+
+		// Check URL for parameters and dynamically change content
+        // (for version2 of prototype to display eg. 'UK aleady selected')
+		if (window.location.href.indexOf("?passport-type-opener-answer=United+Kingdom&passport-type-opener-answer=Ireland") > -1) {
+			$("#uk-ireland-selected").show();
+
+			countriesSelected.push('GB', 'IE');
+		}
+		else if (window.location.href.indexOf("Ireland") > -1) {
+			$("#ireland-selected").show();
+
+			countriesSelected.push('IE');
+
+		} else if (window.location.href.indexOf("United+Kingdom") > -1) {
+			$("#uk-selected").show();
+
+			countriesSelected.push('GB');
+		}
+		else {
+			$('#nothing-selected').show();
+		}
+
+		passportTypes({
+            countriesSelected: countriesSelected
+		});
+    });
+</script>
 
 <script>
   $('.qa-btn-submit').click(function(e) {

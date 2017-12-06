@@ -1,7 +1,9 @@
-$(document).ready(function () {
+function passportTypes (config) {
 	var $typeaheadInputEl = $('.js-typeahead-input'),
 		countriesList = [],
-		countryPriority = ['GB', 'IE'];
+		countryPriority = ['GB', 'IE'],
+
+		countriesSelected = config.countriesSelected || [];
 
 	var typeaheadComponent = TypeaheadComponent.create({
 		scopeElement: $('.js-typeahead-component')[0],
@@ -53,17 +55,17 @@ $(document).ready(function () {
 	}
 
 	function checkSetupPlayback() {
-		var shouldShow = $("#playback-container").children().length;
+		var itemsExist = $("#playback-container").children().length;
 
 		$("#playback-heading").css({
-			"display": shouldShow ? "block" : "none"
+			"display": itemsExist ? "block" : "none"
 		});
 
 		$(".js-address-start-again-trigger").css({
-			"display": shouldShow ? "inline-block" : "none"
+			"display": itemsExist ? "inline-block" : "none"
 		});
 
-		if (!shouldShow) {
+		if (!itemsExist) {
 
 			/**
 			 * Reset selection
@@ -75,12 +77,20 @@ $(document).ready(function () {
 	}
 
 	// Removing playback items
-	function removePlaybackItem_handler(e) {
+	function removePlaybackItem_handler(countryKey, e) {
 		e.preventDefault();
 
+		/**
+		 * Remove from selected list
+		 */
+		var selectedIndex = countriesSelected.indexOf(countryKey);
+
+		countriesSelected.splice(selectedIndex, 1);
+
 		$(this).closest('.playback_item').remove();
-		// remove playback heading if no playback_item listed
+
 		checkSetupPlayback();
+		updateTypeaheadComponentData();
 	}
 
 	// Remove all selected values
@@ -91,6 +101,75 @@ $(document).ready(function () {
 		checkSetupPlayback();
 	}
 
+	function updateTypeaheadComponentData () {
+		typeaheadComponent.update(
+			transformSortCountries(
+				countriesList.filter(function (countryItem) {
+
+					/**
+					 * If item is already selected remove from list
+					 */
+					return !countriesSelected[countriesSelected.indexOf(countryItem.key)];
+				})
+			)
+		);
+	}
+
+	function createPlaybackItem (dataItem) {
+
+		// remove any white space from the selected item
+		var name = dataItem.item[0].name,
+			primaryTextNoSpaces = name.split(' ').join('-'),
+			id = 'passport-types-playback-answer-' + primaryTextNoSpaces,
+
+			$templateEl = $('<div class="playback_item">' +
+				'<div class="playback__answer-text u-dib"' +
+				'id="' + id + '"' +
+				'data-qa="' + id + '">' +
+				'<ul class="u-pl-no u-mb-xs list--bare">' +
+				'<li id="playback-value" class="playback-list-value">' + name + '</li>' +
+				'</ul>' +
+				'</div>' +
+				'</div>'),
+
+			$removeButtonWrapper = $('<div class="playback__remove u-fr"></div>'),
+
+			$removeButton = $('<a href="#"' +
+				'class="js--playback__remove-link"' +
+				'aria-describedby="' + id + '"' +
+				'data-qa="passport-types-playback-answer-remove"' +
+				'data-ga-action="Remove click"' +
+				'data-ga-category="Playback"' +
+				'data-ga="click">Remove <span class="u-vh">your answer</span></a>');
+
+		$removeButton.on('click', removePlaybackItem_handler.bind($removeButton, dataItem.key));
+
+		/**
+		 * Bind it all up
+		 */
+		$templateEl.append($removeButtonWrapper.append($removeButton));
+
+		return $templateEl;
+	}
+
+	function addPlaybackItem ($item) {
+		var $playbackContainer = $("#playback-container");
+		$playbackContainer.append($item);
+	}
+
+	function initPlaybackList () {
+		$.each(countriesSelected, function (key, val) {
+
+			var dataItem = countriesList.filter(function (country) {
+				return country.key === val;
+			})[0];
+
+			if (dataItem) {
+				addPlaybackItem(createPlaybackItem(dataItem));
+				checkSetupPlayback();
+			}
+		});
+	}
 
 	function init() {
 		$.getJSON("../data/records.json")
@@ -113,65 +192,26 @@ $(document).ready(function () {
 					}
 				}
 
-				/**
-				 * After arranging the countries into an array, we need to map the data to an array with properties
-				 * that are compatible with the Typeahead's update interface.
-				 */
-				typeaheadComponent.update(
-					transformSortCountries(countriesList)
-				);
+				updateTypeaheadComponentData();
+				initPlaybackList();
 			});
 	}
 
 	typeaheadComponent.emitter.on('itemSelected', function (e, item) {
 		console.log('Item selected: ', item);
 
-		// remove any white space from the selected item
-		var primaryTextNoSpaces = item.primaryText.split(' ').join('-'),
-			id = 'passport-types-playback-answer-' + primaryTextNoSpaces,
-			$playbackContainer = $("#playback-container"),
-
-			$templateEl = $('<div class="playback_item">' +
-				'<div class="playback__answer-text u-dib"' +
-				'id="' + id + '"' +
-				'data-qa="' + id + '">' +
-				'<ul class="u-pl-no u-mb-xs list--bare">' +
-				'<li id="playback-value" class="playback-list-value">' + item.primaryText + '</li>' +
-				'</ul>' +
-				'</div>' +
-				'</div>'),
-
-			$removeButtonWrapper = $('<div class="playback__remove u-fr"></div>'),
-
-			$removeButton = $('<a href="#"' +
-				'class="js--playback__remove-link"' +
-				'aria-describedby="' + id + '"' +
-				'data-qa="passport-types-playback-answer-remove"' +
-				'data-ga-action="Remove click"' +
-				'data-ga-category="Playback"' +
-				'data-ga="click">Remove <span class="u-vh">your answer</span></a>');
-
-		$removeButton.on('click', removePlaybackItem_handler);
+		var countryKey = item.data.key;
 
 		/**
-		 * Bind it all up
+		 * Add selected country if it's not in the list
 		 */
-		$templateEl.append($removeButtonWrapper.append($removeButton));
-		$playbackContainer.html($($templateEl));
+		if (!countriesSelected[countriesSelected.indexOf(countryKey)]) {
+			countriesSelected.push(countryKey);
+		}
 
+		addPlaybackItem(createPlaybackItem(item.data));
 		checkSetupPlayback();
-
-		typeaheadComponent.update(
-			transformSortCountries(
-				countriesList.filter(function (countryItem) {
-
-					/**
-					 * Remove the selected country from the list
-					 */
-					return countryItem.key !== item.data.key;
-				})
-			)
-		);
+		updateTypeaheadComponentData();
 
 		/**
 		 * Clear typeahead value
@@ -207,20 +247,4 @@ $(document).ready(function () {
 	$('.js-address-start-again-trigger').on('click', removeAllPlayback);
 
 	init();
-});
-
-// Check URL for parameters and dynamically change content
-// (for version2 of prototype to display eg. 'UK aleady selected')
-$(document).ready(function () {
-	if (window.location.href.indexOf("?passport-type-opener-answer=United+Kingdom&passport-type-opener-answer=Ireland") > -1) {
-		$("#uk-ireland-selected").show();
-	}
-	else if (window.location.href.indexOf("Ireland") > -1) {
-		$("#ireland-selected").show();
-	} else if (window.location.href.indexOf("United+Kingdom") > -1) {
-		$("#uk-selected").show();
-	}
-	else {
-		$('#nothing-selected').show();
-	}
-});
+}
