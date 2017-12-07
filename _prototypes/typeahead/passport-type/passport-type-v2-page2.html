@@ -121,32 +121,54 @@ globalcss: false
 <script>
     $(document).ready(function () {
 
-    	var countriesSelected = [];
+    	var countriesSelected = [],
+			passportTypesObj;
 
 		// Check URL for parameters and dynamically change content
         // (for version2 of prototype to display eg. 'UK aleady selected')
 		if (window.location.href.indexOf("?passport-type-opener-answer=United+Kingdom&passport-type-opener-answer=Ireland") > -1) {
-			$("#uk-ireland-selected").show();
-
 			countriesSelected.push('GB', 'IE');
 		}
 		else if (window.location.href.indexOf("Ireland") > -1) {
-			$("#ireland-selected").show();
-
 			countriesSelected.push('IE');
 
 		} else if (window.location.href.indexOf("United+Kingdom") > -1) {
-			$("#uk-selected").show();
-
 			countriesSelected.push('GB');
 		}
-		else {
-			$('#nothing-selected').show();
-		}
 
-		passportTypes({
+		passportTypesObj = passportTypes({
             countriesSelected: countriesSelected
 		});
+
+		function resetPreselectedCountriesNotifications () {
+			$("#uk-ireland-selected").hide();
+			$("#ireland-selected").hide();
+			$("#uk-selected").hide();
+			$('#nothing-selected').hide();
+        }
+
+		passportTypesObj.emitter.on('items-changed', function (e, countriesSelected) {
+			var countryKeys = countriesSelected.countryKeys,
+                uk = countryKeys[countryKeys.indexOf('GB')],
+                ireland = countryKeys[countryKeys.indexOf('IE')];
+
+			if (uk && ireland) {
+				resetPreselectedCountriesNotifications();
+				$("#uk-ireland-selected").show();
+            }
+            else if (ireland) {
+				resetPreselectedCountriesNotifications();
+				$("#ireland-selected").show();
+            }
+            else if (uk) {
+				resetPreselectedCountriesNotifications();
+				$("#uk-selected").show();
+            }
+            else {
+				resetPreselectedCountriesNotifications();
+				$('#nothing-selected').show();
+            }
+        });
     });
 </script>
 

@@ -5,7 +5,8 @@ function passportTypes (config) {
 		countriesListKeyDataMap = {},
 		countryPriority = ['GB', 'IE'],
 
-		countriesSelected = config.countriesSelected || [];
+		countriesSelected = config.countriesSelected || [],
+		emitter = $({});
 
 	var typeaheadComponent = TypeaheadComponent.create({
 		scopeElement: $('.js-typeahead-component')[0],
@@ -89,8 +90,7 @@ function passportTypes (config) {
 
 		countriesSelected.splice(selectedIndex, 1);
 
-		$(this).closest('.playback_item').remove();
-
+		triggerItemsChanged();
 		render();
 	}
 
@@ -100,6 +100,7 @@ function passportTypes (config) {
 
 		countriesSelected.length = 0;
 
+		triggerItemsChanged();
 		render();
 	}
 
@@ -188,6 +189,10 @@ function passportTypes (config) {
 		});
 	}
 
+	function triggerItemsChanged() {
+		emitter.trigger('items-changed', { countryKeys: countriesSelected });
+	}
+
 	function render () {
 		renderPlaybackItems();
 		checkSetupPlayback();
@@ -212,6 +217,7 @@ function passportTypes (config) {
 					}
 				}
 
+				triggerItemsChanged();
 				render();
 			});
 	}
@@ -233,6 +239,7 @@ function passportTypes (config) {
 		 */
 		$typeaheadInputEl.val('');
 
+		triggerItemsChanged();
 		render();
 	});
 
@@ -264,4 +271,12 @@ function passportTypes (config) {
 	$('.js-address-start-again-trigger').on('click', removeAllPlayback);
 
 	init();
+
+	return {
+
+		/**
+		 * Events: ['items-changed']
+		 */
+		emitter: emitter
+	};
 }
