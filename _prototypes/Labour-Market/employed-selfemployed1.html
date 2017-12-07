@@ -1,0 +1,276 @@
+---
+title: employed or self employed
+project: labour-market
+globalcss: false
+---
+
+
+<link rel="stylesheet" href="{{ "/css/census.css" | prepend: site.baseurl }}">
+<link rel="stylesheet" type="text/css" href="{{ "/css/census-proto.css" | prepend: site.baseurl }}">
+<header class="page__header">
+  <header class="header header--census">
+  <div class="header__help is-closed js-help-body">
+    <div class="header__container container">
+      <div class="header__title ">Help and support –</div>
+      <ul class="header__nav nav nav--horizontal">
+        <li class="nav__item">
+          <span class="mars" role="presentation">Call </span> <a class="venus nav__link" href="tel:03000683001"><span class="u-vh">For help call </span>0300 068 3001</a>
+        </li>
+        <li class="nav__item">
+          <a class="venus nav__link external" href="http://www.ons.gov.uk/census/help" target="_blank" rel="noopener noreferrer">Online Help</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="header__container container">
+    <div class="header__logo">
+     <img src="{{ "/img/census-logo.svg" | prepend: site.baseurl }}" alt="2017 Census">
+    </div>
+    <button class="header__btn btn btn--light btn--border js-help-btn" data-ga-action="Help and support" data-ga="click" data-ga-category="Help">
+      Help and support
+    </button>
+  </div>
+</header>
+</header>
+
+
+<!-- Leannes Css -->
+<style>
+/*.panel--simple {
+  padding-top:2rem;
+  margin-bottom:1rem;
+}*/
+.autocomplete__input, 
+.autocomplete__hint {
+    width: 350px;
+}
+.footer.page__footer{
+  display: none;
+}
+.autocomplete__hint,
+.autocomplete__input,
+.autocomplete__option,
+.autocomplete__input--focused {
+  padding:10.8px;
+  border-radius: 3px;
+}
+
+
+
+</style>
+
+
+<div class="page__subheader">
+  <div class="container">
+    <a class="mars" href="javascript:history.back()">Previous</a>
+  </div>
+</div>
+
+<div class="page__container container">
+  <div class="grid grid--reverse">
+    <div class="grid__col col-4@m">
+
+    <!-- right aligned side nav -->
+      <div class="nav nav--sections nav--vertical js-nav page__nav" id="section-nav">
+    <h2 class="nav__title venus">Sections</h2>
+    <ul class="nav__list js-nav-list">
+        <li class="nav__item pluto nav__item--completed">
+            <a class="nav__link" href="#item1">Who lives here?</a>
+        </li>
+        <li class="nav__item pluto nav__item--completed">
+            <a class="nav__link" href="#item2">Household and Accomodation</a>
+        </li>
+        <li class="nav__item pluto nav__item--current">
+            <a class="nav__link" href="#item3">Joanna Bloggs</a>
+        </li>
+    </ul>
+</div>
+
+</div>
+    <div class="grid__col col-7@m pull-1@m">
+      <main role="main" id="main" class="page__main">
+        <form action="../thankyou" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
+          <div class="group" id="rsi">
+            <div class="block" id="total-retail-turnover">
+              <section class="section" id="total-retail-turnover-section">
+                <!--<h2 class="section__title neptune">Joanna Bloggs</h2>-->
+                
+                <div class="question" id="total-retail-turnover-question">
+                  <h1 class="question__title saturn">
+                    <span id="name-text" class="highlight q1"></span>
+                  </h1>
+
+                  <div class="panel panel--simple panel--info">
+                      <div class="panel__body">
+                        
+                          <p>For example, <b>primary school teacher, car mechanic, district nurse, structural engineer</b>
+                           <br> 
+                           <br>
+                          <b>Do not</b> state your pay grade or pay band</p>
+                      </div>
+                  </div>
+
+                  <!-- Auto complete form -->
+                  <div class="question__answers">
+                    <div class="question__answer">
+                      <div class="answer answer--currency" id="total-retail-turnover-answer">
+                        <div class="answer__fields js-fields">
+                          <div class="field">
+                            <label for="q3r1" id="label-total-retail-turnover-answer" class="label venus ">
+
+
+                              <div class="label__inner">
+                                Type and select your job title
+                              </div>
+                              <!-- <div class="question__description mars" id="description-reason-for-change-question">Question description</div> -->
+                            </label>
+                            <div class="input-type">
+                              <select name="last-location" class="input--select input" id="last-country">
+                                <!--{% include_relative occupations.html %}-->
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="guidance js-details" data-show-label="Show further guidance" data-hide-label="Hide further guidance">
+                        <!-- <div class="panel panel--simple panel--info">-->  <a class="guidance__link js-details-trigger js-details-label mars" href="#guidance-permanent-or-family-home-answer" aria-expanded="false" data-guidance-trigger="true" aria-controls="guidance-permanent-or-family-home-answer-body" id="guidance-permanent-or-family-home-answer-trigger" data-ga-category="Help" data-ga-label="permanent-or-family-home-answer" data-ga="click" data-ga-action="Guidance click">Show further guidance</a>
+                          <div class="guidance__main js-details-body" id="guidance-permanent-or-family-home-answer-body" aria-hidden="true">
+                            <div class="guidance__content mars">
+                      
+      
+
+                              <p>Please enter your job title in the space provided.</p>
+  
+                              <p>Do not state your grade or pay band.</p>
+  
+                              <p>If you are not sure of your job title please give the best information you can.</p>
+  
+
+  
+                          </div>
+                        </div>
+                      <!-- </div> -->
+                    </div>
+                    <!-- <div class="question__answer">
+                      <div class="answer answer--currency" id="total-retail-turnover-answer">
+                        <div class="answer__fields js-fields">
+                          <div class="field">
+                            <label for="q3r2" id="label-total-retail-turnover-answer" class="label venus ">
+                              <div class="label__inner">
+                                Wages
+                              </div>
+                              <div class="question__description mars" id="description-reason-for-change-question">Round to the nearest pound. Do not include pence.</div>
+                            </label>
+                            <div class="input-type input-type--currency">
+                              <span class="input-type__type" id="total-retail-turnover-answer-type">£</span>
+                              <input id="q3r2" value="" data-qa="input-text" name="q3r2" class="input input--text input-type__input">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="question__answer">
+                      <div class="answer answer--currency" id="total-retail-turnover-answer">
+                        <div class="answer__fields js-fields">
+                          <div class="field">
+                            <label for="q3r3" id="label-total-retail-turnover-answer" class="label venus ">
+                              <div class="label__inner">
+                                Motor vehicles
+                              </div>
+                              <div class="question__description mars" id="description-reason-for-change-question">Round to the nearest pound. Do not include pence.</div>
+                            </label>
+                            <div class="input-type input-type--currency">
+                              <span class="input-type__type" id="total-retail-turnover-answer-type">£</span>
+                              <input id="q3r3" value="" data-qa="input-text" name="q3r3" class="input input--text input-type__input">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="question__answer">
+                      <div class="answer answer--currency" id="total-retail-turnover-answer">
+                        <div class="answer__fields js-fields">
+                          <div class="field">
+                            <label for="q3r4" id="label-total-retail-turnover-answer" class="label venus ">
+                              <div class="label__inner">
+                                Rent / property charges
+                              </div>
+                              <div class="question__description mars" id="description-reason-for-change-question">Round to the nearest pound. Do not include pence.</div>
+                            </label>
+                            <div class="input-type input-type--currency">
+                              <span class="input-type__type" id="total-retail-turnover-answer-type">£</span>
+                              <input id="q3r4" value="" data-qa="input-text" name="q3r4" class="input input--text input-type__input">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="question__answer">
+                      <div class="answer answer--currency" id="total-retail-turnover-answer">
+                        <div class="answer__fields js-fields">
+                          <div class="field">
+                            <label for="q3r5" id="label-total-retail-turnover-answer" class="label venus ">
+                              <div class="label__inner">
+                                Purchases
+                              </div>
+                              <div class="question__description mars" id="description-reason-for-change-question">Round to the nearest pound. Do not include pence.</div>
+                            </label>
+                            <div class="input-type input-type--currency">
+                              <span class="input-type__type" id="total-retail-turnover-answer-type">£</span>
+                              <input id="q3r5" value="" data-qa="input-text" name="q3r5" class="input input--text input-type__input">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="question__answer">
+                      <div class="answer answer--currency" id="total-retail-turnover-answer">
+                        <div class="answer__fields js-fields">
+                          <div class="field">
+                            <label for="q3r6" id="label-total-retail-turnover-answer" class="label venus ">
+                              <div class="label__inner">
+                                Other items
+                              </div>
+                              <div class="question__description mars" id="description-reason-for-change-question">Round to the nearest pound. Do not include pence.</div>
+                            </label>
+                            <div class="input-type input-type--currency">
+                              <span class="input-type__type" id="total-retail-turnover-answer-type">£</span>
+                              <input id="q3r6" value="" data-qa="input-text" name="q3r6" class="input input--text input-type__input">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div> -->
+                    <!-- <div class="question__answer question__total">
+                      <div class="answer answer--currency" id="total-retail-turnover-answer">
+                        <div class="answer__fields js-fields">
+                          <div class="field">
+                            <label for="q3r6" id="label-total-retail-turnover-answer" class="label venus ">
+                              <div class="label__inner">
+                                Total retail turnover
+                                <p class="mars field__description">Round to the nearest pound (£).</p>
+                              </div>
+                            </label>
+                            <div class="input-type input-type--currency">
+                              <span class="input-type__type" id="total-retail-turnover-answer-type">£</span>
+                              <input id="q3r6" value="" data-qa="input-text" name="q3r6" class="input input--text input-type__input">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div> -->
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+          <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Save and continue</button>
+          <div class="u-mb-m">
+            <button class="btn btn--link mars js-btn-save" type="submit" name="action[save_sign_out]">Save and complete later</button>
+          </div>
+        </form>
+        <a class="page__previous page__previous--bottom js-previous-link" href="javascript:history.back()" id="bottom-previous">Previous</a>
+      </main>
+    </div>
+  </div>
+</div>
