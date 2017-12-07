@@ -1,6 +1,8 @@
 function passportTypes (config) {
 	var $typeaheadInputEl = $('.js-typeahead-input'),
+		$playbackContainer = $('#playback-container'),
 		countriesList = [],
+		countriesListKeyDataMap = {},
 		countryPriority = ['GB', 'IE'],
 
 		countriesSelected = config.countriesSelected || [];
@@ -65,15 +67,15 @@ function passportTypes (config) {
 			"display": itemsExist ? "inline-block" : "none"
 		});
 
-		if (!itemsExist) {
+		/*if (!itemsExist) {
 
-			/**
+			/!**
 			 * Reset selection
-			 */
+			 *!/
 			typeaheadComponent.update(
 				transformSortCountries(countriesList)
 			);
-		}
+		}*/
 	}
 
 	// Removing playback items
@@ -89,16 +91,16 @@ function passportTypes (config) {
 
 		$(this).closest('.playback_item').remove();
 
-		checkSetupPlayback();
-		updateTypeaheadComponentData();
+		render();
 	}
 
 	// Remove all selected values
 	function removeAllPlayback(e) {
 		e.preventDefault();
 
-		$("#playback-container").children().remove();
-		checkSetupPlayback();
+		countriesSelected.length = 0;
+
+		render();
 	}
 
 	function updateTypeaheadComponentData () {
@@ -153,22 +155,43 @@ function passportTypes (config) {
 	}
 
 	function addPlaybackItem ($item) {
-		var $playbackContainer = $("#playback-container");
 		$playbackContainer.append($item);
 	}
 
-	function initPlaybackList () {
-		$.each(countriesSelected, function (key, val) {
+	function renderPlaybackItems () {
 
-			var dataItem = countriesList.filter(function (country) {
-				return country.key === val;
-			})[0];
+		var sortCountriesSelectedComparator = function (a, b) {
 
-			if (dataItem) {
-				addPlaybackItem(createPlaybackItem(dataItem));
-				checkSetupPlayback();
+			var nameA = a.item[0].name.toUpperCase(),
+				nameB = b.item[0].name.toUpperCase();
+
+			if (nameA < nameB) {
+				return -1;
 			}
+			if (nameA > nameB) {
+				return 1;
+			}
+
+			return 0;
+		};
+
+		$playbackContainer.html('');
+
+		var countriesSelectedSortedDataItems = countriesSelected
+			.map(function (key) {
+				return countriesListKeyDataMap[key];
+			})
+			.sort(sortCountriesSelectedComparator);
+
+		$.each(countriesSelectedSortedDataItems, function (key, dataItem) {
+			addPlaybackItem(createPlaybackItem(dataItem));
 		});
+	}
+
+	function render () {
+		renderPlaybackItems();
+		checkSetupPlayback();
+		updateTypeaheadComponentData();
 	}
 
 	function init() {
@@ -179,21 +202,17 @@ function passportTypes (config) {
 				 * Declare all variable used in a function up front.
 				 * If not these will get attached as global object properties.
 				 */
-				var country,
+				var country;
 
-					/**
-					 * All countries appear to be stored in the first object of the array - could change this?
-					 */
-					countries = countryData.Countries[0];
+				countriesListKeyDataMap = countryData.Countries[0];
 
-				for (country in countries) {
-					if (countries.hasOwnProperty(country)) {
-						countriesList.push(countries[country]);
+				for (country in countriesListKeyDataMap) {
+					if (countriesListKeyDataMap.hasOwnProperty(country)) {
+						countriesList.push(countriesListKeyDataMap[country]);
 					}
 				}
 
-				updateTypeaheadComponentData();
-				initPlaybackList();
+				render();
 			});
 	}
 
@@ -209,14 +228,12 @@ function passportTypes (config) {
 			countriesSelected.push(countryKey);
 		}
 
-		addPlaybackItem(createPlaybackItem(item.data));
-		checkSetupPlayback();
-		updateTypeaheadComponentData();
-
 		/**
 		 * Clear typeahead value
 		 */
 		$typeaheadInputEl.val('');
+
+		render();
 	});
 
 	$typeaheadInputEl.on('keydown', function (e) {
