@@ -1,0 +1,161 @@
+---
+title: LM amred forces 17
+project: Labour-market
+globalcss: false
+---
+
+
+<link rel="stylesheet" href="{{ "/css/census.css" | prepend: site.baseurl }}">
+<link rel="stylesheet" href="../css/labourmarket.css">
+<!--<link rel="stylesheet" type="text/css" href="{{ "/css/census-proto.css" | prepend: site.baseurl }}">-->
+
+  <header class="header header--census">
+  <div class="header__help is-closed js-help-body">
+    <div class="header__container container">
+      <div class="header__title ">Help and support –</div>
+      
+    </div>
+  </div>
+  <div class="header__container container">
+    <div class="header__logo">
+     <img src="{{ "/img/census-logo.svg" | prepend: site.baseurl }}" alt="2017 Census">
+    </div>
+    <button class="header__btn btn btn--light btn--border js-help-btn" data-ga-action="Help and support" data-ga="click" data-ga-category="Help">
+      Help and support
+    </button>
+  </div>
+</header>
+</header>
+
+
+
+<div class="section__description mars address_banner u-p-s">
+  <div class="address_banner_container">
+                  <p>For: <b id="address-bar-text"></b></p>
+                  </div> 
+                </div>
+
+<div class="page__subheader">
+  
+  <div class="container">
+    <a class="mars" href="javascript:history.back()">Previous</a>
+  </div>
+</div>
+
+<div class="page__container container">
+  <div class="grid grid--reverse">
+    <div class="grid__col col-4@m">
+
+    <!-- right aligned side nav -->
+      <div class="nav nav--sections nav--vertical js-nav page__nav" id="section-nav">
+    <h2 class="nav__title venus">Sections</h2>
+    <ul class="nav__list js-nav-list">
+        <li class="nav__item pluto nav__item--completed">
+            <a class="nav__link" href="#item1">Who lives here?</a>
+        </li>
+        <li class="nav__item pluto nav__item--completed">
+            <a class="nav__link" href="#item2">Household and Accomodation</a>
+        </li>
+        <li class="nav__item pluto nav__item--current">
+            <a class="nav__link name-text" href="#item3"></a>
+        </li>
+    </ul>
+</div>
+
+</div>
+    <div class="grid__col col-7@m pull-1@m">
+      <main role="main" id="main" class="page__main">
+        <form name="army" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
+          <div class="group" id="rsi">
+            <div class="block" id="total-retail-turnover">
+              <section class="section" id="total-retail-turnover-section">
+               <!-- <h2 class="section__title neptune">Joanna Bloggs</h2>-->
+         
+            
+                <div class="question" id="total-retail-turnover-question">
+                  <h1 class="question__title saturn">
+                    
+                    Has <span class="highlight q1 name-text"></span> ever served in the UK armed forces?
+
+                  </h1>
+
+                  <div class="panel panel--simple panel--info">
+                      <div class="panel__body">
+                        
+                          <p><b>Include</b>
+                          	<ul> 
+                             
+                               <li>UK regular armed forces</li>
+                                <li>UK reserve armed forces</li>
+                                  <li>Uk National service</li>
+								           
+								            </ul>
+
+                      </div>
+                  </div>
+
+                  <br>
+
+                 
+
+                   <div class="answer__fields js-fields">
+
+          <div class="field field--radio field--multiplechoice ">
+          <fieldset>
+          <div class="field__item js-focusable-box">
+          <input  class="input input--radio js-focusable" type="radio" name="job-offer-two" id="job-offer-two-0" value="very-satisfied">
+          <label  class="label label--inline venus" for="job-offer-two-0" id="job-offer-two-0">No</label>
+
+          </div>
+
+          <div class="field__item js-focusable-box">
+          <input  class="input input--radio js-focusable" type="radio" name="job-offer-two" id="job-offer-two-1" value="satisfied">
+          <label  class="label label--inline venus" for="job-offer-two-1" id="job-offer-two-1">Yes - currently serving</label>
+
+          </div>
+          <div class="field__item js-focusable-box">
+          <input  class="input input--radio js-focusable" type="radio" name="job-offer-two" id="job-offer-two-1" value="satisfied">
+          <label  class="label label--inline venus" for="job-offer-two-1" id="job-offer-two-1">Yes - previously served and now left</label>
+
+          </div>
+         
+
+          
+          </fieldset>
+      
+
+    </div>
+
+
+                  
+                      
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+          <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Save and continue</button>
+          <div class="u-mb-m">
+            <button class="btn btn--link mars js-btn-save" type="submit" name="action[save_sign_out]">Save and complete later</button>
+          </div>
+        </form>
+        <a class="page__previous page__previous--bottom js-previous-link" href="../index" id="bottom-previous">Previous</a>
+      </main>
+    </div>
+  </div>
+</div>
+
+<script>
+ $('.qa-btn-submit').click(function(e) {
+     document.army.action = "../End19";
+ });
+</script>
+
+<script>
+  $('#address-bar-text').text(localStorage.getItem('address'));
+</script>
+
+<script>
+   $(function(){ $('.name-text').text(localStorage.getItem('name')); });
+</script>
+
