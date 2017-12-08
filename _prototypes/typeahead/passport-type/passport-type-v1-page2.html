@@ -109,6 +109,22 @@ globalcss: false
 		passportTypes({});
 	});
 </script>
+<style>
+    /* Patch */
+    .page__content {
+        overflow-x: visible;
+    }
+
+    .pac-container {
+        width : 20.1rem;
+    }
+
+    @media only screen and (max-width: 500px) {
+        .pac-container {
+            width : auto;
+        }
+    }
+</style>
 
 <script>
   $('.qa-btn-submit').click(function(e) {

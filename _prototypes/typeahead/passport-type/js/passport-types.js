@@ -14,6 +14,10 @@ function passportTypes (config) {
 		showWhenEmpty: true
 	});
 
+
+	/**
+	 * Data manipulation
+	 */
 	function convertCountryToTypeahead(country) {
 		return {
 
@@ -57,6 +61,10 @@ function passportTypes (config) {
 			sortCountriesByPriority);
 	}
 
+
+	/**
+	 * DOM manipulation
+	 */
 	function checkSetupPlayback() {
 		var itemsExist = $("#playback-container").children().length;
 
@@ -77,45 +85,6 @@ function passportTypes (config) {
 				transformSortCountries(countriesList)
 			);
 		}*/
-	}
-
-	// Removing playback items
-	function removePlaybackItem_handler(countryKey, e) {
-		e.preventDefault();
-
-		/**
-		 * Remove from selected list
-		 */
-		var selectedIndex = countriesSelected.indexOf(countryKey);
-
-		countriesSelected.splice(selectedIndex, 1);
-
-		triggerItemsChanged();
-		render();
-	}
-
-	// Remove all selected values
-	function removeAllPlayback(e) {
-		e.preventDefault();
-
-		countriesSelected.length = 0;
-
-		triggerItemsChanged();
-		render();
-	}
-
-	function updateTypeaheadComponentData () {
-		typeaheadComponent.update(
-			transformSortCountries(
-				countriesList.filter(function (countryItem) {
-
-					/**
-					 * If item is already selected remove from list
-					 */
-					return !countriesSelected[countriesSelected.indexOf(countryItem.key)];
-				})
-			)
-		);
 	}
 
 	function createPlaybackItem (dataItem) {
@@ -159,6 +128,39 @@ function passportTypes (config) {
 		$playbackContainer.append($item);
 	}
 
+	function render () {
+		renderPlaybackItems();
+		checkSetupPlayback();
+		updateTypeaheadComponentData();
+	}
+
+
+	/**
+	 * Event handlers
+	 */
+	function removePlaybackItem_handler(countryKey, e) {
+		e.preventDefault();
+
+		/**
+		 * Remove from selected list
+		 */
+		var selectedIndex = countriesSelected.indexOf(countryKey);
+
+		countriesSelected.splice(selectedIndex, 1);
+
+		render();
+		triggerItemsChanged();
+	}
+
+	function removeAllPlayback(e) {
+		e.preventDefault();
+
+		countriesSelected.length = 0;
+
+		render();
+		triggerItemsChanged();
+	}
+
 	function renderPlaybackItems () {
 
 		var sortCountriesSelectedComparator = function (a, b) {
@@ -189,39 +191,10 @@ function passportTypes (config) {
 		});
 	}
 
-	function triggerItemsChanged() {
-		emitter.trigger('items-changed', { countryKeys: countriesSelected });
-	}
 
-	function render () {
-		renderPlaybackItems();
-		checkSetupPlayback();
-		updateTypeaheadComponentData();
-	}
-
-	function init() {
-		$.getJSON("../data/records.json")
-			.done(function (countryData) {
-
-				/**
-				 * Declare all variable used in a function up front.
-				 * If not these will get attached as global object properties.
-				 */
-				var country;
-
-				countriesListKeyDataMap = countryData.Countries[0];
-
-				for (country in countriesListKeyDataMap) {
-					if (countriesListKeyDataMap.hasOwnProperty(country)) {
-						countriesList.push(countriesListKeyDataMap[country]);
-					}
-				}
-
-				triggerItemsChanged();
-				render();
-			});
-	}
-
+	/**
+	 * Event subscriptions
+	 */
 	typeaheadComponent.emitter.on('itemSelected', function (e, item) {
 		console.log('Item selected: ', item);
 
@@ -239,8 +212,8 @@ function passportTypes (config) {
 		 */
 		$typeaheadInputEl.val('');
 
-		triggerItemsChanged();
 		render();
+		triggerItemsChanged();
 	});
 
 	$typeaheadInputEl.on('keydown', function (e) {
@@ -269,6 +242,59 @@ function passportTypes (config) {
 	});
 
 	$('.js-address-start-again-trigger').on('click', removeAllPlayback);
+
+
+	/**
+	 * Event published
+	 */
+	function triggerItemsChanged() {
+		emitter.trigger('items-changed', { countryKeys: countriesSelected });
+	}
+
+
+	/**
+	 * Components updates
+	 */
+	function updateTypeaheadComponentData () {
+		typeaheadComponent.update(
+			transformSortCountries(
+				countriesList.filter(function (countryItem) {
+
+					/**
+					 * If item is already selected remove from list
+					 */
+					return !countriesSelected[countriesSelected.indexOf(countryItem.key)];
+				})
+			)
+		);
+	}
+
+
+	/**
+	 * Initialisation
+	 */
+	function init() {
+		$.getJSON("../data/records.json")
+			.done(function (countryData) {
+
+				/**
+				 * Declare all variable used in a function up front.
+				 * If not these will get attached as global object properties.
+				 */
+				var country;
+
+				countriesListKeyDataMap = countryData.Countries[0];
+
+				for (country in countriesListKeyDataMap) {
+					if (countriesListKeyDataMap.hasOwnProperty(country)) {
+						countriesList.push(countriesListKeyDataMap[country]);
+					}
+				}
+
+				render();
+				triggerItemsChanged();
+			});
+	}
 
 	init();
 
