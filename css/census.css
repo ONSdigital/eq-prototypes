@@ -5550,7 +5550,7 @@ input:checked ~ .field__other {
 }
 
 .input--checkbox {
-  background: url("/s/img/icons/icons--check.svg") no-repeat center center;
+  background: url("../s/img/icons/icons--check.svg") no-repeat center center;
   background-size: 0;
   -webkit-transition: background-size 50ms ease-out;
   transition: background-size 50ms ease-out;
