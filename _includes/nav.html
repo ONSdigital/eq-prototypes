@@ -1,9 +1,0 @@
-<nav class="site-nav">
-
-  {% for prototype in site.prototypes %}
-    {% if prototype.title %}
-    <a class="page-link" href="{{ prototype.url | prepend: site.baseurl }}">{{ prototype.title }}</a>
-    {% endif %} 
-  {% endfor %}
-
-</nav>
