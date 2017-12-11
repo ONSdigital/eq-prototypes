@@ -81,6 +81,7 @@ globalcss: false
                                                                           <div id="passport-types-country-playback u-cf">
                                                                             <div class="playback u-mt-m">
                                                                               <h2 class="playback__title mars u-fw-b" id="playback-heading">All passports held by Bob Smith</h2>
+                                                                              <div id="playback-container-preselected" class="playback__block"></div>
                                                                               <div id="playback-container" class="playback__block"></div>
                                                                             </div>
                                                                           </div>
@@ -121,24 +122,28 @@ globalcss: false
 <script>
     $(document).ready(function () {
 
-    	var countriesSelected = [],
+    	var countriesPreSelected = [],
 			passportTypesObj;
 
 		// Check URL for parameters and dynamically change content
         // (for version2 of prototype to display eg. 'UK aleady selected')
 		if (window.location.href.indexOf("?passport-type-opener-answer=United+Kingdom&passport-type-opener-answer=Ireland") > -1) {
-			countriesSelected.push('GB', 'IE');
+			countriesPreSelected.push('GB', 'IE');
 		}
 		else if (window.location.href.indexOf("Ireland") > -1) {
-			countriesSelected.push('IE');
+			countriesPreSelected.push('IE');
 
 		} else if (window.location.href.indexOf("United+Kingdom") > -1) {
-			countriesSelected.push('GB');
+			countriesPreSelected.push('GB');
 		}
 
+		/*passportTypesObj = passportTypes({
+            countriesPreSelected: countriesSelected
+		});*/
+
 		passportTypesObj = passportTypes({
-            countriesSelected: countriesSelected
-		});
+            ignoreCountries: countriesPreSelected
+        });
 
 		function resetPreselectedCountriesNotifications () {
 			$("#uk-ireland-selected").hide();
@@ -147,28 +152,57 @@ globalcss: false
 			$('#nothing-selected').hide();
         }
 
-		passportTypesObj.emitter.on('items-changed', function (e, countriesSelected) {
-			var countryKeys = countriesSelected.countryKeys,
-                uk = countryKeys[countryKeys.indexOf('GB')],
-                ireland = countryKeys[countryKeys.indexOf('IE')];
+		/*passportTypesObj.emitter.on('items-changed', function (e, countriesSelected) {
+			showHideNotification(countriesSelected.countryKeys);
+        });*/
+
+		passportTypesObj.emitter.on('data-loaded', function (e, data) {
+			var $container = $('#playback-container-preselected');
+
+			/**
+             * Render a seperate list
+			 */
+			$.each(countriesPreSelected, function (key, val) {
+				var dataItem = data.rawData[val],
+                    name = dataItem.item[0].name,
+					primaryTextNoSpaces = name.split(' ').join('-'),
+					id = 'passport-types-playback-answer-' + primaryTextNoSpaces;
+
+				$container.append('<div class="playback_item">' +
+					'<div class="playback__answer-text u-dib"' +
+					'id="' + id + '"' +
+					'data-qa="' + id + '">' +
+					'<ul class="u-pl-no u-mb-xs list--bare">' +
+					'<li id="playback-value" class="playback-list-value">' + name + '</li>' +
+					'</ul>' +
+					'</div>' +
+					'</div>');
+            });
+        });
+
+		function showHideNotification (countryKeys) {
+			var uk = countryKeys[countryKeys.indexOf('GB')],
+				ireland = countryKeys[countryKeys.indexOf('IE')];
 
 			if (uk && ireland) {
 				resetPreselectedCountriesNotifications();
 				$("#uk-ireland-selected").show();
-            }
-            else if (ireland) {
+			}
+			else if (ireland) {
 				resetPreselectedCountriesNotifications();
 				$("#ireland-selected").show();
-            }
-            else if (uk) {
+			}
+			else if (uk) {
 				resetPreselectedCountriesNotifications();
 				$("#uk-selected").show();
-            }
-            else {
+			}
+			else {
 				resetPreselectedCountriesNotifications();
 				$('#nothing-selected').show();
-            }
-        });
+			}
+        }
+
+		showHideNotification(countriesPreSelected);
     });
 </script>
 

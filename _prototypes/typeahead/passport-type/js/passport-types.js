@@ -1,18 +1,21 @@
 function passportTypes (config) {
+	config = config || {};
+
 	var $typeaheadInputEl = $('.js-typeahead-input'),
 		$playbackContainer = $('#playback-container'),
 		countriesList = [],
 		countriesListKeyDataMap = {},
 		countryPriority = ['GB', 'IE'],
 
-		countriesSelected = config.countriesSelected || [],
-		emitter = $({});
+		ignoreCountries = config.ignoreCountries || [],
+		countriesSelected = config.countriesPreSelected || [],
+		emitter = $({}),
 
-	var typeaheadComponent = TypeaheadComponent.create({
-		scopeElement: $('.js-typeahead-component')[0],
-		inputElement: $typeaheadInputEl[0],
-		showWhenEmpty: true
-	});
+		typeaheadComponent = TypeaheadComponent.create({
+			scopeElement: $('.js-typeahead-component')[0],
+			inputElement: $typeaheadInputEl[0],
+			showWhenEmpty: true
+		});
 
 
 	/**
@@ -245,10 +248,14 @@ function passportTypes (config) {
 
 
 	/**
-	 * Event published
+	 * Events published
 	 */
 	function triggerItemsChanged() {
 		emitter.trigger('items-changed', { countryKeys: countriesSelected });
+	}
+
+	function triggerDataLoaded() {
+		emitter.trigger('data-loaded', { rawData: countriesListKeyDataMap });
 	}
 
 
@@ -286,13 +293,16 @@ function passportTypes (config) {
 				countriesListKeyDataMap = countryData.Countries[0];
 
 				for (country in countriesListKeyDataMap) {
-					if (countriesListKeyDataMap.hasOwnProperty(country)) {
+					if (countriesListKeyDataMap.hasOwnProperty(country) &&
+						!ignoreCountries[ignoreCountries.indexOf(country)]) {
+
 						countriesList.push(countriesListKeyDataMap[country]);
 					}
 				}
 
 				render();
 				triggerItemsChanged();
+				triggerDataLoaded();
 			});
 	}
 
@@ -301,7 +311,10 @@ function passportTypes (config) {
 	return {
 
 		/**
-		 * Events: ['items-changed']
+		 * Events: [
+		 * 	'data-loaded',
+		 * 	'items-changed'
+		 * ]
 		 */
 		emitter: emitter
 	};
