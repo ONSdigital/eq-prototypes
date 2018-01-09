@@ -1,0 +1,51 @@
+.download {
+  display: block;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  &::before,
+  &.after::after {
+    $size: 2rem;
+    content: " ";
+    display: inline-block;
+    vertical-align: middle;
+    background: transparent url("../s/img/icons/icons--download.svg") no-repeat center center;
+    background-size: 2.2rem;
+    min-width: $size;
+    height: $size;
+    margin-right: 0.5em;
+  }
+  &.after::before {
+    display: none;
+  }
+  &:hover::after {
+    background: transparent url("../s/img/icons/icons--download-white.svg") no-repeat center center;
+  }
+}
+
+.download__text {
+  display: block;
+  vertical-align: middle;
+  font-size: 1rem;
+  line-height: 1.2;
+
+  padding-right: 1rem;
+  &.pluto {
+    font-size: 0.77778rem;
+  }
+}
+.panel--warn {
+  margin-bottom: 1rem;
+}
+
+.btn.download {
+  text-align: left;
+  display: block;
+  position: relative;
+  padding-left: 1rem;
+  &.after::after {
+    position: absolute;
+    top: 0.5rem;
+    right: 0;
+  }
+}

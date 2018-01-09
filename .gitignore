@@ -1,0 +1,10 @@
+_site
+.sass-cache
+.jekyll-metadata
+node_modules
+*.log
+coverage/
+yarn.lock
+.DS_Store
+Gemfile.lock
+.ruby-version

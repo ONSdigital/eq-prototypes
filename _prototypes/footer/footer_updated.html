@@ -1,0 +1,774 @@
+---
+title: Survey Heading
+project: Survey Type
+globalcss: false
+
+---
+
+<header class="page__header">
+  {% include survey-header-3.html %}
+  {% include bar-2.html %}
+</header>
+<style>
+      /* Example page specific styling. */
+      .autocomplete-wrapper {
+        max-width: 20em;
+        margin-bottom: 4rem;
+      }
+      .submitted--hidden {
+        display: none;
+      }
+      .autocomplete__menu {
+        list-style: none;
+      }
+      .autocomplete__input {
+
+      }
+      .autocomplete__wrapper{position:relative}
+      .autocomplete__hint,
+      .autocomplete__input{-webkit-appearance:none;border:1px solid #999;border-radius:3px;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;margin-bottom:0;width:100%; width: 20rem; height: 40px;}
+      .autocomplete__input{background-color:transparent;position:relative; padding: 0.6rem 2rem 0.6rem 0.5rem;}
+      .autocomplete__hint{color:#bfc1c3;position:absolute}
+      .autocomplete__input--focused{outline:none;border: 1px solid #4263c2;box-shadow:0 0 0 1px #4263c2;}
+      /*.autocomplete__menu{background-color:#fff;border:2px solid #0b0c0c;border-top:0;color:#34384b;margin:0;max-height:342px;overflow-x:hidden;padding:0;width:100%;width:calc(100% - 4px)}*/
+      .autocomplete__menu{background-color:#fff;border:2px solid #4263c2;border-top:0;color:#34384b;margin:0;max-height:342px;overflow-x:hidden;padding:0;width: calc(100% + 2px); border-radius: 0 0 3px 3px; margin-left: -1px;}
+      .autocomplete__menu--visible{display:block}
+      .autocomplete__menu--hidden{display:none}
+      .autocomplete__menu--overlay{box-shadow:rgba(0,0,0,.256863) 0 2px 6px;left:0;position:absolute;top:100%;z-index:100}
+      .autocomplete__menu--inline{position:relative}
+      .autocomplete__option{border-bottom:solid #4263c2;border-width:1px 0;cursor:pointer;display:block;position:relative; margin: 0;}
+      .autocomplete__option>*{pointer-events:none}
+      .autocomplete__option:first-of-type{border-top-width:0}
+      .autocomplete__option:last-of-type{border-bottom-width:0}
+      .autocomplete__option--odd{background-color:#fafafa}
+      /*.autocomplete__option--focused,
+      .autocomplete__option:hover{background-color:#005ea5;border-color:#005ea5;color:#fff;outline:0}*/
+
+      .autocomplete__option--focused,
+      .autocomplete__option:hover{background-color:#4263c2;border-color:#4263c2;color:#fff;outline:0}
+
+      .autocomplete__option--no-results{background-color:#fafafa;color:#646b6f;cursor:not-allowed}
+      .autocomplete__hint,
+      .autocomplete__input,
+      .autocomplete__option{font-size:16px;line-height:1.25;padding:4px}
+      @media (min-width:641px){
+        .autocomplete__hint,
+        .autocomplete__input,
+        .autocomplete__option{font-size:19px;line-height:1.31579}
+      }
+
+      .footer {
+        padding: 36px 0;
+        padding: 2rem 0;
+        margin-top: 36px;
+        margin-top: 2rem;
+        background-color: #595959;
+        color: #e4e8eb;
+      }
+
+      .footer__link {
+        color: #e4e8eb;
+      }
+
+
+      .footer__link:focus {
+        color: white;
+      }
+
+      .footer__link:hover {
+        color: white;
+      }
+      .footer a{
+          color: #e4e8eb;
+          text-decoration: underline
+       }
+
+      .footer a:hover{
+          color:#e4e8eb
+      }
+
+      .footer a:focus{
+          color:#4263C2;
+          background-color:#fff
+      }
+
+      .footer-nav{
+          padding:0 0 40px 0;
+          padding:0 0 2rem 0
+      }
+      .footer-nav__heading{
+          margin-top:32px;
+          margin-top:2rem;
+          margin-bottom:0
+      }
+      .footer-nav__list{
+          list-style:none;
+          margin:0;
+          padding:0
+      }
+      .footer-nav__item{
+          margin:0;
+          padding:6px 0 2px 0;
+          list-style: none
+      }
+      .page__content+ footer{
+        display: none;
+      }
+
+      .ogl-icon {
+        margin-right: 10px;
+        margin-left: 12px;
+      }
+
+    </style>
+
+<div class="page__subheader">
+  <div class="container">
+    <a class="mars" href="../index">Previous</a>
+  </div>
+</div>
+
+<div class="page__container container">
+  <div class="grid grid--reverse">
+    <div class="grid__col col-4@m">
+    </div>
+    <div class="grid__col col-7@m pull-1@m">
+      <main role="main" id="main" class="page__main">
+        <form action="../thankyou" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
+          <div class="group" id="rsi">
+            <div class="block" id="total-retail-turnover">
+              <section class="section" id="total-retail-turnover-section">
+                <h2 class="section__title neptune">Business Location</h2>
+                <!-- <div class="section__description mars">
+                  <p>1 April 2016 to 31 March 2017</p>
+                  <p>- You should enter figures for the reporting period stated above
+                </br>- Include VAT and internet sales</p>
+                </div> -->
+                <div class="question" id="total-retail-turnover-question">
+                  <h1 class="question__title saturn">
+                    In what country is your business located?
+                  </h1>
+                  <div class="question__answers">
+                    <div class="question__answer">
+                      <div class="answer answer--currency" id="total-retail-turnover-answer">
+                        <div class="answer__fields js-fields">
+                          <div class="field field--select">
+                            <label for="q3r1" id="label-total-retail-turnover-answer" class="label venus ">
+                              <div class="label__inner">
+                                Type and select your country
+                              </div>
+                              <!-- <div class="question__description mars" id="description-reason-for-change-question">Question description</div> -->
+                            </label>
+                            <div class="field input-type">
+                              <select name="last-location" class="input input--select" id="last-country">
+<option value=""></option>
+            <option value="territory:AE-AZ">Abu Dhabi</option>
+            <option value="country:AF">Afghanistan</option>
+            <option value="territory:AE-AJ">Ajman</option>
+            <option value="territory:XQZ">Akrotiri</option>
+            <option value="country:AL">Albania</option>
+            <option value="country:DZ">Algeria</option>
+            <option value="territory:AS">American Samoa</option>
+            <option value="country:AD">Andorra</option>
+            <option value="country:AO">Angola</option>
+            <option value="territory:AI">Anguilla</option>
+            <option value="territory:AQ">Antarctica</option>
+            <option value="country:AG">Antigua and Barbuda</option>
+            <option value="country:AR">Argentina</option>
+            <option value="country:AM">Armenia</option>
+            <option value="territory:AW">Aruba</option>
+            <option value="territory:SH-AC">Ascension</option>
+            <option value="country:AU">Australia</option>
+            <option value="country:AT">Austria</option>
+            <option value="country:AZ">Azerbaijan</option>
+            <option value="country:BH">Bahrain</option>
+            <option value="territory:UM-81">Baker Island</option>
+            <option value="country:BD">Bangladesh</option>
+            <option value="country:BB">Barbados</option>
+            <option value="country:BY">Belarus</option>
+            <option value="country:BE">Belgium</option>
+            <option value="country:BZ">Belize</option>
+            <option value="country:BJ">Benin</option>
+            <option value="territory:BM">Bermuda</option>
+            <option value="country:BT">Bhutan</option>
+            <option value="country:BO">Bolivia</option>
+            <option value="territory:BQ-BO">Bonaire</option>
+            <option value="country:BA">Bosnia and Herzegovina</option>
+            <option value="country:BW">Botswana</option>
+            <option value="territory:BV">Bouvet Island</option>
+            <option value="country:BR">Brazil</option>
+            <option value="territory:BAT">British Antarctic Territory</option>
+            <option value="territory:IO">British Indian Ocean Territory</option>
+            <option value="territory:VG">British Virgin Islands</option>
+            <option value="country:BN">Brunei</option>
+            <option value="country:BG">Bulgaria</option>
+            <option value="country:BF">Burkina Faso</option>
+            <option value="country:MM">Burma</option>
+            <option value="country:BI">Burundi</option>
+            <option value="country:KH">Cambodia</option>
+            <option value="country:CM">Cameroon</option>
+            <option value="country:CA">Canada</option>
+            <option value="country:CV">Cape Verde</option>
+            <option value="territory:KY">Cayman Islands</option>
+            <option value="country:CF">Central African Republic</option>
+            <option value="territory:ES-CE">Ceuta</option>
+            <option value="country:TD">Chad</option>
+            <option value="country:CL">Chile</option>
+            <option value="country:CN">China</option>
+            <option value="territory:CX">Christmas Island</option>
+            <option value="territory:CC">Cocos (Keeling) Islands</option>
+            <option value="country:CO">Colombia</option>
+            <option value="country:KM">Comoros</option>
+            <option value="country:CG">Congo</option>
+            <option value="country:CD">Congo (Democratic Republic)</option>
+            <option value="territory:CK">Cook Islands</option>
+            <option value="country:CR">Costa Rica</option>
+            <option value="country:HR">Croatia</option>
+            <option value="country:CU">Cuba</option>
+            <option value="territory:CW">Curaçao</option>
+            <option value="country:CY">Cyprus</option>
+            <option value="country:CZ">Czechia</option>
+            <option value="country:CS">Czechoslovakia</option>
+            <option value="country:DK">Denmark</option>
+            <option value="territory:XXD">Dhekelia</option>
+            <option value="country:DJ">Djibouti</option>
+            <option value="country:DM">Dominica</option>
+            <option value="country:DO">Dominican Republic</option>
+            <option value="territory:AE-DU">Dubai</option>
+            <option value="country:DD">East Germany</option>
+            <option value="country:TL">East Timor</option>
+            <option value="country:EC">Ecuador</option>
+            <option value="country:EG">Egypt</option>
+            <option value="country:SV">El Salvador</option>
+            <option value="country:GQ">Equatorial Guinea</option>
+            <option value="country:ER">Eritrea</option>
+            <option value="country:EE">Estonia</option>
+            <option value="country:ET">Ethiopia</option>
+            <option value="territory:FK">Falkland Islands</option>
+            <option value="territory:FO">Faroe Islands</option>
+            <option value="country:FJ">Fiji</option>
+            <option value="country:FI">Finland</option>
+            <option value="country:FR">France</option>
+            <option value="territory:GF">French Guiana</option>
+            <option value="territory:PF">French Polynesia</option>
+            <option value="territory:TF">French Southern Territories</option>
+            <option value="territory:AE-FU">Fujairah</option>
+            <option value="country:GA">Gabon</option>
+            <option value="country:GE">Georgia</option>
+            <option value="country:DE">Germany</option>
+            <option value="country:GH">Ghana</option>
+            <option value="territory:GI">Gibraltar</option>
+            <option value="country:GR">Greece</option>
+            <option value="territory:GL">Greenland</option>
+            <option value="country:GD">Grenada</option>
+            <option value="territory:GP">Guadeloupe</option>
+            <option value="territory:GU">Guam</option>
+            <option value="country:GT">Guatemala</option>
+            <option value="territory:GG">Guernsey</option>
+            <option value="country:GN">Guinea</option>
+            <option value="country:GW">Guinea-Bissau</option>
+            <option value="country:GY">Guyana</option>
+            <option value="country:HT">Haiti</option>
+            <option value="territory:HM">Heard Island and McDonald Islands</option>
+            <option value="country:HN">Honduras</option>
+            <option value="territory:HK">Hong Kong</option>
+            <option value="territory:UM-84">Howland Island</option>
+            <option value="country:HU">Hungary</option>
+            <option value="country:IS">Iceland</option>
+            <option value="country:IN">India</option>
+            <option value="country:ID">Indonesia</option>
+            <option value="country:IR">Iran</option>
+            <option value="country:IQ">Iraq</option>
+            <option value="country:IE">Ireland</option>
+            <option value="territory:IM">Isle of Man</option>
+            <option value="country:IL">Israel</option>
+            <option value="country:IT">Italy</option>
+            <option value="country:CI">Ivory Coast</option>
+            <option value="country:JM">Jamaica</option>
+            <option value="country:JP">Japan</option>
+            <option value="territory:UM-86">Jarvis Island</option>
+            <option value="territory:JE">Jersey</option>
+            <option value="territory:UM-67">Johnston Atoll</option>
+            <option value="country:JO">Jordan</option>
+            <option value="country:KZ">Kazakhstan</option>
+            <option value="country:KE">Kenya</option>
+            <option value="territory:UM-89">Kingman Reef</option>
+            <option value="country:KI">Kiribati</option>
+            <option value="country:XK">Kosovo</option>
+            <option value="country:KW">Kuwait</option>
+            <option value="country:KG">Kyrgyzstan</option>
+            <option value="country:LA">Laos</option>
+            <option value="country:LV">Latvia</option>
+            <option value="country:LB">Lebanon</option>
+            <option value="country:LS">Lesotho</option>
+            <option value="country:LR">Liberia</option>
+            <option value="country:LY">Libya</option>
+            <option value="country:LI">Liechtenstein</option>
+            <option value="country:LT">Lithuania</option>
+            <option value="country:LU">Luxembourg</option>
+            <option value="territory:MO">Macao</option>
+            <option value="country:MK">Macedonia</option>
+            <option value="country:MG">Madagascar</option>
+            <option value="country:MW">Malawi</option>
+            <option value="country:MY">Malaysia</option>
+            <option value="country:MV">Maldives</option>
+            <option value="country:ML">Mali</option>
+            <option value="country:MT">Malta</option>
+            <option value="country:MH">Marshall Islands</option>
+            <option value="territory:MQ">Martinique</option>
+            <option value="country:MR">Mauritania</option>
+            <option value="country:MU">Mauritius</option>
+            <option value="territory:YT">Mayotte</option>
+            <option value="territory:ES-ML">Melilla</option>
+            <option value="country:MX">Mexico</option>
+            <option value="country:FM">Micronesia</option>
+            <option value="territory:UM-71">Midway Islands</option>
+            <option value="country:MD">Moldova</option>
+            <option value="country:MC">Monaco</option>
+            <option value="country:MN">Mongolia</option>
+            <option value="country:ME">Montenegro</option>
+            <option value="territory:MS">Montserrat</option>
+            <option value="country:MA">Morocco</option>
+            <option value="country:MZ">Mozambique</option>
+            <option value="country:NA">Namibia</option>
+            <option value="country:NR">Nauru</option>
+            <option value="territory:UM-76">Navassa Island</option>
+            <option value="country:NP">Nepal</option>
+            <option value="country:NL">Netherlands</option>
+            <option value="territory:NC">New Caledonia</option>
+            <option value="country:NZ">New Zealand</option>
+            <option value="country:NI">Nicaragua</option>
+            <option value="country:NE">Niger</option>
+            <option value="country:NG">Nigeria</option>
+            <option value="territory:NU">Niue</option>
+            <option value="territory:NF">Norfolk Island</option>
+            <option value="country:KP">North Korea</option>
+            <option value="territory:MP">Northern Mariana Islands</option>
+            <option value="country:NO">Norway</option>
+            <option value="territory:PS">Occupied Palestinian Territories</option>
+            <option value="country:OM">Oman</option>
+            <option value="country:PK">Pakistan</option>
+            <option value="country:PW">Palau</option>
+            <option value="territory:UM-95">Palmyra Atoll</option>
+            <option value="country:PA">Panama</option>
+            <option value="country:PG">Papua New Guinea</option>
+            <option value="country:PY">Paraguay</option>
+            <option value="country:PE">Peru</option>
+            <option value="country:PH">Philippines</option>
+            <option value="territory:PN">Pitcairn, Henderson, Ducie and Oeno Islands</option>
+            <option value="country:PL">Poland</option>
+            <option value="country:PT">Portugal</option>
+            <option value="territory:PR">Puerto Rico</option>
+            <option value="country:QA">Qatar</option>
+            <option value="territory:AE-RK">Ras al-Khaimah</option>
+            <option value="country:RO">Romania</option>
+            <option value="country:RU">Russia</option>
+            <option value="country:RW">Rwanda</option>
+            <option value="territory:RE">Réunion</option>
+            <option value="territory:BQ-SA">Saba</option>
+            <option value="territory:BL">Saint Barthélemy</option>
+            <option value="territory:SH-HL">Saint Helena</option>
+            <option value="territory:PM">Saint Pierre and Miquelon</option>
+            <option value="territory:MF">Saint-Martin (French part)</option>
+            <option value="country:WS">Samoa</option>
+            <option value="country:SM">San Marino</option>
+            <option value="country:ST">Sao Tome and Principe</option>
+            <option value="country:SA">Saudi Arabia</option>
+            <option value="country:SN">Senegal</option>
+            <option value="country:RS">Serbia</option>
+            <option value="country:SC">Seychelles</option>
+            <option value="territory:AE-SH">Sharjah</option>
+            <option value="country:SL">Sierra Leone</option>
+            <option value="country:SG">Singapore</option>
+            <option value="territory:BQ-SE">Sint Eustatius</option>
+            <option value="territory:SX">Sint Maarten (Dutch part)</option>
+            <option value="country:SK">Slovakia</option>
+            <option value="country:SI">Slovenia</option>
+            <option value="country:SB">Solomon Islands</option>
+            <option value="country:SO">Somalia</option>
+            <option value="country:ZA">South Africa</option>
+            <option value="territory:GS">South Georgia and South Sandwich Islands</option>
+            <option value="country:KR">South Korea</option>
+            <option value="country:SS">South Sudan</option>
+            <option value="country:ES">Spain</option>
+            <option value="country:LK">Sri Lanka</option>
+            <option value="country:KN">St Kitts and Nevis</option>
+            <option value="country:LC">St Lucia</option>
+            <option value="country:VC">St Vincent</option>
+            <option value="country:SD">Sudan</option>
+            <option value="country:SR">Suriname</option>
+            <option value="territory:SJ">Svalbard and Jan Mayen</option>
+            <option value="country:SZ">Swaziland</option>
+            <option value="country:SE">Sweden</option>
+            <option value="country:CH">Switzerland</option>
+            <option value="country:SY">Syria</option>
+            <option value="territory:TW">Taiwan</option>
+            <option value="country:TJ">Tajikistan</option>
+            <option value="country:TZ">Tanzania</option>
+            <option value="country:TH">Thailand</option>
+            <option value="country:BS">The Bahamas</option>
+            <option value="country:GM">The Gambia</option>
+            <option value="country:TG">Togo</option>
+            <option value="territory:TK">Tokelau</option>
+            <option value="country:TO">Tonga</option>
+            <option value="country:TT">Trinidad and Tobago</option>
+            <option value="territory:SH-TA">Tristan da Cunha</option>
+            <option value="country:TN">Tunisia</option>
+            <option value="country:TR">Turkey</option>
+            <option value="country:TM">Turkmenistan</option>
+            <option value="territory:TC">Turks and Caicos Islands</option>
+            <option value="country:TV">Tuvalu</option>
+            <option value="country:SU">USSR</option>
+            <option value="country:UG">Uganda</option>
+            <option value="country:UA">Ukraine</option>
+            <option value="territory:AE-UQ">Umm al-Quwain</option>
+            <option value="country:AE">United Arab Emirates</option>
+            <option value="country:GB">United Kingdom</option>
+            <option value="country:GB">United Kingdom (Wales)</option>
+            <option value="country:GB">United Kingdom (Scotland)</option>
+            <option value="country:GB">United Kingdom (England)</option>
+            <option value="country:GB">United Kingdom (Northern Ireland)</option>
+            <option value="country:GB">United Kingdom (Great Britain)</option>
+            <option value="country:GB">United Kingdom (UK)</option>
+            <option value="country:US">United States</option>
+            <option value="territory:VI">United States Virgin Islands</option>
+            <option value="country:UY">Uruguay</option>
+            <option value="country:UZ">Uzbekistan</option>
+            <option value="country:VU">Vanuatu</option>
+            <option value="country:VA">Vatican City</option>
+            <option value="country:VE">Venezuela</option>
+            <option value="country:VN">Vietnam</option>
+            <option value="territory:UM-79">Wake Island</option>
+            <option value="territory:WF">Wallis and Futuna</option>
+            <option value="territory:EH">Western Sahara</option>
+            <option value="country:YE">Yemen</option>
+            <option value="country:YU">Yugoslavia</option>
+            <option value="country:ZM">Zambia</option>
+            <option value="country:ZW">Zimbabwe</option>
+            <option value="territory:AX">Åland Islands</option>
+          </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- <div class="guidance js-details" data-show-label="Show further guidance" data-hide-label="Hide further guidance">
+                        <!-- <div class="panel panel--simple panel--info">-->  <!--<a class="guidance__link js-details-trigger js-details-label mars" href="#guidance-permanent-or-family-home-answer" aria-expanded="false" data-guidance-trigger="true" aria-controls="guidance-permanent-or-family-home-answer-body" id="guidance-permanent-or-family-home-answer-trigger" data-ga-category="Help" data-ga-label="permanent-or-family-home-answer" data-ga="click" data-ga-action="Guidance click">Show further guidance</a>
+                          <div class="guidance__main js-details-body" id="guidance-permanent-or-family-home-answer-body" aria-hidden="true">
+                            <div class="guidance__content mars">
+                            <h3 class="venus">Include</h3>
+                            <ul class="mars">
+                              <li>all fresh food</li>
+                              <li>other food for human consumption (except chocolate and sugar confectionery)</li>
+                              <li>soft drinks</li>
+                            </ul>
+                            <h3 class="venus">Exclude</h3>
+                            <ul class="mars">
+                              <li>sales from catering facilities used by customers</li>
+                              <li>National lottery</li>
+                            </ul>
+                          </div>
+                        </div> -->
+                      <!-- </div> -->
+                    </div>
+                    <!-- <div class="question__answer">
+                      <div class="answer answer--currency" id="total-retail-turnover-answer">
+                        <div class="answer__fields js-fields">
+                          <div class="field">
+                            <label for="q3r2" id="label-total-retail-turnover-answer" class="label venus ">
+                              <div class="label__inner">
+                                Wages
+                              </div>
+                              <div class="question__description mars" id="description-reason-for-change-question">Round to the nearest pound. Do not include pence.</div>
+                            </label>
+                            <div class="input-type input-type--currency">
+                              <span class="input-type__type" id="total-retail-turnover-answer-type">£</span>
+                              <input id="q3r2" value="" data-qa="input-text" name="q3r2" class="input input--text input-type__input">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="question__answer">
+                      <div class="answer answer--currency" id="total-retail-turnover-answer">
+                        <div class="answer__fields js-fields">
+                          <div class="field">
+                            <label for="q3r3" id="label-total-retail-turnover-answer" class="label venus ">
+                              <div class="label__inner">
+                                Motor vehicles
+                              </div>
+                              <div class="question__description mars" id="description-reason-for-change-question">Round to the nearest pound. Do not include pence.</div>
+                            </label>
+                            <div class="input-type input-type--currency">
+                              <span class="input-type__type" id="total-retail-turnover-answer-type">£</span>
+                              <input id="q3r3" value="" data-qa="input-text" name="q3r3" class="input input--text input-type__input">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="question__answer">
+                      <div class="answer answer--currency" id="total-retail-turnover-answer">
+                        <div class="answer__fields js-fields">
+                          <div class="field">
+                            <label for="q3r4" id="label-total-retail-turnover-answer" class="label venus ">
+                              <div class="label__inner">
+                                Rent / property charges
+                              </div>
+                              <div class="question__description mars" id="description-reason-for-change-question">Round to the nearest pound. Do not include pence.</div>
+                            </label>
+                            <div class="input-type input-type--currency">
+                              <span class="input-type__type" id="total-retail-turnover-answer-type">£</span>
+                              <input id="q3r4" value="" data-qa="input-text" name="q3r4" class="input input--text input-type__input">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="question__answer">
+                      <div class="answer answer--currency" id="total-retail-turnover-answer">
+                        <div class="answer__fields js-fields">
+                          <div class="field">
+                            <label for="q3r5" id="label-total-retail-turnover-answer" class="label venus ">
+                              <div class="label__inner">
+                                Purchases
+                              </div>
+                              <div class="question__description mars" id="description-reason-for-change-question">Round to the nearest pound. Do not include pence.</div>
+                            </label>
+                            <div class="input-type input-type--currency">
+                              <span class="input-type__type" id="total-retail-turnover-answer-type">£</span>
+                              <input id="q3r5" value="" data-qa="input-text" name="q3r5" class="input input--text input-type__input">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="question__answer">
+                      <div class="answer answer--currency" id="total-retail-turnover-answer">
+                        <div class="answer__fields js-fields">
+                          <div class="field">
+                            <label for="q3r6" id="label-total-retail-turnover-answer" class="label venus ">
+                              <div class="label__inner">
+                                Other items
+                              </div>
+                              <div class="question__description mars" id="description-reason-for-change-question">Round to the nearest pound. Do not include pence.</div>
+                            </label>
+                            <div class="input-type input-type--currency">
+                              <span class="input-type__type" id="total-retail-turnover-answer-type">£</span>
+                              <input id="q3r6" value="" data-qa="input-text" name="q3r6" class="input input--text input-type__input">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div> -->
+                    <!-- <div class="question__answer question__total">
+                      <div class="answer answer--currency" id="total-retail-turnover-answer">
+                        <div class="answer__fields js-fields">
+                          <div class="field">
+                            <label for="q3r6" id="label-total-retail-turnover-answer" class="label venus ">
+                              <div class="label__inner">
+                                Total retail turnover
+                                <p class="mars field__description">Round to the nearest pound (£).</p>
+                              </div>
+                            </label>
+                            <div class="input-type input-type--currency">
+                              <span class="input-type__type" id="total-retail-turnover-answer-type">£</span>
+                              <input id="q3r6" value="" data-qa="input-text" name="q3r6" class="input input--text input-type__input">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div> -->
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+          <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Save and continue</button>
+          <div class="u-mb-m">
+            <button class="btn btn--link mars js-btn-save" type="submit" name="action[save_sign_out]">Save and complete later</button>
+          </div>
+        </form>
+        <a class="page__previous page__previous--bottom js-previous-link" href="../index" id="bottom-previous">Previous</a>
+      </main>
+    </div>
+  </div>
+</div>
+<footer class="footer page__footer">
+      <div class="footer-nav container" role="contentinfo">
+
+          <div class="grid container">
+            <div class="">
+
+                  <div class="grid__col col-4@m">
+                    <div class="footer-nav__heading">
+                      <h3 class="venus">Legal information</h3>
+                    </div>
+                    <ul class="footer-nav list">
+                      <li class="footer-nav__item">
+                        <a href="" class="footer__link">Terms and conditions</a>
+                      </li>
+                      <li class="footer-nav__item">
+                        <a href="" class="footer__link">Cookies and privacy</a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="grid__col col-4@m">
+                    <div class="footer-nav__heading">
+                      <h3 class="venus">About ONS</h3>
+                    </div>
+                    <ul class="footer-nav list">
+                      <li class="footer-nav__item">
+                        <a href="https://www.ons.gov.uk/aboutus/whatwedo" class="footer__link">What we do</a>
+                      </li>
+                      <li class="footer-nav__item">
+                        <a href="" class="footer__link">Contact us</a>
+                      </li>
+                      <li class="footer-nav__item">
+                        <a href="https://www.ons.gov.uk/help/accessibility" class="footer__link">Accessibility</a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="grid__col col-4@m">
+                    <div class="footer-nav__heading">
+                      <h3 class="venus">Statistics</h3>
+                    </div>
+                    <ul class="footer-nav list">
+                      <li class="footer-nav__item">
+                        <a href="https://www.statisticsauthority.gov.uk/about-the-authority/" class="footer__link">UK Statistics Authority</a>
+                      </li>
+                      <li class="footer-nav__item">
+                        <a href="https://www.ons.gov.uk/releasecalendar" class="footer__link">Release calendar</a>
+                      </li>
+                      <li class="footer-nav__item">
+                          <a href="https://www.ons.gov.uk/news">News</a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="dl__data mars"><img class="ogl-icon" src="{{site.baseurl}}/s/img/icons/ogl.svg"/>All content is available under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open Government Licence v3.0</a>, except where otherwise stated</dd>
+
+            </div>
+          </div>
+
+        </div>
+    </footer>
+<script>
+!function(e,t){"object"==typeof exports&&"object"==typeof module?module.exports=t():"function"==typeof define&&define.amd?define([],t):"object"==typeof exports?exports.accessibleAutocomplete=t():e.accessibleAutocomplete=t()}(this,function(){return function(e){function t(o){if(n[o])return n[o].exports;var r=n[o]={i:o,l:!1,exports:{}};return e[o].call(r.exports,r,r.exports,t),r.l=!0,r.exports}var n={};return t.m=e,t.c=n,t.i=function(e){return e},t.d=function(e,n,o){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:o})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="/",t(t.s=4)}([function(e,t,n){!function(){"use strict";function t(){}function n(e,n){var o,r,l,i,u=T;for(i=arguments.length;i-- >2;)S.push(arguments[i]);for(n&&null!=n.children&&(S.length||S.push(n.children),delete n.children);S.length;)if((r=S.pop())&&void 0!==r.pop)for(i=r.length;i--;)S.push(r[i]);else!0!==r&&!1!==r||(r=null),(l="function"!=typeof e)&&(null==r?r="":"number"==typeof r?r=String(r):"string"!=typeof r&&(l=!1)),l&&o?u[u.length-1]+=r:u===T?u=[r]:u.push(r),o=l;var a=new t;return a.nodeName=e,a.children=u,a.attributes=null==n?void 0:n,a.key=null==n?void 0:n.key,void 0!==L.vnode&&L.vnode(a),a}function o(e,t){for(var n in t)e[n]=t[n];return e}function r(e,t){return n(e.nodeName,o(o({},e.attributes),t),arguments.length>2?[].slice.call(arguments,2):e.children)}function l(e){!e.__d&&(e.__d=!0)&&1==q.push(e)&&(L.debounceRendering||setTimeout)(i)}function i(){var e,t=q;for(q=[];e=t.pop();)e.__d&&N(e)}function u(e,t,n){return"string"==typeof t||"number"==typeof t?void 0!==e.splitText:"string"==typeof t.nodeName?!e._componentConstructor&&a(e,t.nodeName):n||e._componentConstructor===t.nodeName}function a(e,t){return e.__n===t||e.nodeName.toLowerCase()===t.toLowerCase()}function s(e){var t=o({},e.attributes);t.children=e.children;var n=e.nodeName.defaultProps;if(void 0!==n)for(var r in n)void 0===t[r]&&(t[r]=n[r]);return t}function p(e,t){var n=t?document.createElementNS("http://www.w3.org/2000/svg",e):document.createElement(e);return n.__n=e,n}function c(e){e.parentNode&&e.parentNode.removeChild(e)}function d(e,t,n,o,r){if("className"===t&&(t="class"),"key"===t);else if("ref"===t)n&&n(null),o&&o(e);else if("class"!==t||r)if("style"===t){if(o&&"string"!=typeof o&&"string"!=typeof n||(e.style.cssText=o||""),o&&"object"==typeof o){if("string"!=typeof n)for(var l in n)l in o||(e.style[l]="");for(var l in o)e.style[l]="number"==typeof o[l]&&!1===A.test(l)?o[l]+"px":o[l]}}else if("dangerouslySetInnerHTML"===t)o&&(e.innerHTML=o.__html||"");else if("o"==t[0]&&"n"==t[1]){var i=t!==(t=t.replace(/Capture$/,""));t=t.toLowerCase().substring(2),o?n||e.addEventListener(t,h,i):e.removeEventListener(t,h,i),(e.__l||(e.__l={}))[t]=o}else if("list"!==t&&"type"!==t&&!r&&t in e)f(e,t,null==o?"":o),null!=o&&!1!==o||e.removeAttribute(t);else{var u=r&&t!==(t=t.replace(/^xlink\:?/,""));null==o||!1===o?u?e.removeAttributeNS("http://www.w3.org/1999/xlink",t.toLowerCase()):e.removeAttribute(t):"function"!=typeof o&&(u?e.setAttributeNS("http://www.w3.org/1999/xlink",t.toLowerCase(),o):e.setAttribute(t,o))}else e.className=o||""}function f(e,t,n){try{e[t]=n}catch(e){}}function h(e){return this.__l[e.type](L.event&&L.event(e)||e)}function m(){for(var e;e=B.pop();)L.afterMount&&L.afterMount(e),e.componentDidMount&&e.componentDidMount()}function _(e,t,n,o,r,l){P++||(U=null!=r&&void 0!==r.ownerSVGElement,j=null!=e&&!("__preactattr_"in e));var i=v(e,t,n,o,l);return r&&i.parentNode!==r&&r.appendChild(i),--P||(j=!1,l||m()),i}function v(e,t,n,o,r){var l=e,i=U;if(null==t&&(t=""),"string"==typeof t)return e&&void 0!==e.splitText&&e.parentNode&&(!e._component||r)?e.nodeValue!=t&&(e.nodeValue=t):(l=document.createTextNode(t),e&&(e.parentNode&&e.parentNode.replaceChild(l,e),b(e,!0))),l.__preactattr_=!0,l;if("function"==typeof t.nodeName)return I(e,t,n,o);if(U="svg"===t.nodeName||"foreignObject"!==t.nodeName&&U,(!e||!a(e,String(t.nodeName)))&&(l=p(String(t.nodeName),U),e)){for(;e.firstChild;)l.appendChild(e.firstChild);e.parentNode&&e.parentNode.replaceChild(l,e),b(e,!0)}var u=l.firstChild,s=l.__preactattr_||(l.__preactattr_={}),c=t.children;return!j&&c&&1===c.length&&"string"==typeof c[0]&&null!=u&&void 0!==u.splitText&&null==u.nextSibling?u.nodeValue!=c[0]&&(u.nodeValue=c[0]):(c&&c.length||null!=u)&&y(l,c,n,o,j||null!=s.dangerouslySetInnerHTML),O(l,t.attributes,s),U=i,l}function y(e,t,n,o,r){var l,i,a,s,p=e.childNodes,d=[],f={},h=0,m=0,_=p.length,y=0,g=t?t.length:0;if(0!==_)for(var O=0;O<_;O++){var w=p[O],C=w.__preactattr_,E=g&&C?w._component?w._component.__k:C.key:null;null!=E?(h++,f[E]=w):(C||(void 0!==w.splitText?!r||w.nodeValue.trim():r))&&(d[y++]=w)}if(0!==g)for(var O=0;O<g;O++){a=t[O],s=null;var E=a.key;if(null!=E)h&&void 0!==f[E]&&(s=f[E],f[E]=void 0,h--);else if(!s&&m<y)for(l=m;l<y;l++)if(void 0!==d[l]&&u(i=d[l],a,r)){s=i,d[l]=void 0,l===y-1&&y--,l===m&&m++;break}(s=v(s,a,n,o))&&s!==e&&(O>=_?e.appendChild(s):s!==p[O]&&(s===p[O+1]?c(p[O]):e.insertBefore(s,p[O]||null)))}if(h)for(var O in f)void 0!==f[O]&&b(f[O],!1);for(;m<=y;)void 0!==(s=d[y--])&&b(s,!1)}function b(e,t){var n=e._component;n?M(n):(null!=e.__preactattr_&&e.__preactattr_.ref&&e.__preactattr_.ref(null),!1!==t&&null!=e.__preactattr_||c(e),g(e))}function g(e){for(e=e.lastChild;e;){var t=e.previousSibling;b(e,!0),e=t}}function O(e,t,n){var o;for(o in n)t&&null!=t[o]||null==n[o]||d(e,o,n[o],n[o]=void 0,U);for(o in t)"children"===o||"innerHTML"===o||o in n&&t[o]===("value"===o||"checked"===o?e[o]:n[o])||d(e,o,n[o],n[o]=t[o],U)}function w(e){var t=e.constructor.name;(V[t]||(V[t]=[])).push(e)}function C(e,t,n){var o,r=V[e.name];if(e.prototype&&e.prototype.render?(o=new e(t,n),k.call(o,t,n)):(o=new k(t,n),o.constructor=e,o.render=E),r)for(var l=r.length;l--;)if(r[l].constructor===e){o.__b=r[l].__b,r.splice(l,1);break}return o}function E(e,t,n){return this.constructor(e,n)}function x(e,t,n,o,r){e.__x||(e.__x=!0,(e.__r=t.ref)&&delete t.ref,(e.__k=t.key)&&delete t.key,!e.base||r?e.componentWillMount&&e.componentWillMount():e.componentWillReceiveProps&&e.componentWillReceiveProps(t,o),o&&o!==e.context&&(e.__c||(e.__c=e.context),e.context=o),e.__p||(e.__p=e.props),e.props=t,e.__x=!1,0!==n&&(1!==n&&!1===L.syncComponentUpdates&&e.base?l(e):N(e,1,r)),e.__r&&e.__r(e))}function N(e,t,n,r){if(!e.__x){var l,i,u,a=e.props,p=e.state,c=e.context,d=e.__p||a,f=e.__s||p,h=e.__c||c,v=e.base,y=e.__b,g=v||y,O=e._component,w=!1;if(v&&(e.props=d,e.state=f,e.context=h,2!==t&&e.shouldComponentUpdate&&!1===e.shouldComponentUpdate(a,p,c)?w=!0:e.componentWillUpdate&&e.componentWillUpdate(a,p,c),e.props=a,e.state=p,e.context=c),e.__p=e.__s=e.__c=e.__b=null,e.__d=!1,!w){l=e.render(a,p,c),e.getChildContext&&(c=o(o({},c),e.getChildContext()));var E,I,k=l&&l.nodeName;if("function"==typeof k){var D=s(l);i=O,i&&i.constructor===k&&D.key==i.__k?x(i,D,1,c,!1):(E=i,e._component=i=C(k,D,c),i.__b=i.__b||y,i.__u=e,x(i,D,0,c,!1),N(i,1,n,!0)),I=i.base}else u=g,E=O,E&&(u=e._component=null),(g||1===t)&&(u&&(u._component=null),I=_(u,l,c,n||!v,g&&g.parentNode,!0));if(g&&I!==g&&i!==O){var S=g.parentNode;S&&I!==S&&(S.replaceChild(I,g),E||(g._component=null,b(g,!1)))}if(E&&M(E),e.base=I,I&&!r){for(var T=e,A=e;A=A.__u;)(T=A).base=I;I._component=T,I._componentConstructor=T.constructor}}if(!v||n?B.unshift(e):w||(m(),e.componentDidUpdate&&e.componentDidUpdate(d,f,h),L.afterUpdate&&L.afterUpdate(e)),null!=e.__h)for(;e.__h.length;)e.__h.pop().call(e);P||r||m()}}function I(e,t,n,o){for(var r=e&&e._component,l=r,i=e,u=r&&e._componentConstructor===t.nodeName,a=u,p=s(t);r&&!a&&(r=r.__u);)a=r.constructor===t.nodeName;return r&&a&&(!o||r._component)?(x(r,p,3,n,o),e=r.base):(l&&!u&&(M(l),e=i=null),r=C(t.nodeName,p,n),e&&!r.__b&&(r.__b=e,i=null),x(r,p,1,n,o),e=r.base,i&&e!==i&&(i._component=null,b(i,!1))),e}function M(e){L.beforeUnmount&&L.beforeUnmount(e);var t=e.base;e.__x=!0,e.componentWillUnmount&&e.componentWillUnmount(),e.base=null;var n=e._component;n?M(n):t&&(t.__preactattr_&&t.__preactattr_.ref&&t.__preactattr_.ref(null),e.__b=t,c(t),w(e),g(t)),e.__r&&e.__r(null)}function k(e,t){this.__d=!0,this.context=t,this.props=e,this.state=this.state||{}}function D(e,t,n){return _(n,e,{},!1,t,!1)}var L={},S=[],T=[],A=/acit|ex(?:s|g|n|p|$)|rph|ows|mnc|ntw|ine[ch]|zoo|^ord/i,q=[],B=[],P=0,U=!1,j=!1,V={};o(k.prototype,{setState:function(e,t){var n=this.state;this.__s||(this.__s=o({},n)),o(n,"function"==typeof e?e(n,this.props):e),t&&(this.__h=this.__h||[]).push(t),l(this)},forceUpdate:function(e){e&&(this.__h=this.__h||[]).push(e),N(this,2)},render:function(){}});var R={h:n,createElement:n,cloneElement:r,Component:k,render:D,rerender:i,options:L};e.exports=R}()},function(e,t,n){"use strict";function o(e){if(!e.element)throw new Error("element is not defined");if(!e.id)throw new Error("id is not defined");if(!e.source)throw new Error("source is not defined");Array.isArray(e.source)&&(e.source=a(e.source)),(0,l.render)((0,l.createElement)(u.default,e),e.element)}var r=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var o in n)Object.prototype.hasOwnProperty.call(n,o)&&(e[o]=n[o])}return e},l=n(0),i=n(2),u=function(e){return e&&e.__esModule?e:{default:e}}(i),a=function(e){return function(t,n){n(t?e.filter(function(e){return-1!==e.toLowerCase().indexOf(t.toLowerCase())}):[])}};o.enhanceSelectElement=function(e){if(!e.selectElement)throw new Error("selectElement is not defined");if(!e.source){var t=[].filter.call(e.selectElement.options,function(t){return t.value||e.preserveNullOptions});e.source=t.map(function(e){return e.innerHTML})}e.onConfirm=e.onConfirm||function(t){var n=[].filter.call(e.selectElement.options,function(e){return e.innerHTML===t})[0];n&&(n.selected=!0)},(e.selectElement.value||void 0===e.defaultValue)&&(e.defaultValue=e.selectElement.options[e.selectElement.options.selectedIndex].innerHTML),void 0===e.name&&(e.name=""),void 0===e.id&&(void 0===e.selectElement.id?e.id="":e.id=e.selectElement.id),void 0===e.autoselect&&(e.autoselect=!0);var n=document.createElement("span");e.selectElement.parentNode.insertBefore(n,e.selectElement),o(r({},e,{element:n})),e.selectElement.style.display="none",e.selectElement.id=e.selectElement.id+"-select"},e.exports=o},function(e,t,n){"use strict";function o(e,t){}function r(e,t){if(e)return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function l(e,t){"function"!=typeof t&&null!==t||(e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t))}function i(){return!(!navigator.userAgent.match(/(iPod|iPhone|iPad)/g)||!navigator.userAgent.match(/AppleWebKit/g))}function u(e){return e>47&&e<58||32===e||8===e||e>64&&e<91||e>95&&e<112||e>185&&e<193||e>218&&e<223}function a(e){return m?{onInput:e}:_?{onChange:e}:void 0}t.__esModule=!0,t.default=void 0;var s,p,c=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var o in n)Object.prototype.hasOwnProperty.call(n,o)&&(e[o]=n[o])}return e},d=n(0),f=n(3),h=function(e){return e&&e.__esModule?e:{default:e}}(f),m=!0,_=!1,v={13:"enter",27:"escape",38:"up",40:"down"},y=function(){var e=document.createElement("x");return e.style.cssText="pointer-events:auto","auto"===e.style.pointerEvents}(),b=(p=s=function(e){function t(n){o(this,t);var l=r(this,e.call(this,n));return l.elementRefs={},l.state={focused:null,hovered:null,menuOpen:!1,options:n.defaultValue?[n.defaultValue]:[],query:n.defaultValue,selected:null},l.handleComponentBlur=l.handleComponentBlur.bind(l),l.handleKeyDown=l.handleKeyDown.bind(l),l.handleUpArrow=l.handleUpArrow.bind(l),l.handleDownArrow=l.handleDownArrow.bind(l),l.handleEnter=l.handleEnter.bind(l),l.handlePrintableKey=l.handlePrintableKey.bind(l),l.handleOptionBlur=l.handleOptionBlur.bind(l),l.handleOptionClick=l.handleOptionClick.bind(l),l.handleOptionFocus=l.handleOptionFocus.bind(l),l.handleOptionMouseDown=l.handleOptionMouseDown.bind(l),l.handleOptionMouseEnter=l.handleOptionMouseEnter.bind(l),l.handleOptionMouseOut=l.handleOptionMouseOut.bind(l),l.handleOptionTouchEnd=l.handleOptionTouchEnd.bind(l),l.handleInputBlur=l.handleInputBlur.bind(l),l.handleInputChange=l.handleInputChange.bind(l),l.handleInputFocus=l.handleInputFocus.bind(l),l.pollInputElement=l.pollInputElement.bind(l),l.getDirectInputChanges=l.getDirectInputChanges.bind(l),l}return l(t,e),t.prototype.componentDidMount=function(){this.pollInputElement()},t.prototype.componentWillUnmount=function(){clearTimeout(this.$pollInput)},t.prototype.pollInputElement=function(){var e=this;this.getDirectInputChanges(),this.$pollInput=setTimeout(function(){e.pollInputElement()},100)},t.prototype.getDirectInputChanges=function(){var e=this.elementRefs[-1];e.value!==this.state.query&&this.handleInputChange({target:{value:e.value}})},t.prototype.componentDidUpdate=function(e,t){var n=this.state.focused,o=null===n,r=t.focused!==n;r&&!o&&this.elementRefs[n].focus();var l=-1===n,i=r&&null===t.focused;if(l&&i){var u=this.elementRefs[n];u.setSelectionRange(0,u.value.length)}},t.prototype.hasAutoselect=function(){return!i()&&this.props.autoselect},t.prototype.templateInputValue=function(e){var t=this.props.templates&&this.props.templates.inputValue;return t?t(e):e},t.prototype.templateSuggestion=function(e){var t=this.props.templates&&this.props.templates.suggestion;return t?t(e):e},t.prototype.handleComponentBlur=function(e){var t=this.state,n=t.options,o=t.query,r=t.selected,l=void 0;this.props.confirmOnBlur?(l=e.query||o,this.props.onConfirm(n[r])):l=o,this.setState({focused:null,menuOpen:e.menuOpen||!1,query:l,selected:null})},t.prototype.handleOptionBlur=function(e,t){var n=this.state,o=n.focused,r=n.menuOpen,l=n.options,u=n.selected,a=null===e.relatedTarget,s=e.relatedTarget===this.elementRefs[-1],p=o!==t&&-1!==o;if(a||!p&&!s){var c=r&&i();this.handleComponentBlur({menuOpen:c,query:this.templateInputValue(l[u])})}},t.prototype.handleInputBlur=function(e){var t=this.state,n=t.focused,o=t.menuOpen,r=t.options,l=t.query,u=t.selected;if(-1===n){var a=o&&i(),s=i()?l:this.templateInputValue(r[u]);this.handleComponentBlur({menuOpen:a,query:s})}},t.prototype.handleInputChange=function(e){var t=this,n=this.props,o=n.minLength,r=n.source,l=this.hasAutoselect(),i=e.target.value,u=0===i.length,a=this.state.query.length!==i.length,s=i.length>=o;this.setState({query:i}),!u&&a&&s?r(i,function(e){var n=e.length>0;t.setState({menuOpen:n,options:e,selected:l&&n?0:-1})}):!u&&s||this.setState({menuOpen:!1,options:[]})},t.prototype.handleInputFocus=function(e){this.setState({focused:-1})},t.prototype.handleOptionFocus=function(e){this.setState({focused:e,hovered:null,selected:e})},t.prototype.handleOptionMouseEnter=function(e,t){this.setState({hovered:t})},t.prototype.handleOptionMouseOut=function(e,t){this.setState({hovered:null})},t.prototype.handleOptionTouchEnd=function(e,t){this.handleOptionClick(e,t)},t.prototype.handleOptionClick=function(e,t){var n=this.state.options[t],o=this.templateInputValue(n);this.props.onConfirm(n),this.setState({focused:-1,menuOpen:!1,query:o,selected:-1})},t.prototype.handleOptionMouseDown=function(e){e.preventDefault()},t.prototype.handleUpArrow=function(e){e.preventDefault();var t=this.state,n=t.menuOpen,o=t.selected;-1!==o&&n&&this.handleOptionFocus(o-1)},t.prototype.handleDownArrow=function(e){e.preventDefault();var t=this.state,n=t.menuOpen,o=t.options,r=t.selected;r!==o.length-1&&n&&this.handleOptionFocus(r+1)},t.prototype.handleEnter=function(e){this.state.menuOpen&&(e.preventDefault(),this.state.selected>=0&&this.handleOptionClick(e,this.state.selected))},t.prototype.handlePrintableKey=function(e){var t=this.elementRefs[-1];e.target===t||this.handleInputFocus()},t.prototype.handleKeyDown=function(e){switch(v[e.keyCode]){case"up":this.handleUpArrow(e);break;case"down":this.handleDownArrow(e);break;case"enter":this.handleEnter(e);break;case"escape":this.handleComponentBlur({query:this.state.query});break;default:u(e.keyCode)&&this.handlePrintableKey(e)}},t.prototype.render=function(){var e=this,t=this.props,n=t.cssNamespace,o=t.displayMenu,r=t.id,l=t.minLength,i=t.name,u=t.placeholder,s=t.required,p=this.state,f=p.focused,m=p.hovered,_=p.menuOpen,v=p.options,b=p.query,g=p.selected,O=this.hasAutoselect(),w=-1===f,C=0===v.length,E=0!==b.length,x=b.length>=l,N=this.props.showNoOptionsFound&&w&&C&&E&&x,I=n+"__wrapper",M=n+"__input",k=null!==f,D=k?" "+M+"--focused":"",L=-1!==f&&null!==f,S=n+"__menu",T=S+"--"+o,A=_||N,q=S+"--"+(A?"visible":"hidden"),B=n+"__option",P=n+"__hint",U=this.templateInputValue(v[g]),j=U&&0===U.toLowerCase().indexOf(b.toLowerCase()),V=j&&O?b+U.substr(b.length):"",R=y&&V;return(0,d.createElement)("div",{className:I,onKeyDown:this.handleKeyDown},(0,d.createElement)(h.default,{length:v.length,queryLength:b.length,minQueryLength:l,selectedOption:this.templateInputValue(v[g])}),R&&(0,d.createElement)("span",null,(0,d.createElement)("input",{className:P,readonly:!0,tabIndex:"-1",value:V})),(0,d.createElement)("input",c({"aria-activedescendant":!!L&&r+"__option--"+f,"aria-expanded":_,"aria-owns":r+"__listbox",autoComplete:"off",className:""+M+D,id:r,onBlur:this.handleInputBlur},a(this.handleInputChange),{onFocus:this.handleInputFocus,name:i,placeholder:u,ref:function(t){e.elementRefs[-1]=t},role:"combobox",type:"text",required:s,value:b})),(0,d.createElement)("ul",{className:S+" "+T+" "+q,id:r+"__listbox",role:"listbox"},v.map(function(t,n){var o=-1===f?g===n:f===n,l=o&&null===m?" "+B+"--focused":"",i=n%2?" "+B+"--odd":"";return(0,d.createElement)("li",{"aria-selected":f===n,className:""+B+l+i,dangerouslySetInnerHTML:{__html:e.templateSuggestion(t)},id:r+"__option--"+n,key:n,onBlur:function(t){return e.handleOptionBlur(t,n)},onClick:function(t){return e.handleOptionClick(t,n)},onMouseDown:e.handleOptionMouseDown,onMouseEnter:function(t){return e.handleOptionMouseEnter(t,n)},onMouseOut:function(t){return e.handleOptionMouseOut(t,n)},onTouchEnd:function(t){return e.handleOptionTouchEnd(t,n)},ref:function(t){e.elementRefs[n]=t},role:"option",tabIndex:"-1"})}),N&&(0,d.createElement)("li",{className:B+" "+B+"--no-results"},"No results found")))},t}(d.Component),s.defaultProps={autoselect:!1,cssNamespace:"autocomplete",defaultValue:"",displayMenu:"inline",minLength:0,name:"input-autocomplete",placeholder:"",onConfirm:function(){},confirmOnBlur:!0,showNoOptionsFound:!0,required:!1},p);t.default=b},function(e,t,n){"use strict";function o(e,t){}function r(e,t){if(e)return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function l(e,t){"function"!=typeof t&&null!==t||(e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t))}t.__esModule=!0,t.default=void 0;var i=n(0),u=function(e){function t(){var n,l,i;o(this,t);for(var u=arguments.length,a=Array(u),s=0;s<u;s++)a[s]=arguments[s];return n=l=r(this,e.call.apply(e,[this].concat(a))),l.state={bump:!1},i=n,r(l,i)}return l(t,e),t.prototype.componentWillReceiveProps=function(e){e.queryLength!==this.props.queryLength&&this.setState(function(e){return{bump:!e.bump}})},t.prototype.render=function(){var e=this.props,t=e.length,n=e.queryLength,o=e.minQueryLength,r=e.selectedOption,l=this.state.bump,u={result:1===t?"result":"results",is:1===t?"is":"are"},a=n<o,s=0===t,p=r?(0,i.createElement)("span",null,r," (1 of ",t,") is selected."):null,c=null;return c=a?(0,i.createElement)("span",null,"Type in ",o," or more characters for results."):s?(0,i.createElement)("span",null,"No search results."):(0,i.createElement)("span",null,t," ",u.result," ",u.is," available. ",p),(0,i.createElement)("div",{"aria-atomic":"true","aria-live":"polite",role:"status",style:{border:"0",clip:"rect(0 0 0 0)",height:"1px",marginBottom:"-1px",marginRight:"-1px",overflow:"hidden",padding:"0",position:"absolute",whiteSpace:"nowrap",width:"1px"}},c,(0,i.createElement)("span",null,l?",":",,"))},t}(i.Component);t.default=u},function(e,t,n){e.exports=n(1)}])});
+//# sourceMappingURL=accessible-autocomplete.min.js.map
+</script>
+<script type="text/javascript">
+      var selectEl = document.querySelector('#last-country')
+      accessibleAutocomplete.enhanceSelectElement({
+        autoselect: true,
+        defaultValue: selectEl.options[selectEl.options.selectedIndex].innerHTML,
+        minLength: 2,
+        selectElement: selectEl
+      })
+
+      selectEl = document.querySelector('#passport-country')
+      accessibleAutocomplete.enhanceSelectElement({
+        autoselect: true,
+        defaultValue: selectEl.options[selectEl.options.selectedIndex].innerHTML,
+        minLength: 2,
+        selectElement: selectEl
+      })
+
+      var queryStringParameters = window.location.search
+      var previouslySubmitted = queryStringParameters.length > 0
+      if (previouslySubmitted) {
+        var submittedEl = document.querySelector('.submitted')
+        submittedEl.classList.remove('submitted--hidden')
+        var params = new URLSearchParams(document.location.search.split('?')[1])
+        document.querySelector('.submitted__last-location').innerHTML = params.get('last-location')
+        document.querySelector('.submitted__passport-location').innerHTML = params.get('passport-location')
+      }
+    </script>
+
+<script>
+
+$( document ).ready(function() {
+  if ($('.q1').length > 0) {
+    var q1var = sessionStorage.getItem('q1r1');
+    $('.q1').text(q1var);
+  }
+  if ($('.config1').length>0){
+    var config1 = sessionStorage.getItem('config1');
+    $('.config1').html(config1);
+  }
+
+  var q3r1_answer = sessionStorage.getItem('q3r1');
+  // var q3r2_answer = sessionStorage.getItem('q3r2');
+  // var q3r3_answer = sessionStorage.getItem('q3r3');
+  // var q3r4_answer = sessionStorage.getItem('q3r4');
+  // var q3r5_answer = sessionStorage.getItem('q3r5');
+  // var q3r6_answer = sessionStorage.getItem('q3r6');
+
+  if(q3r1_answer!==""){
+    $('#q3r1').val(q3r1_answer);
+  }
+  // if(q3r2_answer!==""){
+  //   $('#q3r2').val(q3r2_answer);
+  // }
+  // if(q3r3_answer!==""){
+  //   $('#q3r3').val(q3r3_answer);
+  // }
+  // if(q3r4_answer!=""){
+  //   $('#q3r4').val(q3r4_answer);
+  // }
+  // if(q3r5_answer!=""){
+  //   $('#q3r5').val(q3r5_answer);
+  // }
+  // if(q3r6_answer!=""){
+  //   $('#q3r6').val(q3r6_answer);
+  // }
+
+  console.info(sessionStorage);
+  // $('.qa-btn-get-started').click(function(e) {
+  $('.qa-btn-submit').click(function(e) {
+    e.preventDefault();
+
+    var editing = sessionStorage.getItem('editing');
+    if(editing=='true'){
+      window.location.href="../playback/";
+    } else {
+      window.location.href = "../section-2/"; // target of save and continue
+    }
+
+        if ("text" === "text") {
+          var inputValue = $("input[name='q3r1']").val();
+          sessionStorage.setItem('q3r1', inputValue);
+          // var inputValue = $("input[name='q3r2']").val();
+          // sessionStorage.setItem('q3r2', inputValue);
+          // var inputValue = $("input[name='q3r3']").val();
+          // sessionStorage.setItem('q3r3', inputValue);
+          // var inputValue = $("input[name='q3r4']").val();
+          // sessionStorage.setItem('q3r4', inputValue);
+          // var inputValue = $("input[name='q3r5']").val();
+          // sessionStorage.setItem('q3r5', inputValue);
+          // var inputValue = $("input[name='q3r6']").val();
+          // sessionStorage.setItem('q3r6', inputValue);
+          // var inputValue = $("input[name='q3r6']").val();
+          // sessionStorage.setItem('q3r6', inputValue);
+
+        } else {
+          var inputValue = $("input[name='q3r1']:checked").val();
+          sessionStorage.setItem('q3r1', inputValue);
+        }
+  });
+
+  $('.js-details-trigger').click(function(e) {
+    var text = $(this).text();
+    if ($('.js-details').hasClass('is-expanded')){
+      $(this).text(text.replace('Hide', 'Show'));
+    } else {
+      $(this).text(text.replace('Show', 'Hide'));
+    }
+    e.preventDefault();
+    $('.js-details').toggleClass('is-expanded');
+
+  });
+
+});
+</script>
