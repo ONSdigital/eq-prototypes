@@ -5,31 +5,10 @@ globalcss: false
 ---
 
 
-<link rel="stylesheet" href="{{ "/css/census.css" | prepend: site.baseurl }}">
+<link rel="stylesheet" href="{{ "/css/census-header-footer.css" | prepend: site.baseurl }}">
 <header class="page__header">
-  <header class="header header--census">
-  <div class="header__help is-closed js-help-body">
-    <div class="header__container container">
-      <div class="header__title ">Help and support –</div>
-      <ul class="header__nav nav nav--horizontal">
-        <li class="nav__item">
-          <span class="mars" role="presentation">Call </span> <a class="venus nav__link" href="tel:03000683001"><span class="u-vh">For help call </span>0300 068 3001</a>
-        </li>
-        <li class="nav__item">
-          <a class="venus nav__link external" href="http://www.ons.gov.uk/census/help" target="_blank" rel="noopener noreferrer">Online Help</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <div class="header__container container">
-    <div class="header__logo">
-     <img src="{{ "/img/census-logo.svg" | prepend: site.baseurl }}" alt="2017 Census">
-    </div>
-    <button class="header__btn btn btn--light btn--border js-help-btn" data-ga-action="Help and support" data-ga="click" data-ga-category="Help">
-      Help and support
-    </button>
-  </div>
-</header>
+  {% include bar.html %}
+  {% include header-census.html %}
 </header>
 <style>
       /* Example page specific styling. */
@@ -447,44 +426,6 @@ $( document ).ready(function() {
 });
 </script>
 
-
-<footer class="page__footer">
-        
-          <div class="footer footer--census" id="footer" role="contentinfo">
-  <div class="container footer__container">
-    <a class="footer__logo" href="https://www.ons.gov.uk/">
-      <!--<img src="/img/ons-logo-black.svg" alt="Office for National Statistics"> -->
-    </a>
-    <nav>
-      <ul class="footer__nav nav nav--horizontal nav--dark">
-        <li class="nav__item">
-          <a class="nav__link" target="_blank" rel="noopener noreferrer" href="https://www.ons.gov.uk/census/help/cookiesandprivacy">Privacy</a>
-        </li>
-        <li class="nav__item">
-          <a class="nav__link" target="_blank" rel="noopener noreferrer" href="https://www.ons.gov.uk/census/help/termsandconditions">Terms and Conditions</a>
-        </li>
-        <li class="nav__item">
-          <a class="nav__link" target="_blank" rel="noopener noreferrer" href="https://www.ons.gov.uk/help/accessibility">Accessibility</a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-  <div class="footer__help">
-    <div class="container">
-      <div class="mars">Help and Support –
-        <nav>
-          <ul class="footer__helpnav nav nav--horizontal">
-            <li class="nav__item">
-              <span class="mars" role="presentation">Call </span> <a class="venus nav__link" href="tel:03000683001"><span class="u-vh">For help call </span>0300 068 3001</a>
-            </li>
-            <li class="nav__item">
-              <a class="venus nav__link external" href="http://www.ons.gov.uk/census/help" target="_blank" rel="noopener noreferrer">Online Help</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </div>
-  </div>
+{% include footer-census.html %}
 </div>
-        
-      </footer>
+{% include timeout-census.html %}
