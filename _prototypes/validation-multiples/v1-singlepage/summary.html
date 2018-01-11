@@ -1,0 +1,203 @@
+---
+title: Totals v2 (replay inputs)
+project: Totals
+globalcss: false
+---
+
+<header class="page__header">
+{% include survey-header.html %}
+{% include bar.html %}
+</header>
+<style>
+#retailTotal {word-wrap: normal; word-break: normal;}
+
+.panel--simple{
+  margin-left: 0;
+}
+.summary__block{
+  border: 0;
+  border-top: 1px solid #ccc;
+}
+.summary__question{
+  display: block;
+  background-color: transparent;
+  border: 0px;
+  padding: 0;
+  margin-bottom: 1rem;
+  width: 40%;
+  padding-right: 1rem;
+}
+.summary__items{
+  border: 0;
+  border-bottom: 1px solid #ccc;
+  padding: 1rem 0 0 0;
+  margin: 0;
+  overflow: visible;
+}
+.summary__answer{
+  border: 0px;
+}
+.summary__edit{
+  border: 0px;
+  display: block;
+  padding: 0;
+}
+.summary__answer-text{
+  padding: 0;
+  word-break: normal;
+}
+</style>
+<div class="page__subheader">
+  <div class="container">
+    <!-- <a class="mars" href="../section-4">Previous</a> -->
+  </div>
+</div>
+
+<div class="page__container container">
+  <div class="grid grid--reverse">
+    <div class="grid__col col-4@m">
+    </div>
+    <div class="grid__col col-7@m pull-1@m">
+      <main role="main" id="main" class="page__main">
+      <div>
+  <h1 class="saturn">Your answers</h1>
+  <!-- <div class="print__message panel panel--simple panel--error">
+    <h2 class="saturn">Please remember to submit these responses.</h2>
+  </div> -->
+  <div class="print__hidden panel panel--simple panel--info u-mb">
+    <h2 class="neptune">Please submit this survey to complete it</h2>
+    <h2 class="mars">You can review your answers below</h2>
+  </div>
+</div>
+<!-- <div class="download u-mb-s u-mb-m@s">
+  <div class="venus download__text">You will have the opportunity to download your answers after submitting this questionnaire.</div>
+</div> -->
+<div>
+  <div class="summary">
+
+      <div class="summary__block">
+
+
+      <div class="summary__items">
+          <div class="summary__answer">
+            <div class="summary__question" id="total-sales-food-question">
+              For the period 1 May 2016 to 31 May 2016, what was the value of Essential Enterprise Ltd.’s total retail turnover?
+            </div>
+            <div class="summary__answer-text" id="retailTotal">£<span class="retailTotal"></span></div>
+            <div class="summary__edit">
+              <a href="../section-1" class="summary__edit-link" aria-describedby="total-sales-food total-sales-food-answer" data-qa="total-sales-food-edit" data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">Change <span class="u-vh">your answer</span></a>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="summary__items">
+                <div class="mars u-mb-m@s" id="total-sales-food-question">
+                  Of the £<span class="retailTotal"></span> paid to weekly paid employees in the last week of December 2016, what amount was:
+                </div>
+                  <div class="summary__answer">
+                    <div class="summary__question" id="total-sales-food-question">
+                      Holiday pay, paid in advance (estimate if necessary)
+                    </div>
+                    <div class="summary__answer-text" id="q2r1-answer"></div>
+                    <div class="summary__edit">
+                      <a href="../section-1" class="summary__edit-link" aria-describedby="total-sales-food total-sales-food-answer" data-qa="total-sales-food-edit" data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">Change <span class="u-vh">your answer</span></a>
+                    </div>
+                  </div>
+
+                  <div class="summary__answer">
+                    <div class="summary__question" id="total-sales-alcohol-question">
+                       Arrears of pay owing to pay awards
+                    </div>
+                    <div class="summary__answer-text" id="q2r2-answer"></div>
+                    <div class="summary__edit">
+                      <a href="../section-2" class="summary__edit-link" aria-describedby="total-sales-alcohol total-sales-alcohol-answer" data-qa="total-sales-alcohol-edit" data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">Change <span class="u-vh">your answer</span></a>
+                    </div>
+                  </div>
+
+                  <div class="summary__answer">
+                    <div class="summary__question" id="total-sales-clothing-question">
+                       Bonuses, commissions or annual profit from profit related pay schemes
+                    </div>
+                    <div class="summary__answer-text" id="q2r3-answer"></div>
+                    <div class="summary__edit">
+                      <a href="../section-3" class="summary__edit-link" aria-describedby="total-sales-clothing total-sales-clothing-answer" data-qa="total-sales-clothing-edit" data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">Change <span class="u-vh">your answer</span></a>
+                    </div>
+                  </div>
+
+        </div> <!-- Summary items -->
+      </div> <!-- Summary block -->
+  </div>
+</div>
+
+
+    <form class="form qa-questionnaire-form" role="form" method="POST" autocomplete="off" novalidate="">
+      <input id="csrf_token" name="csrf_token" type="hidden" value="IjI5YzdhNTY2ZjgxZGZkY2ZhOGMwYzQ4MjZkYWUwZTNlODNhNDllN2Ei.C_Xwyg.JJgAPY5r93Gl0Qdj5rf7WM9MUaI">
+      <div class="group" id="mci">
+        <div class="block" id="summary">
+        </div>
+      </div>
+
+  <button class="btn btn--primary btn--lg qa-btn-submit" data-qa="btn-submit" data-loading-msg="Submitting…" type="submit">Submit survey</button>
+
+
+      <div class="u-mb-m">
+        <button class="btn btn--link mars js-btn-save" type="submit" name="action[save_sign_out]" data-ga-category="Navigation" data-ga-action="Save and complete later click" data-ga="click">Save and complete later</button>
+      </div>
+    </form>
+
+  <a class="page__previous page__previous--bottom" data-ga-category="Navigation" data-ga-label="bottom" data-ga-action="Previous link click" data-ga="click" href="../of-which" id="bottom-previous">Previous</a>
+
+
+    </main>
+
+    </div>
+  </div>
+</div>
+<script>
+$( document ).ready(function() {
+  var editing = true;
+  sessionStorage.setItem('editing', editing);
+  if ($('.config1').length>0){
+    var config1 = sessionStorage.getItem('config1');
+    $('.config1').html(config1);
+  }
+
+  if ($('.retailTotal').length > 0) {
+    var retailTotal = (Number(sessionStorage.getItem('q3r6'))+Number(sessionStorage.getItem('q3r5'))+Number(sessionStorage.getItem('q3r4'))+Number(sessionStorage.getItem('q2r3'))+Number(sessionStorage.getItem('q2r2'))+Number(sessionStorage.getItem('q2r1'))).toLocaleString('en-gb',{ style: 'currency', currency: 'GBP', minimumFractionDigits: '2' });
+    var q2r1_answer = (Number(sessionStorage.getItem('q2r1'))).toLocaleString('en-gb',{ style: 'currency', currency: 'GBP', minimumFractionDigits: '2' });
+    var q2r2_answer = (Number(sessionStorage.getItem('q2r2'))).toLocaleString('en-gb',{ style: 'currency', currency: 'GBP', minimumFractionDigits: '2' });
+    var q2r3_answer = (Number(sessionStorage.getItem('q2r3'))).toLocaleString('en-gb',{ style: 'currency', currency: 'GBP', minimumFractionDigits: '2' });
+    var retailTotal = sessionStorage.getItem('q1r1');
+
+    if(q2r1_answer=='£0.00') {
+      q2r1_answer = q2r1_answer;
+    }
+    if(q2r2_answer=='£0.00') {
+      q2r2_answer = q2r2_answer;
+    }
+    if(q2r3_answer=='£0.00') {
+      q2r3_answer = q2r3_answer;
+    }
+
+    console.info('Calc\'d total:'+retailTotal);
+    $('#q2r1-answer').text(q2r1_answer);
+    $('#q2r2-answer').text(q2r2_answer);
+    $('#q2r3-answer').text(q2r3_answer);
+    $('.retailTotal').text(retailTotal);
+
+// console.log(retailTotal.toLocaleString('en-gb',{ style: 'currency', currency: 'GBP' }));
+
+    sessionStorage.setItem('retailTotal', retailTotal);
+
+  }
+  console.info(sessionStorage);
+  // $('.qa-btn-get-started').click(function(e) {
+  $('.qa-btn-submit').click(function(e) {
+    e.preventDefault();
+    window.location.href = "../thankyou/"; // target of save and continue
+
+  });
+
+});
+</script>
