@@ -17,15 +17,16 @@ const inlineblock = require('postcss-inline-block');
 const sourcemaps = require('gulp-sourcemaps');
 const svgSprite = require('gulp-svg-sprite');
 
-
 const rename = require('gulp-rename');
 const del = require('del');
 const nunjucksRender = require('gulp-nunjucks-render');
 const data = require('gulp-data');
 const ukisData = require('./_data/ukis.json');
 
-const babel = require('gulp-babel')
-const plumber = require('gulp-plumber')
+const babel = require('gulp-babel');
+const plumber = require('gulp-plumber');
+
+const bundleScripts = require('./gulp/javascript');
 
 // SVG Sprite
 gulp.task('sprite', () => {
@@ -139,9 +140,10 @@ gulp.task('js', () => {
     gutil.log(err.message)
   })
   .pipe(babel())
-  .pipe(plumber())
   .pipe(gulp.dest('js'))
 });
+
+gulp.task('scripts:bundle:watch', () => bundleScripts(true));
 
 gulp.task('fonts', () => {
   gulp.src('./_fonts/**/*')
@@ -153,4 +155,4 @@ gulp.task('img', () => {
   .pipe(gulp.dest('./img'));
 });
 
-gulp.task('default', ['sprite', 'css', 'js', 'jekyll', 'serve', 'img', 'fonts']);
+gulp.task('default', ['sprite', 'css', 'scripts:bundle:watch', 'jekyll', 'serve', 'img', 'fonts']);
