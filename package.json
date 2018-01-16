@@ -30,6 +30,7 @@
     "browserify": "^15.2.0",
     "del": "^2.2.2",
     "eq-sass": "^2.0.0",
+    "event-stream": "^3.3.4",
     "gfm.css": "^1.1.1",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
@@ -64,4 +65,3 @@
   },
   "dependencies": {}
 }
-

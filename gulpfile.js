@@ -26,7 +26,10 @@ const ukisData = require('./_data/ukis.json');
 const babel = require('gulp-babel');
 const plumber = require('gulp-plumber');
 
-const bundleScripts = require('./gulp/javascript');
+const glob = require('glob');
+const es = require('event-stream');
+
+const bundleScripts = require('./gulp/javascript').bundleScripts;
 
 // SVG Sprite
 gulp.task('sprite', () => {
@@ -97,7 +100,7 @@ gulp.task('css', () => {
     .pipe(gulp.dest('css'));
 });
 
-gulp.task('jekyll', () => {
+gulp.task('jekyll', ['scripts:bundle:watch', 'scripts:bundles:watch'], () => {
   const jekyll = child.spawn('jekyll', ['build',
     '--watch',
     '--incremental',
@@ -143,7 +146,27 @@ gulp.task('js', () => {
   .pipe(gulp.dest('js'))
 });
 
-gulp.task('scripts:bundle:watch', () => bundleScripts(true));
+gulp.task('scripts:bundle:watch', () => bundleScripts(true, { path: './_js/bundle.js', dest: './js/compiled/' }));
+
+gulp.task('scripts:bundles:watch', (done) => {
+  var root = './_prototypes';
+
+  glob(root + '/**/bundle.js', function(err, files) {
+    if (err) {
+      done(err);
+    }
+
+    var tasks = files.map(function (entry) {
+      return bundleScripts(true, {
+        path: entry,
+        dest: entry.replace(root, './js/compiled').replace('bundle.js', '')
+      });
+    });
+
+		es.merge(tasks).on('end', done);
+  });
+});
+
 
 gulp.task('fonts', () => {
   gulp.src('./_fonts/**/*')
@@ -155,4 +178,4 @@ gulp.task('img', () => {
   .pipe(gulp.dest('./img'));
 });
 
-gulp.task('default', ['sprite', 'css', 'scripts:bundle:watch', 'jekyll', 'serve', 'img', 'fonts']);
+gulp.task('default', ['css', 'img', 'fonts', 'jekyll', 'serve', 'sprite']);

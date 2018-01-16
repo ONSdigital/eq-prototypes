@@ -11,10 +11,14 @@ const rollupBabel = require('rollup-plugin-babel');
 const nodeResolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
 
-function bundleScripts (watch) {
+function bundleScripts (watch, opts) {
+	opts = opts || {};
+
+	console.log('path: ', opts);
+
 	let cache;
 	const bundler = browserify({
-		entries: ['./_js/bundle.js'],
+		entries: [opts.path], // ./_js/bundle.js
 		debug: true,
 		plugin: [watch ? watchify : null]
 	})
@@ -24,7 +28,7 @@ function bundleScripts (watch) {
 		.transform('rollupify', {
 			config: {
 				cache: false,
-				entry: './_js/bundle.js',
+				entry: 'opts.path', // ./_js/bundle.js
 				plugins: [
 					commonjs({
 						include: 'node_modules/!**',
@@ -55,10 +59,12 @@ function bundleScripts (watch) {
 			})
 			.pipe(source('bundle.js'))
 			.pipe(buffer())
-			.pipe(gulp.dest('./js'));
+			.pipe(gulp.dest(opts.dest)); // './js/compiled/'
 	};
 
 	return bundle();
 };
 
-module.exports = bundleScripts;
+module.exports = {
+	bundleScripts: bundleScripts
+};
