@@ -5,6 +5,15 @@ globalcss: false
 ---
 
 <link rel="stylesheet" href="{{ "/css/census-header-footer.css" | prepend: site.baseurl }}">
+<style>
+    @media only screen and (min-width: 740px) {
+        .field__item--half {
+            min-width: 9.7rem;
+            margin-bottom : 0;
+        }
+    }
+</style>
+
 <header class="page__header">
     {% include bar.html %}
     {% include header-census.html %}
@@ -19,23 +28,6 @@ globalcss: false
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-
-            <!-- right aligned side nav -->
-            <div class="nav nav--sections nav--vertical js-nav page__nav" id="section-nav">
-                <h2 class="nav__title venus">Sections</h2>
-                <ul class="nav__list js-nav-list">
-                    <li class="nav__item pluto nav__item--completed">
-                        <a class="nav__link" href="#item1">Who lives here?</a>
-                    </li>
-                    <li class="nav__item pluto nav__item--completed">
-                        <a class="nav__link" href="#item2">Household and Accomodation</a>
-                    </li>
-                    <li class="nav__item pluto nav__item--current">
-                        <a class="nav__link" href="#item3">Joanna Bloggs</a>
-                    </li>
-                </ul>
-            </div>
-
         </div>
         <div class="grid__col col-7@m pull-1@m">
             <main role="main" id="main" class="page__main">
@@ -54,13 +46,13 @@ globalcss: false
                                                     <div class="field field--radio field--multiplechoice">
                                                         <fieldset>
                                                             <!--<legend class="field__legend mars ">Select your favourite topping</legend>-->
-                                                            <div class="field__item js-focusable-box">
-                                                                <input class="input input--radio js-focusable" name="radio-answer" value="bacon" id="bacon" type="radio">
-                                                                <label class="label label--inline venus" for="bacon">Bacon</label>
+                                                            <div class="field__item field__item--half js-focusable-box">
+                                                                <input class="input input--radio js-focusable" name="radio-answer" value="yes" id="yes" type="radio" />
+                                                                <label class="label label--inline venus" for="yes">Yes</label>
                                                             </div>
-                                                            <div class="field__item js-focusable-box">
-                                                                <input class="input input--radio js-focusable" name="radio-answer" value="olives" id="olives" type="radio">
-                                                                <label class="label label--inline venus" for="olives">Olives</label>
+                                                            <div class="field__item field__item--half js-focusable-box">
+                                                                <input class="input input--radio js-focusable" name="radio-answer" value="no" id="no" type="radio" />
+                                                                <label class="label label--inline venus" for="no">No</label>
                                                             </div>
                                                         </fieldset>
                                                     </div>
@@ -71,19 +63,32 @@ globalcss: false
                                     </div>
                                 </div>
 
-                                <div class="question">
+                                <div class="question" id="heating-type">
                                     <h2 class="question__title neptune">What type of central heating do you have?</h2>
 
                                     <div class="question__answers">
                                         <div class="question__answer">
                                             <div class="answer answer--currency" id="total-retail-turnover-answer">
                                                 <div class="answer__fields js-fields">
-                                                    <div class="field">
+                                                    <div class="field field--checkbox field--multiplechoice">
                                                         <label class="label venus">
                                                             <div class="label__inner">Select all that apply:</div>
                                                         </label>
-                                                        <div class="input-type">
-
+                                                        <div class="field__item js-focusable-box">
+                                                            <input class="input input--checkbox js-focusable" type="checkbox" id="checkbox1">
+                                                            <label class="label label--inline venus" for="checkbox1">Gas</label>
+                                                        </div>
+                                                        <div class="field__item js-focusable-box">
+                                                            <input class="input input--checkbox js-focusable" type="checkbox" id="checkbox2">
+                                                            <label class="label label--inline venus" for="checkbox2">Electric</label>
+                                                        </div>
+                                                        <div class="field__item js-focusable-box">
+                                                            <input class="input input--checkbox js-focusable" type="checkbox" id="checkbox3">
+                                                            <label class="label label--inline venus" for="checkbox3">Solid fuel</label>
+                                                        </div>
+                                                        <div class="field__item js-focusable-box">
+                                                            <input class="input input--checkbox js-focusable" type="checkbox" id="checkbox4">
+                                                            <label class="label label--inline venus" for="checkbox4">Other</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -105,3 +110,14 @@ globalcss: false
 </div>
 
 <script src='/js/bundle.js'></script>
+
+<script>
+    $(document).ready(function () {
+
+    	$('input:radio[name=radio-answer][value=yes]').prop('checked', true);
+
+        $('input:radio[name=radio-answer]').change(function () {
+            $('#heating-type')[$(this).val() === 'yes' ? 'show' : 'hide']();
+        });
+    });
+</script>
