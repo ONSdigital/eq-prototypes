@@ -1,5 +1,5 @@
 ---
-title:  Qualifying question
+title:  Next question link
 project: Checkboxes (mutually exclusive)
 globalcss: false
 ---
@@ -35,33 +35,6 @@ globalcss: false
                     <div class="group">
                         <div class="block" id="total-retail-turnover">
                             <section class="section" id="total-retail-turnover-section">
-
-                                <div class="question">
-                                    <h1 class="question__title saturn">Do you have central heating?</h1>
-
-                                    <div class="question__answers">
-                                        <div class="question__answer">
-                                            <div class="answer">
-                                                <div class="answer__fields js-fields">
-                                                    <div class="field field--radio field--multiplechoice">
-                                                        <fieldset>
-                                                            <!--<legend class="field__legend mars ">Select your favourite topping</legend>-->
-                                                            <div class="field__item field__item--half js-focusable-box">
-                                                                <input class="input input--radio js-focusable" name="radio-answer" value="yes" id="yes" type="radio" />
-                                                                <label class="label label--inline venus" for="yes">Yes</label>
-                                                            </div>
-                                                            <div class="field__item field__item--half js-focusable-box">
-                                                                <input class="input input--radio js-focusable" name="radio-answer" value="no" id="no" type="radio" />
-                                                                <label class="label label--inline venus" for="no">No</label>
-                                                            </div>
-                                                        </fieldset>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
                                 <div class="question" id="heating-type">
                                     <h2 class="question__title neptune">What type of central heating do you have?</h2>
@@ -99,6 +72,9 @@ globalcss: false
                             </section>
                         </div>
                     </div>
+
+                    <p class="u-mb-l"><a href="#">I don’t have central heating, take me to the next question</a></p>
+
                     <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Save and continue</button>
                     <div class="u-mb-m">
                         <button class="btn btn--link mars js-btn-save" type="submit" name="action[save_sign_out]">Save and complete later</button>
@@ -110,7 +86,7 @@ globalcss: false
     </div>
 </div>
 
-<script src='/js/compiled/checkboxes-mutually-exclusive/qualifying-question/bundle.js'></script>
+<script src='/js/compiled/standard-bundle.js'></script>
 
 <script>
     $(document).ready(function () {

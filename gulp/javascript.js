@@ -57,7 +57,7 @@ function bundleScripts (watch, opts) {
 				gutil.log(err.message);
 				this.emit('end');
 			})
-			.pipe(source('bundle.js'))
+			.pipe(source(opts.filename || 'bundle.js'))
 			.pipe(buffer())
 			.pipe(gulp.dest(opts.dest)); // './js/compiled/'
 	};

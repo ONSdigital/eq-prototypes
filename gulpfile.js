@@ -146,7 +146,11 @@ gulp.task('js', () => {
   .pipe(gulp.dest('js'))
 });
 
-gulp.task('scripts:bundle:watch', () => bundleScripts(true, { path: './_js/bundle.js', dest: './js/compiled/' }));
+gulp.task('scripts:bundle:watch', () => bundleScripts(true, {
+  path: './_js/standard-bundle.js',
+  dest: './js/compiled/',
+  filename: 'standard-bundle.js'
+}));
 
 gulp.task('scripts:bundles:watch', (done) => {
   var root = './_prototypes';
