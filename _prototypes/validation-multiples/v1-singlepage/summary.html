@@ -14,6 +14,9 @@ globalcss: false
 .panel--simple{
   margin-left: 0;
 }
+.panel--info h2{
+  margin-bottom: 0;
+}
 .summary__block{
   border: 0;
   border-top: 1px solid #ccc;
@@ -86,7 +89,7 @@ globalcss: false
             </div>
             <div class="summary__answer-text" id="retailTotal">£<span class="retailTotal"></span></div>
             <div class="summary__edit">
-              <a href="../section-1" class="summary__edit-link" aria-describedby="total-sales-food total-sales-food-answer" data-qa="total-sales-food-edit" data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">Change <span class="u-vh">your answer</span></a>
+              <a href="../index" class="summary__edit-link" aria-describedby="total-sales-food total-sales-food-answer" data-qa="total-sales-food-edit" data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">Change <span class="u-vh">your answer</span></a>
             </div>
           </div>
         </div>
@@ -166,9 +169,9 @@ $( document ).ready(function() {
 
   if ($('.retailTotal').length > 0) {
     var retailTotal = (Number(sessionStorage.getItem('q3r6'))+Number(sessionStorage.getItem('q3r5'))+Number(sessionStorage.getItem('q3r4'))+Number(sessionStorage.getItem('q2r3'))+Number(sessionStorage.getItem('q2r2'))+Number(sessionStorage.getItem('q2r1'))).toLocaleString('en-gb',{ style: 'currency', currency: 'GBP', minimumFractionDigits: '2' });
-    var q2r1_answer = (Number(sessionStorage.getItem('q2r1'))).toLocaleString('en-gb',{ style: 'currency', currency: 'GBP', minimumFractionDigits: '2' });
-    var q2r2_answer = (Number(sessionStorage.getItem('q2r2'))).toLocaleString('en-gb',{ style: 'currency', currency: 'GBP', minimumFractionDigits: '2' });
-    var q2r3_answer = (Number(sessionStorage.getItem('q2r3'))).toLocaleString('en-gb',{ style: 'currency', currency: 'GBP', minimumFractionDigits: '2' });
+    var q2r1_answer = (Number(sessionStorage.getItem('q2r1'))).toLocaleString('en-gb',{ style: 'currency', currency: 'GBP', minimumFractionDigits: '0' });
+    var q2r2_answer = (Number(sessionStorage.getItem('q2r2'))).toLocaleString('en-gb',{ style: 'currency', currency: 'GBP', minimumFractionDigits: '0' });
+    var q2r3_answer = (Number(sessionStorage.getItem('q2r3'))).toLocaleString('en-gb',{ style: 'currency', currency: 'GBP', minimumFractionDigits: '0' });
     var retailTotal = sessionStorage.getItem('q1r1');
 
     if(q2r1_answer=='£0.00') {

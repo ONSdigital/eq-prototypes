@@ -41,7 +41,7 @@ globalcss: false
         <ul class="list list--bare">
 
             <li class="list__item mars">
-              1) <a class="js-inpagelink" id="errorLink" href="#q2r1">Enter figures that total the sum of £<span class="q1"></span></a>
+              1) <a class="js-inpagelink" id="errorLink" href="#errorq2r1">Enter figures that total the sum of £<span class="q1"></span></a>
             </li>
 
           </ul>
@@ -206,7 +206,7 @@ $( document ).ready(function() {
       $(".panel--head").removeClass("hidden"); // then show the error panels
       $("#errorLink").attr('href','#errorq2r1');
       $('.question__answers').wrap('<div class="panel__body" data-qa="error-body">').prepend(errorMultiple);
-      $('.question__answers').wrap('<div class="answer answer--date js-has-errors" id="errorq2r3"><aside class="panel panel--simple panel--error" data-qa="error">');
+      $('.question__answers').wrap('<div class="answer answer--date js-has-errors" id="errorq2r1"><aside class="panel panel--simple panel--error" data-qa="error">');
       return false;
     }
 
