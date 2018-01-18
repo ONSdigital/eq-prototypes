@@ -182,4 +182,6 @@ gulp.task('img', () => {
   .pipe(gulp.dest('./img'));
 });
 
+gulp.task('netlify', ['css', 'img', 'fonts', 'jekyll', 'sprite']);
+
 gulp.task('default', ['css', 'img', 'fonts', 'jekyll', 'serve', 'sprite']);
