@@ -68,7 +68,11 @@ gulp.task('sprite', () => {
 });
 
 
-gulp.task('css', () => {
+
+/**
+ * CSS pattern library additions
+ */
+gulp.task('css:build', () => {
   gulp.src('./_css/**/*.scss')
     .pipe(sourcemaps.init())
     .pipe(sassGlob())
@@ -100,23 +104,110 @@ gulp.task('css', () => {
     .pipe(gulp.dest('css'));
 });
 
-gulp.task('jekyll', ['scripts:bundle:watch', 'scripts:bundles:watch'], () => {
-  const jekyll = child.spawn('jekyll', ['build',
-    '--watch',
-    '--incremental',
-    '--drafts'
-  ]);
-
-  const jekyllLogger = (buffer) => {
-    buffer.toString()
-      .split(/\n/)
-      .forEach((message) => gutil.log('Jekyll: ' + message));
-  };
-
-  jekyll.stdout.on('data', jekyllLogger);
-  jekyll.stderr.on('data', jekyllLogger);
+gulp.task('css:watch', () => {
+	return gulp.watch('./_css/**/*.scss', ['css:build']);
 });
 
+
+
+/**
+ * Javascript (currently won't work)
+ */
+gulp.task('scripts:build', () => {
+	gulp.src('./_js/**/*.js')
+		.on('error', function(err) {
+			gutil.log(err.message)
+		})
+		.pipe(babel())
+		.pipe(gulp.dest('js'))
+});
+
+gulp.task('scripts:watch', () => {
+	return gulp.watch('./_js/**/*.js', ['scripts:build']);
+});
+
+/**
+ * Javascript standard patten library modules.
+ */
+const scriptsBundleDefaultOpts = {
+	path: './_js/standard-bundle.js',
+	dest: './js/compiled/',
+	filename: 'standard-bundle.js'
+};
+
+gulp.task('scripts:bundle:build', () => bundleScripts(false, scriptsBundleDefaultOpts));
+
+gulp.task('scripts:bundle:watch', () => bundleScripts(true, scriptsBundleDefaultOpts));
+
+/**
+ * Javascript custom code built with pattern library modules.
+ */
+function scriptsBundles (opts, done) {
+	opts = opts || {};
+
+	var root = './_prototypes';
+
+	glob(root + '/**/bundle.js', function(err, files) {
+		if (err) {
+			done(err);
+		}
+
+		var tasks = files.map(function (entry) {
+			return bundleScripts(!!opts.watch, {
+				path: entry,
+				dest: entry.replace(root, './js/compiled').replace('bundle.js', '')
+			});
+		});
+
+		es.merge(tasks).on('end', done);
+	});
+}
+
+gulp.task('scripts:bundles:build', scriptsBundles.bind(null, { watch: false }));
+
+gulp.task('scripts:bundles:watch', scriptsBundles.bind(null, { watch: true }));
+
+
+
+/**
+ * Jekyll configuration
+ */
+function jekyll (opts) {
+	opts = opts || {};
+
+	const jekyllWatchArgs = [
+		'--watch',
+		'--incremental',
+		'--drafts'
+	];
+
+	const jekyllArgs = [
+		'build',
+		...(!!opts.watch ? jekyllWatchArgs : [])
+	];
+
+	console.log('jekyllArgs', jekyllArgs);
+
+	const jekyll = child.spawn('jekyll', jekyllArgs);
+
+	const jekyllLogger = (buffer) => {
+		buffer.toString()
+			.split(/\n/)
+			.forEach((message) => gutil.log('Jekyll: ' + message));
+	};
+
+	jekyll.stdout.on('data', jekyllLogger);
+	jekyll.stderr.on('data', jekyllLogger);
+}
+
+gulp.task('jekyll:build', jekyll.bind(null, ({ watch: false })));
+
+gulp.task('jekyll:watch', jekyll.bind(null, ({ watch: true })));
+
+
+/**
+ * Local development server
+ */
 gulp.task('serve', () => {
   browserSync.init({
     files: ['_site/css/**/*'],
@@ -131,57 +222,45 @@ gulp.task('serve', () => {
     startPath: "/eq-prototypes"
   });
 
-  gulp.watch('./_css/**/*.scss', ['css']);
-  gulp.watch('./_js/**/*.js', ['js']);
   // gulp.watch('_site/**/*.*').on('change', browserSync.reload);
 });
 
 
-gulp.task('js', () => {
-  gulp.src('./_js/**/*.js')
-  .on('error', function(err) {
-    gutil.log(err.message)
-  })
-  .pipe(babel())
-  .pipe(gulp.dest('js'))
-});
-
-gulp.task('scripts:bundle:watch', () => bundleScripts(true, {
-  path: './_js/standard-bundle.js',
-  dest: './js/compiled/',
-  filename: 'standard-bundle.js'
-}));
-
-gulp.task('scripts:bundles:watch', (done) => {
-  var root = './_prototypes';
-
-  glob(root + '/**/bundle.js', function(err, files) {
-    if (err) {
-      done(err);
-    }
-
-    var tasks = files.map(function (entry) {
-      return bundleScripts(true, {
-        path: entry,
-        dest: entry.replace(root, './js/compiled').replace('bundle.js', '')
-      });
-    });
-
-		es.merge(tasks).on('end', done);
-  });
-});
-
 
 gulp.task('fonts', () => {
   gulp.src('./_fonts/**/*')
-  .pipe(gulp.dest('./s/fonts/'));
+  	.pipe(gulp.dest('./s/fonts/'));
 });
 
 gulp.task('img', () => {
   gulp.src('./_img/**/*')
-  .pipe(gulp.dest('./img'));
+  	.pipe(gulp.dest('./img'));
 });
 
-gulp.task('netlify', ['css', 'img', 'fonts', 'jekyll', 'sprite']);
 
-gulp.task('default', ['css', 'img', 'fonts', 'jekyll', 'serve', 'sprite']);
+
+/**
+ * Build ordering
+ * Note: Change to gulp.series / gulp.parrellel after gulp upgrade.
+ */
+gulp.task('build:parrellel-batch', ['scripts:bundle:build', 'scripts:bundles:build', 'css:build', 'img', 'fonts', 'sprite']);
+
+gulp.task('build:jekyll', ['build:parrellel-batch'], () => { gulp.run('jekyll:build'); });
+
+/**
+ * Dev ordering
+ */
+gulp.task('dev:parrellel-batch', ['scripts:bundle:watch', 'scripts:bundles:watch', 'css:watch', 'img', 'fonts', 'sprite']);
+
+gulp.task('dev:jekyll', ['dev:parrellel-batch'], () => { gulp.run('jekyll:watch'); });
+
+gulp.task('dev:serve', ['dev:jekyll'], () => { gulp.run('serve'); });
+
+
+
+gulp.task('build', ['build:jekyll']);
+
+gulp.task('dev', ['dev:serve']);
+
+gulp.task('netlify', ['build']);
+gulp.task('default', ['build']);

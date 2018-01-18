@@ -11,15 +11,19 @@ Install [RVM](https://rvm.io/) and run:
 
 ## Run
 Install [node](https://nodejs.org/en/) and [gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md) and then run:
-- `gulp`
+- `gulp` to build
+
+
+## Developement
+Run `gulp dev` to run in development (localhost:4000 by default)
 
 
 ## View Prototypes
-
+- Each branch will be deployed to Netlify once a pull request is made. The latest of the master branch is available at:
 [http://onsdigital.github.io/eq-prototypes/](http://onsdigital.github.io/eq-prototypes/)
 
 
-## Development
+## Javascript development
 To build custom code with access to pattern library modules
 - Create a bundle.js file in any folder inside _prototypes/.
 - Reference pattern library modules in ./_js/modules/

@@ -17,18 +17,19 @@ function bundleScripts (watch, opts) {
 	console.log('path: ', opts);
 
 	let cache;
+
 	const bundler = browserify({
-		entries: [opts.path], // ./_js/bundle.js
-		debug: true,
-		plugin: [watch ? watchify : null]
-	})
+			entries: [opts.path],
+			debug: true,
+			plugin: [watch ? watchify : null]
+		})
 		.on('update', () => bundle())
 		.on('log', gutil.log)
 		.on('error', gutil.log)
 		.transform('rollupify', {
 			config: {
 				cache: false,
-				entry: 'opts.path', // ./_js/bundle.js
+				entry: 'opts.path',
 				plugins: [
 					commonjs({
 						include: 'node_modules/!**',
@@ -50,6 +51,7 @@ function bundleScripts (watch, opts) {
 				]
 			}
 		});
+
 	const bundle = () => {
 		return bundler
 			.bundle()
@@ -59,7 +61,7 @@ function bundleScripts (watch, opts) {
 			})
 			.pipe(source(opts.filename || 'bundle.js'))
 			.pipe(buffer())
-			.pipe(gulp.dest(opts.dest)); // './js/compiled/'
+			.pipe(gulp.dest(opts.dest));
 	};
 
 	return bundle();
