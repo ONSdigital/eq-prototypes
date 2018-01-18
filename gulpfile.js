@@ -31,6 +31,8 @@ const es = require('event-stream');
 
 const bundleScripts = require('./gulp/javascript').bundleScripts;
 
+const jekyllFlags = [];
+
 // SVG Sprite
 gulp.task('sprite', () => {
   gulp.src('./_img/**/*.svg')
@@ -183,7 +185,8 @@ function jekyll (opts) {
 
 	const jekyllArgs = [
 		'build',
-		...(!!opts.watch ? jekyllWatchArgs : [])
+		...(!!opts.watch ? jekyllWatchArgs : []),
+		...jekyllFlags
 	];
 
 	console.log('jekyllArgs', jekyllArgs);
@@ -262,5 +265,9 @@ gulp.task('build', ['build:jekyll']);
 
 gulp.task('dev', ['dev:serve']);
 
-gulp.task('netlify', ['build']);
+gulp.task('netlify', () => {
+	jekyllFlags.push("--baseurl=");
+	// jekyllFlags.push("--url=");
+	gulp.run('build');
+});
 gulp.task('default', ['build']);
