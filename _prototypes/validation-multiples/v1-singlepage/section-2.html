@@ -1,5 +1,5 @@
 ---
-title: Validation multiple v1
+title: Validation singlepage v1
 project: Validation multiple questions
 globalcss: false
 
@@ -196,14 +196,14 @@ $( document ).ready(function() {
     var errorMultiple = '<div class="panel__header panel__header--sub"><ul class="list list--bare list--errors"><li class="list__item mars" data-ga-action="Please correct the answer to continue." data-ga-label="single-date-question" data-ga="error" data-ga-category="Error"><p>Enter figures that total the sum of £' + totalVal + '</p></li></ul></div>';
     var calculatedValue = String(val1+val2+val3);
     if( (calculatedValue) !== totalVal ){ // if any of values 1 to 4 are > the total value (q1r1)
-      $(".panel--head").toggleClass("hidden"); // then show the error panels
       $(window).scrollTop(0); // faux submission behaviour - top of page.
       if ( $('.panel--simple') ) {
         $('.answer.js-has-errors').unwrap();
         $('.question__answers').unwrap();
         $('.question__answers .panel__header--sub').remove();
-        $('.panel--head').toggleClass('hidden');
+        $('.panel--head').removeClass('hidden');
       }
+      $(".panel--head").removeClass("hidden"); // then show the error panels
       $("#errorLink").attr('href','#errorq2r1');
       $('.question__answers').wrap('<div class="panel__body" data-qa="error-body">').prepend(errorMultiple);
       $('.question__answers').wrap('<div class="answer answer--date js-has-errors" id="errorq2r3"><aside class="panel panel--simple panel--error" data-qa="error">');
