@@ -18,8 +18,8 @@ globalcss: false
   padding: 0 !important;
 }
 
-.hint{
-  /* display: none; */
+.input-type--currency .hint{
+  display: none;
 }
 
 .numericentry:focus::valid + .hint:after {
@@ -42,8 +42,8 @@ globalcss: false
  display: block;
 }
 
-.numericentry:invalid + .hint:after {
- content:" - Please use this format";
+.numericentry:invalid + .hint:before {
+ content:"Error: Enter a number less than or equal to £";
 }
 
 .smallentry:invalid ~ .hint {
@@ -70,14 +70,13 @@ globalcss: false
   order: 1;
 }
 .input-type__input{
-  flex: 1 auto;
   order: 2;
 }
 
 </style>
 <div class="page__subheader">
   <div class="container">
-    <a class="mars" href="../section-1">Previous</a>
+    <a class="mars" href="../index">Previous</a>
   </div>
 </div>
 
@@ -114,23 +113,6 @@ globalcss: false
                   <h2 class="question__title saturn">
                     Of the £<span class="highlight "><span class="q1"></span></span> paid to weekly paid employees in the last week of May 2016, what amount was:
                   </h2>
-                  <!-- <aside class="question__guidance">
-                    <div class="panel panel--simple panel--info" id="question-guidance-total-retail-turnover-question">
-                      <h3 class="venus">Include</h3>
-                      <ul class="mars">
-                        <li>VAT</li>
-                        <li>internet sales</li>
-                      </ul>
-                      <h3 class="venus">Exclude</h3>
-                      <ul class="mars">
-                        <li>revenue from mobile phone network commission and top up </li>
-                        <li>sales from catering facilities used by customers</li>
-                        <li>lottery sales and commission from lottery sales</li>
-                        <li>sales of car accessories and motor vehicles</li>
-                        <li>NHS receipts</li>
-                      </ul>
-                    </div>
-                  </aside> -->
                   <div class="question__answers">
                     <div class="question__answer">
                       <div class="answer answer--currency" id="aq2r1">
@@ -144,8 +126,9 @@ globalcss: false
                             </label>
                             <div class="input-type input-type--currency">
                               <span class="input-type__type" id="total-retail-turnover-answer-type">£</span>
-                              <input id="q2r1" value="" data-qa="input-text" name="q2r1" pattern="\d*" class="input input--text input-type__input numericentry">
-                              <span class="hint">e.g. 100</span>
+                              <!-- pattern="\d*" -->
+                              <input id="q2r1" value="" data-qa="input-text" name="q2r1" class="input input--text input-type__input numericentry">
+                              <span class="hint"><span class="q1"></span></span>
 
                             </div>
                           </div>
@@ -163,7 +146,8 @@ globalcss: false
                             </label>
                             <div class="input-type input-type--currency">
                               <span class="input-type__type" id="total-retail-turnover-answer-type">£</span>
-                              <input id="q2r2" value="" data-qa="input-text" name="q2r2" class="input input--text input-type__input">
+                              <input id="q2r2" value="" data-qa="input-text" name="q2r2" class="input input--text input-type__input numericentry">
+                              <span class="hint"><span class="q1"></span></span>
                             </div>
                           </div>
                         </div>
@@ -180,7 +164,8 @@ globalcss: false
                             </label>
                             <div class="input-type input-type--currency">
                               <span class="input-type__type" id="total-retail-turnover-answer-type">£</span>
-                              <input id="q2r3" value="" data-qa="input-text" name="q2r3" class="input input--text input-type__input">
+                              <input id="q2r3" value="" data-qa="input-text" name="q2r3" class="input input--text input-type__input numericentry">
+                              <span class="hint"><span class="q1"></span></span>
                             </div>
                           </div>
                         </div>
@@ -213,7 +198,7 @@ globalcss: false
             <button class="btn btn--link mars js-btn-save" type="submit" name="action[save_sign_out]">Save and complete later</button>
           </div>
         </form>
-        <a class="page__previous page__previous--bottom js-previous-link" href="../section-1" id="bottom-previous">Previous</a>
+        <a class="page__previous page__previous--bottom js-previous-link" href="../index" id="bottom-previous">Previous</a>
       </main>
     </div>
   </div>
@@ -242,7 +227,8 @@ $( document ).ready(function() {
     $('#q2r3').val(q2r3_answer);
   }
 
-  console.info(sessionStorage);
+  // add patterns
+  $('.numericentry').attr('pattern','[0-9]|' + q1var);
 
   $('.qa-btn-submit').click(function(e) {
     e.preventDefault();
@@ -254,6 +240,7 @@ $( document ).ready(function() {
     var errorPrep = '<div class="panel__header panel__header--sub"><ul class="list list--bare list--errors"><li class="list__item mars" data-ga-action="Please correct the answer to continue." data-ga-label="single-date-question" data-ga="error" data-ga-category="Error"><p>Your answer is greater than the total.</p></li></ul></div>';
     var errorMultiple = '<div class="panel__header panel__header--sub"><ul class="list list--bare list--errors"><li class="list__item mars" data-ga-action="Please correct the answer to continue." data-ga-label="single-date-question" data-ga="error" data-ga-category="Error"><p>Enter figures that total the sum of £' + totalVal + '</p></li></ul></div>';
     var calculatedValue = String(val1+val2+val3);
+
     if( (calculatedValue) !== totalVal ){ // if any of values 1 to 4 are > the total value (q1r1)
       $(window).scrollTop(0); // faux submission behaviour - top of page.
       if ( $('.panel--simple') ) {
