@@ -189,8 +189,6 @@ function jekyll (opts) {
 		...jekyllFlags
 	];
 
-	console.log('jekyllArgs', jekyllArgs);
-
 	const jekyll = child.spawn('jekyll', jekyllArgs);
 
 	const jekyllLogger = (buffer) => {
