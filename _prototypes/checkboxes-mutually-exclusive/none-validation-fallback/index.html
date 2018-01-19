@@ -1,16 +1,13 @@
 ---
-title:  Next question link
+title:  Mutually exclusive - none with validation
 project: Checkboxes (mutually exclusive)
 globalcss: false
 ---
 
 <link rel="stylesheet" href="{{ '/css/census-header-footer.css' | prepend: site.baseurl }}" />
 <style>
-    @media only screen and (min-width: 740px) {
-        .field__item--half {
-            min-width: 9.7rem;
-            margin-bottom : 0;
-        }
+    .hide {
+        display : none;
     }
 </style>
 
@@ -31,13 +28,28 @@ globalcss: false
         </div>
         <div class="grid__col col-7@m pull-1@m">
             <main role="main" id="main" class="page__main">
+
+                <div id="error-panel" class="hide">
+                    <div class="panel panel--error">
+                        <div class="panel__header">
+                            <div class="venus">Please adjust your answer</div>
+                        </div>
+                        <div class="panel__body">
+                            <p class="mars"><a href="#total-retail-turnover">Your selected option "No central heating" cannot be selected along with any other option.</a></p>
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                </div>
+
                 <form action="../../thankyou/index.html" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
                     <div class="group">
                         <div class="block" id="total-retail-turnover">
+
                             <section class="section" id="total-retail-turnover-section">
 
                                 <div class="question" id="heating-type">
-                                    <h2 class="question__title neptune">What type of central heating do you have?</h2>
+                                    <h1 class="question__title saturn">What type of central heating do you have?</h1>
 
                                     <div class="question__answers">
                                         <div class="question__answer">
@@ -48,20 +60,24 @@ globalcss: false
                                                             <div class="label__inner">Select all that apply:</div>
                                                         </label>
                                                         <div class="field__item js-focusable-box">
-                                                            <input class="input input--checkbox js-focusable" type="checkbox" id="checkbox1">
+                                                            <input class="input input--checkbox js-focusable" value="gas" name="heating-type" type="checkbox" id="checkbox1">
                                                             <label class="label label--inline venus" for="checkbox1">Gas</label>
                                                         </div>
                                                         <div class="field__item js-focusable-box">
-                                                            <input class="input input--checkbox js-focusable" type="checkbox" id="checkbox2">
+                                                            <input class="input input--checkbox js-focusable" value="electric" name="heating-type" type="checkbox" id="checkbox2">
                                                             <label class="label label--inline venus" for="checkbox2">Electric</label>
                                                         </div>
                                                         <div class="field__item js-focusable-box">
-                                                            <input class="input input--checkbox js-focusable" type="checkbox" id="checkbox3">
+                                                            <input class="input input--checkbox js-focusable" value="solid-fuel" name="heating-type" type="checkbox" id="checkbox3">
                                                             <label class="label label--inline venus" for="checkbox3">Solid fuel</label>
                                                         </div>
                                                         <div class="field__item js-focusable-box">
-                                                            <input class="input input--checkbox js-focusable" type="checkbox" id="checkbox4">
+                                                            <input class="input input--checkbox js-focusable" value="other" name="heating-type" type="checkbox" id="checkbox4">
                                                             <label class="label label--inline venus" for="checkbox4">Other</label>
+                                                        </div>
+                                                        <div class="field__item js-focusable-box">
+                                                            <input class="input input--checkbox js-focusable" value="none" name="heating-type" type="checkbox" id="checkbox5">
+                                                            <label class="label label--inline venus" for="checkbox5">No central heating</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -72,8 +88,6 @@ globalcss: false
                             </section>
                         </div>
                     </div>
-
-                    <p class="u-mb-l"><a href="../next-question/index.html">I don’t have central heating, take me to the next question</a></p>
 
                     <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Save and continue</button>
                     <div class="u-mb-m">
@@ -89,12 +103,29 @@ globalcss: false
 <script src='/js/compiled/standard-bundle.js'></script>
 
 <script>
+
     $(document).ready(function () {
 
-    	$('input:radio[name=radio-answer][value=yes]').prop('checked', true);
+    	var nameGroup = 'heating-type';
 
-        $('input:radio[name=radio-answer]').change(function () {
-            $('#heating-type')[$(this).val() === 'yes' ? 'show' : 'hide']();
-        });
+    	function onSubmit (e) {
+            var showError = false,
+                $noneCheckbox = $('input:checkbox[name=' + nameGroup + '][value=none]'),
+                $noneCheckboxChecked = $('input:checkbox[name=' + nameGroup + '][value=none]:checked'),
+                $otherCheckboxesChecked = $('input:checkbox[name=' + nameGroup + ']:checked').not($noneCheckbox);
+
+            if ($otherCheckboxesChecked.length && $noneCheckboxChecked.length) {
+                e.preventDefault();
+                showError = true;
+                toggleError_handler(showError);
+            }
+        }
+
+        function toggleError_handler (val) {
+    		window.scrollTo(0, 0);
+    		$('#error-panel').toggleClass('hide', !val);
+        }
+
+        $('.qa-questionnaire-form').on('submit', onSubmit);
     });
 </script>
