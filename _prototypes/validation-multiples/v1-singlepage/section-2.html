@@ -36,22 +36,22 @@ globalcss: false
    right: 30px;
 }
 
-.numericentry:invalid + .hint {
+.numericentry:invalid + .hint, .numericentry.error + .hint {
  color: red;
  font-weight:bold;
  display: block;
 }
 
-.numericentry:invalid + .hint:before {
+.numericentry:invalid + .hint:before, .numericentry.error + .hint:before {
  content:"Error: Enter a number less than or equal to £";
 }
 
-.smallentry:invalid ~ .hint {
+.smallentry:invalid ~ .hint, .smallentry.error ~ .hint {
  color: red;
  font-weight:bold;
 }
 
-.smallentry:invalid ~ .hint:after {
+.smallentry:invalid ~ .hint:after, .smallentry.error ~ .hint:after {
  content:" - Error: Enter a number ";
 }
 
@@ -127,7 +127,7 @@ globalcss: false
                             <div class="input-type input-type--currency">
                               <span class="input-type__type" id="total-retail-turnover-answer-type">£</span>
                               <!-- pattern="\d*" -->
-                              <input id="q2r1" value="" data-qa="input-text" name="q2r1" class="input input--text input-type__input numericentry">
+                              <input id="q2r1" value="" data-qa="input-text" name="q2r1" pattern="\d*" class="input input--text input-type__input numericentry">
                               <span class="hint"><span class="q1"></span></span>
 
                             </div>
@@ -228,7 +228,15 @@ $( document ).ready(function() {
   }
 
   // add patterns
-  $('.numericentry').attr('pattern','[0-9]|' + q1var);
+  // $('.numericentry').attr('pattern','[0-9]|[1-9][0-9]|' + q1var);
+  $( ".numericentry" ).keyup(function() {
+    console.log(Number($(this).val()) + " " +  Number(q1var));
+    if ( Number($(this).val()) > Number(q1var) ) {
+      $(this).addClass('error');
+    } else {
+      $(this).removeClass('error');
+    }
+  });
 
   $('.qa-btn-submit').click(function(e) {
     e.preventDefault();
