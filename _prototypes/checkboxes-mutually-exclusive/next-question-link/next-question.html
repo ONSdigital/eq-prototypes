@@ -1,0 +1,43 @@
+---
+title:  Mutually exclusive checkboxes - thankyou
+project: Checkboxes (mutually exclusive)
+globalcss: false
+---
+
+<link rel="stylesheet" href="{{ '/css/census-header-footer.css' | prepend: site.baseurl }}" />
+
+<header class="page__header">
+  {% include bar.html %}
+  {% include header-census.html %}
+</header>
+
+<div class="page__subheader">
+  <div class="container">
+    <!-- <a class="mars" href="../section-4">Previous</a> -->
+  </div>
+</div>
+
+<div class="page__container container">
+  <div class="grid grid--reverse">
+    <div class="grid__col col-4@m">
+    </div>
+    <div class="grid__col col-7@m pull-1@m">
+      <main role="main" id="main" class="page__main">
+        <div class="u-mb-s">
+          <h1 class="saturn">The next question...</h1>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+<script>
+$( document ).ready(function() {
+  if ($('.q1').length > 0) {
+    var q1var = sessionStorage.getItem('q1r1');
+    $('.q1').text(q1var);
+
+  }
+  console.info(sessionStorage);
+
+});
+</script>
