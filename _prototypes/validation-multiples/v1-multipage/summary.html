@@ -1,0 +1,253 @@
+---
+title: Validation multipage v1
+project: Validation multiple questions
+globalcss: false
+---
+
+<header class="page__header">
+{% include survey-header.html %}
+{% include bar.html %}
+</header>
+<style>
+.hidden {display: none;}
+#retailTotal {word-wrap: normal; word-break: normal;}
+
+.panel--simple{
+  margin-left: 0;
+}
+.panel--info h2{
+  margin-bottom: 0;
+}
+.summary__block{
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin-top: 1rem;
+}
+.summary__question{
+  display: block;
+  background-color: transparent;
+  border: 0px;
+  padding: 0;
+  margin-bottom: 1rem;
+  width: 40%;
+  padding-right: 1rem;
+}
+.summary__items{
+  border: 0;
+  border-bottom: 1px solid #ccc;
+  padding: 1rem 0 0 0;
+  margin: 0;
+  overflow: visible;
+}
+.summary__block .panel__body{
+  padding: 0;
+}
+.summary__block .panel--error {
+  padding: 0;
+}
+.summary__block .panel--error .panel__header {
+  padding: 1rem 1rem 0rem 1rem;
+}
+.summary__block .panel--error .summary__answer {
+  padding: 0 1rem;
+}
+.summary__answer{
+  border: 0px;
+}
+.summary__edit{
+  border: 0px;
+  display: block;
+  padding: 0;
+}
+.summary__answer-text{
+  padding: 0;
+  word-break: normal;
+}
+</style>
+<div class="page__subheader">
+  <div class="container">
+    <!-- <a class="mars" href="../section-4">Previous</a> -->
+  </div>
+</div>
+
+<div class="page__container container">
+  <div class="grid grid--reverse">
+    <div class="grid__col col-4@m">
+    </div>
+    <div class="grid__col col-7@m pull-1@m">
+
+      <!-- Error head start -->
+          <div class="panel panel--error u-mb-s hidden panel--head" data-qa="error">
+            <div class="panel__header">
+              <h1 class="panel__title venus">This page has an error</h1>
+            </div>
+            <div class="panel__body" data-qa="error-body">
+              <p class="mars">These <strong>must be corrected</strong> to continue.</p>
+              <ul class="list list--bare">
+
+                  <li class="list__item mars">
+                    1) <a class="js-inpagelink" id="errorLink" href="#errorq2r1">Amend the figures so they total the sum of £<span class="q1"></span></a>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+      <!-- End error head -->
+
+      <main role="main" id="main" class="page__main">
+      <div>
+  <h1 class="saturn">Your answers</h1>
+  <!-- <div class="print__message panel panel--simple panel--error">
+    <h2 class="saturn">Please remember to submit these responses.</h2>
+  </div> -->
+  <div class="print__hidden panel panel--simple panel--info u-mb">
+    <h2 class="neptune">Please submit this survey to complete it</h2>
+    <h2 class="mars">You can review your answers below</h2>
+  </div>
+</div>
+<!-- <div class="download u-mb-s u-mb-m@s">
+  <div class="venus download__text">You will have the opportunity to download your answers after submitting this questionnaire.</div>
+</div> -->
+<div>
+  <div class="summary">
+
+      <div class="summary__block">
+
+
+        <div class="summary__items">
+          <div class="summary__answer">
+            <div class="summary__question" id="total-sales-food-question">
+              For the period 1 May 2016 to 31 May 2016, what was the value of Essential Enterprise Ltd.’s total retail turnover?
+            </div>
+            <div class="summary__answer-text" id="retailTotal">£<span class="retailTotal"></span></div>
+            <div class="summary__edit">
+              <a href="../index" class="summary__edit-link" aria-describedby="total-sales-food total-sales-food-answer" data-qa="total-sales-food-edit" data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">Change <span class="u-vh">your answer</span></a>
+            </div>
+          </div>
+        </div>
+
+      <div class="error--hook">
+        <div class="summary__items">
+            <div class="summary__answer">
+              <div class="summary__question" id="total-sales-food-question">
+                Of the £<span class="retailTotal"></span> total retail turnover, what was the value of internet sales?
+              </div>
+              <div class="summary__answer-text" id="q2r1-answer"></div>
+              <div class="summary__edit">
+                <a href="../section-2" class="summary__edit-link" aria-describedby="total-sales-food total-sales-food-answer" data-qa="total-sales-food-edit" data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">Change <span class="u-vh">your answer</span></a>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="summary__items">
+            <div class="summary__answer">
+              <div class="summary__question" id="total-sales-alcohol-question">
+                Of the £<span class="retailTotal"></span> total retail turnover, what was the value of food sales?
+              </div>
+              <div class="summary__answer-text" id="q2r2-answer"></div>
+              <div class="summary__edit">
+                <a href="../section-3" class="summary__edit-link" aria-describedby="total-sales-alcohol total-sales-alcohol-answer" data-qa="total-sales-alcohol-edit" data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">Change <span class="u-vh">your answer</span></a>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="summary__items">
+            <div class="summary__answer">
+              <div class="summary__question" id="total-sales-clothing-question">
+                 Of the £<span class="retailTotal"></span> total retail turnover, what was the value of internet sales?
+              </div>
+              <div class="summary__answer-text" id="q2r3-answer"></div>
+              <div class="summary__edit">
+                <a href="../section-4" class="summary__edit-link" aria-describedby="total-sales-clothing total-sales-clothing-answer" data-qa="total-sales-clothing-edit" data-ga-category="Summary" data-ga-action="Edit click" data-ga="click">Change <span class="u-vh">your answer</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> <!-- Summary block -->
+  </div>
+</div>
+
+
+    <form class="form qa-questionnaire-form" role="form" method="POST" autocomplete="off" novalidate="">
+      <input id="csrf_token" name="csrf_token" type="hidden" value="IjI5YzdhNTY2ZjgxZGZkY2ZhOGMwYzQ4MjZkYWUwZTNlODNhNDllN2Ei.C_Xwyg.JJgAPY5r93Gl0Qdj5rf7WM9MUaI">
+      <div class="group" id="mci">
+        <div class="block" id="summary">
+        </div>
+      </div>
+
+  <button class="btn btn--primary btn--lg qa-btn-submit" data-qa="btn-submit" data-loading-msg="Submitting…" type="submit">Submit survey</button>
+
+
+      <div class="u-mb-m">
+        <button class="btn btn--link mars js-btn-save" type="submit" name="action[save_sign_out]" data-ga-category="Navigation" data-ga-action="Save and complete later click" data-ga="click">Save and complete later</button>
+      </div>
+    </form>
+
+  <a class="page__previous page__previous--bottom" data-ga-category="Navigation" data-ga-label="bottom" data-ga-action="Previous link click" data-ga="click" href="../section-4" id="bottom-previous">Previous</a>
+
+
+    </main>
+
+    </div>
+  </div>
+</div>
+<script>
+$( document ).ready(function() {
+  var editing = true;
+  sessionStorage.setItem('editing', editing);
+  if ($('.config1').length>0){
+    var config1 = sessionStorage.getItem('config1');
+    $('.config1').html(config1);
+  }
+
+  if ($('.retailTotal').length > 0) {
+    var q2r1_answer = (Number(sessionStorage.getItem('q2r1'))).toLocaleString('en-gb',{ style: 'currency', currency: 'GBP', minimumFractionDigits: '0' });
+    var q2r2_answer = (Number(sessionStorage.getItem('q2r2'))).toLocaleString('en-gb',{ style: 'currency', currency: 'GBP', minimumFractionDigits: '0' });
+    var q2r3_answer = (Number(sessionStorage.getItem('q2r3'))).toLocaleString('en-gb',{ style: 'currency', currency: 'GBP', minimumFractionDigits: '0' });
+    var retailTotal = sessionStorage.getItem('q1r1');
+    var calculatedValue = String(Number(sessionStorage.getItem('q2r1')) + Number(sessionStorage.getItem('q2r2')) + Number(sessionStorage.getItem('q2r3')));
+    var errorMultiple = '<div class="panel__header panel__header--sub"><ul class="list list--bare list--errors"><li class="list__item mars" data-ga-action="Please correct the answer to continue." data-ga-label="single-date-question" data-ga="error" data-ga-category="Error"><p>Amend the figures so they total the sum of £' + retailTotal + '</p></li></ul></div>';
+
+    if(q2r1_answer=='£0.00') {
+      q2r1_answer = q2r1_answer;
+    }
+    if(q2r2_answer=='£0.00') {
+      q2r2_answer = q2r2_answer;
+    }
+    if(q2r3_answer=='£0.00') {
+      q2r3_answer = q2r3_answer;
+    }
+    if ($('.q1').length > 0) {
+      var q1var = sessionStorage.getItem('q1r1');
+      $('.q1').text(q1var);
+    }
+    if( calculatedValue !== retailTotal ){
+      $('.panel--head').removeClass('hidden');
+      $('.error--hook').wrap('<div class="panel__body" data-qa="error-body">').prepend(errorMultiple);
+      $('.error--hook').wrap('<div class="answer answer--date js-has-errors" id="errorq2r1"><aside class="panel panel--simple panel--error" data-qa="error">');
+      $('.panel--info').addClass('hidden');
+    }
+
+    console.info('Calc\'d total:'+retailTotal);
+    $('#q2r1-answer').text(q2r1_answer);
+    $('#q2r2-answer').text(q2r2_answer);
+    $('#q2r3-answer').text(q2r3_answer);
+    $('.retailTotal').text(retailTotal);
+
+// console.log(retailTotal.toLocaleString('en-gb',{ style: 'currency', currency: 'GBP' }));
+
+    sessionStorage.setItem('retailTotal', retailTotal);
+
+  }
+  console.info(sessionStorage);
+  // $('.qa-btn-get-started').click(function(e) {
+  $('.qa-btn-submit').click(function(e) {
+    e.preventDefault();
+    window.location.href = "../thankyou/"; // target of save and continue
+
+  });
+
+});
+</script>
