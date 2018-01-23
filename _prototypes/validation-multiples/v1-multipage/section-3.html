@@ -34,23 +34,26 @@ globalcss: false
    top: 10px;
    right: 30px;
 }
-
-.numericentry:invalid + .hint {
+.numericentry:invalid, .numericentry.error {
+  border-color: #d0021b !important;
+  box-shadow: 0 0 0 1px #d0021b;
+}
+.numericentry:invalid + .hint, .numericentry.error + .hint {
  color: #d0021b;
  font-weight:bold;
  display: block;
 }
 
-.numericentry:invalid + .hint:before {
+.numericentry:invalid + .hint:before, .numericentry.error + .hint:before {
  content:"Error: Enter a number less than or equal to £";
 }
 
-.smallentry:invalid ~ .hint {
+.smallentry:invalid ~ .hint, .smallentry.error ~ .hint {
  color: #d0021b;
  font-weight:bold;
 }
 
-.smallentry:invalid ~ .hint:after {
+.smallentry:invalid ~ .hint:after, .smallentry.error ~ .hint:after {
  content:" - Error: Enter a number ";
 }
 
@@ -67,6 +70,7 @@ globalcss: false
 .hint{
   flex: 2 100%;
   order: 1;
+  margin-bottom: 1rem;
 }
 .input-type__input{
   order: 2;
@@ -91,7 +95,7 @@ globalcss: false
         <h1 class="panel__title venus">This page has an error</h1>
       </div>
       <div class="panel__body" data-qa="error-body">
-        <p class="mars">These <strong>must be corrected</strong> to continue.</p>
+        <p class="mars">This <strong>must be corrected</strong> to continue.</p>
         <ul class="list list--bare">
 
             <li class="list__item mars">
@@ -109,7 +113,7 @@ globalcss: false
               <section class="section" id="total-retail-turnover-section">
                 <div class="question" id="total-retail-turnover-question">
                   <h2 class="question__title saturn">
-                    Of the £<span class="highlight "><span class="q1"></span></span> total retail turnover, what was the value of food sales?
+                    Of the <span class="highlight ">£<span class="q1"></span></span> total retail turnover, what was the value of food sales?
                   </h2>
                   <div class="question__answers">
                     <div class="question__answer">
@@ -124,7 +128,7 @@ globalcss: false
                             </label>
                             <div class="input-type input-type--currency">
                               <span class="input-type__type" id="total-retail-turnover-answer-type">£</span>
-                              <input id="q2r2" value="" data-qa="input-text" name="q2r2" class="input input--text input-type__input numericentry">
+                              <input id="q2r2" value="" data-qa="input-text" name="q2r2" pattern="\d*" class="input input--text input-type__input numericentry">
                               <span class="hint"><span class="q1"></span></span>
                             </div>
                           </div>
@@ -163,7 +167,14 @@ $( document ).ready(function() {
   }
 
   // add patterns
-  $('.numericentry').attr('pattern','[0-9]|' + q1var);
+  // $('.numericentry').attr('pattern','[0-9]|[1-9][0-9]|' + q1var);
+  $( ".numericentry" ).keyup(function() {
+    if ( Number($(this).val()) > Number(q1var) ) {
+      $(this).addClass('error');
+    } else {
+      $(this).removeClass('error');
+    }
+  });
 
   console.info(sessionStorage);
 
