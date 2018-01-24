@@ -1,11 +1,9 @@
 const gulp = require('gulp');
 const browserify = require('browserify');
 const watchify = require('watchify');
-const sourcemaps = require('gulp-sourcemaps');
 const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
 const gutil = require('gulp-util');
-const rename = require('gulp-rename');
 
 const rollupBabel = require('rollup-plugin-babel');
 const nodeResolve = require('rollup-plugin-node-resolve');
@@ -13,8 +11,6 @@ const commonjs = require('rollup-plugin-commonjs');
 
 function bundleScripts (watch, opts) {
 	opts = opts || {};
-
-	let cache;
 
 	const bundler = browserify({
 			entries: [opts.path],
@@ -27,10 +23,10 @@ function bundleScripts (watch, opts) {
 		.transform('rollupify', {
 			config: {
 				cache: false,
-				entry: 'opts.path',
+				entry: opts.path,
 				plugins: [
 					commonjs({
-						include: 'node_modules/!**',
+						include: 'node_modules/**',
 						namedExports: {
 							'node_modules/events/events.js': Object.keys(require('events'))
 						}
@@ -41,10 +37,10 @@ function bundleScripts (watch, opts) {
 						preferBuiltins: false
 					}),
 					rollupBabel({
-						// plugins: ['lodash'],
+						plugins: ['lodash'],
 						presets: ['es2015-rollup', 'stage-2'],
 						babelrc: false,
-						exclude: 'node_modules/!**'
+						exclude: 'node_modules/**'
 					})
 				]
 			}
@@ -63,7 +59,7 @@ function bundleScripts (watch, opts) {
 	};
 
 	return bundle();
-};
+}
 
 module.exports = {
 	bundleScripts: bundleScripts
