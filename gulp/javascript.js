@@ -27,10 +27,10 @@ function bundleScripts (watch, opts) {
 		.transform('rollupify', {
 			config: {
 				cache: false,
-				entry: 'opts.path',
+				entry: opts.path,
 				plugins: [
 					commonjs({
-						include: 'node_modules/!**',
+						include: 'node_modules/**',
 						namedExports: {
 							'node_modules/events/events.js': Object.keys(require('events'))
 						}
@@ -41,10 +41,10 @@ function bundleScripts (watch, opts) {
 						preferBuiltins: false
 					}),
 					rollupBabel({
-						// plugins: ['lodash'],
+						plugins: ['lodash'],
 						presets: ['es2015-rollup', 'stage-2'],
 						babelrc: false,
-						exclude: 'node_modules/!**'
+						exclude: 'node_modules/**'
 					})
 				]
 			}
