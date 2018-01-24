@@ -1,11 +1,9 @@
 const gulp = require('gulp');
 const browserify = require('browserify');
 const watchify = require('watchify');
-const sourcemaps = require('gulp-sourcemaps');
 const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
 const gutil = require('gulp-util');
-const rename = require('gulp-rename');
 
 const rollupBabel = require('rollup-plugin-babel');
 const nodeResolve = require('rollup-plugin-node-resolve');
@@ -13,8 +11,6 @@ const commonjs = require('rollup-plugin-commonjs');
 
 function bundleScripts (watch, opts) {
 	opts = opts || {};
-
-	let cache;
 
 	const bundler = browserify({
 			entries: [opts.path],
@@ -63,7 +59,7 @@ function bundleScripts (watch, opts) {
 	};
 
 	return bundle();
-};
+}
 
 module.exports = {
 	bundleScripts: bundleScripts
