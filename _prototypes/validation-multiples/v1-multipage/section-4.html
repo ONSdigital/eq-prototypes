@@ -17,10 +17,17 @@ globalcss: false
 .panel__header--sub {
   padding: 0 !important;
 }
-.input-type--currency .hint{
-  display: none;
+.hint{
+  flex: 2 100%;
+  order: 1;
+  max-height: 0;
+  overflow: hidden;
+  color: #d0021b;
+  font-weight:bold;
+  transition: all 0.1s ease-in-out;
+  margin-bottom: 0.4rem;
+  margin-top: -0.4rem;
 }
-
 .numericentry:focus::valid + .hint:after {
    content: "\f00c";
    font-style: normal;
@@ -34,24 +41,28 @@ globalcss: false
    top: 10px;
    right: 30px;
 }
+.numericentry:invalid, .numericentry.error {
+  border-color: #d0021b !important;
+  box-shadow: 0 0 0 1px #d0021b;
+}
 
-.numericentry:invalid + .hint {
- color: #d0021b;
- font-weight:bold;
+.numericentry:invalid + .hint, .numericentry.error + .hint {
  display: block;
+ height: auto;
+ max-height: 50px;
 }
 
-.numericentry:invalid + .hint:before {
- content:"Error: Enter a number less than or equal to £";
+.numericentry:invalid + .hint:before, .numericentry.error + .hint:before {
+ content:"";
 }
 
-.smallentry:invalid ~ .hint {
+.smallentry:invalid ~ .hint, .smallentry.error ~ .hint {
  color: #d0021b;
  font-weight:bold;
 }
 
-.smallentry:invalid ~ .hint:after {
- content:" - Error: Enter a number ";
+.smallentry:invalid ~ .hint:after, .smallentry.error ~ .hint:after {
+ content:"";
 }
 
 .input-type{
@@ -63,10 +74,6 @@ globalcss: false
   order: 2;
   top: auto !important;
   bottom: 1px;
-}
-.hint{
-  flex: 2 100%;
-  order: 1;
 }
 .input-type__input{
   order: 2;
@@ -91,7 +98,7 @@ globalcss: false
         <h1 class="panel__title venus">This page has an error</h1>
       </div>
       <div class="panel__body" data-qa="error-body">
-        <p class="mars">These <strong>must be corrected</strong> to continue.</p>
+        <p class="mars">This <strong>must be corrected</strong> to continue.</p>
         <ul class="list list--bare">
 
             <li class="list__item mars">
@@ -109,7 +116,7 @@ globalcss: false
               <section class="section" id="total-retail-turnover-section">
                 <div class="question" id="total-retail-turnover-question">
                   <h2 class="question__title saturn">
-                    Of the £<span class="highlight "><span class="q1"></span></span> total retail turnover, what was the value of internet sales?
+                    Of the <span class="highlight ">£<span class="q1"></span></span> total retail turnover, what was the value of alcohol, confectionery and tobacco sales?
                   </h2>
                   <div class="question__answers">
                     <div class="question__answer">
@@ -119,13 +126,13 @@ globalcss: false
                           <div class="field">
                             <label for="q2r3" id="label-total-retail-turnover-answer" class="label venus ">
                               <div class="label__inner">
-                                Internet sales
+                                Alcohol, confectionery and tobacco sales
                               </div>
                             </label>
                             <div class="input-type input-type--currency">
                               <span class="input-type__type" id="total-retail-turnover-answer-type">£</span>
-                              <input id="q2r3" value="" data-qa="input-text" name="q2r3" class="input input--text input-type__input numericentry">
-                              <span class="hint"><span class="q1"></span></span>
+                              <input id="q2r3" value="" data-qa="input-text" name="q2r3" pattern="\d*" class="input input--text input-type__input numericentry">
+                              <span class="hint">Enter a number less than or equal to £<span class="q1"></span></span>
                             </div>
                           </div>
                         </div>
@@ -163,7 +170,14 @@ $( document ).ready(function() {
   }
 
   // add patterns
-  $('.numericentry').attr('pattern','[0-9]|' + q1var);
+  // $('.numericentry').attr('pattern','[0-9]|[1-9][0-9]|' + q1var);
+  $( ".numericentry" ).keyup(function() {
+    if ( Number($(this).val()) > Number(q1var) ) {
+      $(this).addClass('error');
+    } else {
+      $(this).removeClass('error');
+    }
+  });
 
   console.info(sessionStorage);
 
