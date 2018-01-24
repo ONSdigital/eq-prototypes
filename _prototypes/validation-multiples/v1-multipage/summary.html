@@ -209,7 +209,7 @@ $( document ).ready(function() {
     var q2r3_answer = (Number(sessionStorage.getItem('q2r3'))).toLocaleString('en-gb',{ style: 'currency', currency: 'GBP', minimumFractionDigits: '0' });
     var retailTotal = sessionStorage.getItem('q1r1');
     var calculatedValue = String(Number(sessionStorage.getItem('q2r1')) + Number(sessionStorage.getItem('q2r2')) + Number(sessionStorage.getItem('q2r3')));
-    var errorMultiple = '<div class="panel__header panel__header--sub"><ul class="list list--bare list--errors"><li class="list__item mars" data-ga-action="Please correct the answer to continue." data-ga-label="single-date-question" data-ga="error" data-ga-category="Error"><p>Amend the figures so they total the sum of £' + retailTotal + '</p></li></ul></div>';
+    var errorMultiple = '<div class="panel__header panel__header--sub"><ul class="list list--bare list--errors"><li class="list__item mars " data-ga-action="Please correct the answer to continue." data-ga-label="single-date-question" data-ga="error" data-ga-category="Error"><p class="u-mb-no">Amend the figures so they total the sum of £' + retailTotal + '</p></li></ul></div>';
 
     if(q2r1_answer=='£0.00') {
       q2r1_answer = q2r1_answer;

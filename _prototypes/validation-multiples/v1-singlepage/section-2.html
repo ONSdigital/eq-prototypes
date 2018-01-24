@@ -17,11 +17,17 @@ globalcss: false
 .panel__header--sub {
   padding: 0 !important;
 }
-
-.input-type--currency .hint{
-  display: none;
+.hint{
+  flex: 2 100%;
+  order: 1;
+  max-height: 0;
+  overflow: hidden;
+  color: #d0021b;
+  font-weight:bold;
+  transition: all 0.1s ease-in-out;
+  margin-bottom: 0.4rem;
+  margin-top: -0.4rem;
 }
-
 .numericentry:focus::valid + .hint:after {
    content: "\f00c";
    font-style: normal;
@@ -39,14 +45,15 @@ globalcss: false
   border-color: #d0021b !important;
   box-shadow: 0 0 0 1px #d0021b;
 }
+
 .numericentry:invalid + .hint, .numericentry.error + .hint {
- color: #d0021b;
- font-weight:bold;
  display: block;
+ height: auto;
+ max-height: 50px;
 }
 
 .numericentry:invalid + .hint:before, .numericentry.error + .hint:before {
- content:"Error: Enter a number less than or equal to £";
+ content:"";
 }
 
 .smallentry:invalid ~ .hint, .smallentry.error ~ .hint {
@@ -55,7 +62,7 @@ globalcss: false
 }
 
 .smallentry:invalid ~ .hint:after, .smallentry.error ~ .hint:after {
- content:" - Error: Enter a number ";
+ content:"";
 }
 
 .input-type{
@@ -68,15 +75,9 @@ globalcss: false
   top: auto !important;
   bottom: 1px;
 }
-.hint{
-  flex: 2 100%;
-  order: 1;
-  margin-bottom: 1rem;
-}
 .input-type__input{
   order: 2;
 }
-
 </style>
 <div class="page__subheader">
   <div class="container">
@@ -132,7 +133,7 @@ globalcss: false
                               <span class="input-type__type" id="total-retail-turnover-answer-type">£</span>
                               <!-- pattern="\d*" -->
                               <input id="q2r1" value="" data-qa="input-text" name="q2r1" pattern="\d*" class="input input--text input-type__input numericentry">
-                              <span class="hint"><span class="q1"></span></span>
+                              <span class="hint">Enter a number less than or equal to £<span class="q1"></span></span>
 
                             </div>
                           </div>
@@ -151,7 +152,7 @@ globalcss: false
                             <div class="input-type input-type--currency">
                               <span class="input-type__type" id="total-retail-turnover-answer-type">£</span>
                               <input id="q2r2" value="" data-qa="input-text" name="q2r2" class="input input--text input-type__input numericentry">
-                              <span class="hint"><span class="q1"></span></span>
+                              <span class="hint">Enter a number less than or equal to £<span class="q1"></span></span>
                             </div>
                           </div>
                         </div>
@@ -169,7 +170,7 @@ globalcss: false
                             <div class="input-type input-type--currency">
                               <span class="input-type__type" id="total-retail-turnover-answer-type">£</span>
                               <input id="q2r3" value="" data-qa="input-text" name="q2r3" class="input input--text input-type__input numericentry">
-                              <span class="hint"><span class="q1"></span></span>
+                              <span class="hint">Enter a number less than or equal to £<span class="q1"></span></span>
                             </div>
                           </div>
                         </div>
