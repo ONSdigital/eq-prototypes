@@ -9,7 +9,76 @@ globalcss: false
 {% include survey-header.html %}
 {% include bar.html %}
 </header>
+<style>
+.hidden {display: none;}
+.panel--error input {
+  border-color: #d0021b;
+}
+.panel__header--sub {
+  padding: 0 !important;
+}
+.hint{
+  flex: 2 100%;
+  order: 1;
+  max-height: 0;
+  overflow: hidden;
+  color: #d0021b;
+  font-weight:bold;
+  transition: all 0.1s ease-in-out;
+  margin-bottom: 0.4rem;
+  margin-top: -0.4rem;
+}
+.numericentry:focus::valid + .hint:after {
+   content: "\f00c";
+   font-style: normal;
+   font-weight: normal;
+   text-decoration: inherit;
+/*--adjust as necessary--*/
+   color: green;
+   font-size: 18px;
+   padding-right: 0.5em;
+   position: absolute;
+   top: 10px;
+   right: 30px;
+}
+.numericentry:invalid, .numericentry.error {
+  border-color: #d0021b !important;
+  box-shadow: 0 0 0 1px #d0021b;
+}
 
+.numericentry:invalid + .hint, .numericentry.error + .hint {
+ display: block;
+ height: auto;
+ max-height: 50px;
+}
+
+.numericentry:invalid + .hint:before, .numericentry.error + .hint:before {
+ content:"";
+}
+
+.smallentry:invalid ~ .hint, .smallentry.error ~ .hint {
+ color: #d0021b;
+ font-weight:bold;
+}
+
+.smallentry:invalid ~ .hint:after, .smallentry.error ~ .hint:after {
+ content:"";
+}
+
+.input-type{
+  display: flex;
+  flex-flow: row wrap;
+}
+.input-type__type{
+  flex: 1 auto;
+  order: 2;
+  top: auto !important;
+  bottom: 1px;
+}
+.input-type__input{
+  order: 2;
+}
+</style>
 <div class="page__subheader">
   <div class="container">
   </div>
@@ -41,7 +110,8 @@ globalcss: false
                             </label>
                             <div class="input-type input-type--currency">
                               <span class="input-type__type" id="total-retail-turnover-answer-type">£</span>
-                              <input id="q1r1" value="" data-qa="input-text" name="q1r1" class="input input--text input-type__input">
+                              <input id="q1r1" value="" data-qa="input-text" pattern="\d*" name="q1r1" class="input input--text input-type__input numericentry">
+                              <span class="hint mercury">Enter a number</span>
                             </div>
                           </div>
                         </div>
@@ -76,7 +146,6 @@ $( document ).ready(function() {
     var config1 = sessionStorage.getItem('config1');
     $('.config1').html(config1);
   }
-
   console.info(sessionStorage);
   // $('.qa-btn-get-started').click(function(e) {
   $('.qa-btn-submit').click(function(e) {
