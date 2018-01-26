@@ -10,6 +10,9 @@ globalcss: false
 {% include bar.html %}
 </header>
 <style>
+.panel--simple {
+  margin: 0;
+}
 .hidden {display: none;}
 .panel--error input {
   border-color: #d0021b;
@@ -151,7 +154,7 @@ globalcss: false
                             </label>
                             <div class="input-type input-type--currency">
                               <span class="input-type__type" id="total-retail-turnover-answer-type">£</span>
-                              <input id="q2r2" value="" data-qa="input-text" name="q2r2" class="input input--text input-type__input numericentry">
+                              <input id="q2r2" value="" data-qa="input-text" name="q2r2" pattern="\d*" class="input input--text input-type__input numericentry">
                               <span class="hint mercury">Enter a number less than or equal to £<span class="q1"></span></span>
                             </div>
                           </div>
@@ -169,7 +172,7 @@ globalcss: false
                             </label>
                             <div class="input-type input-type--currency">
                               <span class="input-type__type" id="total-retail-turnover-answer-type">£</span>
-                              <input id="q2r3" value="" data-qa="input-text" name="q2r3" class="input input--text input-type__input numericentry">
+                              <input id="q2r3" value="" data-qa="input-text" name="q2r3" pattern="\d*" class="input input--text input-type__input numericentry">
                               <span class="hint mercury">Enter a number less than or equal to £<span class="q1"></span></span>
                             </div>
                           </div>
@@ -263,7 +266,7 @@ $( document ).ready(function() {
       }
       $(".panel--head").removeClass("hidden"); // then show the error panels
       $("#errorLink").attr('href','#errorq2r1');
-      $('.question__answers').wrap('<div class="panel__body" data-qa="error-body">').prepend(errorMultiple);
+      $('.question__answers').wrap('<div class="" data-qa="error-body">').prepend(errorMultiple);
       $('.question__answers').wrap('<div class="answer answer--date js-has-errors" id="errorq2r1"><aside class="panel panel--simple panel--error" data-qa="error">');
       return false;
     }

@@ -10,6 +10,9 @@ globalcss: false
 {% include bar.html %}
 </header>
 <style>
+.panel--simple {
+  margin: 0;
+}
 .hidden {display: none;}
 .panel--error input {
   border-color: #d0021b;
@@ -199,7 +202,7 @@ $( document ).ready(function() {
       }
       $(".panel--head").removeClass("hidden"); // then show the error panels
       $("#errorLink").attr('href','#errorq2r1');
-      $('.question__answers').wrap('<div class="panel__body" data-qa="error-body">').prepend(errorMultiple);
+      $('.question__answers').wrap('<div class="" data-qa="error-body">').prepend(errorMultiple);
       $('.question__answers').wrap('<div class="answer answer--date js-has-errors" id="errorq2r1"><aside class="panel panel--simple panel--error" data-qa="error">');
       return false;
     }
