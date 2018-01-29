@@ -1,5 +1,5 @@
 ---
-title:  Mutually exclusive - none with validation
+title:  Mutually exclusive - none with validation (Business example)
 project: Checkboxes (mutually exclusive)
 globalcss: false
 ---
@@ -29,16 +29,18 @@ globalcss: false
         <div class="grid__col col-7@m pull-1@m">
             <main role="main" id="main" class="page__main">
 
-                <div id="error-panel" class="hide"><!-- class="hide" -->
+                <div id="error-panel" class="hide">
                     <div class="panel panel--error">
                         <div class="panel__header">
-                            <div class="venus">This page has an error</div>
+                            <div class="venus">This page has 1 error</div>
                         </div>
                         <div class="panel__body">
                             <p>This <strong>must be corrected</strong> to continue.</p>
                             <ul class="list list--bare">
                                 <li class="list__item mars">
-                                    1) <a class="js-inpagelink" href="#container-mandatory-checkbox-answer">Select all that apply to continue.</a>
+                                    <a id="piped-error-message"
+                                       class="js-inpagelink"
+                                       href="#container-mandatory-checkbox-answer"></a>
                                 </li>
                             </ul>
                         </div>
@@ -47,14 +49,21 @@ globalcss: false
                     <br />
                 </div>
 
-                <form action="../../thankyou/index.html" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
+                <form action="../../../thankyou/index.html" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
                     <div class="group">
                         <div class="block" id="central-heating">
 
                             <section class="section" id="central-heating-section">
 
                                 <div class="question" id="heating-type">
-                                    <h1 class="question__title saturn">What type of central heating do you have?</h1>
+                                    <h1 class="question__title saturn">
+                                        What significant changes occurred to the total pay or number of employees</h1>
+
+                                    <p>This is your own interpretation of whether there has been a significant change
+                                        in the businesses figures compared with the previous month.</p>
+
+                                    <p>Also consider whether there has been a significant change from the same month in
+                                        the previous year.</p>
 
                                     <div class="question__answers">
                                         <div class="question__answer">
@@ -66,24 +75,36 @@ globalcss: false
                                                             <div class="label__inner">Select all that apply:</div>
                                                         </label>
                                                         <div class="field__item js-focusable-box">
-                                                            <input class="input input--checkbox js-focusable" value="gas" name="heating-type" type="checkbox" id="checkbox1">
-                                                            <label class="label label--inline venus" for="checkbox1">Gas</label>
+                                                            <input class="input input--checkbox js-focusable" value="redundancies" name="question-type" type="checkbox" id="checkbox1">
+                                                            <label class="label label--inline venus js-label" for="checkbox1">Redundancies</label>
                                                         </div>
                                                         <div class="field__item js-focusable-box">
-                                                            <input class="input input--checkbox js-focusable" value="electric" name="heating-type" type="checkbox" id="checkbox2">
-                                                            <label class="label label--inline venus" for="checkbox2">Electric</label>
+                                                            <input class="input input--checkbox js-focusable" value="more-temporary-staff" name="question-type" type="checkbox" id="checkbox2">
+                                                            <label class="label label--inline venus js-label" for="checkbox2">More temporary staff</label>
                                                         </div>
                                                         <div class="field__item js-focusable-box">
-                                                            <input class="input input--checkbox js-focusable" value="solid-fuel" name="heating-type" type="checkbox" id="checkbox3">
-                                                            <label class="label label--inline venus" for="checkbox3">Solid fuel</label>
+                                                            <input class="input input--checkbox js-focusable" value="fewer-temporary-staff" name="question-type" type="checkbox" id="checkbox3">
+                                                            <label class="label label--inline venus js-label" for="checkbox3">Fewer temporary staff</label>
                                                         </div>
                                                         <div class="field__item js-focusable-box">
-                                                            <input class="input input--checkbox js-focusable" value="other" name="heating-type" type="checkbox" id="checkbox4">
-                                                            <label class="label label--inline venus" for="checkbox4">Other</label>
+                                                            <input class="input input--checkbox js-focusable" value="more-overtime" name="question-type" type="checkbox" id="checkbox4">
+                                                            <label class="label label--inline venus js-label" for="checkbox4">More overtime</label>
                                                         </div>
                                                         <div class="field__item js-focusable-box">
-                                                            <input class="input input--checkbox js-focusable" value="none" name="heating-type" type="checkbox" id="checkbox5">
-                                                            <label class="label label--inline venus" for="checkbox5">No central heating</label>
+                                                            <input class="input input--checkbox js-focusable" value="less-overtime" name="question-type" type="checkbox" id="checkbox5">
+                                                            <label class="label label--inline venus js-label" for="checkbox5">Less overtime</label>
+                                                        </div>
+                                                        <div class="field__item js-focusable-box">
+                                                            <input class="input input--checkbox js-focusable" value="pay-increase" name="question-type" type="checkbox" id="checkbox6">
+                                                            <label class="label label--inline venus js-label" for="checkbox6">Pay increase</label>
+                                                        </div>
+                                                        <div class="field__item js-focusable-box">
+                                                            <input class="input input--checkbox js-focusable" value="industrial-action" name="question-type" type="checkbox" id="checkbox7">
+                                                            <label class="label label--inline venus js-label" for="checkbox7">Industrial action</label>
+                                                        </div>
+                                                        <div class="field__item js-focusable-box">
+                                                            <input class="input input--checkbox js-focusable" value="none" name="question-type" type="checkbox" id="checkbox8">
+                                                            <label class="label label--inline venus js-label" for="checkbox8">There were no significant changes</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -127,10 +148,13 @@ globalcss: false
 
     $(document).ready(function () {
 
-    	var nameGroup = 'heating-type';
+    	var nameGroup = 'question-type';
 
     	function onSubmit (e) {
             var showError = false,
+                checkboxErrorLabelArr = [],
+                errorMessageTemplate = "Uncheck ${otherLabels} <strong>or</strong> ‘I don’t have access to a vehicle’ to continue.",
+
                 $noneCheckbox = $('input:checkbox[name=' + nameGroup + '][value=none]'),
                 $noneCheckboxChecked = $('input:checkbox[name=' + nameGroup + '][value=none]:checked'),
                 $otherCheckboxesChecked = $('input:checkbox[name=' + nameGroup + ']:checked').not($noneCheckbox);
@@ -138,23 +162,44 @@ globalcss: false
             if ($otherCheckboxesChecked.length && $noneCheckboxChecked.length) {
                 e.preventDefault();
                 showError = true;
+
+                $otherCheckboxesChecked.each(function () {
+                  checkboxErrorLabelArr.push($(this).next('.js-label').text());
+                });
             }
 
-            toggleError_handler(showError);
+            toggleError_handler({
+              showError: showError,
+              errorMessage: formatErrorMessage(checkboxErrorLabelArr, errorMessageTemplate)
+            });
         }
 
-        function toggleError_handler (val) {
+        function formatErrorMessage (labels, template) {
+
+            return template.replace('${otherLabels}',
+                ' ' +
+                labels
+                    .map(function (item) {
+                        return "'" + item + "'";
+                    })
+                    .join(' and ') +
+                ' ');
+        }
+
+        function toggleError_handler (opts) {
     		window.scrollTo(0, 0);
-    		val ? showError() : hideError();
+    		opts.showError ? showError(opts.errorMessage) : hideError();
         }
 
-        function showError () {
+        function showError (errorMessage) {
+    	    $('#piped-error-message').html(errorMessage);
             $('#error-panel').removeClass('hide');
             $('#central-heating-answer-fields-container').append($('#central-heating-answer-fields'));
             $('#error-panel-container').removeClass('hide');
         }
 
         function hideError () {
+            $('#piped-error-message').html('');
             $('#error-panel').addClass('hide');
             $('#container-mandatory-checkbox-answer').append($('#central-heating-answer-fields'));
             $('#error-panel-container').addClass('hide');
