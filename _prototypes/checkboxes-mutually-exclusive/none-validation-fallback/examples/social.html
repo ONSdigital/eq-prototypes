@@ -1,5 +1,5 @@
 ---
-title:  Mutually exclusive - none with validation (Business example)
+title:  Mutually exclusive - none with validation (Social example)
 project: Checkboxes (mutually exclusive)
 globalcss: false
 ---
@@ -56,14 +56,7 @@ globalcss: false
                             <section class="section" id="central-heating-section">
 
                                 <div class="question" id="heating-type">
-                                    <h1 class="question__title saturn">
-                                        What significant changes occurred to the total pay or number of employees</h1>
-
-                                    <p>This is your own interpretation of whether there has been a significant change
-                                        in the businesses figures compared with the previous month.</p>
-
-                                    <p>Also consider whether there has been a significant change from the same month in
-                                        the previous year.</p>
+                                    <h1 class="question__title saturn">What type of <strong>vehicle</strong> do you have access to?</h1>
 
                                     <div class="question__answers">
                                         <div class="question__answer">
@@ -75,36 +68,28 @@ globalcss: false
                                                             <div class="label__inner">Select all that apply:</div>
                                                         </label>
                                                         <div class="field__item js-focusable-box">
-                                                            <input class="input input--checkbox js-focusable" value="redundancies" name="question-type" type="checkbox" id="checkbox1">
-                                                            <label class="label label--inline venus js-label" for="checkbox1">Redundancies</label>
+                                                            <input class="input input--checkbox js-focusable" value="private-car" name="question-type" type="checkbox" id="checkbox1">
+                                                            <label class="label label--inline venus js-label" for="checkbox1">Private car</label>
                                                         </div>
                                                         <div class="field__item js-focusable-box">
-                                                            <input class="input input--checkbox js-focusable" value="more-temporary-staff" name="question-type" type="checkbox" id="checkbox2">
-                                                            <label class="label label--inline venus js-label" for="checkbox2">More temporary staff</label>
+                                                            <input class="input input--checkbox js-focusable" value="company-car" name="question-type" type="checkbox" id="checkbox2">
+                                                            <label class="label label--inline venus js-label" for="checkbox2">Company car</label>
                                                         </div>
                                                         <div class="field__item js-focusable-box">
-                                                            <input class="input input--checkbox js-focusable" value="fewer-temporary-staff" name="question-type" type="checkbox" id="checkbox3">
-                                                            <label class="label label--inline venus js-label" for="checkbox3">Fewer temporary staff</label>
+                                                            <input class="input input--checkbox js-focusable" value="van" name="question-type" type="checkbox" id="checkbox3">
+                                                            <label class="label label--inline venus js-label" for="checkbox3">Van</label>
                                                         </div>
                                                         <div class="field__item js-focusable-box">
-                                                            <input class="input input--checkbox js-focusable" value="more-overtime" name="question-type" type="checkbox" id="checkbox4">
-                                                            <label class="label label--inline venus js-label" for="checkbox4">More overtime</label>
+                                                            <input class="input input--checkbox js-focusable" value="motorbike" name="question-type" type="checkbox" id="checkbox4">
+                                                            <label class="label label--inline venus js-label" for="checkbox4">Motorbike</label>
                                                         </div>
                                                         <div class="field__item js-focusable-box">
-                                                            <input class="input input--checkbox js-focusable" value="less-overtime" name="question-type" type="checkbox" id="checkbox5">
-                                                            <label class="label label--inline venus js-label" for="checkbox5">Less overtime</label>
+                                                            <input class="input input--checkbox js-focusable" value="minibus" name="question-type" type="checkbox" id="checkbox5">
+                                                            <label class="label label--inline venus js-label" for="checkbox5">Minibus</label>
                                                         </div>
                                                         <div class="field__item js-focusable-box">
-                                                            <input class="input input--checkbox js-focusable" value="pay-increase" name="question-type" type="checkbox" id="checkbox6">
-                                                            <label class="label label--inline venus js-label" for="checkbox6">Pay increase</label>
-                                                        </div>
-                                                        <div class="field__item js-focusable-box">
-                                                            <input class="input input--checkbox js-focusable" value="industrial-action" name="question-type" type="checkbox" id="checkbox7">
-                                                            <label class="label label--inline venus js-label" for="checkbox7">Industrial action</label>
-                                                        </div>
-                                                        <div class="field__item js-focusable-box">
-                                                            <input class="input input--checkbox js-focusable" value="none" name="question-type" type="checkbox" id="checkbox8">
-                                                            <label class="label label--inline venus js-label" for="checkbox8">There were no significant changes</label>
+                                                            <input class="input input--checkbox js-focusable" value="none" name="question-type" type="checkbox" id="checkbox6">
+                                                            <label class="label label--inline venus js-label" for="checkbox6">I don’t have access to a vehicle</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -180,7 +165,7 @@ globalcss: false
                 ' ' +
                 labels
                     .map(function (item) {
-                        return "'" + item + "'";
+                        return '"' + item + '"';
                     })
                     .join(' and ') +
                 ' ');
