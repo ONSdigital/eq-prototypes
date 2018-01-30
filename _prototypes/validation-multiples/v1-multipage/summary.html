@@ -131,7 +131,7 @@ globalcss: false
         <div class="summary__items">
             <div class="summary__answer">
               <div class="summary__question" id="total-sales-food-question">
-                Of the £<span class="retailTotal"></span> total retail turnover, what was the value of internet sales?
+                Of the £<span class="retailTotal"></span> total retail turnover, what was the value of food sales?
               </div>
               <div class="summary__answer-text" id="q2r1-answer"></div>
               <div class="summary__edit">
@@ -144,7 +144,7 @@ globalcss: false
           <div class="summary__items">
             <div class="summary__answer">
               <div class="summary__question" id="total-sales-alcohol-question">
-                Of the £<span class="retailTotal"></span> total retail turnover, what was the value of food sales?
+                Of the £<span class="retailTotal"></span> total retail turnover, what was the value of alcohol, confectionery and tobacco sales?
               </div>
               <div class="summary__answer-text" id="q2r2-answer"></div>
               <div class="summary__edit">
@@ -157,7 +157,7 @@ globalcss: false
           <div class="summary__items">
             <div class="summary__answer">
               <div class="summary__question" id="total-sales-clothing-question">
-                 Of the £<span class="retailTotal"></span> total retail turnover, what was the value of alcohol, confectionery and tobacco sales?
+                 Of the £<span class="retailTotal"></span> total retail turnover, what was the value of other sales?
               </div>
               <div class="summary__answer-text" id="q2r3-answer"></div>
               <div class="summary__edit">
@@ -229,6 +229,8 @@ $( document ).ready(function() {
       $('.error--hook').wrap('<div class="panel__body" data-qa="error-body">').prepend(errorMultiple);
       $('.error--hook').wrap('<div class="answer answer--date js-has-errors" id="errorq2r1"><aside class="panel panel--simple panel--error" data-qa="error">');
       $('.panel--info').addClass('hidden');
+      $('.qa-btn-submit').addClass('hidden');
+      $('.js-btn-save').addClass('hidden');
     }
 
     console.info('Calc\'d total:'+retailTotal);
