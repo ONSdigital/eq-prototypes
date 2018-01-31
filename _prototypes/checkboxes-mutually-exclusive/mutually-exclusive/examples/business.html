@@ -4,7 +4,6 @@ project: Checkboxes (mutually exclusive)
 globalcss: false
 ---
 
-<link rel="stylesheet" href="{{ '/css/census-header-footer.css' | prepend: site.baseurl }}" />
 <style>
     @media only screen and (min-width: 740px) {
         .field__item--half {
@@ -15,8 +14,8 @@ globalcss: false
 </style>
 
 <header class="page__header">
-    {% include bar.html %}
-    {% include header-census.html %}
+    {% include survey-header-no-info-panel.html %}
+    {% include bar-2.html %}
 </header>
 
 <div class="page__subheader">
