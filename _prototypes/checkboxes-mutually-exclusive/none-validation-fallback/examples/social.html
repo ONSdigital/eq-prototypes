@@ -178,13 +178,15 @@ globalcss: false
 
         function showError (errorMessage) {
     	    $('#piped-error-message').html(errorMessage);
-            $('#error-panel').removeClass('hide');
+            $('#error-panel-container-message').html(errorMessage);
+    	    $('#error-panel').removeClass('hide');
             $('#central-heating-answer-fields-container').append($('#central-heating-answer-fields'));
             $('#error-panel-container').removeClass('hide');
         }
 
         function hideError () {
             $('#piped-error-message').html('');
+            $('#error-panel-container-message').html('');
             $('#error-panel').addClass('hide');
             $('#container-mandatory-checkbox-answer').append($('#central-heating-answer-fields'));
             $('#error-panel-container').addClass('hide');
