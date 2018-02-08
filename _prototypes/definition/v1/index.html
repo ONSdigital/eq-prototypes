@@ -1,5 +1,5 @@
 ---
-title: Definition v1
+title: D1
 project: Definition
 globalcss: false
 ---
@@ -23,6 +23,7 @@ globalcss: false
 .definition__title {
   display: inline-block;
   padding-left: 1.5em;
+  padding-top: 2rem;
 }
 
 @media only screen and (min-width: 1100px) {
@@ -36,28 +37,22 @@ globalcss: false
 }
 
 .definition__backtotop {
-  background: url("../../../s/img/icons/icons--definition-arrow.svg") no-repeat center center;
+  background: url("../../../s/img/icons/icons--definition-arrow.svg") no-repeat center left;
   background-size: auto;
   text-align: center;
-  width: 1.5rem;
-  height: 1.5rem;
   display: inline-block;
-  text-indent: -999999px;
   overflow: hidden;
   vertical-align: top;
   position: absolute;
   top: 1.5em;
-  left: -0.25em;
+  left: -0.5em;
+  padding-left: 2rem;
+  padding-right: 0.5rem;
 }
 
-@media only screen and (min-width: 1100px) {
-  .definition__backtotop {
-    top: 1.5em;
-    left: -2em;
-  }
-}
 .definition__backtotop:focus, .definition__backtotop:active {
   background-color: white;
+  color: #4263c2;
 }
 
 .definition__description {
@@ -65,11 +60,6 @@ globalcss: false
 }
 
 .definition__anchor {
-  border: 0;
-  text-decoration: none;
-  border-width: 0 0 2px;
-  border-radius: 0;
-  border-style: dashed;
 }
 
 .definition__anchor:hover {
@@ -122,12 +112,6 @@ globalcss: false
           <div class="group" id="rsi">
             <div class="block" id="total-retail-turnover">
               <section class="section" id="total-retail-turnover-section">
-                <h2 class="section__title neptune">Renewables</h2>
-                <!-- <div class="section__description mars">
-                  <p>1 April 2016 to 31 March 2017</p>
-                  <p>- You should enter figures for the reporting period stated above
-                </br>- Include VAT and internet sales</p>
-                </div> -->
                 <div class="question" id="total-retail-turnover-question">
                   <h1 class="question__title saturn">Do you connect an <a id="anchor-accumulator" href="#def-accumulator" title="Definition of accumulator" class="definition__anchor saturn" >accumulator</a> to your <a id="anchor-photovoltaic" href="#def-photovoltaic" title="Definition of photovoltaic system" class="definition__anchor saturn" >photovoltaic system</a> to store surplus energy?
                   </h1>
