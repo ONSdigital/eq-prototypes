@@ -11,6 +11,11 @@ globalcss: false
             margin-bottom : 0;
         }
     }
+
+    .screen-reader {
+        position: absolute;
+        left: -9999rem;
+    }
 </style>
 
 <header class="page__header">
@@ -90,7 +95,7 @@ globalcss: false
                                 </div>
 
                                 <div class="question">
-                                    <h2 class="question__title neptune">Or</h2>
+                                    <h2 aria-hidden="true" class="question__title neptune">Or</h2>
 
                                     <div class="question__answers">
                                         <div class="question__answer">
@@ -102,7 +107,7 @@ globalcss: false
                                                         </label>-->
                                                         <div class="field__item js-focusable-box">
                                                             <input class="input input--checkbox js-focusable" value="none" name="question-type" type="checkbox" id="checkbox8">
-                                                            <label class="label label--inline venus js-label" for="checkbox8">There were no significant changes</label>
+                                                            <label class="label label--inline venus js-label" for="checkbox8"><span class="screen-reader">Or</span> There were no significant changes</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -126,58 +131,12 @@ globalcss: false
 </div>
 
 <script src='/js/compiled/standard-bundle.js'></script>
+<script src='/js/compiled/checkboxes-mutually-exclusive/mutually-exclusive/bundle.js'></script>
 
 <script>
-
-    function CheckboxGroup (opts) {
-    	opts = opts || {};
-
-        if (!opts.name) {
-        	throw Error('Checkbox group name required');
-        }
-
-        var nameGroup = opts.name,
-            mutullyExclusiveGroupsByValue = opts.mutullyExclusiveGroupsByValue;
-
-        function getSelectedMutullyExclusiveGroupIndexForCheckbox ($checkBox) {
-        	var index;
-
-        	$.each(mutullyExclusiveGroupsByValue, function (i, relatedGroup) {
-        		var found = relatedGroup.indexOf($checkBox.val());
-
-        		if (found !== -1) {
-                    index = i;
-                }
-            });
-
-        	return index;
-        }
-
-        $('input:checkbox[name='+ nameGroup +']').on('change', function (e) {
-
-        	var $otherCheckboxes = $('input:checkbox[name=' + nameGroup + ']:checked').not(this),
-                selectedGroupIndex = getSelectedMutullyExclusiveGroupIndexForCheckbox($(this));
-
-        	if (selectedGroupIndex === undefined) {
-        		console.log('Checkbox not found in group: ', $(this));
-            }
-            else {
-                $otherCheckboxes.each(function (i, checkboxEl) {
-                    var $checkBox = $(checkboxEl),
-                        groupIndex = getSelectedMutullyExclusiveGroupIndexForCheckbox($checkBox);
-
-                    if (groupIndex !== selectedGroupIndex) {
-                        $checkBox.prop('checked', false);
-                        $checkBox.parent().removeClass('is-checked');
-                    }
-                });
-            }
-        });
-    }
-
     $(document).ready(function () {
 
-        new CheckboxGroup({
+        new window.NAMESPACE.CheckboxGroup({
             name: 'question-type',
 
             /**

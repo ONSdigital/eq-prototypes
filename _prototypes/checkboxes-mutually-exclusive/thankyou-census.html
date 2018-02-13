@@ -4,9 +4,11 @@ project: Checkboxes (mutually exclusive)
 globalcss: false
 ---
 
+<link rel="stylesheet" href="{{ '/css/census-header-footer.css' | prepend: site.baseurl }}" />
+
 <header class="page__header">
-  {% include survey-header.html %}
   {% include bar.html %}
+  {% include header-census.html %}
 </header>
 
 <div class="page__subheader">
