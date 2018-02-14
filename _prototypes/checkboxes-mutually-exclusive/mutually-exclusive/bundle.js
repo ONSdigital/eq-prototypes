@@ -29,6 +29,8 @@
       let $otherCheckboxes = $('input:checkbox[name=' + nameGroup + ']:checked').not(this),
         selectedGroupIndex = getSelectedMutullyExclusiveGroupIndexForCheckbox($(this));
 
+      $(this).prop('aria-checked', true);
+
       if (selectedGroupIndex === undefined) {
         console.log('Checkbox not found in group: ', $(this));
       }
