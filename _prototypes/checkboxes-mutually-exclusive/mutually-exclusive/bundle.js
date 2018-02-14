@@ -1,5 +1,5 @@
 (function(context) {
-  const namespace = context.NAMESPACE = context.NAMESPACE || {};
+  const namespace = context.NAMESPACE = (context.NAMESPACE || {});
 
   namespace.CheckboxGroup = function(opts) {
     opts = opts || {};
@@ -15,7 +15,7 @@
       let index;
 
       $.each(mutullyExclusiveGroupsByValue, function (i, relatedGroup) {
-        var found = relatedGroup.indexOf($checkBox.val());
+        let found = relatedGroup.indexOf($checkBox.val());
 
         if (found !== -1) {
           index = i;
@@ -34,15 +34,19 @@
       }
       else {
         $otherCheckboxes.each(function(i, checkboxEl) {
-          let $checkBox = $(checkboxEl),
-            groupIndex = getSelectedMutullyExclusiveGroupIndexForCheckbox($checkBox);
 
-          if (groupIndex !== selectedGroupIndex) {
-            $checkBox.prop('checked', false);
-            $checkBox.parent().removeClass('is-checked');
-          }
+          setTimeout(function () {
+            let $checkBox = $(checkboxEl),
+              groupIndex = getSelectedMutullyExclusiveGroupIndexForCheckbox($checkBox);
+
+            if (groupIndex !== selectedGroupIndex) {
+              $checkBox.prop('checked', false);
+              $checkBox.prop('aria-checked', false);
+              $checkBox.parent().removeClass('is-checked');
+            }
+          }, 0);
         });
       }
     });
   }
-}(window || this));
+}(window));
