@@ -1,5 +1,5 @@
 ---
-title:  Mutually exclusive
+title:  Mutually exclusive (Business example)
 project: Checkboxes (mutually exclusive)
 globalcss: false
 ---
@@ -36,13 +36,13 @@ globalcss: false
         </div>
         <div class="grid__col col-7@m pull-1@m">
             <main role="main" id="main" class="page__main">
-                <form action="../../thankyou-census/index.html" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
+                <form action="../../../thankyou-census/index.html" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
                     <div class="group">
                         <div class="block" id="total-retail-turnover">
                             <section class="section" id="total-retail-turnover-section">
 
                                 <div class="question" id="heating-type">
-                                    <h1 class="question__title saturn">What type of central heating do you have?</h1>
+                                    <h1 class="question__title saturn">What type of vehicle do you have access to?</h1>
 
                                     <div class="question__answers">
                                         <div class="question__answer">
@@ -52,21 +52,36 @@ globalcss: false
                                                         <label class="label venus">
                                                             <div class="label__inner">Select all that apply:</div>
                                                         </label>
+
                                                         <div class="field__item js-focusable-box">
-                                                            <input class="input input--checkbox js-focusable" value="gas" name="heating-type" type="checkbox" id="checkbox1">
-                                                            <label class="label label--inline venus" for="checkbox1">Gas</label>
+                                                            <input class="input input--checkbox js-focusable" value="private-car" name="question-type" type="checkbox" id="checkbox1">
+                                                            <label class="label label--inline venus js-label" for="checkbox1">Private car</label>
                                                         </div>
                                                         <div class="field__item js-focusable-box">
-                                                            <input class="input input--checkbox js-focusable" value="electric" name="heating-type" type="checkbox" id="checkbox2">
-                                                            <label class="label label--inline venus" for="checkbox2">Electric</label>
+                                                            <input class="input input--checkbox js-focusable" value="company-car" name="question-type" type="checkbox" id="checkbox2">
+                                                            <label class="label label--inline venus js-label" for="checkbox2">Company car</label>
                                                         </div>
                                                         <div class="field__item js-focusable-box">
-                                                            <input class="input input--checkbox js-focusable" value="solid-fuel" name="heating-type" type="checkbox" id="checkbox3">
-                                                            <label class="label label--inline venus" for="checkbox3">Solid fuel</label>
+                                                            <input class="input input--checkbox js-focusable" value="van" name="question-type" type="checkbox" id="checkbox3">
+                                                            <label class="label label--inline venus js-label" for="checkbox3">Van</label>
                                                         </div>
                                                         <div class="field__item js-focusable-box">
-                                                            <input class="input input--checkbox js-focusable" value="other" name="heating-type" type="checkbox" id="checkbox4">
-                                                            <label class="label label--inline venus" for="checkbox4">Other</label>
+                                                            <input class="input input--checkbox js-focusable" value="motorbike" name="question-type" type="checkbox" id="checkbox4">
+                                                            <label class="label label--inline venus js-label" for="checkbox4">Motorbike</label>
+                                                        </div>
+                                                        <div class="field__item js-focusable-box">
+                                                            <input class="input input--checkbox js-focusable" value="minibus" name="question-type" type="checkbox" id="checkbox5">
+                                                            <label class="label label--inline venus js-label" for="checkbox5">Minibus</label>
+                                                        </div>
+                                                        <div class="field__item js-focusable-box">
+                                                            <input id="checkbox6" data-qa="has-other-option" type="checkbox" value="other" class="input input--checkbox js-focusable" name="question-type">
+                                                            <label id="label-checkbox6" class="label label--inline venus" for="checkbox6">
+                                                                Other
+                                                            </label>
+                                                            <div class="field__other">
+                                                                <label class="label mercury" for="other-answer-mandatory">Please specify other</label>
+                                                                <input id="other-answer-mandatory" data-qa="other-option" type="text" class="input js-focusable" name="other-answer-mandatory">
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -87,8 +102,8 @@ globalcss: false
                                                             <div class="label__inner">Select all that apply:</div>
                                                         </label>-->
                                                         <div class="field__item js-focusable-box">
-                                                            <input class="input input--checkbox js-focusable" value="none" name="heating-type" type="checkbox" id="checkbox5">
-                                                            <label class="label label--inline venus" for="checkbox5"><span class="screen-reader">Or</span> No central heating</label>
+                                                            <input class="input input--checkbox js-focusable" value="none" name="question-type" type="checkbox" id="checkbox7">
+                                                            <label class="label label--inline venus js-label" for="checkbox7"><span class="screen-reader">Or</span> I don’t have access to a vehicle</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -118,13 +133,20 @@ globalcss: false
     $(document).ready(function () {
 
         new window.NAMESPACE.CheckboxGroup({
-            name: 'heating-type',
+            name: 'question-type',
 
             /**
              * Define groups for mutually exclusive behaviour
              */
             mutullyExclusiveGroupsByValue: [
-                ['gas', 'electric', 'solid-fuel', 'other'],
+                [
+                  'private-car',
+                  'company-car',
+                  'van',
+                  'motorbike',
+                  'minibus',
+                  'other'
+                ],
                 ['none']
             ]
         });
