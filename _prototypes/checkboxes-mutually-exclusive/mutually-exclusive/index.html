@@ -52,22 +52,24 @@ globalcss: false
                                                         <label class="label venus">
                                                             <div class="label__inner">Select all that apply:</div>
                                                         </label>
-                                                        <div class="field__item js-focusable-box">
-                                                            <input class="input input--checkbox js-focusable" value="gas" name="heating-type" type="checkbox" id="checkbox1">
-                                                            <label class="label label--inline venus" for="checkbox1">Gas</label>
-                                                        </div>
-                                                        <div class="field__item js-focusable-box">
-                                                            <input class="input input--checkbox js-focusable" value="electric" name="heating-type" type="checkbox" id="checkbox2">
-                                                            <label class="label label--inline venus" for="checkbox2">Electric</label>
-                                                        </div>
-                                                        <div class="field__item js-focusable-box">
-                                                            <input class="input input--checkbox js-focusable" value="solid-fuel" name="heating-type" type="checkbox" id="checkbox3">
-                                                            <label class="label label--inline venus" for="checkbox3">Solid fuel</label>
-                                                        </div>
-                                                        <div class="field__item js-focusable-box">
-                                                            <input class="input input--checkbox js-focusable" value="other" name="heating-type" type="checkbox" id="checkbox4">
-                                                            <label class="label label--inline venus" for="checkbox4">Other</label>
-                                                        </div>
+                                                        <fieldset id="checkbox-group">
+                                                          <div class="field__item js-focusable-box">
+                                                              <input class="input input--checkbox js-focusable" value="gas" name="heating-type" type="checkbox" id="checkbox1" aria-checked="false">
+                                                              <label class="label label--inline venus" for="checkbox1">Gas</label>
+                                                          </div>
+                                                          <div class="field__item js-focusable-box">
+                                                              <input class="input input--checkbox js-focusable" value="electric" name="heating-type" type="checkbox" id="checkbox2" aria-checked="false">
+                                                              <label class="label label--inline venus" for="checkbox2">Electric</label>
+                                                          </div>
+                                                          <div class="field__item js-focusable-box">
+                                                              <input class="input input--checkbox js-focusable" value="solid-fuel" name="heating-type" type="checkbox" id="checkbox3" aria-checked="false">
+                                                              <label class="label label--inline venus" for="checkbox3">Solid fuel</label>
+                                                          </div>
+                                                          <div class="field__item js-focusable-box">
+                                                              <input class="input input--checkbox js-focusable" value="other" name="heating-type" type="checkbox" id="checkbox4" aria-checked="false">
+                                                              <label class="label label--inline venus" for="checkbox4">Other</label>
+                                                          </div>
+                                                        </fieldset>
                                                     </div>
                                                 </div>
                                             </div>
@@ -87,9 +89,10 @@ globalcss: false
                                                             <div class="label__inner">Select all that apply:</div>
                                                         </label>-->
                                                         <div class="field__item js-focusable-box">
-                                                            <input id="aria-control-id" class="input input--checkbox js-focusable" value="none" name="heating-type" type="checkbox" id="checkbox5">
-                                                            <label class="label label--inline venus" for="checkbox5"><span class="screen-reader">Or</span> No central heating</label>
-                                                            <span aria-controls="aria-control-id" role="region" class="u-vh" aria-live="assertive">Gas unchecked</span>
+                                                            <input class="input input--checkbox js-focusable" value="no-central-heating" name="heating-type" type="checkbox" id="checkbox5" aria-checked="false" aria-describedby="input-desc">
+                                                            <label class="label label--inline venus" for="checkbox5"><span class="screen-reader">Or,</span> No central heating</label>
+                                                            <span id="input-desc" class="u-vh">Selecting this will uncheck all other checkboxes</span>
+                                                            <span id="input-alert" class="u-vh" role="alert" aria-live="polite"></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -126,7 +129,7 @@ globalcss: false
              */
             mutullyExclusiveGroupsByValue: [
                 ['gas', 'electric', 'solid-fuel', 'other'],
-                ['none']
+                ['no-central-heating']
             ]
         });
     });
