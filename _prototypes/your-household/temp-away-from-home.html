@@ -1,0 +1,178 @@
+---
+title: do-you-live-here
+project: your-household
+globalcss: false
+---
+
+
+<link rel="stylesheet" href="{{ "/css/census.css" | prepend: site.baseurl }}">
+<link rel="stylesheet" href="../css/labourmarket.css">
+<!--<link rel="stylesheet" type="text/css" href="{{ "/css/census-proto.css" | prepend: site.baseurl }}">-->
+
+  <header class="header header--census">
+  <div class="header__help is-closed js-help-body">
+    <div class="header__container container">
+      <div class="header__title ">Help and support –</div>
+      
+    </div>
+  </div>
+  <div class="header__container container">
+    <div class="header__logo">
+     <img src="{{ "/img/census-logo.svg" | prepend: site.baseurl }}" alt="2017 Census">
+    </div>
+    <button class="header__btn btn btn--light btn--border js-help-btn" data-ga-action="Help and support" data-ga="click" data-ga-category="Help">
+      Help and support
+    </button>
+  </div>
+</header>
+</header>
+
+
+
+<div class="page__subheader">
+  
+  <div class="container">
+    <a class="mars" href="javascript:history.back()">Previous</a>
+  </div>
+</div>
+
+<div class="page__container container">
+  <div class="grid grid--reverse">
+    <div class="grid__col col-4@m">
+
+    <!-- right aligned side nav -->
+      <div class="nav nav--sections nav--vertical js-nav page__nav" id="section-nav">
+    <h2 class="nav__title venus">Sections</h2>
+    <ul class="nav__list js-nav-list">
+        <li class="nav__item pluto nav__item--current">
+            <a class="nav__link" href="#item1">Your Household</a>
+        </li>
+        <li class="nav__item pluto nav__item--incomplete">
+            <a class="nav__link" href="#item2">Household and Accomodation</a>
+        </li>
+    </ul>
+</div>
+
+</div>
+    <div class="grid__col col-7@m pull-1@m">
+      <main role="main" id="main" class="page__main">
+        <form name="trav" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
+          <div class="group" id="rsi">
+            <div class="block" id="total-retail-turnover">
+              <section class="section" id="total-retail-turnover-section">
+               <!-- <h2 class="section__title neptune">Joanna Bloggs</h2>-->
+         
+            
+                <div class="question" id="total-retail-turnover-question">
+                  <h1 class="question__title saturn">
+                    
+                    Is there anyone else living at <span class="address-text"></span> that is temporarily away from home?
+
+                
+               </h1>
+             </div>
+             <label  class="label venus" id="household-members-title" >Household members temporarily away from home:</label>
+                 <ul id='household-members'>
+                </ul>
+
+
+             <div class="panel panel--simple panel--info" id="question-guidance-everyone-at-address-confirmation-question">
+        
+
+<strong class="u-mb-s u-d-b">Include</strong>
+  <ul class="mars">
+      <li>people who work away from home within the UK  if this is their permanent or family home</li>
+      <li>members of the Armed Forces if this is their permanent or family home</li>
+      <li>people who are temporarily outside the UK for <b>less than 12 months</b></li>
+      
+    </ul>
+ 
+
+      </div>
+
+                 <br>
+
+                   <div class="answer__fields js-fields">
+
+          <div class="field field--radio field--multiplechoice ">
+          <fieldset>
+          <div class="field__item js-focusable-box">
+          <input  class="input input--radio js-focusable" type="radio" name="job-offer-two" id="job-offer-two-0" value="very-satisfied">
+          <label  class="label label--inline venus" for="job-offer-two-0" id="job-offer-two-0">No</label>
+
+          </div>
+
+          <div class="field__item js-focusable-box">
+      <input  data-qa="has-other-option" value="Other" name="job-offer-two" type="radio" id="yes-someone-else" class="input input--radio js-focusable">
+      <label  for="yes-someone-else" id="label-national-identity-england-answer-5" class="label label--inline venus">
+        Yes
+        
+      </label>
+
+        <div class="field__other">
+          <label  for="national-identity-england-answer-other" class="label mercury">What is their full name?</label>
+          <input  data-qa="other-option" name="national-identity-england-answer-other" type="text" id="new-member-name" class="input js-focusable">
+        </div>
+
+      
+
+    </div>
+          
+          
+          </fieldset>
+      
+
+    </div>
+
+
+                  
+                      
+                  
+                </div>
+              </section>
+            </div>
+          </div>
+          <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Continue</button>
+          <div class="u-mb-m">
+            <button class="btn btn--link mars js-btn-save" type="submit" name="action[save_sign_out]">Save and complete later</button>
+          </div>
+        </form>
+        <a class="page__previous page__previous--bottom js-previous-link" href="javascript:history.back()" id="bottom-previous">Previous</a>
+      </main>
+    </div>
+  </div>
+</div>
+
+<script>
+ var yesbox = document.getElementById("yes-someone-else");
+ $('.qa-btn-submit').click(function(e) {
+   if (yesbox.checked) {
+      e.preventDefault();
+     // document.trav.action = "../end";
+     var newName = document.getElementById('new-member-name').value;
+     var members = localStorage.getItem('temp-members') || '';
+     var comma = members ? ',' : '';
+     localStorage.setItem('temp-members', members + comma + newName);
+     window.location.reload();
+
+   } else {
+     document.trav.action = "../no-uk-address";
+   }
+ });
+</script>
+
+<script>
+  $(function(){ $('.address-text').html(localStorage.getItem('address').split(',')[0]); });
+</script>
+
+<script>
+  function populateList() {
+    var members = localStorage.getItem('temp-members');
+    $('#household-members-title, #household-members').toggle(!!members);
+    if (!members) return;
+    $('#household-members').empty().append(members.split(',').map(function (member) {
+      return $('<li>').addClass('mars').text(member);
+    }))
+  }
+  $(populateList);
+</script>
