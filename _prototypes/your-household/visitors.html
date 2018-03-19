@@ -1,5 +1,5 @@
 ---
-title: do-you-live-here
+title: visitors
 project: your-household
 globalcss: false
 ---
@@ -66,30 +66,58 @@ globalcss: false
                 <div class="question" id="total-retail-turnover-question">
                   <h1 class="question__title saturn">
                     
-                    Your Household
+                    Were there any visitors staying overnight on 27th February 2018 at <span class="address-text"></span>?
 
                 
-               </h1>
-             </div>
 
-             <div class="panel panel--simple panel--info" id="question-guidance-everyone-at-address-confirmation-question">
+           </div>
+             <label  class="label venus" id="household-members-title" >Visitors:</label>
+                 <ul id='household-members'>
+                </ul>
+             
+
+
+           
+
+                
+
+                   <div class="answer__fields js-fields">
+
+          <div class="field field--radio field--multiplechoice ">
+          <fieldset>
+          <div class="field__item js-focusable-box">
+          <input  class="input input--radio js-focusable" type="radio" name="job-offer-two" id="job-offer-two-0" value="very-satisfied">
+          <label  class="label label--inline venus" for="job-offer-two-0" id="job-offer-two-0">No</label>
+
+          </div>
+
+          <div class="field__item js-focusable-box">
+      <input  data-qa="has-other-option" value="Other" name="job-offer-two" type="radio" id="yes-someone-else" class="input input--radio js-focusable">
+      <label  for="yes-someone-else" id="label-national-identity-england-answer-5" class="label label--inline venus">
+        Yes
         
+      </label>
 
-<strong class="u-mb-s u-d-b" style="margin-bottom: 0">This section is now complete</strong>
-  <ul class="mars" style="list-style: none;padding: 0; margin-bottom: 0">
-      <li>You can review your answers below</li>
-     
+        <div class="field__other">
+          <label  for="national-identity-england-answer-other" class="label mercury">What is their full name?</label>
+          <input  data-qa="other-option" name="national-identity-england-answer-other" type="text" id="new-member-name" class="input js-focusable">
+        </div>
+
       
-    </ul>
- 
 
-      </div>
+    </div>
+          
+          
+          </fieldset>
+      
 
-                 <br>
-
-                 <table id="household-table"></table>
+    </div>
 
 
+                  
+                      
+                  
+                </div>
               </section>
             </div>
           </div>
@@ -104,70 +132,36 @@ globalcss: false
   </div>
 </div>
 
-<style>
-#household-table {
-}
+<script>
+ var yesbox = document.getElementById("yes-someone-else");
+ $('.qa-btn-submit').click(function(e) {
+   if (yesbox.checked) {
+      e.preventDefault();
+     // document.trav.action = "../end";
+     var newName = document.getElementById('new-member-name').value;
+     var members = localStorage.getItem('visit-members') || '';
+     var comma = members ? ',' : '';
+     localStorage.setItem('visit-members', members + comma + newName);
+     window.location.reload();
 
-#household-table tr:last-child td,
-#household-table .no-border td {
-  border-bottom: 0;
-}
-
-#household-table .last-row td {
-  padding-bottom: 20px;
-}
-
-#household-table .last-row + tr td {
-  padding-top: 20px;
-}
-
-#household-table td {
-  padding: 5px 8px;
-  line-height: 1.3;
-  border-bottom: 0;
-}
-
-#household-table td[rowspan] {
-  width: 40%;
-  padding-bottom: 20px;
-}
-
-#household-table tr.last-row + tr {
-  border-top: thin solid #e4e8eb;
-}
-
-#household-table td:last-child {
-  white-space: nowrap;
-  text-align: right;
-}
-</style>
+   } else {
+     document.trav.action = "../summary";
+   }
+ });
+</script>
 
 <script>
-  function getRows (key, title) {
-    var members = localStorage.getItem(key);
-    if (!members) return null;
-    return members.split(',').map(function (member, index, members) {
-      var firstCell = index === 0 ? '<td rowspan="' + members.length + '">' + title + '</td>' : ''
-      var t = index === 0 ? title : ''
-      var rowClass = index !== members.length - 1 ? 'no-border' : 'last-row';
-      var deleteLink = '?remove=' + member + '&from=' + key;
-      return $('<tr class="' + rowClass + '">' + firstCell + '<td><b>' + member + '</b></td><td><a href="">Change</a> &nbsp; &nbsp; <a href="' + deleteLink + '">Remove</a></tr>');
-    })
+  $(function(){ $('.address-text').html(localStorage.getItem('address').split(',')[0]); });
+</script>
+
+<script>
+  function populateList() {
+    var members = localStorage.getItem('visit-members');
+    $('#household-members-title, #household-members').toggle(!!members);
+    if (!members) return;
+    $('#household-members').empty().append(members.split(',').map(function (member) {
+      return $('<li>').addClass('mars').text(member);
+    }))
   }
-  function populateTable() {
-    $('#household-table').empty();
-    $('#household-table').append(getRows('household-members', 'Household members'));
-    $('#household-table').append(getRows('temp-members', 'Household members temporarily away from home'));
-    $('#household-table').append(getRows('nonuk-members', 'Temporary household members that don‘t have another UK address'));
-    $('#household-table').append(getRows('visit-members', 'Visitors staying overnight on 27th February 2018'));
-  }
-  $(function () {
-    var deleteMatch = window.location.search.match(/remove=([^&]+)/)
-    var deleteFromMatch = window.location.search.match(/from=([a-z-]+)/)
-    if (deleteMatch && deleteFromMatch) {
-      var members = localStorage.getItem(deleteFromMatch[1])
-      localStorage.setItem(deleteFromMatch[1], members.replace(decodeURI(deleteMatch[1]), '').replace(',,', ',').replace(/^,/, '').replace(/,$/, ''))
-    }
-    populateTable()
-  });
+  $(populateList);
 </script>
