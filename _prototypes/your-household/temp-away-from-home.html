@@ -146,7 +146,11 @@ globalcss: false
      window.location.reload();
 
    } else {
-     document.trav.action = "../no-uk-address";
+    if (window.location.search.match(/addnew=1/)) {
+      document.trav.action = "../summary";  
+    } else {
+      document.trav.action = "../no-uk-address";
+    }
    }
  });
 </script>

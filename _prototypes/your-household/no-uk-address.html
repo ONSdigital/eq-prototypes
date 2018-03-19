@@ -155,7 +155,11 @@ globalcss: false
      window.location.reload();
 
    } else {
+    if (window.location.search.match(/addnew=1/)) {
+      document.trav.action = "../summary";  
+    } else {
      document.trav.action = "../visitors";
+    }
    }
  });
 </script>

@@ -104,6 +104,62 @@ globalcss: false
   </div>
 </div>
 
+<div id="modal" class="modal" style="display: none;">
+  <div class="modal__window">
+    <button class="modal__close-button close-modal-button">×</button>
+    <div class="modal__text neptune">Are you sure you would like to remove <span class="remove-member-name highlight"></span> from the survey?</div>
+    <div class="modal__buttons">
+      <button class="close-modal-button btn btn--secondary btn--lg btn--border qa-btn-submit venus">Back to Survey</button>
+      <button class="remove-member-button btn btn--primary btn--lg qa-btn-submit venus">Remove</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal__window {
+    position: relative;
+    background-color: white;
+    max-width: 500px;
+    padding: 80px 40px 40px;
+  }
+
+  .modal__close-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    border: 0;
+    font-size: 36px;
+    color: grey;
+  }
+
+  .modal__text {
+    margin-bottom: 3rem;
+  }
+
+  .modal .btn {
+    width: 48%;
+    padding: 0.9em 0;
+    margin-bottom: 0;
+  }
+
+  .modal .btn--primary {
+    float: right;
+    padding: 1em 0;
+  }
+</style>
+
 <style>
 #household-table {
 }
@@ -143,23 +199,24 @@ globalcss: false
 </style>
 
 <script>
-  function getRows (key, title) {
+  function getRows (key, title, addLink) {
     var members = localStorage.getItem(key);
     if (!members) return null;
     return members.split(',').map(function (member, index, members) {
-      var firstCell = index === 0 ? '<td rowspan="' + members.length + '">' + title + '</td>' : ''
+      var firstCell = index === 0 ? '<td rowspan="' + (members.length + 1) + '">' + title + '</td>' : ''
       var t = index === 0 ? title : ''
-      var rowClass = index !== members.length - 1 ? 'no-border' : 'last-row';
+      // var rowClass = index !== members.length - 1 ? 'no-border' : 'last-row';
+      var rowClass = 'no-border';
       var deleteLink = '?remove=' + member + '&from=' + key;
-      return $('<tr class="' + rowClass + '">' + firstCell + '<td><b>' + member + '</b></td><td><a href="">Change</a> &nbsp; &nbsp; <a href="' + deleteLink + '">Remove</a></tr>');
-    })
+      return $('<tr class="' + rowClass + '">' + firstCell + '<td><b>' + member + '</b></td><td><a class="change-member-link" href="' + addLink + '?change=' + member + '">Change</a> &nbsp; &nbsp; <a class="remove-member-link" data-member="' + member + '" href="' + deleteLink + '">Remove</a></tr>');
+    }).concat($('<tr class="last-row"><td><a href="' + addLink + '?addnew=1">Add new</a></td><td></td></tr>'));
   }
   function populateTable() {
     $('#household-table').empty();
-    $('#household-table').append(getRows('household-members', 'Household members'));
-    $('#household-table').append(getRows('temp-members', 'Household members temporarily away from home'));
-    $('#household-table').append(getRows('nonuk-members', 'Temporary household members that don‘t have another UK address'));
-    $('#household-table').append(getRows('visit-members', 'Visitors staying overnight on 27th February 2018'));
+    $('#household-table').append(getRows('household-members', 'Household members', '../does-anyone-else-live-here'));
+    $('#household-table').append(getRows('temp-members', 'Household members temporarily away from home', '../temp-away-from-home'));
+    $('#household-table').append(getRows('nonuk-members', 'Temporary household members that don‘t have another UK address', '../no-uk-address'));
+    $('#household-table').append(getRows('visit-members', 'Visitors staying overnight on 27th February 2018', '../visitors'));
   }
   $(function () {
     var deleteMatch = window.location.search.match(/remove=([^&]+)/)
@@ -169,5 +226,52 @@ globalcss: false
       localStorage.setItem(deleteFromMatch[1], members.replace(decodeURI(deleteMatch[1]), '').replace(',,', ',').replace(/^,/, '').replace(/,$/, ''))
     }
     populateTable()
+
+    // When clicking remove member link, open modal
+    $('body').on('click', '.remove-member-link', function(e){
+      e.preventDefault();
+      var name = $(this).data('member');
+      var link = $(this).attr('href');
+      $('.remove-member-name').text(name);
+      $('.remove-member-button').click(function () {
+        if (totalMemberCount() === 1) {
+          localStorage.setItem('household-members', '');
+          localStorage.setItem('temp-members', '');
+          localStorage.setItem('nonuk-members', '');
+          localStorage.setItem('visit-members', '');
+          window.location = '../does-anyone-else-live-here';
+        } else {
+          window.location = link;
+        }
+      })
+
+      console.log('totalMemberCount', totalMemberCount())
+      $('#modal').show();
+    });
+
+    $('.close-modal-button').click(function (){
+      $('#modal').hide();
+    });
+
+    // Temporarily disable change links
+    $('.change-member-link').click(function (e){
+      e.preventDefault();
+    });
   });
+
+  function totalMemberCount() {
+    return (
+      getMemberCount('household-members') +
+      getMemberCount('temp-members') +
+      getMemberCount('nonuk-members') +
+      getMemberCount('visit-members')
+    )
+  }
+
+  function getMemberCount(key) {
+    if (!localStorage.getItem(key)) {
+      return 0
+    }
+    return localStorage.getItem(key).split(',').length
+  }
 </script>
