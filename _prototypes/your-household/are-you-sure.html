@@ -1,5 +1,5 @@
 ---
-title: confirm-address
+title: do-you-live-here
 project: your-household
 globalcss: false
 ---
@@ -66,12 +66,10 @@ globalcss: false
                 <div class="question" id="total-retail-turnover-question">
                   <h1 class="question__title saturn">
                     
-                    Can you confirm this address is correct?
-                  </h1>
-                </div>
+                    Are you sure you, or anyone else does not live at <span class="address-text"></span>?
 
-                <label  class="label mars address-text" for="job-offer-two-0" >Pipe in address here</label>
-                <br>
+                 <br>
+                 <br>
 
                    <div class="answer__fields js-fields">
 
@@ -79,34 +77,36 @@ globalcss: false
           <fieldset>
           <div class="field__item js-focusable-box">
           <input  class="input input--radio js-focusable" type="radio" name="job-offer-two" id="job-offer-two-0" value="very-satisfied">
-          <label  class="label label--inline venus" for="job-offer-two-0" >Yes, this address is correct</label>
+          <label  class="label label--inline venus" for="job-offer-two-0" id="job-offer-two-0">Yes</label>
 
           </div>
 
           <div class="field__item js-focusable-box">
           <input  class="input input--radio js-focusable" type="radio" name="job-offer-two" id="job-offer-two-1" value="satisfied">
-          <label  class="label label--inline venus" for="job-offer-two-1" id="job-offer-two-1">No, I need to change this</label>
+          <label  class="label label--inline venus" for="job-offer-two-1" id="job-offer-two-1">No</label>
 
           </div>
-        
+          
           
           </fieldset>
       
-</div>
-    </div>   
+
+    </div>
+
+
+                  
+                      
                   </div>
                 </div>
               </section>
             </div>
           </div>
-            <button class="qa-btn-submit btn btn-submit btn--primary btn--lg" data-qa="btn-submit" type="submit" name="action[save_continue]">Continue</button>
-                
-          
-                <div class="u-mb-m">
-                  <button class= "btn btn--link mars js-btn-save" data-qa="btn-save-sign-out" type="submit" name="action[save_sign_out]" 
-             data-ga="click" data-ga-action="Save and complete later click" data-ga-category="Navigation">Save and complete later</button>
-                </div>
-              </form>
+          <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Continue</button>
+          <div class="u-mb-m">
+            <button class="btn btn--link mars js-btn-save" type="submit" name="action[save_sign_out]">Save and complete later</button>
+          </div>
+        </form>
+        <a class="page__previous page__previous--bottom js-previous-link" href="javascript:history.back()" id="bottom-previous">Previous</a>
       </main>
     </div>
   </div>
@@ -115,18 +115,24 @@ globalcss: false
 <script>
  var yesbox = document.getElementById("job-offer-two-0");
  $('.qa-btn-submit').click(function(e) {
-
-
    if (yesbox.checked) {
-     document.trav.action = "../section-intro";
+    localStorage.setItem('lives-here', 'yes')
+    localStorage.setItem('household-members', localStorage.getItem('name'))
+     document.trav.action = "../end";
    } else {
-     document.trav.action = "../index";
+    localStorage.setItem('lives-here', 'no')
+    var name = localStorage.getItem('name')
+    var members = localStorage.getItem('household-members')
+    if (members) {
+      localStorage.setItem('household-members', members.replace(name, '').replace(/^,/, ''))
+    }
+     document.trav.action = "../do-you-live-here";
    }
  });
 </script>
 
 <script>
-  $(function(){ $('.address-text').html(localStorage.getItem('address').replace(/, /g, '<br />')); });
+  $(function(){ $('.address-text').html(localStorage.getItem('address').split(',')[0]); });
 </script>
 
 <script>
