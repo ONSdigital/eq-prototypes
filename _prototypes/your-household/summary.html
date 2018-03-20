@@ -1,5 +1,5 @@
 ---
-title: do-you-live-here
+title: summary
 project: your-household
 globalcss: false
 ---
@@ -201,7 +201,7 @@ globalcss: false
 <script>
   function getRows (key, title, addLink) {
     var members = localStorage.getItem(key);
-    if (!members) return null;
+    if (!members) return $('<tr class="last-row"><td>' + title + '</td><td><a href="' + addLink + '?addnew=1">Add new</a></td><td></td></tr>');
     return members.split(',').map(function (member, index, members) {
       var firstCell = index === 0 ? '<td rowspan="' + (members.length + 1) + '">' + title + '</td>' : ''
       var t = index === 0 ? title : ''
