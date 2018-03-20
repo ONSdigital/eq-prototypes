@@ -30,3 +30,7 @@ To build custom code with access to pattern library modules
 - Run gulp from the command line in the root of the project.
 - A corresponding compiled bundle.js with be written to the folder js/compiled/
 - Reference the generated bundle.js in your HTML file(s).
+
+## CDN Version
+Default css CDN version: `v1.0.0`
+To use a specific version add `cdn: v1.0.1` to `_prototypes/yourprototype/yourversion/yourtemplate.html`
