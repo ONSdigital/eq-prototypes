@@ -1,3 +1,4 @@
+.idea
 _site
 .sass-cache
 .jekyll-metadata
@@ -8,3 +9,5 @@ yarn.lock
 .DS_Store
 Gemfile.lock
 .ruby-version
+.idea
+js/compiled/

@@ -1,0 +1,60 @@
+---
+title: Passport country typeahead
+project: Typeahead
+globalcss: false
+
+---
+
+    <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <script>document.documentElement.className = document.documentElement.className.replace('no-js','has-js')</script>
+    <!--<![endif]-->
+
+
+<link rel="stylesheet" href="{{ "/css/census-header-footer.css" | prepend: site.baseurl }}">
+
+<header class="page__header">
+  {% include bar.html %}
+  {% include header-census.html %}
+</header>
+
+<div class="page">
+    <div class="page__content">
+        <div class="page__subheader">
+          <div class="container">
+            <a class="mars" href="../index"></a>
+          </div>
+        </div>
+
+<div class="page__container container">
+  <div class="grid grid--reverse">
+    <div class="grid__col col-4@m">
+    </div>
+    <div class="grid__col col-7@m pull-1@m u-cf">
+      <main role="main" id="main" class="page__main">
+        <form action="../passport-type-v1-page1" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
+          <div class="group" id="rsi">
+            <div class="block" id="passport-types-opener">
+              <section class="section" id="passport-types-opener-section">
+                <div class="question" id="passport-types-opener-question">
+                  <h1 class="question__title saturn">
+                    Start page for passport question prototype
+                  </h1>
+              </section>
+            </div>
+          </div>
+          <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Start prototype 1</button>
+        </form>
+      <main role="main" id="main" class="page__main">
+        <form action="../passport-type-v2-page1" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
+          <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Start prototype 2</button>
+        </form>
+      </main>
+    </div>
+  </div>
+</div>
+{% include footer-census.html %}
+</div>
+{% include timeout-census.html %}

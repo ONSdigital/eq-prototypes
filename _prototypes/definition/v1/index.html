@@ -1,0 +1,192 @@
+---
+title: D1
+project: Definition
+globalcss: false
+cdn: v1.0.0
+---
+
+<header class="page__header">
+{% include survey-header.html %}
+{% include bar.html %}
+<style>
+.definition2 {
+  display: block;
+  border-top: 1px solid #999;
+  margin-top: 3em;
+}
+
+.definition2__list {
+  margin: 0;
+  padding: 1.5em 0 1em;
+  position: relative;
+}
+
+.definition2__title {
+  display: inline-block;
+  padding-left: 1.5em;
+  padding-top: 2rem;
+}
+
+@media only screen and (min-width: 1100px) {
+  .definition2__title {
+    padding-left: 0;
+  }
+}
+
+.definition2__title dfn {
+  font-style: normal;
+}
+
+.definition2__backtotop {
+  background: url("../../../s/img/icons/icons--definition-arrow.svg") no-repeat center left;
+  background-size: auto;
+  text-align: center;
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  position: absolute;
+  top: 1.5em;
+  left: -0.5em;
+  padding-left: 2rem;
+  padding-right: 0.5rem;
+}
+
+.definition2__backtotop:focus, .definition2__backtotop:active {
+  background-color: white;
+  color: #4263c2;
+}
+
+.definition2__description {
+  margin: 0;
+}
+
+.definition2__anchor {
+}
+
+.definition2__anchor:hover {
+  color: $color-links-hover;
+  border-color: $color-links-hover;
+}
+
+.definition2__anchor:focus {
+  color: #fff;
+  background-color: $color-links;
+  outline: none;
+}
+/*
+.definition2__anchor::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -0.6em;
+  background: transparent url("#{$static}/img/icons/icons--definition-anchor.svg") no-repeat 50%;
+  background-size: auto;
+  padding: 0;
+  display: inline-block;
+  white-space: nowrap;
+  line-height: 0;
+  vertical-align: super;
+  margin-left: 0;
+  width: 0.6em;
+  height: 0.6em;
+} */
+.panel--simple {
+  margin-left: 0;
+}
+</style>
+</header>
+
+<div class="page__subheader">
+  <div class="container">
+    <a class="mars" href="../index">Previous</a>
+  </div>
+</div>
+
+<div class="page__container container">
+  <div class="grid grid--reverse">
+    <div class="grid__col col-4@m">
+    </div>
+    <div class="grid__col col-7@m pull-1@m">
+      <main role="main" id="main" class="page__main">
+        <form action="../thankyou" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
+          <div class="group" id="rsi">
+            <div class="block" id="total-retail-turnover">
+              <div class="question" id="total-retail-turnover-question">
+                <section class="section" id="total-retail-turnover-section">
+                  <h1 class="question__title saturn">Do you connect an <a id="anchor-accumulator" href="#def-accumulator" title="Definition of accumulator" class="definition2__anchor saturn" >accumulator</a> to your <a id="anchor-photovoltaic" href="#def-photovoltaic" title="Definition of photovoltaic system" class="definition2__anchor saturn" >photovoltaic system</a> to store surplus energy?
+                  </h1>
+
+                  <aside class="question__guidance">
+                    <div class="panel panel--simple panel--info" id="question-guidance-total-turnover-question">
+
+
+                      <strong class="u-mb-s u-d-b">Include</strong>
+                      <ul class="mars">
+                        <li>Batteries</li>
+                        <li>Capacitors</li>
+                        <li>Alternators</li>
+                        <li>Mainsprings</li>
+                        <li>Flywheel energy store</li>
+                      </ul>
+                    </div>
+                  </aside>
+
+                  <div class="question__answers">
+                    <div class="question__answer">
+                      <div class="answer answer--radio  " id="container-radio-mandatory-answer">
+                        <div class="answer__fields js-fields">
+                          <div class="field field--radio field--multiplechoice">
+                            <fieldset>
+                              <legend class="field__legend mars u-vh">Do you connect an accumulator to your photovoltaic system to store surplus energy?</legend>
+                              <div class="field__item js-focusable-box">
+                                <input value="Yes" id="radio-mandatory-answer-0" name="radio-mandatory-answer" type="radio" class="input input--radio js-focusable">
+                                <label id="label-radio-mandatory-answer-0" class="label label--inline venus" for="radio-mandatory-answer-0">
+                                  Yes
+                                </label>
+                              </div>
+                              <div class="field__item js-focusable-box">
+                                <input value="No" id="radio-mandatory-answer-1" name="radio-mandatory-answer" type="radio" class="input input--radio js-focusable">
+                                <label id="label-radio-mandatory-answer-1" class="label label--inline venus" for="radio-mandatory-answer-1">
+                                  No
+                                </label>
+                              </div>
+                            </fieldset>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Save and continue</button>
+          <div class="u-mb-m">
+            <button class="btn btn--link mars js-btn-save" type="submit" name="action[save_sign_out]">Save and complete later</button>
+          </div>
+        </form>
+        <a class="page__previous page__previous--bottom js-previous-link" href="../index" id="bottom-previous">Previous</a>
+        <div class="definition2">
+          <dl class="definition2__list">
+            <dt class="definition2__title venus">
+              <dfn class="venus" id="def-accumulator">Definition for an accumulator</dfn>
+            </dt>
+            <dd class="definition2__description mars">
+              An accumulator is an energy storge device; a device which accepts energy, stores energy and releases energy as needed.
+              <a href="#anchor-accumulator" class="definition2__backtotop">Back to question</a>
+            </dd>
+          </dl>
+          <dl class="definition2__list">
+            <dt class="definition2__title venus">
+              <dfn class="venus" id="def-photovoltaic">Definition for a photovoltaic system</dfn>
+            </dt>
+            <dd class="definition2__description mars">
+              Photovoltaics known as solar panels are usually installed on homes and comercial properties. They produce electricity directly from the energy of the sun. The panels are usually installed on the roof of your property.
+              <a href="#anchor-photovoltaic" class="definition2__backtotop">Back to question</a>
+            </dd>
+          </dl>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>

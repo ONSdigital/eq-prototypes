@@ -1,0 +1,98 @@
+---
+title: Passport questions v1
+project: Typeahead
+globalcss: false
+
+---
+
+<!--[if lt IE 9]>
+<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+<![endif]-->
+<!--[if gt IE 8]><!-->
+  <script>document.documentElement.className = document.documentElement.className.replace('no-js','has-js')</script>
+<!--<![endif]-->
+
+<link rel="stylesheet" href="{{ "/css/census-header-footer.css" | prepend: site.baseurl }}">
+<link href="../css/autocomplete.css" rel="stylesheet">
+<link href="../css/typeahead.css" rel="stylesheet">
+<link href="../css/passport-types.css" rel="stylesheet">
+
+<header class="page__header">
+  {% include bar.html %}
+  {% include header-census.html %}
+</header>
+
+<div class="page">
+  <div class="page__content">
+    <div class="page__subheader">
+      <div class="container">
+        <a class="mars" href="../passport-type-v1-page1">Previous</a>
+      </div>
+    </div>
+
+    <div class="page__container container">
+      <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-7@m pull-1@m">
+          <main role="main" id="main" class="page__main">
+          <form name="validPassportForm" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
+          <div class="group" id="rsi">
+            <div class="block" id="passport-types-opener">
+              <section class="section" id="passport-types-opener-section">
+                <div class="question" id="passport-types-opener-question">
+                  <h1 class="question__title saturn">
+                    Does <span class="highlight q1">Bob Smith</span> hold a valid passport? 
+                  </h1>
+                  <div class="question__answers">
+                    <div class="question__answer">
+                      <div class="answer answer--radio  " id="passport-held-answer">
+                        <div class="answer__fields js-fields">
+                          <div class="field field--radio field--multiplechoice ">
+                            <fieldset>
+                              <div class="field__item js-focusable-box">
+                                <input  value="Yes" type="radio" class="input input--radio js-focusable" id="passport-held-answer-0" name="passport-held-answer">
+                                  <label  class="label label--inline venus" for="passport-held-answer-0">
+                                    Yes
+                                  </label>
+                              </div>
+                              <div class="field__item js-focusable-box">
+                                <input  value="No" type="radio" class="input input--radio js-focusable" id="passport-held-answer-1" name="passport-held-answer">
+                                <label  class="label label--inline venus" for="passport-held-answer-1">
+                                  No
+                                </label>
+                              </div>
+                            </fieldset>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </section>
+            </div>
+          </div>
+          <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Save and continue</button>
+          <div class="u-mb-m">
+            <button class="btn btn--link mars js-btn-save" type="submit" name="action[save_sign_out]">Save and complete later</button>
+          </div>
+          </form>
+          <a class="page__previous page__previous--bottom js-previous-link" href="../index" id="bottom-previous">Previous</a>
+          </main>
+        </div>
+      </div>
+    </div>
+</div>
+{% include footer-census.html %}
+</div>
+{% include timeout-census.html %}
+
+<script>
+  var yesRadio = document.getElementById("passport-held-answer-0");
+  $('.qa-btn-submit').click(function(e) {
+    if (yesRadio.checked) {
+      document.validPassportForm.action = "../passport-type-v1-page2";
+    } else {
+      document.validPassportForm.action = "../end-page";
+    }
+  });
+</script>
