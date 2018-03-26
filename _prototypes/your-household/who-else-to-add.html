@@ -1,5 +1,5 @@
 ---
-title: What is your name
+title: Who else to add
 project: your-household
 globalcss: false
 ---
@@ -47,8 +47,10 @@ globalcss: false
 
                         <div class="question">
                             <h1 class="question__title saturn" data-qa="question-title">
-                                What is your name?
+                                Who do you need to add to <span class="address-text"></span>
                             </h1>
+
+                            <ul id='household-members'></ul>
 
                             <fieldset class="question__fieldset js-question-fieldset">
                                 <legend class="u-vh">What is your name?</legend>
@@ -110,28 +112,28 @@ globalcss: false
     </div>
 </div>
 
+<script src='/js/compiled/standard-bundle.js'></script>
+<script src='/js/compiled/your-household/bundle.js'></script>
+
 <script>
 	$('.btn-submit').click(function (e) {
 		e.preventDefault(); // do not submit the form like usual
-		localStorage.setItem('name', getName());
-		window.location = '../do-you-live-here/';
+        window.ONS.addHouseholdMember(window.ONS.person({
+            firstName: document.getElementById('first-name').value,
+            middleName: document.getElementById('middle-name').value,
+            lastName: document.getElementById('last-name').value
+		}));
+		window.location = '../does-anyone-else-live-here/';
 	});
 
-	function getName() {
-		return [
-			document.getElementById('first-name').value,
-			document.getElementById('middle-name').value,
-			document.getElementById('last-name').value
-		].filter(function (name) {
-			return name
-		}).join(' ')
-	}
-
 	$(function () {
-		var addressLines = localStorage.getItem('address').split(','),
-			addressLine1 = addressLines[0];
+        var addressStored = localStorage.getItem('address') || '',
+            addressLines = addressStored.split(','),
+            addressLine1 = addressLines[0],
+            addressLine2 = addressLines[1];
 
 		$('#section-address').html(addressLine1);
+        $('.address-text').html(addressLine1 + ', ' + addressLine2);
 	});
 </script>
 

@@ -1,124 +1,96 @@
 ---
-title: section-intro
+title: Section intro
 project: your-household
 globalcss: false
 ---
 
-
-<link rel="stylesheet" href="{{ "/css/census.css" | prepend: site.baseurl }}">
-<link rel="stylesheet" href="../css/labourmarket.css">
-<!--<link rel="stylesheet" type="text/css" href="{{ "/css/census-proto.css" | prepend: site.baseurl }}">-->
-
-  <header class="header header--census">
-  <div class="header__help is-closed js-help-body">
-    <div class="header__container container">
-      <div class="header__title ">Help and support –</div>
-      
-    </div>
-  </div>
-  <div class="header__container container">
-    <div class="header__logo">
-     <img src="{{ "/img/census-logo.svg" | prepend: site.baseurl }}" alt="2017 Census">
-    </div>
-    <button class="header__btn btn btn--light btn--border js-help-btn" data-ga-action="Help and support" data-ga="click" data-ga-category="Help">
-      Help and support
-    </button>
-  </div>
+<link rel="stylesheet" href="{{ "/css/census-header-footer.css" | prepend: site.baseurl }}">
+<header class="page__header">
+    {% include bar.html %}
+    {% include header-census.html %}
 </header>
-</header>
-
-
 
 <div class="page__subheader">
-  
-  <div class="container">
-    <a class="mars" href="javascript:history.back()">Previous</a>
-  </div>
+    <div class="container">
+        <a class="mars" href="../index">Previous</a>
+    </div>
 </div>
 
 <div class="page__container container">
-  <div class="grid grid--reverse">
-    <div class="grid__col col-4@m">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
 
-    <!-- right aligned side nav -->
-      <div class="nav nav--sections nav--vertical js-nav page__nav" id="section-nav">
-    <h2 class="nav__title venus">Sections</h2>
-    <ul class="nav__list js-nav-list">
-        <li class="nav__item pluto nav__item--current">
-            <a class="nav__link" href="#item1">Your Household</a>
-        </li>
-        <li class="nav__item pluto nav__item--incomplete">
-            <a class="nav__link" href="#item2">Household and Accomodation</a>
-        </li>
-    </ul>
-</div>
+            <!-- right aligned side nav -->
+            <nav class="nav nav--sections nav--vertical js-nav page__nav" id="section-nav">
+                <h2 class="nav__title venus">Sections</h2>
+                <ul class="nav__list js-nav-list">
+                    <li class="nav__item pluto nav__item--incomplete">
+                        <a class="nav__link" href="#item0" id="section-address">[Dynamic address]</a>
+                    </li>
+                    <li class="nav__item pluto nav__item--current">
+                        <a class="nav__link" href="#item1">Who lives here?</a>
+                    </li>
+                    <li class="nav__item pluto nav__item--incomplete">
+                        <a class="nav__link" href="#item2">Household and accomodation</a>
+                    </li>
+                </ul>
+            </nav>
 
-</div>
-    <div class="grid__col col-7@m pull-1@m">
-      <main role="main" id="main" class="page__main">
-        <form name="trav" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
-          <div class="group" id="rsi">
-            <div class="block" id="total-retail-turnover">
-              <section class="section" id="total-retail-turnover-section">
-               <!-- <h2 class="section__title neptune">Joanna Bloggs</h2>-->
-         <br>
-            
-                <form class="form qa-questionnaire-form" role="form" method="POST" autocomplete="off" novalidate="">
-      <input id="csrf_token" name="csrf_token" type="hidden" value="ImJkNWQyMDFlZDI0ZDFiNGIyNTZmNjM5YzBjMTFiMzY3NjkzZTBhMTQi.DZEV1Q.VFn9WtRKbmzGQrUv5jlP6xuQuOI">
+        </div>
+        <div class="grid__col col-7@m pull-1@m">
+            <main role="main" id="main" class="page__main">
+                <div class="group" id="rsi">
+                    <div class="block" id="total-retail-turnover">
+                        <section class="section" id="total-retail-turnover-section">
+                            <h1 class="saturn">Who lives here?</h1>
 
-      
+                            <p class="mars">In this section, we’re going to ask you about all the people that live or
+                                are visting <span class="address-text"></span>.</p>
 
-  <h1 class="saturn">People who live in the household</h1>
-
-
-  <p class="mars">In this section, we’re going to ask you about the people that live at <span class="address-text"></span>.</p>
-
-
-<h3 class="neptune">Information you need</h3>
-  <ul class="mars"><li>Names of the people living in household and how they are related</li>
-      <li>The number of visitors staying in the household on 27th February 2018</li>
-      
-    </ul>
-
-                  
-                      
-                  </div>
+                            <h3 class="neptune">Information you will need:</h3>
+                            <ul class="mars">
+                                <li>Names of the people living in household</li>
+                                <li>Names of the visitors staying in the household on 27th February 2018</li>
+                            </ul>
+                        </section>
+                    </div>
                 </div>
-              </section>
-            </div>
-          </div>
-          <button class="btn btn--primary btn--lg qa-btn-submit venus btn-submit" type="submit" name="">Continue</button>
-          <div class="u-mb-m">
-            <button class="btn btn--link mars js-btn-save" type="submit" name="action[save_sign_out]">Save and complete later</button>
-          </div>
-        </form>
-        <a class="page__previous page__previous--bottom js-previous-link" href="javascript:history.back()" id="bottom-previous">Previous</a>
-      </main>
+
+                <button class="btn btn--primary btn--lg qa-btn-submit venus btn-submit" type="submit" name="">Continue</button>
+                <div class="u-mb-m">
+                    <button class="btn btn--link mars js-btn-save" type="submit" name="action[save_sign_out]">Save and complete
+                        later
+                    </button>
+                </div>
+
+                <a class="page__previous page__previous--bottom js-previous-link" href="javascript:history.back()"
+                   id="bottom-previous">Previous</a>
+            </main>
+        </div>
     </div>
-  </div>
 </div>
 
 <script>
-$('.btn-submit').click(function(e) {
-  e.preventDefault(); // do not submit the form like usual
-  window.location = '../what-is-your-name/';
-});
+	$('.btn-submit').click(function (e) {
+		e.preventDefault(); // do not submit the form like usual
+		window.location = '../what-is-your-name/';
+	});
 
-    
+	$(function () {
+        var addressLines = localStorage.getItem('address').split(','),
+          addressLine1 = addressLines[0],
+          addressLine2 = addressLines[1];
 
-</script>
+		$('.address-text').html(addressLine1 + ', ' + addressLine2);
+		$('#section-address').html(addressLine1);
+	});
 
-<script>
-  $(function(){ $('.address-text').html(localStorage.getItem('address').split(',')[0]); });
-</script>
-
-<script>
-  $(function(){ 
-    var oneWeekAgo = new Date();
-    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-    var options = { year: 'numeric', month: 'long', day: 'numeric' };
-    $('.one-week-ago').text(oneWeekAgo.toLocaleString('en-GB', options));
-  });
+	$(function () {
+		var oneWeekAgo = new Date();
+		oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+		var options = {year: 'numeric', month: 'long', day: 'numeric'};
+		$('.one-week-ago').text(oneWeekAgo.toLocaleString('en-GB', options));
+	});
 </script>
 
 
