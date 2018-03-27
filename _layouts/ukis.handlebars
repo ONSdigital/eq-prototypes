@@ -1,0 +1,285 @@
+---
+title: UK Innovation Survey
+project: UKIS
+globalcss: false
+---
+{% raw %}
+
+{% include survey-header-v2.html %}
+{{#if homepage}}
+{% include bar-hero.html %}
+{{else}}
+{% include bar.html %}
+{{/if}}
+{% endraw %}
+
+{% block content %}
+<div class="container">
+  {{#if html}}
+    {{{html}}}
+  {{else}}
+  <div class="grid ">
+    <div class="grid__col col-7@s">
+      <div role="main" class="panel__body" id="main">
+        {{#if prev}}
+        <a class="mars" href="../{{prev}}">Previous</a><br/><br/>
+        {{/if}}
+        <form class="form qa-questionnaire-form" role="form" novalidate="">
+          <div class="hidden-form">
+          </div>
+          <div class="group" id="14ba4707-321d-441d-8d21-b8367366e766">
+            <div class="block" id="cd3b74d1-b687-4051-9634-a8f9ce10a27d">
+              <div class="section" id="017880bc-752d-4a6b-83df-e130409ee660">
+                <h2 class="section__title saturn">{{#if sectionVersion}}<span class="section__title__number venus">{{sectionVersion}}</span>{{/if}}{{sectionTitle}}</h2>
+                {{#if sectionDescription}}
+                <div class="section__description">
+                  {{{ sectionDescription}}}
+                </div>
+                {{/if}}
+                <div class="question">
+                  {{#if questionTitle}}
+                  <h3 class="question__title neptune"><span class="question__title__number venus">{{questionVersion}}</span>{{{questionTitle}}}</h3>
+                  {{/if}}
+                  {{#if questionDescription}}
+                  <div class="question__description">
+                    {{{questionDescription}}}
+                  </div>
+                  {{/if}}
+                  <div class="response response--{{answerType}}">
+
+                  {{#if textfield}}
+                    <div class="response response--textfield">
+                      {{#each textfield}}
+                      <div class="field">
+                        <label class="label venus" for="form-input-{{@index}}" >{{label}}</label>{{#if validation}}<br/>{{/if}}
+                        <input class="input input--text mars" pattern="\d*" id="form-input-{{@index}}" name="{{#if qId}}{{qId}}{{else}}1{{/if}}" type="{{type}}" value="">
+                        {{#if validation}}
+                          <span class="hint pluto">{{validation}}</span>
+                        {{/if}}
+                      </div>
+                      <br/>
+                      {{/each}}
+                    </div>
+                  {{/if}}
+
+                  {{#if time}}
+                    <div class="response response--time">
+                      {{#each time}}
+                      <div class="field field--time">
+                        <label class="label venus" for="form-input-{{@index}}">{{label}}</label>
+                        <div class="input-type input-type--percent" {{#if icon}}data-type="{{icon}}"{{/if}}>
+                          <input id="form-input-{{@index}}" name="{{#if qId}}{{qId}}{{else}}1{{/if}}" type="{{type}}" class="input input--text" value="">
+                        </div>
+                      </div>
+                      {{/each}}
+                    </div>
+                  {{/if}}
+
+                  {{#if radios}}
+                    <div class="field field--multi field--radio">
+                      {{#each radios}}
+                        {{#if other}}
+                      <div class="field__item field__item--other">
+                        <input class="input input--radio input--radio--change input--other" type="{{type}}" name="{{qId}}" id="form-input-{{@index}}" value="{{label}}" title="{{label}}">
+                        <label class="label label--inline" for="form-input-{{@index}}"><span class="label__inner mars">{{label}}</span></label>
+                        <div class="field__item--other__text">
+                          <span class="pluto">{{other}}</span><br />
+                          <input class="input input--text" type="text" value="">
+                        </div>
+                      </div>
+                        {{else}}
+                      {{#if groupName}}<p class="mars" style="margin-top: 32px;line-height:1.3rem;">{{{groupName}}}</p>{{/if}}
+                      <div class="field__item">
+                        <input class="input input--radio" type="{{type}}" name="{{qId}}" id="form-input-{{@index}}" value="{{label}}" title="{{label}}">
+                        <label class="label label--inline" for="form-input-{{@index}}"><span class="label__inner">{{label}}</span></label>
+                      </div>
+                        {{/if}}
+                      {{/each}}
+                    </div>
+                  {{/if}}
+
+                  {{#if checkboxs}}
+                    <div class="field field--multi field--checkbox">
+                      {{#each checkboxs}}
+                        {{#if other}}
+                      <div class="field__item field__item--other">
+                        <input class="input input--checkbox input--checkbox--change input--other" type="{{type}}" name="{{#if qId}}{{qId}}{{else}}1{{/if}}" id="form-input-{{@index}}" value="{{label}}" title="{{label}}">
+                        <label class="label label--inline" for="form-input-{{@index}}"><span class="label__inner mars">{{label}}</span></label>
+                        <div class="field__item--other__text">
+                          <span class="pluto">{{other}}</span><br />
+                          <input class="input input--text" type="text" value="">
+                        </div>
+                      </div>
+                        {{else}}
+                      <div class="field__item">
+                        <input class="input input--{{type}}" type="{{type}}" name="{{#if qId}}{{qId}}{{else}}1{{/if}}" id="form-input-{{@index}}" value="{{label}}" title="{{label}}">
+                        <label class="label label--inline" for="form-input-{{@index}}"><span class="label__inner">{{label}}</span></label>
+                      </div>
+                        {{/if}}
+                      {{/each}}
+                    </div>
+                  {{/if}}
+
+                  {{#if currency}}
+                    <div class="response response--currency">
+                      {{#each currency}}
+                      <div class="field">
+                        <label class="label venus" for="form-input-{{@index}}" >{{label}}</label>{{#if validation}}<br/>{{/if}}
+                        <div class="input-type input-type--currency" data-type="£">
+                        <input class="input input--text numericentry mars" pattern="^\d+(,\d+)*$" id="form-input-{{@index}}" name="{{#if qId}}{{qId}}{{else}}1{{/if}}" type="{{type}}" value="">
+                        {{#if validation}}
+                          <span class="hint pluto">{{validation}}</span>
+                        {{/if}}
+                        </div>
+                      </div>
+                      {{/each}}
+                    </div>
+                  {{/if}}
+
+                  {{#if comments}}
+                    <div class="response response--textarea">
+                      <div class="field">
+                        <label class="label mars" for="form-input-{{@index}}" >{{label}}</label>
+                        <textarea id="form-input-{{@index}}" name="{{#if qId}}{{qId}}{{else}}1{{/if}}" class="input input--textarea" rows="8" cols="60"></textarea>
+                      </div>
+                    </div>
+                  {{/if}}
+
+                  {{#if percentage}}
+                    <div class="response response--currency">
+                      {{#each percentage}}
+                      <div class="field">
+                        <label class="label venus" for="form-input-{{@index}}" >{{label}}</label>{{#if validation}}<br/>{{/if}}
+                        <div class="input-type input-type--percent" data-type="%">
+                          <input class="input input--text numericentry mars" pattern="^(100|[1-9]?[0-9])$" id="form-input-{{@index}}" name="{{#if qId}}{{qId}}{{else}}1{{/if}}" type="{{type}}" value="">
+                          {{#if validation}}
+                            <span class="hint pluto">{{validation}}</span>
+                          {{/if}}
+                        </div>
+                      </div>
+                      <br/>
+                      {{/each}}
+                    </div>
+                  {{/if}}
+
+                  {{#if calculation}}
+                  <!-- Text currency -->
+                    <div class="response response--textfield">
+                      <div class="box box--fullwidth">
+                        {{#each calculation}}
+                        <div class="field">
+                          <label class="label venus" for="form-input-{{@index}}">{{label}}</label>
+                          {{#if labelInfo}}<p class="mars">{{labelInfo}}</p>{{/if}}
+                          <div class="input-type input-type--percent" data-type="%">
+                            <input id="form-input-{{@index}}" name="{{#if qId}}{{qId}}{{else}}1{{/if}}" type="{{type}}" class="input input--text" value="">
+                          </div>
+                        </div>
+                        <br/>
+                        {{/each}}
+                      </div>
+                      <div class="box box--fullwidth box--total">
+                        <div class="field">
+                          <label class="label venus" for="form-input-5">Total turnover</label><br>
+                          <div class="input-type input-type--percent" data-type="%">
+                          <input id="form-input-5" class="input input--text numericentry mars" name="1" type="text" value="" pattern="100" aria-describedby="description-form-input-1">
+                          <span class="hint pluto">Total should add up to 100%</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  {{/if}}
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn--quaternary qa-btn-get-started venus" type="submit" name="">{{#if submitButton}}{{submitButton}}{{else}}Save and continue{{/if}}</button><br/><br/>
+          <a class="mars" href="../{{prev}}">Previous</a>
+        </form>
+      </div>
+    </div>
+    <div class="grid__col push-1@s col-3@s">
+      {{#if navigation}}
+      {% raw %}
+      {% include progress-ukis.html %}
+      {% endraw %}
+      {{/if}}
+    </div>
+  </div>
+  {{/if}}
+</div>
+
+<div class="footer--help-and-support">
+  <div class="container">
+    <div class="mars">Help and support - Call
+      <div class="info__tel venus">
+        <a href="tel:03001234931">0300 1234 931</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+$( document ).ready(function() {
+  if ($('.business-name').length > 0) {
+    var businessName = sessionStorage.getItem('Business name');
+    $('.business-name').html(businessName);
+  }
+  {{#if navigation}}
+  var pathArray = window.location.pathname.split( '/' );
+  var fourthLevelLocation = pathArray[4];
+  $('.' + fourthLevelLocation).addClass('active is-open').prevAll().addClass('complete');
+  if ( fourthLevelLocation === "section-5" || fourthLevelLocation === "section-37" || fourthLevelLocation === "section-50c" || fourthLevelLocation === "section-50b" || fourthLevelLocation === "section-91" || fourthLevelLocation === "section-94" || fourthLevelLocation === "section-99" || fourthLevelLocation === "section-104b") {
+    $('.' + fourthLevelLocation).addClass('complete');
+  }
+  {{/if}}
+  $('.qa-btn-get-started').click(function(e) {
+    e.preventDefault();
+    window.location.href = "../{{next}}";
+
+    {{#if sessionStorage}}
+      {{#each sessionStorage}}
+        if ("{{type}}" === "text") {
+          var inputValue = $("input[name='{{qId}}']").val();
+          sessionStorage.setItem('{{label}}', inputValue);
+        } else {
+          var inputValue = $("input[name='{{qId}}']:checked").val();
+          sessionStorage.setItem('{{label}}', inputValue);
+        }
+      {{/each}}
+    {{/if}}
+
+    {{#if route}}
+      {{#each route}}
+        var checkedVal = $("input[name='{{qId}}']:checked").val();
+        var checkedName = $("input[name='{{qId}}']:checked").attr("name");
+        if (checkedVal == "{{label}}" && checkedName == "{{qId}}") {
+          window.location.href = "../{{link}}";
+        }
+      {{/each}}
+    {{/if}}
+    if ( fourthLevelLocation === "section-50" && sessionStorage.getItem('section-6a') === "No" && sessionStorage.getItem('section-6b') === "No" && sessionStorage.getItem('section-6c') === "No" && sessionStorage.getItem('section-6d') === "No" && sessionStorage.getItem('section-8') === "No" && sessionStorage.getItem('section-11') === "No" && sessionStorage.getItem('section-13') === "No" && sessionStorage.getItem('section-16') === "No" && sessionStorage.getItem('section-18') === "No" && sessionStorage.getItem('section-20') === "No" && sessionStorage.getItem('section-22') === "No" && sessionStorage.getItem('section-26') === "No" && sessionStorage.getItem('section-28') === "No" && sessionStorage.getItem('section-34') === "No" && sessionStorage.getItem('section-38a') === "No" && sessionStorage.getItem('section-38b') === "No" && sessionStorage.getItem('section-38c') === "No" ) {
+      window.location.href = "../section-50a";
+    }
+    if ( fourthLevelLocation === "section-28" && sessionStorage.getItem('section-26') === "No" && sessionStorage.getItem('section-28') === "No" ) {
+      window.location.href = "../section-33";
+    }
+  });
+  {{#if calculation}}
+  $('.input--text').keyup( function() {
+    var inputOne = document.getElementById("form-input-0").value;
+    var inputTwo = document.getElementById("form-input-1").value;
+    var inputThree = document.getElementById("form-input-2").value;
+    var inputFour = document.getElementById("form-input-3").value;
+    var totalGoods = Number(inputOne) + Number(inputTwo) + Number(inputThree) + Number(inputFour);
+    document.getElementById("form-input-5").value = totalGoods;
+  });
+  {{/if}}
+
+
+});
+
+</script>
+{% endblock %}

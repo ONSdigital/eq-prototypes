@@ -1,0 +1,40 @@
+.form {
+  margin-bottom: 1rem;
+}
+
+.hidden-form{
+  position: absolute;
+  top: 200px;
+  right: 0;
+}
+
+.transaction{
+  display: block;
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  @include mq(m) {
+    display: flex;
+  }
+  li{
+    width: 100%;
+    position: relative;
+    @include mq(m) {
+    padding: 0 40px 0 0;
+      &:after{
+        content: "-";
+        display: block;
+        position: absolute;
+        font-size: 30px;
+        top: -2px;
+        right: 16px;
+      }
+    }
+  }
+  li:last-child{
+    padding: 0 0px 0 0;
+    &:after{
+      content: "";
+    }
+  }
+}

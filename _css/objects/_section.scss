@@ -1,0 +1,80 @@
+.section {
+  padding: 1rem 0;
+  @include mq(s) {
+    padding: 2rem 0;
+  }
+
+  &:first-of-type {
+    padding-top: 0;
+    margin-top: 0;
+  }
+}
+
+.section__title {
+  position: relative;
+  display: flex;
+}
+.section__title__number {
+  color: $color-white;
+  position: relative;
+  text-align: center;
+  width: 48px;
+  height: 48px;
+  z-index: 1;
+  display: table;
+  top: 6px;
+  left: 0px;
+  vertical-align: top;
+  margin-right: 10px;
+  @include mq(xl) {
+    position: absolute;
+    top: 8px;
+    left: -69px;
+  }
+  &:after {
+    content: "";
+    background-color: $color-dark-blue;
+    border-radius: 100%;
+    width: 48px;
+    height: 48px;
+    position: absolute;
+    display: block;
+    z-index: -1;
+    top: -13px;
+    left: 0px;
+  }
+}
+.question__title__number--census{
+  &:after {
+    background-color: $color-purple; 
+  }
+}
+
+.section__description {
+  @include mq(s) {
+    padding: 0;
+  }
+  div {
+    @include mq(s) {
+      display: table-cell;
+      width: 50%;
+      padding-bottom: 1rem;
+      &:first-of-type {
+        padding-left: 0.25rem;
+        padding-right: 0.5rem;
+      }
+      &:last-of-type {
+        padding-left: 1rem;
+      }
+    }
+    ul {
+      padding-left: 1rem;
+      @include mq(s) {
+        margin-bottom: 0;
+      }
+      @include lt-ie8 {
+        margin-bottom: 1rem;
+      }
+    }
+  }
+}

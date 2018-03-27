@@ -1,0 +1,100 @@
+.box {
+  padding: 1.7rem;
+  border: 1px solid $color-borders;
+  border-radius: 0px;
+  max-width: 40rem;
+  display: inline-block;
+  position: relative;
+
+  &w.confirm {
+    &::before {
+      $size: 2.5rem;
+      background: url("#{$s}/img/icons/icons--check.svg") no-repeat center center;
+      background-color: white;
+      background-size: 2rem;
+      content: "";
+      position: absolute;
+      top: -$size/2;
+      left: 0;
+      right: 0;
+      bottom: auto;
+      margin: auto;
+      width: $size;
+      height: $size;
+      border: 2px solid $color-borders;
+      border-radius: 100%;
+    }
+  }
+}
+
+
+.box__list{
+  font-family: monaco, Consolas, "Lucida Console", monospace;
+  list-style-type: none;
+  padding: 0;
+  margin: 1rem auto;
+}
+.box__list__item {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 0.2rem 0.2rem;
+  text-align: center;
+  margin: 0.2rem;
+  background: rgba(255, 255, 255, 0.5);
+  @include mq(m) {
+    padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
+  }
+  &:first-child{
+    margin-left: 0px;
+  }
+}
+.box--promo{
+  background-color: $color-light-purple;
+  border: 0px;
+  border-left: 8px solid $color-blue;
+  border-radius: 0px;
+  max-width: 100%;
+  margin-bottom: 2rem;
+  display: block;
+  padding-bottom: 8px;
+}
+.box--incude-exclude{
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 8px;
+  border: 0px;
+  border-top: 1px solid $color-grey;
+  border-bottom: 1px solid $color-grey;
+  border-radius: 0px;
+  max-width: 100%;
+  margin-bottom: 2rem;
+  display: block;
+}
+.box--fullwidth {
+  width: 100%;
+  padding: 16px;
+}
+.box--total {
+  border-top: 0px;
+  background-color: #FBFBFB;
+}
+.box--census{
+  border-left: 8px solid $color-purple;
+  background-color: lighten($color-purple, 64%);
+}
+
+.box--entity {
+  margin: 16px 0;
+}
+.box--entity__person{
+  vertical-align: text-bottom;
+  margin: 0 0 16px 0;
+  width: 100%;
+  padding: 9px 16px 9px 16px;
+  border: 1px solid #ccc;
+  min-width: 330px;
+  display: table-caption;
+  border-radius: 3px;
+  background-color: #fbfbfb
+}

@@ -1,0 +1,25 @@
+.u-ar {
+  text-align: right;
+}
+
+.u-dib {
+  display: inline-block;
+}
+
+.u-db {
+  display: block;
+}
+
+.u-no-js-hide {
+  .no-js & {
+    display: none;
+  }
+}
+
+.visually-hidden{
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px; width: 1px;
+  margin: -1px; padding: 0; border: 0;
+}

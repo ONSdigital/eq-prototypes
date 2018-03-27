@@ -1,0 +1,45 @@
+---
+title: Household Questionnaire lite v8
+subtitle: England
+project: 2017 Census lite
+globalcss: false
+---
+
+{% include survey-header-census-hero.html %}
+
+<div class="container">
+  <div class="grid ">
+    <div class="grid__col col-8@s">
+      <div role="main" class="panel__body" id="main">
+        <div class="header">
+          <h2 class="saturn">Welcome to the 2017 Census Test</h2>
+            <p class="mars">By completing this questionnaire you will be joining others in your local area who are helping us to plan for the next census.</p>
+            <p class="mars">If anyone aged 16 or over would like to keep their answers private, they can <a>request a personal and confidential form</a> or by calling <strong>0300 068 3001</strong>.</p>
+            <br/>
+          <div class="box box--promo box--census">
+            <p class="venus">
+              Enter your 12 digit Census access code
+            </p>
+            <ul class="transaction">
+              <li><input class="input input--text" type="text" value=""></li>
+              <li><input class="input input--text" type="text" value=""></li>
+              <li><input class="input input--text" type="text" value=""></li>
+            </ul>
+            <p class="mars">The census access code is printed on your Census letter.</p>
+          </div>
+          <div class="lock u-mb-s u-mb-m@s">
+            <div class="venus lock__text">Your personal information is protected by law and will be kept confidential.</div>
+          </div>
+          <form action="" class="form" role="form" method="POST" novalidate="">
+            <a href="../section-4"class="btn btn--census qa-btn-get-started neptune" type="submit" name="action[start_questionnaire]">Start Census</a>
+          </form>
+        </div>
+      </div>
+      <p class="mars">The Census in England and Wales is organised by the <a>Office for National Statistics</a>.</p>
+
+    </div>
+
+  </div>
+</div>
+
+{% include footer-census.html %}

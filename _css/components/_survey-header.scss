@@ -1,0 +1,265 @@
+$bp: 36em;
+// $bp: 32em;
+// $bp: 30rem;
+
+.survey-header {
+  display: block;
+  overflow: hidden;
+  @include mq($bp) {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.survey-header__logo {
+  margin-bottom: 1rem;
+  @include mq($bp) {
+    margin-bottom: 0;
+    flex: 1 1 50%;
+  }
+}
+
+.survey-header__info {
+  @include mq($from: xs, $to: m) {
+    max-width: 100%;
+  }
+
+  @include mq($bp) {
+    margin-left: auto;
+    float: right;
+    flex: 1 1 10rem;
+    margin-left: 2rem;
+    position: relative;
+    text-align: right;
+    &:before{
+      content: "";
+      display: block;
+      width: 100%;
+      height: 8px;
+      background-color: $color-green;
+      position: absolute;
+      top:-1.3rem;
+      right: 0;
+    }
+  }
+
+  @include fixed {
+    width: 20em;
+    float: right;
+    position: relative;
+  }
+}
+// Census
+
+.census-header{
+  color: white;
+  background-color: $color-purple;
+  margin-bottom: 2rem;
+  overflow: hidden;
+  position: relative;
+  .survey-header {
+    display: flex;
+    align-items: center;
+  }
+  .panel{
+    background-color: transparent;
+  }
+  .panel__header{
+    border: 0px;
+    padding: 4px 0;
+    @include mq(s){
+      padding: 10px 0;
+    }
+    @include mq(s){
+      padding: 20px 0;
+    }
+    &:before {
+      content: none;
+    }
+  }
+  .survey-header__info{
+    @include mq(xs){
+      margin-left: auto;
+      float: right;
+      flex: 1 1 10rem;
+      margin-left: 2rem;
+      position: relative;
+      text-align: right;
+    }
+    &:before {
+      content: none;
+    }
+  }
+  .survey-header__title{
+    margin: 0;
+    display: inline;
+  }
+  .info__title a{
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    border: 2px solid white;
+    padding: 8px 32px;
+    border-radius: 4px;
+    @include mq(s) {
+      font-size: 20px;
+    }
+    svg {
+      width: 105px;
+      height: 26px;
+      @include mq(s) {
+        width: 168px;
+        height: 41px;
+      }
+      @include mq(m) {
+        width: 221px;
+        height: 54px;
+      }
+    }
+  }
+}
+.census-header__help{
+  background-color: #511763;
+  height: 0px;
+  overflow: hidden;
+  text-align: right;
+  transition: height 0.2s ease-in-out;
+  color: #fff;
+  &.is-open{
+    height: 64px;
+  }
+  ul{
+    display: block;
+    padding: 16px 0;
+    margin: 0;
+    li {
+      display: inline-block;
+      margin: 0;
+      margin-left: 0.5rem;
+      padding-left: 0.5rem;
+      border-left: 1px solid #ccc;
+      &:first-child{
+        border-left: 0px;
+        margin-left: 0;
+        padding-left: 0;
+      }
+    }
+  }
+  a{
+    color: #fff;
+  }
+  svg{
+    margin-left: 8px;
+  }
+}
+.census-header--hero{
+  background-color: white;
+  border-bottom: 3px solid $color-purple;
+  color: $color-purple;
+  .survey-header__title{
+    margin: 0 0 0 2rem;
+    width: 220px;
+  }
+  // .survey-header__info{
+  //   flex: none;
+  // }
+  .info__title {
+    a{
+      color: $color-purple;
+      border-color: $color-purple;
+    }
+  }
+  .census-header__crest {
+    width: 115px;
+  }
+  // .census-header__logo{
+  //   text-align: right;
+  //   vertical-align: middle;
+  // }
+  .census-header__cookie{
+    height: 48px;
+    background-color: #f5f6ff;
+    color: $color-text;
+    p{
+      padding-top: 11px;
+    }
+    a{
+      cursor: pointer;
+    }
+  }
+}
+
+.ukis-header{
+  .survey-header__title{
+    margin-bottom: 0;
+  }
+  .panel__header{
+    padding: 1rem 0rem;
+    &:before{
+      display: none;
+    }
+  }
+  .survey-header__info:before{
+    display: none;
+  }
+  .info__title a{
+    text-decoration: none;
+    font-size: 14px;
+    border: 2px solid #537ACD;
+    padding: 8px 32px;
+    border-radius: 4px;
+    @include mq(s) {
+      font-size: 20px;
+    }
+  }
+  .info__list{
+    display: inline-block;
+    padding-top: 0px;
+    margin-top: 0px;
+  }
+  .info__tel {
+    margin-left: 5px;
+    &:before{
+      width: 1rem;
+      height: 1rem;
+      background-size: 1.9em;
+    }
+  }
+}
+.ukis-header__help{
+  background-color: #EEEEEE;
+  height: 0px;
+  overflow: hidden;
+  text-align: right;
+  transition: height 0.2s ease-in-out;
+  &.is-open{
+    height: 78px;
+  }
+  ul{
+    display: block;
+    padding: 8px 0 0 0;
+    margin: 0;
+    li {
+      display: inline-block;
+      margin: 0;
+      margin-left: 0.5rem;
+      padding-left: 0.5rem;
+      border-left: 1px solid #ccc;
+      &:first-child{
+        border-left: 0px;
+        margin-left: 0;
+        padding-left: 0;
+      }
+    }
+  }
+  a{
+    text-decoration: none;
+    color: #000000;
+  }
+  svg{
+    margin-left: 8px;
+  }
+}
+#help-and-support-btn{
+  cursor: pointer;
+}

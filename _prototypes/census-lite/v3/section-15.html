@@ -1,0 +1,94 @@
+---
+title: Household Questionnaire
+subtitle: England
+project: 2017 Census wave 2
+globalcss: false
+---
+
+{% include survey-header-census.html %}
+
+<div class="container">
+  <div class="grid ">
+    <div class="grid__col col-7@s">
+      <div role="main" class="panel__body" id="main">
+        <a class="mars" href="">Previous</a><br/><br/>
+        <form action="../section-8" class="form qa-questionnaire-form" role="form" novalidate="">
+          <div class="hidden-form">
+          </div>
+          <div class="group" id="14ba4707-321d-441d-8d21-b8367366e766">
+            <div class="block" id="cd3b74d1-b687-4051-9634-a8f9ce10a27d">
+              <div class="section" id="017880bc-752d-4a6b-83df-e130409ee660">
+                <h2 class="section__title saturn"><span class="section__title__number question__title__number--census venus">2</span>Accommodation</h2>
+                <div class="question">
+                  <h3 class="question__title neptune"><span class="question__title__number venus">2.4</span>What type of central heating does this accommodation have?</h3>
+                  <div class="question__description mars" id="description-6cc86b54-330c-4465-99b2-34cc7073dc2c">
+                    <p class="mars">Central heating is a central heating system that generates heat for multiple rooms</p>
+                    <p class="mars">Select all that apply, whether or not you use it</p>
+                  </div>
+                  <div class="question__responses">
+                    <div class="response response--checkbox" id="7587eb9b-f24e-4dc0-ac94-66118b896c10">
+                      <div class="field field--multi field--checkbox ">
+                        <div class="field__item">
+                          <input class="input input--checkbox" type="checkbox" name="q5" id="form-input-2" value="Gas" title="Gas">
+                          <label class="label label--inline" for="form-input-2"><span class="label__inner">Gas</span></label>
+                        </div>
+                        <div class="field__item">
+                          <input class="input input--checkbox" type="checkbox" name="q5" id="form-input-3" value="Electric (including storage heaters)" title="Electric (including storage heaters)">
+                          <label class="label label--inline" for="form-input-3"><span class="label__inner">Electric (including storage heaters)</span></label>
+                        </div>
+                        <div class="field__item">
+                          <input class="input input--checkbox" type="checkbox" name="q5" id="form-input-4" value="Oil" title="Oil">
+                          <label class="label label--inline" for="form-input-4"><span class="label__inner">Oil</span></label>
+                        </div>
+                        <div class="field__item">
+                          <input class="input input--checkbox" type="checkbox" name="q5" id="form-input-5" value="Solid fuel (for example wood, coal)" title="Solid fuel (for example wood, coal)">
+                          <label class="label label--inline" for="form-input-5"><span class="label__inner">Solid fuel (for example wood, coal)</span></label>
+                        </div>
+                        <div class="field__item field__item--other">
+                          <input class="input input--checkbox input--checkbox--change input--other" type="checkbox" name="q5" id="form-input-6" value="Other central heating" title="Other central heating">
+                          <label class="label label--inline" for="form-input-6"><span class="label__inner mars">Other central heating</span></label>
+                          <div class="field__item--other__text">
+                            <span class="pluto">Please specify other</span><br>
+                            <input class="input input--text" type="text" value="">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn--census qa-btn-get-started venus" type="submit" name="">Save and continue</button><br/><br/>
+          <a class="mars" href="">Save and complete later</a><br/><br/>
+          <a class="mars" href="">Previous</a>
+        </form>
+      </div>
+    </div>
+    <div class="grid__col push-1@s col-3@s">
+    {% include progress-census.html %}
+    </div>
+  </div>
+</div>
+
+{% include footer-census.html %}
+
+<script>
+
+$('.input--other').click(function(e) {
+  if($(this).prop('checked')) {
+    console.log("checked");
+    $('.field__item--other__text').addClass('field__item--other__text--open');
+  } else {
+  $('.field__item--other__text').removeClass('field__item--other__text--open');
+  }
+});
+
+$('.qa-btn-get-started').click(function(e) {
+  e.preventDefault();
+  var inputValue = $("input[name='q5']:checked"). val();
+  sessionStorage.setItem('centralHeatingType', inputValue);
+  window.location.href = "../section-16-inter";
+});
+
+</script>

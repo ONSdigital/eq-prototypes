@@ -1,0 +1,101 @@
+.alert {
+  border-radius: 0px;
+  overflow: hidden;
+}
+
+.alert__header {
+  margin: 0;
+  padding: 0.75rem 1rem;
+}
+
+.alert__title {
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.alert__body {
+  padding: 0 1rem 1rem 1rem;
+}
+.alert--info {
+  background: tint($color-red, 90%);
+  .alert__header {
+    color: $color-white;
+    background-color: $color-red;
+  }
+  .alert__body {
+    padding: 1rem;
+    a {
+      color: $color-red;
+    }
+    span {
+      color: $color-red;
+    }
+  }
+}
+.alert--simple{
+  border-color: #677424;
+}
+.alert--success{
+  background: #f0f1e9;
+}
+
+.alert--spacious{
+  padding: 2rem;
+}
+
+@mixin alert_type($name, $color) {
+  .alert--#{$name} {
+    border-left: 8px solid $color;
+    background: tint($color, 90%);
+    .alert__header {
+      color: $color;
+    }
+    .alert__body {
+      //background: tint($color, 90%);
+    }
+  }
+}
+
+@include alert_type(error, $color-red);
+@include alert_type(warn, $color-amber);
+@include alert_type(success, $color-green-dark);
+
+
+
+.hint{
+  position: absolute;
+  top: -31px;
+  left: 0;
+}
+.numericentry:focus::valid + .hint:after { font-style: normal; font-weight: normal; text-decoration: inherit; /*--adjust as necessary--*/ color: green; font-size: 18px; padding-right: 0.5em; position: absolute; top: 10px; right: 30px; }
+
+.numericentry:invalid + .hint { color: red; font-weight: bold; }
+
+.numericentry:invalid + .hint:after { content: " - Please use this format"; }
+
+.alert--sticky {
+  background-color: $color-red;
+  color: $color-white;
+  position: fixed;
+  height: 48px;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  .alert__title{
+    max-width: 57.445rem;
+    margin: auto;
+    padding: 0 1rem;
+  }
+  .alert__title__anchor{
+    display: inline-block;
+  }
+}
+.alert__title__anchor{
+  display: none;
+  color: $color-white;
+  position: absolute;
+  right: 0;
+}

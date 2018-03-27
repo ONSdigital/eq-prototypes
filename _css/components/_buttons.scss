@@ -1,0 +1,125 @@
+@mixin btn($bg, $color) {
+  background-color: $bg;
+  color: $color;
+  border: none;
+  padding: 13px 48px;
+  margin: 0 0 18px 0;
+  border-radius: 3px;
+  display: inline-block;
+  text-rendering: optimizeLegibility;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: center;
+  &:focus,
+  &:hover {
+    text-decoration: none;
+    color: $color;
+    background-color: darken($bg, 5%);
+  }
+  &[disabled] {
+    background: $color-grey;
+    color: $color-very-dark-grey;
+    opacity: 0.3;
+  }
+}
+
+.btn {
+  @include btn($color-primary, $color-white);
+}
+
+.btn--secondary {
+  @include btn($color-secondary, $color-white);
+  width: 100%;
+  @include mq(s) {
+    width: auto;
+  }
+}
+
+.btn--tertiary {
+  @include btn($color-secondary, $color-white);
+  padding: 14px 74px;
+  width: 100%;
+  @include mq(s) {
+    width: auto;
+
+  }
+}
+
+.btn--quaternary {
+  @include btn(#0F8243, $color-white);
+  width: 100%;
+  @include mq(s) {
+    width: auto;
+  }
+}
+
+.btn--quinary {
+  @include btn(#0F8243, $color-white);
+  padding: 14px 74px;
+  width: 100%;
+  @include mq(s) {
+    width: auto;
+
+  }
+}
+
+.btn--census {
+  @include btn(#0f8243, $color-white);
+  padding: 14px 74px;
+  width: 100%;
+  @include mq(s) {
+    width: auto;
+
+  }
+}
+
+.btn--neutral {
+  @include btn($color-dark-grey, $color-white);
+}
+
+.btn--border {
+  @include btn($color-white, $color-lighter-blue);
+  border: 3px solid $color-lighter-blue;
+  padding: 10px 42px;
+  &:focus,
+  &:hover {
+    text-decoration: none;
+    color: $color-white;
+    background-color: $color-lighter-blue;
+  }
+}
+
+.btn--border--census {
+  @include btn($color-white, $color-purple);
+  border: 3px solid $color-purple;
+  padding: 10px 42px;
+  width: 100%;
+  @include mq(s) {
+    width: auto;
+  }
+  &:focus,
+  &:hover {
+    text-decoration: none;
+    color: $color-white;
+    background-color: $color-purple;
+  }
+}
+
+.btn--delete {
+  @include btn($color-red, $color-white);
+}
+
+.btn-group {
+  font-size: 0;
+  .btn {
+    display: inline-block;
+    margin-right: 18px;
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+}
+
+.btn-group__btn {
+  display: inline-block;
+}
