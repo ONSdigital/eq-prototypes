@@ -90,8 +90,20 @@ navigationItems:
 	var yesbox = document.getElementById("yes-someone-else");
 	$('.qa-btn-submit').click(function (e) {
 
+		/**
+         * State
+         */
+		if(window.location.search.match(/journey=temp-away-from-home/)) {
+			$('#form').prepend('<input type="hidden" name="journey" value="temp-away-from-home" />');
+        }
+
+		/**
+         * Routing
+		 */
 		if(yesbox.checked) {
-            if(window.location.search.match(/journey=visitors/)) {
+			if(window.location.search.match(/journey=temp-away-from-home/)) {
+				document.trav.action = "../visitors";
+			} else if(window.location.search.match(/journey=visitors/)) {
                 document.trav.action = "../summary";
             } else {
                 document.trav.action = "../temp-away-from-home";

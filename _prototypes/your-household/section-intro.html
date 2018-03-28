@@ -2,6 +2,19 @@
 title: Section intro
 project: your-household
 globalcss: false
+navigationItems:
+  - label: [Dynamic address]
+    id: section-address
+    href: #
+    state: completed
+  - label: Who lives here?
+    id: item2
+    href: #
+    state: current
+  - label: Household and accomodation
+    id: item3
+    href: #
+    state: incomplete
 ---
 
 <link rel="stylesheet" href="{{ "/css/census-header-footer.css" | prepend: site.baseurl }}">
@@ -20,21 +33,7 @@ globalcss: false
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
 
-            <!-- right aligned side nav -->
-            <nav class="nav nav--sections nav--vertical js-nav page__nav" id="section-nav">
-                <h2 class="nav__title venus">Sections</h2>
-                <ul class="nav__list js-nav-list">
-                    <li class="nav__item pluto nav__item--incomplete">
-                        <a class="nav__link" href="#item0" id="section-address">[Dynamic address]</a>
-                    </li>
-                    <li class="nav__item pluto nav__item--current">
-                        <a class="nav__link" href="#item1">Who lives here?</a>
-                    </li>
-                    <li class="nav__item pluto nav__item--incomplete">
-                        <a class="nav__link" href="#item2">Household and accomodation</a>
-                    </li>
-                </ul>
-            </nav>
+            {% include navigation.html items=page.navigationItems title="Sections" %}
 
         </div>
         <div class="grid__col col-7@m pull-1@m">

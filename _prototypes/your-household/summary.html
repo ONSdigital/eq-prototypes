@@ -1,277 +1,288 @@
 ---
-title: summary
+title: Summary
 project: your-household
 globalcss: false
+navigationItems:
+  - label: [Dynamic address]
+    id: section-address
+    href: #
+    state: completed
+  - label: Who lives here?
+    id: section-address
+    href: #
+    state: current
+  - label: Household and accomodation
+    id: section-address
+    href: #
+    state: incomplete
 ---
 
-
-<link rel="stylesheet" href="{{ "/css/census.css" | prepend: site.baseurl }}">
-<link rel="stylesheet" href="../css/labourmarket.css">
-<!--<link rel="stylesheet" type="text/css" href="{{ "/css/census-proto.css" | prepend: site.baseurl }}">-->
-
-  <header class="header header--census">
-  <div class="header__help is-closed js-help-body">
-    <div class="header__container container">
-      <div class="header__title ">Help and support –</div>
-      
-    </div>
-  </div>
-  <div class="header__container container">
-    <div class="header__logo">
-     <img src="{{ "/img/census-logo.svg" | prepend: site.baseurl }}" alt="2017 Census">
-    </div>
-    <button class="header__btn btn btn--light btn--border js-help-btn" data-ga-action="Help and support" data-ga="click" data-ga-category="Help">
-      Help and support
-    </button>
-  </div>
+<link rel="stylesheet" href="{{ "/css/census-header-footer.css" | prepend: site.baseurl }}">
+<header class="page__header">
+    {% include bar.html %}
+    {% include header-census.html %}
 </header>
-</header>
-
-
 
 <div class="page__subheader">
-  
-  <div class="container">
-    <a class="mars" href="javascript:history.back()">Previous</a>
-  </div>
+    <div class="container">
+        <a class="mars" href="../index">Previous</a>
+    </div>
 </div>
 
 <div class="page__container container">
-  <div class="grid grid--reverse">
-    <div class="grid__col col-4@m">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            {% include navigation.html items=page.navigationItems title="Sections" %}
+        </div>
+        <div class="grid__col col-7@m pull-1@m">
+            <main role="main" id="main" class="page__main">
+                <form name="trav" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
+                    <div class="group" id="rsi">
+                        <div class="block" id="total-retail-turnover">
+                            <section class="section" id="total-retail-turnover-section">
+                                <div class="question u-mb-s" id="total-retail-turnover-question">
+                                    <h1 class="question__title saturn">
+                                        Who lives here?
+                                    </h1>
+                                </div>
 
-    <!-- right aligned side nav -->
-      <div class="nav nav--sections nav--vertical js-nav page__nav" id="section-nav">
-    <h2 class="nav__title venus">Sections</h2>
-    <ul class="nav__list js-nav-list">
-        <li class="nav__item pluto nav__item--current">
-            <a class="nav__link" href="#item1">Your Household</a>
-        </li>
-        <li class="nav__item pluto nav__item--incomplete">
-            <a class="nav__link" href="#item2">Household and Accomodation</a>
-        </li>
-    </ul>
-</div>
+                                <div class="panel panel--simple panel--success"
+                                     id="question-guidance-everyone-at-address-confirmation-question">
+                                    <strong class="u-mb-s">This section is now complete</strong>
+                                    <ul class="mars" style="list-style: none;padding: 0; margin-bottom: 0">
+                                        <li>You can check your answers below</li>
+                                    </ul>
+                                </div>
+                                <br />
 
-</div>
-    <div class="grid__col col-7@m pull-1@m">
-      <main role="main" id="main" class="page__main">
-        <form name="trav" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
-          <div class="group" id="rsi">
-            <div class="block" id="total-retail-turnover">
-              <section class="section" id="total-retail-turnover-section">
-               <!-- <h2 class="section__title neptune">Joanna Bloggs</h2>-->
-         
-            
-                <div class="question" id="total-retail-turnover-question">
-                  <h1 class="question__title saturn">
-                    
-                    Your Household
+                                <h2 class="neptune">Household members</h2>
+                                <ul class="list list--records list--bare u-mb-s">
+                                    <li class="list__item">
+                                        <strong>John Smith (You)</strong>
+                                        <a href="change">Change</a>
+                                        <button>Remove</button>
+                                    </li>
+                                </ul>
+                                <p class="u-mb-l"><a href="">Is anyone else missing from this list?</a></p>
 
-                
-               </h1>
-             </div>
-
-             <div class="panel panel--simple panel--info" id="question-guidance-everyone-at-address-confirmation-question">
-        
-
-<strong class="u-mb-s u-d-b" style="margin-bottom: 0">This section is now complete</strong>
-  <ul class="mars" style="list-style: none;padding: 0; margin-bottom: 0">
-      <li>You can review your answers below</li>
-     
-      
-    </ul>
- 
-
-      </div>
-
-                 <br>
-
-                 <table id="household-table"></table>
-
-
-              </section>
-            </div>
-          </div>
-          <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Continue</button>
-          <div class="u-mb-m">
-            <button class="btn btn--link mars js-btn-save" type="submit" name="action[save_sign_out]">Save and complete later</button>
-          </div>
-        </form>
-        <a class="page__previous page__previous--bottom js-previous-link" href="javascript:history.back()" id="bottom-previous">Previous</a>
-      </main>
+                                <h2 class="neptune">Visitors</h2>
+                                <ul class="list list--records list--bare u-mb-s">
+                                    <li class="list__item">
+                                        <strong>John Smith (You)</strong>
+                                        <a href="change">Change</a>
+                                        <button>Remove</button>
+                                    </li>
+                                </ul>
+                                <p class="u-mb-l"><a href="">Is anyone else missing from this list?</a></p>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Continue</button>
+                    <div class="u-mb-m">
+                        <button class="btn btn--link mars js-btn-save" type="submit" name="action[save_sign_out]">Save
+                            and complete later
+                        </button>
+                    </div>
+                </form>
+                <a class="page__previous page__previous--bottom js-previous-link" href="javascript:history.back()"
+                   id="bottom-previous">Previous</a>
+            </main>
+        </div>
     </div>
-  </div>
 </div>
 
 <div id="modal" class="modal" style="display: none;">
-  <div class="modal__window">
-    <button class="modal__close-button close-modal-button">×</button>
-    <div class="modal__text neptune">Are you sure you would like to remove <span class="remove-member-name highlight"></span> from the survey?</div>
-    <div class="modal__buttons">
-      <button class="close-modal-button btn btn--secondary btn--lg btn--border qa-btn-submit venus">Back to Survey</button>
-      <button class="remove-member-button btn btn--primary btn--lg qa-btn-submit venus">Remove</button>
+    <div class="modal__window">
+        <button class="modal__close-button close-modal-button">×</button>
+        <div class="modal__text neptune">Are you sure you would like to remove
+            <span class="remove-member-name highlight"></span> from the survey?
+        </div>
+        <div class="modal__buttons">
+            <button class="close-modal-button btn btn--secondary btn--lg btn--border qa-btn-submit venus">Back to
+                Survey
+            </button>
+            <button class="remove-member-button btn btn--primary btn--lg qa-btn-submit venus">Remove</button>
+        </div>
     </div>
-  </div>
 </div>
 
 <style>
-  .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+    .list.list--records {
+    }
 
-  .modal__window {
-    position: relative;
-    background-color: white;
-    max-width: 500px;
-    padding: 80px 40px 40px;
-  }
-
-  .modal__close-button {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    border: 0;
-    font-size: 36px;
-    color: grey;
-  }
-
-  .modal__text {
-    margin-bottom: 3rem;
-  }
-
-  .modal .btn {
-    width: 48%;
-    padding: 0.9em 0;
-    margin-bottom: 0;
-  }
-
-  .modal .btn--primary {
-    float: right;
-    padding: 1em 0;
-  }
+    .list.list--records .list__item {
+        padding: 1rem 0;
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+    }
 </style>
 
 <style>
-#household-table {
-}
+    .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-#household-table tr:last-child td,
-#household-table .no-border td {
-  border-bottom: 0;
-}
+    .modal__window {
+        position: relative;
+        background-color: white;
+        max-width: 500px;
+        padding: 80px 40px 40px;
+    }
 
-#household-table .last-row td {
-  padding-bottom: 20px;
-}
+    .modal__close-button {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        border: 0;
+        font-size: 36px;
+        color: grey;
+    }
 
-#household-table .last-row + tr td {
-  padding-top: 20px;
-}
+    .modal__text {
+        margin-bottom: 3rem;
+    }
 
-#household-table td {
-  padding: 5px 8px;
-  line-height: 1.3;
-  border-bottom: 0;
-}
+    .modal .btn {
+        width: 48%;
+        padding: 0.9em 0;
+        margin-bottom: 0;
+    }
 
-#household-table td[rowspan] {
-  width: 40%;
-  padding-bottom: 20px;
-}
+    .modal .btn--primary {
+        float: right;
+        padding: 1em 0;
+    }
+</style>
 
-#household-table tr.last-row + tr {
-  border-top: thin solid #e4e8eb;
-}
+<style>
+    /*#household-table {
+    }
 
-#household-table td:last-child {
-  white-space: nowrap;
-  text-align: right;
-}
+    #household-table tr:last-child td,
+    #household-table .no-border td {
+        border-bottom: 0;
+    }
+
+    #household-table .last-row td {
+        padding-bottom: 20px;
+    }
+
+    #household-table .last-row + tr td {
+        padding-top: 20px;
+    }
+
+    #household-table td {
+        padding: 5px 8px;
+        line-height: 1.3;
+        border-bottom: 0;
+    }
+
+    #household-table td[rowspan] {
+        width: 40%;
+        padding-bottom: 20px;
+    }
+
+    #household-table tr.last-row + tr {
+        border-top: thin solid #e4e8eb;
+    }
+
+    #household-table td:last-child {
+        white-space: nowrap;
+        text-align: right;
+    }*/
 </style>
 
 <script>
-  function getRows (key, title, addLink) {
-    var members = localStorage.getItem(key);
-    if (!members) return $('<tr class="last-row"><td>' + title + '</td><td><a href="' + addLink + '?addnew=1">Add new</a></td><td></td></tr>');
-    return members.split(',').map(function (member, index, members) {
-      var firstCell = index === 0 ? '<td rowspan="' + (members.length + 1) + '">' + title + '</td>' : ''
-      var t = index === 0 ? title : ''
-      // var rowClass = index !== members.length - 1 ? 'no-border' : 'last-row';
-      var rowClass = 'no-border';
-      var deleteLink = '?remove=' + member + '&from=' + key;
-      return $('<tr class="' + rowClass + '">' + firstCell + '<td><b>' + member + '</b></td><td><a class="change-member-link" href="' + addLink + '?change=' + member + '">Change</a> &nbsp; &nbsp; <a class="remove-member-link" data-member="' + member + '" href="' + deleteLink + '">Remove</a></tr>');
-    }).concat($('<tr class="last-row"><td><a href="' + addLink + '?addnew=1">Add new</a></td><td></td></tr>'));
-  }
-  function populateTable() {
-    $('#household-table').empty();
-    $('#household-table').append(getRows('household-members', 'Household members', '../does-anyone-else-live-here'));
-    $('#household-table').append(getRows('temp-members', 'Household members temporarily away from home', '../temp-away-from-home'));
-    $('#household-table').append(getRows('nonuk-members', 'Temporary household members that don‘t have another UK address', '../no-uk-address'));
-    $('#household-table').append(getRows('visit-members', 'Visitors staying overnight on 27th February 2018', '../visitors'));
-  }
-  $(function () {
-    var deleteMatch = window.location.search.match(/remove=([^&]+)/)
-    var deleteFromMatch = window.location.search.match(/from=([a-z-]+)/)
-    if (deleteMatch && deleteFromMatch) {
-      var members = localStorage.getItem(deleteFromMatch[1])
-      localStorage.setItem(deleteFromMatch[1], members.replace(decodeURI(deleteMatch[1]), '').replace(',,', ',').replace(/^,/, '').replace(/,$/, ''))
-    }
-    populateTable()
+	$(function () {
+		var addressLines = (localStorage.getItem('address') || '').split(','),
+			addressLine1 = addressLines[0];
 
-    // When clicking remove member link, open modal
-    $('body').on('click', '.remove-member-link', function(e){
-      e.preventDefault();
-      var name = $(this).data('member');
-      var link = $(this).attr('href');
-      $('.remove-member-name').text(name);
-      $('.remove-member-button').click(function () {
-        if (totalMemberCount() === 1) {
-          localStorage.setItem('household-members', '');
-          localStorage.setItem('temp-members', '');
-          localStorage.setItem('nonuk-members', '');
-          localStorage.setItem('visit-members', '');
-          window.location = '../does-anyone-else-live-here';
-        } else {
-          window.location = link;
-        }
-      })
+		$('#section-address').html(addressLine1);
+	});
 
-      console.log('totalMemberCount', totalMemberCount())
-      $('#modal').show();
-    });
+	/*function getRows(key, title, addLink) {
+		var members = localStorage.getItem(key);
+		if (!members) return $('<tr class="last-row"><td>' + title + '</td><td><a href="' + addLink + '?addnew=1">Add new</a></td><td></td></tr>');
+		return members.split(',').map(function (member, index, members) {
+			var firstCell = index === 0 ? '<td rowspan="' + (members.length + 1) + '">' + title + '</td>' : ''
+			var t = index === 0 ? title : ''
+			// var rowClass = index !== members.length - 1 ? 'no-border' : 'last-row';
+			var rowClass = 'no-border';
+			var deleteLink = '?remove=' + member + '&from=' + key;
+			return $('<tr class="' + rowClass + '">' + firstCell + '<td><b>' + member + '</b></td><td><a class="change-member-link" href="' + addLink + '?change=' + member + '">Change</a> &nbsp; &nbsp; <a class="remove-member-link" data-member="' + member + '" href="' + deleteLink + '">Remove</a></tr>');
+		}).concat($('<tr class="last-row"><td><a href="' + addLink + '?addnew=1">Add new</a></td><td></td></tr>'));
+	}
 
-    $('.close-modal-button').click(function (){
-      $('#modal').hide();
-    });
+	function populateTable() {
+		$('#household-table').empty();
+		$('#household-table').append(getRows('household-members', 'Household members', '../does-anyone-else-live-here'));
+		$('#household-table').append(getRows('temp-members', 'Household members temporarily away from home', '../temp-away-from-home'));
+		$('#household-table').append(getRows('nonuk-members', 'Temporary household members that don‘t have another UK address', '../no-uk-address'));
+		$('#household-table').append(getRows('visit-members', 'Visitors staying overnight on 27th February 2018', '../visitors'));
+	}
 
-    // Temporarily disable change links
-    $('.change-member-link').click(function (e){
-      e.preventDefault();
-    });
-  });
+	$(function () {
+		var deleteMatch = window.location.search.match(/remove=([^&]+)/)
+		var deleteFromMatch = window.location.search.match(/from=([a-z-]+)/)
+		if (deleteMatch && deleteFromMatch) {
+			var members = localStorage.getItem(deleteFromMatch[1])
+			localStorage.setItem(deleteFromMatch[1], members.replace(decodeURI(deleteMatch[1]), '').replace(',,', ',').replace(/^,/, '').replace(/,$/, ''))
+		}
+		populateTable()
 
-  function totalMemberCount() {
-    return (
-      getMemberCount('household-members') +
-      getMemberCount('temp-members') +
-      getMemberCount('nonuk-members') +
-      getMemberCount('visit-members')
-    )
-  }
+		// When clicking remove member link, open modal
+		$('body').on('click', '.remove-member-link', function (e) {
+			e.preventDefault();
+			var name = $(this).data('member');
+			var link = $(this).attr('href');
+			$('.remove-member-name').text(name);
+			$('.remove-member-button').click(function () {
+				if (totalMemberCount() === 1) {
+					localStorage.setItem('household-members', '');
+					localStorage.setItem('temp-members', '');
+					localStorage.setItem('nonuk-members', '');
+					localStorage.setItem('visit-members', '');
+					window.location = '../does-anyone-else-live-here';
+				} else {
+					window.location = link;
+				}
+			})
 
-  function getMemberCount(key) {
-    if (!localStorage.getItem(key)) {
-      return 0
-    }
-    return localStorage.getItem(key).split(',').length
-  }
+			console.log('totalMemberCount', totalMemberCount())
+			$('#modal').show();
+		});
+
+		$('.close-modal-button').click(function () {
+			$('#modal').hide();
+		});
+
+		// Temporarily disable change links
+		$('.change-member-link').click(function (e) {
+			e.preventDefault();
+		});
+	});
+
+	function totalMemberCount() {
+		return (
+			getMemberCount('household-members') +
+			getMemberCount('temp-members') +
+			getMemberCount('nonuk-members') +
+			getMemberCount('visit-members')
+		)
+	}
+
+	function getMemberCount(key) {
+		if (!localStorage.getItem(key)) {
+			return 0
+		}
+		return localStorage.getItem(key).split(',').length
+	}*/
 </script>

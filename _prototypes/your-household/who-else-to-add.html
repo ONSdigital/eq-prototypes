@@ -126,13 +126,13 @@ navigationItems:
         /**
          * Routing
          * */
-        if (window.location.search.match(/previous=temp-away-from-home/)) {
-            window.location = '../visitors/';
-        } else if (window.location.search.match(/journey=visitors/)) {
-            window.location = '../does-anyone-else-live-here/?journey=visitors';
-        } else {
-        	window.location = '../does-anyone-else-live-here/';
-        }
+		if (window.location.search.match(/journey=temp-away-from-home/)) {
+			window.location = '../does-anyone-else-live-here/?journey=temp-away-from-home';
+		} else if (window.location.search.match(/journey=visitors/)) {
+			window.location = '../does-anyone-else-live-here/?journey=visitors';
+		} else {
+			window.location = '../does-anyone-else-live-here/';
+		}
 	});
 
 	$(function () {

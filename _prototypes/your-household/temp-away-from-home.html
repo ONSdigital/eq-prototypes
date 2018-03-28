@@ -2,6 +2,19 @@
 title: do-you-live-here
 project: your-household
 globalcss: false
+navigationItems:
+  - label: [Dynamic address]
+    id: section-address
+    href: #
+    state: completed
+  - label: Who lives here?
+    id: section-address
+    href: #
+    state: current
+  - label: Household and accomodation
+    id: section-address
+    href: #
+    state: incomplete
 ---
 
 <link rel="stylesheet" href="{{ "/css/census-header-footer.css" | prepend: site.baseurl }}">
@@ -19,27 +32,13 @@ globalcss: false
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-
-            <nav class="nav nav--sections nav--vertical js-nav page__nav" id="section-nav">
-                <h2 class="nav__title venus">Sections</h2>
-                <ul class="nav__list js-nav-list">
-                    <li class="nav__item pluto nav__item--incomplete">
-                        <a class="nav__link" href="#item0" id="section-address">[Dynamic address]</a>
-                    </li>
-                    <li class="nav__item pluto nav__item--current">
-                        <a class="nav__link" href="#item1">Who lives here?</a>
-                    </li>
-                    <li class="nav__item pluto nav__item--incomplete">
-                        <a class="nav__link" href="#item2">Household and accomodation</a>
-                    </li>
-                </ul>
-            </nav>
-
+            {% include navigation.html items=page.navigationItems title="Sections" %}
         </div>
         <div class="grid__col col-7@m pull-1@m">
             <main role="main" id="main" class="page__main">
                 <form name="trav" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
                     <input type="hidden" name="previous" value="temp-away-from-home" />
+                    <input type="hidden" name="journey" value="temp-away-from-home" />
                     <div class="group" id="rsi">
                         <div class="block" id="total-retail-turnover">
                             <section class="section" id="total-retail-turnover-section">
@@ -90,11 +89,7 @@ globalcss: false
                                                 <label class="label label--inline venus" for="no">No, I need to add another person</label>
                                             </div>
                                         </fieldset>
-
-
                                     </div>
-
-
                                 </div>
                             </section>
                         </div>
@@ -120,7 +115,7 @@ globalcss: false
 	var yesbox = document.getElementById("yes-someone-else");
 	$('.qa-btn-submit').click(function (e) {
         if (yesbox.checked) {
-
+			document.trav.action = "../visitors";
         } else {
             document.trav.action = "../who-else-to-add";
         }
