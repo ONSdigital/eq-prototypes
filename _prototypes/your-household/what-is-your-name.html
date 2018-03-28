@@ -110,10 +110,20 @@ globalcss: false
     </div>
 </div>
 
+<script src='/js/compiled/standard-bundle.js'></script>
+<script src='/js/compiled/your-household/bundle.js'></script>
+
 <script>
 	$('.btn-submit').click(function (e) {
 		e.preventDefault(); // do not submit the form like usual
 		localStorage.setItem('name', getName());
+
+        window.ONS.storage.addUserPerson(window.ONS.storage.TYPES.person({
+            firstName: document.getElementById('first-name').value,
+            middleName: document.getElementById('middle-name').value,
+            lastName: document.getElementById('last-name').value
+        }));
+
 		window.location = '../do-you-live-here/';
 	});
 

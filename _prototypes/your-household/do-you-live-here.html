@@ -81,41 +81,51 @@ globalcss: false
 </div>
 
 <script src='/js/compiled/standard-bundle.js'></script>
+<script src='/js/compiled/your-household/bundle.js'></script>
 
 <script>
-	var yesbox = document.getElementById("yes");
+    var yesbox = document.getElementById("yes");
 	$('.qa-btn-submit').click(function (e) {
+		e.preventDefault();
+
 		var loc;
 
 		if (yesbox.checked) {
-			localStorage.setItem('lives-here', 'yes');
-			localStorage.setItem('household-members', localStorage.getItem('name'));
+            var personUser = window.ONS.storage.getUserPerson();
+
+			/**
+             * Add member to household
+             */
+            window.ONS.storage.updateUserAsHouseholdMember(personUser);
+
+            localStorage.setItem('lives-here', 'yes');
             document.trav.action = loc = "../does-anyone-else-live-here";
 		} else {
-			localStorage.setItem('lives-here', 'no');
-			var name = localStorage.getItem('name');
-			var members = localStorage.getItem('household-members');
+            /**
+             * Remove member from household
+             */
+            window.ONS.storage.deleteUserAsHouseholdMember();
+
+            localStorage.setItem('lives-here', 'no');
+
+			/*var members = localStorage.getItem('household-members');
 			if (members) {
 				localStorage.setItem('household-members', members.replace(name, '').replace(/^,/, ''));
-			}
+			}*/
 			document.trav.action = loc = "../does-anyone-else-live-here";
 		}
 
 		window.location = loc;
 	});
-</script>
 
-<script>
 	$(function () {
-        var addressLines = localStorage.getItem('address').split(','),
+        var addressLines = (localStorage.getItem('address') || '').split(','),
             addressLine1 = addressLines[0];
 
         $('#section-address').html(addressLine1);
-        $('.address-text').html(localStorage.getItem('address').split(',')[0]);
+        $('.address-text').html(addressLines[0]);
 	});
-</script>
 
-<script>
 	$(function () {
 		var oneWeekAgo = new Date();
 		oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);

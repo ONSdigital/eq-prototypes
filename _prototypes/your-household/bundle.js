@@ -1,7 +1,13 @@
-const HOUSEHOLD_MEMBERS_STORAGE_KEY = 'household-members';
+export const HOUSEHOLD_MEMBERS_STORAGE_KEY = 'household-members';
+export const USER_STORAGE_KEY = 'user-details';
+export const USER_HOUSEHOLD_MEMBER_ID = 'person_me';
 
 export function populateList() {
-  var members = getAllHouseholdMembers() || [];
+  if (!$('#household-members').length) {
+    return;
+  }
+
+  let members = getAllHouseholdMembers() || [];
 
   $('#household-members').empty().append(members.map(function(member) {
     return $('<li>').addClass('mars').text(member.fullName);
@@ -21,19 +27,65 @@ export function getAddress() {
   }
 }
 
-export function addHouseholdMember(person) {
-  var people = getAllHouseholdMembers() || [];
+/**
+ * User
+ */
+export function addUserPerson(person) {
+  localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(person));
+}
 
-  people.push({
-    id: 'person' + people.length,
-    ...person
+export function getUserPerson() {
+  return JSON.parse(localStorage.getItem(USER_STORAGE_KEY));
+}
+
+/**
+ * Household
+ */
+export function getUserAsHouseholdMember() {
+  return getAllHouseholdMembers().find((person) => {
+    return person.id === USER_HOUSEHOLD_MEMBER_ID;
+  });
+}
+
+export function deleteUserAsHouseholdMember() {
+  deleteHouseholdMember(USER_HOUSEHOLD_MEMBER_ID);
+}
+
+export function deleteHouseholdMember(personId) {
+  let members = getAllHouseholdMembers().filter((member) => {
+    return member.id !== personId;
   });
 
-  localStorage.setItem(HOUSEHOLD_MEMBERS_STORAGE_KEY, JSON.stringify(people));
+  localStorage.setItem(HOUSEHOLD_MEMBERS_STORAGE_KEY, JSON.stringify(members));
+}
+
+export function updateUserAsHouseholdMember(person) {
+  let userAsHouseholdMember = getUserAsHouseholdMember();
+
+  userAsHouseholdMember ? updateHouseholdMember(person) : addHouseholdMember(person, USER_HOUSEHOLD_MEMBER_ID);
+}
+
+export function updateHouseholdMember(person) {
+  let members = getAllHouseholdMembers().map((member) => {
+    return member.id === USER_HOUSEHOLD_MEMBER_ID ? { ...member, ...person } : member;
+  });
+
+  localStorage.setItem(HOUSEHOLD_MEMBERS_STORAGE_KEY, JSON.stringify(members));
+}
+
+export function addHouseholdMember(person, id) {
+	var people = getAllHouseholdMembers() || [];
+
+	people.push({
+		id: id || 'person' + people.length,
+		...person
+	});
+
+	localStorage.setItem(HOUSEHOLD_MEMBERS_STORAGE_KEY, JSON.stringify(people));
 }
 
 export function getAllHouseholdMembers() {
-  return JSON.parse(localStorage.getItem(HOUSEHOLD_MEMBERS_STORAGE_KEY));
+  return JSON.parse(localStorage.getItem(HOUSEHOLD_MEMBERS_STORAGE_KEY)) || [];
 }
 
 export function person(opts) {
@@ -52,26 +104,28 @@ export function person(opts) {
 }
 
 window.ONS = {};
-window.ONS.getAddress = getAddress;
-window.ONS.addHouseholdMember = addHouseholdMember;
-window.ONS.getAllHouseholdMembers = getAllHouseholdMembers;
-window.ONS.person = person;
+window.ONS.storage = {
+  getAddress,
+  addHouseholdMember,
+  getAllHouseholdMembers,
+  addUserPerson,
+  getUserPerson,
+  getUserAsHouseholdMember,
+  updateUserAsHouseholdMember,
+  deleteUserAsHouseholdMember,
+
+  KEYS: {
+    HOUSEHOLD_MEMBERS_STORAGE_KEY,
+    USER_STORAGE_KEY
+  },
+
+  IDS: {
+    USER_HOUSEHOLD_MEMBER_ID
+  },
+
+  TYPES: {
+    person
+  }
+};
 
 $(populateList);
-
-/*if (yesbox.checked) {
-    e.preventDefault();
-    var members = localStorage.getItem('household-members') || '';
-    var comma = members ? ',' : '';
-    localStorage.setItem('household-members', members + comma + newName);
-    window.location.reload();
-
-} else {
-    if (window.location.search.match(/addnew=1/)) {
-        document.trav.action = "../summary";
-    } else if (localStorage.getItem('lives-here') === 'no') {
-        document.trav.action = "../are-you-sure";
-    } else {
-        document.trav.action = "../temp-away-from-home";
-    }
-}*/

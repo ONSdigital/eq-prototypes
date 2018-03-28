@@ -2,6 +2,19 @@
 title: Does anyone else live here
 project: your-household
 globalcss: false
+navigationItems:
+  - label: [Dynamic address]
+    id: section-address
+    href: #
+    state: completed
+  - label: Who lives here?
+    id: section-address
+    href: #
+    state: current
+  - label: Household and accomodation
+    id: section-address
+    href: #
+    state: incomplete
 ---
 
 <link rel="stylesheet" href="{{ "/css/census-header-footer.css" | prepend: site.baseurl }}">
@@ -19,29 +32,17 @@ globalcss: false
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            <nav class="nav nav--sections nav--vertical js-nav page__nav" id="section-nav">
-                <h2 class="nav__title venus">Sections</h2>
-                <ul class="nav__list js-nav-list">
-                    <li class="nav__item pluto nav__item--incomplete">
-                        <a class="nav__link" href="#item0" id="section-address">[Dynamic address]</a>
-                    </li>
-                    <li class="nav__item pluto nav__item--current">
-                        <a class="nav__link" href="#item1">Who lives here?</a>
-                    </li>
-                    <li class="nav__item pluto nav__item--incomplete">
-                        <a class="nav__link" href="#item2">Household and accomodation</a>
-                    </li>
-                </ul>
-            </nav>
+            {% include navigation.html items=page.navigationItems title="Sections" %}
         </div>
         <div class="grid__col col-7@m pull-1@m">
             <main role="main" id="main" class="page__main">
-                <form name="trav" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
+                <form id="form" name="trav" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
+                    <input type="hidden" name="previous" value="does-anyone-else-live-here" />
                     <div class="group" id="rsi">
                         <div class="block" id="total-retail-turnover">
                             <section class="section">
                                 <div class="question u-mb-s">
-                                    <h1 class="question__title saturn">
+                                    <h1 id="question-title" class="question__title saturn">
                                         Is this everyone who lives at <span class="address-text"></span>?
                                     </h1>
                                 </div>
@@ -53,13 +54,13 @@ globalcss: false
                                         <fieldset>
                                             <div class="field__item js-focusable-box">
                                                 <input class="input input--radio js-focusable" type="radio"
-                                                       name="anyone-else" id="yes-someone-else" value="">
+                                                       name="does-anyone-else-live-here" id="yes-someone-else" value="yes">
                                                 <label class="label label--inline venus" for="yes-someone-else">Yes, this is everyone</label>
                                             </div>
 
                                             <div class="field__item js-focusable-box">
                                                 <input class="input input--radio js-focusable" type="radio"
-                                                       name="anyone-else" id="no" value="">
+                                                       name="does-anyone-else-live-here" id="no" value="no">
                                                 <label class="label label--inline venus" for="no">No, I need to add another person</label>
                                             </div>
                                         </fieldset>
@@ -90,20 +91,27 @@ globalcss: false
 	$('.qa-btn-submit').click(function (e) {
 
 		if(yesbox.checked) {
-            document.trav.action = "../summary";
+            if(window.location.search.match(/journey=visitors/)) {
+                document.trav.action = "../summary";
+            } else {
+                document.trav.action = "../temp-away-from-home";
+            }
         } else {
             document.trav.action = "../who-else-to-add";
 		}
 	});
-</script>
 
-<script>
 	$(function () {
-        var addressLines = localStorage.getItem('address').split(','),
+        var addressLines = (localStorage.getItem('address') || '').split(','),
             addressLine1 = addressLines[0],
             addressLine2 = addressLines[1];
 
         $('#section-address').html(addressLine1);
 		$('.address-text').html(addressLine1 + ', ' + addressLine2);
+
+        if(window.location.search.match(/journey=visitors/)) {
+        	$('#form').prepend('<input type="hidden" name="journey" value="visitors" />');
+            $('#question-title').html('Is this everyone who was visiting on 27th February 2018 at ' + addressLine1 + ', ' + addressLine2);
+        }
 	});
 </script>
