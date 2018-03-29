@@ -56,24 +56,13 @@ navigationItems:
                                 <br />
 
                                 <h2 class="neptune">Household members</h2>
-                                <ul class="list list--records list--bare u-mb-s">
-                                    <li class="list__item">
-                                        <strong>John Smith (You)</strong>
-                                        <a href="change">Change</a>
-                                        <button>Remove</button>
-                                    </li>
-                                </ul>
-                                <p class="u-mb-l"><a href="">Is anyone else missing from this list?</a></p>
+                                <ul id="household-members-summary" class="list list--records list--people u-mb-s"></ul>
+                                <p class="u-mb-l"><a href="#">Is anyone else missing from this list?</a></p>
 
                                 <h2 class="neptune">Visitors</h2>
-                                <ul class="list list--records list--bare u-mb-s">
-                                    <li class="list__item">
-                                        <strong>John Smith (You)</strong>
-                                        <a href="change">Change</a>
-                                        <button>Remove</button>
-                                    </li>
-                                </ul>
-                                <p class="u-mb-l"><a href="">Is anyone else missing from this list?</a></p>
+                                <ul id="visitors-summary" class="list list--records list--people u-mb-s"></ul>
+
+                                <p class="u-mb-l"><a href="#">Is anyone else missing from this list?</a></p>
                             </section>
                         </div>
                     </div>
@@ -106,15 +95,73 @@ navigationItems:
     </div>
 </div>
 
+<ul style="display:none;">
+    <li id="person-record-template" class="list__item">
+        <span class="list__item-name js-person-name"></span>
+        <div class="list__item-actions u-fr">
+            <span class="list__item-action">
+                <a href="change">Change</a>
+            </span>
+            <span class="list__item-action">
+                <button class="btn btn--toggle">Remove</button>
+            </span>
+        </div>
+    </li>
+</ul>
+
+<script src='/js/compiled/standard-bundle.js'></script>
+<script src='/js/compiled/your-household/bundle.js'></script>
+
 <style>
     .list.list--records {
+        border-top: 1px solid #ccc;
     }
 
     .list.list--records .list__item {
+        margin-bottom : 0;
         padding: 1rem 0;
-        border-top: 1px solid #ccc;
         border-bottom: 1px solid #ccc;
     }
+
+    .list.list--people {
+        list-style-type : none;
+    }
+
+    .list.list--people .list__item {
+        background: url(/img/icons/person.svg) 0 1.3rem no-repeat;
+    }
+
+    .list.list--people .list__item-name {
+        padding-left: 2rem;
+    }
+
+    .list.list--people .list__item-actions {
+        margin-top: -4px;
+    }
+
+    .list.list--people .list__item-action + .list__item-action {
+        margin-left : .5rem;
+    }
+
+    .btn--toggle {
+        padding: .3rem .5rem;
+        color: #4263c2;
+        border: 1px solid #4263c2;
+        background-color: #f5f5f5;
+        transition: none;
+    }
+
+    .btn--toggle:hover {
+        color: #4263c2;
+        background-color: #f5f5f5;
+    }
+
+    .btn--toggle:active,
+    .btn--toggle:focus {
+        color: #fff;
+        background-color: #4263c2;
+    }
+
 </style>
 
 <style>
@@ -207,6 +254,36 @@ navigationItems:
 
 		$('#section-address').html(addressLine1);
 	});
+
+	function createMemberItem(member) {
+		var $nodeEl = $('#person-record-template').clone();
+
+        $nodeEl.find('.js-person-name').html(member['@person'].fullName);
+
+        return $nodeEl;
+    }
+
+    function populateHouseholdMembersVisitors() {
+		var members = window.ONS.storage.getAllHouseholdMembers(),
+
+            householdMembers = members.filter(function (member) {
+            	return member.type === window.ONS.storage.KEYS.HOUSEHOLD_MEMBER_TYPE;
+            }),
+
+            visitors = members.filter(function (member) {
+                return member.type === window.ONS.storage.KEYS.VISITOR_TYPE;
+            });
+
+		$.each(householdMembers, function(i, member) {
+            $('#household-members-summary').append(createMemberItem(member));
+        });
+
+        $.each(visitors, function(i, member) {
+            $('#visitors-summary').append(createMemberItem(member));
+        });
+    }
+
+    $(populateHouseholdMembersVisitors);
 
 	/*function getRows(key, title, addLink) {
 		var members = localStorage.getItem(key);

@@ -1,6 +1,8 @@
 export const HOUSEHOLD_MEMBERS_STORAGE_KEY = 'household-members';
 export const USER_STORAGE_KEY = 'user-details';
 export const USER_HOUSEHOLD_MEMBER_ID = 'person_me';
+export const HOUSEHOLD_MEMBER_TYPE = 'household-member';
+export const VISITOR_TYPE = 'visitor';
 
 export function populateList() {
   if (!$('#household-members').length) {
@@ -10,7 +12,7 @@ export function populateList() {
   let members = getAllHouseholdMembers() || [];
 
   $('#household-members').empty().append(members.map(function(member) {
-    return $('<li>').addClass('mars').text(member.fullName);
+    return $('<li>').addClass('mars').text(member['@person'].fullName);
   }));
 }
 
@@ -42,8 +44,8 @@ export function getUserPerson() {
  * Household
  */
 export function getUserAsHouseholdMember() {
-  return getAllHouseholdMembers().find((person) => {
-    return person.id === USER_HOUSEHOLD_MEMBER_ID;
+  return getAllHouseholdMembers().find((member) => {
+    return member['@person'].id === USER_HOUSEHOLD_MEMBER_ID;
   });
 }
 
@@ -53,35 +55,42 @@ export function deleteUserAsHouseholdMember() {
 
 export function deleteHouseholdMember(personId) {
   let members = getAllHouseholdMembers().filter((member) => {
-    return member.id !== personId;
+    return member['@person'].id !== personId;
   });
 
   localStorage.setItem(HOUSEHOLD_MEMBERS_STORAGE_KEY, JSON.stringify(members));
 }
 
-export function updateUserAsHouseholdMember(person) {
+export function updateUserAsHouseholdMember(person, memberData) {
   let userAsHouseholdMember = getUserAsHouseholdMember();
 
-  userAsHouseholdMember ? updateHouseholdMember(person) : addHouseholdMember(person, USER_HOUSEHOLD_MEMBER_ID);
+  userAsHouseholdMember ? updateHouseholdMember(person, memberData) : addHouseholdMember(person, memberData, USER_HOUSEHOLD_MEMBER_ID);
 }
 
-export function updateHouseholdMember(person) {
+export function updateHouseholdMember(person, memberData) {
   let members = getAllHouseholdMembers().map((member) => {
-    return member.id === USER_HOUSEHOLD_MEMBER_ID ? { ...member, ...person } : member;
+    return member['@person'].id === USER_HOUSEHOLD_MEMBER_ID
+      ? {...member, ...memberData, '@person': {...member['@person'], ...person}}
+      : member;
   });
 
   localStorage.setItem(HOUSEHOLD_MEMBERS_STORAGE_KEY, JSON.stringify(members));
 }
 
-export function addHouseholdMember(person, id) {
-	var people = getAllHouseholdMembers() || [];
+export function addHouseholdMember(person, memberData, id) {
+  let people = getAllHouseholdMembers() || [];
+  memberData = memberData || {};
 
-	people.push({
-		id: id || 'person' + people.length,
-		...person
-	});
+  people.push({
+    ...memberData,
+    type: memberData.type || HOUSEHOLD_MEMBER_TYPE,
+    '@person': {
+      ...person,
+      id: id || 'person' + people.length
+    }
+  });
 
-	localStorage.setItem(HOUSEHOLD_MEMBERS_STORAGE_KEY, JSON.stringify(people));
+  localStorage.setItem(HOUSEHOLD_MEMBERS_STORAGE_KEY, JSON.stringify(people));
 }
 
 export function getAllHouseholdMembers() {
@@ -90,7 +99,7 @@ export function getAllHouseholdMembers() {
 
 export function person(opts) {
   if (opts.firstName === '' || opts.lastName === '') {
-    throw Error('Unable to create person with data: ', opts.firstName, !opts.middleName, !opts.lastName);
+    console.log('Unable to create person with data: ', opts.firstName, !opts.middleName, !opts.lastName);
   }
 
   let middleName = opts.middleName || '';
@@ -116,7 +125,9 @@ window.ONS.storage = {
 
   KEYS: {
     HOUSEHOLD_MEMBERS_STORAGE_KEY,
-    USER_STORAGE_KEY
+    USER_STORAGE_KEY,
+    HOUSEHOLD_MEMBER_TYPE,
+    VISITOR_TYPE
   },
 
   IDS: {

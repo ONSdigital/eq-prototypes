@@ -117,15 +117,22 @@ navigationItems:
 <script>
 	$('.btn-submit').click(function (e) {
 		e.preventDefault(); // do not submit the form like usual
-        window.ONS.storage.addHouseholdMember(window.ONS.storage.TYPES.person({
+
+        var person = window.ONS.storage.TYPES.person({
             firstName: document.getElementById('first-name').value,
             middleName: document.getElementById('middle-name').value,
             lastName: document.getElementById('last-name').value
-		}));
+        });
+
+        var personType = window.ONS.storage.KEYS[
+        	window.location.search.match(/journey=visitors/) ? 'VISITOR_TYPE' : 'HOUSEHOLD_MEMBER_TYPE'
+        ];
+
+        window.ONS.storage.addHouseholdMember(person, { type: personType });
 
         /**
          * Routing
-         * */
+         */
 		if (window.location.search.match(/journey=temp-away-from-home/)) {
 			window.location = '../does-anyone-else-live-here/?journey=temp-away-from-home';
 		} else if (window.location.search.match(/journey=visitors/)) {

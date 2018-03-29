@@ -96,7 +96,12 @@ navigationItems:
 			/**
              * Add member to household
              */
-            window.ONS.storage.updateUserAsHouseholdMember(personUser);
+            window.ONS.storage.updateUserAsHouseholdMember(
+            	personUser,
+                {
+                	type: window.ONS.storage.KEYS.HOUSEHOLD_MEMBER_TYPE
+                }
+            );
 
             localStorage.setItem('lives-here', 'yes');
             document.trav.action = loc = "../does-anyone-else-live-here";
@@ -108,10 +113,6 @@ navigationItems:
 
             localStorage.setItem('lives-here', 'no');
 
-			/*var members = localStorage.getItem('household-members');
-			if (members) {
-				localStorage.setItem('household-members', members.replace(name, '').replace(/^,/, ''));
-			}*/
 			document.trav.action = loc = "../does-anyone-else-live-here";
 		}
 
