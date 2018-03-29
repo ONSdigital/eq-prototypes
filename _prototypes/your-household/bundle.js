@@ -58,6 +58,8 @@ export function deleteHouseholdMember(personId) {
     return member['@person'].id !== personId;
   });
 
+  console.log(personId, members);
+
   localStorage.setItem(HOUSEHOLD_MEMBERS_STORAGE_KEY, JSON.stringify(members));
 }
 
@@ -86,11 +88,22 @@ export function addHouseholdMember(person, memberData, id) {
     type: memberData.type || HOUSEHOLD_MEMBER_TYPE,
     '@person': {
       ...person,
-      id: id || 'person' + people.length
+      id: id || 'person' + addHouseholdMemberAutoIncrementId()
     }
   });
 
   localStorage.setItem(HOUSEHOLD_MEMBERS_STORAGE_KEY, JSON.stringify(people));
+}
+
+function addHouseholdMemberAutoIncrementId() {
+  let k = 'household-member-count',
+    id = parseInt(localStorage.getItem(k)) || 0;
+
+  id++;
+
+  localStorage.setItem(k, JSON.stringify(id));
+
+  return id;
 }
 
 export function getAllHouseholdMembers() {
@@ -116,6 +129,7 @@ window.ONS = {};
 window.ONS.storage = {
   getAddress,
   addHouseholdMember,
+  deleteHouseholdMember,
   getAllHouseholdMembers,
   addUserPerson,
   getUserPerson,
