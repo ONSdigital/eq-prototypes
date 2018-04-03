@@ -115,6 +115,19 @@ navigationItems:
 <script src='/js/compiled/your-household/bundle.js'></script>
 
 <script>
+    var editUserId = new URLSearchParams(window.location.search).get('edit'),
+		memberFound = null;
+
+	if(editUserId) {
+		memberFound = window.ONS.storage.getAllHouseholdMembers().filter(function (member) {
+			return member['@person'].id === editUserId;
+		})[0];
+	}
+
+	if(editUserId && !memberFound) {
+		throw Error('Member not found');
+    }
+
 	$('.btn-submit').click(function (e) {
 		e.preventDefault(); // do not submit the form like usual
 
@@ -128,7 +141,13 @@ navigationItems:
         	window.location.search.match(/journey=visitors/) ? 'VISITOR_TYPE' : 'HOUSEHOLD_MEMBER_TYPE'
         ];
 
-        window.ONS.storage.addHouseholdMember(person, { type: personType });
+        if(editUserId && memberFound) {
+			person.id = editUserId;
+			window.ONS.storage['updateHouseholdMember'](person, { type: personType });
+        }
+        else {
+			window.ONS.storage['addHouseholdMember'](person, { type: personType });
+        }
 
         /**
          * Routing
@@ -146,7 +165,8 @@ navigationItems:
         var addressStored = localStorage.getItem('address') || '',
             addressLines = addressStored.split(','),
             addressLine1 = addressLines[0],
-            addressLine2 = addressLines[1];
+            addressLine2 = addressLines[1],
+            person;
 
 		$('#section-address').html(addressLine1);
         $('.address-text').html(addressLine1 + ', ' + addressLine2);
@@ -154,6 +174,14 @@ navigationItems:
         if (window.location.search.match(/journey=visitors/)) {
         	$('#question-title').html('Who else was staying overnight on 27th February 2018 at ' + addressLine1 + ', ' + addressLine2);
         }
+
+		if(memberFound) {
+			person = memberFound['@person'];
+
+			$('#first-name').val(person.firstName);
+			$('#middle-name').val(person.middleName);
+			$('#last-name').val(person.lastName);
+		}
 	});
 </script>
 

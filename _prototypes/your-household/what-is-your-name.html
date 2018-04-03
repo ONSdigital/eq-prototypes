@@ -124,6 +124,8 @@ navigationItems:
             lastName: document.getElementById('last-name').value
         }));
 
+		window.ONS.storage.deleteUserAsHouseholdMember();
+
 		window.location = '../do-you-live-here/';
 	});
 
@@ -139,9 +141,16 @@ navigationItems:
 
 	$(function () {
 		var addressLines = localStorage.getItem('address').split(','),
-			addressLine1 = addressLines[0];
+			addressLine1 = addressLines[0],
+            userPerson = window.ONS.storage.getUserPerson();
 
 		$('#section-address').html(addressLine1);
+
+		if(userPerson) {
+			$('#first-name').val(userPerson.firstName);
+			$('#middle-name').val(userPerson.middleName);
+			$('#last-name').val(userPerson.lastName);
+        }
 	});
 </script>
 

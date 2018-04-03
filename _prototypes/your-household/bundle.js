@@ -58,25 +58,23 @@ export function deleteHouseholdMember(personId) {
     return member['@person'].id !== personId;
   });
 
-  console.log(personId, members);
-
   localStorage.setItem(HOUSEHOLD_MEMBERS_STORAGE_KEY, JSON.stringify(members));
 }
 
 export function updateUserAsHouseholdMember(person, memberData) {
   let userAsHouseholdMember = getUserAsHouseholdMember();
 
-  userAsHouseholdMember ? updateHouseholdMember(person, memberData) : addHouseholdMember(person, memberData, USER_HOUSEHOLD_MEMBER_ID);
+  userAsHouseholdMember ? updateHouseholdMember(userAsHouseholdMember['@person'], memberData) : addHouseholdMember(person, memberData, USER_HOUSEHOLD_MEMBER_ID);
 }
 
 export function updateHouseholdMember(person, memberData) {
-  let members = getAllHouseholdMembers().map((member) => {
-    return member['@person'].id === USER_HOUSEHOLD_MEMBER_ID
-      ? {...member, ...memberData, '@person': {...member['@person'], ...person}}
-      : member;
+  let membersUpdated = getAllHouseholdMembers().map((member) => {
+    return member['@person'].id === person.id
+		? {...member, ...memberData, '@person': {...member['@person'], ...person}}
+		: member;
   });
 
-  localStorage.setItem(HOUSEHOLD_MEMBERS_STORAGE_KEY, JSON.stringify(members));
+  localStorage.setItem(HOUSEHOLD_MEMBERS_STORAGE_KEY, JSON.stringify(membersUpdated));
 }
 
 export function addHouseholdMember(person, memberData, id) {
@@ -129,6 +127,7 @@ window.ONS = {};
 window.ONS.storage = {
   getAddress,
   addHouseholdMember,
+  updateHouseholdMember,
   deleteHouseholdMember,
   getAllHouseholdMembers,
   addUserPerson,

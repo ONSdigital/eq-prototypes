@@ -57,12 +57,12 @@ navigationItems:
 
                                 <h2 class="neptune">Household members</h2>
                                 <ul id="household-members-summary" class="list list--records list--people u-mb-s js-records"></ul>
-                                <p class="u-mb-l"><a href="#">Is anyone else missing from this list?</a></p>
+                                <p class="u-mb-l"><a href="../who-else-to-add">Is anyone else missing from this list?</a></p>
 
                                 <h2 class="neptune">Visitors</h2>
                                 <ul id="visitors-summary" class="list list--records list--people u-mb-s js-records"></ul>
 
-                                <p class="u-mb-l"><a href="#">Is anyone else missing from this list?</a></p>
+                                <p class="u-mb-l"><a href="../who-else-to-add?journey=visitors">Is anyone else missing from this list?</a></p>
                             </section>
                         </div>
                     </div>
@@ -97,7 +97,7 @@ navigationItems:
         <span class="list__item-name js-person-name"></span>
         <div class="list__item-actions u-fr">
             <span class="list__item-action">
-                <a href="change">Change</a>
+                <a class="js-record-edit" href="#">Change</a>
             </span>
             <span class="list__item-action">
                 <button class="btn btn--toggle js-record-remove">Remove</button>
@@ -201,44 +201,6 @@ navigationItems:
     }
 </style>
 
-<style>
-    /*#household-table {
-    }
-
-    #household-table tr:last-child td,
-    #household-table .no-border td {
-        border-bottom: 0;
-    }
-
-    #household-table .last-row td {
-        padding-bottom: 20px;
-    }
-
-    #household-table .last-row + tr td {
-        padding-top: 20px;
-    }
-
-    #household-table td {
-        padding: 5px 8px;
-        line-height: 1.3;
-        border-bottom: 0;
-    }
-
-    #household-table td[rowspan] {
-        width: 40%;
-        padding-bottom: 20px;
-    }
-
-    #household-table tr.last-row + tr {
-        border-top: thin solid #e4e8eb;
-    }
-
-    #household-table td:last-child {
-        white-space: nowrap;
-        text-align: right;
-    }*/
-</style>
-
 <script>
 	$(function () {
 		var addressLines = (localStorage.getItem('address') || '').split(','),
@@ -248,27 +210,39 @@ navigationItems:
 	});
 
 	function createMemberItem(member) {
-		var $nodeEl = $('#person-record-template').clone();
+		var $nodeEl = $('#person-record-template').clone(),
+            personNameText = member['@person'].fullName,
+            memberIsUser = isUser(member);
 
-        $nodeEl.find('.js-person-name').html(member['@person'].fullName);
+		if(memberIsUser) {
+			personNameText += ' (You)';
+        }
+
+        $nodeEl.find('.js-person-name').html(personNameText);
         $nodeEl.find('.js-record-remove').on('click', removeMember_handler.bind(null, member));
+
+        $nodeEl.find('.js-record-edit').attr('href', memberIsUser
+            ? '../what-is-your-name'
+            : '../who-else-to-add?edit=' + member['@person'].id +
+                (member.type === window.ONS.storage.KEYS.VISITOR_TYPE ? '&journey=visitors' : '')
+        );
 
         return $nodeEl;
     }
 
     function updateHouseholdMembersVisitors() {
 		var members = window.ONS.storage.getAllHouseholdMembers(),
+            userMember = members.filter(isUser)[0],
+            otherHouseholdMembers = members.filter(isOtherHouseholdMember),
+            visitors = members.filter(isVisitor),
+            householdMembers = otherHouseholdMembers;
 
-            householdMembers = members.filter(function (member) {
-            	return member.type === window.ONS.storage.KEYS.HOUSEHOLD_MEMBER_TYPE;
-            }),
+		$('#household-members-summary').html('');
+		$('#visitors-summary').html('');
 
-            visitors = members.filter(function (member) {
-                return member.type === window.ONS.storage.KEYS.VISITOR_TYPE;
-            });
-
-        $('#household-members-summary').html('');
-        $('#visitors-summary').html('');
+		if(userMember) {
+			householdMembers = [userMember].concat(otherHouseholdMembers);
+        }
 
 		$.each(householdMembers, function(i, member) {
             $('#household-members-summary').append(createMemberItem(member));
@@ -304,6 +278,19 @@ navigationItems:
         e.preventDefault();
         $('#modal').hide();
     });
+
+	function isOtherHouseholdMember(member) {
+		return member.type === window.ONS.storage.KEYS.HOUSEHOLD_MEMBER_TYPE &&
+			member['@person'].id !== window.ONS.storage.IDS.USER_HOUSEHOLD_MEMBER_ID;
+    }
+
+	function isVisitor(member) {
+		return member.type === window.ONS.storage.KEYS.VISITOR_TYPE;
+    }
+
+    function isUser(member) {
+		return member['@person'].id === window.ONS.storage.IDS.USER_HOUSEHOLD_MEMBER_ID;
+    }
 
     $(updateHouseholdMembersVisitors);
 </script>
