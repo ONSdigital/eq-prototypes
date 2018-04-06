@@ -1,0 +1,26 @@
+navigationItemsRelationships:
+  - label: [Dynamic address]
+    id: section-address
+    href: #
+    state: completed
+  - label: Who lives here?
+    href: ../summary
+    state: completed
+  - label: Relationships
+    href: #
+    state: current
+  - label: Household and accomodation
+    href: #
+    state: incomplete
+
+navigationItemsHousehold:
+  - label: [Dynamic address]
+    id: section-address
+    href: #
+    state: completed
+  - label: Who lives here?
+    href: ../summary
+    state: current
+  - label: Household and accomodation
+    href: #
+    state: incomplete

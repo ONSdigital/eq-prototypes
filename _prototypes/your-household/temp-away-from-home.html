@@ -2,19 +2,6 @@
 title: do-you-live-here
 project: your-household
 globalcss: false
-navigationItems:
-  - label: [Dynamic address]
-    id: section-address
-    href: #
-    state: completed
-  - label: Who lives here?
-    id: section-address
-    href: #
-    state: current
-  - label: Household and accomodation
-    id: section-address
-    href: #
-    state: incomplete
 ---
 
 <link rel="stylesheet" href="{{ "/css/census-header-footer.css" | prepend: site.baseurl }}">
@@ -32,7 +19,7 @@ navigationItems:
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            {% include navigation.html items=page.navigationItems title="Sections" %}
+            {% include navigation.html items=site.data.example.navigationItemsHousehold title="Sections" %}
         </div>
         <div class="grid__col col-7@m pull-1@m">
             <main role="main" id="main" class="page__main">
