@@ -115,7 +115,7 @@ visitors:
     	var $nodeEl = $('#relationship-record-list-template').clone();
 
         $nodeEl.attr('id', '');
-        $nodeEl.find('.js-record-list-heading').html(data.title);
+        $nodeEl.find('.js-record-list-heading').html(data.title + ' is ...');
 
     	return $nodeEl;
     }
