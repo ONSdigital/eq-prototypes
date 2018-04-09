@@ -213,11 +213,9 @@ export function getAllRelationships() {
 }
 
 export function deleteAllRelationshipsForMember(memberId) {
-  let householdRelationships = getAllRelationships().filter((relationship) => {
+  const householdRelationships = getAllRelationships().filter((relationship) => {
     return !(memberId === relationship.personIsId || memberId === relationship.personToId);
   });
-
-  console.log(householdRelationships);
 
   localStorage.setItem(RELATIONSHIPS_STORAGE_KEY, JSON.stringify(householdRelationships));
 }

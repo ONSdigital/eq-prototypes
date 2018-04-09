@@ -12,7 +12,7 @@ globalcss: false
 
 <div class="page__subheader">
     <div class="container">
-        <a class="mars" href="../index">Previous</a>
+        <a class="mars" href="../do-you-live-here">Previous</a>
     </div>
 </div>
 
@@ -101,6 +101,10 @@ globalcss: false
 	});
 
 	$(function () {
+		var addressLines = (localStorage.getItem('address') || '').split(','),
+            addressLine1 = addressLines[0],
+            addressLine2 = addressLines[1]
+
         if(window.location.search.match(/journey=visitors/)) {
         	$('#form').prepend('<input type="hidden" name="journey" value="visitors" />');
             $('#question-title').html('Is this everyone who was visiting on 27th February 2018 at ' + addressLine1 + ', ' + addressLine2);

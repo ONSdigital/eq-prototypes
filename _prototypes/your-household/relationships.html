@@ -14,7 +14,7 @@ visitors:
 
 <div class="page__subheader">
     <div class="container">
-        <a class="mars" href="../index">Previous</a>
+        <a class="mars" href="../summary">Previous</a>
     </div>
 </div>
 
@@ -150,7 +150,6 @@ visitors:
     var storageAPI = window.ONS.storage,
         personIs,
         personTo,
-        missingRelationshipFound = true,
 
         editRelationshipId = new URLSearchParams(window.location.search).get('edit'),
         editRelationshipFound = null;
@@ -274,8 +273,11 @@ visitors:
             $('.qa-btn-submit').on('click', missingSubmit_handler);
         }
         else {
-            missingRelationshipFound = false;
             $('#question-area').html('<h1 class="saturn">No missing relationships found</h1>');
+            $('.qa-btn-submit').on('click', function (e) {
+                e.preventDefault();
+                window.location.href = '../relationships-summary';
+            });
         }
     }
 
@@ -288,10 +290,6 @@ visitors:
             relationshipDescription = chosenItem.description,
             newRelationship,
             dbRelationshipId;
-
-        if (!missingRelationshipFound) {
-            window.location.href = '../relationships-summary';
-        }
 
         if(!relationshipDescription) {
             throw Error('Relationship description not found: ', relationshipDescription);
