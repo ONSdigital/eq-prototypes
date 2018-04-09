@@ -198,6 +198,7 @@ globalcss: false
 			personNameText += ' (You)';
         }
 
+        $nodeEl.attr('id', '');
         $nodeEl.find('.js-person-name').html(personNameText);
         $nodeEl.find('.js-record-remove').on('click', removeMember_handler.bind(null, member));
 
