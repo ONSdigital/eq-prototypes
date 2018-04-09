@@ -21,7 +21,7 @@ visitors:
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            {% include navigation.html items=site.data.example.navigationItemsRelationships title="Sections" %}
+            {% include navigation.html items=site.data.your-household.navigationItemsRelationships nav-title-id="section-address" %}
             {% include navigation.html items=page.householdMembers title="Household members" nav-id="navigation-household-members" %}
             {% include navigation.html items=page.visitors title="Visitors" nav-id="navigation-visitors" %}
         </div>
@@ -221,28 +221,9 @@ visitors:
         };
     }
 
-    $('[name="relationship"]').on('change', function() {
-        $('.js-relationship-person-is-relationship-description')
-          .html(window.ONS.storage.relationshipDescriptionMap[$(this).val()].sentanceLabel);
-    });
-
-	$(function () {
-		var addressLines = (localStorage.getItem('address') || '').split(','),
-			addressLine1 = addressLines[0];
-
-        $('#section-address').html(addressLine1);
-
-        /**
-         * Code branching - are we trying to edit or create a new relationship
-         */
-        if(editRelationshipId) {
-            journeyEditRelationship();
-        }
-        else {
-            journeyCreateNewRelationship();
-        }
-	});
-
+    /**
+     * Edit relationship page setup
+     */
 	function journeyEditRelationship() {
         editRelationshipFound = storageAPI.getAllRelationships().filter(function (relationship) {
             return relationship.id+'' === editRelationshipId;
@@ -282,7 +263,10 @@ visitors:
         window.location.href = '../relationships-summary';
     }
 
-	function journeyCreateNewRelationship() {
+    /**
+     * Create relationship page setup
+     */
+    function journeyCreateNewRelationship() {
 		var missingRelationship = findNextMissingRelationship();
 
         if(missingRelationship) {
@@ -325,7 +309,7 @@ visitors:
 
         nextMissingRelationship = findNextMissingRelationship();
 
-        window.history.pushState(null, '', '?edit=' + dbRelationshipId);
+        window.history.replaceState(null, '', '?edit=' + dbRelationshipId);
 
         /**
          * Routing
@@ -337,4 +321,22 @@ visitors:
             window.location.href = '../relationships-summary';
         }
     }
+
+    $('[name="relationship"]').on('change', function() {
+        $('.js-relationship-person-is-relationship-description')
+            .html(window.ONS.storage.relationshipDescriptionMap[$(this).val()].sentanceLabel);
+    });
+
+    $(function () {
+
+    	/**
+         * Code branching - are we trying to edit or create a new relationship
+         */
+        if(editRelationshipId) {
+            journeyEditRelationship();
+        }
+        else {
+            journeyCreateNewRelationship();
+        }
+    });
 </script>

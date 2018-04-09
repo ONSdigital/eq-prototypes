@@ -19,7 +19,7 @@ globalcss: false
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            {% include navigation.html items=site.data.example.navigationItemsHousehold title="Sections" %}
+            {% include navigation.html items=site.data.your-household.navigationItemsHousehold nav-title-id="section-address" %}
         </div>
         <div class="grid__col col-7@m pull-1@m">
             <main role="main" id="main" class="page__main">
@@ -84,14 +84,4 @@ globalcss: false
             document.trav.action = "../summary";
         }
 	});
-
-    $(function () {
-        var addressStored = localStorage.getItem('address') || '',
-            addressLines = addressStored.split(','),
-            addressLine1 = addressLines[0],
-            addressLine2 = addressLines[1];
-
-        $('#section-address').html(addressLine1);
-        $('.address-text').html(addressLine1 + ', ' + addressLine2);
-    });
 </script>

@@ -212,6 +212,16 @@ export function getAllRelationships() {
   return JSON.parse(localStorage.getItem(RELATIONSHIPS_STORAGE_KEY)) || [];
 }
 
+export function deleteAllRelationshipsForMember(memberId) {
+  let householdRelationships = getAllRelationships().filter((relationship) => {
+    return !(memberId === relationship.personIsId || memberId === relationship.personToId);
+  });
+
+  console.log(householdRelationships);
+
+  localStorage.setItem(RELATIONSHIPS_STORAGE_KEY, JSON.stringify(householdRelationships));
+}
+
 export function relationship(description, personIsId, personToId) {
   return {
     personIsDescription: description,
@@ -224,15 +234,23 @@ export function relationship(description, personIsId, personToId) {
  * Helpers
  */
 function createNavItem(member) {
-  var $nodeEl = $('<li class="js-template-nav-item nav__item pluto">\n' +
-    '        <a class="js-template-nav-item-label nav__link" href="#item0"></a>\n' +
-    '    </li>');
-  $nodeEl.find('.js-template-nav-item-label').html(member['@person'].fullName);
+  var $nodeEl = $('<li class="js-template-nav-item nav__item pluto">' +
+    '  <a class="js-template-nav-item-label nav__link" href="#"></a>' +
+    '</li>'),
+    $linkEl = $nodeEl.find('.js-template-nav-item-label');
+
+  $linkEl.html(member['@person'].fullName);
+
+  if (member['@person'].id === USER_HOUSEHOLD_MEMBER_ID) {
+    $linkEl.attr('href', '../what-is-your-name');
+  } else {
+    $linkEl.attr('href', '../who-else-to-add?edit=' + member['@person'].id);
+  }
 
   return $nodeEl;
 }
 
-function updateNavigationItems() {
+function updateHouseholdVisitorsNavigationItems() {
   let allHouseholdMembers = window.ONS.storage.getAllHouseholdMembers(),
     householdMembers = allHouseholdMembers.filter(window.ONS.storage.isHouseholdMember),
     visitors = allHouseholdMembers.filter(window.ONS.storage.isVisitor);
@@ -266,6 +284,15 @@ function populateList() {
   }));
 }
 
+function updateAddresses() {
+  let addressLines = (localStorage.getItem('address') || '').split(','),
+    addressLine1 = addressLines[0],
+    addressLine2 = addressLines[1];
+
+  $('#section-address').html(addressLine1);
+  $('.address-text').html(addressLine1 + ', ' + addressLine2);
+}
+
 window.ONS = {};
 window.ONS.storage = {
   getAddress,
@@ -287,6 +314,7 @@ window.ONS.storage = {
   addRelationship,
   editRelationship,
   getAllRelationships,
+  deleteAllRelationshipsForMember,
 
   relationshipDescriptionMap,
 
@@ -308,4 +336,5 @@ window.ONS.storage = {
 };
 
 $(populateList);
-$(updateNavigationItems);
+$(updateHouseholdVisitorsNavigationItems);
+$(updateAddresses);

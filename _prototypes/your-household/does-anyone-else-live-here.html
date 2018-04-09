@@ -19,7 +19,7 @@ globalcss: false
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            {% include navigation.html items=site.data.example.navigationItemsHousehold title="Sections" %}
+            {% include navigation.html items=site.data.your-household.navigationItemsHousehold nav-title-id="section-address" %}
         </div>
         <div class="grid__col col-7@m pull-1@m">
             <main role="main" id="main" class="page__main">
@@ -101,13 +101,6 @@ globalcss: false
 	});
 
 	$(function () {
-        var addressLines = (localStorage.getItem('address') || '').split(','),
-            addressLine1 = addressLines[0],
-            addressLine2 = addressLines[1];
-
-        $('#section-address').html(addressLine1);
-		$('.address-text').html(addressLine1 + ', ' + addressLine2);
-
         if(window.location.search.match(/journey=visitors/)) {
         	$('#form').prepend('<input type="hidden" name="journey" value="visitors" />');
             $('#question-title').html('Is this everyone who was visiting on 27th February 2018 at ' + addressLine1 + ', ' + addressLine2);

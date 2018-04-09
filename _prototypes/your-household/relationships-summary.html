@@ -21,7 +21,7 @@ visitors:
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            {% include navigation.html items=site.data.example.navigationItemsRelationships title="Sections" %}
+            {% include navigation.html items=site.data.your-household.navigationItemsRelationships nav-title-id="section-address" %}
             {% include navigation.html items=page.householdMembers title="Household members" nav-id="navigation-household-members" %}
             {% include navigation.html items=page.visitors title="Visitors" nav-id="navigation-visitors" %}
         </div>
@@ -173,13 +173,6 @@ visitors:
             }));
         });
     }
-
-	$(function () {
-        var addressLines = (localStorage.getItem('address') || '').split(','),
-            addressLine1 = addressLines[0];
-
-        $('#section-address').html(addressLine1);
-    });
 
     $(updateRecords);
 </script>

@@ -4,7 +4,7 @@ project: your-household
 globalcss: false
 ---
 
-<link rel="stylesheet" href="{{ "/css/census-header-footer.css" | prepend: site.baseurl }}">
+<link rel="stylesheet" href="{{ '/css/census-header-footer.css' | prepend: site.baseurl }}">
 <header class="page__header">
     {% include bar.html %}
     {% include header-census.html %}
@@ -19,7 +19,7 @@ globalcss: false
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            {% include navigation.html items=site.data.example.navigationItemsHousehold title="Sections" %}
+            {% include navigation.html items=site.data.your-household.navigationItemsHousehold nav-title-id="section-address" %}
         </div>
         <div class="grid__col col-7@m pull-1@m">
             <main role="main" id="main" class="page__main">
@@ -104,14 +104,6 @@ globalcss: false
 		}
 
 		window.location = loc;
-	});
-
-	$(function () {
-        var addressLines = (localStorage.getItem('address') || '').split(','),
-            addressLine1 = addressLines[0];
-
-        $('#section-address').html(addressLine1);
-        $('.address-text').html(addressLines[0]);
 	});
 
 	$(function () {

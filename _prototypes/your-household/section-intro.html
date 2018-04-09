@@ -19,7 +19,7 @@ globalcss: false
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            {% include navigation.html items=site.data.example.navigationItemsHousehold title="Sections" %}
+            {% include navigation.html items=site.data.your-household.navigationItemsHousehold nav-title-id="section-address" %}
         </div>
         <div class="grid__col col-7@m pull-1@m">
             <main role="main" id="main" class="page__main">
@@ -54,19 +54,13 @@ globalcss: false
     </div>
 </div>
 
+<script src='/js/compiled/standard-bundle.js'></script>
+<script src='/js/compiled/your-household/bundle.js'></script>
+
 <script>
 	$('.btn-submit').click(function (e) {
 		e.preventDefault(); // do not submit the form like usual
 		window.location = '../what-is-your-name/';
-	});
-
-	$(function () {
-        var addressLines = localStorage.getItem('address').split(','),
-          addressLine1 = addressLines[0],
-          addressLine2 = addressLines[1];
-
-		$('.address-text').html(addressLine1 + ', ' + addressLine2);
-		$('#section-address').html(addressLine1);
 	});
 
 	$(function () {

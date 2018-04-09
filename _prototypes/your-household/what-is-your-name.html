@@ -19,7 +19,7 @@ globalcss: false
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            {% include navigation.html items=site.data.example.navigationItemsHousehold title="Sections" %}
+            {% include navigation.html items=site.data.your-household.navigationItemsHousehold nav-title-id="section-address" %}
         </div>
 
         <div class="grid__col col-7@m pull-1@m">
@@ -127,11 +127,7 @@ globalcss: false
 	}
 
 	$(function () {
-		var addressLines = localStorage.getItem('address').split(','),
-			addressLine1 = addressLines[0],
-            userPerson = window.ONS.storage.getUserPerson();
-
-		$('#section-address').html(addressLine1);
+		var userPerson = window.ONS.storage.getUserPerson();
 
 		if(userPerson) {
 			$('#first-name').val(userPerson.firstName);
