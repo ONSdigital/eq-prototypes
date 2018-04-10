@@ -103,7 +103,7 @@ globalcss: false
 	$(function () {
 		var addressLines = (sessionStorage.getItem('address') || '').split(','),
             addressLine1 = addressLines[0],
-            addressLine2 = addressLines[1]
+            addressLine2 = addressLines[1];
 
         if(window.location.search.match(/journey=visitors/)) {
         	$('#form').prepend('<input type="hidden" name="journey" value="visitors" />');
