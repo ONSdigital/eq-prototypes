@@ -103,7 +103,7 @@ globalcss: false
 <script>
 	$('.btn-submit').click(function (e) {
 		e.preventDefault(); // do not submit the form like usual
-		localStorage.setItem('name', getName());
+		sessionStorage.setItem('name', getName());
 
         window.ONS.storage.addUserPerson(window.ONS.storage.TYPES.person({
             firstName: document.getElementById('first-name').value,

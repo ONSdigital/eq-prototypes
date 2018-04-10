@@ -89,7 +89,7 @@ globalcss: false
 
 <script>
 	$(function () {
-		$('.address-text').html(localStorage.getItem('address').replace(/, /g, '<br />'));
+		$('.address-text').html(sessionStorage.getItem('address').replace(/, /g, '<br />'));
 	});
 </script>
 

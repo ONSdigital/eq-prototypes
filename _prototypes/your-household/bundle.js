@@ -55,7 +55,7 @@ var relationshipDescriptionMap = {
 };
 
 export function getAddress() {
-  let addressLines = localStorage.getItem('address').split(',');
+  let addressLines = sessionStorage.getItem('address').split(',');
 
   return {
     addressLine1: addressLines[0],
@@ -71,11 +71,11 @@ export function getAddress() {
  * User
  */
 export function addUserPerson(person) {
-  localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(person));
+  sessionStorage.setItem(USER_STORAGE_KEY, JSON.stringify(person));
 }
 
 export function getUserPerson() {
-  return JSON.parse(localStorage.getItem(USER_STORAGE_KEY));
+  return JSON.parse(sessionStorage.getItem(USER_STORAGE_KEY));
 }
 
 /**
@@ -96,7 +96,7 @@ export function deleteHouseholdMember(personId) {
     return member['@person'].id !== personId;
   });
 
-  localStorage.setItem(HOUSEHOLD_MEMBERS_STORAGE_KEY, JSON.stringify(members));
+  sessionStorage.setItem(HOUSEHOLD_MEMBERS_STORAGE_KEY, JSON.stringify(members));
 }
 
 export function updateUserAsHouseholdMember(person, memberData) {
@@ -112,7 +112,7 @@ export function updateHouseholdMember(person, memberData) {
       : member;
   });
 
-  localStorage.setItem(HOUSEHOLD_MEMBERS_STORAGE_KEY, JSON.stringify(membersUpdated));
+  sessionStorage.setItem(HOUSEHOLD_MEMBERS_STORAGE_KEY, JSON.stringify(membersUpdated));
 }
 
 export function addHouseholdMember(person, memberData, id) {
@@ -128,22 +128,22 @@ export function addHouseholdMember(person, memberData, id) {
     }
   });
 
-  localStorage.setItem(HOUSEHOLD_MEMBERS_STORAGE_KEY, JSON.stringify(people));
+  sessionStorage.setItem(HOUSEHOLD_MEMBERS_STORAGE_KEY, JSON.stringify(people));
 }
 
 function autoIncrementId(collection) {
   let k = collection + '-increment',
-    id = parseInt(localStorage.getItem(k)) || 0;
+    id = parseInt(sessionStorage.getItem(k)) || 0;
 
   id++;
 
-  localStorage.setItem(k, JSON.stringify(id));
+  sessionStorage.setItem(k, JSON.stringify(id));
 
   return id;
 }
 
 export function getAllHouseholdMembers() {
-  return JSON.parse(localStorage.getItem(HOUSEHOLD_MEMBERS_STORAGE_KEY)) || [];
+  return JSON.parse(sessionStorage.getItem(HOUSEHOLD_MEMBERS_STORAGE_KEY)) || [];
 }
 
 export function getHouseholdMemberByPersonId(id) {
@@ -192,7 +192,7 @@ export function addRelationship(relationshipObj) {
 
   householdRelationships.push(item);
 
-  localStorage.setItem(RELATIONSHIPS_STORAGE_KEY, JSON.stringify(householdRelationships));
+  sessionStorage.setItem(RELATIONSHIPS_STORAGE_KEY, JSON.stringify(householdRelationships));
 
   return item;
 }
@@ -205,11 +205,11 @@ export function editRelationship(relationshipId, valueObject) {
     } : relationship;
   });
 
-  localStorage.setItem(RELATIONSHIPS_STORAGE_KEY, JSON.stringify(householdRelationships));
+  sessionStorage.setItem(RELATIONSHIPS_STORAGE_KEY, JSON.stringify(householdRelationships));
 }
 
 export function getAllRelationships() {
-  return JSON.parse(localStorage.getItem(RELATIONSHIPS_STORAGE_KEY)) || [];
+  return JSON.parse(sessionStorage.getItem(RELATIONSHIPS_STORAGE_KEY)) || [];
 }
 
 export function deleteAllRelationshipsForMember(memberId) {
@@ -217,7 +217,7 @@ export function deleteAllRelationshipsForMember(memberId) {
     return !(memberId === relationship.personIsId || memberId === relationship.personToId);
   });
 
-  localStorage.setItem(RELATIONSHIPS_STORAGE_KEY, JSON.stringify(householdRelationships));
+  sessionStorage.setItem(RELATIONSHIPS_STORAGE_KEY, JSON.stringify(householdRelationships));
 }
 
 export function relationship(description, personIsId, personToId) {
@@ -283,7 +283,7 @@ function populateList() {
 }
 
 function updateAddresses() {
-  let addressLines = (localStorage.getItem('address') || '').split(','),
+  let addressLines = (sessionStorage.getItem('address') || '').split(','),
     addressLine1 = addressLines[0],
     addressLine2 = addressLines[1];
 

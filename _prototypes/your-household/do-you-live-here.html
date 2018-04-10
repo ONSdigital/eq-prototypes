@@ -90,7 +90,7 @@ globalcss: false
                 }
             );
 
-            localStorage.setItem('lives-here', 'yes');
+            sessionStorage.setItem('lives-here', 'yes');
             document.trav.action = loc = "../does-anyone-else-live-here";
 		} else {
             /**
@@ -98,7 +98,7 @@ globalcss: false
              */
             window.ONS.storage.deleteUserAsHouseholdMember();
 
-            localStorage.setItem('lives-here', 'no');
+            sessionStorage.setItem('lives-here', 'no');
 
 			document.trav.action = loc = "../does-anyone-else-live-here";
 		}

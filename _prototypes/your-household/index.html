@@ -209,7 +209,7 @@ globalcss: false
 <script>
 	$('.btn-submit').click(function (e) {
 		e.preventDefault(); // do not submit the form like usual
-		localStorage.setItem('address', getAddress());
+		sessionStorage.setItem('address', getAddress());
 		window.location = '../confirm-address/';
 	});
 

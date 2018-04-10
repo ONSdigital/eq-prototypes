@@ -150,7 +150,7 @@ globalcss: false
 
 	$(function () {
         var person,
-            addressLines = (localStorage.getItem('address') || '').split(','),
+            addressLines = (sessionStorage.getItem('address') || '').split(','),
             addressLine1 = addressLines[0],
             addressLine2 = addressLines[1];
 
