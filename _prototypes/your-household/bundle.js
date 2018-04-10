@@ -270,14 +270,30 @@ function updateHouseholdVisitorsNavigationItems() {
   }
 }
 
-function populateList() {
+function populateHouseholdList() {
   if (!$('#household-members').length) {
     return;
   }
 
   let members = getAllHouseholdMembers() || [];
 
-  $('#household-members').empty().append(members.map(function(member) {
+  $('#household-members').empty().append(members.filter((member) => {
+    return member.type === HOUSEHOLD_MEMBER_TYPE;
+  }).map(function(member) {
+    return $('<li>').addClass('mars').text(member['@person'].fullName);
+  }));
+}
+
+function populateVisitorList() {
+  if (!$('#visitors-list').length) {
+    return;
+  }
+
+  let members = getAllHouseholdMembers() || [];
+
+  $('#visitors-list').empty().append(members.filter((member) => {
+    return member.type === VISITOR_TYPE;
+  }).map(function(member) {
     return $('<li>').addClass('mars').text(member['@person'].fullName);
   }));
 }
@@ -333,6 +349,12 @@ window.ONS.storage = {
   }
 };
 
-$(populateList);
+window.ONS.helpers = {
+  populateHouseholdList,
+  populateVisitorList
+};
+
+$(populateHouseholdList);
+$(populateVisitorList);
 $(updateHouseholdVisitorsNavigationItems);
 $(updateAddresses);

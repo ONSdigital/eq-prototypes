@@ -160,8 +160,8 @@ visitors:
     }
 
     function findNextMissingRelationship() {
-        var householdMembers = window.ONS.storage.getAllHouseholdMembers(),
-            relationships = window.ONS.storage.getAllRelationships(),
+        var householdMembers = storageAPI.getAllHouseholdMembers().filter(storageAPI.isHouseholdMember),
+            relationships = storageAPI.getAllRelationships(),
             missingRelationshipMembers = [],
             personIs = null;
 

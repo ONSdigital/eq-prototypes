@@ -36,7 +36,7 @@ globalcss: false
                                 Who do you need to add to <span class="address-text"></span>
                             </h1>
 
-                            <ul id='household-members'></ul>
+                            <div id="member-list"></div>
 
                             <fieldset class="question__fieldset js-question-fieldset">
                                 <legend class="u-vh">What is your name?</legend>
@@ -150,12 +150,22 @@ globalcss: false
 
 	$(function () {
         var person,
+            storageAPI = window.ONS.storage,
             addressLines = (sessionStorage.getItem('address') || '').split(','),
             addressLine1 = addressLines[0],
-            addressLine2 = addressLines[1];
+            addressLine2 = addressLines[1],
+            visitors = storageAPI.getAllHouseholdMembers().filter(storageAPI.isVisitor),
+            overrideTitle = 'Who ' + (visitors.length ? 'else ' : '') + 'was staying overnight on 27th February 2018 at ' +
+                addressLine1 + ', ' + addressLine2;
 
         if (window.location.search.match(/journey=visitors/)) {
-        	$('#question-title').html('Who else was staying overnight on 27th February 2018 at ' + addressLine1 + ', ' + addressLine2);
+        	$('#question-title').html(overrideTitle);
+            $('#member-list').html('<ul id="visitors-list"></ul>');
+            window.ONS.helpers.populateVisitorList();
+        }
+        else {
+            $('#member-list').html('<ul id="household-members"></ul>');
+            window.ONS.helpers.populateHouseholdList();
         }
 
 		if(memberFound) {

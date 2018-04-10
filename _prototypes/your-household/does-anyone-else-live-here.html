@@ -34,7 +34,7 @@ globalcss: false
                                     </h1>
                                 </div>
 
-                                <ul id='household-members'></ul>
+                                <div id="member-list"></div>
 
                                 <div class="answer__fields js-fields">
                                     <div class="field field--radio field--multiplechoice ">
@@ -108,6 +108,12 @@ globalcss: false
         if(window.location.search.match(/journey=visitors/)) {
         	$('#form').prepend('<input type="hidden" name="journey" value="visitors" />');
             $('#question-title').html('Is this everyone who was visiting on 27th February 2018 at ' + addressLine1 + ', ' + addressLine2);
+            $('#member-list').html('<ul id="visitors-list"></ul>');
+            window.ONS.helpers.populateVisitorList();
+        }
+        else {
+            $('#member-list').html('<ul id="household-members"></ul>');
+            window.ONS.helpers.populateHouseholdList();
         }
 	});
 </script>
