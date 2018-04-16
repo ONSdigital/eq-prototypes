@@ -80,3 +80,27 @@
 .hide {
     display : none;
 }
+
+
+.field .field__input-typeahead {
+    position : relative;
+}
+
+.field .field__input-hint {
+    position : absolute;
+    padding : .6rem;
+    line-height : normal;
+    border : 1px solid transparent;
+}
+
+.field .field__input-hint-spacer {
+    color : #fff;
+}
+
+.field .field__input-hint-secondary {
+    color : #808080;
+}
+
+.input--transparent {
+    background : transparent;
+}

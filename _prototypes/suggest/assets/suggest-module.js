@@ -1,11 +1,11 @@
 function suggest() {
   let $scope = $('.js-suggest'),
     $inputEl = $scope.find('.js-suggest-input'),
-    occupationComponent = TypeaheadComponent.create({
+    typeaheadComponent = TypeaheadComponent.create({
       scopeElement: $scope,
       inputElement: $inputEl
     }),
-    occupationsService = SuggestService.create({ url: $inputEl.attr('data-suggest-url') });
+    service = SuggestService.create({ url: $inputEl.attr('data-suggest-url') });
 
   function keyUp_handler(e) {
     e.preventDefault();
@@ -19,26 +19,30 @@ function suggest() {
     /**
      * Cancel previous request if not yet returned
      */
-    if (occupationsService.requestInFlight) {
-      occupationsService.$request.abort();
+    if (service.requestInFlight) {
+      service.$request.abort();
     }
 
-    occupationsService.query(val).done(typeaheadUpdate);
+    service.query(val).done(typeaheadUpdate);
   }
 
   function typeaheadUpdate(data) {
-    occupationComponent.update(((data || {})['matches'] || []).map(function(dataItem) {
+    typeaheadComponent.update(((data || {})['matches'] || []).map(function(dataItem) {
       return {
         primaryText: dataItem
       };
     }));
   }
 
-  occupationComponent.emitter.on('itemSelected', function(e, item) {
-    $inputEl.val(item.primaryText);
+  typeaheadComponent.emitter.on('itemSelected', function(e, item) {
+    typeaheadComponent.$inputElClone.val(item.primaryText);
+
+    if (service.requestInFlight) {
+      service.$request.abort();
+    }
   });
 
-  $inputEl.on('keyup', keyUp_handler);
+  typeaheadComponent.$inputElClone.on('keyup', keyUp_handler);
 }
 
 $(suggest);

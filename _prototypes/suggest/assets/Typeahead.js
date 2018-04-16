@@ -2,6 +2,8 @@ function TypeaheadComponent($scope, $inputEl) {
   let _this = this,
     emitter = $({}),
     $container = $scope.find('.pac-container'),
+    $hintElSpacer,
+    $hintElRemainingText,
 
     showWhenEmpty = false,
 
@@ -22,6 +24,23 @@ function TypeaheadComponent($scope, $inputEl) {
    * Initial rendered data
    */
   this.data = [];
+  this.$inputElClone = $inputEl.clone(true);
+  this.hintElClass = 'js-hint-spacer';
+  this.hintElRemainingTextClass = 'js-hint-remaining-text';
+
+  function setup() {
+    let $nodeEl = $('<div class="field__input-typeahead js-suggest-input-container"></div>'),
+      $hintEl = $('<span class="field__input-hint"></span>');
+
+    $hintElSpacer = $('<span class="field__input-hint-spacer ' + _this.hintElClass + '"></span>');
+    $hintElRemainingText = $('<span class="field__input-hint-secondary ' + _this.hintElRemainingTextClass + '"></span>');
+    $inputEl.replaceWith($nodeEl);
+    $nodeEl.append($hintEl.append($hintElSpacer).append($hintElRemainingText));
+    $nodeEl.append(_this.$inputElClone);
+
+    $hintElSpacer = $nodeEl.find('.' + _this.hintElClass);
+    $hintElRemainingText = $nodeEl.find('.' + _this.hintElRemainingTextClass);
+  }
 
   function render() {
     let data = _this.data;
@@ -57,8 +76,7 @@ function TypeaheadComponent($scope, $inputEl) {
   }
 
   function show() {
-    if (
-      (showWhenEmpty && ($inputEl.val() === '') && $inputEl.is(':active') && _this.data.length) || !isClean) {
+    if ((showWhenEmpty && (_this.$inputElClone.val() === '') && _this.$inputElClone.is(':active') && _this.data.length) || !isClean) {
       $container.removeClass('hide');
     }
   }
@@ -116,12 +134,47 @@ function TypeaheadComponent($scope, $inputEl) {
     switchFocusedItem(currentFocusedItemIndex + 1);
   }
 
+  function dirtyKeyDown_handler(e) {
+    setTimeout(function() {
+      typeaheadHint();
+    }, 0);
+  }
+
   function itemMouseDown_handler(item, e) {
     e.preventDefault();
 
     inputChanged();
     emitter.trigger('itemSelected', [item]);
   }
+
+  function typeaheadHint() {
+    const inputText = _this.$inputElClone.val(),
+      inputTextLen = inputText.length;
+
+    if (!_this.data.length || !_this.data[0] || !inputTextLen) {
+      clearTypeaheadHint();
+      return;
+    }
+
+    const match = _this.data.find((item) => {
+      let itemText = item.primaryText;
+      return itemText && itemText.substr(0, inputTextLen) === inputText;
+    });
+
+    match ? showTypeahead(inputText, match.primaryText.substr(inputTextLen)) : clearTypeaheadHint();
+  }
+
+  function showTypeahead(spacer, hint) {
+    $hintElSpacer.html(spacer);
+    $hintElRemainingText.html(hint);
+  }
+
+  function clearTypeaheadHint() {
+    $hintElSpacer.html('');
+    $hintElRemainingText.html('');
+  }
+
+  emitter.on('itemSelected', clearTypeaheadHint);
 
   function resetSelection() {
     currentFocusedItemIndex = 0;
@@ -131,13 +184,12 @@ function TypeaheadComponent($scope, $inputEl) {
   /**
    * Subscribe to input field events
    */
-  $inputEl.on('focus', show);
-  $inputEl.on('blur', hide);
-  $inputEl.on('keydown', function(e) {
+  this.$inputElClone.on('focus', show);
+  this.$inputElClone.on('blur', hide);
+  this.$inputElClone.on('keydown', function(e) {
     if (e.keyCode === 13) {
       e.preventDefault();
     }
-
     let keyDownMethod = keyDownMethods[e.keyCode];
 
     keyDownMethod && keyDownMethod(e);
@@ -145,6 +197,8 @@ function TypeaheadComponent($scope, $inputEl) {
     if (TypeaheadComponent.isKeyPressClean(e)) {
       return;
     }
+
+    dirtyKeyDown_handler(e);
 
     isClean = false;
   });
@@ -161,6 +215,7 @@ function TypeaheadComponent($scope, $inputEl) {
     this.data = dataArr || this.data;
     render();
     resetSelection();
+    typeaheadHint();
   };
 
   /**
@@ -171,6 +226,8 @@ function TypeaheadComponent($scope, $inputEl) {
 
   this.hide = hide;
   this.show = show;
+
+  setup();
 }
 
 TypeaheadComponent.cleanKeys = [37, 38, 39, 40, 13];
