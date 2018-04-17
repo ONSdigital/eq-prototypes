@@ -7,6 +7,7 @@ visitors:
 ---
 
 <link rel="stylesheet" href="{{ '/css/census-header-footer.css' | prepend: site.baseurl }}"/>
+<link rel="stylesheet" href="../style.css" />
 <header class="page__header">
     {% include bar.html %}
     {% include header-census.html %}
@@ -32,9 +33,9 @@ visitors:
                         <div class="block">
                             <section class="section" id="question-area">
                                 <div class="question">
-                                    <h1 class="question__title saturn">What is the relationship between
-                                        <span class="js-relationship-person-is"></span> and
-                                        <span class="js-relationship-person-to"></span>?
+                                    <h1 class="question__title saturn">
+                                        How is <span class="js-relationship-person-is"></span>
+                                        related to <span class="js-relationship-person-to"></span>?
                                     </h1>
 
                                     <h2 class="neptune">
@@ -76,10 +77,28 @@ visitors:
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
                                                            name="relationship"
+                                                           id="step-mother-father"
+                                                           value="step-mother-father"/>
+                                                    <label class="label label--inline venus"
+                                                           for="step-mother-father">Step-mother or step-father</label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="relationship"
                                                            id="son-daughter"
                                                            value="son-daughter"/>
                                                     <label class="label label--inline venus"
                                                            for="son-daughter">Son or Daughter</label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="relationship"
+                                                           id="step-child"
+                                                           value="step-child"/>
+                                                    <label class="label label--inline venus"
+                                                           for="step-child">Step-child</label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
@@ -94,10 +113,10 @@ visitors:
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
                                                            name="relationship"
-                                                           id="other-relation"
-                                                           value="other-relation"/>
+                                                           id="step-brother-sister"
+                                                           value="step-brother-sister"/>
                                                     <label class="label label--inline venus"
-                                                           for="other-relation">Relation - other</label>
+                                                           for="step-brother-sister">Step-brother or step-sister</label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
@@ -124,7 +143,19 @@ visitors:
                                                            id="unrelated"
                                                            value="unrelated"/>
                                                     <label class="label label--inline venus"
-                                                           for="unrelated">Unrelated</label>
+                                                           for="unrelated">
+                                                        Unrelated
+                                                        <span class="pluto u-db label--negative">Including foster child</span>
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="relationship"
+                                                           id="other-relation"
+                                                           value="other-relation"/>
+                                                    <label class="label label--inline venus"
+                                                           for="other-relation">Relation - other</label>
                                                 </div>
                                             </fieldset>
                                         </div>
@@ -139,6 +170,22 @@ visitors:
         </div>
     </div>
 </div>
+
+<style>
+    .field--multiplechoice.field--cols .field__item {
+        vertical-align : top;
+    }
+
+    .label .label--negative {
+        margin-left : -1.9rem;
+    }
+
+    @media only screen and (min-width: 500px) {
+        .field--multiplechoice.field--cols .field__item {
+            width: calc(50% - .5rem);
+        }
+    }
+</style>
 
 <script src='/js/compiled/standard-bundle.js'></script>
 <script src='/js/compiled/your-household/bundle.js'></script>
@@ -319,7 +366,11 @@ visitors:
 
     $('[name="relationship"]').on('change', function() {
         $('.js-relationship-person-is-relationship-description')
-            .html(window.ONS.storage.relationshipDescriptionMap[$(this).val()].sentanceLabel);
+            .html(
+                '<em class="highlight">' +
+                    window.ONS.storage.relationshipDescriptionMap[$(this).val()].sentanceLabel +
+                '</em>'
+            );
     });
 
     $(function () {

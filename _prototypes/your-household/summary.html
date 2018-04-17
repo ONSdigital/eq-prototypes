@@ -5,6 +5,7 @@ globalcss: false
 ---
 
 <link rel="stylesheet" href="{{ "/css/census-header-footer.css" | prepend: site.baseurl }}">
+<link rel="stylesheet" href="../style.css" />
 <header class="page__header">
     {% include bar.html %}
     {% include header-census.html %}
@@ -46,10 +47,11 @@ globalcss: false
                                 <ul id="household-members-summary" class="list list--records list--people u-mb-s js-records"></ul>
                                 <p class="u-mb-l"><a href="../who-else-to-add">Is anyone else missing from this list?</a></p>
 
-                                <h2 class="neptune">Visitors</h2>
-                                <ul id="visitors-summary" class="list list--records list--people u-mb-s js-records"></ul>
-
-                                <p class="u-mb-l"><a href="../who-else-to-add?journey=visitors">Is anyone else missing from this list?</a></p>
+                                <div class="js-visitors-people-list">
+                                    <h2 class="neptune">Visitors staying overnight on 27th February 2018</h2>
+                                    <ul id="visitors-summary" class="list list--records list--people u-mb-s js-records"></ul>
+                                    <p class="u-mb-l"><a href="../who-else-to-add?journey=visitors">Is anyone else missing from this list?</a></p>
+                                </div>
                             </section>
                         </div>
                     </div>
@@ -229,9 +231,14 @@ globalcss: false
             $('#household-members-summary').append(createMemberItem(member));
         });
 
-        $.each(visitors, function(i, member) {
-            $('#visitors-summary').append(createMemberItem(member));
-        });
+		if(visitors.length) {
+            $.each(visitors, function(i, member) {
+                $('#visitors-summary').append(createMemberItem(member));
+            });
+        }
+        else {
+			$('.js-visitors-people-list').hide();
+        }
     }
 
     function removeMember_handler(member, e) {

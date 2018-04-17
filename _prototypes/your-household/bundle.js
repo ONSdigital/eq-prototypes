@@ -8,8 +8,10 @@ export const VISITOR_TYPE = 'visitor';
 var relationshipTypes = {
   'spouse': {},
   'child-parent': {},
+  'step-child-parent': {},
   'grandchild-grandparent': {},
   'sibling': {},
+  'step-brother-sister': {},
   'partner': {},
   'unrelated': {},
   'other-relation': {}
@@ -24,9 +26,17 @@ var relationshipDescriptionMap = {
     sentanceLabel: 'mother or father',
     type: relationshipTypes['child-parent']
   },
+  'step-mother-father': {
+    sentanceLabel: 'step-mother or step-father',
+    type: relationshipTypes['step-child-parent']
+  },
   'son-daughter': {
     sentanceLabel: 'son or daughter',
     type: relationshipTypes['child-parent']
+  },
+  'step-child': {
+    sentanceLabel: 'step-child',
+    type: relationshipTypes['step-child-parent']
   },
   'grandparent': {
     sentanceLabel: 'grandparent',
@@ -39,6 +49,10 @@ var relationshipDescriptionMap = {
   'brother-sister': {
     sentanceLabel: 'brother or sister',
     type: relationshipTypes['sibling']
+  },
+  'step-brother-sister': {
+    sentanceLabel: 'step-brother or step-sister',
+    type: relationshipTypes['step-brother-sister']
   },
   'other-relation': {
     sentanceLabel: 'other type of relation',
@@ -270,6 +284,12 @@ function updateHouseholdVisitorsNavigationItems() {
   }
 }
 
+function createListItemPerson(member) {
+  return $('<li class="list__item">').addClass('mars').html(
+    '<span class="list__item-name">' + member['@person'].fullName + '</span>'
+  );
+}
+
 function populateHouseholdList() {
   if (!$('#household-members').length) {
     return;
@@ -279,9 +299,9 @@ function populateHouseholdList() {
 
   $('#household-members').empty().append(members.filter((member) => {
     return member.type === HOUSEHOLD_MEMBER_TYPE;
-  }).map(function(member) {
-    return $('<li>').addClass('mars').text(member['@person'].fullName);
-  }));
+  }).map(createListItemPerson));
+
+  $('#household-members').addClass('list list--people-plain');
 }
 
 function populateVisitorList() {
@@ -293,9 +313,9 @@ function populateVisitorList() {
 
   $('#visitors-list').empty().append(members.filter((member) => {
     return member.type === VISITOR_TYPE;
-  }).map(function(member) {
-    return $('<li>').addClass('mars').text(member['@person'].fullName);
-  }));
+  }).map(createListItemPerson));
+
+  $('#visitors-list').addClass('list list--people-plain');
 }
 
 function updateAddresses() {

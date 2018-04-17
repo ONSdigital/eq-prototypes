@@ -7,6 +7,7 @@ visitors:
 ---
 
 <link rel="stylesheet" href="{{ '/css/census-header-footer.css' | prepend: site.baseurl }}"/>
+<link rel="stylesheet" href="../style.css" />
 <header class="page__header">
     {% include bar.html %}
     {% include header-census.html %}
@@ -56,7 +57,6 @@ visitors:
 <ul style="display:none;">
     <li id="relationship-record-template" class="list__item">
         <span class="list__item-name">
-            <span class="js-person-is-name"></span> is
             <strong class="js-relationship-description"></strong> to
             <span class="js-person-to-name"></span>
         </span>
@@ -100,7 +100,6 @@ visitors:
         var $nodeEl = $('#relationship-record-template').clone();
 
         $nodeEl.attr('id', '');
-        $nodeEl.find('.js-person-is-name').html(data.personIsName);
         $nodeEl.find('.js-relationship-description').html(data.personIsRelationshipDescription);
         $nodeEl.find('.js-person-to-name').html(data.personToName);
         $nodeEl.find('.js-record-edit').attr('href', '../relationships?edit=' + data.relationshipId);
