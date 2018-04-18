@@ -12,7 +12,7 @@ function suggest() {
 
     let val = $(this).val();
 
-    if (TypeaheadComponent.isKeyPressClean(e)) {
+    if (TypeaheadComponent.isKeyPressClean(e) || val.length < 3) {
       return;
     }
 
