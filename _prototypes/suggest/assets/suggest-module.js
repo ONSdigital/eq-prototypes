@@ -5,7 +5,16 @@ function suggest() {
       scopeElement: $scope,
       inputElement: $inputEl
     }),
-    service = SuggestService.create({ url: $inputEl.attr('data-suggest-url') });
+
+    serviceRoot = (window.location.hostname === 'localhost')
+      ? 'http://localhost:5000/api/'
+      : 'http://ec2-34-243-26-71.eu-west-1.compute.amazonaws.com/',
+
+    service = SuggestService.create({url: serviceRoot + $inputEl.attr('data-suggest-url')});
+
+  console.log(window.location.hostname);
+
+  // http://localhost:5000/api/
 
   function keyUp_handler(e) {
     e.preventDefault();
