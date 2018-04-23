@@ -1,0 +1,157 @@
+---
+title: Summary playback pattern
+project: Summary playback
+globalcss: false
+cdn: v1.1.0
+---
+
+<header class="page__header">
+{% include survey-header.html %}
+{% include bar.html %}
+</header>
+
+<div class="page__subheader">
+  <div class="container">
+  </div>
+</div>
+
+<div class="page__container container">
+  <div class="grid grid--reverse">
+    <div class="grid__col col-4@m">
+    </div>
+    <div class="grid__col col-7@m pull-1@m">
+      <main role="main" id="main" class="page__main">
+
+        <form action="../section-2" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
+          <div class="group" id="rsi">
+            <div class="block" id="total-retail-turnover">
+              <section class="section" id="total-retail-turnover-section">
+
+    <div class="summary">
+        <h2 class="summary__title neptune" id="">Your answers</h2>
+        <div class="summary__block">
+            <div class="summary__item">
+                <div class="grid">
+                    <div class="grid__col col-12@xs col-5@m">
+                      <div class="summary__question mars">For the period 1 May 2017 to 31 May 2017, what was the total turnover of Essential Enterprise Ltd.?</div>
+                    </div>
+                    <div class="grid__col col-8@xs col-5@m">
+                      <div class="summary__answer venus q1r1"></div>
+                    </div>
+                    <div class="grid__col col-4@xs col-2@m">
+                      <div class="summary__link mars">
+                        <a href="../index/">Change <span class="u-vh">your answer for: For the period 1 May 2017 to 31 May 2017, what was the total turnover of Essential Enterprise Ltd.? The current value is: <span class="q1r1"></span></span></a>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="summary__item" id="q1">
+                <div class="grid">
+                    <div class="grid__col col-12@xs col-5@m">
+                      <div class="summary__question mars">Of the <span class="q1r1"></span> total retail turnover, what was the value of internet sales?</div>
+                    </div>
+                    <div class="grid__col col-8@xs col-5@m">
+                      <div class="summary__answer venus q2r1"></div>
+                    </div>
+                    <div class="grid__col col-4@xs col-2@m">
+                      <div class="summary__link mars">
+                        <a href="../page2/">Change <span class="u-vh">your answer for: What was the value of the business's total sales of alcohol, confectionery and tobacco?. The current value is: <span class="q2r1"></span></span></a>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="summary__item" id="q2">
+                <div class="grid">
+                    <div class="grid__col col-12@xs col-5@m">
+                      <div class="summary__question mars">Of the <span class="q1r1"></span> total retail turnover, what was the value of food sales?</div>
+                    </div>
+                    <div class="grid__col col-8@xs col-5@m">
+                      <div class="summary__answer venus q3r1"></div>
+                    </div>
+                    <div class="grid__col col-4@xs col-2@m">
+                      <div class="summary__link mars">
+                        <a href="../page3/">Change <span class="u-vh">your answer for: Of the <span class="q1r1"></span> total retail turnover, what was the value of food sales? The current value is: <span class="q3r1"></span></span></a>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="summary__item" id="q3">
+                <div class="grid">
+                    <div class="grid__col col-12@xs col-5@m">
+                      <div class="summary__question mars">Of the <span class="q1r1"></span> total retail turnover, what was the value of alcohol, confectionary and tobacco sales?</div>
+                    </div>
+                    <div class="grid__col col-8@xs col-5@m">
+                      <div class="summary__answer venus q4r1"></div>
+                    </div>
+                    <div class="grid__col col-4@xs col-2@m">
+                      <div class="summary__link mars">
+                        <a href="../page4/">Change <span class="u-vh">your answer for: What was the value of the business's total sales of alcohol, confectionery and tobacco?. The current value is: <span class="q4r1"></span></span></a>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- End: @summary--group -->
+
+              </section>
+            </div>
+          </div>
+          <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Save and continue</button>
+          <div class="u-mb-m">
+            <button class="btn btn--link mars js-btn-save" type="submit" name="action[save_sign_out]">Save and complete later</button>
+          </div>
+        </form>
+      </main>
+    </div>
+  </div>
+</div>
+<script>
+$( document ).ready(function() {
+  if ($('.q1').length > 0) {
+    var q1var = sessionStorage.getItem('q1r1');
+    $('.q1').text(q1var);
+  }
+  // Question values
+    var q1 = Number(sessionStorage.getItem('q1r1'));
+    var q2 = Number(sessionStorage.getItem('q2r1'));
+    var q3 = Number(sessionStorage.getItem('q3r1'));
+    var q4 = Number(sessionStorage.getItem('q4r1'));
+  // Calculated total
+    var qTot = (q2+q3+q4);
+
+    if (qTot > q1) {
+      console.warn('Error! Total of inputs exceeds '+q1);
+      $('#q1, #q2, #q3').addClass('summary__item--error');
+      $('#q1').prepend('<p class="summary__error-text mars">Amend the figures so they total the sum of £'+q1+'.00.</p>');
+      $('#main').prepend('<div class="panel panel--error u-mb-s" data-qa="error"><div class="panel__header"><h1 class="panel__title venus">This page has an error</h1></div><div class="panel__body" data-qa="error-body">This <strong>must be corrected</strong> to continue.<ul class="list list--bare"><li class="list__item mars">1) <a class="js-inpagelink" href="#q1">Amend the figures so they total the sum of £'+q1+'.00.</a></li></ul></div></div>');
+    }
+
+  var q1var = '£'+(sessionStorage.getItem('q1r1'))+'.00';
+  if(q1var!==null){ $('.q1r1').text(q1var);}
+  var q2var = '£'+(sessionStorage.getItem('q2r1'))+'.00';
+  if(q2var!==null){ $('.q2r1').text(q2var);}
+  var q3var = '£'+(sessionStorage.getItem('q3r1'))+'.00';
+  if(q3var!==null){ $('.q3r1').text(q3var);}
+  var q4var = '£'+(sessionStorage.getItem('q4r1'))+'.00';
+  if(q4var!==null){ $('.q4r1').text(q4var);}
+
+  sessionStorage.setItem('summary', true);
+
+  $('.qa-btn-submit').click(function(e) {
+    e.preventDefault();
+    window.location.href = "../page2"; // target of save and continue
+
+    if ("text" === "text") {
+      var inputValue = $("input[name='q1r1']").val();
+      sessionStorage.setItem('q1r1', inputValue);
+    }
+
+  });
+  console.log(sessionStorage);
+});
+</script>
