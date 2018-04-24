@@ -8,7 +8,7 @@ function suggest() {
 
     serviceRoot = (window.location.hostname === 'localhost')
       ? 'http://localhost:5000/api/'
-      : 'http://ec2-34-243-26-71.eu-west-1.compute.amazonaws.com/api/',
+      : '//davec.dev.eq.ons.digital/api',
 
     service = SuggestService.create({url: serviceRoot + $inputEl.attr('data-suggest-url')});
 
