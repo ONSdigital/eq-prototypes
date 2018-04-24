@@ -130,7 +130,8 @@ $( document ).ready(function() {
 
     if (qTot > q1) {
       console.warn('Error! Total of inputs exceeds '+q1);
-      $('.panel--success, .btn').addClass('u-vh');
+      // $('.panel--success, .btn').addClass('u-vh');
+      $('.panel--success, .btn').remove();
       $('#q1, #q2, #q3').addClass('summary__item--error');
       $('#q1').prepend('<p class="summary__error-text mars">Amend the figures so they total the sum of £'+q1+'.00.</p>');
       $('#main').prepend('<div class="panel panel--error u-mb-s" data-qa="error"><div class="panel__header"><h1 class="panel__title venus">This page has an error</h1></div><div class="panel__body" data-qa="error-body">This <strong>must be corrected</strong> to continue.<ul class="list list--bare"><li class="list__item mars">1) <a class="js-inpagelink" href="#q1">Amend the figures so they total the sum of £'+q1+'.00.</a></li></ul></div></div>');
