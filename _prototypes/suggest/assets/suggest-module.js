@@ -8,7 +8,7 @@ function suggest() {
 
     serviceRoot = (window.location.hostname === 'localhost')
       ? 'http://localhost:5000/api/'
-      : '//davec.dev.eq.ons.digital/api',
+      : '//davec.dev.eq.ons.digital/api/',
 
     service = SuggestService.create({url: serviceRoot + $inputEl.attr('data-suggest-url')});
 
@@ -47,7 +47,7 @@ function suggest() {
     }
   });
 
-  typeaheadComponent.$inputElClone.on('keyup', keyUp_handler);
+  typeaheadComponent.$inputElClone.on('keyup', _.debounce(keyUp_handler, 1000));
 }
 
 $(suggest);
