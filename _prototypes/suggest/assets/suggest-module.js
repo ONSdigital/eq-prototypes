@@ -31,6 +31,17 @@ function suggest() {
     service.query(val).done(typeaheadUpdate);
   }
 
+  function keyDown_handler(e) {
+    let $input = $(this);
+
+    setTimeout(function() {
+      if ($input.val() === '') {
+        console.log(2);
+        typeaheadComponent.update([]);
+      }
+    }, 0);
+  }
+
   function typeaheadUpdate(data) {
     typeaheadComponent.update(((data || {})['matches'] || []).map(function(dataItem) {
       return {
@@ -47,6 +58,7 @@ function suggest() {
     }
   });
 
+  typeaheadComponent.$inputElClone.on('keydown', keyDown_handler);
   typeaheadComponent.$inputElClone.on('keyup', _.debounce(keyUp_handler, 1000));
 }
 

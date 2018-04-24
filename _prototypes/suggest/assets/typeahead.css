@@ -1,20 +1,20 @@
 .pac-container-wrapper {
-    position : relative;
+    position: relative;
 }
 
 .typeahead-component {
-    z-index : 10;
-    position : relative;
+    z-index: 10;
+    position: relative;
 }
 
 .pac-container {
-    position : absolute;
-    width : 19.6rem;
+    position: absolute;
+    width: 19.6rem;
     max-height: 265px;
-    margin-top : -1px;
-    margin-left : -1px;
-    overflow-x : hidden;
-    overflow-y : auto;
+    margin-top: -1px;
+    margin-left: -1px;
+    overflow-x: hidden;
+    overflow-y: auto;
     background-color: #fff;
     border: 2px solid #4263c2;
     border-top: 0;
@@ -22,31 +22,34 @@
     padding: 0;
 }
 
-.pac-logo:after { content: none !important; }
+.pac-logo:after {
+    content: none !important;
+}
 
 .pac-item {
-    display : block;
-    width : 100%;
+    display: block;
+    width: 100%;
     padding: .8rem .6rem;
-    text-align : left;
+    text-align: left;
     cursor: pointer;
     font-family: "Lato", "Helvetica Neue", Arial, sans-serif;
-    border : none;
+    border: none;
     border-top: 1px solid #4263c2;
-    background : none;
-    border-radius : 0;
+    background: none;
+    border-radius: 0;
 }
 
 /**
 * Item is focused
 */
 .pac-item.focused {
-    background-color : #4263c2;
+    background-color: #4263c2;
 }
 
 .pac-item.focused .pac-matched {
     color: #fff;
 }
+
 /**
 * End item is focused
 */
@@ -58,19 +61,18 @@
     color: white;
 }
 
-
 .pac-item,
 .pac-item-query {
     font-size: 17px;
-    color : #999;
+    color: #999;
 }
 
 .pac-item-query {
-    padding-right : 3px;
+    padding-right: 3px;
 }
 
 .pac-matched {
-    color : #000;
+    color: #000;
 }
 
 .pac-item-query:after {
@@ -78,29 +80,31 @@
 }
 
 .hide {
-    display : none;
+    display: none;
 }
 
-
 .field .field__input-typeahead {
-    position : relative;
+    position: relative;
 }
 
 .field .field__input-hint {
-    position : absolute;
-    padding : .6rem;
-    line-height : normal;
-    border : 1px solid transparent;
+    position: absolute;
+    width: 19rem;
+    padding: .6rem;
+    overflow: hidden;
+    white-space: nowrap;
+    line-height: normal;
+    border: 1px solid transparent;
 }
 
 .field .field__input-hint-spacer {
-    color : #fff;
+    color: #fff;
 }
 
 .field .field__input-hint-secondary {
-    color : #808080;
+    color: #808080;
 }
 
 .input--transparent {
-    background : transparent;
+    background: transparent;
 }
