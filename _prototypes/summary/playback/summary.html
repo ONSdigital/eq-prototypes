@@ -27,15 +27,19 @@ cdn: v1.1.0
             <div class="block" id="total-retail-turnover">
               <section class="section" id="total-retail-turnover-section">
 
+              <div class="panel panel--simple panel--success u-mb-s">
+                <div class="panel__body"><p class="venus u-mb-no">This section is now complete</p><p class="mars">You can review your answers below</p></div>
+              </div>
+
     <div class="summary">
-        <h2 class="summary__title neptune" id="">Your answers</h2>
+        <h2 class="summary__title saturn">Your answers</h2>
         <div class="summary__block">
             <div class="summary__item">
                 <div class="grid">
-                    <div class="grid__col col-12@xs col-5@m">
+                    <div class="grid__col col-12@xs col-6@m">
                       <div class="summary__question mars">For the period 1 May 2017 to 31 May 2017, what was the total turnover of Essential Enterprise Ltd.?</div>
                     </div>
-                    <div class="grid__col col-8@xs col-5@m">
+                    <div class="grid__col col-8@xs col-4@m">
                       <div class="summary__answer venus q1r1"></div>
                     </div>
                     <div class="grid__col col-4@xs col-2@m">
@@ -48,10 +52,10 @@ cdn: v1.1.0
 
             <div class="summary__item" id="q1">
                 <div class="grid">
-                    <div class="grid__col col-12@xs col-5@m">
+                    <div class="grid__col col-12@xs col-6@m">
                       <div class="summary__question mars">Of the <span class="q1r1"></span> total retail turnover, what was the value of internet sales?</div>
                     </div>
-                    <div class="grid__col col-8@xs col-5@m">
+                    <div class="grid__col col-8@xs col-4@m">
                       <div class="summary__answer venus q2r1"></div>
                     </div>
                     <div class="grid__col col-4@xs col-2@m">
@@ -64,10 +68,10 @@ cdn: v1.1.0
 
             <div class="summary__item" id="q2">
                 <div class="grid">
-                    <div class="grid__col col-12@xs col-5@m">
+                    <div class="grid__col col-12@xs col-6@m">
                       <div class="summary__question mars">Of the <span class="q1r1"></span> total retail turnover, what was the value of food sales?</div>
                     </div>
-                    <div class="grid__col col-8@xs col-5@m">
+                    <div class="grid__col col-8@xs col-4@m">
                       <div class="summary__answer venus q3r1"></div>
                     </div>
                     <div class="grid__col col-4@xs col-2@m">
@@ -80,10 +84,10 @@ cdn: v1.1.0
 
             <div class="summary__item" id="q3">
                 <div class="grid">
-                    <div class="grid__col col-12@xs col-5@m">
+                    <div class="grid__col col-12@xs col-6@m">
                       <div class="summary__question mars">Of the <span class="q1r1"></span> total retail turnover, what was the value of alcohol, confectionary and tobacco sales?</div>
                     </div>
-                    <div class="grid__col col-8@xs col-5@m">
+                    <div class="grid__col col-8@xs col-4@m">
                       <div class="summary__answer venus q4r1"></div>
                     </div>
                     <div class="grid__col col-4@xs col-2@m">
@@ -101,7 +105,7 @@ cdn: v1.1.0
               </section>
             </div>
           </div>
-          <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Save and continue</button>
+          <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Continue</button>
           <div class="u-mb-m">
             <button class="btn btn--link mars js-btn-save" type="submit" name="action[save_sign_out]">Save and complete later</button>
           </div>
@@ -126,6 +130,7 @@ $( document ).ready(function() {
 
     if (qTot > q1) {
       console.warn('Error! Total of inputs exceeds '+q1);
+      $('.panel--success, .btn').addClass('u-vh');
       $('#q1, #q2, #q3').addClass('summary__item--error');
       $('#q1').prepend('<p class="summary__error-text mars">Amend the figures so they total the sum of £'+q1+'.00.</p>');
       $('#main').prepend('<div class="panel panel--error u-mb-s" data-qa="error"><div class="panel__header"><h1 class="panel__title venus">This page has an error</h1></div><div class="panel__body" data-qa="error-body">This <strong>must be corrected</strong> to continue.<ul class="list list--bare"><li class="list__item mars">1) <a class="js-inpagelink" href="#q1">Amend the figures so they total the sum of £'+q1+'.00.</a></li></ul></div></div>');
