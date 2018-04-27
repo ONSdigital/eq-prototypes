@@ -4,8 +4,9 @@ project: your-household
 globalcss: false
 ---
 
-<link rel="stylesheet" href="{{ "/css/census-header-footer.css" | prepend: site.baseurl }}">
-<link rel="stylesheet" href="../style.css" />
+<link rel="stylesheet"
+      href="{{ "/css/census-header-footer.css" | prepend: site.baseurl }}">
+<link rel="stylesheet" href="../style.css"/>
 <header class="page__header">
     {% include bar.html %}
     {% include header-census.html %}
@@ -20,19 +21,23 @@ globalcss: false
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            {% include navigation.html items=site.data.your-household.navigationItemsHousehold nav-title-id="section-address" %}
+            {% include navigation.html
+            items=site.data.your-household.navigationItemsHousehold
+            nav-title-id="section-address" %}
         </div>
         <div class="grid__col col-7@m pull-1@m">
             <main role="main" id="main" class="page__main">
-                <form name="trav" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
-                    <input type="hidden" name="previous" value="visitors" />
-                    <input type="hidden" name="journey" value="visitors" />
+                <form name="trav" class="form qa-questionnaire-form" role="form"
+                      autocomplete="off" novalidate="">
+                    <input type="hidden" name="previous" value="visitors"/>
+                    <input type="hidden" name="journey" value="visitors"/>
                     <div class="group" id="rsi">
                         <div class="block">
                             <section class="section">
                                 <div class="question">
                                     <h1 class="question__title saturn">
-                                        Were there any visitors staying overnight on 27th February 2018 at
+                                        Were there any visitors staying
+                                        overnight on 27th February 2018 at
                                         <span class="address-text"></span>?
                                     </h1>
                                 </div>
@@ -43,15 +48,23 @@ globalcss: false
                                     <div class="field field--radio field--multiplechoice">
                                         <fieldset>
                                             <div class="field__item js-focusable-box">
-                                                <input class="input input--radio js-focusable" type="radio"
-                                                       name="visitors" id="yes-someone-else">
-                                                <label class="label label--inline venus" for="yes-someone-else">Yes, I need to add a visitor</label>
+                                                <input class="input input--radio js-focusable"
+                                                       type="radio"
+                                                       name="visitors"
+                                                       id="yes-someone-else">
+                                                <label class="label label--inline venus"
+                                                       for="yes-someone-else">Yes,
+                                                    I need to add a
+                                                    visitor</label>
                                             </div>
 
                                             <div class="field__item js-focusable-box">
-                                                <input class="input input--radio js-focusable" type="radio"
+                                                <input class="input input--radio js-focusable"
+                                                       type="radio"
                                                        name="visitors" id="no">
-                                                <label class="label label--inline venus" for="no">No, there were no visitors</label>
+                                                <label class="label label--inline venus"
+                                                       for="no">No, there were
+                                                    no visitors</label>
                                             </div>
                                         </fieldset>
                                     </div>
@@ -59,14 +72,18 @@ globalcss: false
                             </section>
                         </div>
                     </div>
-                    <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Save and continue</button>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus"
+                            type="submit" name="">Save and continue
+                    </button>
                     <div class="u-mb-m">
-                        <button class="btn btn--link mars js-btn-save" type="submit" name="action[save_sign_out]">Save
+                        <button class="btn btn--link mars js-btn-save"
+                                type="submit" name="action[save_sign_out]">Save
                             and complete later
                         </button>
                     </div>
                 </form>
-                <a class="page__previous page__previous--bottom js-previous-link" href="javascript:history.back()"
+                <a class="page__previous page__previous--bottom js-previous-link"
+                   href="javascript:history.back()"
                    id="bottom-previous">Previous</a>
             </main>
         </div>
@@ -74,15 +91,15 @@ globalcss: false
 </div>
 
 <script src='/js/compiled/standard-bundle.js'></script>
-<script src='/js/compiled/your-household/bundle.js'></script>
+<script src='/js/compiled/your-household-v2/bundle.js'></script>
 
 <script>
-	var yesbox = document.getElementById("yes-someone-else");
-	$('.qa-btn-submit').click(function (e) {
-        if (yesbox.checked) {
-            document.trav.action = "../who-else-to-add";
-        } else {
-            document.trav.action = "../summary";
-        }
-	});
+  var yesbox = document.getElementById("yes-someone-else");
+  $('.qa-btn-submit').click(function(e) {
+    if (yesbox.checked) {
+      document.trav.action = "../who-else-to-add";
+    } else {
+      document.trav.action = "../summary";
+    }
+  });
 </script>

@@ -6,15 +6,15 @@ export const RELATIONSHIPS_STORAGE_KEY = 'relationships';
 export const VISITOR_TYPE = 'visitor';
 
 let relationshipTypes = {
-  'spouse': {},
-  'child-parent': {},
-  'step-child-parent': {},
-  'grandchild-grandparent': {},
-  'sibling': {},
-  'step-brother-sister': {},
-  'partner': {},
-  'unrelated': {},
-  'other-relation': {}
+  'spouse': {id: 'spouse'},
+  'child-parent': {id: 'child-parent'},
+  'step-child-parent': {id: 'step-child-parent'},
+  'grandchild-grandparent': {id: 'grandchild-grandparent'},
+  'sibling': {id: 'sibling'},
+  'step-brother-sister': {id: 'step-brother-sister'},
+  'partner': {id: 'partner'},
+  'unrelated': {id: 'unrelated'},
+  'other-relation': {id: 'other-relation'}
 };
 
 let relationshipDescriptionMap = {
@@ -67,6 +67,11 @@ let relationshipDescriptionMap = {
     type: relationshipTypes['unrelated']
   }
 };
+
+/**
+ * Augment Underscore library
+ */
+const _ = window._ || {};
 
 export function getAddress() {
   let addressLines = sessionStorage.getItem('address').split(',');
@@ -193,8 +198,9 @@ export function isOtherHouseholdMember(member) {
 /**
  * Relationships
  */
-export function addRelationship(relationshipObj) {
-  let householdRelationships = getAllRelationships() || [],
+export function addRelationship(relationshipObj, opts) {
+  let options = opts || {},
+    householdRelationships = getAllRelationships() || [],
     item = {
       ...relationshipObj,
       id: autoIncrementId('relationships')
@@ -241,6 +247,129 @@ export function relationship(description, personIsId, personToId) {
     personToId: personToId
   };
 }
+
+/**
+ * Find relationships
+ */
+export function isInRelationship(personId, relationship) {
+  return relationship.personToId === personId || relationship.personIsId === personId;
+}
+
+export function isAChildInRelationship(personId, relationship) {
+  /**
+   * Guard
+   */
+  if (!isInRelationship(personId, relationship)) {
+    return false;
+  }
+
+  /**
+   * TODO - child-parent relationship can be found from reversing
+   * personIs & personTo checks and changing description to son-daughter
+   */
+  return (
+    relationship.personIsDescription === 'mother-father' &&
+    relationship.personToId === personId
+  ) || (
+    relationship.personIsDescription === 'son-daughter' &&
+    relationship.personIsId === personId
+  );
+}
+
+export function isASiblingInRelationship(personId, relationship) {
+  return isInRelationship(personId, relationship) &&
+    relationshipDescriptionMap[relationship.personIsDescription].type.id === 'sibling';
+}
+
+export function getParentIdFromRelationship(relationship) {
+  let parentId;
+
+  if (relationship.personIsDescription === 'mother-father') {
+    parentId = relationship.personIsId;
+  }
+
+  if (relationship.personIsDescription === 'son-daughter') {
+    parentId = relationship.personToId;
+  }
+
+  if (!parentId) {
+    console.log('Parent not found in relationship: ', relationship);
+    return false;
+  }
+
+  return parentId;
+}
+
+export function getSiblingIdFromRelationship(personId, relationship) {
+  if (!isInRelationship(personId, relationship)) {
+    console.log('Person ' + personId + ' not found in relationship: ', relationship);
+    return false;
+  }
+
+  return relationship[relationship.personIsId === personId ? 'personToId' : 'personIsId'];
+}
+
+export function getAllParentsOf(personId) {
+  return getAllRelationships()
+    .filter(isAChildInRelationship.bind(null, personId))
+    .map(relationship => getHouseholdMemberByPersonId(getParentIdFromRelationship(relationship))['@person']);
+}
+
+export const missingRelationshipInference = {
+  siblingsOf(person) {
+
+    const missingRelationships = [],
+      allRelationships = getAllRelationships(),
+      personId = person.id,
+
+      parents = getAllParentsOf(personId),
+
+      siblingIds = allRelationships
+        .filter(isASiblingInRelationship.bind(null, personId))
+        .map(getSiblingIdFromRelationship.bind(null, personId));
+
+    /**
+     * If 2 parent relationships of 'person' are found we can attempt to infer
+     * sibling relationships
+     */
+    if (parents.length === 2) {
+
+      getAllHouseholdMembers().forEach((member) => {
+
+        const memberPersonId = member['@person'].id;
+
+        /**
+         * If member already has a sibling relationship with 'person', skip
+         */
+        if (siblingIds.indexOf(memberPersonId) > -1) {
+          return;
+        }
+
+        const memberParents = getAllParentsOf(memberPersonId);
+
+        /**
+         * If 2 parents of 'member' are found
+         * and they are the same parents of 'person'
+         * we have identified a missing inferred relationship
+         */
+        if (memberParents.length === 2 &&
+          _.difference(parents, memberParents).length === 0) {
+
+          /**
+           * Add to missingRelationships
+           */
+          missingRelationships.push(relationship(
+            'brother-sister',
+            person.id,
+            memberPersonId
+          ));
+        }
+      });
+    }
+
+    return missingRelationships;
+  }
+};
 
 /**
  * Helpers
@@ -369,6 +498,7 @@ window.ONS.storage = {
   deleteAllRelationshipsForMember,
 
   relationshipDescriptionMap,
+  missingRelationshipInference,
 
   KEYS: {
     HOUSEHOLD_MEMBERS_STORAGE_KEY,

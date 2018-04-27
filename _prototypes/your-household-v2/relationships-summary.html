@@ -6,8 +6,9 @@ householdMembers:
 visitors:
 ---
 
-<link rel="stylesheet" href="{{ '/css/census-header-footer.css' | prepend: site.baseurl }}"/>
-<link rel="stylesheet" href="../style.css" />
+<link rel="stylesheet"
+      href="{{ '/css/census-header-footer.css' | prepend: site.baseurl }}"/>
+<link rel="stylesheet" href="../style.css"/>
 <header class="page__header">
     {% include bar.html %}
     {% include header-census.html %}
@@ -22,32 +23,43 @@ visitors:
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            {% include navigation.html items=site.data.your-household.navigationItemsRelationships nav-title-id="section-address" %}
-            {% include navigation.html items=page.householdMembers title="Household members" nav-id="navigation-household-members" %}
-            {% include navigation.html items=page.visitors title="Visitors" nav-id="navigation-visitors" %}
+            {% include navigation.html
+            items=site.data.your-household.navigationItemsRelationships
+            nav-title-id="section-address" %}
+            {% include navigation.html items=page.householdMembers
+            title="Household members" nav-id="navigation-household-members" %}
+            {% include navigation.html items=page.visitors title="Visitors"
+            nav-id="navigation-visitors" %}
         </div>
         <div class="grid__col col-7@m pull-1@m">
             <main role="main" id="main" class="page__main">
-                <form name="trav" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
+                <form name="trav" class="form qa-questionnaire-form" role="form"
+                      autocomplete="off" novalidate="">
                     <div class="group">
                         <div class="block">
                             <section class="section">
-                                <h1 class="question__title saturn">Household relationships</h1>
+                                <h1 class="question__title saturn">Household
+                                    relationships</h1>
 
                                 <div class="panel panel--simple panel--success"
                                      id="question-guidance-everyone-at-address-confirmation-question">
-                                    <strong class="u-mb-s">This section is now complete</strong>
-                                    <ul class="mars" style="list-style: none;padding: 0; margin-bottom: 0">
-                                        <li>You can check your answers below</li>
+                                    <strong class="u-mb-s">This section is now
+                                        complete</strong>
+                                    <ul class="mars"
+                                        style="list-style: none;padding: 0; margin-bottom: 0">
+                                        <li>You can check your answers below
+                                        </li>
                                     </ul>
                                 </div>
-                                <br />
+                                <br/>
 
                                 <div id="household-relationships-summary"></div>
                             </section>
                         </div>
                     </div>
-                    <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Continue</button>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus"
+                            type="submit" name="">Continue
+                    </button>
                 </form>
             </main>
         </div>
@@ -76,7 +88,7 @@ visitors:
 </div>
 
 <script src='/js/compiled/standard-bundle.js'></script>
-<script src='/js/compiled/your-household/bundle.js'></script>
+<script src='/js/compiled/your-household-v2/bundle.js'></script>
 
 <style>
     .list.list--records {
@@ -84,94 +96,97 @@ visitors:
     }
 
     .list.list--records .list__item {
-        margin-bottom : 0;
+        margin-bottom: 0;
         padding: 1rem 0;
         border-bottom: 1px solid #ccc;
     }
 </style>
 
 <script>
-    var storageAPI = window.ONS.storage;
+  var storageAPI = window.ONS.storage;
 
-	/**
-	 * Create record list item DOM fragment
-	 */
-    function createRecord(data) {
-        var $nodeEl = $('#relationship-record-template').clone();
+  /**
+   * Create record list item DOM fragment
+   */
+  function createRecord(data) {
+    var $nodeEl = $('#relationship-record-template').clone();
 
-        $nodeEl.attr('id', '');
-        $nodeEl.find('.js-relationship-description').html(data.personIsRelationshipDescription);
-        $nodeEl.find('.js-person-to-name').html(data.personToName);
-        $nodeEl.find('.js-record-edit').attr('href', '../relationships?edit=' + data.relationshipId);
+    $nodeEl.attr('id', '');
+    $nodeEl.find('.js-relationship-description')
+      .html(data.personIsRelationshipDescription);
+    $nodeEl.find('.js-person-to-name').html(data.personToName);
+    $nodeEl.find('.js-record-edit')
+      .attr('href', '../relationships?edit=' + data.relationshipId);
 
-        return $nodeEl;
-    }
+    return $nodeEl;
+  }
 
-    /**
-     * Create record list DOM fragment
-     */
-    function createRecordList(data) {
-    	var $nodeEl = $('#relationship-record-list-template').clone();
+  /**
+   * Create record list DOM fragment
+   */
+  function createRecordList(data) {
+    var $nodeEl = $('#relationship-record-list-template').clone();
 
-        $nodeEl.attr('id', '');
-        $nodeEl.find('.js-record-list-heading').html(data.title + ' is ...');
+    $nodeEl.attr('id', '');
+    $nodeEl.find('.js-record-list-heading').html(data.title + ' is ...');
 
-    	return $nodeEl;
-    }
+    return $nodeEl;
+  }
 
-    function sortRelationships(relationships) {
+  function sortRelationships(relationships) {
 
-        var householdMemberOrderById = storageAPI.getAllHouseholdMembers().map(function(member) {
-        	return member['@person'].id;
-        });
+    var householdMemberOrderById = storageAPI.getAllHouseholdMembers()
+      .map(function(member) {
+        return member['@person'].id;
+      });
 
-    	return relationships.sort(function (a, b) {
-    		if(householdMemberOrderById.indexOf(a.personIsId) > householdMemberOrderById.indexOf(b.personIsId)) {
-    			return 1;
-            }
+    return relationships.sort(function(a, b) {
+      if (householdMemberOrderById.indexOf(a.personIsId) > householdMemberOrderById.indexOf(b.personIsId)) {
+        return 1;
+      }
 
-            if(householdMemberOrderById.indexOf(a.personIsId) < householdMemberOrderById.indexOf(b.personIsId)) {
-                return -1;
-            }
+      if (householdMemberOrderById.indexOf(a.personIsId) < householdMemberOrderById.indexOf(b.personIsId)) {
+        return -1;
+      }
 
-            return 0;
-        });
-    }
+      return 0;
+    });
+  }
 
-    /**
-     * Update list of records
-     **/
-    function updateRecords() {
-    	var allRelationships = storageAPI.getAllRelationships(),
-            currentMemberIs = null,
-            personIs = {},
-            currentPersonIsRecordList = null;
+  /**
+   * Update list of records
+   **/
+  function updateRecords() {
+    var allRelationships = storageAPI.getAllRelationships(),
+      currentMemberIs = null,
+      personIs = {},
+      currentPersonIsRecordList = null;
 
-        $('#household-relationships-summary').html();
+    $('#household-relationships-summary').html();
 
-        $.each(sortRelationships(allRelationships), function (i, relationship) {
-            var personTo = storageAPI.getHouseholdMemberByPersonId(relationship.personToId)['@person'];
+    $.each(sortRelationships(allRelationships), function(i, relationship) {
+      var personTo = storageAPI.getHouseholdMemberByPersonId(relationship.personToId)['@person'];
 
-            /**
-             * If personIs changes, create a new list
-             */
-            if(relationship.personIsId !== personIs.id) {
-                currentMemberIs = storageAPI.getHouseholdMemberByPersonId(relationship.personIsId);
-                personIs = currentMemberIs['@person'];
-                currentPersonIsRecordList = createRecordList({ title: personIs.fullName });
+      /**
+       * If personIs changes, create a new list
+       */
+      if (relationship.personIsId !== personIs.id) {
+        currentMemberIs = storageAPI.getHouseholdMemberByPersonId(relationship.personIsId);
+        personIs = currentMemberIs['@person'];
+        currentPersonIsRecordList = createRecordList({title: personIs.fullName});
 
-                $('#household-relationships-summary').append(currentPersonIsRecordList);
-            }
+        $('#household-relationships-summary').append(currentPersonIsRecordList);
+      }
 
-            currentPersonIsRecordList.find('.js-records').append(createRecord({
-                personIsName: personIs.fullName,
-                personToName: personTo.fullName,
-                personIsRelationshipDescription: storageAPI
-                  .relationshipDescriptionMap[relationship.personIsDescription].sentanceLabel,
-                relationshipId: relationship.id
-            }));
-        });
-    }
+      currentPersonIsRecordList.find('.js-records').append(createRecord({
+        personIsName: personIs.fullName,
+        personToName: personTo.fullName,
+        personIsRelationshipDescription: storageAPI
+          .relationshipDescriptionMap[relationship.personIsDescription].sentanceLabel,
+        relationshipId: relationship.id
+      }));
+    });
+  }
 
-    $(updateRecords);
+  $(updateRecords);
 </script>

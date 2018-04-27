@@ -6,8 +6,9 @@ householdMembers:
 visitors:
 ---
 
-<link rel="stylesheet" href="{{ '/css/census-header-footer.css' | prepend: site.baseurl }}"/>
-<link rel="stylesheet" href="../style.css" />
+<link rel="stylesheet"
+      href="{{ '/css/census-header-footer.css' | prepend: site.baseurl }}"/>
+<link rel="stylesheet" href="../style.css"/>
 <header class="page__header">
     {% include bar.html %}
     {% include header-census.html %}
@@ -22,25 +23,34 @@ visitors:
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            {% include navigation.html items=site.data.your-household.navigationItemsRelationships nav-title-id="section-address" %}
-            {% include navigation.html items=page.householdMembers title="Household members" nav-id="navigation-household-members" %}
-            {% include navigation.html items=page.visitors title="Visitors" nav-id="navigation-visitors" %}
+            {% include navigation.html
+            items=site.data.your-household.navigationItemsRelationships
+            nav-title-id="section-address" %}
+            {% include navigation.html items=page.householdMembers
+            title="Household members" nav-id="navigation-household-members" %}
+            {% include navigation.html items=page.visitors title="Visitors"
+            nav-id="navigation-visitors" %}
         </div>
         <div class="grid__col col-7@m pull-1@m">
             <main role="main" id="main" class="page__main">
-                <form name="trav" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
+                <form name="trav" class="form qa-questionnaire-form" role="form"
+                      autocomplete="off" novalidate="">
                     <div class="group">
                         <div class="block">
                             <section class="section" id="question-area">
                                 <div class="question">
                                     <h1 class="question__title saturn">
-                                        How is <span class="js-relationship-person-is"></span>
-                                        related to <span class="js-relationship-person-to"></span>?
+                                        How is <span
+                                            class="js-relationship-person-is"></span>
+                                        related to <span
+                                            class="js-relationship-person-to"></span>?
                                     </h1>
 
                                     <h2 class="neptune">
-                                        <span class="js-relationship-person-is"></span> is
-                                        <span class="js-relationship-person-is-relationship-description">...</span> to
+                                        <span class="js-relationship-person-is"></span>
+                                        is
+                                        <span class="js-relationship-person-is-relationship-description">...</span>
+                                        to
                                         <span class="js-relationship-person-to"></span>
                                     </h2>
                                     <div class="answer__fields js-fields">
@@ -53,7 +63,8 @@ visitors:
                                                            id="husband-wife"
                                                            value="husband-wife"/>
                                                     <label class="label label--inline venus"
-                                                           for="husband-wife">Husband or wife</label>
+                                                           for="husband-wife">Husband
+                                                        or wife</label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
@@ -71,7 +82,8 @@ visitors:
                                                            id="mother-father"
                                                            value="mother-father"/>
                                                     <label class="label label--inline venus"
-                                                           for="mother-father">Mother or father</label>
+                                                           for="mother-father">Mother
+                                                        or father</label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
@@ -80,7 +92,8 @@ visitors:
                                                            id="step-mother-father"
                                                            value="step-mother-father"/>
                                                     <label class="label label--inline venus"
-                                                           for="step-mother-father">Step-mother or step-father</label>
+                                                           for="step-mother-father">Step-mother
+                                                        or step-father</label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
@@ -89,7 +102,8 @@ visitors:
                                                            id="son-daughter"
                                                            value="son-daughter"/>
                                                     <label class="label label--inline venus"
-                                                           for="son-daughter">Son or Daughter</label>
+                                                           for="son-daughter">Son
+                                                        or Daughter</label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
@@ -107,7 +121,8 @@ visitors:
                                                            id="brother-sister"
                                                            value="brother-sister"/>
                                                     <label class="label label--inline venus"
-                                                           for="brother-sister">Brother or sister</label>
+                                                           for="brother-sister">Brother
+                                                        or sister</label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
@@ -116,7 +131,8 @@ visitors:
                                                            id="step-brother-sister"
                                                            value="step-brother-sister"/>
                                                     <label class="label label--inline venus"
-                                                           for="step-brother-sister">Step-brother or step-sister</label>
+                                                           for="step-brother-sister">Step-brother
+                                                        or step-sister</label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
@@ -155,7 +171,8 @@ visitors:
                                                            id="other-relation"
                                                            value="other-relation"/>
                                                     <label class="label label--inline venus"
-                                                           for="other-relation">Relation - other</label>
+                                                           for="other-relation">Relation
+                                                        - other</label>
                                                 </div>
                                             </fieldset>
                                         </div>
@@ -164,7 +181,9 @@ visitors:
                             </section>
                         </div>
                     </div>
-                    <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Save and continue</button>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus"
+                            type="submit" name="">Save and continue
+                    </button>
                 </form>
             </main>
         </div>
@@ -173,11 +192,11 @@ visitors:
 
 <style>
     .field--multiplechoice.field--cols .field__item {
-        vertical-align : top;
+        vertical-align: top;
     }
 
     .label .label--negative {
-        margin-left : -1.9rem;
+        margin-left: -1.9rem;
     }
 
     @media only screen and (min-width: 500px) {
@@ -188,201 +207,222 @@ visitors:
 </style>
 
 <script src='/js/compiled/standard-bundle.js'></script>
-<script src='/js/compiled/your-household/bundle.js'></script>
+<script src='/js/compiled/your-household-v2/bundle.js'></script>
 
 <script>
-    var storageAPI = window.ONS.storage,
-        personIs,
-        personTo,
+  var storageAPI = window.ONS.storage,
+    personIs,
+    personTo,
 
-        editRelationshipId = new URLSearchParams(window.location.search).get('edit'),
-        editRelationshipFound = null;
+    editRelationshipId = new URLSearchParams(window.location.search).get('edit'),
+    editRelationshipFound = null;
 
-    function updateQuestion(missingRelationship) {
-        personIs = missingRelationship.personIs;
-        personTo = missingRelationship.personTo;
+  function updateQuestion(missingRelationship) {
+    personIs = missingRelationship.personIs;
+    personTo = missingRelationship.personTo;
 
-        $('.js-relationship-person-is').html(personIs['@person'].fullName);
-        $('.js-relationship-person-to').html(personTo['@person'].fullName);
-    }
+    $('.js-relationship-person-is').html(personIs['@person'].fullName);
+    $('.js-relationship-person-to').html(personTo['@person'].fullName);
+  }
 
-    function findNextMissingRelationship() {
-        var householdMembers = storageAPI.getAllHouseholdMembers().filter(storageAPI.isHouseholdMember),
-            relationships = storageAPI.getAllRelationships(),
-            missingRelationshipMembers = [],
-            personIs = null;
+  function findNextMissingRelationship() {
+    var householdMembers = storageAPI.getAllHouseholdMembers()
+      .filter(storageAPI.isHouseholdMember),
+      relationships = storageAPI.getAllRelationships(),
+      missingRelationshipMembers = [],
+      personIs = null;
+
+    /**
+     * Find the next missing relationship
+     */
+    $.each(householdMembers, function(i, member) {
+      var personId = member['@person'].id;
+
+      /**
+       * Get all relationships for this member
+       */
+      var memberRelationships = relationships.filter(function(relationship) {
+          return relationship.personIsId === personId || relationship.personToId === personId;
+        }),
+
+        memberRelationshipToIds = memberRelationships.map(function(relationship) {
+          return relationship.personIsId === personId ? relationship.personToId : relationship.personIsId;
+        }) || [];
+
+      /**
+       * If total relationships related to this member isn't equal to
+       * total household members -1, indicates missing relationship
+       */
+      if (memberRelationships.length < householdMembers.length - 1) {
 
         /**
-         * Find the next missing relationship
+         * All missing relationship members
          */
-        $.each(householdMembers, function (i, member) {
-            var personId = member['@person'].id;
-
-            /**
-             * Get all relationships for this member
-             */
-            var memberRelationships = relationships.filter(function(relationship) {
-                    return relationship.personIsId === personId || relationship.personToId === personId;
-                }),
-
-                memberRelationshipToIds = memberRelationships.map(function (relationship) {
-                    return relationship.personIsId === personId ? relationship.personToId : relationship.personIsId;
-                }) || [];
-
-            /**
-             * If total relationships related to this member isn't equal to
-             * total household members -1, indicates missing relationship
-             */
-            if (memberRelationships.length < householdMembers.length - 1) {
-
-                /**
-                 * All missing relationship members
-                 */
-                missingRelationshipMembers = householdMembers.filter(function(m) {
-                    return memberRelationshipToIds.indexOf(m['@person'].id) === -1 &&
-                        m['@person'].id !== personId;
-                });
-
-                personIs = member;
-
-                return false;
-            }
+        missingRelationshipMembers = householdMembers.filter(function(m) {
+          return memberRelationshipToIds.indexOf(m['@person'].id) === -1 &&
+            m['@person'].id !== personId;
         });
 
-        return personIs ? {
-            personIs: personIs,
-            personTo: missingRelationshipMembers[0]
-        } : null;
+        personIs = member;
+
+        return false;
+      }
+    });
+
+    return personIs ? {
+      personIs: personIs,
+      personTo: missingRelationshipMembers[0]
+    } : null;
+  }
+
+  function getChosenItem() {
+    var val = $('[name="relationship"]:checked').val();
+
+    return {
+      val: val,
+      description: storageAPI.relationshipDescriptionMap[val]
+    };
+  }
+
+  /**
+   * If this relationship is of a specific type, attempt to infer new
+   * relationships
+   */
+  function relationshipInference(relationship, personIs, personTo) {
+
+    if (storageAPI.relationshipDescriptionMap[relationship.personIsDescription]
+      .type.id === 'child-parent') {
+
+      console.log(storageAPI.missingRelationshipInference.siblingsOf(personTo));
+    }
+  }
+
+  /**
+   * Edit relationship page setup
+   */
+  function journeyEditRelationship() {
+    editRelationshipFound = storageAPI.getAllRelationships()
+      .filter(function(relationship) {
+        return relationship.id + '' === editRelationshipId;
+      })[0];
+
+    if (editRelationshipFound) {
+      updateQuestion({
+        personIs: storageAPI.getHouseholdMemberByPersonId(editRelationshipFound.personIsId),
+        personTo: storageAPI.getHouseholdMemberByPersonId(editRelationshipFound.personToId)
+      });
+      $('.qa-btn-submit')
+        .on('click', editSubmit_handler.bind(null, editRelationshipId));
+    }
+    else {
+      $('#question-area')
+        .html('<h1 class="saturn">Relationship not found</h1>');
+    }
+  }
+
+  function editSubmit_handler(relationshipId, e) {
+    e.preventDefault();
+
+    var chosenItem = getChosenItem(),
+      relationshipDescriptionVal = chosenItem.val,
+      relationshipDescription = chosenItem.description;
+
+    if (!relationshipDescription) {
+      throw Error('Relationship description not found: ', relationshipDescription);
     }
 
-    function getChosenItem() {
-    	var val = $('[name="relationship"]:checked').val();
+    storageAPI.editRelationship(relationshipId,
+      storageAPI.TYPES.relationship(
+        relationshipDescriptionVal,
+        editRelationshipFound.personIsId,
+        editRelationshipFound.personToId,
+      )
+    );
 
-    	return {
-    		val: val,
-            description: window.ONS.storage.relationshipDescriptionMap[val]
-        };
+    window.location.href = '../relationships-summary';
+  }
+
+  /**
+   * Create relationship page setup
+   */
+  function journeyCreateNewRelationship() {
+    var missingRelationship = findNextMissingRelationship();
+
+    if (missingRelationship) {
+      updateQuestion(missingRelationship);
+      $('.qa-btn-submit').on('click', missingSubmit_handler);
     }
-
-    /**
-     * Edit relationship page setup
-     */
-	function journeyEditRelationship() {
-        editRelationshipFound = storageAPI.getAllRelationships().filter(function (relationship) {
-            return relationship.id+'' === editRelationshipId;
-        })[0];
-
-        if(editRelationshipFound) {
-            updateQuestion({
-                personIs: storageAPI.getHouseholdMemberByPersonId(editRelationshipFound.personIsId),
-                personTo: storageAPI.getHouseholdMemberByPersonId(editRelationshipFound.personToId)
-            });
-            $('.qa-btn-submit').on('click', editSubmit_handler.bind(null, editRelationshipId));
-        }
-        else {
-            $('#question-area').html('<h1 class="saturn">Relationship not found</h1>');
-        }
-    }
-
-    function editSubmit_handler(relationshipId, e) {
+    else {
+      $('#question-area')
+        .html('<h1 class="saturn">No missing relationships found</h1>');
+      $('.qa-btn-submit').on('click', function(e) {
         e.preventDefault();
-
-        var chosenItem = getChosenItem(),
-            relationshipDescriptionVal = chosenItem.val,
-            relationshipDescription = chosenItem.description;
-
-        if(!relationshipDescription) {
-            throw Error('Relationship description not found: ', relationshipDescription);
-        }
-
-        storageAPI.editRelationship(relationshipId,
-            storageAPI.TYPES.relationship(
-                relationshipDescriptionVal,
-                editRelationshipFound.personIsId,
-                editRelationshipFound.personToId,
-            )
-        );
-
         window.location.href = '../relationships-summary';
+      });
     }
+  }
+
+  function missingSubmit_handler(e) {
+    e.preventDefault();
+
+    var nextMissingRelationship,
+      chosenItem = getChosenItem(),
+      relationshipDescriptionVal = chosenItem.val,
+      relationshipDescription = chosenItem.description,
+      newRelationship,
+      dbRelationshipId;
+
+    if (!relationshipDescription) {
+      throw Error('Relationship description not found: ', relationshipDescription);
+    }
+
+    newRelationship = storageAPI.addRelationship(
+      storageAPI.TYPES.relationship(
+        relationshipDescriptionVal,
+        personIs['@person'].id,
+        personTo['@person'].id
+      )
+    );
+
+    dbRelationshipId = newRelationship.id;
+
+    window.history.replaceState(null, '', '?edit=' + dbRelationshipId);
+
+    relationshipInference(newRelationship, personIs, personTo);
+
+    nextMissingRelationship = findNextMissingRelationship();
 
     /**
-     * Create relationship page setup
+     * Routing
      */
-    function journeyCreateNewRelationship() {
-		var missingRelationship = findNextMissingRelationship();
-
-        if(missingRelationship) {
-            updateQuestion(missingRelationship);
-            $('.qa-btn-submit').on('click', missingSubmit_handler);
-        }
-        else {
-            $('#question-area').html('<h1 class="saturn">No missing relationships found</h1>');
-            $('.qa-btn-submit').on('click', function (e) {
-                e.preventDefault();
-                window.location.href = '../relationships-summary';
-            });
-        }
+    if (nextMissingRelationship) {
+      window.location.href = '../relationships';
     }
-
-    function missingSubmit_handler(e) {
-        e.preventDefault();
-
-        var nextMissingRelationship,
-            chosenItem = getChosenItem(),
-            relationshipDescriptionVal = chosenItem.val,
-            relationshipDescription = chosenItem.description,
-            newRelationship,
-            dbRelationshipId;
-
-        if(!relationshipDescription) {
-            throw Error('Relationship description not found: ', relationshipDescription);
-        }
-
-        newRelationship = window.ONS.storage.addRelationship(
-            window.ONS.storage.TYPES.relationship(
-                relationshipDescriptionVal,
-                personIs['@person'].id,
-                personTo['@person'].id
-            )
-        );
-
-        dbRelationshipId = newRelationship.id;
-
-        nextMissingRelationship = findNextMissingRelationship();
-
-        window.history.replaceState(null, '', '?edit=' + dbRelationshipId);
-
-        /**
-         * Routing
-         */
-        if(nextMissingRelationship) {
-            window.location.href = '../relationships';
-        }
-        else {
-            window.location.href = '../relationships-summary';
-        }
+    else {
+      window.location.href = '../relationships-summary';
     }
+  }
 
-    $('[name="relationship"]').on('change', function() {
-        $('.js-relationship-person-is-relationship-description')
-            .html(
-                '<em class="highlight">' +
-                    window.ONS.storage.relationshipDescriptionMap[$(this).val()].sentanceLabel +
-                '</em>'
-            );
-    });
+  $('[name="relationship"]').on('change', function() {
+    $('.js-relationship-person-is-relationship-description')
+      .html(
+        '<em class="highlight">' +
+        storageAPI.relationshipDescriptionMap[$(this)
+          .val()].sentanceLabel +
+        '</em>'
+      );
+  });
 
-    $(function () {
+  $(function() {
 
-    	/**
-         * Code branching - are we trying to edit or create a new relationship
-         */
-        if(editRelationshipId) {
-            journeyEditRelationship();
-        }
-        else {
-            journeyCreateNewRelationship();
-        }
-    });
+    /**
+     * Code branching - are we trying to edit or create a new relationship
+     */
+    if (editRelationshipId) {
+      journeyEditRelationship();
+    }
+    else {
+      journeyCreateNewRelationship();
+    }
+  });
 </script>

@@ -4,8 +4,9 @@ project: your-household
 globalcss: false
 ---
 
-<link rel="stylesheet" href="{{ "/css/census-header-footer.css" | prepend: site.baseurl }}">
-<link rel="stylesheet" href="../style.css" />
+<link rel="stylesheet"
+      href="{{ "/css/census-header-footer.css" | prepend: site.baseurl }}">
+<link rel="stylesheet" href="../style.css"/>
 <header class="page__header">
     {% include bar.html %}
     {% include header-census.html %}
@@ -20,21 +21,30 @@ globalcss: false
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            {% include navigation.html items=site.data.your-household.navigationItemsHousehold nav-title-id="section-address" %}
+            {% include navigation.html
+            items=site.data.your-household.navigationItemsHousehold
+            nav-title-id="section-address" %}
         </div>
         <div class="grid__col col-7@m pull-1@m">
             <main role="main" id="main" class="page__main">
-                <form name="trav" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
-                    <input type="hidden" name="previous" value="temp-away-from-home" />
-                    <input type="hidden" name="journey" value="temp-away-from-home" />
+                <form name="trav" class="form qa-questionnaire-form" role="form"
+                      autocomplete="off" novalidate="">
+                    <input type="hidden" name="previous"
+                           value="temp-away-from-home"/>
+                    <input type="hidden" name="journey"
+                           value="temp-away-from-home"/>
                     <div class="group" id="rsi">
                         <div class="block" id="total-retail-turnover">
-                            <section class="section" id="total-retail-turnover-section">
+                            <section class="section"
+                                     id="total-retail-turnover-section">
                                 <!-- <h2 class="section__title neptune">Joanna Bloggs</h2>-->
 
-                                <div class="question u-mb-s" id="total-retail-turnover-question">
+                                <div class="question u-mb-s"
+                                     id="total-retail-turnover-question">
                                     <h1 class="question__title saturn">
-                                        Also thinking about those who are temporarily away from home and those staying
+                                        Also thinking about those who are
+                                        temporarily away from home and those
+                                        staying
                                         without a UK address, is this everyone?
                                     </h1>
                                 </div>
@@ -45,18 +55,40 @@ globalcss: false
                                     <div class="panel__body">
                                         <strong class="u-mb-s u-d-b">Include</strong>
                                         <ul class="list u-ml-m">
-                                            <li class="list__item">people who usually live outside the UK who are
-                                                staying in the UK for three months or more</li>
-                                            <li class="list__item">people who work away from home within the UK if this
-                                                is their permanent or family home</li>
-                                            <li class="list__item">members of the Armed Force if this is their permanent
-                                                or family home</li>
-                                            <li class="list__item">people who are temporarily outside the UK for less
-                                                than 12 months</li>
-                                            <li class="list__item">poeple staying temporarily who usually live in the UK
-                                                but do not have another UK address, for example relatives, friends</li>
-                                            <li class="list__item">other people who usually live here, including anyone
-                                                temporarily away from home</li>
+                                            <li class="list__item">people who
+                                                usually live outside the UK who
+                                                are
+                                                staying in the UK for three
+                                                months or more
+                                            </li>
+                                            <li class="list__item">people who
+                                                work away from home within the
+                                                UK if this
+                                                is their permanent or family
+                                                home
+                                            </li>
+                                            <li class="list__item">members of
+                                                the Armed Force if this is their
+                                                permanent
+                                                or family home
+                                            </li>
+                                            <li class="list__item">people who
+                                                are temporarily outside the UK
+                                                for less
+                                                than 12 months
+                                            </li>
+                                            <li class="list__item">poeple
+                                                staying temporarily who usually
+                                                live in the UK
+                                                but do not have another UK
+                                                address, for example relatives,
+                                                friends
+                                            </li>
+                                            <li class="list__item">other people
+                                                who usually live here, including
+                                                anyone
+                                                temporarily away from home
+                                            </li>
                                         </ul>
 
                                     </div>
@@ -66,15 +98,23 @@ globalcss: false
                                     <div class="field field--radio field--multiplechoice ">
                                         <fieldset>
                                             <div class="field__item js-focusable-box">
-                                                <input class="input input--radio js-focusable" type="radio"
-                                                       name="temporary-members" id="yes-someone-else">
-                                                <label class="label label--inline venus" for="yes-someone-else">Yes, this is everyone</label>
+                                                <input class="input input--radio js-focusable"
+                                                       type="radio"
+                                                       name="temporary-members"
+                                                       id="yes-someone-else">
+                                                <label class="label label--inline venus"
+                                                       for="yes-someone-else">Yes,
+                                                    this is everyone</label>
                                             </div>
 
                                             <div class="field__item js-focusable-box">
-                                                <input class="input input--radio js-focusable" type="radio"
-                                                       name="temporary-members" id="no">
-                                                <label class="label label--inline venus" for="no">No, I need to add another person</label>
+                                                <input class="input input--radio js-focusable"
+                                                       type="radio"
+                                                       name="temporary-members"
+                                                       id="no">
+                                                <label class="label label--inline venus"
+                                                       for="no">No, I need to
+                                                    add another person</label>
                                             </div>
                                         </fieldset>
                                     </div>
@@ -82,14 +122,18 @@ globalcss: false
                             </section>
                         </div>
                     </div>
-                    <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Continue</button>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus"
+                            type="submit" name="">Continue
+                    </button>
                     <div class="u-mb-m">
-                        <button class="btn btn--link mars js-btn-save" type="submit" name="action[save_sign_out]">Save
+                        <button class="btn btn--link mars js-btn-save"
+                                type="submit" name="action[save_sign_out]">Save
                             and complete later
                         </button>
                     </div>
                 </form>
-                <a class="page__previous page__previous--bottom js-previous-link" href="javascript:history.back()"
+                <a class="page__previous page__previous--bottom js-previous-link"
+                   href="javascript:history.back()"
                    id="bottom-previous">Previous</a>
             </main>
         </div>
@@ -97,15 +141,15 @@ globalcss: false
 </div>
 
 <script src='/js/compiled/standard-bundle.js'></script>
-<script src='/js/compiled/your-household/bundle.js'></script>
+<script src='/js/compiled/your-household-v2/bundle.js'></script>
 
 <script>
-	var yesbox = document.getElementById("yes-someone-else");
-	$('.qa-btn-submit').click(function (e) {
-        if (yesbox.checked) {
-			document.trav.action = "../visitors";
-        } else {
-            document.trav.action = "../who-else-to-add";
-        }
-	});
+  var yesbox = document.getElementById("yes-someone-else");
+  $('.qa-btn-submit').click(function(e) {
+    if (yesbox.checked) {
+      document.trav.action = "../visitors";
+    } else {
+      document.trav.action = "../who-else-to-add";
+    }
+  });
 </script>
