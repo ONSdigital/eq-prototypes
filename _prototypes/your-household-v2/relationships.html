@@ -289,12 +289,19 @@ visitors:
    * relationships
    */
   function relationshipInference(relationship, personIs, personTo) {
+    var missingRelationships = [];
 
-    if (storageAPI.relationshipDescriptionMap[relationship.personIsDescription]
-      .type.id === 'child-parent') {
-
-      console.log(storageAPI.missingRelationshipInference.siblingsOf(personTo));
+    if (relationship.personIsDescription === 'mother-father') {
+      missingRelationships = missingRelationships.concat(storageAPI.missingRelationshipInference.siblingsOf(personTo));
     }
+
+    if (relationship.personIsDescription === 'son-daughter') {
+      missingRelationships = missingRelationships.concat(storageAPI.missingRelationshipInference.siblingsOf(personIs));
+    }
+
+    $.each(missingRelationships, function (i, relationship) {
+      storageAPI.addRelationship(relationship);
+    });
   }
 
   /**

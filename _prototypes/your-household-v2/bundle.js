@@ -315,11 +315,16 @@ export function getAllParentsOf(personId) {
     .map(relationship => getHouseholdMemberByPersonId(getParentIdFromRelationship(relationship))['@person']);
 }
 
+export function getParentIdFromPerson(person) {
+  return person.id;
+}
+
 export const missingRelationshipInference = {
-  siblingsOf(person) {
+  siblingsOf(subjectMember) {
 
     const missingRelationships = [],
       allRelationships = getAllRelationships(),
+      person = subjectMember['@person'],
       personId = person.id,
 
       parents = getAllParentsOf(personId),
@@ -339,9 +344,15 @@ export const missingRelationshipInference = {
         const memberPersonId = member['@person'].id;
 
         /**
-         * If member already has a sibling relationship with 'person', skip
+         * Guard
+         * If member is the subject member
+         * or member is a parent
+         * or member already has a sibling relationship with 'person'
+         * skip member
          */
-        if (siblingIds.indexOf(memberPersonId) > -1) {
+        if (memberPersonId === personId ||
+          memberPersonId === parents[0].id || memberPersonId === parents[1].id ||
+          siblingIds.indexOf(memberPersonId) > -1) {
           return;
         }
 
@@ -353,7 +364,10 @@ export const missingRelationshipInference = {
          * we have identified a missing inferred relationship
          */
         if (memberParents.length === 2 &&
-          _.difference(parents, memberParents).length === 0) {
+          _.difference(
+            parents.map(getParentIdFromPerson),
+            memberParents.map(getParentIdFromPerson)
+          ).length === 0) {
 
           /**
            * Add to missingRelationships
