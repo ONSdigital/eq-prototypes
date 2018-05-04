@@ -4,7 +4,14 @@ import {
   editRelationship,
   getAllRelationships,
   deleteAllRelationshipsForMember,
+  relationshipSummaryTemplates,
   missingRelationshipInference,
+  getAllParentsOf,
+  getAllChildrenOf,
+  getParentIdFromRelationship,
+  getChildIdFromRelationship,
+  isAParentInRelationship,
+  isInRelationship,
   relationship
 } from './assets/relationships';
 import {
@@ -22,7 +29,8 @@ import {
   deleteUserAsHouseholdMember,
   isVisitor,
   isOtherHouseholdMember,
-  isHouseholdMember
+  isHouseholdMember,
+  person
 } from './assets/household';
 
 export const USER_STORAGE_KEY = 'user-details';
@@ -166,7 +174,15 @@ window.ONS.storage = {
   getAllRelationships,
   deleteAllRelationshipsForMember,
 
+  getAllParentsOf,
+  getAllChildrenOf,
+  getParentIdFromRelationship,
+  getChildIdFromRelationship,
+  isAParentInRelationship,
+  isInRelationship,
+
   relationshipDescriptionMap,
+  relationshipSummaryTemplates,
   missingRelationshipInference,
 
   KEYS: {

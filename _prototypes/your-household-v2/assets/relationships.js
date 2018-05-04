@@ -2,7 +2,7 @@ import {autoIncrementId} from './utils';
 import {
   getAllHouseholdMembers,
   getHouseholdMemberByPersonId
-} from '../household';
+} from './household';
 
 /**
  * Augment Underscore library
@@ -10,12 +10,14 @@ import {
 const _ = window._ || {};
 
 export const RELATIONSHIPS_STORAGE_KEY = 'relationships';
+export const RELATIONSHIP_SUMMARIES_STORAGE_KEY = 'relationships-summaries';
 
 export const relationshipTypes = {
   'spouse': {id: 'spouse'},
   'child-parent': {id: 'child-parent'},
   'step-child-parent': {id: 'step-child-parent'},
   'grandchild-grandparent': {id: 'grandchild-grandparent'},
+  'half-sibling': {id: 'half-sibling'},
   'sibling': {id: 'sibling'},
   'step-brother-sister': {id: 'step-brother-sister'},
   'partner': {id: 'partner'},
@@ -24,76 +26,135 @@ export const relationshipTypes = {
 };
 
 export const relationshipDescriptionMap = {
+  // covered
   'husband-wife': {
     sentanceLabel: 'husband or wife',
+    summaryAdjective: 'married',
     type: relationshipTypes['spouse']
   },
   'mother-father': {
     sentanceLabel: 'mother or father',
+    summaryAdjective: 'parent',
     type: relationshipTypes['child-parent']
   },
   'step-mother-father': {
     sentanceLabel: 'step-mother or step-father',
+    summaryAdjective: 'step-parent',
     type: relationshipTypes['step-child-parent']
   },
   'son-daughter': {
     sentanceLabel: 'son or daughter',
+    summaryAdjective: 'child',
     type: relationshipTypes['child-parent']
+  },
+  'half-brother-sister': {
+    sentanceLabel: 'half-brother or half-sister',
+    summaryAdjective: 'half-brother or half-sister',
+    type: relationshipTypes['half-sibling']
   },
   'step-child': {
     sentanceLabel: 'step-child',
+    summaryAdjective: 'step-child',
     type: relationshipTypes['step-child-parent']
   },
   'grandparent': {
     sentanceLabel: 'grandparent',
+    summaryAdjective: 'grandparent',
     type: relationshipTypes['grandchild-grandparent']
   },
   'grandchild': {
     sentanceLabel: 'grandchild',
+    summaryAdjective: 'grandchild',
     type: relationshipTypes['grandchild-grandparent']
   },
   'brother-sister': {
     sentanceLabel: 'brother or sister',
+    summaryAdjective: 'brother or sister',
     type: relationshipTypes['sibling']
   },
   'step-brother-sister': {
     sentanceLabel: 'step-brother or step-sister',
+    summaryAdjective: 'step-brother or step-sister',
     type: relationshipTypes['step-brother-sister']
   },
   'other-relation': {
     sentanceLabel: 'other type of relation',
+    summaryAdjective: 'related',
     type: relationshipTypes['other-relation']
   },
+  // covered
   'partner': {
     sentanceLabel: 'partner',
+    summaryAdjective: 'partners',
     type: relationshipTypes['partner']
   },
   'unrelated': {
     sentanceLabel: 'not related',
+    summaryAdjective: 'no relation',
     type: relationshipTypes['unrelated']
   }
+};
+
+function nameElement(name) {
+  return '<strong>' + name + '</strong>';
+}
+
+function personListStr(peopleArr) {
+  if (peopleArr.length > 2) {
+    console.log(peopleArr, 'not enough people to create a list string');
+    return;
+  }
+
+  let peopleCopy = [...peopleArr],
+    lastPerson = peopleCopy.pop();
+
+  return peopleCopy
+    .map(nameElement).join(', ') + ' and ' + nameElement(lastPerson)
+}
+
+export const relationshipSummaryTemplates = {
+  'partnership': (person1, person2, description) => {
+    return `${personListStr([person1, person2])} are ${description}`;
+  },
+  /**
+   * Summary can only be inferred
+   */
+  'twoFamilyMembersToMany': (parent1, parent2, childrenArr, description) => {
+    return `<strong>${parent1}</strong> and <strong>${parent2}</strong> are the ${description} of ${personListStr(childrenArr)}`;
+  },
+  'oneFamilyMembersToMany': (parent, childrenArr, description) => {
+    return `<strong>${parent}</strong> is the ${description} of ${personListStr(childrenArr)}`;
+  },
+  'allMutual': (peopleArr, description) => {
+    return `${personListStr(peopleArr)} are ${description}`;
+  }
+
+  /**
+   * TODO
+   * Missing many to one template
+   */
 };
 
 /**
  * Types
  */
-export function relationship(description, personIsId, personToId) {
+export function relationship(description, personIsId, personToId, opts = {}) {
   return {
     personIsDescription: description,
     personIsId: personIsId,
-    personToId: personToId
+    personToId: personToId,
+    inferred: !!opts.inferred
   };
 }
 
 /**
  * Storage
  */
-export function addRelationship(relationshipObj, opts) {
-  let options = opts || {},
-    householdRelationships = getAllRelationships() || [],
+export function addRelationship(relationshipObj, opts = {}) {
+  let householdRelationships = getAllRelationships() || [],
     item = {
       ...relationshipObj,
-      id: autoIncrementId('relationships')
+      id: autoIncrementId(RELATIONSHIPS_STORAGE_KEY)
     };
 
   householdRelationships.push(item);
@@ -159,6 +220,23 @@ export function isASiblingInRelationship(personId, relationship) {
     relationshipDescriptionMap[relationship.personIsDescription].type.id === 'sibling';
 }
 
+export function isAParentInRelationship(personId, relationship) {
+  /**
+   * Guard
+   */
+  if (!isInRelationship(personId, relationship)) {
+    return false;
+  }
+
+  return (
+    relationship.personIsDescription === 'mother-father' &&
+    relationship.personIsId === personId
+  ) || (
+    relationship.personIsDescription === 'son-daughter' &&
+    relationship.personToId === personId
+  );
+}
+
 /**
  * Retrieve people by role in relationships
  */
@@ -181,6 +259,25 @@ export function getParentIdFromRelationship(relationship) {
   return parentId;
 }
 
+export function getChildIdFromRelationship(relationship) {
+  let childId;
+
+  if (relationship.personIsDescription === 'mother-father') {
+    childId = relationship.personToId;
+  }
+
+  if (relationship.personIsDescription === 'son-daughter') {
+    childId = relationship.personIsId;
+  }
+
+  if (!childId) {
+    console.log('Child not found in relationship: ', relationship);
+    return false;
+  }
+
+  return childId;
+}
+
 export function getSiblingIdFromRelationship(personId, relationship) {
   if (!isInRelationship(personId, relationship)) {
     console.log('Person ' + personId + ' not found in relationship: ', relationship);
@@ -194,6 +291,12 @@ export function getAllParentsOf(personId) {
   return getAllRelationships()
     .filter(isAChildInRelationship.bind(null, personId))
     .map(relationship => getHouseholdMemberByPersonId(getParentIdFromRelationship(relationship))['@person']);
+}
+
+export function getAllChildrenOf(personId) {
+  return getAllRelationships()
+    .filter(isAParentInRelationship.bind(null, personId))
+    .map(relationship => getHouseholdMemberByPersonId(getChildIdFromRelationship(relationship))['@person']);
 }
 
 export function getParentIdFromPerson(person) {
@@ -259,7 +362,8 @@ export const missingRelationshipInference = {
           missingRelationships.push(relationship(
             'brother-sister',
             person.id,
-            memberPersonId
+            memberPersonId,
+            {inferred: true}
           ));
         }
       });

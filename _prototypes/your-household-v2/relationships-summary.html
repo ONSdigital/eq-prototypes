@@ -53,7 +53,58 @@ visitors:
                                 </div>
                                 <br/>
 
+
                                 <div id="household-relationships-summary"></div>
+
+
+                                <div>
+                                    Rob and Jane are married
+                                </div>
+
+                                <!--
+                                    'Rob and Jane are parents to Jon, David
+                                    and Sally'
+                                    Is separate relationship description,
+                                    dependent on the 2 common parents, only
+                                    grouped like this if they share parents.
+                                -->
+                                <div>
+                                    Rob and Jane are the parents of Jon, David
+                                    and Sally
+                                </div>
+
+                                <!--
+                                    1 parent to 2 children
+
+                                    Step-father relationship for Gareth and
+                                    Andrew to Rob is inferred
+
+                                    Half-sibling relationships for Gareth and
+                                    Andrew to Jon, David and Sally is inferred
+
+                                    Step-child relationships for Emily to
+                                    Gareth and Andrew inferred
+                                -->
+                                <div>
+                                    Jane is the parent of Gareth and Andrew
+                                </div>
+
+                                <!--
+                                    1 parent to 1 child
+
+                                    Step-mother relationship for Emily to Jane
+                                    is inferred
+
+                                    Half-sibling relationships for Emily to Jon,
+                                    David, Sally is inferred
+
+                                    Step-child relationships for Emily to
+                                    Gareth and Andrew inferred (already defined
+                                    above)
+                                -->
+                                <div>
+                                    Rob is the parent of Emily
+                                </div>
                             </section>
                         </div>
                     </div>
@@ -66,7 +117,27 @@ visitors:
     </div>
 </div>
 
+
 <ul style="display:none;">
+    <li id="relationship-record-template" class="list__item">
+        <span class="list__item-name">
+            <span class="js-relationship-description"></span>
+        </span>
+        <div class="list__item-actions u-fr">
+            <span class="list__item-action">
+                <a class="js-record-edit" href="#">Change</a>
+            </span>
+        </div>
+    </li>
+</ul>
+
+<div style="display:none;">
+    <div id="relationship-record-list-template">
+        <ul class="list list--records list--bare u-mb-l js-records"></ul>
+    </div>
+</div>
+
+<!--<ul style="display:none;">
     <li id="relationship-record-template" class="list__item">
         <span class="list__item-name">
             <strong class="js-relationship-description"></strong> to
@@ -83,9 +154,9 @@ visitors:
 <div style="display:none;">
     <div id="relationship-record-list-template">
         <h2 class="neptune js-record-list-heading"></h2>
-        <ul class="list list--records list--bare u-mb-l js-records"></ul>
+        <ul class="list list&#45;&#45;records list&#45;&#45;bare u-mb-l js-records"></ul>
     </div>
-</div>
+</div>-->
 
 <script src='/js/compiled/standard-bundle.js'></script>
 <script src='/js/compiled/your-household-v2/bundle.js'></script>
@@ -105,10 +176,26 @@ visitors:
 <script>
   var storageAPI = window.ONS.storage;
 
+  function createRecord(summary) {
+    var $nodeEl = $('#relationship-record-template').clone();
+
+    $nodeEl.find('.js-relationship-description').html(summary);
+
+    return $nodeEl;
+  }
+
+  function createRecordList() {
+    var $nodeEl = $('#relationship-record-list-template').clone();
+
+    $nodeEl.attr('id', '');
+
+    return $nodeEl;
+  }
+
   /**
    * Create record list item DOM fragment
    */
-  function createRecord(data) {
+  /*function createRecord(data) {
     var $nodeEl = $('#relationship-record-template').clone();
 
     $nodeEl.attr('id', '');
@@ -119,21 +206,21 @@ visitors:
       .attr('href', '../relationships?edit=' + data.relationshipId);
 
     return $nodeEl;
-  }
+  }*/
 
   /**
    * Create record list DOM fragment
    */
-  function createRecordList(data) {
+  /*function createRecordList(data) {
     var $nodeEl = $('#relationship-record-list-template').clone();
 
     $nodeEl.attr('id', '');
     $nodeEl.find('.js-record-list-heading').html(data.title + ' is ...');
 
     return $nodeEl;
-  }
+  }*/
 
-  function sortRelationships(relationships) {
+  /*function sortRelationships(relationships) {
 
     var householdMemberOrderById = storageAPI.getAllHouseholdMembers()
       .map(function(member) {
@@ -151,12 +238,12 @@ visitors:
 
       return 0;
     });
-  }
+  }*/
 
   /**
    * Update list of records
    **/
-  function updateRecords() {
+  /*function updateRecords() {
     var allRelationships = storageAPI.getAllRelationships(),
       currentMemberIs = null,
       personIs = {},
@@ -167,9 +254,9 @@ visitors:
     $.each(sortRelationships(allRelationships), function(i, relationship) {
       var personTo = storageAPI.getHouseholdMemberByPersonId(relationship.personToId)['@person'];
 
-      /**
+      /!**
        * If personIs changes, create a new list
-       */
+       *!/
       if (relationship.personIsId !== personIs.id) {
         currentMemberIs = storageAPI.getHouseholdMemberByPersonId(relationship.personIsId);
         personIs = currentMemberIs['@person'];
@@ -186,6 +273,315 @@ visitors:
         relationshipId: relationship.id
       }));
     });
+  }*/
+
+  function updateRecords() {
+    var allRelationships = storageAPI.getAllRelationships(),
+      relationshipIdsToExplain = allRelationships
+        .filter(function(relationship) { return !relationship.inferred; })
+        .map(function(relationship) { return relationship.id; }),
+      lines = [],
+      recordList = createRecordList();
+
+    $('#household-relationships-summary').html();
+
+    function relationshipExplained(relationship) {
+      relationshipIdsToExplain.splice(relationshipIdsToExplain.indexOf(relationship.id), 1);
+    }
+
+    console.log('Explained: ', relationshipIdsToExplain);
+
+    /**
+     * Make relationships are sorted by household member entry order
+     */
+    $.each(storageAPI.getAllHouseholdMembers(), function (i, member) {
+      var memberRelationships = allRelationships
+        .filter(function(relationship) {
+          return storageAPI.isInRelationship(
+            member['@person'].id,
+            relationship
+          );
+        });
+
+      /**
+       * Guard
+       */
+      if (!memberRelationships.length) {
+        return;
+      }
+
+      /**
+       * For each member relationship,
+       * 1. Find all partner-type relationships
+       * 2. Find all children with partner(s) if found
+       * 3. Find all children as a single parent
+       * 4. Find all other relationship
+       */
+      $.each(memberRelationships, function (i, relationship) {
+
+        /**
+         * Guard
+         * Don't do anything if relationship is explained
+         */
+        if (relationshipIdsToExplain.indexOf(relationship.id) === -1) {
+          return;
+        }
+
+        var relationshipType = storageAPI
+            .relationshipDescriptionMap[relationship.personIsDescription].type,
+
+          relationshipTypeId = relationshipType.id,
+
+          relationshipDescription = storageAPI
+            .relationshipDescriptionMap[relationship.personIsDescription],
+
+          personIs = storageAPI
+            .getHouseholdMemberByPersonId(relationship.personIsId)['@person'],
+
+          personTo = storageAPI
+            .getHouseholdMemberByPersonId(relationship.personToId)['@person'];
+
+        if (relationshipTypeId === 'spouse' ||
+          relationshipTypeId === 'partner') {
+
+          lines.push(storageAPI.relationshipSummaryTemplates['partnership'](
+            personIs.fullName,
+            personTo.fullName,
+            relationshipDescription.summaryAdjective
+          ));
+
+          relationshipExplained(relationship);
+        }
+        else if (relationship.personIsDescription === 'mother-father') {
+
+
+
+
+
+
+
+          /**
+           * Shared children relationships with personIs parent
+           * Example: [
+           *    {
+           *        parent1: 1
+           *        parent2: 2,
+           *        children: []
+           *    }
+           * ]
+           */
+          var viewModel = [];
+
+          /**
+           * Get all the relationships that have children of personIs
+           */
+          var personIsChildrenRelationships = memberRelationships
+            .filter(storageAPI.isAParentInRelationship.bind(null,
+              personIs.id)),
+
+            personIsChildrenIds = personIsChildrenRelationships
+              .map(function (relationship) {
+                return storageAPI.getChildIdFromRelationship(relationship);
+              }),
+
+            /**
+             * Find all children from personIs relationships
+             */
+            personIsChildren = personIsChildrenIds.map(function (id) {
+              return storageAPI.getHouseholdMemberByPersonId(id)['@person'];
+            }),
+
+            /*personIsChildren = personIsChildrenRelationships
+              .map(function (relationship) {
+                return storageAPI.getChildIdFromRelationship(relationship);
+              }),*/
+
+            /*personIsChildrenIds = personIsChildren.map(function (child) {
+
+              console.log('map', child);
+              return child.id;
+            }),*/
+
+            childrenIdsToExplain = $.merge([], personIsChildrenIds);
+
+          console.log('=', relationship.id + '. ' +
+            personIs.fullName + ': ',
+            'personIsId:' + relationship.personIsId + ' ',
+            personIsChildrenRelationships);
+
+          /**
+           * Find other parents of these children
+           * and create view-model items to render lines of summaries
+           */
+          $.each(allRelationships
+            .filter(function (relationship) {
+
+              /**
+               * Guard
+               * If relationship type is not child-parent
+               */
+              if (storageAPI
+                .relationshipDescriptionMap[relationship.personIsDescription]
+                .type.id !== 'child-parent') {
+
+                return false;
+              }
+
+              console.log('---', personIsChildrenIds);
+              prettyLogRelationship(relationship);
+              console.log(personIsChildrenIds.indexOf(relationship.personIsId));
+              console.log(personIsChildrenIds.indexOf(relationship.personIsId));
+              console.log('---');
+
+              /**
+               * Find parents with the same children
+               *
+               * If personIs-child is in relationship
+               */
+              if ((
+                personIsChildrenIds.indexOf(relationship.personIsId) === -1 &&
+                personIsChildrenIds.indexOf(relationship.personToId) === -1
+              )) {
+                return false;
+              }
+
+              /**
+               * If personIs is not in relationship
+               */
+              return !storageAPI.isInRelationship(personIs.id, relationship);
+            }),
+            function (i, relationship) {
+
+              prettyLogRelationship(relationship);
+
+              /**
+               * Check if parentId already exists in viewModel
+               * If if does, this becomes the product, else create new product
+               */
+              var item = _.find(viewModel, function (line) {
+                return line.parent2 === storageAPI
+                  .getParentIdFromRelationship(relationship);
+              });
+
+              if(!item) {
+                item = {
+                  parent1: personIs.id,
+                  parent2: storageAPI.getParentIdFromRelationship(relationship),
+                  children: []
+                };
+
+                viewModel.push(item);
+              }
+
+              var childId = storageAPI.getChildIdFromRelationship(relationship);
+
+              removeFromList(childrenIdsToExplain, childId);
+
+              /**
+               * Add child to viewModel
+               */
+              item.children
+                .push(personIsChildren[personIsChildrenIds.indexOf(childId)]);
+
+              relationshipExplained(relationship);
+            }
+          );
+
+          /**
+           * Create lines for two parents of
+           */
+          $.each(viewModel, function (i, line) {
+            lines.push(storageAPI.relationshipSummaryTemplates['twoFamilyMembersToMany'](
+              line.parent1,
+              line.parent2,
+              relationship.personIsDescription
+            ));
+          });
+
+          /**
+           * Create lines for one parent of
+           */
+
+
+
+
+
+
+        }
+        else if (relationshipTypeId === 'sibling' ||
+          relationshipTypeId === 'step-brother-sister' ||
+          relationshipTypeId === 'other-relation' ||
+          relationshipTypeId === 'unrelated') {
+
+          /*var refinedRelationships =
+            findAllRelationshipsByTypeId(memberRelationships, relationshipTypeId);*/
+
+          //console.log('refinedRelationships', refinedRelationships);
+
+          /**
+           * Create mutual-relationship summary description
+           */
+          lines.push(storageAPI.relationshipSummaryTemplates['allMutual'](
+            [personIs.fullName, personTo.fullName],
+            relationship.personIsDescription
+          ));
+
+          relationshipExplained(relationship);
+
+          /*$.each(refinedRelationships, function (relationship) {
+            relationshipExplained(relationship);
+          });*/
+        }
+
+        /**
+         * Relationships not currently described:
+         * child
+         * step-parent
+         * step-child
+         * grandparent
+         * grandchild
+         */
+      });
+    });
+
+    console.log('To explain: ', relationshipIdsToExplain);
+
+    $.each(lines, function(i, line) {
+      recordList.find('.js-records').append(createRecord(line));
+    });
+
+    $('#household-relationships-summary').append(recordList);
+  }
+
+  function removeFromList(list, val) {
+    list.splice(list.indexOf(val), 1);
+  }
+
+  function prettyLogRelationship(relationship) {
+    console.log(
+      '==' +
+      ' personIs: ', storageAPI
+        .getHouseholdMemberByPersonId(relationship.personIsId)['@person'].fullName,
+      ' ' + relationship.personIsId + ' ',
+      ' personTo: ', storageAPI
+        .getHouseholdMemberByPersonId(relationship.personToId)['@person'].fullName,
+      ' ' + relationship.personToId + ' '
+    );
+  }
+
+  function findAllRelationshipsByTypeId(relationships, relationshipTypeId) {
+    return relationships
+      .filter(function(relationship) {
+
+        console.log('1', storageAPI
+          .relationshipDescriptionMap[relationship.personIsDescription]);
+
+        console.log('2', relationshipTypeId);
+
+        return storageAPI
+          .relationshipDescriptionMap[relationship.personIsDescription]
+          .type.id === relationshipTypeId;
+      });
   }
 
   $(updateRecords);
