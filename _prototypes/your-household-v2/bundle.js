@@ -12,6 +12,7 @@ import {
   getChildIdFromRelationship,
   isAParentInRelationship,
   isInRelationship,
+  areAnyChildrenInRelationshipNotParent,
   relationship
 } from './assets/relationships';
 import {
@@ -180,6 +181,7 @@ window.ONS.storage = {
   getChildIdFromRelationship,
   isAParentInRelationship,
   isInRelationship,
+  areAnyChildrenInRelationshipNotParent,
 
   relationshipDescriptionMap,
   relationshipSummaryTemplates,

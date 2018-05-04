@@ -120,14 +120,14 @@ visitors:
 
 <ul style="display:none;">
     <li id="relationship-record-template" class="list__item">
-        <span class="list__item-name">
-            <span class="js-relationship-description"></span>
-        </span>
         <div class="list__item-actions u-fr">
             <span class="list__item-action">
                 <a class="js-record-edit" href="#">Change</a>
             </span>
         </div>
+        <span class="list__item-name">
+            <span class="js-relationship-description"></span>
+        </span>
     </li>
 </ul>
 
@@ -192,96 +192,14 @@ visitors:
     return $nodeEl;
   }
 
-  /**
-   * Create record list item DOM fragment
-   */
-  /*function createRecord(data) {
-    var $nodeEl = $('#relationship-record-template').clone();
-
-    $nodeEl.attr('id', '');
-    $nodeEl.find('.js-relationship-description')
-      .html(data.personIsRelationshipDescription);
-    $nodeEl.find('.js-person-to-name').html(data.personToName);
-    $nodeEl.find('.js-record-edit')
-      .attr('href', '../relationships?edit=' + data.relationshipId);
-
-    return $nodeEl;
-  }*/
-
-  /**
-   * Create record list DOM fragment
-   */
-  /*function createRecordList(data) {
-    var $nodeEl = $('#relationship-record-list-template').clone();
-
-    $nodeEl.attr('id', '');
-    $nodeEl.find('.js-record-list-heading').html(data.title + ' is ...');
-
-    return $nodeEl;
-  }*/
-
-  /*function sortRelationships(relationships) {
-
-    var householdMemberOrderById = storageAPI.getAllHouseholdMembers()
-      .map(function(member) {
-        return member['@person'].id;
-      });
-
-    return relationships.sort(function(a, b) {
-      if (householdMemberOrderById.indexOf(a.personIsId) > householdMemberOrderById.indexOf(b.personIsId)) {
-        return 1;
-      }
-
-      if (householdMemberOrderById.indexOf(a.personIsId) < householdMemberOrderById.indexOf(b.personIsId)) {
-        return -1;
-      }
-
-      return 0;
-    });
-  }*/
-
-  /**
-   * Update list of records
-   **/
-  /*function updateRecords() {
-    var allRelationships = storageAPI.getAllRelationships(),
-      currentMemberIs = null,
-      personIs = {},
-      currentPersonIsRecordList = null;
-
-    $('#household-relationships-summary').html();
-
-    $.each(sortRelationships(allRelationships), function(i, relationship) {
-      var personTo = storageAPI.getHouseholdMemberByPersonId(relationship.personToId)['@person'];
-
-      /!**
-       * If personIs changes, create a new list
-       *!/
-      if (relationship.personIsId !== personIs.id) {
-        currentMemberIs = storageAPI.getHouseholdMemberByPersonId(relationship.personIsId);
-        personIs = currentMemberIs['@person'];
-        currentPersonIsRecordList = createRecordList({title: personIs.fullName});
-
-        $('#household-relationships-summary').append(currentPersonIsRecordList);
-      }
-
-      currentPersonIsRecordList.find('.js-records').append(createRecord({
-        personIsName: personIs.fullName,
-        personToName: personTo.fullName,
-        personIsRelationshipDescription: storageAPI
-          .relationshipDescriptionMap[relationship.personIsDescription].sentanceLabel,
-        relationshipId: relationship.id
-      }));
-    });
-  }*/
-
   function updateRecords() {
     var allRelationships = storageAPI.getAllRelationships(),
       relationshipIdsToExplain = allRelationships
         .filter(function(relationship) { return !relationship.inferred; })
         .map(function(relationship) { return relationship.id; }),
       lines = [],
-      recordList = createRecordList();
+      recordList = createRecordList(),
+      sharedParentsViewModelHistory = [];
 
     $('#household-relationships-summary').html();
 
@@ -359,7 +277,6 @@ visitors:
 
 
 
-
           /**
            * Shared children relationships with personIs parent
            * Example: [
@@ -391,17 +308,6 @@ visitors:
               return storageAPI.getHouseholdMemberByPersonId(id)['@person'];
             }),
 
-            /*personIsChildren = personIsChildrenRelationships
-              .map(function (relationship) {
-                return storageAPI.getChildIdFromRelationship(relationship);
-              }),*/
-
-            /*personIsChildrenIds = personIsChildren.map(function (child) {
-
-              console.log('map', child);
-              return child.id;
-            }),*/
-
             childrenIdsToExplain = $.merge([], personIsChildrenIds);
 
           console.log('=', relationship.id + '. ' +
@@ -410,47 +316,41 @@ visitors:
             personIsChildrenRelationships);
 
           /**
-           * Find other parents of these children
-           * and create view-model items to render lines of summaries
+           * Find relationships with other parents of these children
            */
-          $.each(allRelationships
+          var filtered = allRelationships
+            .filter(
+              storageAPI.areAnyChildrenInRelationshipNotParent.bind(null, personIsChildrenIds, personIs.id)
+            )
             .filter(function (relationship) {
+			var parentIdFromRelationship = storageAPI
+				.getParentIdFromRelationship(relationship);
 
-              /**
-               * Guard
-               * If relationship type is not child-parent
-               */
-              if (storageAPI
-                .relationshipDescriptionMap[relationship.personIsDescription]
-                .type.id !== 'child-parent') {
+            /**
+             * Guard
+             * Check if shared parent relationship has already been explained before creating a new viewModel
+             */
+            var existing = _.find(sharedParentsViewModelHistory, function (vModel) {
+              return _.difference(
+                  [vModel.parent1, vModel.parent2],
+                  [parentIdFromRelationship, personIs.id]
+              ).length === 0;
+            });
 
-                return false;
-              }
+            return !existing;
+          });
 
-              console.log('---', personIsChildrenIds);
-              prettyLogRelationship(relationship);
-              console.log(personIsChildrenIds.indexOf(relationship.personIsId));
-              console.log(personIsChildrenIds.indexOf(relationship.personIsId));
-              console.log('---');
+          console.log('filtered', filtered);
 
-              /**
-               * Find parents with the same children
-               *
-               * If personIs-child is in relationship
-               */
-              if ((
-                personIsChildrenIds.indexOf(relationship.personIsId) === -1 &&
-                personIsChildrenIds.indexOf(relationship.personToId) === -1
-              )) {
-                return false;
-              }
-
-              /**
-               * If personIs is not in relationship
-               */
-              return !storageAPI.isInRelationship(personIs.id, relationship);
-            }),
+          /**
+           * Create view-model items to render lines of summaries
+           */
+          $.each(filtered,
             function (i, relationship) {
+          	  var parentIdFromRelationship = storageAPI
+                .getParentIdFromRelationship(relationship);
+
+          	  console.log('history', sharedParentsViewModelHistory);
 
               prettyLogRelationship(relationship);
 
@@ -459,8 +359,7 @@ visitors:
                * If if does, this becomes the product, else create new product
                */
               var item = _.find(viewModel, function (line) {
-                return line.parent2 === storageAPI
-                  .getParentIdFromRelationship(relationship);
+                return line.parent2 === parentIdFromRelationship;
               });
 
               if(!item) {
@@ -471,6 +370,7 @@ visitors:
                 };
 
                 viewModel.push(item);
+                sharedParentsViewModelHistory.push(item);
               }
 
               var childId = storageAPI.getChildIdFromRelationship(relationship);
@@ -483,24 +383,67 @@ visitors:
               item.children
                 .push(personIsChildren[personIsChildrenIds.indexOf(childId)]);
 
+              /**
+               * Explain other shared parent relationships
+               */
               relationshipExplained(relationship);
             }
           );
 
+          console.log('viewModel', viewModel);
+
           /**
-           * Create lines for two parents of
+           * Create lines for two parents of (shared parenthood)
            */
           $.each(viewModel, function (i, line) {
             lines.push(storageAPI.relationshipSummaryTemplates['twoFamilyMembersToMany'](
-              line.parent1,
-              line.parent2,
-              relationship.personIsDescription
+              personIs.fullName,
+              storageAPI.getHouseholdMemberByPersonId(line.parent2)['@person'].fullName,
+              line.children.map(function(child) { return child.fullName; }),
+              storageAPI.relationshipDescriptionMap[relationship.personIsDescription]
+                .summaryAdjective + 's'
             ));
           });
 
           /**
-           * Create lines for one parent of
+           * If there are remaining children without a shared parent relationship
+           * create line for one parent of
            */
+          if(childrenIdsToExplain.length) {
+          	/**
+             * Check children haven't already been explained in sharedParentHistory
+             */
+          	var explainedChildrenFromHistory =
+                _.uniq(
+				    _.flatten(sharedParentsViewModelHistory.map(function (vModel) {
+                        return vModel.children.map(function (child) { return child.id; });
+          	        }))
+                );
+
+            var remainingChildrenNames = childrenIdsToExplain
+              .filter(function (id) {
+                return explainedChildrenFromHistory.indexOf(id) === -1;
+              })
+              .map(function (id) {
+                return personIsChildren[personIsChildrenIds.indexOf(id)].fullName;
+              });
+
+            console.log('childrenIdsToExplain', remainingChildrenNames);
+
+            lines.push(storageAPI.relationshipSummaryTemplates['oneFamilyMemberToMany'](
+              personIs.fullName,
+              remainingChildrenNames,
+              storageAPI.relationshipDescriptionMap[relationship.personIsDescription]
+                .summaryAdjective
+            ));
+          }
+
+          /**
+           * Explain all personIs child-parent relationships regardless of shared parenthood
+           */
+		  $.each(personIsChildrenRelationships, function (i, relationship) {
+			relationshipExplained(relationship);
+          });
 
 
 

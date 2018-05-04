@@ -100,9 +100,13 @@ function nameElement(name) {
 }
 
 function personListStr(peopleArr) {
-  if (peopleArr.length > 2) {
+  if (peopleArr.length < 1) {
     console.log(peopleArr, 'not enough people to create a list string');
     return;
+  }
+
+  if (peopleArr.length === 1) {
+    return nameElement(peopleArr[0]);
   }
 
   let peopleCopy = [...peopleArr],
@@ -122,7 +126,7 @@ export const relationshipSummaryTemplates = {
   'twoFamilyMembersToMany': (parent1, parent2, childrenArr, description) => {
     return `<strong>${parent1}</strong> and <strong>${parent2}</strong> are the ${description} of ${personListStr(childrenArr)}`;
   },
-  'oneFamilyMembersToMany': (parent, childrenArr, description) => {
+  'oneFamilyMemberToMany': (parent, childrenArr, description) => {
     return `<strong>${parent}</strong> is the ${description} of ${personListStr(childrenArr)}`;
   },
   'allMutual': (peopleArr, description) => {
@@ -235,6 +239,42 @@ export function isAParentInRelationship(personId, relationship) {
     relationship.personIsDescription === 'son-daughter' &&
     relationship.personToId === personId
   );
+}
+
+export function areAnyChildrenInRelationshipNotParent(childrenIds, notParentId, relationship) {
+  /**
+   * Guard
+   * If relationship type is not child-parent
+   */
+  if (storageAPI
+    .relationshipDescriptionMap[relationship.personIsDescription]
+    .type.id !== 'child-parent') {
+
+    return false;
+  }
+
+  console.log('---', childrenIds);
+  prettyLogRelationship(relationship, relationship.personIsId, relationship.personToId);
+  console.log(childrenIds.indexOf(relationship.personIsId));
+  console.log(childrenIds.indexOf(relationship.personToId));
+  console.log('---');
+
+  /**
+   * Find parents with the same children
+   *
+   * If personIs-child is in relationship
+   */
+  if ((
+    childrenIds.indexOf(relationship.personIsId) === -1 &&
+    childrenIds.indexOf(relationship.personToId) === -1
+  )) {
+    return false;
+  }
+
+  /**
+   * If personIs is not in relationship
+   */
+  return !storageAPI.isInRelationship(notParentId, relationship);
 }
 
 /**
