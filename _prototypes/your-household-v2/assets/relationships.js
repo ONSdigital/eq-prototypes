@@ -246,18 +246,11 @@ export function areAnyChildrenInRelationshipNotParent(childrenIds, notParentId, 
    * Guard
    * If relationship type is not child-parent
    */
-  if (storageAPI
-    .relationshipDescriptionMap[relationship.personIsDescription]
+  if (relationshipDescriptionMap[relationship.personIsDescription]
     .type.id !== 'child-parent') {
 
     return false;
   }
-
-  console.log('---', childrenIds);
-  prettyLogRelationship(relationship, relationship.personIsId, relationship.personToId);
-  console.log(childrenIds.indexOf(relationship.personIsId));
-  console.log(childrenIds.indexOf(relationship.personToId));
-  console.log('---');
 
   /**
    * Find parents with the same children
@@ -274,7 +267,7 @@ export function areAnyChildrenInRelationshipNotParent(childrenIds, notParentId, 
   /**
    * If personIs is not in relationship
    */
-  return !storageAPI.isInRelationship(notParentId, relationship);
+  return !isInRelationship(notParentId, relationship);
 }
 
 /**

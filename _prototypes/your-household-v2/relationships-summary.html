@@ -204,7 +204,17 @@ visitors:
     $('#household-relationships-summary').html();
 
     function relationshipExplained(relationship) {
-      relationshipIdsToExplain.splice(relationshipIdsToExplain.indexOf(relationship.id), 1);
+      var foundId = relationshipIdsToExplain.indexOf(relationship.id);
+
+      /**
+       * Guard
+       */
+      if (foundId === -1) {
+        console.log('Attempt to explain relationship failed: ', relationship);
+        return;
+      }
+
+      relationshipIdsToExplain.splice(foundId, 1);
     }
 
     console.log('Explained: ', relationshipIdsToExplain);
@@ -310,11 +320,6 @@ visitors:
 
             childrenIdsToExplain = $.merge([], personIsChildrenIds);
 
-          console.log('=', relationship.id + '. ' +
-            personIs.fullName + ': ',
-            'personIsId:' + relationship.personIsId + ' ',
-            personIsChildrenRelationships);
-
           /**
            * Find relationships with other parents of these children
            */
@@ -340,8 +345,6 @@ visitors:
             return !existing;
           });
 
-          console.log('filtered', filtered);
-
           /**
            * Create view-model items to render lines of summaries
            */
@@ -349,10 +352,6 @@ visitors:
             function (i, relationship) {
           	  var parentIdFromRelationship = storageAPI
                 .getParentIdFromRelationship(relationship);
-
-          	  console.log('history', sharedParentsViewModelHistory);
-
-              prettyLogRelationship(relationship);
 
               /**
                * Check if parentId already exists in viewModel
@@ -390,8 +389,6 @@ visitors:
             }
           );
 
-          console.log('viewModel', viewModel);
-
           /**
            * Create lines for two parents of (shared parenthood)
            */
@@ -428,8 +425,6 @@ visitors:
                 return personIsChildren[personIsChildrenIds.indexOf(id)].fullName;
               });
 
-            console.log('childrenIdsToExplain', remainingChildrenNames);
-
             lines.push(storageAPI.relationshipSummaryTemplates['oneFamilyMemberToMany'](
               personIs.fullName,
               remainingChildrenNames,
@@ -459,14 +454,12 @@ visitors:
           /*var refinedRelationships =
             findAllRelationshipsByTypeId(memberRelationships, relationshipTypeId);*/
 
-          //console.log('refinedRelationships', refinedRelationships);
-
           /**
            * Create mutual-relationship summary description
            */
           lines.push(storageAPI.relationshipSummaryTemplates['allMutual'](
             [personIs.fullName, personTo.fullName],
-            relationship.personIsDescription
+            relationshipDescription.sentanceLabel
           ));
 
           relationshipExplained(relationship);
@@ -475,10 +468,21 @@ visitors:
             relationshipExplained(relationship);
           });*/
         }
+        else if (relationshipTypeId === 'step-child-parent' ||
+          relationshipTypeId === 'grandchild-grandparent') {
+
+          lines.push(storageAPI.relationshipSummaryTemplates['oneFamilyMemberToMany'](
+            personIs.fullName,
+            [personTo.fullName],
+            relationshipDescription.sentanceLabel
+          ));
+
+          relationshipExplained(relationship);
+        }
 
         /**
          * Relationships not currently described:
-         * child
+         * child ?
          * step-parent
          * step-child
          * grandparent
@@ -497,7 +501,17 @@ visitors:
   }
 
   function removeFromList(list, val) {
-    list.splice(list.indexOf(val), 1);
+    var foundId = list.indexOf(val);
+
+    /**
+     * Guard
+     */
+    if (foundId === -1) {
+      console.log('Attempt to remove from list failed: ', list, val);
+      return;
+    }
+
+    list.splice(foundId, 1);
   }
 
   function prettyLogRelationship(relationship) {
