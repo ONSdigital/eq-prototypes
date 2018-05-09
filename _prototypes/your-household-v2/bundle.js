@@ -10,9 +10,11 @@ import {
   getAllChildrenOf,
   getParentIdFromRelationship,
   getChildIdFromRelationship,
+  isAChildInRelationship,
   isAParentInRelationship,
   isInRelationship,
   areAnyChildrenInRelationshipNotParent,
+  getRelationshipsWithPersonIds,
   relationship
 } from './assets/relationships';
 import {
@@ -180,12 +182,14 @@ window.ONS.storage = {
   getParentIdFromRelationship,
   getChildIdFromRelationship,
   isAParentInRelationship,
+  isAChildInRelationship,
   isInRelationship,
   areAnyChildrenInRelationshipNotParent,
 
   relationshipDescriptionMap,
   relationshipSummaryTemplates,
   missingRelationshipInference,
+  getRelationshipsWithPersonIds,
 
   KEYS: {
     HOUSEHOLD_MEMBERS_STORAGE_KEY,

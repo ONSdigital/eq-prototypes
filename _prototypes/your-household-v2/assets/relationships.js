@@ -32,11 +32,13 @@ export const relationshipDescriptionMap = {
     summaryAdjective: 'married',
     type: relationshipTypes['spouse']
   },
+  // covered
   'mother-father': {
     sentanceLabel: 'mother or father',
     summaryAdjective: 'parent',
     type: relationshipTypes['child-parent']
   },
+  // covered
   'step-mother-father': {
     sentanceLabel: 'step-mother or step-father',
     summaryAdjective: 'step-parent',
@@ -47,36 +49,43 @@ export const relationshipDescriptionMap = {
     summaryAdjective: 'child',
     type: relationshipTypes['child-parent']
   },
+  // covered
   'half-brother-sister': {
     sentanceLabel: 'half-brother or half-sister',
     summaryAdjective: 'half-brother or half-sister',
     type: relationshipTypes['half-sibling']
   },
+  // covered
   'step-child': {
     sentanceLabel: 'step-child',
     summaryAdjective: 'step-child',
     type: relationshipTypes['step-child-parent']
   },
+  // covered
   'grandparent': {
     sentanceLabel: 'grandparent',
     summaryAdjective: 'grandparent',
     type: relationshipTypes['grandchild-grandparent']
   },
+  // covered
   'grandchild': {
     sentanceLabel: 'grandchild',
     summaryAdjective: 'grandchild',
     type: relationshipTypes['grandchild-grandparent']
   },
+  // covered
   'brother-sister': {
     sentanceLabel: 'brother or sister',
     summaryAdjective: 'brother or sister',
     type: relationshipTypes['sibling']
   },
+  // covered
   'step-brother-sister': {
     sentanceLabel: 'step-brother or step-sister',
     summaryAdjective: 'step-brother or step-sister',
     type: relationshipTypes['step-brother-sister']
   },
+  // covered
   'other-relation': {
     sentanceLabel: 'other type of relation',
     summaryAdjective: 'related',
@@ -88,9 +97,10 @@ export const relationshipDescriptionMap = {
     summaryAdjective: 'partners',
     type: relationshipTypes['partner']
   },
+  // covered
   'unrelated': {
-    sentanceLabel: 'not related',
-    summaryAdjective: 'no relation',
+    sentanceLabel: 'no relation',
+    summaryAdjective: 'not related',
     type: relationshipTypes['unrelated']
   }
 };
@@ -405,3 +415,10 @@ export const missingRelationshipInference = {
     return missingRelationships;
   }
 };
+
+export function getRelationshipsWithPersonIds(relationships, idArr) {
+  return relationships.filter(function(childRelationship) {
+    return idArr.indexOf(childRelationship.personIsId) !== -1 ||
+      idArr.indexOf(childRelationship.personToId) !== -1;
+  });
+}
