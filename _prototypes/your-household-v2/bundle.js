@@ -18,6 +18,7 @@ import {
   areAnyChildrenInRelationshipNotParent,
   getRelationshipsWithPersonIds,
   getPeopleIdsMissingRelationshipsWithPerson,
+  findNextMissingRelationship,
   relationship
 } from './assets/relationships';
 import {
@@ -196,6 +197,7 @@ window.ONS.storage = {
   inferRelationships,
   getRelationshipsWithPersonIds,
   getPeopleIdsMissingRelationshipsWithPerson,
+  findNextMissingRelationship,
 
   KEYS: {
     HOUSEHOLD_MEMBERS_STORAGE_KEY,

@@ -225,56 +225,6 @@ visitors:
     $('.js-relationship-person-to').html(personTo['@person'].fullName);
   }
 
-  function findNextMissingRelationship() {
-    var householdMembers = storageAPI.getAllHouseholdMembers()
-      .filter(storageAPI.isHouseholdMember),
-      relationships = storageAPI.getAllRelationships(),
-      missingRelationshipMembers = [],
-      personIs = null;
-
-    /**
-     * Find the next missing relationship
-     */
-    $.each(householdMembers, function(i, member) {
-      var personId = member['@person'].id;
-
-      /**
-       * Get all relationships for this member
-       */
-      var memberRelationships = relationships.filter(function(relationship) {
-          return relationship.personIsId === personId || relationship.personToId === personId;
-        }),
-
-        memberRelationshipToIds = memberRelationships.map(function(relationship) {
-          return relationship.personIsId === personId ? relationship.personToId : relationship.personIsId;
-        }) || [];
-
-      /**
-       * If total relationships related to this member isn't equal to
-       * total household members -1, indicates missing relationship
-       */
-      if (memberRelationships.length < householdMembers.length - 1) {
-
-        /**
-         * All missing relationship members
-         */
-        missingRelationshipMembers = householdMembers.filter(function(m) {
-          return memberRelationshipToIds.indexOf(m['@person'].id) === -1 &&
-            m['@person'].id !== personId;
-        });
-
-        personIs = member;
-
-        return false;
-      }
-    });
-
-    return personIs ? {
-      personIs: personIs,
-      personTo: missingRelationshipMembers[0]
-    } : null;
-  }
-
   function getChosenItem() {
     var val = $('[name="relationship"]:checked').val();
 
@@ -282,30 +232,6 @@ visitors:
       val: val,
       description: storageAPI.relationshipDescriptionMap[val]
     };
-  }
-
-  /**
-   * If this relationship is of a specific type, attempt to infer new
-   * relationships
-   */
-  function relationshipInference(relationship, personIs, personTo) {
-    var missingRelationships = [];
-
-    if (relationship.personIsDescription === 'mother-father') {
-      missingRelationships = missingRelationships.concat(
-        storageAPI.missingRelationshipInference.siblingsOf(personTo)
-      );
-    }
-
-    if (relationship.personIsDescription === 'son-daughter') {
-      missingRelationships = missingRelationships.concat(
-        storageAPI.missingRelationshipInference.siblingsOf(personIs)
-      );
-    }
-
-    $.each(missingRelationships, function(i, relationship) {
-      storageAPI.addRelationship(relationship);
-    });
   }
 
   /**
@@ -357,7 +283,7 @@ visitors:
    * Create relationship page setup
    */
   function journeyCreateNewRelationship() {
-    var missingRelationship = findNextMissingRelationship();
+    var missingRelationship = storageAPI.findNextMissingRelationship();
 
     if (missingRelationship) {
       updateQuestion(missingRelationship);
@@ -399,9 +325,9 @@ visitors:
 
     window.history.replaceState(null, '', '?edit=' + dbRelationshipId);
 
-    relationshipInference(newRelationship, personIs, personTo);
+    storageAPI.inferRelationships(newRelationship, personIs, personTo);
 
-    nextMissingRelationship = findNextMissingRelationship();
+    nextMissingRelationship = storageAPI.findNextMissingRelationship();
 
     /**
      * Routing

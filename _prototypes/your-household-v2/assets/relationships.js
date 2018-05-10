@@ -1,5 +1,6 @@
 import {autoIncrementId} from './utils';
 import {
+  isHouseholdMember,
   getAllHouseholdMembers,
   getHouseholdMemberByPersonId
 } from './household';
@@ -440,11 +441,53 @@ export function inferRelationships(relationship, personIs, personTo) {
   });
 }
 
-export function getRelationshipsWithPersonIds(relationships, idArr) {
-  return relationships.filter(function(childRelationship) {
-    return idArr.indexOf(childRelationship.personIsId) !== -1 ||
-      idArr.indexOf(childRelationship.personToId) !== -1;
+export function findNextMissingRelationship() {
+  var householdMembers = getAllHouseholdMembers().filter(isHouseholdMember),
+    relationships = getAllRelationships(),
+    missingRelationshipMembers = [],
+    personIs = null;
+
+  /**
+   * Find the next missing relationship
+   */
+  $.each(householdMembers, function(i, member) {
+    var personId = member['@person'].id;
+
+    /**
+     * Get all relationships for this member
+     */
+    var memberRelationships = relationships.filter(function(relationship) {
+        return relationship.personIsId === personId || relationship.personToId === personId;
+      }),
+
+      memberRelationshipToIds = memberRelationships.map(function(relationship) {
+        return relationship.personIsId === personId ? relationship.personToId : relationship.personIsId;
+      }) || [];
+
+    /**
+     * If total relationships related to this member isn't equal to
+     * total household members -1, indicates missing relationship
+     */
+    if (memberRelationships.length < householdMembers.length - 1) {
+
+      /**
+       * All missing relationship members
+       */
+      missingRelationshipMembers = householdMembers.filter(function(m) {
+        return memberRelationshipToIds.indexOf(m['@person'].id) === -1 &&
+          m['@person'].id !== personId;
+      });
+
+      personIs = member;
+
+      return false;
+    }
   });
+
+  return personIs ? {
+    personIs: personIs,
+    personTo: missingRelationshipMembers[0]
+  } : null;
 }
 
 export function getPeopleIdsMissingRelationshipsWithPerson(personId) {
@@ -472,6 +515,16 @@ export function getPeopleIdsMissingRelationshipsWithPerson(personId) {
   });
 
   return remainingPersonIds;
+}
+
+/**
+ * Retrieve from relationship group
+ */
+export function getRelationshipsWithPersonIds(relationships, idArr) {
+  return relationships.filter(function(childRelationship) {
+    return idArr.indexOf(childRelationship.personIsId) !== -1 ||
+      idArr.indexOf(childRelationship.personToId) !== -1;
+  });
 }
 
 /**

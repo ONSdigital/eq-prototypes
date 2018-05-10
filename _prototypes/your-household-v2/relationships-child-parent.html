@@ -187,26 +187,47 @@ visitors:
       });
     }
 
-    function createParentChildRelationship(childId) {
-      return storageAPI.TYPES.relationship(
-        'mother-father',
-        parentId,
-        childId
-      );
-    }
-
     $('.js-submit').on('click', function(e) {
       e.preventDefault();
 
       var relationshipsUrl = window.location.pathname
-        .replace('relationships-child-parent', 'relationships');
+        .replace('relationships-child-parent', 'relationships'),
+        newRelationshipsWithChildIds = [];
 
       $('[name=checkbox-answer]:checked').each(function () {
-        storageAPI.addRelationship(createParentChildRelationship($(this).val()));
+        var childId = $(this).val();
+
+        newRelationshipsWithChildIds.push({
+          relationship: storageAPI.addRelationship(
+            storageAPI.TYPES.relationship(
+              'mother-father',
+              parentId,
+              childId
+            )
+          ),
+          childId: childId
+        });
+      });
+
+      /**
+       * Avoid race conditions by doing inference separately
+       */
+      $.each(newRelationshipsWithChildIds, function (i, item) {
+        storageAPI.inferRelationships(
+          item.relationship,
+          storageAPI.getHouseholdMemberByPersonId(parentId),
+          storageAPI.getHouseholdMemberByPersonId(item.childId)
+        );
       });
 
       window.history.replaceState(null, '', relationshipsUrl);
-      window.location.href = relationshipsUrl;
+
+      if(storageAPI.findNextMissingRelationship()) {
+        window.location.href = relationshipsUrl;
+      }
+      else {
+        window.location.href = '../relationships-summary';
+      }
     });
 
     $(updateList);
