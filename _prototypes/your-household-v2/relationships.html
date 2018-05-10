@@ -292,11 +292,15 @@ visitors:
     var missingRelationships = [];
 
     if (relationship.personIsDescription === 'mother-father') {
-      missingRelationships = missingRelationships.concat(storageAPI.missingRelationshipInference.siblingsOf(personTo));
+      missingRelationships = missingRelationships.concat(
+        storageAPI.missingRelationshipInference.siblingsOf(personTo)
+      );
     }
 
     if (relationship.personIsDescription === 'son-daughter') {
-      missingRelationships = missingRelationships.concat(storageAPI.missingRelationshipInference.siblingsOf(personIs));
+      missingRelationships = missingRelationships.concat(
+        storageAPI.missingRelationshipInference.siblingsOf(personIs)
+      );
     }
 
     $.each(missingRelationships, function(i, relationship) {
@@ -403,7 +407,27 @@ visitors:
      * Routing
      */
     if (nextMissingRelationship) {
-      window.location.href = '../relationships';
+
+      /**
+       * Question strategies
+       *
+       * If child-parent relationship type was selected
+       * and there are missing relationships for this person
+       */
+      (function () {
+        var relationshipTypeId = storageAPI
+            .relationshipDescriptionMap[relationshipDescriptionVal].type.id,
+          personIsId = personIs['@person'].id;
+
+        if(relationshipTypeId === 'child-parent' &&
+          storageAPI.getPeopleIdsMissingRelationshipsWithPerson(personIsId).length) {
+
+          window.location.href = '../relationships-child-parent/?parent=' + personIsId;
+        }
+        else {
+          window.location.href = '../relationships';
+        }
+      }());
     }
     else {
       window.location.href = '../relationships-summary';

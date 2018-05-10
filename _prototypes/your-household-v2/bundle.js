@@ -6,15 +6,18 @@ import {
   deleteAllRelationshipsForMember,
   relationshipSummaryTemplates,
   missingRelationshipInference,
+  inferRelationships,
   getAllParentsOf,
   getAllChildrenOf,
   getParentIdFromRelationship,
   getChildIdFromRelationship,
+  getOtherPersonIdFromRelationship,
   isAChildInRelationship,
   isAParentInRelationship,
   isInRelationship,
   areAnyChildrenInRelationshipNotParent,
   getRelationshipsWithPersonIds,
+  getPeopleIdsMissingRelationshipsWithPerson,
   relationship
 } from './assets/relationships';
 import {
@@ -181,6 +184,7 @@ window.ONS.storage = {
   getAllChildrenOf,
   getParentIdFromRelationship,
   getChildIdFromRelationship,
+  getOtherPersonIdFromRelationship,
   isAParentInRelationship,
   isAChildInRelationship,
   isInRelationship,
@@ -189,7 +193,9 @@ window.ONS.storage = {
   relationshipDescriptionMap,
   relationshipSummaryTemplates,
   missingRelationshipInference,
+  inferRelationships,
   getRelationshipsWithPersonIds,
+  getPeopleIdsMissingRelationshipsWithPerson,
 
   KEYS: {
     HOUSEHOLD_MEMBERS_STORAGE_KEY,

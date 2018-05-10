@@ -1,0 +1,214 @@
+---
+title: Relationships - All children
+project: your-household
+globalcss: false
+householdMembers:
+visitors:
+---
+
+<link rel="stylesheet"
+      href="{{ '/css/census-header-footer.css' | prepend: site.baseurl }}"/>
+<link rel="stylesheet" href="../style.css"/>
+<header class="page__header">
+    {% include bar.html %}
+    {% include header-census.html %}
+</header>
+
+<div class="page__subheader">
+    <div class="container">
+        <a class="mars" href="../summary">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            {% include navigation.html
+            items=site.data.your-household.navigationItemsRelationships
+            nav-title-id="section-address" %}
+            {% include navigation.html items=page.householdMembers
+            title="Household members" nav-id="navigation-household-members" %}
+            {% include navigation.html items=page.visitors title="Visitors"
+            nav-id="navigation-visitors" %}
+        </div>
+        <div class="grid__col col-7@m pull-1@m">
+            <main role="main" id="main" class="page__main">
+                <form name="trav" class="form qa-questionnaire-form" role="form"
+                      autocomplete="off" novalidate="">
+                    <div class="group">
+                        <div class="block">
+                            <section class="section" id="question-area">
+                                <div class="question">
+                                    <h1 class="question__title saturn u-mb-l">
+                                        Are any of the following household
+                                        members also children of <span
+                                            class="js-relationship-person-is"></span>?
+                                    </h1>
+
+                                    <label class="label venus " id="label-address-line-1">
+                                        <div class="label__inner">
+                                            Remaining household members
+                                        </div>
+                                    </label>
+
+                                    <p>Select all that apply</p>
+
+                                    <div class="answer__fields js-fields">
+                                        <div class="field field--radio field--multiplechoice field--cols">
+                                            <fieldset id="js-member-list">
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button
+                            class="btn btn--primary btn--lg qa-btn-submit venus js-submit"
+                      type="submit" name="">Save and continue
+                    </button>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<div style="display:none;">
+    <div id="member-checkbox-select-template" class="field__item js-focusable-box">
+        <input class="input input--checkbox js-person-control"
+               name="checkbox-answer"
+               type="checkbox" />
+        <label class="label label--inline venus js-person-name"></label>
+    </div>
+</div>
+
+<script src='/js/compiled/standard-bundle.js'></script>
+<script src='/js/compiled/your-household-v2/bundle.js'></script>
+
+<script>
+
+    var storageAPI = window.ONS.storage;
+
+    function createMemberListItem(person) {
+      var $nodeEl = $('#member-checkbox-select-template').clone(),
+        personId = person.id;
+
+      $nodeEl.attr('id', '');
+      $nodeEl.find('.js-person-name').html(person.fullName);
+      $nodeEl.find('.js-person-name').attr('for', personId);
+      $nodeEl.find('.js-person-control').attr('id', personId);
+      $nodeEl.find('.js-person-control').attr('value', personId);
+
+      return $nodeEl;
+    }
+
+    /**
+     * Find members that don't already have relationships with person
+     */
+    var allRelationships = storageAPI.getAllRelationships(),
+
+      parentId = new URLSearchParams(window.location.search).get('parent'),
+
+      parent,
+
+      members = storageAPI.getAllHouseholdMembers(),
+
+      remainingPersonIds = members.map(function (member) {
+        return member['@person'].id;
+      });
+
+    function removeFromList(list, val) {
+
+      function doRemove(item) {
+        var foundId = list.indexOf(item);
+
+        /**
+         * Guard
+         */
+        if (foundId === -1) {
+          console.log('Attempt to remove from list failed: ', list, val);
+          return;
+        }
+
+        list.splice(foundId, 1);
+      }
+
+      if(_.isArray(val)) {
+        $.each(val, function (i, item) {
+          doRemove(item);
+        });
+      }
+      else {
+        doRemove(val);
+      }
+    }
+
+    function updateList() {
+      if (!parentId) {
+        console.log('parent url parameter not found');
+        return;
+      }
+
+      parent = storageAPI.getHouseholdMemberByPersonId(parentId)['@person'];
+
+      /**
+       * Remove this person from the list
+       */
+      removeFromList(remainingPersonIds, parentId);
+
+      $.each(
+        allRelationships.filter(
+          storageAPI.isInRelationship.bind(null, parentId)
+        ),
+        function (i, relationship) {
+          var personIsIndex = remainingPersonIds.indexOf(relationship.personIsId),
+            personToIndex = remainingPersonIds.indexOf(relationship.personToId);
+
+          if(personIsIndex !== -1) {
+            removeFromList(remainingPersonIds, relationship.personIsId);
+            return;
+          }
+
+          if(personToIndex !== -1) {
+            removeFromList(remainingPersonIds, relationship.personToId);
+            return;
+          }
+        }
+      );
+
+      $('.js-relationship-person-is').html(parent.fullName);
+
+      $.each(
+        remainingPersonIds.map(function (personId) {
+          return storageAPI.getHouseholdMemberByPersonId(personId);
+        }
+      ), function (i, member) {
+        $('#js-member-list').append(createMemberListItem(member['@person']));
+      });
+    }
+
+    function createParentChildRelationship(childId) {
+      return storageAPI.TYPES.relationship(
+        'mother-father',
+        parentId,
+        childId
+      );
+    }
+
+    $('.js-submit').on('click', function(e) {
+      e.preventDefault();
+
+      var relationshipsUrl = window.location.pathname
+        .replace('relationships-child-parent', 'relationships');
+
+      $('[name=checkbox-answer]:checked').each(function () {
+        storageAPI.addRelationship(createParentChildRelationship($(this).val()));
+      });
+
+      window.history.replaceState(null, '', relationshipsUrl);
+      window.location.href = relationshipsUrl;
+    });
+
+    $(updateList);
+
+</script>

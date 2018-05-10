@@ -10,7 +10,6 @@ import {
 const _ = window._ || {};
 
 export const RELATIONSHIPS_STORAGE_KEY = 'relationships';
-export const RELATIONSHIP_SUMMARIES_STORAGE_KEY = 'relationships-summaries';
 
 export const relationshipTypes = {
   'spouse': {id: 'spouse'},
@@ -330,6 +329,11 @@ export function getSiblingIdFromRelationship(personId, relationship) {
   return relationship[relationship.personIsId === personId ? 'personToId' : 'personIsId'];
 }
 
+export function getOtherPersonIdFromRelationship(personId, relationship) {
+  return relationship.personIsId === personId
+    ? relationship.personToId : relationship.personIsId;
+}
+
 export function getAllParentsOf(personId) {
   return getAllRelationships()
     .filter(isAChildInRelationship.bind(null, personId))
@@ -416,9 +420,85 @@ export const missingRelationshipInference = {
   }
 };
 
+export function inferRelationships(relationship, personIs, personTo) {
+  var missingRelationships = [];
+
+  if (relationship.personIsDescription === 'mother-father') {
+    missingRelationships = missingRelationships.concat(
+      missingRelationshipInference.siblingsOf(personTo)
+    );
+  }
+
+  if (relationship.personIsDescription === 'son-daughter') {
+    missingRelationships = missingRelationships.concat(
+      missingRelationshipInference.siblingsOf(personIs)
+    );
+  }
+
+  $.each(missingRelationships, function(i, relationship) {
+    addRelationship(relationship);
+  });
+}
+
 export function getRelationshipsWithPersonIds(relationships, idArr) {
   return relationships.filter(function(childRelationship) {
     return idArr.indexOf(childRelationship.personIsId) !== -1 ||
       idArr.indexOf(childRelationship.personToId) !== -1;
   });
+}
+
+export function getPeopleIdsMissingRelationshipsWithPerson(personId) {
+  var remainingPersonIds = getAllHouseholdMembers().map(function(member) {
+    return member['@person'].id;
+  });
+
+  /**
+   * Remove this person from the list
+   */
+  removeFromList(remainingPersonIds, personId);
+
+  $.each(getAllRelationships(), function(i, relationship) {
+    if (!isInRelationship(personId, relationship)) {
+      return;
+    }
+
+    /**
+     * Remove the other person from the remainingPersonIds list
+     */
+    removeFromList(
+      remainingPersonIds,
+      getOtherPersonIdFromRelationship(personId, relationship)
+    );
+  });
+
+  return remainingPersonIds;
+}
+
+/**
+ * Utils
+ */
+function removeFromList(list, val) {
+
+  function doRemove(item) {
+    var foundId = list.indexOf(item);
+
+    /**
+     * Guard
+     */
+    if (foundId === -1) {
+      console.log('Attempt to remove from list failed: ', list, val);
+      return;
+    }
+
+    list.splice(foundId, 1);
+  }
+
+  if(_.isArray(val)) {
+    $.each(val, function (i, item) {
+      doRemove(item);
+    });
+  }
+  else {
+    doRemove(val);
+  }
 }
