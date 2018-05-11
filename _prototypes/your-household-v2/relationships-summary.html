@@ -102,7 +102,8 @@ visitors:
 </style>
 
 <script>
-  var storageAPI = window.ONS.storage;
+  var storageAPI = window.ONS.storage,
+	  utils = window.ONS.utils;
 
   function createRecord(summary) {
     var $nodeEl = $('#relationship-record-template').clone();
@@ -130,7 +131,7 @@ visitors:
 
     $('#household-relationships-summary').html();
 
-    console.log('Explained: ', relationshipIdsToExplain);
+    console.log('To explain: ', relationshipIdsToExplain);
 
     /**
      * Relationships sorted by household member entry order
@@ -152,7 +153,7 @@ visitors:
       }
 
       /**
-       * For each member relationship,
+       * For each member relationship, - currently not strictly run in order
        * 1. Find all partner-type relationships
        * 2. Find all children with partner(s) if found
        * 3. Find all children as a single parent
@@ -183,44 +184,18 @@ visitors:
 
         $.each(summaryLines.relationshipsExplained,
           function (i, relationshipExplained) {
-            removeFromList(relationshipIdsToExplain, relationshipExplained.id);
+            utils.removeFromList(relationshipIdsToExplain, relationshipExplained.id);
           });
       });
     });
 
-    console.log('To explain: ', relationshipIdsToExplain);
+    console.log('Explained: ', relationshipIdsToExplain);
 
     $.each(lines, function(i, line) {
       recordList.find('.js-records').append(createRecord(line));
     });
 
     $('#household-relationships-summary').append(recordList);
-  }
-
-  function removeFromList(list, val) {
-
-    function doRemove(item) {
-      var foundId = list.indexOf(item);
-
-      /**
-       * Guard
-       */
-      if (foundId === -1) {
-        console.log('Attempt to remove from list failed: ', list, val);
-        return;
-      }
-
-      list.splice(foundId, 1);
-    }
-
-    if(_.isArray(val)) {
-      $.each(val, function (i, item) {
-        doRemove(item);
-      });
-    }
-    else {
-      doRemove(val);
-    }
   }
 
   function retrieveRelationshipInfo(relationship) {
@@ -375,7 +350,7 @@ visitors:
     /**
      * Remove children explained in shared parent relationships
      */
-    removeFromList(childrenIdsToExplain, viewModelChildrenIdsExplained);
+    utils.removeFromList(childrenIdsToExplain, viewModelChildrenIdsExplained);
 
     /**
      * Add extra relationships explained in view-model to list

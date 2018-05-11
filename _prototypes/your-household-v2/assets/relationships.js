@@ -1,4 +1,4 @@
-import {autoIncrementId} from './utils';
+import {autoIncrementId, removeFromList} from './utils';
 import {
   isHouseholdMember,
   getAllHouseholdMembers,
@@ -130,23 +130,18 @@ export const relationshipSummaryTemplates = {
   'partnership': (person1, person2, description) => {
     return `${personListStr([person1, person2])} are ${description}`;
   },
-  /**
-   * Summary can only be inferred
-   */
   'twoFamilyMembersToMany': (parent1, parent2, childrenArr, description) => {
-    return `<strong>${parent1}</strong> and <strong>${parent2}</strong> are the ${description} of ${personListStr(childrenArr)}`;
+    return `${nameElement(parent1)} and ${nameElement(parent2)} are the ${description} of ${personListStr(childrenArr)}`;
   },
   'oneFamilyMemberToMany': (parent, childrenArr, description) => {
-    return `<strong>${parent}</strong> is the ${description} of ${personListStr(childrenArr)}`;
+    return `${nameElement(parent)} is the ${description} of ${personListStr(childrenArr)}`;
+  },
+  'manyToMany': (peopleArr1, peopleArr2, description) => {
+    return `${personListStr(peopleArr1)} ${peopleArr1.length > 1 ? 'are' : 'is'} ${description} to ${personListStr(peopleArr2)}`;
   },
   'allMutual': (peopleArr, description) => {
     return `${personListStr(peopleArr)} are ${description}`;
   }
-
-  /**
-   * TODO
-   * Missing many to one template
-   */
 };
 
 /**
@@ -525,33 +520,4 @@ export function getRelationshipsWithPersonIds(relationships, idArr) {
     return idArr.indexOf(childRelationship.personIsId) !== -1 ||
       idArr.indexOf(childRelationship.personToId) !== -1;
   });
-}
-
-/**
- * Utils
- */
-function removeFromList(list, val) {
-
-  function doRemove(item) {
-    var foundId = list.indexOf(item);
-
-    /**
-     * Guard
-     */
-    if (foundId === -1) {
-      console.log('Attempt to remove from list failed: ', list, val);
-      return;
-    }
-
-    list.splice(foundId, 1);
-  }
-
-  if(_.isArray(val)) {
-    $.each(val, function (i, item) {
-      doRemove(item);
-    });
-  }
-  else {
-    doRemove(val);
-  }
 }

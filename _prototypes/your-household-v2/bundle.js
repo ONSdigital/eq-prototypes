@@ -39,6 +39,7 @@ import {
   isHouseholdMember,
   person
 } from './assets/household';
+import {removeFromList} from './assets/utils';
 
 export const USER_STORAGE_KEY = 'user-details';
 
@@ -219,6 +220,10 @@ window.ONS.storage = {
 window.ONS.helpers = {
   populateHouseholdList,
   populateVisitorList
+};
+
+window.ONS.utils = {
+  removeFromList
 };
 
 $(populateHouseholdList);
