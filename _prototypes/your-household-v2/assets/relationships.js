@@ -44,6 +44,7 @@ export const relationshipDescriptionMap = {
     summaryAdjective: 'step-parent',
     type: relationshipTypes['step-child-parent']
   },
+  // covered
   'son-daughter': {
     sentanceLabel: 'son or daughter',
     summaryAdjective: 'child',
@@ -190,10 +191,16 @@ export function getAllRelationships() {
   return JSON.parse(sessionStorage.getItem(RELATIONSHIPS_STORAGE_KEY)) || [];
 }
 
-export function deleteAllRelationshipsForMember(memberId) {
+export function getAllManualRelationships() {
+  return getAllRelationships().filter((relationship) => {
+    return !relationship.inferred;
+  });
+}
+
+export function deleteAllRelationshipsForMember(personId) {
   const householdRelationships = getAllRelationships()
     .filter((relationship) => {
-      return !(memberId === relationship.personIsId || memberId === relationship.personToId);
+      return !(personId === relationship.personIsId || personId === relationship.personToId);
     });
 
   sessionStorage.setItem(RELATIONSHIPS_STORAGE_KEY,
@@ -510,6 +517,10 @@ export function getPeopleIdsMissingRelationshipsWithPerson(personId) {
   });
 
   return remainingPersonIds;
+}
+
+export function getRelationshipType(relationship) {
+  return relationshipDescriptionMap[relationship.personIsDescription].type;
 }
 
 /**

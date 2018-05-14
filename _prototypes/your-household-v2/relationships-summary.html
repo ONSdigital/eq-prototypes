@@ -232,8 +232,61 @@ visitors:
     };
   }
 
-  function allMutualSummary(relationship) {
-    var relationshipInfo = retrieveRelationshipInfo(relationship);
+  function groupSummary(relationship) {
+    var relationshipInfo = retrieveRelationshipInfo(relationship),
+
+      allManualRelationshipsByDescription = storageAPI
+        .getAllManualRelationships()
+        .filter(function (relationship) {
+          return storageAPI.getRelationshipType(relationship) ===
+            relationshipInfo.relationshipType;
+        }),
+
+        mutualPersonRelationshipGroup = [
+          /**
+           * People?
+           */
+        ];
+
+    console.log(allManualRelationshipsByDescription);
+
+    /**
+     * 1. Find all mutual relationships
+     * / Filter out inferred relationships
+     * - Partition relationships that are all mutual within a group to
+     * person is and store remaining
+     *
+     * - Find all filtered relationships with personIs
+     * - For each other person in relationship find relationships with same
+     * type and other people as personIs (Defining group scope for summary)
+     * - Remove and store the differences between personIs relationships and
+     * other person 'in scope' relationships
+     *
+     *
+     * 2. Find all group to group relationships
+     * - With remaining relationships...
+     *
+     * - For each other person in remaining relationship find relationships with
+     * the same type (People can be out of scope of mutual relationships, the
+     * only thing in common is the relationship type).
+     * - For each new relationship found, check whether other people in
+     * remaining relationships share the same type of relationship to new
+     * person.
+     *
+     *       Are unrelated to
+     * dave  <------------->  Jon
+     * Emily <------------->  Mark
+     * James <------------->  Emma
+     *
+     * Also, bi-directional arrows must cross for all members on opposing
+     * groups.
+     *
+     */
+
+
+    /**
+     * Could default to writing out relationship manually?
+     */
 
     return {
       relationshipsExplained: [relationship],
@@ -506,10 +559,10 @@ visitors:
     'spouse':                   'partnership',
     'partner':                  'partnership',
     'child-parent':             'family',
-    'sibling':                  'all-mutual',
-    'step-brother-sister':      'all-mutual',
-    'other-relation':           'all-mutual',
-    'unrelated':                'all-mutual',
+    'sibling':                  'group',
+    'step-brother-sister':      'group',
+    'other-relation':           'group',
+    'unrelated':                'group',
     'step-child-parent':        'family-single',
     'grandchild-grandparent':   'family-single'
   };
@@ -525,7 +578,7 @@ visitors:
   var summaryStrategies = {
     'partnership': partnershipSummary,
     'family': familySummary,
-    'all-mutual': allMutualSummary,
+    'group': groupSummary,
     'family-single': familySingleSummary
   };
 

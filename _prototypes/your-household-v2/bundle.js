@@ -3,6 +3,7 @@ import {
   addRelationship,
   editRelationship,
   getAllRelationships,
+  getAllManualRelationships,
   deleteAllRelationshipsForMember,
   relationshipSummaryTemplates,
   missingRelationshipInference,
@@ -18,6 +19,7 @@ import {
   areAnyChildrenInRelationshipNotParent,
   getRelationshipsWithPersonIds,
   getPeopleIdsMissingRelationshipsWithPerson,
+  getRelationshipType,
   findNextMissingRelationship,
   relationship
 } from './assets/relationships';
@@ -180,6 +182,7 @@ window.ONS.storage = {
   addRelationship,
   editRelationship,
   getAllRelationships,
+  getAllManualRelationships,
   deleteAllRelationshipsForMember,
 
   getAllParentsOf,
@@ -198,6 +201,7 @@ window.ONS.storage = {
   inferRelationships,
   getRelationshipsWithPersonIds,
   getPeopleIdsMissingRelationshipsWithPerson,
+  getRelationshipType,
   findNextMissingRelationship,
 
   KEYS: {
