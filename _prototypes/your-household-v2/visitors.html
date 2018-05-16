@@ -18,6 +18,22 @@ globalcss: false
     </div>
 </div>
 
+<style>
+    .definition {
+        display : block;
+        border : none;
+        margin : auto;
+    }
+
+    /**
+     * Copied compiled code
+     */
+    .has-js .u-no-js-show,.no-js .u-no-js-hide{display:none}
+    .definition .definition__link:before,.guidance__link:before{-webkit-transition:-webkit-transform .3s ease-in-out;transition:-webkit-transform .3s ease-in-out;transition:transform .3s ease-in-out;transition:transform .3s ease-in-out,-webkit-transform .3s ease-in-out;margin-right:5.399px;margin-right:.3rem;speak:none;content:"";background:url(https://sdc-global-design-patterns.netlify.com/assets/img/icons/icons--guidance.svg) no-repeat 50%;background-size:auto;text-align:center;width:18px;width:1rem;height:18px;height:1rem;position:relative;left:-1.8px;left:-.1rem;top:-.9px;top:-.05rem;vertical-align:middle;display:inline-block;*display:inline;*zoom:1}.definition .definition__link:hover,.guidance__link:hover{outline:none}.definition .definition__link:hover:before,.guidance__link:hover:before{background:url(https://sdc-global-design-patterns.netlify.com/assets/img/icons/icons--guidance-darkblue.svg) no-repeat 50%}.definition .definition__link:focus:before,.guidance__link:focus:before{background:url(https://sdc-global-design-patterns.netlify.com/assets/img/icons/icons--guidance-white.svg) no-repeat 50%}.definition.is-expanded .definition__link:before,.is-expanded .guidance__link:before{-webkit-transform:rotate(90deg);transform:rotate(90deg)}.definition .definition__main,.guidance__main{overflow:hidden;width:100%;opacity:0;-webkit-transition:all 0;transition:all 0;max-height:0}.definition.is-expanded .definition__main,.is-expanded .guidance__main,.no-js .definition .definition__main,.no-js .guidance__main{max-height:10000em;height:auto;opacity:1;-webkit-transition:opacity .3s ease-out,max-height .3s ease-out;transition:opacity .3s ease-out,max-height .3s ease-out}
+    .definition .definition__link{outline:none;padding:3.6px 9px 3.6px 3.6px;padding:.2rem .5rem .2rem .2rem;font-weight:600;text-decoration:none}.definition .definition__link:focus:hover{background-color:#033e58}.definition .definition__content{padding-top:9px;padding-top:.5rem}.definition:not(.is-expanded) .definition__content-close-trigger{display:none}
+    .btn--toggle{padding:5.399px 9px;padding:.3rem .5rem;color:#4263c2;border:1px solid #4263c2;background-color:#f5f5f5;-webkit-transition:none;transition:none}.btn--toggle:hover{color:#033e58;background-color:#f5f5f5;border-color:#033e58}.btn--toggle:active,.btn--toggle:focus{color:#fff;background-color:#4263c2;border-color:#4263c2}
+</style>
+
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
@@ -44,29 +60,56 @@ globalcss: false
 
                                 <!--<ul id='household-members'></ul>-->
 
-                                <div class="answer__fields js-fields">
-                                    <div class="field field--radio field--multiplechoice">
-                                        <fieldset>
-                                            <div class="field__item js-focusable-box">
-                                                <input class="input input--radio js-focusable"
-                                                       type="radio"
-                                                       name="visitors"
-                                                       id="yes-someone-else">
-                                                <label class="label label--inline venus"
-                                                       for="yes-someone-else">Yes,
-                                                    I need to add a
-                                                    visitor</label>
-                                            </div>
+                                <div class="answer">
+                                    <div class="answer__fields js-fields">
+                                        <div class="field field--radio field--multiplechoice">
+                                            <fieldset>
+                                                <div class="field__item js-focusable-box">
+                                                    <input class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="visitors"
+                                                           id="yes-someone-else">
+                                                    <label class="label label--inline venus"
+                                                           for="yes-someone-else">Yes,
+                                                        I need to add a visitor
+                                                        <span class="pluto u-db label--negative">
+                                                            Include people who
+                                                            live somewhere else
+                                                            in the UK or abroad
+                                                        </span>
+                                                    </label>
+                                                </div>
 
-                                            <div class="field__item js-focusable-box">
-                                                <input class="input input--radio js-focusable"
-                                                       type="radio"
-                                                       name="visitors" id="no">
-                                                <label class="label label--inline venus"
-                                                       for="no">No, there were
-                                                    no visitors</label>
-                                            </div>
-                                        </fieldset>
+                                                <div class="field__item js-focusable-box">
+                                                    <input class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="visitors" id="no">
+                                                    <label class="label label--inline venus"
+                                                           for="no">No, there were
+                                                        no visitors</label>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="definition js-details" data-hide-label="Click to collapse." data-show-label="Click to expand.">
+
+                                    <a href="#definition" class="definition__link mars js-details-trigger u-no-js-hide" aria-expanded="true" data-js-accordion-event-label="What is a photovoltaic system?" data-ga-label="definition-pattern-library" data-ga-action="Definition click" data-ga="click" data-ga-category="Help">Why this question is important <span class="u-vh js-details-label">Click to collapse.</span></a>
+
+                                    <h3 class="venus u-no-js-show u-mb-no">Why this question is important</h3>
+
+                                    <div id="definition" class="definition__main js-details-body" aria-hidden="false">
+                                        <div class="definition__content mars">
+                                            <p>Visitor information is collected
+                                                to ensure that everyone is
+                                                counted, in order to produce
+                                                accurate estimates of the
+                                                population, to facilitate
+                                                effective planning and
+                                                funding decisions.</p>
+                                        </div>
+                                        <button class="btn btn--toggle definition__content-close-trigger js-details-trigger u-no-js-hide">Hide this</button>
                                     </div>
                                 </div>
                             </section>
@@ -90,7 +133,7 @@ globalcss: false
     </div>
 </div>
 
-<script src='/js/compiled/standard-bundle.js'></script>
+<script src='https://sdc-global-design-patterns.netlify.com/assets/scripts/bundle.js'></script>
 <script src='/js/compiled/your-household-v2/bundle.js'></script>
 
 <script>

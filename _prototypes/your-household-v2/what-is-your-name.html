@@ -60,18 +60,6 @@ globalcss: false
                                     </div>
 
                                     <div class="question__answer">
-                                        <label class="label venus"
-                                               for="middle-name">
-                                            <div class="label__inner">
-                                                Middle name
-                                            </div>
-                                        </label>
-                                        <input class="input input--text "
-                                               id="middle-name"
-                                               data-qa="input-text" value=""/>
-                                    </div>
-
-                                    <div class="question__answer">
                                         <label class="label venus ">
                                             <div class="label__inner">
                                                 Last name
@@ -122,7 +110,6 @@ globalcss: false
 
     window.ONS.storage.addUserPerson(window.ONS.storage.TYPES.person({
       firstName: document.getElementById('first-name').value,
-      middleName: document.getElementById('middle-name').value,
       lastName: document.getElementById('last-name').value
     }));
 
@@ -134,7 +121,6 @@ globalcss: false
   function getName() {
     return [
       document.getElementById('first-name').value,
-      document.getElementById('middle-name').value,
       document.getElementById('last-name').value
     ].filter(function(name) {
       return name
@@ -146,7 +132,6 @@ globalcss: false
 
     if (userPerson) {
       $('#first-name').val(userPerson.firstName);
-      $('#middle-name').val(userPerson.middleName);
       $('#last-name').val(userPerson.lastName);
     }
   });

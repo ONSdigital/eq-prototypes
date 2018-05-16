@@ -63,18 +63,6 @@ globalcss: false
                                     </div>
 
                                     <div class="question__answer">
-                                        <label class="label venus"
-                                               for="middle-name">
-                                            <div class="label__inner">
-                                                Middle name
-                                            </div>
-                                        </label>
-                                        <input class="input input--text "
-                                               id="middle-name"
-                                               data-qa="input-text" value=""/>
-                                    </div>
-
-                                    <div class="question__answer">
                                         <label class="label venus ">
                                             <div class="label__inner">
                                                 Last name
@@ -138,7 +126,6 @@ globalcss: false
 
     var person = window.ONS.storage.TYPES.person({
       firstName: document.getElementById('first-name').value,
-      middleName: document.getElementById('middle-name').value,
       lastName: document.getElementById('last-name').value
     });
 
@@ -157,8 +144,10 @@ globalcss: false
     /**
      * Routing
      */
-    if (window.location.search.match(/journey=temp-away-from-home/)) {
-      window.location = '../does-anyone-else-live-here/?journey=temp-away-from-home';
+    if (window.location.search.match(/journey=temp-living-here/)) {
+      window.location = '../temp-living-here/';
+    } else if (window.location.search.match(/journey=temp-away-from-home/)) {
+      window.location = '../temp-away-from-home/';
     } else if (window.location.search.match(/journey=visitors/)) {
       window.location = '../does-anyone-else-live-here/?journey=visitors';
     } else {
@@ -191,7 +180,6 @@ globalcss: false
       person = memberFound['@person'];
 
       $('#first-name').val(person.firstName);
-      $('#middle-name').val(person.middleName);
       $('#last-name').val(person.lastName);
     }
   });

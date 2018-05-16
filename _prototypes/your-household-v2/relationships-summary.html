@@ -69,11 +69,11 @@ visitors:
 
 <ul style="display:none;">
     <li id="relationship-record-template" class="list__item">
-        <div class="list__item-actions u-fr">
+        <!--<div class="list__item-actions u-fr">
             <span class="list__item-action">
                 <a class="js-record-edit" href="#">Change</a>
             </span>
-        </div>
+        </div>-->
         <span class="list__item-name">
             <span class="js-relationship-description"></span>
         </span>
@@ -233,7 +233,7 @@ visitors:
   }
 
   function groupSummary(relationship) {
-    var relationshipInfo = retrieveRelationshipInfo(relationship),
+    var relationshipInfo = retrieveRelationshipInfo(relationship);/*,
 
       allManualRelationshipsByDescription = storageAPI
         .getAllManualRelationships()
@@ -242,21 +242,58 @@ visitors:
             relationshipInfo.relationshipType;
         }),
 
-        mutualPersonRelationshipGroup = [
-          /**
-           * People?
-           */
-        ];
+        personIsRelationships = allManualRelationshipsByDescription
+          .filter(storageAPI.isInRelationship
+            .bind(null, relationshipInfo['@personIs'].id)
+          ),
 
-    console.log(allManualRelationshipsByDescription);
+        otherPeopleIdsInPersonIsRelationships = personIsRelationships
+          .map(storageAPI.getOtherPersonIdFromRelationship
+            .bind(null, relationshipInfo['@personIs'].id)
+          ),
+
+        groups = {
+          'mutualRelationshipGroupPersonIds': [],
+          'remainingRelationshipIds': []
+        };
+
+    console.log('relationship',
+      relationshipInfo, otherPeopleIdsInPersonIsRelationships);
+
+    $.each(otherPeopleIdsInPersonIsRelationships, function(i, personId) {
+      var otherPersonRelationshipsByDescription =
+        allManualRelationshipsByDescription.filter(
+          storageAPI.isInRelationship.bind(null, personId)
+        );
+
+      $.each(otherPersonRelationshipsByDescription,
+        function (i, otherRelationship){
+          var thirdPersonId = storageAPI
+            .getOtherPersonIdFromRelationship(personId, otherRelationship),
+            targetArrKey = otherPeopleIdsInPersonIsRelationships
+              .indexOf(thirdPersonId) !== -1
+              ? 'mutualRelationshipGroupPersonIds' : 'remainingRelationshipIds';
+
+          // groups[targetArrKey] = _.uniq([personId], groups[targetArrKey]);
+
+          /!*if(otherPeopleIdsInPersonIsRelationships.indexOf(thirdPersonId) !== -1) {
+            mutualRelationshipGroupPersonIds.push(personId)
+          }
+          else {
+            remainingRelationshipIds.push(personId);
+          }*!/
+        }
+      );
+    });
+
+    console.log('mutual: ', groups.mutualRelationshipGroupPersonIds);
+    console.log('remaining: ', groups.remainingRelationshipIds);*/
 
     /**
      * 1. Find all mutual relationships
      * / Filter out inferred relationships
-     * - Partition relationships that are all mutual within a group to
-     * person is and store remaining
      *
-     * - Find all filtered relationships with personIs
+     * / Find all filtered relationships with personIs
      * - For each other person in relationship find relationships with same
      * type and other people as personIs (Defining group scope for summary)
      * - Remove and store the differences between personIs relationships and
@@ -313,7 +350,7 @@ visitors:
           [
             relationshipInfo['@personTo'].fullName
           ],
-          relationshipInfo['relationshipDescription'].sentanceLabel
+          relationshipInfo['relationshipDescription'].summaryAdjective
         )
       ]
     }

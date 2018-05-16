@@ -14,7 +14,7 @@ globalcss: false
 
 <div class="page__subheader">
     <div class="container">
-        <a class="mars" href="../does-anyone-else-live-here">Previous</a>
+        <a class="mars" href="../who-else-to-add">Previous</a>
     </div>
 </div>
 
@@ -30,9 +30,9 @@ globalcss: false
                 <form name="trav" class="form qa-questionnaire-form" role="form"
                       autocomplete="off" novalidate="">
                     <input type="hidden" name="previous"
-                           value="temp-away-from-home"/>
+                           value="temp-living-here"/>
                     <input type="hidden" name="journey"
-                           value="temp-away-from-home"/>
+                           value="temp-living-here"/>
                     <div class="group" id="rsi">
                         <div class="block" id="total-retail-turnover">
                             <section class="section"
@@ -42,9 +42,9 @@ globalcss: false
                                 <div class="question u-mb-s"
                                      id="total-retail-turnover-question">
                                     <h1 class="question__title saturn">
-                                        Is there anyone else living at
-                                        <span class="address-text"></span>
-                                        who is currently away?
+                                        Is there anyone else temporarily living
+                                        at <span class="address-text"></span>
+                                        who does not have a UK address?
                                     </h1>
                                 </div>
 
@@ -62,9 +62,12 @@ globalcss: false
                                                        for="yes-someone-else">Yes,
                                                     I need to add another person
                                                     <span class="pluto u-db label--negative">
-                                                        Include people working or studying away
-                                                        from home, armed forces, people outside
-                                                        the UK for less than 12 months</span>
+                                                        For example relatives
+                                                        or friends, or people
+                                                        who plan to stay in
+                                                        the UK for 3 months
+                                                        or more
+                                                    </span>
                                                 </label>
                                             </div>
 
@@ -75,7 +78,7 @@ globalcss: false
                                                        id="no">
                                                 <label class="label label--inline venus"
                                                        for="no">No, this
-                                                is everyone</label>
+                                                    is everyone</label>
                                             </div>
                                         </fieldset>
                                     </div>
@@ -110,7 +113,7 @@ globalcss: false
     if (yesbox.checked) {
       document.trav.action = "../who-else-to-add";
     } else {
-      document.trav.action = "../temp-living-here";
+      document.trav.action = "../visitors";
     }
   });
 </script>
