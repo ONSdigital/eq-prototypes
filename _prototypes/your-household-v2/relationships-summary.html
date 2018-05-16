@@ -233,7 +233,7 @@ visitors:
   }
 
   function groupSummary(relationship) {
-    var relationshipInfo = retrieveRelationshipInfo(relationship);/*,
+    var relationshipInfo = retrieveRelationshipInfo(relationship),
 
       allManualRelationshipsByDescription = storageAPI
         .getAllManualRelationships()
@@ -260,34 +260,98 @@ visitors:
     console.log('relationship',
       relationshipInfo, otherPeopleIdsInPersonIsRelationships);
 
-    $.each(otherPeopleIdsInPersonIsRelationships, function(i, personId) {
+    /*$.each(otherPeopleIdsInPersonIsRelationships, function(i, personId) {
       var otherPersonRelationshipsByDescription =
         allManualRelationshipsByDescription.filter(
           storageAPI.isInRelationship.bind(null, personId)
-        );
+        ),
 
-      $.each(otherPersonRelationshipsByDescription,
-        function (i, otherRelationship){
-          var thirdPersonId = storageAPI
-            .getOtherPersonIdFromRelationship(personId, otherRelationship),
-            targetArrKey = otherPeopleIdsInPersonIsRelationships
-              .indexOf(thirdPersonId) !== -1
-              ? 'mutualRelationshipGroupPersonIds' : 'remainingRelationshipIds';
+        thirdPersonIds = otherPersonRelationshipsByDescription.map(
+          storageAPI.getOtherPersonIdFromRelationship.bind(null, personId)
+        ),
 
-          // groups[targetArrKey] = _.uniq([personId], groups[targetArrKey]);
+        thirdPersonIdMatches = thirdPersonIds.filter(function (thirdPersonId) {
+          return otherPeopleIdsInPersonIsRelationships
+            .indexOf(thirdPersonId) !== -1;
+        }),
 
-          /!*if(otherPeopleIdsInPersonIsRelationships.indexOf(thirdPersonId) !== -1) {
-            mutualRelationshipGroupPersonIds.push(personId)
-          }
-          else {
-            remainingRelationshipIds.push(personId);
-          }*!/
-        }
+        diffOtherToPersonIs = _.difference(
+          otherPeopleIdsInPersonIsRelationships.filter(function (id) {
+            /!**
+             * Remove other person and person is from check
+             *!/
+            return id !== personId && id !== relationshipInfo['@personIs'].id;
+          }),
+          thirdPersonIdMatches //.concat(personId)
+        ),
+
+        /!**
+         * If there is a difference in relationships between other person and
+         * personIs
+         *!/
+        targetArrKey = !diffOtherToPersonIs.length
+          ? 'mutualRelationshipGroupPersonIds'
+          : 'remainingRelationshipIds';
+
+      console.log(
+        'other person: ', personId,
+        'thirdPersonIds: ', thirdPersonIds,
+        'thirdPersonIdMatches: ', thirdPersonIdMatches,
+        'diffOtherToPersonIs: ', diffOtherToPersonIs,
+        'adjust0: ', [].concat(otherPeopleIdsInPersonIsRelationships),
+        'adjust1: ', [].concat(otherPeopleIdsInPersonIsRelationships)
+          .splice(otherPeopleIdsInPersonIsRelationships.indexOf(personId), 1),
+        'adjust2: ', otherPeopleIdsInPersonIsRelationships.indexOf(personId),
+        'targetArrKey: ', targetArrKey,
+        'union: ', _.union([personId], groups[targetArrKey]),
+        'pre-arr: ', groups[targetArrKey]
       );
-    });
+
+      groups[targetArrKey] = _.union([personId], groups[targetArrKey]);
+
+      console.log('post-arr: ', groups[targetArrKey]);
+    });*/
+
+    var otherPeopleRelationshipsModel =
+      otherPeopleIdsInPersonIsRelationships
+        .map(function (personId) {
+          return {
+            personId: personId,
+            relationships: allManualRelationshipsByDescription
+              .filter(function (relationship) {
+
+                /**
+                 * If other person is in relationship and personIs is not in
+                 * relationship
+                 */
+                return storageAPI.isInRelationship(personId, relationship) &&
+                  !storageAPI.isInRelationship(relationshipInfo['@personIs'].id, relationship)
+              })
+          }
+        }),
+
+      otherPeopleThirdPersonGroups = otherPeopleRelationshipsModel
+        .map(function (model){
+          return model.relationships.map(
+            storageAPI.getOtherPersonIdFromRelationship.bind(null, model.personId)
+          );
+        });
+
+    // console.log(_.flatten(otherPeopleThirdPersonGroups, true));
+
+    console.log(
+      'other models: ', otherPeopleRelationshipsModel,
+      'third person groups: ', otherPeopleThirdPersonGroups,
+      'difference: ', _.difference.apply(null, otherPeopleThirdPersonGroups));
+
+    /*if(_.difference(otherPeopleRelationships.map)) {
+    }*/
+
+    //console.log(otherPeopleRelationships);
+
 
     console.log('mutual: ', groups.mutualRelationshipGroupPersonIds);
-    console.log('remaining: ', groups.remainingRelationshipIds);*/
+    console.log('remaining: ', groups.remainingRelationshipIds);
 
     /**
      * 1. Find all mutual relationships

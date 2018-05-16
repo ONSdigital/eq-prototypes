@@ -158,7 +158,7 @@ function updateAddresses() {
     addressLine2 = addressLines[1];
 
   $('#section-address').html(addressLine1);
-  $('.address-text').html(addressLine1 + ', ' + addressLine2);
+  $('.address-text').html(addressLine1 + (addressLine2 ? ', ' + addressLine2 : ''));
 }
 
 window.ONS = window.ONS || {};
