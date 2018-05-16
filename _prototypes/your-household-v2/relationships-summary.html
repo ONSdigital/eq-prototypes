@@ -437,6 +437,8 @@ visitors:
       viewModel = familyViewModelProduct.viewModel,
       viewModelChildrenIdsExplained = familyViewModelProduct.childIdsExplained;
 
+    console.log('parent', parent);
+
     /**
      * Remove children explained in shared parent relationships
      */
@@ -467,10 +469,10 @@ visitors:
      */
     $.each(viewModel, function (i, line) {
       lines.push(storageAPI.relationshipSummaryTemplates['twoFamilyMembersToMany'](
-        relationshipInfo['@personIs'].fullName,
+        parent.fullName,
         storageAPI.getHouseholdMemberByPersonId(line.parent2)['@person'].fullName,
         line.children.map(function(child) { return child.fullName; }),
-        relationshipInfo['relationshipDescription'].summaryAdjective + 's'
+        storageAPI.relationshipDescriptionMap['mother-father'].summaryAdjective + 's'
       ));
     });
 
@@ -507,9 +509,13 @@ visitors:
           );
 
         lines.push(storageAPI.relationshipSummaryTemplates['oneFamilyMemberToMany'](
-          relationshipInfo['@personIs'].fullName,
+          parent.fullName,
           remainingChildrenNames,
-          relationshipInfo['relationshipDescription'].summaryAdjective
+
+          /**
+           * Force parent descripion for more efficient summary
+           */
+          storageAPI.relationshipDescriptionMap['mother-father'].summaryAdjective
         ));
 
         relationshipsExplained = relationshipsExplained
