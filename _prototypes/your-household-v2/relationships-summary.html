@@ -253,64 +253,12 @@ visitors:
           ),
 
         groups = {
-          'mutualRelationshipGroupPersonIds': [],
-          'remainingRelationshipIds': []
+          'mutual': [],
+          'remaining': []
         };
 
     console.log('relationship',
       relationshipInfo, otherPeopleIdsInPersonIsRelationships);
-
-    /*$.each(otherPeopleIdsInPersonIsRelationships, function(i, personId) {
-      var otherPersonRelationshipsByDescription =
-        allManualRelationshipsByDescription.filter(
-          storageAPI.isInRelationship.bind(null, personId)
-        ),
-
-        thirdPersonIds = otherPersonRelationshipsByDescription.map(
-          storageAPI.getOtherPersonIdFromRelationship.bind(null, personId)
-        ),
-
-        thirdPersonIdMatches = thirdPersonIds.filter(function (thirdPersonId) {
-          return otherPeopleIdsInPersonIsRelationships
-            .indexOf(thirdPersonId) !== -1;
-        }),
-
-        diffOtherToPersonIs = _.difference(
-          otherPeopleIdsInPersonIsRelationships.filter(function (id) {
-            /!**
-             * Remove other person and person is from check
-             *!/
-            return id !== personId && id !== relationshipInfo['@personIs'].id;
-          }),
-          thirdPersonIdMatches //.concat(personId)
-        ),
-
-        /!**
-         * If there is a difference in relationships between other person and
-         * personIs
-         *!/
-        targetArrKey = !diffOtherToPersonIs.length
-          ? 'mutualRelationshipGroupPersonIds'
-          : 'remainingRelationshipIds';
-
-      console.log(
-        'other person: ', personId,
-        'thirdPersonIds: ', thirdPersonIds,
-        'thirdPersonIdMatches: ', thirdPersonIdMatches,
-        'diffOtherToPersonIs: ', diffOtherToPersonIs,
-        'adjust0: ', [].concat(otherPeopleIdsInPersonIsRelationships),
-        'adjust1: ', [].concat(otherPeopleIdsInPersonIsRelationships)
-          .splice(otherPeopleIdsInPersonIsRelationships.indexOf(personId), 1),
-        'adjust2: ', otherPeopleIdsInPersonIsRelationships.indexOf(personId),
-        'targetArrKey: ', targetArrKey,
-        'union: ', _.union([personId], groups[targetArrKey]),
-        'pre-arr: ', groups[targetArrKey]
-      );
-
-      groups[targetArrKey] = _.union([personId], groups[targetArrKey]);
-
-      console.log('post-arr: ', groups[targetArrKey]);
-    });*/
 
     var otherPeopleRelationshipsModel =
       otherPeopleIdsInPersonIsRelationships
@@ -340,43 +288,52 @@ visitors:
       otherPersonGroupScopedToPersonIsGroupIds =
         _.flatten(otherPeopleThirdPersonIdGroups).filter(function (personId) {
           return otherPeopleIdsInPersonIsRelationships.indexOf(personId) !== -1;
-        }),
+        })/*,
 
       otherGroupToPersonIsGroupDiff = _.difference(
         otherPersonGroupScopedToPersonIsGroupIds,
         otherPeopleIdsInPersonIsRelationships
-      );
+      )*/;
 
-    console.log(
+    /*console.log(
       'other models: ', otherPeopleRelationshipsModel,
       'third person groups: ', otherPeopleThirdPersonIdGroups,
       'third people ids scoped: ', otherPersonGroupScopedToPersonIsGroupIds,
       'difference: ', otherGroupToPersonIsGroupDiff
-    );
+    );*/
 
     /**
      * Retain all people common in each other persons relationships to
      * create a mutual group.
      * Start with everyone and reduce list
      */
-    groups.mutualRelationshipGroupPersonIds =
+    groups.mutual =
       otherPeopleIdsInPersonIsRelationships;
 
     $.each(otherPeopleThirdPersonIdGroups, function (i, group) {
-      console.log(
+      /*console.log(
         group,
-        groups.mutualRelationshipGroupPersonIds,
+        groups.mutual,
         otherPeopleRelationshipsModel[i],
-        group.concat(otherPeopleRelationshipsModel[i].personId));
+        group.concat(otherPeopleRelationshipsModel[i].personId)
+      );*/
 
-      groups.mutualRelationshipGroupPersonIds = _.intersection(
+      groups.mutual = _.intersection(
         group.concat(otherPeopleRelationshipsModel[i].personId),
-        groups.mutualRelationshipGroupPersonIds
+        groups.mutual
       );
     });
 
-    console.log('mutual: ', groups.mutualRelationshipGroupPersonIds);
-    console.log('remaining: ', groups.remainingRelationshipIds);
+    /**
+     * Who are the people remaining outside of the mutual group
+     */
+    groups.remaining = _.difference(
+      otherPeopleIdsInPersonIsRelationships,
+      groups.mutual
+    );
+
+    console.log('mutual: ', groups.mutual);
+    console.log('remaining: ', groups.remaining);
     console.log('=====');
 
     /**
