@@ -178,7 +178,7 @@ visitors:
           relationshipTypesToSummaryStrategyMap[relationshipTypeId]
           ](relationship, member['@person']);
 
-        console.log('Summary lines: ', summaryLines);
+        // console.log('Summary lines: ', summaryLines);
 
         lines = [].concat(lines, summaryLines.lines);
 
@@ -330,28 +330,54 @@ visitors:
           }
         }),
 
-      otherPeopleThirdPersonGroups = otherPeopleRelationshipsModel
+      otherPeopleThirdPersonIdGroups = otherPeopleRelationshipsModel
         .map(function (model){
           return model.relationships.map(
             storageAPI.getOtherPersonIdFromRelationship.bind(null, model.personId)
           );
-        });
+        }),
 
-    // console.log(_.flatten(otherPeopleThirdPersonGroups, true));
+      otherPersonGroupScopedToPersonIsGroupIds =
+        _.flatten(otherPeopleThirdPersonIdGroups).filter(function (personId) {
+          return otherPeopleIdsInPersonIsRelationships.indexOf(personId) !== -1;
+        }),
+
+      otherGroupToPersonIsGroupDiff = _.difference(
+        otherPersonGroupScopedToPersonIsGroupIds,
+        otherPeopleIdsInPersonIsRelationships
+      );
 
     console.log(
       'other models: ', otherPeopleRelationshipsModel,
-      'third person groups: ', otherPeopleThirdPersonGroups,
-      'difference: ', _.difference.apply(null, otherPeopleThirdPersonGroups));
+      'third person groups: ', otherPeopleThirdPersonIdGroups,
+      'third people ids scoped: ', otherPersonGroupScopedToPersonIsGroupIds,
+      'difference: ', otherGroupToPersonIsGroupDiff
+    );
 
-    /*if(_.difference(otherPeopleRelationships.map)) {
-    }*/
+    /**
+     * Retain all people common in each other persons relationships to
+     * create a mutual group.
+     * Start with everyone and reduce list
+     */
+    groups.mutualRelationshipGroupPersonIds =
+      otherPeopleIdsInPersonIsRelationships;
 
-    //console.log(otherPeopleRelationships);
+    $.each(otherPeopleThirdPersonIdGroups, function (i, group) {
+      console.log(
+        group,
+        groups.mutualRelationshipGroupPersonIds,
+        otherPeopleRelationshipsModel[i],
+        group.concat(otherPeopleRelationshipsModel[i].personId));
 
+      groups.mutualRelationshipGroupPersonIds = _.intersection(
+        group.concat(otherPeopleRelationshipsModel[i].personId),
+        groups.mutualRelationshipGroupPersonIds
+      );
+    });
 
     console.log('mutual: ', groups.mutualRelationshipGroupPersonIds);
     console.log('remaining: ', groups.remainingRelationshipIds);
+    console.log('=====');
 
     /**
      * 1. Find all mutual relationships
