@@ -314,10 +314,10 @@ visitors:
           group.indexOf(personToId) !== -1;
       });
 
-    console.log('relationship', relationshipInfo);
+    /*console.log('relationship', relationshipInfo);
     console.log('other models: ', memberRelationshipsModels);
     console.log('member relationship groups: ', memberRelationshipsScopedPersonIdGroups);
-    console.log('shared groups: ', sharedGroups);
+    console.log('shared groups: ', sharedGroups);*/
 
     /**
      * Retain all people common in each other persons relationships to create
@@ -342,9 +342,9 @@ visitors:
       groups.mutual
     );
 
-    console.log('mutual: ', groups.mutual);
+    /*console.log('mutual: ', groups.mutual);
     console.log('remaining: ', groups.remaining);
-    console.log('=====');
+    console.log('=====');*/
 
     /**
      * 1. Find all mutual relationships
@@ -493,8 +493,6 @@ visitors:
        */
       viewModel = familyViewModelProduct.viewModel,
       viewModelChildrenIdsExplained = familyViewModelProduct.childIdsExplained;
-
-    console.log('parent', parent);
 
     /**
      * Remove children explained in shared parent relationships

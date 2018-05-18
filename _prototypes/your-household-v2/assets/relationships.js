@@ -264,22 +264,35 @@ export function areAnyChildrenInRelationshipNotParent(childrenIds, notParentId, 
     return false;
   }
 
+  let childIndexAsPersonIs = childrenIds.indexOf(relationship.personIsId),
+    childIndexAsPersonTo = childrenIds.indexOf(relationship.personToId);
+
   /**
    * Find parents with the same children
    *
-   * If personIs-child is in relationship
+   * If a personIs-child is not in relationship
+   * or 2 children are found in relationship
    */
-  if ((
-    childrenIds.indexOf(relationship.personIsId) === -1 &&
-    childrenIds.indexOf(relationship.personToId) === -1
-  )) {
+  if (
+    (childIndexAsPersonIs === -1 && childIndexAsPersonTo === -1) ||
+    (childIndexAsPersonIs !== -1 && childIndexAsPersonTo !== -1)
+  ) {
     return false;
   }
 
   /**
-   * If personIs is not in relationship
+   * Child must be in relationship, get child index
    */
-  return !isInRelationship(notParentId, relationship);
+  let childIndex = childIndexAsPersonIs !== -1
+    ? childIndexAsPersonIs
+    : childIndexAsPersonTo;
+
+  /**
+   * If personIs is not in relationship
+   * and child from previous relationship is a child in this relationship
+   */
+  return !isInRelationship(notParentId, relationship) &&
+    isAChildInRelationship(childrenIds[childIndex], relationship);
 }
 
 /**
