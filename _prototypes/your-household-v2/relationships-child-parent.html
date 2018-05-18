@@ -111,7 +111,9 @@ visitors:
 
       parent,
 
-      members = storageAPI.getAllHouseholdMembers(),
+      members = storageAPI.getAllHouseholdMembers().filter(function (member) {
+        return member.type === storageAPI.KEYS.HOUSEHOLD_MEMBER_TYPE;
+      }),
 
       remainingPersonIds = members.map(function (member) {
         return member['@person'].id;
