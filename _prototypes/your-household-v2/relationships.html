@@ -341,14 +341,21 @@ visitors:
        * and there are missing relationships for this person
        */
       (function () {
-        var relationshipTypeId = storageAPI
-            .relationshipDescriptionMap[relationshipDescriptionVal].type.id,
-          personIsId = personIs['@person'].id;
+        var personIsId = personIs['@person'].id,
+          personToId = personTo['@person'].id,
+          parentId;
 
-        if(relationshipTypeId === 'child-parent' &&
+        if(relationshipDescriptionVal === 'mother-father' &&
           storageAPI.getPeopleIdsMissingRelationshipsWithPerson(personIsId).length) {
+          parentId = personIsId;
+        }
+        else if(relationshipDescriptionVal === 'son-daughter' &&
+          storageAPI.getPeopleIdsMissingRelationshipsWithPerson(personToId).length) {
+          parentId = personToId;
+        }
 
-          window.location.href = '../relationships-child-parent/?parent=' + personIsId;
+        if(parentId) {
+          window.location.href = '../relationships-child-parent/?parent=' + parentId;
         }
         else {
           window.location.href = '../relationships';
