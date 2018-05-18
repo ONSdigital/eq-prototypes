@@ -235,6 +235,11 @@ visitors:
   function groupSummary(relationship) {
     var relationshipInfo = retrieveRelationshipInfo(relationship),
 
+      groups = {
+        'mutual': [],
+        'remaining': []
+      },
+
       allManualRelationshipsByDescription = storageAPI
         .getAllManualRelationships()
         .filter(function (relationship) {
@@ -242,27 +247,19 @@ visitors:
             relationshipInfo.relationshipType;
         }),
 
-        personIsRelationships = allManualRelationshipsByDescription
-          .filter(storageAPI.isInRelationship
-            .bind(null, relationshipInfo['@personIs'].id)
-          ),
+      personIsRelationships = allManualRelationshipsByDescription.filter(
+        storageAPI.isInRelationship.bind(null, relationshipInfo['@personIs'].id)
+      ),
 
-        otherPeopleIdsInPersonIsRelationships = personIsRelationships
-          .map(storageAPI.getOtherPersonIdFromRelationship
-            .bind(null, relationshipInfo['@personIs'].id)
-          ),
+      otherPeopleIdsInPersonIsRelationships = personIsRelationships.map(
+        storageAPI.getOtherPersonIdFromRelationship
+          .bind(null, relationshipInfo['@personIs'].id)
+      ),
 
-        groups = {
-          'mutual': [],
-          'remaining': []
-        };
+      memberRelationshipsModels = storageAPI.getAllHouseholdMembers()
+        .map(function (member) {
+          var personId = member['@person'].id;
 
-    console.log('relationship',
-      relationshipInfo, otherPeopleIdsInPersonIsRelationships);
-
-    var otherPeopleRelationshipsModel =
-      otherPeopleIdsInPersonIsRelationships
-        .map(function (personId) {
           return {
             personId: personId,
             relationships: allManualRelationshipsByDescription
@@ -272,54 +269,67 @@ visitors:
                  * If other person is in relationship and personIs is not in
                  * relationship
                  */
-                return storageAPI.isInRelationship(personId, relationship) &&
-                  !storageAPI.isInRelationship(relationshipInfo['@personIs'].id, relationship)
+                return storageAPI.isInRelationship(personId, relationship);/* &&
+                  !storageAPI.isInRelationship(relationshipInfo['@personIs'].id, relationship)*/
               })
           }
         }),
 
-      otherPeopleThirdPersonIdGroups = otherPeopleRelationshipsModel
+      personIsId = relationshipInfo['@personIs'].id,
+      personToId = relationshipInfo['@personTo'].id,
+
+      memberRelationshipsScopedPersonIdGroups = memberRelationshipsModels
+        .filter(function (model) {
+          /**
+           * Only include relationships that personIs or personTo are included
+           */
+          return model.relationships.filter(function (relationship) {
+            return storageAPI.isInRelationship(personIsId, relationship) ||
+              storageAPI.isInRelationship(personToId, relationship);
+          }).length;
+        })
         .map(function (model){
           return model.relationships.map(
             storageAPI.getOtherPersonIdFromRelationship.bind(null, model.personId)
           );
         }),
 
-      otherPersonGroupScopedToPersonIsGroupIds =
-        _.flatten(otherPeopleThirdPersonIdGroups).filter(function (personId) {
-          return otherPeopleIdsInPersonIsRelationships.indexOf(personId) !== -1;
-        })/*,
+      memberPersonIdGroups = memberRelationshipsModels.map(function (model){
+        var people = model.relationships.map(
+          storageAPI.getOtherPersonIdFromRelationship.bind(null, model.personId)
+        );
 
-      otherGroupToPersonIsGroupDiff = _.difference(
-        otherPersonGroupScopedToPersonIsGroupIds,
-        otherPeopleIdsInPersonIsRelationships
-      )*/;
+        if(people.length) {
+          people.push(model.personId);
+        }
 
-    /*console.log(
-      'other models: ', otherPeopleRelationshipsModel,
-      'third person groups: ', otherPeopleThirdPersonIdGroups,
-      'third people ids scoped: ', otherPersonGroupScopedToPersonIsGroupIds,
-      'difference: ', otherGroupToPersonIsGroupDiff
-    );*/
+        return people;
+      }),
+
+      /**
+       * Can't be a filter, need to keep the index to get person
+       */
+      sharedGroups = memberPersonIdGroups.filter(function (group) {
+        return group.indexOf(personIsId) !== -1 &&
+          group.indexOf(personToId) !== -1;
+      });
+
+    console.log('relationship', relationshipInfo);
+    console.log('other models: ', memberRelationshipsModels);
+    console.log('member relationship groups: ', memberRelationshipsScopedPersonIdGroups);
+    console.log('shared groups: ', sharedGroups);
 
     /**
-     * Retain all people common in each other persons relationships to
-     * create a mutual group.
+     * Retain all people common in each other persons relationships to create
+     * a mutual group.
      * Start with everyone and reduce list
      */
-    groups.mutual =
-      otherPeopleIdsInPersonIsRelationships;
+    groups.mutual = otherPeopleIdsInPersonIsRelationships
+      .concat(relationshipInfo['@personIs'].id);
 
-    $.each(otherPeopleThirdPersonIdGroups, function (i, group) {
-      /*console.log(
-        group,
-        groups.mutual,
-        otherPeopleRelationshipsModel[i],
-        group.concat(otherPeopleRelationshipsModel[i].personId)
-      );*/
-
+    $.each(memberRelationshipsScopedPersonIdGroups, function (i, group) {
       groups.mutual = _.intersection(
-        group.concat(otherPeopleRelationshipsModel[i].personId),
+        group.concat(memberRelationshipsModels[i].personId),
         groups.mutual
       );
     });
