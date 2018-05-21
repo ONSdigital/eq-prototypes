@@ -93,6 +93,10 @@ export function getHouseholdMemberByPersonId(id) {
   });
 }
 
+export function getMemberPersonId(member) {
+  return member['@person'].id;
+}
+
 /**
  * Comparators
  */

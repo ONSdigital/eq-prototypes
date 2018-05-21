@@ -17,6 +17,8 @@ import {
   isAParentInRelationship,
   isInRelationship,
   areAnyChildrenInRelationshipNotParent,
+  isRelationshipType,
+  getRelationshipOf,
   getRelationshipsWithPersonIds,
   getPeopleIdsMissingRelationshipsWithPerson,
   getRelationshipType,
@@ -34,6 +36,7 @@ import {
   getAllHouseholdMembers,
   getUserAsHouseholdMember,
   getHouseholdMemberByPersonId,
+  getMemberPersonId,
   updateUserAsHouseholdMember,
   deleteUserAsHouseholdMember,
   isVisitor,
@@ -172,6 +175,7 @@ window.ONS.storage = {
   getUserPerson,
   getUserAsHouseholdMember,
   getHouseholdMemberByPersonId,
+  getMemberPersonId,
   updateUserAsHouseholdMember,
   deleteUserAsHouseholdMember,
 
@@ -194,6 +198,8 @@ window.ONS.storage = {
   isAChildInRelationship,
   isInRelationship,
   areAnyChildrenInRelationshipNotParent,
+  isRelationshipType,
+  getRelationshipOf,
 
   relationshipDescriptionMap,
   relationshipSummaryTemplates,

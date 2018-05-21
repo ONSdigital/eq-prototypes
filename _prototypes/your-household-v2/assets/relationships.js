@@ -295,6 +295,11 @@ export function areAnyChildrenInRelationshipNotParent(childrenIds, notParentId, 
     isAChildInRelationship(childrenIds[childIndex], relationship);
 }
 
+export function isRelationshipType(relationshipType, relationship) {
+  return relationshipDescriptionMap[relationship.personIsDescription]
+    .type.id === relationshipType;
+}
+
 /**
  * Retrieve people by role in relationships
  */
@@ -543,5 +548,12 @@ export function getRelationshipsWithPersonIds(relationships, idArr) {
   return relationships.filter(function(childRelationship) {
     return idArr.indexOf(childRelationship.personIsId) !== -1 ||
       idArr.indexOf(childRelationship.personToId) !== -1;
+  });
+}
+
+export function getRelationshipOf(person1, person2) {
+  return getAllRelationships().find(function(relationship) {
+    return isInRelationship(person1, relationship) &&
+      isInRelationship(person2, relationship);
   });
 }

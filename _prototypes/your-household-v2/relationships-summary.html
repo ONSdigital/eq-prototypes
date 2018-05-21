@@ -131,7 +131,7 @@ visitors:
 
     $('#household-relationships-summary').html();
 
-    console.log('To explain: ', relationshipIdsToExplain);
+    console.log('To explain: ', [].concat(relationshipIdsToExplain));
 
     /**
      * Relationships sorted by household member entry order
@@ -240,111 +240,80 @@ visitors:
         'remaining': []
       },
 
-      allManualRelationshipsByDescription = storageAPI
-        .getAllManualRelationships()
-        .filter(function (relationship) {
-          return storageAPI.getRelationshipType(relationship) ===
-            relationshipInfo.relationshipType;
-        }),
-
-      personIsRelationships = allManualRelationshipsByDescription.filter(
-        storageAPI.isInRelationship.bind(null, relationshipInfo['@personIs'].id)
-      ),
-
-      otherPeopleIdsInPersonIsRelationships = personIsRelationships.map(
-        storageAPI.getOtherPersonIdFromRelationship
-          .bind(null, relationshipInfo['@personIs'].id)
-      ),
-
-      memberRelationshipsModels = storageAPI.getAllHouseholdMembers()
-        .map(function (member) {
-          var personId = member['@person'].id;
-
-          return {
-            personId: personId,
-            relationships: allManualRelationshipsByDescription
-              .filter(function (relationship) {
-
-                /**
-                 * If other person is in relationship and personIs is not in
-                 * relationship
-                 */
-                return storageAPI.isInRelationship(personId, relationship);/* &&
-                  !storageAPI.isInRelationship(relationshipInfo['@personIs'].id, relationship)*/
-              })
-          }
-        }),
-
       personIsId = relationshipInfo['@personIs'].id,
       personToId = relationshipInfo['@personTo'].id,
 
-      memberRelationshipsScopedPersonIdGroups = memberRelationshipsModels
-        .filter(function (model) {
-          /**
-           * Only include relationships that personIs or personTo are included
-           */
-          return model.relationships.filter(function (relationship) {
-            return storageAPI.isInRelationship(personIsId, relationship) ||
-              storageAPI.isInRelationship(personToId, relationship);
-          }).length;
-        })
-        .map(function (model){
-          return model.relationships.map(
-            storageAPI.getOtherPersonIdFromRelationship.bind(null, model.personId)
-          );
-        }),
+      relationshipsExplained = [],
+      relationshipsIdsExplained = [],
+      lines = [],
 
-      memberPersonIdGroups = memberRelationshipsModels.map(function (model){
-        var people = model.relationships.map(
-          storageAPI.getOtherPersonIdFromRelationship.bind(null, model.personId)
-        );
+      mutualGroups = groupSummary.getAllMutuallyExclusiveGroups();
 
-        if(people.length) {
-          people.push(model.personId);
-        }
+    console.log('relationship', relationshipInfo);
 
-        return people;
-      }),
-
-      /**
-       * Can't be a filter, need to keep the index to get person
-       */
-      sharedGroups = memberPersonIdGroups.filter(function (group) {
+    /**
+     * Find mutual group match with personIsId & personToId
+     */
+    $.each(mutualGroups, function(i, groupsByType) {
+      var found = _.find(groupsByType, function (group) {
         return group.indexOf(personIsId) !== -1 &&
           group.indexOf(personToId) !== -1;
       });
 
-    /*console.log('relationship', relationshipInfo);
-    console.log('other models: ', memberRelationshipsModels);
-    console.log('member relationship groups: ', memberRelationshipsScopedPersonIdGroups);
-    console.log('shared groups: ', sharedGroups);*/
-
-    /**
-     * Retain all people common in each other persons relationships to create
-     * a mutual group.
-     * Start with everyone and reduce list
-     */
-    groups.mutual = otherPeopleIdsInPersonIsRelationships
-      .concat(relationshipInfo['@personIs'].id);
-
-    $.each(memberRelationshipsScopedPersonIdGroups, function (i, group) {
-      groups.mutual = _.intersection(
-        group.concat(memberRelationshipsModels[i].personId),
-        groups.mutual
-      );
+      if(found && !(explainedExclusiveGroups[i]
+        .indexOf(groupsByType.indexOf(found)) !== -1)
+      ) {
+        explainedExclusiveGroups[i].push(groupsByType.indexOf(found));
+        groups.mutual = found;
+      }
     });
 
-    /**
-     * Who are the people remaining outside of the mutual group
-     */
-    groups.remaining = _.difference(
-      otherPeopleIdsInPersonIsRelationships,
-      groups.mutual
-    );
+    $.each(groups.mutual, function (i, person1Id) {
+      $.each(groups.mutual, function (o, person2Id) {
+        var relationship = storageAPI.getRelationshipOf(person1Id, person2Id);
 
-    /*console.log('mutual: ', groups.mutual);
+        /**
+         * Guard
+         */
+        if (i === o || relationshipsIdsExplained.indexOf(relationship.id) !== -1) {
+          return;
+        }
+
+        relationshipsIdsExplained.push(relationship.id);
+        relationshipsExplained = relationshipsExplained.concat(relationship);
+      });
+    });
+
+    if(groups.mutual.length) {
+      lines.push(storageAPI.relationshipSummaryTemplates['allMutual'](
+        groups.mutual.map(function (personId) {
+          return storageAPI
+            .getHouseholdMemberByPersonId(personId)['@person'].fullName;
+        }),
+        relationshipInfo['relationshipDescription'].summaryAdjective
+      ));
+    }
+    else {
+
+      /**
+       * Needs rework for many to many relationships
+       */
+      relationshipsExplained = [relationship];
+
+      lines.push(storageAPI.relationshipSummaryTemplates['allMutual'](
+        [
+          relationshipInfo['@personIs'].fullName,
+          relationshipInfo['@personTo'].fullName
+        ],
+        relationshipInfo['relationshipDescription'].summaryAdjective
+      ));
+    }
+
+    console.log('summaries: ', lines);
+    console.log('relationshipsExplained: ', relationshipsExplained);
+    console.log('mutual: ', groups.mutual);
     console.log('remaining: ', groups.remaining);
-    console.log('=====');*/
+    console.log('=====');
 
     /**
      * 1. Find all mutual relationships
@@ -381,20 +350,109 @@ visitors:
     /**
      * Could default to writing out relationship manually?
      */
-
+    
     return {
-      relationshipsExplained: [relationship],
-      lines: [
-        storageAPI.relationshipSummaryTemplates['allMutual'](
-          [
-              relationshipInfo['@personIs'].fullName,
-              relationshipInfo['@personTo'].fullName
-          ],
-          relationshipInfo['relationshipDescription'].summaryAdjective
-        )
-      ]
+      relationshipsExplained: relationshipsExplained,
+      lines: lines
     }
   }
+
+  function getMemberRelationshipModelsByType(relationshipType) {
+    return storageAPI.getAllHouseholdMembers()
+      .map(function (member) {
+        var personId = member['@person'].id;
+
+        return {
+          personId: personId,
+          relationships:
+            storageAPI.getAllManualRelationships()
+              .filter(storageAPI.isRelationshipType.bind(null, relationshipType))
+              .filter(storageAPI.isInRelationship.bind(null, personId))
+        }
+      })
+  }
+
+  /**
+   * Mutually exclusive relationship groups in priority order
+   */
+  var exclusiveGroups = {
+    'sibling': [],
+    'step-brother-sister': [],
+    'other-relation': [],
+    'unrelated': []
+  };
+
+  var explainedExclusiveGroups = {
+    'sibling': [],
+    'step-brother-sister': [],
+    'other-relation': [],
+    'unrelated': []
+  };
+
+  groupSummary.getAllMutuallyExclusiveGroups = function () {
+    if (groupSummary.allMutuallyExclusiveGroups) {
+      return groupSummary.allMutuallyExclusiveGroups;
+    }
+
+    $.each(exclusiveGroups, function (relationshipType, group) {
+      var peopleAlreadyAllocated = _.uniq(_.flatten(_.keys(exclusiveGroups)
+        .map(function(k) {
+          return exclusiveGroups[k];
+        })));
+
+      /**
+       * Find all sibling group models first
+       */
+      var memberRelationshipsModels =
+        getMemberRelationshipModelsByType(relationshipType);
+
+      var memberPersonIdGroups = memberRelationshipsModels.map(function (model){
+        var people = model.relationships.map(
+          storageAPI.getOtherPersonIdFromRelationship.bind(null, model.personId)
+        );
+
+        if(people.length) {
+          people.push(model.personId);
+        }
+
+        return people;
+      });
+
+      /**
+       * Remove members already found in other mutual groups
+       */
+      var removedDuplicates = memberPersonIdGroups.map(function (group) {
+        var nonDuplicates = group.filter(function (personId) {
+          return peopleAlreadyAllocated.indexOf(personId) === -1;
+        });
+
+        return nonDuplicates;
+      });
+
+      var uniqueGroupsByType = removedDuplicates
+        .reduce(function (accum, currentGroup) {
+          var matchFound = false;
+
+          $.each(accum, function (i, group) {
+            if(!_.difference(currentGroup, group).length) {
+              matchFound = true;
+            }
+          });
+
+          if(!accum.length || !matchFound) {
+            accum.push(currentGroup);
+          }
+
+          return accum;
+        }, []);
+
+      exclusiveGroups[relationshipType] = uniqueGroupsByType;
+    });
+
+    groupSummary.allMutuallyExclusiveGroups = exclusiveGroups;
+
+    return exclusiveGroups;
+  };
 
   function familySingleSummary(relationship) {
     var relationshipInfo = retrieveRelationshipInfo(relationship);
