@@ -41,7 +41,10 @@ visitors:
                                 <div class="question">
                                     <h1 class="question__title saturn u-mb-l">
                                         Are any of the following household
-                                        members also children of <span
+                                        members also
+                                        <span
+                                            class="js-other-description"></span>
+                                        <span
                                             class="js-relationship-person-is"></span>?
                                     </h1>
 
@@ -75,12 +78,11 @@ visitors:
 
 <div style="display:none;">
     <div id="member-checkbox-select-template" class="field__item js-focusable-box">
-        <input class="input input--checkbox js-person-control"
+        <input class="input input--checkbox js-focusable js-person-control"
                name="checkbox-answer"
                type="checkbox" />
         <label class="label label--inline venus js-person-name"></label>
     </div>
-    <br />
 </div>
 
 <script src='/js/compiled/standard-bundle.js'></script>
@@ -108,9 +110,13 @@ visitors:
      */
     var allRelationships = storageAPI.getAllRelationships(),
 
-      parentId = new URLSearchParams(window.location.search).get('parent'),
+      params = new URLSearchParams(window.location.search),
 
-      parent,
+      personId = params.get('person'),
+
+      relationshipDescription = params.get('relationship-description'),
+
+      person,
 
       members = storageAPI.getAllHouseholdMembers().filter(function (member) {
         return member.type === storageAPI.KEYS.HOUSEHOLD_MEMBER_TYPE;
@@ -147,21 +153,26 @@ visitors:
     }
 
     function updateList() {
-      if (!parentId) {
-        console.log('parent url parameter not found');
+      if (!personId) {
+        console.log('person url parameter not found');
         return;
       }
 
-      parent = storageAPI.getHouseholdMemberByPersonId(parentId)['@person'];
+      if(!relationshipDescription) {
+        console.log('relationship-description url parameter not found');
+        return;
+      }
+
+      person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'];
 
       /**
        * Remove this person from the list
        */
-      removeFromList(remainingPersonIds, parentId);
+      removeFromList(remainingPersonIds, personId);
 
       $.each(
         allRelationships.filter(
-          storageAPI.isInRelationship.bind(null, parentId)
+          storageAPI.isInRelationship.bind(null, personId)
         ),
         function (i, relationship) {
           var personIsIndex = remainingPersonIds.indexOf(relationship.personIsId),
@@ -179,7 +190,12 @@ visitors:
         }
       );
 
-      $('.js-relationship-person-is').html(parent.fullName);
+      $('.js-relationship-person-is').html(person.fullName);
+
+      $('.js-other-description').html(
+        relationshipDescription === 'mother-father' ?
+          'children of' : 'unrelated to'
+      );
 
       $.each(
         remainingPersonIds.map(function (personId) {
@@ -194,32 +210,32 @@ visitors:
       e.preventDefault();
 
       var relationshipsUrl = window.location.pathname
-        .replace('relationships-child-parent', 'relationships'),
-        newRelationshipsWithChildIds = [];
+        .replace('relationships-person-select', 'relationships'),
+        newRelationshipsWithOtherPersonIds = [];
 
       $('[name=checkbox-answer]:checked').each(function () {
-        var childId = $(this).val();
+        var otherId = $(this).val();
 
-        newRelationshipsWithChildIds.push({
+        newRelationshipsWithOtherPersonIds.push({
           relationship: storageAPI.addRelationship(
             storageAPI.TYPES.relationship(
-              'mother-father',
-              parentId,
-              childId
+              relationshipDescription,
+              personId,
+              otherId
             )
           ),
-          childId: childId
+          otherId: otherId
         });
       });
 
       /**
        * Avoid race conditions by doing inference separately
        */
-      $.each(newRelationshipsWithChildIds, function (i, item) {
+      $.each(newRelationshipsWithOtherPersonIds, function (i, item) {
         storageAPI.inferRelationships(
           item.relationship,
-          storageAPI.getHouseholdMemberByPersonId(parentId),
-          storageAPI.getHouseholdMemberByPersonId(item.childId)
+          storageAPI.getHouseholdMemberByPersonId(personId),
+          storageAPI.getHouseholdMemberByPersonId(item.otherId)
         );
       });
 

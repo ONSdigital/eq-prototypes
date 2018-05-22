@@ -334,28 +334,39 @@ visitors:
      */
     if (nextMissingRelationship) {
 
-      /**
-       * Question strategies
-       *
-       * If child-parent relationship type was selected
-       * and there are missing relationships for this person
-       */
       (function () {
         var personIsId = personIs['@person'].id,
           personToId = personTo['@person'].id,
-          parentId;
+          subjectPersonId,
+          subjectRelationshipDescription;
 
+        /**
+         * Question strategies
+         *
+         * If child-parent relationship type was selected
+         * and there are missing relationships for this person
+         */
         if(relationshipDescriptionVal === 'mother-father' &&
           storageAPI.getPeopleIdsMissingRelationshipsWithPerson(personIsId).length) {
-          parentId = personIsId;
+          subjectPersonId = personIsId;
         }
         else if(relationshipDescriptionVal === 'son-daughter' &&
           storageAPI.getPeopleIdsMissingRelationshipsWithPerson(personToId).length) {
-          parentId = personToId;
+          subjectPersonId = personToId;
+          subjectRelationshipDescription = 'mother-father';
+        }
+        else if(relationshipDescriptionVal === 'unrelated' &&
+          storageAPI.getPeopleIdsMissingRelationshipsWithPerson(personToId).length) {
+          subjectPersonId = personIsId;
         }
 
-        if(parentId) {
-          window.location.href = '../relationships-child-parent/?parent=' + parentId;
+        subjectRelationshipDescription = subjectRelationshipDescription ||
+          relationshipDescriptionVal;
+
+        if(subjectPersonId) {
+          window.location.href = '../relationships-person-select/?person=' +
+            subjectPersonId + '&relationship-description=' +
+            subjectRelationshipDescription;
         }
         else {
           window.location.href = '../relationships';
