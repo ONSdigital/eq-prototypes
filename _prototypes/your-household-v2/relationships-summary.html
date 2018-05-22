@@ -350,7 +350,7 @@ visitors:
     /**
      * Could default to writing out relationship manually?
      */
-    
+
     return {
       relationshipsExplained: relationshipsExplained,
       lines: lines
@@ -445,6 +445,13 @@ visitors:
 
           return accum;
         }, []);
+
+      /**
+       * Can only be one unrelated mutual group
+       */
+      if(relationshipType === 'unrelated') {
+        uniqueGroupsByType = [_.intersection.apply(null, uniqueGroupsByType)];
+      }
 
       exclusiveGroups[relationshipType] = uniqueGroupsByType;
     });
