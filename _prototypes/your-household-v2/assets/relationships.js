@@ -88,7 +88,7 @@ export const relationshipDescriptionMap = {
   },
   // covered
   'other-relation': {
-    sentanceLabel: 'other type of relation',
+    sentanceLabel: 'relation - other',
     summaryAdjective: 'related',
     type: relationshipTypes['other-relation']
   },
@@ -98,9 +98,14 @@ export const relationshipDescriptionMap = {
     summaryAdjective: 'partners',
     type: relationshipTypes['partner']
   },
+  'same-sex-partner': {
+    sentanceLabel: 'same sex civil partner',
+    summaryAdjective: 'same sex civil partners',
+    type: relationshipTypes['partner']
+  },
   // covered
   'unrelated': {
-    sentanceLabel: 'no relation',
+    sentanceLabel: 'unrelated',
     summaryAdjective: 'not related',
     type: relationshipTypes['unrelated']
   }
