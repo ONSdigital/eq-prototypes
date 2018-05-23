@@ -234,59 +234,18 @@ visitors:
 
   function groupSummary(relationship) {
     var relationshipInfo = retrieveRelationshipInfo(relationship),
-
-      groups = {
-        'mutual': [],
-        'remaining': []
-      },
-
-      personIsId = relationshipInfo['@personIs'].id,
-      personToId = relationshipInfo['@personTo'].id,
-
       relationshipsExplained = [],
-      relationshipsIdsExplained = [],
       lines = [],
-
-      mutualGroups = groupSummary.getAllMutuallyExclusiveGroups();
+      mutualGroups = groupSummary.findMutualOf(relationshipInfo);
 
     console.log('relationship', relationshipInfo);
 
-    /**
-     * Find mutual group match with personIsId & personToId
-     */
-    $.each(mutualGroups, function(i, groupsByType) {
-      var found = _.find(groupsByType, function (group) {
-        return group.indexOf(personIsId) !== -1 &&
-          group.indexOf(personToId) !== -1;
-      });
+    relationshipsExplained = relationshipsExplained
+      .concat(mutualGroups.relationshipsExplained);
 
-      if(found && !(explainedExclusiveGroups[i]
-        .indexOf(groupsByType.indexOf(found)) !== -1)
-      ) {
-        explainedExclusiveGroups[i].push(groupsByType.indexOf(found));
-        groups.mutual = found;
-      }
-    });
-
-    $.each(groups.mutual, function (i, person1Id) {
-      $.each(groups.mutual, function (o, person2Id) {
-        var relationship = storageAPI.getRelationshipOf(person1Id, person2Id);
-
-        /**
-         * Guard
-         */
-        if (i === o || relationshipsIdsExplained.indexOf(relationship.id) !== -1) {
-          return;
-        }
-
-        relationshipsIdsExplained.push(relationship.id);
-        relationshipsExplained = relationshipsExplained.concat(relationship);
-      });
-    });
-
-    if(groups.mutual.length) {
+    if(mutualGroups.people.length) {
       lines.push(storageAPI.relationshipSummaryTemplates['allMutual'](
-        groups.mutual.map(function (personId) {
+        mutualGroups.people.map(function (personId) {
           return storageAPI
             .getHouseholdMemberByPersonId(personId)['@person'].fullName;
         }),
@@ -311,8 +270,7 @@ visitors:
 
     console.log('summaries: ', lines);
     console.log('relationshipsExplained: ', relationshipsExplained);
-    console.log('mutual: ', groups.mutual);
-    console.log('remaining: ', groups.remaining);
+    console.log('mutual: ', mutualGroups);
     console.log('=====');
 
     /**
@@ -389,7 +347,51 @@ visitors:
     'unrelated': []
   };
 
-  groupSummary.getAllMutuallyExclusiveGroups = function () {
+  groupSummary.findMutualOf = function(relationshipInfo) {
+    var groupModelPeople = [],
+      personIsId = relationshipInfo['@personIs'].id,
+      personToId = relationshipInfo['@personTo'].id,
+      mutualGroups = groupSummary.mutuallyExclusiveGroupsViewModel(),
+      relationshipsExplained = [],
+      relationshipsIdsExplained = [];
+
+    $.each(mutualGroups, function(i, groupsByType) {
+      var found = _.find(groupsByType, function (group) {
+        return group.indexOf(personIsId) !== -1 &&
+          group.indexOf(personToId) !== -1;
+      });
+
+      if(found && !(explainedExclusiveGroups[i]
+        .indexOf(groupsByType.indexOf(found)) !== -1)
+      ) {
+        explainedExclusiveGroups[i].push(groupsByType.indexOf(found));
+        groupModelPeople = found;
+      }
+    });
+
+    $.each(groupModelPeople, function (i, person1Id) {
+      $.each(groupModelPeople, function (o, person2Id) {
+        var relationship = storageAPI.getRelationshipOf(person1Id, person2Id);
+
+        /**
+         * Guard
+         */
+        if (i === o || relationshipsIdsExplained.indexOf(relationship.id) !== -1) {
+          return;
+        }
+
+        relationshipsIdsExplained.push(relationship.id);
+        relationshipsExplained = relationshipsExplained.concat(relationship);
+      });
+    });
+
+    return {
+      people: groupModelPeople,
+      relationshipsExplained: relationshipsExplained
+    };
+  };
+
+  groupSummary.mutuallyExclusiveGroupsViewModel = function () {
     if (groupSummary.allMutuallyExclusiveGroups) {
       return groupSummary.allMutuallyExclusiveGroups;
     }

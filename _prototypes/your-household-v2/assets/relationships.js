@@ -165,7 +165,7 @@ export function relationship(description, personIsId, personToId, opts = {}) {
 /**
  * Storage
  */
-export function addRelationship(relationshipObj, opts = {}) {
+export function addRelationship(relationshipObj) {
   let householdRelationships = getAllRelationships() || [],
     item = {
       ...relationshipObj,
