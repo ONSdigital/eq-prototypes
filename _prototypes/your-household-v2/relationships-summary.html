@@ -236,12 +236,10 @@ visitors:
     var relationshipInfo = retrieveRelationshipInfo(relationship),
       relationshipsExplained = [],
       lines = [],
-      mutualGroups = groupSummary.findMutualOf(relationshipInfo);
+      mutualGroups = groupSummary.findMutualOf(relationshipInfo),
+      manyToManyGroups = groupSummary.findManyToManyWith(relationshipInfo);
 
     console.log('relationship', relationshipInfo);
-
-    relationshipsExplained = relationshipsExplained
-      .concat(mutualGroups.relationshipsExplained);
 
     if(mutualGroups.people.length) {
       lines.push(storageAPI.relationshipSummaryTemplates['allMutual'](
@@ -251,8 +249,28 @@ visitors:
         }),
         relationshipInfo['relationshipDescription'].summaryAdjective
       ));
+
+      relationshipsExplained = relationshipsExplained
+        .concat(mutualGroups.relationshipsExplained);
     }
-    else {
+    else if(manyToManyGroups.groups.length) {
+      $.each(manyToManyGroups.groups, function (i, group) {
+        lines.push(storageAPI.relationshipSummaryTemplates['manyToMany'](
+          group.personIsRelatedGroup.map(function (personId) {
+            return storageAPI
+              .getHouseholdMemberByPersonId(personId)['@person'].fullName;
+          }),
+          group.otherPeopleGroup.map(function (personId) {
+            return storageAPI
+              .getHouseholdMemberByPersonId(personId)['@person'].fullName;
+          }),
+          relationshipInfo['relationshipDescription'].summaryAdjective
+        ));
+      });
+
+      relationshipsExplained = relationshipsExplained
+        .concat(manyToManyGroups.relationshipsExplained);
+    } else {
 
       /**
        * Needs rework for many to many relationships
@@ -271,6 +289,7 @@ visitors:
     console.log('summaries: ', lines);
     console.log('relationshipsExplained: ', relationshipsExplained);
     console.log('mutual: ', mutualGroups);
+    console.log('manyToManyGroups: ', manyToManyGroups);
     console.log('=====');
 
     /**
@@ -347,6 +366,8 @@ visitors:
     'unrelated': []
   };
 
+  var explainedManyToManyGroups = [];
+
   groupSummary.findMutualOf = function(relationshipInfo) {
     var groupModelPeople = [],
       personIsId = relationshipInfo['@personIs'].id,
@@ -376,7 +397,8 @@ visitors:
         /**
          * Guard
          */
-        if (i === o || relationshipsIdsExplained.indexOf(relationship.id) !== -1) {
+        if (i === o || !relationship ||
+          relationshipsIdsExplained.indexOf(relationship.id) !== -1) {
           return;
         }
 
@@ -431,6 +453,13 @@ visitors:
         return nonDuplicates;
       });
 
+      /**
+       * Can only be one unrelated mutual group
+       */
+      if(relationshipType === 'unrelated') {
+        removedDuplicates = [_.intersection.apply(null, removedDuplicates)];
+      }
+
       var uniqueGroupsByType = removedDuplicates
         .reduce(function (accum, currentGroup) {
           var matchFound = false;
@@ -448,19 +477,150 @@ visitors:
           return accum;
         }, []);
 
-      /**
-       * Can only be one unrelated mutual group
-       */
-      if(relationshipType === 'unrelated') {
-        uniqueGroupsByType = [_.intersection.apply(null, uniqueGroupsByType)];
-      }
-
       exclusiveGroups[relationshipType] = uniqueGroupsByType;
     });
 
     groupSummary.allMutuallyExclusiveGroups = exclusiveGroups;
 
     return exclusiveGroups;
+  };
+
+  function isPersonInGroup(list, personTarget) {
+    return _.find(list,
+      function (personId) {
+        return personId === personTarget;
+      })
+  }
+
+  groupSummary.findManyToManyWith = function(relationshipInfo) {
+    var personIsId = relationshipInfo['@personIs'].id,
+      personToId = relationshipInfo['@personTo'].id,
+
+      personIsGroups = groupSummary.getGroupsOf(personIsId, personToId),
+      personToGroups = groupSummary.getGroupsOf(personToId, personIsId),
+
+      relationshipsExplained = [],
+      /*relationshipsIdsExplained = []*/
+
+      /*[{
+          personIsRelatedGroup: [<people>],
+          otherPeopleGroup: [<people>]
+      }]*/
+      groups = [];
+
+    console.log('personIsGroups: ', personIsGroups);
+    console.log('personToGroups: ', personToGroups);
+
+    /**
+     * Check people in relationship aren't already found in a many to many
+     * relationship
+     */
+    if(_.find(explainedManyToManyGroups, function (group) {
+      return (
+        isPersonInGroup(group.personIsRelatedGroup, personIsId) &&
+        isPersonInGroup(group.otherPeopleGroup, personToId)
+        ) || (
+        isPersonInGroup(group.personIsRelatedGroup, personToId) &&
+        isPersonInGroup(group.otherPeopleGroup, personToId)
+      );
+    })) {
+      return {
+        groups: groups,
+        relationshipsExplained: relationshipsExplained
+      };
+    }
+
+    /**
+     * Create many to many models
+     */
+    $.each(personIsGroups, function (i, personIsGroup) {
+      $.each(personIsGroup, function (o, group) {
+        var personGroupByRelationship = group.map(function (personId) {
+            return storageAPI.getAllManualRelationships()
+              .filter(storageAPI.isInRelationship.bind(null, personId))
+              .filter(storageAPI.isRelationshipType
+                .bind(null, relationshipInfo.relationshipTypeId))
+              .map(storageAPI.getOtherPersonIdFromRelationship
+                .bind(null, personId));
+          }),
+
+          smallestIndifferentGroup = _.intersection
+            .apply(null, personGroupByRelationship),
+
+          model = {
+            personIsRelatedGroup: group,
+            otherPeopleGroup: smallestIndifferentGroup
+          };
+
+        console.log('personGroupByRelationship', personGroupByRelationship);
+        console.log('smallestIndifferentGroup', smallestIndifferentGroup);
+
+        groups.push(model);
+        explainedManyToManyGroups.push(model);
+      });
+    });
+
+    /**
+     * Explain relationships
+     */
+    $.each(groups, function (i, group) {
+      $.each(group.personIsRelatedGroup, function (i, person1Id) {
+        $.each(group.otherPeopleGroup, function (o, person2Id) {
+          relationshipsExplained.push(storageAPI.getRelationshipOf(person1Id, person2Id));
+        });
+      });
+    });
+
+    return {
+      groups: groups,
+      relationshipsExplained: relationshipsExplained
+    };
+  };
+
+  groupSummary.getGroupsOf = function(person1Id, person2Id) {
+    var personGroups = [],
+      mutualGroups = groupSummary.mutuallyExclusiveGroupsViewModel();
+
+    /**
+     * TODO - Find family groups to add to personIsGroups
+     */
+
+    /**
+     * TODO - Should this be grouped with other family?
+     * Find other double member groups to add to personIsGroups
+     */
+    var personFamilySingleGroups = storageAPI.getAllManualRelationships()
+      .filter(storageAPI.isInRelationship.bind(null, person1Id))
+      .filter(storageAPI.isRelationshipType.bind(null, [
+        'spouse', 'pertner', 'step-child-parent', 'grandchild-grandparent'
+      ]))
+      .map(function (relationship) {
+        return [
+          storageAPI.getOtherPersonIdFromRelationship(person1Id, relationship),
+          person1Id
+        ];
+      });
+
+    /**
+     * Find mutual group that has personIs only and not personTo in relationship
+     * and isn't an unrelated mutual group
+     */
+    var personMutualGroup = _.find(mutualGroups,
+      function (groupsByType, gTypeKey) {
+        if(gTypeKey === 'unrelated') {
+          return false;
+        }
+
+        return _.find(groupsByType, function (group) {
+          return group.indexOf(person1Id) !== -1 &&
+            group.indexOf(person2Id) === -1;
+        })
+      });
+
+    personFamilySingleGroups.length && personGroups.push(personFamilySingleGroups);
+    personMutualGroup && personGroups.push(personMutualGroup);
+
+    return personGroups;
   };
 
   function familySingleSummary(relationship) {

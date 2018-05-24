@@ -301,8 +301,17 @@ export function areAnyChildrenInRelationshipNotParent(childrenIds, notParentId, 
 }
 
 export function isRelationshipType(relationshipType, relationship) {
-  return relationshipDescriptionMap[relationship.personIsDescription]
-    .type.id === relationshipType;
+  const typeOfRelationship = relationshipDescriptionMap[relationship.personIsDescription]
+    .type.id;
+
+  /**
+   * relationshipType can be an array
+   */
+  return _.isArray(relationshipType)
+    ? !!_.find(relationshipType, function (rType) {
+      return rType === typeOfRelationship;
+    })
+    : typeOfRelationship === relationshipType;
 }
 
 /**
