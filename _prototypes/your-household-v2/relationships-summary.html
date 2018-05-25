@@ -178,7 +178,7 @@ visitors:
           relationshipTypesToSummaryStrategyMap[relationshipTypeId]
           ](relationship, member['@person']);
 
-        // console.log('Summary lines: ', summaryLines);
+        console.log('Summary lines: ', summaryLines);
 
         lines = [].concat(lines, summaryLines.lines);
 
@@ -544,19 +544,67 @@ visitors:
                 .bind(null, personId));
           }),
 
-          smallestIndifferentGroup = _.intersection
+          /**
+           * Smallest indifferent group
+           */
+          otherPeopleGroup = _.intersection
             .apply(null, personGroupByRelationship),
 
-          model = {
-            personIsRelatedGroup: group,
-            otherPeopleGroup: smallestIndifferentGroup
+          personIsRelatedGroup = group,
+
+          model;
+
+        if(personIsRelatedGroup.length && otherPeopleGroup.length) {
+
+          /**
+           * Filter people on left side that have already been explained in
+           * many to many groups
+           * Refine otherPeopleGroup
+           */
+          $.each(explainedManyToManyGroups, function (t, explainedGroup) {
+
+            if(explainedGroup.relationshipTypeId ===
+              relationshipInfo.relationshipTypeId
+            ) {
+
+              /**
+               * If there is a match to the same group of other people in
+               * relationship
+               */
+              if(!_.difference(
+                otherPeopleGroup,
+                explainedGroup.otherPeopleGroup
+              ).length) {
+
+                /**
+                 * Only include people who haven't already been explained to
+                 * this otherPeopleGroup
+                 */
+                personIsRelatedGroup = _.difference(
+                  personIsRelatedGroup,
+                  explainedGroup.personIsRelatedGroup
+                );
+              }
+            }
+          });
+
+          if(!personIsRelatedGroup.length) {
+            return;
+          }
+
+          model= {
+            relationshipTypeId: relationshipInfo.relationshipTypeId,
+            personIsRelatedGroup: personIsRelatedGroup,
+            otherPeopleGroup: otherPeopleGroup
           };
 
-        console.log('personGroupByRelationship', personGroupByRelationship);
-        console.log('smallestIndifferentGroup', smallestIndifferentGroup);
+          groups.push(model);
+          explainedManyToManyGroups.push(model);
+        }
 
-        groups.push(model);
-        explainedManyToManyGroups.push(model);
+        console.log('personGroupByRelationship', personGroupByRelationship);
+        console.log('personIsRelatedGroup', personIsRelatedGroup);
+        console.log('otherPeopleGroup', otherPeopleGroup);
       });
     });
 
