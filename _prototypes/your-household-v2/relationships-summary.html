@@ -630,17 +630,13 @@ visitors:
       mutualGroups = groupSummary.mutuallyExclusiveGroupsViewModel();
 
     /**
-     * TODO - Find family groups to add to personIsGroups
-     */
-
-    /**
      * TODO - Should this be grouped with other family?
      * Find other double member groups to add to personIsGroups
      */
     var personFamilySingleGroups = storageAPI.getAllManualRelationships()
       .filter(storageAPI.isInRelationship.bind(null, person1Id))
       .filter(storageAPI.isRelationshipType.bind(null, [
-        'spouse', 'pertner', 'step-child-parent', 'grandchild-grandparent'
+        'spouse', 'partner', 'step-child-parent', 'grandchild-grandparent'
       ]))
       .map(function (relationship) {
         return [
@@ -664,6 +660,25 @@ visitors:
             group.indexOf(person2Id) === -1;
         })
       });
+
+    /**
+     * TODO - Add family as group
+     * Hack - Refine sibling mutual groups with shared parents and inferred
+     * sibling relationships from familySummary viewModels
+     *
+     * Find all family with person1Id
+     * Find sibling mutual group with person1Id
+     *
+     * If person1Id has both, detect whether other siblings in group have the
+     * same parent(s).
+     *   If mutual siblings shares 2 parents, replace mutual group with family.
+     *   If mutual siblings share 1 parent, attempt to break mutual group into
+     *     siblings with two parent groups
+     *   else
+     *     Break into 1 parent to children group(s)
+     *
+     * else - theres is no conflict, add as additional group
+     */
 
     personFamilySingleGroups.length && personGroups.push(personFamilySingleGroups);
     personMutualGroup && personGroups.push(personMutualGroup);
