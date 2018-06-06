@@ -102,4 +102,7 @@ items:
         JSON.stringify($('#text-input2').val()));
     });
   });
+
+  $('#text-input1').val(JSON.parse(sessionStorage.getItem('computer-devices-aquisitions')) || '');
+  $('#text-input2').val(JSON.parse(sessionStorage.getItem('computer-devices-disposals')) || '');
 </script>

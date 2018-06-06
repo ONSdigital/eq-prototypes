@@ -119,5 +119,8 @@ items:
       sessionStorage.setItem('computer-software-disposals',
         JSON.stringify($('#text-input2').val()));
     });
+
+    $('#text-input1').val(JSON.parse(sessionStorage.getItem('computer-software-aquisitions')) || '');
+    $('#text-input2').val(JSON.parse(sessionStorage.getItem('computer-software-disposals')) || '');
   });
 </script>
