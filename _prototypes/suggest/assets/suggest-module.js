@@ -59,7 +59,7 @@ function suggest() {
   });
 
   typeaheadComponent.$inputElClone.on('keydown', keyDown_handler);
-  typeaheadComponent.$inputElClone.on('keyup', _.debounce(keyUp_handler, 300));
+  typeaheadComponent.$inputElClone.on('keyup', keyUp_handler);
 }
 
 $(suggest);
