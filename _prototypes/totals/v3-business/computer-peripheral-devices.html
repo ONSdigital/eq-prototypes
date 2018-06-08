@@ -95,11 +95,16 @@ items:
 
 <script>
   $(function () {
-    $('.js-questionnaire-form').on('submit', function () {
+    $('.js-questionnaire-form').on('submit', function (e) {
       sessionStorage.setItem('computer-devices-aquisitions',
         JSON.stringify($('#text-input1').val()));
       sessionStorage.setItem('computer-devices-disposals',
         JSON.stringify($('#text-input2').val()));
+
+      if(new URLSearchParams(window.location.search).get('edit')) {
+        e.preventDefault();
+        window.location.href = '../aquisitions-summary';
+      }
     });
   });
 
