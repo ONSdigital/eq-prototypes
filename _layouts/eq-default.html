@@ -30,19 +30,13 @@
     <!--<![endif]-->
 
     <!--[if (gt IE 9) | (IEMobile)]><!-->
-    <link href="https://cdn.ons.gov.uk/sdc/0bceacd/css/responsive.css" rel="stylesheet" />
+    <link rel="stylesheet"
+          href="https://cdn.ons.gov.uk/sdc/{% if page.cdn %}{{ page.cdn }}{% else %}v1.0.0{% endif %}/css/responsive.css" />
     <!--<![endif]-->
     <!--[if (lte IE 9) & (!IEMobile)]>
-    <link href="https://cdn.ons.gov.uk/sdc/0bceacd/css/fixed.css" rel="stylesheet" />
+    <link rel="stylesheet"
+          href="https://cdn.ons.gov.uk/sdc/{% if page.cdn %}{{ page.cdn }}{% else %}v1.0.0{% endif %}/css/fixed.css" />
     <![endif]-->
-
-    {% if page.cdn %}
-    <link rel="stylesheet"
-          href="https://cdn.ons.gov.uk/sdc/{{ page.cdn }}/css/responsive.css" />
-    {% else %}
-    <link rel="stylesheet"
-          href="https://cdn.ons.gov.uk/sdc/v1.0.0/css/responsive.css" />
-    {% endif %}
 
     <link rel='stylesheet prefetch'
           href='https://fonts.googleapis.com/css?family=Lato:300,400,600,700,900' />
@@ -60,11 +54,7 @@
     </div>
 </div>
 
-{% if page.cdn %}
-<script src="https://cdn.ons.gov.uk/sdc/{{ page.cdn }}/scripts/bundle.min.js"></script>
-{% else %}
-<script src="https://cdn.ons.gov.uk/sdc/v1.0.0/scripts/bundle.min.js"></script>
-{% endif %}
+<script src="https://cdn.ons.gov.uk/sdc/{% if page.cdn %}{{ page.cdn }}{% else %}v1.0.0{% endif %}/scripts/bundle.min.js"></script>
 
 </body>
 </html>
