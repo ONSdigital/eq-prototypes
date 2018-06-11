@@ -305,10 +305,10 @@ export function isRelationshipType(relationshipType, relationship) {
     .type.id;
 
   /**
-   * relationshipType can be an array
+   * relationshipType can be an array of types
    */
   return _.isArray(relationshipType)
-    ? !!_.find(relationshipType, function (rType) {
+    ? !!_.find(relationshipType, function(rType) {
       return rType === typeOfRelationship;
     })
     : typeOfRelationship === relationshipType;
@@ -372,7 +372,7 @@ export function getOtherPersonIdFromRelationship(personId, relationship) {
 export function getAllParentsOf(personId) {
   return getAllRelationships()
     .filter(isAChildInRelationship.bind(null, personId))
-    .map(relationship => getHouseholdMemberByPersonId(getParentIdFromRelationship(relationship))['@person']);
+    .map(relationship => getPersonFromMember(getHouseholdMemberByPersonId(getParentIdFromRelationship(relationship))));
 }
 
 export function getAllChildrenOf(personId) {
@@ -381,8 +381,12 @@ export function getAllChildrenOf(personId) {
     .map(relationship => getHouseholdMemberByPersonId(getChildIdFromRelationship(relationship))['@person']);
 }
 
-export function getParentIdFromPerson(person) {
+export function getPersonIdFromPerson(person) {
   return person.id;
+}
+
+export function getPersonFromMember(member) {
+  return member['@person'];
 }
 
 /**
@@ -393,7 +397,7 @@ export const missingRelationshipInference = {
 
     const missingRelationships = [],
       allRelationships = getAllRelationships(),
-      person = subjectMember['@person'],
+      person = getPersonFromMember(subjectMember),
       personId = person.id,
 
       parents = getAllParentsOf(personId),
@@ -434,8 +438,8 @@ export const missingRelationshipInference = {
          */
         if (memberParents.length === 2 &&
           _.difference(
-            parents.map(getParentIdFromPerson),
-            memberParents.map(getParentIdFromPerson)
+            parents.map(getPersonIdFromPerson),
+            memberParents.map(getPersonIdFromPerson)
           ).length === 0) {
 
           /**
@@ -476,7 +480,7 @@ export function inferRelationships(relationship, personIs, personTo) {
 }
 
 export function findNextMissingRelationship() {
-  var householdMembers = getAllHouseholdMembers().filter(isHouseholdMember),
+  let householdMembers = getAllHouseholdMembers().filter(isHouseholdMember),
     relationships = getAllRelationships(),
     missingRelationshipMembers = [],
     personIs = null;
@@ -485,12 +489,12 @@ export function findNextMissingRelationship() {
    * Find the next missing relationship
    */
   $.each(householdMembers, function(i, member) {
-    var personId = member['@person'].id;
+    const personId = member['@person'].id;
 
     /**
      * Get all relationships for this member
      */
-    var memberRelationships = relationships.filter(function(relationship) {
+    const memberRelationships = relationships.filter(function(relationship) {
         return relationship.personIsId === personId || relationship.personToId === personId;
       }),
 
@@ -525,7 +529,7 @@ export function findNextMissingRelationship() {
 }
 
 export function getPeopleIdsMissingRelationshipsWithPerson(personId) {
-  var remainingPersonIds = getAllHouseholdMembers().map(function(member) {
+  const remainingPersonIds = getAllHouseholdMembers().map(function(member) {
     return member['@person'].id;
   });
 
