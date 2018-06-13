@@ -123,9 +123,7 @@ function createListItemPerson(member) {
   );
 }
 
-function populateHouseholdList() {
-  const $el = $('#household-members');
-
+function populateList($el, memberType) {
   if (!$el.length) {
     return;
   }
@@ -133,26 +131,18 @@ function populateHouseholdList() {
   let members = getAllHouseholdMembers() || [];
 
   $el.empty().append(members.filter((member) => {
-    return member.type === HOUSEHOLD_MEMBER_TYPE;
+    return member.type === memberType;
   }).map(createListItemPerson));
 
   $el.addClass('list list--people-plain');
 }
 
+function populateHouseholdList() {
+  populateList($('#household-members'), HOUSEHOLD_MEMBER_TYPE);
+}
+
 function populateVisitorList() {
-  const $el = $('#visitors-list');
-
-  if (!$el.length) {
-    return;
-  }
-
-  let members = getAllHouseholdMembers() || [];
-
-  $el.empty().append(members.filter((member) => {
-    return member.type === VISITOR_TYPE;
-  }).map(createListItemPerson));
-
-  $el.addClass('list list--people-plain');
+  populateList($('#visitors-list'), VISITOR_TYPE);
 }
 
 function updateAddresses() {
