@@ -1,0 +1,181 @@
+---
+title: Who else to add
+project: your-household
+globalcss: false
+---
+
+<link rel="stylesheet" href="{{ "/css/census-header-footer.css" | prepend: site.baseurl }}">
+<link rel="stylesheet" href="../style.css" />
+<header class="page__header">
+    {% include bar.html %}
+    {% include header-census.html %}
+</header>
+
+<div class="page__subheader">
+    <div class="container">
+        <a class="mars" href="../does-anyone-else-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            {% include navigation.html items=site.data.your-household.navigationItemsHousehold nav-title-id="section-address" %}
+        </div>
+        <div class="grid__col col-7@m pull-1@m">
+            <main role="main" id="main" class="page__main">
+                <div class="feedback__inline js-feedback-inline is-collapsed">
+                    <div class="feedback__border">
+                    </div>
+                </div>
+
+                <div class="group">
+                    <div class="block">
+
+                        <div class="question">
+                            <h1 id="question-title" class="question__title saturn" data-qa="question-title">
+                                Who do you need to add to <span class="address-text"></span>
+                            </h1>
+
+                            <div id="member-list"></div>
+
+                            <fieldset class="question__fieldset js-question-fieldset">
+                                <legend class="u-vh">What is your name?</legend>
+
+                                <div class="question__answers">
+                                    <div class="question__answer">
+                                        <label class="label venus" for="first-name">
+                                            <div class="label__inner">
+                                                First name
+                                            </div>
+                                        </label>
+                                        <input class="input input--text " id="first-name"
+                                               data-qa="input-text" value=""/>
+                                    </div>
+
+                                    <div class="question__answer">
+                                        <label class="label venus" for="middle-name">
+                                            <div class="label__inner">
+                                                Middle name
+                                            </div>
+                                        </label>
+                                        <input class="input input--text " id="middle-name"
+                                               data-qa="input-text" value=""/>
+                                    </div>
+
+                                    <div class="question__answer">
+                                        <label class="label venus ">
+                                            <div class="label__inner">
+                                                Last name
+                                            </div>
+                                        </label>
+                                        <input class="input input--text " id="last-name"
+                                               data-qa="input-text" value=""/>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-submit btn--primary btn--lg" data-qa="btn-submit" type="submit"
+                        name="action[save_continue]">
+                    Save and continue
+                </button>
+
+                <div class="u-mb-m">
+                    <button class="btn btn--link mars js-btn-save" data-qa="btn-save-sign-out" type="submit"
+                            name="action[save_sign_out]"
+                            data-ga="click" data-ga-action="Save and complete later click"
+                            data-ga-category="Navigation">Save and
+                        complete later
+                    </button>
+                </div>
+
+                <a class="page__previous page__previous--bottom js-previous-link" href="javascript:history.back()"
+                   id="bottom-previous">Previous</a>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/standard-bundle.js'></script>
+<script src='/js/compiled/your-household/bundle.js'></script>
+
+<script>
+    var editUserId = new URLSearchParams(window.location.search).get('edit'),
+		memberFound = null;
+
+	if(editUserId) {
+		memberFound = window.ONS.storage.getAllHouseholdMembers().filter(function (member) {
+			return member['@person'].id === editUserId;
+		})[0];
+	}
+
+	if(editUserId && !memberFound) {
+		throw Error('Member not found');
+    }
+
+	$('.btn-submit').click(function (e) {
+		e.preventDefault(); // do not submit the form like usual
+
+        var person = window.ONS.storage.TYPES.person({
+            firstName: document.getElementById('first-name').value,
+            middleName: document.getElementById('middle-name').value,
+            lastName: document.getElementById('last-name').value
+        });
+
+        var personType = window.ONS.storage.KEYS[
+        	window.location.search.match(/journey=visitors/) ? 'VISITOR_TYPE' : 'HOUSEHOLD_MEMBER_TYPE'
+        ];
+
+        if(editUserId && memberFound) {
+			person.id = editUserId;
+			window.ONS.storage['updateHouseholdMember'](person, { type: personType });
+        }
+        else {
+			window.ONS.storage['addHouseholdMember'](person, { type: personType });
+        }
+
+        /**
+         * Routing
+         */
+		if (window.location.search.match(/journey=temp-away-from-home/)) {
+			window.location = '../does-anyone-else-live-here/?journey=temp-away-from-home';
+		} else if (window.location.search.match(/journey=visitors/)) {
+			window.location = '../does-anyone-else-live-here/?journey=visitors';
+		} else {
+			window.location = '../does-anyone-else-live-here/';
+		}
+	});
+
+	$(function () {
+        var person,
+            storageAPI = window.ONS.storage,
+            addressLines = (sessionStorage.getItem('address') || '').split(','),
+            addressLine1 = addressLines[0],
+            addressLine2 = addressLines[1],
+            visitors = storageAPI.getAllHouseholdMembers().filter(storageAPI.isVisitor),
+            overrideTitle = 'Who ' + (visitors.length ? 'else ' : '') + 'was staying overnight on 27th February 2018 at ' +
+                addressLine1 + ', ' + addressLine2;
+
+        if (window.location.search.match(/journey=visitors/)) {
+        	$('#question-title').html(overrideTitle);
+            $('#member-list').html('<ul id="visitors-list"></ul>');
+            window.ONS.helpers.populateVisitorList();
+        }
+        else {
+            $('#member-list').html('<ul id="household-members"></ul>');
+            window.ONS.helpers.populateHouseholdList();
+        }
+
+		if(memberFound) {
+			person = memberFound['@person'];
+
+			$('#first-name').val(person.firstName);
+			$('#middle-name').val(person.middleName);
+			$('#last-name').val(person.lastName);
+		}
+	});
+</script>
+

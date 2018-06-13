@@ -104,7 +104,7 @@ gulp.task('css:build', () => {
         }),
         inlineblock(),
         pseudoelements(),
-        reporter({ clearMessages: true })
+        reporter({clearMessages: true})
       ])
     )
     .pipe(sourcemaps.write())
@@ -173,9 +173,9 @@ function scriptsBundles(opts, done) {
   });
 }
 
-gulp.task('scripts:bundles:build', scriptsBundles.bind(null, { watch: false }));
+gulp.task('scripts:bundles:build', scriptsBundles.bind(null, {watch: false}));
 
-gulp.task('scripts:bundles:watch', scriptsBundles.bind(null, { watch: true }));
+gulp.task('scripts:bundles:watch', scriptsBundles.bind(null, {watch: true}));
 
 /**
  * Jekyll configuration
@@ -191,7 +191,7 @@ function jekyll(opts) {
     ...jekyllFlags
   ];
 
-  const jekyll = child.spawn('jekyll', jekyllArgs);
+  const jekyll = child[process.platform === 'win32' ? 'exec' : 'spawn']('jekyll', jekyllArgs);
 
   const jekyllLogger = buffer => {
     buffer
@@ -204,9 +204,9 @@ function jekyll(opts) {
   jekyll.stderr.on('data', jekyllLogger);
 }
 
-gulp.task('jekyll:build', jekyll.bind(null, { watch: false }));
+gulp.task('jekyll:build', jekyll.bind(null, {watch: false}));
 
-gulp.task('jekyll:watch', jekyll.bind(null, { watch: true }));
+gulp.task('jekyll:watch', jekyll.bind(null, {watch: true}));
 
 /**
  * Local development server
