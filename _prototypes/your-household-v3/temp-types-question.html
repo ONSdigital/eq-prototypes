@@ -1,0 +1,156 @@
+---
+title: Living here currently away
+project: your-household
+globalcss: false
+layout: eq-default
+cdn: v1.2.0
+---
+
+<link rel="stylesheet"
+      href="{{ "/css/census-header-footer.css" | prepend: site.baseurl }}">
+<link rel="stylesheet" href="../style.css"/>
+<header class="page__header">
+    {% include bar.html %}
+    {% include header-census.html %}
+</header>
+
+<div class="page__subheader">
+    <div class="container">
+        <a class="mars" href="../does-anyone-else-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            {% include navigation.html
+            items=site.data.your-household.navigationItemsHousehold
+            nav-title-id="section-address" %}
+        </div>
+        <div class="grid__col col-7@m pull-1@m">
+            <main role="main" id="main" class="page__main">
+                <form name="trav" class="form qa-questionnaire-form" role="form"
+                      autocomplete="off" novalidate="">
+                    <input type="hidden" name="away-journeys"
+                           value=""/>
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <!-- <h2 class="section__title neptune">Joanna Bloggs</h2>-->
+
+                                <div class="question u-mb-s"
+                                     id="total-retail-turnover-question">
+                                    <h1 class="question__title saturn">
+                                        Who do you need to add to
+                                        <span class="address-text"></span>
+                                        <span class="js-question-sentence-by-type"></span>?
+                                    </h1>
+                                </div>
+
+                                <fieldset
+                                        class="question__fieldset js-question-fieldset u-mb-l">
+                                    <legend class="u-vh">What is your name?</legend>
+
+                                    <div class="question__answers">
+                                        <div class="question__answer">
+                                            <label class="label venus"
+                                                   for="first-name">
+                                                <div class="label__inner">
+                                                    First name
+                                                </div>
+                                            </label>
+                                            <input class="input input--text "
+                                                   id="first-name"
+                                                   data-qa="input-text" value=""/>
+                                        </div>
+
+                                        <div class="question__answer">
+                                            <label class="label venus ">
+                                                <div class="label__inner">
+                                                    Last name
+                                                </div>
+                                            </label>
+                                            <input class="input input--text "
+                                                   id="last-name"
+                                                   data-qa="input-text" value=""/>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg btn-submit venus"
+                            type="submit" name="">Continue
+                    </button>
+                    <div class="u-mb-m">
+                        <button class="btn btn--link mars js-btn-save"
+                                type="submit" name="action[save_sign_out]">
+                            Save and complete later
+                        </button>
+                    </div>
+                </form>
+                <a class="page__previous page__previous--bottom js-previous-link"
+                   href="javascript:history.back()"
+                   id="bottom-previous">Previous</a>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/standard-bundle.js'></script>
+<script src='/js/compiled/your-household-v3/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage;
+  var awayTypesStr = new URLSearchParams(window.location.search).get('away-types');
+
+  if(!awayTypesStr) {
+    throw Error('No sentence for away type found');
+  }
+
+  var awayTypes = JSON.parse(awayTypesStr),
+    awayType = awayTypes.shift();
+
+
+  var editUserId = new URLSearchParams(window.location.search).get('edit'),
+    memberFound = null;
+
+  if (editUserId) {
+    memberFound = window.ONS.storage.getAllHouseholdMembers()
+      .filter(function(member) {
+        return member['@person'].id === editUserId;
+      })[0];
+  }
+
+  if (editUserId && !memberFound) {
+    throw Error('Member not found');
+  }
+
+  $('.js-question-sentence-by-type').html({
+    'studying-away': 'who is working or studying away from home',
+    'armed-forces': 'who is a member of the armed forces',
+    'outside-uk': 'who is staying outside the UK for 12 months'
+  }[awayType]);
+
+
+  $('.btn-submit').on('click', function(e) {
+    e.preventDefault();
+
+    var person = storageAPI.TYPES.person({
+      firstName: document.getElementById('first-name').value,
+      lastName: document.getElementById('last-name').value
+    });
+
+    var personType = storageAPI.KEYS['HOUSEHOLD_MEMBER_TYPE'];
+
+    if (editUserId && memberFound) {
+      person.id = editUserId;
+      window.ONS.storage['updateHouseholdMember'](person, {type: personType});
+    }
+    else {
+      window.ONS.storage['addHouseholdMember'](person, {type: personType});
+    }
+
+    window.location.href = '../temp-types-feedback.html';
+  });
+</script>

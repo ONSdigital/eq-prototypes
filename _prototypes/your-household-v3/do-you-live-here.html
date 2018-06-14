@@ -47,8 +47,11 @@ globalcss: false
                                                            name="live-here"
                                                            id="yes">
                                                     <label class="label label--inline venus"
-                                                           for="yes">Yes, I live
-                                                        here</label>
+                                                           for="yes">
+                                                        Yes, I live here
+                                                        <span
+                                                                class="pluto u-db label--negative">This is my main or only address</span>
+                                                    </label>
                                                 </div>
 
                                                 <div class="field__item js-focusable-box">
@@ -57,8 +60,12 @@ globalcss: false
                                                            name="live-here"
                                                            id="no">
                                                     <label class="label label--inline venus"
-                                                           for="no">No, I don't
-                                                        live here</label>
+                                                           for="no">
+                                                        No, I don't live
+                                                        here
+                                                        <span
+                                                                class="pluto u-db label--negative">This is a second home or holiday home</span>
+                                                    </label>
                                                 </div>
                                             </fieldset>
                                         </div>
@@ -85,8 +92,14 @@ globalcss: false
     </div>
 </div>
 
+<style>
+    .label .label--negative {
+        margin-left: -1.9rem;
+    }
+</style>
+
 <script src='/js/compiled/standard-bundle.js'></script>
-<script src='/js/compiled/your-household-v2/bundle.js'></script>
+<script src='/js/compiled/your-household-v3/bundle.js'></script>
 
 <script>
   var yesbox = document.getElementById("yes");

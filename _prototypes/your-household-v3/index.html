@@ -1,5 +1,5 @@
 ---
-title: Version 2
+title: Version 3
 project: your-household
 globalcss: false
 ---
@@ -11,6 +11,16 @@ globalcss: false
     {% include bar.html %}
     {% include header-census.html %}
 </header>
+
+<style>
+    .input--text-lg {
+        width : 100%;
+    }
+
+    .input--text-postcode {
+        max-width : 9.25rem;
+    }
+</style>
 
 <div class="page__subheader">
     <div class="container">
@@ -66,61 +76,19 @@ globalcss: false
                                                            for="address-line-1"
                                                            id="label-address-line-1">
                                                         <div class="label__inner">
-                                                            Address Line 1
+                                                            Building and street
                                                         </div>
                                                     </label>
-                                                    <p>Including your house name
-                                                        or number</p>
-
-                                                    <input class="input input--text "
+                                                    <input
+                                                            class="input input--text input--text-lg u-mb-s"
                                                            id="address-line-1"
                                                            name="address-line-1"
                                                            data-qa="input-text"
                                                            value=""/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <div class="question__answer">
-                                        <div class="answer answer--textfield  "
-                                             id="container-address-line-2">
-                                            <div class="answer__fields js-fields">
-                                                <div class="field">
-                                                    <label class="label venus "
-                                                           for="address-line-2"
-                                                           id="label-address-line-2">
-                                                        <div class="label__inner">
-                                                            Address Line 2
-                                                        </div>
-                                                    </label>
-
-                                                    <input class="input input--text "
+                                                    <input class="input input--text input--text-lg"
                                                            id="address-line-2"
                                                            name="address-line-2"
-                                                           data-qa="input-text"
-                                                           value=""/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="question__answer">
-                                        <div class="answer answer--textfield  "
-                                             id="container-address-line-3">
-                                            <div class="answer__fields js-fields">
-                                                <div class="field">
-                                                    <label class="label venus "
-                                                           for="address-line-3"
-                                                           id="label-address-line-3">
-                                                        <div class="label__inner">
-                                                            Address Line 3
-
-                                                        </div>
-                                                    </label>
-                                                    <input class="input input--text "
-                                                           id="address-line-3"
-                                                           name="address-line-3"
                                                            data-qa="input-text"
                                                            value=""/>
                                                 </div>
@@ -161,7 +129,7 @@ globalcss: false
                                                            for="county"
                                                            id="label-county">
                                                         <div class="label__inner">
-                                                            County
+                                                            County (optional)
 
                                                         </div>
                                                     </label>
@@ -190,33 +158,10 @@ globalcss: false
                                                         </div>
                                                     </label>
 
-                                                    <input class="input input--text "
+                                                    <input
+                                                            class="input input--text input--text-postcode"
                                                            id="postcode"
                                                            name="postcode"
-                                                           data-qa="input-text"
-                                                           value=""/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="question__answer">
-                                        <div class="answer answer--textfield  "
-                                             id="container-country">
-                                            <div class="answer__fields js-fields">
-                                                <div class="field">
-                                                    <label class="label venus "
-                                                           for="country"
-                                                           id="label-country">
-                                                        <div class="label__inner">
-                                                            Country
-
-                                                        </div>
-                                                    </label>
-
-                                                    <input class="input input--text "
-                                                           id="country"
-                                                           name="country"
                                                            data-qa="input-text"
                                                            value=""/>
                                                 </div>
@@ -271,7 +216,6 @@ globalcss: false
 
       document.getElementById('address-line-1').value,
       document.getElementById('address-line-2').value,
-      document.getElementById('address-line-3').value,
       document.getElementById('town-city').value,
       document.getElementById('county').value,
       document.getElementById('postcode').value,

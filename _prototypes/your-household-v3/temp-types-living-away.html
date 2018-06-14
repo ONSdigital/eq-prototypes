@@ -1,0 +1,133 @@
+---
+title: Living here currently away
+project: your-household
+globalcss: false
+layout: eq-default
+cdn: v1.2.0
+---
+
+<link rel="stylesheet"
+      href="{{ "/css/census-header-footer.css" | prepend: site.baseurl }}">
+<link rel="stylesheet" href="../style.css"/>
+<header class="page__header">
+    {% include bar.html %}
+    {% include header-census.html %}
+</header>
+
+<div class="page__subheader">
+    <div class="container">
+        <a class="mars" href="../does-anyone-else-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            {% include navigation.html
+            items=site.data.your-household.navigationItemsHousehold
+            nav-title-id="section-address" %}
+        </div>
+        <div class="grid__col col-7@m pull-1@m">
+            <main role="main" id="main" class="page__main">
+                <form name="trav" class="form qa-questionnaire-form" role="form"
+                      autocomplete="off" novalidate="">
+                    <input type="hidden" name="away-journeys"
+                           value=""/>
+                    <!--<input type="hidden" name="journey"
+                           value="temp-types-living-away"/>-->
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <!-- <h2 class="section__title neptune">Joanna Bloggs</h2>-->
+
+                                <div class="question u-mb-s"
+                                     id="total-retail-turnover-question">
+                                    <h1 class="question__title saturn">
+                                        Apart from the people already added,
+                                        is there anyone else living at
+                                        <span class="address-text"></span>
+                                        who is currently away?
+                                    </h1>
+                                </div>
+
+                                <ul id="household-members" class="u-mb-l"></ul>
+
+                                <div
+                                        class="field field--checkbox field--multiplechoice field--exclusive u-mb-l">
+                                    <fieldset>
+                                        <legend class="field__legend mars u-vh">What type of central heating do you have?</legend>
+                                        <div class="field__label venus">Select all that apply:</div>
+                                        <div class="field__item js-focusable-box">
+                                            <input
+                                                    class="input input--checkbox js-focusable js-exclusive-checkbox-group" name="away-type" value="studying-away" id="studying-away" type="checkbox" />
+                                            <label class="label label--inline venus " for="studying-away">
+                                                Someone working or studying
+                                                away from home
+                                            </label>
+                                        </div>
+                                        <div class="field__item js-focusable-box">
+                                            <input
+                                                    class="input input--checkbox js-focusable js-exclusive-checkbox-group" name="away-type" value="armed-forces" id="armed-forces" type="checkbox" />
+                                            <label class="label label--inline venus " for="armed-forces">
+                                                A member of the armed forces
+                                            </label>
+                                        </div>
+                                        <div class="field__item js-focusable-box">
+                                            <input
+                                                    class="input input--checkbox js-focusable js-exclusive-checkbox-group" name="away-type" value="outside-uk" id="outside-uk" type="checkbox" />
+                                            <label class="label label--inline venus " for="outside-uk">
+                                                Someone staying outside the
+                                                UK for less than 12 months
+                                            </label>
+                                        </div>
+                                        <div class="field__label u-mt-s venus" aria-hidden="true">Or</div>
+                                        <div class="field__item js-focusable-box">
+                                            <input
+                                                    class="input input--checkbox js-focusable js-exclusive-checkbox" name="away-type" value="no" id="none" type="checkbox" />
+                                            <label class="label label--inline venus " for="none">
+                                                <span class="u-vh">Or,</span>
+                                                No, this is everyone <span
+                                                    class="u-vh">. Selecting this will uncheck all other checkboxes</span>
+                                            </label>
+                                            <span class="js-exclusive-checkbox-alert u-vh" role="alert" aria-live="polite" data-adjective="deselected"></span>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus"
+                            type="submit" name="">Continue
+                    </button>
+                    <div class="u-mb-m">
+                        <button class="btn btn--link mars js-btn-save"
+                                type="submit" name="action[save_sign_out]">
+                            Save and complete later
+                        </button>
+                    </div>
+                </form>
+                <a class="page__previous page__previous--bottom js-previous-link"
+                   href="javascript:history.back()"
+                   id="bottom-previous">Previous</a>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/standard-bundle.js'></script>
+<script src='/js/compiled/your-household-v3/bundle.js'></script>
+
+<script>
+  $('.qa-btn-submit').on('click', function(e) {
+    e.preventDefault();
+
+    var awayTypes = [];
+
+    $('[name=away-type]:checked').each(function (i, el) {
+      awayTypes.push($(el).val());
+    });
+
+    window.location = '../temp-types-question?away-types=' +
+      JSON.stringify(awayTypes);
+  });
+</script>

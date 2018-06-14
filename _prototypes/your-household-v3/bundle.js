@@ -150,8 +150,15 @@ function updateAddresses() {
     addressLine1 = addressLines[0],
     addressLine2 = addressLines[1];
 
-  $('#section-address').html(addressLine1);
-  $('.address-text').html(addressLine1 + (addressLine2 ? ', ' + addressLine2 : ''));
+  $('#section-address').html(addressLine1 || '<a href="../index">Address not' +
+    ' found</a>');
+  $('.address-text').html(
+    addressLine1 && addressLine2
+      ? (
+        addressLine1 + (addressLine2 ? ', ' + addressLine2 : '')
+      )
+      : '<a href="../index">Address not found</a>'
+  );
 }
 
 window.ONS = window.ONS || {};
