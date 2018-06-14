@@ -109,7 +109,7 @@ cdn: v1.2.0
   }
 
   var awayTypes = JSON.parse(awayTypesStr),
-    awayType = awayTypes.shift();
+    awayType = [].concat(awayTypes).shift();
 
 
   var editUserId = new URLSearchParams(window.location.search).get('edit'),
@@ -126,12 +126,7 @@ cdn: v1.2.0
     throw Error('Member not found');
   }
 
-  $('.js-question-sentence-by-type').html({
-    'studying-away': 'who is working or studying away from home',
-    'armed-forces': 'who is a member of the armed forces',
-    'outside-uk': 'who is staying outside the UK for 12 months'
-  }[awayType]);
-
+  $('.js-question-sentence-by-type').html(storageAPI.tempAwayQuestionSentenceMap[awayType]);
 
   $('.btn-submit').on('click', function(e) {
     e.preventDefault();
@@ -151,6 +146,7 @@ cdn: v1.2.0
       window.ONS.storage['addHouseholdMember'](person, {type: personType});
     }
 
-    window.location.href = '../temp-types-feedback.html';
+    window.location.href = '../temp-types-feedback?away-types=' +
+      JSON.stringify(awayTypes);
   });
 </script>

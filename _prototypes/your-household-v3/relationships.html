@@ -41,9 +41,9 @@ visitors:
                                 <div class="question">
                                     <h1 class="question__title saturn">
                                         How is <span
-                                            class="js-relationship-person-is"></span>
+                                            class="js-relationship-person-to"></span>
                                         related to <span
-                                            class="js-relationship-person-to"></span>?
+                                            class="js-relationship-person-is"></span>?
                                     </h1>
 
                                     <h2 class="neptune">
@@ -328,7 +328,10 @@ visitors:
     var missingRelationship = storageAPI.findNextMissingRelationship();
 
     if (missingRelationship) {
-      updateQuestion(missingRelationship);
+      updateQuestion({
+          personIs: missingRelationship.personTo,
+		  personTo: missingRelationship.personIs
+	  });
       $('.qa-btn-submit').on('click', missingSubmit_handler);
     }
     else {

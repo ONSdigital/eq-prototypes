@@ -112,3 +112,9 @@ export function isOtherHouseholdMember(member) {
   return member.type === window.ONS.storage.KEYS.HOUSEHOLD_MEMBER_TYPE &&
     member['@person'].id !== window.ONS.storage.IDS.USER_HOUSEHOLD_MEMBER_ID;
 }
+
+export const tempAwayQuestionSentenceMap = {
+  'studying-away': 'who is working or studying away from home',
+  'armed-forces': 'who is a member of the armed forces',
+  'outside-uk': 'who is staying outside the UK for 12 months'
+};

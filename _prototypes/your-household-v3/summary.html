@@ -4,8 +4,7 @@ project: your-household
 globalcss: false
 ---
 
-<link rel="stylesheet"
-      href="{{ "/css/census-header-footer.css" | prepend: site.baseurl }}">
+<link rel="stylesheet" href="{{ '/css/census-header-footer.css' | prepend: site.baseurl }}">
 <link rel="stylesheet" href="../style.css"/>
 <header class="page__header">
     {% include bar.html %}
@@ -55,8 +54,7 @@ globalcss: false
                                 <h2 class="neptune">Household members</h2>
                                 <ul id="household-members-summary"
                                     class="list list--records list--people u-mb-s js-records"></ul>
-                                <p class="u-mb-l"><a href="../who-else-to-add">Is
-                                    anyone else missing from this list?</a></p>
+                                <p class="u-mb-l"><a href="../who-else-to-add">Add someone else</a></p>
 
                                 <div class="js-visitors-people-list">
                                     <h2 class="neptune">Visitors staying
@@ -64,8 +62,7 @@ globalcss: false
                                     <ul id="visitors-summary"
                                         class="list list--records list--people u-mb-s js-records"></ul>
                                     <p class="u-mb-l"><a
-                                            href="../who-else-to-add?journey=visitors">Is
-                                        anyone else missing from this list?</a>
+                                            href="../who-else-to-add?journey=visitors">Add someone else</a>
                                     </p>
                                 </div>
                             </section>

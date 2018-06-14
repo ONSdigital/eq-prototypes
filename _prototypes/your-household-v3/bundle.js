@@ -42,7 +42,8 @@ import {
   isVisitor,
   isOtherHouseholdMember,
   isHouseholdMember,
-  person
+  person,
+  tempAwayQuestionSentenceMap
 } from './assets/household';
 import {removeFromList} from './assets/utils';
 
@@ -175,6 +176,7 @@ window.ONS.storage = {
   getMemberPersonId,
   updateUserAsHouseholdMember,
   deleteUserAsHouseholdMember,
+  tempAwayQuestionSentenceMap,
 
   isVisitor,
   isOtherHouseholdMember,
