@@ -88,7 +88,7 @@ export const relationshipDescriptionMap = {
   },
   // covered
   'other-relation': {
-    sentanceLabel: 'relation - other',
+    sentanceLabel: 'other relation',
     summaryAdjective: 'related',
     type: relationshipTypes['other-relation']
   },

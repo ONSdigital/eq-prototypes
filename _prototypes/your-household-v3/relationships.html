@@ -47,11 +47,11 @@ visitors:
                                     </h1>
 
                                     <h2 class="neptune">
-                                        <span class="js-relationship-person-is"></span>
-                                        is
+                                        <!--<span class="js-relationship-person-is"></span>
+                                        is-->
                                         <span class="js-relationship-person-is-relationship-description">...</span>
-                                        to
-                                        <span class="js-relationship-person-to"></span>
+                                        <!--to
+                                        <span class="js-relationship-person-to"></span>-->
                                     </h2>
                                     <div class="answer__fields js-fields">
                                         <div class="field field--radio field--multiplechoice field--cols">
@@ -200,7 +200,7 @@ visitors:
                                                            value="other-relation"/>
                                                     <label class="label label--inline venus"
                                                            for="other-relation">
-                                                        Relation - other
+                                                        Other relation
                                                         <span class="pluto u-db label--negative">&nbsp;</span>
                                                     </label>
                                                 </div>
@@ -262,6 +262,12 @@ visitors:
   function updateQuestion(missingRelationship) {
     personIs = missingRelationship.personIs;
     personTo = missingRelationship.personTo;
+
+    $('.js-relationship-person-is-relationship-description').html(
+      personIs['@person'].fullName +
+      ' is ... to ' +
+      personTo['@person'].fullName
+    );
 
     $('.js-relationship-person-is').html(personIs['@person'].fullName);
     $('.js-relationship-person-to').html(personTo['@person'].fullName);
@@ -424,13 +430,37 @@ visitors:
   }
 
   $('[name="relationship"]').on('change', function() {
-    $('.js-relationship-person-is-relationship-description')
+
+    var relationshipDescription = storageAPI.relationshipDescriptionMap[$(this).val()],
+
+      isNotFamily = ['unrelated', 'other-relation'].indexOf(
+        relationshipDescription.type.id
+      ) !== -1,
+
+      html = isNotFamily
+        ? personIs['@person'].fullName +
+          ' is <em class="highlight">' +
+            relationshipDescription.sentanceLabel +
+          '</em> to ' +
+          personTo['@person'].fullName
+
+        : personIs['@person'].fullName +
+          ' is ' +
+          personTo['@person'].fullName + "'s " +
+          '<em class="highlight">' +
+            relationshipDescription.sentanceLabel +
+          '</em> ';
+
+    $('.js-relationship-person-is-relationship-description').html(html);
+
+
+    /*$('.js-relationship-person-is-relationship-description')
       .html(
         '<em class="highlight">' +
         storageAPI.relationshipDescriptionMap[$(this)
           .val()].sentanceLabel +
         '</em>'
-      );
+      );*/
   });
 
   $(function() {
