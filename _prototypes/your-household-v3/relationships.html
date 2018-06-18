@@ -265,8 +265,9 @@ visitors:
 
     $('.js-relationship-person-is-relationship-description').html(
       personIs['@person'].fullName +
-      ' is ... to ' +
-      personTo['@person'].fullName
+      " is " +
+      personTo['@person'].fullName +
+      "'s..."
     );
 
     $('.js-relationship-person-is').html(personIs['@person'].fullName);
