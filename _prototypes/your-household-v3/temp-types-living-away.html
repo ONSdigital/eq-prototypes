@@ -121,13 +121,20 @@ cdn: v1.2.0
   $('.qa-btn-submit').on('click', function(e) {
     e.preventDefault();
 
-    var awayTypes = [];
+    var awayTypes = [], url;
 
     $('[name=away-type]:checked').each(function (i, el) {
       awayTypes.push($(el).val());
     });
 
-    window.location = '../temp-types-question?away-types=' +
-      JSON.stringify(awayTypes);
+    if($('[name=away-type]:checked').val() === "no") {
+        url = '../temp-living-here?away-types='
+    } else {
+        url = '../temp-types-question?away-types='
+    }
+
+    window.location = url +
+        JSON.stringify(awayTypes);
   });
+
 </script>
