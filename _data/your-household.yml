@@ -1,5 +1,5 @@
 navigationItemsRelationships:
-  - label: Who lives here?
+  - label: People at this address
     href: ../summary
     state: completed
   - label: Relationships
@@ -10,7 +10,7 @@ navigationItemsRelationships:
     state: incomplete
 
 navigationItemsHousehold:
-  - label: Who lives here?
+  - label: People at this address
     href: ../summary
     state: current
   - label: Accomodation
