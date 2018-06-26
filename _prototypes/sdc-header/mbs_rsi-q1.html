@@ -1,0 +1,53 @@
+---
+title: SDC Header
+project: Pattern Library
+globalcss: false
+cdn: none
+layout: sdc-default
+---
+<link rel="stylesheet" href="{{ "/css/sdc-header.css" | prepend: site.baseurl }}">
+
+{% include sdc-header-save.html %}
+<div class="container">
+  <div class="grid grid--reverse">
+  <div class="grid__col col-4@m"></div>
+  <div class="grid__col col-7@m pull-1@m">
+    <main role="main" id="main" class="page__main">
+    <form class="form qa-questionnaire-form" role="form" method="get" action="../mbs_rsi-q2/" autocomplete="off" novalidate="">
+        <div class="group" id="rsi">
+          <div class="block" id="reporting-period-choice">
+            <p class="block__title neptune" data-qa="block-title">Reporting period</p>
+          <div class="question" id="reporting-period-choice-question">
+            <h1 class="question__title saturn" data-qa="question-title">Are you able to report for the period from <span class="date">1 May 2016</span> to <span class="date">31 May 2016</span>?</h1>
+            <div class="question__answers">
+              <div class="question__answer">
+                <div class="answer answer--radio  " id="container-reporting-period-choice-answer">
+                  <div class="answer__fields js-fields">
+                    <div class="field field--radio field--multiplechoice ">
+                      <fieldset>
+                      <legend class="field__legend mars u-vh">Are you able to report for the period from <span class="date">1 May 2016</span> to <span class="date">31 May 2016</span>?</legend>
+                        <div class="field__item js-focusable-box">
+                          <input class="input input--radio js-focusable " name="reporting-period-choice-answer" id="reporting-period-choice-answer-0" value="Yes" type="radio">
+                          <label class="label label--inline venus" for="reporting-period-choice-answer-0" id="label-reporting-period-choice-answer-0">Yes</label>
+                        </div>
+                        <div class="field__item js-focusable-box">
+                          <input class="input input--radio js-focusable " name="reporting-period-choice-answer" id="reporting-period-choice-answer-1" value="No" type="radio">
+                          <label class="label label--inline venus" for="reporting-period-choice-answer-1" id="label-reporting-period-choice-answer-1">No</label>
+                        </div>
+                      </fieldset>
+                    </div>
+                  </div>
+                </div>
+              </div>
+             </div>
+            </div>
+          </div>
+        </div>
+      <button class="btn btn--primary btn--lg" data-qa="btn-submit" type="submit" name="action[save_continue]">Save and continue</button>
+    </form>
+  <a class="page__previous page__previous--bottom" data-ga-action="Previous link click" data-ga-category="Navigation" data-ga="click" data-ga-label="bottom" href="../mbs_rsi-index/" id="bottom-previous">Previous</a>
+    </main>
+  </div>
+</div>
+</div>
+<script src='https://deploy-preview-111--sdc-global-design-patterns.netlify.com/assets/scripts/bundle.js'></script>

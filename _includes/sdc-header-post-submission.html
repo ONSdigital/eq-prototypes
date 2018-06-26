@@ -13,8 +13,12 @@
                 <div class="grid__col col-6@s">
                     <nav class="nav nav--horizontal nav--light u-d-no--@xs@s u-fr" aria-label="Site services menu">
                         <ul class="nav__list" role="menubar" aria-label="Site services menu">
-                            <li class="nav__item" role="menuitem"><a href="#1" class="nav__link">My account</a></li>
-                            <li class="nav__item" role="menuitem"><a href="#1" class="nav__link">Help</a></li>
+                            <li class="nav__item" role="menuitem"><a href="../ras_my-surveys-mbs-rsi-complete/" class="nav__link">My surveys</a></li>
+                            <!-- <li class="nav__item" role="menuitem"><a href="../signed-out/" class="nav__link">Sign out</a></li>
+                            <li class="nav__item"><form class="form u-mb-no" method="get" action="/sdc-header/signed-out-progress-saved/" autocomplete="off" novalidate="">
+                              <button class="btn btn--ghost print__hidden btn--small">Sign out</button>
+                            </form></li> -->
+
                         </ul>
                     </nav>
                 </div>
@@ -29,14 +33,16 @@
                 </div>
                 <button class="btn btn--mobile js-nav-btn u-fr u-d-no--@s" type="button" id="menu-btn" aria-expanded="false" aria-controls="main-nav" aria-label="Toggle main navigation" aria-haspopup="true"><span></span></button>
                 <div class="u-fr u-d-no--@xs@s">
-                    <button class="btn btn--ghost print__hidden">Save and sign out</button>
+                    <form class="form u-mb-no" method="get" action="/sdc-header/signed-out-progress-saved/" autocomplete="off" novalidate="">
+                      <button class="btn btn--ghost print__hidden">Sign out</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
     <div class="header__nav">
         <div class="container">
-            <nav class="nav nav--horizontal nav--light nav--main nav--h-m js-main-nav" aria-label="Main menu" id="main-nav">
+            <!-- <nav class="nav nav--horizontal nav--light nav--main nav--h-m js-main-nav" aria-label="Main menu" id="main-nav">
                 <ul class="nav__list" aria-label="Navigation menu" role="menubar">
                     <li class="nav__item nav__item--active" role="menuitem" aria-current="page"><a href="#1" class="nav__link">Surveys</a></li>
                     <li class="nav__item " role="menuitem"><a href="#1" class="nav__link">Messages</a></li>
@@ -45,7 +51,7 @@
                     <li class="nav__item u-d-no--@s" role="menuitem"><button class="btn btn--ghost print__hidden">Save and sign out</button>
                     </li>
                 </ul>
-            </nav>
+            </nav> -->
         </div>
     </div>
 </header>
