@@ -2,13 +2,13 @@
 title: Confirm address
 project: your-household
 globalcss: false
+layout: eq-default-extras
+cdn: v1.2.0
 ---
 
-<link rel="stylesheet" href="{{ "/css/census-header-footer.css" | prepend: site.baseurl }}">
-<link rel="stylesheet" href="../style.css" />
 <header class="page__header">
+    {% include survey-header.html %}
     {% include bar.html %}
-    {% include header-census.html %}
 </header>
 
 <div class="page__subheader">
@@ -73,8 +73,6 @@ globalcss: false
         </button>
     </div>
 </div>
-
-<script src='/js/compiled/standard-bundle.js'></script>
 
 <script>
 	var yesbox = document.getElementById("address-correct-yes");

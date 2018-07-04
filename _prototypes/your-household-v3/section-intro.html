@@ -2,14 +2,13 @@
 title: Section intro
 project: your-household
 globalcss: false
+layout: eq-default-extras
+cdn: v1.2.0
 ---
 
-<link rel="stylesheet"
-      href="{{ "/css/census-header-footer.css" | prepend: site.baseurl }}">
-<link rel="stylesheet" href="../style.css"/>
 <header class="page__header">
+    {% include survey-header.html %}
     {% include bar.html %}
-    {% include header-census.html %}
 </header>
 
 <div class="page__subheader">
@@ -68,7 +67,6 @@ globalcss: false
     </div>
 </div>
 
-<script src='/js/compiled/standard-bundle.js'></script>
 <script src='/js/compiled/your-household-v3/bundle.js'></script>
 
 <script>

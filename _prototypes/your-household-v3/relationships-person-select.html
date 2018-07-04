@@ -4,14 +4,13 @@ project: your-household
 globalcss: false
 householdMembers:
 visitors:
+layout: eq-default-extras
+cdn: v1.2.0
 ---
 
-<link rel="stylesheet"
-      href="{{ '/css/census-header-footer.css' | prepend: site.baseurl }}"/>
-<link rel="stylesheet" href="../style.css"/>
 <header class="page__header">
+    {% include survey-header.html %}
     {% include bar.html %}
-    {% include header-census.html %}
 </header>
 
 <div class="page__subheader">
@@ -57,8 +56,9 @@ visitors:
                                     <p>Select all that apply</p>
 
                                     <div class="answer__fields js-fields">
-                                        <div class="field field--radio field--multiplechoice">
-                                            <fieldset id="js-member-list">
+                                        <div class="field field--radio field--multiplechoice field--exclusive">
+                                            <fieldset id="js-member-list"
+                                                  class="u-mb-m">
                                             </fieldset>
                                         </div>
                                     </div>
@@ -78,14 +78,13 @@ visitors:
 
 <div style="display:none;">
     <div id="member-checkbox-select-template" class="field__item js-focusable-box">
-        <input class="input input--checkbox js-focusable js-person-control"
+        <input class="input input--checkbox js-focusable js-person-control js-exclusive-checkbox-group"
                name="checkbox-answer"
                type="checkbox" />
         <label class="label label--inline venus js-person-name"></label>
     </div>
 </div>
 
-<script src='/js/compiled/standard-bundle.js'></script>
 <script src='/js/compiled/your-household-v3/bundle.js'></script>
 
 <script>
@@ -204,6 +203,15 @@ visitors:
       ), function (i, member) {
         $('#js-member-list').append(createMemberListItem(member['@person']));
       });
+
+      $('#js-member-list').append('<div class="field__label u-mt-s venus" aria-hidden="true">Or</div>');
+      $('#js-member-list').append('<div class="field__item js-focusable-box">\n' +
+        '        <input class="input input--checkbox js-focusable js-exclusive-checkbox" name="checkbox-answer" value="none" id="none" type="checkbox">\n' +
+        '        <label class="label label--inline venus " for="none">\n' +
+        '            <span class="u-vh">Or,</span> None<span class="u-vh">. Selecting this will uncheck all other checkboxes</span>\n' +
+        '        </label>\n' +
+        '        <span class="js-exclusive-checkbox-alert u-vh" role="alert" aria-live="polite" data-adjective="deselected">none deselected. </span>\n' +
+        '      </div>');
     }
 
     $('.js-submit').on('click', function(e) {
@@ -215,6 +223,13 @@ visitors:
 
       $('[name=checkbox-answer]:checked').each(function () {
         var otherId = $(this).val();
+
+        /**
+         * Check if none selected
+         */
+        if (otherId === 'none') {
+          return;
+        }
 
         newRelationshipsWithOtherPersonIds.push({
           relationship: storageAPI.addRelationship(
@@ -250,5 +265,4 @@ visitors:
     });
 
     $(updateList);
-
 </script>
