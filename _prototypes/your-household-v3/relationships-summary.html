@@ -134,7 +134,8 @@ cdn: v1.2.0
     /**
      * Relationships sorted by household member entry order
      */
-    $.each(storageAPI.getAllHouseholdMembers(), function (i, member) {
+    $.each(storageAPI.getAllHouseholdMembers().filter(storageAPI.isHouseholdMember),
+      function (i, member) {
       var memberRelationships = allRelationships
         .filter(function(relationship) {
           return storageAPI.isInRelationship(
@@ -333,7 +334,7 @@ cdn: v1.2.0
   }
 
   function getMemberRelationshipModelsByType(relationshipType) {
-    return storageAPI.getAllHouseholdMembers()
+    return storageAPI.getAllHouseholdMembers().filter(storageAPI.isHouseholdMember)
       .map(function (member) {
         var personId = member['@person'].id;
 
