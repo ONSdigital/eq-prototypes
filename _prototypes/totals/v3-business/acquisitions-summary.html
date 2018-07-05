@@ -34,7 +34,7 @@ cdn: v1.1.0
                             <section class="section">
                                 <h1 class="question__title saturn">
                                     We calculate the total value of
-                                    aquisitions to be
+                                    acquisitions to be
                                     <span class="highlight">&pound;<span
                                             class="js-grand-total"></span>?
                                 </h1>
@@ -55,12 +55,12 @@ cdn: v1.1.0
                                                 </div>
                                                 <div class="grid__col col-8@xs col-4@m">
                                                     <div
-                                                            class="summary__answer venus">&pound;<span class="js-transport-equipment-aquisitions"></span></div>
+                                                            class="summary__answer venus">&pound;<span class="js-transport-equipment-acquisitions"></span></div>
                                                 </div>
                                                 <div class="grid__col col-4@xs col-2@m">
                                                     <div class="summary__link mars">
                                                         <a
-                                                                href="../index/?edit=true">Change <span class="u-vh">your answer for: What are the dates of the sales period you are reporting for?. The current value is: 01 January 2015 to 02 February 2017</span></a>
+                                                                href="../transport-equipment/?edit=true">Change <span class="u-vh">your answer for: What are the dates of the sales period you are reporting for?. The current value is: 01 January 2015 to 02 February 2017</span></a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -72,7 +72,7 @@ cdn: v1.1.0
                                                 </div>
                                                 <div class="grid__col col-8@xs col-4@m">
                                                     <div
-                                                            class="summary__answer venus">&pound;<span class="js-computer-devices-aquisitions"></span></div>
+                                                            class="summary__answer venus">&pound;<span class="js-computer-devices-acquisitions"></span></div>
                                                 </div>
                                                 <div class="grid__col col-4@xs col-2@m">
                                                     <div class="summary__link mars">
@@ -89,7 +89,7 @@ cdn: v1.1.0
                                                     <div class="summary__question mars">Total value of acquisitions for computer software programs purchased or developed externally (bespoke)</div>
                                                 </div>
                                                 <div class="grid__col col-8@xs col-4@m">
-                                                    <div class="summary__answer venus">&pound;<span class="js-computer-software-aquisitions"></span></div>
+                                                    <div class="summary__answer venus">&pound;<span class="js-computer-software-acquisitions"></span></div>
                                                 </div>
                                                 <div class="grid__col col-4@xs col-2@m">
                                                     <div class="summary__link mars">
@@ -106,7 +106,7 @@ cdn: v1.1.0
                                                     <div class="summary__question mars">Total value of acquisitions for databases purchased or developed externally (bespoke)</div>
                                                 </div>
                                                 <div class="grid__col col-8@xs col-4@m">
-                                                    <div class="summary__answer venus">&pound;<span class="js-databases-aquisitions"></span></div>
+                                                    <div class="summary__answer venus">&pound;<span class="js-databases-acquisitions"></span></div>
                                                 </div>
                                                 <div class="grid__col col-4@xs col-2@m">
                                                     <div class="summary__link mars">
@@ -123,7 +123,7 @@ cdn: v1.1.0
                                                     <div class="summary__question mars">Total value of acquisitions for databases purchased or telecommuniction equipment</div>
                                                 </div>
                                                 <div class="grid__col col-8@xs col-4@m">
-                                                    <div class="summary__answer venus">&pound;<span class="js-telecommunications-aquisitions"></span></div>
+                                                    <div class="summary__answer venus">&pound;<span class="js-telecommunications-acquisitions"></span></div>
                                                 </div>
                                                 <div class="grid__col col-4@xs col-2@m">
                                                     <div class="summary__link mars">
@@ -140,7 +140,7 @@ cdn: v1.1.0
                                                     <div class="summary__question mars">Total value of acquisitions for other machinery or equipment not mentioned</div>
                                                 </div>
                                                 <div class="grid__col col-8@xs col-4@m">
-                                                    <div class="summary__answer venus">&pound;<span class="js-other-machinery-aquisitions"></span></div>
+                                                    <div class="summary__answer venus">&pound;<span class="js-other-machinery-acquisitions"></span></div>
                                                 </div>
                                                 <div class="grid__col col-4@xs col-2@m">
                                                     <div class="summary__link mars">
@@ -154,7 +154,7 @@ cdn: v1.1.0
                                         <div class="summary__item">
                                             <div class="grid">
                                                 <div class="grid__col col-12@xs col-6@m">
-                                                    <div class="summary__question neptune">Grand total for value of aquisitions</div>
+                                                    <div class="summary__question neptune">Grand total for value of acquisitions</div>
                                                 </div>
                                                 <div class="grid__col col-8@xs col-4@m">
                                                     <div
@@ -191,33 +191,33 @@ cdn: v1.1.0
 
 <script>
     $(function () {
-      var transportEquipmentAquisitions =
-          JSON.parse(sessionStorage.getItem('transport-equipment-aquisitions')),
-        computerDevicesAquisitions =
-          JSON.parse(sessionStorage.getItem('computer-devices-aquisitions')),
-        computerSoftwareAquisitions =
-          JSON.parse(sessionStorage.getItem('computer-software-aquisitions')),
-        databasesAquisitions =
-          JSON.parse(sessionStorage.getItem('databases-aquisitions')),
-        telecommunicationsAquisitions =
-          JSON.parse(sessionStorage.getItem('telecommunications-aquisitions')),
-        otherMachineryAquisitions =
-          JSON.parse(sessionStorage.getItem('other-machinery-aquisitions'));
+      var transportEquipmentacquisitions =
+          JSON.parse(sessionStorage.getItem('transport-equipment-acquisitions')),
+        computerDevicesacquisitions =
+          JSON.parse(sessionStorage.getItem('computer-devices-acquisitions')),
+        computerSoftwareacquisitions =
+          JSON.parse(sessionStorage.getItem('computer-software-acquisitions')),
+        databasesacquisitions =
+          JSON.parse(sessionStorage.getItem('databases-acquisitions')),
+        telecommunicationsacquisitions =
+          JSON.parse(sessionStorage.getItem('telecommunications-acquisitions')),
+        otherMachineryacquisitions =
+          JSON.parse(sessionStorage.getItem('other-machinery-acquisitions'));
 
-      $('.js-transport-equipment-aquisitions').html(transportEquipmentAquisitions);
-      $('.js-computer-devices-aquisitions').html(computerDevicesAquisitions);
-      $('.js-computer-software-aquisitions').html(computerSoftwareAquisitions);
-      $('.js-databases-aquisitions').html(databasesAquisitions);
-      $('.js-telecommunications-aquisitions').html(telecommunicationsAquisitions);
-      $('.js-other-machinery-aquisitions').html(otherMachineryAquisitions);
+      $('.js-transport-equipment-acquisitions').html(transportEquipmentacquisitions);
+      $('.js-computer-devices-acquisitions').html(computerDevicesacquisitions);
+      $('.js-computer-software-acquisitions').html(computerSoftwareacquisitions);
+      $('.js-databases-acquisitions').html(databasesacquisitions);
+      $('.js-telecommunications-acquisitions').html(telecommunicationsacquisitions);
+      $('.js-other-machinery-acquisitions').html(otherMachineryacquisitions);
 
       $('.js-grand-total').html(
-        parseInt(transportEquipmentAquisitions) +
-        parseInt(computerDevicesAquisitions) +
-        parseInt(computerSoftwareAquisitions) +
-        parseInt(databasesAquisitions) +
-        parseInt(telecommunicationsAquisitions) +
-        parseInt(otherMachineryAquisitions)
+        parseInt(transportEquipmentacquisitions) +
+        parseInt(computerDevicesacquisitions) +
+        parseInt(computerSoftwareacquisitions) +
+        parseInt(databasesacquisitions) +
+        parseInt(telecommunicationsacquisitions) +
+        parseInt(otherMachineryacquisitions)
       );
     });
 </script>

@@ -35,7 +35,7 @@ items:
         </div>
         <div class="grid__col col-7@m pull-1@m">
             <main role="main" id="main" class="page__main">
-                <form action="../computer-peripheral-devices"
+                <form action="../transport-equipment"
                       name="trav"
                       class="form js-questionnaire-form"
                       role="form"
@@ -44,66 +44,58 @@ items:
                         <div class="block">
                             <section class="section">
                                 <h1 class="question__title saturn">
-                                    What was the value of aquisitions and
-                                    proceeds from disposal of capital assets
-                                    for <span class="highlight">transport
-                                    assets and
-                                    equipment</span>?
+                                    Which machinery and equipment does your
+                                    business possess?
                                 </h1>
-                                <div class="panel panel--simple panel--info u-mb-s">
-                                    <div class="panel__body">
-                                        <strong class="u-mb-xs u-d-b">Include
-                                        </strong>
-                                        <ul class="list u-ml-m u-mb-l">
-                                            <li class="list__item">New and
-                                            used motor vehicles, special purpose
-                                            vehicles, trailers, ships,
-                                            boats, aircraft and railway
-                                            rolling stock, motor cycles,
-                                            bicycles, invalid carriages,
-                                            parts, accessories, major
-                                            repairs, etc.</li>
-                                            <li class="list__item">(All
-                                                means of transportation
-                                                and trailers, invalid
-                                                carriages, parts,
-                                                accessories, major repairs)</li>
-                                        </ul>
 
-                                        <strong class="u-mb-xs u-d-b">Exclude
-                                        </strong>
-                                        <ul class="list u-ml-m">
-                                            <li class="list__item">
-                                                Lifting and handling machinery
-                                            </li>
-                                            <li class="list__item">
-                                                Special purpose machinery
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="field u-mb-m">
-                                    <label class="label venus" for="text-input1">
-                                        Value of aquisitions
-                                    </label>
-                                    <div class="input-type input-type--currency">
-                                        <abbr title="Pounds (GBP)" class="input-type__type" id="answer-type">£</abbr>
-                                        <input class="input input--text input-type__input" name="answer" id="text-input1" value="" data-qa="input-text">
-                                    </div>
-                                </div>
-
-                                <div class="field">
-                                    <label class="label venus"
-                                           for="text-input2">
-                                        Value of proceeds from disposals
-                                    </label>
-                                    <div class="input-type input-type--currency">
-                                        <abbr title="Pounds (GBP)"
-                                              class="input-type__type" id="answer-type2">£</abbr>
-                                        <input
-                                                class="input input--text input-type__input" name="answer" id="text-input2" value="" data-qa="input-text">
-                                    </div>
+                                <div class="field field--checkbox field--multiplechoice">
+                                    <fieldset>
+                                        <legend class="field__legend mars">Select all that apply</legend>
+                                        <div class="field__item js-focusable-box">
+                                            <input
+                                                    class="input input--checkbox js-focusable" name="checkbox-answer" value="transport-equipment" id="transport-equipment" type="checkbox">
+                                            <label class="label label--inline venus " for="transport-equipment">
+                                                Transport assets and equipment
+                                            </label>
+                                        </div>
+                                        <div class="field__item js-focusable-box">
+                                            <input class="input input--checkbox js-focusable" name="checkbox-answer" value="computer-devices" id="computer-devices" type="checkbox">
+                                            <label class="label label--inline venus " for="computer-devices">
+                                                Computer and peripheral
+                                                devices (hardware)
+                                            </label>
+                                        </div>
+                                        <div class="field__item js-focusable-box">
+                                            <input class="input input--checkbox js-focusable" name="checkbox-answer" value="computer-software" id="computer-software" type="checkbox">
+                                            <label class="label label--inline venus " for="computer-software">
+                                                Computer software programs
+                                                <span
+                                                        class="pluto u-db label--negative">Purchased or developed externally (bespoke)</span>
+                                            </label>
+                                        </div>
+                                        <div class="field__item js-focusable-box">
+                                            <input class="input input--checkbox js-focusable" name="checkbox-answer" value="databases" id="databases" type="checkbox">
+                                            <label class="label label--inline venus " for="databases">
+                                                Databases
+                                                <span
+                                                        class="pluto u-db label--negative">Purchased or developed externally (bespoke)</span>
+                                            </label>
+                                        </div>
+                                        <div class="field__item js-focusable-box">
+                                            <input class="input input--checkbox js-focusable" name="checkbox-answer" value="computer-software" id="computer-software" type="checkbox">
+                                            <label class="label label--inline venus " for="computer-software">
+                                                Telecommunication equipment
+                                            </label>
+                                        </div>
+                                        <div class="field__item js-focusable-box">
+                                            <input class="input input--checkbox js-focusable" name="checkbox-answer" value="computer-software" id="computer-software" type="checkbox">
+                                            <label class="label label--inline venus " for="computer-software">
+                                                Other machinery or equipment
+                                                <span
+                                                        class="pluto u-db label--negative">Used in business or industry, not mentioned previously</span>
+                                            </label>
+                                        </div>
+                                    </fieldset>
                                 </div>
                             </section>
                         </div>
@@ -117,21 +109,22 @@ items:
     </div>
 </div>
 
+<script src="https://sdc-global-design-patterns.netlify.com/assets/scripts/bundle.js"></script>
+
 <script>
   $(function () {
     $('.js-questionnaire-form').on('submit', function (e) {
-      sessionStorage.setItem('transport-equipment-aquisitions',
+
+
+      /*sessionStorage.setItem('transport-equipment-acquisitions',
         JSON.stringify($('#text-input1').val()));
       sessionStorage.setItem('transport-equipment-disposals',
         JSON.stringify($('#text-input2').val()));
 
       if(new URLSearchParams(window.location.search).get('edit')) {
         e.preventDefault();
-        window.location.href = '../aquisitions-summary';
-      }
+        window.location.href = '../acquisitions-summary';
+      }*/
     });
-
-    $('#text-input1').val(JSON.parse(sessionStorage.getItem('transport-equipment-aquisitions')) || '');
-    $('#text-input2').val(JSON.parse(sessionStorage.getItem('transport-equipment-disposals')) || '');
   });
 </script>
