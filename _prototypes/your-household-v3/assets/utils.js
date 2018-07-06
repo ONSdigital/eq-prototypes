@@ -34,3 +34,10 @@ export function removeFromList(list, val) {
 		doRemove(val);
 	}
 }
+
+export function trailingNameS(name) {
+  let personToFullName = name,
+    personToFullNameLength = personToFullName.length;
+
+  return personToFullName[personToFullNameLength - 1] === 's' ? '\'' : '\'s';
+}

@@ -225,7 +225,7 @@ cdn: v1.2.0
         storageAPI.relationshipSummaryTemplates['partnership'](
           relationshipInfo['@personIs'].fullName,
           relationshipInfo['@personTo'].fullName,
-          relationshipInfo['relationshipDescription'].summaryAdjective
+          relationshipInfo['relationshipDescription'].sentanceLabel
         )
       ]
     };
@@ -696,7 +696,7 @@ cdn: v1.2.0
           [
             relationshipInfo['@personTo'].fullName
           ],
-          relationshipInfo['relationshipDescription'].summaryAdjective
+          relationshipInfo['relationshipDescription'].sentanceLabel
         )
       ]
     }
@@ -816,7 +816,7 @@ cdn: v1.2.0
         parent.fullName,
         storageAPI.getHouseholdMemberByPersonId(line.parent2)['@person'].fullName,
         line.children.map(function(child) { return child.fullName; }),
-        storageAPI.relationshipDescriptionMap['mother-father'].summaryAdjective + 's'
+        storageAPI.relationshipDescriptionMap['mother-father'].sentanceLabel
       ));
     });
 
@@ -859,7 +859,7 @@ cdn: v1.2.0
           /**
            * Force parent descripion for more efficient summary
            */
-          storageAPI.relationshipDescriptionMap['mother-father'].summaryAdjective
+          storageAPI.relationshipDescriptionMap['mother-father'].sentanceLabel
         ));
 
         relationshipsExplained = relationshipsExplained

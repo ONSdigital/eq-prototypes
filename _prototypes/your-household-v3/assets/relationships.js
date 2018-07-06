@@ -1,4 +1,4 @@
-import {autoIncrementId, removeFromList} from './utils';
+import {autoIncrementId, removeFromList, trailingNameS} from './utils';
 import {
   isHouseholdMember,
   getAllHouseholdMembers,
@@ -106,7 +106,7 @@ export const relationshipDescriptionMap = {
   // covered
   'unrelated': {
     sentanceLabel: 'unrelated',
-    summaryAdjective: 'not related',
+    summaryAdjective: 'unrelated',
     type: relationshipTypes['unrelated']
   }
 };
@@ -134,13 +134,13 @@ function personListStr(peopleArr) {
 
 export const relationshipSummaryTemplates = {
   'partnership': (person1, person2, description) => {
-    return `${personListStr([person1, person2])} are ${description}`;
+    return `${nameElement(person1)} is ${nameElement(person2 + trailingNameS(person2))} ${description}`;
   },
   'twoFamilyMembersToMany': (parent1, parent2, childrenArr, description) => {
-    return `${nameElement(parent1)} and ${nameElement(parent2)} are the ${description} of ${personListStr(childrenArr)}`;
+    return `${nameElement(parent1)} and ${nameElement(parent2)} are ${personListStr(childrenArr.map(name => name + trailingNameS(name)))} ${description}`;
   },
   'oneFamilyMemberToMany': (parent, childrenArr, description) => {
-    return `${nameElement(parent)} is the ${description} of ${personListStr(childrenArr)}`;
+    return `${nameElement(parent)} is ${personListStr(childrenArr.map(name => name + trailingNameS(name)))} ${description}`;
   },
   'manyToMany': (peopleArr1, peopleArr2, description) => {
     return `${personListStr(peopleArr1)} ${peopleArr1.length > 1 ? 'are' : 'is'} ${description} to ${personListStr(peopleArr2)}`;

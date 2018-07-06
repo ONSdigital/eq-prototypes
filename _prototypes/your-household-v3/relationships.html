@@ -414,15 +414,15 @@ cdn: v1.2.0
     personIs = missingRelationship.personIs;
     personTo = missingRelationship.personTo;
 
-    var personToFullName = personTo['@person'].fullName,
+    /*var personToFullName = personTo['@person'].fullName,
       personToFullNameLength = personToFullName.length,
-      trailing = personToFullName[personToFullNameLength] === 's' ? "'" : "'s";
+      trailing = personToFullName[personToFullNameLength] === 's' ? "'" : "'s";*/
 
     $('.js-relationship-person-is-relationship-description').html(
       personIs['@person'].fullName +
       " is " +
       personTo['@person'].fullName +
-      trailing +
+      window.ONS.utils.trailingNameS(personIs['@person'].fullName) +
       "<span class='highlight'>...</span>"
     );
 

@@ -45,7 +45,7 @@ import {
   person,
   tempAwayQuestionSentenceMap
 } from './assets/household';
-import {removeFromList} from './assets/utils';
+import {removeFromList, trailingNameS} from './assets/utils';
 
 export const USER_STORAGE_KEY = 'user-details';
 
@@ -232,7 +232,8 @@ window.ONS.helpers = {
 };
 
 window.ONS.utils = {
-  removeFromList
+  removeFromList,
+  trailingNameS
 };
 
 $(populateHouseholdList);
