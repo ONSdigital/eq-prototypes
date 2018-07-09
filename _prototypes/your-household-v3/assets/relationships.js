@@ -29,25 +29,25 @@ export const relationshipDescriptionMap = {
   // covered
   'husband-wife': {
     sentanceLabel: 'husband or wife',
-    summaryAdjective: 'married',
+    summaryAdjective: 'husband or wife',
     type: relationshipTypes['spouse']
   },
   // covered
   'mother-father': {
     sentanceLabel: 'mother or father',
-    summaryAdjective: 'parent',
+    summaryAdjective: 'mother or father',
     type: relationshipTypes['child-parent']
   },
   // covered
   'step-mother-father': {
     sentanceLabel: 'step-mother or step-father',
-    summaryAdjective: 'step-parent',
+    summaryAdjective: 'step-mother or step-father',
     type: relationshipTypes['step-child-parent']
   },
   // covered
   'son-daughter': {
     sentanceLabel: 'son or daughter',
-    summaryAdjective: 'child',
+    summaryAdjective: 'son or daughter',
     type: relationshipTypes['child-parent']
   },
   // covered
@@ -95,12 +95,12 @@ export const relationshipDescriptionMap = {
   // covered
   'partner': {
     sentanceLabel: 'partner',
-    summaryAdjective: 'partners',
+    summaryAdjective: 'partner',
     type: relationshipTypes['partner']
   },
   'same-sex-partner': {
     sentanceLabel: 'same sex civil partner',
-    summaryAdjective: 'same sex civil partners',
+    summaryAdjective: 'same sex civil partner',
     type: relationshipTypes['partner']
   },
   // covered

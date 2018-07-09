@@ -11,33 +11,29 @@ export function autoIncrementId(collection) {
 
 export function removeFromList(list, val) {
 
-	function doRemove(item) {
-		var foundId = list.indexOf(item);
+  function doRemove(item) {
+    var foundId = list.indexOf(item);
 
-		/**
-		 * Guard
-		 */
-		if (foundId === -1) {
-			console.log('Attempt to remove from list failed: ', list, val);
-			return;
-		}
+    /**
+     * Guard
+     */
+    if (foundId === -1) {
+      console.log('Attempt to remove from list failed: ', list, val);
+      return;
+    }
 
-		list.splice(foundId, 1);
-	}
+    list.splice(foundId, 1);
+  }
 
-	if(_.isArray(val)) {
-		$.each(val, function (i, item) {
-			doRemove(item);
-		});
-	}
-	else {
-		doRemove(val);
-	}
+  if (_.isArray(val)) {
+    $.each(val, function(i, item) {
+      doRemove(item);
+    });
+  } else {
+    doRemove(val);
+  }
 }
 
 export function trailingNameS(name) {
-  let personToFullName = name,
-    personToFullNameLength = personToFullName.length;
-
-  return personToFullName[personToFullNameLength - 1] === 's' ? '\'' : '\'s';
+  return name[name.length - 1] === 's' ? '\'' : '\'s';
 }

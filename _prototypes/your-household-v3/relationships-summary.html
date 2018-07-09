@@ -225,7 +225,7 @@ cdn: v1.2.0
         storageAPI.relationshipSummaryTemplates['partnership'](
           relationshipInfo['@personIs'].fullName,
           relationshipInfo['@personTo'].fullName,
-          relationshipInfo['relationshipDescription'].sentanceLabel
+          relationshipInfo['relationshipDescription'].summaryAdjective
         )
       ]
     };
@@ -240,7 +240,7 @@ cdn: v1.2.0
 
     console.log('relationship', relationshipInfo);
 
-    if(mutualGroups.people.length) {
+    if(mutualGroups.people && mutualGroups.people.length) {
       lines.push(storageAPI.relationshipSummaryTemplates['allMutual'](
         mutualGroups.people.map(function (personId) {
           return storageAPI
@@ -252,10 +252,10 @@ cdn: v1.2.0
       relationshipsExplained = relationshipsExplained
         .concat(mutualGroups.relationshipsExplained);
     }
-    else if(manyToManyGroups.groups.length) {
+    else if(manyToManyGroups.groups && manyToManyGroups.groups.length) {
       $.each(manyToManyGroups.groups, function (i, group) {
         lines.push(storageAPI.relationshipSummaryTemplates['manyToMany'](
-          group.personIsRelatedGroup.map(function (personId) {
+          group.personRelatedGroup.map(function (personId) {
             return storageAPI
               .getHouseholdMemberByPersonId(personId)['@person'].fullName;
           }),
@@ -485,10 +485,9 @@ cdn: v1.2.0
   };
 
   function isPersonInGroup(list, personTarget) {
-    return _.find(list,
-      function (personId) {
-        return personId === personTarget;
-      })
+    return _.find(list, function (personId) {
+      return personId === personTarget;
+    });
   }
 
   groupSummary.findManyToManyWith = function(relationshipInfo) {
@@ -502,7 +501,7 @@ cdn: v1.2.0
       /*relationshipsIdsExplained = []*/
 
       /*[{
-          personIsRelatedGroup: [<people>],
+          personRelatedGroup: [<people>],
           otherPeopleGroup: [<people>]
       }]*/
       groups = [];
@@ -516,11 +515,11 @@ cdn: v1.2.0
      */
     if(_.find(explainedManyToManyGroups, function (group) {
       return (
-        isPersonInGroup(group.personIsRelatedGroup, personIsId) &&
+        isPersonInGroup(group.personRelatedGroup, personIsId) &&
         isPersonInGroup(group.otherPeopleGroup, personToId)
         ) || (
-        isPersonInGroup(group.personIsRelatedGroup, personToId) &&
-        isPersonInGroup(group.otherPeopleGroup, personToId)
+        isPersonInGroup(group.personRelatedGroup, personToId) &&
+        isPersonInGroup(group.otherPeopleGroup, personIsId)
       );
     })) {
       return {
@@ -529,11 +528,36 @@ cdn: v1.2.0
       };
     }
 
+    groups = groups.concat(
+      manyToManyViewModels(relationshipInfo, personToGroups).groups,
+      manyToManyViewModels(relationshipInfo, personIsGroups).groups
+    );
+
     /**
-     * Create many to many models
+     * Explain relationships
      */
-    $.each(personIsGroups, function (i, personIsGroup) {
-      $.each(personIsGroup, function (o, group) {
+    $.each(groups, function (i, group) {
+      $.each(group.personRelatedGroup, function (i, person1Id) {
+        $.each(group.otherPeopleGroup, function (o, person2Id) {
+          relationshipsExplained.push(storageAPI.getRelationshipOf(person1Id, person2Id));
+        });
+      });
+    });
+
+    return {
+      groups: groups,
+      relationshipsExplained: relationshipsExplained
+    };
+  };
+
+  /**
+   * Create many to many models
+   */
+  function manyToManyViewModels(relationshipInfo, personGroups) {
+    var groups = [];
+
+    $.each(personGroups, function (i, personGroup) {
+      $.each(personGroup, function (o, group) {
         var personGroupByRelationship = group.map(function (personId) {
             return storageAPI.getAllManualRelationships()
               .filter(storageAPI.isInRelationship.bind(null, personId))
@@ -549,11 +573,11 @@ cdn: v1.2.0
           otherPeopleGroup = _.intersection
             .apply(null, personGroupByRelationship),
 
-          personIsRelatedGroup = group,
+          personRelatedGroup = group,
 
           model;
 
-        if(personIsRelatedGroup.length && otherPeopleGroup.length) {
+        if(personRelatedGroup.length && otherPeopleGroup.length) {
 
           /**
            * Filter people on left side that have already been explained in
@@ -579,21 +603,21 @@ cdn: v1.2.0
                  * Only include people who haven't already been explained to
                  * this otherPeopleGroup
                  */
-                personIsRelatedGroup = _.difference(
-                  personIsRelatedGroup,
-                  explainedGroup.personIsRelatedGroup
+                personRelatedGroup = _.difference(
+                  personRelatedGroup,
+                  explainedGroup.personRelatedGroup
                 );
               }
             }
           });
 
-          if(!personIsRelatedGroup.length) {
+          if(!personRelatedGroup.length) {
             return;
           }
 
-          model= {
+          model = {
             relationshipTypeId: relationshipInfo.relationshipTypeId,
-            personIsRelatedGroup: personIsRelatedGroup,
+            personRelatedGroup: personRelatedGroup,
             otherPeopleGroup: otherPeopleGroup
           };
 
@@ -602,27 +626,15 @@ cdn: v1.2.0
         }
 
         console.log('personGroupByRelationship', personGroupByRelationship);
-        console.log('personIsRelatedGroup', personIsRelatedGroup);
+        console.log('personRelatedGroup', personRelatedGroup);
         console.log('otherPeopleGroup', otherPeopleGroup);
       });
     });
 
-    /**
-     * Explain relationships
-     */
-    $.each(groups, function (i, group) {
-      $.each(group.personIsRelatedGroup, function (i, person1Id) {
-        $.each(group.otherPeopleGroup, function (o, person2Id) {
-          relationshipsExplained.push(storageAPI.getRelationshipOf(person1Id, person2Id));
-        });
-      });
-    });
-
     return {
-      groups: groups,
-      relationshipsExplained: relationshipsExplained
+      groups: groups
     };
-  };
+  }
 
   groupSummary.getGroupsOf = function(person1Id, person2Id) {
     var personGroups = [],
@@ -696,7 +708,7 @@ cdn: v1.2.0
           [
             relationshipInfo['@personTo'].fullName
           ],
-          relationshipInfo['relationshipDescription'].sentanceLabel
+          relationshipInfo['relationshipDescription'].summaryAdjective
         )
       ]
     }
@@ -816,7 +828,7 @@ cdn: v1.2.0
         parent.fullName,
         storageAPI.getHouseholdMemberByPersonId(line.parent2)['@person'].fullName,
         line.children.map(function(child) { return child.fullName; }),
-        storageAPI.relationshipDescriptionMap['mother-father'].sentanceLabel
+        storageAPI.relationshipDescriptionMap['mother-father'].summaryAdjective
       ));
     });
 
@@ -859,7 +871,7 @@ cdn: v1.2.0
           /**
            * Force parent descripion for more efficient summary
            */
-          storageAPI.relationshipDescriptionMap['mother-father'].sentanceLabel
+          storageAPI.relationshipDescriptionMap['mother-father'].summaryAdjective
         ));
 
         relationshipsExplained = relationshipsExplained
