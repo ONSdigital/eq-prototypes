@@ -10,7 +10,7 @@ navigationItemsRelationships:
     state: incomplete
 
 navigationItemsHousehold:
-  - label: People at this address
+  - label: People who live here
     href: ../summary
     state: current
   - label: Accomodation

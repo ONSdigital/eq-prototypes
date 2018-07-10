@@ -50,41 +50,49 @@ cdn: v1.2.0
 
                                 <ul id="household-members"></ul>
 
-                                <div class="answer__fields js-fields">
-                                    <div class="field field--radio field--multiplechoice ">
-                                        <fieldset class="u-mb-m">
-                                            <div class="field__item js-focusable-box">
-                                                <input class="input input--radio js-focusable"
-                                                       type="radio"
-                                                       name="temporary-members"
-                                                       id="yes-someone-else">
-                                                <label class="label label--inline venus"
-                                                       for="yes-someone-else">Yes,
-                                                    I need to add another person
-                                                    <span class="pluto u-db label--negative">
-                                                        Include relatives, friends or other people
-                                                        who plan to stay in the UK for 3 months or more
-                                                    </span>
-                                                </label>
-                                            </div>
-
-                                            <div class="field__item js-focusable-box">
-                                                <input class="input input--radio js-focusable"
-                                                       type="radio"
-                                                       name="temporary-members"
-                                                       id="no">
-                                                <label class="label label--inline venus"
-                                                       for="no">No, this
-                                                    is everyone</label>
-                                            </div>
-                                        </fieldset>
-                                    </div>
+                                <div class="field field--checkbox field--multiplechoice field--exclusive u-mb-l">
+                                    <fieldset>
+                                        <legend
+                                                class="field__legend mars u-vh">Select all that apply:</legend>
+                                        <div class="field__label venus">Select all that apply:</div>
+                                        <div class="field__item js-focusable-box">
+                                            <input
+                                                    class="input input--checkbox js-focusable js-exclusive-checkbox-group" name="away-type" value="no-address" id="no-address" type="checkbox" />
+                                            <label class="label label--inline venus " for="no-address">
+                                                Anyone staying temporarily who
+                                                usually lives in the UK but do
+                                                not have another UK address
+                                                including relatives and friends
+                                            </label>
+                                        </div>
+                                        <div class="field__item js-focusable-box">
+                                            <input
+                                                    class="input input--checkbox js-focusable js-exclusive-checkbox-group" name="away-type" value="three-months-more" id="three-months-more" type="checkbox" />
+                                            <label class="label label--inline venus " for="three-months-more">
+                                                Anyone who usually lives outside
+                                                the UK who is staying in the UK
+                                                for 3 months or more
+                                            </label>
+                                        </div>
+                                        <div class="field__label u-mt-s venus" aria-hidden="true">Or</div>
+                                        <div class="field__item js-focusable-box">
+                                            <input
+                                                    class="input input--checkbox js-focusable js-exclusive-checkbox" name="away-type" value="no" id="none" type="checkbox" />
+                                            <label class="label label--inline venus " for="none">
+                                                <span class="u-vh">Or,</span>
+                                                No, this is everyone
+                                                <span
+                                                        class="u-vh">. Selecting this will uncheck all other checkboxes</span>
+                                            </label>
+                                            <span class="js-exclusive-checkbox-alert u-vh" role="alert" aria-live="polite" data-adjective="deselected"></span>
+                                        </div>
+                                    </fieldset>
                                 </div>
                             </section>
                         </div>
                     </div>
                     <button class="btn btn--primary btn--lg qa-btn-submit venus"
-                            type="submit" name="">Continue
+                            type="submit" name="">Save and continue
                     </button>
                     <div class="u-mb-m">
                         <button class="btn btn--link mars js-btn-save"
@@ -106,10 +114,16 @@ cdn: v1.2.0
 <script>
   var yesbox = document.getElementById("yes-someone-else");
   $('.qa-btn-submit').click(function(e) {
-    if (yesbox.checked) {
+    /*if (yesbox.checked) {
       document.trav.action = "../who-else-to-add";
     } else {
       document.trav.action = "../visitors";
+    }*/
+
+    if($('[name=away-type]:checked').val() === "no") {
+      document.trav.action = "../visitors";
+    } else {
+      document.trav.action = "../who-else-to-add";
     }
   });
 </script>

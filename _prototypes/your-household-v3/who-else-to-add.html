@@ -144,7 +144,7 @@ cdn: v1.2.0
      * Routing
      */
     if (window.location.search.match(/journey=temp-living-here/)) {
-      window.location = '../temp-living-here/';
+      window.location = '../temp-living-here-feedback/';
     } else if (window.location.search.match(/journey=temp-away-from-home/)) {
       window.location = '../temp-away-from-home/';
     } else if (window.location.search.match(/journey=visitors/)) {
@@ -163,12 +163,22 @@ cdn: v1.2.0
       visitors = storageAPI.getAllHouseholdMembers()
         .filter(storageAPI.isVisitor),
       overrideTitle = 'Who ' + (visitors.length ? 'else ' : '') + 'was staying overnight on 27th February 2018 at ' +
-        addressLine1 + ', ' + addressLine2;
+        addressLine1 + ', ' + addressLine2,
+
+      overrideTitleStayingOutsideUK = 'Who do you need to add to ' +
+        addressLine1 + ', ' + addressLine2 +
+        ' from outside the UK staying at ' + addressLine1 + ', ' +
+        addressLine2 + ' who does not have a UK address';
 
     if (window.location.search.match(/journey=visitors/)) {
       $('#question-title').html(overrideTitle);
       $('#member-list').html('<ul id="visitors-list"></ul>');
       window.ONS.helpers.populateVisitorList();
+    }
+    else if (window.location.search.match(/journey=temp-living-here/)) {
+      $('#question-title').html(overrideTitleStayingOutsideUK);
+      $('#member-list').html('<ul id="household-members"></ul>');
+      window.ONS.helpers.populateHouseholdList();
     }
     else {
       $('#member-list').html('<ul id="household-members"></ul>');

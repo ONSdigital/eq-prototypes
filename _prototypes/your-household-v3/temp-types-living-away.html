@@ -41,9 +41,10 @@ cdn: v1.2.0
                                 <div class="question u-mb-s"
                                      id="total-retail-turnover-question">
                                     <h1 class="question__title saturn">
-                                        Is there anyone else living at
+                                        Apart from the people already added,
+                                        is there anyone else living at
                                         <span class="address-text"></span>
-                                        who is currently away, who has not already been added?
+                                        temporarily away?
                                     </h1>
                                 </div>
 
@@ -52,29 +53,33 @@ cdn: v1.2.0
                                 <div
                                         class="field field--checkbox field--multiplechoice field--exclusive u-mb-l">
                                     <fieldset>
-                                        <legend class="field__legend mars u-vh">What type of central heating do you have?</legend>
+                                        <legend
+                                                class="field__legend mars u-vh">Select all that apply:</legend>
                                         <div class="field__label venus">Select all that apply:</div>
                                         <div class="field__item js-focusable-box">
                                             <input
                                                     class="input input--checkbox js-focusable js-exclusive-checkbox-group" name="away-type" value="studying-away" id="studying-away" type="checkbox" />
                                             <label class="label label--inline venus " for="studying-away">
-                                                Someone working or studying
-                                                away from home
+                                                Anyone who is temporarily
+                                                away from home including
+                                                students
                                             </label>
                                         </div>
                                         <div class="field__item js-focusable-box">
                                             <input
                                                     class="input input--checkbox js-focusable js-exclusive-checkbox-group" name="away-type" value="armed-forces" id="armed-forces" type="checkbox" />
                                             <label class="label label--inline venus " for="armed-forces">
-                                                A member of the armed forces
+                                                Anyone working away from home
+                                                including members of the
+                                                armed forces
                                             </label>
                                         </div>
                                         <div class="field__item js-focusable-box">
                                             <input
                                                     class="input input--checkbox js-focusable js-exclusive-checkbox-group" name="away-type" value="outside-uk" id="outside-uk" type="checkbox" />
                                             <label class="label label--inline venus " for="outside-uk">
-                                                Someone staying outside the
-                                                UK for less than 12 months
+                                                Anyone based outside the UK
+                                                for less than 12 months
                                             </label>
                                         </div>
                                         <div class="field__label u-mt-s venus" aria-hidden="true">Or</div>
@@ -83,7 +88,11 @@ cdn: v1.2.0
                                                     class="input input--checkbox js-focusable js-exclusive-checkbox" name="away-type" value="no" id="none" type="checkbox" />
                                             <label class="label label--inline venus " for="none">
                                                 <span class="u-vh">Or,</span>
-                                                No, this is everyone <span
+                                                No, there is no one
+                                                temporarily away who counts
+                                                this address as their
+                                                permanent or family home
+                                                <span
                                                     class="u-vh">. Selecting this will uncheck all other checkboxes</span>
                                             </label>
                                             <span class="js-exclusive-checkbox-alert u-vh" role="alert" aria-live="polite" data-adjective="deselected"></span>

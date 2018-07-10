@@ -52,130 +52,67 @@ cdn: v1.2.0
 
                 <div class="group" id="what-is-your-address-group">
                     <div class="block" id="what-is-your-address">
-                        <div class="question"
-                             id="what-is-your-address-question">
+                        <div class="question">
                             <h1 class="question__title saturn"
                                 data-qa="question-title">
-                                What is your address?
+                                Welcome to the household prototype
                             </h1>
 
-                            <fieldset
-                                    class="question__fieldset js-question-fieldset u-mb-m">
+                            <div class="panel panel--simple panel--info">
+                                <div class="panel__body">
+                                    <div class="field">
+                                        <label class="label venus "
+                                               for="address-line-1"
+                                               id="label-address-line-1">
+                                            <div class="label__inner">
+                                                Enter the unique access code
+                                            </div>
+                                        </label>
 
-                                <legend class="u-vh">What is your address?
-                                </legend>
-
-                                <div class="question__answers">
-                                    <div class="question__answer">
-                                        <div class="answer answer--textfield  "
-                                             id="container-address-line-1">
-                                            <div class="answer__fields js-fields">
-                                                <div class="field">
-                                                    <label class="label venus "
-                                                           for="address-line-1"
-                                                           id="label-address-line-1">
-                                                        <div class="label__inner">
-                                                            Building and street
-                                                        </div>
-                                                    </label>
-                                                    <input
-                                                            class="input input--text input--text-lg u-mb-s"
-                                                           id="address-line-1"
-                                                           name="address-line-1"
-                                                           data-qa="input-text"
-                                                           value=""/>
-
-                                                    <input class="input input--text input--text-lg"
-                                                           id="address-line-2"
-                                                           name="address-line-2"
-                                                           data-qa="input-text"
-                                                           value=""/>
-                                                </div>
+                                        <div class="grid">
+                                            <div class="grid__col col-4@m">
+                                                <input
+                                                        class="input input--text input--text-lg u-mb-s"
+                                                        id="address-line-1"
+                                                        name="address-line-1"
+                                                        data-qa="input-text"
+                                                        value=""/>
+                                            </div>
+                                            <div class="grid__col col-4@m">
+                                                <input
+                                                        class="input input--text input--text-lg u-mb-s"
+                                                        id="address-line-1"
+                                                        name="address-line-1"
+                                                        data-qa="input-text"
+                                                        value=""/>
+                                            </div>
+                                            <div class="grid__col col-4@m">
+                                                <input
+                                                        class="input input--text input--text-lg u-mb-s"
+                                                        id="address-line-1"
+                                                        name="address-line-1"
+                                                        data-qa="input-text"
+                                                        value=""/>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="question__answer">
-                                        <div class="answer answer--textfield  "
-                                             id="container-town-city">
-                                            <div class="answer__fields js-fields">
-                                                <div class="field">
-                                                    <label class="label venus "
-                                                           for="town-city"
-                                                           id="label-town-city">
-                                                        <div class="label__inner">
-                                                            Town or City
-
-                                                        </div>
-                                                    </label>
-
-                                                    <input class="input input--text "
-                                                           id="town-city"
-                                                           name="town-city"
-                                                           data-qa="input-text"
-                                                           value=""/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="question__answer">
-                                        <div class="answer answer--textfield  "
-                                             id="container-county">
-                                            <div class="answer__fields js-fields">
-                                                <div class="field">
-                                                    <label class="label venus "
-                                                           for="county"
-                                                           id="label-county">
-                                                        <div class="label__inner">
-                                                            County (optional)
-
-                                                        </div>
-                                                    </label>
-
-                                                    <input class="input input--text "
-                                                           id="county"
-                                                           name="county"
-                                                           data-qa="input-text"
-                                                           value=""/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="question__answer">
-                                        <div class="answer answer--textfield  "
-                                             id="container-postcode">
-                                            <div class="answer__fields js-fields">
-                                                <div class="field">
-                                                    <label class="label venus "
-                                                           for="postcode"
-                                                           id="label-postcode">
-                                                        <div class="label__inner">
-                                                            Postcode
-
-                                                        </div>
-                                                    </label>
-
-                                                    <input
-                                                            class="input input--text input--text-postcode"
-                                                           id="postcode"
-                                                           name="postcode"
-                                                           data-qa="input-text"
-                                                           value=""/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <p class="mars">The unique access code
+                                        is printed on your invitation
+                                        letter or form</p>
                                 </div>
-                            </fieldset>
+                            </div>
+
+                            <p class="mars u-mt-l lock">Your personal information is
+                                protected by law and will kept confidential</p>
+
                         </div>
                     </div>
                 </div>
 
                 <button class="btn btn-submit btn--primary btn--lg"
                         data-qa="btn-submit" type="submit"
-                        name="action[save_continue]">Continue
+                        name="action[save_continue]">Submit code
                 </button>
 
 
@@ -205,28 +142,8 @@ cdn: v1.2.0
 
 <script>
   $('.btn-submit').click(function(e) {
-    e.preventDefault(); // do not submit the form like usual
-    sessionStorage.setItem('address', getAddress());
+    e.preventDefault();
     window.location = '../confirm-address/';
   });
-
-  function getAddress() {
-    var array = [
-
-      document.getElementById('address-line-1').value,
-      document.getElementById('address-line-2').value,
-      document.getElementById('town-city').value,
-      document.getElementById('county').value,
-      document.getElementById('postcode').value,
-
-    ];
-    return array.filter(filterAddressLine).join(', ');
-  }
-
-
-  function filterAddressLine(value) {
-    return value;
-
-  }
 </script>
 
