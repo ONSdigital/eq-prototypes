@@ -1,16 +1,16 @@
 function suggest() {
   let $scope = $('.js-suggest'),
-    $inputEl = $scope.find('.js-suggest-input'),
-    typeaheadComponent = TypeaheadComponent.create({
-      scopeElement: $scope,
-      inputElement: $inputEl
-    }),
+  $inputEl = $scope.find('.js-suggest-input'),
+  typeaheadComponent = TypeaheadComponent.create({
+  	  scopeElement: $scope,
+	  inputElement: $inputEl
+	  }),
 
-    serviceRoot = (window.location.hostname === 'localhost')
-      ? 'http://localhost:5000/'
-      : 'https://jonshaw-lookup-api.dev.eq.ons.digital/',
+	serviceRoot = (window.location.hostname === 'localhost')
+	  ? 'http://localhost:5000/'
+	  : 'https://jonshaw-lookup-api.dev.eq.ons.digital/',
 
-    service = SuggestService.create({url: serviceRoot + $inputEl.attr('data-suggest-url'), type:$inputEl.attr('data-suggest-type')});
+	service = SuggestService.create({url: serviceRoot + $inputEl.attr('data-suggest-url')});
 
   function keyUp_handler(e) {
     e.preventDefault();
@@ -43,7 +43,7 @@ function suggest() {
   }
 
   function typeaheadUpdate(data) {
-    typeaheadComponent.update(((data || {})['matches'] || []).map(function(dataItem) {
+    typeaheadComponent.update(((data || {})[$inputEl.attr('data-suggest-type')] || []).map(function(dataItem) {
       return {
         primaryText: dataItem
       };

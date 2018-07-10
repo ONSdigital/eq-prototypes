@@ -11,7 +11,6 @@ function SuggestService(rootUrl, type) {
       dataType: 'json',
       success: function(data) {
         _this.requestInFlight = false;
-        return data[type];
       },
       fail: function() {
         _this.requestInFlight = false;
