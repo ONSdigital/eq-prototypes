@@ -10,7 +10,7 @@ function suggest() {
       ? 'http://localhost:5000/'
       : 'https://jonshaw-lookup-api.dev.eq.ons.digital/',
 
-    service = SuggestService.create({url: serviceRoot + $inputEl.attr('data-suggest-url')});
+    service = SuggestService.create({url: serviceRoot + $inputEl.attr('data-suggest-url'), type:$inputEl.attr('data-suggest-type')});
 
   function keyUp_handler(e) {
     e.preventDefault();

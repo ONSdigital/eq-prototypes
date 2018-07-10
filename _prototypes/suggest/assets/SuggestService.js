@@ -1,4 +1,4 @@
-function SuggestService(rootUrl) {
+function SuggestService(rootUrl, type) {
   let _this = this;
 
   this.requestInFlight = false;
@@ -11,7 +11,7 @@ function SuggestService(rootUrl) {
       dataType: 'json',
       success: function(data) {
         _this.requestInFlight = false;
-        return data.occupations;
+        return data[type];
       },
       fail: function() {
         _this.requestInFlight = false;
