@@ -412,47 +412,49 @@ export const missingRelationshipInference = {
      */
     if (parents.length === 2) {
 
-      getAllHouseholdMembers().forEach((member) => {
+      getAllHouseholdMembers()
+        .filter(isHouseholdMember)
+        .forEach((member) => {
 
-        const memberPersonId = member['@person'].id;
-
-        /**
-         * Guard
-         * If member is the subject member
-         * or member is a parent
-         * or member already has a sibling relationship with 'person'
-         * skip member
-         */
-        if (memberPersonId === personId ||
-          memberPersonId === parents[0].id || memberPersonId === parents[1].id ||
-          siblingIds.indexOf(memberPersonId) > -1) {
-          return;
-        }
-
-        const memberParents = getAllParentsOf(memberPersonId);
-
-        /**
-         * If 2 parents of 'member' are found
-         * and they are the same parents of 'person'
-         * we have identified a missing inferred relationship
-         */
-        if (memberParents.length === 2 &&
-          _.difference(
-            parents.map(getPersonIdFromPerson),
-            memberParents.map(getPersonIdFromPerson)
-          ).length === 0) {
+          const memberPersonId = member['@person'].id;
 
           /**
-           * Add to missingRelationships
+           * Guard
+           * If member is the subject member
+           * or member is a parent
+           * or member already has a sibling relationship with 'person'
+           * skip member
            */
-          missingRelationships.push(relationship(
-            'brother-sister',
-            person.id,
-            memberPersonId,
-            {inferred: true}
-          ));
-        }
-      });
+          if (memberPersonId === personId ||
+            memberPersonId === parents[0].id || memberPersonId === parents[1].id ||
+            siblingIds.indexOf(memberPersonId) > -1) {
+            return;
+          }
+
+          const memberParents = getAllParentsOf(memberPersonId);
+
+          /**
+           * If 2 parents of 'member' are found
+           * and they are the same parents of 'person'
+           * we have identified a missing inferred relationship
+           */
+          if (memberParents.length === 2 &&
+            _.difference(
+              parents.map(getPersonIdFromPerson),
+              memberParents.map(getPersonIdFromPerson)
+            ).length === 0) {
+
+            /**
+             * Add to missingRelationships
+             */
+            missingRelationships.push(relationship(
+              'brother-sister',
+              person.id,
+              memberPersonId,
+              {inferred: true}
+            ));
+          }
+        });
     }
 
     return missingRelationships;
@@ -529,9 +531,11 @@ export function findNextMissingRelationship() {
 }
 
 export function getPeopleIdsMissingRelationshipsWithPerson(personId) {
-  const remainingPersonIds = getAllHouseholdMembers().map(function(member) {
-    return member['@person'].id;
-  });
+  const remainingPersonIds = getAllHouseholdMembers()
+    .filter(isHouseholdMember)
+    .map(function(member) {
+      return member['@person'].id;
+    });
 
   /**
    * Remove this person from the list
