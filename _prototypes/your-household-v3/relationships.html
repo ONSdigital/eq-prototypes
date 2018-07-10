@@ -556,7 +556,17 @@ cdn: v1.2.0
           subjectRelationshipDescription = 'mother-father';
         }
         else if(relationshipDescriptionVal === 'unrelated' &&
-          storageAPI.getPeopleIdsMissingRelationshipsWithPerson(personIsId).length) {
+          storageAPI.getPeopleIdsMissingRelationshipsWithPerson(personIsId).length &&
+
+          /**
+           * And personIs already has the same relationship type with someone
+           * else
+           */
+          storageAPI.getAllManualRelationships()
+            .filter(storageAPI.isInRelationship.bind(null, personIsId))
+            .filter(storageAPI.isRelationshipType.bind(null, relationshipDescriptionVal))
+            .length > 1
+        ) {
           subjectPersonId = personIsId;
         }
 
