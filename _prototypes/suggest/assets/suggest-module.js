@@ -7,8 +7,8 @@ function suggest() {
     }),
 
     serviceRoot = (window.location.hostname === 'localhost')
-      ? 'http://localhost:5000/api/'
-      : '//davec.dev.eq.ons.digital/api/',
+      ? 'http://localhost:5000/'
+      : 'https://jonshaw-lookup-api.dev.eq.ons.digital/',
 
     service = SuggestService.create({url: serviceRoot + $inputEl.attr('data-suggest-url')});
 

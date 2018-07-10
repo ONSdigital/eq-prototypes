@@ -11,7 +11,7 @@ function SuggestService(rootUrl) {
       dataType: 'json',
       success: function(data) {
         _this.requestInFlight = false;
-        return data.matches;
+        return data.occupations;
       },
       fail: function() {
         _this.requestInFlight = false;
