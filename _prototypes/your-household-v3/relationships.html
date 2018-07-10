@@ -410,24 +410,19 @@ cdn: v1.2.0
     editRelationshipId = new URLSearchParams(window.location.search).get('edit'),
     editRelationshipFound = null;
 
-  function updateQuestion(missingRelationship) {
+  function updateQuestion(missingRelationship, descriptionChosen) {
     personIs = missingRelationship.personIs;
     personTo = missingRelationship.personTo;
-
-    /*var personToFullName = personTo['@person'].fullName,
-      personToFullNameLength = personToFullName.length,
-      trailing = personToFullName[personToFullNameLength] === 's' ? "'" : "'s";*/
 
     $('.js-relationship-person-is-relationship-description').html(
       personIs['@person'].fullName +
       " is " +
       personTo['@person'].fullName +
-      window.ONS.utils.trailingNameS(personIs['@person'].fullName) +
-      "<span class='highlight'>...</span>"
+      window.ONS.utils.trailingNameS(personTo['@person'].fullName) +
+      (descriptionChosen ? ' ' : '') + //Spacing
+      "<span class='highlight'>" + (descriptionChosen || "...") +
+      "</span>"
     );
-
-    $('.js-relationship-person-is').html(personIs['@person'].fullName);
-    $('.js-relationship-person-to').html(personTo['@person'].fullName);
   }
 
   function getChosenItem() {
@@ -491,10 +486,7 @@ cdn: v1.2.0
     var missingRelationship = storageAPI.findNextMissingRelationship();
 
     if (missingRelationship) {
-      updateQuestion({
-          personIs: missingRelationship.personTo,
-		  personTo: missingRelationship.personIs
-	  });
+      updateQuestion(missingRelationship);
       $('.qa-btn-submit').on('click', missingSubmit_handler);
     }
     else {
@@ -601,23 +593,12 @@ cdn: v1.2.0
           '</em> to ' +
           personTo['@person'].fullName
 
-        : personIs['@person'].fullName +
-          ' is ' +
-          personTo['@person'].fullName + "'s " +
-          '<em class="highlight">' +
-            relationshipDescription.sentanceLabel +
-          '</em> ';
+        : updateQuestion({
+          personIs: personIs,
+          personTo: personTo
+        }, relationshipDescription.sentanceLabel);
 
     $('.js-relationship-person-is-relationship-description').html(html);
-
-
-    /*$('.js-relationship-person-is-relationship-description')
-      .html(
-        '<em class="highlight">' +
-        storageAPI.relationshipDescriptionMap[$(this)
-          .val()].sentanceLabel +
-        '</em>'
-      );*/
   });
 
   $(function() {

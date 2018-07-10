@@ -47,6 +47,17 @@ cdn: v1.2.0
                                             class="js-relationship-person-is"></span>?
                                     </h1>
 
+                                    <div id="question-info"
+                                         style="display:none;"
+                                            class="panel panel--simple panel--info u-mb-l">
+                                        <div class="panel__body">
+                                            <p class="mars">
+                                                <strong>Exclude</strong>
+                                                step children
+                                            </p>
+                                        </div>
+                                    </div>
+
                                     <label class="label venus " id="label-address-line-1">
                                         <div class="label__inner">
                                             Remaining household members
@@ -91,19 +102,6 @@ cdn: v1.2.0
 
     var storageAPI = window.ONS.storage;
 
-    function createMemberListItem(person) {
-      var $nodeEl = $('#member-checkbox-select-template').clone(),
-        personId = person.id;
-
-      $nodeEl.attr('id', '');
-      $nodeEl.find('.js-person-name').html(person.fullName);
-      $nodeEl.find('.js-person-name').attr('for', personId);
-      $nodeEl.find('.js-person-control').attr('id', personId);
-      $nodeEl.find('.js-person-control').attr('value', personId);
-
-      return $nodeEl;
-    }
-
     /**
      * Find members that don't already have relationships with person
      */
@@ -124,6 +122,19 @@ cdn: v1.2.0
       remainingPersonIds = members.map(function (member) {
         return member['@person'].id;
       });
+
+    function createMemberListItem(person) {
+      var $nodeEl = $('#member-checkbox-select-template').clone(),
+        personId = person.id;
+
+      $nodeEl.attr('id', '');
+      $nodeEl.find('.js-person-name').html(person.fullName);
+      $nodeEl.find('.js-person-name').attr('for', personId);
+      $nodeEl.find('.js-person-control').attr('id', personId);
+      $nodeEl.find('.js-person-control').attr('value', personId);
+
+      return $nodeEl;
+    }
 
     function removeFromList(list, val) {
 
@@ -191,10 +202,15 @@ cdn: v1.2.0
 
       $('.js-relationship-person-is').html(person.fullName);
 
-      $('.js-other-description').html(
-        relationshipDescription === 'mother-father' ?
-          'children of' : 'unrelated to'
-      );
+      'mother-father' === relationshipDescription && (function(){
+        $('.question__title').removeClass('u-mb-l');
+        $('#question-info').show();
+        $('.js-other-description').html('children of');
+      }());
+
+      'unrelated' === relationshipDescription && (function(){
+        $('.js-other-description').html('unrelated to');
+      }());
 
       $.each(
         remainingPersonIds.map(function (personId) {
