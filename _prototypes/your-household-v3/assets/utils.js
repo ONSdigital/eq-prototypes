@@ -35,5 +35,5 @@ export function removeFromList(list, val) {
 }
 
 export function trailingNameS(name) {
-  return name[name.length - 1] === 's' ? '\'' : '\'s';
+  return name[name.length - 1] === 's' ? '\&#x2019;' : '\&#x2019;s';
 }

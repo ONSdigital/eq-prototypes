@@ -419,8 +419,7 @@ cdn: v1.2.0
       " is " +
       personTo['@person'].fullName +
       window.ONS.utils.trailingNameS(personTo['@person'].fullName) +
-      (descriptionChosen ? ' ' : '') + //Spacing
-      "<span class='highlight'>" + (descriptionChosen || "...") +
+      " <span class='highlight'>" + (descriptionChosen || "...") +
       "</span>"
     );
   }
@@ -486,7 +485,10 @@ cdn: v1.2.0
     var missingRelationship = storageAPI.findNextMissingRelationship();
 
     if (missingRelationship) {
-      updateQuestion(missingRelationship);
+      updateQuestion({
+        personIs: missingRelationship.personTo,
+        personTo: missingRelationship.personIs
+      });
       $('.qa-btn-submit').on('click', missingSubmit_handler);
     }
     else {
