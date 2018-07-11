@@ -57,7 +57,7 @@ cdn: v1.2.0
                                                        for="yes-someone-else"
                                                        id="yes-someone-else-label">Yes,
                                                     I need to add another person
-                                                    <span class="pluto u-db label--negative">Include partners, children, babies, students, housemates and lodgers</span>
+                                                    <span class="pluto u-db label--negative">Include partners, children, babies born on or before 20 July 2018, housemates and lodgers</span>
                                                 </label>
                                             </div>
 
@@ -163,7 +163,8 @@ cdn: v1.2.0
       $('#form')
         .prepend('<input type="hidden" name="journey" value="visitors" />');
       $('#question-title')
-        .html('Was anyone else staying on 27th February 2018 at ' + addressLine1 + ', ' + addressLine2);
+        .html('Was anyone else staying on 20th July 2018 at ' + addressLine1 +
+          ', ' + addressLine2);
       $('#member-list').html('<ul id="visitors-list"></ul>');
       $('#yes-someone-else-label').html('Yes, I need to add a visitor');
       window.ONS.helpers.populateVisitorList();
