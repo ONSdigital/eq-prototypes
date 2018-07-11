@@ -1,5 +1,5 @@
 ---
-title: Confirm address
+title: Household prototype
 project: your-household
 globalcss: false
 layout: eq-default-extras
@@ -79,9 +79,10 @@ cdn: v1.2.0
 <script>
 	var yesbox = document.getElementById("address-correct-yes");
 
-	$('.qa-btn-submit').click(function (e) {
+	$('.qa-btn-submit').on('click', function (e) {
 
-		var loc = yesbox.checked ? "../section-intro" : "../index";
+		var loc = yesbox.checked ? "../section-intro" :
+          "../test-address/?edit=true";
 
         document.trav.action = loc;
         window.location = loc;
@@ -90,7 +91,7 @@ cdn: v1.2.0
 
 <script>
 	$(function () {
-		$('.address-text').html(sessionStorage.getItem('address').replace(/, /g, '<br />'));
+		$('.address-text').html((sessionStorage.getItem('address') || '').replace(/, /g, '<br />'));
 	});
 </script>
 

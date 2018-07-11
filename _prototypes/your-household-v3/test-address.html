@@ -1,5 +1,5 @@
 ---
-title: Test address
+title: Household prototype
 project: your-household
 globalcss: false
 layout: eq-default-extras
@@ -206,8 +206,21 @@ cdn: v1.2.0
 <script>
   $('.btn-submit').click(function(e) {
     e.preventDefault(); // do not submit the form like usual
+
+    var isEditing =
+      new URLSearchParams(window.location.search).get('edit') === 'true';
+
     sessionStorage.setItem('address', getAddress());
-    window.location = '../index/';
+
+    sessionStorage.setItem('address-line-1',
+      document.getElementById('address-line-1').value);
+    sessionStorage.setItem('address-line-2',
+      document.getElementById('address-line-2').value);
+    sessionStorage.setItem('town-city', document.getElementById('town-city').value);
+    sessionStorage.setItem('county', document.getElementById('county').value);
+    sessionStorage.setItem('postcode', document.getElementById('postcode').value);
+
+    window.location = isEditing ? '../confirm-address/' : '../index/';
   });
 
   function getAddress() {
@@ -223,10 +236,18 @@ cdn: v1.2.0
     return array.filter(filterAddressLine).join(', ');
   }
 
-
   function filterAddressLine(value) {
     return value;
-
   }
+
+  function updateEditableAddress() {
+    $('#address-line-1').val(sessionStorage.getItem('address-line-1'));
+    $('#address-line-2').val(sessionStorage.getItem('address-line-2'));
+    $('#town-city').val(sessionStorage.getItem('town-city'));
+    $('#county').val(sessionStorage.getItem('county'));
+    $('#postcode').val(sessionStorage.getItem('postcode'));
+  }
+
+  $(updateEditableAddress);
 </script>
 
