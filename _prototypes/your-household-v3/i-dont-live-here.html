@@ -33,7 +33,7 @@ cdn: v1.2.0
                             <section class="section">
                                 <div class="question">
                                     <h1 class="question__title saturn">
-                                        Do you live at <span
+                                        Does anybody usually live at <span
                                             class="address-text"></span>?
                                     </h1>
 
@@ -47,9 +47,8 @@ cdn: v1.2.0
                                                            id="yes">
                                                     <label class="label label--inline venus"
                                                            for="yes">
-                                                        Yes, this is my
-                                                        permenant or family
-                                                        home
+                                                        Yes, I need to add
+                                                        somebody
                                                     </label>
                                                 </div>
 
@@ -60,8 +59,8 @@ cdn: v1.2.0
                                                            id="no">
                                                     <label class="label label--inline venus"
                                                            for="no">
-                                                        No, I don't live
-                                                        here
+                                                        No, nobody usually
+                                                        lives here
                                                     </label>
                                                 </div>
                                             </fieldset>
@@ -106,29 +105,10 @@ cdn: v1.2.0
     var loc;
 
     if (yesbox.checked) {
-      var personUser = window.ONS.storage.getUserPerson();
-
-      /**
-       * Add member to household
-       */
-      window.ONS.storage.updateUserAsHouseholdMember(
-        personUser,
-        {
-          type: window.ONS.storage.KEYS.HOUSEHOLD_MEMBER_TYPE
-        }
-      );
-
-      sessionStorage.setItem('lives-here', 'yes');
-      document.trav.action = loc = "../does-anyone-else-live-here";
+      document.trav.action = loc = "../who-else-to-add";
     } else {
-      /**
-       * Remove member from household
-       */
-      window.ONS.storage.deleteUserAsHouseholdMember();
-
-      sessionStorage.setItem('lives-here', 'no');
-
-      document.trav.action = loc = "../i-dont-live-here";
+      sessionStorage.removeItem('household-members');
+      document.trav.action = loc = "../summary";
     }
 
     window.location = loc;
