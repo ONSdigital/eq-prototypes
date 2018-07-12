@@ -161,6 +161,8 @@ function updateAddresses() {
       )
       : '<a href="../test-address">Address not found</a>'
   );
+
+  $('.address-text-line1').html(addressLine1);
 }
 
 window.ONS = window.ONS || {};
