@@ -1,0 +1,20 @@
+.list.list--people-plain {
+  margin-bottom : 1rem;
+  list-style-type : none;
+}
+
+.list.list--people-plain .list__item {
+  background: url(/img/icons/person.svg) 0 .2rem no-repeat;
+}
+
+.list.list--people-plain .list__item-name {
+  padding-left: 1.5rem;
+}
+
+.list.list--people-plain .list__item-actions {
+  margin-top: -4px;
+}
+
+.list.list--people-plain .list__item-action + .list__item-action {
+  margin-left : .5rem;
+}
