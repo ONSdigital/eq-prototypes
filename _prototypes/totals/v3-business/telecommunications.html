@@ -45,7 +45,7 @@ items:
                         <div class="block">
                             <section class="section">
                                 <h1 class="question__title saturn">
-                                    What was the value of aquisitions and
+                                    What was the value of acquisitions and
                                     proceeds from disposal of capital assets
                                     for <span class="highlight">telecommunications
                                     equipment
@@ -53,17 +53,27 @@ items:
                                 </h1>
                                 <div class="panel panel--simple panel--info u-mb-s">
                                     <div class="panel__body">
-                                        <strong>Include</strong> phones, fax
-                                        machines, switchboards, transmitters,
-                                        receivers, TV cameras, CCTV
-                                        equipment, cameras, burglar or fire
-                                        alarmms, etc.
+                                        <strong class="u-mb-xs u-d-b">Include
+                                        </strong>
+                                        <ul class="list u-ml-m u-mb-l">
+                                            <li class="list__item">Phones,
+                                                switchboards, and fax
+                                                machines</li>
+                                            <li
+                                                    class="list__item">Transmitters and receivers
+                                            </li>
+                                            <li class="list__item">CCTV
+                                                equipment and burglar or
+                                                fire alarms</li>
+                                            <li class="list__item">TV
+                                                cameras and other camera</li>
+                                        </ul>
                                     </div>
                                 </div>
 
                                 <div class="field u-mb-m">
                                     <label class="label venus" for="text-input1">
-                                        Value of aquisitions
+                                        Value of acquisitions
                                     </label>
                                     <div class="input-type input-type--currency">
                                         <abbr title="Pounds (GBP)" class="input-type__type" id="answer-type">£</abbr>
@@ -97,14 +107,19 @@ items:
 
 <script>
   $(function () {
-    $('.js-questionnaire-form').on('submit', function () {
-      sessionStorage.setItem('telecommunications-aquisitions',
+    $('.js-questionnaire-form').on('submit', function (e) {
+      sessionStorage.setItem('telecommunications-acquisitions',
         JSON.stringify($('#text-input1').val()));
       sessionStorage.setItem('telecommunications-disposals',
         JSON.stringify($('#text-input2').val()));
+
+      if(new URLSearchParams(window.location.search).get('edit')) {
+        e.preventDefault();
+        window.location.href = '../acquisitions-summary';
+      }
     });
   });
 
-  $('#text-input1').val(JSON.parse(sessionStorage.getItem('telecommunications-aquisitions')) || '');
+  $('#text-input1').val(JSON.parse(sessionStorage.getItem('telecommunications-acquisitions')) || '');
   $('#text-input2').val(JSON.parse(sessionStorage.getItem('telecommunications-disposals')) || '');
 </script>

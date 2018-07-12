@@ -45,12 +45,16 @@ items:
                         <div class="block">
                             <section class="section">
                                 <h1 class="question__title saturn">
-                                    What was the value of aquisitions and
+                                    What was the value of acquisitions and
                                     proceeds from disposal of capital assets
                                     for <span class="highlight">databases
                                     purchased or developed externally
                                     (bespoke)</span>?
                                 </h1>
+                                <p class="question__description">These are
+                                    files of data that are organised to
+                                    enable effective use of, and access to,
+                                    the data.</p>
                                 <div class="panel panel--simple panel--info u-mb-s">
                                     <div class="panel__body">
                                         <strong class="u-mb-xs u-d-b">Exclude
@@ -68,7 +72,7 @@ items:
 
                                 <div class="field u-mb-m">
                                     <label class="label venus" for="text-input1">
-                                        Value of aquisitions
+                                        Value of acquisitions
                                     </label>
                                     <div class="input-type input-type--currency">
                                         <abbr title="Pounds (GBP)" class="input-type__type" id="answer-type">£</abbr>
@@ -102,14 +106,19 @@ items:
 
 <script>
   $(function () {
-    $('.js-questionnaire-form').on('submit', function () {
-      sessionStorage.setItem('databases-aquisitions',
+    $('.js-questionnaire-form').on('submit', function (e) {
+      sessionStorage.setItem('databases-acquisitions',
         JSON.stringify($('#text-input1').val()));
       sessionStorage.setItem('databases-disposals',
         JSON.stringify($('#text-input2').val()));
+
+      if(new URLSearchParams(window.location.search).get('edit')) {
+        e.preventDefault();
+        window.location.href = '../acquisitions-summary';
+      }
     });
   });
 
-  $('#text-input1').val(JSON.parse(sessionStorage.getItem('databases-aquisitions')) || '');
+  $('#text-input1').val(JSON.parse(sessionStorage.getItem('databases-acquisitions')) || '');
   $('#text-input2').val(JSON.parse(sessionStorage.getItem('databases-disposals')) || '');
 </script>

@@ -35,7 +35,7 @@ items:
         </div>
         <div class="grid__col col-7@m pull-1@m">
             <main role="main" id="main" class="page__main">
-                <form action="../aquisitions-summary"
+                <form action="../acquisitions-summary"
                       name="trav"
                       class="form js-questionnaire-form"
                       role="form"
@@ -45,7 +45,7 @@ items:
                         <div class="block">
                             <section class="section">
                                 <h1 class="question__title saturn">
-                                    What was the value of aquisitions and
+                                    What was the value of acquisitions and
                                     proceeds from disposal of capital assets
                                     for <span class="highlight">other
                                     machinery or equipment not mentioned</span>?
@@ -58,7 +58,8 @@ items:
                                             <li class="list__item">Electrical/electronic equipment</li>
                                             <li class="list__item">General/special purpose equipment</li>
                                             <li class="list__item">Small tools</li>
-                                            <li class="list__item">Furniture</li>
+                                            <li class="list__item">Furniture
+                                            (and office equipment)</li>
                                             <li class="list__item">Office equipment</li>
                                             <li class="list__item">Fabricated products</li>
                                         </ul>
@@ -67,7 +68,7 @@ items:
 
                                 <div class="field u-mb-m">
                                     <label class="label venus" for="text-input1">
-                                        Value of aquisitions
+                                        Value of acquisitions
                                     </label>
                                     <div class="input-type input-type--currency">
                                         <abbr title="Pounds (GBP)" class="input-type__type" id="answer-type">£</abbr>
@@ -101,14 +102,19 @@ items:
 
 <script>
   $(function () {
-    $('.js-questionnaire-form').on('submit', function () {
-      sessionStorage.setItem('other-machinery-aquisitions',
+    $('.js-questionnaire-form').on('submit', function (e) {
+      sessionStorage.setItem('other-machinery-acquisitions',
         JSON.stringify($('#text-input1').val()));
       sessionStorage.setItem('other-machinery-disposals',
         JSON.stringify($('#text-input2').val()));
+
+      if(new URLSearchParams(window.location.search).get('edit')) {
+        e.preventDefault();
+        window.location.href = '../acquisitions-summary';
+      }
     });
   });
 
-  $('#text-input1').val(JSON.parse(sessionStorage.getItem('other-machinery-aquisitions')) || '');
+  $('#text-input1').val(JSON.parse(sessionStorage.getItem('other-machinery-acquisitions')) || '');
   $('#text-input2').val(JSON.parse(sessionStorage.getItem('other-machinery-disposals')) || '');
 </script>

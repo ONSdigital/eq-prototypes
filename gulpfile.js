@@ -146,8 +146,8 @@ gulp.task('scripts:bundle:build', () =>
   bundleScripts(false, scriptsBundleDefaultOpts)
 );
 
-gulp.task('scripts:bundle:watch', ['scripts:bundle:build'], () =>
-  gulp.watch('./_js/**/*.js', ['scripts:bundle:build'])
+gulp.task('scripts:bundle:watch', () =>
+  bundleScripts(true, scriptsBundleDefaultOpts)
 );
 
 /**
@@ -201,7 +201,7 @@ function jekyll(opts) {
     ...jekyllFlags
   ];
 
-  const jekyll = child.spawn('jekyll', jekyllArgs);
+  const jekyll = child[process.platform === 'win32' ? 'exec' : 'spawn']('jekyll', jekyllArgs);
 
   const jekyllLogger = buffer => {
     buffer
