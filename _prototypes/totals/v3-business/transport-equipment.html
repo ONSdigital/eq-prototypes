@@ -1,0 +1,139 @@
+---
+title: Totals v3 Business example
+project: Totals
+globalcss: false
+items:
+  - label: Reporting Period
+    href: #
+    state: completed
+  - label: Major Improvements and Construction Work
+    href: #
+    state: completed
+  - label: Machinery and Equipment
+    href: #
+    state: current
+  - label: Total Value
+    href: #
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<header class="page__header">
+    {% include survey-header.html %}
+    {% include bar.html %}
+</header>
+
+<div class="page__subheader">
+    <div class="container">
+        <a class="mars" href="../relationships">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            {% include navigation.html items=page.items title="Sections" %}
+        </div>
+        <div class="grid__col col-7@m pull-1@m">
+            <main role="main" id="main" class="page__main">
+                <form action="../computer-peripheral-devices"
+                      name="trav"
+                      class="form js-questionnaire-form"
+                      role="form"
+                      autocomplete="off" novalidate="">
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <h1 class="question__title saturn">
+                                    What was the value of acquisitions and
+                                    proceeds from disposal of capital assets
+                                    for <span class="highlight">transport
+                                    assets and
+                                    equipment</span>?
+                                </h1>
+                                <div class="panel panel--simple panel--info u-mb-s">
+                                    <div class="panel__body">
+                                        <strong class="u-mb-xs u-d-b">Include
+                                        </strong>
+                                        <ul class="list u-ml-m u-mb-l">
+                                            <li class="list__item">New and
+                                            used motor vehicles, special purpose
+                                                vehicles, and trailers,</li>
+                                            <li class="list__item">Ships
+                                                and boats</li>
+                                            <li class="list__item">Aircraft
+                                                and railway rolling stock</li>
+                                            <li class="list__item">Motor
+                                                cycles and bicycles,</li>
+                                            <li class="list__item">Mobility
+                                                scooters and powered wheelchairs,</li>
+                                            <li class="list__item">Parts
+                                                and accessories</li>
+                                            <li class="list__item">Major
+                                                repairs</li>
+                                        </ul>
+
+                                        <strong class="u-mb-xs u-d-b">Exclude
+                                        </strong>
+                                        <ul class="list u-ml-m">
+                                            <li class="list__item">
+                                                Lifting and handling machinery
+                                            </li>
+                                            <li class="list__item">
+                                                Special purpose machinery
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="field u-mb-m">
+                                    <label class="label venus" for="text-input1">
+                                        Value of acquisitions
+                                    </label>
+                                    <div class="input-type input-type--currency">
+                                        <abbr title="Pounds (GBP)" class="input-type__type" id="answer-type">£</abbr>
+                                        <input class="input input--text input-type__input" name="answer" id="text-input1" value="" data-qa="input-text">
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label venus"
+                                           for="text-input2">
+                                        Value of proceeds from disposals
+                                    </label>
+                                    <div class="input-type input-type--currency">
+                                        <abbr title="Pounds (GBP)"
+                                              class="input-type__type" id="answer-type2">£</abbr>
+                                        <input
+                                                class="input input--text input-type__input" name="answer" id="text-input2" value="" data-qa="input-text">
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus"
+                            type="submit" name="">Save and continue
+                    </button>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script>
+  $(function () {
+    $('.js-questionnaire-form').on('submit', function (e) {
+      sessionStorage.setItem('transport-equipment-acquisitions',
+        JSON.stringify($('#text-input1').val()));
+      sessionStorage.setItem('transport-equipment-disposals',
+        JSON.stringify($('#text-input2').val()));
+
+      if(new URLSearchParams(window.location.search).get('edit')) {
+        e.preventDefault();
+        window.location.href = '../acquisitions-summary';
+      }
+    });
+
+    $('#text-input1').val(JSON.parse(sessionStorage.getItem('transport-equipment-acquisitions')) || '');
+    $('#text-input2').val(JSON.parse(sessionStorage.getItem('transport-equipment-disposals')) || '');
+  });
+</script>

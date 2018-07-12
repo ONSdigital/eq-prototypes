@@ -16,6 +16,7 @@ const reporter = require('postcss-reporter');
 const inlineblock = require('postcss-inline-block');
 const sourcemaps = require('gulp-sourcemaps');
 const svgSprite = require('gulp-svg-sprite');
+const path = require('path');
 
 const babel = require('gulp-babel');
 
@@ -104,7 +105,7 @@ gulp.task('css:build', () => {
         }),
         inlineblock(),
         pseudoelements(),
-        reporter({clearMessages: true})
+        reporter({ clearMessages: true })
       ])
     )
     .pipe(sourcemaps.write())
@@ -152,9 +153,7 @@ gulp.task('scripts:bundle:watch', () =>
 /**
  * Javascript custom code built with pattern library modules.
  */
-function scriptsBundles(opts, done) {
-  opts = opts || {};
-
+function scriptsBundles(opts = {}, done) {
   let root = './_prototypes';
 
   glob(root + '/**/bundle.js', function(err, files) {
@@ -162,20 +161,31 @@ function scriptsBundles(opts, done) {
       done(err);
     }
 
-    let tasks = files.map(function(entry) {
+    files.map(function(entry) {
       return bundleScripts(!!opts.watch, {
         path: entry,
         dest: entry.replace(root, './js/compiled').replace('bundle.js', '')
       });
     });
-
-    es.merge(tasks).on('end', done);
   });
 }
 
-gulp.task('scripts:bundles:build', scriptsBundles.bind(null, {watch: false}));
+gulp.task('scripts:bundles:build', scriptsBundles.bind(null, { watch: false }));
 
-gulp.task('scripts:bundles:watch', scriptsBundles.bind(null, {watch: true}));
+gulp.task('scripts:bundles:watch', ['scripts:bundles:build'], () => {
+  return gulp.watch(
+    './_prototypes/**/bundle.js', function(e) {
+      const dest = e.path
+        .replace(path.join(__dirname, '_prototypes'), './js/compiled')
+        .replace('bundle.js', '');
+
+      bundleScripts(false, {
+        path: e.path,
+        dest: dest
+      });
+    }
+  );
+});
 
 /**
  * Jekyll configuration
@@ -204,9 +214,9 @@ function jekyll(opts) {
   jekyll.stderr.on('data', jekyllLogger);
 }
 
-gulp.task('jekyll:build', jekyll.bind(null, {watch: false}));
+gulp.task('jekyll:build', jekyll.bind(null, { watch: false }));
 
-gulp.task('jekyll:watch', jekyll.bind(null, {watch: true}));
+gulp.task('jekyll:watch', jekyll.bind(null, { watch: true }));
 
 /**
  * Local development server
