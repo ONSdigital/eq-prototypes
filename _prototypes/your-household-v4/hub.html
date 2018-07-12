@@ -18,14 +18,29 @@ cdn: v1.2.0
     </div>
 </div>
 
+<style>
+    .completed {
+        position: relative;
+    }
+
+    .completed::before {
+        z-index:2;
+        content:"";
+        background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAbCAYAAAAZMl2nAAAABGdBTUEAALGPC/xhBQAAAjtJREFUSA29l0FLW0EQx2f2NWDSQ196sFBELKFfwVMPNcmLFZV68eRFPBd6K4IexKT0IHjpqdDi0aMg5iCKUvDkqdBDQYiKIIJY0oO1wZhMd0L3+V6yz+TlrZ1DNjOzM/9f9u1uEoD/aH3Lk/EgORGUMB1/VHDeXf4u7z9ZyvXqeqMuaDqWLGTf1Ov0sdEX8UdMWJmLuc0zr869g9iL2RlC+gwEHi08eCB60j/nN04VjCepQuZGe9GZJqAvANS6BRBKIobp8uz2CSu2TjDEcScEaxCk6Jq+2h9eDbB7LyBtIVhZGgEMQLVaXKAFYfzRdArBIFL8EgWOlOe394yCdAvBUBa/NNvTT+MJa7B/rSf7/KyyUzpuzuv8KBDcr2WPMMTV+Z+i3O2jUKtt2O+Hh3TC3lhUCO7lezQuBNFLJYSAV2BZY7/mNndVzDuagOB+7oroIHiCXJkE1G+Kj/NOjn2vmYLgng2QIAglSgTxGtB6spAbVzGTENwTiQiTeWdLfvKMEgkcEaqAYgrr8DDwxmwq9h7RppTPFYhIKGgFEGu+jM4hiAHRqmkIlmoc38rO0fdE5llJfi+9ljF33+hY/uV9m1w3r9OVULXuPRISRtVrx7AQ3MQFYccETDcQLSBRYbqF0IJ0CxMFIhAkLExUiDtBOoUxAdEWxAdDOCF9qXtrpiC4o+/U3Er43/Fpig+lTuQ9zPdMA8YkBKt1BMITK7uH3xLp1Ln8eTdqGoL7hzY777yV/1NehC5sU/AXb484yamkz/AAAAAASUVORK5CYII=") no-repeat 50%;
+        background-size:1rem;
+        position:absolute;
+        left:9px;left:-1.5rem;
+        width:1.2em;
+        height:1.2em;
+        bottom:0;
+        top:0;
+        margin:auto;
+    }
+</style>
+
 <div class="page__container container">
     <div class="grid grid--reverse">
-        <div class="grid__col col-4@m">
-            {% include navigation.html
-            items=site.data.your-household.navigationItemsHousehold
-            nav-title-id="section-address" %}
-        </div>
-        <div class="grid__col col-7@m pull-1@m">
+        <div class="grid__col col-12@m">
             <main role="main" id="main" class="page__main">
                 <form name="trav" class="form qa-questionnaire-form" role="form"
                       autocomplete="off" novalidate="">
@@ -40,36 +55,45 @@ cdn: v1.2.0
                                     </h1>
                                 </div>
 
-                                <div class="panel panel--simple panel--success"
+                                <div class="panel panel--simple panel--info"
                                      id="question-guidance-everyone-at-address-confirmation-question">
                                     <strong class="u-mb-s">You have completed
                                         the section
                                         <span class="address-text-line1"></span></strong>
-                                    <ul class="mars"
-                                        style="list-style: none;padding: 0; margin-bottom: 0">
-                                        <li>You can check your answers below
-                                        </li>
-                                    </ul>
+                                    <p class="mars">In order to submit this
+                                        survey you need to complete all of
+                                        the following sections</p>
                                 </div>
                                 <br />
 
-                                <h2 class="neptune">Household members</h2>
-                                <ul id="household-members-summary"
-                                    class="list list--records list--people u-mb-s js-records"></ul>
-                                <p id="nobody-notice"
-                                   style="display:none;">Nobody usually
-                                    lives here</p>
-                                <p class="u-mb-xl"><a href="../who-else-to-add">Add someone to this household</a></p>
-
-                                <div class="js-visitors-people-list">
-                                    <h2 class="neptune">Visitors staying
-                                        overnight on 20th July 2018</h2>
-                                    <ul id="visitors-summary"
-                                        class="list list--records list--people u-mb-s js-records"></ul>
-                                    <p class="u-mb-xl"><a
-                                            href="../who-else-to-add?journey=visitors">Add someone to this household</a>
-                                    </p>
+                                <div class="summary">
+                                    <div class="summary__block">
+                                        <div class="summary__item">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question venus address-text-line1"></div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer mars completed">Completed</div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link mars">
+                                                        <a href="#edit">View
+                                                            answers
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="household-member-surveys"></div>
+                                    </div>
                                 </div>
+
+                                <p>You can submit this survey once all of
+                                    the sections are complete</p>
                             </section>
                         </div>
                     </div>
@@ -91,35 +115,58 @@ cdn: v1.2.0
     </div>
 </div>
 
-<div id="modal" class="modal" style="display: none;">
-    <div class="modal__window">
-        <h1 class="saturn">Are you sure you want to remove <span
-                class="js-person-name"></span>?</h1>
-        <p class="u-mb-m">All of the data associated with this person will be
-            deleted</p>
-
-        <div class="modal__buttons">
-            <button class="btn btn--toggle venus close-modal-button">Cancel
-            </button>
-            <button class="btn btn--primary venus remove-member-button">
-                Confirm
-            </button>
+<ul style="display:none;">
+    <div id="person-survey-item-template" class="summary__item">
+        <div class="grid">
+            <div class="grid__col col-12@xs col-6@m">
+                <div
+                        class="summary__question venus js-person-name"></div>
+            </div>
+            <div class="grid__col col-8@xs col-4@m">
+                <div
+                        class="summary__answer mars">Not started</div>
+            </div>
+            <div class="grid__col col-4@xs col-2@m">
+                <div class="summary__link mars">
+                    <a class="js-link"
+                       href="#">Start section
+                        <span class="u-vh"></span>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
-<ul style="display:none;">
-    <li id="person-record-template" class="list__item">
+    <!--<li id="person-record-template" class="list__item">
         <span class="list__item-name js-person-name"></span>
         <div class="list__item-actions u-fr">
             <span class="list__item-action">
                 <a class="js-record-edit" href="#">Change</a>
             </span>
             <span class="list__item-action">
-                <button class="btn btn--toggle js-record-remove">Remove</button>
+                <button class="btn btn&#45;&#45;toggle js-record-remove">Remove</button>
             </span>
         </div>
-    </li>
+    </li>-->
 </ul>
 
 <script src='/js/compiled/your-household-v4/bundle.js'></script>
+
+<script>
+    var storageAPI = window.ONS.storage;
+
+    function updateIndividualSurveyList() {
+      $.each(storageAPI.getAllHouseholdMembers().filter(storageAPI.isHouseholdMember), function (i, member) {
+
+        var $nodeEl = $('#person-survey-item-template').clone(),
+            person = member['@person'];
+
+        $nodeEl.find('.js-person-name').html(person.fullName);
+        $nodeEl.find('.js-link').attr('href', '../individual-start/?person=' + person.id);
+
+        $('#household-member-surveys').append($nodeEl);
+      });
+    }
+
+    $(updateIndividualSurveyList);
+</script>

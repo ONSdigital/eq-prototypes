@@ -17,6 +17,9 @@
     "url": "https://github.com/ONSdigital/eq-prototypes/issues"
   },
   "homepage": "https://github.com/ONSdigital/eq-prototypes#readme",
+  "resolutions": {
+    "eslint-scope": "3.7.1"
+  },
   "devDependencies": {
     "autoprefixer": "^6.3.6",
     "babel-core": "^6.26.0",
