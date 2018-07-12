@@ -50,12 +50,15 @@ cdn: v1.2.0
                                         </li>
                                     </ul>
                                 </div>
-                                <br/>
+                                <br />
 
                                 <h2 class="neptune">Household members</h2>
                                 <ul id="household-members-summary"
                                     class="list list--records list--people u-mb-s js-records"></ul>
-                                <p class="u-mb-xl"><a href="../who-else-to-add">Add someone else</a></p>
+                                <p id="nobody-notice"
+                                   style="display:none;">Nobody usually
+                                    lives here</p>
+                                <p class="u-mb-xl"><a href="../who-else-to-add">Add someone to this household</a></p>
 
                                 <div class="js-visitors-people-list">
                                     <h2 class="neptune">Visitors staying
@@ -63,7 +66,7 @@ cdn: v1.2.0
                                     <ul id="visitors-summary"
                                         class="list list--records list--people u-mb-s js-records"></ul>
                                     <p class="u-mb-xl"><a
-                                            href="../who-else-to-add?journey=visitors">Add someone else</a>
+                                            href="../who-else-to-add?journey=visitors">Add someone to this household</a>
                                     </p>
                                 </div>
                             </section>
@@ -253,6 +256,10 @@ cdn: v1.2.0
     $.each(householdMembers, function(i, member) {
       $('#household-members-summary').append(createMemberItem(member));
     });
+
+    if(!householdMembers.length) {
+      $('#nobody-notice').show();
+    }
 
     if (visitors.length) {
       $.each(visitors, function(i, member) {

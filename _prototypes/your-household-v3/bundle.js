@@ -159,7 +159,7 @@ function updateAddresses() {
       ? (
         addressLine1 + (addressLine2 ? ', ' + addressLine2 : '')
       )
-      : '<a href="../index">Address not found</a>'
+      : '<a href="../test-address">Address not found</a>'
   );
 }
 

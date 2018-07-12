@@ -40,8 +40,8 @@ export const relationshipDescriptionMap = {
   },
   // covered
   'step-mother-father': {
-    sentanceLabel: 'step-mother or step-father',
-    summaryAdjective: 'step-mother or step-father',
+    sentanceLabel: 'stepmother or stepfather',
+    summaryAdjective: 'stepmother or stepfather',
     type: relationshipTypes['step-child-parent']
   },
   // covered
@@ -58,8 +58,8 @@ export const relationshipDescriptionMap = {
   },
   // covered
   'step-child': {
-    sentanceLabel: 'step-child',
-    summaryAdjective: 'step-child',
+    sentanceLabel: 'stepchild',
+    summaryAdjective: 'stepchild',
     type: relationshipTypes['step-child-parent']
   },
   // covered
@@ -82,8 +82,8 @@ export const relationshipDescriptionMap = {
   },
   // covered
   'step-brother-sister': {
-    sentanceLabel: 'step-brother or step-sister',
-    summaryAdjective: 'step-brother or step-sister',
+    sentanceLabel: 'stepbrother or stepsister',
+    summaryAdjective: 'stepbrother or stepsister',
     type: relationshipTypes['step-brother-sister']
   },
   // covered
