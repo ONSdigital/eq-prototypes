@@ -1,0 +1,130 @@
+---
+title: Totals v3 Business example
+project: Totals
+globalcss: false
+items:
+  - label: Reporting Period
+    href: #
+    state: completed
+  - label: Major Improvements and Construction Work
+    href: #
+    state: completed
+  - label: Machinery and Equipment
+    href: #
+    state: current
+  - label: Total Value
+    href: #
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<header class="page__header">
+    {% include survey-header.html %}
+    {% include bar.html %}
+</header>
+
+<div class="page__subheader">
+    <div class="container">
+        <a class="mars" href="../relationships">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            {% include navigation.html items=page.items title="Sections" %}
+        </div>
+        <div class="grid__col col-7@m pull-1@m">
+            <main role="main" id="main" class="page__main">
+                <form action="../transport-equipment"
+                      name="trav"
+                      class="form js-questionnaire-form"
+                      role="form"
+                      autocomplete="off" novalidate="">
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <h1 class="question__title saturn">
+                                    Which machinery and equipment does your
+                                    business possess?
+                                </h1>
+
+                                <div class="field field--checkbox field--multiplechoice">
+                                    <fieldset>
+                                        <legend class="field__legend mars">Select all that apply</legend>
+                                        <div class="field__item js-focusable-box">
+                                            <input
+                                                    class="input input--checkbox js-focusable" name="checkbox-answer" value="transport-equipment" id="transport-equipment" type="checkbox">
+                                            <label class="label label--inline venus " for="transport-equipment">
+                                                Transport assets and equipment
+                                            </label>
+                                        </div>
+                                        <div class="field__item js-focusable-box">
+                                            <input class="input input--checkbox js-focusable" name="checkbox-answer" value="computer-devices" id="computer-devices" type="checkbox">
+                                            <label class="label label--inline venus " for="computer-devices">
+                                                Computer and peripheral
+                                                devices (hardware)
+                                            </label>
+                                        </div>
+                                        <div class="field__item js-focusable-box">
+                                            <input class="input input--checkbox js-focusable" name="checkbox-answer" value="computer-software" id="computer-software" type="checkbox">
+                                            <label class="label label--inline venus " for="computer-software">
+                                                Computer software programs
+                                                <span
+                                                        class="pluto u-db label--negative">Purchased or developed externally (bespoke)</span>
+                                            </label>
+                                        </div>
+                                        <div class="field__item js-focusable-box">
+                                            <input class="input input--checkbox js-focusable" name="checkbox-answer" value="databases" id="databases" type="checkbox">
+                                            <label class="label label--inline venus " for="databases">
+                                                Databases
+                                                <span
+                                                        class="pluto u-db label--negative">Purchased or developed externally (bespoke)</span>
+                                            </label>
+                                        </div>
+                                        <div class="field__item js-focusable-box">
+                                            <input class="input input--checkbox js-focusable" name="checkbox-answer" value="computer-software" id="computer-software" type="checkbox">
+                                            <label class="label label--inline venus " for="computer-software">
+                                                Telecommunication equipment
+                                            </label>
+                                        </div>
+                                        <div class="field__item js-focusable-box">
+                                            <input class="input input--checkbox js-focusable" name="checkbox-answer" value="computer-software" id="computer-software" type="checkbox">
+                                            <label class="label label--inline venus " for="computer-software">
+                                                Other machinery or equipment
+                                                <span
+                                                        class="pluto u-db label--negative">Used in business or industry, not mentioned previously</span>
+                                            </label>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus"
+                            type="submit" name="">Save and continue
+                    </button>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src="https://sdc-global-design-patterns.netlify.com/assets/scripts/bundle.js"></script>
+
+<script>
+  $(function () {
+    $('.js-questionnaire-form').on('submit', function (e) {
+
+
+      /*sessionStorage.setItem('transport-equipment-acquisitions',
+        JSON.stringify($('#text-input1').val()));
+      sessionStorage.setItem('transport-equipment-disposals',
+        JSON.stringify($('#text-input2').val()));
+
+      if(new URLSearchParams(window.location.search).get('edit')) {
+        e.preventDefault();
+        window.location.href = '../acquisitions-summary';
+      }*/
+    });
+  });
+</script>
