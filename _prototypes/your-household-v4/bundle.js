@@ -163,6 +163,14 @@ function updateAddresses() {
   );
 
   $('.address-text-line1').html(addressLine1);
+
+  let personId = new URLSearchParams(window.location.search).get('person'),
+    person;
+
+  if (personId) {
+    person = getHouseholdMemberByPersonId(personId)['@person'];
+    $('#section-individual').html(person.fullName);
+  }
 }
 
 window.ONS = window.ONS || {};
