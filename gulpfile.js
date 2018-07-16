@@ -134,7 +134,7 @@ gulp.task('scripts:watch', () => {
 });
 
 /**
- * Javascript standard patten library modules.
+ * Javascript standard pattern library modules.
  */
 const scriptsBundleDefaultOpts = {
   path: './_js/standard-bundle.js',
@@ -156,12 +156,12 @@ gulp.task('scripts:bundle:watch', () =>
 function scriptsBundles(opts = {}, done) {
   let root = './_prototypes';
 
-  glob(root + '/**/bundle.js', function(err, files) {
+  return glob(root + '/**/bundle.js', function(err, files) {
     if (err) {
       done(err);
     }
 
-    files.map(function(entry) {
+    return files.map(function(entry) {
       return bundleScripts(!!opts.watch, {
         path: entry,
         dest: entry.replace(root, './js/compiled').replace('bundle.js', '')
@@ -172,9 +172,11 @@ function scriptsBundles(opts = {}, done) {
 
 gulp.task('scripts:bundles:build', scriptsBundles.bind(null, { watch: false }));
 
+/*gulp.task('scripts:bundles:watch', scriptsBundles.bind(null, { watch: true }));*/
+
 gulp.task('scripts:bundles:watch', ['scripts:bundles:build'], () => {
   return gulp.watch(
-    './_prototypes/**/bundle.js', function(e) {
+    './_prototypes/**/*.js', function(e) {
       const dest = e.path
         .replace(path.join(__dirname, '_prototypes'), './js/compiled')
         .replace('bundle.js', '');

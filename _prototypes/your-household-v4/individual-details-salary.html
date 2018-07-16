@@ -98,6 +98,15 @@ cdn: v1.2.0
 <script src='/js/compiled/your-household-v4/bundle.js'></script>
 
 <script>
+  var storageAPI = window.ONS.storage,
+    personId = new URLSearchParams(window.location.search).get('person');
+
+  $('.qa-btn-submit').on('click', function () {
+    storageAPI.addUpdateSalary(personId,
+      $('#text-input').val()
+    );
+  });
+
   /**
    * Routing
    */

@@ -52,12 +52,15 @@ cdn: v1.2.0
                                             <div class="fieldgroup__fields">
                                                 <div class="field field--input field--day">
                                                     <label class="label mercury" data-qa="label-day">Day</label>
-                                                    <input placeholder="DD" value="" data-qa="input-StringField" class="input input--StringField ">
+                                                    <input
+                                                            id="personal-detail-dob-day" placeholder="DD"
+                                                            value="" data-qa="input-StringField" class="input input--StringField ">
                                                 </div>
 
                                                 <div class="field field--select field--month">
-                                                    <label class="label mercury" for="date-range-from-month" id="label-date-range-from-month" data-qa="label-month">Month</label>
-                                                    <select class="input input--select" id="date-range-from-month" name="date-range-from-month">
+                                                    <label class="label mercury" for="personal-detail-dob-month" id="label-date-range-from-month" data-qa="label-month">Month</label>
+                                                    <select
+                                                            class="input input--select"id="personal-detail-dob-month" name="date-range-from-month">
                                                         <option value="" disabled="disabled" selected="selected">Select month</option>
                                                         <option value="1">January</option>
                                                         <option value="2">February</option>
@@ -76,7 +79,9 @@ cdn: v1.2.0
 
                                                 <div class="field field--input field--year">
                                                     <label class="label mercury" data-qa="label-year">Year</label>
-                                                    <input placeholder="YYYY" value="" data-qa="input-StringField" class="input input--StringField ">
+                                                    <input
+                                                            id="personal-detail-dob-year"
+                                                            placeholder="YYYY" value="" data-qa="input-StringField" class="input input--StringField ">
                                                 </div>
                                             </div>
                                         </fieldset>
@@ -115,8 +120,31 @@ cdn: v1.2.0
 <script src='/js/compiled/your-household-v4/bundle.js'></script>
 
 <script>
+  var storageAPI = window.ONS.storage,
+    personId = new URLSearchParams(window.location.search).get('person');
+
+  $('.qa-btn-submit').on('click', function () {
+    storageAPI.addUpdatePersonalDetailsDOB(personId,
+      $('#personal-detail-dob-day').val(),
+      $('#personal-detail-dob-month').val(),
+      $('#personal-detail-dob-year').val()
+    );
+  });
+
+  function updateAnswer() {
+    var details = storageAPI.getPersonalDetailsFor(personId);
+
+    if (details && details.dob) {
+      details.dob.day && $('#personal-detail-dob-day').val(details.dob.day);
+      details.dob.month && $('#personal-detail-dob-month').val(details.dob.month);
+      details.dob.year && $('#personal-detail-dob-year').val(details.dob.year);
+    }
+  }
+
+  $(updateAnswer);
+
   /**
    * Routing
    */
-  $('#person').val(new URLSearchParams(window.location.search).get('person'));
+  $('#person').val(personId);
 </script>

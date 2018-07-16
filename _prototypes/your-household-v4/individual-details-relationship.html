@@ -39,7 +39,7 @@ cdn: v1.2.0
                                     <h1 id="question-title"
                                         class="question__title saturn">
                                         What is your legal marital or
-                                        same-sex civil partnership ?
+                                        same-sex civil partnership?
                                     </h1>
                                 </div>
 
@@ -50,9 +50,9 @@ cdn: v1.2.0
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="does-anyone-else-live-here"
+                                                           name="marital-status"
                                                            id="never"
-                                                           value="yes">
+                                                           value="never">
                                                     <label class="label label--inline venus"
                                                            for="never"
                                                            id="never-label">
@@ -65,9 +65,9 @@ cdn: v1.2.0
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="does-anyone-else-live-here"
+                                                           name="marital-status"
                                                            id="married"
-                                                           value="yes">
+                                                           value="married">
                                                     <label class="label label--inline venus"
                                                            for="married"
                                                            id="married-label">
@@ -77,9 +77,9 @@ cdn: v1.2.0
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="does-anyone-else-live-here"
+                                                           name="marital-status"
                                                            id="registered"
-                                                           value="yes">
+                                                           value="registered">
                                                     <label class="label label--inline venus"
                                                            for="registered"
                                                            id="registered-label">
@@ -91,9 +91,9 @@ cdn: v1.2.0
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="does-anyone-else-live-here"
+                                                           name="marital-status"
                                                            id="separated-married"
-                                                           value="yes">
+                                                           value="separated-married">
                                                     <label class="label label--inline venus"
                                                            for="separated-married"
                                                            id="separated-married-label">
@@ -104,9 +104,9 @@ cdn: v1.2.0
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="does-anyone-else-live-here"
+                                                           name="marital-status"
                                                            id="separated-partnership"
-                                                           value="yes">
+                                                           value="separated-partnership">
                                                     <label class="label label--inline venus"
                                                            for="separated-partnership"
                                                            id="separated-partnership-label">
@@ -118,9 +118,9 @@ cdn: v1.2.0
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="does-anyone-else-live-here"
+                                                           name="marital-status"
                                                            id="divorced"
-                                                           value="yes">
+                                                           value="divorced">
                                                     <label class="label label--inline venus"
                                                            for="divorced"
                                                            id="divorced-label">
@@ -130,9 +130,9 @@ cdn: v1.2.0
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="does-anyone-else-live-here"
+                                                           name="marital-status"
                                                            id="former-partnership"
-                                                           value="yes">
+                                                           value="former-partnership">
                                                     <label class="label label--inline venus"
                                                            for="former-partnership"
                                                            id="former-partnership-label">
@@ -145,9 +145,9 @@ cdn: v1.2.0
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="does-anyone-else-live-here"
+                                                           name="marital-status"
                                                            id="widowed"
-                                                           value="yes">
+                                                           value="widowed">
                                                     <label class="label label--inline venus"
                                                            for="widowed"
                                                            id="widowed-label">
@@ -157,9 +157,9 @@ cdn: v1.2.0
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="does-anyone-else-live-here"
+                                                           name="marital-status"
                                                            id="surviving-partner"
-                                                           value="yes">
+                                                           value="surviving-partner">
                                                     <label class="label label--inline venus"
                                                            for="surviving-partner"
                                                            id="surviving-partner-label">
@@ -205,6 +205,15 @@ cdn: v1.2.0
 <script src='/js/compiled/your-household-v4/bundle.js'></script>
 
 <script>
+  var storageAPI = window.ONS.storage,
+    personId = new URLSearchParams(window.location.search).get('person');
+
+  $('.qa-btn-submit').on('click', function () {
+    storageAPI.addUpdateMaritalStatus(personId,
+      $('[name="marital-status"]:checked').val()
+    );
+  });
+
   /**
    * Routing
    */

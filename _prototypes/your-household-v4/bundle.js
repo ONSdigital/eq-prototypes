@@ -45,6 +45,18 @@ import {
   person,
   tempAwayQuestionSentenceMap
 } from './assets/household';
+import {
+  addUpdatePersonalDetailsDOB,
+  getPersonalDetailsFor,
+  addUpdateMaritalStatus,
+  addUpdateCountry,
+  addUpdateOrientation,
+  addUpdateSalary,
+
+  personalDetailsMaritalStatusMap,
+  personalDetailsCountryMap,
+  personalDetailsOrientationMap
+} from './assets/personal-details';
 import {removeFromList, trailingNameS} from './assets/utils';
 
 export const USER_STORAGE_KEY = 'user-details';
@@ -221,6 +233,17 @@ window.ONS.storage = {
   getPeopleIdsMissingRelationshipsWithPerson,
   getRelationshipType,
   findNextMissingRelationship,
+
+  addUpdatePersonalDetailsDOB,
+  getPersonalDetailsFor,
+  addUpdateMaritalStatus,
+  addUpdateCountry,
+  addUpdateOrientation,
+  addUpdateSalary,
+
+  personalDetailsMaritalStatusMap,
+  personalDetailsCountryMap,
+  personalDetailsOrientationMap,
 
   KEYS: {
     HOUSEHOLD_MEMBERS_STORAGE_KEY,

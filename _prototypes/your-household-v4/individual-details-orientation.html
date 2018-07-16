@@ -50,60 +50,60 @@ cdn: v1.2.0
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="country"
-                                                           id="england"
-                                                           value="england">
+                                                           name="orientation"
+                                                           id="straight"
+                                                           value="straight">
                                                     <label class="label label--inline venus"
-                                                           for="england"
-                                                           id="england-label">
+                                                           for="straight"
+                                                           id="straight-label">
                                                         Straight or Heterosexual
                                                     </label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="country"
-                                                           id="wales"
-                                                           value="wales">
+                                                           name="orientation"
+                                                           id="gay"
+                                                           value="gay">
                                                     <label class="label label--inline venus"
-                                                           for="wales"
-                                                           id="wales-label">
+                                                           for="gay"
+                                                           id="gay-label">
                                                         Gay or Lesbian
                                                     </label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="country"
-                                                           id="scotland"
-                                                           value="scotland">
+                                                           name="orientation"
+                                                           id="bisexual"
+                                                           value="bisexual">
                                                     <label class="label label--inline venus"
-                                                           for="scotland"
-                                                           id="scotland-label">
+                                                           for="bisexual"
+                                                           id="bisexual-label">
                                                         Bisexual
                                                     </label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="country"
-                                                           id="northern-ireland"
-                                                           value="northern-ireland">
+                                                           name="orientation"
+                                                           id="other"
+                                                           value="other">
                                                     <label class="label label--inline venus"
-                                                           for="northern-ireland"
-                                                           id="northern-ireland-label">
+                                                           for="other"
+                                                           id="other-label">
                                                         Other
                                                     </label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="country"
-                                                           id="republic-ireland"
-                                                           value="republic-ireland">
+                                                           name="orientation"
+                                                           id="no-say"
+                                                           value="no-say">
                                                     <label class="label label--inline venus"
-                                                           for="republic-ireland"
-                                                           id="republic-ireland-label">
+                                                           for="no-say"
+                                                           id="no-say-label">
                                                         Prefer not to say
                                                     </label>
                                                 </div>
@@ -144,6 +144,15 @@ cdn: v1.2.0
 <script src='/js/compiled/your-household-v4/bundle.js'></script>
 
 <script>
+  var storageAPI = window.ONS.storage,
+    personId = new URLSearchParams(window.location.search).get('person');
+
+  $('.qa-btn-submit').on('click', function () {
+    storageAPI.addUpdateOrientation(personId,
+      $('[name="orientation"]:checked').val()
+    );
+  });
+
   /**
    * Routing
    */

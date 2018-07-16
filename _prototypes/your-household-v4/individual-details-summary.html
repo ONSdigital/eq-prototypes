@@ -117,7 +117,7 @@ cdn: v1.2.0
                                                 </div>
                                                 <div class="grid__col col-8@xs col-4@m">
                                                     <div
-                                                            class="summary__answer venus">[marital status]</div>
+                                                            class="summary__answer venus js-marital-status"></div>
                                                 </div>
                                                 <div class="grid__col col-4@xs col-2@m">
                                                     <div class="summary__link mars">
@@ -136,7 +136,7 @@ cdn: v1.2.0
                                                 </div>
                                                 <div class="grid__col col-8@xs col-4@m">
                                                     <div
-                                                            class="summary__answer venus">[country]</div>
+                                                            class="summary__answer venus js-country"></div>
                                                 </div>
                                                 <div class="grid__col col-4@xs col-2@m">
                                                     <div class="summary__link mars">
@@ -193,7 +193,7 @@ cdn: v1.2.0
                                                 </div>
                                                 <div class="grid__col col-8@xs col-4@m">
                                                     <div
-                                                            class="summary__answer venus">[sexual orientation]</div>
+                                                            class="summary__answer venus js-orientation"></div>
                                                 </div>
                                                 <div class="grid__col col-4@xs col-2@m">
                                                     <div class="summary__link mars">
@@ -255,3 +255,13 @@ cdn: v1.2.0
 
 <script src='/js/compiled/your-household-v4/bundle.js'></script>
 
+<script>
+  var storageAPI = window.ONS.storage,
+    personId = new URLSearchParams(window.location.search).get('person'),
+    details = storageAPI.getPersonalDetailsFor(personId);
+
+  $('.js-marital-status').html(storageAPI.personalDetailsMaritalStatusMap[details.maritalStatus].description);
+  $('.js-country').html(storageAPI.personalDetailsCountryMap[details.country].description);
+  $('.js-orientation').html(storageAPI.personalDetailsOrientationMap[details.orientation].description);
+
+</script>
