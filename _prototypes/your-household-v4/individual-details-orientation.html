@@ -28,7 +28,7 @@ cdn: v1.2.0
         <div class="grid__col col-7@m pull-1@m">
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
-                      role="form" autocomplete="off" novalidate="">
+                      role="form" autocomplete="off" action="../individual-details-salary">
                     <input type="hidden" name="person" id="person"
                            value="#"/>
                     <div class="group" id="rsi">
@@ -37,8 +37,9 @@ cdn: v1.2.0
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title saturn">
-                                        Are you <span class="js-person-name"></span>, or are you someone who is completing
-                                        the survey for <span class="js-person-name"></span>?
+                                        Which of the following options best
+                                        describes how you think of your
+                                        sexual orientation?
                                     </h1>
                                 </div>
 
@@ -49,24 +50,61 @@ cdn: v1.2.0
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="does-anyone-else-live-here"
-                                                           id="yes-someone-else"
-                                                           value="yes">
+                                                           name="country"
+                                                           id="england"
+                                                           value="england">
                                                     <label class="label label--inline venus"
-                                                           for="yes-someone-else"
-                                                           id="yes-someone-else-label">
-                                                        I am <span class="js-person-name"></span>
+                                                           for="england"
+                                                           id="england-label">
+                                                        Straight or Heterosexual
                                                     </label>
                                                 </div>
-
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="does-anyone-else-live-here"
-                                                           id="no" value="no">
+                                                           name="country"
+                                                           id="wales"
+                                                           value="wales">
                                                     <label class="label label--inline venus"
-                                                           for="no">
-                                                        I am someone else who is completing the survey for <span class="js-person-name"></span>
+                                                           for="wales"
+                                                           id="wales-label">
+                                                        Gay or Lesbian
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="country"
+                                                           id="scotland"
+                                                           value="scotland">
+                                                    <label class="label label--inline venus"
+                                                           for="scotland"
+                                                           id="scotland-label">
+                                                        Bisexual
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="country"
+                                                           id="northern-ireland"
+                                                           value="northern-ireland">
+                                                    <label class="label label--inline venus"
+                                                           for="northern-ireland"
+                                                           id="northern-ireland-label">
+                                                        Other
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="country"
+                                                           id="republic-ireland"
+                                                           value="republic-ireland">
+                                                    <label class="label label--inline venus"
+                                                           for="republic-ireland"
+                                                           id="republic-ireland-label">
+                                                        Prefer not to say
                                                     </label>
                                                 </div>
                                             </fieldset>
@@ -106,26 +144,8 @@ cdn: v1.2.0
 <script src='/js/compiled/your-household-v4/bundle.js'></script>
 
 <script>
-	var storageAPI = window.ONS.storage,
-		personId = new URLSearchParams(window.location.search).get('person');
-	var yesbox = document.getElementById("yes-someone-else");
-	$('.qa-btn-submit').click(function(e) {
-
-	    $('#person').val(personId);
-
-		/**
-		 * Routing
-		 */
-		if (yesbox.checked) {
-            document.trav.action = "../individual-details-dob";
-		} else {
-			document.trav.action = "../who-else-to-add";
-		}
-	});
-
-	function updateName() {
-		$('.js-person-name').html(storageAPI.getHouseholdMemberByPersonId(personId)['@person'].fullName);
-	}
-
-	$(updateName);
+  /**
+   * Routing
+   */
+  $('#person').val(new URLSearchParams(window.location.search).get('person'));
 </script>

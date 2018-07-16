@@ -170,6 +170,8 @@ function updateAddresses() {
   if (personId) {
     person = getHouseholdMemberByPersonId(personId)['@person'];
     $('#section-individual').html(person.fullName);
+
+    $('.js-person-fullname-from-url-id').html(person.fullName);
   }
 }
 

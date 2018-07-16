@@ -1,0 +1,105 @@
+---
+title: Household prototype v4
+project: your-household
+globalcss: false
+layout: eq-default-extras
+cdn: v1.2.0
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<header class="page__header">
+    {% include survey-header.html %}
+    {% include bar.html %}
+</header>
+
+<div class="page__subheader">
+    <div class="container">
+        <a class="mars" href="../do-you-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            {% include navigation.html
+            items=site.data.your-household-v4.yourHouseholdV4_navigationItemsPersonalDetails
+            nav-title-id="section-individual" %}
+        </div>
+        <div class="grid__col col-7@m pull-1@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="off" action="../individual-details-summary">
+                    <input type="hidden" name="person" id="person"
+                           value="#"/>
+                    <div class="group" id="rsi">
+                        <div class="block" id="total-retail-turnover">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title saturn">
+                                        What was your gross pay, that is your
+                                        pay before any deductions, the last
+                                        time you were paid?
+                                    </h1>
+                                </div>
+
+                                <div id="question-info"
+                                     class="panel panel--simple panel--info u-mb-l">
+                                    <div class="panel__body">
+                                        <p class="mars">
+                                            <strong>Exclude</strong>
+                                            expenses (if possible)
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="answer">
+                                    <div
+                                            class="answer__fields js-fields u-mb-xl">
+                                        <div class="field">
+                                            <label class="label venus "
+                                                   for="text-input">Gross pay
+                                                last time you were paid
+                                            </label>
+                                            <input class="input input--text" type="text" id="text-input">
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+
+                    <p class="mars">Can't complete this question?<br />
+                        <a href="../hub">Choose another section and return to this later</a></p>
+
+                    <p class="mars u-mb-m">Want to keep your answers secure from
+                        other people at this address?<br />
+                        <a href="../hub">Get a separate access code to
+                            submit an individual response</a></p>
+
+                    <div class="u-mb-m">
+                        <button class="btn btn--link mars js-btn-save"
+                                type="submit" name="action[save_sign_out]">Save
+                            and complete later
+                        </button>
+                    </div>
+                </form>
+                <a class="page__previous page__previous--bottom js-previous-link"
+                   href="javascript:history.back()"
+                   id="bottom-previous">Previous</a>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/your-household-v4/bundle.js'></script>
+
+<script>
+  /**
+   * Routing
+   */
+  $('#person').val(new URLSearchParams(window.location.search).get('person'));
+</script>
