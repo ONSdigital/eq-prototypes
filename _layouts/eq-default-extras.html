@@ -5,6 +5,8 @@
 <!--[if IE 9]>         <html lang="en-gb" dir="ltr" class="no-js lt-ie10"> <![endif]-->
 <!--[if gt IE 9]><!--> <html lang="en-gb" dir="ltr" class="no-js"> <!--<![endif]-->
 <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.0/underscore-min.js"></script>
+    <script src="{{ '/js/jquery.min.js' | prepend: site.baseurl }}"></script>
     {% include head-eq-default.html %}
 </head>
 <body>
@@ -16,6 +18,7 @@
         {{ content }}
     </div>
 </div>
+{% include footer-eq-default.html %}
 
 <script src="https://cdn.ons.gov.uk/sdc/{% if page.cdn %}{{ page.cdn }}{% else %}v1.0.0{% endif %}/scripts/bundle.min.js"></script>
 
