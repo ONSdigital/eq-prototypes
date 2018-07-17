@@ -99,12 +99,21 @@ cdn: v1.2.0
 
 <script>
   var storageAPI = window.ONS.storage,
-    personId = new URLSearchParams(window.location.search).get('person');
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person'),
+    isEditing = urlParams.get('edit');
 
-  $('.qa-btn-submit').on('click', function () {
+  $('#text-input').val(storageAPI.getPersonalDetailsFor(personId).salary);
+
+  $('.qa-btn-submit').on('click', function (e) {
     storageAPI.addUpdateSalary(personId,
       $('#text-input').val()
     );
+
+    if(isEditing) {
+      e.preventDefault();
+      window.location.href = '../individual-details-summary/?person=' + personId;
+    }
   });
 
   /**

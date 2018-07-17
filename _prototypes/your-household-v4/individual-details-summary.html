@@ -98,11 +98,13 @@ cdn: v1.2.0
                                                 </div>
                                                 <div class="grid__col col-8@xs col-4@m">
                                                     <div
-                                                            class="summary__answer venus">[DOB]</div>
+                                                            class="summary__answer venus js-dob"></div>
                                                 </div>
                                                 <div class="grid__col col-4@xs col-2@m">
                                                     <div class="summary__link mars">
-                                                        <a href="#edit">Change
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-dob/?edit=true">Change
                                                             <span class="u-vh"></span>
                                                         </a>
                                                     </div>
@@ -121,7 +123,9 @@ cdn: v1.2.0
                                                 </div>
                                                 <div class="grid__col col-4@xs col-2@m">
                                                     <div class="summary__link mars">
-                                                        <a href="#edit">Change
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-relationship/?edit=true">Change
                                                             <span class="u-vh"></span>
                                                         </a>
                                                     </div>
@@ -140,45 +144,9 @@ cdn: v1.2.0
                                                 </div>
                                                 <div class="grid__col col-4@xs col-2@m">
                                                     <div class="summary__link mars">
-                                                        <a href="#edit">Change
-                                                            <span class="u-vh"></span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="summary__item">
-                                            <div class="grid">
-                                                <div class="grid__col col-12@xs col-6@m">
-                                                    <div
-                                                            class="summary__question mars">Nationality</div>
-                                                </div>
-                                                <div class="grid__col col-8@xs col-4@m">
-                                                    <div
-                                                            class="summary__answer venus">[nationality]</div>
-                                                </div>
-                                                <div class="grid__col col-4@xs col-2@m">
-                                                    <div class="summary__link mars">
-                                                        <a href="#edit">Change
-                                                            <span class="u-vh"></span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="summary__item">
-                                            <div class="grid">
-                                                <div class="grid__col col-12@xs col-6@m">
-                                                    <div
-                                                            class="summary__question mars">Ethnic group</div>
-                                                </div>
-                                                <div class="grid__col col-8@xs col-4@m">
-                                                    <div
-                                                            class="summary__answer venus">[ethnic group]</div>
-                                                </div>
-                                                <div class="grid__col col-4@xs col-2@m">
-                                                    <div class="summary__link mars">
-                                                        <a href="#edit">Change
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-country/?edit=true">Change
                                                             <span class="u-vh"></span>
                                                         </a>
                                                     </div>
@@ -197,7 +165,9 @@ cdn: v1.2.0
                                                 </div>
                                                 <div class="grid__col col-4@xs col-2@m">
                                                     <div class="summary__link mars">
-                                                        <a href="#edit">Change
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-orientation/?edit=true">Change
                                                             <span class="u-vh"></span>
                                                         </a>
                                                     </div>
@@ -208,15 +178,17 @@ cdn: v1.2.0
                                             <div class="grid">
                                                 <div class="grid__col col-12@xs col-6@m">
                                                     <div
-                                                            class="summary__question mars">Religion</div>
+                                                            class="summary__question mars">Salary</div>
                                                 </div>
                                                 <div class="grid__col col-8@xs col-4@m">
                                                     <div
-                                                            class="summary__answer venus">[religion]</div>
+                                                            class="summary__answer venus js-salary"></div>
                                                 </div>
                                                 <div class="grid__col col-4@xs col-2@m">
                                                     <div class="summary__link mars">
-                                                        <a href="#edit">Change
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-salary/?edit=true">Change
                                                             <span class="u-vh"></span>
                                                         </a>
                                                     </div>
@@ -253,15 +225,26 @@ cdn: v1.2.0
     </div>
 </div>
 
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 <script src='/js/compiled/your-household-v4/bundle.js'></script>
 
 <script>
   var storageAPI = window.ONS.storage,
     personId = new URLSearchParams(window.location.search).get('person'),
-    details = storageAPI.getPersonalDetailsFor(personId);
+    details = storageAPI.getPersonalDetailsFor(personId),
+    dobDate = moment(details.dob.year + '-' + details.dob.month + '-' +
+      details.dob.day, 'YYYY-MM-DD');
 
   $('.js-marital-status').html(storageAPI.personalDetailsMaritalStatusMap[details.maritalStatus].description);
   $('.js-country').html(storageAPI.personalDetailsCountryMap[details.country].description);
   $('.js-orientation').html(storageAPI.personalDetailsOrientationMap[details.orientation].description);
+  $('.js-salary').html(details.salary);
+  $('.js-dob').html(dobDate.format('MMMM Do YYYY'));
+
+  $(function () {
+    $('.js-change-person-link').each(function () {
+      $(this).attr('href', $(this).attr('href') + '&person=' + personId);
+    });
+  });
 
 </script>
