@@ -36,6 +36,10 @@ cdn: v1.2.0
         top:0;
         margin:auto;
     }
+
+    .btn--primary[disabled] {
+        opacity: .5;
+    }
 </style>
 
 <div class="page__container container">
@@ -74,13 +78,16 @@ cdn: v1.2.0
                                                     <div
                                                             class="summary__question venus address-text-line1"></div>
                                                 </div>
-                                                <div class="grid__col col-8@xs col-4@m">
+                                                <div
+                                                        class="grid__col col-8@xs col-3@m">
                                                     <div
                                                             class="summary__answer mars completed">Completed</div>
                                                 </div>
-                                                <div class="grid__col col-4@xs col-2@m">
+                                                <div
+                                                        class="grid__col col-4@xs col-3@m">
                                                     <div class="summary__link mars">
-                                                        <a href="#edit">View
+                                                        <a
+                                                                href="../summary">View
                                                             answers
                                                             <span class="u-vh"></span>
                                                         </a>
@@ -98,7 +105,8 @@ cdn: v1.2.0
                         </div>
                     </div>
                     <button class="btn btn--primary btn--lg qa-btn-submit venus"
-                            type="submit" name="">Submit survey
+                            type="submit"
+                            disabled="disabled">Submit survey
                     </button>
                     <div class="u-mb-m">
                         <button class="btn btn--link mars js-btn-save"
@@ -122,15 +130,15 @@ cdn: v1.2.0
                 <div
                         class="summary__question venus js-person-name"></div>
             </div>
-            <div class="grid__col col-8@xs col-4@m">
+            <div class="grid__col col-8@xs col-3@m">
                 <div
-                        class="summary__answer mars">Not started</div>
+                        class="summary__answer mars js-survey-status">[Status
+                    not found]</div>
             </div>
-            <div class="grid__col col-4@xs col-2@m">
+            <div class="grid__col col-4@xs col-3@m">
                 <div class="summary__link mars">
                     <a class="js-link"
                        href="#">Start section
-                        <span class="u-vh"></span>
                     </a>
                 </div>
             </div>
@@ -143,17 +151,75 @@ cdn: v1.2.0
 <script>
     var storageAPI = window.ONS.storage;
 
+    var statusMap = {
+      'not-started': {
+        label: 'Not started',
+        linkText: 'Start section',
+        link: ''
+      },
+      'in-progress': {
+        label: 'In progress',
+        linkText: 'Continue with section'
+      },
+      'completed': {
+        label: 'Completed',
+        linkText: 'View answers'
+      }
+    };
+
+    var people = storageAPI.getAllHouseholdMembers()
+      .filter(storageAPI.isHouseholdMember)
+      .map(function (member) {
+        return member['@person'];
+      }),
+      peopleIdsToComplete = _.pluck(people, 'id');
+
     function updateIndividualSurveyList() {
-      $.each(storageAPI.getAllHouseholdMembers().filter(storageAPI.isHouseholdMember), function (i, member) {
+      $.each(people, function (i, person) {
 
         var $nodeEl = $('#person-survey-item-template').clone(),
-            person = member['@person'];
+            $surveyStatus = $nodeEl.find('.js-survey-status'),
+            personDetails = storageAPI.getPersonalDetailsFor(person.id),
+            surveyStatus;
 
+        if (!personDetails) {
+          surveyStatus = 'not-started';
+        }
+        else if (
+          personDetails.dob &&
+          personDetails.country &&
+          personDetails.orientation &&
+          personDetails.maritalStatus &&
+          personDetails.salary
+        ) {
+          surveyStatus = 'completed';
+
+          window.ONS.utils.removeFromList(peopleIdsToComplete, person.id);
+        }
+        else {
+          surveyStatus = 'in-progress';
+        }
+
+        $nodeEl.attr('id', '');
         $nodeEl.find('.js-person-name').html(person.fullName);
-        $nodeEl.find('.js-link').attr('href', '../individual-intro/?person=' + person.id);
+        $nodeEl.find('.js-link').html(statusMap[surveyStatus].linkText);
+        $nodeEl.find('.js-link').attr('href',
+          (surveyStatus === 'not-started' || surveyStatus === 'in-progress')
+            ? '../individual-intro/?person=' + person.id
+            : '../individual-details-summary/?person=' + person.id
+        );
+        $surveyStatus.html(statusMap[surveyStatus].label);
+
+        if (surveyStatus === 'completed') {
+          $surveyStatus.addClass('completed');
+        }
 
         $('#household-member-surveys').append($nodeEl);
       });
+
+      if (peopleIdsToComplete.length === 0) {
+        $('.qa-btn-submit').attr('disabled', false);
+      }
     }
 
     $(updateIndividualSurveyList);
