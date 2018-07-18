@@ -36,7 +36,7 @@ cdn: v1.2.0
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
-                                        class="question__title saturn">
+                                        class="question__title saturn js-heading">
                                         What was your gross pay, that is your
                                         pay before any deductions, the last
                                         time you were paid?
@@ -75,12 +75,10 @@ cdn: v1.2.0
                     <p class="mars">Can't complete this question?<br />
                         <a href="../hub">Choose another section and return to this later</a></p>
 
-                    <p class="mars u-mb-m">Want to keep your answers secure from
-                        other people at this address?<br />
+                    <p class="mars u-mb-m"><span class="js-link-secure-label"></span><br />
                         <a class="js-link-secure"
-                           href="../individual-decision-secure">Get a separate
-                            access code to
-                            submit an individual response</a></p>
+                           href="#">Get a separate access code to submit an
+                            individual response</a></p>
 
                     <div class="u-mb-m">
                         <button class="btn btn--link mars js-btn-save"
@@ -103,6 +101,7 @@ cdn: v1.2.0
   var storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
     personId = urlParams.get('person'),
+    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     isEditing = urlParams.get('edit');
 
   $('#text-input').val(storageAPI.getPersonalDetailsFor(personId).salary);
@@ -117,6 +116,16 @@ cdn: v1.2.0
       window.location.href = '../individual-details-summary/?person=' + personId;
     }
   });
+
+  function updateQuestion() {
+    if(storageAPI.getAnsweringIndividualByProxy()) {
+      $('.js-heading').html('What was ' + person.fullName +
+        ' gross pay, that is ' + person.fullName +
+        ' pay before any deductions, the last time they were paid?');
+    }
+  }
+
+  $(updateQuestion);
 
   /**
    * Routing
