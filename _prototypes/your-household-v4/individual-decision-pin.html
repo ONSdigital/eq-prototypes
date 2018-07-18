@@ -1,0 +1,118 @@
+---
+title: Household prototype v4
+project: your-household
+globalcss: false
+layout: eq-default-extras
+cdn: v1.2.0
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<header class="page__header">
+    {% include survey-header.html %}
+    {% include bar.html %}
+</header>
+
+<style>
+    .pin {
+        display : inline-block;
+        padding : .5rem 1rem;
+        background-color : #efefef;
+        border : 1px solid #aaa;
+        letter-spacing: .2rem;
+        font-weight : normal;
+    }
+</style>
+
+<div class="page__subheader">
+    <div class="container">
+        <a class="mars" href="../do-you-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-7@m pull-1@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="off"
+                      action="../individual-details-dob">
+                    <input type="hidden" name="person" id="person"
+                           value="#"/>
+                    <div class="group u-mb-xl">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title saturn">
+                                        Your individual access code
+                                    </h1>
+
+                                    <div class="pin saturn u-mb-m">
+                                        34567
+                                    </div>
+
+                                    <p class="venus">
+                                        Make a note of your access code as
+                                        you will need it to view or edit your
+                                        answers once you have signed out.
+                                    </p>
+                                    <p class="mars u-mb-m">
+                                        If you lose your code you won't be
+                                        able to retrieve it and you'll need
+                                        to enter your answers again.
+                                    </p>
+                                </div>
+
+                                <div class="field field--checkbox field--multiplechoice">
+                                    <div class="field__item js-focusable-box">
+                                        <input class="input input--checkbox js-focusable" name="checkbox-answer" value="bacon" id="bacon" type="checkbox">
+                                        <label
+                                                class="label label--inline venus " for="bacon">Send me my access code by text message (optional)</label>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Continue with new
+                        individual access code
+                    </button>
+
+                    <div class="u-mb-m"><a
+                            class="js-link-person" href="../individual-decision">Cancel
+                        this and
+                        return me to the survey</a></div>
+
+                    <div class="u-mb-m">
+                        <button class="btn btn--link mars js-btn-save"
+                                type="submit" name="action[save_sign_out]">Save
+                            and complete later
+                        </button>
+                    </div>
+                </form>
+                <a class="page__previous page__previous--bottom js-previous-link"
+                   href="javascript:history.back()"
+                   id="bottom-previous">Previous</a>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/your-household-v4/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    personId = new URLSearchParams(window.location.search).get('person'),
+    pinObj = storageAPI.createPinFor(personId);
+
+  $('.pin').html(pinObj.pin);
+
+  $('.qa-btn-submit').on('click', function (e) {
+    e.preventDefault();
+
+    window.location.href = '../individual-details-dob/?person=' + personId;
+  });
+</script>

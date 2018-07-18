@@ -37,9 +37,13 @@ cdn: v1.2.0
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title saturn">
-                                        Are you <span class="js-person-name"></span>, or are you someone who is completing
-                                        the survey for <span class="js-person-name"></span>?
+                                        Send individual access code
                                     </h1>
+                                    <p class="mars u-mb-m">
+                                        You can request the access code to be
+                                        sent by text message to their mobile
+                                        phone, or we can post it to them.
+                                    </p>
                                 </div>
 
                                 <div class="answer">
@@ -50,25 +54,43 @@ cdn: v1.2.0
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
                                                            name="does-anyone-else-live-here"
-                                                           id="yes-someone-else"
-                                                           value="yes">
+                                                           id="no"
+                                                           value="no">
                                                     <label class="label label--inline venus"
-                                                           for="yes-someone-else"
-                                                           id="yes-someone-else-label">
-                                                        I am <span class="js-person-name"></span>
+                                                           for="no"
+                                                           id="no-label">
+                                                        Send access code by
+                                                        text message
                                                     </label>
+                                                    <div class="field__other">
+                                                        <label
+                                                                class="label venus mercury" for="other-answer" id="label-checkbox-other-input">Enter your mobile number</label>
+                                                        <input class="input input__text js-focusable" id="other-answer" name="other-answer" type="text" data-qa="other-option">
+                                                    </div>
                                                 </div>
 
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
                                                            name="does-anyone-else-live-here"
-                                                           id="no" value="no">
+                                                           id="yes" value="yes">
                                                     <label class="label label--inline venus"
-                                                           for="no">
-                                                        I am someone else who is completing the survey for <span class="js-person-name"></span>
+                                                           for="yes">
+                                                        Send an access code
+                                                        in the post
                                                     </label>
                                                 </div>
+
+                                                <!--<div class="field__item js-focusable-box is-checked">
+                                                    <input class="input input&#45;&#45;radio js-focusable" name="radio-answer" value="Other" id="radio-answer-other" type="radio" data-qa="has-other-option">
+                                                    <label class="label label&#45;&#45;inline venus " for="radio-answer-other" id="label-radio-answer-other">Other
+                                                        <br><span class="label__description pluto">Any other topping.</span>
+                                                    </label>
+                                                    <div class="field__other">
+                                                        <label class="label venus mercury" for="other-answer" id="label-checkbox-other-input">Please specify other</label>
+                                                        <input class="input input__text js-focusable" id="other-answer" name="other-answer" type="text" data-qa="other-option">
+                                                    </div>
+                                                </div>-->
                                             </fieldset>
                                         </div>
                                     </div>
@@ -79,9 +101,6 @@ cdn: v1.2.0
                     <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
                             type="submit" name="">Save and continue
                     </button>
-
-                    <p class="mars">Can't complete this question?<br />
-                        <a href="../hub">Choose another section and return to this later</a></p>
 
                     <div class="u-mb-m">
                         <button class="btn btn--link mars js-btn-save"
@@ -101,27 +120,20 @@ cdn: v1.2.0
 <script src='/js/compiled/your-household-v4/bundle.js'></script>
 
 <script>
-	var storageAPI = window.ONS.storage,
-		personId = new URLSearchParams(window.location.search).get('person'),
-        yesbox = document.getElementById("yes-someone-else");
+  var storageAPI = window.ONS.storage,
+    personId = new URLSearchParams(window.location.search).get('person');
+  var nobox = document.getElementById("no");
+  $('.qa-btn-submit').on('click', function(e) {
 
-	$('.qa-btn-submit').click(function(e) {
+    $('#person').val(personId);
 
-	    $('#person').val(personId);
+    storageAPI.createPinFor(personId, { exported: true });
+    document.trav.action = "../hub";
+  });
 
-		/**
-		 * Routing
-		 */
-		if (yesbox.checked) {
-            document.trav.action = "../individual-details-dob";
-		} else {
-			document.trav.action = "../individual-decision-other-secure";
-		}
-	});
+  function updateName() {
+    $('.js-person-name').html(storageAPI.getHouseholdMemberByPersonId(personId)['@person'].fullName);
+  }
 
-	function updateName() {
-		$('.js-person-name').html(storageAPI.getHouseholdMemberByPersonId(personId)['@person'].fullName);
-	}
-
-	$(updateName);
+  $(updateName);
 </script>

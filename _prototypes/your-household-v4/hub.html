@@ -164,6 +164,10 @@ cdn: v1.2.0
       'completed': {
         label: 'Completed',
         linkText: 'View answers'
+      },
+      'private': {
+        label: 'Responding individually',
+        linkText: null
       }
     };
 
@@ -180,9 +184,18 @@ cdn: v1.2.0
         var $nodeEl = $('#person-survey-item-template').clone(),
             $surveyStatus = $nodeEl.find('.js-survey-status'),
             personDetails = storageAPI.getPersonalDetailsFor(person.id),
+            personPin = storageAPI.getPinFor(person.id),
             surveyStatus;
 
-        if (!personDetails) {
+        console.log(person.id, personPin);
+
+        /**
+         * Set state
+         */
+        if (personPin && personPin.exported) {
+          surveyStatus = 'private';
+        }
+        else if (!personDetails) {
           surveyStatus = 'not-started';
         }
         else if (
@@ -200,17 +213,26 @@ cdn: v1.2.0
           surveyStatus = 'in-progress';
         }
 
+        /**
+         * Manipulate DOM fragment
+         */
         $nodeEl.attr('id', '');
         $nodeEl.find('.js-person-name').html(person.fullName);
         $nodeEl.find('.js-link').html(statusMap[surveyStatus].linkText);
-        $nodeEl.find('.js-link').attr('href',
-          (surveyStatus === 'not-started' || surveyStatus === 'in-progress')
-            ? '../individual-intro/?person=' + person.id
-            : '../individual-details-summary/?person=' + person.id
-        );
         $surveyStatus.html(statusMap[surveyStatus].label);
 
-        if (surveyStatus === 'completed') {
+        if (surveyStatus === 'private') {
+          $nodeEl.find('.js-link').hide();
+        }
+        else {
+          $nodeEl.find('.js-link').attr('href',
+            (surveyStatus === 'not-started' || surveyStatus === 'in-progress')
+              ? '../individual-intro/?person=' + person.id
+              : '../individual-details-summary/?person=' + person.id
+          );
+        }
+
+        if (surveyStatus === 'completed' || surveyStatus === 'private') {
           $surveyStatus.addClass('completed');
         }
 

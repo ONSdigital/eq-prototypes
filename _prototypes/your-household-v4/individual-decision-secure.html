@@ -37,9 +37,24 @@ cdn: v1.2.0
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title saturn">
-                                        Are you <span class="js-person-name"></span>, or are you someone who is completing
-                                        the survey for <span class="js-person-name"></span>?
+                                        Do you want to keep your answers
+                                        secure from other people at this
+                                        address?
                                     </h1>
+                                    <p class="mars u-mb-m">
+                                        We'll provide you with a separate
+                                        access code if you don't want other
+                                        people living at this address to view
+                                        your answers.
+                                    </p>
+                                    <p class="mars u-mb-m">
+                                        An example of this might be if you
+                                        live in a shared or student house.
+                                        You might not want other people to
+                                        have access to information about you
+                                        such as your age, marital status,
+                                        health, education and employment.
+                                    </p>
                                 </div>
 
                                 <div class="answer">
@@ -50,12 +65,13 @@ cdn: v1.2.0
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
                                                            name="does-anyone-else-live-here"
-                                                           id="yes-someone-else"
-                                                           value="yes">
+                                                           id="no"
+                                                           value="no">
                                                     <label class="label label--inline venus"
-                                                           for="yes-someone-else"
-                                                           id="yes-someone-else-label">
-                                                        I am <span class="js-person-name"></span>
+                                                           for="no"
+                                                           id="no-label">
+                                                        No, I am happy to
+                                                        continue
                                                     </label>
                                                 </div>
 
@@ -63,10 +79,13 @@ cdn: v1.2.0
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
                                                            name="does-anyone-else-live-here"
-                                                           id="no" value="no">
+                                                           id="yes" value="yes">
                                                     <label class="label label--inline venus"
-                                                           for="no">
-                                                        I am someone else who is completing the survey for <span class="js-person-name"></span>
+                                                           for="yes">
+                                                        Yes, I would like to
+                                                        submit an individual
+                                                        response using a
+                                                        separate access code
                                                     </label>
                                                 </div>
                                             </fieldset>
@@ -79,9 +98,6 @@ cdn: v1.2.0
                     <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
                             type="submit" name="">Save and continue
                     </button>
-
-                    <p class="mars">Can't complete this question?<br />
-                        <a href="../hub">Choose another section and return to this later</a></p>
 
                     <div class="u-mb-m">
                         <button class="btn btn--link mars js-btn-save"
@@ -101,27 +117,27 @@ cdn: v1.2.0
 <script src='/js/compiled/your-household-v4/bundle.js'></script>
 
 <script>
-	var storageAPI = window.ONS.storage,
-		personId = new URLSearchParams(window.location.search).get('person'),
-        yesbox = document.getElementById("yes-someone-else");
+  var storageAPI = window.ONS.storage,
+    personId = new URLSearchParams(window.location.search).get('person');
+  var nobox = document.getElementById("no");
+  $('.qa-btn-submit').on('click', function(e) {
 
-	$('.qa-btn-submit').click(function(e) {
+    $('#person').val(personId);
 
-	    $('#person').val(personId);
+    /**
+     * Routing
+     */
+    if (nobox.checked) {
+      storageAPI.unsetPinFor(personId);
+      document.trav.action = "../individual-details-dob";
+    } else {
+      document.trav.action = "../individual-decision-pin";
+    }
+  });
 
-		/**
-		 * Routing
-		 */
-		if (yesbox.checked) {
-            document.trav.action = "../individual-details-dob";
-		} else {
-			document.trav.action = "../individual-decision-other-secure";
-		}
-	});
+  function updateName() {
+    $('.js-person-name').html(storageAPI.getHouseholdMemberByPersonId(personId)['@person'].fullName);
+  }
 
-	function updateName() {
-		$('.js-person-name').html(storageAPI.getHouseholdMemberByPersonId(personId)['@person'].fullName);
-	}
-
-	$(updateName);
+  $(updateName);
 </script>

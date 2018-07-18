@@ -37,9 +37,22 @@ cdn: v1.2.0
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title saturn">
-                                        Are you <span class="js-person-name"></span>, or are you someone who is completing
-                                        the survey for <span class="js-person-name"></span>?
+                                        Are you happy to continue answering
+                                        for <span class="js-person-name"></span>
                                     </h1>
+                                    <p class="mars u-mb-m">
+                                        This section asks you to provide
+                                        information about their age, marital
+                                        status, sexual orientation, health,
+                                        education and employment.
+                                    </p>
+                                    <p class="mars u-mb-m">
+                                        If you are not happy to answer these
+                                        questions and would like them to
+                                        complete their own section you can
+                                        request an individual access pin on
+                                        their behalf.
+                                    </p>
                                 </div>
 
                                 <div class="answer">
@@ -50,12 +63,13 @@ cdn: v1.2.0
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
                                                            name="does-anyone-else-live-here"
-                                                           id="yes-someone-else"
+                                                           id="yes"
                                                            value="yes">
                                                     <label class="label label--inline venus"
-                                                           for="yes-someone-else"
-                                                           id="yes-someone-else-label">
-                                                        I am <span class="js-person-name"></span>
+                                                           for="yes"
+                                                           id="yes-label">
+                                                        Yes, I am happy to
+                                                        continue
                                                     </label>
                                                 </div>
 
@@ -66,7 +80,11 @@ cdn: v1.2.0
                                                            id="no" value="no">
                                                     <label class="label label--inline venus"
                                                            for="no">
-                                                        I am someone else who is completing the survey for <span class="js-person-name"></span>
+                                                        No, I would like to
+                                                        request an access
+                                                        code so they can
+                                                        complete their own
+                                                        section
                                                     </label>
                                                 </div>
                                             </fieldset>
@@ -79,9 +97,6 @@ cdn: v1.2.0
                     <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
                             type="submit" name="">Save and continue
                     </button>
-
-                    <p class="mars">Can't complete this question?<br />
-                        <a href="../hub">Choose another section and return to this later</a></p>
 
                     <div class="u-mb-m">
                         <button class="btn btn--link mars js-btn-save"
@@ -101,27 +116,27 @@ cdn: v1.2.0
 <script src='/js/compiled/your-household-v4/bundle.js'></script>
 
 <script>
-	var storageAPI = window.ONS.storage,
-		personId = new URLSearchParams(window.location.search).get('person'),
-        yesbox = document.getElementById("yes-someone-else");
+  var storageAPI = window.ONS.storage,
+    personId = new URLSearchParams(window.location.search).get('person');
+  var yesbox = document.getElementById("yes");
+  $('.qa-btn-submit').on('click', function(e) {
 
-	$('.qa-btn-submit').click(function(e) {
+    $('#person').val(personId);
 
-	    $('#person').val(personId);
+    /**
+     * Routing
+     */
+    if (yesbox.checked) {
+      storageAPI.unsetPinFor(personId);
+      document.trav.action = "../individual-details-dob";
+    } else {
+      document.trav.action = "../individual-decision-other-pin";
+    }
+  });
 
-		/**
-		 * Routing
-		 */
-		if (yesbox.checked) {
-            document.trav.action = "../individual-details-dob";
-		} else {
-			document.trav.action = "../individual-decision-other-secure";
-		}
-	});
+  function updateName() {
+    $('.js-person-name').html(storageAPI.getHouseholdMemberByPersonId(personId)['@person'].fullName);
+  }
 
-	function updateName() {
-		$('.js-person-name').html(storageAPI.getHouseholdMemberByPersonId(personId)['@person'].fullName);
-	}
-
-	$(updateName);
+  $(updateName);
 </script>

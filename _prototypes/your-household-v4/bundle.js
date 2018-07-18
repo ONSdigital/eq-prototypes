@@ -55,7 +55,11 @@ import {
 
   personalDetailsMaritalStatusMap,
   personalDetailsCountryMap,
-  personalDetailsOrientationMap
+  personalDetailsOrientationMap,
+
+  createPinFor,
+  getPinFor,
+  unsetPinFor
 } from './assets/personal-details';
 import {removeFromList, trailingNameS} from './assets/utils';
 
@@ -187,6 +191,41 @@ function updateAddresses() {
   }
 }
 
+const secureLinkTextMap = {
+  'question-you': {
+    description: 'Want to keep your answers secure from other people at this' +
+    ' address?',
+    linkText: 'Get a separate access code to submit an individual response',
+    link: '../individual-decision-secure'
+  },
+  'pin-you': {
+    description: 'You\'ve chosen to keep your answers secure',
+    linkText: 'Cancel this and make answers available to the rest of the' +
+    ' household',
+    link: '../individual-decision-secure'
+  }
+};
+
+function updatePersonLink() {
+  const personId = new URLSearchParams(window.location.search).get('person'),
+    pinObj = getPinFor(personId);
+
+  const secureLinkTextConfig = secureLinkTextMap[
+    pinObj && pinObj.pin ? 'pin-you' : 'question-you'
+  ];
+
+  if (personId) {
+    let $secureLink = $('.js-link-secure');
+    $secureLink.attr('href', secureLinkTextConfig.link + '?person=' + personId);
+
+    $secureLink.html(secureLinkTextConfig.linkText);
+    $('.js-link-secure-label').html(secureLinkTextConfig.description);
+
+    let personLink = $('.js-link-person');
+    personLink.attr('href', personLink.attr('href') + '?person=' + personId);
+  }
+}
+
 window.ONS = window.ONS || {};
 window.ONS.storage = {
   getAddress,
@@ -245,6 +284,10 @@ window.ONS.storage = {
   personalDetailsCountryMap,
   personalDetailsOrientationMap,
 
+  createPinFor,
+  getPinFor,
+  unsetPinFor,
+
   KEYS: {
     HOUSEHOLD_MEMBERS_STORAGE_KEY,
     USER_STORAGE_KEY,
@@ -276,3 +319,4 @@ $(populateHouseholdList);
 $(populateVisitorList);
 $(updateHouseholdVisitorsNavigationItems);
 $(updateAddresses);
+$(updatePersonLink);

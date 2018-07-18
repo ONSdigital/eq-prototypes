@@ -1,4 +1,5 @@
 export const PERSONAL_DETAILS_KEY = 'individual-details';
+export const PERSONAL_PINS_KEY = 'individual-pins';
 
 export const personalDetailsMaritalStatusMap = {
   'never': {
@@ -125,6 +126,35 @@ export function addUpdateSalary(personId, val) {
   updatePersonalDetails(personId, details);
 
   return details;
+}
+
+export function getPins() {
+  return JSON.parse(sessionStorage.getItem(PERSONAL_PINS_KEY)) || {};
+}
+
+export function createPinFor(personId, opts = {}) {
+  let pins = getPins();
+
+  pins[personId] = {
+    pin: _.random(10000, 99999),
+    exported: !!opts.exported
+  };
+
+  sessionStorage.setItem(PERSONAL_PINS_KEY, JSON.stringify(pins));
+
+  return pins[personId];
+}
+
+export function getPinFor(personId) {
+  return getPins()[personId];
+}
+
+export function unsetPinFor(personId) {
+  let pins = getPins();
+
+  delete pins[personId];
+
+  sessionStorage.setItem(PERSONAL_PINS_KEY, JSON.stringify(pins));
 }
 
 export function updatePersonalDetails(personId, details) {
