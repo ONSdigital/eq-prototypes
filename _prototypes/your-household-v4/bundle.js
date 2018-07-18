@@ -64,6 +64,7 @@ import {
 import {removeFromList, trailingNameS} from './assets/utils';
 
 export const USER_STORAGE_KEY = 'user-details';
+export const INDIVIDUAL_PROXY_STORAGE_KEY = 'proxy-person';
 
 export function getAddress() {
   let addressLines = sessionStorage.getItem('address').split(',');
@@ -203,27 +204,41 @@ const secureLinkTextMap = {
     linkText: 'Cancel this and make answers available to the rest of the' +
     ' household',
     link: '../individual-decision-secure'
+  },
+  'question-proxy': {
+    description: 'Not happy to continue answering for $[NAME]?',
+    linkText: 'Request an individual access code to be sent to them',
+    link: '../individual-decision-other-secure'
   }
 };
 
 function updatePersonLink() {
-  const personId = new URLSearchParams(window.location.search).get('person'),
-    pinObj = getPinFor(personId);
-
-  const secureLinkTextConfig = secureLinkTextMap[
-    pinObj && pinObj.pin ? 'pin-you' : 'question-you'
-  ];
+  const personId = new URLSearchParams(window.location.search).get('person');
 
   if (personId) {
+    const person = getHouseholdMemberByPersonId(personId)['@person'],
+      pinObj = getPinFor(personId),
+      secureLinkTextConfig = secureLinkTextMap[
+        (getAnsweringIndividualByProxy() ? 'question-proxy' : (pinObj && pinObj.pin ? 'pin-you' : 'question-you'))
+      ];
+
     let $secureLink = $('.js-link-secure');
     $secureLink.attr('href', secureLinkTextConfig.link + '?person=' + personId);
 
     $secureLink.html(secureLinkTextConfig.linkText);
-    $('.js-link-secure-label').html(secureLinkTextConfig.description);
+    $('.js-link-secure-label').html(secureLinkTextConfig.description.replace('$[NAME]', person.fullName));
 
     let personLink = $('.js-link-person');
     personLink.attr('href', personLink.attr('href') + '?person=' + personId);
   }
+}
+
+function setAnsweringIndividualByProxy(bool) {
+  sessionStorage.setItem(INDIVIDUAL_PROXY_STORAGE_KEY, JSON.stringify(bool));
+}
+
+function getAnsweringIndividualByProxy() {
+  return JSON.parse(sessionStorage.getItem(INDIVIDUAL_PROXY_STORAGE_KEY));
 }
 
 window.ONS = window.ONS || {};
@@ -288,9 +303,13 @@ window.ONS.storage = {
   getPinFor,
   unsetPinFor,
 
+  setAnsweringIndividualByProxy,
+  getAnsweringIndividualByProxy,
+
   KEYS: {
     HOUSEHOLD_MEMBERS_STORAGE_KEY,
     USER_STORAGE_KEY,
+    INDIVIDUAL_PROXY_STORAGE_KEY,
     HOUSEHOLD_MEMBER_TYPE,
     VISITOR_TYPE
   },

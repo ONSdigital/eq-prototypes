@@ -127,7 +127,7 @@ cdn: v1.2.0
      * Routing
      */
     if (yesbox.checked) {
-      storageAPI.unsetPinFor(personId);
+      storageAPI.setAnsweringIndividualByProxy(true);
       document.trav.action = "../individual-details-dob";
     } else {
       document.trav.action = "../individual-decision-other-pin";

@@ -113,6 +113,7 @@ cdn: v1.2.0
 		 * Routing
 		 */
 		if (yesbox.checked) {
+            storageAPI.setAnsweringIndividualByProxy(false);
             document.trav.action = "../individual-details-dob";
 		} else {
 			document.trav.action = "../individual-decision-other-secure";
