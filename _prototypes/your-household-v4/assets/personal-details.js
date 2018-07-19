@@ -27,6 +27,9 @@ export const personalDetailsMaritalStatusMap = {
   },
   'surviving-partner': {
     description: 'Surviving partner from a same-sex civil partnership'
+  },
+  'separated-partnership': {
+    description: 'Separated, but still legally in a same-sex civil partnership'
   }
 };
 
