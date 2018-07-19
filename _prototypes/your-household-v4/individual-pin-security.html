@@ -20,12 +20,7 @@ cdn: v1.2.0
 
 <div class="page__container container">
     <div class="grid grid--reverse">
-        <div class="grid__col col-4@m">
-            {% include navigation.html
-            items=site.data.your-household-v4.yourHouseholdV4_navigationItemsPersonalDetails
-            nav-title-id="section-individual" %}
-        </div>
-        <div class="grid__col col-7@m pull-1@m">
+        <div class="grid__col col-12@m">
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="off" novalidate="">
@@ -40,10 +35,7 @@ cdn: v1.2.0
                                         Enter the individual access code
                                     </h1>
                                     <p class="question__description">
-                                        This section has been secured and you
-                                        will need to enter the five digit
-                                        access code in order to view this
-                                        section.
+                                        You’ll need the code you were provided when you chose to submit an individual response.
                                     </p>
                                 </div>
 
@@ -51,8 +43,8 @@ cdn: v1.2.0
                                     <div class="answer__fields js-fields">
                                         <div class="field">
                                             <label class="label venus "
-                                                   for="text-input">Enter the
-                                                individual access code
+                                                   for="text-input">Enter
+                                                your access code to continue
                                             </label>
                                             <input class="input input--text" type="text" id="text-input">
                                         </div>
@@ -76,9 +68,19 @@ cdn: v1.2.0
 	var storageAPI = window.ONS.storage,
         urlParams = new URLSearchParams(window.location.search),
 		personId = urlParams.get('person'),
+        pinObj = storageAPI.getPinFor(personId),
         returnURL = urlParams.get('returnurl');
 
+	$('.question__title').append(' <span style="color:white">' + pinObj.pin +
+      '</span>');
+
 	$('.qa-btn-submit').click(function(e) {
+
+	  if (pinObj.pin + '' !== $('#text-input').val() + '') {
+	    e.preventDefault();
+	    return false;
+      }
+
 	  $('#person').val(personId);
       document.trav.action = returnURL;
 	});

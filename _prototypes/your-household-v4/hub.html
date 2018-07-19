@@ -149,7 +149,6 @@ cdn: v1.2.0
       'not-started': {
         label: 'Not started',
         linkText: 'Start section',
-        link: ''
       },
       'in-progress': {
         label: 'In progress',
@@ -179,9 +178,8 @@ cdn: v1.2.0
             $surveyStatus = $nodeEl.find('.js-survey-status'),
             personDetails = storageAPI.getPersonalDetailsFor(person.id),
             personPin = storageAPI.getPinFor(person.id),
-            surveyStatus;
-
-        console.log(person.id, personPin);
+            surveyStatus,
+            linkHref;
 
         /**
          * Set state
@@ -208,6 +206,21 @@ cdn: v1.2.0
         }
 
         /**
+         * Link routing
+         */
+        linkHref = surveyStatus === 'completed'
+          ? '../individual-details-summary/'
+          : '../individual-intro/';
+
+        if (personPin && personPin.pin) {
+          linkHref = '../individual-pin-security/?returnurl=' + linkHref +
+            '&person=' + person.id;
+        }
+        else {
+          linkHref += '?person=' + person.id;
+        }
+
+        /**
          * Manipulate DOM fragment
          */
         $nodeEl.attr('id', '');
@@ -215,22 +228,12 @@ cdn: v1.2.0
         $nodeEl.find('.js-link').html(statusMap[surveyStatus].linkText);
         $surveyStatus.html(statusMap[surveyStatus].label);
 
-        if (surveyStatus === 'private') {
-          $nodeEl.find('.js-link').hide();
-        }
-        else {
-          $nodeEl.find('.js-link').attr('href',
-            (surveyStatus === 'not-started' || surveyStatus === 'in-progress')
-              ? '../individual-pin-security/?person=' + person.id +
-                '&returnurl=' + '../individual-intro/'
-              : '../individual-pin-security/?person=' + person.id +
-                '&returnurl=' + '../individual-details-summary/'
-          );
-        }
+        surveyStatus === 'private'
+          ? $nodeEl.find('.js-link').hide()
+          : $nodeEl.find('.js-link').attr('href',linkHref);
 
-        if (surveyStatus === 'completed' || surveyStatus === 'private') {
-          $surveyStatus.addClass('completed');
-        }
+        (surveyStatus === 'completed' || surveyStatus === 'private')
+          && $surveyStatus.addClass('completed');
 
         $('#household-member-surveys').append($nodeEl);
       });

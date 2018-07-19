@@ -223,7 +223,8 @@ function updatePersonLink() {
       ];
 
     let $secureLink = $('.js-link-secure');
-    $secureLink.attr('href', secureLinkTextConfig.link + '?person=' + personId);
+    $secureLink.attr('href', secureLinkTextConfig.link + '?person=' + personId +
+      '&returnurl=' + window.location.pathname);
 
     $secureLink.html(secureLinkTextConfig.linkText);
     $('.js-link-secure-label').html(secureLinkTextConfig.description.replace('$[NAME]', person.fullName));

@@ -105,14 +105,16 @@ cdn: v1.2.0
 
 <script>
   var storageAPI = window.ONS.storage,
-    personId = new URLSearchParams(window.location.search).get('person'),
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person'),
+    returnURL = urlParams.get('returnurl'),
     pinObj = storageAPI.createPinFor(personId);
 
   $('.pin').html(pinObj.pin);
 
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
-
-    window.location.href = '../individual-details-dob/?person=' + personId;
+    window.location.href = (returnURL ? returnURL :
+      "../individual-details-dob") + '?person=' + personId;
   });
 </script>
