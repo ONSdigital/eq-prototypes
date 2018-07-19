@@ -13,9 +13,6 @@ cdn: v1.2.0
 </header>
 
 <div class="page__subheader">
-    <div class="container">
-        <a class="mars" href="../visitors">Previous</a>
-    </div>
 </div>
 
 <style>
@@ -115,9 +112,6 @@ cdn: v1.2.0
                         </button>
                     </div>
                 </form>
-                <a class="page__previous page__previous--bottom js-previous-link"
-                   href="javascript:history.back()"
-                   id="bottom-previous">Previous</a>
             </main>
         </div>
     </div>
@@ -227,8 +221,10 @@ cdn: v1.2.0
         else {
           $nodeEl.find('.js-link').attr('href',
             (surveyStatus === 'not-started' || surveyStatus === 'in-progress')
-              ? '../individual-intro/?person=' + person.id
-              : '../individual-details-summary/?person=' + person.id
+              ? '../individual-pin-security/?person=' + person.id +
+                '&returnurl=' + '../individual-intro/'
+              : '../individual-pin-security/?person=' + person.id +
+                '&returnurl=' + '../individual-details-summary/'
           );
         }
 
