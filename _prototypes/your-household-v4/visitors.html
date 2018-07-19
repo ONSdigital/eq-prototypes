@@ -3,7 +3,7 @@ title: Household prototype v4
 project: your-household
 globalcss: false
 layout: eq-default-extras
-cdn: v1.2.0
+cdn: v1.4.4
 ---
 
 <link rel="stylesheet" href="../style.css"/>
@@ -17,22 +17,6 @@ cdn: v1.2.0
         <a class="mars" href="../temp-away-from-home">Previous</a>
     </div>
 </div>
-
-<style>
-    .definition {
-        display : block;
-        border : none;
-        margin : auto;
-    }
-
-    /**
-     * Copied compiled code
-     */
-    .has-js .u-no-js-show,.no-js .u-no-js-hide{display:none}
-    .definition .definition__link:before,.guidance__link:before{-webkit-transition:-webkit-transform .3s ease-in-out;transition:-webkit-transform .3s ease-in-out;transition:transform .3s ease-in-out;transition:transform .3s ease-in-out,-webkit-transform .3s ease-in-out;margin-right:5.399px;margin-right:.3rem;speak:none;content:"";background:url(https://sdc-global-design-patterns.netlify.com/assets/img/icons/icons--guidance.svg) no-repeat 50%;background-size:auto;text-align:center;width:18px;width:1rem;height:18px;height:1rem;position:relative;left:-1.8px;left:-.1rem;top:-.9px;top:-.05rem;vertical-align:middle;display:inline-block;*display:inline;*zoom:1}.definition .definition__link:hover,.guidance__link:hover{outline:none}.definition .definition__link:hover:before,.guidance__link:hover:before{background:url(https://sdc-global-design-patterns.netlify.com/assets/img/icons/icons--guidance-darkblue.svg) no-repeat 50%}.definition .definition__link:focus:before,.guidance__link:focus:before{background:url(https://sdc-global-design-patterns.netlify.com/assets/img/icons/icons--guidance-white.svg) no-repeat 50%}.definition.is-expanded .definition__link:before,.is-expanded .guidance__link:before{-webkit-transform:rotate(90deg);transform:rotate(90deg)}.definition .definition__main,.guidance__main{overflow:hidden;width:100%;opacity:0;-webkit-transition:all 0;transition:all 0;max-height:0}.definition.is-expanded .definition__main,.is-expanded .guidance__main,.no-js .definition .definition__main,.no-js .guidance__main{max-height:10000em;height:auto;opacity:1;-webkit-transition:opacity .3s ease-out,max-height .3s ease-out;transition:opacity .3s ease-out,max-height .3s ease-out}
-    .definition .definition__link{outline:none;padding:3.6px 9px 3.6px 3.6px;padding:.2rem .5rem .2rem .2rem;font-weight:600;text-decoration:none}.definition .definition__link:focus:hover{background-color:#033e58}.definition .definition__content{padding-top:9px;padding-top:.5rem}.definition:not(.is-expanded) .definition__content-close-trigger{display:none}
-    .btn--toggle{padding:5.399px 9px;padding:.3rem .5rem;color:#4263c2;border:1px solid #4263c2;background-color:#f5f5f5;-webkit-transition:none;transition:none}.btn--toggle:hover{color:#033e58;background-color:#f5f5f5;border-color:#033e58}.btn--toggle:active,.btn--toggle:focus{color:#fff;background-color:#4263c2;border-color:#4263c2}
-</style>
 
 <div class="page__container container">
     <div class="grid grid--reverse">
@@ -97,29 +81,25 @@ cdn: v1.2.0
                                 </div>
 
                                 <div class="definition js-details"
-                                     data-hide-label="Click to collapse." data-show-label="Click to expand.">
+                                     data-hide-label="Click to collapse."
+                                     data-show-label="Click to expand.">
 
                                     <a href="#definition"
                                        class="definition__link mars js-details-trigger u-no-js-hide"
-                                       aria-expanded="true"
+                                       aria-expanded="false"
                                        data-js-accordion-event-label="Why your answer is important"
                                        data-ga-label="definition-pattern-library"
                                        data-ga-action="Definition click"
                                        data-ga="click"
-                                       data-ga-category="Help">
-                                        Why your answer is important
-                                        <span class="u-vh js-details-label">
-                                            Click to collapse.
-                                        </span>
-                                    </a>
+                                       data-ga-category="Help">Why your answer is important <span class="u-vh js-details-label">Click to expand.</span></a>
 
                                     <h3 class="venus u-no-js-show u-mb-no">Why your answer is important</h3>
 
-                                    <div id="definition" class="definition__main js-details-body" aria-hidden="false">
+                                    <div id="definition" class="definition__main js-details-body">
                                         <div class="definition__content mars">
                                             <p>We ask for visitor information to check that everyone is counted. This helps to produce accurate population estimates. Add any visitors, even if you think they may have been counted elsewhere.</p>
                                         </div>
-                                        <button class="btn btn--toggle definition__content-close-trigger js-details-trigger u-no-js-hide">Hide this</button>
+                                        <button class="btn btn--secondary btn--small definition__content-close-trigger js-details-trigger u-no-js-hide">Hide this</button>
                                     </div>
                                 </div>
                             </section>
@@ -129,10 +109,7 @@ cdn: v1.2.0
                             type="submit" name="">Save and continue
                     </button>
                     <div class="u-mb-m">
-                        <button class="btn btn--link mars js-btn-save"
-                                type="submit" name="action[save_sign_out]">Save
-                            and complete later
-                        </button>
+                        <a class="mars" href="../index">Save and complete later</a>
                     </div>
                 </form>
                 <a class="page__previous page__previous--bottom js-previous-link"

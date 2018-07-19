@@ -3,7 +3,7 @@ title: Household prototype v4
 project: your-household
 globalcss: false
 layout: eq-default-extras
-cdn: v1.2.0
+cdn: v1.4.4
 ---
 
 <link rel="stylesheet" href="../style.css"/>
@@ -76,10 +76,7 @@ cdn: v1.2.0
                             type="submit" name="">Continue
                     </button>
                     <div class="u-mb-m">
-                        <button class="btn btn--link mars js-btn-save"
-                                type="submit" name="action[save_sign_out]">Save
-                            and complete later
-                        </button>
+                        <a class="mars" href="../index">Save and complete later</a>
                     </div>
                 </form>
                 <a class="page__previous page__previous--bottom js-previous-link"
@@ -97,12 +94,17 @@ cdn: v1.2.0
         <p class="u-mb-m">All of the data associated with this person will be
             deleted</p>
 
-        <div class="modal__buttons">
-            <button class="btn btn--toggle venus close-modal-button">Cancel
+        <div class="modal__buttons btn-group">
+            <button class="btn btn-group__btn btn--secondary venus close-modal-button">Cancel
             </button>
-            <button class="btn btn--primary venus remove-member-button">
+            <button class="btn btn-group__btn venus remove-member-button">
                 Confirm
             </button>
+
+            <!--<div class="btn-group">
+                <button class="btn btn-group__btn js-record-edit">Change</button>
+                <button class="btn btn-group__btn btn&#45;&#45;secondary js-record-remove">Remove</button>
+            </div>-->
         </div>
     </div>
 </div>
@@ -115,7 +117,7 @@ cdn: v1.2.0
                 <a class="js-record-edit" href="#">Change</a>
             </span>
             <span class="list__item-action">
-                <button class="btn btn--toggle js-record-remove">Remove</button>
+                <button class="btn btn--secondary btn--small js-record-remove">Remove</button>
             </span>
         </div>
     </li>
@@ -154,25 +156,6 @@ cdn: v1.2.0
         margin-left: .5rem;
     }
 
-    .btn--toggle {
-        padding: .3rem .5rem;
-        color: #4263c2;
-        border: 1px solid #4263c2;
-        background-color: #f5f5f5;
-        transition: none;
-    }
-
-    .btn--toggle:hover {
-        color: #4263c2;
-        background-color: #f5f5f5;
-    }
-
-    .btn--toggle:active,
-    .btn--toggle:focus {
-        color: #fff;
-        background-color: #4263c2;
-    }
-
 </style>
 
 <style>
@@ -195,23 +178,6 @@ cdn: v1.2.0
         max-width: 520px;
         padding: 2rem;
         text-align: center;
-    }
-
-    .modal__buttons {
-        text-align: center;
-    }
-
-    /**
-     * hmmm
-     */
-    .modal__buttons .btn--toggle {
-        margin-right: .25rem;
-        padding: 9px 14px;
-    }
-
-    .modal__buttons .btn--primary {
-        margin-left: .25rem;
-        padding: 10px 14px;
     }
 </style>
 
