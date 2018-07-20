@@ -51,7 +51,7 @@ function suggest() {
   }
 
   typeaheadComponent.emitter.on('itemSelected', function(e, item) {
-    typeaheadComponent.$inputElClone.val(item.primaryText);
+    typeaheadComponent.$inputElClone.val(item.primaryText.replace('<em>', '').replace('</em>', ''));
 
     if (service.requestInFlight) {
       service.$request.abort();
