@@ -55,8 +55,11 @@ cdn: v1.4.4
                                                        value="yes">
                                                 <label class="label label--inline venus"
                                                        for="yes-someone-else"
-                                                       id="yes-someone-else-label">Yes,
-                                                    I need to add another person
+                                                       id="yes-someone-else-label">
+                                                    <span
+                                                            class="yes-answer">Yes, I need to
+                                                        add
+                                                    another person</span>
                                                     <span
                                                             class="pluto u-db label--negative">Include partners, children, babies born on or before 20 July 2018, housemates, tenants and lodgers</span>
                                                 </label>
@@ -118,16 +121,9 @@ cdn: v1.4.4
 <script src='/js/compiled/your-household-v4/bundle.js'></script>
 
 <script>
-  var yesbox = document.getElementById("yes-someone-else");
+  var yesbox = document.getElementById("yes-someone-else"),
+    storageAPI = window.ONS.storage;
   $('.qa-btn-submit').click(function(e) {
-
-    /**
-     * State
-     */
-    /*if (window.location.search.match(/journey=temp-away-from-home/)) {
-      $('#form')
-        .prepend('<input type="hidden" name="journey" value="temp-away-from-home" />');
-    }*/
 
     /**
      * Routing
@@ -140,13 +136,6 @@ cdn: v1.4.4
         document.trav.action = "../temp-types-living-away";
       }
 
-      /*if (window.location.search.match(/journey=temp-away-from-home/)) {
-        document.trav.action = "../visitors";
-      } else if (window.location.search.match(/journey=visitors/)) {
-        document.trav.action = "../summary";
-      } else {
-        document.trav.action = "../temp-away-from-home";
-      }*/
     } else {
       document.trav.action = "../who-else-to-add";
     }
@@ -155,7 +144,9 @@ cdn: v1.4.4
   $(function() {
     var addressLines = (sessionStorage.getItem('address') || '').split(','),
       addressLine1 = addressLines[0],
-      addressLine2 = addressLines[1];
+      addressLine2 = addressLines[1],
+      householdMembers = storageAPI
+        .getAllHouseholdMembers().filter(storageAPI.isHouseholdMember);
 
     if (window.location.search.match(/journey=visitors/)) {
       $('#form')
@@ -170,6 +161,14 @@ cdn: v1.4.4
     else {
       $('#member-list').html('<ul id="household-members"></ul>');
       window.ONS.helpers.populateHouseholdList();
+    }
+
+    if (householdMembers.length > 2) {
+      $('.yes-answer').html(
+        'Yes, I need to add a ' +
+        window.ONS.utils.numberToPositionWord(householdMembers.length + 1) +
+        ' person'
+      );
     }
   });
 </script>

@@ -63,6 +63,8 @@ import {
 } from './assets/personal-details';
 import {removeFromList, trailingNameS} from './assets/utils';
 
+import { numberToPositionWord } from './assets/numbers-to-words';
+
 export const USER_STORAGE_KEY = 'user-details';
 export const INDIVIDUAL_PROXY_STORAGE_KEY = 'proxy-person';
 
@@ -332,7 +334,8 @@ window.ONS.helpers = {
 
 window.ONS.utils = {
   removeFromList,
-  trailingNameS
+  trailingNameS,
+  numberToPositionWord
 };
 
 $(populateHouseholdList);
