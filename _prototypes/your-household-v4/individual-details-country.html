@@ -172,6 +172,7 @@ cdn: v1.4.4
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
       $('.js-heading').html('What is ' + person.fullName +
+      window.ONS.utils.trailingNameS(person.fullName) +
         ' country of birth?');
     }
   }

@@ -148,7 +148,8 @@ cdn: v1.4.4
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('What is ' + person.fullName + ' date of birth?');
+      $('.js-heading').html('What is ' + person.fullName +
+      window.ONS.utils.trailingNameS(person.fullName) + ' date of birth?');
     }
   }
 

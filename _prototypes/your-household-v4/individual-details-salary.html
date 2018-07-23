@@ -117,7 +117,9 @@ cdn: v1.4.4
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
       $('.js-heading').html('What was ' + person.fullName +
+      window.ONS.utils.trailingNameS(person.fullName) +
         ' gross pay, that is ' + person.fullName +
+      window.ONS.utils.trailingNameS(person.fullName) +
         ' pay before any deductions, the last time they were paid?');
     }
   }
