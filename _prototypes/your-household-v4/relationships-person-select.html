@@ -46,7 +46,7 @@ cdn: v1.4.4
                                     <div id="question-info"
                                          style="display:none;"
                                             class="panel panel--simple panel--info u-mb-l">
-                                        <div class="panel__body">
+                                        <div class="panel__body js-question-info-body">
                                             <p class="mars">
                                                 Do not include stepchildren
                                                 or foster children here,
@@ -207,6 +207,8 @@ cdn: v1.4.4
 
       'unrelated' === relationshipDescription && (function(){
         $('.js-other-description').html('unrelated to');
+        $('.js-question-info-body').html('<p class="mars"><strong>Exclude</strong> partners; they will be included later</p>');
+        $('#question-info').show();
       }());
 
       $.each(
