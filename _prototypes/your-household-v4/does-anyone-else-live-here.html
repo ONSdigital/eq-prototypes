@@ -146,14 +146,15 @@ cdn: v1.4.4
       addressLine1 = addressLines[0],
       addressLine2 = addressLines[1],
       householdMembers = storageAPI
-        .getAllHouseholdMembers().filter(storageAPI.isHouseholdMember);
+        .getAllHouseholdMembers().filter(storageAPI.isHouseholdMember),
+      nextPosition = householdMembers.length + 1;
 
     if (window.location.search.match(/journey=visitors/)) {
       $('#form')
         .prepend('<input type="hidden" name="journey" value="visitors" />');
       $('#question-title')
         .html('Was anyone else staying on 20th July 2018 at ' + addressLine1 +
-          ', ' + addressLine2);
+          ', ' + addressLine2 + '?');
       $('#member-list').html('<ul id="visitors-list"></ul>');
       $('#yes-someone-else-label').html('Yes, I need to add a visitor');
       window.ONS.helpers.populateVisitorList();
@@ -163,12 +164,10 @@ cdn: v1.4.4
       window.ONS.helpers.populateHouseholdList();
     }
 
-    console.log(householdMembers, householdMembers.length);
-
-    if ((householdMembers.length + 1) > 1) {
+    if ((nextPosition) > 1) {
       $('.yes-answer').html(
         'Yes, I need to add a ' +
-        window.ONS.utils.numberToPositionWord(householdMembers.length + 1) +
+        window.ONS.utils.numberToPositionWord(nextPosition) +
         ' person'
       );
     }

@@ -1,4 +1,5 @@
 import {
+  RELATIONSHIPS_STORAGE_KEY,
   relationshipDescriptionMap,
   addRelationship,
   editRelationship,
@@ -64,6 +65,8 @@ import {
 import {removeFromList, trailingNameS} from './assets/utils';
 
 import { numberToPositionWord } from './assets/numbers-to-words';
+
+import { tools } from './assets/prototype-tools';
 
 export const USER_STORAGE_KEY = 'user-details';
 export const INDIVIDUAL_PROXY_STORAGE_KEY = 'proxy-person';
@@ -314,7 +317,8 @@ window.ONS.storage = {
     USER_STORAGE_KEY,
     INDIVIDUAL_PROXY_STORAGE_KEY,
     HOUSEHOLD_MEMBER_TYPE,
-    VISITOR_TYPE
+    VISITOR_TYPE,
+    RELATIONSHIPS_STORAGE_KEY
   },
 
   IDS: {
@@ -343,3 +347,4 @@ $(populateVisitorList);
 $(updateHouseholdVisitorsNavigationItems);
 $(updateAddresses);
 $(updatePersonLink);
+$(tools);
