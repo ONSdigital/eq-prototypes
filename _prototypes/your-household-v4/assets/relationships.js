@@ -99,8 +99,8 @@ export const relationshipDescriptionMap = {
     type: relationshipTypes['partner']
   },
   'same-sex-partner': {
-    sentanceLabel: 'same sex civil partner',
-    summaryAdjective: 'same sex civil partner',
+    sentanceLabel: 'legally registered civil partner',
+    summaryAdjective: 'legally registered civil partner',
     type: relationshipTypes['partner']
   },
   // covered

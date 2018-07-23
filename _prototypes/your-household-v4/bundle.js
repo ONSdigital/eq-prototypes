@@ -217,6 +217,10 @@ const secureLinkTextMap = {
   }
 };
 
+function updateAllPreviousLinks() {
+  $('.js-previous-link').attr('href', document.referrer);
+}
+
 function updatePersonLink() {
   const personId = new URLSearchParams(window.location.search).get('person');
 
@@ -348,3 +352,4 @@ $(updateHouseholdVisitorsNavigationItems);
 $(updateAddresses);
 $(updatePersonLink);
 $(tools);
+$(updateAllPreviousLinks);
