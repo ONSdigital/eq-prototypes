@@ -145,7 +145,8 @@ cdn: v1.4.4
     urlParams = new URLSearchParams(window.location.search),
     personId = urlParams.get('person'),
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
-    isEditing = urlParams.get('edit');
+    isEditing = urlParams.get('edit'),
+    details = storageAPI.getPersonalDetailsFor(personId);
 
   $('.qa-btn-submit').on('click', function (e) {
     storageAPI.addUpdateOrientation(personId,
@@ -164,6 +165,10 @@ cdn: v1.4.4
         person.fullName + window.ONS.utils.trailingNameS(person.fullName)
         +' sexual orientation?');
     }
+  }
+
+  if (details && details.orientation) {
+    $('#' + details.orientation).attr('checked', true);
   }
 
   $(updateQuestion);

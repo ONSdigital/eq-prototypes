@@ -155,7 +155,8 @@ cdn: v1.4.4
     urlParams = new URLSearchParams(window.location.search),
     personId = urlParams.get('person'),
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
-    isEditing = urlParams.get('edit');
+    isEditing = urlParams.get('edit'),
+    details = storageAPI.getPersonalDetailsFor(personId);
 
   $('.qa-btn-submit').on('click', function (e) {
     storageAPI.addUpdateCountry(personId,
@@ -173,6 +174,10 @@ cdn: v1.4.4
       $('.js-heading').html('What is ' + person.fullName +
         ' country of birth?');
     }
+  }
+
+  if (details && details.country) {
+    $('#' + details.country).attr('checked', true);
   }
 
   $(updateQuestion);

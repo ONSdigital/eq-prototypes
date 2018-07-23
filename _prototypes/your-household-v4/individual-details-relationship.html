@@ -206,6 +206,7 @@ cdn: v1.4.4
     urlParams = new URLSearchParams(window.location.search),
     personId = urlParams.get('person'),
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+    details = storageAPI.getPersonalDetailsFor(personId),
     isEditing = urlParams.get('edit');
 
   $('.qa-btn-submit').on('click', function (e) {
@@ -224,6 +225,10 @@ cdn: v1.4.4
       $('.js-heading').html('What is ' + person.fullName +
         ' legal marital or same-sex civil partnership status?');
     }
+  }
+
+  if (details && details.maritalStatus) {
+    $('#' + details.maritalStatus).attr('checked', true);
   }
 
   $(updateQuestion);
