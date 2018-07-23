@@ -163,7 +163,9 @@ cdn: v1.4.4
       window.ONS.helpers.populateHouseholdList();
     }
 
-    if (householdMembers.length > 2) {
+    console.log(householdMembers, householdMembers.length);
+
+    if ((householdMembers.length + 1) > 1) {
       $('.yes-answer').html(
         'Yes, I need to add a ' +
         window.ONS.utils.numberToPositionWord(householdMembers.length + 1) +
