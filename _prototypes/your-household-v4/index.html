@@ -3,7 +3,7 @@ title: Household prototype v4
 project: your-household
 globalcss: false
 layout: eq-default-extras
-cdn: v1.4.4
+cdn: v1.5.0
 ---
 
 <style>
@@ -11,34 +11,12 @@ cdn: v1.4.4
         width : 100%;
     }
 
-    .input--text-postcode {
-        max-width : 9.25rem;
-    }
-
     .lock {
         font-weight : normal;
     }
-
-    .lock2 {
-
-    }
-
-    .lock2::before {
-        $size: 2rem;
-        content: " ";
-        display: inline-block;
-        vertical-align: middle;
-        background: url('../img/icons/lockicon.svg') no-repeat center center;
-        background-size: 2.2rem;
-        margin-right: 0.5em;
-    }
 </style>
 
-<header class="page__header">
-    {% include survey-header.html %}
-    {% include bar.html %}
-</header>
-
+<link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
 </div>
 

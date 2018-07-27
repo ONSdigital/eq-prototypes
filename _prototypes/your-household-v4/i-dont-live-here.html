@@ -3,14 +3,10 @@ title: Household prototype v4
 project: your-household
 globalcss: false
 layout: eq-default-extras
-cdn: v1.4.4
+cdn: v1.5.0
 ---
 
-<header class="page__header">
-    {% include survey-header.html %}
-    {% include bar.html %}
-</header>
-
+<link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
         <a class="js-previous-link mars" href="../what-is-your-name">Previous
@@ -78,14 +74,7 @@ cdn: v1.4.4
                     <button class="btn btn--primary btn--lg qa-btn-submit venus"
                             type="submit" name="">Save and continue
                     </button>
-                    <div class="u-mb-m">
-                        <a class="mars" href="../index">Save and complete later</a>
-                    </div>
                 </form>
-                <a
-                        class="js-previous-link page__previous page__previous--bottom js-previous-link"
-                   href="javascript:history.back()"
-                   id="bottom-previous">Previous</a>
             </main>
         </div>
     </div>

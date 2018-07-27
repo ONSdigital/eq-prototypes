@@ -18,3 +18,10 @@
 .list.list--people-plain .list__item-action + .list__item-action {
   margin-left : .5rem;
 }
+
+/**
+ * Pattern library fix
+ */
+.header {
+  margin-bottom : 0;
+}
