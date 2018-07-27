@@ -1,5 +1,5 @@
 ---
-title: Household prototype v4
+title: Online Household Study
 project: your-household
 globalcss: false
 layout: eq-default-extras
@@ -29,8 +29,8 @@ cdn: v1.4.4
             <main role="main" id="main" class="page__main">
                 <form name="trav" class="form qa-questionnaire-form" role="form"
                       autocomplete="off" novalidate="">
-                    <div class="group" id="rsi">
-                        <div class="block" id="total-retail-turnover">
+                    <div class="group">
+                        <div class="block">
                             <section class="section">
                                 <div class="question">
                                     <h1 class="question__title saturn">
@@ -103,7 +103,7 @@ cdn: v1.4.4
     });
 
     $('#js-member-list').append('<div class="field__item js-focusable-box">\n' +
-      '        <input class="input input--checkbox js-focusable js-person-control js-exclusive-checkbox-group" name="checkbox-answer" value="someone-else" id="someone-else" type="checkbox">\n' +
+      '        <input class="input input--checkbox js-focusable js-exclusive-checkbox-group js-person-not-listed" name="checkbox-answer" value="someone-else" id="someone-else" type="checkbox">\n' +
       '        <label class="label label--inline venus " for="someone-else">\n' +
       '            Someone else not listed above<span class="u-vh"></span>\n' +
       '        </label>\n' +
@@ -122,8 +122,14 @@ cdn: v1.4.4
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
 
+    var notListedChecked = $('.js-person-not-listed:checked').length;
 
-    window.location.href = '../who-else-to-add/?journey=student-halls';
+    if (notListedChecked) {
+      window.location.href = '../who-else-to-add/?journey=student-halls';
+    }
+    else {
+      window.location.href = '../do-they-share-cooking-facilities';
+    }
   });
 
   $(render);

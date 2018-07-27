@@ -34,8 +34,7 @@ cdn: v1.4.4
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title saturn">
-                                        Does anybody else live at <span
-                                            class="address-text"></span>?
+                                        Do all of these people share cooking facilities?
                                     </h1>
                                 </div>
 
@@ -54,11 +53,7 @@ cdn: v1.4.4
                                                        for="yes-someone-else"
                                                        id="yes-someone-else-label">
                                                     <span
-                                                            class="yes-answer">Yes, I need to
-                                                        add
-                                                    another person</span>
-                                                    <span
-                                                            class="pluto u-db label--negative">Include other adults, children, babies, even if they are currently away for a continuous period of up to 6 months</span>
+                                                            class="yes-answer">Yes, all of these people share cooking facilities</span>
                                                 </label>
                                             </div>
 
@@ -68,10 +63,7 @@ cdn: v1.4.4
                                                        name="does-anyone-else-live-here"
                                                        id="no" value="no">
                                                 <label class="label label--inline venus"
-                                                       for="no">No, this is
-                                                not the main residence
-                                                    of any other adults,
-                                                children or babies</label>
+                                                       for="no">Not everyone shares cooking facilities</label>
                                             </div>
                                         </fieldset>
                                     </div>
@@ -97,25 +89,11 @@ cdn: v1.4.4
 <script src='/js/compiled/your-household-v4/bundle.js'></script>
 
 <script>
-  var yesbox = document.getElementById("yes-someone-else"),
-    storageAPI = window.ONS.storage;
-  $('.qa-btn-submit').click(function(e) {
+	$('.qa-btn-submit').click(function(e) {
 
-    /**
-     * Routing
-     */
-    if (!yesbox.checked) {
-      /*if (window.location.search.match(/journey=visitors/)) {
-        document.trav.action = "../summary";
-      }
-      else {
-        document.trav.action = "../temp-types-living-away";
-      }*/
-
-      document.trav.action = "../does-anyone-live-student-halls";
-
-    } else {
-      document.trav.action = "../who-else-to-add";
-    }
-  });
+		/**
+		 * Routing
+		 */
+		document.trav.action = "../do-they-share-dining-living-room";
+	});
 </script>
