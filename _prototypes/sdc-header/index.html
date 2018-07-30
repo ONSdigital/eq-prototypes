@@ -1,0 +1,42 @@
+---
+title: SDC Header
+project: Pattern Library
+globalcss: false
+cdn: none
+layout: sdc-default
+---
+<link rel="stylesheet" href="{{ "/css/sdc-header.css" | prepend: site.baseurl }}">
+
+{% include sdc-header-min.html %}
+<div class="container">
+  <div class="grid">
+        <div class="grid__col col-6@m">
+          <div role="main" id="main" class="page__main">
+            <section>
+              <form id="form-sign-in" action="../ras_my-surveys/" class="form">
+                <p class="mars u-mt-no">New to this service?
+                   <a href="create-account/">Create an account</a></p>
+                <h1 class="saturn">Sign in</h1>
+                <div class="field">
+                  <label for="inputEmail" class="label">Email address</label>
+                  <input id="inputEmail" class="input input--text input-type__input" required="" type="email">
+                </div>
+                <br>
+                <div class="field">
+                  <label for="inputPassword" class="label venus">Password</label>
+                    <span id="showHidePassword" class="showHidePasswordn">
+                      <input id="showHideToggle" type="checkbox" onchange="document.getElementById('inputPassword').type = this.checked ? 'text' : 'password'">
+                      <label class="mars u-ml-xs" id="showHideToggleLabel" for="showHideToggle">Show password</label>
+                    </span>
+                  <input id="inputPassword" type="password" class="input input--text input-type__input u-mt-xs">
+                </div>
+                <p class="u-mt-xs"><a href="forgot-password/">Forgot password?</a></p>
+                <button class="btn btn--primary venus" type="submit">Sign in</button>
+              </form>
+            </section>
+
+          </div>
+        </div>
+      </div>
+</div>
+<script src='https://deploy-preview-111--sdc-global-design-patterns.netlify.com/assets/scripts/bundle.js'></script>

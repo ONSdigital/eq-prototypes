@@ -1,0 +1,494 @@
+
+.table-head-align {
+  text-align: left;
+}
+.caption {
+  text-align: left;
+}
+.table__dense {
+  font-size: 81.25%;
+}
+.table--cell {
+    padding: 0.5rem 0 0.5rem 1rem;
+    font-size: 12pt;
+    text-align: left;
+    vertical-align: top;
+  }
+.table--header--cell {
+    padding: 0.5rem 0 0.25rem 1rem;
+    font-size: 12pt;
+    text-align: left;
+  }
+}
+
+.table--row {
+  border-bottom: 1px solid #ccc;
+}
+
+.table--header--cell {
+  border-bottom: 2px solid #666;
+}
+
+
+.to-do-list{
+  width: 100%;
+  margin: 1.5rem 0;
+}
+
+
+.to-do-list thead tr{
+  border-bottom: 2px solid #000;
+}
+
+.to-do-list tbody tr{
+  border-bottom: 1px solid #ddd;
+}
+
+.to-do-list th, .to-do-list td{
+    text-align: left;
+    vertical-align: top;
+    margin-bottom: 1rem;
+}
+
+.to-do-list td{
+    padding: 1rem 1rem 0 0;
+}
+
+.to-do-list td:last-child{
+    padding-right: 0;
+    text-align: right;
+}
+
+.to-do-list dl{
+  display: inline-block;
+}
+
+.to-do-list dt{
+  float: left;
+  clear: left;
+  width: 6rem;
+  margin: 0;
+  padding: 0;
+}
+
+.to-do-list dt::after{
+  content: ":";
+}
+
+.to-do-list dd{
+  margin: 0 0 0 6rem;
+  padding: 0 0 0.5rem 0;
+  text-transform: uppercase;
+}
+
+
+
+@media screen and (max-width: 600px) {
+  .to-do-list {
+    border: 0;
+  }
+
+  .to-do-list thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  .to-do-list tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  .to-do-list td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    text-align: right;
+  }
+  .to-do-list td:before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .to-do-list td:last-child {
+    border-bottom: 0;
+  }
+}
+dl.enrolment-details dt{
+    float: left;
+    clear: left;
+    width: 10rem;
+    line-height: 1.5;
+}
+
+dl.enrolment-details dt::after{
+    content: ": ";
+}
+
+dl.enrolment-details dd{
+    margin: 0 0 0 11rem;
+    padding: 0 1rem 0;
+    line-height: 1.5;
+    font-weight: 600;
+}
+
+
+.header__btn {
+  text-align: right;
+  line-height: 1;
+  color: white;
+  margin: 0 0 0 36px;
+  margin: 0 0 0 2rem;
+  width: auto;
+}
+
+@media only screen and (min-width: 300px) and (max-width: 500px) {
+  .header__btn {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.5rem !important;
+  }
+}
+
+.header__help {
+  padding: 0;
+  color: #fff;
+  background: #033e58;
+  overflow: hidden;
+  -webkit-transition: max-height 300ms ease-in;
+  transition: max-height 300ms ease-in;
+  height: auto;
+}
+
+@media only screen and (min-width: 740px) {
+  .header__help .header__container {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+}
+
+.has-js .header__help {
+  max-height: 720px;
+  max-height: 40rem;
+}
+
+.has-js .header__help.is-closed {
+  max-height: 0;
+  -webkit-transition: max-height 200ms ease-out;
+  transition: max-height 200ms ease-out;
+}
+
+@media only screen and (min-width: 300px) and (max-width: 500px) {
+  .header__help .mars,
+  .header__help .venus {
+    font-size: 0.8rem;
+  }
+}
+
+.header__help a {
+  color: white;
+  text-decoration: underline;
+}
+
+.header__help a:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.header__help .header__container {
+  padding-top: 13.5px;
+  padding-top: 0.75rem;
+  padding-bottom: 13.5px;
+  padding-bottom: 0.75rem;
+}
+
+@media only screen and (min-width: 740px) {
+  .header__help .header__container {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+}
+
+.header__title {
+  display: none;
+}
+
+.header__nav {
+  margin-left: auto;
+  margin-right: 18px;
+}
+
+
+.header__logo{
+    width: auto;
+    margin-right: auto;
+}
+
+.btn--light.btn--border {
+    font-weight: 600;
+    background: transparent;
+    border: 2px solid #033e58;
+    color: #033e58;
+    padding: 9px 36px;
+    padding: 0.5rem 2rem;
+}
+
+.btn--light.btn--border:hover, .btn--light.btn--border:focus {
+    background: #033e58;
+    color: #fff;
+}
+@media only screen and (max-width: 540px) {
+  .header__btn span {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 499px) {
+  .header__btn {
+    font-size: 6.4px;
+    font-size: 0.8rem;
+    padding: 2.4px 4px !important;
+    padding: 0.3rem 0.5rem !important;
+    margin: 0 0 0 8px;
+    margin: 0 0 0 1rem;
+  }
+}
+
+.u-vh, .u-visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+
+/* Survey list navigation */
+/* Using BEM              */
+
+/* My surveys - Tabbed navigation */
+
+.nav-tabs{
+    list-style: none;
+    padding: 0;
+    border-bottom: 1px solid #666;
+}
+
+.nav-tabs__tab, .nav-tabs__tab--active{
+    display: inline-block;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+.tab-label{
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    margin: 0;
+    margin-bottom: -1px;
+    border: 1px solid #fff;
+    border-top-left-radius: 0.3rem;
+    border-top-right-radius: 0.3rem;
+    border-bottom: 0;
+    color: #222;
+    font-weight: 400;
+}
+
+@media only screen and (max-width: 360px) {
+  .tab-label{
+    padding: 0.5rem 0.8rem;
+  }
+}
+
+.nav-tabs__tab--active .tab-label{
+    font-weight: 600;
+    border: 1px solid #666;
+    border-bottom: 1px solid #fff;
+}
+
+.nav-tabs__tab .tab-label{
+    text-decoration: none;
+}
+
+.nav-tabs__tab .tab-label:hover{
+    text-decoration: underline;
+    background-color: #f7f7f7;
+}
+
+
+.survey-list__business-name{
+    margin-left: 10px;
+}
+
+.survey-list__system-feedback{
+    margin-left: 10px;
+}
+
+
+/* Survey list 'card' styles */
+
+.survey-list{
+    list-style: none;
+    padding: 0;
+}
+
+.survey-list__item{
+    padding: 0;
+    margin: 0;
+}
+
+.survey-list .card{
+    width:100%;
+    margin: 0;
+    border-bottom: 1px solid #ccc;
+    padding: 20px 0 20px 0;
+}
+
+.survey-list .card:hover{
+    background-color: #f7f7f7;
+}
+
+.survey-list .card h3{
+    margin: 0;
+    display: inline-block;
+    font-weight: 400;
+}
+
+.card h3 .for-the-business{
+    display: inline-block;
+    color: #666;
+}
+
+.survey-list-item__label{
+    text-transform: uppercase;
+}
+
+.survey-list-item__label:after{
+  content: ": ";
+}
+
+@media only screen and (min-width: 740px){
+    .survey-list-item__label{
+      border: 0;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+}
+
+.survey-list .card:hover{
+    background-color: #f7f7f7;
+}
+
+.survey-list .header-row{
+    display: none;
+    border-bottom: 2px solid #666;
+    font-weight: bold;
+}
+
+@media only screen and (min-width: 740px){
+    .survey-list .header-row, .survey-list .header-row:hover{
+        display: block;
+        padding: 10px 0 0 0;
+        background: #fff;
+    }
+}
+
+.card .survey-action{
+    /*display: inline-block;
+    text-align: right;*/
+}
+
+.card .survey-action a.btn{
+    padding: 5px 15px;
+    width: 100%;
+}
+
+.card .survey-action a.view-survey{
+    background-color: #666;
+    color: #fff;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 3px;
+    text-rendering: optimizeLegibility;
+    text-decoration: none;
+    width: 100%;
+}
+
+@media only screen and (min-width: 500px){
+
+    .card .guidance__content div:last-of-type,
+    .card .guidance__content div:first-of-type {
+        padding-left: 0;
+    }
+}
+
+.survey-list-business-details{
+    padding-left: 0;
+}
+
+.survey-list-business-details__label{
+    margin-bottom: 0.3rem;
+}
+
+.survey-list-business-details__business-name{
+    margin-top:0;
+    padding-top:0;
+    margin-bottom: 2rem;
+}
+
+.business-address{
+    padding-top:0;
+    padding-left: 0;
+    margin-top:0;
+    margin-bottom: 1rem;
+    list-style: none;
+}
+
+button.btn.start-survey {
+    padding: 0.75rem;
+}
+  .header__logo {
+    width:275px;
+  }
+  .to-do-list td:last-child{
+      padding-right: 0.5rem;
+      text-align: right;
+  }
+  .to-do-list td:first-child{
+      padding-left: 0.5rem;
+      text-align: left;
+  }
+  .to-do-list th:last-child{
+      padding-right: 0.5rem;
+      text-align: right;
+  }
+  .to-do-list th:first-child{
+      padding-left: 0.5rem;
+      text-align: left;
+  }
+  .survey-table__width {
+    width: 40%;
+  }
+  .header__title {
+      display: block;
+  }
+  .header__nav {
+    margin-left: 0;
+    margin-right: 0;
+}

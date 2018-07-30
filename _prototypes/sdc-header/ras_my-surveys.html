@@ -1,0 +1,190 @@
+---
+title: Surveys to complete (page 1 of 10) - ONS Business Surveys
+project: Pattern Library
+globalcss: false
+cdn: none
+layout: sdc-default
+---
+<link rel="stylesheet" href="{{ "/css/sdc-header.css" | prepend: site.baseurl }}">
+<link rel="stylesheet" href="{{ "/css/ras-styles.css" | prepend: site.baseurl }}">
+<style type="text/css">
+.pagination{clear:both}
+.pagination__items{padding:0}
+.pagination__item{width:45px;width:2.5rem;height:45px;height:2.5rem;line-height:41.4px;line-height:2.3rem;text-align:center;display:inline-block;margin-right:4.5px;margin-right:.25rem;box-sizing:border-box;*display:inline;*zoom:1}
+.pagination__item--current .pagination__link{background-color:#033e58;color:#fff;text-decoration:none;border-radius:3px;border:3px solid #033e58;border:.16667rem solid #033e58;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+.pagination__item--current .pagination__link:hover{background-color:#033e58;cursor:default}
+.pagination__item--next,.pagination__item--previous{width:auto}
+.pagination__item--next .pagination__link,.pagination__item--previous .pagination__link{padding-left:9px;padding-left:.5rem;padding-right:9px;padding-right:.5rem}
+.pagination__item--previous{margin-left:-11.988px;margin-left:-.666rem}
+.pagination__item--gap{cursor:default}
+.pagination__link{width:100%;height:100%;display:block;border-radius:3px;border: .16667rem solid transparent;}
+.pagination__link:hover{background-color:#e4e8eb;-webkit-transition:background-color .2s ease-in,border-color .2s ease-in,color .2s ease-in;transition:background-color .2s ease-in,border-color .2s ease-in,color .2s ease-in}
+.pagination__link:active,.pagination__link:focus{outline:3px solid #fe781f;outline-offset:3px;-webkit-transition:background-color .2s ease-in,color .2s ease-in;transition:background-color .2s ease-in,color .2s ease-in}
+.pagination__link:active:hover,.pagination__link:focus:hover{color:#fff;background-color:#4263c2;border-color:#4263c2;-webkit-transition:background-color .2s ease-in,border-color .2s ease-in,color .2s ease-in;transition:background-color .2s ease-in,border-color .2s ease-in,color .2s ease-in}
+.pagination__position{padding:9px 0;padding:.5rem 0}
+@media only screen and (min-width:300px) and (max-width:500px){
+  .pagination__item{display:none}
+  .pagination__item--next,.pagination__item--previous{visibility:visible;display:inline-block;*display:inline;*zoom:1}
+  .pagination__position.u-hidden{visibility:visible!important;display:block!important}
+  .pagination__item--next{margin-left:-.666rem}.pagination__item--previous~.pagination__item--next{margin-left:.25rem}
+}
+</style>
+{% include sdc-header-main.html %}
+<div class="container">
+  <div class="grid">
+          <div class="grid__col col-12@m">
+
+            <ul class="nav-tabs">
+              <li class="nav-tabs__tab--active"><span class="tab-label">To do</span></li>
+              <li class="nav-tabs__tab"><a class="tab-label" href="history.html">Done</a></li>
+            </ul>
+
+            <div id="main" role="main">
+              <h1 class="u-vh">Surveys to complete</h1>
+              <p class="u-mt-m">
+                <a href="#add">Add a survey</a> using your enrolment code
+              </p>
+              <table class="to-do-list" summary="List of surveys to complete">
+                <thead>
+                  <tr>
+                    <th scope="col" class="survey-table__width">Survey</th>
+                    <th scope="col">Period covered</th>
+                    <th scope="col">Submit by</th>
+                    <th scope="col">Status</th>
+                    <th scope="col" class="u-vh">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td data-label="Survey">
+                      Business Register and Employment Survey
+                      <dl class="pluto">
+                        <dt>Business</dt>
+                        <dd>ESSENTIAL ENTERPRISE LTD.</dd>
+                        <dt>Trading as</dt>
+                        <dd>ESSENTIAL ENTERPRISE</dd>
+                        <dt>Ref</dt>
+                        <dd>49900045624B</dd>
+                      </dl>
+                    </td>
+                    <td data-label="Period covered">1 Jan - 31 Dec 2016</td>
+                    <td data-label="Submit by">30 Nov 2017</td>
+                    <td data-label="Status">Not started</td>
+                    <td data-label="Action">
+                      <form class="form" action="/BRES/index.html">
+                        <button class="btn start-survey u-ws-n" type="submit">Access <span class="u-vh">Business Register and Employment </span>survey</button>
+                      </form>
+                        <a href="#" class="pluto survey-message">Send a message <span class="u-vh">about your Business Register and Employment survey</span></a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td data-label="Survey">
+                      Monthly Business Survey - Retail Sales Index
+                      <dl class="pluto">
+                        <dt>Business</dt>
+                        <dd>ESSENTIAL ENTERPRISE LTD.</dd>
+                        <dt>Trading as</dt>
+                        <dd>ESSENTIAL ENTERPRISE</dd>
+                        <dt>Ref</dt>
+                        <dd>49900045624B</dd>
+                      </dl>
+                    </td>
+                    <td data-label="Period covered">1 May - 31 May 2017</td>
+                    <td data-label="Submit by">30 June 2017</td>
+                    <td data-label="Status">Not started</td>
+                    <td data-label="Action">
+                      <form class="form" action="../mbs_rsi-index/">
+                        <button class="btn start-survey u-ws-n" type="submit">Access <span class="u-vh">Monthly Business Survey - Retail Sales Index </span>survey</button>
+                      </form>
+                        <a href="#" class="pluto survey-message">Send a message <span class="u-vh">about your Monthly Business Survey - Retail Sales Index survey</span></a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td data-label="Survey">
+                      Business Register and Employment Survey
+                      <dl class="pluto">
+                        <dt>Business</dt>
+                        <dd>ESSENTIAL ENTERPRISE LTD.</dd>
+                        <dt>Trading as</dt>
+                        <dd>ESSENTIAL ENTERPRISE</dd>
+                        <dt>Ref</dt>
+                        <dd>74400045624B</dd>
+                      </dl>
+                    </td>
+                    <td data-label="Period covered">1 Jan - 31 Dec 2016</td>
+                    <td data-label="Submit by">30 Nov 2017</td>
+                    <td data-label="Status">Not started</td>
+                    <td data-label="Action">
+                      <form class="form" action="/BRES/index.html">
+                        <button class="btn start-survey u-ws-n" type="submit">Access <span class="u-vh">Business Register and Employment </span>survey</button>
+                      </form>
+                        <a href="#" class="pluto survey-message">Send a message <span class="u-vh">about your Business Register and Employment survey</span></a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td data-label="Survey">
+                      Monthly Wages and Salaries Survey
+                      <dl class="pluto">
+                        <dt>Business</dt>
+                        <dd>Templeton Metalworks Ltd</dd>
+                        <dt>Trading as</dt>
+                        <dd>Templeton &amp; Price Ltd</dd>
+                        <dt>Ref</dt>
+                        <dd>18923641186A</dd>
+                      </dl>
+                    </td>
+                    <td data-label="Period covered">1 Sep - 30 Sep 2017</td>
+                    <td data-label="Submit by">7 Nov 2017</td>
+                    <td data-label="Status">Not started</td>
+                    <td data-label="Action">
+                      <form class="form" action="/BRES/index.html">
+                        <button class="btn start-survey u-ws-n" type="submit">Access <span class="u-vh">Monthly Wages and Salaries Survey </span>survey</button>
+                      </form>
+                      <a href="#" class="pluto survey-message">Send a message <span class="u-vh">about your Monthly Wages and Salaries Survey survey</span></a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td data-label="Survey">
+                      Monthly Wages and Salaries Survey
+                      <dl class="pluto">
+                        <dt>Business</dt>
+                        <dd>Templeton Metalworks Ltd</dd>
+                        <dt>Trading as</dt>
+                        <dd>Templeton &amp; Price Ltd</dd>
+                        <dt>Ref</dt>
+                        <dd>18923641186A</dd>
+                      </dl>
+                    </td>
+                    <td data-label="Period covered">1 Aug - 31 Aug 2017</td>
+                    <td data-label="Submit by">7 Dec 2017</td>
+                    <td data-label="Status">Not started</td>
+                    <td data-label="Action">
+                      <form class="form" action="/BRES/index.html">
+                        <button class="btn start-survey u-ws-n" type="submit">Access <span class="u-vh">Monthly Wages and Salaries Survey </span>survey</button>
+                      </form>
+                      <a href="#" class="pluto survey-message">Send a message <span class="u-vh">about your Monthly Wages and Salaries Survey survey</span></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+                </div>
+
+                <nav class="pagination u-mb-l" role="navigation" aria-label="Pagination (Page 1 of 10)">
+                  <div class="mars pagination__position">Page 1 of 10</div>
+                  <ul class="pagination__items">
+                    <li class="pagination__item pagination__item--active pagination__item--current"><a href="javascript:;" class="pagination__link" aria-label="Current page (1 of 10)" aria-current="true">1</a></li>
+                    <li class="pagination__item"><a href="../ras_my-surveys-p2/" class="pagination__link" rel="next" aria-label="Go to page 2">2</a></li>
+                    <li class="pagination__item"><a href="../ras_my-surveys-p3/" class="pagination__link" aria-label="Go to page 3">3</a></li>
+                    <li class="pagination__item"><a href="javascript:;" class="pagination__link" aria-label="Go to page 4">4</a></li>
+                    <li class="pagination__item"><a href="javascript:;" class="pagination__link" aria-label="Go to page 5">5</a></li>
+                    <li class="pagination__item pagination__item--gap">&hellip;</li>
+                    <li class="pagination__item"><a href="javascript:;" class="pagination__link" aria-label="Go to the last page">10</a></li>
+                    <li class="pagination__item pagination__item--next"><a href="../ras_my-surveys-p2/" class="pagination__link" aria-label="Go to the next page (Page 2)" rel="next">Next</a></li>
+                  </ul>
+                </nav>
+
+              </div>
+            </div>
+</div>
+<script src='https://deploy-preview-111--sdc-global-design-patterns.netlify.com/assets/scripts/bundle.js'></script>
