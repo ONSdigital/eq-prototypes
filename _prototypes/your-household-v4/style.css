@@ -25,3 +25,8 @@
 .header {
   margin-bottom : 0;
 }
+
+.lock {
+    padding-left : 1.5rem;
+    background : url('../img/icons/lockicon.svg') no-repeat left top;
+}
