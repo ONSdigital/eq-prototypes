@@ -104,6 +104,8 @@ cdn: v1.5.0
 
       personId = params.get('person'),
 
+      surveyType = params.get('survey'),
+
       relationshipDescription = params.get('relationship-description'),
 
       person,
@@ -268,10 +270,10 @@ cdn: v1.5.0
       window.history.replaceState(null, '', relationshipsUrl);
 
       if(storageAPI.findNextMissingRelationship()) {
-        window.location.href = relationshipsUrl;
+        window.location.href = relationshipsUrl + '?survey=' + surveyType;
       }
       else {
-        window.location.href = '../relationships-summary';
+        window.location.href = '../relationships-summary/?survey=' + surveyType;
       }
     });
 
