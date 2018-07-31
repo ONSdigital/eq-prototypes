@@ -21,6 +21,8 @@ cdn: v1.5.0
                       role="form" autocomplete="off" novalidate="">
                     <input type="hidden" name="person" id="person"
                            value="#"/>
+                    <input type="hidden" name="survey" id="survey-type"
+                           value="#"/>
                     <div class="group u-mb-xl">
                         <div class="block">
                             <section class="section">
@@ -36,7 +38,8 @@ cdn: v1.5.0
 
                                     <div class="definition u-mb-l js-details"
                                          data-hide-label="Click to collapse." data-show-label="Click to expand.">
-                                        <a href="#definition" class="definition__link mars js-details-trigger u-no-js-hide" aria-expanded="false" data-js-accordion-event-label="Help with individual access code" data-ga-label="definition-pattern-library" data-ga-action="Definition click" data-ga="click" data-ga-category="Help">Help with individual access code <span class="u-vh js-details-label">Click to expand.</span></a>
+                                        <a href="#definition"
+                                           class="definition__link mars js-details-trigger u-no-js-hide icon--details" aria-expanded="false" data-js-accordion-event-label="Help with individual access code" data-ga-label="definition-pattern-library" data-ga-action="Definition click" data-ga="click" data-ga-category="Help">Help with individual access code <span class="u-vh js-details-label">Click to expand.</span></a>
 
                                         <h3 class="venus u-no-js-show u-mb-no">Help with individual access code</h3>
 
@@ -88,7 +91,8 @@ cdn: v1.5.0
         urlParams = new URLSearchParams(window.location.search),
 		personId = urlParams.get('person'),
         pinObj = storageAPI.getPinFor(personId),
-        returnURL = urlParams.get('returnurl');
+        returnURL = urlParams.get('returnurl'),
+        surveyType = urlParams.get('survey');
 
 	$('.question__title').append(' <span style="color:white">' + pinObj.pin +
       '</span>');
@@ -104,9 +108,14 @@ cdn: v1.5.0
       document.trav.action = returnURL;
 	});
 
+    function updateRouting() {
+      $('#survey-type').val(surveyType);
+    }
+
 	function updateName() {
 		$('.js-person-name').html(storageAPI.getHouseholdMemberByPersonId(personId)['@person'].fullName);
 	}
 
 	$(updateName);
+    $(updateRouting);
 </script>

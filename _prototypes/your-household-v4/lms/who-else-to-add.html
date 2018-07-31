@@ -18,7 +18,7 @@ cdn: v1.5.0
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
             <!--{% include navigation.html
-            items=site.data.your-household.navigationItemsHousehold
+            items=site.data.your-household-v4.navigationItemsHousehold
             nav-title-id="section-address" %}-->
         </div>
         <div class="grid__col col-7@m pull-1@m">
@@ -132,6 +132,9 @@ cdn: v1.5.0
      */
     if (window.location.search.match(/journey=student-halls/)) {
       window.location = '../is-there-does-anyone-else-student-halls/';
+    }
+    else {
+      window.location = '../does-anyone-else-live-here/';
     }
   });
 

@@ -17,7 +17,7 @@ cdn: v1.5.0
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
             {% include navigation.html
-            items=site.data.your-household.navigationItemsHousehold
+            items=site.data.your-household-v4.navigationItemsHousehold
             nav-title-id="section-address" %}
         </div>
         <div class="grid__col col-7@m pull-1@m">
@@ -30,7 +30,8 @@ cdn: v1.5.0
                                      id="total-retail-turnover-section">
                                 <div class="question u-mb-s"
                                      id="total-retail-turnover-question">
-                                    <h1 class="question__title saturn">
+                                    <h1
+                                            class="question__title saturn js-heading">
                                         People who live here
                                     </h1>
                                 </div>
@@ -53,7 +54,11 @@ cdn: v1.5.0
                                 <p id="nobody-notice"
                                    style="display:none;">Nobody usually
                                     lives here</p>
-                                <p class="u-mb-xl"><a href="../who-else-to-add">Add someone to this household</a></p>
+                                <p class="u-mb-xl">
+                                    <a href="../who-else-to-add"
+                                       class="js-add-to-household">
+                                        Add someone to this household</a>
+                                </p>
 
                                 <div class="js-visitors-people-list">
                                     <h2 class="neptune">Visitors staying
@@ -145,9 +150,6 @@ cdn: v1.5.0
         margin-left: .5rem;
     }
 
-</style>
-
-<style>
     .modal {
         position: fixed;
         z-index: 1000;
@@ -171,6 +173,13 @@ cdn: v1.5.0
 </style>
 
 <script>
+  var urlParams = new URLSearchParams(window.location.search),
+    surveyType = urlParams.get('survey'),
+    nextPage = surveyType
+      ? '../relationships/?survey=' + surveyType
+      : '../relationships',
+    altPage = surveyType && surveyType === 'lms' ? surveyType + '/' : '';
+
   function createMemberItem(member) {
     var $nodeEl = $('#person-record-template').clone(),
       personNameText = member['@person'].fullName,
@@ -185,11 +194,13 @@ cdn: v1.5.0
     $nodeEl.find('.js-record-remove')
       .on('click', removeMember_handler.bind(null, member));
 
-    $nodeEl.find('.js-record-edit').attr('href', memberIsUser
-      ? '../what-is-your-name'
-      : '../who-else-to-add?edit=' + member['@person'].id +
-      (member.type === window.ONS.storage.KEYS.VISITOR_TYPE ? '&journey=visitors' : '')
-    );
+    $nodeEl.find('.js-record-edit').attr('href', (
+      memberIsUser
+        ? '../' + altPage + 'what-is-your-name/?noop=1'
+        : '../' + altPage + 'who-else-to-add/?edit=' + member['@person'].id +
+          (member.type === window.ONS.storage.KEYS.VISITOR_TYPE ?
+           '&journey=visitors' : '')
+    ));
 
     return $nodeEl;
   }
@@ -257,7 +268,7 @@ cdn: v1.5.0
     e.preventDefault();
 
     if (window.ONS.storage.getAllHouseholdMembers().length > 1) {
-      window.location.href = '../relationships';
+      window.location.href = nextPage;
     }
     else {
       alert('Journey for less than one person in household, not yet implemented');
@@ -268,5 +279,15 @@ cdn: v1.5.0
     return member['@person'].id === window.ONS.storage.IDS.USER_HOUSEHOLD_MEMBER_ID;
   }
 
+  function updateContent () {
+    var $addToHousehould = $('.js-add-to-household');
+
+    if (surveyType === 'lms') {
+      $('.js-heading').html('About your household');
+      $addToHousehould.attr('href', '../lms/who-else-to-add/');
+    }
+  }
+
+  $(updateContent);
   $(updateHouseholdMembersVisitors);
 </script>

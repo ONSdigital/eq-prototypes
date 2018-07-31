@@ -26,6 +26,8 @@ cdn: v1.5.0
                       role="form" autocomplete="off" novalidate="">
                     <input type="hidden" name="person" id="person"
                            value="#"/>
+                    <input type="hidden" name="survey" id="survey-type"
+                           value="#"/>
                     <div class="group" id="rsi">
                         <div class="block" id="total-retail-turnover">
                             <section class="section">
@@ -87,12 +89,12 @@ cdn: v1.5.0
 
 <script>
 	var storageAPI = window.ONS.storage,
-		personId = new URLSearchParams(window.location.search).get('person'),
-        yesbox = document.getElementById("yes-someone-else");
+        urlParams = new URLSearchParams(window.location.search),
+		personId = urlParams.get('person'),
+        yesbox = document.getElementById("yes-someone-else"),
+        surveyType = urlParams.get('survey');
 
 	$('.qa-btn-submit').click(function(e) {
-
-	    $('#person').val(personId);
 
 		/**
 		 * Routing
@@ -106,9 +108,15 @@ cdn: v1.5.0
 		}
 	});
 
+	function updateRouting () {
+      $('#person').val(personId);
+      $('#survey-type').val(surveyType);
+    }
+
 	function updateName() {
 		$('.js-person-name').html(storageAPI.getHouseholdMemberByPersonId(personId)['@person'].fullName);
 	}
 
 	$(updateName);
+    $(updateRouting);
 </script>

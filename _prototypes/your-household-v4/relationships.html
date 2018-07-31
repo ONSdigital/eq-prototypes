@@ -19,7 +19,7 @@ cdn: v1.5.0
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
             {% include navigation.html
-            items=site.data.your-household.navigationItemsRelationships
+            items=site.data.your-household-v4.navigationItemsRelationships
             nav-title-id="section-address" %}
         </div>
         <div class="grid__col col-7@m pull-1@m">
@@ -232,8 +232,12 @@ cdn: v1.5.0
     personIs,
     personTo,
 
-    editRelationshipId = new URLSearchParams(window.location.search).get('edit'),
-    editRelationshipFound = null;
+    urlParams = new URLSearchParams(window.location.search),
+    editRelationshipId = urlParams.get('edit'),
+    editRelationshipFound = null,
+
+    surveyType = urlParams.get('survey'),
+    nextPageSurveyRouting = surveyType ? '&survey=' + surveyType : '';
 
   function updateQuestion(missingRelationship, descriptionChosen) {
     personIs = missingRelationship.personIs;
@@ -300,7 +304,8 @@ cdn: v1.5.0
       )
     );
 
-    window.location.href = '../relationships-summary';
+    window.location.href = '../relationships-summary/?noop=1' +
+      nextPageSurveyRouting;
   }
 
   /**
@@ -321,7 +326,8 @@ cdn: v1.5.0
         .html('<h1 class="saturn">No missing relationships found</h1>');
       $('.qa-btn-submit').on('click', function(e) {
         e.preventDefault();
-        window.location.href = '../relationships-summary';
+
+        window.location.href = '../relationships-summary/?noop=1' + nextPageSurveyRouting;
       });
     }
   }
@@ -350,7 +356,7 @@ cdn: v1.5.0
 
     dbRelationshipId = newRelationship.id;
 
-    window.history.replaceState(null, '', '?edit=' + dbRelationshipId);
+    window.history.replaceState(null, '', '?edit=' + dbRelationshipId + nextPageSurveyRouting);
 
     storageAPI.inferRelationships(newRelationship, personIs, personTo);
 
@@ -403,15 +409,17 @@ cdn: v1.5.0
         if(subjectPersonId) {
           window.location.href = '../relationships-person-select/?person=' +
             subjectPersonId + '&relationship-description=' +
-            subjectRelationshipDescription;
+            subjectRelationshipDescription +
+            nextPageSurveyRouting;
         }
         else {
-          window.location.href = '../relationships';
+          window.location.href = '../relationships/?noop=1' +
+            nextPageSurveyRouting;
         }
       }());
     }
     else {
-      window.location.href = '../relationships-summary';
+      window.location.href = '../relationships-summary/noop=1' + nextPageSurveyRouting;
     }
   }
 

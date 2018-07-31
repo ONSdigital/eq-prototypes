@@ -98,13 +98,15 @@ cdn: v1.5.0
     urlParams = new URLSearchParams(window.location.search),
     personId = urlParams.get('person'),
     returnURL = urlParams.get('returnurl'),
-    pinObj = storageAPI.createPinFor(personId);
+    pinObj = storageAPI.createPinFor(personId),
+    surveyType = urlParams.get('survey');
 
   $('.pin').html(pinObj.pin);
 
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
     window.location.href = (returnURL ? returnURL :
-      "../individual-details-dob") + '?person=' + personId;
+      "../individual-details-dob") + '?person=' + personId +
+      (surveyType ? '&survey=' + surveyType : '');
   });
 </script>

@@ -28,6 +28,8 @@ cdn: v1.5.0
                            value="#"/>
                     <input type="hidden" name="returnurl" id="returnurl"
                            value="#"/>
+                    <input type="hidden" name="survey" id="survey-type"
+                           value="#"/>
                     <div class="group" id="rsi">
                         <div class="block" id="total-retail-turnover">
                             <section class="section">
@@ -108,7 +110,8 @@ cdn: v1.5.0
     urlParams = new URLSearchParams(window.location.search),
     personId = urlParams.get('person'),
     returnURL = urlParams.get('returnurl'),
-    nobox = document.getElementById("no");
+    nobox = document.getElementById("no"),
+    surveyType = urlParams.get('survey');
 
   $('.qa-btn-submit').on('click', function(e) {
 
@@ -132,9 +135,14 @@ cdn: v1.5.0
     }
   });
 
+  function updateRouting() {
+    $('#survey-type').val(surveyType);
+  }
+
   function updateName() {
     $('.js-person-name').html(storageAPI.getHouseholdMemberByPersonId(personId)['@person'].fullName);
   }
 
   $(updateName);
+  $(updateRouting);
 </script>

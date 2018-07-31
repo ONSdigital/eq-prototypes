@@ -225,21 +225,40 @@ function updatePersonLink() {
   const personId = new URLSearchParams(window.location.search).get('person');
 
   if (personId) {
-    const person = getHouseholdMemberByPersonId(personId)['@person'],
+    let urlParam = new URLSearchParams(window.location.search),
+      person = getHouseholdMemberByPersonId(personId)['@person'],
       pinObj = getPinFor(personId),
       secureLinkTextConfig = secureLinkTextMap[
         (getAnsweringIndividualByProxy() ? 'question-proxy' : (pinObj && pinObj.pin ? 'pin-you' : 'question-you'))
-      ];
+      ],
+      linkHref = secureLinkTextConfig.link + '?person=' + personId +
+        '&returnurl=' + window.location.pathname,
+      surveyType = urlParam.get('survey');
+
+    linkHref += (surveyType ? '&survey=' + surveyType : '');
 
     let $secureLink = $('.js-link-secure');
-    $secureLink.attr('href', secureLinkTextConfig.link + '?person=' + personId +
-      '&returnurl=' + window.location.pathname);
+    $secureLink.attr('href', linkHref);
 
     $secureLink.html(secureLinkTextConfig.linkText);
     $('.js-link-secure-label').html(secureLinkTextConfig.description.replace('$[NAME]', person.fullName));
 
     let personLink = $('.js-link-person');
-    personLink.attr('href', personLink.attr('href') + '?person=' + personId);
+    personLink.attr('href', personLink.attr('href') + '?person=' + personId +
+      (surveyType ? '&survey=' + surveyType : ''));
+  }
+}
+
+function updateBySurveyType() {
+  const urlParams = new URLSearchParams(window.location.search),
+    surveyType = urlParams.get('survey');
+
+  if (surveyType) {
+    $('.js-header-title').html(surveyTypeConfig[surveyType].title);
+    $('#people-living-here').html(surveyTypeConfig[surveyType].householdSectionTitle);
+    $('#people-living-here').attr('href', surveyTypeConfig[surveyType].householdSectionLink);
+    $('#relationships-section').attr('href', surveyTypeConfig[surveyType].relationshipsSection);
+    $('title').html(surveyTypeConfig[surveyType].title);
   }
 }
 
@@ -250,6 +269,15 @@ function setAnsweringIndividualByProxy(bool) {
 function getAnsweringIndividualByProxy() {
   return JSON.parse(sessionStorage.getItem(INDIVIDUAL_PROXY_STORAGE_KEY));
 }
+
+const surveyTypeConfig = {
+  lms: {
+    title: 'Online Household Study',
+    householdSectionTitle: 'About your household',
+    householdSectionLink: '../summary/?survey=lms',
+    relationshipsSection: '../relationships/?survey=lms'
+  }
+};
 
 window.ONS = window.ONS || {};
 window.ONS.storage = {
@@ -353,3 +381,4 @@ $(updateAddresses);
 $(updatePersonLink);
 $(tools);
 $(updateAllPreviousLinks);
+$(updateBySurveyType);

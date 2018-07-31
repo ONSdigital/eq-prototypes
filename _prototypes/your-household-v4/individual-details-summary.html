@@ -44,6 +44,8 @@ cdn: v1.5.0
             <main role="main" id="main" class="page__main">
                 <form name="trav" class="form qa-questionnaire-form" role="form"
                       autocomplete="off" action="../hub">
+                    <input type="hidden" name="survey" id="survey-type"
+                           value="#"/>
                     <div class="group" id="rsi">
                         <div class="block" id="total-retail-turnover">
                             <section class="section"
@@ -215,10 +217,12 @@ cdn: v1.5.0
 
 <script>
   var storageAPI = window.ONS.storage,
-    personId = new URLSearchParams(window.location.search).get('person'),
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person'),
     details = storageAPI.getPersonalDetailsFor(personId),
     dobDate = moment(details.dob.year + '-' + details.dob.month + '-' +
-      details.dob.day, 'YYYY-MM-DD');
+      details.dob.day, 'YYYY-MM-DD'),
+    surveyType = urlParams.get('survey');
 
   $('.js-marital-status').html(storageAPI.personalDetailsMaritalStatusMap[details.maritalStatus].description);
   $('.js-country').html(storageAPI.personalDetailsCountryMap[details.country].description);
@@ -226,10 +230,17 @@ cdn: v1.5.0
   $('.js-salary').html(details.salary);
   $('.js-dob').html(dobDate.format('MMMM Do YYYY'));
 
+  function updateRouting() {
+    $('#survey-type').val(surveyType);
+  }
+
   $(function () {
     $('.js-change-person-link').each(function () {
-      $(this).attr('href', $(this).attr('href') + '&person=' + personId);
+      $(this).attr('href', $(this).attr('href') + '&person=' + personId +
+        (surveyType ? '&survey=' + surveyType : ''));
     });
   });
+
+  $(updateRouting);
 
 </script>

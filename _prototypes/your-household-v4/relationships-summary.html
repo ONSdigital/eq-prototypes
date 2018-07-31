@@ -19,13 +19,14 @@ cdn: v1.5.0
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
             {% include navigation.html
-            items=site.data.your-household.navigationItemsRelationships
+            items=site.data.your-household-v4.navigationItemsRelationships
             nav-title-id="section-address" %}
         </div>
         <div class="grid__col col-7@m pull-1@m">
             <main role="main" id="main" class="page__main">
                 <form name="trav" class="form qa-questionnaire-form" role="form"
                       autocomplete="off" novalidate="" action="../hub">
+                    <input type="hidden" name="survey" id="survey-type" />
                     <div class="group">
                         <div class="block">
                             <section class="section">
@@ -93,7 +94,13 @@ cdn: v1.5.0
 
 <script>
   var storageAPI = window.ONS.storage,
-	  utils = window.ONS.utils;
+	  utils = window.ONS.utils,
+      urlParams = new URLSearchParams(window.location.search),
+      surveyType = urlParams.get('survey');
+
+  function updateRouting() {
+    $('#survey-type').val(surveyType);
+  }
 
   function createRecord(summary) {
     var $nodeEl = $('#relationship-record-template').clone();
@@ -974,4 +981,5 @@ cdn: v1.5.0
   };
 
   $(updateRecords);
+  $(updateRouting);
 </script>

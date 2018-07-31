@@ -26,6 +26,8 @@ cdn: v1.5.0
                       role="form" autocomplete="off" action="../individual-details-salary">
                     <input type="hidden" name="person" id="person"
                            value="#"/>
+                    <input type="hidden" name="survey" id="survey-type"
+                           value="#"/>
                     <div class="group" id="rsi">
                         <div class="block" id="total-retail-turnover">
                             <section class="section">
@@ -119,7 +121,8 @@ cdn: v1.5.0
                     </button>
 
                     <p class="mars">Can't complete this question?<br />
-                        <a href="../hub">Choose another section and return to this later</a></p>
+                        <a href="../hub" class="js-choose-another-section">Choose another section and
+                            return to this later</a></p>
 
                     <p class="mars u-mb-m"><span class="js-link-secure-label"></span><br />
                         <a class="js-link-secure"
@@ -139,7 +142,8 @@ cdn: v1.5.0
     personId = urlParams.get('person'),
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     isEditing = urlParams.get('edit'),
-    details = storageAPI.getPersonalDetailsFor(personId);
+    details = storageAPI.getPersonalDetailsFor(personId),
+    surveyType = urlParams.get('survey');
 
   $('.qa-btn-submit').on('click', function (e) {
     storageAPI.addUpdateOrientation(personId,
@@ -148,9 +152,17 @@ cdn: v1.5.0
 
     if(isEditing) {
       e.preventDefault();
-      window.location.href = '../individual-details-summary/?person=' + personId;
+      window.location.href = '../individual-details-summary/?person=' +
+        personId + (surveyType ? '&survey=' + surveyType : '');
     }
   });
+
+  function updateRouting() {
+    if(surveyType) {
+      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    }
+    $('#survey-type').val(surveyType);
+  }
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
@@ -165,6 +177,7 @@ cdn: v1.5.0
   }
 
   $(updateQuestion);
+  $(updateRouting);
 
   /**
    * Routing

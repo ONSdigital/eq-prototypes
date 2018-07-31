@@ -79,7 +79,7 @@ cdn: v1.5.0
                                                         class="grid__col col-4@xs col-3@m">
                                                     <div class="summary__link mars">
                                                         <a
-                                                                href="../summary">View
+                                                                href="../summary" class="js-view-summary">View
                                                             answers
                                                             <span class="u-vh"></span>
                                                         </a>
@@ -132,7 +132,9 @@ cdn: v1.5.0
 <script src='/js/compiled/your-household-v4/bundle.js'></script>
 
 <script>
-    var storageAPI = window.ONS.storage;
+    var storageAPI = window.ONS.storage,
+      urlParams = new URLSearchParams(window.location.search),
+      surveyType = urlParams.get('survey');
 
     var statusMap = {
       'not-started': {
@@ -159,6 +161,8 @@ cdn: v1.5.0
         return member['@person'];
       }),
       peopleIdsToComplete = _.pluck(people, 'id');
+
+    var nextPageSurvey = surveyType ? '&survey=' + surveyType : '';
 
     function updateIndividualSurveyList() {
       $.each(people, function (i, person) {
@@ -209,6 +213,8 @@ cdn: v1.5.0
           linkHref += '?person=' + person.id;
         }
 
+        linkHref += nextPageSurvey;
+
         /**
          * Manipulate DOM fragment
          */
@@ -232,5 +238,10 @@ cdn: v1.5.0
       }
     }
 
+    function updateLinks () {
+      $('.js-view-summary').attr('href', '../summary/?survey=' + surveyType);
+    }
+
     $(updateIndividualSurveyList);
+    $(updateLinks);
 </script>

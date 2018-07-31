@@ -61,11 +61,15 @@ cdn: v1.5.0
 
 <script>
   var storageAPI = window.ONS.storage,
-    personId = new URLSearchParams(window.location.search).get('person');
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person'),
+    surveyType = urlParams.get('survey');
 
   $('.btn-submit').click(function(e) {
     e.preventDefault();
-    window.location = '../individual-decision/?person=' + personId;
+
+    window.location = '../individual-decision/?person=' + personId +
+      (surveyType ? '&survey=' + surveyType : '');
   });
 
   function updateName() {
