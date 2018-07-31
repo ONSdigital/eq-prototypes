@@ -270,10 +270,12 @@ cdn: v1.5.0
       window.history.replaceState(null, '', relationshipsUrl);
 
       if(storageAPI.findNextMissingRelationship()) {
-        window.location.href = relationshipsUrl + '?survey=' + surveyType;
+        window.location.href = relationshipsUrl +
+          (surveyType ? '?survey=' + surveyType : '');
       }
       else {
-        window.location.href = '../relationships-summary/?survey=' + surveyType;
+        window.location.href = '../relationships-summary/' +
+          (surveyType ? '?survey=' + surveyType : '');
       }
     });
 
