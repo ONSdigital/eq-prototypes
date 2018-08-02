@@ -230,6 +230,10 @@ gulp.task('serve', () => {
       baseDir: '_site',
       routes: {
         '/eq-prototypes': '_site'
+      },
+      middleware: function (req, res, next) {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        next();
       }
     },
     startPath: '/eq-prototypes'

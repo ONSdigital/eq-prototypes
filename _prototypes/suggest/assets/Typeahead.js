@@ -2,6 +2,7 @@ function TypeaheadComponent($scope, $inputEl) {
   let _this = this,
     emitter = $({}),
     $container = $scope.find('.pac-container'),
+    $voiceoverAlert = $scope.find('.js-voiceover-polite-alert'),
     $hintElSpacer,
     $hintElRemainingText,
 
@@ -71,6 +72,7 @@ function TypeaheadComponent($scope, $inputEl) {
     setTimeout(function() {
       if (!$container.hasClass('hide')) {
         $container.addClass('hide');
+        _this.optionsAreHidden = true;
       }
     }, 0);
   }
@@ -78,10 +80,18 @@ function TypeaheadComponent($scope, $inputEl) {
   function show() {
     if ((showWhenEmpty && (_this.$inputElClone.val() === '') && _this.$inputElClone.is(':active') && _this.data.length) || !isClean) {
       $container.removeClass('hide');
+      _this.optionsAreHidden = false;
     }
   }
 
   function switchFocusedItem(index) {
+    /**
+     * Don't navigate list if options are hidden
+     */
+    if (_this.optionsAreHidden) {
+      return;
+    }
+
     let current = currentFocusedItemIndex,
       $currentEl = $container.find('.pac-item:nth-child(' + current + ')'),
       next = index,
@@ -89,6 +99,9 @@ function TypeaheadComponent($scope, $inputEl) {
 
     $currentEl.removeClass('focused');
     $nextEl.addClass('focused');
+
+    $voiceoverAlert.html(_this.data[next - 1].primaryText + ' focused');
+    $voiceoverAlert.attr('aria-live', 'polite');
 
     currentFocusedItemIndex = next;
 
@@ -156,7 +169,7 @@ function TypeaheadComponent($scope, $inputEl) {
       return;
     }
 
-    const match = _this.data.find((item) => {
+    const match = _this.data.find(function (item) {
       let itemText = item.primaryText;
       return itemText && itemText.substr(0, inputTextLen) === inputText;
     });
@@ -174,7 +187,13 @@ function TypeaheadComponent($scope, $inputEl) {
     $hintElRemainingText.html('');
   }
 
+  function voiceOverSelected() {
+    $voiceoverAlert.html(_this.data[currentFocusedItemIndex - 1].primaryText + ' option chosen');
+    $voiceoverAlert.attr('aria-live', 'assertive');
+  }
+
   emitter.on('itemSelected', clearTypeaheadHint);
+  emitter.on('itemSelected', voiceOverSelected);
 
   function resetSelection() {
     currentFocusedItemIndex = 0;
@@ -255,3 +274,5 @@ TypeaheadComponent.create = function(opts) {
 
   return component;
 };
+
+export default TypeaheadComponent;

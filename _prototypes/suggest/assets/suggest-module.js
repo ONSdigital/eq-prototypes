@@ -1,4 +1,7 @@
-function suggest() {
+import TypeaheadComponent from './Typeahead';
+import SuggestService from './SuggestService';
+
+export default function suggest() {
   let $scope = $('.js-suggest'),
     $inputEl = $scope.find('.js-suggest-input'),
     typeaheadComponent = TypeaheadComponent.create({
@@ -43,6 +46,8 @@ function suggest() {
   }
 
   function typeaheadUpdate(data) {
+    console.log('data', data);
+
     typeaheadComponent.update(((data || {})['matches'] || []).map(function(dataItem) {
       return {
         primaryText: dataItem

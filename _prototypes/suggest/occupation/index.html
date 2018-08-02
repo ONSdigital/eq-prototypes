@@ -10,9 +10,18 @@ layout: eq-default
 <link rel="stylesheet" href="../../assets/typeahead.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.0/underscore.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="../../assets/Typeahead.js"></script>
-<script src="../../assets/SuggestService.js"></script>
-<script src="../../assets/suggest-module.js"></script>
+<script src='/js/compiled/suggest/bundle.js'></script>
+
+<!-- Target IE10 -->
+<script>
+  document.documentElement.setAttribute('data-useragent', navigator.userAgent);
+</script>
+
+<style>
+    html[data-useragent*='MSIE 10.0'] .field__input-hint {
+        border-top : none;
+    }
+</style>
 
 <header class="page__header">
     {% include bar.html %}
@@ -117,7 +126,9 @@ layout: eq-default
                                                                placeholder="Search for job title or occupation"
                                                                type="text"/>
                                                         <div class="pac-container-wrapper">
-                                                            <div class="pac-container pac-logo hide"></div>
+                                                            <div class="pac-container pac-logo hide" aria-live="polite"></div>
+                                                            <span
+                                                                    class="js-voiceover-polite-alert u-vh" role="alert" aria-live="polite"></span>
                                                         </div>
                                                     </div>
                                                 </div>

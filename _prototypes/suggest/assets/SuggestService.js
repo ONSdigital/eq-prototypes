@@ -29,3 +29,5 @@ SuggestService.create = function(opts) {
 
   return new SuggestService(opts.url);
 };
+
+export default SuggestService;
