@@ -124,6 +124,7 @@ function TypeaheadComponent($scope, $inputEl) {
     }
 
     inputChanged();
+    voiceOverSelected(data);
     emitter.trigger('itemSelected', [data]);
   }
 
@@ -157,6 +158,7 @@ function TypeaheadComponent($scope, $inputEl) {
     e.preventDefault();
 
     inputChanged();
+    voiceOverSelected(item);
     emitter.trigger('itemSelected', [item]);
   }
 
@@ -187,13 +189,16 @@ function TypeaheadComponent($scope, $inputEl) {
     $hintElRemainingText.html('');
   }
 
-  function voiceOverSelected() {
-    $voiceoverAlert.html(_this.data[currentFocusedItemIndex - 1].primaryText + ' option chosen');
+  function voiceOverSelected(dataItem) {
+    console.log(dataItem, $voiceoverAlert);
+
+    $voiceoverAlert.html(dataItem.primaryText + ' option chosen');
     $voiceoverAlert.attr('aria-live', 'assertive');
+
+    console.log(dataItem, $voiceoverAlert);
   }
 
   emitter.on('itemSelected', clearTypeaheadHint);
-  emitter.on('itemSelected', voiceOverSelected);
 
   function resetSelection() {
     currentFocusedItemIndex = 0;
