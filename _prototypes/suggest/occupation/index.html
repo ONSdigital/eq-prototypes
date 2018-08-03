@@ -1,12 +1,11 @@
 ---
-title: Suggest - Suggest possible values for an occupation given an input term
+title: Suggest - occupation service lookup
 project: Suggest
 globalcss: false
-layout: eq-default
+layout: eq-default-extras
+cdn: v1.5.0
 ---
 
-<link rel="stylesheet"
-      href="{{ '/css/census-header-footer.css' | prepend: site.baseurl }}">
 <link rel="stylesheet" href="../../assets/typeahead.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.0/underscore.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -21,12 +20,16 @@ layout: eq-default
     html[data-useragent*='MSIE 10.0'] .field__input-hint {
         border-top : none;
     }
+
+    .header {
+        margin-bottom : 0;
+    }
 </style>
 
 <header class="page__header">
-    {% include bar.html %}
-    {% include header-census.html %}
+    {% include header-eq-default.html %}
 </header>
+
 <div class="page__subheader">
     <div class="container">
 
@@ -151,63 +154,9 @@ layout: eq-default
                             </div>
                         </block>
                     </div>
-                    <button class="btn btn--primary btn--lg"
-                            data-qa="btn-submit" type="submit"
-                            name="action[save_continue]">Save and continue
-                    </button>
-                    <div class="u-mb-m">
-                        <button class="btn btn--link mars js-btn-save"
-                                type="submit" name="action[save_sign_out]"
-                                data-ga-category="Navigation"
-                                data-ga-action="Save and complete later click"
-                                data-ga="click">Save and complete later
-                        </button>
-                    </div>
                 </form>
-
-                <a class="page__previous page__previous--bottom"
-
-                   data-ga-label="bottom" data-ga-category="Navigation"
-                   data-ga-action="Previous link click"
-                   data-ga="click"
-                   href="/questionnaire/census/household/MNNDHEx5/household-member/0/another-address"
-                   id="bottom-previous">Previous</a>
             </main>
         </div>
     </div>
 </div>
 
-{% include footer-census.html %}
-{% include timeout-census.html %}
-
-<script>
-
-  /*$(document).ready(function() {
-      let input_field = document.getElementById('autocomplete');
-      input_field.addEventListener("change", function (evt) {
-          fillInSelection(evt.currentTarget.value);
-      });
-  });
-
-
-  function fillInSelection(val) {
-      let selection_field = document.getElementById('selection');
-      selection_field.innerHTML="You selected: " + val;
-  }
-
-
-  $("#autocomplete").autocomplete({
-      source: function (request, response) {
-          $.ajax({
-              url: "http://localhost:5000/api/occupations/?q=" + request.term,
-              dataType: "json",
-              success: function (data) {
-                  return response(data.matches);
-              }
-          });
-      },
-      items: 10,
-      minLength: 1
-  });*/
-
-</script>
