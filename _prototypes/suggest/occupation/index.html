@@ -11,25 +11,6 @@ cdn: v1.5.0
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src='/js/compiled/suggest/bundle.js'></script>
 
-<!-- Target IE10 -->
-<script>
-  document.documentElement.setAttribute('data-useragent', navigator.userAgent);
-</script>
-
-<style>
-    html[data-useragent*='MSIE 10.0'] .field__input-hint {
-        border-top : none;
-    }
-
-    .header {
-        margin-bottom : 0;
-    }
-
-    .page__content {
-        overflow-x : visible;
-    }
-</style>
-
 <header class="page__header">
     {% include header-eq-default.html %}
 </header>
@@ -128,7 +109,8 @@ cdn: v1.5.0
                                                             </div>
                                                         </label>
                                                         <input id="autocomplete"
-                                                               data-suggest-url="occupations/"
+                                                               data-suggest-url="occupation/"
+                                                               data-suggest-type="occupations"
                                                                class="input input--text input--transparent js-suggest-input"
                                                                placeholder="Search for job title or occupation"
                                                                type="text"/>

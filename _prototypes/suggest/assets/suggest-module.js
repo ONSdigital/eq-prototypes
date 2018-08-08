@@ -9,9 +9,7 @@ export default function suggest() {
       inputElement: $inputEl
     }),
 
-    serviceRoot = (window.location.hostname === 'localhost')
-      ? 'http://localhost:5000/api/'
-      : '//davec.dev.eq.ons.digital/api/',
+    serviceRoot = 'https://jonshaw-lookup-api.dev.eq.ons.digital/',
 
     service = SuggestService.create({url: serviceRoot + $inputEl.attr('data-suggest-url')});
 
@@ -39,20 +37,25 @@ export default function suggest() {
 
     setTimeout(function() {
       if ($input.val() === '') {
-        console.log(2);
         typeaheadComponent.update([]);
       }
     }, 0);
   }
 
   function typeaheadUpdate(data) {
-    console.log('data', data);
-
-    typeaheadComponent.update(((data || {})['matches'] || []).map(function(dataItem) {
+    typeaheadComponent.update(((data || {})[$inputEl.attr('data-suggest-type')] || []).map(function(dataItem) {
       return {
-        primaryText: dataItem
+        primaryText: cleanFormattingFromService(dataItem),
+        formattedText: dataItem
       };
     }));
+  }
+
+  /**
+   * Temporary utility until service fixed
+   */
+  function cleanFormattingFromService(val) {
+    return val.replace(/<em>|<\/em>/gi, '');
   }
 
   typeaheadComponent.emitter.on('itemSelected', function(e, item) {
@@ -65,6 +68,8 @@ export default function suggest() {
 
   typeaheadComponent.$inputElClone.on('keydown', keyDown_handler);
   typeaheadComponent.$inputElClone.on('keyup', keyUp_handler);
+
+  document.documentElement.setAttribute('data-useragent', navigator.userAgent);
 }
 
 $(suggest);

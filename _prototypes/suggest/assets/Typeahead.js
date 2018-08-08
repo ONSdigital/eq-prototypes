@@ -51,10 +51,12 @@ function TypeaheadComponent($scope, $inputEl) {
     $(data).each(function(key, item) {
       let $item = $('<button class="pac-item">' +
         // '<span class="pac-item-query">' +
-        '<span class="pac-matched">' + item.primaryText + '</span>' +
+        '<span class="pac-matched"></span>' +
         // '</span>' +
         (item.secondaryText ? '<span>' + ' / ' + item.secondaryText + '</span>' : '') +
       '</button>');
+
+      $item.find('.pac-matched').html(item.formattedText || item.primaryText);
 
       $item.on('click', function(e) {
         e.preventDefault();
@@ -171,7 +173,7 @@ function TypeaheadComponent($scope, $inputEl) {
       return;
     }
 
-    const match = _this.data.find(function (item) {
+    const match = _this.data.find(function(item) {
       let itemText = item.primaryText;
       return itemText && itemText.substr(0, inputTextLen) === inputText;
     });
@@ -190,12 +192,8 @@ function TypeaheadComponent($scope, $inputEl) {
   }
 
   function voiceOverSelected(dataItem) {
-    console.log(dataItem, $voiceoverAlert);
-
     $voiceoverAlert.html(dataItem.primaryText + ' option chosen');
     $voiceoverAlert.attr('aria-live', 'assertive');
-
-    console.log(dataItem, $voiceoverAlert);
   }
 
   emitter.on('itemSelected', clearTypeaheadHint);

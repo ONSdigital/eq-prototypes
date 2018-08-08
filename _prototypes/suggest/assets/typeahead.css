@@ -108,3 +108,18 @@
 .input--transparent {
     background: transparent;
 }
+
+
+
+
+html[data-useragent*='MSIE 10.0'] .field__input-hint {
+    border-top : none;
+}
+
+.header {
+    margin-bottom : 0;
+}
+
+.page__content {
+    overflow-x : visible;
+}

@@ -1,22 +1,18 @@
 ---
-title: Suggest - Suggest possible values for official country names given an input term
+title: Suggest - Suggest countries lookup
 project: Suggest
 globalcss: false
-layout: eq-default
+layout: eq-default-extras
+cdn: v1.5.0
 ---
 
-<link rel="stylesheet"
-      href="{{ "/css/census-header-footer.css" | prepend: site.baseurl }}">
 <link rel="stylesheet" href="../../assets/typeahead.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.0/underscore.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="../../assets/Typeahead.js"></script>
-<script src="../../assets/SuggestService.js"></script>
-<script src="../../assets/suggest-module.js"></script>
+<script src='/js/compiled/suggest/bundle.js'></script>
 
 <header class="page__header">
-    {% include bar.html %}
-    {% include header-census.html %}
+    {% include header-eq-default.html %}
 </header>
 <div class="page__subheader">
     <div class="container">
@@ -85,7 +81,7 @@ layout: eq-default
                     <input id="csrf_token" name="csrf_token" type="hidden"
                            value="ImMxYWMzNzg1NTE4OGFlZjUzN2QyOWJjNmFjNGU2OGJhNjMxMDA0ODAi.DH8MjA.22XS3mNvK1-HC7uib7_bWLuUgV4">
                     <div class="group" id="household-member">
-                        <block class="block" id="other-address">
+                        <div class="block" id="other-address">
                             <p class="block__title neptune"
                                data-qa="block-title">Joanna Bloggs</p>
                             <div class="question" id="other-address-question">
@@ -115,12 +111,15 @@ layout: eq-default
                                                             </div>
                                                         </label>
                                                         <input id="autocomplete"
-                                                               data-suggest-url="countries_official_names/"
-                                                               class="input input--text js-suggest-input"
+                                                               data-suggest-url="country/"
+                                                               data-suggest-type="countries"
+                                                               class="input input--text input--transparent js-suggest-input"
                                                                placeholder="Start typing for country choices"
                                                                type="text">
                                                         <div class="pac-container-wrapper">
                                                             <div class="pac-container pac-logo hide"></div>
+                                                            <span
+                                                                    class="js-voiceover-polite-alert u-vh" role="alert" aria-live="polite"></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -141,64 +140,10 @@ layout: eq-default
                                     </div>
                                 </fieldset>
                             </div>
-                        </block>
-                    </div>
-                    <button class="btn btn--primary btn--lg"
-                            data-qa="btn-submit" type="submit"
-                            name="action[save_continue]">Save and continue
-                    </button>
-                    <div class="u-mb-m">
-                        <button class="btn btn--link mars js-btn-save"
-                                type="submit" name="action[save_sign_out]"
-                                data-ga-category="Navigation"
-                                data-ga-action="Save and complete later click"
-                                data-ga="click">Save and complete later
-                        </button>
+                        </div>
                     </div>
                 </form>
-
-                <a class="page__previous page__previous--bottom"
-
-                   data-ga-label="bottom" data-ga-category="Navigation"
-                   data-ga-action="Previous link click"
-                   data-ga="click"
-                   href="/questionnaire/census/household/MNNDHEx5/household-member/0/another-address"
-                   id="bottom-previous">Previous</a>
             </main>
         </div>
     </div>
 </div>
-
-{% include footer-census.html %}
-{% include timeout-census.html %}
-
-<script>
-  /*$(document).ready(function() {
-      let input_field = document.getElementById('autocomplete');
-      input_field.addEventListener("change", function (evt) {
-          fillInSelection(evt.currentTarget.value);
-      });
-  });
-
-
-  function fillInSelection(val) {
-      let selection_field = document.getElementById('selection');
-      selection_field.innerHTML="You selected: " + val;
-  }
-
-
-  $("#autocomplete").autocomplete({
-      source: function (request, response) {
-          $.ajax({
-              url: "http://localhost:5000/api/countries_official_names/?q=" + request.term,
-              dataType: "json",
-              success: function (data) {
-                  return response(data.matches);
-              }
-          });
-      },
-      items: 10,
-      minLength: 1
-  });*/
-
-</script>
