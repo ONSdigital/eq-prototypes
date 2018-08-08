@@ -9,6 +9,7 @@ function TypeaheadComponent($scope, $inputEl) {
     $hintElRemainingText,
 
     showWhenEmpty = false,
+    hintDataMatchIndex = -1,
 
     /**
      * If user has not typed anything new
@@ -194,6 +195,8 @@ function TypeaheadComponent($scope, $inputEl) {
       return itemText && itemText.substr(0, inputTextLen) === inputText;
     });
 
+    hintDataMatchIndex = _this.data.indexOf(match);
+
     match ? showTypeahead(inputText, match.primaryText.substr(inputTextLen)) : clearTypeaheadHint();
   }
 
@@ -254,6 +257,10 @@ function TypeaheadComponent($scope, $inputEl) {
     render();
     resetSelection();
     typeaheadHint();
+
+    if (hintDataMatchIndex > -1) {
+      switchFocusedItem(hintDataMatchIndex + 1);
+    }
   };
 
   /**
