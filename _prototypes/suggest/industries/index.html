@@ -103,16 +103,15 @@ cdn: v1.5.0
                                                                 Main activity
                                                             </div>
                                                         </label>
-                                                        <input id="autocomplete"
-                                                               class="input input--text input--transparent js-suggest-input"
-                                                               data-suggest-url="industry/"
-                                                               data-suggest-type="industries"
-                                                               placeholder="Start typing for industry choices"
-                                                               type="text">
-                                                        <div class="pac-container-wrapper">
-                                                            <div class="pac-container pac-logo hide" aria-live="polite"></div>
-                                                            <span
-                                                                    class="js-voiceover-polite-alert u-vh" role="alert" aria-live="polite"></span>
+                                                        <div class="pac-container-wrapper js-focusable-box">
+                                                            <input id="autocomplete"
+                                                                   class="input input--text input--typeahead js-suggest-input js-focusable"
+                                                                   data-suggest-url="industry/"
+                                                                   data-suggest-type="industries"
+                                                                   placeholder="Start typing for industry choices"
+                                                                   type="text">
+                                                            <div class="pac-container pac-logo" aria-live="polite"></div>
+                                                            <span class="js-voiceover-polite-alert u-vh" role="alert" aria-live="polite"></span>
                                                         </div>
                                                     </div>
                                                 </div>
