@@ -110,16 +110,15 @@ cdn: v1.5.0
                                                                 below
                                                             </div>
                                                         </label>
-                                                        <input id="autocomplete"
-                                                               data-suggest-url="country/"
-                                                               data-suggest-type="countries"
-                                                               class="input input--text input--transparent js-suggest-input"
-                                                               placeholder="Start typing for country choices"
-                                                               type="text">
-                                                        <div class="pac-container-wrapper">
-                                                            <div class="pac-container pac-logo hide"></div>
-                                                            <span
-                                                                    class="js-voiceover-polite-alert u-vh" role="alert" aria-live="polite"></span>
+                                                        <div class="pac-container-wrapper js-focusable-box">
+                                                            <input id="autocomplete"
+                                                                   data-suggest-url="country/"
+                                                                   data-suggest-type="countries"
+                                                                   class="input input--text input--typeahead js-suggest-input js-focusable"
+                                                                   placeholder="Start typing for country choices"
+                                                                   type="text" />
+                                                            <div class="pac-container pac-logo" aria-live="polite"></div>
+                                                            <span class="js-voiceover-polite-alert u-vh" role="alert" aria-live="polite"></span>
                                                         </div>
                                                     </div>
                                                 </div>

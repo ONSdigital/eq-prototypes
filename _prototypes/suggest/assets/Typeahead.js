@@ -2,6 +2,8 @@ function TypeaheadComponent($scope, $inputEl) {
   let _this = this,
     emitter = $({}),
     $container = $scope.find('.pac-container'),
+    $scrollableContainer,
+    $revealContainer,
     $voiceoverAlert = $scope.find('.js-voiceover-polite-alert'),
     $hintElSpacer,
     $hintElRemainingText,
@@ -18,6 +20,8 @@ function TypeaheadComponent($scope, $inputEl) {
       38: arrowUpKey_handler,
       40: arrowDownKey_handler
     },
+
+    refineNoticeItemThreshold = 1,
 
     currentFocusedItemIndex = 0;
 
@@ -46,13 +50,13 @@ function TypeaheadComponent($scope, $inputEl) {
   function render() {
     let data = _this.data;
 
+    $scrollableContainer = $('<div class="pac-scroll"></div>');
+    $revealContainer = $('<div class="pac-reveal"></div>');
     $container.html('');
 
     $(data).each(function(key, item) {
       let $item = $('<button class="pac-item">' +
-        // '<span class="pac-item-query">' +
         '<span class="pac-matched"></span>' +
-        // '</span>' +
         (item.secondaryText ? '<span>' + ' / ' + item.secondaryText + '</span>' : '') +
       '</button>');
 
@@ -64,24 +68,36 @@ function TypeaheadComponent($scope, $inputEl) {
 
       $item.on('mousedown', itemMouseDown_handler.bind(_this, item));
 
-      $container.append($item);
+      $scrollableContainer.append($item);
     });
+
+    $revealContainer.append($scrollableContainer);
+
+    if (data.length > refineNoticeItemThreshold) {
+      $revealContainer.append('<div class="pac-notice">' +
+        '<strong class="pluto">Refine your search to see more results</strong>' +
+        '</div>');
+    }
+
+    $container.append($revealContainer);
 
     !data.length ? hide() : show();
   }
 
   function hide() {
     setTimeout(function() {
-      if (!$container.hasClass('hide')) {
-        $container.addClass('hide');
-        _this.optionsAreHidden = true;
+      if ($revealContainer && !$revealContainer.hasClass('hide')) {
+        $revealContainer.addClass('hide');
       }
+      _this.optionsAreHidden = true;
     }, 0);
   }
 
   function show() {
     if ((showWhenEmpty && (_this.$inputElClone.val() === '') && _this.$inputElClone.is(':active') && _this.data.length) || !isClean) {
-      $container.removeClass('hide');
+      if ($revealContainer) {
+        $revealContainer.removeClass('hide');
+      }
       _this.optionsAreHidden = false;
     }
   }
@@ -95,9 +111,9 @@ function TypeaheadComponent($scope, $inputEl) {
     }
 
     let current = currentFocusedItemIndex,
-      $currentEl = $container.find('.pac-item:nth-child(' + current + ')'),
+      $currentEl = $scrollableContainer.find('.pac-item:nth-child(' + current + ')'),
       next = index,
-      $nextEl = $container.find('.pac-item:nth-child(' + next + ')');
+      $nextEl = $scrollableContainer.find('.pac-item:nth-child(' + next + ')');
 
     $currentEl.removeClass('focused');
     $nextEl.addClass('focused');
@@ -107,7 +123,7 @@ function TypeaheadComponent($scope, $inputEl) {
 
     currentFocusedItemIndex = next;
 
-    $container.scrollTop($container.scrollTop() + $nextEl.position().top);
+    $scrollableContainer.scrollTop($scrollableContainer.scrollTop() + $nextEl.position().top);
   }
 
   function inputChanged() {
@@ -200,7 +216,7 @@ function TypeaheadComponent($scope, $inputEl) {
 
   function resetSelection() {
     currentFocusedItemIndex = 0;
-    $container.scrollTop(0);
+    $scrollableContainer.scrollTop(0);
   }
 
   /**
