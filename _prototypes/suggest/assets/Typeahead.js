@@ -90,6 +90,9 @@ function TypeaheadComponent($scope, $inputEl) {
       if ($revealContainer && !$revealContainer.hasClass('hide')) {
         $revealContainer.addClass('hide');
       }
+
+      $hintElSpacer.hide();
+      $hintElRemainingText.hide();
       _this.optionsAreHidden = true;
     }, 0);
   }
@@ -99,6 +102,9 @@ function TypeaheadComponent($scope, $inputEl) {
       if ($revealContainer) {
         $revealContainer.removeClass('hide');
       }
+
+      $hintElSpacer.show();
+      $hintElRemainingText.show();
       _this.optionsAreHidden = false;
     }
   }
