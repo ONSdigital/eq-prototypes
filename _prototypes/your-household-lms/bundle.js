@@ -272,7 +272,7 @@ function getAnsweringIndividualByProxy() {
 
 const surveyTypeConfig = {
   lms: {
-    title: 'Online Household Study',
+    title: 'Online Household Study v2',
     householdSectionTitle: 'About your household',
     householdSectionLink: '../summary/?survey=lms',
     relationshipsSection: '../relationships/?survey=lms'

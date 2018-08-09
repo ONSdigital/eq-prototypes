@@ -22,7 +22,8 @@ export function person(opts) {
     fullName: opts.firstName + ' ' + middleName + ' ' + opts.lastName,
     firstName: opts.firstName,
     middleName,
-    lastName: opts.lastName
+    lastName: opts.lastName,
+    gender: opts.gender
   };
 }
 

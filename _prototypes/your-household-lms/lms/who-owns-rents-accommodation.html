@@ -30,9 +30,8 @@ cdn: v1.5.0
                             <section class="section">
                                 <div class="question">
                                     <h1 class="question__title saturn">
-                                        Do any of these people live in a
-                                        student halls of residence for part
-                                        of the year?
+                                        In whose name, or names, is this
+                                        accommodation owned or rented?
                                     </h1>
 
                                     <p>Select all that apply</p>
@@ -92,20 +91,13 @@ cdn: v1.5.0
       $('#js-member-list').append(createMemberListItem(member['@person']));
     });
 
-    $('#js-member-list').append('<div class="field__item js-focusable-box">\n' +
-      '        <input class="input input--checkbox js-focusable js-exclusive-checkbox-group js-person-not-listed" name="checkbox-answer" value="someone-else" id="someone-else" type="checkbox">\n' +
-      '        <label class="label label--inline venus " for="someone-else">\n' +
-      '            Someone else not listed above<span class="u-vh"></span>\n' +
-      '        </label>\n' +
-      '      </div>');
-
     $('#js-member-list').append('<div class="field__label u-mt-s venus" aria-hidden="true">Or</div>');
     $('#js-member-list').append('<div class="field__item js-focusable-box">\n' +
-      '        <input class="input input--checkbox js-focusable js-exclusive-checkbox" name="checkbox-answer" value="none" id="none" type="checkbox">\n' +
-      '        <label class="label label--inline venus " for="none">\n' +
-      '            <span class="u-vh">Or,</span> None of these people live in a student halls of residence<span class="u-vh">. Selecting this will uncheck all other checkboxes</span>\n' +
+      '        <input class="input input--checkbox js-focusable js-exclusive-checkbox js-person-not-listed" name="checkbox-answer" value="someone-else" id="someone-else" type="checkbox">\n' +
+      '        <label class="label label--inline venus " for="someone-else">\n' +
+      '            <span class="u-vh">Or,</span> Someone else not listed above<span class="u-vh">. Selecting this will uncheck all other checkboxes</span>\n' +
       '        </label>\n' +
-      '        <span class="js-exclusive-checkbox-alert u-vh" role="alert" aria-live="polite" data-adjective="deselected">none deselected. </span>\n' +
+      '        <span class="js-exclusive-checkbox-alert u-vh" role="alert" aria-live="polite" data-adjective="deselected">Someone else not listed above deselected. </span>\n' +
       '      </div>');
   }
 
@@ -115,10 +107,11 @@ cdn: v1.5.0
     var notListedChecked = $('.js-person-not-listed:checked').length;
 
     if (notListedChecked) {
-      window.location.href = '../who-else-to-add/?journey=student-halls';
+      //window.location.href = '../who-else-to-add/?journey=who-owns';
+      window.location.href = '../../summary/?survey=lms';
     }
     else {
-      window.location.href = '../do-they-share-cooking-facilities';
+      window.location.href = '../../summary?survey=lms';
     }
   });
 

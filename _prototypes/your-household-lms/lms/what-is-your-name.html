@@ -1,5 +1,5 @@
 ---
-title: Online Household Study
+title: Online Household Study v2
 project: your-household
 globalcss: false
 layout: eq-default-extras
@@ -34,19 +34,19 @@ cdn: v1.5.0
                         <div class="question">
                             <h1 class="question__title saturn"
                                 data-qa="question-title">
-                                What is your name?
+                                Enter your details
                             </h1>
 
                             <fieldset
                                     class="question__fieldset u-mb-xl js-question-fieldset">
-                                <legend class="u-vh">What is your name?</legend>
+                                <legend class="u-vh">Enter your details</legend>
 
                                 <div class="question__answers">
                                     <div class="question__answer">
                                         <label class="label venus"
                                                for="first-name">
                                             <div class="label__inner">
-                                                First name
+                                                My first or given name
                                             </div>
                                         </label>
                                         <input class="input input--text "
@@ -57,7 +57,7 @@ cdn: v1.5.0
                                     <div class="question__answer">
                                         <label class="label venus ">
                                             <div class="label__inner">
-                                                Last name
+                                                My surname or family name
                                             </div>
                                         </label>
                                         <input class="input input--text "
@@ -66,6 +66,25 @@ cdn: v1.5.0
                                     </div>
                                 </div>
                             </fieldset>
+
+                            <div class="field field--radio field--multiplechoice u-mb-xl">
+                                <fieldset>
+                                    <legend class="field__legend mars ">My sex</legend>
+                                    <div class="field__item js-focusable-box">
+                                        <input
+                                                class="input input--radio js-focusable" name="radio-answer" value="male" id="male" type="radio">
+                                        <label
+                                                class="label label--inline venus "
+                                               for="male">Male</label>
+                                    </div>
+                                    <div class="field__item js-focusable-box">
+                                        <input
+                                                class="input input--radio js-focusable" name="radio-answer" value="female" id="female" type="radio">
+                                        <label class="label label--inline venus "
+                                               for="female">Female</label>
+                                    </div>
+                                </fieldset>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -80,7 +99,7 @@ cdn: v1.5.0
     </div>
 </div>
 
-<script src='/js/compiled/your-household-v4/bundle.js'></script>
+<script src='/js/compiled/your-household-lms/bundle.js'></script>
 
 <script>
   $('.btn-submit').click(function(e) {
@@ -89,7 +108,8 @@ cdn: v1.5.0
 
     window.ONS.storage.addUserPerson(window.ONS.storage.TYPES.person({
       firstName: document.getElementById('first-name').value,
-      lastName: document.getElementById('last-name').value
+      lastName: document.getElementById('last-name').value,
+      gender: $('[name=radio-answer]:checked').val()
     }));
 
     window.ONS.storage.deleteUserAsHouseholdMember();
@@ -112,6 +132,7 @@ cdn: v1.5.0
     if (userPerson) {
       $('#first-name').val(userPerson.firstName);
       $('#last-name').val(userPerson.lastName);
+      $('#' + userPerson.gender).attr('checked', true);
     }
   });
 </script>
