@@ -1,0 +1,150 @@
+---
+title: Household prototype v4
+project: your-household
+globalcss: false
+layout: eq-default-extras
+cdn: v1.5.0
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link mars"
+           href="../does-anyone-else-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            <!--{% include navigation.html
+            items=site.data.your-household-v4.navigationItemsHousehold
+            nav-title-id="section-address" %}-->
+        </div>
+        <div class="grid__col col-7@m pull-1@m">
+            <main role="main" id="main" class="page__main">
+                <form name="trav" class="form qa-questionnaire-form" role="form"
+                      autocomplete="off" novalidate="">
+                    <input type="hidden" name="away-journeys"
+                           value=""/>
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s"
+                                     id="total-retail-turnover-question">
+                                    <h1 class="question__title saturn js-heading">
+                                        <span class="js-heading-inner-part1"></span>
+                                        <span class="address-text"></span>
+                                        who is temporarily away?
+                                    </h1>
+                                </div>
+
+                                <ul id="household-members" class="u-mb-l"></ul>
+
+                                <div
+                                        class="field field--checkbox field--multiplechoice field--exclusive u-mb-xl">
+                                    <fieldset>
+                                        <legend
+                                                class="field__legend mars u-vh">Select all that apply:</legend>
+                                        <div class="field__label venus">Select all that apply:</div>
+                                        <div class="field__item js-focusable-box">
+                                            <input
+                                                    class="input input--checkbox js-focusable js-exclusive-checkbox-group" name="away-type" value="studying-away" id="studying-away" type="checkbox" />
+                                            <label class="label label--inline venus " for="studying-away">
+                                                Students and/or school
+                                                children who live away from
+                                                home during term time
+                                            </label>
+                                        </div>
+                                        <div class="field__item js-focusable-box">
+                                            <input
+                                                    class="input input--checkbox js-focusable js-exclusive-checkbox-group" name="away-type" value="armed-forces" id="armed-forces" type="checkbox" />
+                                            <label class="label label--inline venus " for="armed-forces">
+                                                Anyone working away from home
+                                                within the UK, including
+                                                members of the armed forces,
+                                                if this is their permanent or
+                                                family home
+                                            </label>
+                                        </div>
+                                        <div class="field__item js-focusable-box">
+                                            <input
+                                                    class="input input--checkbox js-focusable js-exclusive-checkbox-group" name="away-type" value="outside-uk" id="outside-uk" type="checkbox" />
+                                            <label class="label label--inline venus " for="outside-uk">
+                                                Anyone temporarily outside
+                                                the UK for less than 12 months
+                                            </label>
+                                        </div>
+                                        <div class="field__item js-focusable-box">
+                                            <input
+                                                    class="input input--checkbox js-focusable js-exclusive-checkbox-group" name="away-type" value="temp-away" id="temp-away" type="checkbox" />
+                                            <label class="label label--inline venus " for="temp-away">
+                                                Other people who usually live
+                                                here including anyone
+                                                temporarily away from home
+                                            </label>
+                                        </div>
+                                        <div class="field__label u-mt-s venus" aria-hidden="true">Or</div>
+                                        <div class="field__item js-focusable-box">
+                                            <input
+                                                    class="input input--checkbox js-focusable js-exclusive-checkbox" name="away-type" value="no" id="none" type="checkbox" />
+                                            <label class="label label--inline venus " for="none">
+                                                <span class="u-vh">Or,</span>
+                                                No, there is no one
+                                                temporarily away who counts
+                                                this address as their
+                                                permanent or family home
+                                                <span
+                                                    class="u-vh">. Selecting this will uncheck all other checkboxes</span>
+                                            </label>
+                                            <span class="js-exclusive-checkbox-alert u-vh" role="alert" aria-live="polite" data-adjective="deselected"></span>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus"
+                            type="submit" name="">Save and continue
+                    </button>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/your-household-v4/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    members = storageAPI.getAllHouseholdMembers();
+
+  $('.qa-btn-submit').on('click', function(e) {
+    e.preventDefault();
+
+    var awayTypes = [], url;
+
+    $('[name=away-type]:checked').each(function (i, el) {
+      awayTypes.push($(el).val());
+    });
+
+    if($('[name=away-type]:checked').val() === "no") {
+        url = '../temp-living-here?away-types='
+    } else {
+        url = '../temp-types-question?away-types='
+    }
+
+    window.location = url +
+        JSON.stringify(awayTypes);
+  });
+
+  function updateQuestion () {
+    $('.js-heading-inner-part1').html(members.length ?
+      'Apart from the people already added, is there anyone else living at':
+      'Is there anyone else living at'
+    );
+  }
+
+  $(updateQuestion);
+
+</script>
