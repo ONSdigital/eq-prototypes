@@ -75,7 +75,7 @@ function TypeaheadComponent($scope, $inputEl) {
     $revealContainer.append($scrollableContainer);
 
     if (data.length > refineNoticeItemThreshold) {
-      $revealContainer.append('<div class="pac-notice">' +
+      $scrollableContainer.append('<div class="pac-notice">' +
         '<strong class="pluto">Refine your search to see more results</strong>' +
         '</div>');
     }
