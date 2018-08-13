@@ -6,7 +6,9 @@ export default function suggest() {
     $inputEl = $scope.find('.js-suggest-input'),
     typeaheadComponent = TypeaheadComponent.create({
       scopeElement: $scope,
-      inputElement: $inputEl
+      inputElement: $inputEl,
+      listId: $inputEl.attr('data-list-id'),
+      listLabelledBy: $inputEl.attr('data-list-labelled-by-ref')
     }),
 
     serviceRoot = 'https://jonshaw-lookup-api.dev.eq.ons.digital/',
@@ -29,7 +31,11 @@ export default function suggest() {
       service.$request.abort();
     }
 
-    service.query(val).done(typeaheadUpdate);
+    //service.query(val).done(typeaheadUpdate);
+
+    service.query(val).fail(function () {
+      typeaheadComponent.update(mockData())
+    });
   }
 
   function keyDown_handler(e) {
@@ -70,6 +76,43 @@ export default function suggest() {
   typeaheadComponent.$inputElClone.on('keyup', keyUp_handler);
 
   document.documentElement.setAttribute('data-useragent', navigator.userAgent);
+}
+
+function mockData() {
+  return [
+    {
+      primaryText: 'line 1 formatted',
+      formattedText: 'line 1 <em>Formatted</em>'
+    },
+    {
+      primaryText: 'line 2 formatted',
+      formattedText: 'line 2 <em>Formatted</em>'
+    },
+    {
+      primaryText: 'line 3 formatted',
+      formattedText: 'line 3 <em>Formatted</em>'
+    },
+    {
+      primaryText: 'line 4 formatted',
+      formattedText: 'line 4 <em>Formatted</em>'
+    },
+    {
+      primaryText: 'line 5 formatted',
+      formattedText: 'line 5 <em>Formatted</em>'
+    },
+    {
+      primaryText: 'line 6 formatted',
+      formattedText: 'line 6 <em>Formatted</em>'
+    },
+    {
+      primaryText: 'line 7 formatted',
+      formattedText: 'line 7 <em>Formatted</em>'
+    },
+    {
+      primaryText: 'line 8 formatted',
+      formattedText: 'line 8 <em>Formatted</em>'
+    }
+  ];
 }
 
 $(suggest);

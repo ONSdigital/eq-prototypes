@@ -9,6 +9,8 @@ function TypeaheadComponent($scope, $inputEl) {
     $hintElRemainingText,
 
     showWhenEmpty = false,
+    listId,
+    listLabelledBy,
     hintDataMatchIndex = -1,
 
     /**
@@ -46,6 +48,22 @@ function TypeaheadComponent($scope, $inputEl) {
 
     $hintElSpacer = $nodeEl.find('.' + _this.hintElClass);
     $hintElRemainingText = $nodeEl.find('.' + _this.hintElRemainingTextClass);
+
+    ariaSetup();
+  }
+
+  function ariaSetup() {
+    [
+      'autocomplete',
+      'aria-autocomplete',
+      'aria-describedby',
+      'aria-expanded',
+      'aria-controls',
+      'aria-haspopup'
+    ].forEach(function(prop) {
+      const val = _this.$inputElClone.attr('data-' + prop);
+      val && _this.$inputElClone.attr(prop, val);
+    });
   }
 
   function render() {
@@ -56,7 +74,7 @@ function TypeaheadComponent($scope, $inputEl) {
     $container.html('');
 
     $(data).each(function(key, item) {
-      let $item = $('<button class="pac-item">' +
+      let $item = $('<button class="pac-item" role="option">' +
         '<span class="pac-matched"></span>' +
         (item.secondaryText ? '<span>' + ' / ' + item.secondaryText + '</span>' : '') +
       '</button>');
@@ -71,6 +89,15 @@ function TypeaheadComponent($scope, $inputEl) {
 
       $scrollableContainer.append($item);
     });
+
+    /**
+     * Aria references
+     */
+    listId && $scrollableContainer.attr('id', listId);
+    listLabelledBy && $scrollableContainer.attr('aria-labelledby', listLabelledBy);
+
+    $voiceoverAlert.attr('aria-live', 'polite');
+    $voiceoverAlert.html(data.length + ' suggestions found');
 
     $revealContainer.append($scrollableContainer);
 
@@ -91,6 +118,7 @@ function TypeaheadComponent($scope, $inputEl) {
         $revealContainer.addClass('hide');
       }
 
+      _this.$inputElClone.attr('aria-expanded', false);
       $hintElSpacer.hide();
       $hintElRemainingText.hide();
       _this.optionsAreHidden = true;
@@ -103,6 +131,7 @@ function TypeaheadComponent($scope, $inputEl) {
         $revealContainer.removeClass('hide');
       }
 
+      _this.$inputElClone.attr('aria-expanded', true);
       $hintElSpacer.show();
       $hintElRemainingText.show();
       _this.optionsAreHidden = false;
@@ -254,6 +283,11 @@ function TypeaheadComponent($scope, $inputEl) {
     showWhenEmpty = !!val;
   };
 
+  this.setListReferences = function(id, labelId) {
+    listId = id || undefined;
+    listLabelledBy = labelId || undefined;
+  };
+
   this.update = function(dataArr) {
     if (!dataArr || dataArr.length === undefined) {
       return;
@@ -287,22 +321,25 @@ TypeaheadComponent.isKeyPressClean = function(e) {
 };
 
 /**
- *
  * opts example
  * {
  *   scopeElement: <HTML element>,
  *   inputElement: <HTML element>,
  *   showWhenEmpty: <Boolean>
+ *   listId: <String>
  * }
  */
 TypeaheadComponent.create = function(opts) {
-  let $scope = $(opts.scopeElement),
+  const $scope = $(opts.scopeElement),
     $inputEl = $(opts.inputElement),
     showWhenEmpty = opts.showWhenEmpty,
+    listId = opts.listId,
+    listLabelledBy = opts.listLabelledBy,
 
     component = new TypeaheadComponent($scope, $inputEl);
 
   component.showListWhenEmpty(showWhenEmpty);
+  component.setListReferences(listId, listLabelledBy);
 
   return component;
 };
