@@ -126,8 +126,6 @@
     overflow-x: hidden;
     overflow-y: auto;
     max-height: 265px;
-    background-color: #fff;
-    box-shadow: inset 0 -4px 8px #ccc;
 }
 
 .pac-notice {
@@ -135,6 +133,22 @@
     background-color : #eee;
 }
 
+.pac-shadow {
+    position :absolute;
+    bottom : 0;
+    left : 0;
+    right : 0;
+    height : 8px;
+    background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.2) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.2) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#33000000',GradientType=0 ); /* IE6-9 */
+}
+
+.pac-reveal {
+    position : relative;
+    background-color : #fff;
+}
 
 
 

@@ -73,6 +73,8 @@ function TypeaheadComponent($scope, $inputEl) {
     $revealContainer = $('<div class="pac-reveal"></div>');
     $container.html('');
 
+    $revealContainer.append('<div class="pac-shadow"></div>');
+
     $(data).each(function(key, item) {
       let $item = $('<button class="pac-item" role="option">' +
         '<span class="pac-matched"></span>' +
