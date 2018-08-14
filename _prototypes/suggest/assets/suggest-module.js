@@ -10,10 +10,7 @@ export default function suggest() {
       listId: $inputEl.attr('data-list-id'),
       listLabelledBy: $inputEl.attr('data-list-labelled-by-ref')
     }),
-
-    serviceRoot = 'https://jonshaw-lookup-api.dev.eq.ons.digital/',
-
-    service = SuggestService.create({url: serviceRoot + $inputEl.attr('data-suggest-url')});
+    service = SuggestService.create({url: $inputEl.attr('data-suggest-url')});
 
   function keyUp_handler(e) {
     e.preventDefault();

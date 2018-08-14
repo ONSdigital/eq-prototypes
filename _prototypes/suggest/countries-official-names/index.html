@@ -103,22 +103,36 @@ cdn: v1.5.0
                                                     <div class="field">
                                                         <label for="autocomplete"
                                                                class="label venus js-suggest"
-                                                               id="label-occupation">
-                                                            <div class="label__inner">
-                                                                Please type your
-                                                                country of birth
-                                                                below
-                                                            </div>
+                                                               id="typeahead1-label">
+                                                            Please type your
+                                                            country of birth
+                                                            below
                                                         </label>
+                                                        <div>
+                                                            <span
+                                                                    class="label__description pluto u-mb-xs">Type below to search for country name</span>
+                                                        </div>
                                                         <div class="pac-container-wrapper js-focusable-box">
                                                             <input id="autocomplete"
-                                                                   data-suggest-url="country/"
+                                                                   data-autocomplete="off"
+                                                                   data-aria-autocomplete="list"
+                                                                   data-aria-describedby="typeahead1-instructions"
+                                                                   data-aria-expanded="false"
+                                                                   data-aria-controls="typeahead1-list"
+                                                                   data-aria-haspopup="listbox"
+
+                                                                   data-suggest-url="https://jonshaw-lookup-api.dev.eq.ons.digital/country/"
                                                                    data-suggest-type="countries"
+                                                                   data-list-id="typeahead1-list-id"
+                                                                   data-list-labelled-by-ref="typeahead1-label"
                                                                    class="input input--text input--typeahead js-suggest-input js-focusable"
                                                                    placeholder="Start typing for country choices"
                                                                    type="text" />
-                                                            <div class="pac-container pac-logo" aria-live="polite"></div>
+                                                            <div id="typeahead1-list"
+                                                                 class="pac-container pac-logo" aria-live="polite"></div>
                                                             <span class="js-voiceover-polite-alert u-vh" role="alert" aria-live="polite"></span>
+                                                            <span id="typeahead1-instructions"
+                                                                  class="u-vh">Use down and up keys to access and browse countries after input. Confirm your choice with enter key, or esc key to close countries suggestions</span>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -1,2 +1,1 @@
 import './assets/suggest-module';
-
