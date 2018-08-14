@@ -31,9 +31,9 @@ export default function suggest() {
       service.$request.abort();
     }
 
-    //service.query(val).done(typeaheadUpdate);
+    service.query(val).done(typeaheadUpdate);
 
-    service.query(val).fail(function () {
+    service.query(val).fail(function() {
       typeaheadComponent.update(mockData())
     });
   }
@@ -81,36 +81,36 @@ export default function suggest() {
 function mockData() {
   return [
     {
-      primaryText: 'line 1 formatted',
-      formattedText: 'line 1 <em>Formatted</em>'
+      primaryText: 'line 1 Formatted (Fake data)',
+      formattedText: 'line 1 <em>Formatted</em> (Fake data)'
     },
     {
-      primaryText: 'line 2 formatted',
-      formattedText: 'line 2 <em>Formatted</em>'
+      primaryText: 'line 2 Formatted (Fake data)',
+      formattedText: 'line 2 <em>Formatted</em> (Fake data)'
     },
     {
-      primaryText: 'line 3 formatted',
-      formattedText: 'line 3 <em>Formatted</em>'
+      primaryText: 'line 3 Formatted (Fake data)',
+      formattedText: 'line 3 <em>Formatted</em> (Fake data)'
     },
     {
-      primaryText: 'line 4 formatted',
-      formattedText: 'line 4 <em>Formatted</em>'
+      primaryText: 'line 4 Formatted (Fake data)',
+      formattedText: 'line 4 <em>Formatted</em> (Fake data)'
     },
     {
-      primaryText: 'line 5 formatted',
-      formattedText: 'line 5 <em>Formatted</em>'
+      primaryText: 'line 5 Formatted (Fake data)',
+      formattedText: 'line 5 <em>Formatted</em> (Fake data)'
     },
     {
-      primaryText: 'line 6 formatted',
-      formattedText: 'line 6 <em>Formatted</em>'
+      primaryText: 'line 6 Formatted (Fake data)',
+      formattedText: 'line 6 <em>Formatted</em> (Fake data)'
     },
     {
-      primaryText: 'line 7 formatted',
-      formattedText: 'line 7 <em>Formatted</em>'
+      primaryText: 'line 7 Formatted (Fake data)',
+      formattedText: 'line 7 <em>Formatted</em> (Fake data)'
     },
     {
-      primaryText: 'line 8 formatted',
-      formattedText: 'line 8 <em>Formatted</em>'
+      primaryText: 'line 8 Formatted (Fake data)',
+      formattedText: 'line 8 <em>Formatted</em> (Fake data)'
     }
   ];
 }
