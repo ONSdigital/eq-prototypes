@@ -8,7 +8,7 @@ import {
   deleteAllRelationshipsForMember,
   relationshipSummaryTemplates,
   missingRelationshipInference,
-  inferRelationships,
+  //inferRelationships,
   getAllParentsOf,
   getAllChildrenOf,
   getParentIdFromRelationship,
@@ -320,7 +320,7 @@ window.ONS.storage = {
   relationshipDescriptionMap,
   relationshipSummaryTemplates,
   missingRelationshipInference,
-  inferRelationships,
+  //inferRelationships,
   getRelationshipsWithPersonIds,
   getPeopleIdsMissingRelationshipsWithPerson,
   getRelationshipType,
@@ -382,3 +382,4 @@ $(updatePersonLink);
 $(tools);
 $(updateAllPreviousLinks);
 $(updateBySurveyType);
+

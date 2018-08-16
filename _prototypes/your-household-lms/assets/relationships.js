@@ -22,26 +22,28 @@ export const relationshipTypes = {
   'step-brother-sister': {id: 'step-brother-sister'},
   'partner': {id: 'partner'},
   'unrelated': {id: 'unrelated'},
-  'other-relation': {id: 'other-relation'}
+  'other-relation': {id: 'other-relation'},
+  'parent-in-law': {id: 'parent-in-law'},
+  'son-daughter-in-law': {id: 'son-daughter-in-law'}
 };
 
 export const relationshipDescriptionMap = {
   // covered
   'husband-wife': {
-    sentanceLabel: 'husband or wife',
-    summaryAdjective: 'husband or wife',
+    sentanceLabel: 'husband, wife or same sex civil partner',
+    summaryAdjective: 'husband, wife or same sex civil partner',
     type: relationshipTypes['spouse']
   },
   // covered
   'mother-father': {
-    sentanceLabel: 'mother or father',
-    summaryAdjective: 'mother or father',
+    sentanceLabel: 'parent',
+    summaryAdjective: 'parent',
     type: relationshipTypes['child-parent']
   },
   // covered
   'step-mother-father': {
-    sentanceLabel: 'stepmother or stepfather',
-    summaryAdjective: 'stepmother or stepfather',
+    sentanceLabel: 'step parent',
+    summaryAdjective: 'step parent',
     type: relationshipTypes['step-child-parent']
   },
   // covered
@@ -58,7 +60,7 @@ export const relationshipDescriptionMap = {
   },
   // covered
   'step-child': {
-    sentanceLabel: 'stepchild',
+    sentanceLabel: 'Stepson or stepdaughter',
     summaryAdjective: 'stepchild',
     type: relationshipTypes['step-child-parent']
   },
@@ -88,8 +90,8 @@ export const relationshipDescriptionMap = {
   },
   // covered
   'other-relation': {
-    sentanceLabel: 'other relation',
-    summaryAdjective: 'related',
+    sentanceLabel: 'other relative',
+    summaryAdjective: 'other relative',
     type: relationshipTypes['other-relation']
   },
   // covered
@@ -103,10 +105,20 @@ export const relationshipDescriptionMap = {
     summaryAdjective: 'legally registered civil partner',
     type: relationshipTypes['partner']
   },
+  'parent-in-law': {
+    sentanceLabel: 'parent-in-law',
+    summaryAdjective: 'parent-in-law',
+    type: relationshipTypes['parent-in-law']
+  },
+  'son-daughter-in-law': {
+    sentanceLabel: 'son-in-law or daughter-in-law',
+    summaryAdjective: 'son-in-law or daughter-in-law',
+    type: relationshipTypes['son-daughter-in-law']
+  },
   // covered
   'unrelated': {
-    sentanceLabel: 'unrelated',
-    summaryAdjective: 'unrelated',
+    sentanceLabel: 'other non-relative',
+    summaryAdjective: 'other non-relative',
     type: relationshipTypes['unrelated']
   }
 };
@@ -461,7 +473,7 @@ export const missingRelationshipInference = {
   }
 };
 
-export function inferRelationships(relationship, personIs, personTo) {
+/*export function inferRelationships(relationship, personIs, personTo) {
   var missingRelationships = [];
 
   if (relationship.personIsDescription === 'mother-father') {
@@ -479,7 +491,7 @@ export function inferRelationships(relationship, personIs, personTo) {
   $.each(missingRelationships, function(i, relationship) {
     addRelationship(relationship);
   });
-}
+}*/
 
 export function findNextMissingRelationship() {
   let householdMembers = getAllHouseholdMembers().filter(isHouseholdMember),

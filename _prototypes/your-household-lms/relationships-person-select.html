@@ -259,13 +259,17 @@ cdn: v1.5.0
       /**
        * Avoid race conditions by doing inference separately
        */
-      $.each(newRelationshipsWithOtherPersonIds, function (i, item) {
+      /**
+       * Removed - Can't do inferences when siblings and adopted children
+       * belong to the same relationship type
+       **/
+      /*$.each(newRelationshipsWithOtherPersonIds, function (i, item) {
         storageAPI.inferRelationships(
           item.relationship,
           storageAPI.getHouseholdMemberByPersonId(personId),
           storageAPI.getHouseholdMemberByPersonId(item.otherId)
         );
-      });
+      });*/
 
       window.history.replaceState(null, '', relationshipsUrl);
 
