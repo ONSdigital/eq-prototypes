@@ -29,10 +29,6 @@ export default function suggest() {
     }
 
     service.query(val).done(typeaheadUpdate);
-
-    service.query(val).fail(function() {
-      typeaheadComponent.update(mockData())
-    });
   }
 
   function keyDown_handler(e) {
