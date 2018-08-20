@@ -1,4 +1,4 @@
-function SuggestService(rootUrl) {
+function SuggestService(rootUrl, type) {
   let _this = this;
 
   this.requestInFlight = false;
@@ -11,7 +11,6 @@ function SuggestService(rootUrl) {
       dataType: 'json',
       success: function(data) {
         _this.requestInFlight = false;
-        return data.matches;
       },
       fail: function() {
         _this.requestInFlight = false;
@@ -29,3 +28,5 @@ SuggestService.create = function(opts) {
 
   return new SuggestService(opts.url);
 };
+
+export default SuggestService;

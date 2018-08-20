@@ -1,5 +1,5 @@
 ---
-title: Suggest - occupation service lookup
+title: Suggest - Address service lookup
 project: Suggest
 globalcss: false
 layout: eq-default-extras
@@ -87,12 +87,12 @@ cdn: v1.5.0
                                data-qa="block-title">Joanna Bloggs</p>
                             <div class="question" id="other-address-question">
                                 <h1 class="question__title saturn">
-                                    What is your full job title
+                                    What is your address?
                                 </h1>
                                 <fieldset
                                         class="question__fieldset js-question-fieldset">
 
-                                    <legend class="u-vh">What is your full job title
+                                    <legend class="u-vh">What is your address?
                                     </legend>
                                     <div class="question__answers">
                                         <div class="question__answer">
@@ -104,11 +104,10 @@ cdn: v1.5.0
                                                         <label for="autocomplete"
                                                                class="label venus"
                                                                id="typeahead1-label">
-                                                            Full job title
+                                                            Full address details
                                                         </label>
-                                                        <div>
-                                                            <span class="label__description pluto u-mb-xs">Type below to search for a job title or occupation</span>
-                                                        </div>
+                                                        <span
+                                                                class="label__description pluto u-mb-xs">Type below to search for your address</span>
                                                         <div class="pac-container-wrapper js-focusable-box">
                                                             <input id="autocomplete"
                                                                    data-autocomplete="off"
@@ -118,12 +117,12 @@ cdn: v1.5.0
                                                                    data-aria-controls="typeahead1-list"
                                                                    data-aria-haspopup="listbox"
 
-                                                                   data-suggest-url="https://staging-lookup-api.dev.eq.ons.digital/occupation/"
-                                                                   data-suggest-type="occupations"
+                                                                   data-suggest-url="https://preprod-address-lookup-api.eq.ons.digital/address_api/"
+                                                                   data-suggest-type="addresses"
                                                                    data-list-id="typeahead1-list-id"
                                                                    data-list-labelled-by-ref="typeahead1-label"
                                                                    class="input input--text input--typeahead js-suggest-input js-focusable"
-                                                                   placeholder="Type to search for a job title or occupation"
+                                                                   placeholder="Type to search for your address"
                                                                    type="text"/>
                                                             <div id="typeahead1-list"
                                                                 class="pac-container pac-logo" aria-live="polite"></div>

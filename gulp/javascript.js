@@ -13,6 +13,8 @@ const commonjs = require('rollup-plugin-commonjs');
 
 function bundleScripts(watch, opts = {}) {
 
+  console.log(watch, opts);
+
   const bundler = function() {
     const b = browserify({
         entries: opts.path,

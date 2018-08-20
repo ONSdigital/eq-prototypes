@@ -2,10 +2,16 @@ function TypeaheadComponent($scope, $inputEl) {
   let _this = this,
     emitter = $({}),
     $container = $scope.find('.pac-container'),
+    $scrollableContainer,
+    $revealContainer,
+    $voiceoverAlert = $scope.find('.js-voiceover-polite-alert'),
     $hintElSpacer,
     $hintElRemainingText,
 
     showWhenEmpty = false,
+    listId,
+    listLabelledBy,
+    hintDataMatchIndex = -1,
 
     /**
      * If user has not typed anything new
@@ -17,6 +23,8 @@ function TypeaheadComponent($scope, $inputEl) {
       38: arrowUpKey_handler,
       40: arrowDownKey_handler
     },
+
+    refineNoticeItemThreshold = 1,
 
     currentFocusedItemIndex = 0;
 
@@ -40,20 +48,40 @@ function TypeaheadComponent($scope, $inputEl) {
 
     $hintElSpacer = $nodeEl.find('.' + _this.hintElClass);
     $hintElRemainingText = $nodeEl.find('.' + _this.hintElRemainingTextClass);
+
+    ariaSetup();
+  }
+
+  function ariaSetup() {
+    [
+      'autocomplete',
+      'aria-autocomplete',
+      'aria-describedby',
+      'aria-expanded',
+      'aria-controls',
+      'aria-haspopup'
+    ].forEach(function(prop) {
+      const val = _this.$inputElClone.attr('data-' + prop);
+      val && _this.$inputElClone.attr(prop, val);
+    });
   }
 
   function render() {
     let data = _this.data;
 
+    $scrollableContainer = $('<div class="pac-scroll"></div>');
+    $revealContainer = $('<div class="pac-reveal"></div>');
     $container.html('');
 
+    $revealContainer.append('<div class="pac-shadow"></div>');
+
     $(data).each(function(key, item) {
-      let $item = $('<button class="pac-item">' +
-        // '<span class="pac-item-query">' +
-        '<span class="pac-matched">' + item.primaryText + '</span>' +
-        // '</span>' +
+      let $item = $('<button class="pac-item" role="option">' +
+        '<span class="pac-matched"></span>' +
         (item.secondaryText ? '<span>' + ' / ' + item.secondaryText + '</span>' : '') +
       '</button>');
+
+      $item.find('.pac-matched').html(item.formattedText || item.primaryText);
 
       $item.on('click', function(e) {
         e.preventDefault();
@@ -61,43 +89,94 @@ function TypeaheadComponent($scope, $inputEl) {
 
       $item.on('mousedown', itemMouseDown_handler.bind(_this, item));
 
-      $container.append($item);
+      $scrollableContainer.append($item);
     });
+
+    /**
+     * Aria references
+     */
+    listId && $scrollableContainer.attr('id', listId);
+    listLabelledBy && $scrollableContainer.attr('aria-labelledby', listLabelledBy);
+
+    $voiceoverAlert.attr('aria-live', 'polite');
+    $voiceoverAlert.html(data.length + ' suggestions found');
+
+    $revealContainer.append($scrollableContainer);
+
+    if (data.length > refineNoticeItemThreshold) {
+      $scrollableContainer.append('<div class="pac-notice">' +
+        '<strong class="pluto">Refine your search to see more results</strong>' +
+        '</div>');
+    }
+
+    $container.append($revealContainer);
 
     !data.length ? hide() : show();
   }
 
   function hide() {
     setTimeout(function() {
-      if (!$container.hasClass('hide')) {
-        $container.addClass('hide');
+      if ($revealContainer && !$revealContainer.hasClass('hide')) {
+        $revealContainer.addClass('hide');
       }
+
+      _this.$inputElClone.attr('aria-expanded', false);
+      $hintElSpacer.hide();
+      $hintElRemainingText.hide();
+      _this.optionsAreHidden = true;
     }, 0);
   }
 
   function show() {
     if ((showWhenEmpty && (_this.$inputElClone.val() === '') && _this.$inputElClone.is(':active') && _this.data.length) || !isClean) {
-      $container.removeClass('hide');
+      if ($revealContainer) {
+        $revealContainer.removeClass('hide');
+      }
+
+      _this.$inputElClone.attr('aria-expanded', true);
+      $hintElSpacer.show();
+      $hintElRemainingText.show();
+      _this.optionsAreHidden = false;
     }
   }
 
   function switchFocusedItem(index) {
+    /**
+     * Don't navigate list if options are hidden
+     */
+    if (_this.optionsAreHidden) {
+      return;
+    }
+
     let current = currentFocusedItemIndex,
-      $currentEl = $container.find('.pac-item:nth-child(' + current + ')'),
+      $currentEl = $scrollableContainer.find('.pac-item:nth-child(' + current + ')'),
       next = index,
-      $nextEl = $container.find('.pac-item:nth-child(' + next + ')');
+      $nextEl = $scrollableContainer.find('.pac-item:nth-child(' + next + ')');
 
     $currentEl.removeClass('focused');
     $nextEl.addClass('focused');
 
+    $voiceoverAlert.html(_this.data[next - 1].primaryText + ' focused');
+    $voiceoverAlert.attr('aria-live', 'polite');
+
     currentFocusedItemIndex = next;
 
-    $container.scrollTop($container.scrollTop() + $nextEl.position().top);
+    $scrollableContainer.scrollTop($scrollableContainer.scrollTop() + $nextEl.position().top);
   }
 
   function inputChanged() {
     isClean = true;
     hide();
+  }
+
+  function clearTypeaheadHint() {
+    $hintElSpacer.html('');
+    $hintElRemainingText.html('');
+  }
+
+  function voiceOverSelected(dataItem) {
+    $voiceoverAlert.html(dataItem.primaryText + ' option chosen');
+    $voiceoverAlert.attr('aria-live', 'assertive');
   }
 
   /**
@@ -111,6 +190,7 @@ function TypeaheadComponent($scope, $inputEl) {
     }
 
     inputChanged();
+    voiceOverSelected(data);
     emitter.trigger('itemSelected', [data]);
   }
 
@@ -144,6 +224,7 @@ function TypeaheadComponent($scope, $inputEl) {
     e.preventDefault();
 
     inputChanged();
+    voiceOverSelected(item);
     emitter.trigger('itemSelected', [item]);
   }
 
@@ -156,10 +237,12 @@ function TypeaheadComponent($scope, $inputEl) {
       return;
     }
 
-    const match = _this.data.find((item) => {
+    const match = _this.data.find(function(item) {
       let itemText = item.primaryText;
-      return itemText && itemText.substr(0, inputTextLen) === inputText;
+      return itemText && itemText.substr(0, inputTextLen).toLowerCase() === inputText.toLowerCase();
     });
+
+    hintDataMatchIndex = _this.data.indexOf(match);
 
     match ? showTypeahead(inputText, match.primaryText.substr(inputTextLen)) : clearTypeaheadHint();
   }
@@ -169,16 +252,11 @@ function TypeaheadComponent($scope, $inputEl) {
     $hintElRemainingText.html(hint);
   }
 
-  function clearTypeaheadHint() {
-    $hintElSpacer.html('');
-    $hintElRemainingText.html('');
-  }
-
   emitter.on('itemSelected', clearTypeaheadHint);
 
   function resetSelection() {
     currentFocusedItemIndex = 0;
-    $container.scrollTop(0);
+    $scrollableContainer.scrollTop(0);
   }
 
   /**
@@ -207,6 +285,11 @@ function TypeaheadComponent($scope, $inputEl) {
     showWhenEmpty = !!val;
   };
 
+  this.setListReferences = function(id, labelId) {
+    listId = id || undefined;
+    listLabelledBy = labelId || undefined;
+  };
+
   this.update = function(dataArr) {
     if (!dataArr || dataArr.length === undefined) {
       return;
@@ -216,6 +299,10 @@ function TypeaheadComponent($scope, $inputEl) {
     render();
     resetSelection();
     typeaheadHint();
+
+    if (this.data.length && hintDataMatchIndex > -1) {
+      switchFocusedItem(hintDataMatchIndex + 1);
+    }
   };
 
   /**
@@ -236,22 +323,27 @@ TypeaheadComponent.isKeyPressClean = function(e) {
 };
 
 /**
- *
  * opts example
  * {
  *   scopeElement: <HTML element>,
  *   inputElement: <HTML element>,
  *   showWhenEmpty: <Boolean>
+ *   listId: <String>
  * }
  */
 TypeaheadComponent.create = function(opts) {
-  let $scope = $(opts.scopeElement),
+  const $scope = $(opts.scopeElement),
     $inputEl = $(opts.inputElement),
     showWhenEmpty = opts.showWhenEmpty,
+    listId = opts.listId,
+    listLabelledBy = opts.listLabelledBy,
 
     component = new TypeaheadComponent($scope, $inputEl);
 
   component.showListWhenEmpty(showWhenEmpty);
+  component.setListReferences(listId, listLabelledBy);
 
   return component;
 };
+
+export default TypeaheadComponent;

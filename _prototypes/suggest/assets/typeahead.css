@@ -1,4 +1,5 @@
 .pac-container-wrapper {
+    display : inline-block;
     position: relative;
 }
 
@@ -8,16 +9,10 @@
 }
 
 .pac-container {
+    min-height : 2.5rem;
     position: absolute;
-    width: 19.6rem;
-    max-height: 265px;
-    margin-top: -1px;
-    margin-left: -1px;
-    overflow-x: hidden;
-    overflow-y: auto;
-    background-color: #fff;
-    border: 2px solid #4263c2;
-    border-top: 0;
+    top : 0;
+    width: 19.5rem;
     color: #34384b;
     padding: 0;
 }
@@ -34,7 +29,7 @@
     cursor: pointer;
     font-family: "Lato", "Helvetica Neue", Arial, sans-serif;
     border: none;
-    border-top: 1px solid #4263c2;
+    border-top: 1px solid #ccc;
     background: none;
     border-radius: 0;
 }
@@ -105,6 +100,66 @@
     color: #808080;
 }
 
-.input--transparent {
+.input--typeahead {
     background: transparent;
+}
+
+.pac-container-wrapper.has-focus > .pac-container,
+.pac-container-wrapper.has-focus.is-checked > .pac-container {
+    border-color : #033e58;
+    box-shadow : 0 0 0 3px #fe791f;
+    border-radius : .2rem;
+}
+
+.input--typeahead:hover,
+.input--typeahead:focus,
+.input--typeahead:active {
+    box-shadow : none;
+}
+
+.field__input-typeahead + .pac-container > .pac-reveal > .pac-scroll  {
+    margin-top : 2.45rem;
+}
+
+.pac-scroll {
+    position : relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 265px;
+}
+
+.pac-notice {
+    padding: .4rem .6rem;
+    background-color : #eee;
+}
+
+.pac-shadow {
+    position :absolute;
+    bottom : 0;
+    left : 0;
+    right : 0;
+    height : 8px;
+    background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.2) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.2) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#33000000',GradientType=0 ); /* IE6-9 */
+}
+
+.pac-reveal {
+    position : relative;
+    background-color : #fff;
+}
+
+
+
+html[data-useragent*='MSIE 10.0'] .field__input-hint {
+    border-top : none;
+}
+
+.header {
+    margin-bottom : 0;
+}
+
+.page__content {
+    overflow-x : visible;
 }
