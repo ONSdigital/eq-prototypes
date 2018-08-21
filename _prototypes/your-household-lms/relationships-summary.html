@@ -216,7 +216,9 @@ cdn: v1.5.0
   }
 
   function partnershipSummary(relationship) {
-    var relationshipInfo = retrieveRelationshipInfo(relationship);
+    var relationshipInfo = retrieveRelationshipInfo(relationship),
+      altDescriptionObj =
+        storageAPI.femaleAltGenderDescriptions[relationship.personIsDescription];
 
     return {
       relationshipsExplained: [relationship],
@@ -224,7 +226,10 @@ cdn: v1.5.0
         storageAPI.relationshipSummaryTemplates['partnership'](
           relationshipInfo['@personIs'].fullName,
           relationshipInfo['@personTo'].fullName,
-          relationshipInfo['relationshipDescription'].summaryAdjective
+          (relationshipInfo['@personIs'].gender === 'female' && altDescriptionObj
+              ? altDescriptionObj
+              : relationshipInfo['relationshipDescription']
+          ).summaryAdjective
         )
       ]
     };
@@ -697,7 +702,9 @@ cdn: v1.5.0
   };
 
   function familySingleSummary(relationship) {
-    var relationshipInfo = retrieveRelationshipInfo(relationship);
+    var relationshipInfo = retrieveRelationshipInfo(relationship),
+      altDescriptionObj =
+        storageAPI.femaleAltGenderDescriptions[relationship.personIsDescription];
 
     return {
       relationshipsExplained: [relationship],
@@ -707,7 +714,10 @@ cdn: v1.5.0
           [
             relationshipInfo['@personTo'].fullName
           ],
-          relationshipInfo['relationshipDescription'].summaryAdjective
+          (relationshipInfo['@personIs'].gender === 'female' && altDescriptionObj
+            ? altDescriptionObj
+            : relationshipInfo['relationshipDescription']
+          ).summaryAdjective
         )
       ]
     }

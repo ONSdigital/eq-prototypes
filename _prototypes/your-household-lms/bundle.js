@@ -1,6 +1,7 @@
 import {
   RELATIONSHIPS_STORAGE_KEY,
   relationshipDescriptionMap,
+  femaleAltGenderDescriptions,
   addRelationship,
   editRelationship,
   getAllRelationships,
@@ -317,6 +318,7 @@ window.ONS.storage = {
   isRelationshipType,
   getRelationshipOf,
 
+  femaleAltGenderDescriptions,
   relationshipDescriptionMap,
   relationshipSummaryTemplates,
   missingRelationshipInference,

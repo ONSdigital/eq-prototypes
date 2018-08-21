@@ -257,34 +257,6 @@ cdn: v1.5.0
     surveyType = urlParams.get('survey'),
     nextPageSurveyRouting = surveyType ? '&survey=' + surveyType : '';
 
-  var maleAltGenderDescriptions = {
-    'husband-wife': {
-      description: 'Wife, husband or same sex civil partner',
-      sentanceLabel: 'wife, husband or same sex civil partner'
-    },
-    'son-daughter': {
-      description: 'Daughter or son' +
-        '<span class="pluto u-db">Including adopted daughter or adopted son</span>',
-      sentanceLabel: 'daughter or son'
-    },
-    'step-child': {
-      description: 'Stepdaughter or stepson',
-      sentanceLabel: 'stepdaughter or stepson'
-    },
-    'son-daughter-in-law': {
-      description: 'Daughter-in-law or son-in-law',
-      sentanceLabel: 'daughter-in-law or son-in-law'
-    },
-    'brother-sister': {
-      description: 'Sister or brother',
-      sentanceLabel: 'sister or brother'
-    },
-    'step-brother-sister': {
-      description: 'Stepsister or stepbrother',
-      sentanceLabel: 'stepsister or stepbrother'
-    }
-  };
-
   function updateQuestion(missingRelationship, descriptionChosen) {
     personIs = missingRelationship.personIs;
     personTo = missingRelationship.personTo;
@@ -305,12 +277,12 @@ cdn: v1.5.0
      * Change answer descriptions based on gender of person
      */
     if(isFemale) {
-      $('#husband-wife-label').html(maleAltGenderDescriptions['husband-wife'].description);
-      $('#son-daughter-label').html(maleAltGenderDescriptions['son-daughter'].description);
-      $('#step-child-label').html(maleAltGenderDescriptions['step-child'].description);
-      $('#son-daughter-in-law-label').html(maleAltGenderDescriptions['son-daughter-in-law'].description);
-      $('#brother-sister-label').html(maleAltGenderDescriptions['brother-sister'].description);
-      $('#step-brother-sister-label').html(maleAltGenderDescriptions['step-brother-sister'].description);
+      $('#husband-wife-label').html(storageAPI.femaleAltGenderDescriptions['husband-wife'].description);
+      $('#son-daughter-label').html(storageAPI.femaleAltGenderDescriptions['son-daughter'].description);
+      $('#step-child-label').html(storageAPI.femaleAltGenderDescriptions['step-child'].description);
+      $('#son-daughter-in-law-label').html(storageAPI.femaleAltGenderDescriptions['son-daughter-in-law'].description);
+      $('#brother-sister-label').html(storageAPI.femaleAltGenderDescriptions['brother-sister'].description);
+      $('#step-brother-sister-label').html(storageAPI.femaleAltGenderDescriptions['step-brother-sister'].description);
     }
   }
 
@@ -497,7 +469,7 @@ cdn: v1.5.0
 
     var relationshipDescription = storageAPI.relationshipDescriptionMap[$(this).val()],
 
-      altDescriptionObj = maleAltGenderDescriptions[$(this).val()],
+      altDescriptionObj = storageAPI.femaleAltGenderDescriptions[$(this).val()],
 
       isNotFamily = ['unrelated', 'other-relation'].indexOf(
         relationshipDescription.type.id

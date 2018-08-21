@@ -123,6 +123,40 @@ export const relationshipDescriptionMap = {
   }
 };
 
+export const femaleAltGenderDescriptions = {
+  'husband-wife': {
+    description: 'Wife, husband or same sex civil partner',
+    sentanceLabel: 'wife, husband or same sex civil partner',
+    summaryAdjective: 'wife, husband or same sex civil partner'
+  },
+  'son-daughter': {
+    description: 'Daughter or son' +
+      '<span class="pluto u-db">Including adopted daughter or adopted son</span>',
+    sentanceLabel: 'daughter or son',
+    summaryAdjective: 'Daughter or son'
+  },
+  'step-child': {
+    description: 'Stepdaughter or stepson',
+    sentanceLabel: 'stepdaughter or stepson',
+    summaryAdjective: 'stepdaughter or stepson'
+  },
+  'son-daughter-in-law': {
+    description: 'Daughter-in-law or son-in-law',
+    sentanceLabel: 'daughter-in-law or son-in-law',
+    summaryAdjective: 'daughter-in-law or son-in-law'
+  },
+  'brother-sister': {
+    description: 'Sister or brother',
+    sentanceLabel: 'sister or brother',
+    summaryAdjective: 'sister or brother'
+  },
+  'step-brother-sister': {
+    description: 'Stepsister or stepbrother',
+    sentanceLabel: 'stepsister or stepbrother',
+    summaryAdjective: 'stepsister or stepbrother'
+  }
+};
+
 function nameElement(name) {
   return '<strong>' + name + '</strong>';
 }
