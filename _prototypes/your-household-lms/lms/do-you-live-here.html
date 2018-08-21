@@ -122,13 +122,18 @@ cdn: v1.5.0
   });
 
   function updateFullAddress () {
-    $('.js-full-address').html(
-      sessionStorage.getItem('address-line-1') + '<br />' +
-      sessionStorage.getItem('address-line-2') + '<br />' +
-      sessionStorage.getItem('town-city') + '<br />' +
-      sessionStorage.getItem('county') + '<br />' +
-      sessionStorage.getItem('postcode')
-    );
+    $('.js-full-address').html([
+      'address-line-1',
+      'address-line-2',
+      'town-city',
+      'county',
+      'postcode'
+    ]
+      .map(function (key) {
+        var line = sessionStorage.getItem(key);
+        return line ? line + '<br />' : ''
+      })
+      .join(''));
   }
 
   $(updateFullAddress);
