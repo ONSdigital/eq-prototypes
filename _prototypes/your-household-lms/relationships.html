@@ -478,6 +478,7 @@ cdn: v1.5.0
           window.location.href = '../relationships-person-select/?person=' +
             subjectPersonId + '&relationship-description=' +
             subjectRelationshipDescription +
+            '&gender-preference=' + personIs['@person'].gender +
             nextPageSurveyRouting;
         }
         else {
@@ -505,7 +506,6 @@ cdn: v1.5.0
       html = isNotFamily
         ? personIs['@person'].fullName +
           ' is <em class="highlight">' +
-            sentanceLabel
             (altDescriptionObj ? altDescriptionObj.sentanceLabel : undefined) ||
             relationshipDescription.sentanceLabel +
           '</em> to ' +

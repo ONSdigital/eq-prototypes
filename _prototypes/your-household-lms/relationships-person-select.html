@@ -106,6 +106,8 @@ cdn: v1.5.0
 
       surveyType = params.get('survey'),
 
+      genderPreference = params.get('gender-preference'),
+
       relationshipDescription = params.get('relationship-description'),
 
       person,
@@ -200,7 +202,8 @@ cdn: v1.5.0
       'mother-father' === relationshipDescription && (function(){
         $('.question__title').removeClass('u-mb-l');
         $('#question-info').show();
-        $('.js-other-description').html('sons or daughters of');
+        $('.js-other-description').html(genderPreference === 'female' ?
+          'daughters or sons of' : 'sons or daughters of');
       }());
 
       'unrelated' === relationshipDescription && (function(){
