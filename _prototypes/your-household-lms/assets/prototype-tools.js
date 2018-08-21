@@ -101,6 +101,7 @@ export function tools () {
     e.preventDefault();
     clearStorage();
     createFamilyHousehold();
+    window.location.href = '../summary?survey=lms';
   });
 
   $createFamilyRelationships.on('click', function(e) {
@@ -108,6 +109,7 @@ export function tools () {
     clearStorage();
     createFamilyHousehold();
     createFamilyRelationships();
+    window.location.href = '../relationships-summary?survey=lms';
   });
 
   function prerequisites() {
@@ -125,13 +127,11 @@ export function tools () {
     sessionStorage.setItem('user-details', JSON.stringify(userData));
     sessionStorage.setItem(window.ONS.storage.KEYS.HOUSEHOLD_MEMBERS_STORAGE_KEY, JSON.stringify(familyHouseholdMembersData));
     sessionStorage.setItem('household-members-increment', JSON.stringify(4));
-    window.location.href = '../summary';
   }
 
   function createFamilyRelationships() {
     sessionStorage.setItem(window.ONS.storage.KEYS.RELATIONSHIPS_STORAGE_KEY, JSON.stringify(familyHouseholdRelationshipsData));
     sessionStorage.setItem('relationships-increment', JSON.stringify(6));
-    window.location.href = '../relationships-summary';
   }
 
   function clearStorage() {
