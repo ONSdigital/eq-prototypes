@@ -16,7 +16,8 @@ export function tools () {
         'firstName': 'Dave',
         'middleName': '',
         'lastName': 'Jones',
-        'id': 'person_me'
+        'id': 'person_me',
+        'gender': 'male'
       }
     }, {
       'type':
@@ -26,7 +27,8 @@ export function tools () {
         'firstName': 'Sally',
         'middleName': '',
         'lastName': 'Jones',
-        'id': 'person1'
+        'id': 'person1',
+        'gender': 'female'
       }
     }, {
       'type': 'household-member',
@@ -35,7 +37,8 @@ export function tools () {
         'firstName': 'Rebecca',
         'middleName': '',
         'lastName': 'Jones',
-        'id': 'person2'
+        'id': 'person2',
+        'gender': 'female'
       }
     }, {
       'type': 'household-member',
@@ -44,7 +47,8 @@ export function tools () {
         'firstName': 'Amy',
         'middleName': '',
         'lastName': 'Jones',
-        'id': 'person3'
+        'id': 'person3',
+        'gender': 'female'
       }
     }],
 

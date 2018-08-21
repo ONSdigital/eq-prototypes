@@ -384,4 +384,3 @@ $(updatePersonLink);
 $(tools);
 $(updateAllPreviousLinks);
 $(updateBySurveyType);
-
