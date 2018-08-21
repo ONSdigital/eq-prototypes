@@ -48,7 +48,8 @@ cdn: v1.5.0
                                                                name="relationship"
                                                                id="husband-wife"
                                                                value="husband-wife"/>
-                                                        <label class="label label--inline u-width-fill venus"
+                                                        <label id="husband-wife-label"
+                                                               class="label label--inline u-width-fill venus"
                                                                for="husband-wife">Husband, wife or same sex civil partner</label>
                                                     </div>
                                                     <div class="field__item js-focusable-box">
@@ -102,7 +103,9 @@ cdn: v1.5.0
                                                                name="relationship"
                                                                id="son-daughter"
                                                                value="son-daughter"/>
-                                                        <label class="label label--inline venus"
+                                                        <label
+                                                                id="son-daughter-label"
+                                                               class="label label--inline venus"
                                                                for="son-daughter">
                                                             Son or daughter
                                                             <span class="pluto u-db">Including adopted son or adopted daughter</span>
@@ -114,7 +117,8 @@ cdn: v1.5.0
                                                                name="relationship"
                                                                id="step-child"
                                                                value="step-child"/>
-                                                        <label class="label label--inline venus"
+                                                        <label id="step-child-label"
+                                                               class="label label--inline venus"
                                                                for="step-child">
                                                             Stepson or
                                                             stepdaughter
@@ -126,7 +130,8 @@ cdn: v1.5.0
                                                                name="relationship"
                                                                id="son-daughter-in-law"
                                                                value="son-daughter-in-law"/>
-                                                        <label class="label label--inline venus"
+                                                        <label id="son-daughter-in-law-label"
+                                                               class="label label--inline venus"
                                                                for="son-daughter-in-law">
                                                             Son-in-law or
                                                             daughter-in-law
@@ -138,7 +143,8 @@ cdn: v1.5.0
                                                                name="relationship"
                                                                id="brother-sister"
                                                                value="brother-sister"/>
-                                                        <label class="label label--inline venus"
+                                                        <label id="brother-sister-label"
+                                                               class="label label--inline venus"
                                                                for="brother-sister">
                                                             Brother or sister
                                                         </label>
@@ -149,7 +155,8 @@ cdn: v1.5.0
                                                                name="relationship"
                                                                id="step-brother-sister"
                                                                value="step-brother-sister"/>
-                                                        <label class="label label--inline venus"
+                                                        <label id="step-brother-sister-label"
+                                                               class="label label--inline venus"
                                                                for="step-brother-sister">
                                                             Stepbrother or
                                                             stepsister
@@ -250,6 +257,34 @@ cdn: v1.5.0
     surveyType = urlParams.get('survey'),
     nextPageSurveyRouting = surveyType ? '&survey=' + surveyType : '';
 
+  var maleAltGenderDescriptions = {
+    'husband-wife': {
+      description: 'Wife, husband or same sex civil partner',
+      sentanceLabel: 'wife, husband or same sex civil partner'
+    },
+    'son-daughter': {
+      description: 'Daughter or son' +
+        '<span class="pluto u-db">Including adopted daughter or adopted son</span>',
+      sentanceLabel: 'daughter or son'
+    },
+    'step-child': {
+      description: 'Stepdaughter or stepson',
+      sentanceLabel: 'stepdaughter or stepson'
+    },
+    'son-daughter-in-law': {
+      description: 'Daughter-in-law or son-in-law',
+      sentanceLabel: 'daughter-in-law or son-in-law'
+    },
+    'brother-sister': {
+      description: 'Sister or brother',
+      sentanceLabel: 'sister or brother'
+    },
+    'step-brother-sister': {
+      description: 'Stepsister or stepbrother',
+      sentanceLabel: 'stepsister or stepbrother'
+    }
+  };
+
   function updateQuestion(missingRelationship, descriptionChosen) {
     personIs = missingRelationship.personIs;
     personTo = missingRelationship.personTo;
@@ -261,6 +296,22 @@ cdn: v1.5.0
       " of " +
       personTo['@person'].fullName
     );
+  }
+
+  function updateAnswerDescription(personIs) {
+    var isFemale = personIs['@person'].gender === 'female';
+
+    /**
+     * Change answer descriptions based on gender of person
+     */
+    if(isFemale) {
+      $('#husband-wife-label').html(maleAltGenderDescriptions['husband-wife'].description);
+      $('#son-daughter-label').html(maleAltGenderDescriptions['son-daughter'].description);
+      $('#step-child-label').html(maleAltGenderDescriptions['step-child'].description);
+      $('#son-daughter-in-law-label').html(maleAltGenderDescriptions['son-daughter-in-law'].description);
+      $('#brother-sister-label').html(maleAltGenderDescriptions['brother-sister'].description);
+      $('#step-brother-sister-label').html(maleAltGenderDescriptions['step-brother-sister'].description);
+    }
   }
 
   function getChosenItem() {
@@ -281,11 +332,17 @@ cdn: v1.5.0
         return relationship.id + '' === editRelationshipId;
       })[0];
 
+    var personIs =
+        storageAPI.getHouseholdMemberByPersonId(editRelationshipFound.personIsId),
+      personTo =
+        storageAPI.getHouseholdMemberByPersonId(editRelationshipFound.personToId);
+
     if (editRelationshipFound) {
       updateQuestion({
-        personIs: storageAPI.getHouseholdMemberByPersonId(editRelationshipFound.personIsId),
-        personTo: storageAPI.getHouseholdMemberByPersonId(editRelationshipFound.personToId)
+        personIs: personIs,
+        personTo: personTo
       });
+      updateAnswerDescription(personIs);
       $('.qa-btn-submit')
         .on('click', editSubmit_handler.bind(null, editRelationshipId));
     }
@@ -329,6 +386,7 @@ cdn: v1.5.0
         personIs: missingRelationship.personTo,
         personTo: missingRelationship.personIs
       });
+      updateAnswerDescription(missingRelationship.personTo);
       $('.qa-btn-submit').on('click', missingSubmit_handler);
     }
     else {
@@ -438,6 +496,8 @@ cdn: v1.5.0
 
     var relationshipDescription = storageAPI.relationshipDescriptionMap[$(this).val()],
 
+      altDescriptionObj = maleAltGenderDescriptions[$(this).val()],
+
       isNotFamily = ['unrelated', 'other-relation'].indexOf(
         relationshipDescription.type.id
       ) !== -1,
@@ -445,6 +505,8 @@ cdn: v1.5.0
       html = isNotFamily
         ? personIs['@person'].fullName +
           ' is <em class="highlight">' +
+            sentanceLabel
+            (altDescriptionObj ? altDescriptionObj.sentanceLabel : undefined) ||
             relationshipDescription.sentanceLabel +
           '</em> to ' +
           personTo['@person'].fullName
@@ -452,7 +514,8 @@ cdn: v1.5.0
         : updateQuestion({
           personIs: personIs,
           personTo: personTo
-        }, relationshipDescription.sentanceLabel);
+        }, (altDescriptionObj ? altDescriptionObj.sentanceLabel : undefined) ||
+          relationshipDescription.sentanceLabel);
 
     $('.js-relationship-person-is-relationship-description').html(html);
   });
