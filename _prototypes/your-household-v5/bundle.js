@@ -142,7 +142,10 @@ function updateHouseholdVisitorsNavigationItems() {
 
 function createListItemPerson(member) {
   return $('<li class="list__item">').addClass('mars').html(
-    '<span class="list__item-name">' + member['@person'].fullName + '</span>'
+    '<span class="list__item-name">' +
+      member['@person'].fullName +
+      (member['@person'].id === USER_HOUSEHOLD_MEMBER_ID ? ' (You)' : '') +
+    '</span>'
   );
 }
 
