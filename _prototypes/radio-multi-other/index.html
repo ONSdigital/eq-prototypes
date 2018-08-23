@@ -1,6 +1,6 @@
 ---
 title: Multiple radio inputs with sub-inputs
-project: radio-other-multi
+project: Multiple specify other radio buttons
 globalcss: false
 cdn: v1.5.2
 ---
@@ -15,7 +15,6 @@ cdn: v1.5.2
         <main role="main" id="main" class="page__main">
 <div class="group" id="household-member">
   <div class="block" id="black-ethnic-group">
-    <p class="block__title neptune" data-qa="block-title">First-name Last-name</p>
     <div class="question" id="black-ethnic-group-question">
       <h1 class="question__title saturn" data-qa="question-title">Which one best describes your Black, African, Caribbean, Black British ethnic group or background?</h1>
       <fieldset class="question__fieldset js-question-fieldset">
@@ -31,7 +30,7 @@ cdn: v1.5.2
                     <input class="input input--radio js-focusable" name="radio-answer" value="african-other" id="african-other" type="radio" data-qa="has-other-option">
                     <label class="label label--inline venus" for="african-other" id="label-african-other">African<br/></label>
                     <div class="field__other">
-                      <label class="label venus mercury" for="other-answer1" id="label-checkbox-other-input">Please write in</label>
+                      <label class="label venus mercury" for="other-answer1" id="label-checkbox-other-input">Please specify your background</label>
                       <input class="input input__text js-focusable" id="other-answer1" name="other-answer1" type="text" data-qa="other-option">
                     </div>
                   </div>
@@ -41,26 +40,16 @@ cdn: v1.5.2
                   </div>
                   <div class="field__item js-focusable-box">
                     <input class="input input--radio js-focusable" name="radio-answer" value="ethnic-other" id="any-other" type="radio" data-qa="has-other-option">
-                    <label class="label label--inline venus" for="any-other" id="label-any-other">Any other Black, African, Caribbean background<br/><span class="label__description pluto">Including Arab or any other ethnic group</span></label>
+                    <label class="label label--inline venus" for="any-other" id="label-any-other">Any other Black, African, Caribbean background</label>
                     <div class="field__other">
-                      <label class="label venus mercury" for="other-answer2" id="label-checkbox-other-input">Please write in</label>
+                      <label class="label venus mercury" for="other-answer2" id="label-checkbox-other-input">Please specify your background</label>
                       <input class="input input__text js-focusable" id="other-answer2" name="other-answer2" type="text" data-qa="other-option">
                     </div>
                   </div>
                 </fieldset>
               </div>
             </div>
-            <!-- Show hide guidance -->
-                        <div class="guidance js-details" data-hide-label="Hide further guidance" data-show-label="Show further guidance">
-                          <a class="guidance__link js-details-trigger js-details-label mars" href="#guidance-black-ethnic-group-answer" aria-expanded="true" data-guidance-trigger="true" id="guidance-black-ethnic-group-answer-trigger" aria-controls="guidance-black-ethnic-group-answer-body" data-ga-label="black-ethnic-group-answer" data-ga-category="Help" data-ga-action="Guidance click" data-ga="click">Show further guidance</a>
-                          <div class="guidance__main js-details-body" id="guidance-black-ethnic-group-answer-body" aria-hidden="false">
-                            <div class="guidance__content mars">
-                              <p>The options are based on the answer to the previous question. Please select the answer you think is most appropriate.</p>
-                              <p>If you don’t feel the options apply to you, select ‘Any other ...’ and write in your ethnic group.</p>
-                            </div>
-                          </div>
-                        </div>
-            <!-- / Show hide guidance -->
+
           </div>
         </div>
       </div>
