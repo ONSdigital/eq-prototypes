@@ -1,0 +1,55 @@
+---
+title: Multiple radio inputs with sub-inputs
+project: radio-other-multi
+globalcss: false
+cdn: v1.5.2
+---
+{% include new-header-external.html %}
+<div class="page__container container">
+
+    <div class="grid grid--reverse">
+      <div class="grid__col col-4@m">
+
+      </div>
+      <div class="grid__col col-7@m pull-1@m">
+
+        <h1 class="question__title saturn" data-qa="question-title">What is <em class="highlight">your</em> ethnic group?</h1>
+
+        <div class="question__description mars">It is for you to choose your ethnic group. For example this could be your family or cultural background, or it could be how you would describe yourself.</div>
+
+        <div class="field field--radio field--multiplechoice u-mb-xl">
+          <fieldset class="u-mb-xl">
+            <legend class="field__legend mars ">Select your ethnic group</legend>
+            <div class="field__item js-focusable-box">
+              <input class="input input--radio js-focusable" name="radio-answer" value="white" id="white" type="radio">
+              <label class="label label--inline venus" for="white">White<br/><span class="label__description pluto">Including English, Welsh, Scottish, Northern Irish, British, Irish, Gypsy, Irish Traveller or any other White background</span></label>
+            </div>
+            <div class="field__item js-focusable-box">
+              <input class="input input--radio js-focusable" name="radio-answer" value="mixed" id="mixed" type="radio">
+              <label class="label label--inline venus" for="mixed">Mixed or multiple ethnic groups<br/><span class="label__description pluto">Including White and Black Caribbean, White and Black African, White and Asian or any other Mixed or multiple ethnic background</span></label>
+            </div>
+            <div class="field__item js-focusable-box">
+              <input class="input input--radio js-focusable" name="radio-answer" value="asian" id="asian" type="radio">
+              <label class="label label--inline venus" for="asian">Asian<br/><span class="label__description pluto">Including Indian, Pakistani, Bangladeshi, Chinese or any other Asian background</span></label>
+            </div>
+            <div class="field__item js-focusable-box">
+              <input class="input input--radio js-focusable" name="radio-answer" value="black-other" id="black-other" type="radio" data-qa="has-other-option">
+              <label class="label label--inline venus" for="black-other" id="label-black-other">Black, African, Caribbean or Black British<br/><span class="label__description pluto">Including African, Caribbean or any other Black, African or Caribbean background</span></label>
+              <div class="field__other">
+                <label class="label venus mercury" for="other-answer1" id="label-checkbox-other-input">Please specify your ethnic group</label>
+                <input class="input input__text js-focusable" id="other-answer1" name="other-answer1" type="text" data-qa="other-option">
+              </div>
+            </div>
+            <div class="field__item js-focusable-box">
+              <input class="input input--radio js-focusable" name="radio-answer" value="ethnic-other" id="any-other" type="radio" data-qa="has-other-option">
+              <label class="label label--inline venus" for="any-other" id="label-any-other">Other ethnic group<br/><span class="label__description pluto">Including Arab or any other ethnic group</span></label>
+              <div class="field__other">
+                <label class="label venus mercury" for="other-answer2" id="label-checkbox-other-input">Please specify your ethnic group</label>
+                <input class="input input__text js-focusable" id="other-answer2" name="other-answer2" type="text" data-qa="other-option">
+              </div>
+            </div>
+          </fieldset>
+        </div>
+</div>
+</div>
+</div>
