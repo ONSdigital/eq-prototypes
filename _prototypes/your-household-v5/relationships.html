@@ -234,6 +234,7 @@ cdn: v1.5.0
 
     urlParams = new URLSearchParams(window.location.search),
     editRelationshipId = urlParams.get('edit'),
+    redirect = urlParams.get('redirect'),
     editRelationshipFound = null,
 
     surveyType = urlParams.get('survey'),
@@ -365,7 +366,10 @@ cdn: v1.5.0
     /**
      * Routing
      */
-    if (nextMissingRelationship) {
+    if(redirect) {
+      window.location.href = redirect;
+    }
+    else if (nextMissingRelationship) {
 
       (function () {
         var personIsId = personIs['@person'].id,

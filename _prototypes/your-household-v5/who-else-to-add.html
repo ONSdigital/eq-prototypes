@@ -125,13 +125,15 @@ cdn: v1.5.0
      * Routing
      */
     if (window.location.search.match(/journey=temp-living-here/)) {
-      window.location = '../temp-living-here-feedback/';
+      window.location =
+        '../relationships/?redirect=../temp-living-here-feedback/';
     } else if (window.location.search.match(/journey=temp-away-from-home/)) {
       window.location = '../temp-away-from-home/';
     } else if (window.location.search.match(/journey=visitors/)) {
       window.location = '../does-anyone-else-live-here/?journey=visitors';
     } else {
-      window.location = '../does-anyone-else-live-here/';
+      window.location =
+        '../relationships/?redirect=../does-anyone-else-live-here/';
     }
   });
 
