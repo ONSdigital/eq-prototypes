@@ -83,8 +83,9 @@ cdn: v1.5.0
 <script src='/js/compiled/your-household-v5/bundle.js'></script>
 
 <script>
-  var storageAPI = window.ONS.storage;
-  var awayTypesStr = new URLSearchParams(window.location.search).get('away-types');
+  var storageAPI = window.ONS.storage,
+    userLiveAtAddress = storageAPI.doILiveHere(),
+    awayTypesStr = new URLSearchParams(window.location.search).get('away-types');
 
   if(!awayTypesStr) {
     throw Error('No sentence for away type found');
@@ -131,7 +132,10 @@ cdn: v1.5.0
     /*window.location.href = '../temp-types-feedback?away-types=' +
       JSON.stringify(awayTypes);*/
 
-    window.location =
-      '../relationships/?redirect=../temp-types-feedback/?away-types=' + JSON.stringify(awayTypes);
+    window.location = userLiveAtAddress
+      ? '../relationships/?redirect=../temp-types-feedback/?away-types=' +
+        JSON.stringify(awayTypes)
+      : '../temp-types-feedback/?away-types=' +
+        JSON.stringify(awayTypes);
   });
 </script>

@@ -240,19 +240,46 @@ cdn: v1.5.0
     surveyType = urlParams.get('survey'),
     nextPageSurveyRouting = surveyType ? '&survey=' + surveyType : '';
 
-  function updateQuestion(missingRelationship, descriptionChosen) {
+  function updateQuestion(missingRelationship, relationshipDescription) {
+    /**
+     * Code smell
+     */
     personIs = missingRelationship.personIs;
     personTo = missingRelationship.personTo;
 
+    var isNotFamilyDescription = relationshipDescription &&
+      ['unrelated'].indexOf(
+        relationshipDescription.type.id
+      ) !== -1;
+
+    var personToIsMe = personTo['@person'].id ===
+        storageAPI.IDS.USER_HOUSEHOLD_MEMBER_ID;
+
+    var gap1 = "Thinking about " + personTo['@person'].fullName + ", <br />";
+
+    var gap2 = isNotFamilyDescription
+      ? " is "
+      : (personToIsMe ? " is your" : " is their");
+
+    var gap3 = " to " + (personToIsMe ? ' you' : personTo['@person'].fullName);
+
     $('.js-relationship-person-is-relationship-description').html(
-      (personTo['@person'].id === 'person_me'
-        ? ("Thinking about you (" + personTo['@person'].fullName + "), <br />" +
-          personIs['@person'].fullName + " is your")
-        : ("Thinking about " + personTo['@person'].fullName + ", <br />" +
-          personIs['@person'].fullName + " is their")
-      ) +
-      " <span class='highlight'>" + (descriptionChosen || "...") +
-      "</span>"
+
+      /**
+       * Conditionally show if question is not about me
+       */
+      (!personToIsMe ? gap1 : '') +
+
+      personIs['@person'].fullName + gap2 +
+      " <span class='highlight'>" +
+        (relationshipDescription && relationshipDescription.sentanceLabel ||
+          "...") +
+      "</span>" +
+
+      /**
+       * Conditionally show if not family description
+       */
+      (isNotFamilyDescription ? gap3 : '')
     );
   }
 
@@ -431,8 +458,12 @@ cdn: v1.5.0
   }
 
   $('[name="relationship"]').on('change', function() {
+    updateQuestion({
+      personIs: personIs,
+      personTo: personTo
+    }, storageAPI.relationshipDescriptionMap[$(this).val()]);
 
-    var relationshipDescription = storageAPI.relationshipDescriptionMap[$(this).val()],
+    /*var relationshipDescription = storageAPI.relationshipDescriptionMap[$(this).val()],
 
       isNotFamily = ['unrelated', 'other-relation'].indexOf(
         relationshipDescription.type.id
@@ -450,7 +481,7 @@ cdn: v1.5.0
           personTo: personTo
         }, relationshipDescription.sentanceLabel);
 
-    $('.js-relationship-person-is-relationship-description').html(html);
+    $('.js-relationship-person-is-relationship-description').html(html);*/
   });
 
   $(function() {

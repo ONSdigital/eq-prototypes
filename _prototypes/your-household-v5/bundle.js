@@ -282,6 +282,10 @@ const surveyTypeConfig = {
   }
 };
 
+function doILiveHere() {
+  return sessionStorage.getItem('lives-here') === 'yes';
+}
+
 window.ONS = window.ONS || {};
 window.ONS.storage = {
   getAddress,
@@ -347,6 +351,8 @@ window.ONS.storage = {
   setAnsweringIndividualByProxy,
   getAnsweringIndividualByProxy,
 
+  doILiveHere,
+
   KEYS: {
     HOUSEHOLD_MEMBERS_STORAGE_KEY,
     USER_STORAGE_KEY,
@@ -385,4 +391,3 @@ $(updatePersonLink);
 $(tools);
 $(updateAllPreviousLinks);
 $(updateBySurveyType);
-

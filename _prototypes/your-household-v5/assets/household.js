@@ -71,7 +71,10 @@ export function addHouseholdMember(person, memberData, id) {
   let people = getAllHouseholdMembers() || [];
   memberData = memberData || {};
 
-  people.push({
+  /**
+   * User is always first in the household list
+   */
+  people[id === USER_HOUSEHOLD_MEMBER_ID ? 'unshift' : 'push']({
     ...memberData,
     type: memberData.type || HOUSEHOLD_MEMBER_TYPE,
     '@person': {
