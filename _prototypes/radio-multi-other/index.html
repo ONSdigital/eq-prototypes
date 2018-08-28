@@ -16,7 +16,7 @@ cdn: v1.5.2
 <div class="group" id="household-member">
   <div class="block" id="black-ethnic-group">
     <div class="question" id="black-ethnic-group-question">
-      <h1 class="question__title saturn" data-qa="question-title">Which one best describes your Black, African, Caribbean, Black British ethnic group or background?</h1>
+      <h1 class="question__title saturn" data-qa="question-title">Which one best describes your Black, Caribbean, African or Black British ethnic group or background?</h1>
       <fieldset class="question__fieldset js-question-fieldset">
       <legend class="field__legend u-vh">Select your ethnic group</legend>
       <div class="question__answers">
@@ -25,7 +25,11 @@ cdn: v1.5.2
             <div class="answer__fields js-fields">
               <div class="field field--radio field--multiplechoice">
                 <fieldset>
-                  <legend class="field__legend mars u-vh">Which one best describes your Black, African, Caribbean, Black British ethnic group or background?</legend>
+                  <legend class="field__legend mars u-vh">Which one best describes your Black, Caribbean, African or Black British ethnic group or background?</legend>
+                  <div class="field__item js-focusable-box">
+                    <input class="input input--radio js-focusable" name="radio-answer" value="caribbean" id="caribbean" type="radio">
+                    <label class="label label--inline venus" for="caribbean">Caribbean<br/></label>
+                  </div>
                   <div class="field__item js-focusable-box">
                     <input class="input input--radio js-focusable" name="radio-answer" value="african-other" id="african-other" type="radio" data-qa="has-other-option">
                     <label class="label label--inline venus" for="african-other" id="label-african-other">African<br/></label>
@@ -34,13 +38,10 @@ cdn: v1.5.2
                       <input class="input input__text js-focusable" id="other-answer1" name="other-answer1" type="text" data-qa="other-option">
                     </div>
                   </div>
-                  <div class="field__item js-focusable-box">
-                    <input class="input input--radio js-focusable" name="radio-answer" value="caribbean" id="caribbean" type="radio">
-                    <label class="label label--inline venus" for="caribbean">Caribbean<br/></label>
-                  </div>
+
                   <div class="field__item js-focusable-box">
                     <input class="input input--radio js-focusable" name="radio-answer" value="ethnic-other" id="any-other" type="radio" data-qa="has-other-option">
-                    <label class="label label--inline venus" for="any-other" id="label-any-other">Any other Black, Black British or Caribbean background</label>
+                    <label class="label label--inline venus" for="any-other" id="label-any-other">Any other Black or Black British<!-- or Caribbean background--></label>
                     <div class="field__other">
                       <label class="label venus mercury" for="other-answer2" id="label-checkbox-other-input">Please specify your background</label>
                       <input class="input input__text js-focusable" id="other-answer2" name="other-answer2" type="text" data-qa="other-option">
