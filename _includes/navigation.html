@@ -4,7 +4,7 @@
         {% for item in include.items %}
         <li class="nav__item pluto nav__item--{{item.state}}">
             {% if item.state == 'current' %}
-            <span class="mars">{{item.label}}</span>
+            <span class="mars" id="{{item.sid}}">{{item.label}}</span>
             {% else %}
             <a class="nav__link" {% if item.href %}href="{{item.href}}"{% endif %} id="{{item.id}}">{{item.label}}</a>
             {% endif %}

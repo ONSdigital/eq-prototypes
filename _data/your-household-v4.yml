@@ -1,0 +1,35 @@
+navigationItemsRelationships:
+  - label: People who live here
+    href: ../summary
+    state: completed
+    sid: people-living-here
+    id: people-living-here
+  - label: Relationships
+    href: ../relationships/
+    state: current
+    sid: relationships-section
+    id: relationships-section
+
+navigationItemsHousehold:
+  - label: People who live here
+    href: ../summary
+    state: current
+    sid: people-living-here
+    id: people-living-here
+  - label: Relationships
+    href: ../relationships/
+    state: incomplete
+    sid: relationships-section
+    id: relationships-section
+
+
+yourHouseholdV4_navigationItemsPersonalDetails:
+  - label: Personal details
+    href: ../summary
+    state: current
+  - label: Education
+    href: ..
+    state: incomplete
+  - label: Employment
+    href: ..
+    state: incomplete

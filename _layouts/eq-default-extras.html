@@ -15,12 +15,16 @@
         <div class="skip">
             <a class="skip__link" href="#main">Skip to content</a>
         </div>
+        <header class="page__header">
+            {% include header-eq-default.html %}
+        </header>
         {{ content }}
     </div>
+    <div class="page__footer">
+        {% include footer-eq-default.html %}
+    </div>
 </div>
-{% include footer-eq-default.html %}
-
-<script src="https://cdn.ons.gov.uk/sdc/{% if page.cdn %}{{ page.cdn }}{% else %}v1.0.0{% endif %}/scripts/bundle.min.js"></script>
+<script src="https://cdn.ons.gov.uk/sdc/{% if page.cdn %}{{ page.cdn }}{% else %}v1.0.0{% endif %}/scripts/bundle.js"></script>
 
 </body>
 </html>
