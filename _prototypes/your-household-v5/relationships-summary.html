@@ -45,7 +45,7 @@ cdn: v1.5.0
                                 </div>
                                 <br/>
 
-                                <div id="household-relationships-summary"></div>
+                                <div id="household-relationships-summary" class="u-mb-l@m"></div>
                             </section>
                         </div>
                     </div>
@@ -59,22 +59,42 @@ cdn: v1.5.0
 </div>
 
 
-<ul style="display:none;">
-    <li id="relationship-record-template" class="list__item">
-        <div class="list__item-actions u-fr">
-            <span class="list__item-action">
-                <a class="js-record-edit" href="#">Change</a>
-            </span>
-        </div>
-        <span class="list__item-name">
-            <span class="js-relationship-description"></span>
-        </span>
-    </li>
-</ul>
+<div style="display:none;">
+    <div id="relationship-record-template">
+        <h3 class="accordion__title js-accordion-title u-cf icon--accordion" data-js-accordion-event-label="Total retail turnover">
+            <span class="accordion__title-text js-relationship-description"></span>
+            <button class="btn btn--secondary btn--small accordion__title-right accordion-unhide@m js-accordion-toggle u-wa--@xs" data-close-label="Hide" data-open-label="Show" aria-hidden="true">Show</button>
+        </h3>
+        <div class="accordion__body mars js-accordion-body"></div>
+    </div>
+</div>
 
 <div style="display:none;">
-    <div id="relationship-record-list-template">
-        <ul class="list list--records list--bare u-mb-xl js-records"></ul>
+    <div id="relationship-record-list-template" class="accordion js-accordion">
+        <div class="js-accordion-content js-records"></div>
+    </div>
+</div>
+
+<div style="display:none">
+    <div id="summary-record-template" class="summary__item">
+        <div class="grid">
+            <div class="grid__col col-12@xs col-6@m">
+                <div class="summary__question mars js-label"></div>
+            </div>
+            <div class="grid__col col-8@xs col-4@m">
+                <div class="summary__answer venus js-value"></div>
+            </div>
+            <div class="grid__col col-4@xs col-2@m">
+                <div class="summary__link mars js-action">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="display:none">
+    <div id="relatioship-details-list" class="summary">
+        <div class="summary__block js-summary-list"></div>
     </div>
 </div>
 
@@ -102,18 +122,42 @@ cdn: v1.5.0
     $('#survey-type').val(surveyType);
   }
 
-  function createRecord(summary) {
-    var $nodeEl = $('#relationship-record-template').clone();
-
-    $nodeEl.find('.js-relationship-description').html(summary);
-
-    return $nodeEl;
-  }
-
   function createRecordList() {
     var $nodeEl = $('#relationship-record-list-template').clone();
 
     $nodeEl.attr('id', '');
+
+    return $nodeEl;
+  }
+
+  function createSummaryRecord(data) {
+    var $nodeEl = $('#summary-record-template').clone(),
+        $changeLink = $('<a href="#edit">Change</a>');
+        $changeLink.on('click', function (e) {
+          e.preventDefault();
+          window.location.href = data.changeLink;
+        });
+
+    $nodeEl.attr('id', '');
+    $nodeEl.find('.js-label').html(data.label);
+    $nodeEl.find('.js-value').html(data.value);
+    $nodeEl.find('.js-action').html($changeLink);
+
+    return $nodeEl;
+  }
+
+  function createIndividualRelationshipList() {
+    var $nodeEl = $('#relatioship-details-list').clone();
+
+    $nodeEl.attr('id', '');
+
+    return $nodeEl;
+  }
+
+  function createRecord(summary) {
+    var $nodeEl = $('#relationship-record-template').clone();
+
+    $nodeEl.find('.js-relationship-description').html(summary);
 
     return $nodeEl;
   }
@@ -124,6 +168,7 @@ cdn: v1.5.0
         .filter(function(relationship) { return !relationship.inferred; })
         .map(function(relationship) { return relationship.id; }),
       lines = [],
+      relationshipView = [],
       recordList = createRecordList();
 
     $('#household-relationships-summary').html();
@@ -179,6 +224,7 @@ cdn: v1.5.0
         console.log('Summary lines: ', summaryLines);
 
         lines = [].concat(lines, summaryLines.lines);
+        relationshipView = [].concat(relationshipView, summaryLines);
 
         $.each(summaryLines.relationshipsExplained,
           function (i, relationshipExplained) {
@@ -189,8 +235,36 @@ cdn: v1.5.0
 
     console.log('Explained: ', relationshipIdsToExplain);
 
-    $.each(lines, function(i, line) {
-      recordList.find('.js-records').append(createRecord(line));
+    var recordsEl = recordList.find('.js-records');
+
+    $.each(relationshipView, function(i, summary) {
+      var recordEl = createRecord(summary.lines.join(',<br />'));
+      var accordionBody = recordEl.find('.js-accordion-body');
+      var relationshipList = createIndividualRelationshipList();
+
+      $.each(summary.relationshipsExplained, function(t, relationship) {
+        var USER_HOUSEHOLD_MEMBER_ID = storageAPI.IDS.USER_HOUSEHOLD_MEMBER_ID,
+          personIs =
+            storageAPI.getHouseholdMemberByPersonId(relationship.personIsId)['@person'],
+          personTo =
+            storageAPI.getHouseholdMemberByPersonId(relationship.personToId)['@person'];
+
+        var label = relationship.personToId === USER_HOUSEHOLD_MEMBER_ID
+          ? (personIs.fullName + ' is your ...')
+          : ('Thinking of ' + personTo.fullName + ', <br />' +
+            personIs.fullName + ' is their ...');
+
+        var summaryRecordEl = createSummaryRecord({
+          label: label,
+          value: storageAPI.relationshipDescriptionMap[relationship.personIsDescription].sentanceLabel,
+          changeLink: '../relationships/?edit=' + relationship.id
+        });
+
+        relationshipList.find('.js-summary-list').append(summaryRecordEl);
+      });
+
+      recordsEl.append(recordEl);
+      accordionBody.append(relationshipList);
     });
 
     $('#household-relationships-summary').append(recordList);
@@ -222,8 +296,8 @@ cdn: v1.5.0
       relationshipsExplained: [relationship],
       lines: [
         storageAPI.relationshipSummaryTemplates['partnership'](
-          relationshipInfo['@personIs'].fullName,
-          relationshipInfo['@personTo'].fullName,
+          relationshipInfo['@personIs'],
+          relationshipInfo['@personTo'],
           relationshipInfo['relationshipDescription'].summaryAdjective
         )
       ]
@@ -237,13 +311,10 @@ cdn: v1.5.0
       mutualGroups = groupSummary.findMutualOf(relationshipInfo),
       manyToManyGroups = groupSummary.findManyToManyWith(relationshipInfo);
 
-    console.log('relationship', relationshipInfo);
-
     if(mutualGroups.people && mutualGroups.people.length) {
       lines.push(storageAPI.relationshipSummaryTemplates['allMutual'](
         mutualGroups.people.map(function (personId) {
-          return storageAPI
-            .getHouseholdMemberByPersonId(personId)['@person'].fullName;
+          return storageAPI.getHouseholdMemberByPersonId(personId)['@person'];
         }),
         relationshipInfo['relationshipDescription'].summaryAdjective
       ));
@@ -254,13 +325,11 @@ cdn: v1.5.0
     else if(manyToManyGroups.groups && manyToManyGroups.groups.length) {
       $.each(manyToManyGroups.groups, function (i, group) {
         lines.push(storageAPI.relationshipSummaryTemplates['manyToMany'](
-          group.personRelatedGroup.map(function (personId) {
-            return storageAPI
-              .getHouseholdMemberByPersonId(personId)['@person'].fullName;
+          group.personRelatedGroup.map(function(personId) {
+            return storageAPI.getHouseholdMemberByPersonId(personId)['@person'];
           }),
-          group.otherPeopleGroup.map(function (personId) {
-            return storageAPI
-              .getHouseholdMemberByPersonId(personId)['@person'].fullName;
+          group.otherPeopleGroup.map(function(personId) {
+            return storageAPI.getHouseholdMemberByPersonId(personId)['@person'];
           }),
           relationshipInfo['relationshipDescription'].summaryAdjective
         ));
@@ -277,8 +346,8 @@ cdn: v1.5.0
 
       lines.push(storageAPI.relationshipSummaryTemplates['allMutual'](
         [
-          relationshipInfo['@personIs'].fullName,
-          relationshipInfo['@personTo'].fullName
+          relationshipInfo['@personIs'],
+          relationshipInfo['@personTo']
         ],
         relationshipInfo['relationshipDescription'].summaryAdjective
       ));
@@ -703,9 +772,9 @@ cdn: v1.5.0
       relationshipsExplained: [relationship],
       lines: [
         storageAPI.relationshipSummaryTemplates['oneFamilyMemberToMany'](
-          relationshipInfo['@personIs'].fullName,
+          relationshipInfo['@personIs'],
           [
-            relationshipInfo['@personTo'].fullName
+            relationshipInfo['@personTo']
           ],
           relationshipInfo['relationshipDescription'].summaryAdjective
         )
@@ -824,9 +893,9 @@ cdn: v1.5.0
      */
     $.each(viewModel, function (i, line) {
       lines.push(storageAPI.relationshipSummaryTemplates['twoFamilyMembersToMany'](
-        parent.fullName,
-        storageAPI.getHouseholdMemberByPersonId(line.parent2)['@person'].fullName,
-        line.children.map(function(child) { return child.fullName; }),
+        parent,
+        storageAPI.getHouseholdMemberByPersonId(line.parent2)['@person'],
+        line.children.map(function(child) { return child; }),
         storageAPI.relationshipDescriptionMap['mother-father'].summaryAdjective
       ));
     });
@@ -852,7 +921,7 @@ cdn: v1.5.0
             }),
 
           remainingChildrenNames = remainingChildrenIds.map(function (id) {
-            return personIsChildren[personIsChildrenIds.indexOf(id)].fullName;
+            return personIsChildren[personIsChildrenIds.indexOf(id)];
           }),
 
           /**
@@ -864,7 +933,7 @@ cdn: v1.5.0
           );
 
         lines.push(storageAPI.relationshipSummaryTemplates['oneFamilyMemberToMany'](
-          parent.fullName,
+          parent,
           remainingChildrenNames,
 
           /**

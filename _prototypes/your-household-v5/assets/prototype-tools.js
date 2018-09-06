@@ -83,6 +83,7 @@ export function tools () {
       'personIsId': 'person3',
       'personToId': 'person2',
       'inferred': true,
+      'inferredBy': [3, 5, 2, 4],
       'id': 6
     }],
 

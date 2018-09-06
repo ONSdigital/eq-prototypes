@@ -2,7 +2,8 @@ import {autoIncrementId, removeFromList, trailingNameS} from './utils';
 import {
   isHouseholdMember,
   getAllHouseholdMembers,
-  getHouseholdMemberByPersonId
+  getHouseholdMemberByPersonId,
+  USER_HOUSEHOLD_MEMBER_ID
 } from './household';
 
 /**
@@ -115,32 +116,42 @@ function nameElement(name) {
   return '<strong>' + name + '</strong>';
 }
 
-function personListStr(peopleArr) {
+function personListStr(peopleArr, opts = {}) {
   if (peopleArr.length < 1) {
     console.log(peopleArr, 'not enough people to create a list string');
     return;
   }
 
   if (peopleArr.length === 1) {
-    return nameElement(peopleArr[0]);
+    return nameElement(peopleArr[0].fullName + formatPersonIfYou(peopleArr[0]));
   }
 
   let peopleCopy = [...peopleArr],
     lastPerson = peopleCopy.pop();
 
   return peopleCopy
-    .map(nameElement).join(', ') + ' and ' + nameElement(lastPerson)
+    .map((person) => `${nameElement(person.fullName +
+      (opts.isFamily ? trailingNameS(person.fullName) : '') +
+      formatPersonIfYou(person))}`)
+    .join(', ') + ' and ' + nameElement(lastPerson.fullName +
+      (opts.isFamily ? trailingNameS(lastPerson.fullName) : '') +
+      formatPersonIfYou(lastPerson))
+}
+
+function formatPersonIfYou(person) {
+  return person.id === USER_HOUSEHOLD_MEMBER_ID ? ' (You)' : '';
 }
 
 export const relationshipSummaryTemplates = {
   'partnership': (person1, person2, description) => {
-    return `${nameElement(person1)} is ${nameElement(person2 + trailingNameS(person2))} ${description}`;
+    return `${nameElement(person1.fullName + formatPersonIfYou(person1))} is ${nameElement(person2.fullName + trailingNameS(person2.fullName) + formatPersonIfYou(person2))} ${description}`;
   },
   'twoFamilyMembersToMany': (parent1, parent2, childrenArr, description) => {
-    return `${nameElement(parent1)} and ${nameElement(parent2)} are ${personListStr(childrenArr.map(name => name + trailingNameS(name)))} ${description}`;
+    return `${nameElement(parent1.fullName + formatPersonIfYou(parent1))} and ${nameElement(parent2.fullName + formatPersonIfYou(parent2))} are ${personListStr(childrenArr, {isFamily: true})} ${description}`;
   },
   'oneFamilyMemberToMany': (parent, childrenArr, description) => {
-    return `${nameElement(parent)} is ${personListStr(childrenArr.map(name => name + trailingNameS(name)))} ${description}`;
+    console.log(parent, childrenArr, description);
+    return `${nameElement(parent.fullName + formatPersonIfYou(parent))} is ${personListStr(childrenArr, {isFamily: true})} ${description}`;
   },
   'manyToMany': (peopleArr1, peopleArr2, description) => {
     return `${personListStr(peopleArr1)} ${peopleArr1.length > 1 ? 'are' : 'is'} ${description} to ${personListStr(peopleArr2)}`;
@@ -158,7 +169,8 @@ export function relationship(description, personIsId, personToId, opts = {}) {
     personIsDescription: description,
     personIsId: personIsId,
     personToId: personToId,
-    inferred: !!opts.inferred
+    inferred: !!opts.inferred,
+    inferredBy: opts.inferredBy
   };
 }
 
@@ -178,6 +190,14 @@ export function addRelationship(relationshipObj) {
     JSON.stringify(householdRelationships));
 
   return item;
+}
+
+export function deleteRelationship(relationshipObj) {
+  let householdRelationships = (getAllRelationships() || [])
+    .filter(relationship => relationship.id !== relationshipObj.id);
+
+  sessionStorage.setItem(RELATIONSHIPS_STORAGE_KEY,
+    JSON.stringify(householdRelationships));
 }
 
 export function editRelationship(relationshipId, valueObject) {
@@ -312,6 +332,10 @@ export function isRelationshipType(relationshipType, relationship) {
       return rType === typeOfRelationship;
     })
     : typeOfRelationship === relationshipType;
+}
+
+export function isRelationshipInferred(relationship) {
+  return relationship.inferred;
 }
 
 /**
@@ -449,9 +473,23 @@ export const missingRelationshipInference = {
              */
             missingRelationships.push(relationship(
               'brother-sister',
-              person.id,
+              personId,
               memberPersonId,
-              {inferred: true}
+              {
+                inferred: true,
+                inferredBy: [
+                  /**
+                   * Must be 4 relationships
+                   * Could have used member's parents but we can assume they
+                   * must be the same at this point or the inferrence
+                   * couldn't happen.
+                   */
+                  getRelationshipOf(personId, parents[0].id).id,
+                  getRelationshipOf(personId, parents[1].id).id,
+                  getRelationshipOf(memberPersonId, parents[0].id).id,
+                  getRelationshipOf(memberPersonId, parents[1].id).id
+                ]
+              }
             ));
           }
         });

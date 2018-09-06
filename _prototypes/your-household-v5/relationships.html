@@ -320,7 +320,8 @@ cdn: v1.5.0
 
     var chosenItem = getChosenItem(),
       relationshipDescriptionVal = chosenItem.val,
-      relationshipDescription = chosenItem.description;
+      relationshipDescription = chosenItem.description,
+      aRelationshipPreviouslyInferredByThis = false;
 
     if (!relationshipDescription) {
       throw Error('Relationship description not found: ', relationshipDescription);
@@ -334,8 +335,29 @@ cdn: v1.5.0
       )
     );
 
-    window.location.href = '../relationships-summary/?noop=1' +
-      nextPageSurveyRouting;
+    /**
+     * Were there any relationships created by inference when
+     * previously creating this relationship
+     */
+    $.each(storageAPI.getAllRelationships().filter(storageAPI.isRelationshipInferred),
+      function(i, relationship) {
+        var isInferredByThis = !!_.find(relationship.inferredBy, function(id) {
+          return id+'' === relationshipId+'';
+        });
+
+        if(isInferredByThis) {
+          storageAPI.deleteRelationship(relationship);
+          aRelationshipPreviouslyInferredByThis = true;
+        }
+      });
+
+    if(aRelationshipPreviouslyInferredByThis) {
+      dynamicRouting();
+    }
+    else {
+      window.location.href = '../relationships-summary/?noop=1' +
+        nextPageSurveyRouting;
+    }
   }
 
   /**
@@ -399,57 +421,7 @@ cdn: v1.5.0
       window.location.href = redirect;
     }
     else if (nextMissingRelationship) {
-
-      (function () {
-        var personIsId = personIs['@person'].id,
-          personToId = personTo['@person'].id,
-          subjectPersonId,
-          subjectRelationshipDescription;
-
-        /**
-         * Question strategies
-         *
-         * If child-parent relationship type was selected
-         * and there are missing relationships for this person
-         */
-        if(relationshipDescriptionVal === 'mother-father' &&
-          storageAPI.getPeopleIdsMissingRelationshipsWithPerson(personIsId).length) {
-          subjectPersonId = personIsId;
-        }
-        else if(relationshipDescriptionVal === 'son-daughter' &&
-          storageAPI.getPeopleIdsMissingRelationshipsWithPerson(personToId).length) {
-          subjectPersonId = personToId;
-          subjectRelationshipDescription = 'mother-father';
-        }
-        else if(relationshipDescriptionVal === 'unrelated' &&
-          storageAPI.getPeopleIdsMissingRelationshipsWithPerson(personIsId).length &&
-
-          /**
-           * And personIs already has the same relationship type with someone
-           * else
-           */
-          storageAPI.getAllManualRelationships()
-            .filter(storageAPI.isInRelationship.bind(null, personIsId))
-            .filter(storageAPI.isRelationshipType.bind(null, relationshipDescriptionVal))
-            .length > 1
-        ) {
-          subjectPersonId = personIsId;
-        }
-
-        subjectRelationshipDescription = subjectRelationshipDescription ||
-          relationshipDescriptionVal;
-
-        if(subjectPersonId) {
-          window.location.href = '../relationships-person-select/?person=' +
-            subjectPersonId + '&relationship-description=' +
-            subjectRelationshipDescription +
-            nextPageSurveyRouting;
-        }
-        else {
-          window.location.href = '../relationships/?noop=1' +
-            nextPageSurveyRouting;
-        }
-      }());
+      dynamicRouting();
     }
     else {
       window.location.href = '../relationships-summary/?noop=1' +
@@ -457,31 +429,64 @@ cdn: v1.5.0
     }
   }
 
+  function dynamicRouting() {
+      var personIsId = personIs['@person'].id,
+        personToId = personTo['@person'].id,
+        chosenItem = getChosenItem(),
+        relationshipDescriptionVal = chosenItem.val,
+        subjectPersonId,
+        subjectRelationshipDescription;
+
+      /**
+       * Question strategies
+       *
+       * If child-parent relationship type was selected
+       * and there are missing relationships for this person
+       */
+      if(relationshipDescriptionVal === 'mother-father' &&
+        storageAPI.getPeopleIdsMissingRelationshipsWithPerson(personIsId).length) {
+        subjectPersonId = personIsId;
+      }
+      else if(relationshipDescriptionVal === 'son-daughter' &&
+        storageAPI.getPeopleIdsMissingRelationshipsWithPerson(personToId).length) {
+        subjectPersonId = personToId;
+        subjectRelationshipDescription = 'mother-father';
+      }
+      else if(relationshipDescriptionVal === 'unrelated' &&
+        storageAPI.getPeopleIdsMissingRelationshipsWithPerson(personIsId).length &&
+
+        /**
+         * And personIs already has the same relationship type with someone
+         * else
+         */
+        storageAPI.getAllManualRelationships()
+          .filter(storageAPI.isInRelationship.bind(null, personIsId))
+          .filter(storageAPI.isRelationshipType.bind(null, relationshipDescriptionVal))
+          .length > 1
+      ) {
+        subjectPersonId = personIsId;
+      }
+
+      subjectRelationshipDescription = subjectRelationshipDescription ||
+        relationshipDescriptionVal;
+
+      if(subjectPersonId) {
+        window.location.href = '../relationships-person-select/?person=' +
+          subjectPersonId + '&relationship-description=' +
+          subjectRelationshipDescription +
+          nextPageSurveyRouting;
+      }
+      else {
+        window.location.href = '../relationships/?noop=1' +
+          nextPageSurveyRouting;
+      }
+  }
+
   $('[name="relationship"]').on('change', function() {
     updateQuestion({
       personIs: personIs,
       personTo: personTo
     }, storageAPI.relationshipDescriptionMap[$(this).val()]);
-
-    /*var relationshipDescription = storageAPI.relationshipDescriptionMap[$(this).val()],
-
-      isNotFamily = ['unrelated', 'other-relation'].indexOf(
-        relationshipDescription.type.id
-      ) !== -1,
-
-      html = isNotFamily
-        ? personIs['@person'].fullName +
-          ' is <em class="highlight">' +
-            relationshipDescription.sentanceLabel +
-          '</em> to ' +
-          personTo['@person'].fullName
-
-        : updateQuestion({
-          personIs: personIs,
-          personTo: personTo
-        }, relationshipDescription.sentanceLabel);
-
-    $('.js-relationship-person-is-relationship-description').html(html);*/
   });
 
   $(function() {

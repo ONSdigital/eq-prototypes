@@ -2,6 +2,7 @@ import {
   RELATIONSHIPS_STORAGE_KEY,
   relationshipDescriptionMap,
   addRelationship,
+  deleteRelationship,
   editRelationship,
   getAllRelationships,
   getAllManualRelationships,
@@ -19,6 +20,7 @@ import {
   isInRelationship,
   areAnyChildrenInRelationshipNotParent,
   isRelationshipType,
+  isRelationshipInferred,
   getRelationshipOf,
   getRelationshipsWithPersonIds,
   getPeopleIdsMissingRelationshipsWithPerson,
@@ -307,6 +309,7 @@ window.ONS.storage = {
   isHouseholdMember,
 
   addRelationship,
+  deleteRelationship,
   editRelationship,
   getAllRelationships,
   getAllManualRelationships,
@@ -322,6 +325,7 @@ window.ONS.storage = {
   isInRelationship,
   areAnyChildrenInRelationshipNotParent,
   isRelationshipType,
+  isRelationshipInferred,
   getRelationshipOf,
 
   relationshipDescriptionMap,
