@@ -33,10 +33,17 @@ cdn: v1.5.0
                                 <div class="question u-mb-s"
                                      id="total-retail-turnover-question">
                                     <h1 class="question__title saturn">
-                                        Who do you need to add to
-                                        <span class="address-text"></span>
-                                        who is temporarily away from home?
+                                        Who do you need to add?
                                     </h1>
+                                </div>
+
+                                <div
+                                        class="panel panel--simple panel--info u-mb-m">
+                                    <div class="panel__body">
+                                        <strong class="u-mb-xs u-d-b">Include
+                                        </strong>
+                                        <ul id="question-list"></ul>
+                                    </div>
                                 </div>
 
                                 <fieldset
@@ -82,6 +89,10 @@ cdn: v1.5.0
 
 <script src='/js/compiled/your-household-v6/bundle.js'></script>
 
+<ul style="display:none;">
+    <li id="question-list-item-template" class="list__item"></li>
+</ul>
+
 <script>
   var storageAPI = window.ONS.storage,
     userLiveAtAddress = storageAPI.doILiveHere(),
@@ -107,6 +118,16 @@ cdn: v1.5.0
 
   if (editUserId && !memberFound) {
     throw Error('Member not found');
+  }
+
+  function updateQuestionList() {
+    $('#question-list').append(awayTypes.map(function(awayType) {
+      var $nodeEl = $('#question-list-item-template').clone();
+
+      $nodeEl.html(storageAPI.tempAwayQuestionSentenceMap[awayType]);
+
+      return $nodeEl;
+    }));
   }
 
   $('.js-question-sentence-by-type').html(storageAPI.tempAwayQuestionSentenceMap[awayType]);
@@ -138,4 +159,6 @@ cdn: v1.5.0
       : '../temp-types-feedback/?away-types=' +
         JSON.stringify(awayTypes);
   });
+
+  $(updateQuestionList);
 </script>

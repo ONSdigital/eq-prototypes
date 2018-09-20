@@ -30,10 +30,20 @@ cdn: v1.5.0
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title saturn">
-                                        Is there anyone else at
+                                        Is there anyone else who is away or
+                                        staying at
                                         <span class="address-text"></span>
-                                        <span class="js-question-sentence-by-type"></span>?
+                                        for 3 months or more?
                                     </h1>
+                                </div>
+
+                                <div
+                                        class="panel panel--simple panel--info u-mb-m">
+                                    <div class="panel__body">
+                                        <strong class="u-mb-xs u-d-b">Include
+                                        </strong>
+                                        <ul id="question-list"></ul>
+                                    </div>
                                 </div>
 
                                 <div id="member-list"></div>
@@ -78,6 +88,10 @@ cdn: v1.5.0
 
 <script src='/js/compiled/your-household-v6/bundle.js'></script>
 
+<ul style="display:none;">
+    <li id="question-list-item-template" class="list__item"></li>
+</ul>
+
 <script>
   var storageAPI = window.ONS.storage,
       yesbox = document.getElementById("yes-someone-else"),
@@ -87,9 +101,19 @@ cdn: v1.5.0
 	  throw Error('No sentence for away type found');
   }
 
-  var awayTypes = JSON.parse(awayTypesStr),
+  var awayTypes = JSON.parse(awayTypesStr)/*,
 	  awayTypeOriginal = [].concat(awayTypes);
-	  awayType = awayTypes.shift();
+	  awayType = awayTypes.shift()*/;
+
+  function updateQuestionList() {
+    $('#question-list').append(awayTypes.map(function(awayType) {
+      var $nodeEl = $('#question-list-item-template').clone();
+
+      $nodeEl.html(storageAPI.tempAwayQuestionSentenceMap[awayType]);
+
+      return $nodeEl;
+    }));
+  }
 
   $('.qa-btn-submit').click(function(e) {
   	e.preventDefault();
@@ -98,18 +122,17 @@ cdn: v1.5.0
      * Routing
      */
     if (!yesbox.checked) {
-      window.location.href = '../temp-living-here';
+      window.location.href = '../summary';
     } else {
       window.location.href = '../temp-types-question?away-types=' +
-        JSON.stringify(awayTypeOriginal);
+        JSON.stringify(awayTypes);
     }
   });
+
+  $(updateQuestionList);
 
   $(function() {
     $('#member-list').html('<ul id="household-members"></ul>');
     window.ONS.helpers.populateHouseholdList();
-
-    $('.js-question-sentence-by-type').html('who is temporarily away');
-    /*$('.js-question-sentence-by-type').html(storageAPI.tempAwayQuestionSentenceMap[awayType]);*/
   });
 </script>
