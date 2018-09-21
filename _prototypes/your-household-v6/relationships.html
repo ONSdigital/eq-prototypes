@@ -263,7 +263,11 @@ cdn: v1.5.0
 
     var gap2 = isNotFamilyDescription
       ? " is "
-      : (personToIsMe ? " is your" : " is their");
+      : (personToIsMe
+          ? " is your"
+          : " is " + personTo['@person'].fullName +
+          window.ONS.utils.trailingNameS(personTo['@person'].fullName)
+      );
 
     var gap3 = " to " + (personToIsMe ? ' you' : personTo['@person'].fullName);
 
@@ -297,23 +301,21 @@ cdn: v1.5.0
     var personToIsMe = personTo['@person'].id ===
         storageAPI.IDS.USER_HOUSEHOLD_MEMBER_ID;
 
-    var gap1 = "Thinking about " + personTo['@person'].fullName + ", <br />";
-
     var gap2 = isNotFamilyDescription
       ? " is "
-      : (personToIsMe ? " is your" : " is their");
+      : (personToIsMe
+        ? " is your"
+        : " is " + personTo['@person'].fullName +
+          window.ONS.utils.trailingNameS(personTo['@person'].fullName)
+      );
 
     var gap3 = " to " + (personToIsMe ? ' you' : personTo['@person'].fullName);
 
     $('.js-relationship-person-is-relationship-description').html(
-
-      /**
-       * Conditionally show if question is not about me
-       */
-      (!personToIsMe ? gap1 : '') +
-
       personIs['@person'].fullName +
+
       gap2 +
+
       (relationshipDescription && relationshipDescription.sentanceLabel || " ...") +
 
       /**
@@ -406,7 +408,7 @@ cdn: v1.5.0
       dynamicRouting();
     }
     else {
-      window.location.href = '../relationships-summary/?noop=1' +
+      window.location.href = '../relationships-summary-proxy/?noop=1' +
         nextPageSurveyRouting;
     }
   }
@@ -439,7 +441,7 @@ cdn: v1.5.0
       $('.qa-btn-submit').on('click', function(e) {
         e.preventDefault();
 
-        window.location.href = '../relationships-summary/?noop=1' + nextPageSurveyRouting;
+        window.location.href = '../relationships-summary-proxy/?noop=1' + nextPageSurveyRouting;
       });
     }
   }
@@ -484,7 +486,7 @@ cdn: v1.5.0
       dynamicRouting();
     }
     else {
-      window.location.href = '../relationships-summary/?noop=1' +
+      window.location.href = '../relationships-summary-proxy/?noop=1' +
         nextPageSurveyRouting;
     }
   }
