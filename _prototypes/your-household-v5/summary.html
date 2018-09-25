@@ -1,0 +1,293 @@
+---
+title: Household prototype v5
+project: your-household
+globalcss: false
+layout: eq-default-extras
+cdn: v1.5.0
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link mars" href="../visitors">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            {% include navigation.html
+            items=site.data.your-household-v4.navigationItemsHousehold
+            nav-title-id="section-address" %}
+        </div>
+        <div class="grid__col col-7@m pull-1@m">
+            <main role="main" id="main" class="page__main">
+                <form name="trav" class="form qa-questionnaire-form" role="form"
+                      autocomplete="off" novalidate="">
+                    <div class="group" id="rsi">
+                        <div class="block" id="total-retail-turnover">
+                            <section class="section"
+                                     id="total-retail-turnover-section">
+                                <div class="question u-mb-s"
+                                     id="total-retail-turnover-question">
+                                    <h1
+                                            class="question__title saturn js-heading">
+                                        People who live here
+                                    </h1>
+                                </div>
+
+                                <div class="panel panel--simple panel--success"
+                                     id="question-guidance-everyone-at-address-confirmation-question">
+                                    <strong class="u-mb-s">This sub section is
+                                        now complete</strong>
+                                    <ul class="mars"
+                                        style="list-style: none;padding: 0; margin-bottom: 0">
+                                        <li>You can check your answers below
+                                        </li>
+                                    </ul>
+                                </div>
+                                <br />
+
+                                <h2 class="neptune">Household members</h2>
+                                <ul id="household-members-summary"
+                                    class="list list--records list--people u-mb-s js-records"></ul>
+                                <p id="nobody-notice"
+                                   style="display:none;">Nobody usually
+                                    lives here</p>
+                                <p class="u-mb-xl">
+                                    <a href="../who-else-to-add"
+                                       class="js-add-to-household">
+                                        Add someone to this household</a>
+                                </p>
+
+                                <div class="js-visitors-people-list">
+                                    <h2 class="neptune">Visitors staying
+                                        overnight on 19th August 2018</h2>
+                                    <ul id="visitors-summary"
+                                        class="list list--records list--people u-mb-s js-records"></ul>
+                                    <p class="u-mb-xl"><a
+                                            href="../who-else-to-add?journey=visitors">Add someone to this household</a>
+                                    </p>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus"
+                            type="submit" name="">Continue
+                    </button>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<div id="modal" class="modal" style="display: none;">
+    <div class="modal__window">
+        <h1 class="saturn">Are you sure you want to remove <span
+                class="js-person-name"></span>?</h1>
+        <p class="u-mb-m">All of the data associated with this person will be
+            deleted</p>
+
+        <div class="modal__buttons btn-group">
+            <button class="btn btn-group__btn btn--secondary venus close-modal-button">Cancel
+            </button>
+            <button class="btn btn-group__btn venus remove-member-button">
+                Confirm
+            </button>
+
+            <!--<div class="btn-group">
+                <button class="btn btn-group__btn js-record-edit">Change</button>
+                <button class="btn btn-group__btn btn&#45;&#45;secondary js-record-remove">Remove</button>
+            </div>-->
+        </div>
+    </div>
+</div>
+
+<ul style="display:none;">
+    <li id="person-record-template" class="list__item">
+        <span class="list__item-name js-person-name"></span>
+        <div class="list__item-actions u-fr">
+            <span class="list__item-action">
+                <a class="js-record-edit" href="#">Change</a>
+            </span>
+            <span class="list__item-action">
+                <button class="btn btn--secondary btn--small js-record-remove">Remove</button>
+            </span>
+        </div>
+    </li>
+</ul>
+
+<script src='/js/compiled/your-household-v5/bundle.js'></script>
+
+<style>
+    .list.list--records {
+        border-top: 1px solid #ccc;
+    }
+
+    .list.list--records .list__item {
+        margin-bottom: 0;
+        padding: 1rem 0;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .list.list--people {
+        list-style-type: none;
+    }
+
+    .list.list--people .list__item {
+        background: url(/img/icons/person.svg) 0 1.3rem no-repeat;
+    }
+
+    .list.list--people .list__item-name {
+        padding-left: 2rem;
+    }
+
+    .list.list--people .list__item-actions {
+        margin-top: -4px;
+    }
+
+    .list.list--people .list__item-action + .list__item-action {
+        margin-left: .5rem;
+    }
+
+    .modal {
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal__window {
+        position: relative;
+        background-color: white;
+        max-width: 520px;
+        padding: 2rem;
+        text-align: center;
+    }
+</style>
+
+<script>
+  var urlParams = new URLSearchParams(window.location.search),
+    surveyType = urlParams.get('survey'),
+    nextPage = surveyType
+      ? '../relationships/?survey=' + surveyType
+      : '../relationships',
+    altPage = surveyType && surveyType === 'lms' ? surveyType + '/' : '';
+
+  function createMemberItem(member) {
+    var $nodeEl = $('#person-record-template').clone(),
+      personNameText = member['@person'].fullName,
+      memberIsUser = isUser(member);
+
+    if (memberIsUser) {
+      personNameText += ' (You)';
+    }
+
+    $nodeEl.attr('id', '');
+    $nodeEl.find('.js-person-name').html(personNameText);
+    $nodeEl.find('.js-record-remove')
+      .on('click', removeMember_handler.bind(null, member));
+
+    $nodeEl.find('.js-record-edit').attr('href', (
+      memberIsUser
+        ? '../' + altPage + 'what-is-your-name/?noop=1'
+        : '../' + altPage + 'who-else-to-add/?edit=' + member['@person'].id +
+          (member.type === window.ONS.storage.KEYS.VISITOR_TYPE ?
+           '&journey=visitors' : '')
+    ));
+
+    return $nodeEl;
+  }
+
+  function updateHouseholdMembersVisitors() {
+    var members = window.ONS.storage.getAllHouseholdMembers(),
+      userMember = members.filter(isUser)[0],
+      otherHouseholdMembers = members.filter(window.ONS.storage.isOtherHouseholdMember),
+      visitors = members.filter(window.ONS.storage.isVisitor),
+      householdMembers = otherHouseholdMembers;
+
+    $('#household-members-summary').html('');
+    $('#visitors-summary').html('');
+
+    if (userMember) {
+      householdMembers = [userMember].concat(otherHouseholdMembers);
+    }
+
+    $.each(householdMembers, function(i, member) {
+      $('#household-members-summary').append(createMemberItem(member));
+    });
+
+    if(!householdMembers.length) {
+      $('#nobody-notice').show();
+    }
+
+    if (visitors.length) {
+      $.each(visitors, function(i, member) {
+        $('#visitors-summary').append(createMemberItem(member));
+      });
+    }
+    else {
+      $('.js-visitors-people-list').hide();
+    }
+  }
+
+  function removeMember_handler(member, e) {
+    e.preventDefault();
+    var modal = $('#modal'),
+      original = modal.find('.remove-member-button'),
+      newNode = original.clone();
+
+    newNode.on('click', confirmRemoveMember_handler.bind(null, member));
+    original.replaceWith(newNode);
+
+    modal.find('.js-person-name').html(member['@person'].fullName);
+
+    modal.show();
+  }
+
+  function confirmRemoveMember_handler(member) {
+    window.ONS.storage.deleteHouseholdMember(member['@person'].id);
+    window.ONS.storage.deleteAllRelationshipsForMember(member['@person'].id);
+
+    updateHouseholdMembersVisitors();
+    $('#modal').hide();
+  }
+
+  $('#modal .close-modal-button').on('click', function(e) {
+    e.preventDefault();
+    $('#modal').hide();
+  });
+
+  $('.qa-btn-submit').on('click', function(e) {
+    e.preventDefault();
+
+    if (window.ONS.storage.getAllHouseholdMembers().length > 1) {
+      window.location.href = nextPage;
+    }
+    else {
+      alert('Journey for less than one person in household, not yet implemented');
+    }
+  });
+
+  function isUser(member) {
+    return member['@person'].id === window.ONS.storage.IDS.USER_HOUSEHOLD_MEMBER_ID;
+  }
+
+  function updateContent () {
+    var $addToHousehould = $('.js-add-to-household');
+
+    if (surveyType === 'lms') {
+      $('.js-heading').html('About your household');
+      $addToHousehould.attr('href', '../lms/who-else-to-add/');
+    }
+  }
+
+  $(updateContent);
+  $(updateHouseholdMembersVisitors);
+</script>

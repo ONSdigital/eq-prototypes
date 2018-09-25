@@ -1,0 +1,191 @@
+---
+title: Household prototype v5
+project: your-household
+globalcss: false
+layout: eq-default-extras
+cdn: v1.5.0
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link mars" href="../do-you-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            {% include navigation.html
+            items=site.data.your-household-v4.yourHouseholdV4_navigationItemsPersonalDetails
+            nav-title-id="section-individual" %}
+        </div>
+        <div class="grid__col col-7@m pull-1@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="off" action="../individual-details-orientation">
+                    <input type="hidden" name="person" id="person"
+                           value="#"/>
+                    <input type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group" id="rsi">
+                        <div class="block" id="total-retail-turnover">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title saturn js-heading">
+                                        What is your country of birth?
+                                    </h1>
+                                </div>
+
+                                <div class="answer">
+                                    <div class="answer__fields js-fields">
+                                        <div class="field field--radio field--multiplechoice ">
+                                            <fieldset class="u-mb-xl">
+                                                <div class="field__item js-focusable-box">
+                                                    <input class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="country"
+                                                           id="england"
+                                                           value="england">
+                                                    <label class="label label--inline venus"
+                                                           for="england"
+                                                           id="england-label">
+                                                        England
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="country"
+                                                           id="wales"
+                                                           value="wales">
+                                                    <label class="label label--inline venus"
+                                                           for="wales"
+                                                           id="wales-label">
+                                                        Wales
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="country"
+                                                           id="scotland"
+                                                           value="scotland">
+                                                    <label class="label label--inline venus"
+                                                           for="scotland"
+                                                           id="scotland-label">
+                                                        Scotland
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="country"
+                                                           id="northern-ireland"
+                                                           value="northern-ireland">
+                                                    <label class="label label--inline venus"
+                                                           for="northern-ireland"
+                                                           id="northern-ireland-label">
+                                                        Northern Ireland
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="country"
+                                                           id="republic-ireland"
+                                                           value="republic-ireland">
+                                                    <label class="label label--inline venus"
+                                                           for="republic-ireland"
+                                                           id="republic-ireland-label">
+                                                        Republic of Ireland
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="country"
+                                                           id="elsewhere"
+                                                           value="elsewhere">
+                                                    <label class="label label--inline venus"
+                                                           for="elsewhere"
+                                                           id="elsewhere-label">
+                                                        Elsewhere
+                                                    </label>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+
+                    <p class="mars">Can't complete this question?<br />
+                        <a href="../hub" class="js-choose-another-section">Choose another section and
+                            return to this later</a></p>
+
+                    <p class="mars u-mb-m"><span class="js-link-secure-label"></span><br />
+                        <a class="js-link-secure"
+                           href="#">Get a separate access code to submit an
+                            individual response</a></p>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/your-household-v5/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person'),
+    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+    isEditing = urlParams.get('edit'),
+    details = storageAPI.getPersonalDetailsFor(personId),
+    surveyType = urlParams.get('survey');
+
+  $('.qa-btn-submit').on('click', function (e) {
+    storageAPI.addUpdateCountry(personId,
+      $('[name="country"]:checked').val()
+    );
+
+    if(isEditing) {
+      e.preventDefault();
+      window.location.href = '../individual-details-summary/?person=' +
+        personId + (surveyType ? '&survey=' + surveyType : '');
+    }
+  });
+
+  function updateRouting() {
+    if(surveyType) {
+      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    }
+    $('#survey-type').val(surveyType);
+  }
+
+  function updateQuestion() {
+    if(storageAPI.getAnsweringIndividualByProxy()) {
+      $('.js-heading').html('What is ' + person.fullName +
+      window.ONS.utils.trailingNameS(person.fullName) +
+        ' country of birth?');
+    }
+  }
+
+  if (details && details.country) {
+    $('#' + details.country).attr('checked', true);
+  }
+
+  $(updateQuestion);
+  $(updateRouting);
+
+  /**
+   * Routing
+   */
+  $('#person').val(new URLSearchParams(window.location.search).get('person'));
+</script>
