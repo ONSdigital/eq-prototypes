@@ -99,13 +99,12 @@ cdn: v1.5.0
     });
 
     if($('[name=away-type]:checked').val() === "no") {
-        url = '../temp-living-here?away-types='
+        url = '../summary/';
     } else {
-        url = '../temp-types-question?away-types='
+        url = '../temp-types-question?away-types=' + JSON.stringify(awayTypes);
     }
 
-    window.location = url +
-        JSON.stringify(awayTypes);
+    window.location = url;
   });
 
   function updateQuestionList() {
