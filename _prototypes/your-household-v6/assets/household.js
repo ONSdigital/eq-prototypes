@@ -117,16 +117,15 @@ export function isOtherHouseholdMember(member) {
 }
 
 export const tempAwayQuestionSentenceMap = {
-  'three-more': 'People who usually live outside the UK who are staying for' +
-    ' 3 months or more',
-  'perm-away': 'People who work away from home within the UK if this is' +
+  'three-more': 'People who usually live outside the UK who are staying in the UK for 3 months or more',
+  'perm-away': 'People who work away from home within the UK, if this is' +
     ' their permanent or family home',
-  'armed-forces': 'Members of the armed forces if this is their permenant or' +
+  'armed-forces': 'Members of the armed forces, if this is their permanent or' +
     ' family home',
   'less-twelve': 'People who are temporarily outside the UK for less than 12' +
     ' months',
   'usually-temp': 'People staying temporarily who usually live in the UK but' +
-    ' do not have another UK address',
+    ' do not have another UK address, for example, relatives, friends',
   'other': 'Other people who usually live here, including anyone temporarily' +
     ' away from home'
 };

@@ -38,6 +38,30 @@ cdn: v1.5.0
                                     </h1>
                                 </div>
 
+                                <div class="definition js-details u-mb-s"
+                                     data-hide-label="Click to collapse."
+                                     data-show-label="Click to expand.">
+
+                                    <a href="#definition"
+                                       class="definition__link mars js-details-trigger u-no-js-hide icon--details"
+                                       aria-expanded="false"
+                                       data-js-accordion-event-label="Why your answer is important"
+                                       data-ga-label="definition-pattern-library"
+                                       data-ga-action="Definition click"
+                                       data-ga="click"
+                                       data-ga-category="Help">Why do I have to include my visitors? <span class="u-vh js-details-label">Click to expand.</span></a>
+
+                                    <h3
+                                            class="venus u-no-js-show u-mb-no">Why do I have to include my visitors?</h3>
+
+                                    <div id="definition" class="definition__main js-details-body">
+                                        <div class="definition__content mars">
+                                            <p>We ask for visitor information to check that everyone is counted. This helps to produce accurate population estimates. Add any visitors, even if you think they may have been counted elsewhere.</p>
+                                        </div>
+                                        <button class="btn btn--secondary btn--small definition__content-close-trigger js-details-trigger u-no-js-hide">Hide this</button>
+                                    </div>
+                                </div>
+
                                 <div class="answer">
                                     <div class="answer__fields js-fields">
                                         <div class="field field--checkbox field--multiplechoice field--exclusive">
@@ -49,26 +73,21 @@ cdn: v1.5.0
                                                     <input
                                                             class="input input--checkbox js-focusable js-exclusive-checkbox-group" name="away-type" value="usually-in-uk" id="usually-in-uk" type="checkbox" />
                                                     <label class="label label--inline venus " for="usually-in-uk">
-                                                        Anyone who usually
-                                                        lives somewhere else
-                                                        in the UK, for
-                                                        example
-                                                        boy/girlfriends,
-                                                        friends or relatives
+                                                        People who usually live somewhere else in the UK, for example boy/girlfriends, friends or relatives
                                                     </label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
                                                     <input
                                                             class="input input--checkbox js-focusable js-exclusive-checkbox-group" name="away-type" value="second-address" id="second-address" type="checkbox" />
                                                     <label class="label label--inline venus " for="second-address">
-                                                        Anyone else staying here because it is their second address, for example, for work. Their permanent or family home is elsewhere
+                                                        People staying here because it is their second address, for example, for work. Their permanent or family home is elsewhere
                                                     </label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
                                                     <input
                                                             class="input input--checkbox js-focusable js-exclusive-checkbox-group" name="away-type" value="less-three" id="less-three" type="checkbox" />
                                                     <label class="label label--inline venus " for="less-three">
-                                                        Anyone who usually lives outside the UK who is staying in the UK for less than three months
+                                                        People who usually live outside the UK who are staying in the UK for less than three months
                                                     </label>
                                                 </div>
 
@@ -76,8 +95,7 @@ cdn: v1.5.0
                                                     <input
                                                             class="input input--checkbox js-focusable js-exclusive-checkbox-group" name="away-type" value="on-holiday" id="on-holiday" type="checkbox" />
                                                     <label class="label label--inline venus " for="on-holiday">
-                                                        Anyone who is here on
-                                                        holiday
+                                                        People here on holiday
                                                     </label>
                                                 </div>
                                                 <div class="field__label u-mt-s venus" aria-hidden="true">Or</div>
@@ -86,9 +104,7 @@ cdn: v1.5.0
                                                             class="input input--checkbox js-focusable js-exclusive-checkbox" name="away-type" value="no" id="none" type="checkbox" />
                                                     <label class="label label--inline venus " for="none">
                                                         <span class="u-vh">Or,</span>
-                                                        No, there are no
-                                                        visitors staying
-                                                        overnight
+                                                        No, there are no visitors staying overnight here on 19 August 2018”
                                                         <span
                                                                 class="u-vh">. Selecting this will uncheck all other checkboxes</span>
                                                     </label>
@@ -96,30 +112,6 @@ cdn: v1.5.0
                                                 </div>
                                             </fieldset>
                                         </div>
-                                    </div>
-                                </div>
-
-                                <div class="definition js-details"
-                                     data-hide-label="Click to collapse."
-                                     data-show-label="Click to expand.">
-
-                                    <a href="#definition"
-                                       class="definition__link mars js-details-trigger u-no-js-hide icon--details"
-                                       aria-expanded="false"
-                                       data-js-accordion-event-label="Why your answer is important"
-                                       data-ga-label="definition-pattern-library"
-                                       data-ga-action="Definition click"
-                                       data-ga="click"
-                                       data-ga-category="Help">Why your answer is important <span class="u-vh js-details-label">Click to expand.</span></a>
-
-                                    <h3
-                                            class="venus u-no-js-show u-mb-no">Why your answer is important</h3>
-
-                                    <div id="definition" class="definition__main js-details-body">
-                                        <div class="definition__content mars">
-                                            <p>We ask for visitor information to check that everyone is counted. This helps to produce accurate population estimates. Add any visitors, even if you think they may have been counted elsewhere.</p>
-                                        </div>
-                                        <button class="btn btn--secondary btn--small definition__content-close-trigger js-details-trigger u-no-js-hide">Hide this</button>
                                     </div>
                                 </div>
                             </section>
@@ -142,7 +134,7 @@ cdn: v1.5.0
     if (!nobox.checked) {
       document.trav.action = "../who-else-to-add";
     } else {
-      document.trav.action = "../hub";
+      document.trav.action = "../summary";
     }
   });
 </script>
