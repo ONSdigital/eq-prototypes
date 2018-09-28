@@ -24,9 +24,9 @@ export default function suggest() {
     /**
      * Cancel previous request if not yet returned
      */
-    if (service.requestInFlight) {
+    /*if (service.requestInFlight) {
       service.$request.abort();
-    }
+    }*/
 
     service.query(val).done(typeaheadUpdate);
   }
