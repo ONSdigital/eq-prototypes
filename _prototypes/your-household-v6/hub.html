@@ -239,7 +239,9 @@ cdn: v1.5.0
     }
 
     function updateLinks () {
-      $('.js-view-summary').attr('href', '../summary/?survey=' + surveyType);
+      if (surveyType) {
+        $('.js-view-summary').attr('href', '../summary/?survey=' + surveyType);
+      }
     }
 
     $(updateIndividualSurveyList);
