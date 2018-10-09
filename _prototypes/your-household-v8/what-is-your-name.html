@@ -32,7 +32,7 @@ cdn: v1.5.0
                     <div class="block">
 
                         <div class="question">
-                            <h1 class="question__title saturn"
+                            <h1 class="question__title saturn js-heading"
                                 data-qa="question-title">
                                 What is your name?
                             </h1>
@@ -83,18 +83,34 @@ cdn: v1.5.0
 <script src='/js/compiled/your-household-v8/bundle.js'></script>
 
 <script>
+  var urlParams = new URLSearchParams(window.location.search),
+    isEditing = urlParams.get('edit') === 'true',
+    storageAPI = window.ONS.storage,
+    userAsMember = storageAPI.getUserAsHouseholdMember(),
+    userPerson = userAsMember && userAsMember['@person'];
+
+  function updateQuestion() {
+    if(isEditing && userPerson) {
+      $('.js-heading').html('Change details for ' + userPerson.fullName + ' (You)');
+    }
+  }
+
   $('.btn-submit').click(function(e) {
     e.preventDefault(); // do not submit the form like usual
     sessionStorage.setItem('name', getName());
 
-    window.ONS.storage.addUserPerson(window.ONS.storage.TYPES.person({
+    var newPersonObj = window.ONS.storage.TYPES.person({
       firstName: document.getElementById('first-name').value,
       lastName: document.getElementById('last-name').value
-    }));
+    });
 
-    window.ONS.storage.deleteUserAsHouseholdMember();
+    storageAPI.addUserPerson(newPersonObj);
 
-    window.location = '../do-you-live-here/';
+    if(isEditing) {
+      storageAPI.updateUserAsHouseholdMember(newPersonObj, userAsMember);
+    }
+
+    window.location = isEditing ? '../summary/' : '../do-you-live-here/';
   });
 
   function getName() {
@@ -114,5 +130,7 @@ cdn: v1.5.0
       $('#last-name').val(userPerson.lastName);
     }
   });
+
+  $(updateQuestion);
 </script>
 

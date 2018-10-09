@@ -196,7 +196,7 @@ cdn: v1.5.0
 
     $nodeEl.find('.js-record-edit').attr('href', (
       memberIsUser
-        ? '../' + altPage + 'what-is-your-name/?noop=1'
+        ? '../' + altPage + 'what-is-your-name/?noop=1&edit=true'
         : '../' + altPage + 'who-else-to-add/?edit=' + member['@person'].id +
           (member.type === window.ONS.storage.KEYS.VISITOR_TYPE ?
            '&journey=visitors' : '')

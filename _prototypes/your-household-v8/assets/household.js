@@ -51,8 +51,10 @@ export function deleteHouseholdMember(personId) {
 export function updateUserAsHouseholdMember(person, memberData) {
   let userAsHouseholdMember = getUserAsHouseholdMember();
 
+  person.id = USER_HOUSEHOLD_MEMBER_ID;
+
   userAsHouseholdMember
-    ? updateHouseholdMember(userAsHouseholdMember['@person'], memberData)
+    ? updateHouseholdMember(person, memberData)
     : addHouseholdMember(person, memberData, USER_HOUSEHOLD_MEMBER_ID);
 }
 
