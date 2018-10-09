@@ -252,22 +252,7 @@ cdn: v1.5.0
     editRelationshipFound = null,
 
     surveyType = urlParams.get('survey'),
-    nextPageSurveyRouting = surveyType ? '&survey=' + surveyType : '',
-
-    $target = $('.js-relationship-answer-feedback');
-
-  function changeLink_handler(e) {
-    e.preventDefault();
-    
-    updateList();
-    updateAnswer({
-      personIs: personIs,
-      personTo: personTo
-    });
-
-    $('[name="relationship"]').prop('checked', false);
-    $('.field__item').removeClass('is-checked');
-  }
+    nextPageSurveyRouting = surveyType ? '&survey=' + surveyType : '';
 
   function updateAnswer(missingRelationship, relationshipDescription) {
     var personIs = missingRelationship.personIs,
@@ -291,10 +276,6 @@ cdn: v1.5.0
 
     var gap3 = " to " + (personToIsMe ? ' you' : personTo['@person'].fullName);
 
-    var $link = $('<a href="" class="u-fr">Change</a>');
-
-    $link.on('click', changeLink_handler);
-
     $('.js-relationship-answer-feedback').html(
       personIs['@person'].fullName +
 
@@ -311,23 +292,6 @@ cdn: v1.5.0
        */
       (isNotFamilyDescription ? gap3 : '')
     );
-
-    if(relationshipDescription) {
-      $target.append($link);
-    }
-  }
-
-  function updateList($el) {
-    var $parent;
-
-    if($el) {
-      $parent = $el.closest('.field__item');
-      $parent.siblings().hide();
-      $parent.show();
-    }
-    else {
-      $('.field__item').show();
-    }
   }
 
   function updateQuestion(missingRelationship, relationshipDescription) {
@@ -590,8 +554,6 @@ cdn: v1.5.0
       personIs: personIs,
       personTo: personTo
     }, storageAPI.relationshipDescriptionMap[$(this).val()]);
-
-    updateList($(this));
   });
 
   $(function() {
