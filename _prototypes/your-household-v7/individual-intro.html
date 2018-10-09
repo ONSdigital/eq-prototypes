@@ -1,0 +1,83 @@
+---
+title: Household prototype v7
+project: your-household
+globalcss: false
+layout: eq-default-extras
+cdn: v1.5.0
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link mars" href="../confirm-address">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            {% include navigation.html
+            items=site.data.your-household-v7.yourHouseholdV4_navigationItemsPersonalDetails
+            nav-title-id="section-individual" %}
+        </div>
+        <div class="grid__col col-7@m pull-1@m">
+            <main role="main" id="main" class="page__main">
+                <div class="group u-mb-xl" id="rsi">
+                    <div class="block" id="total-retail-turnover">
+                        <section class="section"
+                                 id="total-retail-turnover-section">
+                            <h1 class="saturn js-person-name"></h1>
+
+                            <p class="mars">In this sub section, we’re going to
+                                ask you questions about <span class="js-person-name"></span>.
+                            </p>
+
+                            <h3 class="neptune">Information you will need:</h3>
+                            <ul class="mars">
+                                <li>Personal details such as date of birth, country of birth, sexual orientation and religion etc.</li>
+                                <li>Education and qualifications</li>
+                                <li>Employment, income and travel to work</li>
+                                <li>Second or holiday homes</li>
+                                <li>Unpaid care, health and well-being</li>
+                            </ul>
+
+                            <h3 class="neptune">Submitting an individual response</h3>
+                            <p class="mars">When completing this section, we will ask you if you would like to submit an
+                            individual response. Choose this option if you don't want other people at this address to view
+                            your answers</p>
+                        </section>
+                    </div>
+                </div>
+
+                <button class="btn btn--primary btn--lg qa-btn-submit venus btn-submit"
+                        type="submit" name="">Continue
+                </button>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/your-household-v7/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person'),
+    surveyType = urlParams.get('survey');
+
+  $('.btn-submit').click(function(e) {
+    e.preventDefault();
+
+    window.location = '../individual-decision/?person=' + personId +
+      (surveyType ? '&survey=' + surveyType : '');
+  });
+
+  function updateName() {
+    $('.js-person-name').html(storageAPI.getHouseholdMemberByPersonId(personId)['@person'].fullName);
+  }
+
+  $(updateName);
+</script>
+
+
+
