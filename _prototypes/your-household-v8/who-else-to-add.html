@@ -117,10 +117,12 @@ cdn: v1.5.0
 <script src='/js/compiled/your-household-v8/bundle.js'></script>
 
 <script>
-  var editUserId = new URLSearchParams(window.location.search).get('edit'),
+  var urlParams = new URLSearchParams(window.location.search),
+    editUserId = urlParams.get('edit'),
     storageAPI = window.ONS.storage,
     memberFound = null,
-    userLiveAtAddress = storageAPI.doILiveHere();
+    userLiveAtAddress = storageAPI.doILiveHere(),
+    isLateAddition = !!urlParams.get('late-addition');
 
   if (editUserId) {
     memberFound = window.ONS.storage.getAllHouseholdMembers()
@@ -186,6 +188,8 @@ cdn: v1.5.0
      */
     if(editUserId) {
       window.location = '../summary/';
+    } else if(isLateAddition) {
+      window.location = '../relationships/?redirect=../summary/';
     } else if (window.location.search.match(/journey=temp-living-here/)) {
       window.location = userLiveAtAddress
         ? '../relationships/?redirect=../temp-living-here-feedback/'
@@ -218,7 +222,7 @@ cdn: v1.5.0
         ' who does not have another UK address?';
 
     if(editUserId) {
-      if(memberFound) {
+      if (memberFound) {
         person = memberFound['@person'];
 
         $('#first-name').val(person.firstName);
