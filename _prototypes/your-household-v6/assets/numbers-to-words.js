@@ -90,7 +90,7 @@ var NUMBER_TO_POSITION_TEXT_MAP = {
   'nine': 'ninth',
   'ten': 'tenth',
   'eleven': 'eleventh',
-  'twelve': 'twelveth',
+  'twelve': 'twelfth',
   'thirteen': 'thirteenth',
   'fourteen': 'fourteenth',
   'fifteen': 'fifteenth',
