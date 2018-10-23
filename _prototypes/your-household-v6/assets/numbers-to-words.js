@@ -87,7 +87,7 @@ var NUMBER_TO_POSITION_TEXT_MAP = {
   'six': 'sixth',
   'seven': 'seventh',
   'eight': 'eighth',
-  'nine': 'nineth',
+  'nine': 'ninth',
   'ten': 'tenth',
   'eleven': 'eleventh',
   'twelve': 'twelveth',
