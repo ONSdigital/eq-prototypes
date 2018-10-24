@@ -46,7 +46,8 @@ import {
   isOtherHouseholdMember,
   isHouseholdMember,
   person,
-  tempAwayQuestionSentenceMap
+  tempAwayQuestionSentenceMap,
+  visitorQuestionSentenceMap
 } from './assets/household';
 import {
   addUpdatePersonalDetailsDOB,
@@ -66,7 +67,7 @@ import {
 } from './assets/personal-details';
 import {removeFromList, trailingNameS} from './assets/utils';
 
-import { numberToPositionWord } from './assets/numbers-to-words';
+import { numberToPositionWord, numberToWordsStyleguide } from './assets/numbers-to-words';
 
 import { tools } from './assets/prototype-tools';
 
@@ -303,6 +304,7 @@ window.ONS.storage = {
   updateUserAsHouseholdMember,
   deleteUserAsHouseholdMember,
   tempAwayQuestionSentenceMap,
+  visitorQuestionSentenceMap,
 
   isVisitor,
   isOtherHouseholdMember,
@@ -384,7 +386,8 @@ window.ONS.helpers = {
 window.ONS.utils = {
   removeFromList,
   trailingNameS,
-  numberToPositionWord
+  numberToPositionWord,
+  numberToWordsStyleguide
 };
 
 $(populateHouseholdList);

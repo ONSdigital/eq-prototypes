@@ -129,3 +129,10 @@ export const tempAwayQuestionSentenceMap = {
   'other': 'Other people who usually live here, including anyone temporarily' +
     ' away from home'
 };
+
+export const visitorQuestionSentenceMap = {
+  'usually-in-uk': 'People who usually live somewhere else in the UK, for example boy/girlfriends, friends or relatives',
+  'second-address': 'People staying here because it is their second address, for example, for work. Their permanent or family home is elsewhere',
+  'less-three': 'People who usually live outside the UK who are staying in the UK for less than three months',
+  'on-holiday': 'People here on holiday',
+}

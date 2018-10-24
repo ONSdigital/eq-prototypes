@@ -225,11 +225,13 @@ cdn: v1.5.0
 
     const numberOfHouseholdMembers = householdMembers.length;
     const peopleListTitle = document.querySelector('.js-household-people-list');
-    peopleListTitle.innerHTML = peopleListTitle.innerHTML.replace('{n}', numberOfHouseholdMembers);
+    peopleListTitle.innerHTML = peopleListTitle.innerHTML.replace('{n}', window.ONS.utils.numberToWordsStyleguide(numberOfHouseholdMembers));
 
     if(!numberOfHouseholdMembers) {
       $('#nobody-notice').show();
-    } else if (numberOfHouseholdMembers > 1) {
+    }
+    
+    if (numberOfHouseholdMembers !== 1) {
         document.querySelector('.js-household-people-plural').style.display = 'inline';
     }
 
@@ -241,7 +243,7 @@ cdn: v1.5.0
       });
 
       const visitorsListTitle = document.querySelector('.js-visitors-people-list');
-        visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{n}', numberOfVisitors);
+        visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{n}', window.ONS.utils.numberToWordsStyleguide(numberOfVisitors));
 
         if (numberOfVisitors > 1) {
             document.querySelector('.js-visitors-people-plural').style.display = 'inline';

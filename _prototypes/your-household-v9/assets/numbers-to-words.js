@@ -87,10 +87,10 @@ var NUMBER_TO_POSITION_TEXT_MAP = {
   'six': 'sixth',
   'seven': 'seventh',
   'eight': 'eighth',
-  'nine': 'nineth',
+  'nine': 'ninth',
   'ten': 'tenth',
   'eleven': 'eleventh',
-  'twelve': 'twelveth',
+  'twelve': 'twelfth',
   'thirteen': 'thirteenth',
   'fourteen': 'fourteenth',
   'fifteen': 'fifteenth',
@@ -143,4 +143,12 @@ export function numberToPositionWord(num) {
 
   // console.log('result', (prefix ? prefix + ' ' : '') + newLastWord);
   return result;
+}
+
+export function numberToWordsStyleguide(number) {
+  if (number > 9) {
+    return number;
+  } 
+
+  return ONE_TO_NINETEEN[number - 1];
 }
