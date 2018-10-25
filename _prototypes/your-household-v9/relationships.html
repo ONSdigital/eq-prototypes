@@ -300,23 +300,27 @@ cdn: v1.5.0
 
     var personToIsMe = personTo['@person'].id ===
         storageAPI.IDS.USER_HOUSEHOLD_MEMBER_ID;
+    
+    var gap1 = "Thinking about " + personTo['@person'].fullName + ", <br />";
 
     var gap2 = isNotFamilyDescription
       ? " is "
-      : (personToIsMe
-        ? " is your"
-        : " is " + personTo['@person'].fullName +
-          window.ONS.utils.trailingNameS(personTo['@person'].fullName)
-      );
+      : (personToIsMe ? " is your" : " is their");
 
     var gap3 = " to " + (personToIsMe ? ' you' : personTo['@person'].fullName);
 
     $('.js-relationship-person-is-relationship-description').html(
-      personIs['@person'].fullName +
+      
+      /**
+       * Conditionally show if question is not about me
+       */
+      (!personToIsMe ? gap1 : '') +
 
-      gap2 +
-
-      (relationshipDescription && relationshipDescription.sentanceLabel || " ...") +
+      personIs['@person'].fullName + gap2 +
+      " <span class='highlight'>" +
+        (relationshipDescription && relationshipDescription.sentanceLabel ||
+          "...") +
+      "</span>" +
 
       /**
        * Conditionally show if not family description
@@ -545,10 +549,16 @@ cdn: v1.5.0
   }
 
   $('[name="relationship"]').on('change', function() {
+    const relationshipDescription = storageAPI.relationshipDescriptionMap[$(this).val()];
+    updateQuestion({
+      personIs: personIs,
+      personTo: personTo
+    }, relationshipDescription);
+
     updateAnswer({
       personIs: personIs,
       personTo: personTo
-    }, storageAPI.relationshipDescriptionMap[$(this).val()]);
+    }, relationshipDescription);
   });
 
   $(function() {
