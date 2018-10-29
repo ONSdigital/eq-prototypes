@@ -40,7 +40,7 @@ cdn: v1.5.0
                                 <ul id="household-members" class="u-mb-l"></ul>
 
                                 <div
-                                        class="field field--checkbox field--multiplechoice field--exclusive u-mb-xl">
+                                        class="field field--checkbox field--multiplechoice field--exclusive u-mb-s">
                                     <fieldset>
                                         <legend class="field__legend mars u-vh">Select all that apply:</legend>
                                         <div class="field__label venus">Select all that apply:</div>
@@ -60,6 +60,29 @@ cdn: v1.5.0
                                     </fieldset>
                                 </div>
                             </section>
+                        </div>
+                    </div>
+                    <div class="definition js-details u-mb-xl"
+                            data-hide-label="Click to collapse."
+                            data-show-label="Click to expand.">
+
+                        <a href="#definition"
+                            class="definition__link mars js-details-trigger u-no-js-hide icon--details"
+                            aria-expanded="false"
+                            data-js-accordion-event-label="Why do we ask this question?"
+                            data-ga-label="definition-pattern-library"
+                            data-ga-action="Definition click"
+                            data-ga="click"
+                            data-ga-category="Help">Why do we ask this question? <span class="u-vh js-details-label">Click to expand.</span></a>
+
+                        <h3
+                                class="venus u-no-js-show u-mb-no">Why do we ask this question?</h3>
+
+                        <div id="definition" class="definition__main js-details-body">
+                            <div class="definition__content mars">
+                                <p>We ask this question to check that everyone is correctly counted on the census. This may include people who are staying temporarily or are away.</p>
+                            </div>
+                            <button class="btn btn--secondary btn--small definition__content-close-trigger js-details-trigger u-no-js-hide">Hide this</button>
                         </div>
                     </div>
                     <button class="btn btn--primary btn--lg qa-btn-submit venus"
@@ -124,8 +147,8 @@ cdn: v1.5.0
 
   function updateQuestion () {
     $('.js-heading-inner-part1').html(members.length ?
-      'Apart from the people already added, is there anyone else you need to add?':
-      'Is there anyone you need to add?'
+      `Apart from the people already added, is there anyone else you need to add to ${sessionStorage.getItem('address-line-1')} who fits into the following categories?`:
+      `Is there anyone you need to add to ${sessionStorage.getItem('address-line-1')} who fits into the following categories?`
     );
   }
 
