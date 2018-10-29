@@ -83,6 +83,8 @@ cdn: v1.5.0
 <script src='/js/compiled/your-household-v9/bundle.js'></script>
 
 <script>
+    console.log(window.ONS.storage.getUserPerson());
+
   $('.btn-submit').click(function(e) {
     e.preventDefault(); // do not submit the form like usual
     sessionStorage.setItem('name', getName());
@@ -92,7 +94,21 @@ cdn: v1.5.0
       lastName: document.getElementById('last-name').value
     }));
 
-    window.ONS.storage.deleteUserAsHouseholdMember();
+    if (sessionStorage.getItem('lives-here') === 'yes') {
+        var personUser = window.ONS.storage.getUserPerson();
+
+        /**
+         * Add member to household
+         */
+        window.ONS.storage.updateUserAsHouseholdMember(
+            personUser,
+            {
+            type: window.ONS.storage.KEYS.HOUSEHOLD_MEMBER_TYPE
+            }
+        );
+    } else {
+        window.ONS.storage.deleteUserAsHouseholdMember();
+    }
 
     window.location = '../does-anyone-else-live-here/';
   });
