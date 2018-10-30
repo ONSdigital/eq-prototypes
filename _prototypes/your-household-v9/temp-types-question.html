@@ -156,11 +156,7 @@ cdn: v1.5.0
     /*window.location.href = '../temp-types-feedback?away-types=' +
       JSON.stringify(awayTypes);*/
 
-    window.location = userLiveAtAddress
-      ? '../temp-types-living-away/?redirect=../temp-types-feedback/?away-types=' +
-        JSON.stringify(awayTypes)
-      : '../temp-types-feedback/?away-types=' +
-        JSON.stringify(awayTypes);
+    window.location = '../temp-types-feedback/?away-types=' + JSON.stringify(awayTypes);
   });
 
   $(updateQuestionList);
