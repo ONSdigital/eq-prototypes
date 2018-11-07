@@ -32,7 +32,7 @@ cdn: v1.5.0
                                      id="total-retail-turnover-question">
                                     <h1
                                             class="question__title saturn js-heading">
-                                        People who live here
+                                        People who live here and overnight visitors
                                     </h1>
                                 </div>
 
@@ -48,7 +48,8 @@ cdn: v1.5.0
                                 </div>
                                 <br />
 
-                                <h2 class="neptune js-household-people-list">You&rsquo;ve added {n} household member<span class="js-household-people-plural" style="display: none">s</span></h2>
+                                <h2
+                                        class="neptune js-household-people-list">You&rsquo;ve added <span class="highlight">{n}</span> household member<span class="js-household-people-plural" style="display: none">s</span></h2>
                                 <ul id="household-members-summary"
                                     class="list list--records list--people u-mb-s js-records"></ul>
                                 <p id="nobody-notice"
@@ -61,10 +62,12 @@ cdn: v1.5.0
                                 </p>
 
                                 <div class="js-visitors-people-list">
-                                    <h2 class="neptune js-visitors-people-title">You&rsquo;ve added {n} visitor<span class="js-visitors-people-plural" style="display: none">s</span> staying
+                                    <h2 class="neptune js-visitors-people-title">You&rsquo;ve added <span class="highlight">{n}</span> visitor<span class="js-visitors-people-plural" style="display: none">s</span> staying
                                         overnight on 28 October 2018</h2>
                                     <ul id="visitors-summary"
                                         class="list list--records list--people u-mb-s js-records"></ul>
+                                    <p id="nobody-visitor-notice"
+                                       style="display:none;">There are no visitors staying overnight on 28 October 2018.</p>
                                     <p class="u-mb-xl"><a
                                             href="../who-else-to-add?journey=visitors">Add a visitor</a>
                                     </p>
@@ -225,7 +228,8 @@ cdn: v1.5.0
 
     const numberOfHouseholdMembers = householdMembers.length;
     const peopleListTitle = document.querySelector('.js-household-people-list');
-    peopleListTitle.innerHTML = peopleListTitle.innerHTML.replace('{n}', window.ONS.utils.numberToWordsStyleguide(numberOfHouseholdMembers));
+    peopleListTitle.innerHTML = peopleListTitle.innerHTML.replace('{n}',
+      window.ONS.utils.numberToWordsStyleguide(numberOfHouseholdMembers) || 0);
 
     if(!numberOfHouseholdMembers) {
       $('#nobody-notice').show();
@@ -237,20 +241,22 @@ cdn: v1.5.0
 
     const numberOfVisitors = visitors.length;
 
-    if (numberOfVisitors) {
-      $.each(visitors, function(i, member) {
-        $('#visitors-summary').append(createMemberItem(member));
-      });
-
-      const visitorsListTitle = document.querySelector('.js-visitors-people-list');
-        visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{n}', window.ONS.utils.numberToWordsStyleguide(numberOfVisitors));
-
-        if (numberOfVisitors > 1) {
-            document.querySelector('.js-visitors-people-plural').style.display = 'inline';
-        }
+    if(!numberOfVisitors) {
+      $('#nobody-visitor-notice').show();
     }
-    else {
-      $('.js-visitors-people-list').hide();
+
+    $.each(visitors, function(i, member) {
+        $('#visitors-summary').append(createMemberItem(member));
+    });
+
+    const visitorsListTitle = document.querySelector('.js-visitors-people-list');
+
+    visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{n}',
+      window.ONS.utils.numberToWordsStyleguide(numberOfVisitors) || 0);
+
+    if (numberOfVisitors > 1) {
+      document.querySelector('.js-visitors-people-plural').style.display =
+       'inline';
     }
   }
 
