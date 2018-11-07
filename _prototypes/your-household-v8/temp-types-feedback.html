@@ -1,5 +1,5 @@
 ---
-title: Household prototype v6
+title: Household prototype v8
 project: your-household
 globalcss: false
 layout: eq-default-extras
@@ -17,24 +17,30 @@ cdn: v1.5.0
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
             <!--{% include navigation.html
-            items=site.data.your-household-v6.navigationItemsHousehold
+            items=site.data.your-household-v8.navigationItemsHousehold
             nav-title-id="section-address" %}-->
         </div>
         <div class="grid__col col-7@m pull-1@m">
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="off" novalidate="">
-                    <input type="hidden" name="previous"
-                           value="does-anyone-else-live-here"/>
-                    <div class="group" id="rsi">
-                        <div class="block" id="total-retail-turnover">
+                    <div class="group">
+                        <div class="block">
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title saturn">
-                                        Does anybody else live at <span
-                                            class="address-text"></span>?
+                                        Is there anyone else apart from the people already included, who you need to add?
                                     </h1>
+                                </div>
+
+                                <div
+                                        class="panel panel--simple panel--info u-mb-m">
+                                    <div class="panel__body">
+                                        <strong class="u-mb-xs u-d-b">Include
+                                        </strong>
+                                        <ul id="question-list"></ul>
+                                    </div>
                                 </div>
 
                                 <div id="member-list"></div>
@@ -45,29 +51,22 @@ cdn: v1.5.0
                                             <div class="field__item js-focusable-box">
                                                 <input class="input input--radio js-focusable"
                                                        type="radio"
-                                                       name="does-anyone-else-live-here"
+                                                       name="is-this-everyone"
                                                        id="yes-someone-else"
                                                        value="yes">
                                                 <label class="label label--inline venus"
                                                        for="yes-someone-else"
-                                                       id="yes-someone-else-label">
-                                                    <span
-                                                            class="yes-answer">Yes, I need to
-                                                        add
-                                                    another person</span>
-                                                    <span
-                                                            class="pluto u-db label--negative">Include partners, children, babies born on or before 28 October 2018, housemates, tenants and lodgers, students and schoolchildren who live away from home during term time</span>
+                                                       id="yes-someone-else-label">Yes, I need to add someone
                                                 </label>
                                             </div>
 
                                             <div class="field__item js-focusable-box">
                                                 <input class="input input--radio js-focusable"
                                                        type="radio"
-                                                       name="does-anyone-else-live-here"
+                                                       name="is-this-everyone"
                                                        id="no" value="no">
                                                 <label class="label label--inline venus"
-                                                       for="no">No, this is
-                                                    everyone</label>
+                                                       for="no">No, this is everyone</label>
                                             </div>
                                         </fieldset>
                                     </div>
@@ -84,58 +83,53 @@ cdn: v1.5.0
     </div>
 </div>
 
-<script src='/js/compiled/your-household-v6/bundle.js'></script>
+<script src='/js/compiled/your-household-v8/bundle.js'></script>
+
+<ul style="display:none;">
+    <li id="question-list-item-template" class="list__item"></li>
+</ul>
 
 <script>
-  var yesbox = document.getElementById("yes-someone-else"),
-    storageAPI = window.ONS.storage;
+  var storageAPI = window.ONS.storage,
+      yesbox = document.getElementById("yes-someone-else"),
+      awayTypesStr = new URLSearchParams(window.location.search).get('away-types');
+
+  if(!awayTypesStr) {
+	  throw Error('No sentence for away type found');
+  }
+
+  var awayTypes = JSON.parse(awayTypesStr)/*,
+	  awayTypeOriginal = [].concat(awayTypes);
+	  awayType = awayTypes.shift()*/;
+
+  function updateQuestionList() {
+    $('#question-list').append(awayTypes.map(function(awayType) {
+      var $nodeEl = $('#question-list-item-template').clone();
+
+      $nodeEl.html(storageAPI.tempAwayQuestionSentenceMap[awayType]);
+
+      return $nodeEl;
+    }));
+  }
+
   $('.qa-btn-submit').click(function(e) {
+  	e.preventDefault();
 
     /**
      * Routing
      */
     if (!yesbox.checked) {
-      if (window.location.search.match(/journey=visitors/)) {
-        document.trav.action = "../summary";
-      }
-      else {
-        document.trav.action = "../temp-types-living-away";
-      }
-
+      window.location.href = '../visitors/';
     } else {
-      document.trav.action = "../who-else-to-add";
+      window.location.href = '../temp-types-question?away-types=' +
+        JSON.stringify(awayTypes);
     }
   });
 
+  $(updateQuestionList);
+
   $(function() {
-    var addressLines = (sessionStorage.getItem('address') || '').split(','),
-      addressLine1 = addressLines[0],
-      addressLine2 = addressLines[1],
-      householdMembers = storageAPI
-        .getAllHouseholdMembers().filter(storageAPI.isHouseholdMember),
-      nextPosition = householdMembers.length + 1;
-
-    if (window.location.search.match(/journey=visitors/)) {
-      $('#form')
-        .prepend('<input type="hidden" name="journey" value="visitors" />');
-      $('#question-title')
-        .html('Is anyone else staying on 28 October 2018 at ' + addressLine1 +
-          ', ' + addressLine2 + '?');
-      $('#member-list').html('<ul id="visitors-list"></ul>');
-      $('#yes-someone-else-label').html('Yes, I need to add another visitor');
-      window.ONS.helpers.populateVisitorList();
-    }
-    else {
-      $('#member-list').html('<ul id="household-members"></ul>');
-      window.ONS.helpers.populateHouseholdList();
-    }
-
-    if ((nextPosition) > 1) {
-      $('.yes-answer').html(
-        'Yes, I need to add a ' +
-        window.ONS.utils.numberToPositionWord(nextPosition) +
-        ' person'
-      );
-    }
+    $('#member-list').html('<ul id="household-members"></ul>');
+    window.ONS.helpers.populateHouseholdList();
   });
 </script>
