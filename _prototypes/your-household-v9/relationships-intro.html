@@ -26,18 +26,11 @@ cdn: v1.5.0
                     <div class="block" id="total-retail-turnover">
                         <section class="section"
                                  id="total-retail-turnover-section">
-                            <h1 class="saturn address-text"></h1>
+                            <h1 class="saturn">Household relationships</h1>
 
-                            <p class="mars">In this section, we're going to ask you about the people living at
-                                <span class="address-text"></span>.</p>
+                            <p class="mars">In this section, we’ll ask you how the people in this household are related to each other.</p>
 
-                            <h3 class="neptune">Information you will need:</h3>
-                            <ul class="mars">
-                                <li>Names of the people living at this address</li>
-                                <li>Names of anyone who are temporarily away</li>
-                                <li>Names of anyone staying at this address who has been or intends to be, in the UK for 3 months or more</li>
-                                <li>Names of visitors staying at this address on 28 October 2018</li>
-                            </ul>
+                            <p>For the displayed household members, select the appropriate relationship from the options shown. The selected relationship will display at the bottom of the page for you to check.</p>
                         </section>
                     </div>
                 </div>
@@ -53,9 +46,15 @@ cdn: v1.5.0
 <script src='/js/compiled/your-household-v9/bundle.js'></script>
 
 <script>
+  var urlParams = new URLSearchParams(window.location.search),
+    surveyType = urlParams.get('survey'),
+    nextPage = surveyType
+      ? '../relationships/?survey=' + surveyType
+      : '../relationships';
+
   $('.btn-submit').click(function(e) {
     e.preventDefault(); // do not submit the form like usual
-    window.location = '../do-you-live-here/';
+    window.location.href = nextPage;
   });
 
   $(function() {

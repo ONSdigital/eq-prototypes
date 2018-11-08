@@ -179,8 +179,8 @@ cdn: v1.5.0
   var urlParams = new URLSearchParams(window.location.search),
     surveyType = urlParams.get('survey'),
     nextPage = surveyType
-      ? '../relationships/?survey=' + surveyType
-      : '../relationships',
+      ? '../relationships-intro/?survey=' + surveyType
+      : '../relationships-intro',
     altPage = surveyType && surveyType === 'lms' ? surveyType + '/' : '';
 
   function createMemberItem(member) {
