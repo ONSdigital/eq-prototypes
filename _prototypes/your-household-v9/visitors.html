@@ -27,9 +27,9 @@ cdn: v1.5.0
                       autocomplete="off" novalidate="">
                     <input type="hidden" name="previous" value="visitors"/>
                     <input type="hidden" name="journey" value="visitors"/>
-                    <div class="group" id="rsi">
+                    <div class="group">
                         <div class="block">
-                            <section class="section u-mb-xl">
+                            <section class="section u-mb-s">
                                 <div class="question">
                                     <h1 class="question__title saturn">
                                         Are there any visitors staying
@@ -93,6 +93,31 @@ cdn: v1.5.0
                             </section>
                         </div>
                     </div>
+
+                    <div class="definition js-details u-mb-xl"
+                         data-hide-label="Click to collapse."
+                         data-show-label="Click to expand.">
+
+                        <a href="#definition"
+                           class="definition__link mars js-details-trigger u-no-js-hide icon--details"
+                           aria-expanded="false"
+                           data-js-accordion-event-label="Why your answer is important"
+                           data-ga-label="definition-pattern-library"
+                           data-ga-action="Definition click"
+                           data-ga="click"
+                           data-ga-category="Help">Why do I have to include my visitors? <span class="u-vh js-details-label">Click to expand.</span></a>
+
+                        <h3
+                                class="venus u-no-js-show u-mb-no">Why do I have to include my visitors?</h3>
+
+                        <div id="definition" class="definition__main js-details-body">
+                            <div class="definition__content mars">
+                                <p>We ask for visitor information to check that everyone is counted. This helps to produce accurate population estimates. Add any visitors, even if you think they may have been counted elsewhere.</p>
+                            </div>
+                            <button class="btn btn--secondary btn--small definition__content-close-trigger js-details-trigger u-no-js-hide">Hide this</button>
+                        </div>
+                    </div>
+
                     <button class="btn btn--primary btn--lg qa-btn-submit venus"
                             type="submit" name="">Save and continue
                     </button>
