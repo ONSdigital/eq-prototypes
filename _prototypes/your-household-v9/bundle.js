@@ -289,6 +289,14 @@ function doILiveHere() {
   return sessionStorage.getItem('lives-here') === 'yes';
 }
 
+function getSignificant() {
+  return '11 November 2018';
+}
+
+function updateSignificantDate() {
+  $('.js-significant-date').html(getSignificant());
+}
+
 window.ONS = window.ONS || {};
 window.ONS.storage = {
   getAddress,
@@ -387,7 +395,8 @@ window.ONS.utils = {
   removeFromList,
   trailingNameS,
   numberToPositionWord,
-  numberToWordsStyleguide
+  numberToWordsStyleguide,
+  getSignificant
 };
 
 $(populateHouseholdList);
@@ -398,3 +407,4 @@ $(updatePersonLink);
 $(tools);
 $(updateAllPreviousLinks);
 $(updateBySurveyType);
+$(updateSignificantDate);
