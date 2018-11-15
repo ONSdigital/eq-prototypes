@@ -117,22 +117,28 @@ export function isOtherHouseholdMember(member) {
 }
 
 export const tempAwayQuestionSentenceMap = {
-  'three-more': 'People who usually live outside the UK who are staying in the UK for 3 months or more',
-  'perm-away': 'People who work away from home within the UK, if this is' +
-    ' their permanent or family home',
-  'armed-forces': 'Members of the armed forces, if this is their permanent or' +
-    ' family home',
-  'less-twelve': 'People who are temporarily outside the UK for less than 12' +
-    ' months',
-  'usually-temp': 'People staying temporarily who usually live in the UK but' +
-    ' do not have another UK address, for example, relatives, friends',
-  'other': 'Other people who usually live here, including anyone temporarily' +
-    ' away from home'
+  'three-more': `Pobl sy'n byw y tu allan i'r Deyrnas Unedig fel arfer, ond sy'n 
+    aros yn y Deyrnas Unedig am 3 mis neu fwy`,
+  'perm-away': `Pobl sy'n gweithio oddi cartref yn y Deyrnas Unedig, os mai hwn 
+    yw eu cartref parhaol neu gartref y teulu`,
+  'armed-forces': `Aelodau o'r lluoedd arfog, os mai hwn yw eu cartref parhaol 
+    neu gartref y teulu`,
+  'less-twelve': `Pobl sydd y tu allan i’r Deyrnas Unedig dros dro am lai na 12 
+    mis`,
+  'usually-temp': `Pobl sy'n aros yma dros dro, sy'n byw yn y Deyrnas Unedig fel 
+    arfer, ond sydd heb gyfeiriad arall yn y Deyrnas Unedig, er enghraifft 
+    perthnasau, ffrindiau`,
+  'other': `Pobl eraill sy’n byw yma fel arfer, gan gynnwys unrhyw un sydd oddi 
+    cartref dros dro`
 };
 
 export const visitorQuestionSentenceMap = {
-  'usually-in-uk': 'People who usually live somewhere else in the UK, for example boy/girlfriends, friends or relatives',
-  'second-address': 'People staying here because it is their second address, for example, for work. Their permanent or family home is elsewhere',
-  'less-three': 'People who usually live outside the UK who are staying in the UK for less than three months',
-  'on-holiday': 'People here on holiday',
-}
+  'usually-in-uk': `Pobl sydd fel arfer yn byw rywle arall yn y Deyrnas Unedig, 
+    er enghraifft cariadon, ffrindiau neu berthnasau`,
+  'second-address': `Pobl sy'n aros yma gan mai dyma eu hail gyfeiriad, er 
+    enghraifft, oherwydd gwaith. Mae eu cartref parhaol neu gartref y teulu 
+    rywle arall`,
+  'less-three': `Pobl sy'n byw y tu allan i’r Deyrnas Unedig fel arfer, ond sy'n 
+    aros yn y Deyrnas Unedig am lai na 3 mis`,
+  'on-holiday': 'Pobl sydd ar wyliau yma'
+};

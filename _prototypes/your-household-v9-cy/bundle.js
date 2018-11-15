@@ -290,7 +290,7 @@ function doILiveHere() {
 }
 
 function getSignificant() {
-  return '11 noviembre 2018';
+  return '11 Tachwedd 2018';
 }
 
 function updateSignificantDate() {
@@ -408,3 +408,4 @@ $(tools);
 $(updateAllPreviousLinks);
 $(updateBySurveyType);
 $(updateSignificantDate);
+

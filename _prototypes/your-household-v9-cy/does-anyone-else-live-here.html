@@ -6,6 +6,20 @@ layout: eq-default-extras
 cdn: v1.5.0
 ---
 
+<script>
+    var welshPeopleCountLabels = {
+      2: 'Oes, mae angen i mi ychwanegu ail berson',
+      3: 'Oes, mae angen i mi ychwanegu trydydd person',
+      4: 'Oes, mae angen i mi ychwanegu pedwerydd person',
+      5: 'Oes, mae angen i mi ychwanegu pumed person',
+      6: 'Oes, mae angen i mi ychwanegu chweched person',
+      7: 'Oes, mae angen i mi ychwanegu seithfed person',
+      8: 'Oes, mae angen i mi ychwanegu unfed person',
+      9: 'Oes, mae angen i mi ychwanegu naw person',
+      10: 'Oes, mae angen i mi ychwanegu degfed person'
+    };
+</script>
+
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
@@ -32,7 +46,7 @@ cdn: v1.5.0
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title saturn">
-                                        Does anyone else live at <span
+                                        Oes unrhyw un arall yn byw yn <span
                                             class="address-text"></span>?
                                     </h1>
                                 </div>
@@ -52,11 +66,17 @@ cdn: v1.5.0
                                                        for="yes-someone-else"
                                                        id="yes-someone-else-label">
                                                     <span
-                                                            class="yes-answer">Yes, I need to
-                                                        add
-                                                    another person</span>
-                                                    <span
-                                                            class="pluto u-db label--negative">Include partners, children, babies born on or before <span class="js-significant-date"></span>, housemates, tenants and lodgers, students and schoolchildren who live away from home during term time, where this is their permanent or family home</span>
+                                                            class="yes-answer">Oes, mae angen i mi ychwanegu rhywun arall</span>
+                                                    <span class="pluto u-db label--negative">
+                                                        Dylech gynnwys
+                                                        partneriaid, plant,
+                                                        babanod a aned ar <span class="js-significant-date"></span>
+                                                        neu cyn hynny,
+                                                        cydletywyr, tenantiaid a lojers,
+                                                        myfyrwyr a phlant ysgol sy&#39;n byw
+                                                        oddi cartref yn ystod y tymor, os
+                                                        mai dyma eu cartref parhaol neu
+                                                        gartref y teulu.</span>
                                                 </label>
                                             </div>
 
@@ -66,7 +86,8 @@ cdn: v1.5.0
                                                        name="does-anyone-else-live-here"
                                                        id="no" value="no">
                                                 <label class="label label--inline venus"
-                                                       for="no">No, I do not need to add anyone</label>
+                                                       for="no">Nac oes, nid oes angen i mi
+                                                    ychwanegu unrhyw un</label>
                                             </div>
                                         </fieldset>
                                     </div>
@@ -83,7 +104,7 @@ cdn: v1.5.0
     </div>
 </div>
 
-<script src='/js/compiled/your-household-v9/bundle.js'></script>
+<script src='/js/compiled/your-household-v9-cy/bundle.js'></script>
 
 <script>
   var yesbox = document.getElementById("yes-someone-else"),
@@ -118,13 +139,13 @@ cdn: v1.5.0
       $('#form')
         .prepend('<input type="hidden" name="journey" value="visitors" />');
       $('#question-title')
-        .html('Is there anyone else staying overnight on ' +
+        .html('Oes unrhyw un arall yn aros dros nos ar ' +
           window.ONS.utils.getSignificant()
-          + ' at ' +
+          + ' yn ' +
           addressLine1 +
           ', ' + addressLine2 + '?');
       $('#member-list').html('<ul id="visitors-list"></ul>');
-      $('#yes-someone-else-label').html('Yes, I need to add another visitor');
+      $('#yes-someone-else-label').html('Oes, mae angen i mi ychwanegu ymwelydd arall');
       window.ONS.helpers.populateVisitorList();
     }
     else {
@@ -133,11 +154,13 @@ cdn: v1.5.0
     }
 
     if ((nextPosition) > 1) {
-      $('.yes-answer').html(
+      $('.yes-answer').html(welshPeopleCountLabels[nextPosition]);
+
+      /*$('.yes-answer').html(
         'Yes, I need to add a ' +
         window.ONS.utils.numberToPositionWord(nextPosition) +
         ' person'
-      );
+      );*/
     }
   });
 </script>

@@ -42,16 +42,20 @@ cdn: v1.5.0
                                 <div
                                         class="field field--checkbox field--multiplechoice field--exclusive u-mb-s">
                                     <fieldset>
-                                        <legend class="field__legend mars u-vh">Select all that apply:</legend>
-                                        <div class="field__label venus">Select all that apply:</div>
+                                        <legend class="field__legend mars u-vh">Dewiswch bob un sy'n berthnasol:</legend>
+                                        <div class="field__label venus">Dewiswch bob un sy'n berthnasol:</div>
                                         <div id="question-list"></div>
-                                        <div class="field__label u-mt-s venus" aria-hidden="true">Or</div>
+                                        <div
+                                                class="field__label u-mt-s venus" aria-hidden="true">Neu</div>
                                         <div class="field__item js-focusable-box">
                                             <input
                                                     class="input input--checkbox js-focusable js-exclusive-checkbox" name="away-type" value="no" id="none" type="checkbox" />
                                             <label class="label label--inline venus " for="none">
                                                 <span class="u-vh">Or,</span>
-                                                No, there is no one else who is temporarily away or who should be included at this address
+                                                Nac oes, nid oes unrhyw un arall
+                                                sydd oddi cartref dros dro neu y
+                                                dylid ei gynnwys yn y cyfeiriad
+                                                hwn
                                                 <span
                                                         class="u-vh">. Selecting this will uncheck all other checkboxes</span>
                                             </label>
@@ -73,16 +77,21 @@ cdn: v1.5.0
                             data-ga-label="definition-pattern-library"
                             data-ga-action="Definition click"
                             data-ga="click"
-                            data-ga-category="Help">Why do we ask this question? <span class="u-vh js-details-label">Click to expand.</span></a>
+                            data-ga-category="Help">Pam rydym yn gofyn y cwestiwn hwn? <span class="u-vh js-details-label">Click to expand.</span></a>
 
                         <h3
-                                class="venus u-no-js-show u-mb-no">Why do we ask this question?</h3>
+                                class="venus u-no-js-show u-mb-no">Pam rydym
+                            yn gofyn y cwestiwn hwn?</h3>
 
                         <div id="definition" class="definition__main js-details-body">
                             <div class="definition__content mars">
-                                <p>We ask this question to check that everyone is correctly counted on the census. This may include people who are staying temporarily or are away.</p>
+                                <p>Rydym yn gofyn y cwestiwn hwn er
+                                    mwyn sicrhau bod pawb yn cael eu
+                                    cyfrif yn gywir yn y cyfrifiad. Gall
+                                    hyn gynnwys pobl sy'n aros dros dro
+                                    neu sydd oddi cartref dros dro.</p>
                             </div>
-                            <button class="btn btn--secondary btn--small definition__content-close-trigger js-details-trigger u-no-js-hide">Hide this</button>
+                            <button class="btn btn--secondary btn--small definition__content-close-trigger js-details-trigger u-no-js-hide">Cuddio hwn</button>
                         </div>
                     </div>
                     <button class="btn btn--primary btn--lg qa-btn-submit venus"
@@ -94,7 +103,7 @@ cdn: v1.5.0
     </div>
 </div>
 
-<script src='/js/compiled/your-household-v9/bundle.js'></script>
+<script src='/js/compiled/your-household-v9-cy/bundle.js'></script>
 
 <div style="display:none">
     <div id="question-list-item-template" class="field__item js-focusable-box">
@@ -147,8 +156,13 @@ cdn: v1.5.0
 
   function updateQuestion () {
     $('.js-heading-inner-part1').html(members.length ?
-      `Apart from the people already included, is there anyone else you need to add to ${sessionStorage.getItem('address-line-1')} who fits into the following categories?`:
-      `Is there anyone you need to add to ${sessionStorage.getItem('address-line-1')} who fits into the following categories?`
+      `Ar wahân i'r bobl sydd wed'u
+cynnwys eisoes, oes unrhyw un arall
+y mae angen i chi ei ychwanegu at
+${sessionStorage.getItem('address-line-1')} sy'n perthyn i'r categorïau
+canlynol?`:
+      `Oes unrhyw un y mae angen i chi ei ychwanegu at ${sessionStorage.getItem('address-line-1')} sy'n perthyn
+i'r categorïau canlynol?`
     );
   }
 
