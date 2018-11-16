@@ -6,6 +6,21 @@ layout: eq-default-extras
 cdn: v1.5.0
 ---
 
+<script>
+  var welshNumberToWord = {
+    1: 'un',
+    2: 'dau',
+    3: 'tri',
+    4: 'pedwar',
+    5: 'pum',
+    6: 'chwe',
+    7: 'saith',
+    8: 'wyth',
+    9: 'naw',
+    10: 'deg',
+  };
+</script>
+
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
@@ -32,46 +47,46 @@ cdn: v1.5.0
                                      id="total-retail-turnover-question">
                                     <h1
                                             class="question__title saturn js-heading">
-                                        People who live here and overnight visitors
+                                        Pobl sy'n byw yma ac ymwelwyr sy'n
+                                        aros dros nos
                                     </h1>
                                 </div>
 
                                 <div class="panel panel--simple panel--success"
                                      id="question-guidance-everyone-at-address-confirmation-question">
-                                    <strong class="u-mb-s">This sub section is
-                                        now complete</strong>
+                                    <strong class="u-mb-s">Mae'r is-adran hon wedi'i chwblhau
+                                        nawr</strong>
                                     <ul class="mars"
                                         style="list-style: none;padding: 0; margin-bottom: 0">
-                                        <li>You can check your answers below
-                                        </li>
+                                        <li>Gallwch edrych dros eich atebion isod</li>
                                     </ul>
                                 </div>
                                 <br />
 
-                                <h2
-                                        class="neptune js-household-people-list">You&rsquo;ve added <span class="highlight">{n}</span> household member<span class="js-household-people-plural" style="display: none">s</span></h2>
+                                <h2 class="neptune js-household-people-list">
+                                    Rydych wedi ychwanegu <span class="highlight">{n}</span> aelod o'r
+                                    cartref</h2>
                                 <ul id="household-members-summary"
                                     class="list list--records list--people u-mb-s js-records"></ul>
                                 <p id="nobody-notice"
-                                   style="display:none;">Nobody usually
-                                    lives here</p>
+                                   style="display:none;">Nid oes neb yn byw yma fel arfer</p>
                                 <p class="u-mb-xl">
                                     <a href="../who-else-to-add"
                                        class="js-add-to-household">
-                                        Add someone to this household</a>
+                                        Ychwanegwch rywun at y cartref hwn</a>
                                 </p>
 
                                 <div class="js-visitors-people-list">
-                                    <h2 class="neptune js-visitors-people-title">You&rsquo;ve added <span class="highlight">{n}</span> visitor<span class="js-visitors-people-plural" style="display: none">s</span> staying
-                                        overnight on <span class="js-significant-date"></span></h2>
+                                    <h2 class="neptune js-visitors-people-title">
+                                        Rydych wedi ychwanegu <span class="highlight">{n}</span>
+                                        ymwelydd sy'n aros dros nos ar <span class="js-significant-date"></span></h2>
                                     <ul id="visitors-summary"
                                         class="list list--records list--people u-mb-s js-records"></ul>
                                     <p id="nobody-visitor-notice"
-                                       style="display:none;">There are no
-                                        visitors staying overnight on
-                                        <span class="js-significant-date"></span>.</p>
+                                       style="display:none;">Nid oes unrhyw ymwelwyr yn aros
+                                        dros nos ar <span class="js-significant-date"></span>.</p>
                                     <p class="u-mb-xl"><a
-                                            href="../who-else-to-add?journey=visitors">Add a visitor</a>
+                                            href="../who-else-to-add?journey=visitors">Ychwanegwch ymwelydd</a>
                                     </p>
                                 </div>
                             </section>
@@ -113,7 +128,7 @@ cdn: v1.5.0
         <span class="list__item-name js-person-name"></span>
         <div class="list__item-actions u-fr">
             <span class="list__item-action">
-                <a class="js-record-edit" href="#">Change</a>
+                <a class="js-record-edit" href="#">Newid</a>
             </span>
             <!--<span class="list__item-action">
                 <button class="btn btn&#45;&#45;secondary btn&#45;&#45;small js-record-remove">Remove</button>
@@ -231,15 +246,15 @@ cdn: v1.5.0
     const numberOfHouseholdMembers = householdMembers.length;
     const peopleListTitle = document.querySelector('.js-household-people-list');
     peopleListTitle.innerHTML = peopleListTitle.innerHTML.replace('{n}',
-      window.ONS.utils.numberToWordsStyleguide(numberOfHouseholdMembers) || 0);
+      welshNumberToWord[numberOfHouseholdMembers] || 0);
 
     if(!numberOfHouseholdMembers) {
       $('#nobody-notice').show();
     }
-    
-    if (numberOfHouseholdMembers !== 1) {
+
+    /*if (numberOfHouseholdMembers !== 1) {
         document.querySelector('.js-household-people-plural').style.display = 'inline';
-    }
+    }*/
 
     const numberOfVisitors = visitors.length;
 
@@ -254,7 +269,7 @@ cdn: v1.5.0
     const visitorsListTitle = document.querySelector('.js-visitors-people-list');
 
     visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{n}',
-      window.ONS.utils.numberToWordsStyleguide(numberOfVisitors) || 0);
+      welshNumberToWord[numberOfVisitors] || 0);
 
     if (numberOfVisitors > 1) {
       document.querySelector('.js-visitors-people-plural').style.display =
