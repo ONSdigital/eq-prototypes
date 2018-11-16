@@ -228,6 +228,7 @@ gulp.task('serve', () => {
     files: ['_site/css/**/*'],
     port: 4000,
     browser: 'false',
+    notify: false,
     server: {
       baseDir: '_site',
       routes: {
@@ -237,7 +238,7 @@ gulp.task('serve', () => {
     startPath: '/eq-prototypes'
   });
 
-  // gulp.watch('_site/**/*.*').on('change', browserSync.reload);
+  gulp.watch('_site/**/*.*').on('change', browserSync.reload);
 });
 
 gulp.task('fonts', () => {

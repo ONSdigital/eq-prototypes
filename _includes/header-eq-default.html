@@ -1,4 +1,12 @@
 <header class="header">
+    {% if page.beta %}
+        <div class="beta-bar" role="banner">
+            <div class="container beta-bar__inner">
+                <h3 class="beta-bar__badge">Beta</h3>
+                <p class="beta-bar__desc u-fs-s">This is a new service – your <a href="#feedback">feedback</a> will help us improve it.</p>
+            </div>
+        </div>
+    {% endif %}
     <div class="header__top" role="banner">
         <div class="container">
             <div class="grid grid--gutterless">
@@ -15,20 +23,18 @@
     </div>
     <div class="header__main ">
         <div class="container">
-            <div class="grid grid--gutterless grid--align-mid u-cf">
-                <div class="grid__col ">
-                    <h1
-                            class="header__title header__title--nav-adj">
-                        <span class="js-header-title">
-                            {% if page.title %}
-                                {{ page.title }}
-                            {% else %}
-                                {{ site.title }}
-                            {% endif %}
-                        </span>
-                        <button class="btn btn--ghost u-fr">Save and
-                            complete later</button>
+            <div class="grid grid--gutterless grid--flex grid--between grid--vertical-center grid--no-wrap">
+                <div class="grid__col grid__col--auto">
+                    <h1 class="header__title js-header-title">
+                        {% if page.title %}
+                            {{ page.title }}
+                        {% else %}
+                            {{ site.title }}
+                        {% endif %}
                     </h1>
+                </div>
+                <div class="grid__col grid__col--auto grid__col--no-shrink">
+                    <button class="btn btn--ghost u-ml-s{% if page.footerSave == true %} u-d-no--@xs@m{% endif %}">Save and complete later</button>
                 </div>
             </div>
         </div>

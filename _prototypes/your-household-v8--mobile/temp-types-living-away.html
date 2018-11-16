@@ -1,0 +1,137 @@
+---
+title: Household prototype v8 (mobile optimised)
+project: your-household
+globalcss: false
+layout: eq-default-extras
+netlify: http://localhost:3000
+footerSave: true
+beta: true
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link u-fs-r"
+           href="../does-anyone-else-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            <!--{% include navigation.html
+            items=site.data.your-household-v8.navigationItemsHousehold
+            nav-title-id="section-address" %}-->
+        </div>
+        <div class="grid__col col-7@m pull-1@m">
+            <main role="main" id="main" class="page__main">
+                <form name="trav" class="form qa-questionnaire-form" role="form"
+                      autocomplete="off" novalidate="">
+                    <input type="hidden" name="away-journeys"
+                           value=""/>
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s"
+                                     id="total-retail-turnover-question">
+                                    <h1 class="question__title u-fs-l js-heading">
+                                        <span class="js-heading-inner-part1"></span>
+                                    </h1>
+                                </div>
+
+                                <ul id="household-members" class="u-mb-l"></ul>
+
+                                <div
+                                        class="field field--checkbox field--multiplechoice field--exclusive u-mb-xl">
+                                    <fieldset>
+                                        <legend class="field__legend u-fs-r u-vh">Select all that apply:</legend>
+                                        <div class="field__label u-fs-r--b">Select all that apply:</div>
+                                        <div id="question-list"></div>
+                                        <div class="field__label u-mt-s u-fs-r--b" aria-hidden="true">Or</div>
+                                        <div class="field__item js-focusable-box">
+                                            <input
+                                                    class="input input--checkbox js-focusable js-exclusive-checkbox" name="away-type" value="no" id="none" type="checkbox" />
+                                            <label class="label label--inline u-fs-r " for="none">
+                                                <span class="u-vh">Or,</span>
+                                                No, there is no one else who is temporarily away or who should be included at this address
+                                                <span
+                                                        class="u-vh">. Selecting this will uncheck all other checkboxes</span>
+                                            </label>
+                                            <span class="js-exclusive-checkbox-alert u-vh" role="alert" aria-live="polite" data-adjective="deselected"></span>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit u-fs-r--b"
+                            type="submit" name="">Save and continue
+                    </button>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/your-household-v8/bundle.js'></script>
+
+<div style="display:none">
+    <div id="question-list-item-template" class="field__item js-focusable-box">
+        <input class="input input--checkbox js-focusable js-exclusive-checkbox-group js-answer-field" name="away-type" value="" id="" type="checkbox" />
+        <label class="label label--inline u-fs-r js-answer-label"></label>
+    </div>
+</div>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    members = storageAPI.getAllHouseholdMembers();
+
+  $('.qa-btn-submit').on('click', function(e) {
+    e.preventDefault();
+
+    var awayTypes = [], url;
+
+    $('[name=away-type]:checked').each(function (i, el) {
+      awayTypes.push($(el).val());
+    });
+
+    if($('[name=away-type]:checked').val() === "no") {
+        url = '../visitors/';
+    } else {
+        url = '../temp-types-question?away-types=' + JSON.stringify(awayTypes);
+    }
+
+    window.location = url;
+  });
+
+  function updateQuestionList() {
+    var items = storageAPI.tempAwayQuestionSentenceMap;
+
+    $('#question-list').html(
+      Object.keys(items).map(function(k) {
+        var $nodeEl = $('#question-list-item-template').clone(),
+            $field = $nodeEl.find('.js-answer-field'),
+            $label = $nodeEl.find('.js-answer-label');
+
+        $nodeEl.attr('id', '');
+        $label.html(items[k]);
+        $label.attr('for', k);
+        $field.attr('value', k);
+        $field.attr('id', k);
+
+        return $nodeEl;
+      })
+    );
+  }
+
+  function updateQuestion () {
+    $('.js-heading-inner-part1').html(members.length ?
+      'Apart from the people already added, is there anyone else you need to add?':
+      'Is there anyone you need to add?'
+    );
+  }
+
+  $(updateQuestionList);
+  $(updateQuestion);
+
+</script>
