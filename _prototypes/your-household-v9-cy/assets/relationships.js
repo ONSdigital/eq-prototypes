@@ -29,26 +29,26 @@ export const relationshipTypes = {
 export const relationshipDescriptionMap = {
   // covered
   'husband-wife': {
-    sentanceLabel: 'husband or wife',
-    summaryAdjective: 'husband or wife',
+    sentanceLabel: 'gŵr neu wraig',
+    summaryAdjective: 'gŵr neu wraig',
     type: relationshipTypes['spouse']
   },
   // covered
   'mother-father': {
-    sentanceLabel: 'mother or father',
-    summaryAdjective: 'mother or father',
+    sentanceLabel: 'mam neu dad',
+    summaryAdjective: 'mam neu dad',
     type: relationshipTypes['child-parent']
   },
   // covered
   'step-mother-father': {
-    sentanceLabel: 'stepmother or stepfather',
-    summaryAdjective: 'stepmother or stepfather',
+    sentanceLabel: 'llysfam neu lystad',
+    summaryAdjective: 'llysfam neu lystad',
     type: relationshipTypes['step-child-parent']
   },
   // covered
   'son-daughter': {
-    sentanceLabel: 'son or daughter',
-    summaryAdjective: 'son or daughter',
+    sentanceLabel: 'mab neu ferch',
+    summaryAdjective: 'mab neu ferch',
     type: relationshipTypes['child-parent']
   },
   // covered
@@ -59,38 +59,38 @@ export const relationshipDescriptionMap = {
   },
   // covered
   'step-child': {
-    sentanceLabel: 'stepchild',
-    summaryAdjective: 'stepchild',
+    sentanceLabel: 'llysblentyn',
+    summaryAdjective: 'llysblentyn',
     type: relationshipTypes['step-child-parent']
   },
   // covered
   'grandparent': {
-    sentanceLabel: 'grandparent',
-    summaryAdjective: 'grandparent',
+    sentanceLabel: 'nain/mam-gu neu daid/tad-cu',
+    summaryAdjective: 'nain/mam-gu neu daid/tad-cu',
     type: relationshipTypes['grandchild-grandparent']
   },
   // covered
   'grandchild': {
-    sentanceLabel: 'grandchild',
-    summaryAdjective: 'grandchild',
+    sentanceLabel: 'ŵyr neu wyres',
+    summaryAdjective: 'ŵyr neu wyres',
     type: relationshipTypes['grandchild-grandparent']
   },
   // covered
   'brother-sister': {
-    sentanceLabel: 'brother or sister',
-    summaryAdjective: 'brother or sister',
+    sentanceLabel: 'brawd neu chwaer',
+    summaryAdjective: 'brawd neu chwaer',
     type: relationshipTypes['sibling']
   },
   // covered
   'step-brother-sister': {
-    sentanceLabel: 'stepbrother or stepsister',
-    summaryAdjective: 'stepbrother or stepsister',
+    sentanceLabel: 'llysfrawd neu lyschwaer',
+    summaryAdjective: 'llysfrawd neu lyschwaer',
     type: relationshipTypes['step-brother-sister']
   },
   // covered
   'other-relation': {
-    sentanceLabel: 'other relation',
-    summaryAdjective: 'related',
+    sentanceLabel: 'perthynas arall',
+    summaryAdjective: 'perthynas arall',
     type: relationshipTypes['other-relation']
   },
   // covered
@@ -100,8 +100,8 @@ export const relationshipDescriptionMap = {
     type: relationshipTypes['partner']
   },
   'same-sex-partner': {
-    sentanceLabel: 'legally registered civil partner',
-    summaryAdjective: 'legally registered civil partner',
+    sentanceLabel: 'partner sifil cofrestredig cyfreithiol',
+    summaryAdjective: 'partner sifil cofrestredig cyfreithiol',
     type: relationshipTypes['partner']
   },
   // covered
