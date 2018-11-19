@@ -9,14 +9,24 @@
     {% endif %}
     <div class="header__top" role="banner">
         <div class="container">
-            <div class="grid grid--gutterless">
-                <div class="grid__col col-6@s">
+            <div class="grid grid--gutterless grid--flex grid--between grid--vertical-center grid--no-wrap">
+                <div class="grid__col grid__col--auto">
                     <div class="logo">
                         <img src="https://deploy-preview-129--sdc-global-design-patterns.netlify.com/assets/img/ons-logo-black-en.svg" alt="Office for National Statistics logo" class="logo__img header__logo--print">
                         <a href="{{ site.baseurl }}/">
                             <img src="https://deploy-preview-129--sdc-global-design-patterns.netlify.com/assets/img/ons-logo-pos.svg" alt="Office for National Statistics logo" class="logo__img header__logo print__hidden">
                         </a>
                     </div>
+                </div>
+                <div class="grid__col grid__col--auto grid__col--no-shrink u-d-no--@xs@m">
+                    <ul class="list list--bare list--inline">
+                        <li class="list__item">
+                            <a href="/my-account" class="footer__link" target="_blank">My account</a>
+                        </li>
+                        <li class="list__item">
+                            <a href="/#" class="footer__link">Cymraeg</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
