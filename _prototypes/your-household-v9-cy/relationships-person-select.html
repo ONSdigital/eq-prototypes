@@ -31,12 +31,11 @@ cdn: v1.5.0
                             <section class="section" id="question-area">
                                 <div class="question">
                                     <h1 class="question__title saturn u-mb-l">
-                                        Are any of the following household
-                                        members also
-                                        <span
-                                            class="js-other-description"></span>
-                                        <span
-                                            class="js-relationship-person-is"></span>?
+                                        A yw unrhyw un o'r aelodau canlynol
+                                        o'r cartref ddim yn
+                                        <span class="js-other-description"></span>
+                                        <span class="js-relationship-person-is"></span>
+                                        chwaith?
                                     </h1>
 
                                     <div id="question-info"
@@ -44,9 +43,9 @@ cdn: v1.5.0
                                             class="panel panel--simple panel--info u-mb-l">
                                         <div class="panel__body js-question-info-body">
                                             <p class="mars">
-                                                Do not include stepchildren
-                                                or foster children here,
-                                                these will be included later
+                                                Peidiwch â chynnwys llysblant na
+                                                phlant maeth yma, byddant yn cael
+                                                eu cynnwys yn ddiweddarach
                                             </p>
                                         </div>
                                     </div>
@@ -57,7 +56,7 @@ cdn: v1.5.0
                                         </div>
                                     </label>-->
 
-                                    <p>Select all that apply</p>
+                                    <p>Dewiswch bob un sy'n berthnasol</p>
 
                                     <div class="answer__fields js-fields">
                                         <div class="field field--radio field--multiplechoice field--exclusive">
@@ -200,12 +199,14 @@ cdn: v1.5.0
       'mother-father' === relationshipDescription && (function(){
         $('.question__title').removeClass('u-mb-l');
         $('#question-info').show();
-        $('.js-other-description').html('sons or daughters of');
+        $('.js-other-description').html('hefyd yn feibion neu ferched i');
       }());
 
       'unrelated' === relationshipDescription && (function(){
-        $('.js-other-description').html('unrelated to');
-        $('.js-question-info-body').html('<p class="mars">Do not include partners here, they will be included later</p>');
+        $('.js-other-description').html('ddim yn perthyn i');
+        $('.js-question-info-body').html('<p class="mars">Peidiwch â chynnwys partneriaid\n' +
+          'yma, byddant yn cael eu cynnwys yn\n' +
+          'ddiweddarach</p>');
         $('#question-info').show();
       }());
 
@@ -217,11 +218,11 @@ cdn: v1.5.0
         $('#js-member-list').append(createMemberListItem(member['@person']));
       });
 
-      $('#js-member-list').append('<div class="field__label u-mt-s venus" aria-hidden="true">Or</div>');
+      $('#js-member-list').append('<div class="field__label u-mt-s venus" aria-hidden="true">Neu</div>');
       $('#js-member-list').append('<div class="field__item js-focusable-box">\n' +
         '        <input class="input input--checkbox js-focusable js-exclusive-checkbox" name="checkbox-answer" value="none" id="none" type="checkbox">\n' +
         '        <label class="label label--inline venus " for="none">\n' +
-        '            <span class="u-vh">Or,</span> None<span class="u-vh">. Selecting this will uncheck all other checkboxes</span>\n' +
+        '            <span class="u-vh">Neu,</span> Dim un<span class="u-vh">. Selecting this will uncheck all other checkboxes</span>\n' +
         '        </label>\n' +
         '        <span class="js-exclusive-checkbox-alert u-vh" role="alert" aria-live="polite" data-adjective="deselected">none deselected. </span>\n' +
         '      </div>');

@@ -138,3 +138,14 @@ export function tools () {
   $listLinks.append($createFamilyHousehold);
   $listLinks.append($createFamilyRelationships);
 }
+
+function addLanguageSwitch() {
+  const $el = $('<a class="util-language">Welsh</a>');
+  const $container = $('.header__top > .container');
+
+  $el.attr('href', window.location.href.replace('your-household-v9', 'your-household-v9-cy'));
+
+  $container.prepend($el);
+}
+
+$(addLanguageSwitch);
