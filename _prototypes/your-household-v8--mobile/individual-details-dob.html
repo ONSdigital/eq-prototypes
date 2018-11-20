@@ -1,0 +1,171 @@
+---
+title: Household prototype v8 (mobile optimised)
+project: your-household
+globalcss: false
+layout: eq-default-extras
+netlify: https://deploy-preview-214--sdc-global-design-patterns.netlify.com
+footerSave: true
+beta: true
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link u-fs-r" href="../do-you-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            {% include navigation.html
+            items=site.data.your-household-v8.yourHouseholdV4_navigationItemsPersonalDetails
+            nav-title-id="section-individual" %}
+        </div>
+        <div class="grid__col col-7@m pull-1@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="off" novalidate=""
+                      action="../individual-details-relationship">
+                    <input type="hidden" name="person" id="person"
+                           value="#"/>
+                    <input type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group" id="rsi">
+                        <div class="block" id="total-retail-turnover">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-l js-heading">
+                                        What is your date of birth?
+                                    </h1>
+                                    <p class="question__description">For
+                                        example 20 March 1980</p>
+                                </div>
+
+                                <div class="answer answer--date">
+                                    <div
+                                            class="answer__fields js-fields u-mb-xl">
+                                        <fieldset class="fieldgroup fieldgroup--inline" data-qa="widget-date">
+
+                                            <div class="fieldgroup__fields">
+                                                <div class="field field--input">
+                                                    <label class="label u-fs-s--b" for="personal-detail-dob-day" data-qa="label-day">Day</label>
+                                                    <input
+                                                        id="personal-detail-dob-day"
+                                                        class="input input--w-2"
+                                                        type="number"
+                                                        pattern="[0-9]*"
+                                                        min="1"
+                                                        max="31"
+                                                        data-qa="input-StringField">
+                                                </div>
+
+                                                <div class="field field--input">
+                                                    <label class="label u-fs-s--b" for="personal-detail-dob-month" data-qa="label-month">Month</label>
+                                                    <input 
+                                                        id="personal-detail-dob-month"
+                                                        class="input input--w-2"
+                                                        type="number"
+                                                        pattern="[0-9]*"
+                                                        min="1"
+                                                        max="12"
+                                                        data-qa="input-StringField">
+                                                </div>
+
+                                                <div class="field field--input">
+                                                    <label class="label u-fs-s--b" data-qa="label-year">Year</label>
+                                                    <input
+                                                        id="personal-detail-dob-year"
+                                                        class="input input--w-4"
+                                                        type="number"
+                                                        pattern="[0-9]*"
+                                                        min="1000"
+                                                        max="3000"
+                                                        data-qa="input-StringField">
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit u-fs-r--b u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+
+                    <p class="u-fs-r">Can't complete this question?<br />
+                        <a href="../hub"
+                           class="js-choose-another-section">Choose another
+                            section and
+                            return
+                            to this later</a></p>
+
+                    <p class="u-fs-r u-mb-m"><span class="js-link-secure-label"></span><br />
+                        <a class="js-link-secure"
+                           href="#">Get a separate access code to submit an
+                            individual response</a></p>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/your-household-v8/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person'),
+    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+    isEditing = urlParams.get('edit'),
+    surveyType = urlParams.get('survey');
+
+  $('.qa-btn-submit').on('click', function (e) {
+    storageAPI.addUpdatePersonalDetailsDOB(personId,
+      $('#personal-detail-dob-day').val(),
+      $('#personal-detail-dob-month').val(),
+      $('#personal-detail-dob-year').val()
+    );
+
+    if(isEditing) {
+      e.preventDefault();
+      window.location.href = '../individual-details-summary/?person=' +
+        personId + (surveyType ? '&survey=' + surveyType : '');
+    }
+  });
+
+  function updateRouting() {
+    if(surveyType) {
+      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    }
+    $('#survey-type').val(surveyType);
+  }
+
+  function updateAnswer() {
+    var details = storageAPI.getPersonalDetailsFor(personId);
+
+    if (details && details.dob) {
+      details.dob.day && $('#personal-detail-dob-day').val(details.dob.day);
+      details.dob.month && $('#personal-detail-dob-month').val(details.dob.month);
+      details.dob.year && $('#personal-detail-dob-year').val(details.dob.year);
+    }
+  }
+
+  function updateQuestion() {
+    if(storageAPI.getAnsweringIndividualByProxy()) {
+      $('.js-heading').html('What is ' + person.fullName +
+      window.ONS.utils.trailingNameS(person.fullName) + ' date of birth?');
+    }
+  }
+
+  $(updateAnswer);
+  $(updateQuestion);
+  $(updateRouting);
+
+  /**
+   * Routing
+   */
+  $('#person').val(personId);
+</script>

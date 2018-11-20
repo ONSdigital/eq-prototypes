@@ -1,18 +1,174 @@
+<style>
+    .details__summary {
+        position: relative;
+        padding-left: 1.5rem;
+        list-style: none;
+        color: #4263c2;
+        transition: color .3s ease-in-out;
+        text-decoration: none;
+    }
+
+
+    .details__summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .details__summary:focus {
+        outline-offset: 3px;
+        outline: 3px solid #fe781f;
+        color: #033e58;
+        text-decoration: none;
+    }
+
+    .details:target .details__summary {
+        text-decoration: none;
+    }
+
+    .details__summary:before,
+    .details__summary:after {
+        content: '';
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1.1rem;
+        height: 1.1rem;
+        background-size: 1.1rem 1.1rem;
+        background-repeat: no-repeat;
+
+        transition: opacity .3s ease-in-out,
+                    transform .3s ease-in-out;
+    }
+
+    .details[open] .details__summary:before,
+    .details[open] .details__summary:after {
+        transform: rotate(90deg);
+    }
+
+    .details__summary:focus:before,
+    .details__summary:not(:focus):after {
+        opacity: 0;
+    }
+
+    .details__summary:before {
+        background-image: url(https://deploy-preview-214--sdc-global-design-patterns.netlify.com/assets/img/icons/icons--chevron-right-blue.svg);
+    }
+
+   
+    .details__summary:after {
+        background-image: url(https://deploy-preview-214--sdc-global-design-patterns.netlify.com/assets/img/icons/icons--chevron-right-blue-hover.svg);
+    }
+
+    .feedback:not(.has-js) .feedback__button {
+        display: none;
+    }
+
+    .hr {
+        height: 1px;
+        background: rgba(0,0,0,.4);
+        border: none;
+    }
+</style>
+
 <footer class="footer" role="contentinfo">
     <div class="container">
+        {% if page.footerSave %}
+        <button class="btn btn--ghost-blue u-d-no--@m u-mb-m">Save and complete later</button>
+        {% endif %}
+        <ul class="list list--bare u-d-no--@m">
+            <li class="list__item">
+                <a href="/my-account" class="footer__link" target="_blank">My account</a>
+            </li>
+            <li class="list__item">
+                <a href="/#" class="footer__link">Cymraeg</a>
+            </li>
+        </ul>
+
+        <hr class="hr u-mt-m u-d-no--@m">
+
         <div class="grid">
-            <div class="grid__col col-12@m">
-                <ul class="list list--bare">
-                    <li><a href="/contact-us" class="footer__link footer__link--inline" target="_blank">Contact us</a></li><li><a href="/cookies-privacy" class="footer__link footer__link--inline" target="_blank">Cookies and privacy</a></li>
-                </ul>
-            </div>
-            <div class="grid__col col-12@m">
-                <div class="footer__license footer__license--border">
-                    <img alt="OGL" class="footer__ogl-img" src="https://cdn.ons.gov.uk/sdc/{% if page.cdn %}{{ page.cdn }}{% else %}v1.0.0{% endif %}/img/UKOpenGovernmentLicence-grey.svg"> All content is available under the
-                    <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" class="footer__link">Open Government
-                        Licence v3.0</a>, except where otherwise stated
-                </div>
+            <div class="grid__col col-8@m">
+                <details open id="feedback" class="details js-details u-pt-s">
+                    <summary class="details__summary u-fs-r--b u-mb-s">Your feedback will help us improve this service</summary> 
+                    <form class="feedback__form" id="feedback-form" method="POST">
+                        <h2 class="u-fs-l@m">How can we improve this page</h2>
+                        <div class="field u-mb-m">
+                            <label for="comments" class="label u-fs-r--b">Your comments</label>
+                            <textarea id="comments" class="input input--textarea  js-charlimit-input" data-maxlength="2000" maxlength="2000" rows="8" data-char-limit-ref="feedback-message-remaining" name="message"></textarea>
+                            <div id="feedback-message-remaining" class="input__limit u-mt-xs u-fs-s--b" aria-live="polite" data-charcount-singular="You have {x} character remaining" data-charcount-plural="You have {x} characters remaining">You have 2000 characters remaining</div>
+                        </div>
+        
+                        <div class="field u-mb-m">
+                            <label class="label u-fs-r--b " for="name">Your name (Optional)
+                                <br/><span class="label__description u-fs-s">Please include your name and email address if you're interested in taking part in further research to improve this survey</span>
+                            </label>
+                            <input id="name" class="input input--text" name="name" type="text">
+                        </div>
+        
+                        <div class="field u-mb-l">
+                            <label class="label u-fs-r--b" for="email">Email (Optional)</label>
+                            <input id="email" class="input input--text" email="name" type="email">
+                        </div>
+                        
+                        <div>
+                            <button class="btn u-mb-m" type="submit">Send feedback</button>
+                        </div>
+                        
+                        <div>
+                            <button class="feedback__cancel js-feedback-cancel btn btn--ghost-blue btn--small u-mb-m" type="button">I don't want to provide feedback</button>
+                        </div>
+                    </form>
+                </details>
             </div>
         </div>
+            
+        <hr class="hr u-mb-m">
+        
+        <ul class="list list--bare list--inline@m">
+            <li class="list__item">
+                <a href="/contact-us" class="footer__link" target="_blank">Contact us</a>
+            </li>
+            <li class="list__item">
+                <a href="/cookies-privacy" class="footer__link" target="_blank">Cookies and privacy</a>
+            </li>
+        </ul>
+    
+        <div class="footer__license footer__license--border">
+            <img alt="OGL" class="footer__ogl-img" src="https://cdn.ons.gov.uk/sdc/{% if page.cdn %}{{ page.cdn }}{% else %}v1.0.0{% endif %}/img/UKOpenGovernmentLicence-grey.svg"> All content is available under the
+            <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" class="footer__link">Open Government
+                Licence v3.0</a>, except where otherwise stated
+        </div>
+            
     </div>
 </footer>
+
+<script>
+    const hash = window.location.hash.replace('#', '');
+    const detailsElements = [...document.querySelectorAll('.js-details')];
+
+    detailsElements.forEach(element => {
+        const id = element.getAttribute('id');
+        
+        if (id) {
+            const anchorLinks = [...document.querySelectorAll(`a[href='#${id}']`)];
+
+            anchorLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    element.setAttribute('open', '');
+                });
+            });
+        }
+
+        element.removeAttribute('open');
+        
+        const cancelButton = element.querySelector('.js-feedback-cancel');
+        
+        if (cancelButton) {
+            cancelButton.addEventListener('click', () => {
+                element.removeAttribute('open');
+            });
+        }
+
+        element.classList.add('has-js');
+    });
+</script>

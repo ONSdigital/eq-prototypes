@@ -1,0 +1,18 @@
+---
+title: Household prototype v8 (mobile optimised)
+project: your-household
+globalcss: false
+householdMembers:
+visitors:
+netlify: https://deploy-preview-214--sdc-global-design-patterns.netlify.com
+---
+
+<script>
+    var urlParams = new URLSearchParams(window.location.search),
+      surveyType = urlParams.get('survey'),
+      urlSuffix = surveyType ? '?survey=' + surveyType : '';
+
+    $(function () {
+      window.location.href = '../hub/' + urlSuffix;
+    });
+</script>

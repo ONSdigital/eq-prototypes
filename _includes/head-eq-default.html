@@ -23,12 +23,20 @@
 <!--<![endif]-->
 
 <!--[if (gt IE 9) | (IEMobile)]><!-->
-<link rel="stylesheet"
-      href="https://cdn.ons.gov.uk/sdc/{% if page.cdn %}{{ page.cdn }}{% else %}v1.0.0{% endif %}/css/responsive.css" />
+{% if page.netlify %}
+    <link rel="stylesheet" href="{{ page.netlify }}/assets/css/responsive.css">   
+{% else %} 
+    <link rel="stylesheet"
+        href="https://cdn.ons.gov.uk/sdc/{% if page.cdn %}{{ page.cdn }}{% else %}v1.0.0{% endif %}/css/responsive.css" />
+{% endif %}
 <!--<![endif]-->
 <!--[if (lte IE 9) & (!IEMobile)]>
-<link rel="stylesheet"
-      href="https://cdn.ons.gov.uk/sdc/{% if page.cdn %}{{ page.cdn }}{% else %}v1.0.0{% endif %}/css/fixed.css" />
+{% if page.netlify %}
+    <link rel="stylesheet" href="{{ page.netlify }}/assets/css/fixed.css">   
+{% else %} 
+    <link rel="stylesheet"
+        href="https://cdn.ons.gov.uk/sdc/{% if page.cdn %}{{ page.cdn }}{% else %}v1.0.0{% endif %}/css/fixed.css" />
+{% endif %}
 <![endif]-->
 
 <link rel='stylesheet prefetch'
