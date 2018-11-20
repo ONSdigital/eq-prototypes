@@ -1,3 +1,67 @@
+<style>
+    .language-switcher {
+        position: relative;
+    }
+
+    .languages {
+        position: absolute;
+        right: 0;
+        border: 1px solid #999;
+        background-color: #fff;
+        border-radius: 3px;
+    }
+
+    .language-switcher__selected,
+    .language-switcher__link {
+        display : block;
+        padding : .2rem .5rem;
+    }
+
+    .language-switcher__items {
+        display : none;
+        margin-bottom : 0;
+        padding : 0;
+        list-style-type : none;
+    }
+
+    .language-switcher__item {
+        margin-bottom : 0;
+    }
+
+    .language-switcher__item {
+        border-top : 1px solid #999;
+    }
+
+    .language-switcher__selected {
+        width : 8rem;
+        line-height : 1.6rem;
+        text-align : left;
+        background: none;
+        border: none;
+    }
+
+    .language-switcher__selected::after {
+        position: absolute;
+        right: 10px;
+        height: 20px;
+        width: 20px;
+        content: "";
+        background-image: url('https://sdc-global-design-patterns.netlify.com/assets/img/icons/icons--chevron-right-blue-hover.svg');
+        background-repeat: no-repeat;
+        background-size: 10px;
+        background-position: 92% center;
+        transform: rotate(90deg);
+    }
+
+    .language-switcher__selected--open {
+
+    }
+
+    .language-switcher__items--open {
+        display: block;
+    }
+</style>
+
 <header class="header">
     <div class="header__top" role="banner">
         <div class="container">
@@ -11,10 +75,36 @@
                     </div>
                 </div>
                 <div class="grid__col col-6@s">
-                    <a href="">English</a>
-                    <a href="">Cymraeg</a>
-                    <a href="">Gàidhlig</a>
-                    <a href="">Ulstèr-Scotch</a>
+                    <div class="language-switcher">
+                        <div class="languages">
+                            <button
+                                    class="language-switcher__selected js-language-switcher-selected">
+                                English
+                            </button>
+                            <ul class="language-switcher__items js-language-switcher-items">
+                                <li class="language-switcher__item">
+                                    <a class="language-switcher__link" href="">
+                                        Cymraeg
+                                    </a>
+                                </li>
+                                <li class="language-switcher__item">
+                                    <a class="language-switcher__link" href="">
+                                        Gàidhlig
+                                    </a>
+                                </li>
+                                <li class="language-switcher__item">
+                                    <a class="language-switcher__link" href="">
+                                        Ulstèr -Scotch
+                                    </a>
+                                </li>
+                                <li class="language-switcher__item">
+                                    <a class="language-switcher__link" href="">
+                                        All languages
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -40,3 +130,15 @@
         </div>
     </div>
 </header>
+
+
+<script>
+    $(function () {
+      $('.js-language-switcher-selected').on('click', function(e) {
+        e.preventDefault();
+
+        $(this).addClass('language-switcher__selected--open');
+        $('.js-language-switcher-items').toggleClass('language-switcher__items--open');
+      });
+    });
+</script>
