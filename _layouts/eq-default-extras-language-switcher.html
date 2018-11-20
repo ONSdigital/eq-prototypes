@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en-gb" dir="ltr" class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en-gb" dir="ltr" class="no-js lt-ie10 lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en-gb" dir="ltr" class="no-js lt-ie10 lt-ie9"> <![endif]-->
+<!--[if IE 9]>         <html lang="en-gb" dir="ltr" class="no-js lt-ie10"> <![endif]-->
+<!--[if gt IE 9]><!--> <html lang="en-gb" dir="ltr" class="no-js"> <!--<![endif]-->
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.0/underscore-min.js"></script>
+    <script src="{{ '/js/jquery.min.js' | prepend: site.baseurl }}"></script>
+    {% include head-eq-default.html %}
+</head>
+<body>
+<div class="page">
+    <div class="page__content">
+        <div class="skip">
+            <a class="skip__link" href="#main">Skip to content</a>
+        </div>
+        <header class="page__header">
+            {% include header-eq-default-language-switcher.html %}
+        </header>
+        {{ content }}
+    </div>
+    <div class="page__footer">
+        {% include footer-eq-default-transactional.html %}
+    </div>
+</div>
+<script src="https://cdn.ons.gov.uk/sdc/{% if page.cdn %}{{ page.cdn }}{% else %}v1.0.0{% endif %}/scripts/bundle.js"></script>
+
+</body>
+</html>
