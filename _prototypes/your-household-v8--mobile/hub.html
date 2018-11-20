@@ -9,23 +9,22 @@ beta: true
 ---
 
 <link rel="stylesheet" href="../style.css"/>
-<div class="page__subheader">
-</div>
 
 <style>
     .completed {
         position: relative;
+        padding-left: 2rem;
     }
 
     .completed::before {
         z-index:2;
         content:"";
-        background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAbCAYAAAAZMl2nAAAABGdBTUEAALGPC/xhBQAAAjtJREFUSA29l0FLW0EQx2f2NWDSQ196sFBELKFfwVMPNcmLFZV68eRFPBd6K4IexKT0IHjpqdDi0aMg5iCKUvDkqdBDQYiKIIJY0oO1wZhMd0L3+V6yz+TlrZ1DNjOzM/9f9u1uEoD/aH3Lk/EgORGUMB1/VHDeXf4u7z9ZyvXqeqMuaDqWLGTf1Ov0sdEX8UdMWJmLuc0zr869g9iL2RlC+gwEHi08eCB60j/nN04VjCepQuZGe9GZJqAvANS6BRBKIobp8uz2CSu2TjDEcScEaxCk6Jq+2h9eDbB7LyBtIVhZGgEMQLVaXKAFYfzRdArBIFL8EgWOlOe394yCdAvBUBa/NNvTT+MJa7B/rSf7/KyyUzpuzuv8KBDcr2WPMMTV+Z+i3O2jUKtt2O+Hh3TC3lhUCO7lezQuBNFLJYSAV2BZY7/mNndVzDuagOB+7oroIHiCXJkE1G+Kj/NOjn2vmYLgng2QIAglSgTxGtB6spAbVzGTENwTiQiTeWdLfvKMEgkcEaqAYgrr8DDwxmwq9h7RppTPFYhIKGgFEGu+jM4hiAHRqmkIlmoc38rO0fdE5llJfi+9ljF33+hY/uV9m1w3r9OVULXuPRISRtVrx7AQ3MQFYccETDcQLSBRYbqF0IJ0CxMFIhAkLExUiDtBOoUxAdEWxAdDOCF9qXtrpiC4o+/U3Er43/Fpig+lTuQ9zPdMA8YkBKt1BMITK7uH3xLp1Ln8eTdqGoL7hzY777yV/1NehC5sU/AXb484yamkz/AAAAAASUVORK5CYII=") no-repeat 50%;
-        background-size:1rem;
+        background:url(https://sdc-global-design-patterns.netlify.com/assets/img/icons/icons--check-green.svg) no-repeat 50%;
+        background-size: 1rem;
         position:absolute;
-        left:9px;left:-1.5rem;
-        width:1.2em;
-        height:1.2em;
+        left: 0;
+        width: 1em;
+        height: 1em;
         bottom:0;
         top:0;
         margin:auto;
@@ -36,7 +35,7 @@ beta: true
     }
 </style>
 
-<div class="page__container container">
+<div class="page__container container u-mt-m">
     <div class="grid grid--reverse">
         <div class="grid__col col-12@m">
             <main role="main" id="main" class="page__main">
@@ -66,25 +65,13 @@ beta: true
 
                                 <div class="summary u-mb-xl">
                                     <div class="summary__block">
-                                        <div class="summary__item">
-                                            <div class="grid">
-                                                <div class="grid__col col-12@xs col-6@m">
-                                                    <div
-                                                            class="summary__question u-fs-r--b address-text-line1"></div>
-                                                </div>
-                                                <div
-                                                        class="grid__col col-8@xs col-3@m">
-                                                    <div
-                                                            class="summary__answer u-fs-r completed">Completed</div>
-                                                </div>
-                                                <div
-                                                        class="grid__col col-4@xs col-3@m">
+                                        <div class="summary__item grid grid--gutterless">
+                                            <div class="summary__question grid__col col-12@xs col-6@m u-fs-r--b address-text-line1"></div>
+                                            <div class="grid__col col-12@xs col-6@m">
+                                                <div class="grid grid--gutterless grid--flex grid--nowrap grid--between">
+                                                    <div class="summary__answer u-fs-r completed">Completed</div>
                                                     <div class="summary__link u-fs-r">
-                                                        <a
-                                                                href="../summary" class="js-view-summary">View
-                                                            answers
-                                                            <span class="u-vh"></span>
-                                                        </a>
+                                                        <a href="../summary" class="js-view-summary">View answers <span class="u-vh"></span></a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -109,24 +96,18 @@ beta: true
 </div>
 
 <ul style="display:none;">
-    <div id="person-survey-item-template" class="summary__item">
-        <div class="grid">
-            <div class="grid__col col-12@xs col-6@m">
-                <div
-                        class="summary__question u-fs-r--b js-person-name"></div>
-            </div>
-            <div class="grid__col col-8@xs col-3@m">
-                <div
-                        class="summary__answer u-fs-r js-survey-status">[Status
-                    not found]</div>
-            </div>
-            <div class="grid__col col-4@xs col-3@m">
+    <div id="person-survey-item-template" class="summary__item grid grid--gutterless">
+        <div class="grid__col col-12@xs col-6@m summary__question u-fs-r--b js-person-name"></div>
+        <div class="grid__col col-12@xs col-6@m">
+            <div class="grid grid--flex grid--gutterless grid--nowrap grid--between">
+                <div class="summary__answer u-fs-r js-survey-status">[Status not found]</div>
                 <div class="summary__link u-fs-r">
                     <a class="js-link"
-                       href="#">Start section
+                        href="#">Start section
                     </a>
                 </div>
             </div>
+            
         </div>
     </div>
 </ul>

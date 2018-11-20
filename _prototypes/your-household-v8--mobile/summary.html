@@ -107,15 +107,16 @@ beta: true
 
 <ul style="display:none;">
     <li id="person-record-template" class="list__item">
-        <span class="list__item-name js-person-name"></span>
-        <div class="list__item-actions u-fr">
-            <span class="list__item-action">
+        <div class="grid grid--flex grid--between grid--no-wrap">
+            <div class="grid__col u-flex-shrink">
+                <div class="icon icon--person js-person-name"></div>
+            </div>
+            <div class="grid__col u-flex-no-grow">
                 <a class="js-record-edit" href="#">Change</a>
-            </span>
-            <!--<span class="list__item-action">
-                <button class="btn btn&#45;&#45;secondary btn&#45;&#45;small js-record-remove">Remove</button>
-            </span>-->
+            </div>
         </div>
+        
+       
     </li>
 </ul>
 
@@ -136,7 +137,17 @@ beta: true
         list-style-type: none;
     }
 
-    .list.list--people .list__item {
+    .icon--person {
+        position: relative;
+        padding-left: 2rem !important;
+    }
+
+    .icon-person:before {
+        position: absolute;
+        content: '';
+        display: block;
+        width: 1.3rem;
+        height: 1.3rem;
         background: url(/img/icons/person.svg) 0 1.3rem no-repeat;
     }
 
