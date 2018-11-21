@@ -20,7 +20,7 @@ cdn: v1.5.0
       'step-brother-sister': 'llysfrawd neu lyschwaer',
       'step-mother-father': 'llysfam neu lystad',
       'grandchild': 'ŵyr neu wyres',
-      'grandparent': 'daid/tad-cu neu nain/mam-gu',
+      'grandparent': 'nain/mam-gu neu daid/tad-cu',
       'other-relation': 'berthynas arall',
       'unrelated': 'perthyn'
     };
@@ -306,8 +306,10 @@ cdn: v1.5.0
     }
 
     $('.js-relationship-answer-feedback').html(
-      (personToIsMe && k && k === 'unrelated')
-        ? 'Nid yw ' + personIs['@person'].fullName + ' yn <strong>perthyn</strong> i chi'
+      (k && k === 'unrelated')
+        ? 'Nid yw ' + personIs['@person'].fullName +
+          ' yn <strong>perthyn</strong> i ' +
+          (personToIsMe ? 'chi' : personTo['@person'].fullName)
         : standardText()
     );
   }
