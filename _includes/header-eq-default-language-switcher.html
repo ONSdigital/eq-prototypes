@@ -1,6 +1,7 @@
 <style>
     .language-switcher {
         position: relative;
+        top: -.25rem;
     }
 
     .languages {
@@ -60,6 +61,11 @@
     .language-switcher__items--open {
         display: block;
     }
+
+
+    /*.languages:focus-within > .language-switcher__items {
+        display : block;
+    }*/
 </style>
 
 <header class="header">
@@ -94,11 +100,12 @@
                                 </li>
                                 <li class="language-switcher__item">
                                     <a class="language-switcher__link" href="">
-                                        Ulstèr -Scotch
+                                        Ulstèr-Scotch
                                     </a>
                                 </li>
                                 <li class="language-switcher__item">
-                                    <a class="language-switcher__link" href="">
+                                    <a class="language-switcher__link"
+                                       href="../all-languages/">
                                         All languages
                                     </a>
                                 </li>
@@ -134,11 +141,25 @@
 
 <script>
     $(function () {
-      $('.js-language-switcher-selected').on('click', function(e) {
+      var switcher = $('.js-language-switcher-selected');
+
+      switcher.on('click', function(e) {
         e.preventDefault();
 
-        $(this).addClass('language-switcher__selected--open');
-        $('.js-language-switcher-items').toggleClass('language-switcher__items--open');
+        toggle('show');
       });
+
+      switcher.on('blur', function () {
+        setTimeout(function () {
+          toggle('hide');
+        }, 10);
+      });
+
+      function toggle(description) {
+        var jQMethod = description === 'show' ? 'addClass' : 'removeClass';
+
+        $(this)[jQMethod]('language-switcher__selected--open');
+        $('.js-language-switcher-items')[jQMethod]('language-switcher__items--open');
+      }
     });
 </script>
