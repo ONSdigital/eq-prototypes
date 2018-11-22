@@ -143,11 +143,16 @@
       var $scopeEl = $('.js-language-switcher');
       var $switcher = $scopeEl.find('.js-language-switcher-selected');
       var clickedStateProperty = 'data-language-item-clicked';
+      var switcherOpenClass = 'language-switcher__selected--open';
+      var itemsOpenClass = 'language-switcher__items--open';
 
-      $switcher.on('click', function(e) {
+      $switcher.on('mouseup', function(e) {
         e.preventDefault();
+        e.stopPropagation();
 
-        toggle('show');
+        toggle($switcher.hasClass(switcherOpenClass)
+          ? 'hide'
+          : 'show');
       });
 
       function setSwitcherProp(val) {
@@ -170,8 +175,8 @@
       function toggle(description) {
         var jQMethod = description === 'show' ? 'addClass' : 'removeClass';
 
-        $(this)[jQMethod]('language-switcher__selected--open');
-        $scopeEl.find('.js-language-switcher-items')[jQMethod]('language-switcher__items--open');
+        $switcher[jQMethod](switcherOpenClass);
+        $scopeEl.find('.js-language-switcher-items')[jQMethod](itemsOpenClass);
       }
     });
 </script>
