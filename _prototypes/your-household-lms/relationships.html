@@ -1,0 +1,507 @@
+---
+title: Household prototype v4
+project: your-household
+globalcss: false
+householdMembers:
+visitors:
+layout: eq-default-extras
+cdn: v1.5.0
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link mars" href="../summary">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            {% include navigation.html
+            items=site.data.your-household-v4.navigationItemsRelationships
+            nav-title-id="section-address" %}
+        </div>
+        <div class="grid__col col-7@m pull-1@m">
+            <main role="main" id="main" class="page__main">
+                <form name="trav" class="form qa-questionnaire-form" role="form"
+                      autocomplete="off" novalidate="">
+                    <div class="group">
+                        <div class="block">
+                            <section class="section" id="question-area">
+                                <div class="question">
+                                    <h1 class="question__title saturn">
+                                        <span class="js-relationship-person-is-relationship-description">...</span>
+                                    </h1>
+                                    <p class="question__description">
+                                        Complete the sentence by selecting
+                                        the appropriate relationship.
+                                    </p>
+
+                                    <div class="answer__fields js-fields">
+                                        <div class="field field--radio field--multiplechoice">
+                                            <fieldset class="grid u-mb-xl">
+                                                <div class="grid__col col-8@m">
+                                                    <div class="field__item js-focusable-box">
+                                                        <input class="input input--radio js-focusable"
+                                                               type="radio"
+                                                               name="relationship"
+                                                               id="husband-wife"
+                                                               value="husband-wife"/>
+                                                        <label id="husband-wife-label"
+                                                               class="label label--inline u-width-fill venus"
+                                                               for="husband-wife">Husband, wife or same sex civil partner</label>
+                                                    </div>
+                                                    <div class="field__item js-focusable-box">
+                                                        <input class="input input--radio js-focusable"
+                                                               type="radio"
+                                                               name="relationship"
+                                                               id="partner"
+                                                               value="partner"/>
+                                                        <label class="label label--inline venus"
+                                                               for="partner">
+                                                            Partner
+                                                        </label>
+                                                    </div>
+                                                    <div class="field__item js-focusable-box">
+                                                        <input class="input input--radio js-focusable"
+                                                               type="radio"
+                                                               name="relationship"
+                                                               id="mother-father"
+                                                               value="mother-father"/>
+                                                        <label class="label label--inline venus"
+                                                               for="mother-father">
+                                                            Parent
+                                                            <span class="pluto u-db">Including adopted parent</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="field__item js-focusable-box">
+                                                        <input class="input input--radio js-focusable"
+                                                               type="radio"
+                                                               name="relationship"
+                                                               id="step-mother-father"
+                                                               value="step-mother-father"/>
+                                                        <label class="label label--inline venus"
+                                                               for="step-mother-father">
+                                                            Step parent
+                                                        </label>
+                                                    </div>
+                                                    <div class="field__item js-focusable-box">
+                                                        <input class="input input--radio js-focusable"
+                                                               type="radio"
+                                                               name="relationship"
+                                                               id="parent-in-law"
+                                                               value="parent-in-law"/>
+                                                        <label class="label label--inline venus"
+                                                               for="parent-in-law">
+                                                            Parent-in-law
+                                                        </label>
+                                                    </div>
+                                                    <div class="field__item js-focusable-box">
+                                                        <input class="input input--radio js-focusable"
+                                                               type="radio"
+                                                               name="relationship"
+                                                               id="son-daughter"
+                                                               value="son-daughter"/>
+                                                        <label
+                                                                id="son-daughter-label"
+                                                               class="label label--inline venus"
+                                                               for="son-daughter">
+                                                            Son or daughter
+                                                            <span class="pluto u-db">Including adopted son or adopted daughter</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="field__item js-focusable-box">
+                                                        <input class="input input--radio js-focusable"
+                                                               type="radio"
+                                                               name="relationship"
+                                                               id="step-child"
+                                                               value="step-child"/>
+                                                        <label id="step-child-label"
+                                                               class="label label--inline venus"
+                                                               for="step-child">
+                                                            Stepson or
+                                                            stepdaughter
+                                                        </label>
+                                                    </div>
+                                                    <div class="field__item js-focusable-box">
+                                                        <input class="input input--radio js-focusable"
+                                                               type="radio"
+                                                               name="relationship"
+                                                               id="son-daughter-in-law"
+                                                               value="son-daughter-in-law"/>
+                                                        <label id="son-daughter-in-law-label"
+                                                               class="label label--inline venus"
+                                                               for="son-daughter-in-law">
+                                                            Son-in-law or
+                                                            daughter-in-law
+                                                        </label>
+                                                    </div>
+                                                    <div class="field__item js-focusable-box">
+                                                        <input class="input input--radio js-focusable"
+                                                               type="radio"
+                                                               name="relationship"
+                                                               id="brother-sister"
+                                                               value="brother-sister"/>
+                                                        <label id="brother-sister-label"
+                                                               class="label label--inline venus"
+                                                               for="brother-sister">
+                                                            Brother or sister
+                                                        </label>
+                                                    </div>
+                                                    <div class="field__item js-focusable-box">
+                                                        <input class="input input--radio js-focusable"
+                                                               type="radio"
+                                                               name="relationship"
+                                                               id="step-brother-sister"
+                                                               value="step-brother-sister"/>
+                                                        <label id="step-brother-sister-label"
+                                                               class="label label--inline venus"
+                                                               for="step-brother-sister">
+                                                            Stepbrother or
+                                                            stepsister
+                                                        </label>
+                                                    </div>
+                                                    <div class="field__item js-focusable-box">
+                                                        <input class="input input&#45;&#45;radio js-focusable"
+                                                               type="radio"
+                                                               name="relationship"
+                                                               id="grandparent"
+                                                               value="grandparent"/>
+                                                        <label class="label label&#45;&#45;inline venus"
+                                                               for="grandparent">
+                                                            Grandparent
+                                                        </label>
+                                                    </div>
+                                                    <div class="field__item js-focusable-box">
+                                                        <input class="input input--radio js-focusable"
+                                                               type="radio"
+                                                               name="relationship"
+                                                               id="grandchild"
+                                                               value="grandchild"/>
+                                                        <label class="label label--inline venus"
+                                                               for="grandchild">
+                                                            Grandchild
+                                                        </label>
+                                                    </div>
+                                                    <div class="field__item js-focusable-box">
+                                                        <input class="input input&#45;&#45;radio js-focusable"
+                                                               type="radio"
+                                                               name="relationship"
+                                                               id="other-relation"
+                                                               value="other-relation"/>
+                                                        <label class="label label&#45;&#45;inline venus"
+                                                               for="other-relation">
+                                                            Other relative
+                                                        </label>
+                                                    </div>
+                                                    <div class="field__item js-focusable-box">
+                                                        <input class="input input&#45;&#45;radio js-focusable"
+                                                               type="radio"
+                                                               name="relationship"
+                                                               id="unrelated"
+                                                               value="unrelated"/>
+                                                        <label class="label label&#45;&#45;inline venus"
+                                                               for="unrelated">
+                                                            Other non-relative
+                                                            <span class="pluto u-db">Including foster parent and foster child</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus"
+                            type="submit" name="">Save and continue
+                    </button>
+
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<style>
+    .field--multiplechoice .field__item {
+        margin-right: 0;
+        width: 100%;
+        min-width: 0;
+        vertical-align: top;
+    }
+
+    .label .label--negative {
+        margin-left: -1.9rem;
+    }
+
+    .u-width-fill {
+        width: 100%;
+        min-width: 0;
+    }
+</style>
+
+<script src='/js/compiled/your-household-lms/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    personIs,
+    personTo,
+
+    urlParams = new URLSearchParams(window.location.search),
+    editRelationshipId = urlParams.get('edit'),
+    editRelationshipFound = null,
+
+    surveyType = urlParams.get('survey'),
+    nextPageSurveyRouting = surveyType ? '&survey=' + surveyType : '';
+
+  function updateQuestion(missingRelationship, descriptionChosen) {
+    personIs = missingRelationship.personIs;
+    personTo = missingRelationship.personTo;
+
+    $('.js-relationship-person-is-relationship-description').html(
+      personIs['@person'].fullName +
+      " is the " +
+      " <span class='highlight'>" + (descriptionChosen || "...") + "</span>" +
+      " of " +
+      personTo['@person'].fullName
+    );
+  }
+
+  function updateAnswerDescription(personIs) {
+    var isFemale = personIs['@person'].gender === 'female';
+
+    /**
+     * Change answer descriptions based on gender of person
+     */
+    if(isFemale) {
+      $('#husband-wife-label').html(storageAPI.femaleAltGenderDescriptions['husband-wife'].description);
+      $('#son-daughter-label').html(storageAPI.femaleAltGenderDescriptions['son-daughter'].description);
+      $('#step-child-label').html(storageAPI.femaleAltGenderDescriptions['step-child'].description);
+      $('#son-daughter-in-law-label').html(storageAPI.femaleAltGenderDescriptions['son-daughter-in-law'].description);
+      $('#brother-sister-label').html(storageAPI.femaleAltGenderDescriptions['brother-sister'].description);
+      $('#step-brother-sister-label').html(storageAPI.femaleAltGenderDescriptions['step-brother-sister'].description);
+    }
+  }
+
+  function getChosenItem() {
+    var val = $('[name="relationship"]:checked').val();
+
+    return {
+      val: val,
+      description: storageAPI.relationshipDescriptionMap[val]
+    };
+  }
+
+  /**
+   * Edit relationship page setup
+   */
+  function journeyEditRelationship() {
+    editRelationshipFound = storageAPI.getAllRelationships()
+      .filter(function(relationship) {
+        return relationship.id + '' === editRelationshipId;
+      })[0];
+
+    var personIs =
+        storageAPI.getHouseholdMemberByPersonId(editRelationshipFound.personIsId),
+      personTo =
+        storageAPI.getHouseholdMemberByPersonId(editRelationshipFound.personToId);
+
+    if (editRelationshipFound) {
+      updateQuestion({
+        personIs: personIs,
+        personTo: personTo
+      });
+      updateAnswerDescription(personIs);
+      $('.qa-btn-submit')
+        .on('click', editSubmit_handler.bind(null, editRelationshipId));
+    }
+    else {
+      $('#question-area')
+        .html('<h1 class="saturn">Relationship not found</h1>');
+    }
+  }
+
+  function editSubmit_handler(relationshipId, e) {
+    e.preventDefault();
+
+    var chosenItem = getChosenItem(),
+      relationshipDescriptionVal = chosenItem.val,
+      relationshipDescription = chosenItem.description;
+
+    if (!relationshipDescription) {
+      throw Error('Relationship description not found: ', relationshipDescription);
+    }
+
+    storageAPI.editRelationship(relationshipId,
+      storageAPI.TYPES.relationship(
+        relationshipDescriptionVal,
+        editRelationshipFound.personIsId,
+        editRelationshipFound.personToId,
+      )
+    );
+
+    window.location.href = '../relationships-summary/?noop=1' +
+      nextPageSurveyRouting;
+  }
+
+  /**
+   * Create relationship page setup
+   */
+  function journeyCreateNewRelationship() {
+    var missingRelationship = storageAPI.findNextMissingRelationship();
+
+    if (missingRelationship) {
+      updateQuestion({
+        personIs: missingRelationship.personTo,
+        personTo: missingRelationship.personIs
+      });
+      updateAnswerDescription(missingRelationship.personTo);
+      $('.qa-btn-submit').on('click', missingSubmit_handler);
+    }
+    else {
+      $('#question-area')
+        .html('<h1 class="saturn">No missing relationships found</h1>');
+      $('.qa-btn-submit').on('click', function(e) {
+        e.preventDefault();
+
+        window.location.href = '../relationships-summary/?noop=1' + nextPageSurveyRouting;
+      });
+    }
+  }
+
+  function missingSubmit_handler(e) {
+    e.preventDefault();
+
+    var nextMissingRelationship,
+      chosenItem = getChosenItem(),
+      relationshipDescriptionVal = chosenItem.val,
+      relationshipDescription = chosenItem.description,
+      newRelationship,
+      dbRelationshipId;
+
+    if (!relationshipDescription) {
+      throw Error('Relationship description not found: ', relationshipDescription);
+    }
+
+    newRelationship = storageAPI.addRelationship(
+      storageAPI.TYPES.relationship(
+        relationshipDescriptionVal,
+        personIs['@person'].id,
+        personTo['@person'].id
+      )
+    );
+
+    dbRelationshipId = newRelationship.id;
+
+    window.history.replaceState(null, '', '?edit=' + dbRelationshipId + nextPageSurveyRouting);
+
+    //storageAPI.inferRelationships(newRelationship, personIs, personTo);
+
+    nextMissingRelationship = storageAPI.findNextMissingRelationship();
+
+    /**
+     * Routing
+     */
+    if (nextMissingRelationship) {
+
+      (function () {
+        var personIsId = personIs['@person'].id,
+          personToId = personTo['@person'].id,
+          subjectPersonId,
+          subjectRelationshipDescription;
+
+        /**
+         * Question strategies
+         *
+         * If child-parent relationship type was selected
+         * and there are missing relationships for this person
+         */
+        if(relationshipDescriptionVal === 'mother-father' &&
+          storageAPI.getPeopleIdsMissingRelationshipsWithPerson(personIsId).length) {
+          subjectPersonId = personIsId;
+        }
+        else if(relationshipDescriptionVal === 'son-daughter' &&
+          storageAPI.getPeopleIdsMissingRelationshipsWithPerson(personToId).length) {
+          subjectPersonId = personToId;
+          subjectRelationshipDescription = 'mother-father';
+        }
+        else if(relationshipDescriptionVal === 'unrelated' &&
+          storageAPI.getPeopleIdsMissingRelationshipsWithPerson(personIsId).length &&
+
+          /**
+           * And personIs already has the same relationship type with someone
+           * else
+           */
+          storageAPI.getAllManualRelationships()
+            .filter(storageAPI.isInRelationship.bind(null, personIsId))
+            .filter(storageAPI.isRelationshipType.bind(null, relationshipDescriptionVal))
+            .length > 1
+        ) {
+          subjectPersonId = personIsId;
+        }
+
+        subjectRelationshipDescription = subjectRelationshipDescription ||
+          relationshipDescriptionVal;
+
+        if(subjectPersonId) {
+          window.location.href = '../relationships-person-select/?person=' +
+            subjectPersonId + '&relationship-description=' +
+            subjectRelationshipDescription +
+            '&gender-preference=' + personIs['@person'].gender +
+            nextPageSurveyRouting;
+        }
+        else {
+          window.location.href = '../relationships/?noop=1' +
+            nextPageSurveyRouting;
+        }
+      }());
+    }
+    else {
+      window.location.href = '../relationships-summary/?noop=1' +
+        nextPageSurveyRouting;
+    }
+  }
+
+  $('[name="relationship"]').on('change', function() {
+
+    var relationshipDescription = storageAPI.relationshipDescriptionMap[$(this).val()],
+
+      altDescriptionObj = storageAPI.femaleAltGenderDescriptions[$(this).val()],
+
+      isNotFamily = ['unrelated', 'other-relation'].indexOf(
+        relationshipDescription.type.id
+      ) !== -1,
+
+      html = isNotFamily
+        ? personIs['@person'].fullName +
+          ' is <em class="highlight">' +
+            (altDescriptionObj ? altDescriptionObj.sentanceLabel : undefined) ||
+            relationshipDescription.sentanceLabel +
+          '</em> to ' +
+          personTo['@person'].fullName
+
+        : updateQuestion({
+          personIs: personIs,
+          personTo: personTo
+        }, (altDescriptionObj ? altDescriptionObj.sentanceLabel : undefined) ||
+          relationshipDescription.sentanceLabel);
+
+    $('.js-relationship-person-is-relationship-description').html(html);
+  });
+
+  $(function() {
+
+    /**
+     * Code branching - are we trying to edit or create a new relationship
+     */
+    if (editRelationshipId) {
+      journeyEditRelationship();
+    }
+    else {
+      journeyCreateNewRelationship();
+    }
+  });
+</script>

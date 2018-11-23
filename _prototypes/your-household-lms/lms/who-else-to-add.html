@@ -1,0 +1,187 @@
+---
+title: Online Household Study v2
+project: your-household
+globalcss: false
+layout: eq-default-extras
+cdn: v1.5.0
+---
+
+<link rel="stylesheet" href="../../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link mars"
+           href="../does-anyone-else-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            <!--{% include navigation.html
+            items=site.data.your-household-v4.navigationItemsHousehold
+            nav-title-id="section-address" %}-->
+        </div>
+        <div class="grid__col col-7@m pull-1@m">
+            <main role="main" id="main" class="page__main">
+                <div class="feedback__inline js-feedback-inline is-collapsed">
+                    <div class="feedback__border">
+                    </div>
+                </div>
+
+                <div class="group">
+                    <div class="block">
+
+                        <div class="question">
+                            <h1 id="question-title"
+                                class="question__title saturn"
+                                data-qa="question-title">
+                                Please enter the details of the other people
+                                who live at <span
+                                    class="address-text"></span>
+                            </h1>
+
+                            <div class="panel panel--simple panel--info u-mb-m js-panel-info">
+                                <p class="mars"><strong>Include</strong> all
+                                adults, children and babies who class this
+                                    as their main residence, even if they
+                                    are currently away for a continuous
+                                    period of up to 6 months</p>
+                            </div>
+
+                            <h2 class="neptune js-heading-2"></h2>
+
+                            <!--<div id="member-list"></div>-->
+
+                            <fieldset
+                                    class="question__fieldset js-question-fieldset u-mb-xl">
+                                <legend class="u-vh">What is your name?</legend>
+
+                                <div class="question__answers">
+                                    <div class="question__answer">
+                                        <label class="label venus"
+                                               for="first-name">
+                                            <div class="label__inner">
+                                                First or given name
+                                            </div>
+                                        </label>
+                                        <input class="input input--text "
+                                               id="first-name"
+                                               data-qa="input-text" value=""/>
+                                    </div>
+
+                                    <div class="question__answer">
+                                        <label class="label venus ">
+                                            <div class="label__inner">
+                                                Surname or family name
+                                            </div>
+                                        </label>
+                                        <input class="input input--text "
+                                               id="last-name"
+                                               data-qa="input-text" value=""/>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <div class="field field--radio field--multiplechoice u-mb-xl">
+                                <fieldset>
+                                    <legend class="field__legend mars ">Sex
+                                    </legend>
+                                    <div class="field__item js-focusable-box">
+                                        <input
+                                                class="input input--radio js-focusable" name="radio-answer" value="male" id="male" type="radio">
+                                        <label
+                                                class="label label--inline venus "
+                                                for="male">Male</label>
+                                    </div>
+                                    <div class="field__item js-focusable-box">
+                                        <input
+                                                class="input input--radio js-focusable" name="radio-answer" value="female" id="female" type="radio">
+                                        <label class="label label--inline venus "
+                                               for="female">Female</label>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-submit btn--primary btn--lg"
+                        data-qa="btn-submit" type="submit"
+                        name="action[save_continue]">
+                    Save and continue
+                </button>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/your-household-lms/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    editUserId = new URLSearchParams(window.location.search).get('edit'),
+    memberFound = null,
+    allMembers = storageAPI.getAllHouseholdMembers().filter(storageAPI.isHouseholdMember);
+
+  if (editUserId) {
+    memberFound = allMembers
+      .filter(function(member) {
+        return member['@person'].id === editUserId;
+      })[0];
+  }
+
+  if (editUserId && !memberFound) {
+    throw Error('Member not found');
+  }
+
+  $('.btn-submit').click(function(e) {
+    e.preventDefault(); // do not submit the form like usual
+
+    var person = window.ONS.storage.TYPES.person({
+      firstName: document.getElementById('first-name').value,
+      lastName: document.getElementById('last-name').value,
+      gender: $('[name=radio-answer]:checked').val()
+    });
+
+    var personType = window.ONS.storage.KEYS['HOUSEHOLD_MEMBER_TYPE'];
+
+    if (editUserId && memberFound) {
+      person.id = editUserId;
+      window.ONS.storage['updateHouseholdMember'](person, {type: personType});
+    }
+    else {
+      window.ONS.storage['addHouseholdMember'](person, {type: personType});
+    }
+
+    /**
+     * Routing
+     */
+    if (window.location.search.match(/journey=student-halls/)) {
+      window.location = '../is-there-does-anyone-else-student-halls/';
+    }
+    else {
+      window.location = '../does-anyone-else-live-here/';
+    }
+  });
+
+  $(function() {
+    var person,
+      overrideTitleStudentHalls = 'Who do you need to add who lives in a student halls of residence for part of the year?';
+
+    if (window.location.search.match(/journey=student-halls/)) {
+      $('#question-title').html(overrideTitleStudentHalls);
+      $('.js-panel-info').hide();
+    }
+
+    if (memberFound) {
+      person = memberFound['@person'];
+
+      $('#first-name').val(person.firstName);
+      $('#last-name').val(person.lastName);
+      $('#' + userPerson.gender).attr('checked', true);
+    }
+
+    $('.js-heading-2').html('Person ' + (allMembers.length + 1));
+  });
+</script>
+
