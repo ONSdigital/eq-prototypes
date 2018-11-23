@@ -54,18 +54,14 @@
         transform: rotate(90deg);
     }
 
-    .language-switcher__selected--open {
-
+    .choose-language {
+        position : relative;
+        top : .3rem;
     }
 
     .language-switcher__items--open {
         display: block;
     }
-
-
-    /*.languages:focus-within > .language-switcher__items {
-        display : block;
-    }*/
 </style>
 
 <header class="header">
@@ -82,24 +78,31 @@
                 </div>
                 <div class="grid__col col-6@s">
                     <div class="language-switcher js-language-switcher">
-                        <div class="languages">
+                        <a class="choose-language u-fr"
+                           href="#languages">Choose language</a>
+                        <div class="languages" style="display:none;">
                             <button
-                                    class="language-switcher__selected js-language-switcher-selected">
+                                class="language-switcher__selected js-language-switcher-selected"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                                aria-controls="language-switcher-items">
                                 English
                             </button>
-                            <ul class="language-switcher__items js-language-switcher-items">
+                            <ul id="language-switcher-items"
+                                class="language-switcher__items js-language-switcher-items"
+                                role="menu">
                                 <li class="language-switcher__item">
-                                    <a class="language-switcher__link js-language-switcher-item" href="">
+                                    <a class="language-switcher__link js-language-switcher-item" href="" role="menuitem">
                                         Cymraeg
                                     </a>
                                 </li>
                                 <li class="language-switcher__item">
-                                    <a class="language-switcher__link js-language-switcher-item" href="">
+                                    <a class="language-switcher__link js-language-switcher-item" href="" role="menuitem">
                                         Gàidhlig
                                     </a>
                                 </li>
                                 <li class="language-switcher__item">
-                                    <a class="language-switcher__link js-language-switcher-item" href="">
+                                    <a class="language-switcher__link js-language-switcher-item" href="" role="menuitem">
                                         Ulstèr-Scotch
                                     </a>
                                 </li>
@@ -145,8 +148,14 @@
       var clickedStateProperty = 'data-language-item-clicked';
       var switcherOpenClass = 'language-switcher__selected--open';
       var itemsOpenClass = 'language-switcher__items--open';
+      var listAnchorClass = 'js-language-switcher-item';
+      var $listAnchors = $scopeEl.find('.' + listAnchorClass);
+      var $list = $scopeEl.find('.js-language-switcher-items');
 
-      $switcher.on('mouseup', function(e) {
+      $('.choose-language').hide();
+      $('.languages').show();
+
+      $switcher.on('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
 
@@ -155,12 +164,43 @@
           : 'show');
       });
 
+      $switcher.on('keydown', function(e) {
+        if(e.key === 'ArrowDown' && $switcher.hasClass(switcherOpenClass)) {
+          e.preventDefault();
+
+          setSwitcherProp(true);
+          $list.find('.' + listAnchorClass + ':first').trigger('focus');
+        }
+      });
+
       function setSwitcherProp(val) {
         $switcher.attr(clickedStateProperty, val);
       }
 
-      $scopeEl.find('.js-language-switcher-item')
-        .on('mousedown', setSwitcherProp.bind(null, true));
+      $listAnchors.on('mousedown', setSwitcherProp.bind(null, true));
+
+      $listAnchors.on('keydown', function(e) {
+        var $this = $(this),
+            keyMap = {
+              'ArrowDown': function () {
+                e.preventDefault();
+                var $nextEl = $this.parent().next();
+
+                $nextEl && $nextEl.find('.' + listAnchorClass).trigger('focus');
+              },
+              'ArrowUp': function () {
+                e.preventDefault();
+                var $prevEl = $this.parent().prev();
+
+                $prevEl[0] &&
+                    $prevEl.find('.' + listAnchorClass).trigger('focus');
+              }
+            };
+
+        var funcFound = keyMap[e.key];
+
+        funcFound && funcFound();
+      });
 
       document.addEventListener('mouseup', function  () {
         toggle('hide');
@@ -176,7 +216,7 @@
         var jQMethod = description === 'show' ? 'addClass' : 'removeClass';
 
         $switcher[jQMethod](switcherOpenClass);
-        $scopeEl.find('.js-language-switcher-items')[jQMethod](itemsOpenClass);
+        $list[jQMethod](itemsOpenClass);
       }
     });
 </script>
