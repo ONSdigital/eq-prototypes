@@ -52,8 +52,10 @@
     background : url('../img/icons/lockicon.svg') no-repeat left top;
 }
 
-.footer {
-    /* margin-top : 7rem; */
+@media all and (min-width: 740px) {
+  .footer {
+    margin-top : 6.5rem;
+  }
 }
 
 .btn--danger {
