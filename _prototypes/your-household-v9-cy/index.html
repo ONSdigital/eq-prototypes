@@ -1,0 +1,120 @@
+---
+title: Household prototype v9 - Welsh
+project: your-household
+globalcss: false
+layout: eq-default-extras
+cdn: v1.5.0
+---
+
+<style>
+    .input--text-lg {
+        width : 100%;
+    }
+
+    .lock {
+        font-weight : normal;
+    }
+</style>
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+
+        <div class="grid__col col-7@m pull-1@m">
+            <main role="main" id="main" class="page__main">
+                <div class="feedback__inline js-feedback-inline is-collapsed">
+                    <div class="feedback__border">
+                        <form id="feedback-form" method="POST"
+                              class="feedback__form">
+                            <input id="csrf_token" name="csrf_token"
+                                   type="hidden"
+                                   value="IjI4MWVjOTc4Mjk5NTE1NjQ5YjlmNWUzZTU4MGZlOGIzNGYwNDQwZTYi.DQfxeA.HzzQFY1qLDUwiMKKT_aAcR1OKUI">
+                            <div class="group">
+                                <div class="feedback__field">
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="group u-mb-xl" id="what-is-your-address-group">
+                    <div class="block" id="what-is-your-address">
+                        <div class="question">
+                            <h1 class="question__title saturn"
+                                data-qa="question-title">
+                                Croeso i'r prototeip cartrefi
+                            </h1>
+
+                            <div class="panel panel--simple panel--info">
+                                <div class="panel__body">
+                                    <div class="field">
+                                        <label class="label venus "
+                                               for="address-line-1"
+                                               id="label-address-line-1">
+                                            <div class="label__inner">
+                                                Rhowch y cod mynediad unigryw
+                                            </div>
+                                        </label>
+
+                                        <div class="grid">
+                                            <div class="grid__col col-4@m">
+                                                <input
+                                                        class="input input--text input--text-lg u-mb-s"
+                                                        id="address-line-1"
+                                                        name="address-line-1"
+                                                        data-qa="input-text"
+                                                        value=""/>
+                                            </div>
+                                            <div class="grid__col col-4@m">
+                                                <input
+                                                        class="input input--text input--text-lg u-mb-s"
+                                                        id="address-line-1"
+                                                        name="address-line-1"
+                                                        data-qa="input-text"
+                                                        value=""/>
+                                            </div>
+                                            <div class="grid__col col-4@m">
+                                                <input
+                                                        class="input input--text input--text-lg u-mb-s"
+                                                        id="address-line-1"
+                                                        name="address-line-1"
+                                                        data-qa="input-text"
+                                                        value=""/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <p class="mars">Mae'r cod mynediad unigryw wedi'i argraffu ar eich llythyr gwahoddiad neu'ch ffurflen</p>
+                                </div>
+                            </div>
+
+                            <p class="mars u-mt-l lock">Mae eich gwybodaeth bersonol yn cael ei diogelu gan y gyfraith a chaiff ei chadw'n gyfrinachol</p>
+
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-submit btn--primary btn--lg"
+                        data-qa="btn-submit" type="submit"
+                        name="action[save_continue]">Cyflwyno cod
+                </button>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/standard-bundle.js'></script>
+
+<script>
+  $('.btn-submit').click(function(e) {
+    e.preventDefault();
+    window.location = '../confirm-address/';
+  });
+</script>
+
