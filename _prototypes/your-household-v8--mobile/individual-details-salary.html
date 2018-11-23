@@ -60,7 +60,10 @@ beta: true
                                                    for="text-input">Gross pay
                                                 last time you were paid
                                             </label>
-                                            <input class="input input--text" type="text" id="text-input">
+                                            <div class="input-type input-type--prefix">
+                                                <input id="text-input" class="input input--w-5 input-type__input" type="number" pattern="[0-9]*">
+                                                <abbr title="pounds" class="input-type__type">£</abbr>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
