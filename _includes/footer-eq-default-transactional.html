@@ -8,6 +8,10 @@
         text-decoration: none;
     }
 
+    .details__summary--no-arrow {
+        padding-left: 0;
+    }
+
 
     .details__summary::-webkit-details-marker {
         display: none;
@@ -24,8 +28,8 @@
         text-decoration: none;
     }
 
-    .details__summary:before,
-    .details__summary:after {
+    .details__summary:not(.details__summary--no-arrow):before,
+    .details__summary:not(.details__summary--no-arrow):after {
         content: '';
         display: inline-block;
         position: absolute;
@@ -40,22 +44,22 @@
                     transform .3s ease-in-out;
     }
 
-    .details[open] .details__summary:before,
-    .details[open] .details__summary:after {
+    .details[open] .details__summary:not(.details__summary--no-arrow):before,
+    .details[open] .details__summary:not(.details__summary--no-arrow):after {
         transform: rotate(90deg);
     }
 
-    .details__summary:focus:before,
-    .details__summary:not(:focus):after {
+    .details__summary:not(.details__summary--no-arrow):focus:before,
+    .details__summary:not(.details__summary--no-arrow):not(:focus):after {
         opacity: 0;
     }
 
-    .details__summary:before {
+    .details__summary:not(.details__summary--no-arrow):before {
         background-image: url(https://deploy-preview-214--sdc-global-design-patterns.netlify.com/assets/img/icons/icons--chevron-right-blue.svg);
     }
 
    
-    .details__summary:after {
+    .details__summary:not(.details__summary--no-arrow):after {
         background-image: url(https://deploy-preview-214--sdc-global-design-patterns.netlify.com/assets/img/icons/icons--chevron-right-blue-hover.svg);
     }
 
@@ -115,7 +119,7 @@
                         </div>
                         
                         <div>
-                            <button class="feedback__cancel js-feedback-cancel btn btn--ghost-blue btn--small u-mb-m" type="button">I don't want to provide feedback</button>
+                            <button class="feedback__cancel js-details-close btn btn--ghost-blue btn--small u-mb-m" type="button">I don't want to provide feedback</button>
                         </div>
                     </form>
                 </details>
@@ -161,7 +165,7 @@
 
         element.removeAttribute('open');
         
-        const cancelButton = element.querySelector('.js-feedback-cancel');
+        const cancelButton = element.querySelector('.js-details-close');
         
         if (cancelButton) {
             cancelButton.addEventListener('click', () => {

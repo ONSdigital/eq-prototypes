@@ -40,29 +40,11 @@ beta: true
                                     </h1>
                                 </div>
 
-                                <div class="definition js-details u-mb-s"
-                                     data-hide-label="Click to collapse."
-                                     data-show-label="Click to expand.">
-
-                                    <a href="#definition"
-                                       class="definition__link u-fs-r js-details-trigger u-no-js-hide icon--details"
-                                       aria-expanded="false"
-                                       data-js-accordion-event-label="Why your answer is important"
-                                       data-ga-label="definition-pattern-library"
-                                       data-ga-action="Definition click"
-                                       data-ga="click"
-                                       data-ga-category="Help">Why do I have to include my visitors? <span class="u-vh js-details-label">Click to expand.</span></a>
-
-                                    <h3
-                                            class="u-fs-r--b u-no-js-show u-mb-no">Why do I have to include my visitors?</h3>
-
-                                    <div id="definition" class="definition__main js-details-body">
-                                        <div class="definition__content u-fs-r">
-                                            <p>We ask for visitor information to check that everyone is counted. This helps to produce accurate population estimates. Add any visitors, even if you think they may have been counted elsewhere.</p>
-                                        </div>
-                                        <button class="btn btn--secondary btn--small definition__content-close-trigger js-details-trigger u-no-js-hide">Hide this</button>
-                                    </div>
-                                </div>
+                                <details class="details u-mb-s js-details" open>
+                                    <summary class="details__summary details__summary--no-arrow u-mb-s">Why do I have to include my visitors?</summary>
+                                    <p>We ask for visitor information to check that everyone is counted. This helps to produce accurate population estimates. Add any visitors, even if you think they may have been counted elsewhere.</p>
+                                    <button type="button" class="btn btn--secondary btn--small definition__content-close-trigger js-details-close u-no-js-hide">Hide this</button>
+                                </details>
 
                                 <div class="answer">
                                     <div class="answer__fields js-fields">
