@@ -33,12 +33,18 @@
         border-top : 1px solid #999;
     }
 
-    .language-switcher__selected {
+    .language-switcher__selected,
+    .language-switcher__selected:hover,
+    .language-switcher__selected:active,
+    .language-switcher__selected:focus {
         width : 8rem;
         line-height : 1.6rem;
         text-align : left;
+        font-weight : normal;
+        color : #000;
         background: none;
         border: none;
+        transition : none;
     }
 
     .language-switcher__selected::after {
@@ -82,7 +88,7 @@
                            href="#languages">Choose language</a>
                         <div class="languages" style="display:none;">
                             <button
-                                class="language-switcher__selected js-language-switcher-selected"
+                                class="btn language-switcher__selected js-language-switcher-selected"
                                 aria-haspopup="true"
                                 aria-expanded="false"
                                 aria-controls="language-switcher-items">
