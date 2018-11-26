@@ -8,11 +8,6 @@
         text-decoration: none;
     }
 
-    .details__summary--no-arrow {
-        padding-left: 0;
-    }
-
-
     .details__summary::-webkit-details-marker {
         display: none;
     }
@@ -28,12 +23,12 @@
         text-decoration: none;
     }
 
-    .details__summary:not(.details__summary--no-arrow):before,
-    .details__summary:not(.details__summary--no-arrow):after {
+    .details__summary:before,
+    .details__summary:after {
         content: '';
         display: inline-block;
         position: absolute;
-        top: 0;
+        top: 0.25rem;
         left: 0;
         width: 1.1rem;
         height: 1.1rem;
@@ -44,22 +39,22 @@
                     transform .3s ease-in-out;
     }
 
-    .details[open] .details__summary:not(.details__summary--no-arrow):before,
-    .details[open] .details__summary:not(.details__summary--no-arrow):after {
+    .details[open] .details__summary:before,
+    .details[open] .details__summary:after {
         transform: rotate(90deg);
     }
 
-    .details__summary:not(.details__summary--no-arrow):focus:before,
-    .details__summary:not(.details__summary--no-arrow):not(:focus):after {
+    .details__summary:focus:before,
+    .details__summary:not(:focus):after {
         opacity: 0;
     }
 
-    .details__summary:not(.details__summary--no-arrow):before {
+    .details__summary:before {
         background-image: url(https://deploy-preview-214--sdc-global-design-patterns.netlify.com/assets/img/icons/icons--chevron-right-blue.svg);
     }
 
    
-    .details__summary:not(.details__summary--no-arrow):after {
+    .details__summary:after {
         background-image: url(https://deploy-preview-214--sdc-global-design-patterns.netlify.com/assets/img/icons/icons--chevron-right-blue-hover.svg);
     }
 
@@ -72,14 +67,18 @@
         background: rgba(0,0,0,.4);
         border: none;
     }
+
+    .footer__license {
+        margin-top: 0 !important;
+    }
 </style>
 
 <footer class="footer" role="contentinfo">
     <div class="container">
         {% if page.footerSave %}
-        <button class="btn btn--ghost-blue u-d-no--@m u-mb-m">Save and complete later</button>
+        <button class="btn btn--ghost-blue u-d-no@m u-mb-m">Save and complete later</button>
         {% endif %}
-        <ul class="list list--bare u-d-no--@m">
+        <ul class="list list--bare u-d-no@m">
             <li class="list__item">
                 <a href="/my-account" class="footer__link" target="_blank">My account</a>
             </li>
@@ -88,7 +87,7 @@
             </li>
         </ul>
 
-        <!--<hr class="hr u-mt-m u-d-no--@m">
+        <!--<hr class="hr u-mt-m u-d-no@m">
 
         <div class="grid">
             <div class="grid__col col-8@m">
@@ -126,7 +125,7 @@
             </div>
         </div>-->
             
-        <hr class="hr u-mt-s u-mb-s">
+        <hr class="hr u-mt-s u-mb-s u-d-no@m">
         
         <ul class="list list--bare list--inline@m">
             <li class="list__item">
@@ -136,11 +135,13 @@
                 <a href="/cookies-privacy" class="footer__link" target="_blank">Cookies and privacy</a>
             </li>
         </ul>
-    
-        <div class="footer__license footer__license--border">
-            <img alt="OGL" class="footer__ogl-img" src="https://cdn.ons.gov.uk/sdc/{% if page.cdn %}{{ page.cdn }}{% else %}v1.0.0{% endif %}/img/UKOpenGovernmentLicence-grey.svg"> All content is available under the
+
+        <hr class="hr u-mt-s u-mb-s u-mt-m@m u-mb-m@m">
+
+        <div class="footer__license">
+            <img alt="OGL" class="footer__ogl-img" src="https://deploy-preview-214--sdc-global-design-patterns.netlify.com/assets/img/UKOpenGovernmentLicence-grey.svg"> <span class="u-d-b@xs@m u-mt-s@xs">All content is available under the
             <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" class="footer__link">Open Government
-                Licence v3.0</a>, except where otherwise stated
+                Licence v3.0</a>, except where otherwise stated</span>
         </div>
             
     </div>
