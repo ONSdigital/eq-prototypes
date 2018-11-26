@@ -188,7 +188,7 @@ cdn: v1.5.0
     /**
      * Get state
      */
-    function getSurveyStatus(personDetails, personPin) {
+    function getSurveyStatus(personDetails, personPin, isVisitor) {
       var status;
 
       if (personPin && personPin.exported) {
@@ -214,7 +214,7 @@ cdn: v1.5.0
     /**
      * Link routing
      */
-    function getLinkHref(person, status, personPin) {
+    function getLinkHrefHouseholdMember(person, status, personPin) {
       var linkHref = status === 'completed'
         ? '../individual-details-summary/'
         : '../individual-intro/';
@@ -226,6 +226,16 @@ cdn: v1.5.0
       else {
         linkHref += '?person=' + person.id;
       }
+
+      return linkHref;
+    }
+
+    function getLinkHrefVisitor(person, status) {
+      var linkHref = status === 'completed'
+        ? '../individual-details-summary/'
+        : '../individual-details-sex/';
+
+      linkHref += '?person=' + person.id;
 
       return linkHref;
     }
@@ -266,11 +276,12 @@ cdn: v1.5.0
         var isVisitor = storageAPI.isVisitor(member);
 
         var personDetails = storageAPI.getPersonalDetailsFor(person.id),
-          personPin = storageAPI.getPinFor(person.id),
-          linkHref;
+          personPin = storageAPI.getPinFor(person.id);
 
-        var surveyStatus = getSurveyStatus(personDetails, personPin);
-        var linkHref = getLinkHref(person, surveyStatus, personPin);
+        var surveyStatus = getSurveyStatus(personDetails, personPin, isVisitor);
+        var linkHref = !isVisitor
+          ? getLinkHrefHouseholdMember(person, surveyStatus, personPin)
+          : getLinkHrefVisitor(person, surveyStatus);
 
         if(surveyStatus === 'completed') {
           window.ONS.utils.removeFromList(peopleIdsToComplete, person.id);

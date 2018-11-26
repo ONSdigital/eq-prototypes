@@ -131,6 +131,17 @@ export function addUpdateSalary(personId, val) {
   return details;
 }
 
+export function addUpdateSex(personId, val) {
+  let allDetails = getAllPersonalDetails(),
+    details = allDetails[personId] || {};
+
+  details['sex'] = val;
+
+  updatePersonalDetails(personId, details);
+
+  return details;
+}
+
 export function getPins() {
   return JSON.parse(sessionStorage.getItem(PERSONAL_PINS_KEY)) || {};
 }
