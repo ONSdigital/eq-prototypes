@@ -2,16 +2,33 @@ export function tools () {
 
   const $listLinks = $('.test-data-links'),
 
-    $createFamilyHousehold = $('<li><a href="#" class=\'mock-data-family\'>' +
+    $createFamilyHousehold =
+      $('<li><a href="#" class=\'mock-data-family\'>' +
       'Create family household</a></li>'),
 
-    $createFamilyRelationships = $('<li><a href="#"' +
+    $createFamilyRelationships =
+      $('<li><a href="#"' +
       ' class=\'mock-data-family\'>' +
       'Create family with relationships</a></li>'),
 
-    $createFamilyWithRelationshipsAndVisitors = $('<li><a href="#"' +
+    $createFamilyWithRelationshipsAndVisitors =
+      $('<li><a href="#"' +
       ' class=\'mock-data-family\'>' +
       'Create family with relationships and visitors</a></li>'),
+
+    $createFamilyWithRelationshipsPersonalDetailsAndVisitors =
+      $('<li><a' +
+      ' href="#"' +
+      ' class=\'mock-data-family\'>' +
+      'Create family with relationships, just family individual responses and' +
+      ' visitors</a></li>'),
+
+    $createFamilyWithRelationshipsPersonalDetailsAndVisitorsPersonalDetails =
+      $('<li><a' +
+      ' href="#"' +
+      ' class=\'mock-data-family\'>' +
+      'Create family with relationships, family individual responses and' +
+      ' visitors individual responses</a></li>'),
 
     familyHouseholdMembersData = [{
       'type': 'household-member',
@@ -112,6 +129,68 @@ export function tools () {
       'id': 6
     }],
 
+    familyPersonalDetails = {
+      'person_me': {
+        'dob': {
+          'day': '17',
+          'month': '4',
+          'year': '1967'
+        },
+        'maritalStatus': 'married',
+        'country': 'wales',
+        'orientation': 'straight',
+        'salary': '40000'
+      },
+      'person1': {
+        'dob': {'day': '02', 'month': '10', 'year': '1965'},
+        'maritalStatus': 'married',
+        'country': 'wales',
+        'orientation': 'straight',
+        'salary': '40000'
+      },
+      'person2': {
+        'dob': {'day': '20', 'month': '5', 'year': '1981'},
+        'maritalStatus': 'never',
+        'country': 'wales',
+        'orientation': 'straight',
+        'salary': '20000'
+      },
+      'person3': {
+        'dob': {'day': '11', 'month': '7', 'year': '1984'},
+        'maritalStatus': 'never',
+        'country': 'wales',
+        'orientation': 'straight',
+        'salary': '20000'
+      }
+    },
+
+    visitorsPersonalDetails = {
+      'person4': {
+        'sex': 'male',
+        'dob': {'day': '20', 'month': '7', 'year': '1990'},
+        'address-where': 'in-uk',
+        'address': {
+          'address-line-1': '15',
+          'address-line-2': 'Somewhere near',
+          'town-city': 'Llandridnod',
+          'county': 'Powys',
+          'postcode': 'LL34 AN5'
+        }
+      },
+      'person5': {
+        'sex': 'male',
+        'dob': {'day': '02', 'month': '5', 'year': '1991'},
+        'address-where': 'out-uk',
+        'address': {
+          'address-line-1': '94',
+          'address-line-2': 'Somewhere Far',
+          'town-city': 'Springfield',
+          'county': 'New York',
+          'postcode': 'NY10A'
+        }
+      }
+    },
+
     userData = {
       'fullName': 'Dave  Jones',
       'firstName': 'Dave',
@@ -122,22 +201,47 @@ export function tools () {
   $createFamilyHousehold.on('click', function(e) {
     e.preventDefault();
     clearStorage();
+    prerequisites();
     createFamilyHousehold();
+    window.location.href = '../summary';
   });
 
   $createFamilyRelationships.on('click', function(e) {
     e.preventDefault();
     clearStorage();
+    prerequisites();
     createFamilyHousehold();
     createFamilyRelationships();
+    window.location.href = '../hub';
   });
 
   $createFamilyWithRelationshipsAndVisitors.on('click', function(e) {
     e.preventDefault();
     clearStorage();
-    createFamilyHousehold();
+    prerequisites();
+    createFamilyHouseholdWithVisitors();
     createFamilyRelationships();
-    createVisitors();
+    window.location.href = '../hub';
+  });
+
+  $createFamilyWithRelationshipsPersonalDetailsAndVisitors.on('click', function(e) {
+    e.preventDefault();
+    clearStorage();
+    prerequisites();
+    createFamilyHouseholdWithVisitors();
+    createFamilyRelationships();
+    createFamilyPersonalDetails();
+    window.location.href = '../hub';
+  });
+
+  $createFamilyWithRelationshipsPersonalDetailsAndVisitorsPersonalDetails.on('click', function(e) {
+    e.preventDefault();
+    clearStorage();
+    prerequisites();
+    createFamilyHouseholdWithVisitors();
+    createFamilyRelationships();
+    createFamilyVisitorsPersonalDetails();
+    window.location.href = '../hub';
   });
 
   function prerequisites() {
@@ -151,27 +255,32 @@ export function tools () {
   }
 
   function createFamilyHousehold() {
-    prerequisites();
     sessionStorage.setItem('user-details', JSON.stringify(userData));
     sessionStorage.setItem(window.ONS.storage.KEYS.HOUSEHOLD_MEMBERS_STORAGE_KEY, JSON.stringify(familyHouseholdMembersData));
     sessionStorage.setItem('household-members-increment', JSON.stringify(4));
-    window.location.href = '../summary';
+  }
+
+  function createFamilyHouseholdWithVisitors() {
+    sessionStorage.setItem(window.ONS.storage.KEYS.HOUSEHOLD_MEMBERS_STORAGE_KEY, JSON.stringify([
+      ...familyHouseholdMembersData,
+      ...visitorsMemberData
+    ]));
   }
 
   function createFamilyRelationships() {
     sessionStorage.setItem(window.ONS.storage.KEYS.RELATIONSHIPS_STORAGE_KEY, JSON.stringify(familyHouseholdRelationshipsData));
     sessionStorage.setItem('relationships-increment', JSON.stringify(6));
-    window.location.href = '../hub';
   }
 
-  function createVisitors() {
-    sessionStorage.setItem(window.ONS.storage.KEYS.HOUSEHOLD_MEMBERS_STORAGE_KEY, JSON.stringify([
-      ...familyHouseholdMembersData,
-      ...visitorsMemberData
-    ]));
-    sessionStorage.setItem(window.ONS.storage.KEYS.RELATIONSHIPS_STORAGE_KEY, JSON.stringify(familyHouseholdRelationshipsData));
-    sessionStorage.setItem('relationships-increment', JSON.stringify(6));
-    window.location.href = '../hub';
+  function createFamilyPersonalDetails() {
+    sessionStorage.setItem(window.ONS.storage.KEYS.PERSONAL_DETAILS_KEY, JSON.stringify(familyPersonalDetails));
+  }
+
+  function createFamilyVisitorsPersonalDetails() {
+    sessionStorage.setItem(window.ONS.storage.KEYS.PERSONAL_DETAILS_KEY, JSON.stringify({
+      ...familyPersonalDetails,
+      ...visitorsPersonalDetails
+    }));
   }
 
   function clearStorage() {
@@ -181,4 +290,6 @@ export function tools () {
   $listLinks.append($createFamilyHousehold);
   $listLinks.append($createFamilyRelationships);
   $listLinks.append($createFamilyWithRelationshipsAndVisitors);
+  $listLinks.append($createFamilyWithRelationshipsPersonalDetailsAndVisitors);
+  $listLinks.append($createFamilyWithRelationshipsPersonalDetailsAndVisitorsPersonalDetails);
 }

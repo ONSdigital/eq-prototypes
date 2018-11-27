@@ -65,7 +65,10 @@ import {
 
   createPinFor,
   getPinFor,
-  unsetPinFor
+  unsetPinFor,
+
+  PERSONAL_PINS_KEY,
+  PERSONAL_DETAILS_KEY
 } from './assets/personal-details';
 import {removeFromList, trailingNameS} from './assets/utils';
 
@@ -369,7 +372,9 @@ window.ONS.storage = {
     INDIVIDUAL_PROXY_STORAGE_KEY,
     HOUSEHOLD_MEMBER_TYPE,
     VISITOR_TYPE,
-    RELATIONSHIPS_STORAGE_KEY
+    RELATIONSHIPS_STORAGE_KEY,
+    PERSONAL_PINS_KEY,
+    PERSONAL_DETAILS_KEY
   },
 
   IDS: {

@@ -181,7 +181,7 @@ cdn: v1.5.0
 
     function isVisitorSectionComplete(personDetails) {
       return personDetails.sex &&
-        personDetails.addressInUK &&
+        personDetails['address-where'] &&
         personDetails.address;
     }
 
