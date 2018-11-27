@@ -56,6 +56,8 @@ import {
   addUpdateOrientation,
   addUpdateSalary,
   addUpdateSex,
+  addUpdateAddressWhere,
+  addUpdateAddressIndividual,
 
   personalDetailsMaritalStatusMap,
   personalDetailsCountryMap,
@@ -345,6 +347,8 @@ window.ONS.storage = {
   addUpdateOrientation,
   addUpdateSalary,
   addUpdateSex,
+  addUpdateAddressWhere,
+  addUpdateAddressIndividual,
 
   personalDetailsMaritalStatusMap,
   personalDetailsCountryMap,

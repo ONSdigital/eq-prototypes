@@ -7,7 +7,11 @@ export function tools () {
 
     $createFamilyRelationships = $('<li><a href="#"' +
       ' class=\'mock-data-family\'>' +
-      'Create family relationships</a></li>'),
+      'Create family with relationships</a></li>'),
+
+    $createFamilyWithRelationshipsAndVisitors = $('<li><a href="#"' +
+      ' class=\'mock-data-family\'>' +
+      'Create family with relationships and visitors</a></li>'),
 
     familyHouseholdMembersData = [{
       'type': 'household-member',
@@ -45,6 +49,27 @@ export function tools () {
         'middleName': '',
         'lastName': 'Jones',
         'id': 'person3'
+      }
+    }],
+
+    visitorsMemberData = [{
+      'type': 'visitor',
+      '@person': {
+        'fullName': 'Gareth Johnson',
+        'firstName': 'Gareth',
+        'middleName': '',
+        'lastName': 'Johnson',
+        'id': 'person4'
+      }
+    },
+    {
+      'type': 'visitor',
+      '@person': {
+        'fullName': 'John Hamilton',
+        'firstName': 'John',
+        'middleName': '',
+        'lastName': 'Hamilton',
+        'id': 'person5'
       }
     }],
 
@@ -107,6 +132,14 @@ export function tools () {
     createFamilyRelationships();
   });
 
+  $createFamilyWithRelationshipsAndVisitors.on('click', function(e) {
+    e.preventDefault();
+    clearStorage();
+    createFamilyHousehold();
+    createFamilyRelationships();
+    createVisitors();
+  });
+
   function prerequisites() {
     sessionStorage.setItem('address', '12 Somewhere Close, Newport, CF12 3AB');
     sessionStorage.setItem('address-line-1', '12');
@@ -128,7 +161,17 @@ export function tools () {
   function createFamilyRelationships() {
     sessionStorage.setItem(window.ONS.storage.KEYS.RELATIONSHIPS_STORAGE_KEY, JSON.stringify(familyHouseholdRelationshipsData));
     sessionStorage.setItem('relationships-increment', JSON.stringify(6));
-    window.location.href = '../relationships-summary';
+    window.location.href = '../hub';
+  }
+
+  function createVisitors() {
+    sessionStorage.setItem(window.ONS.storage.KEYS.HOUSEHOLD_MEMBERS_STORAGE_KEY, JSON.stringify([
+      ...familyHouseholdMembersData,
+      ...visitorsMemberData
+    ]));
+    sessionStorage.setItem(window.ONS.storage.KEYS.RELATIONSHIPS_STORAGE_KEY, JSON.stringify(familyHouseholdRelationshipsData));
+    sessionStorage.setItem('relationships-increment', JSON.stringify(6));
+    window.location.href = '../hub';
   }
 
   function clearStorage() {
@@ -137,4 +180,5 @@ export function tools () {
 
   $listLinks.append($createFamilyHousehold);
   $listLinks.append($createFamilyRelationships);
+  $listLinks.append($createFamilyWithRelationshipsAndVisitors);
 }

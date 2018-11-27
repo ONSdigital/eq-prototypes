@@ -142,6 +142,28 @@ export function addUpdateSex(personId, val) {
   return details;
 }
 
+export function addUpdateAddressWhere(personId, val) {
+  let allDetails = getAllPersonalDetails(),
+    details = allDetails[personId] || {};
+
+  details['address-where'] = val;
+
+  updatePersonalDetails(personId, details);
+
+  return details;
+}
+
+export function addUpdateAddressIndividual(personId, val) {
+  let allDetails = getAllPersonalDetails(),
+    details = allDetails[personId] || {};
+
+  details['address'] = val;
+
+  updatePersonalDetails(personId, details);
+
+  return details;
+}
+
 export function getPins() {
   return JSON.parse(sessionStorage.getItem(PERSONAL_PINS_KEY)) || {};
 }
