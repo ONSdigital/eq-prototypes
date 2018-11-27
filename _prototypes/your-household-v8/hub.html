@@ -181,8 +181,10 @@ cdn: v1.5.0
 
     function isVisitorSectionComplete(personDetails) {
       return personDetails.sex &&
-        personDetails['address-where'] &&
-        personDetails.address;
+        (personDetails['address-where'] === 'same-as-visitor1'
+          ? true
+          : personDetails.address
+        );
     }
 
     /**

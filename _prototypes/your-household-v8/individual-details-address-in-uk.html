@@ -122,9 +122,8 @@ cdn: v1.5.0
     surveyType = urlParams.get('survey');
 
   $('.qa-btn-submit').on('click', function (e) {
-    storageAPI.addUpdateAddressWhere(personId,
-      $('[name="addrees-where"]:checked').val()
-    );
+    var val = $('[name="addrees-where"]:checked').val();
+    storageAPI.addUpdateAddressWhere(personId, val);
 
     if(isEditing) {
       e.preventDefault();
@@ -134,8 +133,15 @@ cdn: v1.5.0
 
     if(isVisitor) {
       e.preventDefault();
-      window.location.href = '../individual-details-address/?person=' +
-        personId + (surveyType ? '&survey=' + surveyType : '');
+
+      if(val === 'same-as-visitor1') {
+        window.location.href = '../hub/' + (surveyType ? '?survey=' +
+          surveyType : '');
+      }
+      else {
+        window.location.href = '../individual-details-address/?person=' +
+          personId + (surveyType ? '&survey=' + surveyType : '');
+      }
     }
   });
 
