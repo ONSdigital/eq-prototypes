@@ -2,6 +2,10 @@ export function tools () {
 
   const $listLinks = $('.test-data-links'),
 
+    $clearData =
+      $('<li><a href="#" class=\'mock-data-family\'>' +
+        'Clear all data</a></li>'),
+
     $createFamilyHousehold =
       $('<li><a href="#" class=\'mock-data-family\'>' +
       'Create family household</a></li>'),
@@ -244,6 +248,12 @@ export function tools () {
     window.location.href = '../hub';
   });
 
+  $clearData.on('click', function(e) {
+    e.preventDefault();
+    clearStorage();
+    window.location.href = '../test-address';
+  });
+
   function prerequisites() {
     sessionStorage.setItem('address', '12 Somewhere Close, Newport, CF12 3AB');
     sessionStorage.setItem('address-line-1', '12');
@@ -292,4 +302,5 @@ export function tools () {
   $listLinks.append($createFamilyWithRelationshipsAndVisitors);
   $listLinks.append($createFamilyWithRelationshipsPersonalDetailsAndVisitors);
   $listLinks.append($createFamilyWithRelationshipsPersonalDetailsAndVisitorsPersonalDetails);
+  $listLinks.append($clearData);
 }

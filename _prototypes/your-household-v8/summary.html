@@ -152,12 +152,17 @@ cdn: v1.5.0
 </style>
 
 <script>
-  var urlParams = new URLSearchParams(window.location.search),
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
     surveyType = urlParams.get('survey'),
-    nextPage = surveyType
-      ? '../relationships/?survey=' + surveyType
-      : '../relationships',
+    householdMembers = storageAPI.getAllHouseholdMembers()
+      .filter(storageAPI.isHouseholdMember),
+    nextPage = householdMembers.length > 2
+      ? '../relationships/?noop=true'
+      : '../hub/?noop=true',
     altPage = surveyType && surveyType === 'lms' ? surveyType + '/' : '';
+
+  nextPage += surveyType ? '&survey=' + surveyType : '';
 
   function createMemberItem(member) {
     var $nodeEl = $('#person-record-template').clone(),
