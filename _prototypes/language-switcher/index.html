@@ -6,9 +6,6 @@ layout: eq-default-extras-language-switcher
 cdn: v1.8.4
 ---
 
-<div class="page__subheader">
-</div>
-
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
@@ -35,13 +32,50 @@ cdn: v1.8.4
                 <div class="group u-mb-xl" id="what-is-your-address-group">
                     <div class="block" id="what-is-your-address">
                         <div class="question">
-                            <h1 class="question__title saturn"
+                            <h1 id="question-title"
+                                class="question__title saturn"
                                 data-qa="question-title">
-                                Language switcher (top right)
+                                What is your name?
                             </h1>
                         </div>
+
+                        <fieldset
+                                class="question__fieldset js-question-fieldset u-mb-s">
+                            <legend class="u-vh">What is your name?</legend>
+
+                            <div class="question__answers">
+                                <div class="question__answer">
+                                    <label class="label venus"
+                                           for="first-name">
+                                        <div class="label__inner">
+                                            First name
+                                        </div>
+                                    </label>
+                                    <input class="input input--text "
+                                           id="first-name"
+                                           data-qa="input-text" value=""/>
+                                </div>
+
+                                <div class="question__answer">
+                                    <label class="label venus ">
+                                        <div class="label__inner">
+                                            Last name
+                                        </div>
+                                    </label>
+                                    <input class="input input--text "
+                                           id="last-name"
+                                           data-qa="input-text" value=""/>
+                                </div>
+                            </div>
+                        </fieldset>
                     </div>
                 </div>
+
+                <button class="btn btn-submit btn--primary btn--lg"
+                        data-qa="btn-submit" type="submit"
+                        name="action[save_continue]">
+                    Save and continue
+                </button>
             </main>
         </div>
     </div>
