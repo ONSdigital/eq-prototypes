@@ -26,7 +26,9 @@
                                 {{ site.title }}
                             {% endif %}
                         </span>
+                        {% unless page.hideSaveLater %}
                         <button class="btn btn--ghost u-fr">Cadw a chwblhau'n ddiweddarach</button>
+                        {% endunless %}
                     </h1>
                 </div>
             </div>
