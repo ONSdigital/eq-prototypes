@@ -392,7 +392,8 @@ window.ONS.helpers = {
 window.ONS.utils = {
   removeFromList,
   trailingNameS,
-  numberToPositionWord
+  numberToPositionWord,
+  getSignificant
 };
 
 $(populateHouseholdList);
@@ -404,3 +405,4 @@ $(tools);
 $(updateAllPreviousLinks);
 $(updateBySurveyType);
 $(updateSignificantDate);
+

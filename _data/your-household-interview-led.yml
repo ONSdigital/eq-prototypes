@@ -3,3 +3,9 @@ navigationItemsHousehold:
   state: current
 - label: Accommodation
   state: incomplete
+
+navigationItemsHouseholdComplete:
+- label: People in your household
+  state: complete
+- label: Accommodation
+  state: incomplete

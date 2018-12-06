@@ -127,7 +127,7 @@ export const tempAwayQuestionSentenceMap = {
   'less-twelve': 'People who are temporarily outside the UK for less than 12' +
     ' months',
   'usually-temp': 'People staying temporarily who usually live in the UK but' +
-    ' do not have another UK address, for example, relatives, friends',
+    ' do not have another UK address',
   'other': 'Other people who usually live here, including anyone temporarily' +
     ' away from home'
 };

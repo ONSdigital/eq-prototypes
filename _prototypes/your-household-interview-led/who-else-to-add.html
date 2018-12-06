@@ -46,7 +46,7 @@ footer: minimal
                             <div id="member-list"></div>
 
                             <fieldset
-                                    class="question__fieldset js-question-fieldset u-mb-xl">
+                                    class="question__fieldset js-question-fieldset">
                                 <legend class="u-vh">What is your name?</legend>
 
                                 <div class="question__answers">
@@ -74,6 +74,12 @@ footer: minimal
                                     </div>
                                 </div>
                             </fieldset>
+
+                            <p class="u-mb-xl u-mt-m">
+                                <a class="mars"
+                                   href="../temp-types-living-away">Cancel and return to the previous question
+                                </a>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -209,16 +215,34 @@ footer: minimal
         : '../does-anyone-else-live-here/';
     }*/
 
-    console.log(parseInt(window.sessionStorage.getItem('number-of-people')));
-    console.log(membersTotal);
 
-    if(parseInt(window.sessionStorage.getItem('number-of-people')) ===
+
+    /**
+     * Routing
+     */
+    if(editUserId) {
+      window.location = '../summary/';
+    } else if (window.location.search.match(/journey=visitors/)) {
+      window.location = '../does-anyone-else-live-here/?journey=visitors';
+    } else {
+      if(parseInt(window.sessionStorage.getItem('number-of-people')) ===
+        membersTotal + 1) {
+        window.location.href = '../temp-types-living-away';
+      }
+      else {
+        window.location.reload();
+      }
+    }
+
+
+
+    /*if(parseInt(window.sessionStorage.getItem('number-of-people')) ===
       membersTotal + 1) {
-      window.location.href = '../summary';
+      window.location.href = '../temp-types-living-away';
     }
     else {
       window.location.reload();
-    }
+    }*/
   });
 
   $(function() {
@@ -229,7 +253,7 @@ footer: minimal
       visitors = storageAPI.getAllHouseholdMembers()
         .filter(storageAPI.isVisitor),
       overrideTitle = 'Who ' + (visitors.length ? 'else ' : '') +
-        'is staying overnight on 19th August 2018 at ' +
+        'is staying overnight on ' + window.ONS.utils.getSignificant() + ' ' +
         addressLine1 + ', ' + addressLine2 + '?',
 
       overrideTitleStayingOutsideUK = 'Who do you need to add to ' +
