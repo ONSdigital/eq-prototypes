@@ -121,7 +121,7 @@ footer: minimal
     </li>
 </ul>
 
-<script src='/js/compiled/your-household-v8/bundle.js'></script>
+<script src='/js/compiled/your-household-interview-led/bundle.js'></script>
 
 <style>
     .list.list--records {
@@ -158,9 +158,7 @@ footer: minimal
 <script>
   var urlParams = new URLSearchParams(window.location.search),
     surveyType = urlParams.get('survey'),
-    nextPage = surveyType
-      ? '../relationships/?survey=' + surveyType
-      : '../relationships',
+    nextPage = '../accommodation-kind',
     altPage = surveyType && surveyType === 'lms' ? surveyType + '/' : '';
 
   function createMemberItem(member) {
@@ -262,15 +260,5 @@ footer: minimal
     return member['@person'].id === window.ONS.storage.IDS.USER_HOUSEHOLD_MEMBER_ID;
   } 
 
-  function updateContent () {
-    var $addToHousehould = $('.js-add-to-household');
-
-    if (surveyType === 'lms') {
-      $('.js-heading').html('About your household');
-      $addToHousehould.attr('href', '../lms/who-else-to-add/');
-    }
-  }
-
-  $(updateContent);
   $(updateHouseholdMembersVisitors);
 </script>

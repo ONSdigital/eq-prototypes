@@ -9,3 +9,10 @@ navigationItemsHouseholdComplete:
   state: complete
 - label: Accommodation
   state: incomplete
+
+navigationItemsAccommodation:
+- label: People in your household
+  state: complete
+  href: ../summary
+- label: Accommodation
+  state: current
