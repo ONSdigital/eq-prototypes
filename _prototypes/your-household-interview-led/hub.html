@@ -90,6 +90,7 @@ footer: minimal
                                             </div>
                                         </div>
                                         <div id="household-member-surveys"></div>
+                                        <div id="visitor-surveys"></div>
                                     </div>
                                 </div>
 
@@ -134,6 +135,197 @@ footer: minimal
 <script src='/js/compiled/your-household-interview-led/bundle.js'></script>
 
 <script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    surveyType = urlParams.get('survey');
+
+  var statusMap = {
+    'not-started': {
+      label: 'Not started',
+      linkText: 'Start section',
+    },
+    'in-progress': {
+      label: 'In progress',
+      linkText: 'Continue with section'
+    },
+    'completed': {
+      label: 'Completed',
+      linkText: 'View answers'
+    },
+    'private': {
+      label: 'Responding individually',
+      linkText: null
+    }
+  };
+
+  var allHouseholdMembers = storageAPI.getAllHouseholdMembers(),
+
+    people = allHouseholdMembers
+      .filter(storageAPI.isHouseholdMember),
+
+    visitors = allHouseholdMembers
+      .filter(storageAPI.isVisitor),
+
+    peopleIdsToComplete = _.flatten([
+      _.pluck(people.map(function (member) { return member['@person']; }), 'id'),
+      _.pluck(visitors.map(function (member) { return member['@person']; }), 'id')
+    ]);
+
+  var nextPageSurvey = surveyType ? '&survey=' + surveyType : '';
+
+  /*function isHouseholdMemberSectionComplete(personDetails) {
+    return personDetails.dob &&
+      personDetails.country &&
+      personDetails.orientation &&
+      personDetails.maritalStatus &&
+      personDetails.salary;
+  }*/
+
+  function isHouseholdMemberSectionComplete(personDetails) {
+    return personDetails.sex &&
+      personDetails.dob &&
+      personDetails.age;
+  }
+
+  function isVisitorSectionComplete(personDetails) {
+    return personDetails.sex &&
+      (personDetails['address-where'] === 'same-as-visitor1'
+        ? true
+        : personDetails.address
+      );
+  }
+
+  /**
+   * Get state
+   */
+  function getSurveyStatus(personDetails, personPin, isVisitor) {
+    var status;
+
+    if (personPin && personPin.exported) {
+      status = 'private';
+    }
+    else if (!personDetails) {
+      status = 'not-started';
+    }
+    else if (
+      !isVisitor
+        ? isHouseholdMemberSectionComplete(personDetails)
+        : isVisitorSectionComplete(personDetails)
+    ) {
+      status = 'completed';
+    }
+    else {
+      status = 'in-progress';
+    }
+
+    return status;
+  }
+
+  /**
+   * Link routing
+   */
+  function getLinkHrefHouseholdMember(person, status, personPin) {
+    var linkHref = status === 'completed'
+      ? '../individual-details-summary/'
+      : '../individual-is-available/';
+
+    if (personPin && personPin.pin) {
+      linkHref = '../individual-pin-security/?returnurl=' + linkHref +
+        '&person=' + person.id;
+    }
+    else {
+      linkHref += '?person=' + person.id;
+    }
+
+    return linkHref;
+  }
+
+  function getLinkHrefVisitor(person, status) {
+    var linkHref = status === 'completed'
+      ? '../individual-details-summary/'
+      : '../individual-details-sex/';
+
+    linkHref += '?person=' + person.id;
+
+    return linkHref;
+  }
+
+  /**
+   * Create list item from state
+   */
+  function createListItem(person, surveyStatus, linkHref, isVisitor) {
+    var $nodeEl = $('#person-survey-item-template').clone(),
+      $surveyStatus = $nodeEl.find('.js-survey-status');
+
+    /**
+     * Manipulate DOM fragment
+     */
+    $nodeEl.attr('id', '');
+    $nodeEl.find('.js-person-name').html(
+      person.fullName + (isVisitor ? ' (Visitor)': '')
+    );
+    $nodeEl.find('.js-link').html(statusMap[surveyStatus].linkText);
+    $surveyStatus.html(statusMap[surveyStatus].label);
+
+    surveyStatus === 'private'
+      ? $nodeEl.find('.js-link').hide()
+      : $nodeEl.find('.js-link').attr('href',linkHref);
+
+    (surveyStatus === 'completed' || surveyStatus === 'private')
+    && $surveyStatus.addClass('completed');
+
+    return $nodeEl;
+  }
+
+  function createList(data) {
+    var $container = $('<div></div>');
+
+    $.each(data, function (i, member) {
+
+      var person = member['@person'];
+      var isVisitor = storageAPI.isVisitor(member);
+
+      var personDetails = storageAPI.getPersonalDetailsFor(person.id),
+        personPin = storageAPI.getPinFor(person.id);
+
+      var surveyStatus = getSurveyStatus(personDetails, personPin, isVisitor);
+      var linkHref = !isVisitor
+        ? getLinkHrefHouseholdMember(person, surveyStatus, personPin)
+        : getLinkHrefVisitor(person, surveyStatus);
+
+      if(surveyStatus === 'completed') {
+        window.ONS.utils.removeFromList(peopleIdsToComplete, person.id);
+      }
+
+      linkHref += nextPageSurvey;
+
+      $container.append(createListItem(person, surveyStatus, linkHref, isVisitor));
+    });
+
+    return $container;
+  }
+
+  function updateList() {
+
+    $('#household-member-surveys').append(createList(people));
+    $('#visitor-surveys').append(createList(visitors));
+
+    if (peopleIdsToComplete.length === 0) {
+      $('.qa-btn-submit').attr('disabled', false);
+    }
+  }
+
+  function updateLinks () {
+    if (surveyType) {
+      $('.js-view-summary').attr('href', '../summary/?survey=' + surveyType);
+    }
+  }
+
+  $(updateList);
+  $(updateLinks);
+</script>
+
+<!--<script>
     var storageAPI = window.ONS.storage,
       urlParams = new URLSearchParams(window.location.search),
       surveyType = urlParams.get('survey');
@@ -253,4 +445,4 @@ footer: minimal
 
     $(updateIndividualSurveyList);
     $(updateLinks);
-</script>
+</script>-->

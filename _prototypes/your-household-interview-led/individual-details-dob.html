@@ -127,21 +127,32 @@ footer: minimal
   var storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
     personId = urlParams.get('person'),
-    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+    member = storageAPI.getHouseholdMemberByPersonId(personId),
+    person = member['@person'],
     isEditing = urlParams.get('edit'),
+    isVisitor = storageAPI.isVisitor(member),
     surveyType = urlParams.get('survey');
 
   $('.qa-btn-submit').on('click', function (e) {
+    e.preventDefault();
 
     $('[name="unknown-dob"]:checked')[0]
       ? storageAPI.addUpdatePersonalDetailsDOBUnknown(personId)
       : storageAPI.addUpdatePersonalDetailsDOB(personId,
-        $('#personal-detail-dob-day').val(),
-        $('#personal-detail-dob-month').val(),
-        $('#personal-detail-dob-year').val());
+          $('#personal-detail-dob-day').val(),
+          $('#personal-detail-dob-month').val(),
+          $('#personal-detail-dob-year').val());
 
     if(isEditing) {
-      e.preventDefault();
+      window.location.href = '../individual-details-summary/?person=' +
+        personId + (surveyType ? '&survey=' + surveyType : '');
+    }
+
+    if(isVisitor) {
+      window.location.href = '../individual-details-address-in-uk/?person=' +
+        personId + (surveyType ? '&survey=' + surveyType : '');
+    }
+    else {
       window.location.href = '../individual-details-age/?person=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
     }
