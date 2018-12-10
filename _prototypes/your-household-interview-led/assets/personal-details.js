@@ -72,6 +72,15 @@ export const personalDetailsOrientationMap = {
   }
 };
 
+export const personalDetailsGenderMap = {
+  'male': {
+    description: 'Male'
+  },
+  'female': {
+    description: 'Female'
+  }
+};
+
 export function addUpdatePersonalDetailsDOB(personId, day, month, year) {
   let allDetails = getAllPersonalDetails(),
     details = allDetails[personId] || {};

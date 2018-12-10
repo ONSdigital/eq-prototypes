@@ -64,6 +64,7 @@ import {
   personalDetailsMaritalStatusMap,
   personalDetailsCountryMap,
   personalDetailsOrientationMap,
+  personalDetailsGenderMap,
 
   createPinFor,
   getPinFor,
@@ -365,6 +366,7 @@ window.ONS.storage = {
   personalDetailsMaritalStatusMap,
   personalDetailsCountryMap,
   personalDetailsOrientationMap,
+  personalDetailsGenderMap,
 
   createPinFor,
   getPinFor,
@@ -415,3 +417,4 @@ $(tools);
 $(updateAllPreviousLinks);
 $(updateBySurveyType);
 $(updateSignificantDate);
+
