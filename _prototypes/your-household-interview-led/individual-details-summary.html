@@ -52,9 +52,8 @@ footer: minimal
                         <div class="block" id="total-retail-turnover">
                             <section class="section"
                                      id="total-retail-turnover-section">
-                                <div class="question u-mb-s"
-                                     id="total-retail-turnover-question">
-                                    <h1 class="question__title saturn">
+                                <div class="question u-mb-s">
+                                    <h1 class="question__title u-fs-l">
                                         Personal details
                                     </h1>
                                 </div>
@@ -194,6 +193,28 @@ footer: minimal
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="summary__item js-age-field"
+                                             style="display:none;">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question mars">Age</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer venus js-age"></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link mars">
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-age/?edit=true">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
 
                                         <div class="summary__item js-gender-field" style="display:none;">
@@ -284,17 +305,13 @@ footer: minimal
   }
 
   function showHouseholdMemberFields() {
-    $('.js-marital-status-field').show();
-    $('.js-marital-status').html(storageAPI.personalDetailsMaritalStatusMap[details.maritalStatus].description);
+    $('.js-gender-field').show();
+    $('.js-gender').html(storageAPI.personalDetailsGenderMap[details.sex].description);
 
-    $('.js-country-field').show();
-    $('.js-country').html(storageAPI.personalDetailsCountryMap[details.country].description);
-
-    $('.js-sexual-orientation-field').show();
-    $('.js-orientation').html(storageAPI.personalDetailsOrientationMap[details.orientation].description);
-
-    $('.js-salary-field').show();
-    $('.js-salary').html(details.salary);
+    $('.js-age-field').show();
+    $('.js-age').html(details.age.isApproximate ?
+      (details.age.val + '<br />Age is approximate') :
+      details.age.val);
 
     $('.js-dob-field').show();
     $('.js-dob').html(
