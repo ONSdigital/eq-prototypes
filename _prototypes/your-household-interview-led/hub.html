@@ -131,7 +131,7 @@ footer: minimal
     </div>
 </ul>
 
-<script src='/js/compiled/your-household-v8/bundle.js'></script>
+<script src='/js/compiled/your-household-interview-led/bundle.js'></script>
 
 <script>
     var storageAPI = window.ONS.storage,
@@ -203,7 +203,7 @@ footer: minimal
         /**
          * Link routing
          */
-        linkHref = surveyStatus === 'completed'
+        /*linkHref = surveyStatus === 'completed'
           ? '../individual-details-summary/'
           : '../individual-intro/';
 
@@ -213,8 +213,13 @@ footer: minimal
         }
         else {
           linkHref += '?person=' + person.id;
-        }
+        }*/
 
+        linkHref = surveyStatus === 'completed'
+          ? '../individual-details-summary/'
+          : '../individual-is-available/';
+
+        linkHref += '?person=' + person.id;
         linkHref += nextPageSurvey;
 
         /**

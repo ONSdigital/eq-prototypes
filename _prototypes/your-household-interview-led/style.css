@@ -74,3 +74,11 @@
     width: 100%;
     max-width: calc(8.2195rem + 4px);
 }
+
+.page__container {
+    padding-bottom :  1rem;
+}
+
+.footer {
+    margin-top : 6rem;
+}

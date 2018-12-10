@@ -116,22 +116,6 @@ gulp.task('css:watch', () => {
   return gulp.watch('./_css/**/*.scss', ['css:build']);
 });
 
-/**
- * Javascript (currently won't work)
- */
-gulp.task('scripts:build', () => {
-  gulp
-    .src('./_js/**/*.js')
-    .on('error', function(err) {
-      gutil.log(err.message);
-    })
-    .pipe(babel())
-    .pipe(gulp.dest('js'));
-});
-
-gulp.task('scripts:watch', () => {
-  return gulp.watch('./_js/**/*.js', ['scripts:build']);
-});
 
 /**
  * Javascript standard pattern library modules.
@@ -253,7 +237,6 @@ gulp.task('img', () => {
  * Note: Change to gulp.series / gulp.parrellel after gulp upgrade.
  */
 gulp.task('build:parrellel-batch', [
-  'scripts:bundle:build',
   'scripts:bundles:build',
   'css:build',
   'img',
@@ -269,7 +252,6 @@ gulp.task('build:jekyll', ['build:parrellel-batch'], () => {
  * Dev ordering
  */
 gulp.task('dev:parrellel-batch', [
-  'scripts:bundle:watch',
   'scripts:bundles:watch',
   'css:watch',
   'img',
@@ -278,7 +260,7 @@ gulp.task('dev:parrellel-batch', [
 ]);
 
 gulp.task('dev:jekyll', ['dev:parrellel-batch'], () => {
-  gulp.run('jekyll:watch');
+  //gulp.run('jekyll:watch');
 });
 
 gulp.task('dev:serve', ['dev:jekyll'], () => {

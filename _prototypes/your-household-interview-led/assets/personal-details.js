@@ -87,6 +87,19 @@ export function addUpdatePersonalDetailsDOB(personId, day, month, year) {
   return details;
 }
 
+export function addUpdatePersonalDetailsDOBUnknown(personId) {
+  let allDetails = getAllPersonalDetails(),
+    details = allDetails[personId] || {};
+
+  console.log('unknown');
+
+  details['dob'] = 'unknown';
+
+  updatePersonalDetails(personId, details);
+
+  return details;
+}
+
 export function addUpdateMaritalStatus(personId, val) {
   let allDetails = getAllPersonalDetails(),
     details = allDetails[personId] || {};
@@ -125,6 +138,31 @@ export function addUpdateSalary(personId, val) {
     details = allDetails[personId] || {};
 
   details['salary'] = val;
+
+  updatePersonalDetails(personId, details);
+
+  return details;
+}
+
+export function addUpdateSex(personId, val) {
+  let allDetails = getAllPersonalDetails(),
+    details = allDetails[personId] || {};
+
+  details['sex'] = val;
+
+  updatePersonalDetails(personId, details);
+
+  return details;
+}
+
+export function addUpdateAge(personId, val, { isApproximate = false }) {
+  let allDetails = getAllPersonalDetails(),
+    details = allDetails[personId] || {};
+
+  details['age'] = {
+    val,
+    isApproximate
+  };
 
   updatePersonalDetails(personId, details);
 

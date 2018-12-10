@@ -50,11 +50,14 @@ import {
 } from './assets/household';
 import {
   addUpdatePersonalDetailsDOB,
+  addUpdatePersonalDetailsDOBUnknown,
   getPersonalDetailsFor,
   addUpdateMaritalStatus,
   addUpdateCountry,
   addUpdateOrientation,
   addUpdateSalary,
+  addUpdateSex,
+  addUpdateAge,
 
   personalDetailsMaritalStatusMap,
   personalDetailsCountryMap,
@@ -346,11 +349,14 @@ window.ONS.storage = {
   findNextMissingRelationship,
 
   addUpdatePersonalDetailsDOB,
+  addUpdatePersonalDetailsDOBUnknown,
   getPersonalDetailsFor,
   addUpdateMaritalStatus,
   addUpdateCountry,
   addUpdateOrientation,
   addUpdateSalary,
+  addUpdateSex,
+  addUpdateAge,
 
   personalDetailsMaritalStatusMap,
   personalDetailsCountryMap,
@@ -405,4 +411,3 @@ $(tools);
 $(updateAllPreviousLinks);
 $(updateBySurveyType);
 $(updateSignificantDate);
-
