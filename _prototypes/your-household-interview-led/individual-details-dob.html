@@ -147,14 +147,15 @@ footer: minimal
       window.location.href = '../individual-details-summary/?person=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
     }
-
-    if(isVisitor) {
-      window.location.href = '../individual-details-address-in-uk/?person=' +
-        personId + (surveyType ? '&survey=' + surveyType : '');
-    }
     else {
-      window.location.href = '../individual-details-age/?person=' +
-        personId + (surveyType ? '&survey=' + surveyType : '');
+      if(isVisitor) {
+        window.location.href = '../individual-details-address-in-uk/?person=' +
+          personId + (surveyType ? '&survey=' + surveyType : '');
+      }
+      else {
+        window.location.href = '../individual-details-age/?person=' +
+          personId + (surveyType ? '&survey=' + surveyType : '');
+      }
     }
   });
 

@@ -91,6 +91,8 @@ footer: minimal
 <script>
     var storageAPI = window.ONS.storage,
       urlParams = new URLSearchParams(window.location.search),
+      isEditing = urlParams.get('edit'),
+      surveyType = urlParams.get('survey'),
       personId = urlParams.get('person'),
       person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'];
 
@@ -103,6 +105,12 @@ footer: minimal
 
       storageAPI.addUpdateSex(personId, $('[name="sex"]:checked').val());
 
-      window.location.href = '../individual-details-dob/?person=' + personId;
+      if(isEditing) {
+        window.location.href = '../individual-details-summary/?person=' +
+          personId + (surveyType ? '&survey=' + surveyType : '');
+      }
+      else {
+        window.location.href = '../individual-details-dob/?person=' + personId;
+      }
     });
 </script>

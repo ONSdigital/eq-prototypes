@@ -82,17 +82,16 @@ export function tools () {
         'lastName': 'Johnson',
         'id': 'person4'
       }
-    },
-      {
-        'type': 'visitor',
-        '@person': {
-          'fullName': 'John Hamilton',
-          'firstName': 'John',
-          'middleName': '',
-          'lastName': 'Hamilton',
-          'id': 'person5'
-        }
-      }],
+    }, {
+      'type': 'visitor',
+      '@person': {
+        'fullName': 'John Hamilton',
+        'firstName': 'John',
+        'middleName': '',
+        'lastName': 'Hamilton',
+        'id': 'person5'
+      }
+    }],
 
     familyHouseholdRelationshipsData = [{
       'personIsDescription': 'husband-wife',
