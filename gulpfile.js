@@ -237,6 +237,7 @@ gulp.task('img', () => {
  * Note: Change to gulp.series / gulp.parrellel after gulp upgrade.
  */
 gulp.task('build:parrellel-batch', [
+  'scripts:bundle:build',
   'scripts:bundles:build',
   'css:build',
   'img',
