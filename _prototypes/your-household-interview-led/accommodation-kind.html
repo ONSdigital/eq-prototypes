@@ -108,8 +108,28 @@ footer: minimal
 </div>
 
 <script>
+    var storageAPI = window.ONS.storage,
+      liveHere = window.sessionStorage.getItem('lives-here') === 'yes',
+      otherAddress =
+        JSON.parse(window.sessionStorage.getItem('other-address')),
+      address = storageAPI.getAddress();
+
+    function updateQuestion() {
+      $('.js-heading').html(
+        'What kind of accommodation ' +
+        (liveHere
+          ? ('is ' + address.addressLine1 + ', ' + address.addressLine2)
+          : ('was ' + otherAddress['address-line-1'] + ', ' +
+              otherAddress['address-line-2'])
+        ) +
+        ' on ' + window.ONS.utils.getSignificant()
+      );
+    }
+
     $('.qa-btn-submit').on('click', function (e) {
       e.preventDefault();
       window.location.href = '../hub';
     });
+
+    $(updateQuestion);
 </script>

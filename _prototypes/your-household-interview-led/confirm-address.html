@@ -71,8 +71,7 @@ footer: minimal
 	var yesbox = document.getElementById("address-correct-yes");
 
 	$('.qa-btn-submit').on('click', function (e) {
-
-		var loc = yesbox.checked ? "../section-intro" :
+		var loc = yesbox.checked ? "../what-is-your-name" :
           "../test-address/?edit=true";
 
         document.trav.action = loc;
