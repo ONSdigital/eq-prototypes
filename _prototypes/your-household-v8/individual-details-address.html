@@ -45,7 +45,8 @@ cdn: v1.5.0
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title saturn js-heading">
-                                        What is their usual address?
+                                        What is <span class="js-person"></span>
+                                        usual address?
                                     </h1>
                                 </div>
 
@@ -218,6 +219,8 @@ cdn: v1.5.0
   }
 
   function updateQuestion() {
+    $('.js-person').html(person.fullName + window.ONS.utils.trailingNameS(person.fullName));
+
     /*if(storageAPI.getAnsweringIndividualByProxy() || isVisitor) {
       $('.js-heading').html('What is ' + person.fullName +
         window.ONS.utils.trailingNameS(person.fullName) + ' usual address?');
