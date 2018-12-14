@@ -99,11 +99,18 @@ footer: minimal
     $('.qa-btn-submit').on('click', function (e) {
       e.preventDefault();
 
-      var $numberOfPeopleEl = $('#number-of-people');
+      var $numberOfPeopleEl = $('#number-of-people'),
+        numberOfPeopleVal = parseInt($numberOfPeopleEl.val());
 
       window.sessionStorage.setItem('number-of-people',
         $numberOfPeopleEl.val());
 
-      window.location = '../who-else-to-add/';
+      if(numberOfPeopleVal === 0 ||
+        (window.sessionStorage.getItem('lives-here') === 'yes' && numberOfPeopleVal === 1)) {
+        window.location = '../temp-types-living-away/';
+      }
+      else {
+        window.location = '../who-else-to-add/';
+      }
     });
 </script>
