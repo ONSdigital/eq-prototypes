@@ -36,8 +36,7 @@ footer: minimal
                                 <div class="question u-mb-s"
                                      id="total-retail-turnover-question">
                                     <h1 class="question__title saturn js-heading">
-                                        What is <span
-                                            class="js-person"></span> sex?
+                                        What is your sex?
                                     </h1>
                                 </div>
 
@@ -96,9 +95,11 @@ footer: minimal
       personId = urlParams.get('person'),
       person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'];
 
-    $(function () {
-      $('.js-person').html(person.fullName);
-    });
+    function updateQuestion() {
+      if(storageAPI.getAnsweringIndividualByProxy()) {
+        $('.js-heading').html('What is ' + person.fullName + window.ONS.utils.trailingNameS(person.fullName) + ' sex');
+      }
+    }
 
     $('.qa-btn-submit').on('click', function (e) {
       e.preventDefault();
@@ -113,4 +114,6 @@ footer: minimal
         window.location.href = '../individual-details-dob/?person=' + personId;
       }
     });
+
+    $(updateQuestion);
 </script>

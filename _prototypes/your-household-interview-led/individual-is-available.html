@@ -48,11 +48,11 @@ footer: minimal
                                             <div class="field__item js-focusable-box">
                                                 <input class="input input--radio js-focusable"
                                                        type="radio"
-                                                       name="accommodation-kind"
-                                                       id="whole-house"
+                                                       name="is-available"
+                                                       id="yes"
                                                        value="yes">
                                                 <label class="label label--inline venus"
-                                                       for="whole-house"
+                                                       for="yes"
                                                        id="yes-someone-else-label">Yes, they are available
                                                 </label>
                                             </div>
@@ -60,11 +60,11 @@ footer: minimal
                                             <div class="field__item js-focusable-box">
                                                 <input class="input input--radio js-focusable"
                                                        type="radio"
-                                                       name="accommodation-kind"
-                                                       id="flat"
-                                                       value="flat">
+                                                       name="is-available"
+                                                       id="no-me"
+                                                       value="no-me">
                                                 <label class="label label--inline venus"
-                                                       for="flat">No, I
+                                                       for="no-me">No, I
                                                     will answer their
                                                     question on their
                                                     behalf</label>
@@ -73,11 +73,11 @@ footer: minimal
                                             <div class="field__item js-focusable-box">
                                                 <input class="input input--radio js-focusable"
                                                        type="radio"
-                                                       name="accommodation-kind"
-                                                       id="caravan"
-                                                       value="no">
+                                                       name="is-available"
+                                                       id="no-out"
+                                                       value="no-out">
                                                 <label class="label label--inline venus"
-                                                       for="caravan">No,
+                                                       for="no-out">No,
                                                     they have moved out of the
                                                     household</label>
                                             </div>
@@ -108,8 +108,9 @@ footer: minimal
 <script>
     var storageAPI = window.ONS.storage,
       urlParams = new URLSearchParams(window.location.search),
-      personId = urlParams.get('person')
-      person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'];
+      personId = urlParams.get('person'),
+      person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+      yesbox = document.getElementById("yes");
 
     $(function () {
       $('.js-person').html(person.fullName);
@@ -117,6 +118,13 @@ footer: minimal
 
     $('.qa-btn-submit').on('click', function (e) {
       e.preventDefault();
+
+      if (yesbox.checked) {
+        storageAPI.setAnsweringIndividualByProxy(false);
+      } else {
+        storageAPI.setAnsweringIndividualByProxy(true);
+      }
+
       window.location.href = '../individual-details-sex/?person=' + personId;
     });
 </script>

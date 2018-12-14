@@ -41,7 +41,8 @@ footer: minimal
                                     <fieldset class="field u-mb-xl">
                                         <div class="answer__fields js-fields">
                                             <label
-                                                    class="label u-fs-r--b">Your age in years</label>
+                                                    class="label u-fs-r--b js-q-label">Your
+                                                age in years</label>
                                             <input
                                                 id="age"
                                                 type="number"
@@ -81,9 +82,15 @@ footer: minimal
     personId = urlParams.get('person'),
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'];
 
-  $(function () {
-    $('.js-person').html(person.fullName);
-  });
+  function updateQuestion() {
+    if(storageAPI.getAnsweringIndividualByProxy()) {
+      $('.js-heading').html('What was ' + person.fullName +
+        window.ONS.utils.trailingNameS(person.fullName) +
+        ' age on their last birthday?');
+
+      $('.js-q-label').html(person.fullName + window.ONS.utils.trailingNameS(person.fullName) + ' age in years');
+    }
+  }
 
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
@@ -95,4 +102,6 @@ footer: minimal
 
     window.location.href = '../hub/';
   });
+
+  $(updateQuestion);
 </script>
