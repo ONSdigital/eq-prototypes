@@ -6,6 +6,20 @@ layout: eq-default-extras-language-switcher
 cdn: v1.8.4
 ---
 
+<style>
+    .input--text-lg {
+        width : 100%;
+    }
+
+    .lock {
+        font-weight : normal;
+    }
+</style>
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+</div>
+
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
@@ -16,6 +30,7 @@ cdn: v1.8.4
                 <div class="feedback__inline js-feedback-inline is-collapsed">
                     <div class="feedback__border">
                         <form id="feedback-form" method="POST"
+                              action="../confirm-address"
                               class="feedback__form">
                             <input id="csrf_token" name="csrf_token"
                                    type="hidden"
@@ -32,53 +47,75 @@ cdn: v1.8.4
                 <div class="group u-mb-xl" id="what-is-your-address-group">
                     <div class="block" id="what-is-your-address">
                         <div class="question">
-                            <h1 id="question-title"
-                                class="question__title saturn"
+                            <h1 class="question__title saturn"
                                 data-qa="question-title">
-                                What is your name?
+                                Welcome to the household prototype
                             </h1>
-                        </div>
 
-                        <fieldset
-                                class="question__fieldset js-question-fieldset u-mb-s">
-                            <legend class="u-vh">What is your name?</legend>
+                            <div class="panel panel--simple panel--info">
+                                <div class="panel__body">
+                                    <div class="field">
+                                        <label class="label venus "
+                                               for="address-line-1"
+                                               id="label-address-line-1">
+                                            <div class="label__inner">
+                                                Enter the unique access code
+                                            </div>
+                                        </label>
 
-                            <div class="question__answers">
-                                <div class="question__answer">
-                                    <label class="label venus"
-                                           for="first-name">
-                                        <div class="label__inner">
-                                            First name
+                                        <div class="grid">
+                                            <div class="grid__col col-4@m">
+                                                <input
+                                                        class="input input--text input--text-lg u-mb-s"
+                                                        id="address-line-1"
+                                                        name="address-line-1"
+                                                        data-qa="input-text"
+                                                        value=""/>
+                                            </div>
+                                            <div class="grid__col col-4@m">
+                                                <input
+                                                        class="input input--text input--text-lg u-mb-s"
+                                                        id="address-line-1"
+                                                        name="address-line-1"
+                                                        data-qa="input-text"
+                                                        value=""/>
+                                            </div>
+                                            <div class="grid__col col-4@m">
+                                                <input
+                                                        class="input input--text input--text-lg u-mb-s"
+                                                        id="address-line-1"
+                                                        name="address-line-1"
+                                                        data-qa="input-text"
+                                                        value=""/>
+                                            </div>
                                         </div>
-                                    </label>
-                                    <input class="input input--text "
-                                           id="first-name"
-                                           data-qa="input-text" value=""/>
-                                </div>
+                                    </div>
 
-                                <div class="question__answer">
-                                    <label class="label venus ">
-                                        <div class="label__inner">
-                                            Last name
-                                        </div>
-                                    </label>
-                                    <input class="input input--text "
-                                           id="last-name"
-                                           data-qa="input-text" value=""/>
+                                    <p class="mars">The unique access code
+                                        is printed on your invitation
+                                        letter or form</p>
                                 </div>
                             </div>
-                        </fieldset>
+
+                            <p class="mars u-mt-l lock">Your personal information is protected by law and will be kept confidential</p>
+
+                        </div>
                     </div>
                 </div>
 
                 <button class="btn btn-submit btn--primary btn--lg"
                         data-qa="btn-submit" type="submit"
-                        name="action[save_continue]">
-                    Save and continue
+                        name="action[save_continue]">Submit code
                 </button>
             </main>
         </div>
     </div>
 </div>
 
-<script src='/js/compiled/standard-bundle.js'></script>
+<script>
+  $('.btn-submit').click(function(e) {
+    e.preventDefault();
+    window.location = '../confirm-address/';
+  });
+</script>
+
