@@ -1,15 +1,15 @@
 import {
   RELATIONSHIPS_STORAGE_KEY,
   relationshipDescriptionMap,
+  femaleAltGenderDescriptions,
   addRelationship,
-  deleteRelationship,
   editRelationship,
   getAllRelationships,
   getAllManualRelationships,
   deleteAllRelationshipsForMember,
   relationshipSummaryTemplates,
   missingRelationshipInference,
-  inferRelationships,
+  //inferRelationships,
   getAllParentsOf,
   getAllChildrenOf,
   getParentIdFromRelationship,
@@ -20,7 +20,6 @@ import {
   isInRelationship,
   areAnyChildrenInRelationshipNotParent,
   isRelationshipType,
-  isRelationshipInferred,
   getRelationshipOf,
   getRelationshipsWithPersonIds,
   getPeopleIdsMissingRelationshipsWithPerson,
@@ -46,8 +45,7 @@ import {
   isOtherHouseholdMember,
   isHouseholdMember,
   person,
-  tempAwayQuestionSentenceMap,
-  visitorQuestionSentenceMap
+  tempAwayQuestionSentenceMap
 } from './assets/household';
 import {
   addUpdatePersonalDetailsDOB,
@@ -67,7 +65,7 @@ import {
 } from './assets/personal-details';
 import {removeFromList, trailingNameS} from './assets/utils';
 
-import { numberToPositionWord, numberToWordsStyleguide } from './assets/numbers-to-words';
+import { numberToPositionWord } from './assets/numbers-to-words';
 
 import { tools } from './assets/prototype-tools';
 
@@ -145,10 +143,7 @@ function updateHouseholdVisitorsNavigationItems() {
 
 function createListItemPerson(member) {
   return $('<li class="list__item">').addClass('mars').html(
-    '<span class="list__item-name">' +
-      member['@person'].fullName +
-      (member['@person'].id === USER_HOUSEHOLD_MEMBER_ID ? ' (You)' : '') +
-    '</span>'
+    '<span class="list__item-name">' + member['@person'].fullName + '</span>'
   );
 }
 
@@ -278,24 +273,12 @@ function getAnsweringIndividualByProxy() {
 
 const surveyTypeConfig = {
   lms: {
-    title: 'Online Household Study',
+    title: 'Online Household Study v2',
     householdSectionTitle: 'About your household',
     householdSectionLink: '../summary/?survey=lms',
     relationshipsSection: '../relationships/?survey=lms'
   }
 };
-
-function doILiveHere() {
-  return sessionStorage.getItem('lives-here') === 'yes';
-}
-
-function getSignificant() {
-  return '11 November 2018';
-}
-
-function updateSignificantDate() {
-  $('.js-significant-date').html(getSignificant());
-}
 
 window.ONS = window.ONS || {};
 window.ONS.storage = {
@@ -312,14 +295,12 @@ window.ONS.storage = {
   updateUserAsHouseholdMember,
   deleteUserAsHouseholdMember,
   tempAwayQuestionSentenceMap,
-  visitorQuestionSentenceMap,
 
   isVisitor,
   isOtherHouseholdMember,
   isHouseholdMember,
 
   addRelationship,
-  deleteRelationship,
   editRelationship,
   getAllRelationships,
   getAllManualRelationships,
@@ -335,13 +316,13 @@ window.ONS.storage = {
   isInRelationship,
   areAnyChildrenInRelationshipNotParent,
   isRelationshipType,
-  isRelationshipInferred,
   getRelationshipOf,
 
+  femaleAltGenderDescriptions,
   relationshipDescriptionMap,
   relationshipSummaryTemplates,
   missingRelationshipInference,
-  inferRelationships,
+  //inferRelationships,
   getRelationshipsWithPersonIds,
   getPeopleIdsMissingRelationshipsWithPerson,
   getRelationshipType,
@@ -364,8 +345,6 @@ window.ONS.storage = {
 
   setAnsweringIndividualByProxy,
   getAnsweringIndividualByProxy,
-
-  doILiveHere,
 
   KEYS: {
     HOUSEHOLD_MEMBERS_STORAGE_KEY,
@@ -394,9 +373,7 @@ window.ONS.helpers = {
 window.ONS.utils = {
   removeFromList,
   trailingNameS,
-  numberToPositionWord,
-  numberToWordsStyleguide,
-  getSignificant
+  numberToPositionWord
 };
 
 $(populateHouseholdList);
@@ -407,5 +384,4 @@ $(updatePersonLink);
 $(tools);
 $(updateAllPreviousLinks);
 $(updateBySurveyType);
-$(updateSignificantDate);
 

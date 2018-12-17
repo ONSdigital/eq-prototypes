@@ -140,10 +140,10 @@ export function tools () {
 }
 
 function addLanguageSwitch() {
-  const $el = $('<a class="util-language">Welsh</a>');
+  const $el = $('<a class="util-language">Saesneg</a>');
   const $container = $('.header__top > .container');
 
-  $el.attr('href', window.location.href.replace('your-household-v9', 'your-household-v9-cy'));
+  $el.attr('href', window.location.href.replace('your-household-v9-cy', 'your-household-v9'));
 
   $container.prepend($el);
 }

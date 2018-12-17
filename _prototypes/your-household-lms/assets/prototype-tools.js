@@ -16,7 +16,8 @@ export function tools () {
         'firstName': 'Dave',
         'middleName': '',
         'lastName': 'Jones',
-        'id': 'person_me'
+        'id': 'person_me',
+        'gender': 'male'
       }
     }, {
       'type':
@@ -26,7 +27,8 @@ export function tools () {
         'firstName': 'Sally',
         'middleName': '',
         'lastName': 'Jones',
-        'id': 'person1'
+        'id': 'person1',
+        'gender': 'female'
       }
     }, {
       'type': 'household-member',
@@ -35,7 +37,8 @@ export function tools () {
         'firstName': 'Rebecca',
         'middleName': '',
         'lastName': 'Jones',
-        'id': 'person2'
+        'id': 'person2',
+        'gender': 'female'
       }
     }, {
       'type': 'household-member',
@@ -44,7 +47,8 @@ export function tools () {
         'firstName': 'Amy',
         'middleName': '',
         'lastName': 'Jones',
-        'id': 'person3'
+        'id': 'person3',
+        'gender': 'female'
       }
     }],
 
@@ -83,7 +87,6 @@ export function tools () {
       'personIsId': 'person3',
       'personToId': 'person2',
       'inferred': true,
-      'inferredBy': [3, 5, 2, 4],
       'id': 6
     }],
 
@@ -98,6 +101,7 @@ export function tools () {
     e.preventDefault();
     clearStorage();
     createFamilyHousehold();
+    window.location.href = '../summary?survey=lms';
   });
 
   $createFamilyRelationships.on('click', function(e) {
@@ -105,6 +109,7 @@ export function tools () {
     clearStorage();
     createFamilyHousehold();
     createFamilyRelationships();
+    window.location.href = '../relationships-summary?survey=lms';
   });
 
   function prerequisites() {
@@ -122,13 +127,11 @@ export function tools () {
     sessionStorage.setItem('user-details', JSON.stringify(userData));
     sessionStorage.setItem(window.ONS.storage.KEYS.HOUSEHOLD_MEMBERS_STORAGE_KEY, JSON.stringify(familyHouseholdMembersData));
     sessionStorage.setItem('household-members-increment', JSON.stringify(4));
-    window.location.href = '../summary';
   }
 
   function createFamilyRelationships() {
     sessionStorage.setItem(window.ONS.storage.KEYS.RELATIONSHIPS_STORAGE_KEY, JSON.stringify(familyHouseholdRelationshipsData));
     sessionStorage.setItem('relationships-increment', JSON.stringify(6));
-    window.location.href = '../relationships-summary';
   }
 
   function clearStorage() {
@@ -138,14 +141,3 @@ export function tools () {
   $listLinks.append($createFamilyHousehold);
   $listLinks.append($createFamilyRelationships);
 }
-
-function addLanguageSwitch() {
-  const $el = $('<a class="util-language">Welsh</a>');
-  const $container = $('.header__top > .container');
-
-  $el.attr('href', window.location.href.replace('your-household-v9', 'your-household-v9-cy'));
-
-  $container.prepend($el);
-}
-
-$(addLanguageSwitch);
