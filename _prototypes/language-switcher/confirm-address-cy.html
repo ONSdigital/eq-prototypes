@@ -1,0 +1,95 @@
+---
+title: Language switches
+project: your-household
+globalcss: false
+layout: eq-default-extras-language-switcher
+cdn: v1.8.4
+language: welsh
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link mars" href="../index">Yn flaenorol</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-7@m pull-1@m">
+            <main role="main" id="main" class="page__main">
+                <form name="trav" class="form qa-questionnaire-form u-mb-xl"
+                      role="form" autocomplete="off" novalidate="">
+                    <div class="group" id="rsi">
+                        <div class="block" id="total-retail-turnover">
+                            <section class="section" id="total-retail-turnover-section">
+                                <div class="question u-mb-s" id="total-retail-turnover-question">
+                                    <h1 class="question__title saturn">
+                                        Allwch chi gadarnhau bod y cyfeiriad hwn yn gywir?
+                                    </h1>
+                                </div>
+
+                                <p class="mars address-text"
+                                   for="address-correct-yes">Address not
+                                    set</p>
+
+                                <div class="answer__fields js-fields">
+                                    <div class="field field--radio field--multiplechoice ">
+                                        <fieldset>
+                                            <div class="field__item js-focusable-box">
+                                                <input class="input input--radio js-focusable" type="radio"
+                                                       name="address-correct" id="address-correct-yes">
+                                                <label class="label label--inline venus" for="address-correct-yes">Ydy, mae'r cyfeiriad hwn yn gywir</label>
+                                            </div>
+
+                                            <div class="field__item js-focusable-box">
+                                                <input class="input input--radio js-focusable" type="radio"
+                                                       name="address-correct" id="address-correct-no">
+                                                <label class="label label--inline venus" for="address-correct-no">Nac ydy, mae angen i mi ei newid</label>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </form>
+            </main>
+        </div>
+    </div>
+
+    <button class="qa-btn-submit btn btn-submit btn--primary btn--lg" data-qa="btn-submit" type="submit"
+            name="action[save_continue]">Cadw a pharhau
+    </button>
+</div>
+
+<script>
+	var yesbox = document.getElementById("address-correct-yes");
+
+	$('.qa-btn-submit').on('click', function (e) {
+
+		var loc = yesbox.checked ? "../section-intro-cy" :
+          "../test-address-cy/?edit=true";
+
+        document.trav.action = loc;
+        window.location = loc;
+	});
+</script>
+
+<script>
+	$(function () {
+		$('.address-text').html((sessionStorage.getItem('address') || '').replace(/, /g, '<br />'));
+	});
+</script>
+
+<script>
+	$(function () {
+		var oneWeekAgo = new Date();
+		oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+		var options = {year: 'numeric', month: 'long', day: 'numeric'};
+		$('.one-week-ago').text(oneWeekAgo.toLocaleString('en-GB', options));
+	});
+</script>
+

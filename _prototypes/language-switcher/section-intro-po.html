@@ -1,0 +1,70 @@
+---
+title: Language switches
+project: your-household
+globalcss: false
+layout: eq-default-extras-language-switcher
+cdn: v1.8.4
+language: polish
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <!--<div class="container">
+        <a class="js-previous-link mars" href="../confirm-address">Previous</a>
+    </div>-->
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            <!--{% include navigation.html
+            items=site.data.your-household-v8.navigationItemsHousehold
+            nav-title-id="section-address" %}-->
+        </div>
+        <div class="grid__col col-7@m pull-1@m">
+            <main role="main" id="main" class="page__main">
+                <div class="group u-mb-xl" id="rsi">
+                    <div class="block" id="total-retail-turnover">
+                        <section class="section"
+                                 id="total-retail-turnover-section">
+                            <h1 class="saturn address-text"></h1>
+
+                            <p class="mars">W tej części będziemy pytać cię o ludzi mieszkających przy <span class="address-text"></span>, Hull io tym, jak są ze sobą spokrewnieni.</p>
+
+                            <h3 class="neptune">Informacje, których będziesz potrzebować:</h3>
+                            <ul class="mars">
+                                <li>Nazwiska osób mieszkających pod tym adresem</li>
+                                <li>Nazwy osób tymczasowo przebywających poza domem</li>
+                                <li>Nazwiska osób przebywających pod tym adresem, które przebywają w Wielkiej Brytanii przez 3 miesiące lub dłużej</li>
+                                <li>Nazwiska osób przebywających pod tym adresem w dniu 21 września 2018 r</li>
+                            </ul>
+                        </section>
+                    </div>
+                </div>
+
+                <button class="btn btn--primary btn--lg qa-btn-submit venus btn-submit"
+                        type="submit" name="">dalej
+                </button>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/your-household-v8/bundle.js'></script>
+
+<script>
+  $('.btn-submit').click(function(e) {
+    e.preventDefault(); // do not submit the form like usual
+    window.location = '../what-is-your-name-po/';
+  });
+
+  $(function() {
+    var oneWeekAgo = new Date();
+    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+    var options = {year: 'numeric', month: 'long', day: 'numeric'};
+    $('.one-week-ago').text(oneWeekAgo.toLocaleString('en-GB', options));
+  });
+</script>
+
+
+

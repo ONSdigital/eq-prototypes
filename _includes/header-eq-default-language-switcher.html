@@ -104,12 +104,27 @@
                             <ul id="language-switcher-items"
                                 class="language-switcher__items js-language-switcher-items"
                                 role="menu">
-                                <li class="language-switcher__item">
-                                    <a class="language-switcher__link js-language-switcher-item" href="" role="menuitem">
+                                <li id="english-item"
+                                    class="language-switcher__item">
+                                    <a
+                                            class="language-switcher__link js-language-switcher-item" href="" role="menuitem" data-language-item="english">
+                                        English
+                                    </a>
+                                </li>
+                                <li id="welsh-item"
+                                    class="language-switcher__item">
+                                    <a class="language-switcher__link js-language-switcher-item" href="" role="menuitem" data-language-item="welsh">
                                         Cymraeg
                                     </a>
                                 </li>
-                                <li class="language-switcher__item">
+                                <li id="polish-item"
+                                    class="language-switcher__item">
+                                    <a class="language-switcher__link js-language-switcher-item" href="" role="menuitem" data-language-item="polish">
+                                        Polskie
+                                    </a>
+                                </li>
+
+                                <!--<li class="language-switcher__item">
                                     <a class="language-switcher__link js-language-switcher-item" href="" role="menuitem">
                                         Gàidhlig
                                     </a>
@@ -124,7 +139,7 @@
                                        href="../languages/">
                                         All languages
                                     </a>
-                                </li>
+                                </li>-->
                             </ul>
                         </div>
                     </div>
@@ -144,8 +159,14 @@
                                 {{ site.title }}
                             {% endif %}
                         </span>
-                        <button class="btn btn--ghost u-fr">Save and
-                            complete later</button>
+                        <button class="btn btn--ghost u-fr">
+                            {% if page.language == 'polish' %}
+                            Zapisz i uzupełnij później
+                            {% else if page.language == 'welsh' %}
+                            Cadw a chwblhau'n ddiweddarach
+                            {% else %}
+                            Save and complete later
+                            {% endif %}</button>
                     </h1>
                 </div>
             </div>
@@ -155,6 +176,25 @@
 
 
 <script>
+    var language = "{% if page.language %}{{page.language}}{% else %}english{% endif %}",
+      languageMap = {
+        'english': {
+          elId: 'english-item',
+          label: 'English',
+          fragment: '/'
+        },
+        'welsh': {
+          elId: 'welsh-item',
+          label: 'Cymraeg',
+          fragment: '-cy/'
+        },
+        'polish': {
+          elId: 'polish-item',
+          label: 'Polskie',
+          fragment: '-po/'
+        }
+      };
+
     $(function () {
       var $scopeEl = $('.js-language-switcher');
       var $switcher = $scopeEl.find('.js-language-switcher-selected');
@@ -165,8 +205,13 @@
       var $listAnchors = $scopeEl.find('.' + listAnchorClass);
       var $list = $scopeEl.find('.js-language-switcher-items');
 
+      /**
+       * Setup language selector
+       */
+      $('#' + languageMap[language].elId).remove();
       $('.choose-language').hide();
       $('.languages').show();
+      $switcher.html(languageMap[language].label);
 
       $switcher.on('click', function(e) {
         e.preventDefault();
@@ -215,6 +260,25 @@
         funcFound && funcFound();
       });
 
+      $listAnchors.on('click', function (e) {
+        e.preventDefault();
+
+        var url = '',
+          chosen = $(this).attr('data-language-item'),
+          currentLanguageFragment = languageMap[language].fragment,
+          chosenLanguageFragment = languageMap[chosen].fragment;
+
+        if(language === 'english') {
+          var pieces = window.location.href.split('/');
+          url = pieces.slice(0, pieces.length-1).join('/') + chosenLanguageFragment;
+        }
+        else {
+          url = window.location.href.replace(currentLanguageFragment, chosenLanguageFragment);
+        }
+
+        window.location.href = url;
+      });
+
       document.addEventListener('mouseup', function  () {
         toggle('hide');
       });
@@ -232,4 +296,5 @@
         $list[jQMethod](itemsOpenClass);
       }
     });
+
 </script>

@@ -1,0 +1,138 @@
+---
+title: Language switches
+project: your-household
+globalcss: false
+layout: eq-default-extras-language-switcher
+cdn: v1.8.4
+language: polish
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link mars" href="../section-intro-po">Poprzedni
+        </a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            <!--{% include navigation.html
+            items=site.data.your-household-v8.navigationItemsHousehold
+            nav-title-id="section-address" %}-->
+        </div>
+
+        <div class="grid__col col-7@m pull-1@m">
+            <main role="main" id="main" class="page__main">
+                <div class="feedback__inline js-feedback-inline is-collapsed">
+                    <div class="feedback__border">
+                    </div>
+                </div>
+
+                <div class="group">
+                    <div class="block">
+
+                        <div class="question">
+                            <h1 class="question__title saturn js-heading"
+                                data-qa="question-title">
+                                Jak masz na imię?
+                            </h1>
+
+                            <fieldset
+                                    class="question__fieldset u-mb-xl js-question-fieldset">
+                                <legend class="u-vh">Jak masz na imię?</legend>
+
+                                <div class="question__answers">
+                                    <div class="question__answer">
+                                        <label class="label venus"
+                                               for="first-name">
+                                            <div class="label__inner">
+                                                Imię
+                                            </div>
+                                        </label>
+                                        <input class="input input--text "
+                                               id="first-name"
+                                               data-qa="input-text" value=""/>
+                                    </div>
+
+                                    <div class="question__answer">
+                                        <label class="label venus ">
+                                            <div class="label__inner">
+                                                Nazwisko
+                                            </div>
+                                        </label>
+                                        <input class="input input--text "
+                                               id="last-name"
+                                               data-qa="input-text" value=""/>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-submit btn--primary btn--lg"
+                        data-qa="btn-submit" type="submit"
+                        name="action[save_continue]">
+                    Zapisz i kontynuuj
+                </button>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/your-household-v8/bundle.js'></script>
+
+<script>
+  var urlParams = new URLSearchParams(window.location.search),
+    isEditing = urlParams.get('edit') === 'true',
+    storageAPI = window.ONS.storage,
+    userAsMember = storageAPI.getUserAsHouseholdMember(),
+    userPerson = userAsMember && userAsMember['@person'];
+
+  function updateQuestion() {
+    if(isEditing && userPerson) {
+      $('.js-heading').html('Change details for ' + userPerson.fullName + ' (You)');
+    }
+  }
+
+  $('.btn-submit').click(function(e) {
+    e.preventDefault(); // do not submit the form like usual
+    sessionStorage.setItem('name', getName());
+
+    var newPersonObj = window.ONS.storage.TYPES.person({
+      firstName: document.getElementById('first-name').value,
+      lastName: document.getElementById('last-name').value
+    });
+
+    storageAPI.addUserPerson(newPersonObj);
+
+    if(isEditing) {
+      storageAPI.updateUserAsHouseholdMember(newPersonObj, userAsMember);
+    }
+
+    window.location = isEditing ? '../summary-po/' : '../do-you-live-here-po/';
+  });
+
+  function getName() {
+    return [
+      document.getElementById('first-name').value,
+      document.getElementById('last-name').value
+    ].filter(function(name) {
+      return name
+    }).join(' ')
+  }
+
+  $(function() {
+    var userPerson = window.ONS.storage.getUserPerson();
+
+    if (userPerson) {
+      $('#first-name').val(userPerson.firstName);
+      $('#last-name').val(userPerson.lastName);
+    }
+  });
+
+  $(updateQuestion);
+</script>
+

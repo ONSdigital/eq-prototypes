@@ -1,0 +1,71 @@
+---
+title: Language switches
+project: your-household
+globalcss: false
+layout: eq-default-extras-language-switcher
+cdn: v1.8.4
+language: welsh
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <!--<div class="container">
+        <a class="js-previous-link mars" href="../confirm-address">Previous</a>
+    </div>-->
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            <!--{% include navigation.html
+            items=site.data.your-household-v6.navigationItemsHousehold
+            nav-title-id="section-address" %}-->
+        </div>
+        <div class="grid__col col-7@m pull-1@m">
+            <main role="main" id="main" class="page__main">
+                <div class="group u-mb-xl" id="rsi">
+                    <div class="block" id="total-retail-turnover">
+                        <section class="section"
+                                 id="total-retail-turnover-section">
+                            <h1 class="saturn address-text"></h1>
+
+                            <p class="mars">Yn yr adran hon, byddwn yn gofyn i chi am y bobl sy'n byw yn
+                                <span class="address-text"></span>.</p>
+
+                            <h3 class="neptune">Gwybodaeth y bydd ei hangen arnoch:</h3>
+                            <ul class="mars">
+                                <li>Enwau'r bobl sy'n byw yn y cyfeiriad hwn</li>
+                                <li>Enwau unrhyw un sydd oddi cartref dros dro</li>
+                                <li>Enwau unrhyw un sy'n aros yn y cyfeiriad hwn sydd wedi bod, neu sy'n bwriadu bod, yn y Deyrnas Unedig am 3 mis neu fwy</li>
+                                <li>Enwau ymwelwyr sy'n aros yn y cyfeiriad hwn ar <span class="js-significant-date"></span></li>
+                            </ul>
+                        </section>
+                    </div>
+                </div>
+
+                <button class="btn btn--primary btn--lg qa-btn-submit venus btn-submit"
+                        type="submit" name="">Parhau
+                </button>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/your-household-v9-cy/bundle.js'></script>
+
+<script>
+  $('.btn-submit').click(function(e) {
+    e.preventDefault(); // do not submit the form like usual
+    window.location = '../what-is-your-name-cy/';
+  });
+
+  $(function() {
+    var oneWeekAgo = new Date();
+    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+    var options = {year: 'numeric', month: 'long', day: 'numeric'};
+    $('.one-week-ago').text(oneWeekAgo.toLocaleString('en-GB', options));
+  });
+</script>
+
+
+
