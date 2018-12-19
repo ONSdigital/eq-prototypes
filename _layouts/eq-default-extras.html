@@ -21,7 +21,11 @@
         {{ content }}
     </div>
     <div class="page__footer">
+        {% if page.footer == "minimal" %}
+        {% include footer-eq-default-minimal.html %}
+        {% else %}
         {% include footer-eq-default-transactional.html %}
+        {% endif %}
     </div>
 </div>
 <script src="https://cdn.ons.gov.uk/sdc/{% if page.cdn %}{{ page.cdn }}{% else %}v1.0.0{% endif %}/scripts/bundle.js"></script>
