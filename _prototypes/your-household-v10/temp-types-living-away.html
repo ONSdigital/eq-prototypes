@@ -40,28 +40,50 @@ cdn: v1.5.0
                                 <ul id="household-members" class="u-mb-l"></ul>
 
                                 <div
-                                        class="field field--checkbox field--multiplechoice field--exclusive u-mb-s">
-                                    <fieldset>
-                                        <legend class="field__legend mars u-vh">Select all that apply:</legend>
-                                        <div class="field__label venus">Select all that apply:</div>
-                                        <div id="question-list"></div>
-                                        <div class="field__label u-mt-s venus" aria-hidden="true">Or</div>
-                                        <div class="field__item js-focusable-box">
-                                            <input
-                                                    class="input input--checkbox js-focusable js-exclusive-checkbox" name="away-type" value="no" id="none" type="checkbox" />
-                                            <label class="label label--inline venus " for="none">
-                                                <span class="u-vh">Or,</span>
-                                                No, there is no one else who is temporarily away or who should be included at this address
-                                                <span
-                                                        class="u-vh">. Selecting this will uncheck all other checkboxes</span>
-                                            </label>
-                                            <span class="js-exclusive-checkbox-alert u-vh" role="alert" aria-live="polite" data-adjective="deselected"></span>
-                                        </div>
-                                    </fieldset>
+                                        class="panel panel--simple panel--info u-mb-s">
+                                    <div class="panel__body">
+                                        <strong class="u-mb-xs u-d-b">Include
+                                            people who are temporarily away
+                                        </strong>
+                                        <ul id="question-list-away"></ul>
+                                        <strong class="u-mb-xs u-mt-m u-d-b">Include
+                                            people who are temporarily staying
+                                        </strong>
+                                        <ul id="question-list-in"></ul>
+                                    </div>
                                 </div>
                             </section>
                         </div>
                     </div>
+
+                    <div class="answer__fields js-fields u-mt-m">
+                        <div class="field field--radio field--multiplechoice">
+                            <fieldset class="u-mb-l">
+                                <div class="field__item js-focusable-box">
+                                    <input class="input input--radio js-focusable"
+                                           type="radio"
+                                           name="away-type"
+                                           id="yes">
+                                    <label class="label label--inline venus"
+                                           for="yes">
+                                        Yes, this is everyone
+                                    </label>
+                                </div>
+
+                                <div class="field__item js-focusable-box">
+                                    <input class="input input--radio js-focusable"
+                                           type="radio"
+                                           name="away-type"
+                                           id="no">
+                                    <label class="label label--inline venus"
+                                           for="no">
+                                        No, I need to add someone
+                                    </label>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+
                     <div class="definition js-details u-mb-xl"
                             data-hide-label="Click to collapse."
                             data-show-label="Click to expand.">
@@ -96,59 +118,64 @@ cdn: v1.5.0
 
 <script src='/js/compiled/your-household-v9/bundle.js'></script>
 
-<div style="display:none">
-    <div id="question-list-item-template" class="field__item js-focusable-box">
-        <input class="input input--checkbox js-focusable js-exclusive-checkbox-group js-answer-field" name="away-type" value="" id="" type="checkbox" />
-        <label class="label label--inline venus js-answer-label"></label>
-    </div>
-</div>
+<ul style="display:none;">
+    <li id="question-list-item-template"
+        class="list__item js-list-item-label"></li>
+</ul>
 
 <script>
   var storageAPI = window.ONS.storage,
-    members = storageAPI.getAllHouseholdMembers();
+    members = storageAPI.getAllHouseholdMembers(),
+    yesbox = document.getElementById("yes"),
+    grouped = {
+      away: [
+        storageAPI.tempAwayQuestionSentenceMap['perm-away'],
+        storageAPI.tempAwayQuestionSentenceMap['armed-forces'],
+        storageAPI.tempAwayQuestionSentenceMap['less-twelve'],
+        storageAPI.tempAwayQuestionSentenceMap['other']
+      ],
+      in: [
+        storageAPI.tempAwayQuestionSentenceMap['usually-temp'],
+        storageAPI.tempAwayQuestionSentenceMap['three-more'],
+      ]
+    };
 
   $('.qa-btn-submit').on('click', function(e) {
     e.preventDefault();
 
-    var awayTypes = [], url;
+    var url;
 
-    $('[name=away-type]:checked').each(function (i, el) {
-      awayTypes.push($(el).val());
-    });
-
-    if($('[name=away-type]:checked').val() === "no") {
-        url = '../visitors/';
+    if(yesbox.checked) {
+      url = '../visitors/';
     } else {
-        url = '../temp-types-question?away-types=' + JSON.stringify(awayTypes);
+      url = '../who-else-to-add/?redirect=../temp-types-living-away';
     }
 
     window.location = url;
   });
 
+  function createIncludeItem(text) {
+    var $nodeEl = $('#question-list-item-template').clone(),
+      $label = $nodeEl;
+
+    $nodeEl.attr('id', '');
+    $label.html(text);
+
+    return $nodeEl;
+  }
+
   function updateQuestionList() {
-    var items = storageAPI.tempAwayQuestionSentenceMap;
-
-    $('#question-list').html(
-      Object.keys(items).map(function(k) {
-        var $nodeEl = $('#question-list-item-template').clone(),
-            $field = $nodeEl.find('.js-answer-field'),
-            $label = $nodeEl.find('.js-answer-label');
-
-        $nodeEl.attr('id', '');
-        $label.html(items[k]);
-        $label.attr('for', k);
-        $field.attr('value', k);
-        $field.attr('id', k);
-
-        return $nodeEl;
-      })
-    );
+    $('#question-list-away').html(grouped.away.map(createIncludeItem));
+    $('#question-list-in').html(grouped.in.map(createIncludeItem));
   }
 
   function updateQuestion () {
-    $('.js-heading-inner-part1').html(members.length ?
+    /*$('.js-heading-inner-part1').html(members.length ?
       `Apart from the people already included, is there anyone else you need to add to ${sessionStorage.getItem('address-line-1')} who fits into the following categories?`:
       `Is there anyone you need to add to ${sessionStorage.getItem('address-line-1')} who fits into the following categories?`
+    );*/
+    $('.js-heading-inner-part1').html(
+      `Have you added everyone who lives at ${sessionStorage.getItem('address-line-1')}`
     );
   }
 
