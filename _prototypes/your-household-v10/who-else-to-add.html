@@ -31,7 +31,7 @@ cdn: v1.5.0
                 <div class="group u-mb-xl">
                     <div class="block">
 
-                        <div class="question">
+                        <div class="question u-mb-s">
                             <h1 id="question-title"
                                 class="question__title saturn"
                                 data-qa="question-title">
@@ -79,13 +79,13 @@ cdn: v1.5.0
                         </fieldset>
                     </div>
 
-                    <div class="definition js-details js-definition-visitors"
+                    <!--<div class="definition js-details js-definition-visitors"
                          style="display:none;"
                          data-hide-label="Click to collapse."
                          data-show-label="Click to expand.">
 
                         <a href="#definition"
-                           class="definition__link mars js-details-trigger u-no-js-hide icon--details"
+                           class="definition__link mars js-details-trigger u-no-js-hide icon&#45;&#45;details"
                            aria-expanded="false"
                            data-js-accordion-event-label="Why your answer is important"
                            data-ga-label="definition-pattern-library"
@@ -100,9 +100,9 @@ cdn: v1.5.0
                             <div class="definition__content mars">
                                 <p>We ask for visitor information to check that everyone is counted. This helps to produce accurate population estimates. Add any visitors, even if you think they may have been counted elsewhere.</p>
                             </div>
-                            <button class="btn btn--secondary btn--small definition__content-close-trigger js-details-trigger u-no-js-hide">Hide this</button>
+                            <button class="btn btn&#45;&#45;secondary btn&#45;&#45;small definition__content-close-trigger js-details-trigger u-no-js-hide">Hide this</button>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
 
                 <button class="btn btn-submit btn--primary btn--lg"
@@ -115,7 +115,7 @@ cdn: v1.5.0
     </div>
 </div>
 
-<script src='/js/compiled/your-household-v9/bundle.js'></script>
+<script src='/js/compiled/your-household-v10/bundle.js'></script>
 
 <script>
   var urlParams = new URLSearchParams(window.location.search),
@@ -136,18 +136,19 @@ cdn: v1.5.0
     throw Error('Member not found');
   }
 
-  const visitorTypesStr = new URLSearchParams(window.location.search).get('visitor-types');
+  var visitorTypesStr =
+    new URLSearchParams(window.location.search).get('visitor-types');
 
   if (visitorTypesStr) {
-    const visitorTypes = JSON.parse(visitorTypesStr);
+    var visitorTypes = JSON.parse(visitorTypesStr);
 
     if (visitorTypes.length) {
       document.querySelector('.js-visitor-panel').style.display = 'block';
 
-      const visitorIncludes = document.querySelector('.js-visitor-includes');
+      var visitorIncludes = document.querySelector('.js-visitor-includes');
 
       visitorTypes.forEach(type => {
-        const li = document.createElement('li');
+        var li = document.createElement('li');
         li.className = 'list__item';
 
         li.innerHTML = storageAPI.visitorQuestionSentenceMap[type];
@@ -155,7 +156,6 @@ cdn: v1.5.0
         visitorIncludes.appendChild(li);
       });
     }
-    
   }
 
   $('.btn-submit').click(function(e) {
@@ -190,7 +190,8 @@ cdn: v1.5.0
     } else if (window.location.search.match(/journey=temp-away-from-home/)) {
       window.location = '../temp-away-from-home/';
     } else if (window.location.search.match(/journey=visitors/)) {
-      window.location = '../does-anyone-else-live-here/?journey=visitors';
+      window.location =
+        '../does-anyone-else-live-here/?journey=visitors&visitor-types=' + visitorTypesStr;
     } else {
       window.location = userLiveAtAddress
         ? '../does-anyone-else-live-here/?redirect=../does-anyone-else-live-here/'
@@ -206,8 +207,10 @@ cdn: v1.5.0
       addressLine2 = addressLines[1],
       visitors = storageAPI.getAllHouseholdMembers()
         .filter(storageAPI.isVisitor),
-      overrideTitle = 'Who ' + (visitors.length ? 'else ' : '') +
-        'is staying overnight on ' + window.ONS.utils.getSignificant() +
+      overrideTitle = 'What is the name of the ' +
+        window.ONS.utils.numberToPositionWord(visitors.length + 1) +
+        ' visitor staying overnight on '
+        + window.ONS.utils.getSignificant() +
         ' at ' +
         addressLine1 + ', ' + addressLine2 + '?',
 

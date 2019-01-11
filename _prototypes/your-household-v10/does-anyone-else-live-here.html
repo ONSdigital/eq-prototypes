@@ -37,6 +37,13 @@ cdn: v1.5.0
                                     </h1>
                                 </div>
 
+                                <div class="panel panel--simple panel--info u-mb-m js-visitor-panel" style="display: none">
+                                    <div class="panel__body">
+                                        <strong class="u-mb-xs u-d-b">Include</strong>
+                                        <ul class="js-visitor-includes"></ul>
+                                    </div>
+                                </div>
+
                                 <div id="member-list"></div>
 
                                 <div class="answer__fields js-fields">
@@ -56,7 +63,7 @@ cdn: v1.5.0
                                                         add
                                                     another person</span>
                                                     <span
-                                                            class="pluto u-db label--negative">Include partners, children, babies born on or before <span class="js-significant-date"></span>, housemates, tenants and lodgers, students and schoolchildren who live away from home during term time, where this is their permanent or family home</span>
+                                                            class="pluto u-db label--negative">Include partners, children, babies born on or before <span class="js-significant-date"></span>, housemates, tenants and lodgers, students and schoolchildren who live away from home during term time</span>
                                                 </label>
                                             </div>
 
@@ -66,7 +73,8 @@ cdn: v1.5.0
                                                        name="does-anyone-else-live-here"
                                                        id="no" value="no">
                                                 <label class="label label--inline venus"
-                                                       for="no">No, I do not need to add anyone</label>
+                                                       for="no">No, this
+                                                is everyone</label>
                                             </div>
                                         </fieldset>
                                     </div>
@@ -83,7 +91,7 @@ cdn: v1.5.0
     </div>
 </div>
 
-<script src='/js/compiled/your-household-v9/bundle.js'></script>
+<script src='/js/compiled/your-household-v10/bundle.js'></script>
 
 <script>
   var yesbox = document.getElementById("yes-someone-else"),
@@ -112,13 +120,15 @@ cdn: v1.5.0
       addressLine2 = addressLines[1],
       householdMembers = storageAPI
         .getAllHouseholdMembers().filter(storageAPI.isHouseholdMember),
-      nextPosition = householdMembers.length + 1;
+      nextPosition = householdMembers.length + 1,
+      visitorTypesStr = new URLSearchParams(window.location.search).get('visitor-types');
 
     if (window.location.search.match(/journey=visitors/)) {
+      $('#form').prepend("<input type='hidden' name='visitor-types' value='" + visitorTypesStr + "' />");
       $('#form')
         .prepend('<input type="hidden" name="journey" value="visitors" />');
       $('#question-title')
-        .html('Is there anyone else staying overnight on ' +
+        .html('Is any other visitor staying on ' +
           window.ONS.utils.getSignificant()
           + ' at ' +
           addressLine1 +
@@ -126,6 +136,25 @@ cdn: v1.5.0
       $('#member-list').html('<ul id="visitors-list"></ul>');
       $('#yes-someone-else-label').html('Yes, I need to add another visitor');
       window.ONS.helpers.populateVisitorList();
+
+      if (visitorTypesStr) {
+        var visitorTypes = JSON.parse(visitorTypesStr);
+
+        if (visitorTypes.length) {
+          document.querySelector('.js-visitor-panel').style.display = 'block';
+
+          var visitorIncludes = document.querySelector('.js-visitor-includes');
+
+          visitorTypes.forEach(type => {
+            var li = document.createElement('li');
+            li.className = 'list__item';
+
+            li.innerHTML = storageAPI.visitorQuestionSentenceMap[type];
+
+            visitorIncludes.appendChild(li);
+          });
+        }
+      }
     }
     else {
       $('#member-list').html('<ul id="household-members"></ul>');
