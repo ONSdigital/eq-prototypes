@@ -409,3 +409,6 @@ $(updateAllPreviousLinks);
 $(updateBySurveyType);
 $(updateSignificantDate);
 
+$(function () {
+  $('.complete-later').html('Cadw a chwblhau\'n ddiweddarach');
+});
