@@ -256,7 +256,7 @@ cdn: v1.5.0
       visitors = storageAPI.getAllHouseholdMembers()
         .filter(storageAPI.isVisitor),
       overrideTitle = 'What is the name of the ' +
-        (visitors.length > 1
+        (visitors.length > 0
           ? window.ONS.utils.numberToPositionWord(visitors.length + 1) : '') +
         ' visitor staying overnight on '
         + window.ONS.utils.getSignificant() +
