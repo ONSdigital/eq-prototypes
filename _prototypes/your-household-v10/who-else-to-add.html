@@ -68,6 +68,18 @@ cdn: v1.5.0
                                 <div class="question__answer">
                                     <label class="label venus ">
                                         <div class="label__inner">
+                                            Middle name(s)
+                                        </div>
+                                    </label>
+                                    <p class="u-mb-xs pluto">Optional</p>
+                                    <input class="input input--text "
+                                           id="middle-name"
+                                           data-qa="input-text" value=""/>
+                                </div>
+
+                                <div class="question__answer">
+                                    <label class="label venus ">
+                                        <div class="label__inner">
                                             Last name
                                         </div>
                                     </label>
@@ -244,7 +256,8 @@ cdn: v1.5.0
       visitors = storageAPI.getAllHouseholdMembers()
         .filter(storageAPI.isVisitor),
       overrideTitle = 'What is the name of the ' +
-        window.ONS.utils.numberToPositionWord(visitors.length + 1) +
+        (visitors.length > 1
+          ? window.ONS.utils.numberToPositionWord(visitors.length + 1) : '') +
         ' visitor staying overnight on '
         + window.ONS.utils.getSignificant() +
         ' at ' +

@@ -39,9 +39,9 @@ cdn: v1.5.0
                                             class="js-relationship-person-is"></span>?
                                     </h1>
 
-                                    <div id="question-info"
+                                    <!--<div id="question-info"
                                          style="display:none;"
-                                            class="panel panel--simple panel--info u-mb-l">
+                                            class="panel panel&#45;&#45;simple panel&#45;&#45;info u-mb-l">
                                         <div class="panel__body js-question-info-body">
                                             <p class="mars">
                                                 Do not include stepchildren
@@ -49,7 +49,7 @@ cdn: v1.5.0
                                                 these will be included later
                                             </p>
                                         </div>
-                                    </div>
+                                    </div>-->
 
                                     <!--<label class="label venus " id="label-address-line-1">
                                         <div class="label__inner">
@@ -57,6 +57,8 @@ cdn: v1.5.0
                                         </div>
                                     </label>-->
 
+                                    <p class="venus u-mb-no">Remaining household
+                                        members</p>
                                     <p>Select all that apply</p>
 
                                     <div class="answer__fields js-fields">
@@ -217,14 +219,14 @@ cdn: v1.5.0
         $('#js-member-list').append(createMemberListItem(member['@person']));
       });
 
-      $('#js-member-list').append('<div class="field__label u-mt-s venus" aria-hidden="true">Or</div>');
+      /*$('#js-member-list').append('<div class="field__label u-mt-s venus" aria-hidden="true">Or</div>');
       $('#js-member-list').append('<div class="field__item js-focusable-box">\n' +
         '        <input class="input input--checkbox js-focusable js-exclusive-checkbox" name="checkbox-answer" value="none" id="none" type="checkbox">\n' +
         '        <label class="label label--inline venus " for="none">\n' +
         '            <span class="u-vh">Or,</span> None<span class="u-vh">. Selecting this will uncheck all other checkboxes</span>\n' +
         '        </label>\n' +
         '        <span class="js-exclusive-checkbox-alert u-vh" role="alert" aria-live="polite" data-adjective="deselected">none deselected. </span>\n' +
-        '      </div>');
+        '      </div>');*/
     }
 
     $('.js-submit').on('click', function(e) {

@@ -120,7 +120,7 @@ export const tempAwayQuestionSentenceMap = {
   'three-more': 'People who usually live outside the UK who are staying in the UK for 3 months or more',
   'perm-away': 'People who work away from home within the UK',
   'armed-forces': 'Members of the armed forces',
-  'less-twelve': 'People who are away from home for less than 12 months',
+  'less-twelve': 'People who are away from the UK for less than 12 months',
   'usually-temp': 'People staying temporarily who usually live in the UK but' +
     ' do not have another UK address',
   'other': 'Other people who usually live here but are temporarily away'
