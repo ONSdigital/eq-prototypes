@@ -114,7 +114,7 @@ cdn: v1.5.0
         <span class="list__item-name js-person-name"></span>
         <div class="list__item-actions u-fr">
             <span class="list__item-action">
-                <a class="js-record-edit" href="#">Change or remove</a>
+                <a class="js-record-edit" href="#">Change </a>
             </span>
             <!--<span class="list__item-action">
                 <button class="btn btn&#45;&#45;secondary btn&#45;&#45;small js-record-remove">Remove</button>
@@ -172,6 +172,8 @@ cdn: v1.5.0
 
     if (memberIsUser) {
       personNameText += ' (You)';
+    } else {
+      $nodeEl.find('.js-record-edit').append('or remove');
     }
 
     $nodeEl.attr('id', '');
