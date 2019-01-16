@@ -503,7 +503,9 @@ cdn: v1.5.0
       chosenItem = getChosenItem(),
       relationshipDescriptionVal = chosenItem.val,
       subjectPersonId,
-      subjectRelationshipDescription;
+      subjectRelationshipDescription,
+      missingRelationshipsForPerson =
+       storageAPI.getPeopleIdsMissingRelationshipsWithPerson(personToId);
 
       /**
        * Question strategies
@@ -536,7 +538,8 @@ cdn: v1.5.0
       }*/
 
     if(relationshipDescriptionVal === 'unrelated' &&
-      storageAPI.getPeopleIdsMissingRelationshipsWithPerson(personToId).length &&
+      missingRelationshipsForPerson.length &&
+      missingRelationshipsForPerson.length > 1 &&
 
       /**
        * And personIs already has the same relationship type with someone else
