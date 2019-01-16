@@ -125,6 +125,7 @@ cdn: v1.5.0
 
 <script>
   var storageAPI = window.ONS.storage,
+    members = storageAPI.getAllHouseholdMembers().filter(storageAPI.isHouseholdMember),
     yesbox = document.getElementById("yes"),
     grouped = {
       away: [
