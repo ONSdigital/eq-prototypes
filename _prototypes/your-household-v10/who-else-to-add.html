@@ -92,7 +92,15 @@ cdn: v1.5.0
                     </div>
                 </div>
 
-                <div class="js-remove-section u-mb-xl" style="display:none;">
+                <p class="u-mb-no"><a class="js-cancel-return" href=""
+                      style="display:none;">Cancel
+                    and
+                    return to the
+                    previous
+                    question</a></p>
+
+                <div class="js-remove-section u-mb-xl"
+                     style="display:none;">
                     <p>If you have added this person by mistake or if
                         circumstances have changed, you can remove them.</p>
 
@@ -100,7 +108,7 @@ cdn: v1.5.0
                             class="btn btn--secondary btn--small js-remove-person">Remove this person</button>
                 </div>
 
-                <button class="btn btn-submit btn--primary btn--lg u-mb-xl"
+                <button class="btn btn-submit btn--primary btn--lg u-mt-xl"
                         data-qa="btn-submit" type="submit"
                         name="action[save_continue]">
                     Save and continue
@@ -137,6 +145,7 @@ cdn: v1.5.0
 <script>
   var urlParams = new URLSearchParams(window.location.search),
     editUserId = urlParams.get('edit'),
+    previous = urlParams.get('previous'),
     redirect = urlParams.get('redirect'),
     storageAPI = window.ONS.storage,
     memberFound = null,
@@ -249,7 +258,6 @@ cdn: v1.5.0
 
   $(function() {
     var person,
-      storageAPI = window.ONS.storage,
       addressLines = (sessionStorage.getItem('address') || '').split(','),
       addressLine1 = addressLines[0],
       addressLine2 = addressLines[1],
@@ -294,6 +302,13 @@ cdn: v1.5.0
     else {
       $('#member-list').html('<ul id="household-members"></ul>');
       window.ONS.helpers.populateHouseholdList();
+    }
+
+    if(previous === 'temp-types-living-away' ||
+      previous === 'does-anyone-else-live-here' ||
+      previous === 'visitors') {
+      $('.js-cancel-return').attr('href', document.referrer);
+      $('.js-cancel-return').show();
     }
 
     if (memberFound) {

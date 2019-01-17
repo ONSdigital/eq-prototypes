@@ -125,6 +125,7 @@ cdn: v1.5.0
 
 <script>
   var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
     members = storageAPI.getAllHouseholdMembers().filter(storageAPI.isHouseholdMember),
     yesbox = document.getElementById("yes"),
     grouped = {
@@ -148,7 +149,8 @@ cdn: v1.5.0
     if(yesbox.checked) {
       url = '../visitors/';
     } else {
-      url = '../who-else-to-add/?redirect=../temp-types-living-away';
+      url =
+        '../who-else-to-add/?previous=temp-types-living-away&redirect=../temp-types-living-away';
     }
 
     window.location = url;
