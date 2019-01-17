@@ -3,13 +3,13 @@ title: Household prototype v10
 project: your-household
 globalcss: false
 layout: eq-default-extras
-cdn: v1.5.0
+cdn: v2.0.0
 ---
 
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous-link mars" href="../what-is-your-name">Previous
+        <a class="js-previous-link" href="../what-is-your-name">Previous
         </a>
     </div>
 </div>
@@ -25,11 +25,11 @@ cdn: v1.5.0
             <main role="main" id="main" class="page__main">
                 <form name="trav" class="form qa-questionnaire-form" role="form"
                       autocomplete="off" novalidate="">
-                    <div class="group" id="rsi">
-                        <div class="block" id="total-retail-turnover">
+                    <div class="group">
+                        <div class="block">
                             <section class="section">
                                 <div class="question">
-                                    <h1 class="question__title saturn">
+                                    <h1 class="question__title u-fs-l">
                                         Does anyone usually live at <span
                                             class="address-text"></span>?
                                     </h1>
@@ -42,12 +42,12 @@ cdn: v1.5.0
                                                            type="radio"
                                                            name="live-here"
                                                            id="yes">
-                                                    <label class="label label--inline venus"
+                                                    <label class="label label--inline"
                                                            for="yes">
                                                         Yes, I need to add
                                                         someone
                                                         <span
-                                                                class="pluto u-db">Include partners, children, babies born on or before <span class="js-significant-date"></span>, housemates, tenants and lodgers, students and schoolchildren who live away from home during term time, where this is their permanent or family home</span>
+                                                                class="u-fs-s u-db">Include partners, children, babies born on or before <span class="js-significant-date"></span>, housemates, tenants and lodgers, students and schoolchildren who live away from home during term time, where this is their permanent or family home</span>
                                                     </label>
                                                 </div>
 
@@ -56,12 +56,12 @@ cdn: v1.5.0
                                                            type="radio"
                                                            name="live-here"
                                                            id="no">
-                                                    <label class="label label--inline venus"
+                                                    <label class="label label--inline"
                                                            for="no">
                                                         No, no one usually lives
                                                         here
                                                         <span
-                                                                class="pluto u-db">For example, this is a second address or holiday home</span>
+                                                                class="u-fs-s u-db">For example, this is a second address or holiday home</span>
                                                     </label>
                                                 </div>
                                             </fieldset>
@@ -71,7 +71,7 @@ cdn: v1.5.0
                             </section>
                         </div>
                     </div>
-                    <button class="btn btn--primary btn--lg qa-btn-submit venus"
+                    <button class="btn btn--primary btn--lg qa-btn-submit"
                             type="submit" name="">Save and continue
                     </button>
                 </form>
@@ -97,7 +97,7 @@ cdn: v1.5.0
     var loc;
 
     if (yesbox.checked) {
-      document.trav.action = loc = "../who-else-to-add";
+      document.trav.action = loc = "../who-else-to-add/?previous=i-dont-live-here";
     } else {
       sessionStorage.removeItem('household-members');
       document.trav.action = loc = "../temp-types-living-away";

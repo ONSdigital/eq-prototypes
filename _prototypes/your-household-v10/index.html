@@ -3,7 +3,7 @@ title: Household prototype v10
 project: your-household
 globalcss: false
 layout: eq-default-extras
-cdn: v1.5.0
+cdn: v2.0.0
 ---
 
 <style>
@@ -31,9 +31,6 @@ cdn: v1.5.0
                     <div class="feedback__border">
                         <form id="feedback-form" method="POST"
                               class="feedback__form">
-                            <input id="csrf_token" name="csrf_token"
-                                   type="hidden"
-                                   value="IjI4MWVjOTc4Mjk5NTE1NjQ5YjlmNWUzZTU4MGZlOGIzNGYwNDQwZTYi.DQfxeA.HzzQFY1qLDUwiMKKT_aAcR1OKUI">
                             <div class="group">
                                 <div class="feedback__field">
 
@@ -46,7 +43,7 @@ cdn: v1.5.0
                 <div class="group u-mb-xl" id="what-is-your-address-group">
                     <div class="block" id="what-is-your-address">
                         <div class="question">
-                            <h1 class="question__title saturn"
+                            <h1 class="question__title u-fs-l"
                                 data-qa="question-title">
                                 Welcome to the household prototype
                             </h1>
@@ -54,8 +51,8 @@ cdn: v1.5.0
                             <div class="panel panel--simple panel--info">
                                 <div class="panel__body">
                                     <div class="field">
-                                        <label class="label venus "
-                                               for="address-line-1"
+                                        <label class="label"
+                                               for="line-1"
                                                id="label-address-line-1">
                                             <div class="label__inner">
                                                 Enter the unique access code
@@ -64,39 +61,33 @@ cdn: v1.5.0
 
                                         <div class="grid">
                                             <div class="grid__col col-4@m">
-                                                <input
-                                                        class="input input--text input--text-lg u-mb-s"
-                                                        id="address-line-1"
-                                                        name="address-line-1"
+                                                <input  id="line-1"
+                                                        class="input input--text input--block u-mb-s"
                                                         data-qa="input-text"
                                                         value=""/>
                                             </div>
                                             <div class="grid__col col-4@m">
                                                 <input
-                                                        class="input input--text input--text-lg u-mb-s"
-                                                        id="address-line-1"
-                                                        name="address-line-1"
+                                                        class="input input--text input--block u-mb-s"
                                                         data-qa="input-text"
                                                         value=""/>
                                             </div>
                                             <div class="grid__col col-4@m">
                                                 <input
-                                                        class="input input--text input--text-lg u-mb-s"
-                                                        id="address-line-1"
-                                                        name="address-line-1"
+                                                        class="input input--text input--block u-mb-s"
                                                         data-qa="input-text"
                                                         value=""/>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <p class="mars">The unique access code
+                                    <p>The unique access code
                                         is printed on your invitation
                                         letter or form</p>
                                 </div>
                             </div>
 
-                            <p class="mars u-mt-l lock">Your personal information is protected by law and will be kept confidential</p>
+                            <p class="u-fs-r u-mt-l lock">Your personal information is protected by law and will be kept confidential</p>
 
                         </div>
                     </div>

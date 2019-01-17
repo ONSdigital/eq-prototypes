@@ -3,13 +3,13 @@ title: Household prototype v10
 project: your-household
 globalcss: false
 layout: eq-default-extras
-cdn: v1.5.0
+cdn: v2.0.0
 ---
 
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous-link mars" href="../index">Previous</a>
+        <a class="js-previous-link" href="../index">Previous</a>
     </div>
 </div>
 
@@ -21,16 +21,16 @@ cdn: v1.5.0
             <main role="main" id="main" class="page__main">
                 <form name="trav" class="form qa-questionnaire-form u-mb-xl"
                       role="form" autocomplete="off" novalidate="">
-                    <div class="group" id="rsi">
-                        <div class="block" id="total-retail-turnover">
-                            <section class="section" id="total-retail-turnover-section">
-                                <div class="question u-mb-s" id="total-retail-turnover-question">
-                                    <h1 class="question__title saturn">
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 class="question__title u-fs-l">
                                         Can you confirm this address is correct?
                                     </h1>
                                 </div>
 
-                                <p class="mars address-text"
+                                <p class="address-text"
                                    for="address-correct-yes">Address not
                                     set</p>
 
@@ -40,7 +40,7 @@ cdn: v1.5.0
                                             <div class="field__item js-focusable-box">
                                                 <input class="input input--radio js-focusable" type="radio"
                                                        name="address-correct" id="address-correct-yes">
-                                                <label class="label label--inline venus" for="address-correct-yes">Yes, this
+                                                <label class="label label--inline" for="address-correct-yes">Yes, this
                                                     address is correct</label>
                                             </div>
 

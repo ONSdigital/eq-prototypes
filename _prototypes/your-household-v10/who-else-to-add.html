@@ -3,13 +3,13 @@ title: Household prototype v10
 project: your-household
 globalcss: false
 layout: eq-default-extras
-cdn: v1.5.0
+cdn: v2.0.0
 ---
 
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous-link mars"
+        <a class="js-previous-link"
            href="../does-anyone-else-live-here">Previous</a>
     </div>
 </div>
@@ -33,7 +33,7 @@ cdn: v1.5.0
 
                         <div class="question u-mb-s">
                             <h1 id="question-title"
-                                class="question__title saturn"
+                                class="question__title u-fs-l"
                                 data-qa="question-title">
                                 Who do you need to add to <span class="address-text"></span>?
                             </h1>
@@ -54,7 +54,7 @@ cdn: v1.5.0
 
                             <div class="question__answers">
                                 <div class="question__answer">
-                                    <label class="label venus"
+                                    <label class="label"
                                            for="first-name">
                                         <div class="label__inner">
                                             First name
@@ -66,19 +66,19 @@ cdn: v1.5.0
                                 </div>
 
                                 <div class="question__answer">
-                                    <label class="label venus ">
+                                    <label class="label ">
                                         <div class="label__inner">
                                             Middle name(s)
                                         </div>
                                     </label>
-                                    <p class="u-mb-xs pluto">Optional</p>
+                                    <p class="u-mb-xs u-fs-s">Optional</p>
                                     <input class="input input--text "
                                            id="middle-name"
                                            data-qa="input-text" value=""/>
                                 </div>
 
                                 <div class="question__answer">
-                                    <label class="label venus ">
+                                    <label class="label ">
                                         <div class="label__inner">
                                             Last name
                                         </div>
@@ -120,19 +120,19 @@ cdn: v1.5.0
 
 <div id="modal" class="modal" style="display: none;">
     <div class="modal__window">
-        <h1 class="saturn">Are you sure you want to remove <span
+        <h1 class="u-fs-l">Are you sure you want to remove <span
                 class="js-person-name"></span>?</h1>
         <p class="u-mb-m">All of the data associated with this person will be
             deleted</p>
 
         <div class="modal__buttons btn-group">
             <div class="u-mb-xs">
-                <button class="btn btn-group__btn btn--danger venus remove-member-button">
+                <button class="btn btn-group__btn btn--danger remove-member-button">
                     Yes, remove this person
                 </button>
             </div>
             <div>
-                <button class="btn btn-group__btn btn--secondary venus close-modal-button">
+                <button class="btn btn-group__btn btn--secondary close-modal-button">
                     No, cancel this
                 </button>
             </div>
@@ -306,7 +306,8 @@ cdn: v1.5.0
 
     if(previous === 'temp-types-living-away' ||
       previous === 'does-anyone-else-live-here' ||
-      previous === 'visitors') {
+      previous === 'visitors' ||
+      previous === 'i-dont-live-here') {
       $('.js-cancel-return').attr('href', document.referrer);
       $('.js-cancel-return').show();
     }
