@@ -69,3 +69,7 @@
     background-color : #b00015;
     border-color : #b00015;
 }
+
+.page__content {
+    padding-bottom : .5rem;
+}
