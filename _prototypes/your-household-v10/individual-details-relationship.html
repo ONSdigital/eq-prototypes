@@ -3,13 +3,13 @@ title: Household prototype v10
 project: your-household
 globalcss: false
 layout: eq-default-extras
-cdn: v1.5.0
+cdn: v2.0.0
 ---
 
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous-link mars" href="../do-you-live-here">Previous</a>
+        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
     </div>
 </div>
 
@@ -29,12 +29,12 @@ cdn: v1.5.0
                            value="#"/>
                     <input type="hidden" name="survey" id="survey-type"
                            value="#"/>
-                    <div class="group" id="rsi">
-                        <div class="block" id="total-retail-turnover">
+                    <div class="group">
+                        <div class="block">
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
-                                        class="question__title saturn js-heading">
+                                        class="question__title u-fs-l js-heading">
                                         What is your legal marital or
                                         same-sex civil partnership status?
                                     </h1>
@@ -50,7 +50,7 @@ cdn: v1.5.0
                                                            name="marital-status"
                                                            id="never"
                                                            value="never">
-                                                    <label class="label label--inline venus"
+                                                    <label class="label label--inline"
                                                            for="never"
                                                            id="never-label">
                                                         Never married and
@@ -65,7 +65,7 @@ cdn: v1.5.0
                                                            name="marital-status"
                                                            id="married"
                                                            value="married">
-                                                    <label class="label label--inline venus"
+                                                    <label class="label label--inline"
                                                            for="married"
                                                            id="married-label">
                                                         Married
@@ -77,7 +77,7 @@ cdn: v1.5.0
                                                            name="marital-status"
                                                            id="registered"
                                                            value="registered">
-                                                    <label class="label label--inline venus"
+                                                    <label class="label label--inline"
                                                            for="registered"
                                                            id="registered-label">
                                                         In a registered
@@ -91,7 +91,7 @@ cdn: v1.5.0
                                                            name="marital-status"
                                                            id="separated-married"
                                                            value="separated-married">
-                                                    <label class="label label--inline venus"
+                                                    <label class="label label--inline"
                                                            for="separated-married"
                                                            id="separated-married-label">
                                                         Separated, but still
@@ -104,7 +104,7 @@ cdn: v1.5.0
                                                            name="marital-status"
                                                            id="separated-partnership"
                                                            value="separated-partnership">
-                                                    <label class="label label--inline venus"
+                                                    <label class="label label--inline"
                                                            for="separated-partnership"
                                                            id="separated-partnership-label">
                                                         Separated, but still
@@ -118,7 +118,7 @@ cdn: v1.5.0
                                                            name="marital-status"
                                                            id="divorced"
                                                            value="divorced">
-                                                    <label class="label label--inline venus"
+                                                    <label class="label label--inline"
                                                            for="divorced"
                                                            id="divorced-label">
                                                         Divorced
@@ -130,7 +130,7 @@ cdn: v1.5.0
                                                            name="marital-status"
                                                            id="former-partnership"
                                                            value="former-partnership">
-                                                    <label class="label label--inline venus"
+                                                    <label class="label label--inline"
                                                            for="former-partnership"
                                                            id="former-partnership-label">
                                                         Formerly in a
@@ -145,7 +145,7 @@ cdn: v1.5.0
                                                            name="marital-status"
                                                            id="widowed"
                                                            value="widowed">
-                                                    <label class="label label--inline venus"
+                                                    <label class="label label--inline"
                                                            for="widowed"
                                                            id="widowed-label">
                                                         Widowed
@@ -157,7 +157,7 @@ cdn: v1.5.0
                                                            name="marital-status"
                                                            id="surviving-partner"
                                                            value="surviving-partner">
-                                                    <label class="label label--inline venus"
+                                                    <label class="label label--inline"
                                                            for="surviving-partner"
                                                            id="surviving-partner-label">
                                                         Surviving partner
@@ -176,12 +176,12 @@ cdn: v1.5.0
                             type="submit" name="">Save and continue
                     </button>
 
-                    <p class="mars">Can't complete this question?<br />
+                    <p>Can't complete this question?<br />
                         <a href="../hub" class="js-choose-another-section">Choose another section and
                             return
                             to this later</a></p>
 
-                    <p class="mars u-mb-m"><span class="js-link-secure-label"></span><br />
+                    <p class="u-mb-m"><span class="js-link-secure-label"></span><br />
                         <a class="js-link-secure"
                            href="#">Get a separate access code to submit an
                             individual response</a></p>

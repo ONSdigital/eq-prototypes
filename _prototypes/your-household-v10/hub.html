@@ -3,7 +3,7 @@ title: Household prototype v10
 project: your-household
 globalcss: false
 layout: eq-default-extras
-cdn: v1.5.0
+cdn: v2.0.0
 ---
 
 <link rel="stylesheet" href="../style.css"/>
@@ -40,13 +40,11 @@ cdn: v1.5.0
             <main role="main" id="main" class="page__main">
                 <form name="trav" class="form qa-questionnaire-form" role="form"
                       autocomplete="off" novalidate="">
-                    <div class="group" id="rsi">
-                        <div class="block" id="total-retail-turnover">
-                            <section class="section"
-                                     id="total-retail-turnover-section">
-                                <div class="question u-mb-s"
-                                     id="total-retail-turnover-question">
-                                    <h1 class="question__title saturn">
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 class="question__title u-fs-l">
                                         Survey progress
                                     </h1>
                                 </div>
@@ -56,7 +54,7 @@ cdn: v1.5.0
                                     <strong class="u-mb-s">You have completed
                                         the section
                                         <span class="address-text-line1"></span></strong>
-                                    <p class="mars">In order to submit this
+                                    <p>In order to submit this
                                         survey you need to complete all of
                                         the following sections</p>
                                 </div>
@@ -68,16 +66,16 @@ cdn: v1.5.0
                                             <div class="grid">
                                                 <div class="grid__col col-12@xs col-6@m">
                                                     <div
-                                                            class="summary__question venus address-text-line1"></div>
+                                                            class="summary__question address-text-line1"></div>
                                                 </div>
                                                 <div
                                                         class="grid__col col-8@xs col-3@m">
                                                     <div
-                                                            class="summary__answer mars completed">Completed</div>
+                                                            class="summary__answer completed">Completed</div>
                                                 </div>
                                                 <div
                                                         class="grid__col col-4@xs col-3@m">
-                                                    <div class="summary__link mars">
+                                                    <div class="summary__link">
                                                         <a
                                                                 href="../summary" class="js-view-summary">View
                                                             answers
@@ -97,7 +95,7 @@ cdn: v1.5.0
                             </section>
                         </div>
                     </div>
-                    <button class="btn btn--primary btn--lg qa-btn-submit venus"
+                    <button class="btn btn--primary btn--lg qa-btn-submit"
                             type="submit"
                             disabled="disabled">Submit survey
                     </button>
@@ -112,15 +110,15 @@ cdn: v1.5.0
         <div class="grid">
             <div class="grid__col col-12@xs col-6@m">
                 <div
-                        class="summary__question venus js-person-name"></div>
+                        class="summary__question js-person-name"></div>
             </div>
             <div class="grid__col col-8@xs col-3@m">
                 <div
-                        class="summary__answer mars js-survey-status">[Status
+                        class="summary__answer js-survey-status">[Status
                     not found]</div>
             </div>
             <div class="grid__col col-4@xs col-3@m">
-                <div class="summary__link mars">
+                <div class="summary__link">
                     <a class="js-link"
                        href="#">Start section
                     </a>

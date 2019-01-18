@@ -3,13 +3,13 @@ title: Household prototype v10
 project: your-household
 globalcss: false
 layout: eq-default-extras
-cdn: v1.5.0
+cdn: v2.0.0
 ---
 
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="mars" href="../do-you-live-here">Previous</a>
+        <a href="../do-you-live-here">Previous</a>
     </div>
 </div>
 
@@ -28,12 +28,12 @@ cdn: v1.5.0
                            value="#"/>
                     <input type="hidden" name="survey" id="survey-type"
                            value="#"/>
-                    <div class="group" id="rsi">
-                        <div class="block" id="total-retail-turnover">
+                    <div class="group">
+                        <div class="block">
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
-                                        class="question__title saturn js-heading">
+                                        class="question__title u-fs-l js-heading">
                                         Which of the following best describes your sexual orientation?
                                     </h1>
                                 </div>
@@ -48,7 +48,7 @@ cdn: v1.5.0
                                                            name="orientation"
                                                            id="straight"
                                                            value="straight">
-                                                    <label class="label label--inline venus"
+                                                    <label class="label label--inline"
                                                            for="straight"
                                                            id="straight-label">
                                                         Straight or Heterosexual
@@ -60,7 +60,7 @@ cdn: v1.5.0
                                                            name="orientation"
                                                            id="gay"
                                                            value="gay">
-                                                    <label class="label label--inline venus"
+                                                    <label class="label label--inline"
                                                            for="gay"
                                                            id="gay-label">
                                                         Gay or Lesbian
@@ -72,7 +72,7 @@ cdn: v1.5.0
                                                            name="orientation"
                                                            id="bisexual"
                                                            value="bisexual">
-                                                    <label class="label label--inline venus"
+                                                    <label class="label label--inline"
                                                            for="bisexual"
                                                            id="bisexual-label">
                                                         Bisexual
@@ -84,7 +84,7 @@ cdn: v1.5.0
                                                            name="orientation"
                                                            id="other"
                                                            value="other">
-                                                    <label class="label label--inline venus"
+                                                    <label class="label label--inline"
                                                            for="other"
                                                            id="other-label">
                                                         Other sexual
@@ -93,7 +93,7 @@ cdn: v1.5.0
                                                     </label>
                                                     <div class="field__other">
                                                         <!--<label
-                                                                class="label venus mercury" for="other-answer" id="label-checkbox-other-input">Enter your mobile number</label>-->
+                                                                class="label mercury" for="other-answer" id="label-checkbox-other-input">Enter your mobile number</label>-->
                                                         <input class="input input__text js-focusable" id="other-answer" name="orientation" type="text" data-qa="other-option">
                                                     </div>
                                                 </div>
@@ -103,7 +103,7 @@ cdn: v1.5.0
                                                            name="orientation"
                                                            id="no-say"
                                                            value="no-say">
-                                                    <label class="label label--inline venus"
+                                                    <label class="label label--inline"
                                                            for="no-say"
                                                            id="no-say-label">
                                                         Prefer not to say
@@ -116,15 +116,15 @@ cdn: v1.5.0
                             </section>
                         </div>
                     </div>
-                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                    <button class="btn btn--primary btn--lg qa-btn-submit u-mb-xl"
                             type="submit" name="">Save and continue
                     </button>
 
-                    <p class="mars">Can't complete this question?<br />
+                    <p>Can't complete this question?<br />
                         <a href="../hub" class="js-choose-another-section">Choose another section and
                             return to this later</a></p>
 
-                    <p class="mars u-mb-m"><span class="js-link-secure-label"></span><br />
+                    <p class="u-mb-m"><span class="js-link-secure-label"></span><br />
                         <a class="js-link-secure"
                            href="#">Get a separate access code to submit an
                             individual response</a></p>

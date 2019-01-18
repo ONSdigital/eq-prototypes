@@ -3,13 +3,13 @@ title: Household prototype v10
 project: your-household
 globalcss: false
 layout: eq-default-extras
-cdn: v1.5.0
+cdn: v2.0.0
 ---
 
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous-link mars" href="../do-you-live-here">Previous</a>
+        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
     </div>
 </div>
 
@@ -34,7 +34,7 @@ cdn: v1.5.0
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
-                                        class="question__title saturn js-heading">
+                                        class="question__title u-fs-l js-heading">
                                         What is your date of birth?
                                     </h1>
                                     <p class="question__description">For
@@ -44,20 +44,21 @@ cdn: v1.5.0
                                 <div class="answer answer--date">
                                     <div
                                             class="answer__fields js-fields u-mb-xl">
-                                        <fieldset class="fieldgroup fieldgroup--date" data-qa="widget-date">
+                                        <fieldset
+                                                class="fieldgroup fieldgroup--inline fieldgroup--date" data-qa="widget-date">
 
                                             <div class="fieldgroup__fields">
-                                                <div class="field field--input field--day">
-                                                    <label class="label mercury" data-qa="label-day">Day</label>
+                                                <div class="field field--input input--w-2">
+                                                    <label class="label u-fs-s--b" data-qa="label-day">Day</label>
                                                     <input
                                                             id="personal-detail-dob-day" placeholder="DD"
                                                             value="" data-qa="input-StringField" class="input input--StringField ">
                                                 </div>
 
                                                 <div class="field field--select field--month">
-                                                    <label class="label mercury" for="personal-detail-dob-month" id="label-date-range-from-month" data-qa="label-month">Month</label>
+                                                    <label class="label u-fs-s--b" for="personal-detail-dob-month" id="label-date-range-from-month" data-qa="label-month">Month</label>
                                                     <select
-                                                            class="input input--select"id="personal-detail-dob-month" name="date-range-from-month">
+                                                            class="input input--select input--w-auto" id="personal-detail-dob-month" name="date-range-from-month">
                                                         <option value="" disabled="disabled" selected="selected">Select month</option>
                                                         <option value="1">January</option>
                                                         <option value="2">February</option>
@@ -75,10 +76,10 @@ cdn: v1.5.0
                                                 </div>
 
                                                 <div class="field field--input field--year">
-                                                    <label class="label mercury" data-qa="label-year">Year</label>
+                                                    <label class="label u-fs-s--b" data-qa="label-year">Year</label>
                                                     <input
                                                             id="personal-detail-dob-year"
-                                                            placeholder="YYYY" value="" data-qa="input-StringField" class="input input--StringField ">
+                                                            placeholder="YYYY" value="" data-qa="input-StringField" class="input input--StringField input--w-4">
                                                 </div>
                                             </div>
                                         </fieldset>
@@ -87,18 +88,18 @@ cdn: v1.5.0
                             </section>
                         </div>
                     </div>
-                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                    <button class="btn btn--primary btn--lg qa-btn-submit u-mb-xl"
                             type="submit" name="">Save and continue
                     </button>
 
-                    <p class="mars">Can't complete this question?<br />
+                    <p>Can't complete this question?<br />
                         <a href="../hub"
                            class="js-choose-another-section">Choose another
                             section and
                             return
                             to this later</a></p>
 
-                    <p class="mars u-mb-m"><span class="js-link-secure-label"></span><br />
+                    <p class="u-mb-m"><span class="js-link-secure-label"></span><br />
                         <a class="js-link-secure"
                            href="#">Get a separate access code to submit an
                             individual response</a></p>
