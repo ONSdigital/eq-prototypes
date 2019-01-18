@@ -5,13 +5,13 @@ globalcss: false
 householdMembers:
 visitors:
 layout: eq-default-extras
-cdn: v1.5.0
+cdn: v2.0.0
 ---
 
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous-link mars" href="../summary">Previous</a>
+        <a class="js-previous-link" href="../summary">Previous</a>
     </div>
 </div>
 
@@ -30,7 +30,7 @@ cdn: v1.5.0
                         <div class="block">
                             <section class="section" id="question-area">
                                 <div class="question">
-                                    <h1 class="question__title saturn">
+                                    <h1 class="question__title u-fs-l">
                                         <span class="js-relationship-person-is-relationship-description">...</span>
                                     </h1>
                                     <p class="question__description">
@@ -184,7 +184,8 @@ cdn: v1.5.0
                                                         <label class="label label&#45;&#45;inline venus"
                                                                for="unrelated">
                                                             Unrelated
-                                                            <span class="pluto u-db">Including foster child</span>
+                                                            <span
+                                                                    class="u-fs-s u-db">Including foster child</span>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -370,7 +371,7 @@ cdn: v1.5.0
     }
     else {
       $('#question-area')
-        .html('<h1 class="saturn">Relationship not found</h1>');
+        .html('<h1 class="u-fs-l">Relationship not found</h1>');
     }
   }
 
@@ -443,7 +444,7 @@ cdn: v1.5.0
     }
     else {
       $('#question-area')
-        .html('<h1 class="saturn">No missing relationships found</h1>');
+        .html('<h1 class="u-fs-l">No missing relationships found</h1>');
       $('.qa-btn-submit').on('click', function(e) {
         e.preventDefault();
 
