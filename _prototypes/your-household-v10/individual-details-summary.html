@@ -305,6 +305,9 @@ cdn: v2.0.0
     var visitor1PersonalDetails,
       $addressContainer = $('.js-address-individual-field');
 
+    /**
+     * Address
+     */
     if(details['address-where'] === 'same-as-visitor1') {
       visitor1PersonalDetails =
         storageAPI.getPersonalDetailsFor(visitor1['@person'].id);
@@ -313,6 +316,11 @@ cdn: v2.0.0
 
       $addressContainer.show();
       $('.js-address-individual').html(formatAddress(visitor1PersonalDetails.address));
+    }
+    else if(details['address-where'] === 'outside-uk') {
+      $addressContainer.show();
+      $('.js-address-individual').html(details['address-outside-uk'] +
+        ' (Outside UK)');
     }
     else {
       $addressContainer.show();

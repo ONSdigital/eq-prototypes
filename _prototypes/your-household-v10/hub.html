@@ -178,11 +178,28 @@ cdn: v2.0.0
   }
 
   function isVisitorSectionComplete(personDetails) {
-    return personDetails.sex &&
-      (personDetails['address-where'] === 'same-as-visitor1'
-          ? true
-          : personDetails.address
-      );
+
+    if(!personDetails.sex) {
+      return false;
+    }
+
+    if(!personDetails['address-where']) {
+      return false;
+    }
+
+    if(personDetails['address-where'] === 'in-uk' &&
+      !personDetails.address
+    ) {
+      return false;
+    }
+
+    if(personDetails['address-where'] === 'outside-uk' &&
+      !personDetails['address-outside-uk']
+    ) {
+      return false;
+    }
+
+    return true;
   }
 
   /**

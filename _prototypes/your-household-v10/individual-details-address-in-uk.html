@@ -70,25 +70,11 @@ cdn: v2.0.0
                                                         An address in the UK
                                                     </label>
                                                 </div>
-                                                <!--<div class="field__item js-focusable-box">
-                                                    <input class="input input&#45;&#45;radio js-focusable"
-                                                           type="radio"
-                                                           name="addrees-where"
-                                                           id="out-uk"
-                                                           value="out-uk">
-                                                    <label class="label label&#45;&#45;inline"
-                                                           for="out-uk"
-                                                           id="out-uk-label">
-                                                        An address outside
-                                                        the UK
-                                                    </label>
-                                                </div>-->
-
                                                 <div class="field__item js-focusable-box">
                                                     <input
-                                                            class="input input--radio js-focusable" name="addrees-where" value="Other" id="radio-answer-other" type="radio" data-qa="has-other-option">
+                                                            class="input input--radio js-focusable" name="addrees-where" value="outside-uk" id="outside-uk" type="radio" data-qa="has-other-option">
                                                     <label
-                                                            class="label label--inline u-fs-r " for="radio-answer-other" id="label-radio-answer-other">An address outside the UK</label>
+                                                            class="label label--inline u-fs-r " for="outside-uk" id="label-radio-answer-other">An address outside the UK</label>
                                                     <div class="field__other">
                                                         <label
                                                                 class="label u-fs-s--b" for="other-answer" id="label-checkbox-other-input">Please specify country</label>
@@ -137,6 +123,10 @@ cdn: v2.0.0
     var val = $('[name="addrees-where"]:checked').val();
     storageAPI.addUpdateAddressWhere(personId, val);
 
+    if(val === 'outside-uk'){
+      storageAPI.addUpdateAddressOutsideUK(personId, $('#other-answer').val());
+    }
+
     if(isEditing) {
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person=' +
@@ -146,14 +136,20 @@ cdn: v2.0.0
     if(isVisitor) {
       e.preventDefault();
 
-      if(val === 'same-as-visitor1') {
-        window.location.href = '../hub/' + (surveyType ? '?survey=' +
-          surveyType : '');
-      }
-      else {
-        window.location.href = '../individual-details-address/?person=' +
-          personId + (surveyType ? '&survey=' + surveyType : '');
-      }
+      var routeMap = {
+        'same-as-visitor1': {
+          url: '../hub/?noop=fake'
+        },
+        'in-uk': {
+          url: '../individual-details-address/?person=' + personId
+        },
+        'outside-uk': {
+          url: '../hub/?noop=fake'
+        }
+      };
+
+      window.location.href = routeMap[val].url +
+        (surveyType ? '&survey=' + surveyType : '');
     }
   });
 

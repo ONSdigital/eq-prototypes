@@ -56,10 +56,16 @@ import {
   addUpdateCountry,
   addUpdateOrientation,
   addUpdateSalary,
+  addUpdateSex,
+  addUpdateAddressWhere,
+  addUpdateAddressIndividual,
+  addUpdateAge,
+  addUpdateAddressOutsideUK,
 
   personalDetailsMaritalStatusMap,
   personalDetailsCountryMap,
   personalDetailsOrientationMap,
+  personalDetailsGenderMap,
 
   PERSONAL_DETAILS_KEY,
 
@@ -355,10 +361,16 @@ window.ONS.storage = {
   addUpdateCountry,
   addUpdateOrientation,
   addUpdateSalary,
+  addUpdateSex,
+  addUpdateAddressWhere,
+  addUpdateAddressIndividual,
+  addUpdateAge,
+  addUpdateAddressOutsideUK,
 
   personalDetailsMaritalStatusMap,
   personalDetailsCountryMap,
   personalDetailsOrientationMap,
+  personalDetailsGenderMap,
 
   createPinFor,
   getPinFor,
@@ -411,3 +423,4 @@ $(tools);
 $(updateAllPreviousLinks);
 $(updateBySurveyType);
 $(updateSignificantDate);
+

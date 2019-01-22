@@ -72,6 +72,15 @@ export const personalDetailsOrientationMap = {
   }
 };
 
+export const personalDetailsGenderMap = {
+  'male': {
+    description: 'Male'
+  },
+  'female': {
+    description: 'Female'
+  }
+};
+
 export function addUpdatePersonalDetailsDOB(personId, day, month, year) {
   let allDetails = getAllPersonalDetails(),
     details = allDetails[personId] || {};
@@ -125,6 +134,64 @@ export function addUpdateSalary(personId, val) {
     details = allDetails[personId] || {};
 
   details['salary'] = val;
+
+  updatePersonalDetails(personId, details);
+
+  return details;
+}
+
+export function addUpdateSex(personId, val) {
+  let allDetails = getAllPersonalDetails(),
+    details = allDetails[personId] || {};
+
+  details['sex'] = val;
+
+  updatePersonalDetails(personId, details);
+
+  return details;
+}
+
+export function addUpdateAddressWhere(personId, val) {
+  let allDetails = getAllPersonalDetails(),
+    details = allDetails[personId] || {};
+
+  details['address-where'] = val;
+
+  updatePersonalDetails(personId, details);
+
+  return details;
+}
+
+export function addUpdateAge(personId, val, { isApproximate = false }) {
+  let allDetails = getAllPersonalDetails(),
+    details = allDetails[personId] || {};
+
+  details['age'] = {
+    val,
+    isApproximate
+  };
+
+  updatePersonalDetails(personId, details);
+
+  return details;
+}
+
+export function addUpdateAddressOutsideUK(personId, val) {
+  let allDetails = getAllPersonalDetails(),
+    details = allDetails[personId] || {};
+
+  details['address-outside-uk'] = val;
+
+  updatePersonalDetails(personId, details);
+
+  return details;
+}
+
+export function addUpdateAddressIndividual(personId, val) {
+  let allDetails = getAllPersonalDetails(),
+    details = allDetails[personId] || {};
+
+  details['address'] = val;
 
   updatePersonalDetails(personId, details);
 
