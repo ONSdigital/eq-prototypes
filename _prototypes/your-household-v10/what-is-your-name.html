@@ -28,17 +28,17 @@ cdn: v2.0.0
                     </div>
                 </div>
 
-                <div class="group">
+                <div class="group u-mb-s">
                     <div class="block">
 
                         <div class="question">
-                            <h1 class="question__title u-fs-l"
+                            <h1 class="question__title u-fs-l js-heading"
                                 data-qa="question-title">
                                 What is your name?
                             </h1>
 
                             <fieldset
-                                    class="question__fieldset u-mb-xl js-question-fieldset">
+                                    class="question__fieldset js-question-fieldset">
                                 <legend class="u-vh">What is your name?</legend>
 
                                 <div class="question__answers">
@@ -55,12 +55,11 @@ cdn: v2.0.0
                                     </div>
 
                                     <div class="question__answer">
-                                        <label class="label u-mb-no">
+                                        <label class="label">
                                             <div class="label__inner">
                                                 Middle name(s)
                                             </div>
                                         </label>
-                                        <p class="u-mb-xs pluto">Optional</p>
                                         <input class="input input--text"
                                                id="middle-name"
                                                data-qa="input-text" value=""/>
@@ -82,7 +81,17 @@ cdn: v2.0.0
                     </div>
                 </div>
 
-                <button class="btn btn-submit btn--primary btn--lg"
+                <div class="js-remove-section"
+                     style="display:none;">
+                    <p>If you have added this person by mistake or if
+                        circumstances have changed, you can remove them.</p>
+
+                    <button
+                            class="btn btn--secondary btn--small js-remove-person">Remove this person</button>
+                </div>
+
+
+                <button class="btn btn-submit btn--primary btn--lg u-mt-xl"
                         data-qa="btn-submit" type="submit"
                         name="action[save_continue]">
                     Save and continue
@@ -92,21 +101,89 @@ cdn: v2.0.0
     </div>
 </div>
 
+<div id="modal" class="modal" style="display: none;">
+    <div class="modal__window">
+        <h1 class="u-fs-l">Are you sure you want to remove <span
+                class="js-person-name"></span>?</h1>
+        <p class="u-mb-m">All of the data associated with this person will be
+            deleted</p>
+
+        <div class="modal__buttons btn-group">
+            <div class="u-mb-xs">
+                <button class="btn btn-group__btn btn--danger remove-member-button">
+                    Yes, remove this person
+                </button>
+            </div>
+            <div>
+                <button class="btn btn-group__btn btn--secondary close-modal-button">
+                    No, cancel this
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src='/js/compiled/your-household-v10/bundle.js'></script>
 
 <script>
-    console.log(window.ONS.storage.getUserPerson());
+  var urlParams = new URLSearchParams(window.location.search),
+    isEditing = urlParams.get('edit') === 'true',
+    storageAPI = window.ONS.storage,
+    userAsMember = storageAPI.getUserAsHouseholdMember(),
+    userPerson = userAsMember && userAsMember['@person'];
+
+  function removeMember_handler(member, e) {
+    e.preventDefault();
+    var modal = $('#modal'),
+      original = modal.find('.remove-member-button'),
+      newNode = original.clone();
+
+    newNode.on('click', confirmRemoveMember_handler.bind(null, member));
+    original.replaceWith(newNode);
+
+    modal.find('.js-person-name').html(member['@person'].fullName);
+
+    modal.show();
+  }
+
+  function confirmRemoveMember_handler(member) {
+    sessionStorage.setItem('lives-here', 'no');
+    storageAPI.deleteUserAsHouseholdMember();
+    storageAPI.deleteAllRelationshipsForMember(member['@person'].id);
+
+    window.location.href = '../summary/';
+  }
+
+  $('#modal .close-modal-button').on('click', function(e) {
+    e.preventDefault();
+    $('#modal').hide();
+  });
+
+  $('.js-remove-person').on('click', removeMember_handler.bind(null, userAsMember));
+
+  function updateQuestion() {
+    if(isEditing && userPerson) {
+      $('.js-heading').html('Change details for ' + userPerson.fullName + ' (You)');
+      $('.js-remove-section').show();
+    }
+  }
 
   $('.btn-submit').click(function(e) {
     e.preventDefault(); // do not submit the form like usual
     sessionStorage.setItem('name', getName());
 
-    window.ONS.storage.addUserPerson(window.ONS.storage.TYPES.person({
+    var newPersonObj = storageAPI.TYPES.person({
       firstName: document.getElementById('first-name').value,
       lastName: document.getElementById('last-name').value
-    }));
+    });
 
-    window.location = '../do-you-live-here/';
+    storageAPI.addUserPerson(newPersonObj);
+
+    if(isEditing) {
+      storageAPI.updateUserAsHouseholdMember(newPersonObj, userAsMember);
+    }
+
+    window.location = isEditing ? '../summary/' : '../do-you-live-here/';
   });
 
   function getName() {
@@ -119,12 +196,14 @@ cdn: v2.0.0
   }
 
   $(function() {
-    var userPerson = window.ONS.storage.getUserPerson();
+    var userPerson = storageAPI.getUserPerson();
 
     if (userPerson) {
       $('#first-name').val(userPerson.firstName);
       $('#last-name').val(userPerson.lastName);
     }
   });
+
+  $(updateQuestion);
 </script>
 

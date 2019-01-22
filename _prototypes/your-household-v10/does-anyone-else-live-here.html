@@ -118,23 +118,24 @@ cdn: v2.0.0
     var addressLines = (sessionStorage.getItem('address') || '').split(','),
       addressLine1 = addressLines[0],
       addressLine2 = addressLines[1],
-      householdMembers = storageAPI
-        .getAllHouseholdMembers().filter(storageAPI.isHouseholdMember),
-      nextPosition = householdMembers.length + 1,
+      members = storageAPI.getAllHouseholdMembers(),
+      householdMembers = members.filter(storageAPI.isHouseholdMember),
+      visitors = members.filter(storageAPI.isVisitor),
+      nextPosition,
       visitorTypesStr = new URLSearchParams(window.location.search).get('visitor-types');
 
     if (window.location.search.match(/journey=visitors/)) {
+      nextPosition = visitors.length + 1;
       $('#form').prepend("<input type='hidden' name='visitor-types' value='" + visitorTypesStr + "' />");
       $('#form')
         .prepend('<input type="hidden" name="journey" value="visitors" />');
       $('#question-title')
-        .html('Is any other visitor staying on ' +
+        .html('Are there any other visitors staying overnight on ' +
           window.ONS.utils.getSignificant()
           + ' at ' +
           addressLine1 +
           ', ' + addressLine2 + '?');
       $('#member-list').html('<ul id="visitors-list"></ul>');
-      $('#yes-someone-else-label').html('Yes, I need to add another visitor');
       window.ONS.helpers.populateVisitorList();
 
       if (visitorTypesStr) {
@@ -157,6 +158,7 @@ cdn: v2.0.0
       }
     }
     else {
+      nextPosition = householdMembers.length + 1;
       $('#member-list').html('<ul id="household-members"></ul>');
       window.ONS.helpers.populateHouseholdList();
     }
