@@ -1,0 +1,83 @@
+---
+title: Census Coverage Survey
+project: your-household
+globalcss: false
+layout: eq-default-extras
+cdn: v1.8.4
+hideSaveLater: true
+footer: minimal
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <!--<div class="container">
+        <a class="js-previous-link mars" href="../confirm-address">Previous</a>
+    </div>-->
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            {% include navigation.html
+            title="Your household"
+            items=site.data.your-household-interview-led.navigationItemsHousehold
+            %}
+        </div>
+        <div class="grid__col col-7@m pull-1@m">
+            <main role="main" id="main" class="page__main">
+                <div class="group u-mb-xl" id="rsi">
+                    <div class="block" id="total-retail-turnover">
+                        <section class="section"
+                                 id="total-retail-turnover-section">
+                            <h1 class="saturn">
+                                People in your household
+                            </h1>
+
+                            <p class="mars">In this section, we're going to
+                                ask you about the people in this household
+                                on <strong><span class="js-significant-date"></span></strong></p>
+
+                            <p class="mars">Here are some cards to help with
+                                answering the questions.</p>
+
+                            <p class="mars"><strong class="card-number">1</strong>
+                                Turn to card 1 for the definition of a household</p>
+
+                            <p class="mars">A <strong>household</strong>,
+                                which is one person living alone or a group
+                                of people (not necessarily related) living at
+                                the same address who share cooking facilities
+                                and share a living room OR sitting room OR
+                                dining area.
+                            </p>
+                        </section>
+                    </div>
+                </div>
+
+                <button
+                        class="btn btn--primary btn--lg qa-btn-submit venus btn-submit u-mb-l"
+                        type="submit" name="">Continue
+                </button>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/your-household-interview-led/bundle.js'></script>
+
+<script>
+  $('.btn-submit').click(function(e) {
+    e.preventDefault(); // do not submit the form like usual
+    window.location = '../do-you-live-here/';
+  });
+
+  $(function() {
+    var oneWeekAgo = new Date();
+    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+    var options = {year: 'numeric', month: 'long', day: 'numeric'};
+    $('.one-week-ago').text(oneWeekAgo.toLocaleString('en-GB', options));
+  });
+</script>
+
+
+

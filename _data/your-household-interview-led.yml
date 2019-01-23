@@ -1,0 +1,18 @@
+navigationItemsHousehold:
+- label: People in your household
+  state: current
+- label: Accommodation
+  state: incomplete
+
+navigationItemsHouseholdComplete:
+- label: People in your household
+  state: complete
+- label: Accommodation
+  state: incomplete
+
+navigationItemsAccommodation:
+- label: People in your household
+  state: complete
+  href: ../summary
+- label: Accommodation
+  state: current
