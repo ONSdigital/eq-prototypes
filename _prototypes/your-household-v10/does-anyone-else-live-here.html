@@ -73,8 +73,7 @@ cdn: v2.0.0
                                                        name="does-anyone-else-live-here"
                                                        id="no" value="no">
                                                 <label class="label label--inline"
-                                                       for="no">No, this
-                                                is everyone</label>
+                                                       for="no">No, I do not need to add anyone</label>
                                             </div>
                                         </fieldset>
                                     </div>
@@ -122,9 +121,11 @@ cdn: v2.0.0
       householdMembers = members.filter(storageAPI.isHouseholdMember),
       visitors = members.filter(storageAPI.isVisitor),
       nextPosition,
-      visitorTypesStr = new URLSearchParams(window.location.search).get('visitor-types');
+      visitorTypesStr =
+        new URLSearchParams(window.location.search).get('visitor-types'),
+      isVisitorJourney = window.location.search.match(/journey=visitors/);
 
-    if (window.location.search.match(/journey=visitors/)) {
+    if (isVisitorJourney) {
       nextPosition = visitors.length + 1;
       $('#form').prepend("<input type='hidden' name='visitor-types' value='" + visitorTypesStr + "' />");
       $('#form')
@@ -167,7 +168,7 @@ cdn: v2.0.0
       $('.yes-answer').html(
         'Yes, I need to add a ' +
         window.ONS.utils.numberToPositionWord(nextPosition) +
-        ' person'
+        ' ' + (isVisitorJourney ? 'visitor' : 'person')
       );
     }
   });
