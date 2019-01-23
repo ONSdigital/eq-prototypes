@@ -16,9 +16,9 @@ cdn: v1.5.0
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            {% include navigation.html
+            <!--{% include navigation.html
             items=site.data.your-household-v8.yourHouseholdV4_navigationItemsPersonalDetails
-            nav-title-id="section-individual" %}
+            nav-title-id="section-individual" %}-->
         </div>
         <div class="grid__col col-7@m pull-1@m">
             <main role="main" id="main" class="page__main">
@@ -98,10 +98,10 @@ cdn: v1.5.0
                             return
                             to this later</a></p>
 
-                    <p class="mars u-mb-m"><span class="js-link-secure-label"></span><br />
+                    <!--<p class="mars u-mb-m"><span class="js-link-secure-label"></span><br />
                         <a class="js-link-secure"
                            href="#">Get a separate access code to submit an
-                            individual response</a></p>
+                            individual response</a></p>-->
                 </form>
             </main>
         </div>
@@ -114,8 +114,10 @@ cdn: v1.5.0
   var storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
     personId = urlParams.get('person'),
-    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+    member = storageAPI.getHouseholdMemberByPersonId(personId),
+    person = member['@person'],
     isEditing = urlParams.get('edit'),
+    isVisitor = storageAPI.isVisitor(member),
     surveyType = urlParams.get('survey');
 
   $('.qa-btn-submit').on('click', function (e) {
@@ -128,6 +130,12 @@ cdn: v1.5.0
     if(isEditing) {
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person=' +
+        personId + (surveyType ? '&survey=' + surveyType : '');
+    }
+
+    if(isVisitor){
+      e.preventDefault();
+      window.location.href = '../individual-details-address-in-uk/?person=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
     }
   });
@@ -150,9 +158,9 @@ cdn: v1.5.0
   }
 
   function updateQuestion() {
-    if(storageAPI.getAnsweringIndividualByProxy()) {
+    if(storageAPI.getAnsweringIndividualByProxy() || isVisitor) {
       $('.js-heading').html('What is ' + person.fullName +
-      window.ONS.utils.trailingNameS(person.fullName) + ' date of birth?');
+        window.ONS.utils.trailingNameS(person.fullName) + ' date of birth?');
     }
   }
 

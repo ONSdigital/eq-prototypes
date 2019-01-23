@@ -61,6 +61,8 @@ import {
   personalDetailsCountryMap,
   personalDetailsOrientationMap,
 
+  PERSONAL_DETAILS_KEY,
+
   createPinFor,
   getPinFor,
   unsetPinFor
@@ -373,7 +375,8 @@ window.ONS.storage = {
     INDIVIDUAL_PROXY_STORAGE_KEY,
     HOUSEHOLD_MEMBER_TYPE,
     VISITOR_TYPE,
-    RELATIONSHIPS_STORAGE_KEY
+    RELATIONSHIPS_STORAGE_KEY,
+    PERSONAL_DETAILS_KEY
   },
 
   IDS: {
@@ -408,4 +411,3 @@ $(tools);
 $(updateAllPreviousLinks);
 $(updateBySurveyType);
 $(updateSignificantDate);
-

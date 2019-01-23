@@ -36,9 +36,9 @@ cdn: v1.5.0
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            {% include navigation.html
+            <!--{% include navigation.html
             items=site.data.your-household-v8.yourHouseholdV4_navigationItemsPersonalDetails
-            nav-title-id="section-individual" %}
+            nav-title-id="section-individual" %}-->
         </div>
         <div class="grid__col col-7@m pull-1@m">
             <main role="main" id="main" class="page__main">
@@ -87,7 +87,7 @@ cdn: v1.5.0
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="summary__item">
+                                        <div class="summary__item js-dob-field" style="display:none;">
                                             <div class="grid">
                                                 <div class="grid__col col-12@xs col-6@m">
                                                     <div
@@ -108,7 +108,7 @@ cdn: v1.5.0
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="summary__item">
+                                        <div class="summary__item js-marital-status-field" style="display:none;">
                                             <div class="grid">
                                                 <div class="grid__col col-12@xs col-6@m">
                                                     <div
@@ -129,7 +129,7 @@ cdn: v1.5.0
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="summary__item">
+                                        <div class="summary__item js-country-field" style="display:none;">
                                             <div class="grid">
                                                 <div class="grid__col col-12@xs col-6@m">
                                                     <div
@@ -150,7 +150,7 @@ cdn: v1.5.0
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="summary__item">
+                                        <div class="summary__item js-sexual-orientation-field" style="display:none;">
                                             <div class="grid">
                                                 <div class="grid__col col-12@xs col-6@m">
                                                     <div
@@ -171,7 +171,7 @@ cdn: v1.5.0
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="summary__item">
+                                        <div class="summary__item js-salary-field" style="display:none;">
                                             <div class="grid">
                                                 <div class="grid__col col-12@xs col-6@m">
                                                     <div
@@ -192,6 +192,50 @@ cdn: v1.5.0
                                                 </div>
                                             </div>
                                         </div>
+
+
+                                        <div class="summary__item js-gender-field" style="display:none;">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question mars">Gender</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer venus js-gender"></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link mars">
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-sex/?edit=true">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="summary__item js-address-individual-field" style="display:none;">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question mars">Address</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer venus js-address-individual"></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link mars">
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-address/?edit=true">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </section>
@@ -202,10 +246,10 @@ cdn: v1.5.0
                             type="submit" name="">Continue
                     </button>
 
-                    <p class="mars u-mb-m"><span class="js-link-secure-label"></span><br />
+                    <!--<p class="mars u-mb-m"><span class="js-link-secure-label"></span><br />
                         <a class="js-link-secure"
                            href="#">Get a separate access code to submit an
-                            individual response</a></p>
+                            individual response</a></p>-->
                 </form>
             </main>
         </div>
@@ -220,21 +264,86 @@ cdn: v1.5.0
     urlParams = new URLSearchParams(window.location.search),
     personId = urlParams.get('person'),
     details = storageAPI.getPersonalDetailsFor(personId),
-    dobDate = moment(details.dob.year + '-' + details.dob.month + '-' +
-      details.dob.day, 'YYYY-MM-DD'),
-    surveyType = urlParams.get('survey');
+    member = storageAPI.getHouseholdMemberByPersonId(personId),
+    surveyType = urlParams.get('survey'),
+    visitors = storageAPI.getAllHouseholdMembers().filter(storageAPI.isVisitor),
+    visitor1 = visitors.length ? visitors[0] : null;
 
-  $('.js-marital-status').html(storageAPI.personalDetailsMaritalStatusMap[details.maritalStatus].description);
-  $('.js-country').html(storageAPI.personalDetailsCountryMap[details.country].description);
-  $('.js-orientation').html(storageAPI.personalDetailsOrientationMap[details.orientation].description);
-  $('.js-salary').html(details.salary);
-  $('.js-dob').html(dobDate.format('MMMM Do YYYY'));
+  function createDataObj(year, month, day) {
+    return moment(year + '-' + month + '-' + day, 'YYYY-MM-DD');
+  }
+
+  function formatAddress(address) {
+    return address['address-line-1'] + '<br />' +
+      address['address-line-2'] + '<br />' +
+      address['county'] + '<br />' +
+      address['town-city'] + '<br />' +
+      address['postcode'] + '<br />';
+  }
+
+  function showHouseholdMemberFields() {
+    $('.js-marital-status-field').show();
+    $('.js-marital-status').html(storageAPI.personalDetailsMaritalStatusMap[details.maritalStatus].description);
+
+    $('.js-country-field').show();
+    $('.js-country').html(storageAPI.personalDetailsCountryMap[details.country].description);
+
+    $('.js-sexual-orientation-field').show();
+    $('.js-orientation').html(storageAPI.personalDetailsOrientationMap[details.orientation].description);
+
+    $('.js-salary-field').show();
+    $('.js-salary').html(details.salary);
+
+    $('.js-dob-field').show();
+    $('.js-dob').html(
+      createDataObj(details.dob.year, details.dob.month, details.dob.day)
+        .format('MMMM Do YYYY')
+    );
+  }
+
+  function showVisitorFields() {
+    var visitor1PersonalDetails,
+      $addressContainer = $('.js-address-individual-field');
+
+    if(details['address-where'] === 'same-as-visitor1') {
+      visitor1PersonalDetails =
+        storageAPI.getPersonalDetailsFor(visitor1['@person'].id);
+
+      $addressContainer.find('.js-change-person-link').attr('href', '../individual-details-address-in-uk/?edit=true');
+
+      $addressContainer.show();
+      $('.js-address-individual').html(formatAddress(visitor1PersonalDetails.address));
+    }
+    else {
+      $addressContainer.show();
+      $('.js-address-individual').html(formatAddress(details.address));
+    }
+
+    $('.js-gender-field').show();
+    $('.js-gender').html(storageAPI.personalDetailsGenderMap[details.sex].description);
+
+    $('.js-dob-field').show();
+    $('.js-dob').html(
+      createDataObj(details.dob.year, details.dob.month, details.dob.day)
+        .format('MMMM Do YYYY')
+    );
+  }
 
   function updateRouting() {
     $('#survey-type').val(surveyType);
   }
 
   $(function () {
+    /**
+     * Branch
+     */
+    storageAPI.isVisitor(member)
+      ? showVisitorFields()
+      : showHouseholdMemberFields();
+
+    /**
+     * Update links
+     */
     $('.js-change-person-link').each(function () {
       $(this).attr('href', $(this).attr('href') + '&person=' + personId +
         (surveyType ? '&survey=' + surveyType : ''));
