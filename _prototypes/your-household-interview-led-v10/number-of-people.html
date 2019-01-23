@@ -1,0 +1,111 @@
+---
+title: Census Coverage Survey v10
+project: your-household
+globalcss: false
+layout: eq-default-extras
+cdn: v2.0.0
+hideSaveLater: true
+footer: minimal
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../what-is-your-name">Previous
+        </a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            {% include navigation.html
+            title="Your household"
+            items=site.data.your-household-interview-led.navigationItemsHousehold
+            %}
+        </div>
+        <div class="grid__col col-7@m pull-1@m">
+            <main role="main" id="main" class="page__main">
+                <form name="trav" class="form qa-questionnaire-form" role="form"
+                      autocomplete="off" novalidate="">
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question">
+                                    <h1 class="question__title u-fs-l">
+                                        How many people usually lived at
+                                        <span class="address-text"></span> on
+                                        <span class="js-significant-date"></span>?
+                                    </h1>
+
+                                    <div class="panel panel--simple panel--info u-mb-m">
+                                        <div class="panel__body">
+                                            <strong class="u-mb-xs u-d-b">Include</strong>
+                                            <ul id="question-list">
+                                                <li>Partners</li>
+                                                <li>Children</li>
+                                                <li>Babies born on or
+                                                    before <span
+                                                            class="u-fs-r--b js-significant-date"></span></li>
+                                                <li>Housemates</li>
+                                                <li>Tenants and lodgers</li>
+                                                <li>Students and
+                                                    schoolchildren who live away
+                                                    from home during term time</li>
+                                            </ul>
+
+                                            <strong class="u-mb-xs u-d-b">Exclude</strong>
+                                            <ul id="question-list">
+                                                <li>People who have moved
+                                                    in after <span
+                                                            class="u-fs-r--b js-significant-date"></span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="answer__fields js-fields">
+                                        <div class="field u-mb-xl">
+                                            <label class="label"
+                                                   for="number-of-people">Number of
+                                                people who usually lived here
+                                                on <span class="js-significant-date"></span>
+                                            </label>
+                                            <input class="input input--text input--w-7"
+                                                   id="number-of-people"
+                                                   type="text" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus"
+                            type="submit" name="">Save and continue
+                    </button>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/your-household-interview-led-v10/bundle.js'></script>
+
+<script>
+    $('.qa-btn-submit').on('click', function (e) {
+      e.preventDefault();
+
+      var $numberOfPeopleEl = $('#number-of-people'),
+        numberOfPeopleVal = parseInt($numberOfPeopleEl.val());
+
+      window.sessionStorage.setItem('number-of-people',
+        $numberOfPeopleEl.val());
+
+      if(numberOfPeopleVal === 0 ||
+        (window.sessionStorage.getItem('lives-here') === 'yes' && numberOfPeopleVal === 1)) {
+        window.location = '../temp-types-living-away/';
+      }
+      else {
+        window.location = '../who-else-to-add/';
+      }
+    });
+</script>

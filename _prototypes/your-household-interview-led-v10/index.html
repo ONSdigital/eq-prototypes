@@ -1,0 +1,92 @@
+---
+title: Census Coverage Survey v10
+project: your-household
+globalcss: false
+layout: eq-default-extras
+cdn: v2.0.0
+hideSaveLater: true
+footer: minimal
+---
+
+<style>
+    .input--text-lg {
+        width : 100%;
+    }
+
+    .lock {
+        font-weight : normal;
+    }
+</style>
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+
+        <div class="grid__col col-7@m pull-1@m">
+            <main role="main" id="main" class="page__main">
+                <div class="feedback__inline js-feedback-inline is-collapsed">
+                    <div class="feedback__border">
+                        <form id="feedback-form" method="POST"
+                              class="feedback__form">
+                            <div class="group">
+                                <div class="feedback__field">
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="group u-mb-xl" id="what-is-your-address-group">
+                    <div class="block" id="what-is-your-address">
+                        <div class="question">
+                            <h1 class="question__title u-fs-l"
+                                data-qa="question-title">
+                                Hello my name is Paul Sissons from the Office
+                                for National Statistics.
+                            </h1>
+
+                            <p>I delivered a card to say we are carrying out
+                                a Census Coverage Survey in your area. Could you
+                                please spare a little time for a short
+                                interview?</p>
+
+                            <p>During the interview I might show you the
+                                screen and ask you to read information in a
+                                blue box that might help you answer some of
+                                the questions.</p>
+
+                            <p>Here is an example.</p>
+
+                            <div class="panel panel--simple panel--info">
+                                <div class="panel__body">
+                                    <strong class="u-mb-xs u-d-b">What
+                                        is the census coverage survey?</strong>
+                                    <p class="u-fs-r">Lorem ipsum</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-submit btn--primary btn--lg"
+                        data-qa="btn-submit" type="submit"
+                        name="action[save_continue]">Continue
+                </button>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script>
+  $('.btn-submit').click(function(e) {
+    e.preventDefault();
+    window.location = '../what-is-your-name/';
+  });
+</script>
+
