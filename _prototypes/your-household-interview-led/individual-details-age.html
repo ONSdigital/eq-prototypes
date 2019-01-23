@@ -1,0 +1,107 @@
+---
+title: Census Coverage Survey
+project: your-household
+globalcss: false
+layout: eq-default-extras
+cdn: 571b5db
+hideSaveLater: true
+footer: minimal
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link mars" href="../do-you-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+
+        </div>
+        <div class="grid__col col-7@m pull-1@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="off" novalidate=""
+                      action="../individual-details-relationship">
+                    <input type="hidden" name="person" id="person"
+                           value="#"/>
+                    <input type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group" id="rsi">
+                        <div class="block" id="total-retail-turnover">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-l js-heading">
+                                        What was your age on your last birthday?
+                                    </h1>
+
+                                    <fieldset class="field u-mb-xl">
+                                        <div class="answer__fields js-fields">
+                                            <label
+                                                    class="label u-fs-r--b js-q-label">Your
+                                                age in years</label>
+                                            <input
+                                                id="age"
+                                                type="number"
+                                                class="input input--w-10 input--StringField js-exclusive-group">
+                                        </div>
+
+                                        <div class="field__label u-mt-s u-fs-r--b" aria-hidden="true"></div>
+
+                                        <div class="field field--checkbox field--multiplechoice">
+                                            <div class="field__item">
+                                                <input
+                                                        class="input input--checkbox" name="is-approximate" value="" id="is-approx" type="checkbox" />
+                                                <label class="label label--inline u-fs-r " for="is-approx">The answer is
+                                                    an estimate</label>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/your-household-interview-led/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person'),
+    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'];
+
+  function updateQuestion() {
+    if(storageAPI.getAnsweringIndividualByProxy()) {
+      $('.js-heading').html('What was ' + person.fullName +
+        window.ONS.utils.trailingNameS(person.fullName) +
+        ' age on their last birthday?');
+
+      $('.js-q-label').html(person.fullName + window.ONS.utils.trailingNameS(person.fullName) + ' age in years');
+    }
+  }
+
+  $('.qa-btn-submit').on('click', function (e) {
+    e.preventDefault();
+
+    storageAPI.addUpdateAge(personId,
+      $('#age').val(), {
+        isApproximate: !!$('[name="is-approximate"]:checked')[0]
+      });
+
+    window.location.href = '../hub/';
+  });
+
+  $(updateQuestion);
+</script>
