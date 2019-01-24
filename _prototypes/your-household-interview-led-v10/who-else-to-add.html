@@ -307,7 +307,8 @@ footer: minimal
       $('.js-cancel-return').show();
     }*/
 
-    if(previous === 'visitors') {
+    if(previous === 'temp-types-living-away' ||
+      previous === 'visitors') {
       $('.js-cancel-return').attr('href', document.referrer);
       $('.js-cancel-return').show();
     }
