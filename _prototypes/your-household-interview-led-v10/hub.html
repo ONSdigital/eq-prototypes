@@ -49,20 +49,9 @@ footer: minimal
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 class="question__title u-fs-l">
-                                        Survey progress
+                                        Choose another section to complete
                                     </h1>
                                 </div>
-
-                                <div class="panel panel--simple panel--info"
-                                     id="question-guidance-everyone-at-address-confirmation-question">
-                                    <strong class="u-mb-s">You have completed
-                                        the section
-                                        <span class="address-text-line1"></span></strong>
-                                    <p>In order to submit this
-                                        survey you need to complete all of
-                                        the following sections</p>
-                                </div>
-                                <br />
 
                                 <div class="summary u-mb-xl">
                                     <div class="summary__block">
@@ -195,12 +184,18 @@ footer: minimal
 
   var nextPageSurvey = surveyType ? '&survey=' + surveyType : '';
 
-  function isHouseholdMemberSectionComplete(personDetails) {
+  /*function isHouseholdMemberSectionComplete(personDetails) {
     return personDetails.dob &&
       personDetails.country &&
       personDetails.orientation &&
       personDetails.maritalStatus &&
       personDetails.salary;
+  }*/
+
+  function isHouseholdMemberSectionComplete(personDetails) {
+    return personDetails.sex &&
+      personDetails.dob &&
+      personDetails.age;
   }
 
   function isVisitorSectionComplete(personDetails) {
@@ -260,7 +255,7 @@ footer: minimal
   function getLinkHrefHouseholdMember(person, status, personPin) {
     var linkHref = status === 'completed'
       ? '../individual-details-summary/'
-      : '../individual-intro/';
+      : '../individual-is-available/';
 
     if (personPin && personPin.pin) {
       linkHref = '../individual-pin-security/?returnurl=' + linkHref +

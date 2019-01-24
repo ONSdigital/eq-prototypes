@@ -96,20 +96,8 @@ footer: minimal
     var loc;
 
     if (yesbox.checked) {
-      var personUser = window.ONS.storage.getUserPerson();
-
-      /**
-       * Add member to household
-       */
-      window.ONS.storage.updateUserAsHouseholdMember(
-        personUser,
-        {
-          type: window.ONS.storage.KEYS.HOUSEHOLD_MEMBER_TYPE
-        }
-      );
-
       sessionStorage.setItem('lives-here', 'yes');
-      document.trav.action = loc = "../number-of-people/";
+      document.trav.action = loc = "../what-is-your-name/";
 
     } else {
       window.ONS.storage.deleteUserAsHouseholdMember();

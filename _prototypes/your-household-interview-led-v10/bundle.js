@@ -51,6 +51,7 @@ import {
 } from './assets/household';
 import {
   addUpdatePersonalDetailsDOB,
+  addUpdatePersonalDetailsDOBUnknown,
   getPersonalDetailsFor,
   addUpdateMaritalStatus,
   addUpdateCountry,
@@ -356,6 +357,7 @@ window.ONS.storage = {
   findNextMissingRelationship,
 
   addUpdatePersonalDetailsDOB,
+  addUpdatePersonalDetailsDOBUnknown,
   getPersonalDetailsFor,
   addUpdateMaritalStatus,
   addUpdateCountry,

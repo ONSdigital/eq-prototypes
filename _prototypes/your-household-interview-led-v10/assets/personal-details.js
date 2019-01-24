@@ -96,6 +96,17 @@ export function addUpdatePersonalDetailsDOB(personId, day, month, year) {
   return details;
 }
 
+export function addUpdatePersonalDetailsDOBUnknown(personId) {
+  let allDetails = getAllPersonalDetails(),
+    details = allDetails[personId] || {};
+
+  details['dob'] = 'unknown';
+
+  updatePersonalDetails(personId, details);
+
+  return details;
+}
+
 export function addUpdateMaritalStatus(personId, val) {
   let allDetails = getAllPersonalDetails(),
     details = allDetails[personId] || {};
