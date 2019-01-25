@@ -35,7 +35,8 @@ footer: minimal
                                     <h1 class="question__title u-fs-l">
                                         Were you, or anybody in your
                                         current household usually living at
-                                        <span class="address-text"></span>?
+                                        <span class="address-text"></span> on
+                                        <span class="js-significant-date"></span>?
                                     </h1>
 
                                     <div class="answer__fields js-fields">
@@ -96,14 +97,27 @@ footer: minimal
     var loc;
 
     if (yesbox.checked) {
+      var personUser = window.ONS.storage.getUserPerson();
+
+      /**
+       * Add member to household
+       */
+      window.ONS.storage.updateUserAsHouseholdMember(
+        personUser,
+        {
+          type: window.ONS.storage.KEYS.HOUSEHOLD_MEMBER_TYPE
+        }
+      );
+
+
       sessionStorage.setItem('lives-here', 'yes');
-      document.trav.action = loc = "../what-is-your-name/";
+      document.trav.action = loc = "../number-of-people/";
 
     } else {
       window.ONS.storage.deleteUserAsHouseholdMember();
 
       sessionStorage.setItem('lives-here', 'no');
-      document.trav.action = loc = "../i-dont-live-here";
+      document.trav.action = loc = "../noone-lives-here";
     }
 
     window.location = loc;

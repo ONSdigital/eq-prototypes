@@ -83,19 +83,6 @@ import { tools } from './assets/prototype-tools';
 export const USER_STORAGE_KEY = 'user-details';
 export const INDIVIDUAL_PROXY_STORAGE_KEY = 'proxy-person';
 
-export function getAddress() {
-  let addressLines = sessionStorage.getItem('address').split(',');
-
-  return {
-    addressLine1: addressLines[0],
-    addressLine2: addressLines[1],
-    addressLine3: addressLines[2],
-    addressCounty: addressLines[4],
-    addressTownCity: addressLines[3],
-    addressPostcode: addressLines[5]
-  }
-}
-
 /**
  * User
  */
@@ -183,14 +170,32 @@ function populateVisitorList() {
   populateList($('#visitors-list'), VISITOR_TYPE);
 }
 
+export function getAddress() {
+  let addressLines = (sessionStorage.getItem('address') || '').split(',');
+
+  return {
+    addressLine1: addressLines[0],
+    addressLine2: addressLines[1],
+    addressLine3: addressLines[2],
+    addressCounty: addressLines[4],
+    addressTownCity: addressLines[3],
+    addressPostcode: addressLines[5]
+  }
+}
+
 function updateAddresses() {
-  let addressLines = (sessionStorage.getItem('address') || '').split(','),
-    addressLine1 = addressLines[0],
-    addressLine2 = addressLines[1];
+  /**
+   * If other address not specified, use original address
+   */
+  const otherAddress = JSON.parse(sessionStorage.getItem('other-address')),
+    addressLines = (sessionStorage.getItem('address') || '').split(','),
+    addressLine1 = otherAddress ? otherAddress['address-line-1'] : addressLines[0],
+    addressLine2 = otherAddress ? otherAddress['address-line-2'] : addressLines[1];
 
   $('#section-address').html(addressLine1 || '<a' +
     ' href="../test-address">Address not' +
     ' found</a>');
+
   $('.address-text').html(
     addressLine1 && addressLine2
       ? (
@@ -425,4 +430,3 @@ $(tools);
 $(updateAllPreviousLinks);
 $(updateBySurveyType);
 $(updateSignificantDate);
-

@@ -59,7 +59,7 @@ footer: minimal
                                             <div class="grid">
                                                 <div class="grid__col col-12@xs col-6@m">
                                                     <div
-                                                            class="summary__question address-text-line1"></div>
+                                                            class="summary__question address-text-line1 u-fs-r--b"></div>
                                                 </div>
                                                 <div
                                                         class="grid__col col-8@xs col-3@m">
@@ -82,7 +82,7 @@ footer: minimal
                                             <div class="grid">
                                                 <div class="grid__col col-12@xs col-6@m">
                                                     <div
-                                                            class="summary__question">Accommodation</div>
+                                                            class="summary__question u-fs-r--b">Accommodation</div>
                                                 </div>
                                                 <div
                                                         class="grid__col col-8@xs col-3@m">
@@ -125,7 +125,7 @@ footer: minimal
         <div class="grid">
             <div class="grid__col col-12@xs col-6@m">
                 <div
-                        class="summary__question js-person-name"></div>
+                        class="summary__question js-person-name u-fs-r--b"></div>
             </div>
             <div class="grid__col col-8@xs col-3@m">
                 <div
@@ -283,14 +283,17 @@ footer: minimal
    */
   function createListItem(person, surveyStatus, linkHref, isVisitor) {
     var $nodeEl = $('#person-survey-item-template').clone(),
-      $surveyStatus = $nodeEl.find('.js-survey-status');
+      $surveyStatus = $nodeEl.find('.js-survey-status'),
+      $personNameEl = $nodeEl.find('.js-person-name');
 
     /**
      * Manipulate DOM fragment
      */
     $nodeEl.attr('id', '');
-    $nodeEl.find('.js-person-name').html(
-      person.fullName + (isVisitor ? ' (Visitor)': '')
+    $personNameEl.html(
+      person.fullName + (isVisitor ? ' (Visitor)': (
+        person.id === storageAPI.IDS.USER_HOUSEHOLD_MEMBER_ID ? ' (You)' : ''
+      ))
     );
     $nodeEl.find('.js-link').html(statusMap[surveyStatus].linkText);
     $surveyStatus.html(statusMap[surveyStatus].label);

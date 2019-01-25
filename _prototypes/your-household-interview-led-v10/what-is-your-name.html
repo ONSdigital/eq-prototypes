@@ -171,20 +171,11 @@ footer: minimal
 
     storageAPI.addUserPerson(newPersonObj);
 
-    if(sessionStorage.getItem('lives-here') === 'yes' ||
-      isEditing
-    ) {
-      storageAPI.updateUserAsHouseholdMember(
-        newPersonObj,
-        isEditing
-          ? userAsMember
-          : {
-            type: window.ONS.storage.KEYS.HOUSEHOLD_MEMBER_TYPE
-          }
-      );
+    if(isEditing) {
+      storageAPI.updateUserAsHouseholdMember(newPersonObj, userAsMember);
     }
 
-    window.location = isEditing ? '../summary/' : '../number-of-people/';
+    window.location = isEditing ? '../summary/' : '../confirm-address/';
   });
 
   function getName() {

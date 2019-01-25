@@ -69,7 +69,7 @@ footer: minimal
                                            id="yes">
                                     <label class="label label--inline"
                                            for="yes">
-                                        Yes, this is everyone
+                                        Yes, I need to add someone
                                     </label>
                                 </div>
 
@@ -80,7 +80,7 @@ footer: minimal
                                            id="no">
                                     <label class="label label--inline"
                                            for="no">
-                                        No, I need to add someone
+                                        No, I do not need to add anyone
                                     </label>
                                 </div>
                             </fieldset>
@@ -127,10 +127,10 @@ footer: minimal
     var url;
 
     if(yesbox.checked) {
-      url = '../is-anyone-related/';
-    } else {
       url =
         '../who-else-to-add/?previous=temp-types-living-away&redirect=../temp-types-living-away';
+    } else {
+      url = '../is-anyone-related/';
     }
 
     window.location = url;
@@ -152,9 +152,14 @@ footer: minimal
   }
 
   function updateQuestion () {
-    $('.js-heading-inner-part1').html(members.length ?
-      `Apart from the people already included, is there anyone else who was temporarily away or staying you need to add to ${sessionStorage.getItem('address-line-1')}?`:
-      `Is there anyone who is temporarily away or staying you need to add to ${sessionStorage.getItem('address-line-1')}?`
+    $('.js-heading-inner-part1').html(members.length
+      ? `Apart from the people already included, is there anyone else who was
+      temporarily away or staying you need to add to
+      ${sessionStorage.getItem('address-line-1')} on
+      ${window.ONS.utils.getSignificant()}?`
+      : `Is there anyone who is temporarily away or staying you need to add to
+      ${sessionStorage.getItem('address-line-1')} on
+      ${window.ONS.utils.getSignificant()}?`
     );
   }
 
