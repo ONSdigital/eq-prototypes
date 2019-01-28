@@ -184,11 +184,8 @@ footer: minimal
 
   var allHouseholdMembers = storageAPI.getAllHouseholdMembers(),
 
-    people = allHouseholdMembers
-      .filter(storageAPI.isHouseholdMember),
-
-    visitors = allHouseholdMembers
-      .filter(storageAPI.isVisitor),
+    people = allHouseholdMembers.filter(storageAPI.isHouseholdMember),
+    visitors = allHouseholdMembers.filter(storageAPI.isVisitor),
 
     peopleIdsToComplete = _.flatten([
       _.pluck(people.map(function (member) { return member['@person']; }), 'id'),
@@ -197,43 +194,25 @@ footer: minimal
 
   var nextPageSurvey = surveyType ? '&survey=' + surveyType : '';
 
-  /*function isHouseholdMemberSectionComplete(personDetails) {
-    return personDetails.dob &&
-      personDetails.country &&
-      personDetails.orientation &&
-      personDetails.maritalStatus &&
-      personDetails.salary;
-  }*/
-
   function isHouseholdMemberSectionComplete(personDetails) {
     return personDetails.sex &&
-      personDetails.dob &&
-      personDetails.age;
+      (
+        (personDetails.dob === 'unknown' && personDetails.age) ||
+        (
+          personDetails.dob &&
+          personDetails.dob.day &&
+          personDetails.dob.month &&
+          personDetails.dob.year
+        )
+      );
   }
 
   function isVisitorSectionComplete(personDetails) {
-
-    if(!personDetails.sex) {
-      return false;
-    }
-
-    if(!personDetails['address-where']) {
-      return false;
-    }
-
-    if(personDetails['address-where'] === 'in-uk' &&
-      !personDetails.address
-    ) {
-      return false;
-    }
-
-    if(personDetails['address-where'] === 'outside-uk' &&
-      !personDetails['address-outside-uk']
-    ) {
-      return false;
-    }
-
-    return true;
+    return personDetails.sex &&
+      (
+        (personDetails['address-where'] === 'in-uk' && personDetails.address) ||
+        (personDetails['address-where'] === 'outside-uk' && personDetails['address-outside-uk'])
+      );
   }
 
   /**
@@ -330,6 +309,7 @@ footer: minimal
 
       var person = member['@person'];
       var isVisitor = storageAPI.isVisitor(member);
+      var $listItem;
 
       var personDetails = storageAPI.getPersonalDetailsFor(person.id),
         personPin = storageAPI.getPinFor(person.id);
@@ -344,8 +324,19 @@ footer: minimal
       }
 
       linkHref += nextPageSurvey;
+      
+      $listItem = createListItem(person, surveyStatus, linkHref, isVisitor);
 
-      $container.append(createListItem(person, surveyStatus, linkHref, isVisitor));
+      /**
+       * Patch - Reset proxy for user question if set by another route
+       */
+      if(person.id === storageAPI.IDS.USER_HOUSEHOLD_MEMBER_ID) {
+        $listItem.find('.js-link').on('click', function () {
+          storageAPI.setAnsweringIndividualByProxy(false);
+        });
+      }
+
+      $container.append($listItem);
     });
 
     return $container;

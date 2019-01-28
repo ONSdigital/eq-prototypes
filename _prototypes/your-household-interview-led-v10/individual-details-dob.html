@@ -137,7 +137,10 @@ footer: minimal
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
 
-    $('[name="unknown-dob"]:checked')[0]
+    var route,
+      isUnknown = $('[name="unknown-dob"]:checked')[0];
+
+    isUnknown
       ? storageAPI.addUpdatePersonalDetailsDOBUnknown(personId)
       : storageAPI.addUpdatePersonalDetailsDOB(personId,
           $('#personal-detail-dob-day').val(),
@@ -145,19 +148,21 @@ footer: minimal
           $('#personal-detail-dob-year').val());
 
     if(isEditing) {
-      window.location.href = '../individual-details-summary/?person=' +
-        personId + (surveyType ? '&survey=' + surveyType : '');
+      route = '../individual-details-summary/';
+    }
+    else if(isVisitor) {
+      route = '../individual-details-address-in-uk/';
+    }
+    else if(isUnknown) {
+      route = '../individual-details-age/';
     }
     else {
-      if(isVisitor) {
-        window.location.href = '../individual-details-address-in-uk/?person=' +
-          personId + (surveyType ? '&survey=' + surveyType : '');
-      }
-      else {
-        window.location.href = '../individual-details-age/?person=' +
-          personId + (surveyType ? '&survey=' + surveyType : '');
-      }
+      window.location.href = '../hub/';
+      return;
     }
+
+    window.location.href = route + '?person=' + personId +
+      (surveyType ? '&survey=' + surveyType : '');
   });
 
   function updateRouting() {
