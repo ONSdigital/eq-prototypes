@@ -95,10 +95,12 @@ footer: minimal
       isEditing = urlParams.get('edit'),
       surveyType = urlParams.get('survey'),
       personId = urlParams.get('person'),
-      person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'];
+      member = storageAPI.getHouseholdMemberByPersonId(personId),
+      person = member['@person'],
+      isVisitor = storageAPI.isVisitor(member);
 
     function updateQuestion() {
-      if(storageAPI.getAnsweringIndividualByProxy()) {
+      if(storageAPI.getAnsweringIndividualByProxy() || isVisitor) {
         $('.js-heading').html('What is ' + person.fullName + window.ONS.utils.trailingNameS(person.fullName) + ' sex');
       }
     }

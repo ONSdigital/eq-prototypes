@@ -178,7 +178,7 @@ footer: minimal
   }
 
   function updateQuestion() {
-    if(storageAPI.getAnsweringIndividualByProxy()) {
+    if(storageAPI.getAnsweringIndividualByProxy() || isVisitor) {
       $('.js-heading').html('What is ' + person.fullName +
       window.ONS.utils.trailingNameS(person.fullName) + ' date of birth?');
     }

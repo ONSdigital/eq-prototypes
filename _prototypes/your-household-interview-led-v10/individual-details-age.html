@@ -81,10 +81,12 @@ footer: minimal
   var storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
     personId = urlParams.get('person'),
-    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'];
+    member = storageAPI.getHouseholdMemberByPersonId(personId),
+    person = member['@person'],
+    isVisitor = storageAPI.isVisitor(member);
 
   function updateQuestion() {
-    if(storageAPI.getAnsweringIndividualByProxy()) {
+    if(storageAPI.getAnsweringIndividualByProxy() || isVisitor) {
       $('.js-heading').html('What was ' + person.fullName +
         window.ONS.utils.trailingNameS(person.fullName) +
         ' age on their last birthday?');
