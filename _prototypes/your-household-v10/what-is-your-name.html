@@ -128,6 +128,7 @@ cdn: v2.0.0
 <script>
   var urlParams = new URLSearchParams(window.location.search),
     isEditing = urlParams.get('edit') === 'true',
+    livesHere = sessionStorage.getItem('lives-here') === 'yes',
     storageAPI = window.ONS.storage,
     userAsMember = storageAPI.getUserAsHouseholdMember(),
     userPerson = userAsMember && userAsMember['@person'];
@@ -179,11 +180,21 @@ cdn: v2.0.0
 
     storageAPI.addUserPerson(newPersonObj);
 
-    if(isEditing) {
-      storageAPI.updateUserAsHouseholdMember(newPersonObj, userAsMember);
+    if(isEditing || livesHere) {
+      storageAPI.updateUserAsHouseholdMember(
+        newPersonObj,
+        isEditing
+          ? userAsMember
+          : {
+            type: window.ONS.storage.KEYS.HOUSEHOLD_MEMBER_TYPE
+          }
+      );
+    }
+    else {
+      storageAPI.deleteUserAsHouseholdMember();
     }
 
-    window.location = isEditing ? '../summary/' : '../do-you-live-here/';
+    window.location = isEditing ? '../summary/' : '../does-anyone-else-live-here/';
   });
 
   function getName() {

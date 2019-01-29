@@ -28,7 +28,7 @@ cdn: v2.0.0
                     </div>
                 </div>
 
-                <div class="group">
+                <div class="group u-mb-m">
                     <div class="block">
 
                         <div class="question u-mb-s">
@@ -88,6 +88,18 @@ cdn: v2.0.0
                                 </div>
                             </div>
                         </fieldset>
+                    </div>
+                </div>
+
+                <div
+                        class="collapsible collapsible--simple js-collapsible js-collapsible-simple js-visitor-definition u-mb-xs"
+                    style="display:none;">
+                    <div class="js-collapsible-content">
+                        <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Why do I have to include my visitors?">Why do I have to include my visitors?</h3>
+                        <div class="collapsible__body js-collapsible-body">
+                            <p>We ask for visitor information to ensure that everyone is counted. This helps to produce accurate population estimates. Add any visitors, even if you think they may have been included on a census form at another address.</p>
+                            <button class="btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Why do I have to include my visitors?">Hide this</button>
+                        </div>
                     </div>
                 </div>
 
@@ -292,6 +304,7 @@ cdn: v2.0.0
       $('#member-list').html('<ul id="visitors-list"></ul>');
       $('.js-definition-visitors').show();
       window.ONS.helpers.populateVisitorList();
+      $('.js-visitor-definition').show();
     }
     else if (window.location.search.match(/journey=temp-living-here/)) {
       $('#question-title').html(overrideTitleStayingOutsideUK);

@@ -66,7 +66,7 @@ cdn: v2.0.0
                                            id="yes">
                                     <label class="label label--inline"
                                            for="yes">
-                                        Yes, this is everyone
+                                        Yes, I need to add someone
                                     </label>
                                 </div>
 
@@ -77,7 +77,7 @@ cdn: v2.0.0
                                            id="no">
                                     <label class="label label--inline"
                                            for="no">
-                                        No, I need to add someone
+                                        No, I do not need to add anyone
                                     </label>
                                 </div>
                             </fieldset>
@@ -89,7 +89,7 @@ cdn: v2.0.0
                         <div class="js-collapsible-content">
                             <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Why do we ask this question?">Why do we ask this question?</h3>
                             <div class="collapsible__body js-collapsible-body">
-                                <p>We ask this question to check that everyone is correctly counted on the census. This may include people who are staying temporarily or are away.</p>
+                                <p>We ask this question to help ensure that everyone is correctly counted on the census. This may include people who are staying temporarily or are away.</p>
                                 <button class="btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Why do we ask this question?">Hide this</button>
                             </div>
                         </div>
@@ -132,16 +132,9 @@ cdn: v2.0.0
   $('.qa-btn-submit').on('click', function(e) {
     e.preventDefault();
 
-    var url;
-
-    if(yesbox.checked) {
-      url = '../visitors/';
-    } else {
-      url =
-        '../who-else-to-add/?previous=temp-types-living-away&redirect=../temp-types-living-away';
-    }
-
-    window.location = url;
+    window.location = yesbox.checked
+      ? '../who-else-to-add/?previous=temp-types-living-away&redirect=../temp-types-living-away'
+      : '../visitors/';
   });
 
   function createIncludeItem(text) {

@@ -59,11 +59,13 @@ cdn: v2.0.0
                                                        for="yes-someone-else"
                                                        id="yes-someone-else-label">
                                                     <span
-                                                            class="yes-answer">Yes, I need to
-                                                        add
-                                                    another person</span>
+                                                            class="yes-answer">
+                                                        Yes, I need to
+                                                        add another
+                                                        person</span>
                                                     <span
-                                                            class="u-fs-s u-db label--negative">Include partners, children, babies born on or before <span class="js-significant-date"></span>, housemates, tenants and lodgers, students and schoolchildren who live away from home during term time</span>
+                                                            class="u-fs-s u-db label--negative js-householdmembers-detail">Include partners,
+                                                        children, babies born on or before <span class="js-significant-date"></span>, housemates, tenants and lodgers, students and schoolchildren who live away from home during term time, where this is their permanent or family home</span>
                                                 </label>
                                             </div>
 
@@ -157,6 +159,8 @@ cdn: v2.0.0
           });
         }
       }
+
+      $('.js-householdmembers-detail').hide();
     }
     else {
       nextPosition = householdMembers.length + 1;

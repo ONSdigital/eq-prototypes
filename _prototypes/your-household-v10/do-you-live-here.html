@@ -120,20 +120,20 @@ cdn: v2.0.0
     var loc;
 
     if (yesbox.checked) {
-      var personUser = window.ONS.storage.getUserPerson();
+      /*var personUser = window.ONS.storage.getUserPerson();
 
-      /**
+      /!**
        * Add member to household
-       */
+       *!/
       window.ONS.storage.updateUserAsHouseholdMember(
         personUser,
         {
           type: window.ONS.storage.KEYS.HOUSEHOLD_MEMBER_TYPE
         }
-      );
+      );*/
 
       sessionStorage.setItem('lives-here', 'yes');
-      document.trav.action = loc = "../does-anyone-else-live-here/";
+      document.trav.action = loc = "../what-is-your-name/";
 
     } else {
       window.ONS.storage.deleteUserAsHouseholdMember();
