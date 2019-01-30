@@ -1,0 +1,111 @@
+---
+title: Household prototype v10
+project: your-household
+globalcss: false
+layout: eq-default-extras
+cdn: v1.5.0
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link mars" href="../who-else-to-add">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            <!--{% include navigation.html
+            items=site.data.your-household-v6.navigationItemsHousehold
+            nav-title-id="section-address" %}-->
+        </div>
+        <div class="grid__col col-7@m pull-1@m">
+            <main role="main" id="main" class="page__main">
+                <form name="trav" class="form qa-questionnaire-form" role="form"
+                      autocomplete="off" novalidate="">
+                    <input type="hidden" name="previous"
+                           value="temp-living-here"/>
+                    <input type="hidden" name="journey"
+                           value="temp-living-here"/>
+                    <div class="group" id="rsi">
+                        <div class="block" id="total-retail-turnover">
+                            <section class="section"
+                                     id="total-retail-turnover-section">
+                                <div class="question u-mb-s"
+                                     id="total-retail-turnover-question">
+                                    <h1 class="question__title saturn">
+                                        Is there anyone else staying at
+                                        <span class="address-text"></span>
+                                        who does not have another UK address?
+                                    </h1>
+                                </div>
+
+                                <ul id="household-members"></ul>
+
+                                <div
+                                        class="field field--checkbox field--multiplechoice field--exclusive u-mb-xl">
+                                    <fieldset>
+                                        <legend
+                                                class="field__legend mars u-vh">Select all that apply:</legend>
+                                        <div class="field__label venus">Select all that apply:</div>
+                                        <div class="field__item js-focusable-box">
+                                            <input
+                                                    class="input input--checkbox js-focusable js-exclusive-checkbox-group" name="away-type" value="no-address" id="no-address" type="checkbox" />
+                                            <label class="label label--inline venus " for="no-address">
+                                                Anyone staying temporarily who usually lives in the UK but does not have another UK address including friends and relatives
+                                            </label>
+                                        </div>
+                                        <div class="field__item js-focusable-box">
+                                            <input
+                                                    class="input input--checkbox js-focusable js-exclusive-checkbox-group" name="away-type" value="three-months-more" id="three-months-more" type="checkbox" />
+                                            <label class="label label--inline venus " for="three-months-more">
+                                                Anyone who usually lives outside
+                                                the UK who is staying in the UK
+                                                for 3 months or more
+                                            </label>
+                                        </div>
+                                        <div class="field__label u-mt-s venus" aria-hidden="true">Or</div>
+                                        <div class="field__item js-focusable-box">
+                                            <input
+                                                    class="input input--checkbox js-focusable js-exclusive-checkbox" name="away-type" value="no" id="none" type="checkbox" />
+                                            <label class="label label--inline venus " for="none">
+                                                <span class="u-vh">Or,</span>
+                                                No, there is no one else staying who does not have another UK address
+                                                <span
+                                                        class="u-vh">. Selecting this will uncheck all other checkboxes</span>
+                                            </label>
+                                            <span class="js-exclusive-checkbox-alert u-vh" role="alert" aria-live="polite" data-adjective="deselected"></span>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus"
+                            type="submit" name="">Save and continue
+                    </button>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/your-household-v10/bundle.js'></script>
+
+<script>
+  var yesbox = document.getElementById("yes-someone-else");
+  $('.qa-btn-submit').click(function(e) {
+    /*if (yesbox.checked) {
+      document.trav.action = "../who-else-to-add";
+    } else {
+      document.trav.action = "../visitors";
+    }*/
+
+    if($('[name=away-type]:checked').val() === "no") {
+      document.trav.action = "../visitors";
+    } else {
+      document.trav.action = "../who-else-to-add";
+    }
+  });
+</script>
