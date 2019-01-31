@@ -13,6 +13,12 @@ cdn: v2.0.0
     </div>
 </div>
 
+<style>
+    .list--records {
+        margin-right : .5rem;
+    }
+</style>
+
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
@@ -37,14 +43,19 @@ cdn: v2.0.0
                                     </h1>
                                 </div>
 
+                                <ul style="display:none;"
+                                    class="list list--records list--people u-mb-s js-household-members-summary"
+                                    data-redirect="../does-anyone-else-live-here/"></ul>
+                                <ul style="display:none;"
+                                    class="list list--records list--people u-mb-s js-visitors-summary"
+                                    data-redirect="../does-anyone-else-live-here/"></ul>
+
                                 <div class="panel panel--simple panel--info u-mb-m js-visitor-panel" style="display: none">
                                     <div class="panel__body">
                                         <strong class="u-mb-xs u-d-b">Include</strong>
                                         <ul class="js-visitor-includes"></ul>
                                     </div>
                                 </div>
-
-                                <div id="member-list"></div>
 
                                 <div class="answer__fields js-fields">
                                     <div class="field field--radio field--multiplechoice ">
@@ -138,8 +149,8 @@ cdn: v2.0.0
           + ' at ' +
           addressLine1 +
           ', ' + addressLine2 + '?');
-      $('#member-list').html('<ul id="visitors-list"></ul>');
-      window.ONS.helpers.populateVisitorList();
+
+      $('.js-visitors-summary').show();
 
       if (visitorTypesStr) {
         var visitorTypes = JSON.parse(visitorTypesStr);
@@ -164,8 +175,7 @@ cdn: v2.0.0
     }
     else {
       nextPosition = householdMembers.length + 1;
-      $('#member-list').html('<ul id="household-members"></ul>');
-      window.ONS.helpers.populateHouseholdList();
+      $('.js-household-members-summary').show();
     }
 
     if ((nextPosition) > 1) {

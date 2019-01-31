@@ -19,6 +19,36 @@
   margin-left : .5rem;
 }
 
+
+/**
+ * Sumamry records
+ */
+.list.list--records .list__item {
+    margin-bottom: 0;
+    padding: 1rem 0;
+}
+
+.list.list--records .list__item + .list__item {
+    border-top: 1px solid #ccc;
+}
+
+.list.list--people {
+    list-style-type: none;
+}
+
+.list.list--people .list__item {
+    background: url(/img/icons/person.svg) 0 1.3rem no-repeat;
+}
+
+.list.list--people .list__item-name {
+    padding-left: 2rem;
+}
+
+.list.list--people .list__item-action + .list__item-action {
+    margin-left: .5rem;
+}
+
+
 .modal {
     position: fixed;
     z-index: 1000;

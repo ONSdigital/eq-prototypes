@@ -160,6 +160,8 @@ cdn: v2.0.0
     userLiveAtAddress = storageAPI.doILiveHere(),
     isLateAddition = !!urlParams.get('late-addition');
 
+  console.log(redirect);
+
   if (editUserId) {
     memberFound = window.ONS.storage.getAllHouseholdMembers()
       .filter(function(member) {
@@ -189,7 +191,7 @@ cdn: v2.0.0
     storageAPI.deleteHouseholdMember(member['@person'].id);
     storageAPI.deleteAllRelationshipsForMember(member['@person'].id);
 
-    window.location.href = '../summary/';
+    window.location.href = redirect || '../summary/';
   }
 
   $('#modal .close-modal-button').on('click', function(e) {
@@ -221,7 +223,7 @@ cdn: v2.0.0
     }
   }
 
-  $('.btn-submit').click(function(e) {
+  $('.btn-submit').on('click', function(e) {
     e.preventDefault(); // do not submit the form like usual
 
     var person = window.ONS.storage.TYPES.person({
@@ -298,19 +300,10 @@ cdn: v2.0.0
     }
     else if (window.location.search.match(/journey=visitors/)) {
       $('#question-title').html(overrideTitle);
-      $('#member-list').html('<ul id="visitors-list"></ul>');
-      $('.js-definition-visitors').show();
-      window.ONS.helpers.populateVisitorList();
       $('.js-visitor-definition').show();
     }
     else if (window.location.search.match(/journey=temp-living-here/)) {
       $('#question-title').html(overrideTitleStayingOutsideUK);
-      $('#member-list').html('<ul id="household-members"></ul>');
-      window.ONS.helpers.populateHouseholdList();
-    }
-    else {
-      $('#member-list').html('<ul id="household-members"></ul>');
-      window.ONS.helpers.populateHouseholdList();
     }
 
     if(previous === 'temp-types-living-away' ||

@@ -52,7 +52,10 @@ export function updateUserAsHouseholdMember(person, memberData) {
   let userAsHouseholdMember = getUserAsHouseholdMember();
 
   userAsHouseholdMember
-    ? updateHouseholdMember(userAsHouseholdMember['@person'], memberData)
+    ? updateHouseholdMember({
+      ...userAsHouseholdMember['@person'],
+      ...person
+    }, memberData)
     : addHouseholdMember(person, memberData, USER_HOUSEHOLD_MEMBER_ID);
 }
 

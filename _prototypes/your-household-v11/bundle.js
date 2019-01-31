@@ -305,6 +305,74 @@ function updateSignificantDate() {
   $('.js-significant-date').html(getSignificant());
 }
 
+function personRecordTemplate() {
+  return $(`<li id="person-record-template" class="list__item">
+        <span class="list__item-name js-person-name"></span>
+        <div class="list__item-actions u-fr">
+            <span class="list__item-action">
+                <a class="js-record-edit" href="#">Change or remove</a>
+            </span>
+        </div>
+    </li>`);
+}
+
+function createMemberItem(member, { redirect } = { redirect: null }) {
+  var $nodeEl = personRecordTemplate(),
+    urlParams = new URLSearchParams(window.location.search),
+    personNameText = member['@person'].fullName,
+    memberIsUser = isMemberUser(member),
+    surveyType = urlParams.get('survey'),
+    altPage = surveyType && surveyType === 'lms' ? surveyType + '/' : '';
+
+  if (memberIsUser) {
+    personNameText += ' (You)';
+  }
+
+  $nodeEl.attr('id', '');
+  $nodeEl.find('.js-person-name').html(personNameText);
+
+  $nodeEl.find('.js-record-edit').attr('href', (
+    (memberIsUser
+      ? '../' + altPage + 'what-is-your-name/?edit=true'
+      : '../' + altPage + 'who-else-to-add/?edit=' + member['@person'].id +
+        (isVisitor(member) ? '&journey=visitors' : '')) +
+    (redirect ? '&redirect=' + encodeURIComponent(window.location.href) : '')
+  ));
+
+  return $nodeEl;
+}
+
+function updateHouseholdSummary() {
+  const members = getAllHouseholdMembers();
+
+  $('.js-household-members-summary').each(function(i, el) {
+    const $el = $(el);
+
+    $.each([
+      ...members.filter(isMemberUser),
+      ...members.filter(isOtherHouseholdMember)
+    ], function(i, member) {
+      $el.append(createMemberItem(member, { redirect: $el.attr('data-redirect') }));
+    });
+  });
+}
+
+function updateVisitorsSummary() {
+  const members = getAllHouseholdMembers();
+
+  $('.js-visitors-summary').each(function(i, el) {
+    const $el = $(el);
+
+    $.each(members.filter(isVisitor), function(i, member) {
+      $el.append(createMemberItem(member, { redirect: $el.attr('data-redirect') }));
+    });
+  });
+}
+
+function isMemberUser(member) {
+  return member['@person'].id === window.ONS.storage.IDS.USER_HOUSEHOLD_MEMBER_ID;
+}
+
 window.ONS = window.ONS || {};
 window.ONS.storage = {
   getAddress,
@@ -380,6 +448,7 @@ window.ONS.storage = {
   getAnsweringIndividualByProxy,
 
   doILiveHere,
+  isMemberUser,
 
   KEYS: {
     HOUSEHOLD_MEMBERS_STORAGE_KEY,
@@ -423,4 +492,6 @@ $(tools);
 $(updateAllPreviousLinks);
 $(updateBySurveyType);
 $(updateSignificantDate);
+$(updateHouseholdSummary);
+$(updateVisitorsSummary);
 
