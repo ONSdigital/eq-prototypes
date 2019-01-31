@@ -125,7 +125,7 @@ export const tempAwayQuestionSentenceMap = {
   'armed-forces': 'Members of the armed forces if this is their permanent or family home',
   'less-twelve': 'People who are temporarily outside the UK for less than 12 months',
   'usually-temp': 'People staying temporarily who usually live in the UK but' +
-    ' do not have another UK address',
+    ' do not have another UK address for example, relatives, friends',
   'other': 'Other people who usually live here but are temporarily away'
 };
 
