@@ -145,9 +145,15 @@ cdn: v2.0.0
 
   function updateHouseholdMembersVisitors() {
     var members = window.ONS.storage.getAllHouseholdMembers(),
+      userMember = members.filter(isUser)[0],
       otherHouseholdMembers = members.filter(window.ONS.storage.isOtherHouseholdMember),
       visitors = members.filter(window.ONS.storage.isVisitor),
       householdMembers = otherHouseholdMembers;
+
+    if (userMember) {
+      householdMembers = [userMember].concat(otherHouseholdMembers);
+    }
+
 
     const numberOfHouseholdMembers = householdMembers.length;
     const peopleListTitle = document.querySelector('.js-household-people-list');
