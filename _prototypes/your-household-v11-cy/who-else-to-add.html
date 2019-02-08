@@ -4,13 +4,14 @@ project: your-household
 globalcss: false
 layout: eq-default-extras
 cdn: v2.0.0
+language: welsh
 ---
 
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
         <a class="js-previous-link"
-           href="../does-anyone-else-live-here">Previous</a>
+           href="../does-anyone-else-live-here">Yn flaenorol</a>
     </div>
 </div>
 
@@ -35,13 +36,13 @@ cdn: v2.0.0
                             <h1 id="question-title"
                                 class="question__title u-fs-l"
                                 data-qa="question-title">
-                                Who do you need to add to <span class="address-text"></span>?
+                                Pwy y mae angen i chi ei ychwanegu at <span class="address-text"></span>?
                             </h1>
                         </div>
 
                         <div class="panel panel--simple panel--info u-mb-m js-visitor-panel" style="display: none">
                             <div class="panel__body">
-                                <strong class="u-mb-xs u-d-b">Include</strong>
+                                <strong class="u-mb-xs u-d-b">Dylech gynnwys</strong>
                                 <ul class="js-visitor-includes"></ul>
                             </div>
                         </div>
@@ -57,7 +58,7 @@ cdn: v2.0.0
                                     <label class="label"
                                            for="first-name">
                                         <div class="label__inner">
-                                            First name
+                                            Enw cyntaf
                                         </div>
                                     </label>
                                     <input class="input input--text "
@@ -68,7 +69,7 @@ cdn: v2.0.0
                                 <div class="question__answer">
                                     <label class="label ">
                                         <div class="label__inner">
-                                            Middle name(s)
+                                            Enw(au) canol
                                         </div>
                                     </label>
                                     <input class="input input--text "
@@ -79,7 +80,7 @@ cdn: v2.0.0
                                 <div class="question__answer">
                                     <label class="label ">
                                         <div class="label__inner">
-                                            Last name
+                                            Cyfenw
                                         </div>
                                     </label>
                                     <input class="input input--text "
@@ -104,8 +105,7 @@ cdn: v2.0.0
                 </div>
 
                 <p class="u-mb-no"><a class="js-cancel-return" href=""
-                      style="display:none;">Cancel and return to the previous
-                    question</a></p>
+                      style="display:none;">Canslo a dychwelyd i'r cwestiynau blaenorol</a></p>
 
                 <div class="js-remove-section"
                      style="display:none;">
@@ -119,7 +119,7 @@ cdn: v2.0.0
                 <button class="btn btn-submit btn--primary btn--lg u-mt-xl"
                         data-qa="btn-submit" type="submit"
                         name="action[save_continue]">
-                    Save and continue
+                    Cadw a pharhau
                 </button>
             </main>
         </div>
@@ -281,7 +281,17 @@ cdn: v2.0.0
         ' at ' +
         addressLine1 + ', ' + addressLine2 + '?',
 
-      overrideTitleStayingOutsideUK = 'Who do you need to add to ' +
+      overrideTitle = 'Beth yw enw\'r ' + ({
+          2: 'ail',
+          3: 'trydydd',
+          4: 'pedwerydd',
+          5: 'pumed'
+        }[visitors.length + 1] || '') + ' ymwelydd sy\'n aros dros nos ar '
+        + window.ONS.utils.getSignificant() +
+        ' yn ' +
+        addressLine1 + ', ' + addressLine2 + '?',
+
+      overrideTitleStayingOutsideUK = 'Pwy y mae angen i chi ei ychwanegu at ' +
         addressLine1 + ', ' + addressLine2 +
         ' who does not have another UK address?';
 

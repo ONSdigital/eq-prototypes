@@ -155,7 +155,7 @@ function createListItemPerson(member) {
   return $('<li class="list__item">').addClass('mars').html(
     '<span class="list__item-name">' +
       member['@person'].fullName +
-      (member['@person'].id === USER_HOUSEHOLD_MEMBER_ID ? ' (You)' : '') +
+      (member['@person'].id === USER_HOUSEHOLD_MEMBER_ID ? ' (Chi)' : '') +
     '</span>'
   );
 }
@@ -298,7 +298,7 @@ function doILiveHere() {
 }
 
 function getSignificant() {
-  return '3 February 2019';
+  return '3 Chwefror 2019';
 }
 
 function updateSignificantDate() {
@@ -310,7 +310,7 @@ function personRecordTemplate() {
         <span class="list__item-name js-person-name"></span>
         <div class="list__item-actions u-fr">
             <span class="list__item-action">
-                <a class="js-record-edit" href="#">Change or remove</a>
+                <a class="js-record-edit" href="#">Newid neu ddileu</a>
             </span>
         </div>
     </li>`);
@@ -325,7 +325,7 @@ function createMemberItem(member, { redirect } = { redirect: null }) {
     altPage = surveyType && surveyType === 'lms' ? surveyType + '/' : '';
 
   if (memberIsUser) {
-    personNameText += ' (You)';
+    personNameText += ' (Chi)';
   }
 
   $nodeEl.attr('id', '');

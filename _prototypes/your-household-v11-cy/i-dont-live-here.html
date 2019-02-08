@@ -4,6 +4,7 @@ project: your-household
 globalcss: false
 layout: eq-default-extras
 cdn: v2.0.0
+language: welsh
 ---
 
 <link rel="stylesheet" href="../style.css"/>
@@ -30,8 +31,8 @@ cdn: v2.0.0
                             <section class="section">
                                 <div class="question">
                                     <h1 class="question__title u-fs-l">
-                                        Does anyone usually live at <span
-                                            class="address-text"></span>?
+                                        Oes unrhyw un yn byw yn <span
+                                            class="address-text"></span> fel arfer?
                                     </h1>
 
                                     <div class="answer__fields js-fields">
@@ -44,10 +45,11 @@ cdn: v2.0.0
                                                            id="yes">
                                                     <label class="label label--inline"
                                                            for="yes">
-                                                        Yes, I need to add
-                                                        someone
+                                                        Oes, mae angen i mi ychwanegu rhywun arall
                                                         <span
-                                                                class="u-fs-s u-db">Include partners, children, babies born on or before <span class="js-significant-date"></span>, housemates, tenants and lodgers, students and schoolchildren who live away from home during term time, where this is their permanent or family home</span>
+                                                                class="u-fs-s u-db">
+                                                            Dylech gynnwys partneriaid, plant, babanod a aned ar <span class="js-significant-date"></span> neu cyn hynny, cydletywyr, tenantiaid a lojers, myfyrwyr a phlant ysgol sy'n byw oddi cartref yn ystod y tymor, os mai dyma eu cartref parhaol neu gartref y teulu
+                                                        </span>
                                                     </label>
                                                 </div>
 
@@ -58,10 +60,9 @@ cdn: v2.0.0
                                                            id="no">
                                                     <label class="label label--inline"
                                                            for="no">
-                                                        No, no one usually lives
-                                                        here
+                                                        Nac oes, nid oes neb yn byw yma fel arfer
                                                         <span
-                                                                class="u-fs-s u-db">For example, this is a second address or holiday home</span>
+                                                                class="u-fs-s u-db">Er enghraifft, ail gyfeiriad neu dŷ gwyliau yw hwn</span>
                                                     </label>
                                                 </div>
                                             </fieldset>
@@ -72,7 +73,7 @@ cdn: v2.0.0
                         </div>
                     </div>
                     <button class="btn btn--primary btn--lg qa-btn-submit"
-                            type="submit" name="">Save and continue
+                            type="submit" name="">Cadw a pharhau
                     </button>
                 </form>
             </main>

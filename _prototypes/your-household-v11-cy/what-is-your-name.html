@@ -4,12 +4,13 @@ project: your-household
 globalcss: false
 layout: eq-default-extras
 cdn: v2.0.0
+language: welsh
 ---
 
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous-link" href="../section-intro">Previous</a>
+        <a class="js-previous-link" href="../section-intro">Yn flaenorol</a>
     </div>
 </div>
 
@@ -34,19 +35,19 @@ cdn: v2.0.0
                         <div class="question">
                             <h1 class="question__title u-fs-l js-heading"
                                 data-qa="question-title">
-                                What is your name?
+                                Beth yw eich enw?
                             </h1>
 
                             <fieldset
                                     class="question__fieldset js-question-fieldset">
-                                <legend class="u-vh">What is your name?</legend>
+                                <legend class="u-vh">Beth yw eich enw?</legend>
 
                                 <div class="question__answers">
                                     <div class="question__answer">
                                         <label class="label"
                                                for="first-name">
                                             <div class="label__inner">
-                                                First name
+                                                Enw cyntaf
                                             </div>
                                         </label>
                                         <input class="input input--text"
@@ -57,7 +58,7 @@ cdn: v2.0.0
                                     <div class="question__answer">
                                         <label class="label">
                                             <div class="label__inner">
-                                                Middle name(s)
+                                                Enw(au) canol
                                             </div>
                                         </label>
                                         <input class="input input--text"
@@ -68,7 +69,7 @@ cdn: v2.0.0
                                     <div class="question__answer">
                                         <label class="label ">
                                             <div class="label__inner">
-                                                Last name
+                                                Cyfenw
                                             </div>
                                         </label>
                                         <input class="input input--text"
@@ -94,7 +95,7 @@ cdn: v2.0.0
                 <button class="btn btn-submit btn--primary btn--lg u-mt-xl"
                         data-qa="btn-submit" type="submit"
                         name="action[save_continue]">
-                    Save and continue
+                    Cadw a pharhau
                 </button>
             </main>
         </div>
@@ -165,7 +166,7 @@ cdn: v2.0.0
 
   function updateQuestion() {
     if(isEditing && userPerson) {
-      $('.js-heading').html('Change details for ' + userPerson.fullName + ' (You)');
+      $('.js-heading').html('Change details for ' + userPerson.fullName + ' (Chi)');
       $('.js-remove-section').show();
     }
   }

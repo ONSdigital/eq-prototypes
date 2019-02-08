@@ -139,7 +139,7 @@ function personListStr(peopleArr, opts = {}) {
 }
 
 function formatPersonIfYou(person) {
-  return person.id === USER_HOUSEHOLD_MEMBER_ID ? ' (You)' : '';
+  return person.id === USER_HOUSEHOLD_MEMBER_ID ? ' (Chi)' : '';
 }
 
 export const relationshipSummaryTemplates = {

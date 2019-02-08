@@ -4,13 +4,14 @@ project: your-household
 globalcss: false
 layout: eq-default-extras
 cdn: v2.0.0
+language: welsh
 ---
 
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
         <a class="js-previous-link"
-           href="../does-anyone-else-live-here">Previous</a>
+           href="../does-anyone-else-live-here">Yn flaenorol</a>
     </div>
 </div>
 
@@ -43,12 +44,10 @@ cdn: v2.0.0
                                 <div
                                         class="panel panel--simple panel--info u-mb-s">
                                     <div class="panel__body">
-                                        <strong class="u-mb-xs u-d-b">Include
-                                            people who are temporarily away
+                                        <strong class="u-mb-xs u-d-b">Cofiwch gynnwys pobl sydd oddi cartref dros dro
                                         </strong>
                                         <ul id="question-list-away"></ul>
-                                        <strong class="u-mb-xs u-mt-m u-d-b">Include
-                                            people who are temporarily staying
+                                        <strong class="u-mb-xs u-mt-m u-d-b">Cofiwch gynnwys pobl sy'n aros dros dro
                                         </strong>
                                         <ul id="question-list-in"></ul>
                                     </div>
@@ -67,7 +66,7 @@ cdn: v2.0.0
                                            id="yes">
                                     <label class="label label--inline"
                                            for="yes">
-                                        Yes, I need to add someone
+                                        Oes, mae angen i mi ychwanegu rhywun arall
                                     </label>
                                 </div>
 
@@ -78,7 +77,7 @@ cdn: v2.0.0
                                            id="no">
                                     <label class="label label--inline"
                                            for="no">
-                                        No, I do not need to add anyone
+                                        Nac oes, nid oes angen i mi ychwanegu unrhyw un
                                     </label>
                                 </div>
                             </fieldset>
@@ -88,16 +87,17 @@ cdn: v2.0.0
                     <div
                             class="collapsible collapsible--simple js-collapsible js-collapsible-simple u-mb-m">
                         <div class="js-collapsible-content">
-                            <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Why do we ask this question?">Why do we ask this question?</h3>
+                            <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Pam rydym yn gofyn y cwestiwn hwn?">Pam rydym yn gofyn y cwestiwn hwn?</h3>
                             <div class="collapsible__body js-collapsible-body">
-                                <p>We ask this question to help ensure that everyone is correctly counted on the census. This may include people who are staying temporarily or are away.</p>
-                                <button class="btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Why do we ask this question?">Hide this</button>
+                                <p>Rydym yn gofyn y cwestiwn hwn er mwyn helpu i sicrhau bod pawb yn cael eu cyfrif yn gywir yn y cyfrifiad. Gall hyn gynnwys pobl sy'n aros dros dro neu sydd oddi cartref dros dro.
+                                </p>
+                                <button class="btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Pam rydym yn gofyn y cwestiwn hwn?">Cuddio hwn</button>
                             </div>
                         </div>
                     </div>
 
                     <button class="btn btn--primary btn--lg qa-btn-submit"
-                            type="submit" name="">Save and continue
+                            type="submit" name="">Cadw a pharhau
                     </button>
                 </form>
             </main>
@@ -155,8 +155,8 @@ cdn: v2.0.0
 
   function updateQuestion () {
     $('.js-heading-inner-part1').html(members.length ?
-      `Apart from the people already included, is there anyone else who is temporarily away or staying you need to add to ${sessionStorage.getItem('address-line-1')}?`:
-      `Is there anyone who is temporarily away or staying you need to add to ${sessionStorage.getItem('address-line-1')}?`
+      `Ar wahân i'r bobl sydd wedi'u cynnwys eisoes, a oes unrhyw un arall sydd oddi cartref dros dro neu sy'n aros y mae angen i chi ei ychwanegu at ${sessionStorage.getItem('address-line-1')}?` :
+      `A oes unrhyw un sydd oddi cartref dros dro neu sy'n aros y mae angen i chi ei ychwanegu at ${sessionStorage.getItem('address-line-1')}? Cofiwch gynnwys pobl sydd oddi cartref dros dro`
     );
   }
 

@@ -4,12 +4,27 @@ project: your-household
 globalcss: false
 layout: eq-default-extras
 cdn: v2.0.0
+language: welsh
 ---
+
+<script>
+    var welshPeopleCountLabels = {
+      2: 'Oes, mae angen i mi ychwanegu ail berson',
+      3: 'Oes, mae angen i mi ychwanegu trydydd person',
+      4: 'Oes, mae angen i mi ychwanegu pedwerydd person',
+      5: 'Oes, mae angen i mi ychwanegu pumed person',
+      6: 'Oes, mae angen i mi ychwanegu chweched person',
+      7: 'Oes, mae angen i mi ychwanegu seithfed person',
+      8: 'Oes, mae angen i mi ychwanegu unfed person',
+      9: 'Oes, mae angen i mi ychwanegu naw person',
+      10: 'Oes, mae angen i mi ychwanegu degfed person'
+    };
+</script>
 
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
+        <a class="js-previous-link" href="../do-you-live-here">Yn flaenorol</a>
     </div>
 </div>
 
@@ -38,7 +53,7 @@ cdn: v2.0.0
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title u-fs-l">
-                                        Does anyone else live at <span
+                                        Oes unrhyw un arall yn byw yn <span
                                             class="address-text"></span>?
                                     </h1>
                                 </div>
@@ -52,7 +67,7 @@ cdn: v2.0.0
 
                                 <div class="panel panel--simple panel--info u-mb-m js-visitor-panel" style="display: none">
                                     <div class="panel__body">
-                                        <strong class="u-mb-xs u-d-b">Include</strong>
+                                        <strong class="u-mb-xs u-d-b">Cofiwch</strong>
                                         <ul class="js-visitor-includes"></ul>
                                     </div>
                                 </div>
@@ -71,12 +86,10 @@ cdn: v2.0.0
                                                        id="yes-someone-else-label">
                                                     <span
                                                             class="yes-answer">
-                                                        Yes, I need to
-                                                        add another
-                                                        person</span>
+                                                        Oes, mae angen i mi ychwanegu ail berson</span>
                                                     <span
-                                                            class="u-fs-s u-db label--negative js-householdmembers-detail">Include partners,
-                                                        children, babies born on or before <span class="js-significant-date"></span>, housemates, tenants and lodgers, students and schoolchildren who live away from home during term time, where this is their permanent or family home</span>
+                                                            class="u-fs-s u-db label--negative js-householdmembers-detail">
+                                                        Dylech gynnwys partneriaid, plant, babanod a aned ar <span class="js-significant-date"></span> neu cyn hynny, cydletywyr, tenantiaid a lojers, myfyrwyr a phlant ysgol sy'n byw oddi cartref yn ystod y tymor, os mai dyma eu cartref parhaol neu gartref y teulu.</span>
                                                 </label>
                                             </div>
 
@@ -86,7 +99,7 @@ cdn: v2.0.0
                                                        name="does-anyone-else-live-here"
                                                        id="no" value="no">
                                                 <label class="label label--inline"
-                                                       for="no">No, I do not need to add anyone</label>
+                                                       for="no">Nac oes, nid oes angen i mi ychwanegu unrhyw un</label>
                                             </div>
                                         </fieldset>
                                     </div>
@@ -95,7 +108,7 @@ cdn: v2.0.0
                         </div>
                     </div>
                     <button class="btn btn--primary btn--lg qa-btn-submit venus"
-                            type="submit" name="">Save and continue
+                            type="submit" name="">Cadw a pharhau
                     </button>
                 </form>
             </main>
@@ -144,9 +157,9 @@ cdn: v2.0.0
       $('#form')
         .prepend('<input type="hidden" name="journey" value="visitors" />');
       $('#question-title')
-        .html('Are there any other visitors staying overnight on ' +
+        .html('Oes unrhyw ymwelwyr eraill yn aros ar ' +
           window.ONS.utils.getSignificant()
-          + ' at ' +
+          + ' yn ' +
           addressLine1 +
           ', ' + addressLine2 + '?');
 
@@ -179,11 +192,7 @@ cdn: v2.0.0
     }
 
     if ((nextPosition) > 1) {
-      $('.yes-answer').html(
-        'Yes, I need to add a ' +
-        window.ONS.utils.numberToPositionWord(nextPosition) +
-        ' ' + (isVisitorJourney ? 'visitor' : 'person')
-      );
+      $('.yes-answer').html(welshPeopleCountLabels[nextPosition]);
     }
   });
 </script>

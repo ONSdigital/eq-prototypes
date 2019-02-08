@@ -4,6 +4,7 @@ project: your-household
 globalcss: false
 layout: eq-default-extras
 cdn: v2.0.0
+language: welsh
 ---
 
 <link rel="stylesheet" href="../style.css"/>
@@ -32,8 +33,9 @@ cdn: v2.0.0
                             <section class="section u-mb-s">
                                 <div class="question">
                                     <h1 class="question__title u-fs-l">
-                                        Are there any visitors staying
-                                        overnight on <span class="js-significant-date"></span> at
+                                        Oes unrhyw ymwelwyr yn aros dros nos
+                                        ar <span
+                                            class="js-significant-date"></span> yn
                                         <span class="address-text"></span>?
                                     </h1>
                                 </div>
@@ -43,10 +45,10 @@ cdn: v2.0.0
                                         <div class="field field--checkbox field--multiplechoice field--exclusive">
                                             <fieldset>
                                                 <legend class="field__legend u-fs-r u-vh">
-                                                    Select all that apply:
+                                                    Dewiswch bob un sy’n berthnasol:
                                                 </legend>
                                                 <div class="field__label u-fs-r--b">
-                                                    Select all that apply:
+                                                    Dewiswch bob un sy’n berthnasol:
                                                 </div>
                                                 <div class="field__item">
                                                     <input
@@ -57,11 +59,7 @@ cdn: v2.0.0
                                                             type="checkbox"/>
                                                     <label class="label label--inline u-fs-r "
                                                            for="usually-in-uk">
-                                                        People who usually live
-                                                        somewhere else in the
-                                                        UK, for example
-                                                        boy/girlfriends, friends
-                                                        or relatives</label>
+                                                        Pobl sydd fel arfer yn byw rywle arall yn y Deyrnas Unedig, er enghraifft cariadon, ffrindiau neu berthnasau</label>
                                                 </div>
                                                 <div class="field__item">
                                                     <input class="input input--checkbox js-exclusive-group"
@@ -71,7 +69,10 @@ cdn: v2.0.0
                                                            type="checkbox">
                                                     <label class="label label--inline u-fs-r "
                                                            for="second-address">
-                                                        People staying here because it is their second address, for example, for work. Their permanent or family home is elsewhere</label>
+                                                        Pobl sy’n aros yma gan mai dyma eu hail gyfeiriad, er enghraifft, oherwydd gwaith.
+                                                        Mae eu cartref
+                                                        parhaol neu gartref y
+                                                        teulu rywle arall</label>
                                                 </div>
                                                 <div class="field__item">
                                                     <input class="input input--checkbox js-exclusive-group"
@@ -81,7 +82,7 @@ cdn: v2.0.0
                                                            type="checkbox">
                                                     <label class="label label--inline u-fs-r "
                                                            for="less-three">
-                                                        People who usually live outside the UK who are staying in the UK for less than three months</label>
+                                                        Pobl sy’n byw y tu allan i’r Deyrnas Unedig fel arfer, ond sy’n aros yn y Deyrnas Unedig am lai na dri mis</label>
                                                 </div>
                                                 <div class="field__item">
                                                     <input class="input input--checkbox js-exclusive-group"
@@ -91,7 +92,8 @@ cdn: v2.0.0
                                                            type="checkbox">
                                                     <label class="label label--inline u-fs-r "
                                                            for="on-holiday">
-                                                        People here on holiday</label>
+                                                        Pobl sydd ar wyliau yma
+                                                        Neu</label>
                                                 </div>
                                                 <div class="field__label u-mt-s u-fs-r--b" aria-hidden="true">Or</div>
                                                 <div class="field__item">
@@ -103,9 +105,7 @@ cdn: v2.0.0
                                                     <label class="label label--inline u-fs-r "
                                                            for="none">
                                                         <span class="u-vh">,</span>
-                                                        No, there are no
-                                                        visitors staying
-                                                        overnight on
+                                                        Nac oes, nid oes unrhyw ymwelwyr yn aros dros nos
                                                         <span
                                                                 class="js-significant-date"></span><span
                                                             class="u-vh">. Selecting this will uncheck all other checkboxes</span>
@@ -126,16 +126,16 @@ cdn: v2.0.0
                     <div
                             class="collapsible collapsible--simple js-collapsible js-collapsible-simple u-mb-xl">
                         <div class="js-collapsible-content">
-                            <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Why do I have to add visitors?">Why do I have to add visitors?</h3>
+                            <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Pam mae eich ateb yn bwysig?">Pam mae eich ateb yn bwysig?</h3>
                             <div class="collapsible__body js-collapsible-body">
-                                <p>We ask for visitor information to ensure that everyone is counted. This helps to produce accurate population estimates. Add any visitors, even if you think they may have been included on a census form at another address.</p>
-                                <button class="btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Why do I have to add visitors?">Hide this</button>
+                                <p>Rydym yn gofyn am wybodaeth am ymwelwyr er mwyn sicrhau bod pawb yn cael eu cyfrif. Mae hyn yn helpu i lunio amcangyfrifon cywir o'r boblogaeth. Ychwanegwch unrhyw ymwelwyr, hyd yn oed os ydych yn credu eu bod wedi cael eu cynnwys ar ffurflen cyfrifiad mewn cyfeiriad arall.</p>
+                                <button class="btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Pam mae eich ateb yn bwysig?">Cuddio hwn</button>
                             </div>
                         </div>
                     </div>
 
                     <button class="btn btn--primary btn--lg qa-btn-submit"
-                            type="submit" name="">Save and continue
+                            type="submit" name="">Cadw a pharhau
                     </button>
                 </form>
             </main>
