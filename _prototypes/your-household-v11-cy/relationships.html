@@ -9,6 +9,24 @@ cdn: v2.0.0
 language: welsh
 ---
 
+<script>
+    var welshQuestionMutations = {
+      'husband-wife': 'ŵr neu wraig',
+      'same-sex-partner': 'bartner sifil cofrestredig cyfreithiol',
+      'partner': 'bartner',
+      'son-daughter': 'fab neu ferch',
+      'step-child': 'llysblentyn',
+      'brother-sister': 'frawd neu chwaer',
+      'mother-father': 'Mam neu dad',
+      'step-brother-sister': 'llysfrawd neu lyschwaer',
+      'step-mother-father': 'llysfam neu lystad',
+      'grandchild': 'ŵyr neu wyres',
+      'grandparent': 'nain/mam-gu neu daid/tad-cu',
+      'other-relation': 'berthynas arall',
+      'unrelated': 'perthyn'
+    };
+</script>
+
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
@@ -35,8 +53,8 @@ language: welsh
                                         <span class="js-relationship-person-is-relationship-description">...</span>
                                     </h1>
                                     <p class="question__description">
-                                        Complete the sentence by selecting
-                                        the appropriate relationship.
+                                        Cwblhewch y frawddeg drwy ddewis
+                                        y berthynas briodol.
                                     </p>
 
                                     <div class="answer__fields js-fields">
@@ -50,8 +68,7 @@ language: welsh
                                                                id="husband-wife"
                                                                value="husband-wife"/>
                                                         <label class="label label--inline u-width-fill venus"
-                                                               for="husband-wife">Husband
-                                                            or wife</label>
+                                                               for="husband-wife">Gŵr neu wraig</label>
                                                     </div>
                                                     <div class="field__item js-focusable-box">
                                                         <input class="input input--radio js-focusable"
@@ -61,7 +78,8 @@ language: welsh
                                                                value="same-sex-partner"/>
                                                         <label class="label label--inline venus"
                                                                for="same-sex-partner">
-                                                            Legally registered civil partner
+                                                            Partner sifil cofrestredig
+                                                            cyfreithiol
                                                         </label>
                                                     </div>
                                                     <div class="field__item js-focusable-box">
@@ -83,7 +101,7 @@ language: welsh
                                                                value="son-daughter"/>
                                                         <label class="label label--inline venus"
                                                                for="son-daughter">
-                                                            Son or daughter
+                                                            Mab neu ferch
                                                         </label>
                                                     </div>
                                                     <div class="field__item js-focusable-box">
@@ -94,7 +112,7 @@ language: welsh
                                                                value="step-child"/>
                                                         <label class="label label--inline venus"
                                                                for="step-child">
-                                                            Stepchild
+                                                            Llysblentyn
                                                         </label>
                                                     </div>
                                                     <div class="field__item js-focusable-box">
@@ -105,7 +123,7 @@ language: welsh
                                                                value="brother-sister"/>
                                                         <label class="label label--inline venus"
                                                                for="brother-sister">
-                                                            Brother or sister
+                                                            Brawd neu chwaer
                                                         </label>
                                                     </div>
                                                     <div class="field__item js-focusable-box">
@@ -116,8 +134,7 @@ language: welsh
                                                                value="step-brother-sister"/>
                                                         <label class="label label--inline venus"
                                                                for="step-brother-sister">
-                                                            Stepbrother or
-                                                            stepsister
+                                                            Llysfrawd neu lyschwaer
                                                         </label>
                                                     </div>
                                                     <div class="field__item js-focusable-box">
@@ -128,7 +145,7 @@ language: welsh
                                                                value="mother-father"/>
                                                         <label class="label label--inline venus"
                                                                for="mother-father">
-                                                            Mother or father
+                                                            Mam neu dad
                                                         </label>
                                                     </div>
                                                     <div class="field__item js-focusable-box">
@@ -139,8 +156,7 @@ language: welsh
                                                                value="step-mother-father"/>
                                                         <label class="label label--inline venus"
                                                                for="step-mother-father">
-                                                            Stepmother or
-                                                            stepfather
+                                                            Llysfam neu lysdad
                                                         </label>
                                                     </div>
                                                     <div class="field__item js-focusable-box">
@@ -151,7 +167,7 @@ language: welsh
                                                                value="grandchild"/>
                                                         <label class="label label--inline venus"
                                                                for="grandchild">
-                                                            Grandchild
+                                                            Ŵyr neu wyres
                                                         </label>
                                                     </div>
                                                     <div class="field__item js-focusable-box">
@@ -162,7 +178,8 @@ language: welsh
                                                                value="grandparent"/>
                                                         <label class="label label&#45;&#45;inline venus"
                                                                for="grandparent">
-                                                            Grandparent
+                                                            Nain/mam-gu neu
+                                                            daid/tad-cu
                                                         </label>
                                                     </div>
                                                     <div class="field__item js-focusable-box">
@@ -173,7 +190,7 @@ language: welsh
                                                                value="other-relation"/>
                                                         <label class="label label&#45;&#45;inline venus"
                                                                for="other-relation">
-                                                            Other relation
+                                                            Perthynas arall
                                                         </label>
                                                     </div>
                                                     <div class="field__item js-focusable-box">
@@ -184,9 +201,8 @@ language: welsh
                                                                value="unrelated"/>
                                                         <label class="label label&#45;&#45;inline venus"
                                                                for="unrelated">
-                                                            Unrelated
-                                                            <span
-                                                                    class="u-fs-s u-db">Including foster child</span>
+                                                            Ddim yn perthyn
+                                                            <span class="u-fs-s u-db">Gan gynnwys plentyn maeth</span>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -253,7 +269,7 @@ language: welsh
     surveyType = urlParams.get('survey'),
     nextPageSurveyRouting = surveyType ? '&survey=' + surveyType : '';
 
-  function updateAnswer(missingRelationship, relationshipDescription) {
+  function updateAnswer(missingRelationship, relationshipDescription, k) {
     var personIs = missingRelationship.personIs,
       personTo = missingRelationship.personTo;
 
@@ -266,70 +282,82 @@ language: welsh
       ) !== -1;
 
     var gap2 = isNotFamilyDescription
-      ? " is "
+      ? " yw "
       : (personToIsMe
-          ? " is your"
-          : " is " + personTo['@person'].fullName +
-          window.ONS.utils.trailingNameS(personTo['@person'].fullName)
+          ? " yw eich"
+          : " yw " + personTo['@person'].fullName /*+
+          window.ONS.utils.trailingNameS(personTo['@person'].fullName)*/
       );
 
     var gap3 = " to " + (personToIsMe ? ' you' : personTo['@person'].fullName);
 
-    $('.js-relationship-answer-feedback').html(
-      personIs['@person'].fullName +
+    function standardText() {
+      return personIs['@person'].fullName +
 
-      gap2 +
+        gap2 +
 
-      '<strong>' +
+        '<strong>' +
         (relationshipDescription &&
           (' ' + relationshipDescription.sentanceLabel) ||
           " ...") +
-      '</strong>' +
+        '</strong>' +
 
-      /**
-       * Conditionally show if not family description
-       */
-      (isNotFamilyDescription ? gap3 : '')
+        /**
+         * Conditionally show if not family description
+         */
+        (isNotFamilyDescription ? gap3 : '');
+    }
+
+    console.log(standardText());
+
+    $('.js-relationship-answer-feedback').html(
+      (k && k === 'unrelated')
+        ? 'Nid yw ' + personIs['@person'].fullName +
+          ' yn <strong>perthyn</strong> i ' +
+          (personToIsMe ? 'chi' : personTo['@person'].fullName)
+        : standardText()
     );
   }
 
-  function updateQuestion(missingRelationship, relationshipDescription) {
+  function updateQuestion(missingRelationship, relationshipDescription, k) {
     var personIs = missingRelationship.personIs,
       personTo = missingRelationship.personTo;
 
-    var isNotFamilyDescription = relationshipDescription &&
+    /*var isNotFamilyDescription = relationshipDescription &&
       ['unrelated'].indexOf(
         relationshipDescription.type.id
-      ) !== -1;
+      ) !== -1;*/
 
     var personToIsMe = personTo['@person'].id ===
         storageAPI.IDS.USER_HOUSEHOLD_MEMBER_ID;
     
-    var gap1 = "Thinking about " + personTo['@person'].fullName + ", <br />";
+    var gap1 = "Gan feddwl am " + personTo['@person'].fullName +
+      ", <br /> " + (k === 'unrelated' ? 'nid yw' : 'mae') + ' ';
 
-    var gap2 = isNotFamilyDescription
-      ? " is "
-      : (personToIsMe ? " is your" : " is their");
+    var gap2 = personToIsMe ? " yw eich" : " yn";
 
-    var gap3 = " to " + (personToIsMe ? ' you' : personTo['@person'].fullName);
+    var gap3 = ' i ' + personTo['@person'].fullName;
+    //var gap3Your = ' i ' + personTo['@person'].fullName;
 
-    $('.js-relationship-person-is-relationship-description').html(
-      
+    function standardText() {
       /**
        * Conditionally show if question is not about me
        */
-      (!personToIsMe ? gap1 : '') +
+      return (!personToIsMe ? gap1 : '') +
 
-      personIs['@person'].fullName + gap2 +
-      " <span class='highlight'>" +
-        (relationshipDescription && relationshipDescription.sentanceLabel ||
+        personIs['@person'].fullName + gap2 +
+        " <span class='highlight'>" +
+        (relationshipDescription && welshQuestionMutations[k] ||
           "...") +
-      "</span>" +
+        "</span>" +
 
-      /**
-       * Conditionally show if not family description
-       */
-      (isNotFamilyDescription ? gap3 : '')
+        (!personToIsMe ? gap3 : '');
+    }
+
+    $('.js-relationship-person-is-relationship-description').html(
+      (personToIsMe && k && k === 'unrelated')
+        ? 'Nid yw ' + personIs['@person'].fullName + ' yn <span class=\'highlight\'>perthyn</span> i chi'
+        : standardText()
     );
   }
 
@@ -573,12 +601,12 @@ language: welsh
     updateQuestion({
       personIs: personIs,
       personTo: personTo
-    }, relationshipDescription);
+    }, relationshipDescription, $(this).val());
 
     updateAnswer({
       personIs: personIs,
       personTo: personTo
-    }, relationshipDescription);
+    }, relationshipDescription, $(this).val());
   });
 
   $(function() {
