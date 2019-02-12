@@ -32,12 +32,11 @@ language: welsh
                             <section class="section" id="question-area">
                                 <div class="question">
                                     <h1 class="question__title u-fs-l u-mb-l">
-                                        Are any of the following household
-                                        members also
-                                        <span
-                                            class="js-other-description"></span>
-                                        <span
-                                            class="js-relationship-person-is"></span>?
+                                        A yw unrhyw un o'r aelodau canlynol
+                                        o'r cartref
+                                        <span class="js-other-description"></span>
+                                        <span class="js-relationship-person-is"></span>
+                                        chwaith?
                                     </h1>
 
                                     <!--<div id="question-info"
@@ -60,7 +59,7 @@ language: welsh
 
                                     <p class="u-mb-no u-fs-r--b">Remaining household
                                         members</p>
-                                    <p>Select all that apply</p>
+                                    <p>Dewiswch bob un sy'n berthnasol</p>
 
                                     <div class="answer__fields js-fields">
                                         <div class="field field--checkbox field--multiplechoice field--exclusive">
@@ -202,12 +201,14 @@ language: welsh
       'mother-father' === relationshipDescription && (function(){
         $('.question__title').removeClass('u-mb-l');
         $('#question-info').show();
-        $('.js-other-description').html('sons or daughters of');
+        $('.js-other-description').html('hefyd yn feibion neu\'n ferched i');
       }());
 
       'unrelated' === relationshipDescription && (function(){
-        $('.js-other-description').html('unrelated to');
-        $('.js-question-info-body').html('<p>Do not include partners here, they will be included later</p>');
+        $('.js-other-description').html('ddim yn perthyn i');
+        $('.js-question-info-body').html('<p>Peidiwch â chynnwys partneriaid\n' +
+          'yma, byddant yn cael eu cynnwys yn\n' +
+          'ddiweddarach</p>');
         $('#question-info').show();
       }());
 
@@ -219,12 +220,12 @@ language: welsh
         $('#js-member-list').append(createMemberListItem(member['@person']));
       });
 
-      $('#js-member-list').append('<div class="field__label u-mt-s u-fs-r--b" aria-hidden="true">Or</div>');
+      $('#js-member-list').append('<div class="field__label u-mt-s u-fs-r--b" aria-hidden="true">Neu</div>');
       $('#js-member-list').append(
         '<div class="field__item">\n' +
             '<input class="input input--checkbox js-exclusive-checkbox" name="heating-type" value="no central heating" id="none" type="checkbox">\n' +
             '<label class="label label--inline u-fs-r " for="none">\n' +
-                '<span class="u-vh">,</span> None<span class="u-vh">. Selecting this will uncheck all other checkboxes</span>\n' +
+                '<span class="u-vh">,</span> Dim un<span class="u-vh">. Selecting this will uncheck all other checkboxes</span>\n' +
             '</label>\n' +
             '<span class="js-exclusive-alert u-vh" role="alert" aria-live="polite" data-adjective="deselected"></span>\n' +
         '</div>'
