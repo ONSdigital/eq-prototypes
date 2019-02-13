@@ -303,3 +303,14 @@ export function tools () {
   $listLinks.append($createFamilyWithRelationshipsPersonalDetailsAndVisitorsPersonalDetails);
   $listLinks.append($clearData);
 }
+
+function addLanguageSwitch() {
+  const $el = $('<a class="util-language">Cymraeg</a>');
+  const $container = $('.header__top > .container');
+
+  $el.attr('href', window.location.href.replace('your-household-v11', 'your-household-v11-cy'));
+
+  $container.prepend($el);
+}
+
+$(addLanguageSwitch);
