@@ -182,23 +182,34 @@ function populateVisitorList() {
   populateList($('#visitors-list'), VISITOR_TYPE);
 }
 
+function cleanHTMLPlaceholderStringReplacment(el, val) {
+  const $el = $(el),
+    $parent = $el.parent();
+
+  $el.before(val);
+  $el.remove();
+
+  $parent.html($parent.html().replace(/[\s]+/g, ' ').trim());
+}
+
 function updateAddresses() {
   let addressLines = (sessionStorage.getItem('address') || '').split(','),
     addressLine1 = addressLines[0],
     addressLine2 = addressLines[1];
 
-  $('#section-address').html(addressLine1 || '<a' +
+  /*$('#section-address').html(addressLine1 || '<a' +
     ' href="../test-address">Address not' +
-    ' found</a>');
-  $('.address-text').html(
+    ' found</a>');*/
+
+  $('.address-text').each((i, el) => cleanHTMLPlaceholderStringReplacment(el,
     addressLine1 && addressLine2
       ? (
         addressLine1 + (addressLine2 ? ', ' + addressLine2 : '')
       )
       : '<a href="../test-address">Address not found</a>'
-  );
+  ));
 
-  $('.address-text-line1').html(addressLine1);
+  $('.address-text-line1').each((i, el) => cleanHTMLPlaceholderStringReplacment(el, addressLine1));
 
   let personId = new URLSearchParams(window.location.search).get('person'),
     person;
@@ -302,7 +313,7 @@ function getSignificant() {
 }
 
 function updateSignificantDate() {
-  $('.js-significant-date').html(getSignificant());
+  $('.js-significant-date').each((i, el) => cleanHTMLPlaceholderStringReplacment(el, getSignificant()));
 }
 
 function personRecordTemplate() {
