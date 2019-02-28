@@ -491,7 +491,8 @@ window.ONS.utils = {
   trailingNameS,
   numberToPositionWord,
   numberToWordsStyleguide,
-  getSignificant
+  getSignificant,
+  cleanHTMLPlaceholderStringReplacment
 };
 
 $(populateHouseholdList);

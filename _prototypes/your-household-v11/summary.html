@@ -43,13 +43,8 @@ cdn: v2.0.0
 
                                 <div class="panel panel--simple panel--success"
                                      id="question-guidance-everyone-at-address-confirmation-question">
-                                    <strong class="u-mb-s">This sub section is
-                                        now complete</strong>
-                                    <ul
-                                        style="list-style: none;padding: 0; margin-bottom: 0">
-                                        <li>You can check your answers below
-                                        </li>
-                                    </ul>
+                                    <strong class="u-mb-s">This sub section is now complete</strong>
+                                    <p>You can check your answers below</p>
                                 </div>
                                 <br />
 
@@ -68,7 +63,7 @@ cdn: v2.0.0
                                 </p>
 
                                 <div class="js-visitors-people-list">
-                                    <h2 class="u-fs-m js-visitors-people-title">You&rsquo;ve added <span class="highlight">{n}</span> visitor<span class="js-visitors-people-plural" style="display: none">s</span> staying
+                                    <h2 class="u-fs-m js-visitors-people-title">You&rsquo;ve added <span class="highlight">{n}</span> visitor<span class="js-visitors-people-plural"></span> staying
                                         overnight on <span class="js-significant-date"></span></h2>
                                     <ul class="list list--records list--people u-mb-s js-records js-visitors-summary"></ul>
                                     <p id="nobody-visitor-notice"
@@ -148,15 +143,19 @@ cdn: v2.0.0
       userMember = members.filter(isUser)[0],
       otherHouseholdMembers = members.filter(window.ONS.storage.isOtherHouseholdMember),
       visitors = members.filter(window.ONS.storage.isVisitor),
-      householdMembers = otherHouseholdMembers;
+      householdMembers = otherHouseholdMembers,
+      numberOfHouseholdMembers,
+      peopleListTitle,
+      numberOfVisitors,
+      visitorsListTitle;
 
     if (userMember) {
       householdMembers = [userMember].concat(otherHouseholdMembers);
     }
 
 
-    const numberOfHouseholdMembers = householdMembers.length;
-    const peopleListTitle = document.querySelector('.js-household-people-list');
+    numberOfHouseholdMembers = householdMembers.length;
+    peopleListTitle = document.querySelector('.js-household-people-list');
     peopleListTitle.innerHTML = peopleListTitle.innerHTML.replace('{n}',
       window.ONS.utils.numberToWordsStyleguide(numberOfHouseholdMembers) || 0);
 
@@ -168,21 +167,21 @@ cdn: v2.0.0
         document.querySelector('.js-household-people-plural').style.display = 'inline';
     }
 
-    const numberOfVisitors = visitors.length;
+    numberOfVisitors = visitors.length;
 
     if(!numberOfVisitors) {
       $('#nobody-visitor-notice').show();
     }
 
-    const visitorsListTitle = document.querySelector('.js-visitors-people-list');
+    visitorsListTitle = document.querySelector('.js-visitors-people-list');
 
     visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{n}',
       window.ONS.utils.numberToWordsStyleguide(numberOfVisitors) || 0);
 
-    if (numberOfVisitors > 1) {
-      document.querySelector('.js-visitors-people-plural').style.display =
-       'inline';
-    }
+    $('.js-visitors-people-plural').each(function(i, el) {
+      window.ONS.utils
+        .cleanHTMLPlaceholderStringReplacment(el,numberOfVisitors > 1 ? 's' : '');
+    });
   }
 
   $('#modal .close-modal-button').on('click', function(e) {
