@@ -169,13 +169,22 @@ footer: minimal
       lastName: document.getElementById('last-name').value
     });
 
+    newPersonObj.id = "person_me";
+
     storageAPI.addUserPerson(newPersonObj);
 
+    
     if(isEditing) {
       storageAPI.updateUserAsHouseholdMember(newPersonObj, userAsMember);
+    } else {
+      var householdMembers = JSON.parse(sessionStorage.getItem('household-members'));
+      
+      householdMembers[0]['@person'] = newPersonObj;
+
+      sessionStorage.setItem('household-members', JSON.stringify(householdMembers));
     }
 
-    window.location = isEditing ? '../summary/' : '../confirm-address/';
+    window.location = isEditing ? '../summary/' : '../does-anyone-else-live-here/';
   });
 
   function getName() {

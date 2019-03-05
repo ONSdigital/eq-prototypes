@@ -44,14 +44,41 @@ footer: minimal
                                 <p id="nobody-notice"
                                    style="display:none;">Nobody usually
                                     lives here</p>
-                                <p class="u-mb-xl">
-                                    <a
-                                            href="../who-else-to-add/?redirect=../summary/"
-                                       class="js-add-to-household">
-                                        Add someone to this household</a>
-                                </p>
 
-                                <div class="js-visitors-people-list">
+                                 <div class="answer__fields js-fields js-add">
+                                    <div class="field field--radio field--multiplechoice ">
+                                        <fieldset class="u-mb-xl">
+                                            <div class="field__item js-focusable-box">
+                                                <input class="input input--radio js-focusable"
+                                                       type="radio"
+                                                       name="does-anyone-else-live-here"
+                                                       id="yes-someone-else"
+                                                       value="yes">
+                                                <label class="label label--inline u-fs-r"
+                                                       for="yes-someone-else"
+                                                       id="yes-someone-else-label">
+                                                    <span
+                                                            class="yes-answer">Yes, I need to
+                                                        add
+                                                    another person</span>
+                                                    <span class="label__description u-fs-s">Include partners, children, babies born on or before 11 November 2018, housemates, tenants and lodgers, students and schoolchildren who live away from home during term time, where this is their permanent or family home</span>
+                                                </label>
+                                            </div>
+
+                                            <div class="field__item js-focusable-box">
+                                                <input class="input input--radio js-focusable"
+                                                       type="radio"
+                                                       name="does-anyone-else-live-here"
+                                                       id="no" value="no">
+                                                <label
+                                                        class="label label--inline u-fs-r"
+                                                       for="no">No, I do not need to add anyone</label>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+
+                                <div class="js-visitors-people-list u-d-no">
                                     <h2 class="u-fs-m js-visitors-people-title">You&rsquo;ve added <span class="highlight">{n}</span> visitor<span class="js-visitors-people-plural" style="display: none">s</span> staying
                                         overnight on <span class="js-significant-date"></span></h2>
                                     <ul id="visitors-summary"
@@ -87,7 +114,7 @@ footer: minimal
     </li>
 </ul>
 
-<script src='/js/compiled/your-household-v10/bundle.js'></script>
+<script src='/js/compiled/your-household-interview-led-v10/bundle.js'></script>
 
 <style>
     .list.list--records {
@@ -127,7 +154,10 @@ footer: minimal
     nextPage = surveyType
       ? '../hub/?survey=' + surveyType
       : '../hub/',
-    altPage = surveyType && surveyType === 'lms' ? surveyType + '/' : '';
+    altPage = surveyType && surveyType === 'lms' ? surveyType + '/' : '',
+    journey = urlParams.get('journey');
+
+ 
 
   function createMemberItem(member) {
     var $nodeEl = $('#person-record-template').clone(),
@@ -202,6 +232,16 @@ footer: minimal
       document.querySelector('.js-visitors-people-plural').style.display =
        'inline';
     }
+
+    if (journey === 'visitors') {
+      var addRadios = document.querySelector('.js-add');
+      addRadios.className = addRadios.className + ' u-d-no';
+
+       if (numberOfVisitors) {
+         var peopleList = document.querySelector('.js-visitors-people-list');
+         peopleList.className = peopleList.className.replace(' u-d-no', '');
+       }
+    }
   }
 
   $('#modal .close-modal-button').on('click', function(e) {
@@ -212,7 +252,11 @@ footer: minimal
   $('.qa-btn-submit').on('click', function(e) {
     e.preventDefault();
 
-    if (window.ONS.storage.getAllHouseholdMembers().length > 0) {
+    if (document.getElementById('yes-someone-else').checked) {
+      window.location = '../who-else-to-add/';
+    } else if (document.getElementById('no').checked) {
+      window.location = '../temp-types-living-away/';
+    } else if (window.ONS.storage.getAllHouseholdMembers().length > 0) {
       window.location.href = nextPage;
     }
     else {
@@ -235,4 +279,65 @@ footer: minimal
 
   $(updateContent);
   $(updateHouseholdMembersVisitors);
+
+  var storageAPI = window.ONS.storage;
+  $(function() {
+    var addressLines = (sessionStorage.getItem('address') || '').split(','),
+      addressLine1 = addressLines[0],
+      addressLine2 = addressLines[1],
+      members = storageAPI.getAllHouseholdMembers(),
+      householdMembers = members.filter(storageAPI.isHouseholdMember),
+      visitors = members.filter(storageAPI.isVisitor),
+      nextPosition,
+      visitorTypesStr =
+        new URLSearchParams(window.location.search).get('visitor-types'),
+      isVisitorJourney = window.location.search.match(/journey=visitors/);
+
+    if (isVisitorJourney) {
+      nextPosition = visitors.length + 1;
+      $('#form').prepend("<input type='hidden' name='visitor-types' value='" + visitorTypesStr + "' />");
+      $('#form')
+        .prepend('<input type="hidden" name="journey" value="visitors" />');
+      $('#question-title')
+        .html('Are there any other visitors staying overnight on ' +
+          window.ONS.utils.getSignificant()
+          + ' at ' +
+          addressLine1 +
+          ', ' + addressLine2 + '?');
+      $('#member-list').html('<ul id="visitors-list"></ul>');
+      window.ONS.helpers.populateVisitorList();
+
+      if (visitorTypesStr) {
+        var visitorTypes = JSON.parse(visitorTypesStr);
+
+        if (visitorTypes.length) {
+          document.querySelector('.js-visitor-panel').style.display = 'block';
+
+          var visitorIncludes = document.querySelector('.js-visitor-includes');
+
+          visitorTypes.forEach(type => {
+            var li = document.createElement('li');
+            li.className = 'list__item';
+
+            li.innerHTML = storageAPI.visitorQuestionSentenceMap[type];
+
+            visitorIncludes.appendChild(li);
+          });
+        }
+      }
+    }
+    else {
+      nextPosition = householdMembers.length + 1;
+      $('#member-list').html('<ul id="household-members"></ul>');
+      window.ONS.helpers.populateHouseholdList();
+    }
+
+    if ((nextPosition) > 1) {
+      $('.yes-answer').html(
+        'Yes, I need to add a ' +
+        window.ONS.utils.numberToPositionWord(nextPosition) +
+        ' ' + (isVisitorJourney ? 'visitor' : 'person')
+      );
+    }
+  });
 </script>

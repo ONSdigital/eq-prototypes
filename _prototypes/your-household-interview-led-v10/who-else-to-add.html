@@ -102,7 +102,14 @@ footer: minimal
                             class="btn btn--secondary btn--small js-remove-person">Remove this person</button>
                 </div>
 
-                <button class="btn btn-submit btn--primary btn--lg u-mt-xl"
+                <div class="u-mt-xl"></div>
+
+                <div class="js-save-add">
+                  <button class="btn btn-submit btn--secondary btn--lg" type="submit" name="action[save_add]">Save and add another person</button>
+
+                  <div class="u-fs-r--b u-mt-m u-mb-s">Or</div>
+                </div>
+                <button class="btn btn-submit btn--primary btn--lg"
                         data-qa="btn-submit" type="submit"
                         name="action[save_continue]">
                     Save and continue
@@ -145,7 +152,14 @@ footer: minimal
     membersTotal = storageAPI.getAllHouseholdMembers().length,
     memberFound = null,
     userLiveAtAddress = storageAPI.doILiveHere(),
+    journey = urlParams.get('journey')
     isLateAddition = !!urlParams.get('late-addition');
+
+
+  if (journey === 'visitors') {
+    var saveAdd = document.querySelector('.js-save-add');
+    saveAdd.className = saveAdd.className + ' u-d-no';
+  }
 
   if (editUserId) {
     memberFound = window.ONS.storage.getAllHouseholdMembers()
@@ -243,8 +257,9 @@ footer: minimal
       if(parseInt(window.sessionStorage.getItem('number-of-people')) ===
         membersTotal + 1) {
         window.location.href = '../temp-types-living-away';
-      }
-      else {
+      } else if (e.target.getAttribute('name') === 'action[save_continue]') {
+        window.location = '../summary/';
+      } else {
         window.location.reload();
       }
     }

@@ -113,13 +113,13 @@ footer: minimal
 
 
       sessionStorage.setItem('lives-here', 'yes');
-      document.trav.action = loc = "../number-of-people/";
+      document.trav.action = loc = "../what-is-your-name/";
 
     } else {
       window.ONS.storage.deleteUserAsHouseholdMember();
 
       sessionStorage.setItem('lives-here', 'no');
-      document.trav.action = loc = "../noone-lives-here";
+      document.trav.action = loc = "../resident-not-at-address-on-census-night";
     }
 
     window.location = loc;
