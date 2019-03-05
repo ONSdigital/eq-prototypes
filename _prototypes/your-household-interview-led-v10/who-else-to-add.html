@@ -156,7 +156,7 @@ footer: minimal
     isLateAddition = !!urlParams.get('late-addition');
 
 
-  if (journey === 'visitors') {
+  if (journey === 'visitors' || editUserId) {
     var saveAdd = document.querySelector('.js-save-add');
     saveAdd.className = saveAdd.className + ' u-d-no';
   }
