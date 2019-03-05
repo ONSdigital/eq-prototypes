@@ -38,8 +38,7 @@ footer: minimal
                             <h1 id="question-title"
                                 class="question__title u-fs-l"
                                 data-qa="question-title">
-                                What is the name of the <span class="person-position"></span>
-                                person living at
+                                Did anybody else live at
                                 <span class="address-text"></span> on
                                 <span class="js-significant-date"></span>?
                             </h1>
@@ -258,7 +257,7 @@ footer: minimal
         membersTotal + 1) {
         window.location.href = '../temp-types-living-away';
       } else if (e.target.getAttribute('name') === 'action[save_continue]') {
-        window.location = '../summary/';
+        window.location = '../does-anyone-else-live-here/';
       } else {
         window.location.reload();
       }
