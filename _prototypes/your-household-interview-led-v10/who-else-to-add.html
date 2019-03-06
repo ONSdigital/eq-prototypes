@@ -38,9 +38,8 @@ footer: minimal
                             <h1 id="question-title"
                                 class="question__title u-fs-l"
                                 data-qa="question-title">
-                                Did anybody else live at
-                                <span class="address-text"></span> on
-                                <span class="js-significant-date"></span>?
+                                Who else do you need to add to
+                                <span class="address-text"></span>?
                             </h1>
                         </div>
 
@@ -50,8 +49,6 @@ footer: minimal
                                 <ul class="js-visitor-includes"></ul>
                             </div>
                         </div>
-
-                        <div id="member-list"></div>
 
                         <fieldset
                                 class="question__fieldset js-question-fieldset u-mb-s">
@@ -292,7 +289,7 @@ footer: minimal
         $('#first-name').val(person.firstName);
         $('#last-name').val(person.lastName);
         $('#question-title').html('Change details for ' + person.fullName);
-        $('#member-list').remove();
+        // $('#member-list').remove();
         $('.js-remove-section').show();
       } else {
         $('#question-title').html('Member not found');
@@ -300,17 +297,17 @@ footer: minimal
     }
     else if (window.location.search.match(/journey=visitors/)) {
       $('#question-title').html(overrideTitle);
-      $('#member-list').html('<ul id="visitors-list"></ul>');
+      // $('#member-list').html('<ul id="visitors-list"></ul>');
       $('.js-definition-visitors').show();
       window.ONS.helpers.populateVisitorList();
     }
     else if (window.location.search.match(/journey=temp-living-here/)) {
       $('#question-title').html(overrideTitleStayingOutsideUK);
-      $('#member-list').html('<ul id="household-members"></ul>');
+      // $('#member-list').html('<ul id="household-members"></ul>');
       window.ONS.helpers.populateHouseholdList();
     }
     else {
-      $('#member-list').html('<ul id="household-members"></ul>');
+      // $('#member-list').html('<ul id="household-members"></ul>');
       window.ONS.helpers.populateHouseholdList();
     }
 
