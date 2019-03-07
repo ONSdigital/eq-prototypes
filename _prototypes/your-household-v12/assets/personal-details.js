@@ -176,6 +176,19 @@ export function addUpdateAge(personId, val, { isApproximate = false }) {
   return details;
 }
 
+export function addUpdateAgeConfirm(personId, val) {
+  let allDetails = getAllPersonalDetails(),
+    details = allDetails[personId] || {};
+
+  details['age-confirm'] = {
+    val
+  };
+
+  updatePersonalDetails(personId, details);
+
+  return details;
+}
+
 export function addUpdateAddressOutsideUK(personId, val) {
   let allDetails = getAllPersonalDetails(),
     details = allDetails[personId] || {};

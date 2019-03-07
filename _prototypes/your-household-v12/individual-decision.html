@@ -34,8 +34,7 @@ cdn: v2.0.0
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title u-fs-l">
-                                        Are you <span class="js-person-name"></span>, or are you someone who is completing
-                                        the survey for <span class="js-person-name"></span>?
+                                        Are you <span class="js-person-name"></span>?
                                     </h1>
                                 </div>
 
@@ -46,24 +45,25 @@ cdn: v2.0.0
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="does-anyone-else-live-here"
-                                                           id="yes-someone-else"
+                                                           name="is-you"
+                                                           id="yes"
                                                            value="yes">
                                                     <label class="label label--inline"
-                                                           for="yes-someone-else"
+                                                           for="yes"
                                                            id="yes-someone-else-label">
-                                                        I am <span class="js-person-name"></span>
+                                                        Yes I am
                                                     </label>
                                                 </div>
 
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="does-anyone-else-live-here"
+                                                           name="is-you"
                                                            id="no" value="no">
                                                     <label class="label label--inline"
                                                            for="no">
-                                                        I am someone else who is completing the survey for <span class="js-person-name"></span>
+                                                        No, I am answering on
+                                                        their behalf
                                                     </label>
                                                 </div>
                                             </fieldset>
@@ -85,27 +85,20 @@ cdn: v2.0.0
     </div>
 </div>
 
-<script src='/js/compiled/your-household-v11/bundle.js'></script>
+<script src='/js/compiled/your-household-v12/bundle.js'></script>
 
 <script>
 	var storageAPI = window.ONS.storage,
         urlParams = new URLSearchParams(window.location.search),
 		personId = urlParams.get('person'),
-        yesbox = document.getElementById("yes-someone-else"),
+        yesbox = document.getElementById("yes"),
         surveyType = urlParams.get('survey');
 
 	$('.qa-btn-submit').click(function(e) {
+	  var val = yesbox.checked;
 
-		/**
-		 * Routing
-		 */
-		if (yesbox.checked) {
-            storageAPI.setAnsweringIndividualByProxy(false);
-            document.trav.action = "../individual-details-dob";
-		} else {
-            storageAPI.setAnsweringIndividualByProxy(true);
-            document.trav.action = "../individual-details-dob";
-		}
+      storageAPI.setAnsweringIndividualByProxy(!val);
+      document.trav.action = "../individual-details-sex";
 	});
 
 	function updateRouting () {
@@ -114,9 +107,17 @@ cdn: v2.0.0
     }
 
 	function updateName() {
-		$('.js-person-name').html(storageAPI.getHouseholdMemberByPersonId(personId)['@person'].fullName);
+      $('.js-person-name').html(storageAPI.getHouseholdMemberByPersonId(personId)['@person'].fullName);
 	}
+
+	function updateSelected() {
+	  var answerVal = storageAPI.getAnsweringIndividualByProxy();
+
+      answerVal !== null &&
+        $('#' + (answerVal ? 'no' : 'yes')).attr('checked', true);
+    }
 
 	$(updateName);
     $(updateRouting);
+    $(updateSelected);
 </script>

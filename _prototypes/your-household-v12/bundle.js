@@ -60,6 +60,7 @@ import {
   addUpdateAddressWhere,
   addUpdateAddressIndividual,
   addUpdateAge,
+  addUpdateAgeConfirm,
   addUpdateAddressOutsideUK,
 
   personalDetailsMaritalStatusMap,
@@ -444,6 +445,7 @@ window.ONS.storage = {
   addUpdateAddressWhere,
   addUpdateAddressIndividual,
   addUpdateAge,
+  addUpdateAgeConfirm,
   addUpdateAddressOutsideUK,
 
   personalDetailsMaritalStatusMap,
