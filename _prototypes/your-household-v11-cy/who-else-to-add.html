@@ -109,11 +109,10 @@ language: welsh
 
                 <div class="js-remove-section"
                      style="display:none;">
-                    <p>If you have added this person by mistake or if
-                        circumstances have changed, you can remove them.</p>
+                    <p>Os ydych wedi ychwanegu'r person hwn mewn camgymeriad neu os yw'r amgylchiadau wedi newid, gallwch ei ddileu.</p>
 
                     <button
-                            class="btn btn--secondary btn--small js-remove-person">Remove this person</button>
+                            class="btn btn--secondary btn--small js-remove-person">Dileu'r person hwn</button>
                 </div>
 
                 <button class="btn btn-submit btn--primary btn--lg u-mt-xl"
@@ -301,7 +300,7 @@ language: welsh
 
         $('#first-name').val(person.firstName);
         $('#last-name').val(person.lastName);
-        $('#question-title').html('Change details for ' + person.fullName);
+        $('#question-title').html('Newid manylion ar gyfer ' + person.fullName);
         $('#member-list').remove();
         $('.js-remove-section').show();
       } else {
