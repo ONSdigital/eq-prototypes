@@ -54,6 +54,7 @@ import {
   getPersonalDetailsFor,
   addUpdateMaritalStatus,
   addUpdateCountry,
+  addUpdateNationalIdentity,
   addUpdateOrientation,
   addUpdateSalary,
   addUpdateSex,
@@ -439,6 +440,7 @@ window.ONS.storage = {
   getPersonalDetailsFor,
   addUpdateMaritalStatus,
   addUpdateCountry,
+  addUpdateNationalIdentity,
   addUpdateOrientation,
   addUpdateSalary,
   addUpdateSex,
@@ -508,3 +510,4 @@ $(updateBySurveyType);
 $(updateSignificantDate);
 $(updateHouseholdSummary);
 $(updateVisitorsSummary);
+

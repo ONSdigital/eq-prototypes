@@ -118,6 +118,20 @@ export function addUpdateCountry(personId, val) {
   return details;
 }
 
+export function addUpdateNationalIdentity(personId, collection, otherText) {
+  let allDetails = getAllPersonalDetails(),
+    details = allDetails[personId] || {};
+
+  details['national-identity'] = {
+    collection,
+    ...(collection.find(val => val === 'other') ? { otherText } : {})
+  };
+
+  updatePersonalDetails(personId, details);
+
+  return details;
+}
+
 export function addUpdateOrientation(personId, val) {
   let allDetails = getAllPersonalDetails(),
     details = allDetails[personId] || {};
