@@ -28,6 +28,33 @@ cdn: v2.0.0
                     </div>
                 </div>
 
+                <div id="js-error-panel"
+                     class="panel panel--error u-mb-s"
+                     data-qa="error"
+                     style="display:none;">
+                    <div class="panel__header">
+                        <h1 class="panel__title u-fs-r--b">This page has an error</h1>
+                    </div>
+                    <div class="panel__body" data-qa="error-body">
+                        <p class="u-fs-r">This <strong>must be corrected</strong> to continue.</p>
+                        <ul class="list list--bare">
+
+                            <li class="list__item u-fs-r js-first-name-link"
+                                style="display:none">
+                                <a class="js-inpagelink"
+                                      href="#first-name-label">Enter your first
+                                name.</a>
+                            </li>
+
+                            <li class="list__item u-fs-r js-last-name-link"
+                                style="display:none;">
+                                <a class="js-inpagelink"
+                                      href="#last-name-label">Enter your last name.</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
                 <div class="group u-mb-s">
                     <div class="block">
 
@@ -42,8 +69,34 @@ cdn: v2.0.0
                                 <legend class="u-vh">What is your name?</legend>
 
                                 <div class="question__answers">
-                                    <div class="question__answer">
-                                        <label class="label"
+
+                                    <!--<div
+                                            class="panel panel&#45;&#45;simple panel&#45;&#45;error u-mb-s" data-qa="error">
+                                        &lt;!&ndash;<div class="panel__header">
+                                            <ul class="list list&#45;&#45;bare list&#45;&#45;errors">
+                                                <li class="list__item u-fs-r&#45;&#45;b" data-ga-action="Enter an answer to continue." data-ga="error" data-ga-category="Error" data-ga-label="change-comment-question">Enter an answer to continue.</li>
+                                            </ul>
+                                        </div>&ndash;&gt;
+                                        <div class="panel__body" data-qa="error-body">
+                                            <div class="question__answer">
+                                                <label class="label"
+                                                       for="first-name">
+                                                    <div class="label__inner">
+                                                        First name
+                                                    </div>
+                                                </label>
+                                                <input class="input input&#45;&#45;text"
+                                                       id="first-name"
+                                                       data-qa="input-text" value=""/>
+                                            </div>
+                                        </div>
+                                    </div>-->
+
+
+
+                                    <div class="question__answer js-first-name">
+                                        <label id="first-name-label"
+                                                class="label"
                                                for="first-name">
                                             <div class="label__inner">
                                                 First name
@@ -51,7 +104,9 @@ cdn: v2.0.0
                                         </label>
                                         <input class="input input--text"
                                                id="first-name"
-                                               data-qa="input-text" value=""/>
+                                               data-qa="input-text"
+                                               value=""
+                                                data-field-mandatory="true"/>
                                     </div>
 
                                     <div class="question__answer">
@@ -65,8 +120,9 @@ cdn: v2.0.0
                                                data-qa="input-text" value=""/>
                                     </div>
 
-                                    <div class="question__answer">
-                                        <label class="label" for="last-name">
+                                    <div class="question__answer js-last-name">
+                                        <label id="last-name-label"
+                                            class="label" for="last-name">
                                             <div class="label__inner">
                                                 Last name
                                             </div>
@@ -86,7 +142,8 @@ cdn: v2.0.0
                     <p>If you have added this person by mistake or if circumstances have changed, you can remove them.</p>
 
                     <button
-                            class="btn btn--secondary btn--small js-remove-person">Remove this person</button>
+                            class="btn btn--secondary btn--small js-remove-person">
+                        Remove this person</button>
                 </div>
 
 
@@ -129,6 +186,7 @@ cdn: v2.0.0
     redirect = urlParams.get('redirect'),
     livesHere = sessionStorage.getItem('lives-here') === 'yes',
     storageAPI = window.ONS.storage,
+    helpers = window.ONS.helpers,
     userAsMember = storageAPI.getUserAsHouseholdMember(),
     userPerson = userAsMember && userAsMember['@person'];
 
@@ -168,8 +226,49 @@ cdn: v2.0.0
     }
   }
 
+  function validateForm() {
+    var isValid = true;
+
+    /**
+     * First name validation
+     */
+    if(!$('#first-name').val()) {
+      helpers.fieldErrorWrap({ $fieldEl: $('.js-first-name') });
+      $('.js-first-name-link').show();
+      isValid = false;
+    }
+    else {
+      helpers.removeErrorIfWrap({ $fieldEl: $('.js-first-name') });
+    }
+
+    /**
+     * Last name validation
+     */
+    if(!$('#last-name').val()) {
+      helpers.fieldErrorWrap({ $fieldEl: $('.js-last-name') });
+      $('.js-last-name-link').show();
+      isValid = false;
+    }
+    else {
+      helpers.removeErrorIfWrap({ $fieldEl: $('.js-last-name') });
+    }
+
+
+    if(!isValid) {
+      $('#js-error-panel').show();
+    }
+
+    return isValid;
+  }
+
   $('.btn-submit').on('click', function(e) {
     e.preventDefault(); // do not submit the form like usual
+
+    if(!validateForm()) {
+      window.scrollTo(0, 0);
+      return;
+    }
+
     sessionStorage.setItem('name', getName());
 
     var newPersonObj = storageAPI.TYPES.person({
@@ -218,6 +317,8 @@ cdn: v2.0.0
       $('#first-name').val(userPerson.firstName);
       $('#last-name').val(userPerson.lastName);
     }
+
+    $('#middle-name').val('');
   });
 
   $(updateQuestion);

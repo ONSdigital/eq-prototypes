@@ -28,6 +28,33 @@ cdn: v2.0.0
                     </div>
                 </div>
 
+                <div id="js-error-panel"
+                     class="panel panel--error u-mb-s"
+                     data-qa="error"
+                     style="display:none;">
+                    <div class="panel__header">
+                        <h1 class="panel__title u-fs-r--b">This page has an error</h1>
+                    </div>
+                    <div class="panel__body" data-qa="error-body">
+                        <p class="u-fs-r">This <strong>must be corrected</strong> to continue.</p>
+                        <ul class="list list--bare">
+
+                            <li class="list__item u-fs-r js-first-name-link"
+                                style="display:none">
+                                <a class="js-inpagelink"
+                                   href="#first-name-label">Enter your first
+                                    name.</a>
+                            </li>
+
+                            <li class="list__item u-fs-r js-last-name-link"
+                                style="display:none;">
+                                <a class="js-inpagelink"
+                                   href="#last-name-label">Enter your last name.</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
                 <div class="group u-mb-m">
                     <div class="block">
 
@@ -53,9 +80,10 @@ cdn: v2.0.0
                             <legend class="u-vh">Who do you need to add to <span class="address-text"></span>?</legend>
 
                             <div class="question__answers">
-                                <div class="question__answer">
-                                    <label class="label"
-                                           for="first-name">
+                                <div class="question__answer js-first-name">
+                                    <label id="first-name-label"
+                                        class="label"
+                                        for="first-name">
                                         <div class="label__inner">
                                             First name
                                         </div>
@@ -76,8 +104,9 @@ cdn: v2.0.0
                                            data-qa="input-text" value=""/>
                                 </div>
 
-                                <div class="question__answer">
-                                    <label class="label" for="last-name">
+                                <div class="question__answer js-last-name">
+                                    <label id="last-name-label"
+                                        class="label" for="last-name">
                                         <div class="label__inner">
                                             Last name
                                         </div>
@@ -156,6 +185,7 @@ cdn: v2.0.0
     previous = urlParams.get('previous'),
     redirect = urlParams.get('redirect'),
     storageAPI = window.ONS.storage,
+    helpers = window.ONS.helpers,
     memberFound = null,
     userLiveAtAddress = storageAPI.doILiveHere(),
     isLateAddition = !!urlParams.get('late-addition');
@@ -223,8 +253,48 @@ cdn: v2.0.0
     }
   }
 
+  function validateForm() {
+    var isValid = true;
+
+    /**
+     * First name validation
+     */
+    if(!$('#first-name').val()) {
+      helpers.fieldErrorWrap({ $fieldEl: $('.js-first-name') });
+      $('.js-first-name-link').show();
+      isValid = false;
+    }
+    else {
+      helpers.removeErrorIfWrap({ $fieldEl: $('.js-first-name') });
+    }
+
+    /**
+     * Last name validation
+     */
+    if(!$('#last-name').val()) {
+      helpers.fieldErrorWrap({ $fieldEl: $('.js-last-name') });
+      $('.js-last-name-link').show();
+      isValid = false;
+    }
+    else {
+      helpers.removeErrorIfWrap({ $fieldEl: $('.js-last-name') });
+    }
+
+
+    if(!isValid) {
+      $('#js-error-panel').show();
+    }
+
+    return isValid;
+  }
+
   $('.btn-submit').on('click', function(e) {
     e.preventDefault(); // do not submit the form like usual
+
+    if(!validateForm()) {
+      window.scrollTo(0, 0);
+      return;
+    }
 
     var person = window.ONS.storage.TYPES.person({
       firstName: document.getElementById('first-name').value,
@@ -233,7 +303,7 @@ cdn: v2.0.0
 
     var personType = window.ONS.storage.KEYS[
       window.location.search.match(/journey=visitors/) ? 'VISITOR_TYPE' : 'HOUSEHOLD_MEMBER_TYPE'
-      ];
+    ];
 
     if (editUserId && memberFound) {
       person.id = editUserId;
@@ -320,6 +390,8 @@ cdn: v2.0.0
       $('#first-name').val(person.firstName);
       $('#last-name').val(person.lastName);
     }
+
+    $('#middle-name').val('');
   });
 </script>
 

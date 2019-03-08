@@ -73,6 +73,9 @@ import {
   getPinFor,
   unsetPinFor
 } from './assets/personal-details';
+import {
+  fieldErrorTpl
+} from './assets/templates';
 import {removeFromList, trailingNameS} from './assets/utils';
 
 import { numberToPositionWord, numberToWordsStyleguide } from './assets/numbers-to-words';
@@ -384,6 +387,39 @@ function isMemberUser(member) {
   return member['@person'].id === window.ONS.storage.IDS.USER_HOUSEHOLD_MEMBER_ID;
 }
 
+function fieldErrorWrap(opts) {
+  var $el = opts.$fieldEl,
+    $placeHolder = $('<div class="js-error-placeholder"></div>'),
+    $errorEl = $(fieldErrorTpl());
+
+  if ($el.hasClass('js-erroring')) {
+    return;
+  }
+
+  $errorEl.attr('id', '');
+
+  $el.replaceWith($placeHolder);
+
+  console.log($el);
+
+  $el.addClass('js-erroring');
+  $errorEl.find('.js-transclude').append($el);
+  $placeHolder.append($errorEl);
+
+  $errorEl.css('display', 'block');
+}
+
+function removeErrorIfWrap(opts) {
+  var $placeholder = opts.$fieldEl.closest($('.js-error-placeholder'));
+
+  if (!$placeholder.length) {
+    return;
+  }
+
+  $placeholder.before(opts.$fieldEl);
+  $placeholder.remove();
+}
+
 window.ONS = window.ONS || {};
 window.ONS.storage = {
   getAddress,
@@ -483,7 +519,10 @@ window.ONS.storage = {
 
 window.ONS.helpers = {
   populateHouseholdList,
-  populateVisitorList
+  populateVisitorList,
+
+  fieldErrorWrap,
+  removeErrorIfWrap
 };
 
 window.ONS.utils = {
@@ -493,6 +532,11 @@ window.ONS.utils = {
   numberToWordsStyleguide,
   getSignificant,
   cleanHTMLPlaceholderStringReplacment
+};
+
+window.ONS.templates = {
+  /*modalTpl,*/
+  fieldErrorTpl
 };
 
 $(populateHouseholdList);
@@ -506,3 +550,4 @@ $(updateBySurveyType);
 $(updateSignificantDate);
 $(updateHouseholdSummary);
 $(updateVisitorsSummary);
+
