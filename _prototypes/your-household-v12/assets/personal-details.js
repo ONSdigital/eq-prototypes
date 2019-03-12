@@ -81,148 +81,229 @@ export const personalDetailsGenderMap = {
   }
 };
 
-export function addUpdatePersonalDetailsDOB(personId, day, month, year) {
-  let allDetails = getAllPersonalDetails(),
-    details = allDetails[personId] || {};
+function changeDetailsFor(personId, mutation) {
+  let details = getPersonalDetailsFor(personId);
 
-  details['dob'] = {
-    day,
-    month,
-    year
-  };
-
-  updatePersonalDetails(personId, details);
+  updatePersonalDetails(personId, {
+    ...details,
+    ...mutation(details || {})
+  });
 
   return details;
+}
+
+export function addUpdatePersonalDetailsDOB(personId, day, month, year) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'dob': {
+        day,
+        month,
+        year
+      }
+    }));
 }
 
 export function addUpdateMaritalStatus(personId, val) {
-  let allDetails = getAllPersonalDetails(),
-    details = allDetails[personId] || {};
-
-  details['maritalStatus'] = val;
-
-  updatePersonalDetails(personId, details);
-
-  return details;
+  return changeDetailsFor(personId, () =>
+    ({
+      'maritalStatus': val
+    }));
 }
 
 export function addUpdateCountry(personId, val) {
-  let allDetails = getAllPersonalDetails(),
-    details = allDetails[personId] || {};
-
-  details['country'] = val;
-
-  updatePersonalDetails(personId, details);
-
-  return details;
+  return changeDetailsFor(personId, () =>
+    ({
+      'country': val
+    }));
 }
 
 export function addUpdateNationalIdentity(personId, collection, otherText) {
-  let allDetails = getAllPersonalDetails(),
-    details = allDetails[personId] || {};
+  return changeDetailsFor(personId, () =>
+    ({
+      'national-identity': {
+        collection,
+        ...(collection.find(val => val === 'other') ? { otherText } : {})
+      }
+    }));
+}
 
-  details['national-identity'] = {
-    collection,
-    ...(collection.find(val => val === 'other') ? { otherText } : {})
-  };
+export function addUpdateNationalIdentityOther(personId, otherText) {
+  return changeDetailsFor(personId, details =>
+    ({
+      'national-identity': {
+        ...(details['national-identity'] || {}),
+        ...{ otherText }
+      }
+    }));
+}
 
-  updatePersonalDetails(personId, details);
+export function addUpdateEthnicGroup(personId, val) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'ethnic-group': {
+        val
+      }
+    }));
+}
 
-  return details;
+export function addUpdateEthnicGroupDescription(personId, description) {
+  return changeDetailsFor(personId, details =>
+    ({
+      'ethnic-group': {
+        ...(details['ethnic-group'] || {}),
+        ...{ description }
+      }
+    }));
+}
+
+export function addUpdateEthnicGroupOther(personId, otherText) {
+  return changeDetailsFor(personId, details =>
+    ({
+      'ethnic-group': {
+        ...(details['ethnic-group'] || {}),
+        ...{ otherText }
+      }
+    }));
+}
+
+export function addUpdatePassportCountry(personId, countries) {
+  return changeDetailsFor(personId, details =>
+    ({
+      'passport': {
+        ...(details['passport'] || {}),
+        countries
+      }
+    }));
+}
+
+export function addUpdatePassportCountryOther(personId, otherText) {
+  return changeDetailsFor(personId, details =>
+    ({
+      'passport': {
+        ...(details['passport'] || {}),
+        otherText
+      }
+    }));
 }
 
 export function addUpdateOrientation(personId, val) {
-  let allDetails = getAllPersonalDetails(),
-    details = allDetails[personId] || {};
-
-  details['orientation'] = val;
-
-  updatePersonalDetails(personId, details);
-
-  return details;
+  return changeDetailsFor(personId, () =>
+    ({
+      'orientation': val
+    }));
 }
 
 export function addUpdateSalary(personId, val) {
-  let allDetails = getAllPersonalDetails(),
-    details = allDetails[personId] || {};
-
-  details['salary'] = val;
-
-  updatePersonalDetails(personId, details);
-
-  return details;
+  return changeDetailsFor(personId, () =>
+    ({
+      'salary': val
+    }));
 }
 
 export function addUpdateSex(personId, val) {
-  let allDetails = getAllPersonalDetails(),
-    details = allDetails[personId] || {};
-
-  details['sex'] = val;
-
-  updatePersonalDetails(personId, details);
-
-  return details;
+  return changeDetailsFor(personId, () =>
+    ({
+      'sex': val
+    }));
 }
 
 export function addUpdateAddressWhere(personId, val) {
-  let allDetails = getAllPersonalDetails(),
-    details = allDetails[personId] || {};
-
-  details['address-where'] = val;
-
-  updatePersonalDetails(personId, details);
-
-  return details;
+  return changeDetailsFor(personId, () =>
+    ({
+      'address-where': val
+    }));
 }
 
 export function addUpdateAge(personId, val, { isApproximate = false }) {
-  let allDetails = getAllPersonalDetails(),
-    details = allDetails[personId] || {};
-
-  details['age'] = {
-    val,
-    isApproximate
-  };
-
-  updatePersonalDetails(personId, details);
-
-  return details;
+  return changeDetailsFor(personId, () =>
+    ({
+      'age': {
+        val,
+        isApproximate
+      }
+    }));
 }
 
 export function addUpdateAgeConfirm(personId, val) {
-  let allDetails = getAllPersonalDetails(),
-    details = allDetails[personId] || {};
-
-  details['age-confirm'] = {
-    val
-  };
-
-  updatePersonalDetails(personId, details);
-
-  return details;
+  return changeDetailsFor(personId, () =>
+    ({
+      'age-confirm': {
+        val
+      }
+    }));
 }
 
 export function addUpdateAddressOutsideUK(personId, val) {
-  let allDetails = getAllPersonalDetails(),
-    details = allDetails[personId] || {};
-
-  details['address-outside-uk'] = val;
-
-  updatePersonalDetails(personId, details);
-
-  return details;
+  return changeDetailsFor(personId, () =>
+    ({
+      'address-outside-uk': val
+    }));
 }
 
 export function addUpdateAddressIndividual(personId, val) {
-  let allDetails = getAllPersonalDetails(),
-    details = allDetails[personId] || {};
+  return changeDetailsFor(personId, () =>
+    ({
+      'address': val
+    }));
+}
 
-  details['address'] = val;
+export function addUpdateApprenticeship(personId, hasApprenticeship) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'apprenticeship': {
+        hasApprenticeship
+      }
+    }));
+}
 
-  updatePersonalDetails(personId, details);
+export function addUpdateHasQualificationAbove(personId, aboveDegree) {
+  return changeDetailsFor(personId, details =>
+    ({
+      'qualifications': {
+        ...(details['qualifications'] || {}),
+        aboveDegree
+      }
+    }));
+}
 
-  return details;
+export function addUpdateQualificationsNvqEquivalent(personId, nvqEquivalent) {
+  return changeDetailsFor(personId, details =>
+    ({
+      'qualifications': {
+        ...(details['qualifications'] || {}),
+        nvqEquivalent
+      }
+    }));
+}
+
+export function addUpdateQualificationsALevel(personId, aLevels) {
+  return changeDetailsFor(personId, details =>
+    ({
+      'qualifications': {
+        ...(details['qualifications'] || {}),
+        aLevels
+      }
+    }));
+}
+
+export function addUpdateQualificationsGCSEs(personId, gcses) {
+  return changeDetailsFor(personId, details =>
+    ({
+      'qualifications': {
+        ...(details['qualifications'] || {}),
+        gcses
+      }
+    }));
+}
+
+export function addUpdateQualificationsOtherWhere(personId, othersWhere) {
+  return changeDetailsFor(personId, details =>
+    ({
+      'qualifications': {
+        ...(details['qualifications'] || {}),
+        othersWhere
+      }
+    }));
 }
 
 export function getPins() {

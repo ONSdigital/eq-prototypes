@@ -24,29 +24,62 @@ cdn: v2.0.0
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="off"
-                      action="../individual-details-ethnic-group">
+                      action="../individual-details-qualifications-degree">
                     <input type="hidden" name="person" id="person"
                            value="#"/>
                     <input type="hidden" name="survey" id="survey-type"
                            value="#"/>
-                    <div class="group u-mb-l">
+                    <div class="group" id="rsi">
                         <div class="block" id="total-retail-turnover">
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title u-fs-l js-heading">
-                                        You selected ‘Other’ for your national identity, can you specify this further?
+                                        Have you completed an apprenticeship?
                                     </h1>
+                                </div>
+
+                                <div
+                                        class="panel panel--simple panel--info u-mb-s">
+                                    <div class="panel__body">
+                                        <p class="u-fs-r">Include equivalent apprenticeships completed anywhere outside England and Wales</p>
+                                    </div>
                                 </div>
 
                                 <div class="answer">
                                     <div class="answer__fields js-fields">
-                                        <div class="field u-mb-m">
-                                            <label class="label u-fs-r "
-                                                   for="text-input">Enter
-                                                your national identity
-                                            </label>
-                                            <input class="input input--text" type="text" id="text-input">
+                                        <div class="field field--radio field--multiplechoice ">
+                                            <fieldset class="u-mb-xl">
+                                                <div class="field__item js-focusable-box">
+                                                    <input class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="has-apprenticeship"
+                                                           id="yes"
+                                                           value="yes">
+                                                    <label class="label label--inline"
+                                                           for="yes"
+                                                           id="yes-label">
+                                                        <strong
+                                                                class="u-fs-r">Yes</strong>
+                                                        <p class="u-fs-s u-db u-mb-no label--negative">
+                                                            For example trade, advanced, foundation or modern apprenticeships
+                                                        </p>
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="has-apprenticeship"
+                                                           id="no"
+                                                           value="no">
+                                                    <label class="label label--inline"
+                                                           for="no"
+                                                           id="no-label">
+                                                        <strong
+                                                                class="u-fs-r">No</strong>
+                                                    </label>
+                                                </div>
+                                            </fieldset>
                                         </div>
                                     </div>
                                 </div>
@@ -83,9 +116,9 @@ cdn: v2.0.0
     surveyType = urlParams.get('survey');
 
   $('.qa-btn-submit').on('click', function (e) {
-    var otherText = $('#text-input').val();
-
-    storageAPI.addUpdateNationalIdentityOther(personId, otherText);
+    storageAPI.addUpdateApprenticeship(personId,
+      $('[name="has-apprenticeship"]:checked').val()
+    );
 
     if(isEditing) {
       e.preventDefault();
@@ -103,15 +136,13 @@ cdn: v2.0.0
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('You selected ‘Other’ for ' + person.fullName +
-        window.ONS.utils.trailingNameS(person.fullName) +
-        ' national identity, can you specify this further?');
+      $('.js-heading').html('Has ' + person.fullName +
+        ' completed an apprenticeship?');
     }
   }
 
-  if (details && details['national-identity'] &&
-    details['national-identity'].otherText) {
-    $('#text-input').val(details['national-identity'].otherText);
+  if (details && details['apprenticeship'] && details['apprenticeship'].hasApprenticeship) {
+    $('#' + details['apprenticeship'].hasApprenticeship).attr('checked', true);
   }
 
   $(updateQuestion);
