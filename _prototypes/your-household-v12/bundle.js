@@ -54,6 +54,7 @@ import {
   getPersonalDetailsFor,
   addUpdateMaritalStatus,
   addUpdateCountry,
+  addUpdateCountryOther,
   addUpdateNationalIdentity,
   addUpdateNationalIdentityOther,
   addUpdateEthnicGroup,
@@ -75,6 +76,9 @@ import {
   addUpdateQualificationsALevel,
   addUpdateQualificationsGCSEs,
   addUpdateQualificationsOtherWhere,
+  addUpdateEmploymentStatus,
+  addUpdateJobTitle,
+  addUpdateJobDescribe,
 
   personalDetailsMaritalStatusMap,
   personalDetailsCountryMap,
@@ -452,6 +456,7 @@ window.ONS.storage = {
   getPersonalDetailsFor,
   addUpdateMaritalStatus,
   addUpdateCountry,
+  addUpdateCountryOther,
   addUpdateNationalIdentity,
   addUpdateNationalIdentityOther,
   addUpdateEthnicGroup,
@@ -473,6 +478,9 @@ window.ONS.storage = {
   addUpdateQualificationsALevel,
   addUpdateQualificationsGCSEs,
   addUpdateQualificationsOtherWhere,
+  addUpdateEmploymentStatus,
+  addUpdateJobTitle,
+  addUpdateJobDescribe,
 
   personalDetailsMaritalStatusMap,
   personalDetailsCountryMap,
@@ -534,3 +542,4 @@ $(updateBySurveyType);
 $(updateSignificantDate);
 $(updateHouseholdSummary);
 $(updateVisitorsSummary);
+

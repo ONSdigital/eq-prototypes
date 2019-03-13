@@ -24,7 +24,7 @@ cdn: v2.0.0
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="off"
-                      action="../individual-details-passport-country">
+                      action="../individual-details-job-title">
                     <input type="hidden" name="person" id="person"
                            value="#"/>
                     <input type="hidden" name="survey" id="survey-type"
@@ -35,7 +35,7 @@ cdn: v2.0.0
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title u-fs-l js-heading">
-                                        Which of these best describes your White ethnic group or background?
+                                        In your main job, what is your employment status?
                                     </h1>
                                 </div>
 
@@ -46,61 +46,40 @@ cdn: v2.0.0
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="ethnic-description"
-                                                           id="british"
-                                                           value="british">
+                                                           name="radio-group"
+                                                           id="employee"
+                                                           value="employee">
                                                     <label class="label label--inline"
-                                                           for="british"
-                                                           id="british-label">
-                                                        <strong class="u-fs-r">English, Welsh, Scottish, Northern Irish or British</strong>
+                                                           for="employee"
+                                                           id="employee-label">
+                                                        <strong
+                                                                class="u-fs-r">Employee</strong>
                                                     </label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="ethnic-description"
-                                                           id="irish"
-                                                           value="irish">
+                                                           name="radio-group"
+                                                           id="freelance-without-employees"
+                                                           value="freelance-without-employees">
                                                     <label class="label label--inline"
-                                                           for="irish"
-                                                           id="irish-label">
-                                                        <strong class="u-fs-r">Irish</strong>
+                                                           for="freelance-without-employees"
+                                                           id="freelance-without-employees-label">
+                                                        <strong
+                                                                class="u-fs-r">Self-employed or freelance without employees</strong>
                                                     </label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="ethnic-description"
-                                                           id="gypsy"
-                                                           value="gypsy">
+                                                           name="radio-group"
+                                                           id="freelance-with-employees"
+                                                           value="freelance-with-employees">
                                                     <label class="label label--inline"
-                                                           for="gypsy"
-                                                           id="gypsy-label">
-                                                        <strong class="u-fs-r">Gypsy or Irish Traveller</strong>
-                                                    </label>
-                                                </div>
-                                                <div class="field__item js-focusable-box">
-                                                    <input class="input input--radio js-focusable"
-                                                           type="radio"
-                                                           name="ethnic-description"
-                                                           id="roma"
-                                                           value="roma">
-                                                    <label class="label label--inline"
-                                                           for="roma"
-                                                           id="roma-label">
-                                                        <strong class="u-fs-r">Roma</strong>
-                                                    </label>
-                                                </div>
-                                                <div class="field__item js-focusable-box">
-                                                    <input class="input input--radio js-focusable"
-                                                           type="radio"
-                                                           name="ethnic-description"
-                                                           id="other"
-                                                           value="other">
-                                                    <label class="label label--inline"
-                                                           for="other"
-                                                           id="other-label">
-                                                        <strong class="u-fs-r">Other White ethnic group or background</strong>
+                                                           for="freelance-with-employees"
+                                                           id="freelance-with-employees-label">
+                                                        <strong
+                                                                class="u-fs-r">Self-employed with employees</strong>
                                                     </label>
                                                 </div>
                                             </fieldset>
@@ -140,19 +119,13 @@ cdn: v2.0.0
     surveyType = urlParams.get('survey');
 
   $('.qa-btn-submit').on('click', function (e) {
-    var val = $('[name="ethnic-description"]:checked').val();
-
-    storageAPI.addUpdateEthnicGroupDescription(personId, val);
+    storageAPI.addUpdateEmploymentStatus(personId,
+      $('[name="radio-group"]:checked').val()
+    );
 
     if(isEditing) {
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person=' +
-        personId + (surveyType ? '&survey=' + surveyType : '');
-    }
-
-    if(val === 'other') {
-      e.preventDefault();
-      window.location.href = '../individual-details-ethnic-group-other/?person=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
     }
   });
@@ -166,14 +139,13 @@ cdn: v2.0.0
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('Which of these best describes ' + person.fullName +
-        window.ONS.utils.trailingNameS(person.fullName) +
-          ' White ethnic group or background?');
+      $('.js-heading').html('In ' + person.fullName +
+        ' main job, what is their employment status?');
     }
   }
 
-  if (details && details['ethnic-group']) {
-    $('#' + details['ethnic-group'].description).attr('checked', true);
+  if (details && details['employment-status']) {
+    $('#' + details['employment-status'].val).attr('checked', true);
   }
 
   $(updateQuestion);

@@ -151,13 +151,18 @@ cdn: v2.0.0
     surveyType = urlParams.get('survey');
 
   $('.qa-btn-submit').on('click', function (e) {
-    storageAPI.addUpdateCountry(personId,
-      $('[name="country"]:checked').val()
-    );
+    var val = $('[name="country"]:checked').val();
+    storageAPI.addUpdateCountry(personId, val);
 
     if(isEditing) {
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person=' +
+        personId + (surveyType ? '&survey=' + surveyType : '');
+    }
+
+    if(val === 'elsewhere') {
+      e.preventDefault();
+      window.location.href = '../individual-details-country-other/?person=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
     }
   });
@@ -177,8 +182,8 @@ cdn: v2.0.0
     }
   }
 
-  if (details && details.country) {
-    $('#' + details.country).attr('checked', true);
+  if (details && details.country && details.country.val) {
+    $('#' + details.country.val).attr('checked', true);
   }
 
   $(updateQuestion);

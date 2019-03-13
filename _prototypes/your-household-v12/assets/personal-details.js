@@ -113,7 +113,19 @@ export function addUpdateMaritalStatus(personId, val) {
 export function addUpdateCountry(personId, val) {
   return changeDetailsFor(personId, () =>
     ({
-      'country': val
+      'country': {
+        val
+      }
+    }));
+}
+
+export function addUpdateCountryOther(personId, otherText) {
+  return changeDetailsFor(personId, details =>
+    ({
+      'country': {
+        ...(details['country'] || {}),
+        otherText
+      }
     }));
 }
 
@@ -302,6 +314,33 @@ export function addUpdateQualificationsOtherWhere(personId, othersWhere) {
       'qualifications': {
         ...(details['qualifications'] || {}),
         othersWhere
+      }
+    }));
+}
+
+export function addUpdateEmploymentStatus(personId, val) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'employment-status': {
+        val
+      }
+    }));
+}
+
+export function addUpdateJobTitle(personId, val) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'job-title': {
+        val
+      }
+    }));
+}
+
+export function addUpdateJobDescribe(personId, val) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'job-describe': {
+        val
       }
     }));
 }
