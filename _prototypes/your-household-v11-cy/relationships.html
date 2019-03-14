@@ -10,7 +10,7 @@ language: welsh
 ---
 
 <script>
-    var welshQuestionMutations = {
+    var welshQuestionMutated = {
       'husband-wife': 'ŵr neu wraig',
       'same-sex-partner': 'bartner sifil cofrestredig cyfreithiol',
       'partner': 'bartner',
@@ -23,6 +23,22 @@ language: welsh
       'grandchild': 'ŵyr neu wyres',
       'grandparent': 'taid/tad-cu neu nain/mam-gu',
       'other-relation': 'berthynas arall',
+      'unrelated': 'perthyn'
+    };
+
+    var welshQuestionNonMutated = {
+      'husband-wife': 'gŵr neu wraig',
+      'same-sex-partner': 'partner sifil cofrestredig cyfreithiol',
+      'partner': 'partner',
+      'son-daughter': 'mab neu ferch',
+      'step-child': 'llysblentyn',
+      'brother-sister': 'brawd neu chwaer',
+      'mother-father': 'mam neu dad',
+      'step-brother-sister': 'llysfrawd neu lyschwaer',
+      'step-mother-father': 'llysfam neu lystad',
+      'grandchild': 'ŵyr neu wyres',
+      'grandparent': 'taid/tad-cu neu nain/mam-gu',
+      'other-relation': 'perthynas arall',
       'unrelated': 'perthyn'
     };
 </script>
@@ -323,11 +339,6 @@ language: welsh
     var personIs = missingRelationship.personIs,
       personTo = missingRelationship.personTo;
 
-    /*var isNotFamilyDescription = relationshipDescription &&
-      ['unrelated'].indexOf(
-        relationshipDescription.type.id
-      ) !== -1;*/
-
     var personToIsMe = personTo['@person'].id ===
         storageAPI.IDS.USER_HOUSEHOLD_MEMBER_ID;
     
@@ -337,9 +348,9 @@ language: welsh
     var gap2 = personToIsMe ? " yw eich" : " yn";
 
     var gap3 = ' i ' + personTo['@person'].fullName;
-    //var gap3Your = ' i ' + personTo['@person'].fullName;
 
     function standardText() {
+
       /**
        * Conditionally show if question is not about me
        */
@@ -347,8 +358,9 @@ language: welsh
 
         personIs['@person'].fullName + gap2 +
         " <span class='highlight'>" +
-        (relationshipDescription && welshQuestionMutations[k] ||
-          "...") +
+        (relationshipDescription
+          && (personToIsMe ? welshQuestionNonMutated[k] : welshQuestionMutated[k])
+          || "...") +
         "</span>" +
 
         (!personToIsMe ? gap3 : '');
