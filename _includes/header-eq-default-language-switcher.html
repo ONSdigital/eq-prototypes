@@ -90,88 +90,21 @@
         padding: 9px;
         padding: .5rem
     }
+
+    .language-links {
+        margin: 0;
+        padding: 0;
+        list-style: none
+    }
+
+    .language-links__item {
+        display: inline-block;
+        margin: 0 0 0 9px;
+        margin: 0 0 0 .5rem;
+        *display: inline;
+        *zoom: 1
+    }
 </style>
-
-<!--<style>
-    .language-switcher {
-        display : none;
-        position: relative;
-        top: -.25rem;
-    }
-
-    @media(min-width: 500px) {
-        .language-switcher {
-            display : block;
-        }
-    }
-
-    .languages {
-        position: absolute;
-        right: 0;
-        border: 1px solid #999;
-        background-color: #fff;
-        border-radius: 3px;
-    }
-
-    .language-switcher__selected,
-    .language-switcher__link {
-        display : block;
-        padding : .2rem .5rem;
-    }
-
-    .language-switcher__items {
-        display : none;
-        margin-bottom : 0;
-        padding : 0;
-        list-style-type : none;
-    }
-
-    .language-switcher__item {
-        margin-bottom : 0;
-    }
-
-    .language-switcher__item {
-        border-top : 1px solid #999;
-    }
-
-    .language-switcher__selected,
-    .language-switcher__selected:hover,
-    .language-switcher__selected:active,
-    .language-switcher__selected:focus {
-        width : 8rem;
-        line-height : 1.6rem;
-        text-align : left;
-        font-weight : normal;
-        color : #000;
-        background: none;
-        border: none;
-        transition : none;
-    }
-
-    .language-switcher__selected::after {
-        position: absolute;
-        right: 10px;
-        height: 20px;
-        width: 20px;
-        content: "";
-        background-image: url('https://sdc-global-design-patterns.netlify.com/assets/img/icons/icons&#45;&#45;chevron-right-blue-hover.svg');
-        background-repeat: no-repeat;
-        background-size: 10px;
-        background-position: 92% center;
-        transform: rotate(90deg);
-    }
-
-    .choose-language {
-        position : relative;
-        top : .3rem;
-    }
-
-    .language-switcher__items&#45;&#45;open {
-        display: block;
-    }
-</style>-->
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.0/underscore-min.js"></script>
 
 <header class="header">
     <div class="header__top" role="banner">
@@ -186,62 +119,43 @@
                     </div>
                 </div>
                 <div class="grid__col col-6@s">
-                    <div
-                            class="language-switcher u-d-no@xs@s js-language-switcher u-fr" lang="en-GB">
+                    <ul id="language-links"
+                        class="language-links u-d-no@xs@m u-fr">
+                        <li class="language-links__item">
+                            <a class="js-language-switcher-item" href="#"
+                               lang="en" data-language-item="english">English</a>
+                        </li>
+                        <li class="language-links__item">
+                            <a class="js-language-switcher-item" href="#"
+                               lang="cy" data-language-item="welsh">Cymraeg</a>
+                        </li>
+                        <li class="language-links__item">
+                            <a class="js-language-switcher-item" href="#"
+                               lang="pl" data-language-item="polish">Polskie</a>
+                        </li>
+                    </ul>
+
+                    <div id="language-switcher"
+                        style="display:none;"
+                        class="language-switcher u-d-no@xs@s js-language-switcher u-fr" lang="en-GB">
+
                         <a class="js-language-switcher-link" href="#">Choose language</a>
                         <button type="button" class="u-d-no language-switcher__button js-language-switcher-button" aria-label="Language selector. Current language: English">English</button>
                         <ul id="language-switcher-items" class="u-d-no language-switcher__items js-language-switcher-items">
                             <li class="language-switcher__item">
-                                <a href="#" class="language-switcher__language js-language-switcher-item" lang="cy" tabindex="-1">Cymraeg</a>
+                                <a href="#"
+                                   class="language-switcher__language js-language-switcher-item" lang="en" tabindex="-1" data-language-item="english">English</a>
                             </li>
                             <li class="language-switcher__item">
-                                <a href="#" class="language-switcher__language js-language-switcher-item" lang="ga" tabindex="-1">Gaeilge</a>
+                                <a href="#"
+                                   class="language-switcher__language js-language-switcher-item" lang="cy" tabindex="-1" data-language-item="welsh">Cymraeg</a>
                             </li>
                             <li class="language-switcher__item">
-                                <a href="#" class="language-switcher__language js-language-switcher-item" lang="sco" tabindex="-1">Ulstèr-Scotch</a>
+                                <a href="#"
+                                   class="language-switcher__language js-language-switcher-item" lang="pl" tabindex="-1" data-language-item="polish">Polskie</a>
                             </li>
                         </ul>
                     </div>
-
-                    <!--<div class="language-switcher js-language-switcher">
-                        <a class="choose-language u-fr"
-                           href="../languages">Choose language</a>
-                        <div class="languages" style="display:none;">
-                            <button
-                                class="btn language-switcher__selected js-language-switcher-selected"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                                aria-controls="language-switcher-items">
-                                English
-                            </button>
-
-
-
-                            <ul id="language-switcher-items"
-                                class="language-switcher__items js-language-switcher-items"
-                                role="menu">
-                                <li id="english-item"
-                                    class="language-switcher__item">
-                                    <a
-                                            class="language-switcher__link js-language-switcher-item" href="" role="menuitem" data-language-item="english">
-                                        English
-                                    </a>
-                                </li>
-                                <li id="welsh-item"
-                                    class="language-switcher__item">
-                                    <a class="language-switcher__link js-language-switcher-item" href="" role="menuitem" data-language-item="welsh">
-                                        Cymraeg
-                                    </a>
-                                </li>
-                                <li id="polish-item"
-                                    class="language-switcher__item">
-                                    <a class="language-switcher__link js-language-switcher-item" href="" role="menuitem" data-language-item="polish">
-                                        Polskie
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>-->
                 </div>
             </div>
         </div>
@@ -275,12 +189,13 @@
 
 
 <script>
-    /*var language = "{% if page.language %}{{page.language}}{% else %}english{% endif %}",
+  $(function () {
+    var language = "{% if page.language %}{{page.language}}{% else %}english{% endif %}",
       languageMap = {
         'english': {
           elId: 'english-item',
           label: 'English',
-          fragment: '/'
+          fragment: '-en/'
         },
         'welsh': {
           elId: 'welsh-item',
@@ -294,108 +209,40 @@
         }
       };
 
-    $(function () {
-      var $scopeEl = $('.js-language-switcher');
-      var $switcher = $scopeEl.find('.js-language-switcher-selected');
-      var clickedStateProperty = 'data-language-item-clicked';
-      var switcherOpenClass = 'language-switcher__selected--open';
-      var itemsOpenClass = 'language-switcher__items--open';
-      var listAnchorClass = 'js-language-switcher-item';
-      var $listAnchors = $scopeEl.find('.' + listAnchorClass);
-      var $list = $scopeEl.find('.js-language-switcher-items');
+    var $scopeEl = $('.js-language-switcher');
+    var $switcher = $scopeEl.find('.js-language-switcher-button');
+    var listAnchorClass = 'js-language-switcher-item';
+    var $listAnchors = $scopeEl.find('.' + listAnchorClass);
+    var urlParams = new URLSearchParams(window.location.search),
+      showLanguageSwitcher = urlParams.get('language-switcher');
 
-      /!**
-       * Setup language selector
-       *!/
-      $('#' + languageMap[language].elId).remove();
-      $('.choose-language').hide();
-      $('.languages').show();
-      $switcher.html(languageMap[language].label);
+    var $scopeLinksEl = $('.language-links');
+    var listLinksAnchorClass = 'js-language-switcher-item';
+    var $listLinksAnchorClass = $scopeLinksEl.find('.' + listLinksAnchorClass);
 
-      $switcher.on('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
+    $switcher.html(languageMap[language].label);
 
-        toggle($switcher.hasClass(switcherOpenClass)
-          ? 'hide'
-          : 'show');
-      });
+    $listAnchors.on('click', link_handler);
+    $listLinksAnchorClass.on('click', link_handler);
 
-      $switcher.on('keydown', function(e) {
-        if(e.key === 'ArrowDown' && $switcher.hasClass(switcherOpenClass)) {
-          e.preventDefault();
+    function link_handler(e) {
+      e.preventDefault();
 
-          setSwitcherProp(true);
-          $list.find('.' + listAnchorClass + ':first').trigger('focus');
-        }
-      });
+      var chosen = $(this).attr('data-language-item'),
+        currentLanguageFragment = languageMap[language].fragment,
+        chosenLanguageFragment = languageMap[chosen].fragment;
 
-      function setSwitcherProp(val) {
-        $switcher.attr(clickedStateProperty, val);
-      }
+      var url = window.location.href.replace(currentLanguageFragment,
+       chosenLanguageFragment);
 
-      $listAnchors.on('mousedown', setSwitcherProp.bind(null, true));
+      window.location.href = url;
+    }
 
-      $listAnchors.on('keydown', function(e) {
-        var $this = $(this),
-            keyMap = {
-              'ArrowDown': function () {
-                e.preventDefault();
-                var $nextEl = $this.parent().next();
-
-                $nextEl && $nextEl.find('.' + listAnchorClass).trigger('focus');
-              },
-              'ArrowUp': function () {
-                e.preventDefault();
-                var $prevEl = $this.parent().prev();
-
-                $prevEl[0] &&
-                    $prevEl.find('.' + listAnchorClass).trigger('focus');
-              }
-            };
-
-        var funcFound = keyMap[e.key];
-
-        funcFound && funcFound();
-      });
-
-      $listAnchors.on('click', function (e) {
-        e.preventDefault();
-
-        var url = '',
-          chosen = $(this).attr('data-language-item'),
-          currentLanguageFragment = languageMap[language].fragment,
-          chosenLanguageFragment = languageMap[chosen].fragment;
-
-        if(language === 'english') {
-          var pieces = window.location.href.split('/');
-          url = pieces.slice(0, pieces.length-1).join('/') + chosenLanguageFragment;
-        }
-        else {
-          url = window.location.href.replace(currentLanguageFragment, chosenLanguageFragment);
-        }
-
-        window.location.href = url;
-      });
-
-      document.addEventListener('mouseup', function  () {
-        toggle('hide');
-      });
-
-      $switcher.on('blur', function () {
-        if($switcher.attr(clickedStateProperty) !== 'true') {
-          toggle('hide');
-        }
-      });
-
-      function toggle(description) {
-        var jQMethod = description === 'show' ? 'addClass' : 'removeClass';
-
-        $switcher[jQMethod](switcherOpenClass);
-        $list[jQMethod](itemsOpenClass);
-      }
-    });*/
-
+    if(showLanguageSwitcher) {
+      $('#language-links').hide();
+      $('#language-switcher').show();
+    }
+  });
 </script>
 
 <script src='/js/compiled/language-switcher/bundle.js'></script>

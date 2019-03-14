@@ -1,4 +1,5 @@
 import domReady from './domready';
+
 export class LanguageSelector {
   constructor(context) {
     this.context = context;
