@@ -1,5 +1,99 @@
 <style>
     .language-switcher {
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        max-height: 36px
+    }
+
+    .language-switcher__button {
+        position: relative;
+        padding: 9px;
+        padding: .5rem;
+        min-width: 144px;
+        min-width: 8rem;
+        min-height: 36px;
+        border: 1px solid #999;
+        border-radius: 3px;
+        background: transparent;
+        font-family: inherit;
+        line-height: 1;
+        text-align: left;
+        transition: border-color .2s ease-in-out
+    }
+
+    .language-switcher__button:focus {
+        outline: 3px solid #fe781f;
+        outline-offset: 3px
+    }
+
+    .language-switcher__button:after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 50%;
+        right: 9px;
+        right: .5rem;
+        transform: translateY(-50%);
+        width: 15px;
+        height: 15px;
+        background-position: 50%;
+        background-image: url(../assets/img/icons--chevron-down.svg);
+        background-size: 15px;
+        background-repeat: no-repeat
+    }
+
+    .language-switcher__button:focus, .language-switcher__button:hover {
+        border-color: #033e58
+    }
+
+    .language-switcher--open .language-switcher__button {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-color: #033e58
+    }
+
+    .language-switcher--open .language-switcher__button:after {
+        transform: translateY(-50%) rotate(180deg)
+    }
+
+    .language-switcher__items {
+        z-index: 4;
+        position: relative;
+        padding: 0;
+        list-style: none;
+        border: 1px solid #033e58;
+        border-top: 0;
+        border-bottom-left-radius: 3px;
+        border-bottom-right-radius: 3px;
+        background: #fff;
+        opacity: 0;
+        pointer-events: none
+    }
+
+    .language-switcher--open .language-switcher__items {
+        opacity: 1;
+        pointer-events: auto
+    }
+
+    .language-switcher__item {
+        margin: 0
+    }
+
+    .language-switcher__item:not(:last-child) {
+        border-bottom: 1px solid #033e58
+    }
+
+    .language-switcher__language {
+        display: block;
+        padding: 9px;
+        padding: .5rem
+    }
+</style>
+
+<!--<style>
+    .language-switcher {
         display : none;
         position: relative;
         top: -.25rem;
@@ -60,7 +154,7 @@
         height: 20px;
         width: 20px;
         content: "";
-        background-image: url('https://sdc-global-design-patterns.netlify.com/assets/img/icons/icons--chevron-right-blue-hover.svg');
+        background-image: url('https://sdc-global-design-patterns.netlify.com/assets/img/icons/icons&#45;&#45;chevron-right-blue-hover.svg');
         background-repeat: no-repeat;
         background-size: 10px;
         background-position: 92% center;
@@ -72,10 +166,12 @@
         top : .3rem;
     }
 
-    .language-switcher__items--open {
+    .language-switcher__items&#45;&#45;open {
         display: block;
     }
-</style>
+</style>-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.0/underscore-min.js"></script>
 
 <header class="header">
     <div class="header__top" role="banner">
@@ -90,7 +186,24 @@
                     </div>
                 </div>
                 <div class="grid__col col-6@s">
-                    <div class="language-switcher js-language-switcher">
+                    <div
+                            class="language-switcher u-d-no@xs@s js-language-switcher u-fr" lang="en-GB">
+                        <a class="js-language-switcher-link" href="#">Choose language</a>
+                        <button type="button" class="u-d-no language-switcher__button js-language-switcher-button" aria-label="Language selector. Current language: English">English</button>
+                        <ul id="language-switcher-items" class="u-d-no language-switcher__items js-language-switcher-items">
+                            <li class="language-switcher__item">
+                                <a href="#" class="language-switcher__language js-language-switcher-item" lang="cy" tabindex="-1">Cymraeg</a>
+                            </li>
+                            <li class="language-switcher__item">
+                                <a href="#" class="language-switcher__language js-language-switcher-item" lang="ga" tabindex="-1">Gaeilge</a>
+                            </li>
+                            <li class="language-switcher__item">
+                                <a href="#" class="language-switcher__language js-language-switcher-item" lang="sco" tabindex="-1">Ulstèr-Scotch</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!--<div class="language-switcher js-language-switcher">
                         <a class="choose-language u-fr"
                            href="../languages">Choose language</a>
                         <div class="languages" style="display:none;">
@@ -101,6 +214,9 @@
                                 aria-controls="language-switcher-items">
                                 English
                             </button>
+
+
+
                             <ul id="language-switcher-items"
                                 class="language-switcher__items js-language-switcher-items"
                                 role="menu">
@@ -123,26 +239,9 @@
                                         Polskie
                                     </a>
                                 </li>
-
-                                <!--<li class="language-switcher__item">
-                                    <a class="language-switcher__link js-language-switcher-item" href="" role="menuitem">
-                                        Gàidhlig
-                                    </a>
-                                </li>
-                                <li class="language-switcher__item">
-                                    <a class="language-switcher__link js-language-switcher-item" href="" role="menuitem">
-                                        Ulstèr-Scotch
-                                    </a>
-                                </li>
-                                <li class="language-switcher__item">
-                                    <a class="language-switcher__link js-language-switcher-item"
-                                       href="../languages/">
-                                        All languages
-                                    </a>
-                                </li>-->
                             </ul>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
@@ -176,7 +275,7 @@
 
 
 <script>
-    var language = "{% if page.language %}{{page.language}}{% else %}english{% endif %}",
+    /*var language = "{% if page.language %}{{page.language}}{% else %}english{% endif %}",
       languageMap = {
         'english': {
           elId: 'english-item',
@@ -205,9 +304,9 @@
       var $listAnchors = $scopeEl.find('.' + listAnchorClass);
       var $list = $scopeEl.find('.js-language-switcher-items');
 
-      /**
+      /!**
        * Setup language selector
-       */
+       *!/
       $('#' + languageMap[language].elId).remove();
       $('.choose-language').hide();
       $('.languages').show();
@@ -295,6 +394,8 @@
         $switcher[jQMethod](switcherOpenClass);
         $list[jQMethod](itemsOpenClass);
       }
-    });
+    });*/
 
 </script>
+
+<script src='/js/compiled/language-switcher/bundle.js'></script>
