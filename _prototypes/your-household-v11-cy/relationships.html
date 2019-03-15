@@ -301,8 +301,7 @@ language: welsh
       ? " yw "
       : (personToIsMe
           ? " yw eich"
-          : " yw " + personTo['@person'].fullName /*+
-          window.ONS.utils.trailingNameS(personTo['@person'].fullName)*/
+          : " yw "
       );
 
     var gap3 = " to " + (personToIsMe ? ' you' : personTo['@person'].fullName);
@@ -312,11 +311,10 @@ language: welsh
 
         gap2 +
 
-        '<strong>' +
-        (relationshipDescription &&
-          (' ' + relationshipDescription.sentanceLabel) ||
-          " ...") +
-        '</strong>' +
+        (relationshipDescription && relationshipDescription.sentanceLabel
+          ? ' <strong>' + relationshipDescription.sentanceLabel + '</strong> ' + personTo['@person'].fullName
+          : ' ' + personTo['@person'].fullName + " ..."
+        ) +
 
         /**
          * Conditionally show if not family description
@@ -324,13 +322,11 @@ language: welsh
         (isNotFamilyDescription ? gap3 : '');
     }
 
-    console.log(standardText());
-
     $('.js-relationship-answer-feedback').html(
       (k && k === 'unrelated')
         ? 'Nid yw ' + personIs['@person'].fullName +
-          ' yn <strong>perthyn</strong> i ' +
-          (personToIsMe ? 'chi' : personTo['@person'].fullName)
+            ' yn <strong>perthyn</strong> i ' +
+            (personToIsMe ? 'chi' : personTo['@person'].fullName)
         : standardText()
     );
   }
