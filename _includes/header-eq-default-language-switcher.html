@@ -120,6 +120,7 @@
                 </div>
                 <div class="grid__col col-6@s">
                     <ul id="language-links"
+                        style="display:none;"
                         class="language-links u-d-no@xs@m u-fr">
                         <li class="language-links__item">
                             <a class="js-language-switcher-item" href="#"
@@ -239,8 +240,10 @@
     }
 
     if(showLanguageSwitcher) {
-      $('#language-links').hide();
       $('#language-switcher').show();
+    }
+    else {
+      $('#language-links').show();
     }
   });
 </script>
