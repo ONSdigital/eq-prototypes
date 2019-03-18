@@ -70,8 +70,10 @@ cdn: v1.8.4
 
 	$('.qa-btn-submit').on('click', function (e) {
 
-		var loc = yesbox.checked ? "../section-intro-en" :
+		var loc = yesbox.checked ? "../section-intro-en/?noop=true" :
           "../test-address-en/?edit=true";
+
+		loc += (window.languageSwitcherActive ? '&language-switcher=true' : '');
 
         document.trav.action = loc;
         window.location = loc;

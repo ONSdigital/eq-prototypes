@@ -111,7 +111,8 @@ language: welsh
         window.ONS.storage.deleteUserAsHouseholdMember();
     }
 
-    window.location = '../does-anyone-else-live-here-cy/';
+    window.location =  (isEditing ? '../summary-cy/' : '../do-you-live-here-cy/') +
+      (window.languageSwitcherActive ? '?language-switcher=true' : '');
   });
 
   function getName() {

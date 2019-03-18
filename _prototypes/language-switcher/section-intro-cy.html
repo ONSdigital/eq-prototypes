@@ -56,7 +56,10 @@ language: welsh
 <script>
   $('.btn-submit').click(function(e) {
     e.preventDefault(); // do not submit the form like usual
-    window.location = '../what-is-your-name-cy/';
+
+    window.location = '../what-is-your-name-cy/' + (
+      window.languageSwitcherActive ? '?language-switcher=true' : ''
+    );
   });
 
   $(function() {

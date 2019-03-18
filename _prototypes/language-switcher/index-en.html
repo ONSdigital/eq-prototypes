@@ -75,7 +75,6 @@ cdn: v1.8.4
                                             <div class="grid__col col-4@m">
                                                 <input
                                                         class="input input--text input--text-lg u-mb-s"
-                                                        id="address-line-1"
                                                         name="address-line-1"
                                                         data-qa="input-text"
                                                         value=""/>
@@ -83,7 +82,6 @@ cdn: v1.8.4
                                             <div class="grid__col col-4@m">
                                                 <input
                                                         class="input input--text input--text-lg u-mb-s"
-                                                        id="address-line-1"
                                                         name="address-line-1"
                                                         data-qa="input-text"
                                                         value=""/>
@@ -115,7 +113,9 @@ cdn: v1.8.4
 <script>
   $('.btn-submit').click(function(e) {
     e.preventDefault();
-    window.location = '../confirm-address-en/';
+    window.location =  '../confirm-address-en/' + (
+      window.languageSwitcherActive ? '?language-switcher=true' : ''
+    );
   });
 </script>
 

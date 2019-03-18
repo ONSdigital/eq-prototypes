@@ -192,7 +192,8 @@ language: polish
     sessionStorage.setItem('county', document.getElementById('county').value);
     sessionStorage.setItem('postcode', document.getElementById('postcode').value);
 
-    window.location = isEditing ? '../confirm-address-po/' : '../index-po/';
+    window.location = (isEditing ? '../confirm-address-po/' : '../index-po/') +
+      (window.languageSwitcherActive ? '?language-switcher=true' : '');
   });
 
   function getAddress() {

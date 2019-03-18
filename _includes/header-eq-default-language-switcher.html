@@ -226,6 +226,11 @@
     $listAnchors.on('click', link_handler);
     $listLinksAnchorClass.on('click', link_handler);
 
+    /**
+     * Expose boolean
+     */
+    window.languageSwitcherActive = !!showLanguageSwitcher;
+
     function link_handler(e) {
       e.preventDefault();
 

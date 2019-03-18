@@ -76,7 +76,6 @@ language: polish
                                             <div class="grid__col col-4@m">
                                                 <input
                                                         class="input input--text input--text-lg u-mb-s"
-                                                        id="address-line-1"
                                                         name="address-line-1"
                                                         data-qa="input-text"
                                                         value=""/>
@@ -84,7 +83,6 @@ language: polish
                                             <div class="grid__col col-4@m">
                                                 <input
                                                         class="input input--text input--text-lg u-mb-s"
-                                                        id="address-line-1"
                                                         name="address-line-1"
                                                         data-qa="input-text"
                                                         value=""/>
@@ -114,7 +112,9 @@ language: polish
 <script>
   $('.btn-submit').click(function(e) {
     e.preventDefault();
-    window.location = '../confirm-address-po/';
+    window.location = '../confirm-address-po/' + (
+      window.languageSwitcherActive ? '?language-switcher=true' : ''
+    );
   });
 </script>
 

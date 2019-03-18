@@ -112,7 +112,8 @@ language: polish
       storageAPI.updateUserAsHouseholdMember(newPersonObj, userAsMember);
     }
 
-    window.location = isEditing ? '../summary-po/' : '../do-you-live-here-po/';
+    window.location =  (isEditing ? '../summary-po/' : '../do-you-live-here-po/') +
+      (window.languageSwitcherActive ? '?language-switcher=true' : '');
   });
 
   function getName() {

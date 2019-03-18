@@ -110,7 +110,8 @@ cdn: v1.8.4
       storageAPI.updateUserAsHouseholdMember(newPersonObj, userAsMember);
     }
 
-    window.location = isEditing ? '../summary-en/' : '../do-you-live-here-en/';
+    window.location =  (isEditing ? '../summary-en/' : '../do-you-live-here-en/') +
+      (window.languageSwitcherActive ? '?language-switcher=true' : '');
   });
 
   function getName() {

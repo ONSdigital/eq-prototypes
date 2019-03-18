@@ -69,12 +69,13 @@ language: polish
 	var yesbox = document.getElementById("address-correct-yes");
 
 	$('.qa-btn-submit').on('click', function (e) {
+      var loc = yesbox.checked ? "../section-intro-po/?noop=true" :
+        "../test-address-po/?edit=true";
 
-		var loc = yesbox.checked ? "../section-intro-po" :
-          "../test-address-po/?edit=true";
+      loc += (window.languageSwitcherActive ? '&language-switcher=true' : '');
 
-        document.trav.action = loc;
-        window.location = loc;
+      document.trav.action = loc;
+      window.location = loc;
 	});
 </script>
 

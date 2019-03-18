@@ -191,7 +191,8 @@ language: welsh
     sessionStorage.setItem('county', document.getElementById('county').value);
     sessionStorage.setItem('postcode', document.getElementById('postcode').value);
 
-    window.location = isEditing ? '../confirm-address-cy/' : '../index-cy/';
+    window.location = (isEditing ? '../confirm-address-cy/' : '../index-cy/') +
+      (window.languageSwitcherActive ? '?language-switcher=true' : '');
   });
 
   function getAddress() {

@@ -70,11 +70,13 @@ language: welsh
 
 	$('.qa-btn-submit').on('click', function (e) {
 
-		var loc = yesbox.checked ? "../section-intro-cy" :
-          "../test-address-cy/?edit=true";
+      var loc = yesbox.checked ? "../section-intro-cy/?noop=true" :
+        "../test-address-cy/?edit=true";
 
-        document.trav.action = loc;
-        window.location = loc;
+      loc += (window.languageSwitcherActive ? '&language-switcher=true' : '');
+
+      document.trav.action = loc;
+      window.location = loc;
 	});
 </script>
 
