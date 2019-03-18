@@ -141,7 +141,8 @@ cdn: v2.0.0
     details = storageAPI.getPersonalDetailsFor(personId),
     surveyType = urlParams.get('survey');
 
-  $('.qa-btn-submit').on('click', function (e) {
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
     var nationalIdentities = [],
       otherText = $('#other-answer').val();
 
@@ -163,7 +164,7 @@ cdn: v2.0.0
       window.location.href = '../individual-details-national-identity-other/?person=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
     }
-  });
+  }));
 
   function updateRouting() {
     if(surveyType) {

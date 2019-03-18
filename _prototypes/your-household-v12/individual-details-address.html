@@ -187,7 +187,8 @@ cdn: v1.5.0
     details = storageAPI.getPersonalDetailsFor(personId),
     surveyType = urlParams.get('survey');
 
-  $('.qa-btn-submit').on('click', function (e) {
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
     storageAPI.addUpdateAddressIndividual(personId,
       {
         'address-line-1': $('#address-line-1').val(),
@@ -209,7 +210,7 @@ cdn: v1.5.0
       window.location.href = '../hub/' + (surveyType ? '?survey=' +
         surveyType : '');
     }
-  });
+  }));
 
   function updateRouting() {
     if(surveyType) {

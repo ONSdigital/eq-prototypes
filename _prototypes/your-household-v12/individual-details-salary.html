@@ -95,7 +95,9 @@ cdn: v2.0.0
 
   $('#text-input').val(storageAPI.getPersonalDetailsFor(personId).salary);
 
-  $('.qa-btn-submit').on('click', function (e) {
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+
     storageAPI.addUpdateSalary(personId,
       $('#text-input').val()
     );
@@ -105,7 +107,7 @@ cdn: v2.0.0
       window.location.href = '../individual-details-summary/?person=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
     }
-  });
+  }));
 
   function updateRouting() {
     if(surveyType) {

@@ -121,7 +121,9 @@ cdn: v2.0.0
     isVisitor = storageAPI.isVisitor(member),
     surveyType = urlParams.get('survey');
 
-  $('.qa-btn-submit').on('click', function (e) {
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+
     storageAPI.addUpdatePersonalDetailsDOB(personId,
       $('#personal-detail-dob-day').val(),
       $('#personal-detail-dob-month').val(),
@@ -139,7 +141,7 @@ cdn: v2.0.0
       window.location.href = '../individual-details-address-in-uk/?person=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
     }
-  });
+  }));
 
   function updateRouting() {
     if(surveyType) {

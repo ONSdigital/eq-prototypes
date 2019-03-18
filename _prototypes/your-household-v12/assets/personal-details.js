@@ -397,3 +397,21 @@ export function getPersonalDetailsFor(personId) {
 
   return personObj;
 }
+
+export function personalBookmark(personId, page) {
+  return changeDetailsFor(personId, () =>
+    ({
+      '_bookmark': {
+        page
+      }
+    }));
+}
+
+export function getBookmarkFor(personId) {
+  return getPersonalDetailsFor(personId)['_bookmark'].page;
+}
+
+export function personalQuestionSubmitDecorator(personId, callback, e) {
+  personalBookmark(personId, window.location.href);
+  callback(e);
+}

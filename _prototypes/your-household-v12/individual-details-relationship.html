@@ -201,7 +201,9 @@ cdn: v2.0.0
     isEditing = urlParams.get('edit'),
     surveyType = urlParams.get('survey');
 
-  $('.qa-btn-submit').on('click', function (e) {
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+
     storageAPI.addUpdateMaritalStatus(personId,
       $('[name="marital-status"]:checked').val()
     );
@@ -211,7 +213,7 @@ cdn: v2.0.0
       window.location.href = '../individual-details-summary/?person=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
     }
-  });
+  }));
 
   function updateRouting() {
     if(surveyType) {

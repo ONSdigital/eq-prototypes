@@ -105,7 +105,10 @@ cdn: v2.0.0
     details = storageAPI.getPersonalDetailsFor(personId),
     surveyType = urlParams.get('survey');
 
-  $('.qa-btn-submit').on('click', function (e) {
+
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function(e) {
+
     storageAPI.addUpdateSex(personId,
       $('[name="sex"]:checked').val()
     );
@@ -121,7 +124,7 @@ cdn: v2.0.0
       window.location.href = '../individual-details-dob/?person=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
     }
-  });
+  }));
 
   function updateRouting() {
     if(surveyType) {

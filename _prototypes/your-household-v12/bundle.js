@@ -89,7 +89,10 @@ import {
 
   createPinFor,
   getPinFor,
-  unsetPinFor
+  unsetPinFor,
+  personalBookmark,
+  getBookmarkFor,
+  personalQuestionSubmitDecorator
 } from './assets/personal-details';
 import {removeFromList, trailingNameS} from './assets/utils';
 
@@ -490,6 +493,9 @@ window.ONS.storage = {
   createPinFor,
   getPinFor,
   unsetPinFor,
+  personalBookmark,
+  getBookmarkFor,
+  personalQuestionSubmitDecorator,
 
   setAnsweringIndividualByProxy,
   getAnsweringIndividualByProxy,

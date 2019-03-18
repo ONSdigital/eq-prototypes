@@ -80,7 +80,9 @@ cdn: v2.0.0
     details = storageAPI.getPersonalDetailsFor(personId),
     surveyType = urlParams.get('survey');
 
-  $('.qa-btn-submit').on('click', function (e) {
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+
     storageAPI.addUpdatePassportCountryOther(personId, $('#text-input').val());
 
     if(isEditing) {
@@ -88,7 +90,7 @@ cdn: v2.0.0
       window.location.href = '../individual-details-summary/?person=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
     }
-  });
+  }));
 
   function updateRouting() {
     if(surveyType) {

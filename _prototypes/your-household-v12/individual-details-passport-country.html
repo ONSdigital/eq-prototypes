@@ -133,7 +133,8 @@ cdn: v2.0.0
     details = storageAPI.getPersonalDetailsFor(personId),
     surveyType = urlParams.get('survey');
 
-  $('.qa-btn-submit').on('click', function (e) {
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
     var passportCountries = [];
 
     $('[name="passport-country"]:checked').each(function(i, el) {
@@ -153,7 +154,7 @@ cdn: v2.0.0
       window.location.href = '../individual-details-passport-country-other/?person=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
     }
-  });
+  }));
 
   function updateRouting() {
     if(surveyType) {
