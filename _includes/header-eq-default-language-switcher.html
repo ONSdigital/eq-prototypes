@@ -130,10 +130,10 @@
                             <a class="js-language-switcher-item" href="#"
                                lang="cy" data-language-item="welsh">Cymraeg</a>
                         </li>
-                        <li class="language-links__item">
+                        <!--<li class="language-links__item">
                             <a class="js-language-switcher-item" href="#"
                                lang="pl" data-language-item="polish">Polskie</a>
-                        </li>
+                        </li>-->
                     </ul>
 
                     <div id="language-switcher"
@@ -151,10 +151,10 @@
                                 <a href="#"
                                    class="language-switcher__language js-language-switcher-item" lang="cy" tabindex="-1" data-language-item="welsh">Cymraeg</a>
                             </li>
-                            <li class="language-switcher__item">
+                            <!--<li class="language-switcher__item">
                                 <a href="#"
                                    class="language-switcher__language js-language-switcher-item" lang="pl" tabindex="-1" data-language-item="polish">Polskie</a>
-                            </li>
+                            </li>-->
                         </ul>
                     </div>
                 </div>
@@ -249,6 +249,10 @@
     }
     else {
       $('#language-links').show();
+    }
+
+    if(language) {
+      $('[data-language-item=' + language + ']').parent().hide();
     }
   });
 </script>
