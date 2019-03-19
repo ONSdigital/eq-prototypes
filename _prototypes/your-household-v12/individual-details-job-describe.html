@@ -96,6 +96,7 @@ cdn: v2.0.0
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
 
     storageAPI.addUpdateJobDescribe(personId, $('#text-input').val());
+    storageAPI.clearPersonalBookmark(personId);
 
     if(isEditing) {
       e.preventDefault();

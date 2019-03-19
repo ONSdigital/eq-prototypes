@@ -415,3 +415,15 @@ export function personalQuestionSubmitDecorator(personId, callback, e) {
   personalBookmark(personId, window.location.href);
   callback(e);
 }
+
+export function clearPersonalBookmark(personId) {
+  let details = getPersonalDetailsFor(personId);
+
+  delete details._bookmark;
+
+  updatePersonalDetails(personId, {
+    ...details
+  });
+
+  return details;
+}

@@ -92,6 +92,7 @@ import {
   unsetPinFor,
   personalBookmark,
   getBookmarkFor,
+  clearPersonalBookmark,
   personalQuestionSubmitDecorator
 } from './assets/personal-details';
 import {removeFromList, trailingNameS} from './assets/utils';
@@ -316,6 +317,10 @@ function getAnsweringIndividualByProxy() {
   return JSON.parse(sessionStorage.getItem(INDIVIDUAL_PROXY_STORAGE_KEY));
 }
 
+function unsetAnsweringIndividualByProxy() {
+  return JSON.parse(sessionStorage.removeItem(INDIVIDUAL_PROXY_STORAGE_KEY));
+}
+
 const surveyTypeConfig = {
   lms: {
     title: 'Online Household Study',
@@ -495,10 +500,12 @@ window.ONS.storage = {
   unsetPinFor,
   personalBookmark,
   getBookmarkFor,
+  clearPersonalBookmark,
   personalQuestionSubmitDecorator,
 
   setAnsweringIndividualByProxy,
   getAnsweringIndividualByProxy,
+  unsetAnsweringIndividualByProxy,
 
   doILiveHere,
   isMemberUser,

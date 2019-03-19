@@ -89,16 +89,17 @@ cdn: v2.0.0
                                         <div id="visitor-surveys"></div>
                                     </div>
                                 </div>
-
-                                <p>You can submit this survey once all of
-                                    the sections are complete</p>
                             </section>
                         </div>
                     </div>
-                    <button class="btn btn--primary btn--lg qa-btn-submit"
-                            type="submit"
-                            disabled="disabled">Submit survey
-                    </button>
+                    <div class="submit-notice" style="display:none">
+                        <p>You can submit this survey once all of
+                            the sections are complete</p>
+
+                        <button class="btn btn--primary btn--lg qa-btn-submit"
+                                type="submit">Submit survey
+                        </button>
+                    </div>
                 </form>
             </main>
         </div>
@@ -156,11 +157,8 @@ cdn: v2.0.0
 
   var allHouseholdMembers = storageAPI.getAllHouseholdMembers(),
 
-    people = allHouseholdMembers
-      .filter(storageAPI.isHouseholdMember),
-
-    visitors = allHouseholdMembers
-      .filter(storageAPI.isVisitor),
+    people = allHouseholdMembers.filter(storageAPI.isHouseholdMember),
+    visitors = allHouseholdMembers.filter(storageAPI.isVisitor),
 
     peopleIdsToComplete = _.flatten([
       _.pluck(people.map(function (member) { return member['@person']; }), 'id'),
@@ -170,11 +168,8 @@ cdn: v2.0.0
   var nextPageSurvey = surveyType ? '&survey=' + surveyType : '';
 
   function isHouseholdMemberSectionComplete(personDetails) {
-    return personDetails.dob &&
-      personDetails.country &&
-      personDetails.orientation &&
-      personDetails.maritalStatus &&
-      personDetails.salary;
+    return personDetails &&
+      !(!!personDetails._bookmark && !!personDetails._bookmark.page);
   }
 
   function isVisitorSectionComplete(personDetails) {
@@ -208,6 +203,10 @@ cdn: v2.0.0
   function getSurveyStatus(personDetails, personPin, isVisitor) {
     var status;
 
+    if(personDetails) {
+        console.log(isHouseholdMemberSectionComplete(personDetails));
+    }
+
     if (personPin && personPin.exported) {
       status = 'private';
     }
@@ -231,20 +230,24 @@ cdn: v2.0.0
   /**
    * Link routing
    */
-  function getLinkHrefHouseholdMember(person, status, personPin) {
-    var linkHref = status === 'completed'
-      ? '../individual-details-summary/'
-      : '../individual-intro/';
+  function getLinkHrefHouseholdMember(person, status/*, personPin*/) {
+    return status === 'in-progress'
+      ? storageAPI.getBookmarkFor(person.id)
+      : (status === 'completed'
+        ? '../individual-details-summary/' : '../individual-intro/'
+      ) + '?person=' + person.id;
 
-    if (personPin && personPin.pin) {
+    //+ '?person=' + person.id
+
+    /*if (personPin && personPin.pin) {
       linkHref = '../individual-pin-security/?returnurl=' + linkHref +
         '&person=' + person.id;
     }
     else {
       linkHref += '?person=' + person.id;
-    }
+    }*/
 
-    return linkHref;
+    //return linkHref;
   }
 
   function getLinkHrefVisitor(person, status) {
@@ -281,6 +284,12 @@ cdn: v2.0.0
     (surveyStatus === 'completed' || surveyStatus === 'private')
     && $surveyStatus.addClass('completed');
 
+    if(surveyStatus === 'not-started') {
+      $nodeEl.find('.js-link').on('click', function () {
+        storageAPI.unsetAnsweringIndividualByProxy();
+      });
+    }
+
     return $nodeEl;
   }
 
@@ -313,12 +322,11 @@ cdn: v2.0.0
   }
 
   function updateList() {
-
     $('#household-member-surveys').append(createList(people));
     $('#visitor-surveys').append(createList(visitors));
 
     if (peopleIdsToComplete.length === 0) {
-      $('.qa-btn-submit').attr('disabled', false);
+      $('.submit-notice').show();
     }
   }
 
