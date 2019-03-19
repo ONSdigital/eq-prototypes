@@ -7,6 +7,7 @@ cdn: v2.0.0
 ---
 
 <link rel="stylesheet" href="../style.css"/>
+<link rel="stylesheet" href="../assets/modules/typeahead/typeahead.css"/>
 <div class="page__subheader">
     <div class="container">
         <a class="js-previous-link" href="../do-you-live-here">Previous</a>
@@ -41,12 +42,24 @@ cdn: v2.0.0
 
                                 <div class="answer">
                                     <div class="answer__fields js-fields">
-                                        <div class="field u-mb-m">
-                                            <label class="label u-fs-r "
-                                                   for="text-input">Enter
-                                                your national identity
+                                        <div
+                                                class="typeahead js-typeahead u-mt-m" data-content="{&quot;no_results&quot;:&quot;No results found&quot;,&quot;aria_no_results&quot;:&quot;No results found for the query&quot;,&quot;aria_you_have_selected&quot;:&quot;You have selected&quot;,&quot;aria_found_by_alternative_name&quot;:&quot;found by alternative name&quot;,&quot;aria_min_chars&quot;:&quot;Type in 2 or more characters for results.&quot;,&quot;aria_one_result&quot;:&quot;There is one result available.&quot;,&quot;aria_n_results&quot;:&quot;There are {n} results available.&quot;,&quot;aria_limited_results&quot;:&quot;Results have been limited to 10 results. Type more characters to refine your search.&quot;,&quot;more_results&quot;:&quot;Continue typing to refine results&quot;}" data-api-url="https://ons-typeahead-prototypes.herokuapp.com/national-identity">
+                                            <label class="label js-typeahead-label" for="national-identity-input">
+                                                Enter your national identity
                                             </label>
-                                            <input class="input input--text" type="text" id="text-input">
+                                            <div class="typeahead__combobox js-typeahead-combobox" role="combobox" aria-has-popup="national-identity-listbox" aria-expanded="false">
+                                                <input type="hidden"
+                                                       id="national-identity-code" class="input input--text input-type__input js-typeahead-code" name="national-identity-code" />
+                                                <div class="field">
+                                                    <input type="text" id="national-identity-preview" class="input input--text input-type__input typeahead__preview js-typeahead-preview" readonly="true" aria-hidden="true" tabindex="-1" />
+                                                </div>
+                                                <div class="field u-mt-no">
+                                                    <input type="text" id="national-identity-input" class="input input--text input-type__input typeahead__input js-typeahead-input" name="national-identity-input" data-autocomplete="off" />
+                                                </div>
+                                                <div class="typeahead__instructions u-vh js-typeahead-instructions" id="national-identity-instructions">Use up and down keys to navigate results once you&#39;ve typed more than two characters. Use the enter key to select a result. Touch device users, explore by touch or with swipe gestures.</div>
+                                                <ul class="typeahead__listbox js-typeahead-listbox" role="listbox" id="national-identity-listbox"></ul>
+                                                <div class="typeahead__status u-vh js-typeahead-aria-status" aria-live="polite" role="status"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -84,7 +97,7 @@ cdn: v2.0.0
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
-    var otherText = $('#text-input').val();
+    var otherText = $('#national-identity-input').val();
 
     storageAPI.addUpdateNationalIdentityOther(personId, otherText);
 
@@ -112,7 +125,7 @@ cdn: v2.0.0
 
   if (details && details['national-identity'] &&
     details['national-identity'].otherText) {
-    $('#text-input').val(details['national-identity'].otherText);
+    $('#national-identity-input').val(details['national-identity'].otherText);
   }
 
   $(updateQuestion);

@@ -97,6 +97,11 @@ import {
 } from './assets/personal-details';
 import {removeFromList, trailingNameS} from './assets/utils';
 
+/**
+ * DOM modules
+ */
+import './assets/modules/typeahead/typeahead';
+
 import { numberToPositionWord, numberToWordsStyleguide } from './assets/numbers-to-words';
 
 import { tools } from './assets/prototype-tools';
@@ -555,4 +560,3 @@ $(updateBySurveyType);
 $(updateSignificantDate);
 $(updateHouseholdSummary);
 $(updateVisitorsSummary);
-
