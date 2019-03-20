@@ -31,4 +31,4 @@ function typeaheads() {
   typeaheads.forEach(typeahead => new Typeahead(typeahead));
 }
 
-$(typeaheads);
+document.addEventListener('TYPEAHEAD-READY', typeaheads);

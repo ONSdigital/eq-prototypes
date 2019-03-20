@@ -35,74 +35,15 @@ cdn: v2.0.0
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title u-fs-l js-heading">
-                                        Which of these best describes your White ethnic group or background?
+                                        Which of these best describes your ethnic group or background?
                                     </h1>
                                 </div>
 
                                 <div class="answer">
                                     <div class="answer__fields js-fields">
                                         <div class="field field--radio field--multiplechoice ">
-                                            <fieldset class="u-mb-xl">
-                                                <div class="field__item js-focusable-box">
-                                                    <input class="input input--radio js-focusable"
-                                                           type="radio"
-                                                           name="ethnic-description"
-                                                           id="british"
-                                                           value="british">
-                                                    <label class="label label--inline"
-                                                           for="british"
-                                                           id="british-label">
-                                                        <strong class="u-fs-r">English, Welsh, Scottish, Northern Irish or British</strong>
-                                                    </label>
-                                                </div>
-                                                <div class="field__item js-focusable-box">
-                                                    <input class="input input--radio js-focusable"
-                                                           type="radio"
-                                                           name="ethnic-description"
-                                                           id="irish"
-                                                           value="irish">
-                                                    <label class="label label--inline"
-                                                           for="irish"
-                                                           id="irish-label">
-                                                        <strong class="u-fs-r">Irish</strong>
-                                                    </label>
-                                                </div>
-                                                <div class="field__item js-focusable-box">
-                                                    <input class="input input--radio js-focusable"
-                                                           type="radio"
-                                                           name="ethnic-description"
-                                                           id="gypsy"
-                                                           value="gypsy">
-                                                    <label class="label label--inline"
-                                                           for="gypsy"
-                                                           id="gypsy-label">
-                                                        <strong class="u-fs-r">Gypsy or Irish Traveller</strong>
-                                                    </label>
-                                                </div>
-                                                <div class="field__item js-focusable-box">
-                                                    <input class="input input--radio js-focusable"
-                                                           type="radio"
-                                                           name="ethnic-description"
-                                                           id="roma"
-                                                           value="roma">
-                                                    <label class="label label--inline"
-                                                           for="roma"
-                                                           id="roma-label">
-                                                        <strong class="u-fs-r">Roma</strong>
-                                                    </label>
-                                                </div>
-                                                <div class="field__item js-focusable-box">
-                                                    <input class="input input--radio js-focusable"
-                                                           type="radio"
-                                                           name="ethnic-description"
-                                                           id="other"
-                                                           value="other">
-                                                    <label class="label label--inline"
-                                                           for="other"
-                                                           id="other-label">
-                                                        <strong class="u-fs-r">Other White ethnic group or background</strong>
-                                                    </label>
-                                                </div>
+                                            <fieldset class="u-mb-xl"
+                                                      id="radio-placeholder">
                                             </fieldset>
                                         </div>
                                     </div>
@@ -128,6 +69,20 @@ cdn: v2.0.0
     </div>
 </div>
 
+<div class="field__item js-focusable-box js-radio-template"
+     style="display:none;">
+    <input class="input input--radio js-focusable js-radio-input"
+           type="radio"
+           name="ethnic-description"
+           id=""
+           value="">
+    <label class="label label--inline js-radio-label"
+           for=""
+           id="-label">
+        <strong class="u-fs-r js-radio-label-strong"></strong>
+    </label>
+</div>
+
 <script src='/js/compiled/your-household-v12/bundle.js'></script>
 
 <script>
@@ -136,8 +91,113 @@ cdn: v2.0.0
     personId = urlParams.get('person'),
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     isEditing = urlParams.get('edit'),
+    ethnicGroup = urlParams.get('ethnic-group'),
     details = storageAPI.getPersonalDetailsFor(personId),
-    surveyType = urlParams.get('survey');
+    surveyType = urlParams.get('survey'),
+
+    ethnicGroupMap = {
+      'white': {
+        'question': 'White',
+        'options': [
+          {
+            val: 'british',
+            label: 'English, Welsh, Scottish, Northern Irish or British'
+          },
+          {
+            val: 'irish',
+            label: 'Irish'
+          },
+          {
+            val: 'gypsy',
+            label: 'Gypsy or Irish Traveler'
+          },
+          {
+            val: 'roma',
+            label: 'Roma'
+          },
+          {
+            val: 'other',
+            label: 'Other White ethnic group or background'
+          }
+        ]
+      },
+      'mixed': {
+        'question': 'Mixed or Multiple',
+        'options': [
+          {
+            val: 'white-black-caribbean',
+            label: 'White and Black Caribbean'
+          },
+          {
+            val: 'white-black-african',
+            label: 'White and Black African'
+          },
+          {
+            val: 'white-asian',
+            label: 'White and Asian'
+          },
+          {
+            val: 'other',
+            label: 'Any other Mixed or Multiple background'
+          }
+        ]
+      },
+      'asian': {
+        'question': 'Asian or Asian British',
+        'options': [
+          {
+            val: 'indian',
+            label: 'Indian'
+          },
+          {
+            val: 'pakistani',
+            label: 'Pakistani'
+          },
+          {
+            val: 'bangladeshi',
+            label: 'Bangladeshi'
+          },
+          {
+            val: 'chinese',
+            label: 'Chinese'
+          },
+          {
+            val: 'other',
+            label: 'Other Asian ethnic group or background'
+          }
+        ]
+      },
+      'black': {
+        'question': 'Black, African, Caribbean or Black British',
+        'options': [
+          {
+            val: 'african',
+            label: 'African'
+          },
+          {
+            val: 'caribbean',
+            label: 'Caribbean'
+          },
+          {
+            val: 'other',
+            label: 'Any other Black, African or Caribbean background'
+          }
+        ]
+      },
+      'other': {
+        'question': 'Other',
+        'options': [
+          {
+            val: 'arab',
+            label: 'Arab'
+          },
+          {
+            val: 'other',
+            label: 'Any other ethnic group'
+          }
+        ]
+      }
+    };
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
@@ -145,15 +205,17 @@ cdn: v2.0.0
 
     storageAPI.addUpdateEthnicGroupDescription(personId, val);
 
-    if(isEditing) {
+    if(val === 'other' && ethnicGroup !== 'other') {
       e.preventDefault();
-      window.location.href = '../individual-details-summary/?person=' +
-        personId + (surveyType ? '&survey=' + surveyType : '');
+      window.location.href =
+        '../individual-details-ethnic-group-other/?person=' + personId +
+        (surveyType ? '&survey=' + surveyType : '') +
+        (ethnicGroup ? '&ethnic-group=' + ethnicGroup : '');
     }
 
-    if(val === 'other') {
+    if(isEditing && val !== 'other') {
       e.preventDefault();
-      window.location.href = '../individual-details-ethnic-group-other/?person=' +
+      window.location.href = '../individual-details-summary/?person=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
     }
   }));
@@ -166,19 +228,45 @@ cdn: v2.0.0
   }
 
   function updateQuestion() {
-    if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('Which of these best describes ' + person.fullName +
-        window.ONS.utils.trailingNameS(person.fullName) +
-          ' White ethnic group or background?');
-    }
+    var str = 'Which of these best describes ' +
+      (storageAPI.getAnsweringIndividualByProxy()
+        ? person.fullName + window.ONS.utils.trailingNameS(person.fullName)
+        : 'your') +
+      ' ' + ethnicGroupMap[ethnicGroup].question +
+      ' ethnic group or background?';
+
+    $('.js-heading').html(str);
   }
 
-  if (details && details['ethnic-group']) {
-    $('#' + details['ethnic-group'].description).attr('checked', true);
+  function updateAnswer() {
+    $('#radio-placeholder').append(
+      ethnicGroupMap[ethnicGroup].options.map(function (item) {
+        var $template = $('.js-radio-template').clone(),
+            $radioInput = $template.find('.js-radio-input'),
+            $label = $template.find('.js-radio-label');
+
+        $template.attr('id', '');
+        $template.find('.js-radio-label-strong').html(item.label);
+        $template.css('display', '');
+
+        $radioInput.attr('id', item.val);
+        $radioInput.attr('value', item.val);
+
+        if(item.val === details['ethnic-group'].description) {
+          $radioInput.attr('checked', true);
+        }
+
+        $label.attr('id', item.val + '-label');
+        $label.attr('for', item.val);
+
+        return $template;
+      })
+    );
   }
 
   $(updateQuestion);
   $(updateRouting);
+  $(updateAnswer);
 
   /**
    * Routing

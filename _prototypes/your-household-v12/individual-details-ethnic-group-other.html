@@ -6,6 +6,7 @@ layout: eq-default-extras
 cdn: v2.0.0
 ---
 
+<link rel="stylesheet" href="../assets/modules/typeahead/typeahead.css"/>
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
@@ -40,11 +41,24 @@ cdn: v2.0.0
 
                                 <div class="answer">
                                     <div class="answer__fields js-fields">
-                                        <div class="field u-mb-m">
-                                            <label class="label u-fs-r "
-                                                   for="text-input">Enter your ethnic group or background
+                                        <div
+                                                class="typeahead js-typeahead u-mt-m" data-content="{&quot;no_results&quot;:&quot;No results found&quot;,&quot;aria_no_results&quot;:&quot;No results found for the query&quot;,&quot;aria_you_have_selected&quot;:&quot;You have selected&quot;,&quot;aria_found_by_alternative_name&quot;:&quot;found by alternative name&quot;,&quot;aria_min_chars&quot;:&quot;Type in 2 or more characters for results.&quot;,&quot;aria_one_result&quot;:&quot;There is one result available.&quot;,&quot;aria_n_results&quot;:&quot;There are {n} results available.&quot;,&quot;aria_limited_results&quot;:&quot;Results have been limited to 10 results. Type more characters to refine your search.&quot;,&quot;more_results&quot;:&quot;Continue typing to refine results&quot;}">
+                                            <label class="label js-typeahead-label" for="ethnic-group-input">
+                                                Enter your ethnic group or background
                                             </label>
-                                            <input class="input input--text" type="text" id="text-input">
+                                            <div class="typeahead__combobox js-typeahead-combobox" role="combobox" aria-has-popup="ethnic-group-listbox" aria-expanded="false">
+                                                <input type="hidden"
+                                                       id="ethnic-group-code" class="input input--text input-type__input js-typeahead-code" name="ethnic-group-code" />
+                                                <div class="field">
+                                                    <input type="text" id="ethnic-group-preview" class="input input--text input-type__input typeahead__preview js-typeahead-preview" readonly="true" aria-hidden="true" tabindex="-1" />
+                                                </div>
+                                                <div class="field u-mt-no">
+                                                    <input type="text" id="ethnic-group-input" class="input input--text input-type__input typeahead__input js-typeahead-input" name="ethnic-group-input" data-autocomplete="off" />
+                                                </div>
+                                                <div class="typeahead__instructions u-vh js-typeahead-instructions" id="ethnic-group-instructions">Use up and down keys to navigate results once you&#39;ve typed more than two characters. Use the enter key to select a result. Touch device users, explore by touch or with swipe gestures.</div>
+                                                <ul class="typeahead__listbox js-typeahead-listbox" role="listbox" id="ethnic-group-listbox"></ul>
+                                                <div class="typeahead__status u-vh js-typeahead-aria-status" aria-live="polite" role="status"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -77,12 +91,39 @@ cdn: v2.0.0
     personId = urlParams.get('person'),
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     isEditing = urlParams.get('edit'),
+    ethnicGroup = urlParams.get('ethnic-group'),
     details = storageAPI.getPersonalDetailsFor(personId),
     surveyType = urlParams.get('survey');
 
+  ethnicGroupMap = {
+    'white': {
+      'question': 'Other White ethnic group or background',
+      'category': 'White',
+      'api-endpoint': 'ethnic-groups-white'
+    },
+    'mixed': {
+      'question': 'Any other Mixed or Multiple background',
+      'category': 'Mixed or Multiple',
+      'api-endpoint': 'ethnic-groups-mixed'
+    },
+    'asian': {
+      'question': 'Other Asian ethnic group or background',
+      'category': 'Asian or Asian British',
+      'api-endpoint': 'ethnic-groups-asian'
+    },
+    'black': {
+      'question': 'Any other Black, African or Caribbean background',
+      'category': 'Black, African, Caribbean or Black British',
+      'api-endpoint': 'ethnic-groups-black'
+    }/*,
+    'other': {
+      'question': ''
+    }*/
+  };
+
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
-    var otherText = $('#text-input').val();
+    var otherText = $('#ethnic-group-input').val();
 
     storageAPI.addUpdateEthnicGroupOther(personId, otherText);
 
@@ -101,20 +142,33 @@ cdn: v2.0.0
   }
 
   function updateQuestion() {
-    if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('You selected ‘Other White background’ for ' + person.fullName +
-        window.ONS.utils.trailingNameS(person.fullName) +
-        ' White ethnic group, can you specify this further?');
-    }
+    var str = 'You selected ‘' + ethnicGroupMap[ethnicGroup].question + '’ for ' +
+      (storageAPI.getAnsweringIndividualByProxy()
+        ? person.fullName + window.ONS.utils.trailingNameS(person.fullName)
+        : 'your') +
+      ' ' + ethnicGroupMap[ethnicGroup].category +
+      ' ethnic group, can you specify this further?';
+
+    $('.js-heading').html(str);
+  }
+
+  function updateAnswer() {
+    $('.js-typeahead').attr('data-api-url',
+      'https://ons-typeahead-prototypes.herokuapp.com/' +
+      ethnicGroupMap[ethnicGroup]['api-endpoint']);
+
+    document.dispatchEvent(new CustomEvent('TYPEAHEAD-READY'));
+    //data-api-url="https://ons-typeahead-prototypes.herokuapp.com/ethnic-groups-white"
   }
 
   if (details && details['ethnic-group'] &&
     details['ethnic-group'].otherText) {
-    $('#text-input').val(details['ethnic-group'].otherText);
+    $('#ethnic-group-input').val(details['ethnic-group'].otherText);
   }
 
   $(updateQuestion);
   $(updateRouting);
+  $(updateAnswer);
 
   /**
    * Routing
