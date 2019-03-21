@@ -232,7 +232,7 @@ cdn: v2.0.0
    */
   function getLinkHrefHouseholdMember(person, status/*, personPin*/) {
     return status === 'in-progress'
-      ? storageAPI.getBookmarkFor(person.id)
+      ? storageAPI.getBookmarkFor(person.id) + '&continuing=true'
       : (status === 'completed'
         ? '../individual-details-summary/' : '../individual-intro/'
       ) + '?person=' + person.id;

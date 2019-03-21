@@ -411,6 +411,29 @@ function updateVisitorsSummary() {
   });
 }
 
+function updateContinueNotice() {
+  const urlParams = new URLSearchParams(window.location.search),
+    isContinuing = urlParams.get('continuing'),
+    personId = urlParams.get('person');
+
+  if (!isContinuing) {
+    return false;
+  }
+
+  const template = `<div class="panel panel--simple panel--info u-mb-s">
+      <div class="panel__body">
+          <strong>This was the last question
+              you answered in the section</strong>
+          <p>You can review your answers
+              at the <a href="../individual-decision/?person=${personId}">start 
+              of this section</a>
+          </p>
+      </div>
+  </div>`;
+
+  $('.js-heading').closest('.question').prepend(template);
+}
+
 function isMemberUser(member) {
   return member['@person'].id === window.ONS.storage.IDS.USER_HOUSEHOLD_MEMBER_ID;
 }
@@ -560,4 +583,5 @@ $(updateBySurveyType);
 $(updateSignificantDate);
 $(updateHouseholdSummary);
 $(updateVisitorsSummary);
+$(updateContinueNotice);
 
