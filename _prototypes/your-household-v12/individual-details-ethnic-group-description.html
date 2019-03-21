@@ -93,111 +93,7 @@ cdn: v2.0.0
     isEditing = urlParams.get('edit'),
     ethnicGroup = urlParams.get('ethnic-group'),
     details = storageAPI.getPersonalDetailsFor(personId),
-    surveyType = urlParams.get('survey'),
-
-    ethnicGroupMap = {
-      'white': {
-        'question': 'White',
-        'options': [
-          {
-            val: 'british',
-            label: 'English, Welsh, Scottish, Northern Irish or British'
-          },
-          {
-            val: 'irish',
-            label: 'Irish'
-          },
-          {
-            val: 'gypsy',
-            label: 'Gypsy or Irish Traveler'
-          },
-          {
-            val: 'roma',
-            label: 'Roma'
-          },
-          {
-            val: 'other',
-            label: 'Other White ethnic group or background'
-          }
-        ]
-      },
-      'mixed': {
-        'question': 'Mixed or Multiple',
-        'options': [
-          {
-            val: 'white-black-caribbean',
-            label: 'White and Black Caribbean'
-          },
-          {
-            val: 'white-black-african',
-            label: 'White and Black African'
-          },
-          {
-            val: 'white-asian',
-            label: 'White and Asian'
-          },
-          {
-            val: 'other',
-            label: 'Any other Mixed or Multiple background'
-          }
-        ]
-      },
-      'asian': {
-        'question': 'Asian or Asian British',
-        'options': [
-          {
-            val: 'indian',
-            label: 'Indian'
-          },
-          {
-            val: 'pakistani',
-            label: 'Pakistani'
-          },
-          {
-            val: 'bangladeshi',
-            label: 'Bangladeshi'
-          },
-          {
-            val: 'chinese',
-            label: 'Chinese'
-          },
-          {
-            val: 'other',
-            label: 'Other Asian ethnic group or background'
-          }
-        ]
-      },
-      'black': {
-        'question': 'Black, African, Caribbean or Black British',
-        'options': [
-          {
-            val: 'african',
-            label: 'African'
-          },
-          {
-            val: 'caribbean',
-            label: 'Caribbean'
-          },
-          {
-            val: 'other',
-            label: 'Any other Black, African or Caribbean background'
-          }
-        ]
-      },
-      'other': {
-        'question': 'Other',
-        'options': [
-          {
-            val: 'arab',
-            label: 'Arab'
-          },
-          {
-            val: 'other',
-            label: 'Any other ethnic group'
-          }
-        ]
-      }
-    };
+    surveyType = urlParams.get('survey');
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
@@ -210,13 +106,13 @@ cdn: v2.0.0
       window.location.href =
         '../individual-details-ethnic-group-other/?person=' + personId +
         (surveyType ? '&survey=' + surveyType : '') +
-        (ethnicGroup ? '&ethnic-group=' + ethnicGroup : '');
+        (ethnicGroup ? '&ethnic-group=' + ethnicGroup : '') +
+        (isEditing ? '&edit=true' : '');
     }
-
-    if(isEditing && val !== 'other') {
+    else if(isEditing) {
       e.preventDefault();
-      window.location.href = '../individual-details-summary/?person=' +
-        personId + (surveyType ? '&survey=' + surveyType : '');
+      window.location.href = '../individual-details-summary/?person=' + personId +
+        (surveyType ? '&survey=' + surveyType : '');
     }
   }));
 
@@ -232,7 +128,7 @@ cdn: v2.0.0
       (storageAPI.getAnsweringIndividualByProxy()
         ? person.fullName + window.ONS.utils.trailingNameS(person.fullName)
         : 'your') +
-      ' ' + ethnicGroupMap[ethnicGroup].question +
+      ' ' + storageAPI.personalDetailsEthnicGroupMap[ethnicGroup].question +
       ' ethnic group or background?';
 
     $('.js-heading').html(str);
@@ -240,7 +136,7 @@ cdn: v2.0.0
 
   function updateAnswer() {
     $('#radio-placeholder').append(
-      ethnicGroupMap[ethnicGroup].options.map(function (item) {
+      storageAPI.personalDetailsEthnicGroupMap[ethnicGroup].options.map(function (item) {
         var $template = $('.js-radio-template').clone(),
             $radioInput = $template.find('.js-radio-input'),
             $label = $template.find('.js-radio-label');

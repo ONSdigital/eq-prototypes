@@ -260,6 +260,28 @@ cdn: v2.0.0
                                                 </div>
                                             </div>
                                         </div>
+                                        <div
+                                                class="summary__item js-ethinic-group-field" style="display:none;">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question">Ethnic group</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer js-ethinic-group"></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link">
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-ethnic-group/?edit=true">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </section>
@@ -310,6 +332,12 @@ cdn: v2.0.0
   }
 
   function showHouseholdMemberFields() {
+    $('.js-dob-field').show();
+    $('.js-dob').html(
+      createDataObj(details.dob.year, details.dob.month, details.dob.day)
+        .format('MMMM Do YYYY')
+    );
+
     $('.js-marital-status-field').show();
     $('.js-marital-status').html(getDescriptionOf(storageAPI.personalDetailsMaritalStatusMap[details.maritalStatus]));
 
@@ -325,24 +353,40 @@ cdn: v2.0.0
         details['national-identity'].collection.map(function (item) {
           return $('<li></li>').html(
             (item !== 'other'
-              ? storageAPI.personalDetailsNationalIdentity[item].description
+              ? storageAPI.personalDetailsNationalIdentityMap[item].description
               : details['national-identity'].otherText
             ))
         })
       )
     );
 
+    (function () {
+      var ethnicGroup = details['ethnic-group'];
+
+      $('.js-ethinic-group-field').show();
+      $('.js-ethinic-group').html(
+        storageAPI.personalDetailsEthnicGroupMap[ethnicGroup.val].question +
+
+        (ethnicGroup.description
+          ? ': ' +
+            _.find(
+              storageAPI.personalDetailsEthnicGroupMap[ethnicGroup.val].options,
+              function (option) {
+                return option.val === ethnicGroup.description;
+              }
+            ).label
+          : ''
+        ) +
+
+        (ethnicGroup.otherText ? ': ' + ethnicGroup.otherText : '')
+      );
+    })();
+
     /*$('.js-sexual-orientation-field').show();
     $('.js-orientation').html(storageAPI.personalDetailsOrientationMap[details.orientation].description);*/
 
     /*$('.js-salary-field').show();
     $('.js-salary').html(details.salary);*/
-
-    $('.js-dob-field').show();
-    $('.js-dob').html(
-      createDataObj(details.dob.year, details.dob.month, details.dob.day)
-        .format('MMMM Do YYYY')
-    );
   }
 
   function showVisitorFields() {

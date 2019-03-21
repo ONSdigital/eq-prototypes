@@ -175,14 +175,19 @@ cdn: v2.0.0
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
-    storageAPI.addUpdateEthnicGroup(personId,
-      $('[name="ethnic-group"]:checked').val()
-    );
+    var val = $('[name="ethnic-group"]:checked').val();
 
+    storageAPI.addUpdateEthnicGroup(personId, val);
+
+    /**
+     * Will always need to elaborate further on this question
+     */
     if(isEditing) {
       e.preventDefault();
-      window.location.href = '../individual-details-summary/?person=' +
-        personId + (surveyType ? '&survey=' + surveyType : '');
+      window.location.href = '../individual-details-ethnic-group-description/?person=' + personId +
+        (surveyType ? '&survey=' + surveyType : '') +
+        '&ethnic-group=' + val +
+        (isEditing ? '&edit=true' : '');
     }
   }));
 
