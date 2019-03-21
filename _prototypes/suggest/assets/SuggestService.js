@@ -1,3 +1,5 @@
+import formBodyFromObject from './form-body-from-object';
+
 function SuggestService(rootUrl, type) {
   let _this = this;
 
@@ -7,12 +9,23 @@ function SuggestService(rootUrl, type) {
     _this.requestInFlight = true;
 
     _this.$request = $.ajax({
-      url: rootUrl + '?q=' + query,
-      dataType: 'json',
-      success: function(data) {
-        _this.requestInFlight = false;
+      url: rootUrl,
+      type: 'post',
+      /*dataType: 'application/x-www-form-urlencoded',*/
+      data: formBodyFromObject({
+        query: query,
+        lang: 'en-gb'
+      }),
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
       },
-      fail: function() {
+      success: function(data) {
+        console.log('Success: ', data);
+        _this.requestInFlight = false;
+        return data;
+      },
+      fail: function(e) {
+        console.log('fail: ', e);
         _this.requestInFlight = false;
       }
     });

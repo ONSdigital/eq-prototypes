@@ -28,7 +28,10 @@ export default function suggest() {
       service.$request.abort();
     }
 
-    service.query(val).done(typeaheadUpdate);
+    console.log(123);
+    service.query(val).then(function() { console.log('update going on'); });
+
+    //service.query(val).done(typeaheadUpdate);
   }
 
   function keyDown_handler(e) {
@@ -42,6 +45,8 @@ export default function suggest() {
   }
 
   function typeaheadUpdate(data) {
+    console.log('data', data);
+
     typeaheadComponent.update(((data || {})[$inputEl.attr('data-suggest-type')] || []).map(function(dataItem) {
       return {
         primaryText: cleanFormattingFromService(dataItem),
@@ -109,3 +114,50 @@ function mockData() {
 }
 
 $(suggest);
+
+
+/*
+{
+  "results"
+:
+  [{"code": 1, "en-gb": "Winding master", "cy": "Dirwyn meistr"}, {
+    "code": 1,
+    "en-gb": "Winder (textile smallwares mfr)",
+    "cy": "Winder (tecstilau smallwares mfr)"
+  }, {
+    "code": 1,
+    "en-gb": "Winder (textile mfr)",
+    "cy": "Winder (mfr tecstilau)"
+  }, {
+    "code": 1,
+    "en-gb": "Winder (paper mfr)",
+    "cy": "Winder (papur mfr)"
+  }, {
+    "code": 1,
+    "en-gb": "Winder (mining)",
+    "cy": "Winder (mwyngloddio)"
+  }, {
+    "code": 1,
+    "en-gb": "Winder (electrical goods mfr)",
+    "cy": "Winder (nwyddau mfr trydanol)"
+  }, {
+    "code": 1,
+    "en-gb": "Windscreen fitter",
+    "cy": "ffitiwr ffenestr flaen"
+  }, {
+    "code": 1,
+    "en-gb": "Winder (carpet making)",
+    "cy": "Winder (gwneud carped)"
+  }, {
+    "code": 1,
+    "en-gb": "Winder (cable mfr)",
+    "cy": "Winder (mfr cebl)"
+  }, {
+    "code": 1,
+    "en-gb": "Wind turbine technician (construction)",
+    "cy": "technegydd tyrbin gwynt (adeiladu)"
+  }], "totalResults"
+:
+  152
+}
+*/
