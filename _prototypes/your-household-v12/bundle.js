@@ -84,6 +84,7 @@ import {
   personalDetailsCountryMap,
   personalDetailsOrientationMap,
   personalDetailsGenderMap,
+  personalDetailsNationalIdentity,
 
   PERSONAL_DETAILS_KEY,
 
@@ -522,6 +523,7 @@ window.ONS.storage = {
   personalDetailsCountryMap,
   personalDetailsOrientationMap,
   personalDetailsGenderMap,
+  personalDetailsNationalIdentity,
 
   createPinFor,
   getPinFor,
@@ -584,4 +586,3 @@ $(updateSignificantDate);
 $(updateHouseholdSummary);
 $(updateVisitorsSummary);
 $(updateContinueNotice);
-

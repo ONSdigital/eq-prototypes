@@ -81,6 +81,24 @@ export const personalDetailsGenderMap = {
   }
 };
 
+export const personalDetailsNationalIdentity = {
+  'english': {
+    description: 'English'
+  },
+  'welsh': {
+    description: 'Welsh'
+  },
+  'scottish': {
+    description: 'Scottish'
+  },
+  'northern-irish': {
+    description: 'Northern Irish'
+  },
+  'british': {
+    description: 'British'
+  }
+};
+
 function changeDetailsFor(personId, mutation) {
   let details = getPersonalDetailsFor(personId);
 

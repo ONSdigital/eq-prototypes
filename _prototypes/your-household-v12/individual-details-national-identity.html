@@ -162,7 +162,8 @@ cdn: v2.0.0
     if($('#other:checked').length) {
       e.preventDefault();
       window.location.href = '../individual-details-national-identity-other/?person=' +
-        personId + (surveyType ? '&survey=' + surveyType : '');
+        personId + (surveyType ? '&survey=' + surveyType : '') +
+        (isEditing ? '&edit=true' : '');
     }
   }));
 
