@@ -143,15 +143,16 @@ cdn: v2.0.0
 
     storageAPI.addUpdatePassportCountry(personId, passportCountries);
 
-    if(isEditing) {
-      e.preventDefault();
-      window.location.href = '../individual-details-summary/?person=' +
-        personId + (surveyType ? '&survey=' + surveyType : '');
-    }
-
     if($('#other:checked').length) {
       e.preventDefault();
-      window.location.href = '../individual-details-passport-country-other/?person=' +
+      window.location.href =
+        '../individual-details-passport-country-other/?person=' + personId +
+        (surveyType ? '&survey=' + surveyType : '') +
+        (isEditing ? '&edit=true' : '');
+    }
+    else if(isEditing) { console.log('editing');
+      e.preventDefault();
+      window.location.href = '../individual-details-summary/?person=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
     }
   }));

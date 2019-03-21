@@ -99,6 +99,15 @@ export const personalDetailsNationalIdentityMap = {
   }
 };
 
+export const personalDetailsPassportCountriesMap = {
+  'united-kingdom': {
+    description: 'United Kingdom'
+  },
+  'ireland': {
+    description: 'Ireland'
+  }
+};
+
 export const personalDetailsEthnicGroupMap = {
   'white': {
     'question': 'White',

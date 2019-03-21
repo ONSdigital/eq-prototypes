@@ -86,6 +86,7 @@ import {
   personalDetailsGenderMap,
   personalDetailsNationalIdentityMap,
   personalDetailsEthnicGroupMap,
+  personalDetailsPassportCountriesMap,
 
   PERSONAL_DETAILS_KEY,
 
@@ -526,6 +527,7 @@ window.ONS.storage = {
   personalDetailsGenderMap,
   personalDetailsNationalIdentityMap,
   personalDetailsEthnicGroupMap,
+  personalDetailsPassportCountriesMap,
 
   createPinFor,
   getPinFor,
