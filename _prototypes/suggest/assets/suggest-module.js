@@ -28,10 +28,7 @@ export default function suggest() {
       service.$request.abort();
     }
 
-    console.log(123);
-    service.query(val).then(function() { console.log('update going on'); });
-
-    //service.query(val).done(typeaheadUpdate);
+    service.query(val).done(typeaheadUpdate);
   }
 
   function keyDown_handler(e) {
@@ -47,12 +44,21 @@ export default function suggest() {
   function typeaheadUpdate(data) {
     console.log('data', data);
 
-    typeaheadComponent.update(((data || {})[$inputEl.attr('data-suggest-type')] || []).map(function(dataItem) {
+    if (data) {
+      typeaheadComponent.update((data.results || []).map(function(dataItem) {
+        return {
+          primaryText: dataItem['en-gb'],
+          formattedText: dataItem['en-gb']
+        };
+      }));
+    }
+
+    /*typeaheadComponent.update(((data || {})[$inputEl.attr('data-suggest-type')] || []).map(function(dataItem) {
       return {
         primaryText: cleanFormattingFromService(dataItem),
         formattedText: dataItem
       };
-    }));
+    }));*/
   }
 
   /**
