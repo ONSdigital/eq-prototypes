@@ -87,6 +87,11 @@ import {
   personalDetailsNationalIdentityMap,
   personalDetailsEthnicGroupMap,
   personalDetailsPassportCountriesMap,
+  personalDetailsApprenticeshipMap,
+  personalDetailsDegreeAboveMap,
+  personalDetailsNVQMap,
+  personalDetailsALevelMap,
+  personalDetailsGCSEMap,
 
   PERSONAL_DETAILS_KEY,
 
@@ -528,6 +533,11 @@ window.ONS.storage = {
   personalDetailsNationalIdentityMap,
   personalDetailsEthnicGroupMap,
   personalDetailsPassportCountriesMap,
+  personalDetailsApprenticeshipMap,
+  personalDetailsDegreeAboveMap,
+  personalDetailsNVQMap,
+  personalDetailsALevelMap,
+  personalDetailsGCSEMap,
 
   createPinFor,
   getPinFor,
@@ -590,3 +600,4 @@ $(updateSignificantDate);
 $(updateHouseholdSummary);
 $(updateVisitorsSummary);
 $(updateContinueNotice);
+

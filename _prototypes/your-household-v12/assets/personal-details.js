@@ -212,6 +212,78 @@ export const personalDetailsEthnicGroupMap = {
   }
 };
 
+export const personalDetailsApprenticeshipMap = {
+  'yes': {
+    description: 'Yes'
+  },
+  'no': {
+    description: 'No'
+  }
+};
+
+export const personalDetailsDegreeAboveMap = {
+  'yes': {
+    description: 'Yes'
+  },
+  'no': {
+    description: 'No'
+  }
+};
+
+export const personalDetailsNVQMap = {
+  'nvq-level-1': {
+    description: 'NVQ level 1 or equivalent'
+  },
+  'nvq-level-2': {
+    description: 'NVQ level 2 or equivalent'
+  },
+  'nvq-level-3': {
+    description: 'NVQ level 3 or equivalent'
+  },
+  'none': {
+    description: 'None'
+  }
+};
+
+export const personalDetailsALevelMap = {
+  'a-level-2': {
+    description: '2 or more A levels'
+  },
+  'a-level-1-btec': {
+    description: '1 A level'
+  },
+  'a-level-1': {
+    description: '1 AS level'
+  },
+  'baccalaureate': {
+    description: 'Advanced Welsh Baccalaureate'
+  },
+  'none': {
+    description: 'None'
+  }
+};
+
+export const personalDetailsGCSEMap = {
+  'gcse-5': {
+    description: '5 or more GCSEs grades A* to C or 9 to 4'
+  },
+  'other-gcses': {
+    description: 'Any other GCSEs'
+  },
+  'basic-skills': {
+    description: 'Basic skills course'
+  },
+  'national-baccalaureate': {
+    description: 'National Welsh Baccalaureate'
+  },
+  'foundation-baccalaureate': {
+    description: 'Foundation Welsh Baccalaureate'
+  },
+  'none': {
+    description: 'None of these apply'
+  }
+};
+
 function changeDetailsFor(personId, mutation) {
   let details = getPersonalDetailsFor(personId);
 

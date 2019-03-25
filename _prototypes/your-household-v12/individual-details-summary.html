@@ -304,6 +304,116 @@ cdn: v2.0.0
                                                 </div>
                                             </div>
                                         </div>
+                                        <div
+                                                class="summary__item js-apprenticeship-field" style="display:none;">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question">Has apprenticeship</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer js-apprenticeship"></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link">
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-apprenticeship/?edit=true">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                                class="summary__item js-degree-qualification-field" style="display:none;">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question">Has degree qualification</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer js-degree-qualification"></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link">
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-qualifications-degree/?edit=true">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                                class="summary__item js-nvq-qualification-field" style="display:none;">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question">NVQ qualifications</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer js-nvq-qualification"></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link">
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-qualifications-nvq-equivalent/?edit=true">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                                class="summary__item js-a-level-qualification-field" style="display:none;">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question">AS, A level or equivalent qualifications</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer js-a-level-qualification"></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link">
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-qualifications-a-level/?edit=true">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                                class="summary__item js-gcse-qualification-field" style="display:none;">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question">GCSE or equivalent qualifications</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer js-gcse-qualification"></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link">
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-qualifications-gcse/?edit=true">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </section>
@@ -354,21 +464,37 @@ cdn: v2.0.0
   }
 
   function showHouseholdMemberFields() {
+
+    /**
+     * Date of birth
+     */
     $('.js-dob-field').show();
     $('.js-dob').html(
       createDataObj(details.dob.year, details.dob.month, details.dob.day)
         .format('MMMM Do YYYY')
     );
 
+    /**
+     * Marital status
+     */
     $('.js-marital-status-field').show();
     $('.js-marital-status').html(getDescriptionOf(storageAPI.personalDetailsMaritalStatusMap[details.maritalStatus]));
 
+    /**
+     * Country
+     */
     $('.js-country-field').show();
     $('.js-country').html(getDescriptionOf(storageAPI.personalDetailsCountryMap[details.country.val]));
 
+    /**
+     * Gender
+     */
     $('.js-gender-field').show();
     $('.js-gender').html(getDescriptionOf(storageAPI.personalDetailsGenderMap[details.sex]));
 
+    /**
+     * National identity
+     */
     $('.js-national-identity-field').show();
     $('.js-national-identity').html(
       $('<ul class="u-m-no"></ul>').append(
@@ -382,6 +508,9 @@ cdn: v2.0.0
       )
     );
 
+    /**
+     * Enthnic group
+     */
     (function () {
       var ethnicGroup = details['ethnic-group'];
 
@@ -404,6 +533,9 @@ cdn: v2.0.0
       );
     })();
 
+    /**
+     * Passport
+     */
     $('.js-passport-field').show();
     $('.js-passport').html(
       $('<ul class="u-m-no"></ul>').append(
@@ -413,6 +545,45 @@ cdn: v2.0.0
                 ? storageAPI.personalDetailsPassportCountriesMap[item].description
                 : details['passport'].otherText
             ))
+        })
+      )
+    );
+
+    $('.js-apprenticeship-field').show();
+    $('.js-apprenticeship').html(getDescriptionOf(storageAPI.personalDetailsApprenticeshipMap[details.apprenticeship.hasApprenticeship]));
+
+    $('.js-degree-qualification-field').show();
+    $('.js-degree-qualification').html(getDescriptionOf(storageAPI.personalDetailsDegreeAboveMap[details.qualifications.aboveDegree]));
+
+    $('.js-nvq-qualification-field').show();
+    $('.js-nvq-qualification').html(
+      $('<ul class="u-m-no"></ul>').append(
+        details['qualifications'].nvqEquivalent.map(function (item) {
+          return $('<li></li>').html(
+            getDescriptionOf(storageAPI.personalDetailsNVQMap[item])
+          );
+        })
+      )
+    );
+
+    $('.js-a-level-qualification-field').show();
+    $('.js-a-level-qualification').html(
+      $('<ul class="u-m-no"></ul>').append(
+        details['qualifications'].aLevels.map(function (item) {
+          return $('<li></li>').html(
+            getDescriptionOf(storageAPI.personalDetailsALevelMap[item])
+          );
+        })
+      )
+    );
+
+    $('.js-gcse-qualification-field').show();
+    $('.js-gcse-qualification').html(
+      $('<ul class="u-m-no"></ul>').append(
+        details['qualifications'].gcses.map(function (item) {
+          return $('<li></li>').html(
+            getDescriptionOf(storageAPI.personalDetailsGCSEMap[item])
+          );
         })
       )
     );
