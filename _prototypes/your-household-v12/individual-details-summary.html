@@ -637,7 +637,8 @@ cdn: v2.0.0
     $('.js-passport').html(
       createAnswerList(details['passport'].countries, function (dataItem) {
         return (dataItem !== 'other'
-          ? storageAPI.personalDetailsPassportCountriesMap[dataItem].description
+          ?
+            storageAPI.personalDetailsPassportCountriesMap[dataItem].description
           : details['passport'].otherText
         );
       })

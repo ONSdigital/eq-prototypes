@@ -102,6 +102,9 @@ export const personalDetailsPassportCountriesMap = {
   },
   'ireland': {
     description: 'Ireland'
+  },
+  'none': {
+    description: 'None'
   }
 };
 

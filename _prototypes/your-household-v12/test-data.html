@@ -19,6 +19,11 @@ cdn: v1.5.0
         </div>
         <div class="grid__col col-7@m pull-1@m">
             <main role="main" id="main" class="page__main">
+                <h1 id="question-title"
+                    class="question__title u-fs-l js-heading">
+                    Test data
+                </h1>
+
                 <div class="group u-mb-xl">
                     <div class="block">
                         <section class="section">
@@ -28,15 +33,22 @@ cdn: v1.5.0
                     </div>
                 </div>
 
-                <label class="label">Save session</label>
-                <input type="text" id="file-name"
-                       class="input input--text input-type__input u-mb-m"
-                       placeholder="Enter file name"
-                       data-autocomplete="off" />
+                <div class="u-mb-xl">
+                    <label class="label">Load session file</label>
+                    <input type="file" id="fileInput" />
+                </div>
 
-                <button class="btn btn--primary btn--lg venus js-btn-submit"
-                        type="submit">Save
-                </button>
+                <div>
+                    <label class="label">Save session</label>
+                    <input type="text" id="file-name"
+                           class="input input--text input-type__input u-mb-m"
+                           placeholder="Enter file name"
+                           data-autocomplete="off" />
+
+                    <button class="btn btn--primary venus js-btn-submit"
+                            type="submit">Save
+                    </button>
+                </div>
             </main>
         </div>
     </div>
@@ -57,5 +69,32 @@ cdn: v1.5.0
       );
 
       saveAs(file, $('#file-name').val().replace(' ', ''));
+    });
+
+    $(function() {
+      var fileInput = document.getElementById('fileInput');
+
+      fileInput.addEventListener('change', function(e) {
+        var file = fileInput.files[0];
+        var jsonType = /json.*/;
+
+        if (file.type.match(jsonType)) {
+          var reader = new FileReader();
+
+          reader.onload = function(e) {
+            var data = JSON.parse(reader.result);
+
+            $.each(Object.keys(data), function (i, k) {
+              sessionStorage.setItem(k, data[k]);
+            });
+
+            fileInput.value = '';
+
+            window.location.href = '../hub';
+          };
+
+          reader.readAsText(fileInput.files[0]);
+        }
+      });
     });
 </script>
