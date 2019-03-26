@@ -45,12 +45,14 @@ cdn: v2.0.0
                         <div class="block">
                             <section class="section">
                                 <div class="question u-mb-s">
-                                    <h1 class="question__title u-fs-l">
+                                    <h1
+                                            class="question__title u-fs-l js-heading">
                                         Survey progress
                                     </h1>
                                 </div>
 
-                                <div class="panel panel--simple panel--info"
+                                <div
+                                        class="panel panel--simple panel--info js-panel-info"
                                      id="question-guidance-everyone-at-address-confirmation-question">
                                     <strong class="u-mb-s">You have completed
                                         the section
@@ -321,6 +323,8 @@ cdn: v2.0.0
 
     if (peopleIdsToComplete.length === 0) {
       $('.submit-notice').show();
+      $('.js-heading').html('Submit survey');
+      $('.js-panel-info').html('Please submit this survey to complete it');
     }
   }
 
