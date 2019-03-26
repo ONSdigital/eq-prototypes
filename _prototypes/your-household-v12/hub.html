@@ -204,10 +204,6 @@ cdn: v2.0.0
   function getSurveyStatus(personDetails, personPin, isVisitor) {
     var status;
 
-    if(personDetails) {
-        console.log(isHouseholdMemberSectionComplete(personDetails));
-    }
-
     if (personPin && personPin.exported) {
       status = 'private';
     }

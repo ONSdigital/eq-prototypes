@@ -107,7 +107,11 @@ cdn: v2.0.0
 <script>
   $('.btn-submit').click(function(e) {
     e.preventDefault();
-    window.location = '../confirm-address/';
+
+    var urlParams = new URLSearchParams(window.location.search),
+      redirect = urlParams.get('redirect');
+
+    window.location = !redirect ? '../confirm-address/' : redirect;
   });
 </script>
 

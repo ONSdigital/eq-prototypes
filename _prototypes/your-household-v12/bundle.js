@@ -449,6 +449,14 @@ function updateContinueNotice() {
   $('.js-heading').closest('.question').prepend(template);
 }
 
+function updateSaveAndCompleteLater() {
+  $('.complete-later').on('click', function(e) {
+    e.preventDefault();
+
+    window.location.href = '../index/?redirect=../hub';
+  });
+}
+
 function isMemberUser(member) {
   return member['@person'].id === window.ONS.storage.IDS.USER_HOUSEHOLD_MEMBER_ID;
 }
@@ -609,3 +617,4 @@ $(updateSignificantDate);
 $(updateHouseholdSummary);
 $(updateVisitorsSummary);
 $(updateContinueNotice);
+$(updateSaveAndCompleteLater);
