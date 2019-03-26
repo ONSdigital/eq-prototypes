@@ -551,6 +551,14 @@ cdn: v2.0.0
     return config.description;
   }
 
+  function createAnswerList(collection, getTextCallback) {
+    return $('<ul class="u-m-no"></ul>').append(
+      collection.map(function (item) {
+        return $('<li></li>').html(getTextCallback(item))
+      })
+    )
+  }
+
   function showHouseholdMemberFields() {
 
     /**
@@ -585,15 +593,12 @@ cdn: v2.0.0
      */
     $('.js-national-identity-field').show();
     $('.js-national-identity').html(
-      $('<ul class="u-m-no"></ul>').append(
-        details['national-identity'].collection.map(function (item) {
-          return $('<li></li>').html(
-            (item !== 'other'
-              ? storageAPI.personalDetailsNationalIdentityMap[item].description
-              : details['national-identity'].otherText
-            ))
-        })
-      )
+      createAnswerList(details['national-identity'].collection, function (dataItem) {
+        return (dataItem !== 'other'
+          ? storageAPI.personalDetailsNationalIdentityMap[dataItem].description
+          : details['national-identity'].otherText
+        );
+      })
     );
 
     /**
@@ -626,15 +631,12 @@ cdn: v2.0.0
      */
     $('.js-passport-field').show();
     $('.js-passport').html(
-      $('<ul class="u-m-no"></ul>').append(
-        details['passport'].countries.map(function (item) {
-          return $('<li></li>').html(
-            (item !== 'other'
-                ? storageAPI.personalDetailsPassportCountriesMap[item].description
-                : details['passport'].otherText
-            ))
-        })
-      )
+      createAnswerList(details['passport'].countries, function (dataItem) {
+        return (dataItem !== 'other'
+          ? storageAPI.personalDetailsPassportCountriesMap[dataItem].description
+          : details['passport'].otherText
+        );
+      })
     );
 
     /**
@@ -654,13 +656,9 @@ cdn: v2.0.0
      */
     $('.js-nvq-qualification-field').show();
     $('.js-nvq-qualification').html(
-      $('<ul class="u-m-no"></ul>').append(
-        details['qualifications'].nvqEquivalent.map(function (item) {
-          return $('<li></li>').html(
-            getDescriptionOf(storageAPI.personalDetailsNVQMap[item])
-          );
-        })
-      )
+      createAnswerList(details['qualifications'].nvqEquivalent, function (dataItem) {
+        return getDescriptionOf(storageAPI.personalDetailsNVQMap[dataItem]);
+      })
     );
 
     /**
@@ -668,13 +666,9 @@ cdn: v2.0.0
      */
     $('.js-a-level-qualification-field').show();
     $('.js-a-level-qualification').html(
-      $('<ul class="u-m-no"></ul>').append(
-        details['qualifications'].aLevels.map(function (item) {
-          return $('<li></li>').html(
-            getDescriptionOf(storageAPI.personalDetailsALevelMap[item])
-          );
-        })
-      )
+      createAnswerList(details['qualifications'].aLevels, function (dataItem) {
+        return getDescriptionOf(storageAPI.personalDetailsALevelMap[dataItem]);
+      })
     );
 
     /**
@@ -682,13 +676,9 @@ cdn: v2.0.0
      */
     $('.js-gcse-qualification-field').show();
     $('.js-gcse-qualification').html(
-      $('<ul class="u-m-no"></ul>').append(
-        details['qualifications'].gcses.map(function (item) {
-          return $('<li></li>').html(
-            getDescriptionOf(storageAPI.personalDetailsGCSEMap[item])
-          );
-        })
-      )
+      createAnswerList(details['qualifications'].gcses, function (dataItem) {
+        return getDescriptionOf(storageAPI.personalDetailsGCSEMap[dataItem]);
+      })
     );
 
     /**
@@ -696,13 +686,9 @@ cdn: v2.0.0
      */
     $('.js-other-qualification-field').show();
     $('.js-other-qualification').html(
-      $('<ul class="u-m-no"></ul>').append(
-        details['qualifications'].othersWhere.map(function (item) {
-          return $('<li></li>').html(
-            getDescriptionOf(storageAPI.personalDetailsOtherWhere[item])
-          );
-        })
-      )
+      createAnswerList(details['qualifications'].othersWhere, function (dataItem) {
+        return getDescriptionOf(storageAPI.personalDetailsOtherWhere[dataItem]);
+      })
     );
 
     /**
