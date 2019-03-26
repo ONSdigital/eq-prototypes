@@ -48,9 +48,6 @@ export const personalDetailsCountryMap = {
   },
   'republic-ireland': {
     description: 'Republic of Ireland'
-  },
-  'elsewhere': {
-    description: 'Elsewhere'
   }
 };
 
@@ -639,7 +636,13 @@ export function getBookmarkFor(personId) {
 }
 
 export function personalQuestionSubmitDecorator(personId, callback, e) {
-  personalBookmark(personId, window.location.href);
+  const urlParams = new URLSearchParams(window.location.search),
+    isEditing = urlParams.get('edit');
+
+  !isEditing
+    ? personalBookmark(personId, window.location.href)
+    : clearPersonalBookmark(personId);
+
   callback(e);
 }
 

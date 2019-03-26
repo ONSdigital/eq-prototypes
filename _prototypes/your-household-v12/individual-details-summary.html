@@ -580,7 +580,11 @@ cdn: v2.0.0
      * Country
      */
     $('.js-country-field').show();
-    $('.js-country').html(getDescriptionOf(storageAPI.personalDetailsCountryMap[details.country.val]));
+    $('.js-country').html(
+      details.country.val === 'elsewhere'
+        ? details.country.otherText
+        : getDescriptionOf(storageAPI.personalDetailsCountryMap[details.country.val])
+    );
 
     /**
      * Gender

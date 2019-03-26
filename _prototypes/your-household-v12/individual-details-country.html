@@ -163,8 +163,9 @@ cdn: v2.0.0
 
     if(val === 'elsewhere') {
       e.preventDefault();
-      window.location.href = '../individual-details-country-other/?person=' +
-        personId + (surveyType ? '&survey=' + surveyType : '');
+      window.location.href = '../individual-details-country-other/?person=' + personId +
+        (surveyType ? '&survey=' + surveyType : '') +
+        (isEditing ? '&edit=true' : '');
     }
   }));
 
