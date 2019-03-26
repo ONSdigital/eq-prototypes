@@ -19,18 +19,23 @@ cdn: v1.5.0
         </div>
         <div class="grid__col col-7@m pull-1@m">
             <main role="main" id="main" class="page__main">
-                <div class="group u-mb-xl" id="rsi">
-                    <div class="block" id="total-retail-turnover">
-                        <section class="section"
-                                 id="total-retail-turnover-section">
+                <div class="group u-mb-xl">
+                    <div class="block">
+                        <section class="section">
                             <ul class="test-data-links">
                             </ul>
                         </section>
                     </div>
                 </div>
 
-                <button class="btn btn--primary btn--lg qa-btn-submit venus btn-submit"
-                        type="submit" name="">Continue
+                <label class="label">Save session</label>
+                <input type="text" id="file-name"
+                       class="input input--text input-type__input u-mb-m"
+                       placeholder="Enter file name"
+                       data-autocomplete="off" />
+
+                <button class="btn btn--primary btn--lg venus js-btn-submit"
+                        type="submit">Save
                 </button>
             </main>
         </div>
@@ -39,4 +44,18 @@ cdn: v1.5.0
 
 <script src='/js/compiled/your-household-v12/bundle.js'></script>
 
+<script>
+    $('.js-btn-submit').on('click', function(e) {
+      e.preventDefault();
 
+      var file = new File(
+        [JSON.stringify(sessionStorage)],
+        'census-prototype.json',
+        {
+          type: "application/json;charset=utf-8"
+        }
+      );
+
+      saveAs(file, $('#file-name').val().replace(' ', ''));
+    });
+</script>

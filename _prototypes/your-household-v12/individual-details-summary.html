@@ -414,6 +414,94 @@ cdn: v2.0.0
                                                 </div>
                                             </div>
                                         </div>
+                                        <div
+                                                class="summary__item js-other-qualification-field" style="display:none;">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question">Other places qualified</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer js-other-qualification"></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link">
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-qualifications-other-where/?edit=true">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                                class="summary__item js-employment-status-field" style="display:none;">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question">Employment status</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer js-employment-status"></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link">
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-employment-status/?edit=true">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                                class="summary__item js-job-title-field" style="display:none;">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question">Job title</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer js-job-title"></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link">
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-job-title/?edit=true">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                                class="summary__item js-job-description-field" style="display:none;">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question">Job description</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer js-job-description"></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link">
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-job-describe/?edit=true">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </section>
@@ -549,12 +637,21 @@ cdn: v2.0.0
       )
     );
 
+    /**
+     * Apprenticeship
+     */
     $('.js-apprenticeship-field').show();
     $('.js-apprenticeship').html(getDescriptionOf(storageAPI.personalDetailsApprenticeshipMap[details.apprenticeship.hasApprenticeship]));
 
+    /**
+     * Degree qualifications
+     */
     $('.js-degree-qualification-field').show();
     $('.js-degree-qualification').html(getDescriptionOf(storageAPI.personalDetailsDegreeAboveMap[details.qualifications.aboveDegree]));
 
+    /**
+     * NVQ qualifications
+     */
     $('.js-nvq-qualification-field').show();
     $('.js-nvq-qualification').html(
       $('<ul class="u-m-no"></ul>').append(
@@ -566,6 +663,9 @@ cdn: v2.0.0
       )
     );
 
+    /**
+     * A level qualifications
+     */
     $('.js-a-level-qualification-field').show();
     $('.js-a-level-qualification').html(
       $('<ul class="u-m-no"></ul>').append(
@@ -577,6 +677,9 @@ cdn: v2.0.0
       )
     );
 
+    /**
+     * GCSE qualifications
+     */
     $('.js-gcse-qualification-field').show();
     $('.js-gcse-qualification').html(
       $('<ul class="u-m-no"></ul>').append(
@@ -587,6 +690,40 @@ cdn: v2.0.0
         })
       )
     );
+
+    /**
+     * Other qualifications
+     */
+    $('.js-other-qualification-field').show();
+    $('.js-other-qualification').html(
+      $('<ul class="u-m-no"></ul>').append(
+        details['qualifications'].othersWhere.map(function (item) {
+          return $('<li></li>').html(
+            getDescriptionOf(storageAPI.personalDetailsOtherWhere[item])
+          );
+        })
+      )
+    );
+
+    /**
+     * Employment status
+     */
+    $('.js-employment-status-field').show();
+    $('.js-employment-status').html(
+      getDescriptionOf(storageAPI.personalDetailsEmploymentStatus[details['employment-status'].val])
+    );
+
+    /**
+     * Job title
+     */
+    $('.js-job-title-field').show();
+    $('.js-job-title').html(details['job-title'].val);
+
+    /**
+     * Job description
+     */
+    $('.js-job-description-field').show();
+    $('.js-job-description').html(details['job-describe'].val);
 
     /*$('.js-sexual-orientation-field').show();
     $('.js-orientation').html(storageAPI.personalDetailsOrientationMap[details.orientation].description);*/

@@ -92,6 +92,8 @@ import {
   personalDetailsNVQMap,
   personalDetailsALevelMap,
   personalDetailsGCSEMap,
+  personalDetailsOtherWhere,
+  personalDetailsEmploymentStatus,
 
   PERSONAL_DETAILS_KEY,
 
@@ -104,6 +106,11 @@ import {
   personalQuestionSubmitDecorator
 } from './assets/personal-details';
 import {removeFromList, trailingNameS} from './assets/utils';
+
+/**
+ * Library
+ */
+import './assets/lib/FileSaver';
 
 /**
  * DOM modules
@@ -538,6 +545,8 @@ window.ONS.storage = {
   personalDetailsNVQMap,
   personalDetailsALevelMap,
   personalDetailsGCSEMap,
+  personalDetailsOtherWhere,
+  personalDetailsEmploymentStatus,
 
   createPinFor,
   getPinFor,

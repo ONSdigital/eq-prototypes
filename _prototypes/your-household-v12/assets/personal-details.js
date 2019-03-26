@@ -284,6 +284,30 @@ export const personalDetailsGCSEMap = {
   }
 };
 
+export const personalDetailsOtherWhere = {
+  'in-england-wales': {
+    description: 'Yes, in England or Wales'
+  },
+  'outside-england-wales': {
+    description: 'Yes, anywhere outside of England and Wales'
+  },
+  'none': {
+    description: 'No qualifications'
+  }
+};
+
+export const personalDetailsEmploymentStatus = {
+  'employee': {
+    description: 'Employee'
+  },
+  'freelance-without-employees': {
+    description: 'Self-employed or freelance without employees'
+  },
+  'freelance-with-employees': {
+    description: 'Self-employed with employees'
+  }
+};
+
 function changeDetailsFor(personId, mutation) {
   let details = getPersonalDetailsFor(personId);
 
