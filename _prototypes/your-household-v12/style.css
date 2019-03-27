@@ -103,3 +103,15 @@
 .page__content {
     padding-bottom : .5rem;
 }
+
+.ghost-link {
+    position : absolute;
+    bottom : 1rem;
+    right : 1rem;
+    margin-right : 0 !important;
+    color : #aaa;
+}
+
+.footer {
+    position : relative;
+}

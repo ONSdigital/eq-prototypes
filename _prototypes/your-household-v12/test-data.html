@@ -84,6 +84,8 @@ cdn: v1.5.0
           reader.onload = function(e) {
             var data = JSON.parse(reader.result);
 
+            sessionStorage.clear();
+
             $.each(Object.keys(data), function (i, k) {
               sessionStorage.setItem(k, data[k]);
             });

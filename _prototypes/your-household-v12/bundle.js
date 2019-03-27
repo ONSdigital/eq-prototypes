@@ -457,6 +457,12 @@ function updateSaveAndCompleteLater() {
   });
 }
 
+function updateFoortListCol() {
+  $('.js-footer-list-col').append('<li><a href="../test-data"' +
+    ' class="footer__link footer__link--inline ghost-link u-fr">Test' +
+    ' data</a></li>');
+}
+
 function isMemberUser(member) {
   return member['@person'].id === window.ONS.storage.IDS.USER_HOUSEHOLD_MEMBER_ID;
 }
@@ -618,3 +624,4 @@ $(updateHouseholdSummary);
 $(updateVisitorsSummary);
 $(updateContinueNotice);
 $(updateSaveAndCompleteLater);
+$(updateFoortListCol);
