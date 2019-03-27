@@ -41,9 +41,10 @@ cdn: v2.0.0
                                     </h1>
                                 </div>
 
-                                <div class="panel panel--simple panel--success"
-                                     id="question-guidance-everyone-at-address-confirmation-question">
-                                    <strong class="u-mb-s">This sub section is now complete</strong>
+                                <div class="panel panel--simple panel--success js-panel"
+                                    id="question-guidance-everyone-at-address-confirmation-question"
+                                    style="display:none;">
+                                    <strong class="u-mb-s">This section is now complete</strong>
                                     <p>You can check your answers below</p>
                                 </div>
                                 <br />
@@ -99,40 +100,9 @@ cdn: v2.0.0
 
 <script src='/js/compiled/your-household-v12/bundle.js'></script>
 
-<!--<style>
-    .list.list&#45;&#45;records {
-        border-top: 1px solid #ccc;
-    }
-
-    .list.list&#45;&#45;records .list__item {
-        margin-bottom: 0;
-        padding: 1rem 0;
-        border-bottom: 1px solid #ccc;
-    }
-
-    .list.list&#45;&#45;people {
-        list-style-type: none;
-    }
-
-    .list.list&#45;&#45;people .list__item {
-        background: url(/img/icons/person.svg) 0 1.3rem no-repeat;
-    }
-
-    .list.list&#45;&#45;people .list__item-name {
-        padding-left: 2rem;
-    }
-
-    .list.list&#45;&#45;people .list__item-actions {
-        margin-top: -4px;
-    }
-
-    .list.list&#45;&#45;people .list__item-action + .list__item-action {
-        margin-left: .5rem;
-    }
-</style>-->
-
 <script>
   var urlParams = new URLSearchParams(window.location.search),
+    showPanel = urlParams.get('show-panel'),
     surveyType = urlParams.get('survey'),
     nextPage = surveyType
       ? '../relationships-intro/?survey=' + surveyType
@@ -210,6 +180,10 @@ cdn: v2.0.0
     if (surveyType === 'lms') {
       $('.js-heading').html('About your household');
       $addToHousehould.attr('href', '../lms/who-else-to-add/');
+    }
+
+    if(showPanel) {
+      $('.js-panel').show();
     }
   }
 
