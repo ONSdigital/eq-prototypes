@@ -48,6 +48,19 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
                         <div id="member-list"></div>
 
+                        <div class="js-remove-section u-mb-l"
+                             style="display:none;">
+                            <p>If you have added this person by mistake or if
+                                circumstances have changed, you can remove them.</p>
+
+                            <a class="js-remove-person"
+                                href="../remove-household-member/">Remove this
+                                person</a>
+
+                            <!--<button
+                                    class="btn btn&#45;&#45;secondary btn&#45;&#45;small js-remove-person">Remove this person</button>-->
+                        </div>
+
                         <fieldset
                                 class="question__fieldset js-question-fieldset u-mb-s">
                             <legend class="u-vh">Who do you need to add to <span class="address-text"></span>?</legend>
@@ -107,15 +120,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                       style="display:none;">Cancel and return to the previous
                     question</a></p>
 
-                <div class="js-remove-section"
-                     style="display:none;">
-                    <p>If you have added this person by mistake or if
-                        circumstances have changed, you can remove them.</p>
-
-                    <button
-                            class="btn btn--secondary btn--small js-remove-person">Remove this person</button>
-                </div>
-
                 <button class="btn btn-submit btn--primary btn--lg u-mt-xl"
                         data-qa="btn-submit" type="submit"
                         name="action[save_continue]">
@@ -173,33 +177,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     throw Error('Member not found');
   }
 
-  function removeMember_handler(member, e) {
-    e.preventDefault();
-    var modal = $('#modal'),
-      original = modal.find('.remove-member-button'),
-      newNode = original.clone();
-
-    newNode.on('click', confirmRemoveMember_handler.bind(null, member));
-    original.replaceWith(newNode);
-
-    modal.find('.js-person-name').html(member['@person'].fullName);
-
-    modal.show();
-  }
-
-  function confirmRemoveMember_handler(member) {
-    storageAPI.deleteHouseholdMember(member['@person'].id);
-    storageAPI.deleteAllRelationshipsForMember(member['@person'].id);
-
-    window.location.href = redirect || '../summary/';
-  }
-
-  $('#modal .close-modal-button').on('click', function(e) {
-    e.preventDefault();
-    $('#modal').hide();
-  });
-
-  $('.js-remove-person').on('click', removeMember_handler.bind(null, memberFound));
+  var $removeLink = $('.js-remove-person');
+  $removeLink.attr(
+    'href', $removeLink.attr('href') + '?person=' + editUserId +
+    (redirect ? '&redirect=' + redirect : '')
+  );
 
   var visitorTypesStr =
     new URLSearchParams(window.location.search).get('visitor-types');

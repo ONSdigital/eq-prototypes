@@ -615,7 +615,7 @@ export function getAllPersonalDetails() {
 }
 
 export function getPersonalDetailsFor(personId) {
-  const storageObj = JSON.parse(sessionStorage.getItem(PERSONAL_DETAILS_KEY)) || {},
+  const storageObj = getAllPersonalDetails(),
     personObj = storageObj[personId];
 
   if (!personObj) {
@@ -623,6 +623,14 @@ export function getPersonalDetailsFor(personId) {
   }
 
   return personObj;
+}
+
+export function removePersonalDetailsFor(personId) {
+  const storageObj = getAllPersonalDetails();
+
+  delete storageObj[personId];
+
+  sessionStorage.setItem(PERSONAL_DETAILS_KEY, JSON.stringify(storageObj));
 }
 
 export function personalBookmark(personId, page) {

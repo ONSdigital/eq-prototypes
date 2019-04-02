@@ -52,6 +52,7 @@ import {
 import {
   addUpdatePersonalDetailsDOB,
   getPersonalDetailsFor,
+  removePersonalDetailsFor,
   addUpdateMaritalStatus,
   addUpdateCountry,
   addUpdateCountryOther,
@@ -239,10 +240,6 @@ function updateAddresses() {
     addressLine1 = addressLines[0],
     addressLine2 = addressLines[1];
 
-  /*$('#section-address').html(addressLine1 || '<a' +
-    ' href="../test-address">Address not' +
-    ' found</a>');*/
-
   $('.address-text').each((i, el) => cleanHTMLPlaceholderStringReplacment(el,
     addressLine1 && addressLine2
       ? (
@@ -253,14 +250,15 @@ function updateAddresses() {
 
   $('.address-text-line1').each((i, el) => cleanHTMLPlaceholderStringReplacment(el, addressLine1));
 
-  let personId = new URLSearchParams(window.location.search).get('person'),
-    person;
+  const personId = new URLSearchParams(window.location.search).get('person');
 
   if (personId) {
-    person = getHouseholdMemberByPersonId(personId)['@person'];
-    $('#section-individual').html(person.fullName);
+    const person = getHouseholdMemberByPersonId(personId)['@person'],
+      $sectionIndividualEl = $('#section-individual'),
+      $nameEl = $('.js-person-fullname-from-url-id');
 
-    $('.js-person-fullname-from-url-id').html(person.fullName);
+    $sectionIndividualEl.length && cleanHTMLPlaceholderStringReplacment($sectionIndividualEl, person.fullName);
+    $nameEl.length && cleanHTMLPlaceholderStringReplacment($nameEl, person.fullName);
   }
 }
 
@@ -375,6 +373,7 @@ function personRecordTemplate() {
 
 function createMemberItem(member, { redirect } = { redirect: null }) {
   var $nodeEl = personRecordTemplate(),
+    $link = $nodeEl.find('.js-record-edit'),
     urlParams = new URLSearchParams(window.location.search),
     personNameText = member['@person'].fullName,
     memberIsUser = isMemberUser(member),
@@ -383,12 +382,13 @@ function createMemberItem(member, { redirect } = { redirect: null }) {
 
   if (memberIsUser) {
     personNameText += ' (You)';
+    $link.html('Change')
   }
 
   $nodeEl.attr('id', '');
   $nodeEl.find('.js-person-name').html(personNameText);
 
-  $nodeEl.find('.js-record-edit').attr('href', (
+  $link.attr('href', (
     (memberIsUser
       ? '../' + altPage + 'what-is-your-name/?edit=true'
       : '../' + altPage + 'who-else-to-add/?edit=' + member['@person'].id +
@@ -519,6 +519,7 @@ window.ONS.storage = {
 
   addUpdatePersonalDetailsDOB,
   getPersonalDetailsFor,
+  removePersonalDetailsFor,
   addUpdateMaritalStatus,
   addUpdateCountry,
   addUpdateCountryOther,
