@@ -31,7 +31,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 </div>
 
                                 <p for="address-correct-yes"><span
-                                        class="address-text">Address not
+                                        class="full-address-text">Address not
                                     set</span></p>
 
                                 <div class="answer__fields js-fields">
@@ -82,7 +82,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
 <script>
 	$(function () {
-		$('.address-text').html((sessionStorage.getItem('address') || '').replace(/, /g, '<br />'));
+	  if(sessionStorage.getItem('address')) {
+		$('.full-address-text').html((sessionStorage.getItem('address') || '').replace(/,/g, '<br />'));
+      }
 	});
 </script>
 
