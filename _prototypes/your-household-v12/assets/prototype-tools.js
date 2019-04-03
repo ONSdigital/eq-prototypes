@@ -296,10 +296,5 @@ export function tools () {
     sessionStorage.clear();
   }
 
-  /*$listLinks.append($createFamilyHousehold);
-  $listLinks.append($createFamilyRelationships);
-  $listLinks.append($createFamilyWithRelationshipsAndVisitors);
-  $listLinks.append($createFamilyWithRelationshipsPersonalDetailsAndVisitors);
-  $listLinks.append($createFamilyWithRelationshipsPersonalDetailsAndVisitorsPersonalDetails);*/
   $listLinks.append($clearData);
 }

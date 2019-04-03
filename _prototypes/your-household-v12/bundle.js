@@ -467,6 +467,21 @@ function isMemberUser(member) {
   return member['@person'].id === window.ONS.storage.IDS.USER_HOUSEHOLD_MEMBER_ID;
 }
 
+function sessionBookmark() {
+  var pieces = window.location.href
+    .replace(window.location.pathname, '[delimeter]')
+    .split('[delimeter]');
+
+  pieces.shift();
+
+  if (window.location.pathname.match(/test-data/g)) {
+    console.log('match');
+    return;
+  }
+
+  sessionStorage.setItem('_session_bookmark', [].concat(window.location.pathname, pieces).join(''));
+}
+
 window.ONS = window.ONS || {};
 window.ONS.storage = {
   getAddress,
@@ -626,3 +641,4 @@ $(updateVisitorsSummary);
 $(updateContinueNotice);
 $(updateSaveAndCompleteLater);
 $(updateFoortListCol);
+$(sessionBookmark);

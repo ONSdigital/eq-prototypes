@@ -82,7 +82,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
           var reader = new FileReader();
 
           reader.onload = function(e) {
-            var data = JSON.parse(reader.result);
+            var data = JSON.parse(reader.result),
+                bookmark = data['_session_bookmark'];
 
             sessionStorage.clear();
 
@@ -92,7 +93,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
             fileInput.value = '';
 
-            window.location.href = '../hub';
+            console.log(bookmark);
+
+            window.location.href = bookmark ? bookmark : '../hub';
           };
 
           reader.readAsText(fileInput.files[0]);
