@@ -10,36 +10,7 @@ class TypeaheadComponent {
       onUnsetResult: this.onUnsetResult.bind(this)
     });
 
-    /**
-     * Not quite right, could be one service per service, not per component
-     * instance
-     */
-    const service = SuggestionsService.create({
-      apiUrl: context.getAttribute('data-api-url')
-    });
-
-    /**
-     * Wire it all up from the client/component
-     */
-    typeahead.emitter.on(NEW_VALUE_EVENT, query => {
-      service.get(query)
-        .then(async res => {
-          const data = await res.json();
-
-          /**
-           * Move more of this into the data map - too much
-           */
-          typeahead.handleResults({
-            results: suggestionsServiceDataMap({
-              sanitisedQueryReplaceChars: typeahead.sanitisedQueryReplaceChars,
-              sanitisedQuery: typeahead.sanitisedQuery,
-              lang: typeahead.lang
-            }, data.results),
-            totalResults: data.totalResults
-          })
-        });
-    });
-
+    this.core = typeahead;
     this.code = context.querySelector('.js-typeahead-code');
   }
 
@@ -58,8 +29,44 @@ class TypeaheadComponent {
 
 function TypeaheadModule() {
   const typeaheads = [...document.querySelectorAll('.js-typeahead')];
+  const serviceList = {};
 
-  typeaheads.forEach(typeahead => new TypeaheadComponent(typeahead));
+  typeaheads.forEach(typeahead => {
+    const apiUrl = typeahead.getAttribute('data-api-url');
+
+    /**
+     * Lazy-load services
+     */
+    const service = serviceList[apiUrl]
+      ? serviceList[apiUrl]
+      : SuggestionsService.create({
+        apiUrl: typeahead.getAttribute('data-api-url')
+      });
+
+    const component = new TypeaheadComponent(typeahead, service);
+
+    /**
+     * Wire it all up from the client - Not good, only speak to your neighbours
+     */
+    component.core.emitter.on(NEW_VALUE_EVENT, query => {
+      service.get(query)
+        .then(async res => {
+          const data = await res.json();
+
+          /**
+           * Move more of this into the data map - knows too much
+           */
+          component.core.handleResults({
+            results: suggestionsServiceDataMap({
+              sanitisedQueryReplaceChars: component.core.sanitisedQueryReplaceChars,
+              sanitisedQuery: component.core.sanitisedQuery,
+              lang: component.core.lang
+            }, data.results),
+            totalResults: data.totalResults
+          })
+        });
+    });
+  });
 }
 
 document.addEventListener('TYPEAHEAD-READY', TypeaheadModule);

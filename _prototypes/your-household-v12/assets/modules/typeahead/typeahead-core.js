@@ -220,6 +220,7 @@ export default class TypeaheadCore {
   getSuggestions(force) {
     if (!this.settingResult) {
       const query = this.input.value;
+
       const sanitisedQuery = sanitiseTypeaheadText(query, this.sanitisedQueryReplaceChars);
 
       if (sanitisedQuery !== this.sanitisedQuery || (force && !this.resultSelected)) {
