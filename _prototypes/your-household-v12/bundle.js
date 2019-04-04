@@ -1,3 +1,5 @@
+import 'babel-regenerator-runtime';
+
 import {
   RELATIONSHIPS_STORAGE_KEY,
   relationshipDescriptionMap,
@@ -116,7 +118,7 @@ import './assets/lib/FileSaver';
 /**
  * DOM modules
  */
-import './assets/modules/typeahead/typeahead';
+import './assets/modules/typeahead/typeahead.module';
 
 import { numberToPositionWord, numberToWordsStyleguide } from './assets/numbers-to-words';
 
@@ -642,3 +644,4 @@ $(updateContinueNotice);
 $(updateSaveAndCompleteLater);
 $(updateFoortListCol);
 $(sessionBookmark);
+
