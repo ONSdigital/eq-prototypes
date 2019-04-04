@@ -37,11 +37,7 @@ function TypeaheadModule() {
     /**
      * Lazy-load services
      */
-    const service = serviceList[apiUrl]
-      ? serviceList[apiUrl]
-      : SuggestionsService.create({
-        apiUrl: typeahead.getAttribute('data-api-url')
-      });
+    const service = serviceList[apiUrl] = serviceList[apiUrl] || SuggestionsService.create({apiUrl});
 
     const component = new TypeaheadComponent(typeahead, service);
 
@@ -64,6 +60,9 @@ function TypeaheadModule() {
             }, data.results),
             totalResults: data.totalResults
           })
+        })
+        .catch(e => {
+          console.log(e);
         });
     });
   });

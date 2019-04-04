@@ -30,7 +30,7 @@ export default class SuggestionsService {
     try {
       return await this.fetch.send(formBodyFromObject(query));
     } catch (e) {
-      return Promise.reject(Error('Error calling service: ', e));
+      return Promise.reject('Service call rejected', e);
     }
   }
 

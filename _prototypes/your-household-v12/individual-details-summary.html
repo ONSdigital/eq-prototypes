@@ -708,14 +708,18 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     /**
      * Job title
      */
-    $('.js-job-title-field').show();
-    $('.js-job-title').html(details['job-title'].val);
+    if(details['employment-status'].val !== 'not-employed') {
+      $('.js-job-title-field').show();
+      $('.js-job-title').html(details['job-title'].val);
+    }
 
     /**
      * Job description
      */
-    $('.js-job-description-field').show();
-    $('.js-job-description').html(details['job-describe'].val);
+    if(details['employment-status'].val !== 'not-employed') {
+      $('.js-job-description-field').show();
+      $('.js-job-description').html(details['job-describe'].val);
+    }
 
     /*$('.js-sexual-orientation-field').show();
     $('.js-orientation').html(storageAPI.personalDetailsOrientationMap[details.orientation].description);*/

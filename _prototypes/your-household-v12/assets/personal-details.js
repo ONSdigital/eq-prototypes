@@ -305,6 +305,9 @@ export const personalDetailsEmploymentStatus = {
   },
   'freelance-with-employees': {
     description: 'Self-employed with employees'
+  },
+  'not-employed': {
+    description: 'Not employed'
   }
 };
 

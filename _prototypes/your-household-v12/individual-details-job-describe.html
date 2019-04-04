@@ -86,6 +86,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <script>
   var storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
+    switchedFromUnemployed = urlParams.get(switchedFromUnemployed),
     personId = urlParams.get('person'),
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     isEditing = urlParams.get('edit'),
@@ -98,7 +99,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     storageAPI.addUpdateJobDescribe(personId, $('#text-input').val());
     storageAPI.clearPersonalBookmark(personId);
 
-    if(isEditing) {
+    if(isEditing || switchedFromUnemployed) {
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
