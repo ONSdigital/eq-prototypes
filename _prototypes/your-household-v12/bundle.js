@@ -1,4 +1,4 @@
-import 'babel-regenerator-runtime';
+//import 'babel-regenerator-runtime';
 
 import {
   RELATIONSHIPS_STORAGE_KEY,
@@ -118,7 +118,7 @@ import './assets/lib/FileSaver';
 /**
  * DOM modules
  */
-import './assets/modules/typeahead/typeahead.module';
+//import './assets/modules/typeahead/typeahead.module';
 
 import { numberToPositionWord, numberToWordsStyleguide } from './assets/numbers-to-words';
 
