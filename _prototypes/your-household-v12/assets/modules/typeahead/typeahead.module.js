@@ -45,13 +45,15 @@ function TypeaheadModule() {
      * Wire it all up from the client - Not good, only speak to your neighbours
      */
     component.core.emitter.on(NEW_VALUE_EVENT, query => {
-      /*service.get(query)
+      service.get(query)
         .then(async res => {
           const data = await res.json();
 
-          /!**
+          console.log('data', data);
+
+          /**
            * Move more of this into the data map - knows too much
-           *!/
+           */
           component.core.handleResults({
             results: suggestionsServiceDataMap({
               sanitisedQueryReplaceChars: component.core.sanitisedQueryReplaceChars,
@@ -63,7 +65,7 @@ function TypeaheadModule() {
         })
         .catch(e => {
           console.log(e);
-        });*/
+        });
     });
   });
 }

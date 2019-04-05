@@ -14,7 +14,36 @@ export default class SuggestionsService {
     });
   }
 
-  async get(sanitisedQuery, lang) {
+  get(sanitisedQuery, lang) {
+    const query = {
+      query: sanitisedQuery,
+      lang
+    };
+
+    return new Promise((resolve, reject) => {
+
+      console.log('status', this.fetch.status);
+
+      if (this.fetch && this.fetch.status === 'LOADING') {
+        this.fetch.abort();
+      }
+
+      return this.fetch.send(formBodyFromObject(query))
+        .then(resolve)
+        .catch((e) => {
+          this.fetch.abort();
+          reject(e);
+        });
+    });
+
+    /*try {
+      return await this.fetch.send(formBodyFromObject(query));
+    } catch (e) {
+      return Promise.reject('Service call rejected', e);
+    }*/
+  }
+
+  /*async get(sanitisedQuery, lang) {
     const query = {
       query: sanitisedQuery,
       lang
@@ -32,7 +61,7 @@ export default class SuggestionsService {
     } catch (e) {
       return Promise.reject('Service call rejected', e);
     }
-  }
+  }*/
 
   static create(opts) {
     if (!opts.apiUrl) {
