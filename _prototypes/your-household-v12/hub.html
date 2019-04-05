@@ -94,9 +94,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             </section>
                         </div>
                     </div>
-                    <div class="submit-notice" style="display:none">
-                        <button class="btn btn--primary btn--lg qa-btn-submit"
-                                type="submit">Submit survey
+                    <div class="submit-notice">
+                        <button class="btn btn--primary btn--lg js-submit-btn"
+                                type="submit">Continue
                         </button>
                     </div>
                 </form>
@@ -185,10 +185,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     people = allHouseholdMembers.filter(storageAPI.isHouseholdMember),
     visitors = allHouseholdMembers.filter(storageAPI.isVisitor),
 
-    peopleIdsToComplete = _.flatten([
+    peopleIds = _.flatten([
       _.pluck(people.map(function (member) { return member['@person']; }), 'id'),
       _.pluck(visitors.map(function (member) { return member['@person']; }), 'id')
-    ]);
+    ]),
+
+    peopleIdsToComplete = [].concat(peopleIds);
 
   var nextPageSurvey = surveyType ? '&survey=' + surveyType : '';
 
@@ -294,7 +296,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
      */
     $nodeEl.attr('id', '');
     $nodeEl.find('.js-person-name').html(
-      person.fullName + (isVisitor ? ' (Visitor)': '')
+      person.fullName +
+        (person.id === storageAPI.IDS.USER_HOUSEHOLD_MEMBER_ID ? ' (You)': '') +
+        (isVisitor ? ' (Visitor)': '')
     );
     $nodeEl.find('.js-link').html(statusMap[surveyStatus].linkText);
     $surveyStatus.html(statusMap[surveyStatus].label);
@@ -343,14 +347,52 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     return $container;
   }
 
-  function updateList() {
+  function updatePageState() {
     $('#household-member-surveys').append(createList(people));
     $('#visitor-surveys').append(createList(visitors));
 
     if (peopleIdsToComplete.length === 0) {
-      $('.submit-notice').show();
+      $('.js-submit-btn').html('Submit survey');
       $('.js-heading').html('Submit survey');
       $('.js-panel-info').html('Please submit this survey to complete it');
+    }
+    else {
+      $('.js-submit-btn').on('click', function (e) {
+        e.preventDefault();
+
+        var nextStartPersonId;
+
+        /**
+         * Attempt to find next bookmark
+         */
+        var nextBookmarkPersonId = _.find(peopleIds, personId => {
+          var personalDetails = storageAPI.getPersonalDetailsFor(personId);
+
+          return personalDetails && personalDetails['_bookmark'];
+        });
+
+        /**
+         * If no bookmark is found, attempt to find next section to start
+         */
+        if (!nextBookmarkPersonId) {
+          nextStartPersonId = _.find(allHouseholdMembers, member => {
+            var person = member['@person'];
+            var personDetails = storageAPI.getPersonalDetailsFor(person.id);
+            var status = getSurveyStatus(personDetails, null, storageAPI.isVisitor(member));
+
+            return status === 'not-started';
+
+          })['@person'].id;
+        }
+
+        if (nextStartPersonId) {
+          storageAPI.unsetAnsweringIndividualByProxy();
+        }
+
+        window.location.href = nextBookmarkPersonId
+          ? storageAPI.getBookmarkFor(nextBookmarkPersonId) + '&continuing=true'
+          : '../individual-intro/?person=' + nextStartPersonId;
+      });
     }
   }
 
@@ -360,6 +402,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     }
   }
 
-  $(updateList);
+  $(updatePageState);
   $(updateLinks);
 </script>

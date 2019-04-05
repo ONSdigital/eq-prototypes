@@ -336,7 +336,7 @@ function getAnsweringIndividualByProxy() {
 }
 
 function unsetAnsweringIndividualByProxy() {
-  return JSON.parse(sessionStorage.removeItem(INDIVIDUAL_PROXY_STORAGE_KEY));
+  (getAnsweringIndividualByProxy() !== null) && sessionStorage.removeItem(INDIVIDUAL_PROXY_STORAGE_KEY);
 }
 
 const surveyTypeConfig = {
