@@ -116,7 +116,7 @@ import './assets/lib/FileSaver';
 /**
  * DOM modules
  */
-import './assets/modules/typeahead/typeahead.module';
+import './assets/modules/typeahead/typeahead';
 
 import { numberToPositionWord, numberToWordsStyleguide } from './assets/numbers-to-words';
 

@@ -1,5 +1,6 @@
-import EventEmitter from 'events';
-import {sanitiseTypeaheadText} from './typeahead-helpers';
+import AbortableFetch from '../abortable-fetch';
+import formBodyFromObject from '../form-body-from-object';
+import { sanitiseTypeaheadText } from './typeahead-helpers';
 
 const classTypeaheadCombobox = 'js-typeahead-combobox';
 const classTypeaheadLabel = 'js-typeahead-label';
@@ -16,8 +17,6 @@ const classTypeaheadOptionMoreResults = `${classTypeaheadOption}--more-results`;
 const classTypeaheadComboboxFocused = 'typeahead__combobox--focused';
 const classTypeaheadHasResults = 'typeahead--has-results';
 
-export const NEW_VALUE_EVENT = 'REQUEST_DATA';
-
 const KEYCODE = {
   BACK_SPACE: 8,
   RETURN: 13,
@@ -31,19 +30,7 @@ const KEYCODE = {
 };
 
 export default class TypeaheadCore {
-  emitter = new EventEmitter();
-
-  constructor({
-    context,
-    apiUrl,
-    onSelect,
-    onUnsetResult,
-    onError,
-    minChars,
-    resultLimit,
-    sanitisedQueryReplaceChars = []
-  }) {
-
+  constructor({ context, apiUrl, onSelect, onUnsetResult, onError, minChars, resultLimit, sanitisedQueryReplaceChars = [], suggestionFunction }) {
     // DOM Elements
     this.context = context;
     this.combobox = context.querySelector(`.${classTypeaheadCombobox}`);
@@ -67,6 +54,10 @@ export default class TypeaheadCore {
     this.listboxId = this.listbox.getAttribute('id');
     this.minChars = minChars || 2;
     this.resultLimit = resultLimit || null;
+
+    if (suggestionFunction) {
+      this.fetchSuggestions = suggestionFunction;
+    }
 
     // State
     this.ctrlKey = false;
@@ -170,8 +161,7 @@ export default class TypeaheadCore {
     this.blurring = true;
 
     if (this.results) {
-      const exactMatchIndex = this.results.map(result => result.sanitisedText)
-        .indexOf(this.sanitisedQuery);
+      const exactMatchIndex = this.results.map(result => result.sanitisedText).indexOf(this.sanitisedQuery);
 
       if (exactMatchIndex !== -1) {
         this.selectResult(exactMatchIndex);
@@ -222,22 +212,81 @@ export default class TypeaheadCore {
       const query = this.input.value;
 
       const sanitisedQuery = sanitiseTypeaheadText(query, this.sanitisedQueryReplaceChars);
-
+      
       if (sanitisedQuery !== this.sanitisedQuery || (force && !this.resultSelected)) {
         this.unsetResults();
         this.setAriaStatus();
 
         this.query = query;
         this.sanitisedQuery = sanitisedQuery;
-
-        if (this.sanitisedQuery.length >= this.minChars) {
-          this.emitter.emit(NEW_VALUE_EVENT, this.sanitisedQuery);
+       
+        if(this.sanitisedQuery.length >= this.minChars) {
+          this.fetchSuggestions(this.sanitisedQuery)
+            .then(this.handleResults.bind(this))
+            .catch(error => {
+              if (error.name !== 'AbortError' && this.onError) {
+                this.onError(error);
+              }
+            });
         } else {
           this.clearListbox();
           this.clearPreview();
         }
       }
     }
+  }
+
+  fetchSuggestions(sanitisedQuery) {
+    return new Promise((resolve, reject) => {
+      const query = {
+        query: sanitisedQuery,
+        lang: this.lang
+      };
+
+      if (this.fetch && this.fetch.status !== 'DONE') {
+        this.fetch.abort();
+      }
+
+      const body = formBodyFromObject(query);
+
+      this.fetch = new AbortableFetch(this.apiUrl, { 
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body
+      });
+
+      this.fetch.send()
+        .then(async response => {
+          const data = await response.json();
+
+          const results = data.results;
+
+          results.forEach(result => {
+            result.sanitisedText = sanitiseTypeaheadText(result[this.lang], this.sanitisedQueryReplaceChars);
+
+            if (this.lang !== 'en-gb') {
+              const english = result['en-gb'];
+              const sanitisedAlternative =  sanitiseTypeaheadText(english, this.sanitisedQueryReplaceChars);
+
+              if (sanitisedAlternative.match(sanitisedQuery)) {
+                result.alternatives = [english];
+                result.sanitisedAlternatives = [sanitisedAlternative];
+              }
+            } else {
+              result.alternatives = [];
+              result.sanitisedAlternatives = [];
+            }
+          });
+
+          resolve({
+            results,
+            totalResults: data.totalResults
+          });
+        })
+        .catch(reject);
+    });
   }
 
   unsetResults() {
@@ -247,8 +296,8 @@ export default class TypeaheadCore {
 
     if (this.onUnsetResult) {
       this.onUnsetResult();
-    }
-
+    } 
+    
     this.clearPreview();
   }
 
@@ -263,9 +312,9 @@ export default class TypeaheadCore {
     }
   }
 
-  handleResults(viewModel) {
-    this.foundResults = viewModel.totalResults;
-    this.results = viewModel.results;
+  handleResults(result) {
+    this.foundResults = result.totalResults;
+    this.results = result.results;
     this.numberOfResults = Math.max(this.results.length, 0);
 
     if (!this.deleting || (this.numberOfResults && this.deleting)) {
@@ -276,7 +325,6 @@ export default class TypeaheadCore {
         this.listbox.innerHTML = '';
         this.resultOptions = this.results.map((result, index) => {
           let ariaLabel = result[this.lang];
-
           let innerHTML = this.emboldenMatch(ariaLabel, this.query);
 
           if (Array.isArray(result.sanitisedAlternatives)) {
@@ -353,8 +401,7 @@ export default class TypeaheadCore {
   setPreview(index) {
     const result = this.results[index || 0];
     const resultText = result[this.lang];
-    const queryIndex = resultText.toLowerCase()
-      .indexOf(this.query.toLowerCase());
+    const queryIndex = resultText.toLowerCase().indexOf(this.query.toLowerCase());
 
     if (queryIndex === 0 && this.query.length !== resultText.length) {
       this.preview.value = `${this.query}${resultText.slice(this.query.length)}`;
@@ -429,7 +476,7 @@ export default class TypeaheadCore {
 
   emboldenMatch(string, query) {
     query = query.toLowerCase().trim();
-
+  
     if (string.toLowerCase().includes(query)) {
       const queryLength = query.length;
       const matchIndex = string.toLowerCase().indexOf(query);
@@ -437,7 +484,7 @@ export default class TypeaheadCore {
       const before = string.substr(0, matchIndex);
       const match = string.substr(matchIndex, queryLength);
       const after = string.substr(matchEnd, string.length - matchEnd);
-
+  
       return `${before}<em>${match}</em>${after}`;
     } else {
       return string;
