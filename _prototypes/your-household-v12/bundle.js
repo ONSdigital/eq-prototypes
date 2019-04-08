@@ -482,6 +482,10 @@ function sessionBookmark() {
   sessionStorage.setItem('_session_bookmark', [].concat(window.location.pathname, pieces).join(''));
 }
 
+function fieldItemDisplayHack() {
+  $('.field__item').after('<br />');
+}
+
 window.ONS = window.ONS || {};
 window.ONS.storage = {
   getAddress,
@@ -642,3 +646,4 @@ $(updateContinueNotice);
 $(updateSaveAndCompleteLater);
 $(updateFoortListCol);
 $(sessionBookmark);
+$(fieldItemDisplayHack);

@@ -134,29 +134,39 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     $('.js-heading').html(str);
   }
 
+  var $fieldEls =
+    storageAPI.personalDetailsEthnicGroupMap[ethnicGroup].options.map(function (item) {
+    var $template = $('.js-radio-template').clone(),
+      $radioInput = $template.find('.js-radio-input'),
+      $label = $template.find('.js-radio-label');
+
+    $template.attr('id', '');
+    $template.find('.js-radio-label-strong').html(item.label);
+    $template.css('display', '');
+
+    $radioInput.attr('id', item.val);
+    $radioInput.attr('value', item.val);
+
+    if(item.val === details['ethnic-group'].description) {
+      $radioInput.attr('checked', true);
+    }
+
+    $label.attr('id', item.val + '-label');
+    $label.attr('for', item.val);
+
+    return $template;
+  });
+
   function updateAnswer() {
     $('#radio-placeholder').append(
-      storageAPI.personalDetailsEthnicGroupMap[ethnicGroup].options.map(function (item) {
-        var $template = $('.js-radio-template').clone(),
-            $radioInput = $template.find('.js-radio-input'),
-            $label = $template.find('.js-radio-label');
-
-        $template.attr('id', '');
-        $template.find('.js-radio-label-strong').html(item.label);
-        $template.css('display', '');
-
-        $radioInput.attr('id', item.val);
-        $radioInput.attr('value', item.val);
-
-        if(item.val === details['ethnic-group'].description) {
-          $radioInput.attr('checked', true);
-        }
-
-        $label.attr('id', item.val + '-label');
-        $label.attr('for', item.val);
-
-        return $template;
-      })
+      /**
+       * Interlace break tags - temp fix for double banking display issues
+       */
+      _.flatten(
+        _.zip($fieldEls, _.range($els.length).map(function (){
+          return $('<br />');
+        }))
+      )
     );
   }
 
