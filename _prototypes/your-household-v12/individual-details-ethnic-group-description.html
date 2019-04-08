@@ -163,7 +163,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
        * Interlace break tags - temp fix for double banking display issues
        */
       _.flatten(
-        _.zip($fieldEls, _.range($els.length).map(function (){
+        _.zip($fieldEls, _.range($fieldEls.length).map(function (){
           return $('<br />');
         }))
       )
