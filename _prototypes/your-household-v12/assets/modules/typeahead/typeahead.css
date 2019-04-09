@@ -52,8 +52,7 @@
     border-bottom: 1px solid #999
 }
 
-.typeahead__option--focused:not(.typeahead__option--no-results),
-.typeahead__option:not(.typeahead__option--no-results):not(.typeahead__option--more-results):hover {
+.typeahead__option--focused:not(.typeahead__option--no-results), .typeahead__option:not(.typeahead__option--no-results):not(.typeahead__option--more-results):hover {
     border-color: #4263c2;
     background: #4263c2;
     color: #fff
@@ -68,10 +67,7 @@
     border-color: #999
 }
 
-.typeahead:not(.typeahead--initialised) .typeahead__instructions,
-.typeahead:not(.typeahead--initialised) .typeahead__listbox,
-.typeahead:not(.typeahead--initialised) .typeahead__preview,
-.typeahead:not(.typeahead--initialised) .typeahead__status {
+.typeahead:not(.typeahead--initialised) .typeahead__instructions, .typeahead:not(.typeahead--initialised) .typeahead__listbox, .typeahead:not(.typeahead--initialised) .typeahead__preview, .typeahead:not(.typeahead--initialised) .typeahead__status {
     display: none
 }
 
@@ -110,6 +106,9 @@
 }
 
 .previous-link {
-    display: table;
     line-height: 1
+}
+
+.field__description {
+    margin-top: 1rem
 }

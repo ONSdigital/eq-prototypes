@@ -1,11 +1,10 @@
 import AbortableFetch from '../abortable-fetch';
 import formBodyFromObject from '../form-body-from-object';
-import { sanitiseTypeaheadText } from './typeahead-helpers';
+import {sanitiseTypeaheadText} from './typeahead-helpers';
 
 const classTypeaheadCombobox = 'js-typeahead-combobox';
 const classTypeaheadLabel = 'js-typeahead-label';
 const classTypeaheadInput = 'js-typeahead-input';
-const classTypeaheadPreview = 'js-typeahead-preview';
 const classTypeaheadInstructions = 'js-typeahead-instructions';
 const classTypeaheadListbox = 'js-typeahead-listbox';
 const classTypeaheadAriaStatus = 'js-typeahead-aria-status';
@@ -30,13 +29,12 @@ const KEYCODE = {
 };
 
 export default class TypeaheadCore {
-  constructor({ context, apiUrl, onSelect, onUnsetResult, onError, minChars, resultLimit, sanitisedQueryReplaceChars = [], suggestionFunction }) {
+  constructor({context, apiUrl, onSelect, onUnsetResult, onError, minChars, resultLimit, sanitisedQueryReplaceChars = [], suggestionFunction}) {
     // DOM Elements
     this.context = context;
     this.combobox = context.querySelector(`.${classTypeaheadCombobox}`);
     this.label = context.querySelector(`.${classTypeaheadLabel}`);
     this.input = context.querySelector(`.${classTypeaheadInput}`);
-    this.preview = context.querySelector(`.${classTypeaheadPreview}`);
     this.listbox = context.querySelector(`.${classTypeaheadListbox}`);
     this.instructions = context.querySelector(`.${classTypeaheadInstructions}`);
     this.ariaStatus = context.querySelector(`.${classTypeaheadAriaStatus}`);
@@ -144,7 +142,6 @@ export default class TypeaheadCore {
   }
 
   handleChange() {
-    this.clearPreview();
     if (!this.blurring) {
       this.getSuggestions();
     }
@@ -160,19 +157,10 @@ export default class TypeaheadCore {
     clearTimeout(this.blurTimeout);
     this.blurring = true;
 
-    if (this.results) {
-      const exactMatchIndex = this.results.map(result => result.sanitisedText).indexOf(this.sanitisedQuery);
-
-      if (exactMatchIndex !== -1) {
-        this.selectResult(exactMatchIndex);
-      }
-    }
-
     this.blurTimeout = setTimeout(() => {
-      this.clearPreview();
       this.combobox.classList.remove(classTypeaheadComboboxFocused);
       this.blurring = false;
-    }, 0);
+    }, 300);
   }
 
   handleMouseover() {
@@ -210,17 +198,16 @@ export default class TypeaheadCore {
   getSuggestions(force) {
     if (!this.settingResult) {
       const query = this.input.value;
-
       const sanitisedQuery = sanitiseTypeaheadText(query, this.sanitisedQueryReplaceChars);
-      
+
       if (sanitisedQuery !== this.sanitisedQuery || (force && !this.resultSelected)) {
         this.unsetResults();
         this.setAriaStatus();
 
         this.query = query;
         this.sanitisedQuery = sanitisedQuery;
-       
-        if(this.sanitisedQuery.length >= this.minChars) {
+
+        if (this.sanitisedQuery.length >= this.minChars) {
           this.fetchSuggestions(this.sanitisedQuery)
             .then(this.handleResults.bind(this))
             .catch(error => {
@@ -230,7 +217,6 @@ export default class TypeaheadCore {
             });
         } else {
           this.clearListbox();
-          this.clearPreview();
         }
       }
     }
@@ -249,7 +235,7 @@ export default class TypeaheadCore {
 
       const body = formBodyFromObject(query);
 
-      this.fetch = new AbortableFetch(this.apiUrl, { 
+      this.fetch = new AbortableFetch(this.apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
@@ -268,7 +254,7 @@ export default class TypeaheadCore {
 
             if (this.lang !== 'en-gb') {
               const english = result['en-gb'];
-              const sanitisedAlternative =  sanitiseTypeaheadText(english, this.sanitisedQueryReplaceChars);
+              const sanitisedAlternative = sanitiseTypeaheadText(english, this.sanitisedQueryReplaceChars);
 
               if (sanitisedAlternative.match(sanitisedQuery)) {
                 result.alternatives = [english];
@@ -296,9 +282,7 @@ export default class TypeaheadCore {
 
     if (this.onUnsetResult) {
       this.onUnsetResult();
-    } 
-    
-    this.clearPreview();
+    }
   }
 
   clearListbox(preventAriaStatusUpdate) {
@@ -369,7 +353,7 @@ export default class TypeaheadCore {
       }
     }
 
-    if (this.numberOfResults === 0) {
+    if (this.numberOfResults === 0 && this.content.no_results) {
       this.listbox.innerHTML = `<li class="${classTypeaheadOption} ${classTypeaheadOptionNoResults}">${this.content.no_results}</li>`;
       this.combobox.setAttribute('aria-expanded', true);
       this.context.classList.add(classTypeaheadHasResults);
@@ -393,20 +377,7 @@ export default class TypeaheadCore {
         }
       });
 
-      this.setPreview(index);
       this.setAriaStatus();
-    }
-  }
-
-  setPreview(index) {
-    const result = this.results[index || 0];
-    const resultText = result[this.lang];
-    const queryIndex = resultText.toLowerCase().indexOf(this.query.toLowerCase());
-
-    if (queryIndex === 0 && this.query.length !== resultText.length) {
-      this.preview.value = `${this.query}${resultText.slice(this.query.length)}`;
-    } else {
-      this.clearPreview();
     }
   }
 
@@ -431,10 +402,6 @@ export default class TypeaheadCore {
     }
 
     this.ariaStatus.innerHTML = content;
-  }
-
-  clearPreview() {
-    this.preview.value = '';
   }
 
   selectResult(index) {
@@ -469,14 +436,13 @@ export default class TypeaheadCore {
       const ariaMessage = `${this.content.aria_you_have_selected}: ${result[this.lang]}${ariaAlternativeMessage}.`;
 
       this.clearListbox();
-      this.clearPreview();
       this.setAriaStatus(ariaMessage);
     }
   }
 
   emboldenMatch(string, query) {
     query = query.toLowerCase().trim();
-  
+
     if (string.toLowerCase().includes(query)) {
       const queryLength = query.length;
       const matchIndex = string.toLowerCase().indexOf(query);
@@ -484,7 +450,7 @@ export default class TypeaheadCore {
       const before = string.substr(0, matchIndex);
       const match = string.substr(matchIndex, queryLength);
       const after = string.substr(matchEnd, string.length - matchEnd);
-  
+
       return `${before}<em>${match}</em>${after}`;
     } else {
       return string;
