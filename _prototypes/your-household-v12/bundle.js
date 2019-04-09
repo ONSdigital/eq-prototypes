@@ -116,7 +116,7 @@ import './assets/lib/FileSaver';
 /**
  * DOM modules
  */
-import './assets/modules/typeahead/typeahead';
+import './assets/modules/typeahead-refactored/typeahead.module';
 
 import { numberToPositionWord, numberToWordsStyleguide } from './assets/numbers-to-words';
 
@@ -432,7 +432,7 @@ function updateVisitorsSummary() {
   $('.js-visitors-summary').each(function(i, el) {
     const $el = $(el);
 
-    $.each(members.filter(isVisitor), function(i, member) {
+    $.each(members.filter(isVisitor), (i, member) => {
       $el.append(createMemberItem(member, { redirect: $el.attr('data-redirect') }));
     });
   });
@@ -659,3 +659,4 @@ $(updateSaveAndCompleteLater);
 $(updateFoortListCol);
 $(sessionBookmark);
 $(fieldItemDisplayHack);
+
