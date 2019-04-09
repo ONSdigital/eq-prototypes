@@ -106,10 +106,10 @@ import {
   clearPersonalBookmark,
   personalQuestionSubmitDecorator
 } from './assets/personal-details';
-import {removeFromList, trailingNameS} from './assets/utils';
+import { removeFromList, trailingNameS } from './assets/utils';
 
 /**
- * Library
+ * Libraries
  */
 import './assets/lib/FileSaver';
 
@@ -365,7 +365,9 @@ function personRecordTemplate() {
         <span class="list__item-name js-person-name"></span>
         <div class="list__item-actions u-fr">
             <span class="list__item-action">
-                <a class="js-record-edit" href="#">Change or remove</a>
+                <a class="js-record-edit" href="#">Change</a>
+                <span class="js-spacer">|</span>
+                <a class="js-record-remove" href="#">Remove</a>
             </span>
         </div>
     </li>`);
@@ -373,27 +375,37 @@ function personRecordTemplate() {
 
 function createMemberItem(member, { redirect } = { redirect: null }) {
   var $nodeEl = personRecordTemplate(),
-    $link = $nodeEl.find('.js-record-edit'),
+    $editLink = $nodeEl.find('.js-record-edit'),
+    $removeLink = $nodeEl.find('.js-record-remove'),
+    $spacer = $nodeEl.find('.js-spacer'),
     urlParams = new URLSearchParams(window.location.search),
     personNameText = member['@person'].fullName,
     memberIsUser = isMemberUser(member),
     surveyType = urlParams.get('survey'),
-    altPage = surveyType && surveyType === 'lms' ? surveyType + '/' : '';
+    altPage = surveyType && surveyType === 'lms' ? surveyType + '/' : '',
+    redirectTo = (redirect ? '&redirect=' + encodeURIComponent(window.location.href) : '');
 
   if (memberIsUser) {
     personNameText += ' (You)';
-    $link.html('Change')
+    $editLink.html('Change');
+    $removeLink.hide();
+    $spacer.hide();
   }
 
   $nodeEl.attr('id', '');
   $nodeEl.find('.js-person-name').html(personNameText);
 
-  $link.attr('href', (
+  $editLink.attr('href', (
     (memberIsUser
       ? '../' + altPage + 'what-is-your-name/?edit=true'
       : '../' + altPage + 'who-else-to-add/?edit=' + member['@person'].id +
         (isVisitor(member) ? '&journey=visitors' : '')) +
-    (redirect ? '&redirect=' + encodeURIComponent(window.location.href) : '')
+    redirectTo
+  ));
+
+  $removeLink.attr('href', (
+    '../remove-household-member/?person=' + member['@person'].id +
+    '&redirect=../summary'
   ));
 
   return $nodeEl;
