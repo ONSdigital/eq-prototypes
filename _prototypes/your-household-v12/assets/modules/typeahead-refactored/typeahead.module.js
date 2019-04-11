@@ -1,4 +1,4 @@
-import TypeaheadComponent from './typeahead.component';
+import TypeaheadComponent, { NEW_FIELD_VALUE_EVENT } from './typeahead.component';
 
 class TypeaheadContainer {
   constructor(context) {
@@ -8,6 +8,9 @@ class TypeaheadContainer {
       onSelect: this.onSelect.bind(this),
       onUnsetResult: this.onUnsetResult.bind(this),
     });
+
+    //this.typeahead.emitter.on(NEW_FIELD_VALUE_EVENT, value =>
+    // console.log(value));
 
     this.code = context.querySelector('.js-typeahead-code');
   }

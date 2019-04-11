@@ -1,3 +1,5 @@
+import EventEmitter from 'events';
+
 import TypeaheadService from './typeahead.service';
 import {sanitiseTypeaheadText} from './typeahead-helpers';
 
@@ -27,8 +29,22 @@ const KEYCODE = {
   V: 86
 };
 
+export const NEW_FIELD_VALUE_EVENT = 'NEW_FIELD_VALUE';
+
 export default class TypeaheadComponent {
-  constructor({context, apiUrl, onSelect, onUnsetResult, onError, minChars, resultLimit, sanitisedQueryReplaceChars = [], suggestionFunction}) {
+  emitter = new EventEmitter();
+
+  constructor({
+    context,
+    apiUrl,
+    onSelect,
+    onUnsetResult,
+    onError,
+    minChars,
+    resultLimit,
+    sanitisedQueryReplaceChars = []/*,
+    suggestionFunction*/}) {
+
     // DOM Elements
     this.context = context;
     this.combobox = context.querySelector(`.${classTypeaheadCombobox}`);
@@ -207,6 +223,7 @@ export default class TypeaheadComponent {
         this.sanitisedQuery = sanitisedQuery;
 
         if (this.sanitisedQuery.length >= this.minChars) {
+          //this.emitter.emit(NEW_FIELD_VALUE_EVENT, sanitisedQuery);
 
           /**
            * Needs to be pulled out
