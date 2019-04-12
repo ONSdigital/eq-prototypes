@@ -1,6 +1,4 @@
 import EventEmitter from 'events';
-
-import TypeaheadService from './typeahead.service';
 import {sanitiseTypeaheadText} from './typeahead-helpers';
 
 const classTypeaheadCombobox = 'js-typeahead-combobox';
@@ -30,6 +28,8 @@ const KEYCODE = {
 };
 
 export const NEW_FIELD_VALUE_EVENT = 'NEW_FIELD_VALUE';
+export const NEW_ITEM_SELECTED_EVENT = 'NEW_ITEM_SELECTED';
+export const UNSET_FIELD_VALUE_EVENT = 'UNSET_FIELD_VALUE';
 
 export default class TypeaheadComponent {
   emitter = new EventEmitter();
@@ -37,13 +37,9 @@ export default class TypeaheadComponent {
   constructor({
     context,
     apiUrl,
-    onSelect,
-    onUnsetResult,
-    onError,
     minChars,
     resultLimit,
-    sanitisedQueryReplaceChars = []/*,
-    suggestionFunction*/}) {
+    sanitisedQueryReplaceChars = []}) {
 
     // DOM Elements
     this.context = context;
@@ -57,20 +53,11 @@ export default class TypeaheadComponent {
     // Suggestion URL
     this.apiUrl = apiUrl || context.getAttribute('data-api-url');
 
-    // Callbacks
-    this.onSelect = onSelect;
-    this.onUnsetResult = onUnsetResult;
-    this.onError = onError;
-
     // Settings
     this.content = JSON.parse(context.getAttribute('data-content'));
     this.listboxId = this.listbox.getAttribute('id');
     this.minChars = minChars || 2;
     this.resultLimit = resultLimit || null;
-
-    /*if (suggestionFunction) {
-      this.fetchSuggestions = suggestionFunction;
-    }*/
 
     // State
     this.ctrlKey = false;
@@ -158,14 +145,13 @@ export default class TypeaheadComponent {
 
   handleChange() {
     if (!this.blurring) {
-      this.getSuggestions();
+      this.valueChanged();
     }
   }
 
   handleFocus() {
     clearTimeout(this.blurTimeout);
     this.combobox.classList.add(classTypeaheadComboboxFocused);
-    this.getSuggestions(true);
   }
 
   handleBlur() {
@@ -210,7 +196,7 @@ export default class TypeaheadComponent {
     }
   }
 
-  getSuggestions(force) {
+  valueChanged(force) {
     if (!this.settingResult) {
       const query = this.input.value;
       const sanitisedQuery = sanitiseTypeaheadText(query, this.sanitisedQueryReplaceChars);
@@ -223,25 +209,7 @@ export default class TypeaheadComponent {
         this.sanitisedQuery = sanitisedQuery;
 
         if (this.sanitisedQuery.length >= this.minChars) {
-          //this.emitter.emit(NEW_FIELD_VALUE_EVENT, sanitisedQuery);
-
-          /**
-           * Needs to be pulled out
-           * @type {TypeaheadService}
-           */
-          const service = new TypeaheadService({
-            apiUrl: this.apiUrl,
-            lang: this.lang,
-            sanitisedQueryReplaceChars: this.sanitisedQueryReplaceChars
-          });
-
-          service.get(this.sanitisedQuery)
-            .then(this.handleResults.bind(this))
-            .catch(error => {
-              if (error.name !== 'AbortError' && this.onError) {
-                this.onError(error);
-              }
-            });
+          this.emitter.emit(NEW_FIELD_VALUE_EVENT, sanitisedQuery);
         } else {
           this.clearListbox();
         }
@@ -254,9 +222,7 @@ export default class TypeaheadComponent {
     this.resultOptions = [];
     this.resultSelected = false;
 
-    if (this.onUnsetResult) {
-      this.onUnsetResult();
-    }
+    this.emitter.emit(UNSET_FIELD_VALUE_EVENT);
   }
 
   clearListbox(preventAriaStatusUpdate) {
@@ -270,11 +236,15 @@ export default class TypeaheadComponent {
     }
   }
 
-  handleResults(result) {
-    this.foundResults = result.totalResults;
-    this.results = result.results;
+  updateData(dataMap) {
+    this.results = dataMap.results;
+    this.foundResults = dataMap.totalResults;
     this.numberOfResults = Math.max(this.results.length, 0);
 
+    this.render();
+  }
+
+  render() {
     if (!this.deleting || (this.numberOfResults && this.deleting)) {
       if (this.numberOfResults.length === 1 && this.results[0].sanitisedText === this.sanitisedQuery) {
         this.clearListbox(true);
@@ -307,10 +277,10 @@ export default class TypeaheadComponent {
             this.selectResult(index);
           });
 
-          this.listbox.appendChild(listElement);
-
           return listElement;
         });
+
+        this.resultOptions.forEach(listElement => this.listbox.appendChild(listElement));
 
         if (this.numberOfResults < this.foundResults) {
           const listElement = document.createElement('li');
@@ -380,7 +350,7 @@ export default class TypeaheadComponent {
 
   selectResult(index) {
     if (this.results.length) {
-      this.settingResult = true;
+      //this.settingResult = true;
 
       const result = this.results[index || this.highlightedResultIndex || 0];
 
@@ -392,10 +362,12 @@ export default class TypeaheadComponent {
 
       this.resultSelected = true;
 
-      this.onSelect(result).then(() => {
+      this.emitter.emit(NEW_ITEM_SELECTED_EVENT, result);
+
+      /*this.onSelect(result).then(() => {
         this.settingResult = false;
         // this.input.setAttribute('autocomplete', 'false');
-      });
+      });*/
 
       let ariaAlternativeMessage = '';
 
