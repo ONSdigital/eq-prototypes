@@ -47,7 +47,8 @@ export default class TypeaheadService {
           lang: this.lang,
           sanitisedQueryReplaceChars: this.sanitisedQueryReplaceChars
         }))
-        .then(dataMapping => resolve(dataMapping));
+        .then(dataMapping => resolve(dataMapping))
+        .catch(reject);
     });
   }
 }

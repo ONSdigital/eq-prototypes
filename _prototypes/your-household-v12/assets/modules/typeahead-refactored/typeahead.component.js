@@ -39,7 +39,8 @@ export default class TypeaheadComponent {
     apiUrl,
     minChars,
     resultLimit,
-    sanitisedQueryReplaceChars = []}) {
+    sanitisedQueryReplaceChars = [],
+    lang = null}) {
 
     // DOM Elements
     this.context = context;
@@ -75,7 +76,7 @@ export default class TypeaheadComponent {
     this.blurring = false;
     this.blurTimeout = null;
     this.sanitisedQueryReplaceChars = sanitisedQueryReplaceChars;
-    this.lang = document.documentElement.getAttribute('lang').toLowerCase();
+    this.lang = lang || document.documentElement.getAttribute('lang').toLowerCase();
 
     // Modify DOM
     this.label.setAttribute('for', this.input.getAttribute('id'));
