@@ -4,6 +4,7 @@ import TypeaheadComponent, {
   UNSET_FIELD_VALUE_EVENT
 } from './typeahead.component';
 import TypeaheadService from './typeahead.service';
+import typeaheadDataMap from './typeahead.service-data-map';
 
 export default class TypeaheadContainer {
   constructor(context) {
@@ -17,6 +18,11 @@ export default class TypeaheadContainer {
 
     this.typeahead.emitter.on(NEW_FIELD_VALUE_EVENT, value => {
       this.service.get(value)
+        .then(typeaheadDataMap.bind(null, {
+          query: value,
+          lang: this.typeahead.lang,
+          sanitisedQueryReplaceChars: this.typeahead.sanitisedQueryReplaceChars
+        }))
         .then(this.typeahead.updateData.bind(this.typeahead))
         .catch(error => {
           if (error.name !== 'AbortError') {

@@ -1,8 +1,14 @@
 import formBodyFromObject from './form-body-from-object';
 import AbortableFetch from './abortable-fetch';
-import typeaheadDataMap from './typeahead.service-data-map';
 
 export default class TypeaheadService {
+  requestConfig = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+  };
+
   constructor({ apiUrl, lang, sanitisedQueryReplaceChars }) {
     if (!apiUrl || !lang || !sanitisedQueryReplaceChars) {
       throw Error('[TypeaheadService] apiUrl, lang,' +
@@ -10,11 +16,11 @@ export default class TypeaheadService {
     }
 
     this.apiUrl = apiUrl;
+    this.lang = lang;
 
     /**
      * Remove - as not needed to make service calls.
      */
-    this.lang = lang;
     this.sanitisedQueryReplaceChars = sanitisedQueryReplaceChars;
   }
 
@@ -29,25 +35,11 @@ export default class TypeaheadService {
         this.fetch.abort();
       }
 
-      this.fetch = new AbortableFetch(this.apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: formBodyFromObject(query)
-      });
+      this.requestConfig.body = formBodyFromObject(query);
+      this.fetch = new AbortableFetch(this.apiUrl, this.requestConfig);
 
       this.fetch.send()
-
-        /**
-         * Pull out from here into client context
-         */
-        .then(typeaheadDataMap.bind(null, {
-          query: sanitisedQuery,
-          lang: this.lang,
-          sanitisedQueryReplaceChars: this.sanitisedQueryReplaceChars
-        }))
-        .then(dataMapping => resolve(dataMapping))
+        .then(resolve)
         .catch(reject);
     });
   }
