@@ -659,4 +659,3 @@ $(updateSaveAndCompleteLater);
 $(updateFoortListCol);
 $(sessionBookmark);
 $(fieldItemDisplayHack);
-

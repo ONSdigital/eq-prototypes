@@ -17,6 +17,10 @@ export default class TypeaheadContainer {
     });
 
     this.typeahead.emitter.on(NEW_FIELD_VALUE_EVENT, value => {
+
+      /**
+       * Call service, partially apply config for promise callbacks
+       */
       this.service.get(value)
         .then(typeaheadDataMap.bind(null, {
           query: value,

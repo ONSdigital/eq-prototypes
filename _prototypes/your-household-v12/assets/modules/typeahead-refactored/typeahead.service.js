@@ -9,19 +9,15 @@ export default class TypeaheadService {
     }
   };
 
-  constructor({ apiUrl, lang, sanitisedQueryReplaceChars }) {
-    if (!apiUrl || !lang || !sanitisedQueryReplaceChars) {
-      throw Error('[TypeaheadService] apiUrl, lang,' +
-        ' sanitisedQueryReplaceChars parameters are required');
+  constructor({ apiUrl, lang }) {
+    if (!apiUrl || !lang) {
+      throw Error(
+        '[TypeaheadService] \'apiUrl\', \'lang\' parameters are required'
+      );
     }
 
     this.apiUrl = apiUrl;
     this.lang = lang;
-
-    /**
-     * Remove - as not needed to make service calls.
-     */
-    this.sanitisedQueryReplaceChars = sanitisedQueryReplaceChars;
   }
 
   get(sanitisedQuery) {
