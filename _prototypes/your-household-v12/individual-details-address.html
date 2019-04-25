@@ -229,7 +229,7 @@ cdn: v1.5.0
   }
 
   function updateAnswer() {
-    const visitors =
+    var visitors =
       storageAPI.getAllHouseholdMembers().filter(storageAPI.isVisitor),
       visitor1 = visitors[0],
       visitor1Person = visitor1['@person'];

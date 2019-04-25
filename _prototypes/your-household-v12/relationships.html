@@ -570,7 +570,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   }
 
   $('[name="relationship"]').on('change', function() {
-    const relationshipDescription = storageAPI.relationshipDescriptionMap[$(this).val()];
+    var relationshipDescription =
+      storageAPI.relationshipDescriptionMap[$(this).val()];
     updateQuestion({
       personIs: personIs,
       personTo: personTo

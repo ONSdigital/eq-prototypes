@@ -148,8 +148,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     if (!nobox.checked) {
       e.preventDefault();
 
-      const awayTypes =
-       [...document.querySelectorAll('[name=away-type]:checked')].map(element => element.value);
+      var awayTypes = [];
+
+      $('[name=away-type]:checked').each(function (i, el) {
+        awayTypes.push($(el).val());
+      });
 
       window.location.href =
        `../who-else-to-add?previous=visitors&journey=visitors&visitor-types=${JSON.stringify(awayTypes)}`;
