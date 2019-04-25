@@ -365,7 +365,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         /**
          * Attempt to find next bookmark
          */
-        var nextBookmarkPersonId = _.find(peopleIds, personId => {
+        var nextBookmarkPersonId = _.find(peopleIds, function (personId) {
           var personalDetails = storageAPI.getPersonalDetailsFor(personId);
 
           return personalDetails && personalDetails['_bookmark'];
@@ -375,7 +375,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
          * If no bookmark is found, attempt to find next section to start
          */
         if (!nextBookmarkPersonId) {
-          nextStartPersonId = _.find(allHouseholdMembers, member => {
+          nextStartPersonId = _.find(allHouseholdMembers, function(member) {
             var person = member['@person'];
             var personDetails = storageAPI.getPersonalDetailsFor(person.id);
             var status = getSurveyStatus(personDetails, null, storageAPI.isVisitor(member));
