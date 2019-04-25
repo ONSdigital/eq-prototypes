@@ -3,6 +3,7 @@
  */
 import './assets/lib/FileSaver';
 import './assets/lib/url-search-params-polyfill';
+import './assets/lib/array-find-polyfill';
 
 /**
  * DOM modules
@@ -406,7 +407,7 @@ function createMemberItem(member, { redirect } = { redirect: null }) {
 
   $removeLink.attr('href', (
     '../remove-household-member/?person=' + member['@person'].id +
-    '&redirect=../summary'
+    redirectTo
   ));
 
   return $nodeEl;
