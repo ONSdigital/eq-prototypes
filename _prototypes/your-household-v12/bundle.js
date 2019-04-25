@@ -1,3 +1,15 @@
+import 'url-search-params-polyfill';
+
+/**
+ * Libraries
+ */
+import './assets/lib/FileSaver';
+
+/**
+ * DOM modules
+ */
+import './assets/modules/typeahead-refactored/typeahead.module';
+
 import {
   RELATIONSHIPS_STORAGE_KEY,
   relationshipDescriptionMap,
@@ -107,16 +119,6 @@ import {
   personalQuestionSubmitDecorator
 } from './assets/personal-details';
 import { removeFromList, trailingNameS } from './assets/utils';
-
-/**
- * Libraries
- */
-import './assets/lib/FileSaver';
-
-/**
- * DOM modules
- */
-import './assets/modules/typeahead-refactored/typeahead.module';
 
 import { numberToPositionWord, numberToWordsStyleguide } from './assets/numbers-to-words';
 
