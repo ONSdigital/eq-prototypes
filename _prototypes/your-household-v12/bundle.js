@@ -5,6 +5,7 @@ import './assets/lib/FileSaver';
 import './assets/lib/url-search-params-polyfill';
 import './assets/lib/array-find-polyfill';
 import './assets/lib/CustomEvent-polyfill';
+import './assets/lib/fetch-polyfill';
 import './assets/lib/abortcontroller-polyfill';
 
 /**
