@@ -1,9 +1,8 @@
-import 'url-search-params-polyfill';
-
 /**
  * Libraries
  */
 import './assets/lib/FileSaver';
+import './assets/lib/url-search-params-polyfill';
 
 /**
  * DOM modules
