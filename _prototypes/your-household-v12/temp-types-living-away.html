@@ -156,8 +156,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion () {
     $('.js-heading-inner-part1').html(members.length ?
-      `Apart from the people already included, is there anyone else who is temporarily away or staying you need to add to ${sessionStorage.getItem('address-line-1')}?`:
-      `Is there anyone who is temporarily away or staying you need to add to ${sessionStorage.getItem('address-line-1')}?`
+      'Apart from the people already included, is there anyone else who is temporarily away or staying you need to add to ' + sessionStorage.getItem('address-line-1') + '?':
+      'Is there anyone who is temporarily away or staying you need to add to ' + sessionStorage.getItem('address-line-1') + '?'
     );
   }
 

@@ -155,7 +155,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       });
 
       window.location.href =
-       `../who-else-to-add?previous=visitors&journey=visitors&visitor-types=${JSON.stringify(awayTypes)}`;
+        '../who-else-to-add?previous=visitors&journey=visitors&visitor-types=' + JSON.stringify(awayTypes);
     } else {
       document.trav.action = "../summary";
     }
