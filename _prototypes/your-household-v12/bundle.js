@@ -2,6 +2,7 @@
  * Libraries
  */
 import './assets/lib/FileSaver';
+import './assets/lib/array-from-polyfill';
 import './assets/lib/url-search-params-polyfill';
 import './assets/lib/array-find-polyfill';
 import './assets/lib/CustomEvent-polyfill';
