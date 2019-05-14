@@ -66,8 +66,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                 <div class="grid__col col-12@xs col-6@m">
                                                     <div
                                                             class="summary__question completed">
-                                                        <strong>People who
-                                                            live here</strong>
+                                                        <a
+                                                                href="../summary/?show-panel=true" class="js-view-summary">
+                                                            People who live here
+                                                        </a>
                                                     </div>
                                                 </div>
                                                 <!--<div
@@ -78,11 +80,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                 <div
                                                         class="grid__col col-4@xs col-6@m">
                                                     <div class="summary__link">
-                                                        <a
-                                                                href="../summary/?show-panel=true" class="js-view-summary u-fr@m">View
-                                                            answers
-                                                            <span class="u-vh"></span>
-                                                        </a>
+                                                        <strong class="u-fr@m">Completed
+                                                        </strong>
                                                     </div>
                                                 </div>
                                             </div>
@@ -110,7 +109,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         <div class="grid">
             <div class="grid__col col-12@xs col-6@m">
                 <div class="summary__question js-survey-question">
-                    <strong class="js-person-name"></strong>
+                    <a href="#" class="js-person-name js-link"></a>
                 </div>
             </div>
             <!--<div class="grid__col col-8@xs col-3@m">
@@ -120,9 +119,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
             </div>-->
             <div class="grid__col col-12@xs col-6@m">
                 <div class="summary__link">
-                    <a class="js-link"
-                       href="#">Start section
-                    </a>
+                    <strong class="js-survey-status">Not started</strong>
                 </div>
             </div>
         </div>
@@ -297,10 +294,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     $nodeEl.attr('id', '');
     $nodeEl.find('.js-person-name').html(
       person.fullName +
-        (person.id === storageAPI.IDS.USER_HOUSEHOLD_MEMBER_ID ? ' (You)': '') +
+        (person.id === storageAPI.IDS.USER_HOUSEHOLD_MEMBER_ID ? ' (you)': '') +
         (isVisitor ? ' (Visitor)': '')
     );
-    $nodeEl.find('.js-link').html(statusMap[surveyStatus].linkText);
+    //$nodeEl.find('.js-link').html(statusMap[surveyStatus].linkText);
     $surveyStatus.html(statusMap[surveyStatus].label);
 
     surveyStatus === 'private'
