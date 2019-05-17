@@ -44,7 +44,7 @@ language: welsh
                                 <div
                                         class="panel panel--simple panel--info u-mb-s">
                                     <div class="panel__body">
-                                        <strong class="u-mb-xs u-d-b">Cofiwch gynnwys pobl sydd oddi cartref dros dro
+                                        <strong class="u-mb-xs u-d-b">Cofiwch gynnwys pobl sydd i ffwrdd o'r cartref dros dro
                                         </strong>
                                         <ul id="question-list-away"></ul>
                                         <strong class="u-mb-xs u-mt-m u-d-b">Cofiwch gynnwys pobl sy'n aros dros dro
@@ -66,7 +66,7 @@ language: welsh
                                            id="yes">
                                     <label class="label label--inline"
                                            for="yes">
-                                        Oes, mae angen i mi ychwanegu rhywun arall
+                                        Oes, mae angen i mi ychwanegu rhywun
                                     </label>
                                 </div>
 
@@ -87,11 +87,15 @@ language: welsh
                     <div
                             class="collapsible collapsible--simple js-collapsible js-collapsible-simple u-mb-m">
                         <div class="js-collapsible-content">
-                            <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Pam rydym yn gofyn y cwestiwn hwn?">Pam rydym yn gofyn y cwestiwn hwn?</h3>
+                            <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Pam ydym ni’n gofyn y cwestiwn hwn?">Pam ydym ni’n gofyn y cwestiwn hwn?</h3>
                             <div class="collapsible__body js-collapsible-body">
-                                <p>Rydym yn gofyn y cwestiwn hwn er mwyn helpu i sicrhau bod pawb yn cael eu cyfrif yn gywir yn y cyfrifiad. Gall hyn gynnwys pobl sy'n aros dros dro neu sydd oddi cartref dros dro.
+                                <p>Rydym ni’n gofyn y cwestiwn hwn er mwyn helpu
+                                    i wneud yn siŵr bod pawb yn cael eu cyfrif
+                                    yn gywir yn y cyfrifiad. Gall hyn gynnwys
+                                    pobl sy'n aros dros dro neu bobl sydd i
+                                    ffwrdd o’r cartref dros dro.
                                 </p>
-                                <button class="btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Pam rydym yn gofyn y cwestiwn hwn?">Cuddio hwn</button>
+                                <button class="btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Pam ydym ni’n gofyn y cwestiwn hwn?">Cuddio hwn</button>
                             </div>
                         </div>
                     </div>
@@ -155,7 +159,7 @@ language: welsh
 
   function updateQuestion () {
     $('.js-heading-inner-part1').html(members.length ?
-      `Ar wahân i'r bobl sydd wedi'u cynnwys eisoes, oes unrhyw un sydd oddi cartref dros dro neu sy'n aros dros dro y mae angen i chi ei ychwanegu at ${sessionStorage.getItem('address-line-1')}?` :
+      `Ar wahân i'r bobl sydd wedi'u cynnwys eisoes, oes unrhyw un sydd i ffwrdd o'r cartref dros dro neu sy'n aros dros dro y mae angen i chi ei ychwanegu at ${sessionStorage.getItem('address-line-1')}?` :
       `Oes unrhyw un sydd oddi cartref dros dro neu sy'n aros y mae angen i chi ei ychwanegu at ${sessionStorage.getItem('address-line-1')}?`
     );
   }

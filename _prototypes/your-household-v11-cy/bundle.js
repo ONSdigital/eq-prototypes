@@ -155,7 +155,7 @@ function createListItemPerson(member) {
   return $('<li class="list__item">').addClass('mars').html(
     '<span class="list__item-name">' +
       member['@person'].fullName +
-      (member['@person'].id === USER_HOUSEHOLD_MEMBER_ID ? ' (Chi)' : '') +
+      (member['@person'].id === USER_HOUSEHOLD_MEMBER_ID ? ' (chi)' : '') +
     '</span>'
   );
 }
@@ -298,7 +298,7 @@ function doILiveHere() {
 }
 
 function getSignificant() {
-  return '19 Mawrth 2019';
+  return '12 Mehefin 2019';
 }
 
 function updateSignificantDate() {
@@ -325,7 +325,7 @@ function createMemberItem(member, { redirect } = { redirect: null }) {
     altPage = surveyType && surveyType === 'lms' ? surveyType + '/' : '';
 
   if (memberIsUser) {
-    personNameText += ' (Chi)';
+    personNameText += ' (chi)';
   }
 
   $nodeEl.attr('id', '');

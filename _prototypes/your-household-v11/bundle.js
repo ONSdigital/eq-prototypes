@@ -298,7 +298,7 @@ function doILiveHere() {
 }
 
 function getSignificant() {
-  return '3 February 2019';
+  return '12 June 2019';
 }
 
 function updateSignificantDate() {
@@ -494,4 +494,3 @@ $(updateBySurveyType);
 $(updateSignificantDate);
 $(updateHouseholdSummary);
 $(updateVisitorsSummary);
-

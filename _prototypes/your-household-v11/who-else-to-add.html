@@ -65,7 +65,8 @@ cdn: v2.0.0
                                            data-qa="input-text" value=""/>
                                 </div>
 
-                                <div class="question__answer">
+                                <div
+                                        class="question__answer js-middle-name-field">
                                     <label class="label ">
                                         <div class="label__inner">
                                             Middle name(s)
@@ -301,6 +302,7 @@ cdn: v2.0.0
     else if (window.location.search.match(/journey=visitors/)) {
       $('#question-title').html(overrideTitle);
       $('.js-visitor-definition').show();
+      $('.js-middle-name-field').hide();
     }
     else if (window.location.search.match(/journey=temp-living-here/)) {
       $('#question-title').html(overrideTitleStayingOutsideUK);

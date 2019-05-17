@@ -103,20 +103,19 @@ language: welsh
 
 <div id="modal" class="modal" style="display: none;">
     <div class="modal__window">
-        <h1 class="u-fs-l">Are you sure you want to remove <span
+        <h1 class="u-fs-l">Ydych chi'n siŵr eich bod am ddileu <span
                 class="js-person-name"></span>?</h1>
-        <p class="u-mb-m">All of the data associated with this person will be
-            deleted</p>
+        <p class="u-mb-m">Caiff yr holl ddata sy'n gysylltiedig â'r person hwn eu dileu</p>
 
         <div class="modal__buttons btn-group">
             <div class="u-mb-xs">
                 <button class="btn btn-group__btn btn--danger remove-member-button">
-                    Yes, remove this person
+                    Ydw, dileu'r person hwn
                 </button>
             </div>
             <div>
                 <button class="btn btn-group__btn btn--secondary close-modal-button">
-                    No, cancel this
+                    Nac ydw, canslo hyn
                 </button>
             </div>
         </div>
@@ -165,7 +164,7 @@ language: welsh
 
   function updateQuestion() {
     if(isEditing && userPerson) {
-      $('.js-heading').html('Newid manylion ar gyfer ' + userPerson.fullName + ' (Chi)');
+      $('.js-heading').html('Newid manylion ar gyfer ' + userPerson.fullName + ' (chi)');
       $('.js-remove-section').show();
     }
   }

@@ -9,16 +9,16 @@ language: welsh
 
 <script>
     var welshPeopleCountLabels = {
-      2: 'Oes, mae angen i mi ychwanegu ail berson',
-      3: 'Oes, mae angen i mi ychwanegu trydydd person',
-      4: 'Oes, mae angen i mi ychwanegu pedwerydd person',
-      5: 'Oes, mae angen i mi ychwanegu pumed person',
-      6: 'Oes, mae angen i mi ychwanegu chweched person',
-      7: 'Oes, mae angen i mi ychwanegu seithfed person',
-      8: 'Oes, mae angen i mi ychwanegu wythfed person',
-      9: 'Oes, mae angen i mi ychwanegu nawfed person',
-      10: 'Oes, mae angen i mi ychwanegu 10fed person',
-      11: 'Oes, mae angen i mi ychwanegu 11eg person'
+      2: 'Oes, mae angen i mi ychwanegu ail ymwelydd',
+      3: 'Oes, mae angen i mi ychwanegu trydydd ymwelydd',
+      4: 'Oes, mae angen i mi ychwanegu pedwerydd ymwelydd',
+      5: 'Oes, mae angen i mi ychwanegu pumed ymwelydd',
+      6: 'Oes, mae angen i mi ychwanegu chweched ymwelydd',
+      7: 'Oes, mae angen i mi ychwanegu seithfed ymwelydd',
+      8: 'Oes, mae angen i mi ychwanegu wythfed ymwelydd',
+      9: 'Oes, mae angen i mi ychwanegu nawfed ymwelydd',
+      10: 'Oes, mae angen i mi ychwanegu 10fed ymwelydd',
+      11: 'Oes, mae angen i mi ychwanegu 11eg ymwelydd'
     };
 </script>
 
@@ -87,10 +87,10 @@ language: welsh
                                                        id="yes-someone-else-label">
                                                     <span
                                                             class="yes-answer">
-                                                        Oes, mae angen i mi ychwanegu ail berson</span>
+                                                        Oes, mae angen i mi ychwanegu ail ymwelydd</span>
                                                     <span
                                                             class="u-fs-s u-db label--negative js-householdmembers-detail">
-                                                        Dylech gynnwys partneriaid, plant, babanod a anwyd ar <span class="js-significant-date"></span> neu cyn hynny, pobl sy’n rhannu tŷ â chi, tenantiaid a lojers, myfyrwyr a phlant ysgol sy'n byw oddi cartref yn ystod y tymor, os dyma yw eu cartref parhaol neu gartref y teulu.</span>
+                                                        Dylech gynnwys partneriaid, plant, babanod a anwyd ar <span class="js-significant-date"></span> neu cyn hynny, pobl sy’n rhannu cartref â chi, tenantiaid a lojers, myfyrwyr a phlant ysgol sy'n byw i ffrwdd o'r cartref yn ystod y tymor, os mai hwn yw eu cartref parhaol neu gartref y teulu.</span>
                                                 </label>
                                             </div>
 
@@ -100,7 +100,7 @@ language: welsh
                                                        name="does-anyone-else-live-here"
                                                        id="no" value="no">
                                                 <label class="label label--inline"
-                                                       for="no">Nac oes, nid oes angen i mi ychwanegu unrhyw un</label>
+                                                       for="no">Nac oes, rwyf wedi cynnwys pawb</label>
                                             </div>
                                         </fieldset>
                                     </div>
@@ -158,7 +158,7 @@ language: welsh
       $('#form')
         .prepend('<input type="hidden" name="journey" value="visitors" />');
       $('#question-title')
-        .html('Oes unrhyw ymwelwyr eraill yn aros dros nos ar ' +
+        .html('Oes unrhyw ymwelwyr eraill yn aros ar ' +
           window.ONS.utils.getSignificant()
           + ' yn ' +
           addressLine1 +

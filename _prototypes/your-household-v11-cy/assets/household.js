@@ -121,20 +121,22 @@ export function isOtherHouseholdMember(member) {
 
 export const tempAwayQuestionSentenceMap = {
   'three-more': 'Pobl sy\'n byw y tu allan i\'r Deyrnas Unedig fel arfer, ond sy\'n aros yn y Deyrnas Unedig am 3 mis neu fwy',
-  'perm-away': 'Pobl sy\'n gweithio oddi cartref yn y Deyrnas Unedig, os dyma yw eu cartref parhaol neu gartref y teulu',
-  'armed-forces': 'Aelodau o\'r lluoedd arfog (er enghraifft, y fyddin), os dyma yw eu cartref' +
+  'perm-away': 'Pobl sy\'n gweithio oddi cartref yn y Deyrnas Unedig, os mai hwn yw eu cartref parhaol neu gartref y teulu',
+  'armed-forces': 'Aelodau o\'r lluoedd arfog (er enghraifft, y fyddin), os mai hwn yw eu cartref' +
     ' parhaol neu gartref y teulu',
   'less-twelve': 'Pobl sydd y tu allan i\'r Deyrnas UnAelodau o\'r lluoedd arfogedig dros dro am lai na 12 mis',
   'usually-temp': 'Pobl sy\'n aros dros dro, sy\'n byw yn y Deyrnas Unedig' +
     ' fel arfer, ond sydd heb gyfeiriad arall yn y Deyrnas Unedig, er enghraifft perthnasau, ffrindiau',
-  'other': 'Pobl eraill sy\'n byw yma fel arfer, gan gynnwys unrhyw un sydd oddi cartref dros dro'
+  'other': 'Pobl eraill sy\'n byw yma fel arfer, ond sydd i ffwrdd dros dos dros dro'
 };
 
 export const visitorQuestionSentenceMap = {
-  'usually-in-uk': 'Pobl sydd fel arfer yn byw rywle arall yn y Deyrnas Unedig, er enghraifft cariadon, ffrindiau neu berthnasau',
+  'usually-in-uk': 'Pobl sydd fel arfer yn byw rywle arall yn y Deyrnas' +
+    ' Unedig, er enghraifft, cariadon, ffrindiau neu berthnasau',
   'second-address': 'Pobl sy’n aros yma gan mai dyma eu hail gyfeiriad, er enghraifft, oherwydd gwaith.\n' +
     'Mae eu cartref parhaol neu gartref y teulu rywle arall',
-  'less-three': 'Pobl sy’n byw y tu allan i’r Deyrnas Unedig fel arfer, ond sy’n aros yn y Deyrnas Unedig am lai na dri mis',
+  'less-three': 'Pobl sy’n byw y tu allan i’r Deyrnas Unedig fel arfer, ond' +
+    ' sy’n aros yn y Deyrnas Unedig am lai na 3 mis',
   'on-holiday': 'Pobl sydd ar wyliau yma\n' +
     'Neu'
 };

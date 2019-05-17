@@ -85,7 +85,8 @@ cdn: v2.0.0
                                                        type="radio"
                                                        name="does-anyone-else-live-here"
                                                        id="no" value="no">
-                                                <label class="label label--inline"
+                                                <label
+                                                        class="label label--inline js-no-one"
                                                        for="no">No, I do not need to add anyone</label>
                                             </div>
                                         </fieldset>
@@ -151,6 +152,7 @@ cdn: v2.0.0
           ', ' + addressLine2 + '?');
 
       $('.js-visitors-summary').show();
+      $('.js-no-one').html('No, this is everyone');
 
       if (visitorTypesStr) {
         var visitorTypes = JSON.parse(visitorTypesStr);
