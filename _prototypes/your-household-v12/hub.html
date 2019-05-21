@@ -66,22 +66,26 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                 <div class="grid__col col-12@xs col-6@m">
                                                     <div
                                                             class="summary__question completed">
-                                                        <a
-                                                                href="../summary/?show-panel=true" class="js-view-summary">
-                                                            People who live here
-                                                        </a>
+                                                        <strong>
+                                                            People who live
+                                                            here
+                                                        </strong>
+                                                        <span
+                                                                class="u-d-no@s">&mdash; Completed</span>
                                                     </div>
                                                 </div>
-                                                <!--<div
+                                                <div
                                                         class="grid__col col-8@xs col-3@m">
                                                     <div
-                                                            class="summary__answer completed">Completed</div>
-                                                </div>-->
+                                                            class="summary__answer u-d-no u-d-b@s">Completed</div>
+                                                </div>
                                                 <div
-                                                        class="grid__col col-4@xs col-6@m">
+                                                        class="grid__col col-12@xs col-3@m">
                                                     <div class="summary__link">
-                                                        <strong class="u-fr@m">Completed
-                                                        </strong>
+                                                        <a
+                                                                href="../summary/?show-panel=true" class="js-view-summary u-fr@m">
+                                                            View answers
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -109,17 +113,17 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         <div class="grid">
             <div class="grid__col col-12@xs col-6@m">
                 <div class="summary__question js-survey-question">
-                    <a href="#" class="js-person-name js-link"></a>
+                    <strong class="js-person-name"></strong>
+                    <span class="u-d-no@s">&mdash;
+                        <span class="js-survey-status">Not started</span></span>
                 </div>
             </div>
-            <!--<div class="grid__col col-8@xs col-3@m">
-                <div
-                        class="summary__answer js-survey-status">[Status
-                    not found]</div>
-            </div>-->
-            <div class="grid__col col-12@xs col-6@m">
+            <div class="grid__col col-8@xs col-3@m">
+                <div class="summary__answer js-survey-status u-d-no u-d-b@s">Not started</div>
+            </div>
+            <div class="grid__col col-12@xs col-3@m">
                 <div class="summary__link">
-                    <strong class="js-survey-status">Not started</strong>
+                    <a href="#" class="js-link"></a>
                 </div>
             </div>
         </div>
@@ -297,12 +301,13 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         (person.id === storageAPI.IDS.USER_HOUSEHOLD_MEMBER_ID ? ' (you)': '') +
         (isVisitor ? ' (Visitor)': '')
     );
-    //$nodeEl.find('.js-link').html(statusMap[surveyStatus].linkText);
+
+    $nodeEl.find('.js-link').html(statusMap[surveyStatus].linkText);
     $surveyStatus.html(statusMap[surveyStatus].label);
 
     surveyStatus === 'private'
       ? $nodeEl.find('.js-link').hide()
-      : $nodeEl.find('.js-link').attr('href',linkHref);
+      : $nodeEl.find('.js-link').attr('href', linkHref);
 
     (surveyStatus === 'completed' || surveyStatus === 'private')
     && $surveyQuestion.addClass('completed');
