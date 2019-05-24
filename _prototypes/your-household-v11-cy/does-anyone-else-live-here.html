@@ -8,17 +8,30 @@ language: welsh
 ---
 
 <script>
+      var welshVisitorCountLabels = {
+        2: 'Oes, mae angen i mi ychwanegu ail ymwelydd',
+        3: 'Oes, mae angen i mi ychwanegu trydydd ymwelydd',
+        4: 'Oes, mae angen i mi ychwanegu pedwerydd ymwelydd',
+        5: 'Oes, mae angen i mi ychwanegu pumed ymwelydd',
+        6: 'Oes, mae angen i mi ychwanegu chweched ymwelydd',
+        7: 'Oes, mae angen i mi ychwanegu seithfed ymwelydd',
+        8: 'Oes, mae angen i mi ychwanegu wythfed ymwelydd',
+        9: 'Oes, mae angen i mi ychwanegu nawfed ymwelydd',
+        10: 'Oes, mae angen i mi ychwanegu 10fed ymwelydd',
+        11: 'Oes, mae angen i mi ychwanegu 11eg ymwelydd'
+      };
+
     var welshPeopleCountLabels = {
-      2: 'Oes, mae angen i mi ychwanegu ail ymwelydd',
-      3: 'Oes, mae angen i mi ychwanegu trydydd ymwelydd',
-      4: 'Oes, mae angen i mi ychwanegu pedwerydd ymwelydd',
-      5: 'Oes, mae angen i mi ychwanegu pumed ymwelydd',
-      6: 'Oes, mae angen i mi ychwanegu chweched ymwelydd',
-      7: 'Oes, mae angen i mi ychwanegu seithfed ymwelydd',
-      8: 'Oes, mae angen i mi ychwanegu wythfed ymwelydd',
-      9: 'Oes, mae angen i mi ychwanegu nawfed ymwelydd',
-      10: 'Oes, mae angen i mi ychwanegu 10fed ymwelydd',
-      11: 'Oes, mae angen i mi ychwanegu 11eg ymwelydd'
+      2: 'Oes, mae angen i mi ychwanegu ail berson',
+      3: 'Oes, mae angen i mi ychwanegu trydydd person',
+      4: 'Oes, mae angen i mi ychwanegu pedwerydd person',
+      5: 'Oes, mae angen i mi ychwanegu pumed person',
+      6: 'Oes, mae angen i mi ychwanegu chweched person',
+      7: 'Oes, mae angen i mi ychwanegu seithfed person',
+      8: 'Oes, mae angen i mi ychwanegu wythfed person',
+      9: 'Oes, mae angen i mi ychwanegu nawfed person',
+      10: 'Oes, mae angen i mi ychwanegu 10fed person',
+      11: 'Oes, mae angen i mi ychwanegu 11eg person'
     };
 </script>
 
@@ -48,7 +61,7 @@ language: welsh
                       role="form" autocomplete="off" novalidate="">
                     <input type="hidden" name="previous"
                            value="does-anyone-else-live-here"/>
-                    <div class="group" id="rsi">
+                    <div class="group">
                         <div class="block" id="total-retail-turnover">
                             <section class="section">
                                 <div class="question u-mb-s">
@@ -68,14 +81,14 @@ language: welsh
 
                                 <div class="panel panel--simple panel--info u-mb-m js-visitor-panel" style="display: none">
                                     <div class="panel__body">
-                                        <strong class="u-mb-xs u-d-b">Cofiwch</strong>
+                                        <strong class="u-mb-xs u-d-b">Dylech gynnwys</strong>
                                         <ul class="js-visitor-includes"></ul>
                                     </div>
                                 </div>
 
                                 <div class="answer__fields js-fields">
                                     <div class="field field--radio field--multiplechoice ">
-                                        <fieldset class="u-mb-xl">
+                                        <fieldset class="u-mb-m">
                                             <div class="field__item js-focusable-box">
                                                 <input class="input input--radio js-focusable"
                                                        type="radio"
@@ -87,7 +100,7 @@ language: welsh
                                                        id="yes-someone-else-label">
                                                     <span
                                                             class="yes-answer">
-                                                        Oes, mae angen i mi ychwanegu ail ymwelydd</span>
+                                                        Oes, mae angen i mi ychwanegu ail berson</span>
                                                     <span
                                                             class="u-fs-s u-db label--negative js-householdmembers-detail">
                                                         Dylech gynnwys partneriaid, plant, babanod a anwyd ar <span class="js-significant-date"></span> neu cyn hynny, pobl sy’n rhannu cartref â chi, tenantiaid a lojers, myfyrwyr a phlant ysgol sy'n byw i ffrwdd o'r cartref yn ystod y tymor, os mai hwn yw eu cartref parhaol neu gartref y teulu.</span>
@@ -100,7 +113,7 @@ language: welsh
                                                        name="does-anyone-else-live-here"
                                                        id="no" value="no">
                                                 <label class="label label--inline"
-                                                       for="no">Nac oes, rwyf wedi cynnwys pawb</label>
+                                                       for="no">Nac oes, nid oes angen i mi ychwanegu unrhyw un</label>
                                             </div>
                                         </fieldset>
                                     </div>
@@ -108,6 +121,18 @@ language: welsh
                             </section>
                         </div>
                     </div>
+
+                    <div
+                            class="collapsible collapsible--simple js-collapsible js-collapsible-simple u-mb-xl">
+                        <div class="js-collapsible-content">
+                            <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Pam ydym ni’n gofyn y cwestiwn hwn?">Pam ydym ni’n gofyn y cwestiwn hwn?</h3>
+                            <div class="collapsible__body js-collapsible-body">
+                                <p>Rydym ni'n gofyn am wybodaeth am ymwelwyr er mwyn gwneud yn siŵr bod pawb yn cael eu cyfrif. Mae hyn yn helpu i roi amcangyfrifon cywir o'r boblogaeth. Ychwanegwch unrhyw ymwelwyr, hyd yn oed os ydych chi'n credu eu bod wedi cael eu cynnwys ar ffurflen cyfrifiad mewn cyfeiriad arall.</p>
+                                <button class="btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Pam ydym ni’n gofyn y cwestiwn hwn?">Cuddio hwn</button>
+                            </div>
+                        </div>
+                    </div>
+
                     <button class="btn btn--primary btn--lg qa-btn-submit venus"
                             type="submit" name="">Cadw a pharhau
                     </button>
@@ -186,14 +211,18 @@ language: welsh
       }
 
       $('.js-householdmembers-detail').hide();
+
+      if ((nextPosition) > 1) {
+        $('.yes-answer').html(welshVisitorCountLabels[nextPosition]);
+      }
     }
     else {
       nextPosition = householdMembers.length + 1;
       $('.js-household-members-summary').show();
-    }
 
-    if ((nextPosition) > 1) {
-      $('.yes-answer').html(welshPeopleCountLabels[nextPosition]);
+      if ((nextPosition) > 1) {
+        $('.yes-answer').html(welshPeopleCountLabels[nextPosition]);
+      }
     }
   });
 </script>

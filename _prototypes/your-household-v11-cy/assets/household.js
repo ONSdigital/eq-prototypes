@@ -121,13 +121,13 @@ export function isOtherHouseholdMember(member) {
 
 export const tempAwayQuestionSentenceMap = {
   'three-more': 'Pobl sy\'n byw y tu allan i\'r Deyrnas Unedig fel arfer, ond sy\'n aros yn y Deyrnas Unedig am 3 mis neu fwy',
-  'perm-away': 'Pobl sy\'n gweithio oddi cartref yn y Deyrnas Unedig, os mai hwn yw eu cartref parhaol neu gartref y teulu',
+  'perm-away': 'Pobl sy\'n gweithio i ffwrdd o\'r cartref yn y Deyrnas Unedig, os mai hwn yw eu cartref parhaol neu gartref y teulu',
   'armed-forces': 'Aelodau o\'r lluoedd arfog (er enghraifft, y fyddin), os mai hwn yw eu cartref' +
     ' parhaol neu gartref y teulu',
-  'less-twelve': 'Pobl sydd y tu allan i\'r Deyrnas UnAelodau o\'r lluoedd arfogedig dros dro am lai na 12 mis',
+  'less-twelve': 'Pobl sydd y tu allan i\'r Deyrnas Unedig dros dro am lai na 12 mis',
   'usually-temp': 'Pobl sy\'n aros dros dro, sy\'n byw yn y Deyrnas Unedig' +
     ' fel arfer, ond sydd heb gyfeiriad arall yn y Deyrnas Unedig, er enghraifft perthnasau, ffrindiau',
-  'other': 'Pobl eraill sy\'n byw yma fel arfer, ond sydd i ffwrdd dros dos dros dro'
+  'other': 'Pobl eraill sy\'n byw yma fel arfer, ond sydd i ffwrdd dros dos'
 };
 
 export const visitorQuestionSentenceMap = {

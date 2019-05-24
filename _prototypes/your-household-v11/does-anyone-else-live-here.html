@@ -32,8 +32,8 @@ cdn: v2.0.0
                       role="form" autocomplete="off" novalidate="">
                     <input type="hidden" name="previous"
                            value="does-anyone-else-live-here"/>
-                    <div class="group" id="rsi">
-                        <div class="block" id="total-retail-turnover">
+                    <div class="group">
+                        <div class="block">
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
@@ -59,7 +59,7 @@ cdn: v2.0.0
 
                                 <div class="answer__fields js-fields">
                                     <div class="field field--radio field--multiplechoice ">
-                                        <fieldset class="u-mb-xl">
+                                        <fieldset class="u-mb-m">
                                             <div class="field__item js-focusable-box">
                                                 <input class="input input--radio js-focusable"
                                                        type="radio"
@@ -95,6 +95,18 @@ cdn: v2.0.0
                             </section>
                         </div>
                     </div>
+
+                    <div
+                            class="collapsible collapsible--simple js-collapsible js-collapsible-simple u-mb-xl">
+                        <div class="js-collapsible-content">
+                            <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Why do I have to include visitors?">Why do I have to include visitors?</h3>
+                            <div class="collapsible__body js-collapsible-body">
+                                <p>We ask for visitor information to ensure that everyone is counted. This helps to produce accurate population estimates. Add any visitors, even if you think they may have been included on a census form at another address.</p>
+                                <button class="btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Why do I have to include visitors?">Hide this</button>
+                            </div>
+                        </div>
+                    </div>
+
                     <button class="btn btn--primary btn--lg qa-btn-submit venus"
                             type="submit" name="">Save and continue
                     </button>

@@ -98,7 +98,7 @@ language: welsh
                     <div class="js-collapsible-content">
                         <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Pam bod angen i mi ychwanegu ymwelwyr?">Pam bod angen i mi ychwanegu ymwelwyr?</h3>
                         <div class="collapsible__body js-collapsible-body">
-                            <p>Rydym yn gofyn am wybodaeth am ymwelwyr er mwyn sicrhau bod pawb yn cael eu cyfrif. Mae hyn yn helpu i lunio amcangyfrifon cywir o'r boblogaeth. Ychwanegwch unrhyw ymwelwyr, hyd yn oed os ydych yn credu eu bod wedi cael eu cynnwys ar ffurflen cyfrifiad mewn cyfeiriad arall.</p>
+                            <p>Rydym ni'n gofyn am wybodaeth am ymwelwyr er mwyn gwneud yn siŵr bod pawb yn cael eu cyfrif. Mae hyn yn helpu i roi amcangyfrifon cywir o'r boblogaeth. Ychwanegwch unrhyw ymwelwyr, hyd yn oed os ydych chi'n credu eu bod wedi cael eu cynnwys ar ffurflen cyfrifiad mewn cyfeiriad arall.</p>
                             <button class="btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Pam bod angen i mi ychwanegu ymwelwyr?">Cuddio hwn</button>
                         </div>
                     </div>
@@ -310,10 +310,13 @@ language: welsh
     else if (window.location.search.match(/journey=visitors/)) {
       $('#question-title').html(overrideTitle);
       $('.js-visitor-definition').show();
-      $('.js-middle-name-field').hide();
     }
     else if (window.location.search.match(/journey=temp-living-here/)) {
       $('#question-title').html(overrideTitleStayingOutsideUK);
+    }
+
+    if (window.location.search.match(/journey=visitors/)) {
+      $('.js-middle-name-field').hide();
     }
 
     if(previous === 'temp-types-living-away' ||
