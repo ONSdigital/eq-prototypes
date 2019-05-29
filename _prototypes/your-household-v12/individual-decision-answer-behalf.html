@@ -35,7 +35,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title u-fs-l js-heading">
-                                        You have completed your individual
+                                        You have now completed your individual
                                         questions. Can you answer the same
                                         questions for others in your household?
                                     </h1>
@@ -45,7 +45,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                     <p>Select all that apply</p>
 
                                     <div class="answer__fields js-fields">
-                                        <div class="field field--checkbox field--multiplechoice">
+                                        <div class="field field--checkbox field--multiplechoice field--exclusive">
                                             <fieldset id="js-member-list"
                                                       class="u-mb-xl">
                                             </fieldset>
@@ -75,8 +75,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
 <div style="display:none;">
     <div id="member-checkbox-select-template" class="field__item">
-        <input class="input input--checkbox js-person-control"
-               name="checkbox-answer" type="checkbox">
+        <input class="input input--checkbox js-exclusive-group js-person-control"
+               name="checkbox-answer"
+               type="checkbox" />
         <label class="label label--inline u-fs-r js-person-name"></label>
     </div>
 </div>
@@ -133,6 +134,17 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     $.each(personsLeft, function (i, person) {
       $('#js-member-list').append(createMemberListItem(person));
     });
+
+    $('#js-member-list').append('<div class="field__label u-mt-s u-fs-r--b" aria-hidden="true">Or</div>');
+    $('#js-member-list').append(
+      '<div class="field__item">\n' +
+      '<input class="input input--checkbox js-exclusive-checkbox" name="heating-type" value="no central heating" id="none" type="checkbox">\n' +
+      '<label class="label label--inline u-fs-r " for="none">\n' +
+      '<span class="u-vh">,</span> None<span class="u-vh">. Selecting this will uncheck all other checkboxes</span>\n' +
+      '</label>\n' +
+      '<span class="js-exclusive-alert u-vh" role="alert" aria-live="polite" data-adjective="deselected"></span>\n' +
+      '</div>'
+    );
   }
 
   /*function updateRouting() {
