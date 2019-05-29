@@ -102,18 +102,16 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
 
-    var checkedItems = $('[name=checkbox-answer]:checked'),
-      checkedItemsArr = [];
+    var unCheckedItems = $('.js-cloned[name=checkbox-answer]:not(:checked)'),
+      unCheckedItemsArr = [];
 
-    $.each(checkedItems, function (i, item) {
-      checkedItemsArr.push($(item).val());
+    $.each(unCheckedItems, function (i, item) {
+      unCheckedItemsArr.push($(item).val());
     });
 
-    console.log('checkedItemsArr', checkedItemsArr);
-
-    window.location.href = checkedItems.length
+    window.location.href = unCheckedItems.length
       ? '../individual-decision-behalf-continue/?person=' + personId +
-        '&people=' + encodeURI(JSON.stringify(checkedItemsArr))
+        '&people=' + encodeURI(JSON.stringify(unCheckedItemsArr))
       : '../hub/';
   });
 
@@ -126,6 +124,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     $nodeEl.find('.js-person-name').attr('for', personId);
     $nodeEl.find('.js-person-control').attr('id', personId);
     $nodeEl.find('.js-person-control').attr('value', personId);
+    $nodeEl.find('.js-person-control').addClass('js-cloned');
 
     return $nodeEl;
   }
