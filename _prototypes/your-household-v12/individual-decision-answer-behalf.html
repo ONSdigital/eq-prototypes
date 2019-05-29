@@ -35,9 +35,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title u-fs-l js-heading">
-                                        Now you have completed your section
-                                        are you able to answer on behalf of
-                                        the following?
+                                        You have completed your individual
+                                        questions. Can you answer the same
+                                        questions for others in your household?
                                     </h1>
                                 </div>
 
@@ -145,9 +145,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('Now you have completed ' +
+      $('.js-heading').html('You have completed your ' +
         person.fullName + window.ONS.utils.trailingNameS(person.fullName) +
-        ' section are you able to answer on behalf of the following?');
+        'individual questions. Can you answer the same questions for others ' +
+        'in your household?');
     }
   }
 
