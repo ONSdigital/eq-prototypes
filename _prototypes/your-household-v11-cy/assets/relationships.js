@@ -65,7 +65,7 @@ export const relationshipDescriptionMap = {
   },
   // covered
   'grandparent': {
-    sentanceLabel: 'taid/tad-cu neu nain/mam-gu',
+    sentanceLabel: 'daid/tad-cu neu nain/mam-gu',
     summaryAdjective: 'nain/mam-gu neu daid/tad-cu',
     type: relationshipTypes['grandchild-grandparent']
   },
