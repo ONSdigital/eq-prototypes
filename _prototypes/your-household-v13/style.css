@@ -82,6 +82,27 @@
     background : url('../img/icons/lockicon.svg') no-repeat left top;
 }
 
+.tick {
+    height: 1.1em;
+    margin-bottom: -1.8em;
+    background : url('https://sdc-global-design-patterns.netlify.com/assets/img/icons/icons--check-green.svg') no-repeat;
+}
+
+.facebook {
+    padding-left : 2.5rem;
+    background : url('../img/icons/facebook.svg') no-repeat;
+}
+
+.twitter {
+    padding-left : 2.5rem;
+    background : url('../img/icons/twitter.svg') no-repeat;
+}
+
+.email {
+    padding-left : 2.5rem;
+    background : url('../img/icons/email.svg') no-repeat;
+}
+
 .footer {
     margin-top : 7rem;
 }

@@ -471,7 +471,7 @@ function updateSaveAndCompleteLater() {
   $('.complete-later').on('click', function(e) {
     e.preventDefault();
 
-    window.location.href = '../index/?redirect=../hub';
+    window.location.href = '../post-submission/?redirect=../hub';
   });
 }
 

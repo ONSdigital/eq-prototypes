@@ -4,6 +4,7 @@ project: your-household
 globalcss: false
 layout: eq-default-extras
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
 ---
 
 <style>
@@ -13,7 +14,25 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
     .lock {
         font-weight : normal;
+        font-size: 0.9em;
+        margin-top:1em;
     }
+
+    .uac-border {
+        border-style: solid;
+        border-width: 0.4em;
+        border-color: #033e58;
+        padding: 0.7em;
+    }
+
+    p {
+        margin-bottom: 0.3em;
+    }
+
+    .label {
+        margin-bottom: 0;
+    }
+
 </style>
 
 <link rel="stylesheet" href="../style.css"/>
@@ -40,63 +59,36 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                     </div>
                 </div>
 
-                <div class="group u-mb-xl" id="what-is-your-address-group">
+                <div class="group" id="what-is-your-address-group">
                     <div class="block" id="what-is-your-address">
                         <div class="question">
                             <h1 class="question__title u-fs-l"
                                 data-qa="question-title">
-                                Welcome to the household prototype
+                                Start census
                             </h1>
 
-                            <div class="panel panel--simple panel--info">
-                                <div class="panel__body">
-                                    <div class="field">
-                                        <label class="label"
-                                               for="line-1"
-                                               id="label-address-line-1">
-                                            <div class="label__inner">
-                                                Enter the unique access code
-                                            </div>
-                                        </label>
-
-                                        <div class="grid">
-                                            <div class="grid__col col-4@m">
-                                                <input  id="line-1"
-                                                        class="input input--text input--block u-mb-s"
-                                                        data-qa="input-text"
-                                                        value=""/>
-                                            </div>
-                                            <div class="grid__col col-4@m">
-                                                <input
-                                                        class="input input--text input--block u-mb-s"
-                                                        data-qa="input-text"
-                                                        value=""/>
-                                            </div>
-                                            <div class="grid__col col-4@m">
-                                                <input
-                                                        class="input input--text input--block u-mb-s"
-                                                        data-qa="input-text"
-                                                        value=""/>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <p>The unique access code
-                                        is printed on your invitation
-                                        letter or form</p>
-                                </div>
+                            <div class = "uac-border">
+                                <p class="field">
+                                    <label class="label" for="uac">Enter the 16 character code printed on the letter
+                                        <p>Keep this code safe and only share it with others in your household</p>
+                                    </label>
+                                    <input type="text" id="uac" class="input input--text input-type__input uac__input js-uac" name="uac" maxlength="19" data-group-size="4" autocomplete="off" />
+                                </p>
                             </div>
-
-                            <p class="u-fs-r u-mt-l lock">Your personal information is protected by law and will be kept confidential</p>
-
+                            <p class="lock">Your personal information is protected by law and will be kept confidential.</p>
                         </div>
                     </div>
                 </div>
-
+                <br>
                 <button class="btn btn-submit btn--primary btn--lg"
-                        data-qa="btn-submit" type="submit"
-                        name="action[save_continue]">Submit code
+                        data-qa="btn-submit" type="submit">Access census
                 </button>
+                <div>
+                <br>
+                    <strong>Don't have a code?</strong>
+                    <p>You can request a new code if you have lost, forgotten or not recieved an
+                    access code. <a href="#" class="footer2__link">Request a new code to start a new survey</a></p>
+                </div>
             </main>
         </div>
     </div>
