@@ -67,6 +67,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
 <script src='/js/compiled/your-household-v13/bundle.js'></script>
 
+
 <script>
 	var yesbox = document.getElementById("address-correct-yes");
 
@@ -81,6 +82,26 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 </script>
 
 <script>
+    var searchParams = new URLSearchParams(window.location.search);
+
+    var addressParam = searchParams.get('address');
+
+    if (addressParam) {
+        var address = JSON.parse(addressParam);
+
+        var addressParts = [];
+        
+
+        Object.keys(address)
+            .filter(function(key) { return !!address[key] })
+            .forEach(function (key) {
+                sessionStorage.setItem(key, address[key]);
+                addressParts.push(address[key]);
+            })
+        
+        sessionStorage.setItem('address', addressParts.join(', '));
+    }
+
 	$(function () {
 	  if(sessionStorage.getItem('address')) {
 		$('.full-address-text').html((sessionStorage.getItem('address') || '').replace(/,/g, '<br />'));
