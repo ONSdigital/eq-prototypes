@@ -6,6 +6,16 @@ layout: eq-default-extras
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 ---
 
+
+<style type="text/css">
+
+.tick-spacing {
+    margin-left: 2em;
+    margin-bottom: 0.8em;
+}
+
+</style>
+
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
@@ -32,11 +42,13 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                     <div class="group u-mb-l">
                         <div class="block">
                             <section class="section">
-                                <div class="question u-mb-s">
-                                    <h1 id="question-title"
-                                        class="question__title u-fs-l js-heading">
-                                        You have now completed your individual questions. Is there anyone in your household you cannot answer the same questions for?
-                                    </h1>
+                                <div class="question">
+                                    <div class="tick"></div>
+                                    <div class="title tick-spacing">
+                                        <h1 id="question-title" class="question__title u-fs-l js-heading">You have now completed your questions.</h1>
+                                    </div>
+                                    <h1 id="question-title2" class="question__title u-fs-l js-heading">Is there anyone in your household you cannot answer the same questions for?</h1>
+                                    <div class="panel panel--simple panel--info u-mb-s">You can decide on the next page how to answer their questions</div>
                                 </div>
 
                                 <div class="answer">

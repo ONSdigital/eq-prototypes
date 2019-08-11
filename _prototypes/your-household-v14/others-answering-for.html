@@ -1,0 +1,120 @@
+---
+title: Household prototype v14
+project: your-household
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<style type="text/css">
+
+.tick-spacing {
+    margin-left: 1.3em;
+    margin-bottom: 0.8em;
+}
+
+.title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+
+.u-mb-s {
+    margin-bottom: 2em;
+}
+
+</style>
+
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../#">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@l">
+        </div>
+        <div class="grid__col col-7@l pull-1@l">
+            <main role="main" id="main" class="page__main">
+                <form name="trav" class="form qa-questionnaire-form" role="form"
+                      autocomplete="off" novalidate="">
+                    <div class="group">
+                        <div class="block">
+                            <section class="section u-mb-s">
+                                <div class="question">
+                                    <div class="tick"></div>
+                                    <div class="title tick-spacing">You have now completed your questions.</div>
+                                    <div class="title u-fs-l">Is there anyone in your household you cannot answer the same questions for?</div>
+                                    <div class="panel panel--simple panel--info u-mb-s">You can decide on the next page how to answer their questions</div>
+                                </div>
+                                <div class="answer">
+                                    <div class="answer__fields js-fields">
+                                        <div class="field field--checkbox field--multiplechoice field--exclusive">
+                                            <fieldset>
+                                                <legend class="field__legend u-fs-r--b">Select all that apply</legend>
+                                                <div class="field__item">
+                                                    <input class="input input--checkbox js-exclusive-group"
+                                                           name="people-list"
+                                                           value="person1"
+                                                           id="person1"
+                                                           type="checkbox">
+                                                    <label class="label label--inline u-fs-r "
+                                                           for="person1">
+                                                        Person 1</label>
+                                                </div>
+                                                <div class="field__item">
+                                                    <input class="input input--checkbox js-exclusive-group"
+                                                           name="people-list"
+                                                           value="person2"
+                                                           id="person2"
+                                                           type="checkbox">
+                                                    <label class="label label--inline u-fs-r "
+                                                           for="person2">
+                                                        Person 2</label>
+                                                </div>
+                                                <div class="field__item">
+                                                    <input class="input input--checkbox js-exclusive-group"
+                                                           name="people-list"
+                                                           value="person3"
+                                                           id="person3"
+                                                           type="checkbox">
+                                                    <label class="label label--inline u-fs-r "
+                                                           for="person3">
+                                                        Person 3</label>
+                                                </div>
+                                                <div class="field__label u-mt-s u-fs-r--b" aria-hidden="true">Or</div>
+                                                <div class="field__item">
+                                                    <input class="input input--checkbox js-exclusive-checkbox"
+                                                           name="everyone"
+                                                           value="all"
+                                                           id="all"
+                                                           type="checkbox">
+                                                    <label class="label label--inline u-fs-r "
+                                                           for="all">
+                                                        <span class="u-vh">Or,</span>
+                                                        I can answer for everyone
+                                                        <span class="u-vh">. Selecting this will uncheck all other checkboxes</span>
+                                                    </label>
+                                                    <span class="js-exclusive-alert u-vh"
+                                                          role="alert"
+                                                          aria-live="polite"
+                                                          data-adjective="deselected"></span>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit"
+                            type="submit" name="">Save and continue
+                    </button>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>

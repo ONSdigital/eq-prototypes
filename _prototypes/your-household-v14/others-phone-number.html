@@ -1,0 +1,68 @@
+---
+title: Household prototype v14
+project: your-household
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<style type="text/css">
+
+.title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+
+.u-mb-s {
+    margin-bottom: 2em;
+}
+
+</style>
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../others-questions">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@l">
+        </div>
+        <div class="grid__col col-7@l pull-1@l">
+            <main role="main" id="main" class="page__main">
+                <form name="trav" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
+                    <div class="group">
+                        <div class="block">
+                            <section class="section u-mb-s">
+                                <div class="question">
+                                <div class="title u-fs-l">Request a seperate survey for ##Person 1##</div>
+                                <p>If you have their mobile number, we can send a text message to let them know you have requested a seperate survey for them to complete.</p>
+                                </div>
+                                <div class="question__answers">
+                                    <div class="question__answer">
+                                        <label class="label"
+                                               for="phone-number">
+                                            <div class="label__inner">
+                                                ##Person 1##'s mobile number
+                                            </div>
+                                        </label>
+                                        <input class="input input--text"
+                                               id="phone-number"
+                                               data-qa="input-text" value=""/>
+                                </div>
+                                <br>
+                                <p>If you do not know their mobile number you can <a href="#" class="footer2__link">contact us</a> for help.</p>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit"
+                            type="submit" name="">Continue
+                    </button>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
