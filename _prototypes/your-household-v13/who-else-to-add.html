@@ -48,19 +48,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
                         <div id="member-list"></div>
 
-                        <!--<div class="js-remove-section u-mb-l"
-                             style="display:none;">
-                            <p>If you have added this person by mistake or if
-                                circumstances have changed, you can remove them.</p>
-
-                            <a class="js-remove-person"
-                                href="../remove-household-member/">Remove this
-                                person</a>
-
-                            &lt;!&ndash;<button
-                                    class="btn btn&#45;&#45;secondary btn&#45;&#45;small js-remove-person">Remove this person</button>&ndash;&gt;
-                        </div>-->
-
                         <fieldset
                                 class="question__fieldset js-question-fieldset u-mb-s">
                             <legend class="u-vh">Who do you need to add to <span class="address-text"></span>?</legend>
@@ -79,6 +66,17 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 </div>
 
                                 <div class="question__answer">
+                                    <label class="label" for="middle-name">
+                                        <div class="label__inner">
+                                            Middle names
+                                        </div>
+                                    </label>
+                                    <input class="input input--text"
+                                           id="middle-name"
+                                           data-qa="input-text" value=""/>
+                                </div>
+
+                                <div class="question__answer">
                                     <label class="label" for="last-name">
                                         <div class="label__inner">
                                             Last name
@@ -93,8 +91,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                     </div>
                 </div>
 
-                <div
-                        class="collapsible collapsible--simple js-collapsible js-collapsible-simple js-visitor-definition u-mb-xs"
+                <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple js-visitor-definition u-mb-xs"
                     style="display:none;">
                     <div class="js-collapsible-content">
                         <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Why do I have to include visitors?">Why do I have to include visitors?</h3>
