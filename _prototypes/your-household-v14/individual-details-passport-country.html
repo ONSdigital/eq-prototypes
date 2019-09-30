@@ -1,0 +1,191 @@
+---
+title: Household prototype v14
+project: your-household
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@l">
+            <!--{% include navigation.html
+            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
+            nav-title-id="section-individual" %}-->
+        </div>
+        <div class="grid__col col-7@l pull-1@l">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="off"
+                      action="../individual-details-apprenticeship/">
+                    <input type="hidden" name="person" id="person"
+                           value="#"/>
+                    <input type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group u-mb-l">
+                        <div class="block" id="total-retail-turnover">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-l js-heading">
+                                        What passport do you hold?
+                                    </h1>
+                                </div>
+
+                                <div class="answer">
+                                    <div class="answer__fields js-fields">
+                                        <div class="field field--radio field--multiplechoice field--exclusive">
+                                            <fieldset>
+                                                <legend class="field__legend u-fs-r--b">Select all that apply:</legend>
+                                                <div class="field__item">
+                                                    <input
+                                                            class="input input--checkbox js-exclusive-group"
+                                                            name="passport-country"
+                                                            value="united-kingdom"
+                                                            id="united-kingdom"
+                                                            type="checkbox"/>
+                                                    <label class="label label--inline u-fs-r "
+                                                           for="united-kingdom"
+                                                           id="united-kingdom-label">
+                                                        United Kingdom</label>
+                                                </div>
+                                                <div class="field__item">
+                                                    <input class="input input--checkbox js-exclusive-group"
+                                                           name="passport-country"
+                                                           value="ireland"
+                                                           id="ireland"
+                                                           type="checkbox">
+                                                    <label class="label label--inline u-fs-r "
+                                                           for="ireland"
+                                                           id="ireland-label">
+                                                        Ireland</label>
+                                                </div>
+                                                <div class="field__item">
+                                                    <input class="input input--checkbox js-exclusive-group"
+                                                           name="passport-country"
+                                                           value="other"
+                                                           id="other"
+                                                           type="checkbox">
+                                                    <label class="label label--inline u-fs-r "
+                                                           for="other"
+                                                           id="other-label">
+                                                        Other</label>
+                                                </div>
+                                                <div class="field__label u-mt-s u-fs-r--b" aria-hidden="true">Or</div>
+                                                <div class="field__item">
+                                                    <input class="input input--checkbox js-exclusive-checkbox"
+                                                           name="passport-country"
+                                                           value="none"
+                                                           id="none"
+                                                           type="checkbox">
+                                                    <label class="label label--inline u-fs-r "
+                                                           for="none"
+                                                           id="none-label">
+                                                        <span class="u-vh">Or,</span>
+                                                        None<span
+                                                            class="u-vh">. Selecting this will uncheck all other checkboxes</span>
+                                                    </label>
+                                                    <span class="js-exclusive-alert u-vh"
+                                                          role="alert"
+                                                          aria-live="polite"
+                                                          data-adjective="deselected"></span>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+
+                    <p>Can't complete this question?<br />
+                        <a href="../hub" class="js-choose-another-section">Choose another section and
+                            return to this later</a></p>
+
+                    <!--<p class="u-mb-m"><span class="js-link-secure-label"></span><br />
+                        <a class="js-link-secure"
+                           href="#">Get a separate access code to submit an
+                            individual response</a></p>-->
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/your-household-v14/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person'),
+    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+    isEditing = urlParams.get('edit'),
+    details = storageAPI.getPersonalDetailsFor(personId),
+    surveyType = urlParams.get('survey');
+
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+    var passportCountries = [];
+
+    $('[name="passport-country"]:checked').each(function(i, el) {
+      passportCountries.push($(el).val());
+    });
+
+    storageAPI.addUpdatePassportCountry(personId, passportCountries);
+
+    if($('#other:checked').length) {
+      e.preventDefault();
+      window.location.href =
+        '../individual-details-passport-country-other/?person=' + personId +
+        (surveyType ? '&survey=' + surveyType : '') +
+        (isEditing ? '&edit=true' : '');
+    }
+    else if(isEditing) { console.log('editing');
+      e.preventDefault();
+      window.location.href = '../individual-details-summary/?person=' +
+        personId + (surveyType ? '&survey=' + surveyType : '');
+    }
+  }));
+
+  function updateRouting() {
+    if(surveyType) {
+      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    }
+    $('#survey-type').val(surveyType);
+  }
+
+  function updateQuestion() {
+    if(storageAPI.getAnsweringIndividualByProxy()) {
+      $('.js-heading').html('What passport does ' + person.fullName +
+        ' hold?');
+    }
+  }
+
+  (function () {
+    if (details && details['passport'] && details['passport'].countries) {
+      var collection = details['passport'].countries;
+
+      $.each(collection, function (i, val) {
+        $('#' + val).attr('checked', true);
+      });
+    }
+  }());
+
+  $(updateQuestion);
+  $(updateRouting);
+
+  /**
+   * Routing
+   */
+  $('#person').val(new URLSearchParams(window.location.search).get('person'));
+</script>

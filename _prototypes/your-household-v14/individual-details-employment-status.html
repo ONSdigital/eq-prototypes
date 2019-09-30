@@ -1,0 +1,192 @@
+---
+title: Household prototype v14
+project: your-household
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@l">
+            <!--{% include navigation.html
+            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
+            nav-title-id="section-individual" %}-->
+        </div>
+        <div class="grid__col col-7@l pull-1@l">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="off"
+                      action="../individual-details-job-title">
+                    <input type="hidden" name="person" id="person"
+                           value="#"/>
+                    <input type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group" id="rsi">
+                        <div class="block" id="total-retail-turnover">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-l js-heading">
+                                        In your main job, what is your
+                                            employment status?
+                                    </h1>
+                                </div>
+
+                                <div class="answer">
+                                    <div class="answer__fields js-fields">
+                                        <div class="field field--radio field--multiplechoice ">
+                                            <fieldset class="u-mb-xl">
+                                                <div class="field__item js-focusable-box">
+                                                    <input class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="radio-group"
+                                                           id="employee"
+                                                           value="employee">
+                                                    <label class="label label--inline"
+                                                           for="employee"
+                                                           id="employee-label">
+                                                        <strong
+                                                                class="u-fs-r">Employee</strong>
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="radio-group"
+                                                           id="freelance-without-employees"
+                                                           value="freelance-without-employees">
+                                                    <label class="label label--inline"
+                                                           for="freelance-without-employees"
+                                                           id="freelance-without-employees-label">
+                                                        <strong
+                                                                class="u-fs-r">Self-employed or freelance without employees</strong>
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="radio-group"
+                                                           id="freelance-with-employees"
+                                                           value="freelance-with-employees">
+                                                    <label class="label label--inline"
+                                                           for="freelance-with-employees"
+                                                           id="freelance-with-employees-label">
+                                                        <strong
+                                                                class="u-fs-r">Self-employed with employees</strong>
+                                                    </label>
+                                                </div>
+
+                                                <div class="field__label u-mt-s u-fs-r--b" aria-hidden="true">Or</div>
+                                                <div class="field__item">
+                                                    <input class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="radio-group"
+                                                           id="not-employed"
+                                                           value="not-employed" />
+                                                    <label class="label label--inline u-fs-r "
+                                                           for="not-employed">
+                                                        <span class="u-vh">Or,</span>
+                                                        Not employed
+                                                    </label>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+
+                    <p>Can't complete this question?<br />
+                        <a href="../hub" class="js-choose-another-section">Choose another section and
+                            return to this later</a></p>
+
+                    <!--<p class="u-mb-m"><span class="js-link-secure-label"></span><br />
+                        <a class="js-link-secure"
+                           href="#">Get a separate access code to submit an
+                            individual response</a></p>-->
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/your-household-v14/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person'),
+    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+    isEditing = urlParams.get('edit'),
+    details = storageAPI.getPersonalDetailsFor(personId),
+    surveyType = urlParams.get('survey');
+
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+
+    var val = $('[name="radio-group"]:checked').val();
+
+    storageAPI.addUpdateEmploymentStatus(personId, val);
+
+    if(isEditing) {
+      e.preventDefault();
+
+      if(val === 'not-employed') {
+        window.location.href = '../individual-details-summary/?person=' + personId +
+          (surveyType ? '&survey=' + surveyType : '');
+      }
+      else {
+        /**
+         * Pass through to specify additional details
+         */
+        window.location.href = '../individual-details-job-title/?person=' + personId +
+          (surveyType ? '&survey=' + surveyType : '') +
+          '&switchedFromUnemployed=true';
+      }
+    }
+    else if(val === 'not-employed') {
+      e.preventDefault();
+
+      storageAPI.clearPersonalBookmark(personId);
+      window.location.href = '../individual-decision-answer-behalf/?person=' + personId;
+    }
+  }));
+
+  function updateRouting() {
+    if(surveyType) {
+      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    }
+    $('#survey-type').val(surveyType);
+  }
+
+  function updateQuestion() {
+    if(storageAPI.getAnsweringIndividualByProxy()) {
+      $('.js-heading').html('In ' + person.fullName +
+        ' main job, what is their employment status?');
+    }
+  }
+
+  if (details && details['employment-status']) {
+    $('#' + details['employment-status'].val).attr('checked', true);
+  }
+
+  $(updateQuestion);
+  $(updateRouting);
+
+  /**
+   * Routing
+   */
+  $('#person').val(new URLSearchParams(window.location.search).get('person'));
+</script>

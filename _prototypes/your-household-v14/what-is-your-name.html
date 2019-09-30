@@ -1,0 +1,224 @@
+---
+title: Household prototype v14
+project: your-household
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../section-intro">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@l">
+            <!--{% include navigation.html
+            items=site.data.your-household-v6.navigationItemsHousehold
+            nav-title-id="section-address" %}-->
+        </div>
+
+        <div class="grid__col col-7@l pull-1@l">
+            <main role="main" id="main" class="page__main">
+                <div class="feedback__inline js-feedback-inline is-collapsed">
+                    <div class="feedback__border">
+                    </div>
+                </div>
+
+                <div class="group u-mb-s">
+                    <div class="block">
+
+                        <div class="question">
+                            <h1 class="question__title u-fs-l js-heading"
+                                data-qa="question-title">
+                                What is your name?
+                            </h1>
+
+                            <fieldset
+                                    class="question__fieldset js-question-fieldset">
+                                <legend class="u-vh">What is your name?</legend>
+
+                                <div class="question__answers">
+                                    <div class="question__answer">
+                                        <label class="label"
+                                               for="first-name">
+                                            <div class="label__inner">
+                                                First name
+                                            </div>
+                                        </label>
+                                        <input class="input input--text"
+                                               id="first-name"
+                                               data-qa="input-text" value="" placeholder="ENTER TEXT"/>
+                                    </div>
+
+                                    <div class="question__answer">
+                                        <label class="label" for="middle-name">
+                                            <div class="label__inner">
+                                                Middle names
+                                            </div>
+                                        </label>
+                                        <input class="input input--text"
+                                               id="middle-name"
+                                               data-qa="input-text" value="" placeholder="ENTER TEXT"/>
+                                    </div>
+
+                                    <div class="question__answer">
+                                        <label class="label" for="last-name">
+                                            <div class="label__inner">
+                                                Last name
+                                            </div>
+                                        </label>
+                                        <input class="input input--text"
+                                               id="last-name"
+                                               data-qa="input-text" value="" placeholder="ENTER TEXT"/>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+
+                <!--<div class="js-remove-section"
+                     style="display:none;">
+                    <p>If you have added this person by mistake or if circumstances have changed, you can remove them.</p>
+
+                    <button
+                            class="btn btn&#45;&#45;secondary btn&#45;&#45;small js-remove-person">Remove this person</button>
+                </div>-->
+
+                <button class="btn btn-submit btn--primary btn--lg u-mt-xl"
+                        data-qa="btn-submit" type="submit"
+                        name="action[save_continue]">
+                    Save and continue
+                </button>
+            </main>
+        </div>
+    </div>
+</div>
+
+<div id="modal" class="modal" style="display: none;">
+    <div class="modal__window">
+        <h1 class="u-fs-l">Are you sure you want to remove <span
+                class="js-person-name"></span>?</h1>
+        <p class="u-mb-m">All of the data associated with this person will be deleted</p>
+
+        <div class="modal__buttons btn-group">
+            <div class="u-mb-xs">
+                <button class="btn btn-group__btn btn--danger remove-member-button">
+                    Yes, remove this person
+                </button>
+            </div>
+            <div>
+                <button class="btn btn-group__btn btn--secondary close-modal-button">
+                    No, cancel this
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/your-household-v14/bundle.js'></script>
+
+<script>
+  var urlParams = new URLSearchParams(window.location.search),
+    isEditing = urlParams.get('edit') === 'true',
+    redirect = urlParams.get('redirect'),
+    livesHere = sessionStorage.getItem('lives-here') === 'yes',
+    storageAPI = window.ONS.storage,
+    userAsMember = storageAPI.getUserAsHouseholdMember(),
+    userPerson = userAsMember && userAsMember['@person'];
+
+  function removeMember_handler(member, e) {
+    e.preventDefault();
+    var modal = $('#modal'),
+      original = modal.find('.remove-member-button'),
+      newNode = original.clone();
+
+    newNode.on('click', confirmRemoveMember_handler.bind(null, member));
+    original.replaceWith(newNode);
+
+    modal.find('.js-person-name').html(member['@person'].fullName);
+
+    modal.show();
+  }
+
+  function confirmRemoveMember_handler(member) {
+    sessionStorage.setItem('lives-here', 'no');
+    storageAPI.deleteUserAsHouseholdMember();
+    storageAPI.deleteAllRelationshipsForMember(member['@person'].id);
+
+    window.location.href = redirect || '../summary/';
+  }
+
+  $('#modal .close-modal-button').on('click', function(e) {
+    e.preventDefault();
+    $('#modal').hide();
+  });
+
+  $('.js-remove-person').on('click', removeMember_handler.bind(null, userAsMember));
+
+  function updateQuestion() {
+    if(isEditing && userPerson) {
+      $('.js-heading').html('Change details for ' + userPerson.fullName + ' (You)');
+      $('.js-remove-section').show();
+    }
+  }
+
+  $('.btn-submit').on('click', function(e) {
+    e.preventDefault(); // do not submit the form like usual
+    sessionStorage.setItem('name', getName());
+
+    var newPersonObj = storageAPI.TYPES.person({
+      firstName: document.getElementById('first-name').value,
+      lastName: document.getElementById('last-name').value
+    });
+
+    storageAPI.addUserPerson(newPersonObj);
+
+    if(isEditing || livesHere) {
+      storageAPI.updateUserAsHouseholdMember(
+        newPersonObj,
+        isEditing
+          ? userAsMember
+          : {
+            type: window.ONS.storage.KEYS.HOUSEHOLD_MEMBER_TYPE
+          }
+      );
+    }
+    else {
+      storageAPI.deleteUserAsHouseholdMember();
+    }
+
+    if(redirect) {
+      window.location.href = redirect;
+    }
+    else {
+      window.location.href = isEditing ? '../summary/' :
+        '../does-anyone-else-live-here/';
+    }
+  });
+
+  function getName() {
+    return [
+      document.getElementById('first-name').value,
+      document.getElementById('last-name').value
+    ].filter(function(name) {
+      return name
+    }).join(' ');
+  }
+
+  $(function() {
+    var userPerson = storageAPI.getUserPerson();
+
+    if (userPerson) {
+      $('#first-name').val(userPerson.firstName);
+      $('#last-name').val(userPerson.lastName);
+    }
+  });
+
+  $(updateQuestion);
+</script>
+
