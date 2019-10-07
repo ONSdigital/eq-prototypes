@@ -17,9 +17,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@l">
-            <!--{% include navigation.html
-            items=site.data.your-household-v6.navigationItemsHousehold
-            nav-title-id="section-address" %}-->
         </div>
         <div class="grid__col col-7@l pull-1@l">
             <main role="main" id="main" class="page__main">
@@ -41,7 +38,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                         class="panel panel--simple panel--error u-mb-m">
                                     <div class="panel__body">
                                         <strong>All of the data entered
-                                            about this person will be removed
+                                            about this person will be deleted
                                         </strong>
                                     </div>
                                 </div>
@@ -108,7 +105,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         window.location.href = redirect || '../summary/';
       }
       else {
-        window.location.href = '../who-else-to-add/?edit=' + personId;
+        window.location.href = redirect || '../summary/';
       }
     });
 </script>

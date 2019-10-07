@@ -23,9 +23,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@l">
-            <!--{% include navigation.html
-            items=site.data.your-household-v6.navigationItemsHousehold
-            nav-title-id="section-address" %}-->
         </div>
         <div class="grid__col col-7@l pull-1@l">
             <main role="main" id="main" class="page__main">
@@ -37,7 +34,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 <div class="question u-mb-s">
                                     <h1 class="question__title u-fs-l js-heading">
                                         People who live here and overnight
-                                        visitors
+                                        visitors on <span class="js-significant-date"></span>
                                     </h1>
                                 </div>
 
@@ -47,10 +44,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                     <strong class="u-mb-s">This section is now complete</strong>
                                     <p>You can check your answers below</p>
                                 </div>
-                                <br />
+                                <br/>
 
                                 <h2
-                                        class="u-fs-m js-household-people-list">You&rsquo;ve added <span class="highlight">{n}</span> household member<span class="js-household-people-plural" style="display: none">s</span></h2>
+                                    class="u-fs-m js-household-people-list">You&rsquo;ve added <span class="highlight">{n}</span><span class="js-household-people-plural" style="display: none"></span> who lived here on <span class="js-significant-date"></span></h2>
                                 <ul
                                     class="list list--records list--people u-mb-s js-records js-household-members-summary"></ul>
                                 <p id="nobody-notice"
@@ -72,7 +69,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                         visitors staying overnight on
                                         <span class="js-significant-date"></span>.</p>
                                     <p class="u-mb-xl"><a
-                                            href="../who-else-to-add?journey=visitors&redirect=../summary/">Add a visitor</a>
+                                            href="../visitor-name?journey=visitors&redirect=../summary/">Add a visitor</a>
                                     </p>
                                 </div>
                             </section>
@@ -93,9 +90,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   var urlParams = new URLSearchParams(window.location.search),
     showPanel = urlParams.get('show-panel'),
     surveyType = urlParams.get('survey'),
-    nextPage = surveyType
-      ? '../relationships-intro/?survey=' + surveyType
-      : '../relationships-intro';
+    nextPage = '../submit';
 
   function updateHouseholdMembersVisitors() {
     var members = window.ONS.storage.getAllHouseholdMembers(),
@@ -121,10 +116,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     if(!numberOfHouseholdMembers) {
       $('#nobody-notice').show();
     }
-    
-    if (numberOfHouseholdMembers !== 1) {
-        document.querySelector('.js-household-people-plural').style.display = 'inline';
-    }
+  
+
+    $('.js-household-people-plural').each(function(i, el) {
+      window.ONS.utils
+        .cleanHTMLPlaceholderStringReplacment(el,numberOfHouseholdMembers != 1 ? ' people' : ' person');
+    });
 
     numberOfVisitors = visitors.length;
 

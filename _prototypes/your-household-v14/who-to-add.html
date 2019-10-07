@@ -10,7 +10,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <div class="page__subheader">
     <div class="container">
         <a class="js-previous-link"
-           href="../i-do-live-here">Previous</a>
+           href="../i-dont-live-here">Previous</a>
     </div>
 </div>
 
@@ -31,15 +31,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             <h1 id="question-title"
                                 class="question__title u-fs-l"
                                 data-qa="question-title">
-                                Who else lives at <mark><span class="full-address-text">Address not set</span></mark>?
+                                Who lives at <span class="address-text"></span>?
                             </h1>
-                        </div>
-
-                        <div id="change-line"></div>
-
-                        <div id="member-list">
-                            <ul data-redirect="../who-else-to-add/"
-                                    class="list list--records list--people u-mb-s js-records js-household-members-summary"></ul>
                         </div>
 
                         <div class="panel panel--simple panel--info u-mb-m js-visitor-panel" style="display: none">
@@ -48,6 +41,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 <ul class="js-visitor-includes"></ul>
                             </div>
                         </div>
+
+                        <div id="member-list"></div>
 
                         <fieldset
                                 class="question__fieldset js-question-fieldset u-mb-s">
@@ -261,8 +256,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         $('#first-name').val(person.firstName);
         $('#last-name').val(person.lastName);
         $('#question-title').html('Change details for ' + person.fullName);
-        $('#change-line').html('<p>If you have added this person by mistake or if circumstances have changed, you can <a href="../remove-household-member/?person=' + person.id +'">remove</a> them.<br>');
         $('#member-list').remove();
+        /*$('.js-remove-section').show();*/
       } else {
         $('#question-title').html('Member not found');
       }
@@ -319,3 +314,4 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       }
 	});
 </script>
+

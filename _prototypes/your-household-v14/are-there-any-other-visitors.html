@@ -35,7 +35,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title u-fs-l">
-                                        Does anyone else live at <mark><span class="full-address-text">Address not set</span></mark>?
+                                        Are there any other visitors staying overnight on <span class="js-significant-date"></span> at <mark><span class="full-address-text">Address not set</span></mark>?
                                     </h1>
                                 </div>
 
@@ -113,19 +113,14 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       if (window.location.search.match(/journey=visitors/)) {
         document.trav.action = "../summary";
       }
-      else {
-        document.trav.action = "../people-count-confirmation";
-      }
-
     } else {
-      document.trav.action = "../who-else-to-add";
+      document.trav.action = "../visitor-name/?journey=visitors";
     }
   });
 
   $(function() {
     var addressLines = (sessionStorage.getItem('address') || '').split(','),
       addressLine1 = addressLines[0],
-      addressLine2 = addressLines[1],
       members = storageAPI.getAllHouseholdMembers(),
       householdMembers = members.filter(storageAPI.isHouseholdMember),
       visitors = members.filter(storageAPI.isVisitor),
@@ -139,13 +134,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       $('#form').prepend("<input type='hidden' name='visitor-types' value='" + visitorTypesStr + "' />");
       $('#form')
         .prepend('<input type="hidden" name="journey" value="visitors" />');
-      $('#question-title')
-        .html('Are there any other visitors staying overnight on ' +
-          window.ONS.utils.getSignificant()
-          + ' at ' +
-          addressLine1 +
-          ', ' + addressLine2 + '?');
-
       $('.js-visitors-summary').show();
 
       if (visitorTypesStr) {

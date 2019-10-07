@@ -30,8 +30,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             <section class="section">
                                 <div class="question">
                                     <h1 class="question__title u-fs-l">
-                                        Do you usually live at <span
-                                            class="address-text"></span>?
+                                        Do you usually live at <mark><span class="full-address-text">Address not set</span></mark>?
                                     </h1>
                                     <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple u-mb-s">
                                         <div class="js-collapsible-content">
@@ -111,17 +110,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     var loc;
 
     if (yesbox.checked) {
-      /*var personUser = window.ONS.storage.getUserPerson();
-
-      /!**
-       * Add member to household
-       *!/
-      window.ONS.storage.updateUserAsHouseholdMember(
-        personUser,
-        {
-          type: window.ONS.storage.KEYS.HOUSEHOLD_MEMBER_TYPE
-        }
-      );*/
 
       sessionStorage.setItem('lives-here', 'yes');
       document.trav.action = loc = "../what-is-your-name/";
@@ -142,5 +130,34 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     var options = {year: 'numeric', month: 'long', day: 'numeric'};
     $('.one-week-ago').text(oneWeekAgo.toLocaleString('en-GB', options));
   });
+</script>
+
+
+<script>
+    var searchParams = new URLSearchParams(window.location.search);
+
+    var addressParam = searchParams.get('address');
+
+    if (addressParam) {
+        var address = JSON.parse(addressParam);
+
+        var addressParts = [];
+        
+
+        Object.keys(address)
+            .filter(function(key) { return !!address[key] })
+            .forEach(function (key) {
+                sessionStorage.setItem(key, address[key]);
+                addressParts.push(address[key]);
+            })
+        
+        sessionStorage.setItem('address', addressParts.join(', '));
+    }
+
+	$(function () {
+	  if(sessionStorage.getItem('address')) {
+		$('.full-address-text').html((sessionStorage.getItem('address') || '').replace(/,/g, '<br />'));
+      }
+	});
 </script>
 

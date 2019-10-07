@@ -10,7 +10,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <div class="page__subheader">
     <div class="container">
         <a class="js-previous-link"
-           href="../i-do-live-here">Previous</a>
+           href="../people-count-confirmation">Previous</a>
     </div>
 </div>
 
@@ -31,15 +31,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             <h1 id="question-title"
                                 class="question__title u-fs-l"
                                 data-qa="question-title">
-                                Who else lives at <mark><span class="full-address-text">Address not set</span></mark>?
+                                Who else lives at <mark><span class="full-address-text"></span></mark>?
                             </h1>
-                        </div>
-
-                        <div id="change-line"></div>
-
-                        <div id="member-list">
-                            <ul data-redirect="../who-else-to-add/"
-                                    class="list list--records list--people u-mb-s js-records js-household-members-summary"></ul>
                         </div>
 
                         <div class="panel panel--simple panel--info u-mb-m js-visitor-panel" style="display: none">
@@ -48,6 +41,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 <ul class="js-visitor-includes"></ul>
                             </div>
                         </div>
+
+                        <div id="member-list"></div>
 
                         <fieldset
                                 class="question__fieldset js-question-fieldset u-mb-s">
@@ -221,8 +216,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       window.location = '../summary/';
     } else if (window.location.search.match(/journey=temp-living-here/)) {
       window.location = userLiveAtAddress
-        ? '../does-anyone-else-live-here/?redirect=../temp-living-here-feedback/'
-        : '../temp-living-here-feedback/';
+        ? '../does-anyone-else-live-here/?redirect=../people-count-confirmation/'
+        : '../people-count-confirmation/';
     } else if (window.location.search.match(/journey=temp-away-from-home/)) {
       window.location = '../temp-away-from-home/';
     } else if (window.location.search.match(/journey=visitors/)) {
@@ -230,8 +225,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         '../does-anyone-else-live-here/?journey=visitors&visitor-types=' + visitorTypesStr;
     } else {
       window.location = userLiveAtAddress
-        ? '../does-anyone-else-live-here/?redirect=../does-anyone-else-live-here/'
-        : '../does-anyone-else-live-here/';
+        ? '../people-count-confirmation/?redirect=../people-count-confirmation/'
+        : '../people-count-confirmation/';
     }
   });
 
@@ -239,7 +234,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     var person,
       addressLines = (sessionStorage.getItem('address') || '').split(','),
       addressLine1 = addressLines[0],
-      addressLine2 = addressLines[1],
       visitors = storageAPI.getAllHouseholdMembers()
         .filter(storageAPI.isVisitor),
       overrideTitle = 'What is the name of the ' +
@@ -248,10 +242,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         ' visitor staying overnight on '
         + window.ONS.utils.getSignificant() +
         ' at ' +
-        addressLine1 + ', ' + addressLine2 + '?',
+        addressLine1 + '?',
 
       overrideTitleStayingOutsideUK = 'Who do you need to add to ' +
-        addressLine1 + ', ' + addressLine2 +
+        addressLine1 +
         ' who does not have another UK address?';
 
     if(editUserId) {
@@ -261,8 +255,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         $('#first-name').val(person.firstName);
         $('#last-name').val(person.lastName);
         $('#question-title').html('Change details for ' + person.fullName);
-        $('#change-line').html('<p>If you have added this person by mistake or if circumstances have changed, you can <a href="../remove-household-member/?person=' + person.id +'">remove</a> them.<br>');
         $('#member-list').remove();
+        /*$('.js-remove-section').show();*/
       } else {
         $('#question-title').html('Member not found');
       }
@@ -319,3 +313,4 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       }
 	});
 </script>
+

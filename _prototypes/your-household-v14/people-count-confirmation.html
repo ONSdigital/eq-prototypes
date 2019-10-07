@@ -16,11 +16,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
 <div class="page__container container">
     <div class="grid grid--reverse">
-        <div class="grid__col col-4@l">
-            <!--{% include navigation.html
-            items=site.data.your-household-v6.navigationItemsHousehold
-            nav-title-id="section-address" %}-->
-        </div>
+        <div class="grid__col col-4@l"></div>
         <div class="grid__col col-7@l pull-1@l">
             <main role="main" id="main" class="page__main">
                 <form name="trav" class="form qa-questionnaire-form" role="form"
@@ -37,20 +33,26 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                     </h1>
                                 </div>
 
-                                <ul data-redirect="../temp-types-living-away/"
+                                <ul data-redirect="../people-count-confirmation/"
                                     class="list list--records list--people u-mb-s js-records js-household-members-summary"></ul>
 
-                                <div
-                                        class="panel panel--simple panel--info u-mb-s">
+                                <div class="panel panel--simple panel--info u-mb-s">
                                     <div class="panel__body">
-                                        <strong class="u-mb-xs u-d-b">Include
-                                            people who are temporarily away
+                                        <strong class="u-mb-xs u-d-b">Remember to include people who are temporarily away
                                         </strong>
-                                        <ul id="question-list-away"></ul>
-                                        <strong class="u-mb-xs u-mt-m u-d-b">Include
-                                            people who are temporarily staying
+                                        <ul>
+                                            <li>People who work away from home within the UK if this is their permanent or family home</li>
+                                            <li>Members of the armed forces if this is their permanent or family home</li>
+                                            <li>People who are temporarily outside the UK for less than <strong>12 months</strong></li>
+                                            <li>People staying, or expecting to stay, in an establishment such as a hospital, care home or hostel for less than 6 months</li>
+                                            <li>Other people who usually live here but are temporarily away</li>
+                                        </ul>
+                                        <strong class="u-mb-xs u-mt-m u-d-b">Remember to incliude people who are temporarily staying
                                         </strong>
-                                        <ul id="question-list-in"></ul>
+                                        <ul>
+                                            <li>People staying temporarily who usually live in the UK but do not have another UK address for example, relatives, friends</li>
+                                            <li>People who usually live outside the UK who are staying in the UK for <strong>3 months or more</strong></li>
+                                        </ul>
                                     </div>
                                 </div>
                             </section>
@@ -65,9 +67,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                            type="radio"
                                            name="away-type"
                                            id="yes">
-                                    <label class="label label--inline"
+                                    <label class="number-of-people-answer label label--inline"
                                            for="yes">
-                                        Yes, I need to add someone
+                                        Yes, that many people live here
                                     </label>
                                 </div>
 
@@ -78,7 +80,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                            id="no">
                                     <label class="label label--inline"
                                            for="no">
-                                        No, I do not need to add anyone
+                                        No, I need to add someone
                                     </label>
                                 </div>
                             </fieldset>
@@ -90,9 +92,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                         <div class="js-collapsible-content">
                             <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Why do we ask this question?">Why do we ask this question?</h3>
                             <div class="collapsible__body js-collapsible-body">
-                                <p>We ask this question to help ensure that everyone is correctly counted in the census. This  includes people who are staying temporarily or are away.</p>
-                                <button
-                                        class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Why do we ask this question?">Hide this</button>
+                                <p>We ask this question to help ensure that everyone is correctly counted in the census. The information is vital for planning services, whether its for hospital beds, school places, GP's and dentist's services or where to build houses and roads.</p>
+                                <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Why do we ask this question?">Hide this</button>
                             </div>
                         </div>
                     </div>
@@ -135,8 +136,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     e.preventDefault();
 
     window.location = yesbox.checked
-      ? '../who-else-to-add/?previous=temp-types-living-away&redirect=../temp-types-living-away'
-      : '../visitors/';
+      ? '../visitors/'
+      : '../adding-another-person/';
   });
 
   function createIncludeItem(text) {
@@ -149,19 +150,46 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     return $nodeEl;
   }
 
+  function getNumberInHousehold() {
+    var members = storageAPI.getAllHouseholdMembers()
+    var householdMembers = members.filter(storageAPI.isHouseholdMember)
+
+    return householdMembers;
+  };
+
   function updateQuestionList() {
     $('#question-list-away').html(grouped.away.map(createIncludeItem));
     $('#question-list-in').html(grouped.in.map(createIncludeItem));
   }
 
+  function personWording(numberOfPeople) {
+    if (window.ONS.utils.numberToWordsStyleguide(numberOfPeople)) {
+      var personWordingText = window.ONS.utils.numberToWordsStyleguide(numberOfPeople) + " people live "
+      if (numberOfPeople == 1) {
+        personWordingText = "one person lives "
+      } 
+    } else {
+        personWordingText = "no people live "
+    }
+    return personWordingText;
+  }
+
   function updateQuestion () {
-    $('.js-heading-inner-part1').html(members.length ?
-      'Apart from the people already included, is there anyone else who is temporarily away or staying you need to add to ' + sessionStorage.getItem('address-line-1') + '?':
-      'Is there anyone who is temporarily away or staying you need to add to ' + sessionStorage.getItem('address-line-1') + '?'
+    var numberOfPeople = getNumberInHousehold().length
+    $('.js-heading-inner-part1').html(
+      'You said ' + personWording(numberOfPeople) +'at <mark>' + sessionStorage.getItem('address') + '</mark>. Is this correct?'
+    );
+  }
+
+  function updateAnswer(householdMembers) {
+    var numberOfPeople = getNumberInHousehold().length
+    $('.number-of-people-answer').html(
+      'Yes, ' + personWording(numberOfPeople) + 'here'
     );
   }
 
   $(updateQuestionList);
   $(updateQuestion);
-
+  $(updateAnswer);
+  
 </script>

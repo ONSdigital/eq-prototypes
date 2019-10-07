@@ -404,8 +404,8 @@ function createMemberItem(member, { redirect } = { redirect: null }) {
   $editLink.attr('href', (
     (memberIsUser
       ? '../' + altPage + 'what-is-your-name/?edit=true'
-      : '../' + altPage + 'who-else-to-add/?edit=' + member['@person'].id +
-        (isVisitor(member) ? '&journey=visitors' : '')) +
+      : '../' + altPage + 
+        (isVisitor(member) ? 'change-visitors/?edit=' + member['@person'].id + '&journey=visitors' : 'who-else-to-add/?edit=' + member['@person'].id)) +
     redirectTo
   ));
 

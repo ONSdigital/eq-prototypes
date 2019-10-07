@@ -27,7 +27,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title" class="question__title u-fs-l">
-                                        Do any of the following people live at <mark><span class="full-address-text">Address not set</span></mark> on <span class="js-significant-date"></span>?
+                                        Do any of the following people also live at <mark><span class="full-address-text">Address not set</span></mark> on <span class="js-significant-date"></span>?
                                     </h1>
                                 </div>
 
@@ -122,7 +122,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                       id="none">
                                                 <label class="label label--inline"
                                                       for="none">
-                                                    <strong>None of these apply, no-one usually lives here</strong>
+                                                    <strong>None of these apply, I am the only person who lives here</strong>
                                                 </label>
                                             </div>
                                         </fieldset>
@@ -176,7 +176,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
      * Routing
      */
     if (!otherbox.checked) {
-      document.trav.action = "../who-to-add";
+      document.trav.action = "../who-else-to-add";
       } else {
         document.trav.action = "../people-count-confirmation";
       }

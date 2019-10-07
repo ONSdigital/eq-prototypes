@@ -16,11 +16,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
 <div class="page__container container">
     <div class="grid grid--reverse">
-        <div class="grid__col col-4@l">
-            <!--{% include navigation.html
-            items=site.data.your-household-v6.navigationItemsHousehold
-            nav-title-id="section-address" %}-->
-        </div>
+        <div class="grid__col col-4@l"></div>
         <div class="grid__col col-7@l pull-1@l">
             <main role="main" id="main" class="page__main">
                 <form name="trav" class="form qa-questionnaire-form" role="form"
@@ -32,12 +28,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             <section class="section u-mb-s">
                                 <div class="question">
                                     <h1 class="question__title u-fs-l">
-                                        Are there any visitors staying
-                                        overnight on <span class="js-significant-date"></span> at
-                                        <span class="address-text"></span>?
+                                        Apart from everyone already included, who else is staying overnight on <span class="js-significant-date"></span> at
+                                        <mark><span class="full-address-text"></span></mark>?
                                     </h1>
                                 </div>
-
+                                <p><strong>These people are counted as visitors</strong></p>
                                 <div class="answer">
                                     <div class="answer__fields js-fields">
                                         <div class="field field--checkbox field--multiplechoice field--exclusive">
@@ -55,7 +50,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                         People who usually live
                                                         somewhere else in the
                                                         UK, for example
-                                                        boy/girlfriends, friends
+                                                        partners, friends
                                                         or relatives</label>
                                                 </div>
                                                 <div class="field__item">
@@ -97,7 +92,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="checkbox">
                                                     <label class="label label--inline u-fs-r "
                                                            for="none">
-                                                        <span class="u-vh">Or,</span>
+                                                        <span class="u-vh">Or</span>
                                                         No, there are no
                                                         visitors staying
                                                         overnight on
@@ -116,19 +111,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             </section>
                         </div>
                     </div>
-
-                    <div
-                            class="collapsible collapsible--simple js-collapsible js-collapsible-simple u-mb-xl">
-                        <div class="js-collapsible-content">
-                            <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Why do I have to include visitors?">Why do I have to include visitors?</h3>
-                            <div class="collapsible__body js-collapsible-body">
-                                <p>We ask for visitor information to ensure that everyone is counted. This helps to produce accurate population estimates. Add any visitors, even if you think they may have been included on a census form at another address.</p>
-                                <button
-                                        class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Why do I have to include visitors?">Hide this</button>
-                            </div>
-                        </div>
-                    </div>
-
                     <button class="btn btn--primary btn--lg qa-btn-submit"
                             type="submit" name="">Save and continue
                     </button>
@@ -153,10 +135,37 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         awayTypes.push($(el).val());
       });
 
-      window.location.href =
-        '../who-else-to-add?previous=visitors&journey=visitors&visitor-types=' + JSON.stringify(awayTypes);
+      window.location.href ='../visitor-name?journey=visitors';
     } else {
       document.trav.action = "../summary";
     }
   });
+</script>
+
+<script>
+    var searchParams = new URLSearchParams(window.location.search);
+
+    var addressParam = searchParams.get('address');
+
+    if (addressParam) {
+        var address = JSON.parse(addressParam);
+
+        var addressParts = [];
+        
+
+        Object.keys(address)
+            .filter(function(key) { return !!address[key] })
+            .forEach(function (key) {
+                sessionStorage.setItem(key, address[key]);
+                addressParts.push(address[key]);
+            })
+        
+        sessionStorage.setItem('address', addressParts.join(', '));
+    }
+
+	$(function () {
+	  if(sessionStorage.getItem('address')) {
+		$('.full-address-text').html((sessionStorage.getItem('address') || '').replace(/,/g, '<br />'));
+      }
+	});
 </script>
