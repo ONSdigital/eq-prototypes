@@ -249,5 +249,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   }
 
   $(updateAllPreviousLinks);
+
+  function updateCancelLinks() {
+    $('.js-cancel-return').attr('href', document.referrer);
+  }
+
+  $(updateCancelLinks);
 </script>
 
