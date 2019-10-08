@@ -97,4 +97,10 @@ cdn: v1.5.0
       document.trav.action = "../temp-living-here";
     }
   });
+
+  function updateAllPreviousLinks() {
+    $('.js-previous-link').attr('href', document.referrer);
+  }
+
+  $(updateAllPreviousLinks);
 </script>

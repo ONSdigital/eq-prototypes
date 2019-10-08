@@ -92,7 +92,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                         <div class="js-collapsible-content">
                             <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Why do we ask this question?">Why do we ask this question?</h3>
                             <div class="collapsible__body js-collapsible-body">
-                                <p>We ask this question to help ensure that everyone is correctly counted in the census. The information is vital for planning services, whether its for hospital beds, school places, GP's and dentist's services or where to build houses and roads.</p>
+                                <p>We ask this question to help ensure that everyone is correctly counted in the census. The information is vital for planning services, whether it's for hospital beds, school places, GP's and dentist's services or where to build houses and roads.</p>
                                 <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Why do we ask this question?">Hide this</button>
                             </div>
                         </div>
@@ -187,6 +187,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       'Yes, ' + personWording(numberOfPeople) + 'here'
     );
   }
+  function updateAllPreviousLinks() {
+    $('.js-previous-link').attr('href', document.referrer);
+  }
+
+  $(updateAllPreviousLinks);
 
   $(updateQuestionList);
   $(updateQuestion);

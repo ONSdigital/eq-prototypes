@@ -15,12 +15,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
 <div class="page__container container">
     <div class="grid grid--reverse">
-        <div class="grid__col col-4@l">
-            <!--{% include navigation.html
-            items=site.data.your-household-v6.navigationItemsHousehold
-            nav-title-id="section-address" %}-->
-        </div>
-
+        <div class="grid__col col-4@l"></div>
         <div class="grid__col col-7@l pull-1@l">
             <main role="main" id="main" class="page__main">
                 <div class="feedback__inline js-feedback-inline is-collapsed">
@@ -80,14 +75,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                         </div>
                     </div>
                 </div>
-
-                <!--<div class="js-remove-section"
-                     style="display:none;">
-                    <p>If you have added this person by mistake or if circumstances have changed, you can remove them.</p>
-
-                    <button
-                            class="btn btn&#45;&#45;secondary btn&#45;&#45;small js-remove-person">Remove this person</button>
-                </div>-->
 
                 <button class="btn btn-submit btn--primary btn--lg u-mt-xl"
                         data-qa="btn-submit" type="submit"
@@ -220,5 +207,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   });
 
   $(updateQuestion);
+
+  function updateAllPreviousLinks() {
+    $('.js-previous-link').attr('href', document.referrer);
+  }
+
+  $(updateAllPreviousLinks);
 </script>
 

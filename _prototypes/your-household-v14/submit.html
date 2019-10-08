@@ -32,3 +32,13 @@ hideSaveLater: true
 </div>
 
 <script src='/js/compiled/your-household-v14/bundle.js'></script>
+
+<script>
+
+  function updateAllPreviousLinks() {
+    $('.js-previous-link').attr('href', document.referrer);
+  }
+
+  $(updateAllPreviousLinks);
+
+</script>

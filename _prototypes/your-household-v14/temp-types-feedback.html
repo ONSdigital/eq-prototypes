@@ -15,11 +15,7 @@ cdn: v1.5.0
 
 <div class="page__container container">
     <div class="grid grid--reverse">
-        <div class="grid__col col-4@l">
-            <!--{% include navigation.html
-            items=site.data.your-household-v6.navigationItemsHousehold
-            nav-title-id="section-address" %}-->
-        </div>
+        <div class="grid__col col-4@l"></div>
         <div class="grid__col col-7@l pull-1@l">
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
@@ -132,4 +128,10 @@ cdn: v1.5.0
     $('#member-list').html('<ul id="household-members"></ul>');
     window.ONS.helpers.populateHouseholdList();
   });
+
+  function updateAllPreviousLinks() {
+    $('.js-previous-link').attr('href', document.referrer);
+  }
+
+  $(updateAllPreviousLinks);
 </script>

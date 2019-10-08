@@ -37,7 +37,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 <div
                                         class="panel panel--simple panel--error u-mb-m">
                                     <div class="panel__body">
-                                        <strong>All of the data entered
+                                        <strong>All of the information entered
                                             about this person will be deleted
                                         </strong>
                                     </div>
@@ -55,7 +55,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            id="yes">
                                                     <label class="label label--inline"
                                                            for="yes">
-                                                        Yes, I want to remove this person
+                                                        Yes, remove this person
                                                     </label>
                                                 </div>
 
@@ -67,7 +67,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            id="no">
                                                     <label class="label label--inline"
                                                            for="no">
-                                                        No, I do not want to remove this person
+                                                        No, cancel and return
                                                     </label>
                                                 </div>
                                             </fieldset>
@@ -108,4 +108,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         window.location.href = redirect || '../summary/';
       }
     });
+    function updateAllPreviousLinks() {
+      $('.js-previous-link').attr('href', document.referrer);
+    }
+
+    $(updateAllPreviousLinks);
 </script>

@@ -9,7 +9,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-cancel-return" href="" style="display:none;">Previous</a>
+        <a class="js-previous-link" href="" style="display:none;">Previous</a>
     </div>
 
 </div>
@@ -70,9 +70,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                         Yes, I need to
                                                         add another
                                                         person</strong>
-                                                    <p
-                                                            class="u-fs-s u-db u-mb-no label--negative js-householdmembers-detail">Include partners,
-                                                        children, babies born on or before <span class="js-significant-date"></span>, housemates, tenants and lodgers, students and schoolchildren who live away from home during term time, where this is their permanent or family home</p>
                                                 </label>
                                             </div>
 
@@ -210,4 +207,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 		$('.full-address-text').html((sessionStorage.getItem('address') || '').replace(/,/g, '<br />'));
       }
 	});
+
+    function updateAllPreviousLinks() {
+      $('.js-previous-link').attr('href', document.referrer);
+    }
+
+    $(updateAllPreviousLinks);
 </script>

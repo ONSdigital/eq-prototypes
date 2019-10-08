@@ -116,5 +116,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 		var options = {year: 'numeric', month: 'long', day: 'numeric'};
 		$('.one-week-ago').text(oneWeekAgo.toLocaleString('en-GB', options));
 	});
+
+    function updateAllPreviousLinks() {
+    $('.js-previous-link').attr('href', document.referrer);
+    }
+
+    $(updateAllPreviousLinks);
 </script>
 

@@ -104,7 +104,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                 </div>
 
                 <p class="u-mb-no"><a class="js-cancel-return" href=""
-                      style="display:none;">Cancel and return to the previous
+                      >Cancel and return to the previous
                     question</a></p>
 
                 <button class="btn btn-submit btn--primary btn--lg u-mt-xl"
@@ -318,4 +318,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 		$('.full-address-text').html((sessionStorage.getItem('address') || '').replace(/,/g, '<br />'));
       }
 	});
+
+  function updateAllPreviousLinks() {
+    $('.js-previous-link').attr('href', document.referrer);
+  }
+
+  $(updateAllPreviousLinks);
 </script>

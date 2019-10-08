@@ -313,5 +313,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 		$('.full-address-text').html((sessionStorage.getItem('address') || '').replace(/,/g, '<br />'));
       }
 	});
+
+  function updateAllPreviousLinks() {
+    $('.js-previous-link').attr('href', document.referrer);
+  }
+
+  $(updateAllPreviousLinks);
 </script>
 
