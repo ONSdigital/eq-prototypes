@@ -162,29 +162,36 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     $('#question-list-in').html(grouped.in.map(createIncludeItem));
   }
 
-  function personWording(numberOfPeople) {
+  function personWording(numberOfPeople, type) {
     if (window.ONS.utils.numberToWordsStyleguide(numberOfPeople)) {
-      var personWordingText = "<mark>" + window.ONS.utils.numberToWordsStyleguide(numberOfPeople) + "</mark> people live "
+      var questionPersonWordingText = "<mark>" + window.ONS.utils.numberToWordsStyleguide(numberOfPeople) + "</mark> people live"
+      var answerPersonWordingText = window.ONS.utils.numberToWordsStyleguide(numberOfPeople) + " people live"
       if (numberOfPeople == 1) {
-        personWordingText = "<mark>one</mark> person lives "
+        questionPersonWordingText = "<mark>one</mark> person lives"
+        answerPersonWordingText = "one person lives"
       } 
     } else {
-        personWordingText = "<mark>no</mark> people live "
+        questionPersonWordingText = "<mark>no</mark> people live"
+        answerPersonWordingText = "no people live"
     }
-    return personWordingText;
+    if (type == "question") {
+      return questionPersonWordingText
+    } else {
+      return answerPersonWordingText
+    }
   }
 
   function updateQuestion () {
     var numberOfPeople = getNumberInHousehold().length
     $('.js-heading-inner-part1').html(
-      'You said ' + personWording(numberOfPeople) +'at ' + sessionStorage.getItem('address') + '. Is this correct?'
+      'You said ' + personWording(numberOfPeople, "question") +' at ' + sessionStorage.getItem('address') + '. Is this correct?'
     );
   }
 
   function updateAnswer(householdMembers) {
     var numberOfPeople = getNumberInHousehold().length
     $('.number-of-people-answer').html(
-      'Yes, ' + personWording(numberOfPeople) + 'here'
+      'Yes, ' + personWording(numberOfPeople, "answer") + ' here'
     );
   }
   function updateAllPreviousLinks() {
