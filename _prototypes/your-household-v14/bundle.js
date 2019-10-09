@@ -394,8 +394,6 @@ function createMemberItem(member, { redirect } = { redirect: null }) {
   if (memberIsUser) {
     personNameText += ' (You)';
     $editLink.html('Change');
-    $removeLink.hide();
-    $spacer.hide();
   }
 
   $nodeEl.attr('id', '');
