@@ -164,12 +164,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function personWording(numberOfPeople) {
     if (window.ONS.utils.numberToWordsStyleguide(numberOfPeople)) {
-      var personWordingText = window.ONS.utils.numberToWordsStyleguide(numberOfPeople) + " people live "
+      var personWordingText = "<mark>" + window.ONS.utils.numberToWordsStyleguide(numberOfPeople) + "</mark> people live "
       if (numberOfPeople == 1) {
-        personWordingText = "one person lives "
+        personWordingText = "<mark>one</mark> person lives "
       } 
     } else {
-        personWordingText = "no people live "
+        personWordingText = "<mark>no</mark> people live "
     }
     return personWordingText;
   }
@@ -177,7 +177,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   function updateQuestion () {
     var numberOfPeople = getNumberInHousehold().length
     $('.js-heading-inner-part1').html(
-      'You said ' + personWording(numberOfPeople) +'at <mark>' + sessionStorage.getItem('address') + '</mark>. Is this correct?'
+      'You said ' + personWording(numberOfPeople) +'at ' + sessionStorage.getItem('address') + '. Is this correct?'
     );
   }
 
