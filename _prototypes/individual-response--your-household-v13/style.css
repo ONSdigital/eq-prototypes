@@ -1,3 +1,19 @@
+/**
+ * Hub
+**/
+.summary__block {
+  border-bottom: none;
+}
+
+.summary__item {
+  border-top: none;
+}
+
+.summary__item:first-of-type,
+.summary__item:not(:last-child) {
+  border-bottom: 1px solid #888;
+}
+
 .list.list--people-plain {
   margin-bottom : 1rem;
   list-style-type : none;
