@@ -47,7 +47,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                     <div class="title tick-spacing">
                                         <h1 id="question-title" class="question__title u-fs-l js-heading">You have now completed your questions.</h1>
                                     </div>
-                                    <h1 id="question-title2" class="question__title u-fs-l js-heading">Is there anyone in your household you cannot answer the same questions for?</h1>
                                     <div class="panel panel--simple panel--info u-mb-s">You can decide on the next page how to answer their questions</div>
                                 </div>
 
@@ -192,9 +191,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('You have completed your ' +
+      $('.js-heading').html('You have completed ' +
         person.fullName + window.ONS.utils.trailingNameS(person.fullName) +
-        'individual questions. Can you answer the same questions for others ' +
+        ' individual questions. Can you answer the same questions for others ' +
+        'in your household?');
+    } else {
+      $('.js-heading').html('You have completed your individual questions. Can you answer the same questions for others ' +
         'in your household?');
     }
   }
