@@ -1,3 +1,23 @@
+/* v2 Design system overrides */
+
+.checkbox__description, 
+.radio__description,
+.label__description {
+    display: block;
+    margin-top: .25rem;
+    margin-left: -1.85rem!important;
+}
+
+.u-fs-s {
+    font-size: .77777778rem!important;
+}
+
+/* Highlight */
+.highlight {
+    padding: 0 2px;
+    background-color: #f0f762!important;
+}
+
 /* CTA button */
 .btn--link {
     display: inline-block;
