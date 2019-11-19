@@ -99,7 +99,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       })
       .map(function (member) { return member['@person'] });
 
-  var cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people') || '[]');
+  var cannotAnswerPeople = JSON.parse(sessionStorage.setItem('cannot-answer-people', '') || '[]');
 
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();

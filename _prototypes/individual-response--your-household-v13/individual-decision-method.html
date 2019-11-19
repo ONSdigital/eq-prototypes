@@ -33,8 +33,8 @@ cdn: v1.5.0
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
-                                        class="question__title saturn">
-                                        How would you like to request a separate census for <span class="js-person-name u-fs-r--b highlight"></span>?
+                                        class="question__title saturn js-piping">
+                                        How would you like to request a separate census for {x}?
                                     </h1>
                                     <p class="mars u-mb-m">
                                         To request a separate census for others in your household to complete, we need to send them an individual access code.
@@ -45,64 +45,46 @@ cdn: v1.5.0
                                     <div class="answer__fields js-fields">
                                         <div class="field field--radio field--multiplechoice ">
                                             <fieldset class="u-mb-xl">
-                                                <legend class="field__legend">Select way to send access code:</legend>
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
                                                            name="does-anyone-else-live-here"
-                                                           id="radio-answer-0"
-                                                           value="Text message">
-                                                    <label class="label label--inline"
-                                                           for="radio-answer-0"
-                                                           id="label-radio-answer-0">
-                                                        Text message
-                                                        <br>
-                                                        <span class="label__description u-fs-s">Select to enter their mobile number</span>
-                                                    </label>
-                                                    <div class="field__other">
-                                                        <label  class="label venus mercury" 
-                                                                for="phone" 
-                                                                id="label-checkbox-other-input">
-                                                            Enter <span class="js-person-name"></span>'s mobile number
-                                                        </label>
-                                                        <input 
-                                                            class="input input__text js-focusable" 
-                                                            id="phone" 
-                                                            name="other-answer" 
-                                                            type="number" 
-                                                            data-qa="other-option">
-                                                    </div>
-                                                </div>
-                                                <div class="field__item js-focusable-box">
-                                                    <input class="input input--radio js-focusable"
-                                                           type="radio"
-                                                           name="radio-answer-1"
-                                                           id="radio-answer-1"
-                                                           value="Email">
-                                                    <label class="label label--inline"
-                                                           for="radio-answer-1"
-                                                           id="label-radio-answer-1">
-                                                        Email
-                                                        <br>
-                                                        <span class="label__description u-fs-s">Select to enter their email address</span>
-                                                    </label>
-                                                    <div class="field__other">
-                                                        <label  class="label venus mercury" 
-                                                                for="other-answer" 
-                                                                id="label-checkbox-other-input">
-                                                            Enter <span class="js-person-name"></span>'s email address
-                                                        </label>
-                                                        <input class="input input__text js-focusable" id="other-answer" name="other-answer" type="email" data-qa="other-option">
-                                                    </div>
-                                                </div>
-                                                <div class="field__item js-focusable-box">
-                                                    <input class="input input--radio js-focusable"
-                                                           type="radio"
-                                                           name="radio-answer-2"
-                                                           id="Post" value="Post">
+                                                           id="no"
+                                                           value="no">
                                                     <label class="label label--inline venus"
-                                                           for="radio-answer-2"
-                                                           id="radio-answer-2">
+                                                           for="no"
+                                                           id="no-label">
+                                                        Text message
+                                                    </label>
+                                                    <div class="field__other">
+                                                        <label class="label js-piping" for="phone">Enter {x}{s} mobile number</label>
+                                                        <input class="input input__text js-focusable" id="phone" name="other-answer" type="text" data-qa="other-option">
+                                                    </div>
+                                                </div>
+
+                                                <div class="field__item js-focusable-box">
+                                                    <input class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="does-anyone-else-live-here"
+                                                           id="email" value="email">
+                                                    <label class="label label--inline venus"
+                                                           for="email">
+                                                        Email
+                                                    </label>
+                                                    <div class="field__other">
+                                                        <label
+                                                                class="label venus mercury" for="other-answer" id="label-checkbox-other-input">Enter <span class="js-person-name"></span>'s email address</label>
+                                                        <input class="input input__text js-focusable" id="other-answer" name="other-answer" type="text" data-qa="other-option">
+                                                    </div>
+                                                </div>
+
+                                                <div class="field__item js-focusable-box">
+                                                    <input class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="does-anyone-else-live-here"
+                                                           id="post" value="post">
+                                                    <label class="label label--inline venus"
+                                                           for="post">
                                                         Post
                                                     </label>
                                                 </div>
@@ -125,32 +107,46 @@ cdn: v1.5.0
 <script src='/js/compiled/individual-response--your-household-v13/bundle.js'></script>
 
 <script>
-  var storageAPI = window.ONS.storage,
-    urlParams = new URLSearchParams(window.location.search),
-    cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people') || '[]'),
-    personId = cannotAnswerPeople[0].id;
-    nobox = document.getElementById("no"),
-    surveyType = urlParams.get('survey');
-    input = document.getElementById('phone');
-    details = storageAPI.getPersonalDetailsFor(personId);
+    var cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people') || '[]');
+    var searchParams = new URLSearchParams(window.location.search);
+    var personId = searchParams.get('person_id');
+    var previousLink = document.querySelector('.js-previous-link');
+    var input = document.getElementById('phone');
 
-  $('.qa-btn-submit').on('click', function(event) {
-    event.preventDefault();
+    if (!personId) {
+        personId = cannotAnswerPeople[0].id;
+    }
 
-    phoneNumber = $(input).val();
-    sessionStorage.setItem('cannot-answer-people', JSON.stringify(phoneNumber));
-    console.log(phoneNumber);
+    previousLink.setAttribute('href', previousLink.getAttribute('href') + '?person_id=' + personId);
+
+    var person = JSON.parse(sessionStorage.getItem('household-members')).find(function(person) { 
+        return person['@person'].id === personId;
+    })['@person'];
+
+    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
+    var possessive = person.fullName.slice(-1) === 's' ? "'" : "'s";
+
+    pipingDestinations.forEach(function(pipingDestination) {
+        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', person.fullName).replace('{s}', possessive);
+    });
+
+    var cannotAnswerPerson = cannotAnswerPeople.find(function(p) {
+        return p.id === person.id;
+    });
+
+    if (cannotAnswerPerson.phoneNumber) {
+        input.value = cannotAnswerPerson.phoneNumber.slice(0, 5) + ' ' + cannotAnswerPerson.phoneNumber.slice(5);
+    }
+
+    var form = document.querySelector('form');
+    
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
 
         cannotAnswerPerson.phoneNumber = input.value.trim().replace(/ /g, '');
 
         sessionStorage.setItem('cannot-answer-people', JSON.stringify(cannotAnswerPeople));
 
         window.location.href = '../request-survey-confirm-number?person_id=' + personId;
-  });
-
-  function updateName() {
-    $('.js-person-name').html(storageAPI.getHouseholdMemberByPersonId(personId)['@person'].fullName);
-  }
-
-  $(updateName);
+    });
 </script>
