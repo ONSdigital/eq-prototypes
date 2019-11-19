@@ -59,10 +59,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   $('.btn--link').click(function(e) {
     e.preventDefault();
 
-    sessionStorage.setItem('cannot-answer-people', JSON.stringify({id: personId, responseOption: null, phoneNumber: null}));
+    window.location = '../cant-answer-for-others-who/?person=' + personId +
+    (surveyType ? '&survey=' + surveyType : '');
 
-    window.location = '../individual-decision-method/?person=' + personId +
-      (surveyType ? '&survey=' + surveyType : '');
   });
 
   function updateName() {
