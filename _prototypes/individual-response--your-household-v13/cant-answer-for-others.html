@@ -9,7 +9,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous-link" href="../confirm-address">Previous</a>
+        <a class="js-previous-link" href="../hub">Previous</a>
     </div>
 </div>
 
@@ -51,7 +51,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
 <script>
     var cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people') || '[]');
-    var storageAPI = window.ONS.storage,
+    storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
     personId = urlParams.get('person'),
     surveyType = urlParams.get('survey');

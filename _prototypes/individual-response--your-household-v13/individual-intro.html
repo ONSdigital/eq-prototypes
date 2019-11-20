@@ -89,13 +89,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         (surveyType ? '&survey=' + surveyType : '');
     });
 
-    $('.js-previous-link').click(function(e) {
-        e.preventDefault();
-
-        window.location = '../hub/?person=' + personId +
-        (surveyType ? '&survey=' + surveyType : '');
-    });
-
   function updateName() {
     $('.js-person-name').html(storageAPI.getHouseholdMemberByPersonId(personId)['@person'].fullName);
   }

@@ -68,11 +68,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         event.preventDefault();
 
         var nextPerson = cannotAnswerPeople.find(function(person) {
-            return !person.responseOption;
+            return !person.phoneNumber;
         });
 
         if (nextPerson) {
-            window.location.href = '../uac-question?person_id=' + nextPerson.id;
+            window.location.href = '../individual-decision-method/?person_id=' + nextPerson.id;
         } else {
             window.location.href = '../hub';
         }
