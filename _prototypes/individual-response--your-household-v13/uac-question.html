@@ -9,7 +9,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous-link" href="../individual-decision-answer-behalf">Previous</a>
+        <a class="js-previous-link" href="../hub">Previous</a>
     </div>
 </div>
 
@@ -22,27 +22,28 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                         <section class="section">
                             <form autocomplete="off">
                                 <div class="question u-mb-s">
-                                    <h1 id="question-title" class="question__title u-fs-l js-piping">{x}{s} questions</h1>
-                                    <p class="js-piping">If you want {x} to complete their own questions, they will need the unique access code from the census letter we sent you.</p>
-                                    <p>Alternatively, you can request a separate survey for them to complete.</p>
-
+                                    <h1 id="question-title" class="question__title u-fs-l js-piping">How would you like to answer <span class="highlight">{x}{s}</span> questions?</h1>
+                                
                                     <fieldset class="field field--radio field--multiplechoice ">
                                         <legend class="u-vh js-piping">{x}{s} questions</legend>
                                         <div class="field__item js-focusable-box">
+                                            <input class="input input--radio js-focusable" type="radio" name="response-options" id="answer-for">
+                                            <label class="label label--inline" for="answer-for">
+                                                <strong class="u-fs-r js-piping">
+                                                    I will answer for {x}
+                                                </strong>
+                                            </label>
+                                        </div>
+                                        <div class="field__item js-focusable-box">
                                             <input class="input input--radio js-focusable" type="radio" name="response-options" id="give-code">
-                                            <label class="label label--inline" for="give-code">I will give them the code and ask them to complete their own questions</label>
-                                        </div>
-
-                                        <div class="field__item js-focusable-box">
-                                            <input class="input input--radio js-focusable" type="radio" name="response-options" id="new-survey">
-                                            <label class="label label--inline" for="new-survey">I would like to request a separate survey for them to complete</label>
-                                        </div>
-
-                                        <span class="u-fs-r--b u-d-b u-mb-s u-mt-s" aria-hidden="true">Or</span><br>
-
-                                        <div class="field__item js-focusable-box">
-                                            <input class="input input--radio js-focusable" type="radio" name="response-options" id="complete-questions">
-                                            <label class="label label--inline" for="complete-questions"><span class="u-vh">or, </span>I will continue to answer their questions</label>
+                                            <label class="label label--inline" for="give-code">
+                                                <strong class="u-fs-r">
+                                                    I will ask them to answer their own questions
+                                                </strong>
+                                                <p class="u-fs-s u-db u-mb-no label--negative">
+                                                    They will need the unique access code from the letter we sent you
+                                                </p>
+                                            </label>
                                         </div>
                                     </fieldset>
 
