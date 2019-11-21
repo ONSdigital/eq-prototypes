@@ -1,11 +1,16 @@
 /* v2 Design system overrides */
-
+.field__item > .label > p,
 .checkbox__description, 
 .radio__description,
 .label__description {
     display: block;
     margin-top: .25rem;
     margin-left: -1.85rem!important;
+}
+
+.collapsible__body {
+    padding-left: 1.3rem;
+    border-left: 5px solid #ccc;
 }
 
 .u-fs-s {

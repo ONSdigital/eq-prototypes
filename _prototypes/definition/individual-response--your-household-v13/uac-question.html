@@ -27,8 +27,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                     <fieldset class="field field--radio field--multiplechoice ">
                                         <legend class="u-vh js-piping">{x}{s} questions</legend>
                                         <div class="field__item js-focusable-box">
-                                            <input class="input input--radio js-focusable" type="radio" name="response-options" id="answer-for">
-                                            <label class="label label--inline" for="answer-for">
+                                            <input class="input input--radio js-focusable" type="radio" name="response-options" id="complete-questions">
+                                            <label class="label label--inline" for="complete-questions">
                                                 <strong class="u-fs-r js-piping">
                                                     I will answer for {x}
                                                 </strong>
@@ -110,10 +110,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         sessionStorage.setItem('cannot-answer-people', JSON.stringify(cannotAnswerPeople));
 
         switch (responseOption) {
-            case 'new-survey': {
-                window.location.href = '../request-survey?person_id=' + personId;
-                break;
-            }
             case 'complete-questions': {
                 window.location.href = '../individual-intro/?person=' + personId;
                 break;

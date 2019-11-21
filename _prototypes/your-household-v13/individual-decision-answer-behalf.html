@@ -120,7 +120,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     if (canAnswer) {
       window.location.href = '../hub';
     } else {
-      var peopleIds = Array.from(document.querySelectorAll('.js-cloned')).map(function(input) {
+      var peopleIds = Array.from(document.querySelectorAll('.js-cloned:checked')).map(function(input) {
         return input.value;
       });
 
