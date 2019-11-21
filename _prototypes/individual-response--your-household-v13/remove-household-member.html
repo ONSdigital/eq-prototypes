@@ -40,9 +40,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 <div
                                         class="panel panel--simple panel--error u-mb-m">
                                     <div class="panel__body">
-                                        <strong>All of the information entered
+                                        All of the information entered
                                             about this person will be deleted
-                                        </strong>
+                                        
                                     </div>
                                 </div>
 
@@ -78,7 +78,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                     </div>
                                 </div>
                                 <div class="u-mb-xl">
-                                    <p>If you can’t answer questions for others in your household, there are <a href="">other ways for each person to answer their own questions.</a></p>
+                                    <p>If you can’t answer questions for others in your household, there are <a class="js-ir-link" href="#">other ways for each person to answer their own questions.</a></p>
                                 </div>
                             </section>
                         </div>
@@ -114,4 +114,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         window.location.href = '../who-else-to-add/?edit=' + personId;
       }
     });
+
+    $('.js-ir-link').click(function(e) {
+        e.preventDefault();
+
+        window.location = '../cant-answer-for-others/?person=' + personId;    });
 </script>
