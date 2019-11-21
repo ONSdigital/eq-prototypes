@@ -86,11 +86,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <script>
   var storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
-    switchedFromUnemployed = urlParams.get(switchedFromUnemployed),
     personId = urlParams.get('person'),
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
-    isEditing = urlParams.get('edit'),
-    details = storageAPI.getPersonalDetailsFor(personId),
     surveyType = urlParams.get('survey'),
 
     personsLeft = storageAPI.getAllHouseholdMembers()

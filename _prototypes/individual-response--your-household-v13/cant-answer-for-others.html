@@ -55,7 +55,25 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     personId = urlParams.get('person'),
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     surveyType = urlParams.get('survey');
+    // get all cannot answer people
+    var cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people') || '[]');
 
+    if (!personId) {
+        personId = cannotAnswerPeople[0].id;
+    }
+    var cannotAnswerPerson = cannotAnswerPeople.find(function(p) {
+        return p.id === person.id;
+    });
+
+    if (!cannotAnswerPerson) {
+        cannotAnswerPerson = {
+            id: person.id,
+            responseOption: 'new-survey',
+            phoneNumber: null,
+        };
+
+        cannotAnswerPeople.push(cannotAnswerPerson)
+    }
 
   $('.btn--link').click(function(e) {
     e.preventDefault();
@@ -67,28 +85,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
     } else {
 
-        var cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people') || '[]');
-
-        var peopleIds = [personId];
-
-        var people = cannotAnswerPeople.filter(function(person) {
-            return peopleIds.includes(person.id);
-        });
-
-        var newPeopleIds = peopleIds.filter(function(id) {
-            return !people.find(function(person) {
-            return person.id === id;
-            });
-        });
-
-        newPeopleIds.forEach(function(id) {
-            people.push({
-            id: id,
-            responseOption: 'new-survey',
-            phoneNumber: null,
-            });
-        });
-        sessionStorage.setItem('cannot-answer-people', JSON.stringify(people));
+        sessionStorage.setItem('cannot-answer-people', JSON.stringify(cannotAnswerPeople));
 
         window.location = '../individual-decision-method/?person_id=' + personId +
         (surveyType ? '&survey=' + surveyType : '');
