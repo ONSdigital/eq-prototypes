@@ -27,25 +27,24 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                     <fieldset class="field field--radio field--multiplechoice ">
                                         <legend class="u-vh js-piping">{x}{s} questions</legend>
                                         <div class="field__item js-focusable-box">
-                                            <input class="input input--radio js-focusable" type="radio" name="response-options" id="complete-questions">
-                                            <label class="label label--inline" for="complete-questions">
-                                                <strong class="u-fs-r js-piping">
-                                                    I will answer for {x}
-                                                </strong>
+                                            <input class="input input--radio js-focusable" type="radio" name="response-options" id="give-code">
+                                            <label class="label label--inline" for="give-code">I will ask them to answer their own questions<br>
+                                            <p class="label__description u-fs-s u-db u-mb-no label--negative">They will need the unique access code from the letter we sent you</p>
                                             </label>
+                                        </div>
+
+                                        <div class="field__item js-focusable-box u-vh">
+                                            <input class="input input--radio js-focusable" type="radio" name="response-options" id="new-survey">
+                                            <label class="label label--inline" for="new-survey">I would like to request a separate survey for them to complete</label>
                                         </div>
                                         <div class="field__item js-focusable-box">
-                                            <input class="input input--radio js-focusable" type="radio" name="response-options" id="give-code">
-                                            <label class="label label--inline" for="give-code">
-                                                <strong class="u-fs-r">
-                                                    I will ask them to answer their own questions
-                                                </strong>
-                                                <p class="u-fs-s u-db u-mb-no label--negative">
-                                                    They will need the unique access code from the letter we sent you
-                                                </p>
-                                            </label>
+                                            <input class="input input--radio js-focusable" type="radio" name="response-options" id="complete-questions">
+                                            <label class="label label--inline js-piping" for="complete-questions">I will answer for {x}</label>
                                         </div>
                                     </fieldset>
+                                    <div class="u-mt-m">
+                                        <p>If you need help, there are <a class="js-ir-link" href="#">other ways for each person to answer their own questions.</a></p>
+                                    </div>
 
                                     <button class="btn btn--primary btn--lg qa-btn-submit venus u-mt-xl u-mb-xl" type="submit" name="">Continue</button>
                                 </div>
@@ -132,5 +131,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                 }
             }
         }
+    });
+
+    $('.js-ir-link').click(function(e) {
+        e.preventDefault();
+
+        window.location = '../cant-answer-for-others/?person=' + personId;    
     });
 </script>

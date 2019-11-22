@@ -96,7 +96,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       })
       .map(function (member) { return member['@person'] });
 
-  var cannotAnswerPeople = JSON.parse(sessionStorage.setItem('cannot-answer-people', '') || '[]');
+  var cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people', '') || '[]');
 
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
@@ -146,10 +146,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   function updateAnswer() {
     $.each(personsLeft, function (i, person) {
       $('#js-member-list').append(createMemberListItem(person));
-    });
-
-    cannotAnswerPeople.forEach(function(person) {
-      document.querySelector('input[value=' + person.id + ']').checked = true;
     });
   }
 

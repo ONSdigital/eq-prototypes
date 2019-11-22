@@ -134,9 +134,6 @@ cdn: v1.5.0
         return p.id === person.id;
     });
 
-    if (cannotAnswerPerson.phoneNumber) {
-        input.value = cannotAnswerPerson.phoneNumber.slice(0, 5) + ' ' + cannotAnswerPerson.phoneNumber.slice(5);
-    }
 
     var form = document.querySelector('form');
 
