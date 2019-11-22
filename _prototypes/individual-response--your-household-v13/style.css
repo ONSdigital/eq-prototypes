@@ -50,12 +50,18 @@
 /**
  * Hub
 **/
+.summary__block {
+    border-bottom: none;
+}
+
+#visitor-surveys {
+    border-top: 1px solid #888;
+}
 
 .summary__item {
   border-top: none;
 }
 
-.summary__item:first-of-type,
 .summary__item:not(:last-child) {
   border-bottom: 1px solid #888;
 }
