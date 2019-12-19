@@ -1,0 +1,178 @@
+---
+title: Household prototype v15
+project: your-household
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../temp-away-from-home">
+            Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@l"></div>
+        <div class="grid__col col-7@l pull-1@l">
+            <main role="main" id="main" class="page__main">
+                <form name="trav" class="form qa-questionnaire-form" role="form"
+                      autocomplete="off" novalidate="">
+                    <input type="hidden" name="previous" value="visitors"/>
+                    <input type="hidden" name="journey" value="visitors"/>
+                    <div class="group">
+                        <div class="block">
+                            <section class="section u-mb-s">
+                                <div class="question u-mb-s">
+                                    <h1 class="question__title u-fs-l">
+                                        Apart from everyone already included, who else is staying overnight on <span class="js-significant-date"></span> at
+                                        <mark><span class="full-address-text"></span></mark>?
+                                    </h1>
+                                    <div class="question__description">
+                                        <p>These people are counted as visitors.</p>
+                                    </div>
+                                </div>
+                                <div class="answer">
+                                    <div class="answer__fields js-fields">
+                                        <div class="field field--checkbox field--multiplechoice field--exclusive">
+                                            <fieldset>
+                                                <legend class="field__legend u-fs-r--b">Select all that apply</legend>
+                                                <div class="field__item">
+                                                    <input
+                                                            class="input input--checkbox js-exclusive-group"
+                                                            name="away-type"
+                                                            value="usually-in-uk"
+                                                            id="usually-in-uk"
+                                                            type="checkbox"/>
+                                                    <label class="label label--inline u-fs-r "
+                                                           for="usually-in-uk">
+                                                        People who usually live
+                                                        somewhere else in the
+                                                        UK, for example boyfriends, girlfriends, friends
+                                                        or relatives</label>
+                                                </div>
+                                                <div class="field__item">
+                                                    <input class="input input--checkbox js-exclusive-group"
+                                                           name="away-type"
+                                                           value="second-address"
+                                                           id="second-address"
+                                                           type="checkbox">
+                                                    <label class="label label--inline u-fs-r "
+                                                           for="second-address">
+                                                        People staying here because it is their second address, for example, for work. Their permanent or family home is elsewhere</label>
+                                                </div>
+                                                <div class="field__item">
+                                                    <input class="input input--checkbox js-exclusive-group"
+                                                           name="away-type"
+                                                           value="less-three"
+                                                           id="less-three"
+                                                           type="checkbox">
+                                                    <label class="label label--inline u-fs-r "
+                                                           for="less-three">
+                                                        People who usually live outside the UK who are staying in the UK for less than three months</label>
+                                                </div>
+                                                <div class="field__item">
+                                                    <input class="input input--checkbox js-exclusive-group"
+                                                           name="away-type"
+                                                           value="on-holiday"
+                                                           id="on-holiday"
+                                                           type="checkbox">
+                                                    <label class="label label--inline u-fs-r "
+                                                           for="on-holiday">
+                                                        People here on holiday</label>
+                                                </div>
+                                                <div class="field__label u-mt-s u-fs-r--b" aria-hidden="true">Or</div>
+                                                <div class="field__item">
+                                                    <input class="input input--checkbox js-exclusive-checkbox"
+                                                           name="heating-type"
+                                                           value="no"
+                                                           id="none"
+                                                           type="checkbox">
+                                                    <label class="label label--inline u-fs-r "
+                                                           for="none">
+                                                        <span class="u-vh">Or</span>
+                                                        No, there are no
+                                                        visitors staying
+                                                        overnight on
+                                                        <span class="js-significant-date"></span>
+                                                        <span class="u-vh">. Selecting this will uncheck all other checkboxes</span>
+                                                    </label>
+                                                    <span class="js-exclusive-alert u-vh"
+                                                          role="alert"
+                                                          aria-live="polite"
+                                                          data-adjective="deselected"></span>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit"
+                            type="submit" name="">Save and continue
+                    </button>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/your-household-v15/bundle.js'></script>
+
+<script>
+  var nobox = document.getElementById("none");
+
+  $('.qa-btn-submit').click(function(e) {
+    if (!nobox.checked) {
+      e.preventDefault();
+
+      var awayTypes = [];
+
+      $('[name=away-type]:checked').each(function (i, el) {
+        awayTypes.push($(el).val());
+      });
+
+      window.location.href ='../visitor-name?journey=visitors';
+    } else {
+      document.trav.action = "../summary";
+    }
+  });
+</script>
+
+<script>
+    var searchParams = new URLSearchParams(window.location.search);
+
+    var addressParam = searchParams.get('address');
+
+    if (addressParam) {
+        var address = JSON.parse(addressParam);
+
+        var addressParts = [];
+        
+
+        Object.keys(address)
+            .filter(function(key) { return !!address[key] })
+            .forEach(function (key) {
+                sessionStorage.setItem(key, address[key]);
+                addressParts.push(address[key]);
+            })
+        
+        sessionStorage.setItem('address', addressParts.join(', '));
+    }
+
+	$(function () {
+	  if(sessionStorage.getItem('address')) {
+		$('.full-address-text').html((sessionStorage.getItem('address') || '').replace(/,/g, '<br />'));
+      }
+	});
+
+  function updateAllPreviousLinks() {
+    $('.js-previous-link').attr('href', document.referrer);
+  }
+
+  $(updateAllPreviousLinks);
+</script>

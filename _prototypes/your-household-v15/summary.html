@@ -1,0 +1,184 @@
+---
+title: Household prototype v15
+project: your-household
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../visitors">Previous</a>
+    </div>
+</div>
+
+<style>
+    .list.list--records {
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+    }
+</style>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@l">
+        </div>
+        <div class="grid__col col-7@l pull-1@l">
+            <main role="main" id="main" class="page__main">
+                <form name="trav" class="form qa-questionnaire-form" role="form"
+                      autocomplete="off" novalidate="">
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 class="question__title u-fs-l js-heading">
+                                        People who live here and overnight
+                                        visitors on <span class="js-significant-date"></span>
+                                    </h1>
+                                </div>
+
+                                <div class="panel panel--simple panel--success js-panel"
+                                    id="question-guidance-everyone-at-address-confirmation-question"
+                                    style="display:none;">
+                                    <strong class="u-mb-s">This section is now complete</strong>
+                                    <p>You can check your answers below</p>
+                                </div>
+                                <br/>
+
+                                <h2
+                                    class="u-fs-m js-household-people-list">You&rsquo;ve added <span class="highlight">{n}</span><span class="js-household-people-plural" style="display: none"></span> who lived here on <span class="js-significant-date"></span></h2>
+                                <ul
+                                    class="list list--records list--people u-mb-s js-records js-household-members-summary"></ul>
+                                <p id="nobody-notice"
+                                   style="display:none;">Nobody usually
+                                    lives here</p>
+                                <p class="u-mb-xl">
+                                    <a
+                                            href="../who-else-to-add/?redirect=../summary/"
+                                       class="js-add-to-household">
+                                        Add someone to this household</a>
+                                </p>
+
+                                <div class="js-visitors-people-list">
+                                    <h2 class="u-fs-m js-visitors-people-title">You&rsquo;ve added <span class="highlight">{n}</span> visitor<span class="js-visitors-people-plural"></span> staying
+                                        overnight on <span class="js-significant-date"></span></h2>
+                                    <ul class="list list--records list--people u-mb-s js-records js-visitors-summary"></ul>
+                                    <p id="nobody-visitor-notice"
+                                       style="display:none;">There are no
+                                        visitors staying overnight on
+                                        <span class="js-significant-date"></span>.</p>
+                                    <p class="u-mb-xl"><a
+                                            href="../visitor-name?journey=visitors&redirect=../summary/">Add a visitor</a>
+                                    </p>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit"
+                            type="submit" name="">Continue
+                    </button>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/your-household-v15/bundle.js'></script>
+
+<script>
+  var urlParams = new URLSearchParams(window.location.search),
+    showPanel = urlParams.get('show-panel'),
+    surveyType = urlParams.get('survey'),
+    nextPage = '../submit';
+
+  function updateHouseholdMembersVisitors() {
+    var members = window.ONS.storage.getAllHouseholdMembers(),
+      userMember = members.filter(isUser)[0],
+      otherHouseholdMembers = members.filter(window.ONS.storage.isOtherHouseholdMember),
+      visitors = members.filter(window.ONS.storage.isVisitor),
+      householdMembers = otherHouseholdMembers,
+      numberOfHouseholdMembers,
+      peopleListTitle,
+      numberOfVisitors,
+      visitorsListTitle;
+
+    if (userMember) {
+      householdMembers = [userMember].concat(otherHouseholdMembers);
+    }
+
+
+    numberOfHouseholdMembers = householdMembers.length;
+    peopleListTitle = document.querySelector('.js-household-people-list');
+    peopleListTitle.innerHTML = peopleListTitle.innerHTML.replace('{n}',
+      window.ONS.utils.numberToWordsStyleguide(numberOfHouseholdMembers) || 0);
+
+    if(!numberOfHouseholdMembers) {
+      $('#nobody-notice').show();
+    }
+  
+
+    $('.js-household-people-plural').each(function(i, el) {
+      window.ONS.utils
+        .cleanHTMLPlaceholderStringReplacment(el,numberOfHouseholdMembers != 1 ? ' people' : ' person');
+    });
+
+    numberOfVisitors = visitors.length;
+
+    if(!numberOfVisitors) {
+      $('#nobody-visitor-notice').show();
+    }
+
+    visitorsListTitle = document.querySelector('.js-visitors-people-list');
+
+    visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{n}',
+      window.ONS.utils.numberToWordsStyleguide(numberOfVisitors) || 0);
+
+    $('.js-visitors-people-plural').each(function(i, el) {
+      window.ONS.utils
+        .cleanHTMLPlaceholderStringReplacment(el,numberOfVisitors > 1 ? 's' : '');
+    });
+  }
+
+  $('#modal .close-modal-button').on('click', function(e) {
+    e.preventDefault();
+    $('#modal').hide();
+  });
+
+  $('.qa-btn-submit').on('click', function(e) {
+    e.preventDefault();
+
+    if (window.ONS.storage.getAllHouseholdMembers().length > 0) {
+      window.location.href = nextPage;
+    }
+    else {
+      alert('Journey for less than one person in household, not yet implemented');
+    }
+  });
+
+  function isUser(member) {
+    return member['@person'].id === window.ONS.storage.IDS.USER_HOUSEHOLD_MEMBER_ID;
+  } 
+
+  function updateContent () {
+    var $addToHousehould = $('.js-add-to-household');
+
+    if (surveyType === 'lms') {
+      $('.js-heading').html('About your household');
+      $addToHousehould.attr('href', '../lms/who-else-to-add/');
+    }
+
+    if(showPanel) {
+      $('.js-panel').show();
+    }
+  }
+
+  function updateAllPreviousLinks() {
+    $('.js-previous-link').attr('href', document.referrer);
+  }
+
+  $(updateAllPreviousLinks);
+
+  $(updateContent);
+  $(updateHouseholdMembersVisitors);
+</script>
