@@ -33,7 +33,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 class="question__title u-fs-l js-heading">
-                                        People who live here and overnight
+                                        People living here and overnight
                                         visitors on <span class="js-significant-date"></span>
                                     </h1>
                                 </div>
@@ -47,7 +47,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 <br/>
 
                                 <h2
-                                    class="u-fs-m js-household-people-list">You&rsquo;ve added <span class="highlight">{n}</span><span class="js-household-people-plural" style="display: none"></span> who live here on <span class="js-significant-date"></span></h2>
+                                    class="u-fs-m js-household-people-list">You&rsquo;ve added <span class="highlight">{n}</span><span class="js-household-people-plural" style="display: none"></span> living here on <span class="js-significant-date"></span></h2>
                                 <ul
                                     class="list list--records list--people u-mb-s js-records js-household-members-summary"></ul>
                                 <p id="nobody-notice"
@@ -143,11 +143,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         window.ONS.utils.numberToWordsStyleguide(numberOfVisitors) || 0);
     }
 
-
-
     $('.js-visitors-people-plural').each(function(i, el) {
       window.ONS.utils
-        .cleanHTMLPlaceholderStringReplacment(el,numberOfVisitors > 1 ? 's' : '');
+        .cleanHTMLPlaceholderStringReplacment(el,numberOfVisitors != 1 ? 's' : '');
     });
   }
 
