@@ -23,7 +23,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                     <input type="hidden" name="previous"
                            value="does-anyone-else-live-here"/>
                     <div class="group">
-                        <div class="block" id="total-retail-turnover">
+                        <div class="block" id="do-any-live-here">
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title" class="question__title u-fs-l">
@@ -61,7 +61,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                 <label class="label label--inline"
                                                       for="family">
                                                     Family members and partners
-                                                    <p class="u-fs-s u-db u-mb-no label--negative js-householdmembers-detail">Include babies born on or before <span class="js-significant-date"></span>, children, students and schoolchildren who live away from home during term time</p>
+                                                    <p class="u-fs-s u-db u-mb-no label--negative">
+                                                    Include babies born on or before <span class="js-significant-date"></span>, children, students and schoolchildren who live away from home during term time
+                                                    </p>
                                                 </label>
                                             </div>
 
@@ -95,7 +97,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                 <label class="label label--inline"
                                                       for="temp-away">
                                                     People temporarily away
-                                                    <p class="u-fs-s u-db u-mb-no label--negative js-householdmembers-detail">For example, on holiday, working away, in the armed forces, abroad for up to a year, living in an establishment such as a care home for up to 6 months</p>
+                                                    <p class="u-fs-s u-db u-mb-no label--negative">
+                                                    For example, working away, on holiday, in the armed forces, living in an establishment such as a care home for up to 6 months, abroad for up to a year
+                                                    </p>
                                                 </label>
                                             </div>
 
@@ -107,10 +111,13 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                 <label class="label label--inline"
                                                       for="temp-staying">
                                                     People staying temporarily who usually live in the UK but do not have another UK address
+                                                    <p class="u-fs-s u-db u-mb-no label--negative">
+                                                    For example, UK residents  between addresses or currently without a home
+                                                    </p>
                                                 </label>
                                             </div>
 
-                                            <span>Or</span>
+                                            <span class="label u-fs-r--b u-mt-s">Or</span>
 
                                             <div class="field__item js-focusable-box">
                                                 <input class="input input--checkbox js-focusable"
@@ -119,7 +126,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                       id="none">
                                                 <label class="label label--inline"
                                                       for="none">
-                                                    None of these apply, I am the only person who lives here
+                                                    None of these apply, I am the only person who usually lives here
                                                 </label>
                                             </div>
                                         </fieldset>

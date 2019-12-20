@@ -391,8 +391,12 @@ function createMemberItem(member, { redirect } = { redirect: null }) {
     altPage = surveyType && surveyType === 'lms' ? surveyType + '/' : '',
     redirectTo = (redirect ? '&redirect=' + encodeURIComponent(window.location.href) : '');
 
+
+
   if (memberIsUser) {
     personNameText += ' (You)';
+    $removeLink.addClass('u-d-no');
+    $spacer.addClass('u-d-no');
     $editLink.html('Change');
   }
 

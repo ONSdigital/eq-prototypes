@@ -47,7 +47,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 <br/>
 
                                 <h2
-                                    class="u-fs-m js-household-people-list">You&rsquo;ve added <span class="highlight">{n}</span><span class="js-household-people-plural" style="display: none"></span> who lived here on <span class="js-significant-date"></span></h2>
+                                    class="u-fs-m js-household-people-list">You&rsquo;ve added <span class="highlight">{n}</span><span class="js-household-people-plural" style="display: none"></span> who live here on <span class="js-significant-date"></span></h2>
                                 <ul
                                     class="list list--records list--people u-mb-s js-records js-household-members-summary"></ul>
                                 <p id="nobody-notice"
@@ -62,11 +62,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
                                 <div class="js-visitors-people-list">
                                     <h2 class="u-fs-m js-visitors-people-title">You&rsquo;ve added <span class="highlight">{n}</span> visitor<span class="js-visitors-people-plural"></span> staying
-                                        overnight on <span class="js-significant-date"></span></h2>
+                                        overnight here on <span class="js-significant-date"></span></h2>
                                     <ul class="list list--records list--people u-mb-s js-records js-visitors-summary"></ul>
                                     <p id="nobody-visitor-notice"
                                        style="display:none;">There are no
-                                        visitors staying overnight on
+                                        visitors staying overnight here on
                                         <span class="js-significant-date"></span>.</p>
                                     <p class="u-mb-xl"><a
                                             href="../visitor-name?journey=visitors&redirect=../summary/">Add a visitor</a>
@@ -107,11 +107,15 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       householdMembers = [userMember].concat(otherHouseholdMembers);
     }
 
-
     numberOfHouseholdMembers = householdMembers.length;
     peopleListTitle = document.querySelector('.js-household-people-list');
-    peopleListTitle.innerHTML = peopleListTitle.innerHTML.replace('{n}',
-      window.ONS.utils.numberToWordsStyleguide(numberOfHouseholdMembers) || 0);
+    if (numberOfHouseholdMembers > 1) {
+      peopleListTitle.innerHTML = peopleListTitle.innerHTML.replace('{n}',
+        (numberOfHouseholdMembers));
+    } else {
+      peopleListTitle.innerHTML = peopleListTitle.innerHTML.replace('{n}',
+        window.ONS.utils.numberToWordsStyleguide(numberOfHouseholdMembers) || 0);
+    }
 
     if(!numberOfHouseholdMembers) {
       $('#nobody-notice').show();
@@ -131,8 +135,15 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
     visitorsListTitle = document.querySelector('.js-visitors-people-list');
 
-    visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{n}',
-      window.ONS.utils.numberToWordsStyleguide(numberOfVisitors) || 0);
+    if (numberOfVisitors > 1) {
+      visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{n}',
+        (numberOfVisitors));
+    } else {
+      visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{n}',
+        window.ONS.utils.numberToWordsStyleguide(numberOfVisitors) || 0);
+    }
+
+
 
     $('.js-visitors-people-plural').each(function(i, el) {
       window.ONS.utils

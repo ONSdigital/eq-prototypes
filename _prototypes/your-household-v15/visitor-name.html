@@ -76,19 +76,21 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                     </div>
                 </div>
 
-                <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple js-visitor-definition u-mb-xs">
+                <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple js-visitor-definition u-mb-m">
                     <div class="js-collapsible-content">
-                        <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Why do I have to include visitors?">Why do I have to include visitors?</h3>
+                        <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Why do I have to include visitors?">
+                          Why you have to include visitors
+                        </h3>
                         <div class="collapsible__body js-collapsible-body">
-                            <p>We ask for visitor information to ensure that everyone is counted. This helps to produce accurate population estimates. Add any visitors, even if you think they may have been included on a census form at another address.</p>
+                            <p>We ask for information on visitors to ensure that everyone is counted. This helps to produce accurate population estimates. Add any visitors, even if you think they may have been included on a census form at another address.</p>
                             <button class="btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Why do I have to include visitors?">Hide this</button>
                         </div>
                     </div>
                 </div>
 
-                <p class="u-mb-no"><a class="js-cancel-return" href="../visitors">Cancel and return to the previous question</a></p>
+                <p class="u-mb-no u-mt-s"><a class="js-cancel-return" href="../visitors">Cancel and return to the previous question</a></p>
 
-                <button class="btn btn-submit btn--primary btn--lg u-mt-xl"
+                <button class="btn btn-submit btn--primary btn--lg u-mt-l"
                         data-qa="btn-submit" type="submit"
                         name="action[save_continue]">
                     Save and continue
@@ -199,7 +201,40 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       addressLines = (sessionStorage.getItem('address') || '').split(','),
       addressLine1 = addressLines[0],
       addressLine2 = addressLines[1];
+      visitors = storageAPI.getAllHouseholdMembers()
+        .filter(storageAPI.isVisitor),
+      overrideTitle = 'What is the name of the ' +
+        (visitors.length > 0
+          ? window.ONS.utils.numberToPositionWord(visitors.length + 1) : '') +
+        ' visitor staying overnight on '
+        + window.ONS.utils.getSignificant() +
+        ' at ' +
+        '<em class="hightlight">' + addressLine1 + '?' + '</em>',
 
+      overrideTitleStayingOutsideUK = 'Who do you need to add to ' +
+        addressLine1 +
+        ' who does not have another UK address?';
+
+    if(editUserId) {
+      if (memberFound) {
+        person = memberFound['@person'];
+
+        $('#first-name').val(person.firstName);
+        $('#last-name').val(person.lastName);
+        $('#question-title').html('Change details for ' + person.fullName);
+        $('#member-list').remove();
+        /*$('.js-remove-section').show();*/
+      } else {
+        $('#question-title').html('Member not found');
+      }
+    }
+    else if (window.location.search.match(/journey=visitors/)) {
+      $('#question-title').html(overrideTitle);
+      $('.js-visitor-definition').show();
+    }
+    else if (window.location.search.match(/journey=temp-living-here/)) {
+      $('#question-title').html(overrideTitleStayingOutsideUK);
+    }
 
     if(previous === 'people-count-confirmation' ||
       previous === 'are-there-any-other-visitors' ||

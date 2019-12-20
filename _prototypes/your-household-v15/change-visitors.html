@@ -67,17 +67,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 </div>
 
                                 <div class="question__answer">
-                                    <label class="label" for="middle-name">
-                                        <div class="label__inner">
-                                            Middle names
-                                        </div>
-                                    </label>
-                                    <input class="input input--text"
-                                           id="middle-name"
-                                           data-qa="input-text" value=""/>
-                                </div>
-
-                                <div class="question__answer">
                                     <label class="label" for="last-name">
                                         <div class="label__inner">
                                             Last name
@@ -104,7 +93,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                 </div>
 
                 <p class="u-mb-no"><a class="js-cancel-return" href=""
-                      style="display:none;">Cancel and return to the previous
+                      >Cancel and return to the previous
                     question</a></p>
 
                 <button class="btn btn-submit btn--primary btn--lg u-mt-xl"
@@ -261,7 +250,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         $('#first-name').val(person.firstName);
         $('#last-name').val(person.lastName);
         $('#question-title').html('Change details for ' + person.fullName);
-        $('#change-line').html('<p>If you have added this person by mistake or if circumstances have changed, you can <a href="../remove-household-member/?person=' + person.id +'">remove</a> them.<br>');
+        $('#change-line').html('<p>If you have added this person by mistake or if circumstances have changed, you can <a href="../remove-household-member/?person=' + person.id +'">remove this visitor.</a><br>');
         $('#member-list').remove();
       } else {
         $('#question-title').html('Member not found');

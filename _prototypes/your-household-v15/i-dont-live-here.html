@@ -23,7 +23,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                     <input type="hidden" name="previous"
                            value="does-anyone-else-live-here"/>
                     <div class="group">
-                        <div class="block" id="total-retail-turnover">
+                        <div class="block" id="do-any-live-here">
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title" class="question__title u-fs-l">
@@ -36,26 +36,23 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                         <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Who to include">Who to include</h3>
                                         <div class="collapsible__body js-collapsible-body">
                                             <p>This is often their permanent or family home.</p>
-                                            <p>If someone has more than one address, include them at this address if they generally spend most of their time here. For example, children whose parents live apart.</p>
+                                            <p>If someone has more than one home address, include them at this address if they generally spend most of their time here. For example, children whose parents live apart. If they split their time equally then include them at this address if they are staying overnight on <span class="js-significant-date"></span>.</p>
                                             <p>Remember to include</p>
                                             <ul>
                                                 <li><strong>Students,</strong> if this is either their term-time or their out of term-time address</li>
                                                 <li><strong>People with a second address for work,</strong> if this is their home address</li>
                                                 <li><strong>Armed forces members,</strong> if this is their home address</li>
                                             </ul>
-                                            <p>If they split their time equally then include them at this address if they are staying overnight on <span class="js-significant-date"></span>.</p>
                                             <button
                                                     class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="What does /"usually live/" mean?">Hide this</button>
                                         </div>
                                     </div>
                                 </div>
 
-                                <p>You can select more than one for each person.</p>
-
                                 <div class="answer__fields js-fields">
                                     <div class="field field--checkbox field--multiplechoice">
                                         <fieldset class="u-mb-xl">
-                                            <legend class="field__legend u-fs-r--b">Select all that apply:</legend>
+                                            <legend class="field__legend">Select all that apply. You can select more than one for each person.</legend>
                                             <div class="field__item js-focusable-box">
                                                 <input class="input input--checkbox js-focusable"
                                                       type="checkbox"
@@ -63,8 +60,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                       id="family">
                                                 <label class="label label--inline"
                                                       for="family">
-                                                    <strong>Family members and partners</strong>
-                                                    <p class="u-fs-s u-db u-mb-no label--negative js-householdmembers-detail">Include babies born on or before <span class="js-significant-date"></span>, children, students and/or schoolchildren who live away during term time</p>
+                                                    Family members and partners
+                                                    <p class="u-fs-s u-db u-mb-no label--negative">
+                                                    Include babies born on or before <span class="js-significant-date"></span>, children, students and schoolchildren who live away from home during term time
+                                                    </p>
                                                 </label>
                                             </div>
 
@@ -75,7 +74,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                       id="housemates">
                                                 <label class="label label--inline"
                                                       for="housemates">
-                                                    <strong>Housemates, tenants or lodgers</strong>
+                                                    Housemates, tenants or lodgers
                                                 </label>
                                             </div>
 
@@ -86,7 +85,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                       id="outside-uk">
                                                 <label class="label label--inline"
                                                       for="outside-uk">
-                                                    <strong>People who usually live outside the UK who are staying in the UK for 3 months or more</strong>
+                                                    People who usually live outside the UK who are staying in the UK for 3 months or more
                                                 </label>
                                             </div>
 
@@ -97,8 +96,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                       id="temp-away">
                                                 <label class="label label--inline"
                                                       for="temp-away">
-                                                    <strong>People temporarily away</strong>
-                                                    <p class="u-fs-s u-db u-mb-no label--negative js-householdmembers-detail">For example, on holiday, working away, in the armed forces, abroad for up to a year, living in an establishment such as a care home for up to 6 months</p>
+                                                    People temporarily away
+                                                    <p class="u-fs-s u-db u-mb-no label--negative">
+                                                    For example, working away, on holiday, in the armed forces, living in an establishment such as a care home for up to 6 months, abroad for up to a year
+                                                    </p>
                                                 </label>
                                             </div>
 
@@ -109,11 +110,14 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                       id="temp-staying">
                                                 <label class="label label--inline"
                                                       for="temp-staying">
-                                                    <strong>People staying temporarily who usually live in the UK but do not have another UK address</strong>
+                                                    People staying temporarily who usually live in the UK but do not have another UK address
+                                                    <p class="u-fs-s u-db u-mb-no label--negative">
+                                                    For example, UK residents  between addresses or currently without a home
+                                                    </p>
                                                 </label>
                                             </div>
 
-                                            <h3>OR</h3>
+                                            <span class="label u-fs-r--b u-mt-s">Or</span>
 
                                             <div class="field__item js-focusable-box">
                                                 <input class="input input--checkbox js-focusable"
@@ -122,7 +126,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                       id="none">
                                                 <label class="label label--inline"
                                                       for="none">
-                                                    <strong>None of these apply, no-one usually lives here</strong>
+                                                    None of these apply, no-one usually lives here
+                                                    <p class="u-fs-s u-db u-mb-no label--negative">
+                                                    For example, this is a second address or holiday home
+                                                    </p>
                                                 </label>
                                             </div>
                                         </fieldset>
