@@ -49,16 +49,16 @@ cdn: v1.5.0
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
                                                            name="does-anyone-else-live-here"
-                                                           id="no"
-                                                           value="no">
+                                                           id="phone"
+                                                           value="01234567890">
                                                     <label class="label label--inline venus"
-                                                           for="no"
+                                                           for="phone"
                                                            id="no-label">
                                                         Text message
                                                     </label>
                                                     <div class="field__other">
-                                                        <label class="label js-piping" for="phone">Enter {x}{s} mobile number</label>
-                                                        <input class="input input__text js-focusable" id="phone" name="other-answer" type="text" data-qa="other-option">
+                                                        <label class="label u-fs-s--b js-piping" for="phone-other">Enter {x}{s} mobile number</label>
+                                                        <input class="input input__text js-focusable" id="phone-other" name="other-answer" type="text" data-qa="other-option">
                                                     </div>
                                                 </div>
 
@@ -67,14 +67,14 @@ cdn: v1.5.0
                                                            type="radio"
                                                            name="does-anyone-else-live-here"
                                                            id="email" value="email">
-                                                    <label class="label label--inline venus"
+                                                    <label class="label label--inline"
                                                            for="email">
                                                         Email
                                                     </label>
                                                     <div class="field__other">
                                                         <label
-                                                                class="label venus mercury" for="other-answer" id="label-checkbox-other-input">Enter <span class="js-person-name"></span>'s email address</label>
-                                                        <input class="input input__text js-focusable" id="other-answer" name="other-answer" type="text" data-qa="other-option">
+                                                                class="label u-fs-s--b js-piping" for="email-other" id="label-checkbox-other-input">Enter {x}{s} email address</label>
+                                                        <input class="input input__text js-focusable" id="email-other" name="other-answer" type="text" data-qa="other-option">
                                                     </div>
                                                 </div>
 
@@ -111,7 +111,10 @@ cdn: v1.5.0
     var searchParams = new URLSearchParams(window.location.search);
     var personId = searchParams.get('person_id');
     var previousLink = document.querySelector('.js-previous-link');
-    var input = document.getElementById('phone');
+    var phoneInput = document.getElementById('phone');
+    var phoneInputOther = document.getElementById('phone-other');
+    var emailInput = document.getElementById('email');
+    var emailInputOther = document.getElementById('email-other');
 
     if (!personId) {
         personId = cannotAnswerPeople[0].id;
@@ -140,8 +143,13 @@ cdn: v1.5.0
     form.addEventListener('submit', function(event) {
         event.preventDefault();
 
-        cannotAnswerPerson.phoneNumber = input.value.trim().replace(/ /g, '');
-
+        if (phoneInput.checked) {
+            cannotAnswerPerson.phoneNumber = phoneInputOther.value.trim().replace(/ /g, '');
+        } else if (emailInput.checked) {
+            cannotAnswerPerson.emailAddress = emailInputOther.value.trim().replace(/ /g, '');
+        } else {
+            cannotAnswerPerson.postRequest = true;
+        }
         sessionStorage.setItem('cannot-answer-people', JSON.stringify(cannotAnswerPeople));
 
         window.location.href = '../request-survey-confirm-number?person_id=' + personId;
