@@ -1,4 +1,32 @@
 /* v2 Design system overrides */
+.question {
+    margin-bottom: 0;
+}
+.field__legend {
+    font-weight: normal;
+  }
+  
+.field--multiplechoice .field__item {
+border: 1px solid #222;
+}
+
+.input {
+border: 1px solid #222;
+}
+
+.input--checkbox,
+.input--radio {
+border: 2px solid #222;
+top: .85rem;
+width: 1.25rem;
+height: 1.25rem;
+}
+
+.label--negative {
+margin-left: -1.85rem;
+margin-top: .5rem;
+}
+
 .field__item > .label > p,
 .checkbox__description, 
 .radio__description,

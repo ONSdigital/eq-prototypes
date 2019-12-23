@@ -1,5 +1,5 @@
 ---
-title: Household prototype v13
+title: Household prototype v15
 project: your-household
 globalcss: false
 layout: eq-default-extras
@@ -23,9 +23,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@l">
-            <!--{% include navigation.html
-            items=site.data.your-household-v6.navigationItemsHousehold
-            nav-title-id="section-address" %}-->
         </div>
         <div class="grid__col col-7@l pull-1@l">
             <main role="main" id="main" class="page__main">
@@ -36,8 +33,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 class="question__title u-fs-l js-heading">
-                                        People who live here and overnight
-                                        visitors
+                                        People living here and overnight
+                                        visitors on <span class="js-significant-date"></span>
                                     </h1>
                                 </div>
 
@@ -47,10 +44,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                     <strong class="u-mb-s">This section is now complete</strong>
                                     <p>You can check your answers below</p>
                                 </div>
-                                <br />
+                                <br/>
 
                                 <h2
-                                        class="u-fs-m js-household-people-list">You&rsquo;ve added <span class="highlight">{n}</span> household member<span class="js-household-people-plural" style="display: none">s</span></h2>
+                                    class="u-fs-m js-household-people-list">You&rsquo;ve added <span class="highlight">{n}</span><span class="js-household-people-plural" style="display: none"></span> living here on <span class="js-significant-date"></span></h2>
                                 <ul
                                     class="list list--records list--people u-mb-s js-records js-household-members-summary"></ul>
                                 <p id="nobody-notice"
@@ -65,14 +62,14 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
                                 <div class="js-visitors-people-list">
                                     <h2 class="u-fs-m js-visitors-people-title">You&rsquo;ve added <span class="highlight">{n}</span> visitor<span class="js-visitors-people-plural"></span> staying
-                                        overnight on <span class="js-significant-date"></span></h2>
+                                        overnight here on <span class="js-significant-date"></span></h2>
                                     <ul class="list list--records list--people u-mb-s js-records js-visitors-summary"></ul>
                                     <p id="nobody-visitor-notice"
                                        style="display:none;">There are no
-                                        visitors staying overnight on
+                                        visitors staying overnight here on
                                         <span class="js-significant-date"></span>.</p>
                                     <p class="u-mb-xl"><a
-                                            href="../who-else-to-add?journey=visitors&redirect=../summary/">Add a visitor</a>
+                                            href="../visitor-name?journey=visitors&redirect=../summary/">Add a visitor</a>
                                     </p>
                                 </div>
                             </section>
@@ -87,7 +84,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     </div>
 </div>
 
-<script src='/js/compiled/individual-response--your-household-v13/bundle.js'></script>
+<script src='/js/compiled/your-household-v15/bundle.js'></script>
 
 <script>
   var urlParams = new URLSearchParams(window.location.search),
@@ -112,19 +109,25 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       householdMembers = [userMember].concat(otherHouseholdMembers);
     }
 
-
     numberOfHouseholdMembers = householdMembers.length;
     peopleListTitle = document.querySelector('.js-household-people-list');
-    peopleListTitle.innerHTML = peopleListTitle.innerHTML.replace('{n}',
-      window.ONS.utils.numberToWordsStyleguide(numberOfHouseholdMembers) || 0);
+    if (numberOfHouseholdMembers > 1) {
+      peopleListTitle.innerHTML = peopleListTitle.innerHTML.replace('{n}',
+        (numberOfHouseholdMembers));
+    } else {
+      peopleListTitle.innerHTML = peopleListTitle.innerHTML.replace('{n}',
+        window.ONS.utils.numberToWordsStyleguide(numberOfHouseholdMembers) || 0);
+    }
 
     if(!numberOfHouseholdMembers) {
       $('#nobody-notice').show();
     }
-    
-    if (numberOfHouseholdMembers !== 1) {
-        document.querySelector('.js-household-people-plural').style.display = 'inline';
-    }
+  
+
+    $('.js-household-people-plural').each(function(i, el) {
+      window.ONS.utils
+        .cleanHTMLPlaceholderStringReplacment(el,numberOfHouseholdMembers != 1 ? ' people' : ' person');
+    });
 
     numberOfVisitors = visitors.length;
 
@@ -134,12 +137,17 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
     visitorsListTitle = document.querySelector('.js-visitors-people-list');
 
-    visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{n}',
-      window.ONS.utils.numberToWordsStyleguide(numberOfVisitors) || 0);
+    if (numberOfVisitors > 1) {
+      visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{n}',
+        (numberOfVisitors));
+    } else {
+      visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{n}',
+        window.ONS.utils.numberToWordsStyleguide(numberOfVisitors) || 0);
+    }
 
     $('.js-visitors-people-plural').each(function(i, el) {
       window.ONS.utils
-        .cleanHTMLPlaceholderStringReplacment(el,numberOfVisitors > 1 ? 's' : '');
+        .cleanHTMLPlaceholderStringReplacment(el,numberOfVisitors != 1 ? 's' : '');
     });
   }
 
@@ -175,6 +183,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       $('.js-panel').show();
     }
   }
+
+  function updateAllPreviousLinks() {
+    $('.js-previous-link').attr('href', document.referrer);
+  }
+
+  $(updateAllPreviousLinks);
 
   $(updateContent);
   $(updateHouseholdMembersVisitors);
