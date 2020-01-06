@@ -1,0 +1,109 @@
+---
+title: IR - Household prototype v15
+project: Individual Response
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+---
+
+<style>
+    .input--text-lg {
+        width : 100%;
+    }
+
+    .lock {
+        font-weight : normal;
+        font-size: 0.9em;
+        margin-top:1em;
+    }
+
+    .uac-border {
+        border-style: solid;
+        border-width: 0.4em;
+        border-color: #033e58;
+        padding: 0.7em;
+    }
+
+    p {
+        margin-bottom: 0.3em;
+    }
+
+    .label {
+        margin-bottom: 0;
+    }
+
+</style>
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@l">
+        </div>
+
+        <div class="grid__col col-7@l pull-1@l">
+            <main role="main" id="main" class="page__main">
+                <div class="feedback__inline js-feedback-inline is-collapsed">
+                    <div class="feedback__border">
+                        <form id="feedback-form" method="POST"
+                              class="feedback__form">
+                            <div class="group">
+                                <div class="feedback__field">
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="group" id="what-is-your-address-group">
+                    <div class="block" id="what-is-your-address">
+                        <div class="question">
+                            <h1 class="question__title u-fs-l"
+                                data-qa="question-title">
+                                Start census
+                            </h1>
+
+                            <div class = "uac-border">
+                                <p class="field">
+                                    <label class="label" for="uac">Enter the 16 character code printed on the letter
+                                        <p>Keep this code safe and only share it with others in your household</p>
+                                    </label>
+                                    <input type="text" id="uac" class="input input--text input-type__input uac__input js-uac" name="uac" maxlength="19" data-group-size="4" autocomplete="off" />
+                                </p>
+                            </div>
+                            <p class="lock">Your personal information is protected by law and will be kept confidential.</p>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <button class="btn btn-submit btn--primary btn--lg"
+                        data-qa="btn-submit" type="submit"
+                        name="action[save_continue]">Access census
+                </button>
+                <div>
+                <br>
+                    <strong>Don't have a code?</strong>
+                    <p>You can request a new code if you have lost, forgotten or not recieved an
+                    access code. <a href="#" class="footer2__link">Request a new code to start a new survey</a></p>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/your-household-v15/bundle.js'></script>
+
+<script>
+  $('.btn-submit').click(function(e) {
+    e.preventDefault();
+
+    var urlParams = new URLSearchParams(window.location.search),
+      redirect = urlParams.get('redirect');
+
+    window.location = !redirect ? '../confirm-address2/' : redirect;
+  });
+</script>

@@ -1,0 +1,134 @@
+---
+title: IR - Household prototype v15
+project: Individual Response
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<link rel="stylesheet" href="../assets/modules/typeahead/typeahead.css"/>
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@l">
+            <!--{% include navigation.html
+            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
+            nav-title-id="section-individual" %}-->
+        </div>
+        <div class="grid__col col-7@l pull-1@l">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="off" action="../individual-details-apprenticeship">
+                    <input type="hidden" name="person" id="person"
+                           value="#"/>
+                    <input type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group u-mb-l">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-l js-heading">
+                                        You selected ‘Other’ for the passport you hold, can you specify this further?
+                                    </h1>
+                                </div>
+
+                                <div class="answer">
+                                    <div class="answer__fields js-fields">
+                                        <div class="typeahead js-typeahead u-mt-m" data-content="{&quot;no_results&quot;:&quot;No results found&quot;,&quot;aria_no_results&quot;:&quot;No results found for the query&quot;,&quot;aria_you_have_selected&quot;:&quot;You have selected&quot;,&quot;aria_found_by_alternative_name&quot;:&quot;found by alternative name&quot;,&quot;aria_min_chars&quot;:&quot;Type in 2 or more characters for results.&quot;,&quot;aria_one_result&quot;:&quot;There is one result available.&quot;,&quot;aria_n_results&quot;:&quot;There are {n} results available.&quot;,&quot;aria_limited_results&quot;:&quot;Results have been limited to 10 results. Type more characters to refine your search.&quot;,&quot;more_results&quot;:&quot;Continue typing to refine results&quot;}" data-api-url="https://ons-typeahead-prototypes.herokuapp.com/passport">
+                                            <label class="label js-typeahead-label" for="passport-country-other-input">
+                                                Enter the country where your passport was issued
+                                            </label>
+                                            <div class="typeahead__combobox js-typeahead-combobox" role="combobox" aria-has-popup="passport-country-other-listbox" aria-expanded="false">
+                                                <input type="hidden" id="passport-country-other-code" class="input input--text input-type__input js-typeahead-code" name="passport-country-other-code" />
+                                                <div class="field">
+                                                    <input type="text" id="passport-country-other-preview" class="input input--text input-type__input typeahead__preview js-typeahead-preview" readonly="true" aria-hidden="true" tabindex="-1" />
+                                                </div>
+                                                <div class="field u-mt-no">
+                                                    <input type="text" id="passport-country-other-input" class="input input--text input-type__input typeahead__input js-typeahead-input" name="passport-country-other-input" data-autocomplete="off" />
+                                                </div>
+                                                <div class="typeahead__instructions u-vh js-typeahead-instructions" id="passport-country-other-instructions">Use up and down keys to navigate results once you&#39;ve typed more than two characters. Use the enter key to select a result. Touch device users, explore by touch or with swipe gestures.</div>
+                                                <ul class="typeahead__listbox js-typeahead-listbox" role="listbox" id="passport-country-other-listbox"></ul>
+                                                <div class="typeahead__status u-vh js-typeahead-aria-status" aria-live="polite" role="status"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+
+                    <p>Can't complete this question?<br />
+                        <a href="../hub" class="js-choose-another-section">Choose another section and
+                            return to this later</a></p>
+
+                    <!--<p class="u-mb-m"><span class="js-link-secure-label"></span><br />
+                        <a class="js-link-secure"
+                           href="#">Get a separate access code to submit an
+                            individual response</a></p>-->
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/individual-response--your-household-v13/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person'),
+    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+    isEditing = urlParams.get('edit'),
+    details = storageAPI.getPersonalDetailsFor(personId),
+    surveyType = urlParams.get('survey');
+
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+
+    storageAPI.addUpdatePassportCountryOther(personId, $('#passport-country-other-input').val());
+
+    if(isEditing) {
+      e.preventDefault();
+      window.location.href = '../individual-details-summary/?person=' +
+        personId + (surveyType ? '&survey=' + surveyType : '');
+    }
+  }));
+
+  function updateRouting() {
+    if(surveyType) {
+      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    }
+    $('#survey-type').val(surveyType);
+  }
+
+  function updateQuestion() {
+    if(storageAPI.getAnsweringIndividualByProxy()) {
+      $('.js-heading').html('You selected ‘Other’ for the passport ' + person.fullName +
+        ' holds, can you specify this further?');
+    }
+  }
+
+  if (details && details['passport'] && details['passport'].otherText) {
+    $('#passport-country-other-input').val(details['passport'].otherText);
+  }
+
+  document.dispatchEvent(new CustomEvent('TYPEAHEAD-READY'));
+
+  $(updateQuestion);
+  $(updateRouting);
+
+  /**
+   * Routing
+   */
+  $('#person').val(new URLSearchParams(window.location.search).get('person'));
+</script>
