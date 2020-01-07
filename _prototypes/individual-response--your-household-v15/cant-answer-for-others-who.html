@@ -79,7 +79,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     </div>
 </div>
 
-<script src='/js/compiled/individual-response--your-household-v13/bundle.js'></script>
+<script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
 
 <script>
   var storageAPI = window.ONS.storage,
@@ -103,7 +103,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       });
 
       var people = cannotAnswerPeople.filter(function(person) {
-        return peopleIds.includes(person.id);
+        return peopleIds;
       });
 
       var newPeopleIds = peopleIds.filter(function(id) {
@@ -111,7 +111,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
           return person.id === id;
         });
       });
-
       newPeopleIds.forEach(function(id) {
         people.push({
           id: id,
@@ -123,7 +122,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       sessionStorage.setItem('cannot-answer-people', JSON.stringify(people));
 
       window.location.href = '../individual-decision-method?';
-
+ 
   });
 
   function createMemberListItem(person) {
