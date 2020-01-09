@@ -34,7 +34,7 @@ cdn: v1.5.0
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title saturn js-piping">
-                                        How would you like to request a separate census for {x}?
+                                        How would you like to request a separate census for <em class="highlight">{x}</em>?
                                     </h1>
                                     <p class="mars u-mb-m">
                                         To request a separate census for others in your household to complete, we need to send them an individual access code.
@@ -56,10 +56,6 @@ cdn: v1.5.0
                                                            id="no-label">
                                                         Text message
                                                     </label>
-                                                    <div class="field__other">
-                                                        <label class="label u-fs-s--b js-piping" for="phone-other">Enter {x}{s} mobile number</label>
-                                                        <input class="input input__text js-focusable" id="phone-other" name="other-answer" type="text" data-qa="other-option">
-                                                    </div>
                                                 </div>
 
                                                 <div class="field__item js-focusable-box">
@@ -71,11 +67,6 @@ cdn: v1.5.0
                                                            for="email">
                                                         Email
                                                     </label>
-                                                    <div class="field__other">
-                                                        <label
-                                                                class="label u-fs-s--b js-piping" for="email-other" id="label-checkbox-other-input">Enter {x}{s} email address</label>
-                                                        <input class="input input__text js-focusable" id="email-other" name="other-answer" type="text" data-qa="other-option">
-                                                    </div>
                                                 </div>
 
                                                 <div class="field__item js-focusable-box">
@@ -144,14 +135,18 @@ cdn: v1.5.0
         event.preventDefault();
 
         if (phoneInput.checked) {
-            cannotAnswerPerson.phoneNumber = phoneInputOther.value.trim().replace(/ /g, '');
+            cannotAnswerPerson.phoneNumber = true;
+            var url = '../individual-decision-enter-mobile';
         } else if (emailInput.checked) {
-            cannotAnswerPerson.emailAddress = emailInputOther.value.trim().replace(/ /g, '');
+            cannotAnswerPerson.emailAddress = true;
+            var url = '../individual-decision-enter-email';
         } else {
             cannotAnswerPerson.postRequest = true;
+            var url = '../individual-decision-confirm-address';
+
         }
         sessionStorage.setItem('cannot-answer-people', JSON.stringify(cannotAnswerPeople));
 
-        window.location.href = '../request-survey-confirm-number?person_id=' + personId;
+        window.location.href = url + '?person_id=' + personId;
     });
 </script>

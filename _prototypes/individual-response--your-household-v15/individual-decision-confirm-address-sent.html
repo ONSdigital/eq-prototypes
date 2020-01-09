@@ -29,40 +29,17 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                         <section class="section">
                             <div class="question u-mb-s">
                                 <h1 id="question-title"
-                                    class="question__title u-fs-l js-heading">
-                                    Is this mobile number correct?
+                                    class="question__title u-fs-l js-piping">
+                                    A letter has been sent to {x}
                                 </h1>
-                                <p class="js-mobile-no"></p>
-                            </div>
 
-                            <div class="field field--radio field--multiplechoice">
-                                <fieldset>
-                                    <div class="field__item js-focusable-box">
-                                        <input class="input input--radio js-focusable"
-                                               name="radio-answer"
-                                               value="yes"
-                                               id="yes"
-                                               type="radio">
-                                        <label class="label label--inline u-fs-r"
-                                               for="yes">
-                                            Yes, send the text now</label>
-                                    </div>
-                                    <div class="field__item js-focusable-box">
-                                        <input class="input input--radio js-focusable"
-                                               name="radio-answer"
-                                               value="no"
-                                               id="no"
-                                               type="radio">
-                                        <label class="label label--inline u-fs-r "
-                                               for="no">
-                                            No, I need to change it</label>
-                                    </div>
-                                </fieldset>
+                                <p>The letter with an individual access code should
+                                    arrive shortly complete their own census.</p>
                             </div>
                         </section>
                     </div>
                     <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
-                            type="submit" name="">Save and continue
+                            type="submit" name="">Continue
                     </button>
 
                     <!--<p>Can't complete this question?<br />
@@ -92,28 +69,15 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <script>
   var storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
-    switchedFromUnemployed = urlParams.get(switchedFromUnemployed),
     personId = urlParams.get('person'),
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
-    isEditing = urlParams.get('edit'),
-    details = storageAPI.getPersonalDetailsFor(personId),
-    surveyType = urlParams.get('survey'),
-    mobileNo = urlParams.get('mobile');
+    addressLines = (sessionStorage.getItem('address') || '');
 
-  $('.qa-btn-submit').on('click', function (e) {
-    e.preventDefault();
+    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
 
-    window.location.href = $('[name=radio-answer]:checked').val() === 'yes'
-      ? '../individual-decision-enter-mobile-sent/?person=' + personId +
-        '&remaining=' + encodeURI(urlParams.get('people')) + '&mobile=' + mobileNo
-      : document.referrer;
-  });
-
-  function updateDescription () {
-    $('.js-mobile-no').html(mobileNo);
-  }
-
-  $(updateDescription);
+    pipingDestinations.forEach(function(pipingDestination) {
+        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', addressLines);
+    });
 
   /**
    * Routing

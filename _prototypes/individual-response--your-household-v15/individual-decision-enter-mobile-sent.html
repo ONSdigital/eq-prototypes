@@ -29,14 +29,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                         <section class="section">
                             <div class="question u-mb-s">
                                 <h1 id="question-title"
-                                    class="question__title u-fs-l js-heading">
-                                    We have sent the access code to
+                                    class="question__title u-fs-l js-piping">
+                                    We have sent a text message to {x}
                                 </h1>
-                                <p class="js-mobile-no"></p>
 
-                                <p>A text with the code should
-                                    arrive shortly with a message on how
-                                    they can complete their own Census</p>
+                                <p>A text message with an individual access code should
+                                    arrive shortly complete their own census.</p>
                             </div>
                         </section>
                     </div>
@@ -74,6 +72,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     personId = urlParams.get('person'),
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     mobileNo = urlParams.get('mobile');
+
+    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
+
+    pipingDestinations.forEach(function(pipingDestination) {
+        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', mobileNo);
+    });
 
   function updateDescription () {
     $('.js-mobile-no').html(mobileNo);

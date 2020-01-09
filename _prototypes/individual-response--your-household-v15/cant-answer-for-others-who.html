@@ -98,30 +98,16 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
 
-      var peopleIds = Array.from(document.querySelectorAll('input[name=radio-answer]:checked')).map(function(input) {
-        return input.value;
+      var selectedRadio = document.querySelectorAll('input[name=radio-answer]:checked')[0];
+      var personId = selectedRadio.value;
+      cannotAnswerPeople.push({
+        id: personId,
+        responseOption: 'new-survey',
+        phoneNumber: null,
       });
+      sessionStorage.setItem('cannot-answer-people', JSON.stringify(cannotAnswerPeople));
 
-      var people = cannotAnswerPeople.filter(function(person) {
-        return peopleIds;
-      });
-
-      var newPeopleIds = peopleIds.filter(function(id) {
-        return !people.find(function(person) {
-          return person.id === id;
-        });
-      });
-      newPeopleIds.forEach(function(id) {
-        people.push({
-          id: id,
-          responseOption: 'new-survey',
-          phoneNumber: null,
-        });
-      });
-
-      sessionStorage.setItem('cannot-answer-people', JSON.stringify(people));
-
-      window.location.href = '../individual-decision-method?';
+      window.location.href = '../individual-decision-method?person_id=' + personId;
  
   });
 

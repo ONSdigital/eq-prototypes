@@ -30,25 +30,17 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             <div class="question u-mb-s">
                                 <h1 id="question-title"
                                     class="question__title u-fs-l js-piping">
-                                    What is <em class="highlight">{x}{s}</em> mobile number?
+                                    An individual access code will be sent to <em class="highlight">{x}</em> at the following address
                                 </h1>
                             </div>
 
-                            <div class="field">
-                                <label class="label" for="mobile-number">
-                                        Mobile number
-                                        <br>
-                                        <span class="label__description u-fs-s">For international numbers include the country code, for example +33 1234 567</span>
-                                </label>
-                                <input class="input input--text"
-                                       id="mobile-number"
-                                       value="" />
-                            </div>
+                            <div id="address"></div>
                         </section>
                     </div>
-                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
-                            type="submit" name="">Save and continue
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-s"
+                            type="submit" name="">Send access code
                     </button>
+                    <div><a class="js-previous-link" href="../do-you-live-here">Choose another way to send access code</a></div>
 
                     <!--<p>Can't complete this question?<br />
                         <a href="../hub" class="js-choose-another-section">Choose another section and
@@ -78,7 +70,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   var storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
     personId = urlParams.get('person_id'),
-    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'];
+    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+    addressLines = (sessionStorage.getItem('address') || '').replace(/,/g, '<br />');
 
     var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
     var possessive = person.fullName.slice(-1) === 's' ? "'" : "'s";
@@ -87,24 +80,20 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', person.fullName).replace('{s}', possessive);
     });
 
-  $('.qa-btn-submit').on('click', function (e) {
-    e.preventDefault();
-
-    window.location.href = '../individual-decision-enter-mobile-correct/?person=' + personId + '&mobile=' + encodeURI($('#mobile-number').val());
-  });
-
-  /*function updateRouting() {
-    if(surveyType) {
-      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    function updateQuestion() {
+        $('#address').html(person.fullName + ' <br> ' + addressLines);
     }
-    $('#survey-type').val(surveyType);
-  }*/
 
+    $('.qa-btn-submit').on('click', function (e) {
+        e.preventDefault();
 
-  //$(updateRouting);
+        window.location.href = '../individual-decision-confirm-address-sent/?person=' + personId;
+    });
 
-  /**
-   * Routing
-   */
-  $('#person').val(urlParams.get('person'));
+    $(updateQuestion);
+
+    /**
+    * Routing
+    */
+    $('#person').val(urlParams.get('person'));
 </script>
