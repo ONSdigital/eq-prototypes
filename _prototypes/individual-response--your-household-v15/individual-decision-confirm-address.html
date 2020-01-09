@@ -34,13 +34,36 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 </h1>
                             </div>
 
-                            <div id="address"></div>
+                            <div id="address" class="u-mb-m"></div>
+                            <div class="field field--radio field--multiplechoice">
+                                <fieldset>
+                                    <div class="field__item js-focusable-box">
+                                        <input class="input input--radio js-focusable"
+                                               name="radio-answer"
+                                               value="yes"
+                                               id="yes"
+                                               type="radio">
+                                        <label class="label label--inline u-fs-r"
+                                               for="yes">
+                                            Yes, send the letter now</label>
+                                    </div>
+                                    <div class="field__item js-focusable-box">
+                                        <input class="input input--radio js-focusable"
+                                               name="radio-answer"
+                                               value="no"
+                                               id="no"
+                                               type="radio">
+                                        <label class="label label--inline u-fs-r "
+                                               for="no">
+                                            No, send another way</label>
+                                    </div>
+                                </fieldset>
+                            </div>
                         </section>
                     </div>
                     <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-s"
-                            type="submit" name="">Send access code
+                            type="submit" name="">Continue
                     </button>
-                    <div><a class="js-previous-link" href="../do-you-live-here">Choose another way to send access code</a></div>
 
                     <!--<p>Can't complete this question?<br />
                         <a href="../hub" class="js-choose-another-section">Choose another section and
@@ -87,7 +110,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     $('.qa-btn-submit').on('click', function (e) {
         e.preventDefault();
 
-        window.location.href = '../individual-decision-confirm-address-sent/?person=' + personId;
+    window.location.href = $('[name=radio-answer]:checked').val() === 'yes'
+      ? '../individual-decision-confirm-address-sent/?person=' + personId
+      : document.referrer;
     });
 
     $(updateQuestion);
