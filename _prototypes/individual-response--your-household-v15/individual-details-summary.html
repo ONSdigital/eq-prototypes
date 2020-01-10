@@ -1,0 +1,790 @@
+---
+title: IR - Household prototype v15
+project: Individual Response
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../visitors">Previous</a>
+    </div>
+</div>
+
+<style>
+    .completed {
+        position: relative;
+    }
+
+    .completed::before {
+        z-index:2;
+        content:"";
+        background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAbCAYAAAAZMl2nAAAABGdBTUEAALGPC/xhBQAAAjtJREFUSA29l0FLW0EQx2f2NWDSQ196sFBELKFfwVMPNcmLFZV68eRFPBd6K4IexKT0IHjpqdDi0aMg5iCKUvDkqdBDQYiKIIJY0oO1wZhMd0L3+V6yz+TlrZ1DNjOzM/9f9u1uEoD/aH3Lk/EgORGUMB1/VHDeXf4u7z9ZyvXqeqMuaDqWLGTf1Ov0sdEX8UdMWJmLuc0zr869g9iL2RlC+gwEHi08eCB60j/nN04VjCepQuZGe9GZJqAvANS6BRBKIobp8uz2CSu2TjDEcScEaxCk6Jq+2h9eDbB7LyBtIVhZGgEMQLVaXKAFYfzRdArBIFL8EgWOlOe394yCdAvBUBa/NNvTT+MJa7B/rSf7/KyyUzpuzuv10KBDcr2WPMMTV+Z+i3O2jUKtt2O+Hh3TC3lhUCO7lezQuBNFLJYSAV2BZY7/mNndVzDuagOB+7oroIHiCXJkE1G+Kj/NOjn2vmYLgng2QIAglSgTxGtB6spAbVzGTENwTiQiTeWdLfvKMEgkcEaqAYgrr8DDwxmwq9h7RppTPFYhIKGgFEGu+jM4hiAHRqmkIlmoc38rO0fdE5llJfi+9ljF33+hY/uV9m1w3r9OVULXuPRISRtVrx7AQ3MQFYccETDcQLSBRYbqF0IJ0CxMFIhAkLExUiDtBOoUxAdEWxAdDOCF9qXtrpiC4o+/U3Er43/Fpig+lTuQ9zPdMA8YkBKt1BMITK7uH3xLp1Ln8eTdqGoL7hzY777yV/1NehC5sU/AXb484yamkz/AAAAAASUVORK5CYII=") no-repeat 50%;
+        background-size:1rem;
+        position:absolute;
+        left:9px;left:-1.5rem;
+        width:1.2em;
+        height:1.2em;
+        bottom:0;
+        top:0;
+        margin:auto;
+    }
+</style>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@l">
+            <!--{% include navigation.html
+            items=site.data.your-household-v10.yourHouseholdV4_navigationItemsPersonalDetails
+            nav-title-id="section-individual" %}-->
+        </div>
+        <div class="grid__col col-7@l pull-1@l">
+            <main role="main" id="main" class="page__main">
+                <form name="trav" class="form qa-questionnaire-form" role="form"
+                      autocomplete="off" action="../hub">
+                    <input type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group" id="rsi">
+                        <div class="block" id="total-retail-turnover">
+                            <section class="section"
+                                     id="total-retail-turnover-section">
+                                <div class="question u-mb-s"
+                                     id="total-retail-turnover-question">
+                                    <h1
+                                            class="question__title u-fs-l">
+                                        <span class="js-person-fullname-from-url-id"></span>
+                                    </h1>
+                                </div>
+
+                                <div class="panel panel--simple panel--success"
+                                     id="question-guidance-everyone-at-address-confirmation-question">
+                                    <strong class="u-mb-s">This section
+                                        is now complete</strong>
+                                    <p>You can check your
+                                        answers below</p>
+                                </div>
+                                <br />
+
+                                <div class="summary u-mb-xl">
+
+                                    <!-- Personal Details -->
+                                    <div class="summary__block">
+                                        <div class="summary__item">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question">Full name</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer"><span class="js-person-fullname-from-url-id"></span></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link">
+                                                        <a href="#edit">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="summary__item js-dob-field" style="display:none;">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question">Date of birth</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer js-dob"></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link">
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-dob/?edit=true">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="summary__item js-country-field" style="display:none;">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question">Country of birth</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer js-country"></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link">
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-country/?edit=true">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="summary__item js-address-individual-field" style="display:none;">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question">Address</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer js-address-individual"></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link">
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-address/?edit=true">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="summary__item js-marital-status-field" style="display:none;">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question">Marital status</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer js-marital-status"></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link">
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-relationship/?edit=true">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="summary__item js-sexual-orientation-field" style="display:none;">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question">Sexual orientation</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer js-orientation"></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link">
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-orientation/?edit=true">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="summary__item js-gender-field" style="display:none;">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question">Gender</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer js-gender"></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link">
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-sex/?edit=true">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="summary__item js-salary-field" style="display:none;">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question">Salary</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer js-salary"></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link">
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-salary/?edit=true">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Health and Identity -->
+                                        <div
+                                                class="summary__item js-national-identity-field" style="display:none;">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question">National identity</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer js-national-identity"></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link">
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-national-identity/?edit=true">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                                class="summary__item js-ethinic-group-field" style="display:none;">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question">Ethnic group</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer js-ethinic-group"></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link">
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-ethnic-group/?edit=true">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                                class="summary__item js-passport-field" style="display:none;">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question">Passport</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer js-passport"></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link">
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-passport-country/?edit=true">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                                class="summary__item js-apprenticeship-field" style="display:none;">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question">Has apprenticeship</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer js-apprenticeship"></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link">
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-apprenticeship/?edit=true">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                                class="summary__item js-degree-qualification-field" style="display:none;">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question">Has degree qualification</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer js-degree-qualification"></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link">
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-qualifications-degree/?edit=true">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                                class="summary__item js-nvq-qualification-field" style="display:none;">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question">NVQ qualifications</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer js-nvq-qualification"></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link">
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-qualifications-nvq-equivalent/?edit=true">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                                class="summary__item js-a-level-qualification-field" style="display:none;">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question">AS, A level or equivalent qualifications</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer js-a-level-qualification"></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link">
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-qualifications-a-level/?edit=true">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                                class="summary__item js-gcse-qualification-field" style="display:none;">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question">GCSE or equivalent qualifications</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer js-gcse-qualification"></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link">
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-qualifications-gcse/?edit=true">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                                class="summary__item js-other-qualification-field" style="display:none;">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question">Other places qualified</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer js-other-qualification"></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link">
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-qualifications-other-where/?edit=true">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                                class="summary__item js-employment-status-field" style="display:none;">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question">Employment status</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer js-employment-status"></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link">
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-employment-status/?edit=true">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                                class="summary__item js-job-title-field" style="display:none;">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question">Job title</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer js-job-title"></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link">
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-job-title/?edit=true">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                                class="summary__item js-job-description-field" style="display:none;">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-6@m">
+                                                    <div
+                                                            class="summary__question">Job description</div>
+                                                </div>
+                                                <div class="grid__col col-8@xs col-4@m">
+                                                    <div
+                                                            class="summary__answer js-job-description"></div>
+                                                </div>
+                                                <div class="grid__col col-4@xs col-2@m">
+                                                    <div class="summary__link">
+                                                        <a
+                                                                class="js-change-person-link"
+                                                                href="../individual-details-job-describe/?edit=true">Change
+                                                            <span class="u-vh"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button
+                            class="btn btn--primary btn--lg qa-btn-submit u-mb-xl"
+                            type="submit" name="">Continue
+                    </button>
+
+                    <!--<p class="mars u-mb-m"><span class="js-link-secure-label"></span><br />
+                        <a class="js-link-secure"
+                           href="#">Get a separate access code to submit an
+                            individual response</a></p>-->
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+<script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person'),
+    details = storageAPI.getPersonalDetailsFor(personId),
+    member = storageAPI.getHouseholdMemberByPersonId(personId),
+    surveyType = urlParams.get('survey'),
+    visitors = storageAPI.getAllHouseholdMembers().filter(storageAPI.isVisitor),
+    visitor1 = visitors.length ? visitors[0] : null;
+
+  function createDataObj(year, month, day) {
+    return moment(year + '-' + month + '-' + day, 'YYYY-MM-DD');
+  }
+
+  function formatAddress(address) {
+    return address['address-line-1'] + '<br />' +
+      address['address-line-2'] + '<br />' +
+      address['county'] + '<br />' +
+      address['town-city'] + '<br />' +
+      address['postcode'] + '<br />';
+  }
+
+  function getDescriptionOf(config) {
+    return config.description;
+  }
+
+  function createAnswerList(collection, getTextCallback) {
+    return $('<ul class="u-m-no"></ul>').append(
+      collection.map(function (item) {
+        return $('<li></li>').html(getTextCallback(item))
+      })
+    )
+  }
+
+  function showHouseholdMemberFields() {
+
+    /**
+     * Date of birth
+     */
+    $('.js-dob-field').show();
+    $('.js-dob').html(
+      createDataObj(details.dob.year, details.dob.month, details.dob.day)
+        .format('MMMM Do YYYY')
+    );
+
+    /**
+     * Marital status
+     */
+    $('.js-marital-status-field').show();
+    $('.js-marital-status').html(getDescriptionOf(storageAPI.personalDetailsMaritalStatusMap[details.maritalStatus]));
+
+    /**
+     * Country
+     */
+    $('.js-country-field').show();
+    $('.js-country').html(
+      details.country.val === 'elsewhere'
+        ? details.country.otherText
+        : getDescriptionOf(storageAPI.personalDetailsCountryMap[details.country.val])
+    );
+
+    /**
+     * Gender
+     */
+    $('.js-gender-field').show();
+    $('.js-gender').html(getDescriptionOf(storageAPI.personalDetailsGenderMap[details.sex]));
+
+    /**
+     * National identity
+     */
+    $('.js-national-identity-field').show();
+    $('.js-national-identity').html(
+      createAnswerList(details['national-identity'].collection, function (dataItem) {
+        return (dataItem !== 'other'
+          ? storageAPI.personalDetailsNationalIdentityMap[dataItem].description
+          : details['national-identity'].otherText
+        );
+      })
+    );
+
+    /**
+     * Enthnic group
+     */
+    (function () {
+      var ethnicGroup = details['ethnic-group'];
+
+      $('.js-ethinic-group-field').show();
+      $('.js-ethinic-group').html(
+        storageAPI.personalDetailsEthnicGroupMap[ethnicGroup.val].question +
+
+        (ethnicGroup.description
+          ? ': ' +
+            _.find(
+              storageAPI.personalDetailsEthnicGroupMap[ethnicGroup.val].options,
+              function (option) {
+                return option.val === ethnicGroup.description;
+              }
+            ).label
+          : ''
+        ) +
+
+        (ethnicGroup.otherText ? ': ' + ethnicGroup.otherText : '')
+      );
+    })();
+
+    /**
+     * Passport
+     */
+    $('.js-passport-field').show();
+    $('.js-passport').html(
+      createAnswerList(details['passport'].countries, function (dataItem) {
+        return (dataItem !== 'other'
+          ?
+            storageAPI.personalDetailsPassportCountriesMap[dataItem].description
+          : details['passport'].otherText
+        );
+      })
+    );
+
+    /**
+     * Apprenticeship
+     */
+    $('.js-apprenticeship-field').show();
+    $('.js-apprenticeship').html(getDescriptionOf(storageAPI.personalDetailsApprenticeshipMap[details.apprenticeship.hasApprenticeship]));
+
+    /**
+     * Degree qualifications
+     */
+    $('.js-degree-qualification-field').show();
+    $('.js-degree-qualification').html(getDescriptionOf(storageAPI.personalDetailsDegreeAboveMap[details.qualifications.aboveDegree]));
+
+    /**
+     * NVQ qualifications
+     */
+    $('.js-nvq-qualification-field').show();
+    $('.js-nvq-qualification').html(
+      createAnswerList(details['qualifications'].nvqEquivalent, function (dataItem) {
+        return getDescriptionOf(storageAPI.personalDetailsNVQMap[dataItem]);
+      })
+    );
+
+    /**
+     * A level qualifications
+     */
+    $('.js-a-level-qualification-field').show();
+    $('.js-a-level-qualification').html(
+      createAnswerList(details['qualifications'].aLevels, function (dataItem) {
+        return getDescriptionOf(storageAPI.personalDetailsALevelMap[dataItem]);
+      })
+    );
+
+    /**
+     * GCSE qualifications
+     */
+    $('.js-gcse-qualification-field').show();
+    $('.js-gcse-qualification').html(
+      createAnswerList(details['qualifications'].gcses, function (dataItem) {
+        return getDescriptionOf(storageAPI.personalDetailsGCSEMap[dataItem]);
+      })
+    );
+
+    /**
+     * Other qualifications
+     */
+    $('.js-other-qualification-field').show();
+    $('.js-other-qualification').html(
+      createAnswerList(details['qualifications'].othersWhere, function (dataItem) {
+        return getDescriptionOf(storageAPI.personalDetailsOtherWhere[dataItem]);
+      })
+    );
+
+    /**
+     * Employment status
+     */
+    $('.js-employment-status-field').show();
+    $('.js-employment-status').html(
+      getDescriptionOf(storageAPI.personalDetailsEmploymentStatus[details['employment-status'].val])
+    );
+
+    /**
+     * Job title
+     */
+    if(details['employment-status'].val !== 'not-employed') {
+      $('.js-job-title-field').show();
+      $('.js-job-title').html(details['job-title'].val);
+    }
+
+    /**
+     * Job description
+     */
+    if(details['employment-status'].val !== 'not-employed') {
+      $('.js-job-description-field').show();
+      $('.js-job-description').html(details['job-describe'].val);
+    }
+
+    /*$('.js-sexual-orientation-field').show();
+    $('.js-orientation').html(storageAPI.personalDetailsOrientationMap[details.orientation].description);*/
+
+    /*$('.js-salary-field').show();
+    $('.js-salary').html(details.salary);*/
+  }
+
+  function showVisitorFields() {
+    var visitor1PersonalDetails,
+      $addressContainer = $('.js-address-individual-field');
+
+    /**
+     * Address
+     */
+    if(details['address-where'] === 'same-as-visitor1') {
+      visitor1PersonalDetails =
+        storageAPI.getPersonalDetailsFor(visitor1['@person'].id);
+
+      $addressContainer.find('.js-change-person-link').attr('href', '../individual-details-address-in-uk/?edit=true');
+
+      $addressContainer.show();
+      $('.js-address-individual').html(formatAddress(visitor1PersonalDetails.address));
+    }
+    else if(details['address-where'] === 'outside-uk') {
+      $addressContainer.show();
+      $('.js-address-individual').html(details['address-outside-uk'] +
+        ' (Outside UK)');
+    }
+    else {
+      $addressContainer.show();
+      $('.js-address-individual').html(formatAddress(details.address));
+    }
+
+    $('.js-gender-field').show();
+    $('.js-gender').html(storageAPI.personalDetailsGenderMap[details.sex].description);
+
+    $('.js-dob-field').show();
+    $('.js-dob').html(
+      createDataObj(details.dob.year, details.dob.month, details.dob.day)
+        .format('MMMM Do YYYY')
+    );
+  }
+
+  function updateRouting() {
+    $('#survey-type').val(surveyType);
+  }
+
+  $(function () {
+    /**
+     * Branch
+     */
+    storageAPI.isVisitor(member)
+      ? showVisitorFields()
+      : showHouseholdMemberFields();
+
+    /**
+     * Update links
+     */
+    $('.js-change-person-link').each(function () {
+      $(this).attr('href', $(this).attr('href') + '&person=' + personId +
+        (surveyType ? '&survey=' + surveyType : ''));
+    });
+  });
+
+  $(updateRouting);
+
+</script>

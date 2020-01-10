@@ -1,0 +1,159 @@
+---
+title: IR - Household prototype v15
+project: Individual Response
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+
+<style type="text/css">
+
+.tick-spacing {
+    margin-left: 2em;
+    margin-bottom: 0.8em;
+}
+
+</style>
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@l">
+            <!--{% include navigation.html
+            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
+            nav-title-id="section-individual" %}-->
+        </div>
+        <div class="grid__col col-8@l">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="off"
+                      action="../hub">
+                    <input type="hidden" name="person" id="person"
+                           value="#"/>
+                    <input type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group u-mb-l">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question">
+                                    <div class="title">
+                                        <h1 id="question-title" class="question__title u-fs-l js-heading">Who do you need to request a separate census for?</h1>
+                                    </div>
+                                </div>
+
+                                <div class="answer">
+                                    <div class="answer__fields js-fields">
+                                        <div class="field field--radio field--multiplechoice">
+                                            <fieldset id="js-member-list"
+                                                      class="u-mb-xl">
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<div style="display:none;">
+    <div id="member-radio-select-template" class="field__item">
+        <input class="input input--radio js-person-control"
+               name="radio-answer"
+               type="radio" />
+        <label class="label label--inline u-fs-r js-person-name"></label>
+    </div>
+</div>
+
+<script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person'),
+    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+    surveyType = urlParams.get('survey'),
+    personsLeft = storageAPI.getAllHouseholdMembers()
+      .filter(function (member) {
+        return storageAPI.isHouseholdMember && member['@person'].id !== 'person_me';
+      })
+      .map(function (member) { return member['@person'] });
+
+  var cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people', '') || '[]');
+
+  $('.qa-btn-submit').on('click', function (e) {
+    e.preventDefault();
+
+      var selectedRadio = document.querySelectorAll('input[name=radio-answer]:checked')[0];
+      var personId = selectedRadio.value;
+      var cannotAnswerPeopleAlready = cannotAnswerPeople.findIndex((e) => e.id === personId);
+      if (cannotAnswerPeopleAlready === -1) {
+          cannotAnswerPeople.push({
+            id: personId,
+            responseOption: 'new-survey',
+            phoneNumber: null,
+          });
+      } else {
+          cannotAnswerPeople[cannotAnswerPeopleAlready] = {
+            id: personId,
+            responseOption: 'new-survey',
+            phoneNumber: null,
+          };
+      }
+      sessionStorage.setItem('cannot-answer-people', JSON.stringify(cannotAnswerPeople));
+
+      window.location.href = '../individual-decision-method?person_id=' + personId;
+ 
+  });
+
+  function createMemberListItem(person) {
+    var $nodeEl = $('#member-radio-select-template').clone(),
+      personId = person.id;
+
+    $nodeEl.attr('id', '');
+    $nodeEl.find('.js-person-name').html(person.fullName);
+    $nodeEl.find('.js-person-name').attr('for', personId);
+    $nodeEl.find('.js-person-control').attr('id', personId);
+    $nodeEl.find('.js-person-control').attr('value', personId);
+    $nodeEl.find('.js-person-control').addClass('js-cloned');
+
+    return $nodeEl;
+  }
+
+  function updateAnswer() {
+    $.each(personsLeft, function (i, person) {
+      $('#js-member-list').append(createMemberListItem(person));
+    });
+  }
+
+  /*function updateRouting() {
+    if(surveyType) {
+      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    }
+    $('#survey-type').val(surveyType);
+  }*/
+
+
+  $(updateAnswer);
+
+  //$(updateRouting);
+
+  /**
+   * Routing
+   */
+  $('#person').val(urlParams.get('person'));
+</script>

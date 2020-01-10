@@ -1,0 +1,457 @@
+---
+title: IR - Household prototype v15
+project: Individual Response
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+</div>
+
+<style>
+    .completed {
+        position: relative;
+    }
+
+    .completed::before {
+        z-index:2;
+        content:"";
+        background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAbCAYAAAAZMl2nAAAABGdBTUEAALGPC/xhBQAAAjtJREFUSA29l0FLW0EQx2f2NWDSQ196sFBELKFfwVMPNcmLFZV68eRFPBd6K4IexKT0IHjpqdDi0aMg5iCKUvDkqdBDQYiKIIJY0oO1wZhMd0L3+V6yz+TlrZ1DNjOzM/9f9u1uEoD/aH3Lk/EgORGUMB1/VHDeXf4u7z9ZyvXqeqMuaDqWLGTf1Ov0sdEX8UdMWJmLuc0zr869g9iL2RlC+gwEHi08eCB60j/nN04VjCepQuZGe9GZJqAvANS6BRBKIobp8uz2CSu2TjDEcScEaxCk6Jq+2h9eDbB7LyBtIVhZGgEMQLVaXKAFYfzRdArBIFL8EgWOlOe394yCdAvBUBa/NNvTT+MJa7B/rSf7/KyyUzpuzuv8KBDcr2WPMMTV+Z+i3O2jUKtt2O+Hh3TC3lhUCO7lezQuBNFLJYSAV2BZY7/mNndVzDuagOB+7oroIHiCXJkE1G+Kj/NOjn2vmYLgng2QIAglSgTxGtB6spAbVzGTENwTiQiTeWdLfvKMEgkcEaqAYgrr8DDwxmwq9h7RppTPFYhIKGgFEGu+jM4hiAHRqmkIlmoc38rO0fdE5llJfi+9ljF33+hY/uV9m1w3r9OVULXuPRISRtVrx7AQ3MQFYccETDcQLSBRYbqF0IJ0CxMFIhAkLExUiDtBOoUxAdEWxAdDOCF9qXtrpiC4o+/U3Er43/Fpig+lTuQ9zPdMA8YkBKt1BMITK7uH3xLp1Ln8eTdqGoL7hzY777yV/1NehC5sU/AXb484yamkz/AAAAAASUVORK5CYII=") no-repeat 50%;
+        background-size:1rem;
+        position:absolute;
+        left:9px;left:-1.5rem;
+        width:1.2em;
+        height:1.2em;
+        bottom:0;
+        top:0;
+        margin:auto;
+    }
+
+    .btn--primary[disabled] {
+        opacity: .5;
+    }
+</style>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-3@l"></div>
+        <div class="grid__col col-8@l pull-1@l">
+            <main role="main" id="main" class="page__main">
+                <form name="trav" class="form qa-questionnaire-form" role="form"
+                      autocomplete="off" novalidate=""
+                      action="../complete">
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1
+                                            class="question__title u-fs-l js-heading">
+                                        Choose another section to complete
+                                    </h1>
+                                </div>
+
+                                <div
+                                        class="panel panel--simple panel--info js-panel-info"
+                                     id="question-guidance-everyone-at-address-confirmation-question">
+                                    <p class="u-mb-s">You must <strong>complete all sections</strong> in order to submit this census</p>
+                                </div>
+                                <br />
+
+                                <div class="summary u-mb-m">
+                                    <div class="summary__block u-mb-s">
+                                        <div class="summary__item">
+                                            <div class="grid">
+                                                <div
+                                                        class="grid__col col-12@xs col-5@s">
+                                                    <div
+                                                            class="summary__question completed">
+                                                        <strong>
+                                                            People who live
+                                                            here
+                                                        </strong>
+                                                        <span
+                                                                class="u-d-no@s">&mdash; Completed</span>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                        class="grid__col col-3@xs col-3@s">
+                                                    <div
+                                                            class="summary__answer u-d-no u-d-b@s">Completed</div>
+                                                </div>
+                                                <div
+                                                        class="grid__col col-12@xs col-4@s">
+                                                    <div class="summary__link">
+                                                        <a
+                                                                href="../summary/?show-panel=true" class="js-view-summary u-fr@m">
+                                                            View answers
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="household-member-surveys"></div>
+                                        <div id="visitor-surveys"></div>
+                                    </div>
+                                </div>
+                                <div id="individual-response-details" class="collapsible collapsible--simple js-collapsible js-collapsible-simple u-mb-l">
+                                  <div class="js-collapsible-content">
+                                    <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Can’t answer someone else’s questions?">Can’t answer someone else’s questions?</h3>
+                                    <div class="collapsible__body js-collapsible-body">
+                                        <p>The people in your household can answer their own questions if you share the unique access code with them. When everyone has completed their section, your household census can be submitted.</p>
+                                        <p>If this is not possible, there are <a class="js-link-ir" href="#">other ways each person can complete their own section.</a></p>
+                                        <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Can’t answer someone else’s questions?">Hide this</button>
+                                    </div>
+                                  </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="submit-notice">
+                        <button class="btn btn--primary btn--lg js-submit-btn"
+                                type="submit">Continue
+                        </button>
+                    </div>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<ul style="display:none;">
+    <div id="person-survey-item-template" class="summary__item">
+        <div class="grid">
+            <div class="grid__col col-12@xs col-5@s">
+                <div class="summary__question js-survey-question">
+                    <strong class="js-person-name"></strong>
+                    <span class="u-d-no@s">&mdash;
+                        <span class="js-survey-status">Not started</span></span>
+                </div>
+            </div>
+            <div class="grid__col col-8@xs col-3@s">
+                <div class="summary__answer js-survey-status u-d-no u-d-b@s">Not started</div>
+            </div>
+            <div class="grid__col col-12@xs col-4@s">
+                <div class="summary__link">
+                    <a href="#" class="js-link"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</ul>
+
+<style>
+    @media only screen and (max-width:740px) {
+        .summary__link {
+            text-align: left;
+            justify-content: flex-start;
+        }
+    }
+
+    .completed::before {
+        width : 1rem;
+        height : 1rem;
+        background: url('https://sdc-global-design-patterns.netlify.com/assets/img/icons/icons--check-green.svg') no-repeat 50%;
+    }
+
+    .summary__question.completed {
+        padding-left : 1.5rem;
+    }
+
+    .summary__question.completed::before {
+        left : 0;
+    }
+    
+</style>
+
+<script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    surveyType = urlParams.get('survey');
+  
+  var cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people') || '[]');
+  var relationships = JSON.parse(sessionStorage.getItem('relationships') || '[]');
+
+  var statusMap = {
+    'not-started': {
+      label: 'Not started',
+      linkText: 'Start section',
+    },
+    'in-progress': {
+      label: 'Partially completed',
+      linkText: 'Continue with section'
+    },
+    'completed': {
+      label: 'Completed',
+      linkText: 'View answers'
+    },
+    'private': {
+      label: 'Private',
+      linkText: null
+    },
+    'seperate-survey-requested': {
+      label: 'Separate census requested',
+      linkText: 'Change'
+    },
+    'give-code': {
+      label: 'Skipped',
+      linkText: 'Start section'
+    }
+  };
+
+  var allHouseholdMembers = storageAPI.getAllHouseholdMembers(),
+
+    people = allHouseholdMembers.filter(storageAPI.isHouseholdMember),
+    visitors = allHouseholdMembers.filter(storageAPI.isVisitor),
+
+    peopleIds = _.flatten([
+      _.pluck(people.map(function (member) { return member['@person']; }), 'id'),
+      _.pluck(visitors.map(function (member) { return member['@person']; }), 'id')
+    ]),
+
+    peopleIdsToComplete = [].concat(peopleIds);
+
+  var nextPageSurvey = surveyType ? '&survey=' + surveyType : '';
+
+  function isHouseholdMemberSectionComplete(personDetails) {
+    return personDetails &&
+      !(!!personDetails._bookmark && !!personDetails._bookmark.page);
+  }
+
+  function isVisitorSectionComplete(personDetails) {
+
+    if(!personDetails.sex) {
+      return false;
+    }
+
+    if(!personDetails['address-where']) {
+      return false;
+    }
+
+    if(personDetails['address-where'] === 'in-uk' &&
+      !personDetails.address
+    ) {
+      return false;
+    }
+
+    if(personDetails['address-where'] === 'outside-uk' &&
+      !personDetails['address-outside-uk']
+    ) {
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   * Get state
+   */
+  function getSurveyStatus(personDetails, personPin, isVisitor, personId) {
+    var status;
+
+    if (personPin && personPin.exported) {
+      status = 'private';
+    }
+    else if (
+      personId &&
+      cannotAnswerPeople.find(function(person) { return person.id === personId}) &&
+      cannotAnswerPeople.find(function(person) { return person.id === personId}).responseOption === 'give-code'    ) {
+      status = 'give-code';
+    }
+    else if(
+      personId &&
+      cannotAnswerPeople.find(function(person) { return person.id === personId}) &&
+      cannotAnswerPeople.find(function(person) { return person.id === personId}).responseOption === 'new-survey'    ) {
+      status = 'seperate-survey-requested';
+    }
+    else if (!personDetails) {
+      status = 'not-started';
+    }
+    else if (
+      !isVisitor
+        ? isHouseholdMemberSectionComplete(personDetails)
+        : isVisitorSectionComplete(personDetails)
+    ) {
+      status = 'completed';
+    }
+    else {
+      status = 'in-progress';
+    }
+
+    return status;
+  }
+
+  /**
+   * Link routing
+   */
+  function getLinkHrefHouseholdMember(person, status/*, personPin*/) {
+    return status === 'in-progress'
+      ? storageAPI.getBookmarkFor(person.id) + '&continuing=true'
+      : (status === 'completed'
+        ? '../individual-details-summary/' : '../individual-intro/'
+      ) + '?person=' + person.id;
+
+    //+ '?person=' + person.id
+
+    /*if (personPin && personPin.pin) {
+      linkHref = '../individual-pin-security/?returnurl=' + linkHref +
+        '&person=' + person.id;
+    }
+    else {
+      linkHref += '?person=' + person.id;
+    }*/
+
+    //return linkHref;
+  }
+
+  function getLinkHrefVisitor(person, status) {
+    var linkHref = status === 'completed'
+      ? '../individual-details-summary/'
+      : '../individual-details-sex/';
+
+    linkHref += '?person=' + person.id;
+
+    return linkHref;
+  }
+
+  /**
+   * Create list item from state
+   */
+  function createListItem(person, surveyStatus, linkHref, isVisitor) {
+    var $nodeEl = $('#person-survey-item-template').clone(),
+      $surveyStatus = $nodeEl.find('.js-survey-status'),
+      $surveyQuestion = $nodeEl.find('.js-survey-question');
+
+    /**
+     * Manipulate DOM fragment
+     */
+    $nodeEl.attr('id', '');
+    $nodeEl.find('.js-person-name').html(
+      person.fullName +
+        (person.id === storageAPI.IDS.USER_HOUSEHOLD_MEMBER_ID ? ' (you)': '') +
+        (isVisitor ? ' (Visitor)': '')
+    );
+
+    $nodeEl.find('.js-link').html(statusMap[surveyStatus].linkText);
+    $surveyStatus.html(statusMap[surveyStatus].label);
+
+    surveyStatus === 'private'
+      ? $nodeEl.find('.js-link').hide()
+      : $nodeEl.find('.js-link').attr('href', linkHref);
+
+    (surveyStatus === 'completed' || surveyStatus === 'private')
+    && $surveyQuestion.addClass('completed');
+
+    if(surveyStatus === 'not-started') {
+      $nodeEl.find('.js-link').on('click', function () {
+        storageAPI.unsetAnsweringIndividualByProxy();
+      });
+    }
+
+    if (surveyStatus === 'seperate-survey-requested') {
+      $nodeEl.find('.js-link').attr('href', '../uac-question?person_id=' + person.id);
+    }
+
+    return $nodeEl;
+  }
+
+  function createList(data) {
+    var $container = $('<div></div>');
+
+    var mappedList = data.map(function (member, index) {
+      var person = member['@person'];
+      var isVisitor = storageAPI.isVisitor(member);
+
+      var personDetails = storageAPI.getPersonalDetailsFor(person.id),
+        personPin = storageAPI.getPinFor(person.id);
+
+      var surveyStatus = getSurveyStatus(personDetails, personPin, isVisitor, person.id);
+      var linkHref = !isVisitor
+        ? getLinkHrefHouseholdMember(person, surveyStatus, personPin)
+        : getLinkHrefVisitor(person, surveyStatus);
+
+      if(surveyStatus === 'completed') {
+        window.ONS.utils.removeFromList(peopleIdsToComplete, person.id);
+      }
+
+      linkHref += nextPageSurvey;
+
+      return {
+        person: person,
+        surveyStatus: surveyStatus,
+        linkHref: linkHref,
+        isVisitor: isVisitor
+      }
+    });
+
+
+    mappedList.forEach(function(item) {
+      $container.append(createListItem(item.person, item.surveyStatus, item.linkHref, item.isVisitor));
+    });
+
+    return $container;
+  }
+
+  function updatePageState() {
+    $('#household-member-surveys').append(createList(people));
+    $('#visitor-surveys').append(createList(visitors));
+
+    if (peopleIdsToComplete.length === 0) {
+      $('.js-submit-btn').html('Submit survey');
+      $('.js-heading').html('Submit survey');
+      $('.js-panel-info').html('Please submit this survey to complete it');
+    }
+    else {
+      $('.js-submit-btn').on('click', function (e) {
+        e.preventDefault();
+
+        var nextStartPersonId;
+
+        /**
+         * Attempt to find next bookmark
+         */
+        var nextBookmarkPersonId = _.find(peopleIds, function (personId) {
+          var personalDetails = storageAPI.getPersonalDetailsFor(personId);
+
+          return personalDetails && personalDetails['_bookmark'];
+        });
+
+        /**
+         * If no bookmark is found, attempt to find next section to start
+         */
+        if (!nextBookmarkPersonId) {
+          nextStartPersonId = _.find(allHouseholdMembers, function(member) {
+            var person = member['@person'];
+            var personDetails = storageAPI.getPersonalDetailsFor(person.id);
+            var status = getSurveyStatus(personDetails, null, storageAPI.isVisitor(member), person.id);
+
+            return status === 'not-started';
+
+          })['@person'].id;
+        }
+
+        if (nextBookmarkPersonId) {
+          storageAPI.setAnsweringIndividualByProxy(true);
+        }
+
+        window.location.href = nextBookmarkPersonId
+          ? storageAPI.getBookmarkFor(nextBookmarkPersonId) + '&continuing=true'
+          : '../individual-intro/?person=' + nextStartPersonId;
+      });
+    }
+  }
+
+  function updateLinks () {
+    if (surveyType) {
+      $('.js-view-summary').attr('href', '../summary/?survey=' + surveyType);
+    } else {
+      $('.js-link-ir').attr('href', '../cant-answer-for-others/?person=person_me');
+    }
+  }
+
+  $(updatePageState);
+  $(updateLinks);
+</script>

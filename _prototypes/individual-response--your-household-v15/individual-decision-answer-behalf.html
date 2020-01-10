@@ -1,0 +1,205 @@
+---
+title: IR - Household prototype v15
+project: Individual Response
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+
+<style type="text/css">
+
+.tick-spacing {
+    margin-left: 2em;
+    margin-bottom: 0.8em;
+}
+
+</style>
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid">
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="off"
+                      action="../hub">
+                    <input type="hidden" name="person" id="person"
+                           value="#"/>
+                    <input type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group u-mb-l">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question">
+                                  <div class="panel panel--simple panel--success u-mb-s js-success-panel">You have completed your individual questions.</div>
+                                    <div class="title">
+                                        <h1 id="question-title" class="question__title u-fs-l">Is there anyone in your household you cannot answer the same questions for?</h1>
+                                    </div>
+                                    <div class="panel panel--simple panel--info u-mb-s">You can decide on the next page how to answer their questions</div>
+                                </div>
+
+                                <div class="answer">
+                                    <p>Select all that apply</p>
+
+                                    <div class="answer__fields js-fields">
+                                        <div class="field field--checkbox field--multiplechoice field--exclusive">
+                                            <fieldset id="js-member-list"
+                                                      class="u-mb-xl">
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+
+                    <!--<p>Can't complete this question?<br />
+                        <a href="../hub" class="js-choose-another-section">Choose another section and
+                            return to this later</a></p>-->
+
+                    <!--<p class="u-mb-m"><span class="js-link-secure-label"></span><br />
+                        <a class="js-link-secure"
+                           href="#">Get a separate access code to submit an
+                            individual response</a></p>-->
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<div style="display:none;">
+    <div id="member-checkbox-select-template" class="field__item">
+        <input class="input input--checkbox js-exclusive-group js-person-control"
+               name="checkbox-answer"
+               type="checkbox" />
+        <label class="label label--inline u-fs-r js-person-name"></label>
+    </div>
+</div>
+
+<script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    switchedFromUnemployed = urlParams.get(switchedFromUnemployed),
+    personId = urlParams.get('person'),
+    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+    isEditing = urlParams.get('edit'),
+    details = storageAPI.getPersonalDetailsFor(personId),
+    surveyType = urlParams.get('survey'),
+
+    personsLeft = storageAPI.getAllHouseholdMembers()
+      .filter(function (member) {
+        return storageAPI.isHouseholdMember && member['@person'].id !== personId;
+      })
+      .map(function (member) { return member['@person'] });
+
+  var cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people') || '[]');
+
+  $('.qa-btn-submit').on('click', function (e) {
+    e.preventDefault();
+
+    var canAnswer = document.querySelector('.js-exclusive-checkbox').checked;
+
+    if (canAnswer) {
+      window.location.href = '../hub';
+    } else {
+      var peopleIds = Array.from(document.querySelectorAll('.js-cloned')).map(function(input) {
+        return input.value;
+      });
+
+      var people = cannotAnswerPeople.filter(function(person) {
+        return peopleIds.includes(person.id);
+      });
+
+      var newPeopleIds = peopleIds.filter(function(id) {
+        return !people.find(function(person) {
+          return person.id === id;
+        });
+      });
+
+      newPeopleIds.forEach(function(id) {
+        people.push({
+          id: id,
+          responseOption: null,
+          phoneNumber: null,
+        });
+      });
+
+      sessionStorage.setItem('cannot-answer-people', JSON.stringify(people));
+
+      window.location.href = '../uac-question';
+    }
+  });
+
+  function createMemberListItem(person) {
+    var $nodeEl = $('#member-checkbox-select-template').clone(),
+      personId = person.id;
+
+    $nodeEl.attr('id', '');
+    $nodeEl.find('.js-person-name').html(person.fullName);
+    $nodeEl.find('.js-person-name').attr('for', personId);
+    $nodeEl.find('.js-person-control').attr('id', personId);
+    $nodeEl.find('.js-person-control').attr('value', personId);
+    $nodeEl.find('.js-person-control').addClass('js-cloned');
+
+    return $nodeEl;
+  }
+
+  function updateAnswer() {
+    $.each(personsLeft, function (i, person) {
+      $('#js-member-list').append(createMemberListItem(person));
+    });
+
+    $('#js-member-list').append('<div class="field__label u-mt-s u-fs-r--b" aria-hidden="true">Or</div>');
+    $('#js-member-list').append(
+      '<div class="field__item">\n' +
+      '<input class="input input--checkbox js-exclusive-checkbox" name="heating-type" value="no central heating" id="none" type="checkbox">\n' +
+      '<label class="label label--inline u-fs-r " for="none">\n' +
+      '<span class="u-vh">,</span> I can answer for everyone<span class="u-vh">. Selecting this will uncheck all other checkboxes</span>\n' +
+      '</label>\n' +
+      '<span class="js-exclusive-alert u-vh" role="alert" aria-live="polite" data-adjective="deselected"></span>\n' +
+      '</div>'
+    );
+
+    cannotAnswerPeople.forEach(function(person) {
+      document.querySelector('input[value=' + person.id + ']').checked = true;
+    });
+  }
+
+  /*function updateRouting() {
+    if(surveyType) {
+      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    }
+    $('#survey-type').val(surveyType);
+  }*/
+
+  function updateQuestion() {
+    if(storageAPI.getAnsweringIndividualByProxy()) {
+      $('.js-success-panel').html('You have completed ' +
+        person.fullName + window.ONS.utils.trailingNameS(person.fullName) +
+        ' individual questions.');
+    } else {
+      $('.js-success-panel').html('You have completed your individual questions.');
+    }
+  }
+
+  $(updateAnswer);
+  $(updateQuestion);
+  //$(updateRouting);
+
+  /**
+   * Routing
+   */
+  $('#person').val(urlParams.get('person'));
+</script>

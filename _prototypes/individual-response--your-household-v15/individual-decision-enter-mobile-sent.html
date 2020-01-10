@@ -1,0 +1,92 @@
+---
+title: IR - Household prototype v15
+project: Individual Response
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@l">
+            <!--{% include navigation.html
+            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
+            nav-title-id="section-individual" %}-->
+        </div>
+        <div class="grid__col col-7@l pull-1@l">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="off"
+                      action="../hub">
+                    <div class="group u-mb-l">
+                        <section class="section">
+                            <div class="question u-mb-s">
+                                <h1 id="question-title"
+                                    class="question__title u-fs-l js-piping">
+                                    We have sent a text message to {x}
+                                </h1>
+
+                                <p>A text message with an individual access code should
+                                    arrive shortly complete their own census.</p>
+                            </div>
+                        </section>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Continue
+                    </button>
+
+                    <!--<p>Can't complete this question?<br />
+                        <a href="../hub" class="js-choose-another-section">Choose another section and
+                            return to this later</a></p>-->
+
+                    <!--<p class="u-mb-m"><span class="js-link-secure-label"></span><br />
+                        <a class="js-link-secure"
+                           href="#">Get a separate access code to submit an
+                            individual response</a></p>-->
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<div style="display:none;">
+    <div id="member-checkbox-select-template" class="field__item">
+        <input class="input input--checkbox js-person-control"
+               name="checkbox-answer" type="checkbox">
+        <label class="label label--inline u-fs-r js-person-name"></label>
+    </div>
+</div>
+
+<script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person'),
+    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+    mobileNo = urlParams.get('mobile');
+
+    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
+
+    pipingDestinations.forEach(function(pipingDestination) {
+        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', mobileNo);
+    });
+
+  function updateDescription () {
+    $('.js-mobile-no').html(mobileNo);
+  }
+
+  $(updateDescription);
+
+  /**
+   * Routing
+   */
+  $('#person').val(urlParams.get('person'));
+</script>

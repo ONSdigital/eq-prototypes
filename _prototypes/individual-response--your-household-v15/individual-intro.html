@@ -1,0 +1,105 @@
+---
+title: IR - Household prototype v15
+project: Individual Response
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../hub">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@l">
+            <!--{% include navigation.html
+            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
+            nav-title-id="section-individual" %}-->
+        </div>
+        <div class="grid__col col-7@l pull-1@l">
+            <main role="main" id="main" class="page__main">
+                <div class="group">
+                    <div class="block">
+                        <section class="section">
+                            <h1 class="u-fs-l js-person-name"></h1>
+
+                            <!--<p>In this sub section, we’re going to
+                                ask you questions about <span class="js-person-name"></span>.
+                            </p>-->
+                            <p>In this section, we’re going to ask you
+                                questions about <span class="js-person-name u-fs-r--b"></span>.
+                            </p>
+
+                            <h3 class="u-fs-m">Information you need:</h3>
+                            <ul>
+                                <li>Personal details such as date of birth,
+                                    country of birth, religion etc.</li>
+                                <li>Education and qualifications</li>
+                                <li>Employment and travel to work</li>
+                                <li>Second or holiday homes</li>
+                                <li>Unpaid care and health</li>
+                                <li>Languages</li>
+                            </ul>
+
+                            <div id="individual-response-details" class="collapsible collapsible--simple js-collapsible js-collapsible-simple u-mt-m u-vh">
+                                <div class="js-collapsible-content">
+                                    <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Can’t answer someone else’s questions?">Can’t answer questions for this person?</h3>
+                                    <div class="collapsible__body js-collapsible-body">
+                                        <p>You can ask the people in your household to answer their own questions by sharing the unique access code with them.</p>
+                                        <p>If this is not possible, there are <a class="js-ir-link" href="#">other ways each person can complete their own section.</a></p>
+                                        <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Can’t answer someone else’s questions?">Hide this</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <button class="btn btn--primary btn--lg qa-btn-submit btn-submit u-mt-l"
+                        type="submit" name="">Continue
+                </button>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person'),
+    surveyType = urlParams.get('survey');
+
+    $('.btn-submit').click(function(e) {
+    e.preventDefault();
+
+    window.location = '../individual-decision/?person=' + personId +
+        (surveyType ? '&survey=' + surveyType : '');
+    });
+
+    $('.js-ir-link').click(function(e) {
+        e.preventDefault();
+
+        window.location = '../cant-answer-for-others/?person=' + personId +
+        (surveyType ? '&survey=' + surveyType : '');
+    });
+
+  function updateName() {
+    $('.js-person-name').html(storageAPI.getHouseholdMemberByPersonId(personId)['@person'].fullName);
+  }
+
+  function showIrDetails() {
+    if (personId !== 'person_me') {
+        $('#individual-response-details').removeClass('u-vh');
+    }
+  }
+
+  $(updateName);
+  $(showIrDetails);
+
+</script>
