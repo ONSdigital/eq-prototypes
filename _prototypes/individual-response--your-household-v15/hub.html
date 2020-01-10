@@ -205,7 +205,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     ]),
 
     peopleIdsToComplete = [].concat(peopleIds);
-
+  
   var nextPageSurvey = surveyType ? '&survey=' + surveyType : '';
 
   function isHouseholdMemberSectionComplete(personDetails) {
@@ -390,7 +390,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   function updatePageState() {
     $('#household-member-surveys').append(createList(people));
     $('#visitor-surveys').append(createList(visitors));
-
+    console.log(allHouseholdMembers.length)
+    if (allHouseholdMembers.length === 1) {
+        $('.js-collapsible-simple').hide();
+    } 
     if (peopleIdsToComplete.length === 0) {
       $('.js-submit-btn').html('Submit survey');
       $('.js-heading').html('Submit survey');
