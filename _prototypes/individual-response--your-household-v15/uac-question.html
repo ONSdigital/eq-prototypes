@@ -103,7 +103,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         var responseOption = Array.from(document.querySelectorAll('input[type=radio]')).find(function(radio) {
             return radio.checked;
         }).id;
-
         cannotAnswerPerson.responseOption = responseOption;
 
         sessionStorage.setItem('cannot-answer-people', JSON.stringify(cannotAnswerPeople));
@@ -113,22 +112,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                 window.location.href = '../individual-intro/?person=' + personId;
                 break;
             }
+            case 'new-survey': {
+                window.location.href = '../individual-decision-method/?person_id=' + personId;
+                break;
+            }
             default: {
-                var nextPerson = cannotAnswerPeople.find(function(person) {
-                    return !person.responseOption;
-                });
-
-                /*cannotAnswerPeople = cannotAnswerPeople.filter(function(person) {
-                    return person.id !== personId;
-                });
-
-                sessionStorage.setItem('cannot-answer-people', JSON.stringify(cannotAnswerPeople));*/
-
-                if (nextPerson) {
-                    window.location.href = '../uac-question?person_id=' + nextPerson.id;
-                } else {
-                    window.location.href = '../hub';
-                }
+                window.location.href = '../hub';
             }
         }
     });
