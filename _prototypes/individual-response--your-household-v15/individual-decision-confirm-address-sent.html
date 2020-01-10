@@ -76,7 +76,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
 
     pipingDestinations.forEach(function(pipingDestination) {
-        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', addressLines);
+        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', person.fullName + ', ' + addressLines);
     });
 
   /**

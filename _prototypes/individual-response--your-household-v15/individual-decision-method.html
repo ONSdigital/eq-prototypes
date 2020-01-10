@@ -34,10 +34,10 @@ cdn: v1.5.0
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title saturn js-piping">
-                                        How would you like to request a separate census for <em class="highlight">{x}</em>?
+                                        How would you like <em class="highlight">{x}</em> to receive a separate census?
                                     </h1>
                                     <p class="mars u-mb-m">
-                                        To request a separate census for others in your household to complete, we need to send them an individual access code.
+                                        For someone to complete a separate census, we need to send them an individual access code.
                                     </p>
                                 </div>
 
@@ -45,6 +45,31 @@ cdn: v1.5.0
                                     <div class="answer__fields js-fields">
                                         <div class="field field--radio field--multiplechoice ">
                                             <fieldset class="u-mb-xl">
+                                                <legend class="fieldset__legend">Select how to send the access code</legend>
+                                                <div class="field__item js-focusable-box">
+                                                    <input class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="does-anyone-else-live-here"
+                                                           id="post" value="post">
+                                                    <label class="label label--inline venus"
+                                                           for="post">
+                                                        Post
+                                                        <br>
+                                                        <span class="radio__description u-fs-s">We can only send this to the registered household address</span>
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="does-anyone-else-live-here"
+                                                           id="email" value="email">
+                                                    <label class="label label--inline"
+                                                           for="email">
+                                                        Email
+                                                        <br>
+                                                        <span class="radio__description u-fs-s">We will need their email address for this</span>
+                                                    </label>
+                                                </div>
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
@@ -55,28 +80,8 @@ cdn: v1.5.0
                                                            for="phone"
                                                            id="no-label">
                                                         Text message
-                                                    </label>
-                                                </div>
-
-                                                <div class="field__item js-focusable-box">
-                                                    <input class="input input--radio js-focusable"
-                                                           type="radio"
-                                                           name="does-anyone-else-live-here"
-                                                           id="email" value="email">
-                                                    <label class="label label--inline"
-                                                           for="email">
-                                                        Email
-                                                    </label>
-                                                </div>
-
-                                                <div class="field__item js-focusable-box">
-                                                    <input class="input input--radio js-focusable"
-                                                           type="radio"
-                                                           name="does-anyone-else-live-here"
-                                                           id="post" value="post">
-                                                    <label class="label label--inline venus"
-                                                           for="post">
-                                                        Post
+                                                        <br>
+                                                        <span class="radio__description u-fs-s">We will need their mobile number for this</span>
                                                     </label>
                                                 </div>
                                             </fieldset>
@@ -89,6 +94,8 @@ cdn: v1.5.0
                     <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
                             type="submit" name="">Save and continue
                     </button>
+                    <p>To request a census in a different format or for further help, please <a href="/">contact us</a></p>
+
                 </form>
             </main>
         </div>

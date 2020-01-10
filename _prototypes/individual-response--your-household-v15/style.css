@@ -135,7 +135,13 @@ a:focus:not(.btn--link):not(.btn--ghost):not(.js-clear-btn):not(.download__thumb
     outline: 1px solid #222;
     outline-offset: -2px;
 }
-
+.fieldset__legend {
+    display: block;
+    margin-bottom: .4rem;
+    color: inherit;
+    font-weight: 600;
+    font-size: 1rem;
+}
 /* .field__item > .label > p,
 .checkbox__description, 
 .radio__description,
