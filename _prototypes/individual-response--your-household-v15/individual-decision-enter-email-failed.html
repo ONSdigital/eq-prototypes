@@ -22,6 +22,21 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         </div>
         <div class="grid__col col-7@l pull-1@l">
             <main role="main" id="main" class="page__main">
+                <div class="panel panel--error u-mb-m">
+                    <div class="panel__header">
+                        <div class="panel__title u-fs-r--b">This page has 1 error</div>
+                    </div>
+                    <div class="panel__body">
+                        <p>These <strong>must be corrected</strong> to continue.</p>
+                        <ul class="list list--bare">
+                        <li class="list__item ">
+                            <a href="#email-address" class="list__link js-inpagelink">
+                            Enter a vaild email address.
+                            </a>
+                        </li>
+                        </ul>
+                    </div>
+                </div>
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="off"
                       action="../hub">
@@ -33,15 +48,21 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                     What is <em class="highlight">{x}{s}</em> email address?
                                 </h1>
                             </div>
+                            <div class="panel panel--error panel--simple">
+                                <div class="panel__body">
+                                    <p class="panel__error">
+                                    <strong>Enter a vaild email address</strong>
+                                    </p>
+                                    <div class="field">
+                                        <label class="label" for="email-address">
+                                                Email address
 
-                            <div class="field">
-                                <label class="label" for="email-address">
-                                        Email address
-
-                                </label>
-                                <input class="input input--text"
-                                       id="email-address"
-                                       value="" />
+                                        </label>
+                                        <input class="input input--text"
+                                            id="email-address"
+                                            value="" />
+                                    </div>
+                                </div>
                             </div>
                         </section>
                     </div>

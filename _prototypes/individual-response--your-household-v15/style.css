@@ -39,6 +39,9 @@ a:focus:not(.btn--link):not(.btn--ghost):not(.js-clear-btn):not(.download__thumb
 .input__text {
     width: 100%;
 }
+.panel__error {
+    color: #d0021b;
+}
 .question {
     margin-bottom: 0;
 }

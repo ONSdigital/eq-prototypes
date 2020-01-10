@@ -69,7 +69,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <script>
   var storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
-    personId = urlParams.get('person'),
+    personId = urlParams.get('person_id'),
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     emailAddress = urlParams.get('email');
 
