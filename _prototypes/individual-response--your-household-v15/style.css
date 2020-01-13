@@ -257,8 +257,8 @@ a:focus:not(.btn--link):not(.btn--ghost):not(.js-clear-btn):not(.download__thumb
     padding: 1rem 0;
 }
 
-.list.list--records .list__item + .list__item {
-    border-top: 1px solid #ccc;
+.list.list--records .list__item {
+    border-bottom: 1px solid #888;
 }
 
 .list.list--people {
