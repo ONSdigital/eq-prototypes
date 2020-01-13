@@ -187,10 +187,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     'seperate-survey-requested': {
       label: 'Separate census requested',
       linkText: 'Change'
-    },
-    'give-code': {
-      label: 'Skipped',
-      linkText: 'Start section'
     }
   };
 
@@ -247,19 +243,16 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     if (personPin && personPin.exported) {
       status = 'private';
     }
-    else if (
-      personId &&
-      cannotAnswerPeople.find(function(person) { return person.id === personId}) &&
-      cannotAnswerPeople.find(function(person) { return person.id === personId}).responseOption === 'give-code'    ) {
-      status = 'give-code';
-    }
     else if(
       personId &&
       cannotAnswerPeople.find(function(person) { return person.id === personId}) &&
       cannotAnswerPeople.find(function(person) { return person.id === personId}).responseOption === 'new-survey'    ) {
       status = 'seperate-survey-requested';
     }
-    else if (!personDetails) {
+    else if (!personDetails ||
+      personId &&
+      cannotAnswerPeople.find(function(person) { return person.id === personId}) &&
+      cannotAnswerPeople.find(function(person) { return person.id === personId}).responseOption === 'give-code') {
       status = 'not-started';
     }
     else if (
