@@ -93,7 +93,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 		personId = urlParams.get('person'),
         yesbox = document.getElementById("yes"),
         surveyType = urlParams.get('survey');
-
+        
+    storageAPI.personalBookmark(personId, window.location.href);
 	$('.qa-btn-submit').click(function(e) {
 	  var val = yesbox.checked;
 

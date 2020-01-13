@@ -103,8 +103,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     }
 
 	$(function () {
-	  if(sessionStorage.getItem('address')) {
-		$('.full-address-text').html((sessionStorage.getItem('address') || '').replace(/,/g, '<br />'));
+	  if(sessionStorage.getItem('address-line-1')) {
+		$('.full-address-text').html((sessionStorage.getItem('address-line-1'') || '').replace(/,/g, '<br />'));
       }
 	});
 </script>

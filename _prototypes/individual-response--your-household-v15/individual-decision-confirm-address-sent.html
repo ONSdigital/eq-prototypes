@@ -71,12 +71,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     urlParams = new URLSearchParams(window.location.search),
     personId = urlParams.get('person'),
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
-    addressLines = (sessionStorage.getItem('address') || '');
+    addressLines = (sessionStorage.getItem('address-line-1') || '');
 
     var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
 
     pipingDestinations.forEach(function(pipingDestination) {
-        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', person.fullName + ', ' + addressLines);
+        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', person.fullName + ' at ' + addressLines);
     });
 
   /**

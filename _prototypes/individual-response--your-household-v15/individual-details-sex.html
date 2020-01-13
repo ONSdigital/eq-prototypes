@@ -105,6 +105,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     details = storageAPI.getPersonalDetailsFor(personId),
     surveyType = urlParams.get('survey');
 
+    storageAPI.personalBookmark(personId, window.location.href);
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function(e) {

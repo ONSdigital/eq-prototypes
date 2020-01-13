@@ -31,7 +31,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             <h1 id="question-title"
                                 class="question__title u-fs-l"
                                 data-qa="question-title">
-                                Who else lives at <mark><span class="full-address-text">Address not set</span></mark>?
+                                Who else lives at <em class=”highlight”><span class="full-address-text">Address not set</span></em>?
                             </h1>
                         </div>
 
@@ -51,7 +51,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
                         <fieldset
                                 class="question__fieldset js-question-fieldset u-mb-s">
-                            <legend class="u-vh">Who do you need to add to <mark><span class="full-address-text">Address not set</span></mark>?</legend>
+                            <legend class="u-vh">Who do you need to add to <em class=”highlight”><span class="full-address-text">Address not set</span></em>?</legend>
 
                             <div class="question__answers">
                                 <div class="question__answer">
@@ -303,8 +303,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     }
 
 	$(function () {
-	  if(sessionStorage.getItem('address')) {
-		$('.full-address-text').html((sessionStorage.getItem('address') || '').replace(/,/g, '<br />'));
+	  if(sessionStorage.getItem('address-line-1')) {
+		$('.full-address-text').html((sessionStorage.getItem('address-line-1'') || '').replace(/,/g, '<br />'));
       }
 	});
 

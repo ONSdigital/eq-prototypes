@@ -27,7 +27,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title" class="question__title u-fs-l">
-                                        Do any of the following people live at <mark><span class="full-address-text">Address not set</span></mark> on <span class="js-significant-date"></span>?
+                                        Do any of the following people live at <em class=”highlight”><span class="full-address-text">Address not set</span></em> on <span class="js-significant-date"></span>?
                                     </h1>
                                 </div>
 
@@ -213,8 +213,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     }
 
 	$(function () {
-	  if(sessionStorage.getItem('address')) {
-		$('.full-address-text').html((sessionStorage.getItem('address') || '').replace(/,/g, '<br />'));
+	  if(sessionStorage.getItem('address-line-1')) {
+		$('.full-address-text').html((sessionStorage.getItem('address-line-1'') || '').replace(/,/g, '<br />'));
       }
 	});
 
