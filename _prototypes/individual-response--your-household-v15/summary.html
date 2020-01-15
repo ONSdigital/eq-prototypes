@@ -26,17 +26,17 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 class="question__title u-fs-l js-heading">
-                                        People living here and overnight
+                                        People living at <span class="full-address-text"></span> and overnight
                                         visitors on <span class="js-significant-date"></span>
                                     </h1>
                                 </div>
 
                                 <h2
-                                    class="u-fs-m js-household-people-list">You&rsquo;ve added <span class="highlight">{n}</span><span class="js-household-people-plural" style="display: none"></span> living here on <span class="js-significant-date"></span></h2>
+                                    class="u-fs-m js-household-people-list">You said <span class="highlight">{n}</span><span class="js-household-people-plural" style="display: none"></span> {t} living here on <span class="js-significant-date"></span></h2>
                                 <ul
                                     class="list list--records list--people u-mb-s js-records js-household-members-summary"></ul>
                                 <p id="nobody-notice"
-                                   style="display:none;">Nobody usually
+                                   style="display:none;">No one usually
                                     lives here</p>
                                 <p class="u-mb-xl">
                                     <a
@@ -46,13 +46,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 </p>
 
                                 <div class="js-visitors-people-list">
-                                    <h2 class="u-fs-m js-visitors-people-title">You&rsquo;ve added <span class="highlight">{n}</span> visitor<span class="js-visitors-people-plural"></span> staying
+                                    <h2 class="u-fs-m js-visitors-people-title">You said <span class="highlight">{n}</span> visitor<span class="js-visitors-people-plural"></span> {t} staying
                                         overnight here on <span class="js-significant-date"></span></h2>
                                     <ul class="list list--records list--people u-mb-s js-records js-visitors-summary"></ul>
                                     <p id="nobody-visitor-notice"
                                        style="display:none;">There are no
-                                        visitors staying overnight here on
-                                        <span class="js-significant-date"></span>.</p>
+                                        visitors staying overnight here</p>
                                     <p class="u-mb-xl"><a
                                             href="../visitor-name?journey=visitors&redirect=../summary/">Add a visitor</a>
                                     </p>
@@ -69,7 +68,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     </div>
 </div>
 
-<script src='/js/compiled/your-household-v15/bundle.js'></script>
+<script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
 
 <script>
   var urlParams = new URLSearchParams(window.location.search),
@@ -96,12 +95,19 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
     numberOfHouseholdMembers = householdMembers.length;
     peopleListTitle = document.querySelector('.js-household-people-list');
+
     if (numberOfHouseholdMembers > 1) {
       peopleListTitle.innerHTML = peopleListTitle.innerHTML.replace('{n}',
         (numberOfHouseholdMembers));
     } else {
       peopleListTitle.innerHTML = peopleListTitle.innerHTML.replace('{n}',
         window.ONS.utils.numberToWordsStyleguide(numberOfHouseholdMembers) || 0);
+    }
+
+    if (numberOfHouseholdMembers != 1) {
+      peopleListTitle.innerHTML = peopleListTitle.innerHTML.replace('{t}', 'are');
+    } else {
+      peopleListTitle.innerHTML = peopleListTitle.innerHTML.replace('{t}', 'is');
     }
 
     if(!numberOfHouseholdMembers) {
@@ -129,6 +135,21 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{n}',
         window.ONS.utils.numberToWordsStyleguide(numberOfVisitors) || 0);
     }
+
+/*   if (//significantDate is before todaysDate) {
+      if (numberOfVisitors != 1) {
+        visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{t}', 'were');
+      } else {
+        visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{t}', 'was');
+      }
+    } else { 
+*/
+      if (numberOfVisitors != 1) {
+        visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{t}', 'are');
+      } else {
+        visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{t}', 'is');
+      }
+//    } 
 
     $('.js-visitors-people-plural').each(function(i, el) {
       window.ONS.utils
@@ -162,6 +183,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     if (surveyType === 'lms') {
       $('.js-heading').html('About your household');
       $addToHousehould.attr('href', '../lms/who-else-to-add/');
+    }
+
+	  if(sessionStorage.getItem('address-line-1')) {
+  		$('.full-address-text').html((sessionStorage.getItem('address-line-1') || '').replace(/,/g, ''));
     }
 
     if(showPanel) {
