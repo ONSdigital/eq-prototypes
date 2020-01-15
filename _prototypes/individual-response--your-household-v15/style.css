@@ -46,7 +46,7 @@ a:focus:not(.btn--link):not(.btn--ghost):not(.js-clear-btn):not(.download__thumb
     margin-bottom: 0;
 }
 .field__legend {
-    font-weight: normal;
+    font-weight: normal!important;
   }
   
 .field--multiplechoice .field__item {
