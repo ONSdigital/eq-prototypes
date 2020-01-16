@@ -60,7 +60,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   $('.btn--link').click(function(e) {
     e.preventDefault();
 
-    if (personId === 'person_me' && allHouseholdMembers.length === 2) {
+    if (personId === 'person_me' && allHouseholdMembers.length === 2 || personId !== 'person_me' && allHouseholdMembers.length === 1) {
 
         var nextPerson = JSON.parse(sessionStorage.getItem('household-members')).find(function(person) { 
             return person['@person'].id != 'person_me';
