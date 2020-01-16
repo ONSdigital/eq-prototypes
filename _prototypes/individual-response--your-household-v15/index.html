@@ -10,15 +10,26 @@ hideSaveLater: true
 <style>
     .lock {
         font-weight : normal;
-        font-size: 0.9em;
+        font-size: 1rem;
         margin-top:1em;
     }
 
     .uac-border {
+        display: inline-block;
         border-style: solid;
         border-width: 0.4em;
         border-color: #033e58;
         padding: 0.7em;
+    }
+
+    .uac__input {
+        width: 14.9em!important;
+        max-width: 14.9em;
+        font-family: monospace;
+        font-weight: bold;
+        font-size: 24px;
+        text-transform: uppercase;
+        letter-spacing: .35rem;
     }
 
     p {
@@ -27,6 +38,11 @@ hideSaveLater: true
 
     .label {
         margin-bottom: 0;
+    }
+
+    .label__description {
+        font-size: .77777778rem;
+        font-weight: normal;
     }
 
     .textbox-div {
@@ -71,20 +87,15 @@ hideSaveLater: true
                         <div class="question">
                             <h1 class="question__title u-fs-l"
                                 data-qa="question-title">
-                                Welcome to the survey
+                                Start census
                             </h1>
-
-                            <p>The Office for National Statistics (ONS) produces statistics which are relied on by central and local government, businesses and individuals to make decisions and to plan for the future. To make sure our statistics are reliable and relevant we need information which reflects the whole population.</p>
-                            <br>
 
                             <div class = "uac-border">
                                 <p class="field">
-                                    <label class="label" for="uac">ENTER YOUR ACCESS CODE</label>
-                                    <div class="textbox-div textbox-width">
-                                        <input type="text" id="uac1" class="input-length input input--text input-type__input uac__input js-uac textbox-space" name="uac1" maxlength="4" data-group-size="4" autocomplete="off" />
-                                        <input type="text" id="uac2" class="input-length input input--text input-type__input uac__input js-uac textbox-space" name="uac2" maxlength="4" data-group-size="4" autocomplete="off" />
-                                        <input type="text" id="uac3" class="input-length input input--text input-type__input uac__input js-uac" name="uac3" maxlength="4" data-group-size="4" autocomplete="off" />
-                                    </div>
+                                    <label class="label" for="uac">Enter the 16 character code printed on the letter
+                                        <span class="label__description">Keep this code safe and only share it with others in your household</span>
+                                    </label>
+                                    <input type="text" id="uac" class="input input--text input-type__input uac__input js-uac" name="uac" maxlength="19" data-group-size="4" autocomplete="off" />
                                 </p>
                             </div>
                             <p class="lock">Your personal information is protected by law and will be kept confidential.</p>
@@ -94,7 +105,7 @@ hideSaveLater: true
                 <br>
                 <button class="btn btn-submit btn--primary btn--lg"
                         data-qa="btn-submit" type="submit"
-                        name="action[save_continue]">Submit code
+                        name="action[save_continue]">Access census
                 </button>
                 <div>
                 <br>

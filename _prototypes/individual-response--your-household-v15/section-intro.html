@@ -7,7 +7,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 ---
 
 <link rel="stylesheet" href="../style.css"/>
-<div class="page__subheader"></div>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../visitors">Previous</a>
+    </div>
+</div>
 
 <div class="page__container container">
     <div class="grid grid--reverse">
@@ -53,6 +57,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     var options = {year: 'numeric', month: 'long', day: 'numeric'};
     $('.one-week-ago').text(oneWeekAgo.toLocaleString('en-GB', options));
   });
+
+  function updateAllPreviousLinks() {
+    $('.js-previous-link').attr('href', document.referrer);
+  }
+
+  $(updateAllPreviousLinks);
 </script>
 
 <script>
