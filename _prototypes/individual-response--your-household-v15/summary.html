@@ -34,11 +34,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 <h2
                                     class="u-fs-m js-household-people-list">You said <span class="highlight">{n}</span><span class="js-household-people-plural" style="display: none"></span> {t} living here on <span class="js-significant-date"></span></h2>
                                 <ul
-                                    class="list list--records list--people u-mb-s js-records js-household-members-summary"></ul>
+                                    class="list list--records list--people js-records js-household-members-summary"></ul>
                                 <p id="nobody-notice"
                                    style="display:none;">No one usually
                                     lives here</p>
-                                <p class="u-mb-xl">
+                                <p class="add-link-container u-pt-xl u-mb-xl">
                                     <a
                                             href="../who-else-to-add/?redirect=../summary/"
                                        class="js-add-to-household">
@@ -48,18 +48,18 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 <div class="js-visitors-people-list">
                                     <h2 class="u-fs-m js-visitors-people-title">You said <span class="highlight">{n}</span> visitor<span class="js-visitors-people-plural"></span> {t} staying
                                         overnight here on <span class="js-significant-date"></span></h2>
-                                    <ul class="list list--records list--people u-mb-s js-records js-visitors-summary"></ul>
+                                    <ul class="list list--records list--people js-records js-visitors-summary"></ul>
                                     <p id="nobody-visitor-notice"
                                        style="display:none;">There are no
                                         visitors staying overnight here</p>
-                                    <p class="u-mb-xl"><a
+                                    <p class="add-link-container"><a
                                             href="../visitor-name?journey=visitors&redirect=../summary/">Add a visitor</a>
                                     </p>
                                 </div>
                             </section>
                         </div>
                     </div>
-                    <button class="btn btn--primary btn--lg qa-btn-submit"
+                    <button class="btn btn--primary btn--lg u-mt-xs qa-btn-submit"
                             type="submit" name="">Continue
                     </button>
                 </form>
@@ -95,14 +95,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
     numberOfHouseholdMembers = householdMembers.length;
     peopleListTitle = document.querySelector('.js-household-people-list');
-
-    if (numberOfHouseholdMembers > 1) {
-      peopleListTitle.innerHTML = peopleListTitle.innerHTML.replace('{n}',
-        (numberOfHouseholdMembers));
-    } else {
-      peopleListTitle.innerHTML = peopleListTitle.innerHTML.replace('{n}',
-        window.ONS.utils.numberToWordsStyleguide(numberOfHouseholdMembers) || 0);
-    }
+    peopleListTitle.innerHTML = peopleListTitle.innerHTML.replace('{n}', (numberOfHouseholdMembers) || 0);
 
     if (numberOfHouseholdMembers != 1) {
       peopleListTitle.innerHTML = peopleListTitle.innerHTML.replace('{t}', 'are');

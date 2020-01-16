@@ -250,7 +250,7 @@ a:focus:not(.btn--link):not(.btn--ghost):not(.js-clear-btn):not(.download__thumb
 
 
 /**
- * Sumamry records
+ * Summary records
  */
 .list.list--records .list__item {
     margin-bottom: 0;
@@ -259,6 +259,12 @@ a:focus:not(.btn--link):not(.btn--ghost):not(.js-clear-btn):not(.download__thumb
 
 .list.list--records .list__item:not(:last-child) {
     border-bottom: 1px solid #888;
+}
+
+.add-link-container {
+    padding-top: 1rem;
+    margin-bottom: 2rem;
+    border-top: 1px solid #888;
 }
 
 .list.list--people {
