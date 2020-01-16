@@ -51,7 +51,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                         Choose another section to complete
                                     </h1>
                                 </div>
-                                <div class="summary u-mb-m">
+                                <div class="summary">
                                     <div class="summary__block u-mb-s">
                                         <div class="summary__item">
                                             <div class="grid">
@@ -84,7 +84,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                             </div>
                                         </div>
                                         <div id="household-member-surveys"></div>
-                                        <div id="visitor-surveys"></div>
+                                        <div id="visitor-surveys" class="u-d-no"></div>
                                     </div>
                                 </div>
                                 <div id="individual-response-details" class="collapsible collapsible--simple js-collapsible js-collapsible-simple u-mb-l">
@@ -384,7 +384,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updatePageState() {
     $('#household-member-surveys').append(createList(people));
-    $('#visitor-surveys').append(createList(visitors));
+    if (visitors.length) {
+      $('#visitor-surveys').removeClass('u-d-no').append(createList(visitors));
+    }
     if (allHouseholdMembers.length === 1 && sessionStorage.getItem('lives-here') === 'yes') {
         $('.js-collapsible-simple').hide();
     } 

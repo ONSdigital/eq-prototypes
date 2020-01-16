@@ -39,9 +39,16 @@ a:focus:not(.btn--link):not(.btn--ghost):not(.js-clear-btn):not(.download__thumb
 .input__text {
     width: 100%;
 }
+
+.panel--error a {
+    color: #4263c2;
+}
+
 .panel__error {
     color: #d0021b;
 }
+
+
 .question {
     margin-bottom: 0;
 }
@@ -257,6 +264,7 @@ a:focus:not(.btn--link):not(.btn--ghost):not(.js-clear-btn):not(.download__thumb
     padding: 1rem 0;
 }
 
+.summary__block,
 .list.list--records .list__item:not(:last-child) {
     border-bottom: 1px solid #888;
 }
