@@ -53,49 +53,32 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
     personId = urlParams.get('person'),
-    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+    person = personId ? storageAPI.getHouseholdMemberByPersonId(personId)['@person'] : null,
     surveyType = urlParams.get('survey');
-    // get all cannot answer people
-    var cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people') || '[]');
-
-    if (!personId) {
-        personId = cannotAnswerPeople[0].id;
-    }
-    var cannotAnswerPerson = cannotAnswerPeople.find(function(p) {
-        return p.id === person.id;
-    });
-
-    if (!cannotAnswerPerson) {
-        cannotAnswerPerson = {
-            id: person.id,
-            responseOption: 'new-survey',
-            phoneNumber: null,
-        };
-
-        cannotAnswerPeople.push(cannotAnswerPerson)
-    }
+    var allHouseholdMembers = storageAPI.getAllHouseholdMembers();
 
   $('.btn--link').click(function(e) {
     e.preventDefault();
 
-    if (personId === 'person_me') {
+    if (personId === 'person_me' && allHouseholdMembers.length === 2) {
 
-        window.location = '../cant-answer-for-others-who/?person=' + 'person_me' +
-        (surveyType ? '&survey=' + surveyType : '');
+        var nextPerson = JSON.parse(sessionStorage.getItem('household-members')).find(function(person) { 
+            return person['@person'].id != 'person_me';
+        });
+        var nextPersonID = nextPerson['@person'].id;
+        var cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people', '') || '[]');
+        cannotAnswerPeople.push({
+            id: nextPersonID,
+            responseOption: 'new-survey',
+            phoneNumber: null,
+        });
+        sessionStorage.setItem('cannot-answer-people', JSON.stringify(cannotAnswerPeople));
+        window.location = '../individual-decision-method/?person_id=' + nextPersonID + (surveyType ? '&survey=' + surveyType : '');
 
     } else {
-
-        sessionStorage.setItem('cannot-answer-people', JSON.stringify(cannotAnswerPeople));
-
-        window.location = '../individual-decision-method/?person_id=' + personId +
-        (surveyType ? '&survey=' + surveyType : '');
+        
+        window.location = '../cant-answer-for-others-who/' + (surveyType ? '&survey=' + surveyType : '');
     }
 
   });
-
-  function updateName() {
-    $('.js-person-name').html(storageAPI.getHouseholdMemberByPersonId(personId)['@person'].fullName);
-  }
-
-  $(updateName);
 </script>

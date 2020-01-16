@@ -384,11 +384,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updatePageState() {
     $('#household-member-surveys').append(createList(people));
-
     if (visitors.length) {
       $('#visitor-surveys').removeClass('u-d-no').append(createList(visitors));
     }
-    if (allHouseholdMembers.length === 1) {
+    if (allHouseholdMembers.length === 1 && sessionStorage.getItem('lives-here') === 'yes') {
         $('.js-collapsible-simple').hide();
     } 
     if (peopleIdsToComplete.length === 0) {
@@ -440,7 +439,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     if (surveyType) {
       $('.js-view-summary').attr('href', '../summary/?survey=' + surveyType);
     } else {
-      $('.js-link-ir').attr('href', '../cant-answer-for-others/?person=person_me');
+      $('.js-link-ir').attr('href', sessionStorage.getItem('lives-here') === 'yes' ? '../cant-answer-for-others/?person=person_me' : '../cant-answer-for-others/');
     }
   }
 
