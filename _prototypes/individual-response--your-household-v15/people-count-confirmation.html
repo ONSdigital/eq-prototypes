@@ -185,7 +185,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   function updateQuestion () {
     var numberOfPeople = getNumberInHousehold().length
     $('.js-heading-inner-part1').html(
-      'You said ' + personWording(numberOfPeople, "question") +' at ' + sessionStorage.getItem('address-line-1').replace(/,/g, '. ') + 'Do you need to add anyone?'
+      'You said ' + personWording(numberOfPeople, "question") +' at ' + sessionStorage.getItem('address-line-1').replace(/,/g, '') + '. Do you need to add anyone?'
     );
   }
 
