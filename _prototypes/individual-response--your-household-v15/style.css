@@ -91,7 +91,7 @@ a:focus:not(.btn--link):not(.btn--ghost):not(.js-clear-btn):not(.download__thumb
 
 .label--negative {
     margin-left: -1.85rem;
-    margin-top: .5rem;
+    margin-top: .25rem;
 }
 
 .input--checkbox:checked~.label:before, 
@@ -149,7 +149,7 @@ a:focus:not(.btn--link):not(.btn--ghost):not(.js-clear-btn):not(.download__thumb
     display: block;
     margin-bottom: .4rem;
     color: inherit;
-    font-weight: 600;
+    font-weight: 400;
     font-size: 1rem;
 }
 /* .field__item > .label > p,

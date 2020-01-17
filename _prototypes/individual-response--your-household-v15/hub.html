@@ -318,7 +318,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     $nodeEl.attr('id', '');
     $nodeEl.find('.js-person-name').html(
       person.fullName +
-        (person.id === storageAPI.IDS.USER_HOUSEHOLD_MEMBER_ID ? ' (you)': '') +
+        (person.id === storageAPI.IDS.USER_HOUSEHOLD_MEMBER_ID ? '': '') +
         (isVisitor ? ' (Visitor)': '')
     );
 
