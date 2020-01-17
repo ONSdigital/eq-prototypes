@@ -51,6 +51,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                         Choose another section to complete
                                     </h1>
                                 </div>
+                                <div class="panel panel--simple panel--warning js-panel-info u-mb-m" style="display: none;">
+                                </div>
                                 <div class="summary">
                                     <div class="summary__block u-mb-s">
                                         <div class="summary__item">
@@ -103,6 +105,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                         </div>
                     </div>
                     <div class="submit-notice">
+                      <p class="js-declaration"></p>
                         <button class="btn btn--primary btn--lg js-submit-btn"
                                 type="submit">Continue
                         </button>
@@ -391,9 +394,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         $('.js-collapsible-simple').hide();
     } 
     if (peopleIdsToComplete.length === 0) {
-      $('.js-submit-btn').html('Submit survey');
-      $('.js-heading').html('Submit survey');
-      $('.js-panel-info').html('Please submit this survey to complete it');
+      $('.js-submit-btn').html('Submit census');
+      $('.js-heading').html('Submit census');
+      $('.js-panel-info').show().html('<span class="panel__icon" aria-hidden="true">!</span><span class="panel__text">You must submit this census to complete it</span>');
+      $('.js-declaration').show().html('By submitting this census you are confirming that, to the best of your knowledge and belief, the details provided are correct.')
     }
     else {
       $('.js-submit-btn').on('click', function (e) {

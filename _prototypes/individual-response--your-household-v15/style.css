@@ -48,6 +48,34 @@ a:focus:not(.btn--link):not(.btn--ghost):not(.js-clear-btn):not(.download__thumb
     color: #d0021b;
 }
 
+.panel--warning {
+    font-weight: 600;
+    padding-top: .5rem;
+    padding-bottom: 0;
+}
+
+.panel--warning .panel__icon {
+    color: #fff;
+    font-weight: 900;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    min-width: 35px;
+    min-height: 29px;
+    margin-top: -4px;
+    border: 3px solid #0b0c0c;
+    border-radius: 50%;
+    color: #fff;
+    background: #0b0c0c;
+    font-size: 26px;
+    line-height: 29px;
+    text-align: center;
+}
+
+.panel--warning .panel__text {
+    padding-left: 1.3rem;
+    display: block;
+}
 
 .question {
     margin-bottom: 0;
