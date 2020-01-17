@@ -71,16 +71,15 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
 
 <script>
+  var members = window.ONS.storage.getAllHouseholdMembers();
   var urlParams = new URLSearchParams(window.location.search),
     showPanel = urlParams.get('show-panel'),
-    surveyType = urlParams.get('survey'),
-    nextPage = surveyType
-      ? '../relationships-intro/?survey=' + surveyType
-      : '../relationships-intro';
+    nextPage = members.length > 1
+      ? '../relationships-intro/'
+      : '../hub';
 
   function updateHouseholdMembersVisitors() {
-    var members = window.ONS.storage.getAllHouseholdMembers(),
-      userMember = members.filter(isUser)[0],
+      var userMember = members.filter(isUser)[0],
       otherHouseholdMembers = members.filter(window.ONS.storage.isOtherHouseholdMember),
       visitors = members.filter(window.ONS.storage.isVisitor),
       householdMembers = otherHouseholdMembers,
@@ -172,11 +171,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateContent () {
     var $addToHousehould = $('.js-add-to-household');
-
-    if (surveyType === 'lms') {
-      $('.js-heading').html('About your household');
-      $addToHousehould.attr('href', '../lms/who-else-to-add/');
-    }
 
 	  if(sessionStorage.getItem('address-line-1')) {
   		$('.full-address-text').html((sessionStorage.getItem('address-line-1') || '').replace(/,/g, ''));
