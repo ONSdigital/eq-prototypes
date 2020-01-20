@@ -287,6 +287,16 @@ a:focus:not(.btn--link):not(.btn--ghost):not(.js-clear-btn):not(.download__thumb
 /**
  * Summary records
  */
+hr {
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible;
+    border: 0;
+    border-bottom: 1px solid #888;
+    border-style: solid;
+    margin: 0;
+}
+
 .list.list--records .list__item {
     margin-bottom: 0;
     padding: 1rem 0;
@@ -300,7 +310,6 @@ a:focus:not(.btn--link):not(.btn--ghost):not(.js-clear-btn):not(.download__thumb
 .add-link-container {
     padding-top: 1rem;
     margin-bottom: 2rem;
-    border-top: 1px solid #888;
 }
 
 .list.list--people {
