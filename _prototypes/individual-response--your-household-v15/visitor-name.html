@@ -31,7 +31,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             <h1 id="question-title"
                                 class="question__title u-fs-l"
                                 data-qa="question-title">
-                                What is the name of the visitor staying overnight on <span class="js-significant-date"></span> at <em class=”highlight”><span class="full-address-text">Address not set</span></em>?
+                                What is the name of the visitor staying overnight on <span class="js-significant-date"></span> at <span class="full-address-text">Address not set</span>?
                             </h1>
                         </div>
 
@@ -209,7 +209,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         ' visitor staying overnight on '
         + window.ONS.utils.getSignificant() +
         ' at ' +
-        '<em class="hightlight">' + addressLine1 + '?' + '</em>',
+        addressLine1 + '?',
 
       overrideTitleStayingOutsideUK = 'Who do you need to add to ' +
         addressLine1 +

@@ -22,7 +22,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                     <div class="block">
                         <section class="section">
 
-                            <h1 class="u-fs-l">People who live at <span class="full-address-text highlight">Address not set</span></h2>
+                            <h1 class="u-fs-l">People who live at <span class="full-address-text">Address not set</span></h2>
 
                             <p>In this section, we are counting the people at <span class="full-address-text">Address not set</span> on <strong><span class="js-significant-date"></span></strong>.</p>
 
@@ -59,10 +59,13 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   });
 
   function updateAllPreviousLinks() {
-    $('.js-previous-link').attr('href', document.referrer);
+    $('.js-previous-link').click(function (){
+      window.history.back();
+    });
   }
 
   $(updateAllPreviousLinks);
+
 </script>
 
 <script>
