@@ -31,45 +31,56 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             <section class="section" id="question-area">
                                 <div class="question">
                                     <h1 class="question__title u-fs-l u-mb-l">
-                                        Are any of the following household
-                                        members also
-                                        <span
-                                            class="js-other-description"></span>
-                                        <span
-                                            class="js-relationship-person-is"></span>?
+                                        Are any of these people related to 
+                                        <span class="js-relationship-person-is"></span>?
                                     </h1>
 
-                                    <!--<div id="question-info"
-                                         style="display:none;"
-                                            class="panel panel&#45;&#45;simple panel&#45;&#45;info u-mb-l">
-                                        <div class="panel__body js-question-info-body">
-                                            <p class="mars">
-                                                Do not include stepchildren
-                                                or foster children here,
-                                                these will be included later
-                                            </p>
-                                        </div>
-                                    </div>-->
-
-                                    <!--<label class="label venus " id="label-address-line-1">
-                                        <div class="label__inner">
-                                            Remaining household members
-                                        </div>
-                                    </label>-->
-
-                                    <p class="u-mb-no u-fs-r--b">Remaining household
-                                        members</p>
-                                    <p>Select all that apply</p>
-
-                                    <div class="answer__fields js-fields">
-                                        <div class="field field--checkbox field--multiplechoice field--exclusive">
-                                            <fieldset id="js-member-list"
+                                    <div>
+                                        <ul class="list list--records list--people u-mb-s js-records js-person-name">
+                                            <p id="js-member-list"
                                                   class="u-mb-xl">
-                                            </fieldset>
-                                        </div>
+                                            </p>
+                                        </ul>
                                     </div>
                                 </div>
+                                <div class="panel panel--info panel--simple">
+                                  <div class="panel__body">
+                                    <p>Remember to include partners, step-parents and step-children as related<ul>
+                                      </ul>
+                                    </p>
+                                  </div>
+                                </div>
                             </section>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="answer__fields js-fields">
+                        <div class="field field--radio field--multiplechoice u-mb-l">
+                            <fieldset class="grid">
+                                <div class="grid__col">
+                                    <div class="field__item js-focusable-box">
+                                        <input class="input input--radio js-focusable"
+                                                type="radio"
+                                                name="related"
+                                                id="yes"
+                                                value="yes"/>
+                                        <label class="label label--inline u-width-fill venus"
+                                                for="yes">Yes</label>
+                                    </div>
+                                    <div class="field__item js-focusable-box">
+                                        <input class="input input--radio js-focusable"
+                                                type="radio"
+                                                name="related"
+                                                id="no"
+                                                value="no"/>
+                                        <label class="label label--inline venus"
+                                                for="no">
+                                            No, none of these people are related to
+                                            <span class="js-relationship-person-is-radio"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </fieldset>
                         </div>
                     </div>
                     <button
@@ -83,11 +94,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 </div>
 
 <div style="display:none;">
-    <div id="member-checkbox-select-template" class="field__item">
-        <input class="input input--checkbox js-exclusive-group js-person-control"
-               name="checkbox-answer" type="checkbox">
-        <label class="label label--inline u-fs-r js-person-name"></label>
-    </div>
+    <li id="member-radio-select-template" class="list__item">
+        <span class="list__item-name js-person-name"></span>
+        </div>
+    </li>
 </div>
 
 <script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
@@ -120,14 +130,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       });
 
     function createMemberListItem(person) {
-      var $nodeEl = $('#member-checkbox-select-template').clone(),
+      var $nodeEl = $('#member-radio-select-template').clone(),
         personId = person.id;
 
       $nodeEl.attr('id', '');
       $nodeEl.find('.js-person-name').html(person.fullName);
       $nodeEl.find('.js-person-name').attr('for', personId);
-      $nodeEl.find('.js-person-control').attr('id', personId);
-      $nodeEl.find('.js-person-control').attr('value', personId);
 
       return $nodeEl;
     }
@@ -196,19 +204,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         }
       );
 
-      $('.js-relationship-person-is').html(person.fullName);
+      var personToIsMe = person.id ===
+            storageAPI.IDS.USER_HOUSEHOLD_MEMBER_ID;
 
-      'mother-father' === relationshipDescription && (function(){
-        $('.question__title').removeClass('u-mb-l');
-        $('#question-info').show();
-        $('.js-other-description').html('sons or daughters of');
-      }());
-
-      'unrelated' === relationshipDescription && (function(){
-        $('.js-other-description').html('unrelated to');
-        $('.js-question-info-body').html('<p>Do not include partners here, they will be included later</p>');
-        $('#question-info').show();
-      }());
+      $('.js-relationship-person-is').html((personToIsMe ? ' you' : person.fullName));
+      $('.js-relationship-person-is-radio').html((personToIsMe ? ' me' : person.fullName));
 
       $.each(
         remainingPersonIds.map(function (personId) {
@@ -217,17 +217,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       ), function (i, member) {
         $('#js-member-list').append(createMemberListItem(member['@person']));
       });
-
-      $('#js-member-list').append('<div class="field__label u-mt-s u-fs-r--b" aria-hidden="true">Or</div>');
-      $('#js-member-list').append(
-        '<div class="field__item">\n' +
-            '<input class="input input--checkbox js-exclusive-checkbox" name="heating-type" value="no central heating" id="none" type="checkbox">\n' +
-            '<label class="label label--inline u-fs-r " for="none">\n' +
-                '<span class="u-vh">,</span> None<span class="u-vh">. Selecting this will uncheck all other checkboxes</span>\n' +
-            '</label>\n' +
-            '<span class="js-exclusive-alert u-vh" role="alert" aria-live="polite" data-adjective="deselected"></span>\n' +
-        '</div>'
-      );
     }
 
     $('.js-submit').on('click', function(e) {
@@ -237,37 +226,44 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         .replace('relationships-person-select', 'relationships'),
         newRelationshipsWithOtherPersonIds = [];
 
-      $('[name=checkbox-answer]:checked').each(function () {
-        var otherId = $(this).val();
-
+      $('[name=related]:checked').each(function () {
+        var relatedRadio = $(this).val();
+      
+      
         /**
          * Check if none selected
          */
-        if (otherId === 'none') {
+        if (relatedRadio === 'none') {
           return;
+        } else if (relatedRadio === 'no') {
+          $.each(
+            remainingPersonIds.map(function (personId) {
+              return storageAPI.getHouseholdMemberByPersonId(personId);
+            }
+          ), function (i, member) {
+              newRelationshipsWithOtherPersonIds.push({
+                relationship: storageAPI.addRelationship(
+                  storageAPI.TYPES.relationship(
+                    relationshipDescription,
+                    member['@person'].id,
+                    personId
+                  )
+                ),
+                otherId: member['@person'].id
+              });
+                /**
+                * Avoid race conditions by doing inference separately
+                */
+                $.each(newRelationshipsWithOtherPersonIds, function (i, item) {
+                  storageAPI.inferRelationships(
+                    item.relationship,
+                    storageAPI.getHouseholdMemberByPersonId(personId),
+                    storageAPI.getHouseholdMemberByPersonId(item.otherId)
+                  );
+                });
+          });
+
         }
-
-        newRelationshipsWithOtherPersonIds.push({
-          relationship: storageAPI.addRelationship(
-            storageAPI.TYPES.relationship(
-              relationshipDescription,
-              personId,
-              otherId
-            )
-          ),
-          otherId: otherId
-        });
-      });
-
-      /**
-       * Avoid race conditions by doing inference separately
-       */
-      $.each(newRelationshipsWithOtherPersonIds, function (i, item) {
-        storageAPI.inferRelationships(
-          item.relationship,
-          storageAPI.getHouseholdMemberByPersonId(personId),
-          storageAPI.getHouseholdMemberByPersonId(item.otherId)
-        );
       });
 
       window.history.replaceState(null, '', relationshipsUrl);

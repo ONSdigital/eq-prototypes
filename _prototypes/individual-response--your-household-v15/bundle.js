@@ -379,7 +379,7 @@ function personRecordTemplate() {
     </li>`);
 }
 
-function createMemberItem(member, { redirect } = { redirect: null }) {
+function createMemberItem(member, { redirect } = { redirect: null }, noEdit) {
   var $nodeEl = personRecordTemplate(),
     $editLink = $nodeEl.find('.js-record-edit'),
     $removeLink = $nodeEl.find('.js-record-remove'),
@@ -390,9 +390,13 @@ function createMemberItem(member, { redirect } = { redirect: null }) {
     surveyType = urlParams.get('survey'),
     altPage = surveyType && surveyType === 'lms' ? surveyType + '/' : '',
     redirectTo = (redirect ? '&redirect=' + encodeURIComponent(window.location.href) : '');
-
-  if (memberIsUser) {
-    personNameText += '';
+    
+  if (noEdit) {
+    $editLink.hide();
+    $removeLink.hide();
+    $spacer.hide();
+  } 
+  else if (!noEdit && memberIsUser) {
     $editLink.html('Change');
     $removeLink.hide();
     $spacer.hide();
