@@ -363,7 +363,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         ? getLinkHrefHouseholdMember(person, surveyStatus, personPin)
         : getLinkHrefVisitor(person, surveyStatus);
 
-      if(surveyStatus === 'completed') {
+      if((surveyStatus === 'completed') || (surveyStatus === 'seperate-survey-requested')) {
         window.ONS.utils.removeFromList(peopleIdsToComplete, person.id);
       }
 
