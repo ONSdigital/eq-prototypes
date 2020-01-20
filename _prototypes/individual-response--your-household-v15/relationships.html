@@ -453,6 +453,15 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       relationshipDescription = chosenItem.description,
       newRelationship,
       dbRelationshipId;
+    /**  currentPerson = personTo['@person'].id,
+      currentUnrelatedCount = sessionStorage.getItem('unrelatedCount_' + currentPerson);
+
+    if(relationshipDescriptionVal === 'unrelated') {
+      if (!!Number.isInteger(currentUnrelatedCount)) {
+        currentUnrelatedCount = parseInt(currentUnrelatedCount, 10);
+      }
+      sessionStorage.setItem('unrelatedCount_' + currentPerson, ++currentUnrelatedCount);
+    }**/
 
     if (!relationshipDescription) {
       throw Error('Relationship description not found: ', relationshipDescription);
@@ -499,6 +508,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       missingRelationshipsForPerson =
        storageAPI.getPeopleIdsMissingRelationshipsWithPerson(personToId);
 
+    //sessionStorage.setItem('missingrelationships_' + personToId, missingRelationshipsForPerson);
       /**
        * Question strategies
        *
@@ -542,6 +552,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         .length > 1
     ) {
       subjectPersonId = personToId;
+      //if(subjectPersonId) {
+      //  sessionStorage.setItem('unrelatedrelationships_' + personToId, subjectPersonId);
+      //}
     }
 
     subjectRelationshipDescription = subjectRelationshipDescription ||
