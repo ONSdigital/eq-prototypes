@@ -40,7 +40,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                         <br>
                                         <span class="label__description u-fs-s">For international numbers include the country code, for example +33 1234 567</span>
                                 </label>
-                                <input class="input input--text"
+                                <input class="input input--text js-mobile-number"
                                        id="mobile-number"
                                        value="" />
                             </div>
@@ -87,6 +87,16 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', person.fullName).replace('{s}', possessive);
     });
 
+    var cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people', '') || '[]');
+    var cannotAnswerPerson = cannotAnswerPeople.find(function(p) {
+        return p.id === person.id;
+    });    
+    var cannotAnswerTel = cannotAnswerPerson.phoneNumber ? cannotAnswerPerson.phoneNumber : null;
+    if (cannotAnswerTel) {
+        var telInput = document.querySelector('.js-mobile-number');
+        telInput.value = cannotAnswerTel;
+    }
+    
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
 
