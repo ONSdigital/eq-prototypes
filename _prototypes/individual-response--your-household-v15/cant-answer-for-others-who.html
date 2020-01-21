@@ -89,7 +89,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     surveyType = urlParams.get('survey'),
     personsLeft = storageAPI.getAllHouseholdMembers()
       .filter(function (member) {
-        return storageAPI.isHouseholdMember && member['@person'].id !== 'person_me';
+        return storageAPI.isHouseholdMember && member['@person'].id !== 'person_me' && member['type'] !== 'visitor';
       })
       .map(function (member) { return member['@person'] });
 
