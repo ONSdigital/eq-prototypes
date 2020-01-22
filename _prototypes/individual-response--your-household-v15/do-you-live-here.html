@@ -29,7 +29,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                         <div class="block">
                             <section class="section">
                                 <div class="question">
-                                    <h1 class="question__title u-fs-l">
+                                    <h1 class="question__title u-fs-xl">
                                         Do you usually live at <span class="full-address-text">Address not set</span>?
                                     </h1>
                                     <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple u-mb-s">
@@ -158,8 +158,18 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       }
 	});
     function updateAllPreviousLinks() {
-        $('.js-previous-link').attr('href', document.referrer);
+        $('.js-previous-link').attr('href', '../section-intro/');
     }
 
     $(updateAllPreviousLinks);
+
+
+  function setHistory () {
+    var pathArray = window.location.pathname.split('/');
+    var currentPage = pathArray[pathArray.length - 1];
+    var currentHistory = sessionStorage.getItem('pageHistory');
+    
+    sessionStorage.setItem('pageHistory', currentHistory + currentPage);
+  }
+  $(setHistory);
 </script>

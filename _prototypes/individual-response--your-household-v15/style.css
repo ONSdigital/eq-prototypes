@@ -1,4 +1,68 @@
 /* v2 Design system overrides */
+
+/* Typography */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700,800&display=swap');
+
+html,
+body {
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.u-fs-m {
+    font-weight: 300;
+}
+
+.u-fs-xl, 
+h1 {
+    font-size: 1.44444444rem;
+}
+
+.u-fs-l,
+h2 {
+    font-size: 1.3rem;
+}
+
+.u-fs-m,
+h3 {
+    font-size: 1.1rem;
+}
+
+.u-fs-r--b,
+h4 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* over 740px */
+@media only screen and (min-width: 740px) {
+    .u-fs-xl,
+    h1 {
+        font-size: 1.66666667rem;
+    }
+
+    .u-fs-l,
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    .u-fs-m,
+    h3 {
+        font-size: 1.2rem;
+    }
+
+    .u-fs-r--b,
+    h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    }
+}
+
+.btn:not(.btn--ghost) {
+    -webkit-box-shadow: 0px 3px 0px 0px rgba(0,0,0,0.8);
+    -moz-box-shadow: 0px 3px 0px 0px rgba(0,0,0,0.8);
+    box-shadow: 0px 3px 0px 0px rgba(0,0,0,0.8);
+}
+
 .btn:focus {
     outline: 3px solid transparent;
     color: #222;
@@ -26,6 +90,10 @@ a:focus:not(.btn--link):not(.btn--ghost):not(.js-clear-btn):not(.download__thumb
     background-color: #fd0;
     box-shadow: 0 -2px #fd0, 0 4px #222;
     text-decoration: none;
+}
+
+.collapsible__title {
+    text-decoration: underline!important;
 }
 
 .collapsible--simple .collapsible__title:focus {
@@ -194,15 +262,6 @@ a:focus:not(.btn--link):not(.btn--ghost):not(.js-clear-btn):not(.download__thumb
     border-left: 5px solid #ccc;
 }
 
-.u-fs-s {
-    font-size: .77777778rem!important;
-}
-
-.u-fs-s--b {
-    font-size: .77777778rem!important;
-    font-weight: bold;
-}
-
 /* Highlight */
 .highlight {
     padding: 0 2px;
@@ -248,6 +307,10 @@ a:focus:not(.btn--link):not(.btn--ghost):not(.js-clear-btn):not(.download__thumb
 **/
 .summary__block {
     border-bottom: none;
+}
+
+.summary__answer {
+    font-weight: 600;
 }
 
 #visitor-surveys {

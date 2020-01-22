@@ -34,7 +34,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
-                                        class="question__title u-fs-l js-heading">
+                                        class="question__title u-fs-xl js-heading">
                                         You selected ‘Elsewhere’ for your country of birth, can you specify this further?
                                     </h1>
                                 </div>
@@ -114,8 +114,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('You selected ‘Elsewhere’ for ' + person.fullName +
-        window.ONS.utils.trailingNameS(person.fullName) +
+      $('.js-heading').html('You selected ‘Elsewhere’ for ' + '<em class="highlight">' + person.fullName +
+        window.ONS.utils.trailingNameS(person.fullName) + '</em>' +
         ' Country of brith, can you specify this further?');
     }
   }
