@@ -39,7 +39,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                         Email address
 
                                 </label>
-                                <input class="input input--text"
+                                <input class="input input--text js-email-address"
                                        id="email-address"
                                        value="" />
                             </div>
@@ -78,6 +78,16 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', person.fullName).replace('{s}', possessive);
     });
 
+    var cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people', '') || '[]');
+    var cannotAnswerPerson = cannotAnswerPeople.find(function(p) {
+        return p.id === person.id;
+    });    
+    var cannotAnswerEmail = cannotAnswerPerson.emailAddress ? cannotAnswerPerson.emailAddress : null;
+    if (cannotAnswerEmail) {
+        var emailInput = document.querySelector('.js-email-address');
+        emailInput.value = cannotAnswerEmail;
+    }
+    
     $('.qa-btn-submit').on('click', function (e) {
         e.preventDefault();
         if( !validateEmail($('#email-address').val()) || !$('#email-address').val()) {

@@ -105,8 +105,20 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     pipingDestinations.forEach(function(pipingDestination) {
         pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', person.fullName).replace('{s}', possessive);
     });
+    
+    var cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people', '') || '[]');
+
+    var cannotAnswerPerson = cannotAnswerPeople.findIndex((e) => e.id === personId);
+
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
+    cannotAnswerPeople[cannotAnswerPerson] = {
+        id: personId,
+        responseOption: 'new-survey',
+        phoneNumber: null,
+        emailAddress: emailAddress
+    };    
+    sessionStorage.setItem('cannot-answer-people', JSON.stringify(cannotAnswerPeople));
 
     window.location.href = $('[name=radio-answer]:checked').val() === 'yes'
       ? '../individual-decision-enter-email-sent/?person_id=' + personId +

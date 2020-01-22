@@ -142,10 +142,8 @@ cdn: v1.5.0
         event.preventDefault();
 
         if (phoneInput.checked) {
-            cannotAnswerPerson.phoneNumber = true;
             var url = '../individual-decision-enter-mobile';
         } else if (emailInput.checked) {
-            cannotAnswerPerson.emailAddress = true;
             var url = '../individual-decision-enter-email';
         } else {
             cannotAnswerPerson.postRequest = true;

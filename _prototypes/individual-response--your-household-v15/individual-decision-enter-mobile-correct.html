@@ -99,9 +99,20 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     details = storageAPI.getPersonalDetailsFor(personId),
     surveyType = urlParams.get('survey'),
     mobileNo = urlParams.get('mobile');
+    
+    var cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people', '') || '[]');
+    var cannotAnswerPerson = cannotAnswerPeople.findIndex((e) => e.id === personId);
 
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
+
+    cannotAnswerPeople[cannotAnswerPerson] = {
+        id: personId,
+        responseOption: 'new-survey',
+        phoneNumber: mobileNo,
+        emailAddress: null
+    };    
+    sessionStorage.setItem('cannot-answer-people', JSON.stringify(cannotAnswerPeople));
 
     window.location.href = $('[name=radio-answer]:checked').val() === 'yes'
       ? '../individual-decision-enter-mobile-sent/?person=' + personId +
