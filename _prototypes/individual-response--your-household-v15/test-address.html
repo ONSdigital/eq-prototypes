@@ -18,9 +18,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
-    <div class="container">
-        <a class="js-previous-link" href="../index">Previous</a>
-    </div>
+
 </div>
 
 <div class="page__container container">
@@ -86,7 +84,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 </div>
                             </div>
                         </fieldset>
-                    </dåiv>
+                    </div>
                 </div>
 
                 <button class="btn btn-submit btn--primary btn--lg"
@@ -135,15 +133,15 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     return value;
   }
 
-  function updateEditableAddress() {
-    $('#address-line-1').val(sessionStorage.getItem('address-line-1'));
-  }
-
+  if (window.location.search == '?edit=true') {
+    function updateEditableAddress() {
+      $('#address-line-1').val(sessionStorage.getItem('address-line-1'));
+      $('#address-line-2').val(sessionStorage.getItem('address-line-2'));
+      $('#address-town').val(sessionStorage.getItem('address-town'));
+      $('#address-county').val(sessionStorage.getItem('address-county'));
+      $('#address-postcode').val(sessionStorage.getItem('address-postcode'));
+    }
   $(updateEditableAddress);
-
-  function updateAllPreviousLinks() {
-    $('.js-previous-link').attr('href', document.referrer);
   }
 
-  $(updateAllPreviousLinks);
 </script>
