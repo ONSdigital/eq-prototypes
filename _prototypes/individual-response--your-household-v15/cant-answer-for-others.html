@@ -55,26 +55,42 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     personId = urlParams.get('person'),
     person = personId ? storageAPI.getHouseholdMemberByPersonId(personId)['@person'] : null,
     surveyType = urlParams.get('survey');
+    
     var allHouseholdMembers = storageAPI.getAllHouseholdMembers();
     var previousPage = urlParams.get('previous');
+    var cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people', '') || '[]');
+    var otherHouseholdMembers = allHouseholdMembers.filter(function(p) {
+        return p.type !== 'visitor' && p['@person'].id !== 'person_me';
+    });  
+    if (person) {
+        var cannotAnswerPerson = cannotAnswerPeople.find(function(p) {
+            return p.id === person.id;
+        });  
+        var cannotAnswerPersonID = cannotAnswerPerson ? cannotAnswerPerson.id : null;
+    }
 
   $('.btn--link').click(function(e) {
     e.preventDefault();
 
-    if (personId === 'person_me' && allHouseholdMembers.length === 2 || personId !== 'person_me' && allHouseholdMembers.length === 1) {
+    if (otherHouseholdMembers.length === 1 ||
+        personId && personId !== 'person_me') {
+        var cannotAnswerPeopleAlready = cannotAnswerPeople.findIndex((e) => e.id === personId);
 
-        var nextPerson = JSON.parse(sessionStorage.getItem('household-members')).find(function(person) { 
-            return person['@person'].id != 'person_me';
-        });
-        var nextPersonID = nextPerson['@person'].id;
-        var cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people', '') || '[]');
-        cannotAnswerPeople.push({
-            id: nextPersonID,
+      if (cannotAnswerPeopleAlready === -1) {
+          cannotAnswerPeople.push({
+            id: personId,
             responseOption: 'new-survey',
             phoneNumber: null,
-        });
+          });
+      } else {
+          cannotAnswerPeople[cannotAnswerPeopleAlready] = {
+            id: personId,
+            responseOption: 'new-survey',
+            phoneNumber: null,
+          };
+      }       
         sessionStorage.setItem('cannot-answer-people', JSON.stringify(cannotAnswerPeople));
-        window.location = '../individual-decision-method/?person_id=' + nextPersonID + (surveyType ? '&survey=' + surveyType : '');
+        window.location = '../individual-decision-method/?person_id=' + personId + (surveyType ? '&survey=' + surveyType : '');
 
     } else {
         
