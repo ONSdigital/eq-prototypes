@@ -224,10 +224,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       $('[name=related]:checked').each(function () {
         var relatedRadio = $(this).val();
       
-      
-        /**
-         * Check if none selected
-         */
         if (relatedRadio === 'none') {
           return;
         } else if (relatedRadio === 'no') {
@@ -257,21 +253,44 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                   );
                 });
           });
+            var relationshipsUrl = window.location.pathname;
+            window.history.replaceState(null, '', relationshipsUrl);
 
-        }
+            if(storageAPI.findNextMissingRelationship()) {
+
+                if (personId === 'person_me') {
+                  personId = 'person1'
+                } else {
+                  var personInt = personId.slice(personId.length -1 , personId.length); 
+                  personInt = ++personInt
+                  personId = 'person' + personInt;
+                }
+
+                window.location.href = '../relationships-person-select/?person=' +
+                  personId + '&relationship-description=unrelated';
+
+            }
+            else {
+              window.location.href = '../relationships-summary-proxy/' +
+                (surveyType ? '?survey=' + surveyType : '');
+            }
+
+        } else {
+            
+            var relationshipsUrl = window.location.pathname
+              .replace('relationships-person-select', 'relationships')
+            window.history.replaceState(null, '', relationshipsUrl);
+
+            if(storageAPI.findNextMissingRelationship()) {
+              window.location.href = relationshipsUrl +
+                (surveyType ? '?survey=' + surveyType : '');
+            } else {
+              window.location.href = '../relationships-summary-proxy/' +
+                (surveyType ? '?survey=' + surveyType : '');
+            }
+          }
+        });
       });
-
-      window.history.replaceState(null, '', relationshipsUrl);
-
-      if(storageAPI.findNextMissingRelationship()) {
-        window.location.href = relationshipsUrl +
-          (surveyType ? '?survey=' + surveyType : '');
-      }
-      else {
-        window.location.href = '../relationships-summary-proxy/' +
-          (surveyType ? '?survey=' + surveyType : '');
-      }
-    });
 
     $(updateList);
 </script>
