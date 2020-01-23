@@ -61,22 +61,21 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     var otherHouseholdMembers = allHouseholdMembers.filter(function(p) {
         return p.type !== 'visitor' && p['@person'].id !== 'person_me';
     });  
-    if (person) {
-        var cannotAnswerPerson = cannotAnswerPeople.find(function(p) {
-            return p.id === person.id;
-        });  
-        var cannotAnswerPersonID = cannotAnswerPerson ? cannotAnswerPerson.id : null;
-    }
+
   $('.btn--link').click(function(e) {
     e.preventDefault();
 
     if (otherHouseholdMembers.length === 1 ||
         personId && personId !== 'person_me') {
         var otherHouseholdPerson = otherHouseholdMembers.find(function(p) {
-            return p['@person'].id = personId;
+            if (otherHouseholdMembers.length > 1) {
+                return p['@person'].id === personId;
+            } else {
+                return p['@person'].id
+            }
         });  
 
-        var cannotAnswerPeopleAlready = cannotAnswerPeople.findIndex((e) => e.id === personId);
+        var cannotAnswerPeopleAlready = cannotAnswerPeople.findIndex((e) => e.id === otherHouseholdPerson['@person'].id);
 
       if (cannotAnswerPeopleAlready === -1) {
           cannotAnswerPeople.push({
