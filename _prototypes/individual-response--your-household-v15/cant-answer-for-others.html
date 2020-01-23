@@ -90,11 +90,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
           };
       }       
         sessionStorage.setItem('cannot-answer-people', JSON.stringify(cannotAnswerPeople));
-        window.location = '../individual-decision-method/?person_id=' + personId + (surveyType ? '&survey=' + surveyType : '');
+        window.location = '../individual-decision-method/?person_id=' + personId + (surveyType ? '&survey=' + surveyType : '') + (previousPage ? '?previous=' + 'cant-test-for-others' : '');
 
     } else {
         
-        window.location = '../cant-answer-for-others-who/' + (surveyType ? '&survey=' + surveyType : '');
+        window.location = '../cant-answer-for-others-who/' + (surveyType ? '&survey=' + surveyType : '') + (previousPage ? '?previous=' + previousPage : '');
     }
 
   });

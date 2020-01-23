@@ -48,7 +48,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                     What is <em class="highlight">{x}{s}</em> email address?
                                 </h1>
                             </div>
-                            <div class="panel panel--error panel--simple">
+                            <div id="email-address-error" class="panel panel--error panel--simple">
                                 <div class="panel__body">
                                     <p class="panel__error">
                                     <strong>Enter an email address in the correct format, such as name@example.com</strong>
@@ -101,6 +101,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
     $('.qa-btn-submit').on('click', function (e) {
         e.preventDefault();
+
         if( !validateEmail($('#email-address').val())) {
             window.location.href = '../individual-decision-enter-email-failed/?person_id=' + personId + '&email=' + encodeURI($('#email-address').val());
         } else {
@@ -126,4 +127,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
    * Routing
    */
   $('#person').val(urlParams.get('person'));
+
+
+    function updateAllPreviousLinks() {
+        $('.js-previous-link').attr('href', '../individual-decision-method/?person_id=' + personId);
+    }
+
+    $(updateAllPreviousLinks);
 </script>

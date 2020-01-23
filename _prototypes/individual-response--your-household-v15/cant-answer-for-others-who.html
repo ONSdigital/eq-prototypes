@@ -94,6 +94,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       .map(function (member) { return member['@person'] });
 
   var cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people', '') || '[]');
+  var previousPage = urlParams.get('previous');
 
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
@@ -156,4 +157,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
    * Routing
    */
   $('#person').val(urlParams.get('person'));
+
+    function updateAllPreviousLinks() {
+      $('.js-previous-link').attr('href', '../cant-answer-for-others/?previous=' + previousPage);
+    }
+
+    $(updateAllPreviousLinks);
 </script>
