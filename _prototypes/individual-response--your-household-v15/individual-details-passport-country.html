@@ -34,8 +34,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
-                                        class="question__title u-fs-l js-heading">
-                                        What passport do you hold?
+                                        class="question__title u-fs-xl js-heading">
+                                        What passports do you hold?
                                     </h1>
                                 </div>
 
@@ -43,7 +43,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                     <div class="answer__fields js-fields">
                                         <div class="field field--radio field--multiplechoice field--exclusive">
                                             <fieldset>
-                                                <legend class="field__legend u-fs-r--b">Select all that apply:</legend>
+                                                <legend class="field__legend u-fs-r--b">Select all that apply</legend>
                                                 <div class="field__item">
                                                     <input
                                                             class="input input--checkbox js-exclusive-group"
@@ -166,7 +166,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('What passport does ' + person.fullName +
+      $('.js-heading').html('What passports does ' + '<em class="highlight">' + person.fullName + '</em>' +
         ' hold?');
     }
   }

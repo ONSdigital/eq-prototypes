@@ -34,7 +34,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
-                                        class="question__title u-fs-l js-heading">
+                                        class="question__title u-fs-xl js-heading">
 
                                     </h1>
                                 </div>
@@ -122,8 +122,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       route = '../individual-details-dob/';
     }
     else {
-      route = val === 'yes' ? '../individual-details-relationship/' :
-        '../individual-details-dob/';
+      route = val === 'yes' ? '../individual-details-sex/' :
+        '../individual-details-sex/';
     }
 
     window.location.href =
@@ -152,16 +152,16 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
     if(storageAPI.getAnsweringIndividualByProxy()) {
       $('.js-heading').html(
-        person.fullName + ' is ' + age + ' years old. Is this correct?'
+        '<em class="highlight">' + person.fullName + '</em>' + ' is ' + age + ' years old. Is this correct?'
       );
       $('#yes-label').html(
-        'Yes ' + person.fullName + ' is ' + age + ' years old');
+        'Yes, ' + '<em class="highlight">' + person.fullName + '</em>' + ' is ' + age + ' years old');
 
       $('#no-label').html('No, I need to change their date of birth');
     }
     else {
       $('.js-heading').html('You are ' + age + ' years old. Is this correct?');
-      $('#yes-label').html('Yes I am ' + age + ' years old');
+      $('#yes-label').html('Yes, I am ' + age + ' years old');
     }
   }
 

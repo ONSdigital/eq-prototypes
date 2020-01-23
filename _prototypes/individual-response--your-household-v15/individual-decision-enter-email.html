@@ -9,7 +9,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
+        <a class="js-previous-link" href="../individual-decision-method">Previous</a>
     </div>
 </div>
 
@@ -29,7 +29,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                         <section class="section">
                             <div class="question u-mb-s">
                                 <h1 id="question-title"
-                                    class="question__title u-fs-l js-piping">
+                                    class="question__title u-fs-xl js-piping">
                                     What is <em class="highlight">{x}{s}</em> email address?
                                 </h1>
                             </div>
@@ -115,4 +115,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
    * Routing
    */
   $('#person').val(urlParams.get('person'));
+
+    function updateAllPreviousLinks() {
+        $('.js-previous-link').attr('href', '../individual-decision-method/?person_id=' + personId);
+    }
+
+    $(updateAllPreviousLinks);
 </script>

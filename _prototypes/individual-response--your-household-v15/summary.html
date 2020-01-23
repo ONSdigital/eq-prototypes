@@ -25,35 +25,36 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                         <div class="block">
                             <section class="section">
                                 <div class="question u-mb-s">
-                                    <h1 class="question__title u-fs-l js-heading">
-                                        People living at <span class="full-address-text"></span> and overnight
+                                    <h1 class="question__title u-fs-xl js-heading">
+                                        People who live at <span class="full-address-text"></span> and overnight
                                         visitors on <span class="js-significant-date"></span>
                                     </h1>
                                 </div>
 
-                                <h2
-                                    class="u-fs-m js-household-people-list">You said <span class="highlight">{n}</span><span class="js-household-people-plural" style="display: none"></span> {t} living here on <span class="js-significant-date"></span></h2>
-                                <ul
-                                    class="list list--records list--people js-records js-household-members-summary"></ul>
-                                <p id="nobody-notice"
-                                   style="display:none;">No one usually
-                                    lives here</p>
-                                <p class="add-link-container u-pt-xl u-mb-xl">
-                                    <a
-                                            href="../who-else-to-add/?redirect=../summary/"
-                                       class="js-add-to-household">
-                                        Add someone to this household</a>
-                                </p>
-
+                                <div class="js-household-people-list">
+                                  <h2
+                                      class="u-fs-l js-household-people-title">You said <span class="highlight">{n}</span><span class="js-household-people-plural" style="display: none"></span> {t} living here on <span class="js-significant-date"></span></h2>
+                                  <ul id="members-summary"
+                                      class="list list--records list--people js-records js-household-members-summary">
+                                  </ul>
+                                  <hr>
+                                  <p id="members-add-link" class="add-link-container u-pt-xl u-mb-xl">
+                                      <a
+                                        href="../who-else-to-add/?redirect=../summary/"
+                                        class="js-add-to-household">
+                                          Add someone to this household
+                                      </a>
+                                  </p>
+                                </div>
                                 <div class="js-visitors-people-list">
-                                    <h2 class="u-fs-m js-visitors-people-title">You said <span class="highlight">{n}</span> visitor<span class="js-visitors-people-plural"></span> {t} staying
+                                    <h2 class="u-fs-l js-visitors-people-title">You said <span class="highlight">{n}</span> visitor<span class="js-visitors-people-plural"></span> {t} staying
                                         overnight here on <span class="js-significant-date"></span></h2>
-                                    <ul class="list list--records list--people js-records js-visitors-summary"></ul>
-                                    <p id="nobody-visitor-notice"
-                                       style="display:none;">There are no
-                                        visitors staying overnight here</p>
-                                    <p class="add-link-container"><a
-                                            href="../visitor-name?journey=visitors&redirect=../summary/">Add a visitor</a>
+                                    <ul id="visitors-summary" class="list list--records list--people js-records js-visitors-summary"></ul>
+                                    <hr>
+                                    <p id="visitors-add-link" class="add-link-container">
+                                      <a
+                                        href="../visitor-name?journey=visitors&redirect=../summary/">Add a visitor
+                                      </a>
                                     </p>
                                 </div>
                             </section>
@@ -103,7 +104,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     }
 
     if(!numberOfHouseholdMembers) {
-      $('#nobody-notice').show();
+      $('#members-summary').addClass('u-d-no');
+      $('#members-add-link').addClass('u-pt-no');
+      $('.js-household-people-list hr').hide();
     }
   
 
@@ -115,7 +118,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     numberOfVisitors = visitors.length;
 
     if(!numberOfVisitors) {
-      $('#nobody-visitor-notice').show();
+      $('#visitors-summary').hide();
+      $('#visitors-add-link').addClass('u-pt-no');
+      $('.js-visitors-people-list hr').hide();
     }
 
     visitorsListTitle = document.querySelector('.js-visitors-people-list');

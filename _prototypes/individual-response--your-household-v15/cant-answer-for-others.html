@@ -25,7 +25,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                 <div class="group">
                     <div class="block">
                         <section class="section">
-                            <h1 class="u-fs-l">If you can't answer questions for others in your household</h1>
+                            <h1 class="u-fs-xl">If you can't answer questions for others in your household</h1>
 
                             <!--<p>In this sub section, we’re going to
                                 ask you questions about <span class="js-person-name"></span>.
@@ -57,6 +57,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     surveyType = urlParams.get('survey');
     
     var allHouseholdMembers = storageAPI.getAllHouseholdMembers();
+    var previousPage = urlParams.get('previous');
     var cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people', '') || '[]');
     var otherHouseholdMembers = allHouseholdMembers.filter(function(p) {
         return p.type !== 'visitor' && p['@person'].id !== 'person_me';
@@ -68,11 +69,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     if (otherHouseholdMembers.length === 1 ||
         personId && personId !== 'person_me') {
         var otherHouseholdPerson = otherHouseholdMembers.find(function(p) {
-            if (otherHouseholdMembers.length > 1) {
-                return p['@person'].id === personId;
-            } else {
-                return p['@person'].id
-            }
+            return otherHouseholdMembers.length > 1 ? p['@person'].id === personId : p['@person'].id;
         });  
 
         var cannotAnswerPeopleAlready = cannotAnswerPeople.findIndex((e) => e.id === otherHouseholdPerson['@person'].id);
@@ -91,12 +88,22 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
           };
       }       
         sessionStorage.setItem('cannot-answer-people', JSON.stringify(cannotAnswerPeople));
-        window.location = '../individual-decision-method/?person_id=' + otherHouseholdPerson['@person'].id + (surveyType ? '&survey=' + surveyType : '');
+        window.location = '../individual-decision-method/?person_id=' + otherHouseholdPerson['@person'].id + (surveyType ? '&survey=' + surveyType : '') + (previousPage ? '?previous=' + 'cant-test-for-others' : '');
 
     } else {
         
-        window.location = '../cant-answer-for-others-who/' + (surveyType ? '&survey=' + surveyType : '');
+        window.location = '../cant-answer-for-others-who/' + (surveyType ? '&survey=' + surveyType : '') + (previousPage ? '?previous=' + previousPage : '');
     }
 
   });
+
+    function updateAllPreviousLinks() {
+        if (previousPage === 'hub') {
+            $('.js-previous-link').attr('href', '../hub');
+        } else {
+            $('.js-previous-link').attr('href', '../individual-intro/?person=' + personId);
+        }
+    }
+
+    $(updateAllPreviousLinks);
 </script>

@@ -32,6 +32,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     .btn--primary[disabled] {
         opacity: .5;
     }
+
+    .summary__answer {
+      font-weight: 300;
+    }
 </style>
 
 <div class="page__container container">
@@ -47,7 +51,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1
-                                            class="question__title u-fs-l js-heading">
+                                            class="question__title u-fs-xl js-heading">
                                         Choose another section to complete
                                     </h1>
                                 </div>
@@ -363,7 +367,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         ? getLinkHrefHouseholdMember(person, surveyStatus, personPin)
         : getLinkHrefVisitor(person, surveyStatus);
 
-      if(surveyStatus === 'completed') {
+      if((surveyStatus === 'completed') || (surveyStatus === 'seperate-survey-requested')) {
         window.ONS.utils.removeFromList(peopleIdsToComplete, person.id);
       }
 
@@ -443,7 +447,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     if (surveyType) {
       $('.js-view-summary').attr('href', '../summary/?survey=' + surveyType);
     } else {
-      $('.js-link-ir').attr('href', sessionStorage.getItem('lives-here') === 'yes' ? '../cant-answer-for-others/?person=person_me' : '../cant-answer-for-others/');
+      $('.js-link-ir').attr('href', sessionStorage.getItem('lives-here') === 'yes' ? '../cant-answer-for-others/?person=person_me&previous=hub' : '../cant-answer-for-others/?previous=hub');
     }
   }
 

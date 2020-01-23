@@ -359,7 +359,7 @@ function doILiveHere() {
 }
 
 function getSignificant() {
-  return '27 January 2020';
+  return '26 January 2020';
 }
 
 function updateSignificantDate() {

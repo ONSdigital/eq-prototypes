@@ -223,8 +223,8 @@ cdn: v1.5.0
     $('.js-person').html(person.fullName + window.ONS.utils.trailingNameS(person.fullName));
 
     /*if(storageAPI.getAnsweringIndividualByProxy() || isVisitor) {
-      $('.js-heading').html('What is ' + person.fullName +
-        window.ONS.utils.trailingNameS(person.fullName) + ' usual address?');
+      $('.js-heading').html('What is ' + '<em class="highlight">' + person.fullName +
+        window.ONS.utils.trailingNameS(person.fullName) + '</em>' + ' usual address?');
     }*/
   }
 

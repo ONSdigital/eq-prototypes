@@ -33,7 +33,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
-                                        class="question__title u-fs-l js-heading">
+                                        class="question__title u-fs-xl js-heading">
                                         Can you briefly  describe what you do in your main job?
                                     </h1>
                                 </div>
@@ -53,7 +53,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                   data-maxlength="200"
                                                   data-char-limit-ref="textarea-answer-lim-remaining"
                                         ></textarea>
-                                        <div class="input__limit u-mt-xs u-fs-s--b" data-qa="textarea-with-limit" id="textarea-answer-lim-remaining" aria-live="polite"
+                                        <div class="input__limit u-mt-xs u-fs-m--b" data-qa="textarea-with-limit" id="textarea-answer-lim-remaining" aria-live="polite"
                                              data-charcount-singular="You have {x} character remaining"
                                              data-charcount-plural="You have {x} characters remaining">
                                             You have 200 characters remaining</div>
@@ -121,7 +121,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('Can you briefly describe what ' + person.fullName +
+      $('.js-heading').html('Can you briefly describe what ' + '<em class="highlight">' + person.fullName + '</em>' +
         ' does in their main job?');
     }
   }

@@ -34,7 +34,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
-                                        class="question__title u-fs-l js-heading">
+                                        class="question__title u-fs-xl js-heading">
                                         In your main job, what is your
                                             employment status?
                                     </h1>
@@ -173,7 +173,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('In ' + person.fullName +
+      $('.js-heading').html('In ' + '<em class="highlight">' + person.fullName + '</em>' +
         ' main job, what is their employment status?');
     }
   }

@@ -33,7 +33,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
-                                        class="question__title u-fs-l js-heading">
+                                        class="question__title u-fs-xl js-heading">
                                         How would you describe your national identity?
                                     </h1>
                                 </div>
@@ -63,7 +63,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                         <div class="field field--radio field--multiplechoice ">
                                             <fieldset>
                                                 <legend
-                                                        class="field__legend u-fs-r--b">Select all that apply:</legend>
+                                                        class="field__legend u-fs-r--b">Select all that apply</legend>
                                                 <div class="field__item">
                                                     <input
                                                             class="input input--checkbox" name="checkbox-answer" value="english" id="english" type="checkbox" />
@@ -104,10 +104,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                             id="other"
                                                             name="checkbox-answer" value="other" data-qa="has-other-option" type="checkbox" class="input input--checkbox">
                                                     <label id="label-checkbox-mandatory-answer-1" class="label label--inline u-fs-r" for="other">Other<br>
-                                                        <!--<span class="label__description label__inner u-fs-s">An answer is required.</span>-->
+                                                        <!--<span class="label__description label__inner u-fs-m">An answer is required.</span>-->
                                                     </label>
                                                     <!--<div class="field__other">
-                                                        <label class="label u-fs-r u-fs-s&#45;&#45;b"
+                                                        <label class="label u-fs-r u-fs-m&#45;&#45;b"
                                                                for="other-answer"
                                                                id="label-checkbox-other-input">Please specify other</label>
                                                         <input id="other-answer" name="other-answer-mandatory" data-qa="other-option" type="text" class="input">
@@ -184,8 +184,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('How would you describe ' + person.fullName +
-        window.ONS.utils.trailingNameS(person.fullName) +
+      $('.js-heading').html('How would you describe ' + '<em class="highlight">' + person.fullName +
+        window.ONS.utils.trailingNameS(person.fullName) + '</em>' +
         ' national identity?');
     }
   }

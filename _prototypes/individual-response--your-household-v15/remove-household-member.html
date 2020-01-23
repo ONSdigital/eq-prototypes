@@ -27,10 +27,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             <section class="section">
 
                                 <div class="question u-mb-s">
-                                    <h1 class="question__title u-fs-l">
+                                    <h1 class="question__title u-fs-xl">
                                         Are you sure you want to remove
-                                        <span
-                                                class="js-person-fullname-from-url-id"></span>?
+                                        <em class="highlight"><span
+                                                class="js-person-fullname-from-url-id"></span>?</em>
                                     </h1>
                                 </div>
                                 <div class="panel panel--simple panel--warning js-panel-info u-mb-m">
@@ -40,7 +40,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 <div class="answer">
                                     <div class="answer__fields js-fields">
                                         <div class="field field--radio field--multiplechoice">
-                                            <fieldset class="u-mb-xl">
+                                            <fieldset>
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
@@ -67,6 +67,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                             </fieldset>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="u-mb-xl">
+                                    <p>If you can’t answer questions for others in your household, there are <a class="js-ir-link" href="../cant-answer-for-others/">other ways each person can complete their own census.</a></p>
                                 </div>
                             </section>
                         </div>
@@ -104,7 +107,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     });
     function updateAllPreviousLinks() {
       $('.js-previous-link').attr('href', document.referrer);
+      $('.js-ir-link').attr('href', '../cant-answer-for-others/?person=' + personId);
     }
-
     $(updateAllPreviousLinks);
 </script>

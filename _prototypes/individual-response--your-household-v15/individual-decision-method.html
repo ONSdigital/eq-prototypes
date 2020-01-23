@@ -51,7 +51,7 @@ cdn: v1.5.0
                                                            type="radio"
                                                            name="does-anyone-else-live-here"
                                                            id="post" value="post">
-                                                    <label class="label label--inline u-fs-r--b"
+                                                    <label class="label label--inline"
                                                            for="post">
                                                         Post
                                                         <br>
@@ -113,6 +113,7 @@ cdn: v1.5.0
     var phoneInputOther = document.getElementById('phone-other');
     var emailInput = document.getElementById('email');
     var emailInputOther = document.getElementById('email-other');
+    var previousPage = searchParams.get('previous');
 
     if (!personId) {
         personId = cannotAnswerPeople[0].id;
@@ -154,4 +155,14 @@ cdn: v1.5.0
 
         window.location.href = url + '?person_id=' + personId;
     });
+
+    function updateAllPreviousLinks() {
+        if (previousPage === 'cant-answer-for-others-who') {
+            $('.js-previous-link').attr('href', '../cant-answer-for-others-who');
+        } else {
+            $('.js-previous-link').attr('href', '../cant-answer-for-others/?person=' + personId);
+        }
+    }
+
+    $(updateAllPreviousLinks);
 </script>

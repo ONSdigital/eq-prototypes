@@ -34,7 +34,7 @@ cdn: v2.0.0
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
-                                        class="question__title u-fs-l js-heading">
+                                        class="question__title u-fs-xl js-heading">
                                         What is your usual address?
                                     </h1>
                                 </div>
@@ -77,7 +77,7 @@ cdn: v2.0.0
                                                             class="label label--inline u-fs-r " for="outside-uk" id="label-radio-answer-other">An address outside the UK</label>
                                                     <div class="field__other">
                                                         <label
-                                                                class="label u-fs-s--b" for="other-answer" id="label-checkbox-other-input">Please specify country</label>
+                                                                class="label u-fs-m--b" for="other-answer" id="label-checkbox-other-input">Please specify country</label>
                                                         <input class="input input__text" id="other-answer" name="other-answer" type="text" data-qa="other-option">
                                                     </div>
                                                 </div>
@@ -163,8 +163,8 @@ cdn: v2.0.0
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy() || isVisitor) {
-      $('.js-heading').html('What is ' + person.fullName +
-        window.ONS.utils.trailingNameS(person.fullName) + ' usual address?');
+      $('.js-heading').html('What is ' + '<em class="highlight">' + person.fullName +
+        window.ONS.utils.trailingNameS(person.fullName) + '</em>' + ' usual address?');
     }
   }
 

@@ -30,7 +30,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                         <div class="block">
                             <section class="section" id="question-area">
                                 <div class="question">
-                                    <h1 class="question__title u-fs-l u-mb-s">
+                                    <h1 class="question__title u-fs-xl u-mb-s">
                                         Are any of these people related to 
                                         <span class="js-relationship-person-is"></span>?
                                     </h1>
@@ -161,7 +161,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       }
     }
 
-    function updateList() {
+    function updateList(updateOnScreen) {
       if (!personId) {
         console.log('person url parameter not found');
         return;
@@ -202,16 +202,19 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       var personToIsMe = person.id ===
             storageAPI.IDS.USER_HOUSEHOLD_MEMBER_ID;
 
-      $('.js-relationship-person-is').html((personToIsMe ? ' you' : person.fullName));
-      $('.js-relationship-person-is-radio').html((personToIsMe ? ' me' : person.fullName));
+      if (updateOnScreen === true) {
 
-      $.each(
-        remainingPersonIds.map(function (personId) {
-          return storageAPI.getHouseholdMemberByPersonId(personId);
-        }
-      ), function (i, member) {
-        $('#js-member-list').append(createMemberListItem(member['@person']));
-      });
+        $('.js-relationship-person-is').html((personToIsMe ? ' you' : person.fullName));
+        $('.js-relationship-person-is-radio').html((personToIsMe ? ' me' : person.fullName));
+
+        $.each(
+          remainingPersonIds.map(function (personId) {
+            return storageAPI.getHouseholdMemberByPersonId(personId);
+          }
+        ), function (i, member) {
+          $('#js-member-list').append(createMemberListItem(member['@person']));
+        });
+      }
     }
 
     $('.js-submit').on('click', function(e) {
@@ -265,9 +268,16 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                   personInt = ++personInt
                   personId = 'person' + personInt;
                 }
+                //find next list of people to as if unrelated. If more than one go to relationships else 
 
-                window.location.href = '../relationships-person-select/?person=' +
-                  personId + '&relationship-description=unrelated';
+                $(updateList(false));
+
+                if (remainingPersonIds.length < 2) {
+                  window.location.href = '../relationships';
+                } else {
+                  window.location.href = '../relationships-person-select/?person=' +
+                    personId + '&relationship-description=unrelated';
+                }
 
             }
             else {
@@ -292,5 +302,5 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         });
       });
 
-    $(updateList);
+    $(updateList(true));
 </script>

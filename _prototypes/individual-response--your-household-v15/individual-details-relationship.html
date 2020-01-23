@@ -34,7 +34,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
-                                        class="question__title u-fs-l js-heading">
+                                        class="question__title u-fs-xl js-heading">
                                         On <span
                                             class="js-significant-date"></span>,
                                         what is your legal marital or
@@ -224,9 +224,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('What is ' + person.fullName +
-      window.ONS.utils.trailingNameS(person.fullName) +
-        ' legal marital or same-sex civil partnership status?');
+      $('.js-heading').html('On <span class="js-significant-date">' + window.ONS.utils.getSignificant() + '</span>, what is ' + '<em class="highlight">' + person.fullName + 
+      window.ONS.utils.trailingNameS(person.fullName) + '</em>' +
+        ' legal marital or registered civil partnership status?');
     }
   }
 
