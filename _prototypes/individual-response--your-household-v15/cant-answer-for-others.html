@@ -67,29 +67,32 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         });  
         var cannotAnswerPersonID = cannotAnswerPerson ? cannotAnswerPerson.id : null;
     }
-
   $('.btn--link').click(function(e) {
     e.preventDefault();
 
     if (otherHouseholdMembers.length === 1 ||
         personId && personId !== 'person_me') {
+        var otherHouseholdPerson = otherHouseholdMembers.find(function(p) {
+            return p['@person'].id = personId;
+        });  
+
         var cannotAnswerPeopleAlready = cannotAnswerPeople.findIndex((e) => e.id === personId);
 
       if (cannotAnswerPeopleAlready === -1) {
           cannotAnswerPeople.push({
-            id: personId,
+            id: otherHouseholdPerson['@person'].id,
             responseOption: 'new-survey',
             phoneNumber: null,
           });
       } else {
           cannotAnswerPeople[cannotAnswerPeopleAlready] = {
-            id: personId,
+            id: otherHouseholdPerson['@person'].id,
             responseOption: 'new-survey',
             phoneNumber: null,
           };
       }       
         sessionStorage.setItem('cannot-answer-people', JSON.stringify(cannotAnswerPeople));
-        window.location = '../individual-decision-method/?person_id=' + personId + (surveyType ? '&survey=' + surveyType : '');
+        window.location = '../individual-decision-method/?person_id=' + otherHouseholdPerson['@person'].id + (surveyType ? '&survey=' + surveyType : '');
 
     } else {
         
