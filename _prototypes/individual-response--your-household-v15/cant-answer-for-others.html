@@ -54,41 +54,40 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     urlParams = new URLSearchParams(window.location.search),
     personId = urlParams.get('person'),
     person = personId ? storageAPI.getHouseholdMemberByPersonId(personId)['@person'] : null,
-    surveyType = urlParams.get('survey');
-    
-    var allHouseholdMembers = storageAPI.getAllHouseholdMembers();
-    var previousPage = urlParams.get('previous');
-    var cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people', '') || '[]');
-    var otherHouseholdMembers = allHouseholdMembers.filter(function(p) {
+    surveyType = urlParams.get('survey'),
+    previousPage = urlParams.get('previous'),
+    allHouseholdMembers = storageAPI.getAllHouseholdMembers(),
+    cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people', '') || '[]');
+    eligibleHouseholdMembers = allHouseholdMembers.filter(function(p) {
         return p.type !== 'visitor' && p['@person'].id !== 'person_me';
     });  
 
   $('.btn--link').click(function(e) {
     e.preventDefault();
 
-    if (otherHouseholdMembers.length === 1 ||
+    if (eligibleHouseholdMembers.length === 1 ||
         personId && personId !== 'person_me') {
-        var otherHouseholdPerson = otherHouseholdMembers.find(function(p) {
-            return otherHouseholdMembers.length > 1 ? p['@person'].id === personId : p['@person'].id;
+        var eligibleHouseholdMember = eligibleHouseholdMembers.find(function(p) {
+            return eligibleHouseholdMembers.length > 1 ? p['@person'].id === personId : p['@person'].id;
         });  
 
-        var cannotAnswerPeopleAlready = cannotAnswerPeople.findIndex((e) => e.id === otherHouseholdPerson['@person'].id);
+        var cannotAnswerPeopleAlready = cannotAnswerPeople.findIndex((e) => e.id === eligibleHouseholdMember['@person'].id);
 
       if (cannotAnswerPeopleAlready === -1) {
           cannotAnswerPeople.push({
-            id: otherHouseholdPerson['@person'].id,
+            id: eligibleHouseholdMember['@person'].id,
             responseOption: 'new-survey',
             phoneNumber: null,
           });
       } else {
           cannotAnswerPeople[cannotAnswerPeopleAlready] = {
-            id: otherHouseholdPerson['@person'].id,
+            id: eligibleHouseholdMember['@person'].id,
             responseOption: 'new-survey',
             phoneNumber: null,
           };
       }       
         sessionStorage.setItem('cannot-answer-people', JSON.stringify(cannotAnswerPeople));
-        window.location = '../individual-decision-method/?person_id=' + otherHouseholdPerson['@person'].id + (surveyType ? '&survey=' + surveyType : '') + (previousPage ? '?previous=' + 'cant-test-for-others' : '');
+        window.location = '../individual-decision-method/?person_id=' + eligibleHouseholdMember['@person'].id + (surveyType ? '&survey=' + surveyType : '') + (previousPage ? '&previous=' + 'cant-test-for-others' : '');
 
     } else {
         
