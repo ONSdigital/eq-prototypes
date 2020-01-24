@@ -99,7 +99,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     details = storageAPI.getPersonalDetailsFor(personId),
     surveyType = urlParams.get('survey'),
     mobileNo = urlParams.get('mobile');
-    
+    var previousPage = searchParams.get('previous');
     var cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people', '') || '[]');
     var cannotAnswerPerson = cannotAnswerPeople.findIndex((e) => e.id === personId);
 
@@ -116,7 +116,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
     window.location.href = $('[name=radio-answer]:checked').val() === 'yes'
       ? '../individual-decision-enter-mobile-sent/?person=' + personId +
-        '&remaining=' + encodeURI(urlParams.get('people')) + '&mobile=' + mobileNo
+        '&remaining=' + encodeURI(urlParams.get('people')) + '&mobile=' + mobileNo + '&previous=' + previousPage
       : document.referrer;
   });
 

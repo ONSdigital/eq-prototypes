@@ -100,6 +100,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     personId = urlParams.get('person_id'),
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     addressLines = (sessionStorage.getItem('address') || '').replace(/,/g, '<br />');
+    previousPage = urlParams.get('previous');
 
     var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
     var possessive = person.fullName.slice(-1) === 's' ? "'" : "'s";
@@ -126,4 +127,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     * Routing
     */
     $('#person').val(urlParams.get('person'));
+
+
+    function updateAllPreviousLinks() {
+        $('.js-previous-link').attr('href', '../individual-decision-method/?person_id=' + personId + (previousPage ? '&previous=' + previousPage : ''));
+    }
+
+    $(updateAllPreviousLinks);
 </script>

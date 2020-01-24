@@ -153,12 +153,14 @@ cdn: v1.5.0
         }
         sessionStorage.setItem('cannot-answer-people', JSON.stringify(cannotAnswerPeople));
 
-        window.location.href = url + '?person_id=' + personId;
+        window.location.href = url + '?person_id=' + personId + '&previous=' + previousPage;
     });
 
     function updateAllPreviousLinks() {
         if (previousPage === 'cant-answer-for-others-who') {
             $('.js-previous-link').attr('href', '../cant-answer-for-others-who');
+        } else if (previousPage === 'uac-question') {
+            $('.js-previous-link').attr('href', '../uac-question/?person=' + personId + (previousPage ? '&previous=' + previousPage : ''));
         } else {
             $('.js-previous-link').attr('href', '../cant-answer-for-others/?person=' + personId + (previousPage ? '&previous=' + previousPage : ''));
         }

@@ -117,4 +117,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
    * Routing
    */
   $('#person').val(urlParams.get('person'));
+
+
+    function updateAllPreviousLinks() {
+        $('.js-previous-link').attr('href', '../individual-decision-method/?person_id=' + personId);
+    }
+
+    $(updateAllPreviousLinks);
 </script>
