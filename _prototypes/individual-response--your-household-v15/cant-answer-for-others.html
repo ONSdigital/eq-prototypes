@@ -88,7 +88,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
           };
       }       
         sessionStorage.setItem('cannot-answer-people', JSON.stringify(cannotAnswerPeople));
-        window.location = '../individual-decision-method/?person_id=' + otherHouseholdPerson['@person'].id + (surveyType ? '&survey=' + surveyType : '') + (previousPage ? '?previous=' + 'cant-test-for-others' : '');
+        window.location = '../individual-decision-method/?person_id=' + otherHouseholdPerson['@person'].id + (surveyType ? '&survey=' + surveyType : '') + (previousPage ? '&previous=' + 'cant-test-for-others' : '');
 
     } else {
         
@@ -101,7 +101,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         if (previousPage === 'hub') {
             $('.js-previous-link').attr('href', '../hub');
         } else {
-            $('.js-previous-link').attr('href', '../individual-intro/?person=' + personId);
+            $('.js-previous-link').attr('href', '../individual-intro/' + '?person=' + personId);
         }
     }
 
