@@ -204,7 +204,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
       if (updateOnScreen === true) {
 
-        $('.js-relationship-person-is').html((personToIsMe ? ' you' : person.fullName));
+        $('.js-relationship-person-is').html((personToIsMe ? ' you' : '<em class=”highlight”>' + person.fullName + '</em>'));
         $('.js-relationship-person-is-radio').html((personToIsMe ? ' me' : person.fullName));
 
         $.each(
