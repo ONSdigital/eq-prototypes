@@ -65,7 +65,7 @@ h4 {
     }
 }
 
-.btn:not(.btn--ghost) {
+.btn:not(.btn--ghost):not(.btn--ghost-blue) {
     -webkit-box-shadow: 0px 3px 0px 0px rgba(0,0,0,0.8);
     -moz-box-shadow: 0px 3px 0px 0px rgba(0,0,0,0.8);
     box-shadow: 0px 3px 0px 0px rgba(0,0,0,0.8);
