@@ -117,7 +117,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       }
       sessionStorage.setItem('cannot-answer-people', JSON.stringify(cannotAnswerPeople));
 
-      window.location.href = '../individual-decision-method?person_id=' + personId;
+      window.location.href = '../individual-decision-method?person_id=' + personId + (previousPage ? '&previous=' + previousPage : '');
  
   });
 

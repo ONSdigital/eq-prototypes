@@ -160,7 +160,7 @@ cdn: v1.5.0
         if (previousPage === 'cant-answer-for-others-who') {
             $('.js-previous-link').attr('href', '../cant-answer-for-others-who');
         } else {
-            $('.js-previous-link').attr('href', '../cant-answer-for-others/?person=' + personId);
+            $('.js-previous-link').attr('href', '../cant-answer-for-others/?person=' + personId + (previousPage ? '&previous=' + previousPage : ''));
         }
     }
 
