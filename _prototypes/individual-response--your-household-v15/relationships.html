@@ -499,35 +499,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       missingRelationshipsForPerson =
        storageAPI.getPeopleIdsMissingRelationshipsWithPerson(personToId);
 
-      /**
-       * Question strategies
-       *
-       * If child-parent relationship type was selected
-       * and there are missing relationships for this person
-       */
-      /*if(relationshipDescriptionVal === 'mother-father' &&
-        storageAPI.getPeopleIdsMissingRelationshipsWithPerson(personIsId).length) {
-        subjectPersonId = personIsId;
-      }
-      else if(relationshipDescriptionVal === 'son-daughter' &&
-        storageAPI.getPeopleIdsMissingRelationshipsWithPerson(personToId).length) {
-        subjectPersonId = personToId;
-        subjectRelationshipDescription = 'mother-father';
-      }
-      else if(relationshipDescriptionVal === 'unrelated' &&
-        storageAPI.getPeopleIdsMissingRelationshipsWithPerson(personIsId).length &&
-
-        /!**
-         * And personIs already has the same relationship type with someone
-         * else
-         *!/
-        storageAPI.getAllManualRelationships()
-          .filter(storageAPI.isInRelationship.bind(null, personIsId))
-          .filter(storageAPI.isRelationshipType.bind(null, relationshipDescriptionVal))
-          .length > 1
-      ) {
-        subjectPersonId = personIsId;
-      }*/
+    sessionStorage.setItem('missingRelationshipsForPerson.length', missingRelationshipsForPerson.length);
 
     if(relationshipDescriptionVal === 'unrelated' &&
       missingRelationshipsForPerson.length &&
@@ -541,19 +513,32 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         .filter(storageAPI.isRelationshipType.bind(null, relationshipDescriptionVal))
         .length > 1
     ) {
+      sessionStorage.setItem('unrelatedFlag', true);
       subjectPersonId = personToId;
     }
 
     subjectRelationshipDescription = subjectRelationshipDescription ||
       relationshipDescriptionVal;
 
+
+    var remainingMissingRelationships = sessionStorage.getItem('missingRelationshipsForPerson.length');
+    
+    var nextPersonId = storageAPI.getNextPersonId(personToId);
     if(subjectPersonId) {
       window.location.href = '../relationships-person-select/?person=' +
-        subjectPersonId + '&relationship-description=' +
-        subjectRelationshipDescription +
+        personToId + '&relationship-description=' +
+        'unrelated' +
         nextPageSurveyRouting;
-    }
-    else {
+    } else if (sessionStorage.getItem('unrelatedFlag') && remainingMissingRelationships === '0') {
+        if (remainingMissingRelationships > 0) {
+          window.location.href = '../relationships';
+        } else {
+          window.location.href = '../relationships-person-select/?person=' +
+          nextPersonId + '&relationship-description=' +
+          'unrelated' +
+          nextPageSurveyRouting;
+        }
+    } else {
       window.location.href = '../relationships/?noop=1' + nextPageSurveyRouting;
     }
   }
