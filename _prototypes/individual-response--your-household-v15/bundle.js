@@ -22,6 +22,7 @@ import {
   editRelationship,
   getAllRelationships,
   getAllManualRelationships,
+  getNextPersonId,
   deleteAllRelationshipsForMember,
   relationshipSummaryTemplates,
   missingRelationshipInference,
@@ -534,6 +535,7 @@ window.ONS.storage = {
   editRelationship,
   getAllRelationships,
   getAllManualRelationships,
+  getNextPersonId,
   deleteAllRelationshipsForMember,
 
   getAllParentsOf,

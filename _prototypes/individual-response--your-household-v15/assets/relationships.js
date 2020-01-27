@@ -617,3 +617,13 @@ export function getRelationshipOf(person1, person2) {
       isInRelationship(person2, relationship);
   });
 }
+
+export function getNextPersonId(person) {
+  if (person === 'person_me') {
+    return 'person1'
+  } else {
+    var personInt = person.slice(person.length -1 , person.length); 
+    personInt = ++personInt
+    return 'person' + personInt;
+  }
+}
