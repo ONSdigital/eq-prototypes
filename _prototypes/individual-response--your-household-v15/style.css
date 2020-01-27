@@ -12,6 +12,12 @@ body {
     font-weight: 300;
 }
 
+h1,
+h2,
+h3,
+h4 {
+    font-weight: 600!important;
+}
 .u-fs-xl, 
 h1 {
     font-size: 1.44444444rem;

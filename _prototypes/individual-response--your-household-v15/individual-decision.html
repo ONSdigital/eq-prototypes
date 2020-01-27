@@ -33,7 +33,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
-                                        class="question__title u-fs-xl">
+                                        class="question__title u-fs-xl js-heading">
                                         Are you <span class="js-person-name"></span>
                                     </h1>
                                 </div>
@@ -94,10 +94,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         yesbox = document.getElementById("yes"),
         surveyType = urlParams.get('survey');
         
-    storageAPI.personalBookmark(personId, window.location.href);
+        
 	$('.qa-btn-submit').click(function(e) {
 	  var val = yesbox.checked;
-
+      storageAPI.personalBookmark(personId, window.location.href);
       storageAPI.setAnsweringIndividualByProxy(!val);
       document.trav.action = "../individual-details-dob";
 	});
@@ -118,6 +118,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         $('#' + (answerVal ? 'no' : 'yes')).attr('checked', true);
     }
 
+    function updateAllPreviousLinks() {
+        $('.js-previous-link').attr('href', '../individual-intro/?person_id=' + personId);
+    }
+
+    $(updateAllPreviousLinks);
 	$(updateName);
     $(updateRouting);
     $(updateSelected);

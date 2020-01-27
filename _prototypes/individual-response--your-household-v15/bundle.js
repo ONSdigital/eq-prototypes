@@ -359,7 +359,7 @@ function doILiveHere() {
 }
 
 function getSignificant() {
-  return '26 January 2020';
+  return 'Sunday 26 January 2020';
 }
 
 function updateSignificantDate() {
@@ -459,10 +459,10 @@ function updateContinueNotice() {
 
   const template = `<div class="panel panel--simple panel--info u-mb-s">
       <div class="panel__body">
-          <strong>This was the last question
-              you answered in the section</strong>
-          <p>You can review your answers
-              at the <a href="../individual-decision/?person=${personId}">start 
+          <strong>This was the last unanswered question
+              in the section</strong>
+          <p>
+              <a href="../individual-intro/?person=${personId}">Go to the start 
               of this section</a>
           </p>
       </div>

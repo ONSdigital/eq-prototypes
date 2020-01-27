@@ -41,8 +41,7 @@ hideSaveLater: true
 }
 
 </style>
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v5.0"></script>
+
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
@@ -57,32 +56,34 @@ hideSaveLater: true
             <main role="main" id="main" class="page__main">
                 <div class="panel panel--simple panel--success u-mb-m">    
                     <div class="panel__body">
-                        <h1 class="u-mb-xs u-fs-l">
-                            Thank you for submitting your census
+                        <h1 class="u-mb-xs u-fs-l ">
+                            Confirmation email sent
                         </h1>
-                        <p>We have received your answers and you do not need to do anything else.</p>
+                        <p class="js-piping">An email confirming you have completed your census has been sent to&nbsp;<strong>{x}</strong></p>
                     </div>
                 </div>
-                <p>If you would like confirmation sent to you, enter your email address.</p>
-                <form action="../complete--confirmation-sent/">
-                    <p class="field">
-                        <label class="label" for="email">Email address</label>
-                        <input type="email" id="email-address" class="input input--text input-type__input js-typeahead-input " autocomplete="email" />
-                    </p>
-                    <button type="submit" class="btn btn--small u-mb-l qa-btn-submit">
-                        <span class="btn__inner">Send confirmation</span>
-                    </button>
-                </form>
-                <p class="lock u-mb-l">Your personal information is protected by law and will be kept confidential.</p>
-                <hr class="u-mb-m">
                 <h2 class="u-fs-m u-mb-xs">Share</h2>
                 <p class="u-mb-xs">Let others know you've done your census.</p>
+                <!-- Load Facebook SDK for JavaScript -->
+                <div id="fb-root"></div>
+                <script>(function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) return;
+                    js = d.createElement(s); js.id = id;
+                    js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));</script>
 
+                <!-- Your share button code -->
                 <div class="share-buttons">
-                    <div class="fb-share-button u-mt-no u-pt-no u-mr-s u-fl" data-href="https://census.gov.uk/about-the-census/about-census-2021/" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcensus.gov.uk%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+                    <div class="fb-share-button u-mt-no u-pt-no u-mr-s u-fl" 
+                        data-href="https://census.gov.uk/about-the-census/" 
+                        data-text="I&#39;ve just completed my Census 2021 questionnaire! Start yours at:"
+                        data-layout="button">
+                    </div>
                     <div style="display:inline-block; margin-top:.4rem; margin-right:1rem;">
                         <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="I&#39;ve just completed my Census 2021 questionnaire! Start yours at:" data-url="https://census.gov.uk/" data-hashtags="census2021" data-dnt="true" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                    </div>
+                    </div>                    
                 </div>
             </main>
         </div>
@@ -92,15 +93,12 @@ hideSaveLater: true
 <script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
 
 <script>
-function storeEmail(){
-    $('.qa-btn-submit').on('click', function (e) {
-        e.preventDefault();
+    var searchParams = new URLSearchParams(window.location.search);
+    var emailAddress = searchParams.get('email');
+    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
 
-        window.location.href = '../complete--confirmation-sent/?email=' + encodeURI($('#email-address').val());
+    pipingDestinations.forEach(function(pipingDestination) {
+        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', emailAddress);
     });
-  }
-
-  $(storeEmail);
-
 
 </script>

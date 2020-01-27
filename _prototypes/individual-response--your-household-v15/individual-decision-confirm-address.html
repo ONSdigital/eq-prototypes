@@ -33,11 +33,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                     Do you want to send an individual access code to <em class="highlight">{x}</em> by post?
                                 </h1>
                             </div>
-                            <p>A letter with an indivdual access code will be sent to:</p>
+                            <p>A letter with an individual access code will be sent to:</p>
                             <div class="u-mb-m js-address"></div>
                              <div class="panel panel--simple panel--info u-mb-m">
                                 <div class="panel__body">
-                                    We can only send access codes to your registered household address
+                                    For security resons we can only send access codes to an unnamed resident at your registered household address.
                                 </div>
                             </div>
                             <div class="field field--radio field--multiplechoice">
@@ -110,7 +110,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     });
 
     function updateQuestion() {
-        $('.js-address').html(person.fullName + ' <br> ' + addressLines);
+        $('.js-address').html('<strong>Individual Resident</strong>' + ' <br> ' + addressLines);
     }
 
     $('.qa-btn-submit').on('click', function (e) {
