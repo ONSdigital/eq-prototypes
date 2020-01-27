@@ -530,7 +530,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         'unrelated' +
         nextPageSurveyRouting;
     } else if (sessionStorage.getItem('unrelatedFlag') && remainingMissingRelationships === '0') {
-        if (remainingMissingRelationships > 0) {
+        if (missingRelationshipsForPerson.length < 2) {
           window.location.href = '../relationships';
         } else {
           window.location.href = '../relationships-person-select/?person=' +
