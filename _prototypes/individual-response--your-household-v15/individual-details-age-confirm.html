@@ -25,7 +25,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="off"
                       action="../individual-details-dob">
-                    <input type="hidden" name="person" id="person"
+                    <input type="hidden" name="person_id" id="person_id"
                            value="#"/>
                     <input type="hidden" name="survey" id="survey-type"
                            value="#"/>
@@ -98,7 +98,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <script>
   var storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
-    personId = urlParams.get('person'),
+    personId = urlParams.get('person_id'),
     member = storageAPI.getHouseholdMemberByPersonId(personId),
     person = member['@person'],
     isEditing = urlParams.get('edit'),
@@ -128,7 +128,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     }
 
     window.location.href =
-      route + '?person=' + personId + (surveyType ? '&survey=' + surveyType :'');
+      route + '?person_id=' + personId + (surveyType ? '&survey=' + surveyType :'');
   }));
 
   function updateRouting() {
@@ -156,7 +156,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         '<em class="highlight">' + person.fullName + '</em>' + ' is ' + age + ' years old. Is this correct?'
       );
       $('#yes-label').html(
-        'Yes, ' + '<em class="highlight">' + person.fullName + '</em>' + ' is ' + age + ' years old');
+        'Yes, ' + person.fullName + ' is ' + age + ' years old');
 
       $('#no-label').html('No, I need to change their date of birth');
     }
@@ -176,5 +176,5 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   /**
    * Routing
    */
-  $('#person').val(new URLSearchParams(window.location.search).get('person'));
+  $('#person_id').val(new URLSearchParams(window.location.search).get('person_id'));
 </script>
