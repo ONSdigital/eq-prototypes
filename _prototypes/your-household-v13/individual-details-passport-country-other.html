@@ -25,7 +25,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="off" action="../individual-details-apprenticeship">
-                    <input type="hidden" name="person" id="person"
+                    <input type="hidden" name="person" id="person_id"
                            value="#"/>
                     <input type="hidden" name="survey" id="survey-type"
                            value="#"/>
@@ -130,5 +130,5 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   /**
    * Routing
    */
-  $('#person').val(new URLSearchParams(window.location.search).get('person'));
+  $('#person_id').val(new URLSearchParams(window.location.search).get('person'));
 </script>

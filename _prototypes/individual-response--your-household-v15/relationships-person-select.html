@@ -108,7 +108,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
       params = new URLSearchParams(window.location.search),
 
-      personId = params.get('person'),
+      personId = params.get('person_id'),
 
       surveyType = params.get('survey'),
 
@@ -270,7 +270,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                 if (remainingPersonIds.length < 2) {
                   window.location.href = '../relationships';
                 } else {
-                  window.location.href = '../relationships-person-select/?person=' +
+                  window.location.href = '../relationships-person-select/?person_id=' +
                     personId + '&relationship-description=unrelated';
                 }
 

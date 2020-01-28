@@ -25,7 +25,7 @@ cdn: v2.0.0
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="off"
                       action="../individual-details-dob">
-                    <input type="hidden" name="person" id="person"
+                    <input type="hidden" name="person_id" id="person_id"
                            value="#"/>
                     <input type="hidden" name="survey" id="survey-type"
                            value="#"/>
@@ -111,7 +111,7 @@ cdn: v2.0.0
 <script>
   var storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
-    personId = urlParams.get('person'),
+    personId = urlParams.get('person_id'),
     member = storageAPI.getHouseholdMemberByPersonId(personId),
     person = member['@person'],
     isEditing = urlParams.get('edit'),
@@ -130,7 +130,7 @@ cdn: v2.0.0
 
     if(isEditing) {
       e.preventDefault();
-      window.location.href = '../individual-details-summary/?person=' +
+      window.location.href = '../individual-details-summary/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
     }
 
@@ -142,7 +142,7 @@ cdn: v2.0.0
           url: '../hub/?noop=fake'
         },
         'in-uk': {
-          url: '../individual-details-address/?person=' + personId
+          url: '../individual-details-address/?person_id=' + personId
         },
         'outside-uk': {
           url: '../hub/?noop=fake'
@@ -192,5 +192,5 @@ cdn: v2.0.0
   /**
    * Routing
    */
-  $('#person').val(new URLSearchParams(window.location.search).get('person'));
+  $('#person_id').val(new URLSearchParams(window.location.search).get('person_id'));
 </script>

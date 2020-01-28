@@ -511,7 +511,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <script>
   var storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
-    personId = urlParams.get('person'),
+    personId = urlParams.get('person_id'),
     details = storageAPI.getPersonalDetailsFor(personId),
     member = storageAPI.getHouseholdMemberByPersonId(personId),
     surveyType = urlParams.get('survey'),
@@ -762,7 +762,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
      * Update links
      */
     $('.js-change-person-link').each(function () {
-      $(this).attr('href', $(this).attr('href') + '&person=' + personId +
+      $(this).attr('href', $(this).attr('href') + '&person_id=' + personId +
         (surveyType ? '&survey=' + surveyType : ''));
     });
   });

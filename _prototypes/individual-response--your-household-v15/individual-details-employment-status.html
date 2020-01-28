@@ -25,7 +25,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="off"
                       action="../individual-details-job-title">
-                    <input type="hidden" name="person" id="person"
+                    <input type="hidden" name="person_id" id="person_id"
                            value="#"/>
                     <input type="hidden" name="survey" id="survey-type"
                            value="#"/>
@@ -127,7 +127,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <script>
   var storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
-    personId = urlParams.get('person'),
+    personId = urlParams.get('person_id'),
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     isEditing = urlParams.get('edit'),
     details = storageAPI.getPersonalDetailsFor(personId),
@@ -144,14 +144,14 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       e.preventDefault();
 
       if(val === 'not-employed') {
-        window.location.href = '../individual-details-summary/?person=' + personId +
+        window.location.href = '../individual-details-summary/?person_id=' + personId +
           (surveyType ? '&survey=' + surveyType : '');
       }
       else {
         /**
          * Pass through to specify additional details
          */
-        window.location.href = '../individual-details-job-title/?person=' + personId +
+        window.location.href = '../individual-details-job-title/?person_id=' + personId +
           (surveyType ? '&survey=' + surveyType : '') +
           '&switchedFromUnemployed=true';
       }
@@ -160,7 +160,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       e.preventDefault();
 
       storageAPI.clearPersonalBookmark(personId);
-      window.location.href = '../hub/?person=' + personId;
+      window.location.href = '../hub/?person_id=' + personId;
     }
   }));
 
@@ -188,5 +188,5 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   /**
    * Routing
    */
-  $('#person').val(new URLSearchParams(window.location.search).get('person'));
+  $('#person_id').val(new URLSearchParams(window.location.search).get('person_id'));
 </script>

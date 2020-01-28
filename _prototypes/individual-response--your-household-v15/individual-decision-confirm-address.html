@@ -117,7 +117,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         e.preventDefault();
 
     window.location.href = $('[name=radio-answer]:checked').val() === 'yes'
-      ? '../individual-decision-confirm-address-sent/?person=' + personId
+      ? '../individual-decision-confirm-address-sent/?person_id=' + personId
       : document.referrer;
     });
 
@@ -126,7 +126,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     /**
     * Routing
     */
-    $('#person').val(urlParams.get('person'));
+    $('#person_id').val(urlParams.get('person_id'));
 
 
     function updateAllPreviousLinks() {

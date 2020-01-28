@@ -25,7 +25,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="off"
                       action="../individual-details-ethnic-group-description">
-                    <input type="hidden" name="person" id="person"
+                    <input type="hidden" name="person_id" id="person_id"
                            value="#"/>
                     <input type="hidden" name="survey" id="survey-type"
                            value="#"/>
@@ -167,7 +167,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <script>
   var storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
-    personId = urlParams.get('person'),
+    personId = urlParams.get('person_id'),
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     isEditing = urlParams.get('edit'),
     details = storageAPI.getPersonalDetailsFor(personId),
@@ -184,7 +184,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
      */
     if(isEditing) {
       e.preventDefault();
-      window.location.href = '../individual-details-ethnic-group-description/?person=' + personId +
+      window.location.href = '../individual-details-ethnic-group-description/?person_id=' + personId +
         (surveyType ? '&survey=' + surveyType : '') +
         '&ethnic-group=' + val +
         (isEditing ? '&edit=true' : '');
@@ -216,5 +216,5 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   /**
    * Routing
    */
-  $('#person').val(new URLSearchParams(window.location.search).get('person'));
+  $('#person_id').val(new URLSearchParams(window.location.search).get('person_id'));
 </script>

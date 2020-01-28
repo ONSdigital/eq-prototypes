@@ -24,7 +24,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="off">
-                    <input type="hidden" name="person" id="person"
+                    <input type="hidden" name="person" id="person_id"
                            value="#"/>
                     <input type="hidden" name="survey" id="survey-type"
                            value="#"/>
@@ -137,5 +137,5 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   /**
    * Routing
    */
-  $('#person').val(urlParams.get('person'));
+  $('#person_id').val(urlParams.get('person'));
 </script>

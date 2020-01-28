@@ -24,7 +24,7 @@ cdn: v1.5.0
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="off" novalidate="">
-                    <input type="hidden" name="person" id="person"
+                    <input type="hidden" name="person_id" id="person_id"
                            value="#"/>
                     <input type="hidden" name="returnurl" id="returnurl"
                            value="#"/>
@@ -108,14 +108,14 @@ cdn: v1.5.0
 <script>
   var storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
-    personId = urlParams.get('person'),
+    personId = urlParams.get('person_id'),
     returnURL = urlParams.get('returnurl'),
     nobox = document.getElementById("no"),
     surveyType = urlParams.get('survey');
 
   $('.qa-btn-submit').on('click', function(e) {
 
-    $('#person').val(personId);
+    $('#person_id').val(personId);
     $('#returnurl').val(returnURL);
 
     /**

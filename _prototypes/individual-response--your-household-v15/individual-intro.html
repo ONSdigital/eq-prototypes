@@ -74,19 +74,19 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <script>
   var storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
-    personId = urlParams.get('person'),
+    personId = urlParams.get('person_id'),
     surveyType = urlParams.get('survey');
 
     $('.btn-submit').click(function(e) {
     e.preventDefault();
-    window.location = '../individual-decision/?person=' + personId +
+    window.location = '../individual-decision/?person_id=' + personId +
         (surveyType ? '&survey=' + surveyType : '');
     });
 
     $('.js-ir-link').click(function(e) {
         e.preventDefault();
         
-        window.location = '../cant-answer-for-others/?person=' + personId +
+        window.location = '../cant-answer-for-others/?person_id=' + personId +
         (surveyType ? '&survey=' + surveyType : '');
     });
 

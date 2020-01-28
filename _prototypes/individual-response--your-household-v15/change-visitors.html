@@ -155,7 +155,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   var $removeLink = $('.js-remove-person');
   $removeLink.attr(
-    'href', $removeLink.attr('href') + '?person=' + editUserId +
+    'href', $removeLink.attr('href') + '?person_id=' + editUserId +
     (redirect ? '&redirect=' + redirect : '')
   );
 
@@ -250,7 +250,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         $('#first-name').val(person.firstName);
         $('#last-name').val(person.lastName);
         $('#question-title').html('Change details for ' + person.fullName);
-        $('#change-line').html('<p>If you have added this person by mistake or if circumstances have changed, you can <a href="../remove-household-member/?person=' + person.id +'">remove this visitor.</a><br>');
+        $('#change-line').html('<p>If you have added this person by mistake or if circumstances have changed, you can <a href="../remove-household-member/?person_id=' + person.id +'">remove this visitor.</a><br>');
         $('#member-list').remove();
       } else {
         $('#question-title').html('Member not found');

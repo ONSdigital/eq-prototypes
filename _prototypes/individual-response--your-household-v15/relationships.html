@@ -525,7 +525,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     
     var nextPersonId = storageAPI.getNextPersonId(personToId);
     if(subjectPersonId) {
-      window.location.href = '../relationships-person-select/?person=' +
+      window.location.href = '../relationships-person-select/?person_id=' +
         personToId + '&relationship-description=' +
         'unrelated' +
         nextPageSurveyRouting;
@@ -533,7 +533,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         if (missingRelationshipsForPerson.length < 2) {
           window.location.href = '../relationships';
         } else {
-          window.location.href = '../relationships-person-select/?person=' +
+          window.location.href = '../relationships-person-select/?person_id=' +
           nextPersonId + '&relationship-description=' +
           'unrelated' +
           nextPageSurveyRouting;

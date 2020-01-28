@@ -286,16 +286,16 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       ? storageAPI.getBookmarkFor(person.id) + '&continuing=true'
       : (status === 'completed'
         ? '../individual-details-summary/' : '../individual-intro/'
-      ) + '?person=' + person.id;
+      ) + '?person_id=' + person.id;
 
-    //+ '?person=' + person.id
+    //+ '?person_id=' + person.id
 
     /*if (personPin && personPin.pin) {
       linkHref = '../individual-pin-security/?returnurl=' + linkHref +
-        '&person=' + person.id;
+        '&person_id=' + person.id;
     }
     else {
-      linkHref += '?person=' + person.id;
+      linkHref += '?person_id=' + person.id;
     }*/
 
     //return linkHref;
@@ -306,7 +306,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       ? '../individual-details-summary/'
       : '../individual-details-sex/';
 
-    linkHref += '?person=' + person.id;
+    linkHref += '?person_id=' + person.id;
 
     return linkHref;
   }
@@ -438,7 +438,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
         window.location.href = nextBookmarkPersonId
           ? storageAPI.getBookmarkFor(nextBookmarkPersonId) + '&continuing=true'
-          : '../individual-intro/?person=' + nextStartPersonId;
+          : '../individual-intro/?person_id=' + nextStartPersonId;
       });
     }
   }
@@ -447,7 +447,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     if (surveyType) {
       $('.js-view-summary').attr('href', '../summary/?survey=' + surveyType);
     } else {
-      $('.js-link-ir').attr('href', sessionStorage.getItem('lives-here') === 'yes' ? '../cant-answer-for-others/?person=person_me&previous=hub' : '../cant-answer-for-others/?previous=hub');
+      $('.js-link-ir').attr('href', sessionStorage.getItem('lives-here') === 'yes' ? '../cant-answer-for-others/?person_id=person_me&previous=hub' : '../cant-answer-for-others/?previous=hub');
     }
   }
 
