@@ -224,6 +224,7 @@ a:focus:not(.btn--link):not(.btn--ghost):not(.js-clear-btn):not(.download__thumb
 .input--radio:focus {
     border-color: #222;
     outline: none;
+    box-shadow: none;
 }
 
 .input--checkbox:focus~.label:before, 
