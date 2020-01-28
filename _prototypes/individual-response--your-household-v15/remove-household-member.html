@@ -106,8 +106,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       }
     });
     function updateAllPreviousLinks() {
-      $('.js-previous-link').attr('href', document.referrer);
-      $('.js-ir-link').attr('href', '../cant-answer-for-others/?person=' + personId);
+      $('.js-previous-link').attr('href', '../summary/');
+      $('.js-ir-link').attr('href', '../cant-answer-for-others/?person=' + personId + '&previous=' + 'remove-household-member');
     }
     $(updateAllPreviousLinks);
 </script>
