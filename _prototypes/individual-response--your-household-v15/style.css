@@ -89,6 +89,15 @@ h4 {
     border: 2px solid #fd0;
 }
 
+.btn--secondary {
+    border-color: #d0d0d0;
+}
+
+.btn--secondary:hover {
+    border-color: #c0c0c0;
+    color: #222;
+}
+
 a {
     color: #334f9e;
 }
@@ -133,7 +142,7 @@ a:focus:not(.btn--link):not(.btn--ghost):not(.js-clear-btn):not(.download__thumb
 .panel--warning {
     font-weight: 600;
     padding-top: .5rem;
-    padding-bottom: 0;
+    padding-bottom: .5rem;
 }
 
 .panel--warning .panel__icon {
