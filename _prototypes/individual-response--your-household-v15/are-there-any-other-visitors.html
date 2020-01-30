@@ -27,7 +27,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password" novalidate="">
-                    <input autocomplete="new-password" type="hidden" name="previous"
+                    <input type="hidden" name="previous"
                            value="does-anyone-else-live-here"/>
                     <div class="group" id="rsi">
                         <div class="block" id="total-retail-turnover">
@@ -131,9 +131,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
     if (isVisitorJourney) {
       nextPosition = visitors.length + 1;
-      $('#form').prepend("<input autocomplete="new-password" type='hidden' name='visitor-types' value='" + visitorTypesStr + "' />");
+      $('#form').prepend("<input type='hidden' name='visitor-types' value='" + visitorTypesStr + "' />");
       $('#form')
-        .prepend('<input autocomplete="new-password" type="hidden" name="journey" value="visitors" />');
+        .prepend('<input type="hidden" name="journey" value="visitors" />');
       $('.js-visitors-summary').show();
 
       if (visitorTypesStr) {
