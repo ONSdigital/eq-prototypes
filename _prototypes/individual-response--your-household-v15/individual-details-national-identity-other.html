@@ -26,7 +26,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password"
                       action="../individual-details-ethnic-group">
-                    <input autocomplete="new-password" type="hidden" name="person_id" id="person_id"
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
                            value="#"/>
                     <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
                            value="#"/>
@@ -136,5 +136,5 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   /**
    * Routing
    */
-  $('#person_id').val(new URLSearchParams(window.location.search).get('person_id'));
+  $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
 </script>

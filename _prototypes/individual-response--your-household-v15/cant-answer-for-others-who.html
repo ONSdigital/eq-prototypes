@@ -35,7 +35,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password"
                       action="../hub">
-                    <input type="hidden" name="person_id" id="person_id"
+                    <input type="hidden" name="person_id" id="person"
                            value="#"/>
                     <input type="hidden" name="survey" id="survey-type"
                            value="#"/>
@@ -156,7 +156,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   /**
    * Routing
    */
-  $('#person_id').val(urlParams.get('person_id'));
+  $('#person').val(urlParams.get('person_id'));
 
     function updateAllPreviousLinks() {
       $('.js-previous-link').attr('href', '../cant-answer-for-others/?previous=' + previousPage);

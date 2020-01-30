@@ -79,7 +79,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     personDetails = storageAPI.getHouseholdMemberByPersonId(personId);
     $('.btn-submit').click(function(e) {
     e.preventDefault();
-    window.location = personDetails.type === 'visitor' ? '../individual-details-dob/?person=' + personId : '../individual-decision/?person=' + personId +
+    window.location = personDetails.type === 'visitor' ? '../individual-details-dob/?person_id=' + personId : '../individual-decision/?person_id=' + personId +
         (surveyType ? '&survey=' + surveyType : '');
     });
 
