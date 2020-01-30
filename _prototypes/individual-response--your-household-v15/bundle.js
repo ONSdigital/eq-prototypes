@@ -509,6 +509,66 @@ function fieldItemDisplayHack() {
   $('.field__item').after('<br />');
 }
 
+function validateInputs() {
+  var inputs = Array.from(document.querySelectorAll('.input'));
+  inputs
+    .filter(function(input) { return input.required })
+    .forEach(function (input) {
+        var errorBox = document.querySelector('.js-error-box'),
+            listItem = document.querySelector('.js-' + input.id),
+            answer = input.closest('.question__answer'),
+            field = input.closest('.field'),
+            errorMsg = input.getAttribute('data-error-msg');
+
+        if (input.value === '') {
+          hasErrors = true;
+          if (!listItem.classList.contains('js-visible')) {
+            errorBox.classList.remove('u-d-no');
+            listItem.classList.remove('u-d-no'), 
+            listItem.classList.add('js-visible');
+
+            var inputErrorPanel = document.createElement('DIV'),
+                inputErrorBody = document.createElement('DIV'),
+                inputErrorP = document.createElement('P'),
+                inputErrorStrong = document.createElement('STRONG');
+
+            inputErrorPanel.className = 'panel panel--error panel--simple';
+            inputErrorBody.className = 'panel__body';
+            inputErrorP.className = 'panel__error';
+            
+            inputErrorStrong.innerText = errorMsg;
+            inputErrorP.appendChild(inputErrorStrong);
+            inputErrorBody.appendChild(inputErrorP);
+            inputErrorBody.appendChild(field);
+            inputErrorPanel.appendChild(inputErrorBody);
+            answer.appendChild(inputErrorPanel);
+          }
+        } else {
+          var errorPanel = input.closest('.panel');
+          if (errorPanel) {
+            listItem.classList.add('u-d-no'), 
+            listItem.classList.remove('js-visible');
+            answer.appendChild(field);
+            answer.removeChild(errorPanel);
+          }
+        }
+    });
+
+    var errors = Array.from(document.querySelectorAll('.js-visible')).length,
+      pipingDestinations = document.querySelectorAll('.js-piping');
+
+    pipingDestinations.forEach(function(pipingDestination) {
+      pipingDestination.innerText = pipingDestination.innerText
+        .replace('{x}', errors)
+        .replace('{s}', errors > 1 ? 's' : '')
+        .replace('2', errors === 1 ? "1" : "2")
+        .replace('1', errors > 1 ? "2" : "1")
+        .replace('This', errors > 1 ? "These" : "This")
+        .replace('These', errors === 1 ? "This" : "These");
+    });
+
+}
+
 window.ONS = window.ONS || {};
 window.ONS.storage = {
   getAddress,
@@ -652,7 +712,8 @@ window.ONS.utils = {
   numberToPositionWord,
   numberToWordsStyleguide,
   getSignificant,
-  cleanHTMLPlaceholderStringReplacment
+  cleanHTMLPlaceholderStringReplacment,
+  validateInputs,
 };
 
 $(populateHouseholdList);

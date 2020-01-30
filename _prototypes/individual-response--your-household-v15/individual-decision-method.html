@@ -23,10 +23,10 @@ cdn: v1.5.0
         <div class="grid__col col-8@l">
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
-                      role="form" autocomplete="off" novalidate="">
-                    <input type="hidden" name="person_id" id="person_id"
+                      role="form" autocomplete="new-password" novalidate="">
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person_id"
                            value="#"/>
-                    <input type="hidden" name="survey" id="survey-type"
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
                            value="#"/>
                     <div class="group" id="rsi">
                         <div class="block" id="total-retail-turnover">
@@ -47,7 +47,7 @@ cdn: v1.5.0
                                             <fieldset class="u-mb-xl">
                                                 <legend class="fieldset__legend">Select how to send the access code</legend>
                                                 <div class="field__item js-focusable-box">
-                                                    <input class="input input--radio js-focusable"
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
                                                            name="does-anyone-else-live-here"
                                                            id="post" value="post">
@@ -58,8 +58,8 @@ cdn: v1.5.0
                                                         <p class="radio__description label--negative u-fs-s u-mb-no">We can only send this to the registered household address</p>
                                                     </label>
                                                 </div>
-                                                <div class="u-d-no field__item js-focusable-box">
-                                                    <input class="input input--radio js-focusable"
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
                                                            name="does-anyone-else-live-here"
                                                            id="email" value="email">
@@ -71,7 +71,7 @@ cdn: v1.5.0
                                                     </label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
-                                                    <input class="input input--radio js-focusable"
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
                                                            name="does-anyone-else-live-here"
                                                            id="phone"
@@ -141,13 +141,11 @@ cdn: v1.5.0
 
     form.addEventListener('submit', function(event) {
         event.preventDefault();
-
         if (phoneInput.checked) {
             var url = '../individual-decision-enter-mobile';
         } else if (emailInput.checked) {
             var url = '../individual-decision-enter-email';
         } else {
-            cannotAnswerPerson.postRequest = true;
             var url = '../individual-decision-confirm-address';
 
         }

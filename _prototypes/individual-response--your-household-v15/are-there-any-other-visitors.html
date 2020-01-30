@@ -26,8 +26,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
-                      role="form" autocomplete="off" novalidate="">
-                    <input type="hidden" name="previous"
+                      role="form" autocomplete="new-password" novalidate="">
+                    <input autocomplete="new-password" type="hidden" name="previous"
                            value="does-anyone-else-live-here"/>
                     <div class="group" id="rsi">
                         <div class="block" id="total-retail-turnover">
@@ -57,7 +57,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                     <div class="field field--radio field--multiplechoice ">
                                         <fieldset class="u-mb-xl">
                                             <div class="field__item js-focusable-box">
-                                                <input class="input input--radio js-focusable"
+                                                <input autocomplete="new-password" class="input input--radio js-focusable"
                                                        type="radio"
                                                        name="does-anyone-else-live-here"
                                                        id="yes-someone-else"
@@ -77,7 +77,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                             </div>
 
                                             <div class="field__item js-focusable-box">
-                                                <input class="input input--radio js-focusable"
+                                                <input autocomplete="new-password" class="input input--radio js-focusable"
                                                        type="radio"
                                                        name="does-anyone-else-live-here"
                                                        id="no" value="no">
@@ -131,9 +131,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
     if (isVisitorJourney) {
       nextPosition = visitors.length + 1;
-      $('#form').prepend("<input type='hidden' name='visitor-types' value='" + visitorTypesStr + "' />");
+      $('#form').prepend("<input autocomplete="new-password" type='hidden' name='visitor-types' value='" + visitorTypesStr + "' />");
       $('#form')
-        .prepend('<input type="hidden" name="journey" value="visitors" />');
+        .prepend('<input autocomplete="new-password" type="hidden" name="journey" value="visitors" />');
       $('.js-visitors-summary').show();
 
       if (visitorTypesStr) {

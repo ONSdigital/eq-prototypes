@@ -28,11 +28,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
-                      role="form" autocomplete="off"
+                      role="form" autocomplete="new-password"
                       action="../hub">
-                    <input type="hidden" name="person_id" id="person_id"
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person_id"
                            value="#"/>
-                    <input type="hidden" name="survey" id="survey-type"
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
                            value="#"/>
                     <div class="group u-mb-l">
                         <div class="block">
@@ -79,7 +79,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
 <div style="display:none;">
     <div id="member-checkbox-select-template" class="field__item">
-        <input class="input input--checkbox js-exclusive-group js-person-control"
+        <input autocomplete="new-password" class="input input--checkbox js-exclusive-group js-person-control"
                name="checkbox-answer"
                type="checkbox" />
         <label class="label label--inline u-fs-r js-person-name"></label>
@@ -164,7 +164,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     $('#js-member-list').append('<div class="field__label u-mt-s u-fs-r--b" aria-hidden="true">Or</div>');
     $('#js-member-list').append(
       '<div class="field__item">\n' +
-      '<input class="input input--checkbox js-exclusive-checkbox" name="heating-type" value="no central heating" id="none" type="checkbox">\n' +
+      '<input autocomplete="new-password" class="input input--checkbox js-exclusive-checkbox" name="heating-type" value="no central heating" id="none" type="checkbox">\n' +
       '<label class="label label--inline u-fs-r " for="none">\n' +
       '<span class="u-vh">,</span> I can answer for everyone<span class="u-vh">. Selecting this will uncheck all other checkboxes</span>\n' +
       '</label>\n' +

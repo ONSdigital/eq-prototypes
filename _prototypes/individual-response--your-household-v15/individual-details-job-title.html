@@ -24,11 +24,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
-                      role="form" autocomplete="off"
+                      role="form" autocomplete="new-password"
                       action="../individual-details-job-describe">
-                    <input type="hidden" name="person_id" id="person_id"
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person_id"
                            value="#"/>
-                    <input type="hidden" name="survey" id="survey-type"
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
                            value="#"/>
                     <div class="group u-mb-l">
                         <div class="block" id="total-retail-turnover">
@@ -48,12 +48,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                 <span class="label__description">Enter your own answer or select from suggestions</span>
                                             </label>
                                             <div class="typeahead__combobox js-typeahead-combobox" role="combobox" aria-has-popup="job-title-listbox" aria-expanded="false">
-                                                <input type="hidden" id="job-title-code" class="input input--text input-type__input js-typeahead-code" name="job-title-code" />
+                                                <input autocomplete="new-password" type="hidden" id="job-title-code" class="input input--text input-type__input js-typeahead-code" name="job-title-code" />
                                                 <div class="field">
-                                                    <input type="text" id="job-title-preview" class="input input--text input-type__input typeahead__preview js-typeahead-preview" readonly="true" aria-hidden="true" tabindex="-1" />
+                                                    <input autocomplete="new-password" type="text" id="job-title-preview" class="input input--text input-type__input typeahead__preview js-typeahead-preview" readonly="true" aria-hidden="true" tabindex="-1" />
                                                 </div>
                                                 <div class="field u-mt-no">
-                                                    <input type="text" id="job-title-input" class="input input--text input-type__input typeahead__input js-typeahead-input" name="job-title-input" data-autocomplete="off" />
+                                                    <input autocomplete="new-password" type="text" id="job-title-input" class="input input--text input-type__input typeahead__input js-typeahead-input" name="job-title-input" data-autocomplete="new-password" />
                                                 </div>
                                                 <div class="typeahead__instructions u-vh js-typeahead-instructions" id="job-title-instructions">Use up and down keys to navigate results once you&#39;ve typed more than two characters. Use the enter key to select a result. Touch device users, explore by touch or with swipe gestures.</div>
                                                 <ul class="typeahead__listbox js-typeahead-listbox" role="listbox" id="job-title-listbox"></ul>

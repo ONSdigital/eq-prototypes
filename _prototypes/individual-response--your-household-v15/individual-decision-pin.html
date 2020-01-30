@@ -31,9 +31,9 @@ cdn: v1.5.0
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
-                      role="form" autocomplete="off"
+                      role="form" autocomplete="new-password"
                       action="../individual-details-dob">
-                    <input type="hidden" name="person_id" id="person_id"
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person_id"
                            value="#"/>
                     <div class="group u-mb-xl">
                         <div class="block">
@@ -62,13 +62,13 @@ cdn: v1.5.0
 
                                 <div class="field field--checkbox field--multiplechoice">
                                     <div class="field__item js-focusable-box">
-                                        <input class="input input--checkbox js-focusable" name="checkbox-answer" value="bacon" id="bacon" type="checkbox">
+                                        <input autocomplete="new-password" class="input input--checkbox js-focusable" name="checkbox-answer" value="bacon" id="bacon" type="checkbox">
                                         <label
                                                 class="label label--inline venus " for="bacon">Send me my access code by text message (optional)</label>
                                         <div class="field__other">
                                             <label
                                                     class="label venus mercury" for="other-answer" id="label-checkbox-other-input">Enter your mobile number</label>
-                                            <input class="input input__text js-focusable" id="other-answer" name="other-answer" type="text" data-qa="other-option">
+                                            <input autocomplete="new-password" class="input input__text js-focusable" id="other-answer" name="other-answer" type="text" data-qa="other-option">
                                         </div>
                                     </div>
                                 </div>
