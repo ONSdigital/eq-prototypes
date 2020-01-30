@@ -26,7 +26,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password"
                       action="../individual-details-job-describe">
-                    <input autocomplete="new-password" type="hidden" name="person" id="person"
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person_id"
                            value="#"/>
                     <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
                            value="#"/>
@@ -44,7 +44,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                     <div class="answer__fields js-fields">
                                         <div class="typeahead js-typeahead u-mt-m" data-content="{&quot;no_results&quot;:&quot;No results found&quot;,&quot;aria_no_results&quot;:&quot;No results found for the query&quot;,&quot;aria_you_have_selected&quot;:&quot;You have selected&quot;,&quot;aria_found_by_alternative_name&quot;:&quot;found by alternative name&quot;,&quot;aria_min_chars&quot;:&quot;Type in 2 or more characters for results.&quot;,&quot;aria_one_result&quot;:&quot;There is one result available.&quot;,&quot;aria_n_results&quot;:&quot;There are {n} results available.&quot;,&quot;aria_limited_results&quot;:&quot;Results have been limited to 10 results. Type more characters to refine your search.&quot;,&quot;more_results&quot;:&quot;Continue typing to refine results&quot;}" data-api-url="https://ons-typeahead-prototypes.herokuapp.com/occupation">
                                             <label class="label js-typeahead-label" for="job-title-input">
-                                                Enter your job title
+                                                Job title<br>
+                                                <span class="label__description">Enter your own answer or select from suggestions</span>
                                             </label>
                                             <div class="typeahead__combobox js-typeahead-combobox" role="combobox" aria-has-popup="job-title-listbox" aria-expanded="false">
                                                 <input autocomplete="new-password" type="hidden" id="job-title-code" class="input input--text input-type__input js-typeahead-code" name="job-title-code" />
@@ -88,7 +89,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   var storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
     switchedFromUnemployed = urlParams.get('switchedFromUnemployed'),
-    personId = urlParams.get('person'),
+    personId = urlParams.get('person_id'),
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     isEditing = urlParams.get('edit'),
     details = storageAPI.getPersonalDetailsFor(personId),
@@ -101,13 +102,13 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
     if(switchedFromUnemployed) {
       e.preventDefault();
-      window.location.href = '../individual-details-job-describe/?person=' + personId +
+      window.location.href = '../individual-details-job-describe/?person_id=' + personId +
         (surveyType ? '&survey=' + surveyType : '') +
         '&switchedFromUnemployed=true';
     }
     else if(isEditing) {
       e.preventDefault();
-      window.location.href = '../individual-details-summary/?person=' +
+      window.location.href = '../individual-details-summary/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
     }
   }));
@@ -121,7 +122,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('In ' + '<em class="highlight">' + person.fullName + '</em>' +
+      $('.js-heading').html('In ' + '<em class="highlight">' + person.fullName + window.ONS.utils.trailingNameS(person.fullName) + '</em>' +
         ' main job, what is your job title?');
     }
   }
@@ -139,5 +140,5 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   /**
    * Routing
    */
-  $('#person').val(new URLSearchParams(window.location.search).get('person'));
+  $('#person_id').val(new URLSearchParams(window.location.search).get('person_id'));
 </script>

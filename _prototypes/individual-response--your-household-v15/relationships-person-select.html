@@ -108,7 +108,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
       params = new URLSearchParams(window.location.search),
 
-      personId = params.get('person'),
+      personId = params.get('person_id'),
 
       surveyType = params.get('survey'),
 
@@ -256,26 +256,21 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                   );
                 });
           });
+            sessionStorage.setItem('missingRelationshipsForPerson.length', storageAPI.getPeopleIdsMissingRelationshipsWithPerson(personId).length);
             var relationshipsUrl = window.location.pathname;
             window.history.replaceState(null, '', relationshipsUrl);
 
             if(storageAPI.findNextMissingRelationship()) {
 
-                if (personId === 'person_me') {
-                  personId = 'person1'
-                } else {
-                  var personInt = personId.slice(personId.length -1 , personId.length); 
-                  personInt = ++personInt
-                  personId = 'person' + personInt;
-                }
+              personId = storageAPI.getNextPersonId(personId);
                 //find next list of people to as if unrelated. If more than one go to relationships else 
 
                 $(updateList(false));
-
+                
                 if (remainingPersonIds.length < 2) {
                   window.location.href = '../relationships';
                 } else {
-                  window.location.href = '../relationships-person-select/?person=' +
+                  window.location.href = '../relationships-person-select/?person_id=' +
                     personId + '&relationship-description=unrelated';
                 }
 

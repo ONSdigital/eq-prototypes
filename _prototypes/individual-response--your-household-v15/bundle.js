@@ -22,6 +22,7 @@ import {
   editRelationship,
   getAllRelationships,
   getAllManualRelationships,
+  getNextPersonId,
   deleteAllRelationshipsForMember,
   relationshipSummaryTemplates,
   missingRelationshipInference,
@@ -256,7 +257,7 @@ function updateAddresses() {
 
   $('.address-text-line1').each((i, el) => cleanHTMLPlaceholderStringReplacment(el, addressLine1));
 
-  const personId = new URLSearchParams(window.location.search).get('person');
+  const personId = new URLSearchParams(window.location.search).get('person_id');
 
   if (personId) {
     const person = getHouseholdMemberByPersonId(personId)['@person'],
@@ -293,7 +294,7 @@ function updateAllPreviousLinks() {
 }
 
 function updatePersonLink() {
-  const personId = new URLSearchParams(window.location.search).get('person');
+  const personId = new URLSearchParams(window.location.search).get('person_id');
 
   if (personId) {
     let urlParam = new URLSearchParams(window.location.search),
@@ -302,7 +303,7 @@ function updatePersonLink() {
       secureLinkTextConfig = secureLinkTextMap[
         (getAnsweringIndividualByProxy() ? 'question-proxy' : (pinObj && pinObj.pin ? 'pin-you' : 'question-you'))
       ],
-      linkHref = secureLinkTextConfig.link + '?person=' + personId +
+      linkHref = secureLinkTextConfig.link + '?person_id=' + personId +
         '&returnurl=' + window.location.pathname,
       surveyType = urlParam.get('survey');
 
@@ -315,7 +316,7 @@ function updatePersonLink() {
     $('.js-link-secure-label').html(secureLinkTextConfig.description.replace('$[NAME]', person.fullName));
 
     let personLink = $('.js-link-person');
-    personLink.attr('href', personLink.attr('href') + '?person=' + personId +
+    personLink.attr('href', personLink.attr('href') + '?person_id=' + personId +
       (surveyType ? '&survey=' + surveyType : ''));
   }
 }
@@ -359,7 +360,7 @@ function doILiveHere() {
 }
 
 function getSignificant() {
-  return '26 January 2020';
+  return 'Sunday 26 January 2020';
 }
 
 function updateSignificantDate() {
@@ -414,7 +415,7 @@ function createMemberItem(member, { redirect } = { redirect: null }, noEdit) {
   ));
 
   $removeLink.attr('href', (
-    '../remove-household-member/?person=' + member['@person'].id +
+    '../remove-household-member/?person_id=' + member['@person'].id +
     redirectTo
   ));
 
@@ -451,7 +452,7 @@ function updateVisitorsSummary() {
 function updateContinueNotice() {
   const urlParams = new URLSearchParams(window.location.search),
     isContinuing = urlParams.get('continuing'),
-    personId = urlParams.get('person');
+    personId = urlParams.get('person_id');
 
   if (!isContinuing) {
     return false;
@@ -459,10 +460,10 @@ function updateContinueNotice() {
 
   const template = `<div class="panel panel--simple panel--info u-mb-s">
       <div class="panel__body">
-          <strong>This was the last question
-              you answered in the section</strong>
-          <p>You can review your answers
-              at the <a href="../individual-decision/?person=${personId}">start 
+          <strong>This was the last unanswered question
+              in the section</strong>
+          <p>
+              <a href="../individual-intro/?person_id=${personId}">Go to the start 
               of this section</a>
           </p>
       </div>
@@ -594,6 +595,7 @@ window.ONS.storage = {
   editRelationship,
   getAllRelationships,
   getAllManualRelationships,
+  getNextPersonId,
   deleteAllRelationshipsForMember,
 
   getAllParentsOf,

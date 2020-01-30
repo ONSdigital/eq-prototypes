@@ -24,7 +24,7 @@ cdn: v1.5.0
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password" novalidate="">
-                    <input autocomplete="new-password" type="hidden" name="person" id="person"
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person_id"
                            value="#"/>
                     <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
                            value="#"/>
@@ -151,14 +151,16 @@ cdn: v1.5.0
         }
         sessionStorage.setItem('cannot-answer-people', JSON.stringify(cannotAnswerPeople));
 
-        window.location.href = url + '?person_id=' + personId;
+        window.location.href = url + '?person_id=' + personId + '&previous=' + previousPage;
     });
 
     function updateAllPreviousLinks() {
         if (previousPage === 'cant-answer-for-others-who') {
             $('.js-previous-link').attr('href', '../cant-answer-for-others-who');
+        } else if (previousPage === 'uac-question') {
+            $('.js-previous-link').attr('href', '../uac-question/?person_id=' + personId + (previousPage ? '&previous=' + previousPage : ''));
         } else {
-            $('.js-previous-link').attr('href', '../cant-answer-for-others/?person=' + personId);
+            $('.js-previous-link').attr('href', '../cant-answer-for-others/?person_id=' + personId + (previousPage ? '&previous=' + previousPage : ''));
         }
     }
 

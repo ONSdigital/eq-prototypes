@@ -43,7 +43,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                         </div>
                                     </fieldset>
                                     <div class="u-mt-m">
-                                        <p class="u-mb-no">If you need help, there are <a class="js-ir-link" href="#">other ways for each person to answer their own questions.</a></p>
+                                        <p class="u-mb-no">
+                                            To request a census in a different format or for further help, please <a href="/">contact us</a>
+                                        </p>
                                     </div>
 
                                     <button class="btn btn--primary btn--lg qa-btn-submit venus u-mt-xl u-mb-xl" type="submit" name="">Continue</button>
@@ -61,6 +63,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     var cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people') || '[]');
     var searchParams = new URLSearchParams(window.location.search);
     var personId = searchParams.get('person_id');
+    var previousPage = searchParams.get('previous');
 
     if (!personId) {
         personId = cannotAnswerPeople[0].id;
@@ -109,11 +112,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
         switch (responseOption) {
             case 'complete-questions': {
-                window.location.href = '../individual-intro/?person=' + personId;
+                window.location.href = '../individual-intro/?person_id=' + personId + '&previous=uac-question';
                 break;
             }
             case 'new-survey': {
-                window.location.href = '../individual-decision-method/?person_id=' + personId;
+                window.location.href = '../individual-decision-method/?person_id=' + personId + '&previous=uac-question';
                 break;
             }
             default: {
@@ -122,9 +125,4 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         }
     });
 
-    $('.js-ir-link').click(function(e) {
-        e.preventDefault();
-
-        window.location = '../cant-answer-for-others/?person=' + personId;    
-    });
 </script>

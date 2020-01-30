@@ -93,13 +93,13 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   var storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
     switchedFromUnemployed = urlParams.get(switchedFromUnemployed),
-    personId = urlParams.get('person'),
+    personId = urlParams.get('person_id'),
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     isEditing = urlParams.get('edit'),
     details = storageAPI.getPersonalDetailsFor(personId),
     surveyType = urlParams.get('survey'),
     mobileNo = urlParams.get('mobile');
-    
+    var previousPage = urlParams.get('previous');
     var cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people', '') || '[]');
     var cannotAnswerPerson = cannotAnswerPeople.findIndex((e) => e.id === personId);
 
@@ -115,8 +115,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     sessionStorage.setItem('cannot-answer-people', JSON.stringify(cannotAnswerPeople));
 
     window.location.href = $('[name=radio-answer]:checked').val() === 'yes'
-      ? '../individual-decision-enter-mobile-sent/?person=' + personId +
-        '&remaining=' + encodeURI(urlParams.get('people')) + '&mobile=' + mobileNo
+      ? '../individual-decision-enter-mobile-sent/?person_id=' + personId +
+        '&remaining=' + encodeURI(urlParams.get('people')) + '&mobile=' + mobileNo + '&previous=' + previousPage
       : document.referrer;
   });
 
@@ -129,5 +129,5 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   /**
    * Routing
    */
-  $('#person').val(urlParams.get('person'));
+  $('#person_id').val(urlParams.get('person_id'));
 </script>

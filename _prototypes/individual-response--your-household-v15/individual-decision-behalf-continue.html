@@ -132,7 +132,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   var storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
     switchedFromUnemployed = urlParams.get(switchedFromUnemployed),
-    personId = urlParams.get('person'),
+    personId = urlParams.get('person_id'),
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     isEditing = urlParams.get('edit'),
     details = storageAPI.getPersonalDetailsFor(personId),
@@ -142,7 +142,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     e.preventDefault();
 
     window.location.href = $('[name=radio-answer]:checked').val() === 'invite'
-      ? '../individual-decision-enter-mobile/?person=' + personId +
+      ? '../individual-decision-enter-mobile/?person_id=' + personId +
         '&remaining=' + encodeURI(urlParams.get('people'))
       : '../hub/';
   });
@@ -150,5 +150,5 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   /**
    * Routing
    */
-  $('#person').val(urlParams.get('person'));
+  $('#person_id').val(urlParams.get('person_id'));
 </script>

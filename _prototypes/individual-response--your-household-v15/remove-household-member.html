@@ -88,7 +88,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <script>
     var storageAPI = window.ONS.storage,
         urlParams = new URLSearchParams(window.location.search),
-        personId = urlParams.get('person'),
+        personId = urlParams.get('person_id'),
         redirect = urlParams.get('redirect');
 
     $('.qa-btn-submit').on('click', function (e) {
@@ -106,8 +106,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       }
     });
     function updateAllPreviousLinks() {
-      $('.js-previous-link').attr('href', document.referrer);
-      $('.js-ir-link').attr('href', '../cant-answer-for-others/?person=' + personId);
+      $('.js-previous-link').attr('href', '../summary/');
+      $('.js-ir-link').attr('href', '../cant-answer-for-others/?person_id=' + personId + '&previous=' + 'remove-household-member');
     }
     $(updateAllPreviousLinks);
 </script>

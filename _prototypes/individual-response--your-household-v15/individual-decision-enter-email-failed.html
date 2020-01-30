@@ -91,6 +91,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     urlParams = new URLSearchParams(window.location.search),
     personId = urlParams.get('person_id'),
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'];
+    var previousPage = urlParams.get('previous');
 
     var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
     var possessive = person.fullName.slice(-1) === 's' ? "'" : "'s";
@@ -103,9 +104,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         e.preventDefault();
 
         if( !validateEmail($('#email-address').val())) {
-            window.location.href = '../individual-decision-enter-email-failed/?person_id=' + personId + '&email=' + encodeURI($('#email-address').val());
+            window.location.href = '../individual-decision-enter-email-failed/?person_id=' + personId + '&email=' + encodeURI($('#email-address').val() + (previousPage ? '&previous=' + previousPage : ''));
         } else {
-            window.location.href = '../individual-decision-enter-email-correct/?person_id=' + personId + '&email=' + encodeURI($('#email-address').val());
+            window.location.href = '../individual-decision-enter-email-correct/?person_id=' + personId + '&email=' + encodeURI($('#email-address').val() + (previousPage ? '&previous=' + previousPage : ''));
         }
     });
 
@@ -126,11 +127,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   /**
    * Routing
    */
-  $('#person').val(urlParams.get('person'));
+  $('#person_id').val(urlParams.get('person_id'));
 
 
     function updateAllPreviousLinks() {
-        $('.js-previous-link').attr('href', '../individual-decision-method/?person_id=' + personId);
+        $('.js-previous-link').attr('href', '../individual-decision-method/?person_id=' + personId + (previousPage ? '&previous=' + previousPage : ''));
     }
 
     $(updateAllPreviousLinks);

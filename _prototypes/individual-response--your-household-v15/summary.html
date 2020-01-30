@@ -127,13 +127,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
     visitorsListTitle = document.querySelector('.js-visitors-people-list');
 
-    if (numberOfVisitors > 1) {
-      visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{n}',
-        (numberOfVisitors));
-    } else {
-      visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{n}',
-        window.ONS.utils.numberToWordsStyleguide(numberOfVisitors) || 0);
-    }
+    visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{n}', (numberOfVisitors) || 0);
 
 /*   if (//significantDate is before todaysDate) {
       if (numberOfVisitors != 1) {

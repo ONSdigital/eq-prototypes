@@ -101,7 +101,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     emailAddress = urlParams.get('email');
     var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
     var possessive = person.fullName.slice(-1) === 's' ? "'" : "'s";
-
+    var previousPage = urlParams.get('previous');
     pipingDestinations.forEach(function(pipingDestination) {
         pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', person.fullName).replace('{s}', possessive);
     });
@@ -124,7 +124,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       ? '../individual-decision-enter-email-sent/?person_id=' + personId +
         '&remaining=' + encodeURI(urlParams.get('people')) + '&email=' + emailAddress
       : '../individual-decision-enter-email/?person_id=' + personId +
-        '&remaining=' + encodeURI(urlParams.get('people'));
+        '&remaining=' + encodeURI(urlParams.get('people')) + '&previous=' + previousPage;
   });
 
   function updateDescription () {
@@ -136,5 +136,5 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   /**
    * Routing
    */
-  $('#person').val(urlParams.get('person'));
+  $('#person_id').val(urlParams.get('person_id'));
 </script>

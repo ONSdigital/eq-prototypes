@@ -35,7 +35,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password"
                       action="../hub">
-                    <input autocomplete="new-password" type="hidden" name="person" id="person"
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person_id"
                            value="#"/>
                     <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
                            value="#"/>
@@ -84,7 +84,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <script>
   var storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
-    personId = urlParams.get('person'),
+    personId = urlParams.get('person_id'),
     person = personId ? storageAPI.getHouseholdMemberByPersonId(personId)['@person'] : null,
     surveyType = urlParams.get('survey'),
     personsLeft = storageAPI.getAllHouseholdMembers()
@@ -117,7 +117,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       }
       sessionStorage.setItem('cannot-answer-people', JSON.stringify(cannotAnswerPeople));
 
-      window.location.href = '../individual-decision-method?person_id=' + personId;
+      window.location.href = '../individual-decision-method?person_id=' + personId + (previousPage ? '&previous=' + previousPage : '');
  
   });
 
@@ -156,7 +156,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   /**
    * Routing
    */
-  $('#person').val(urlParams.get('person'));
+  $('#person_id').val(urlParams.get('person_id'));
 
     function updateAllPreviousLinks() {
       $('.js-previous-link').attr('href', '../cant-answer-for-others/?previous=' + previousPage);

@@ -25,7 +25,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password" novalidate=""
                       action="../individual-details-age-confirm">
-                    <input autocomplete="new-password" type="hidden" name="person" id="person"
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person_id"
                            value="#"/>
                     <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
                            value="#"/>
@@ -113,16 +113,16 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <script>
   var storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
-    personId = urlParams.get('person'),
+    personId = urlParams.get('person_id'),
     member = storageAPI.getHouseholdMemberByPersonId(personId),
     person = member['@person'],
     isEditing = urlParams.get('edit'),
     isVisitor = storageAPI.isVisitor(member),
     surveyType = urlParams.get('survey');
+    storageAPI.personalBookmark(personId, window.location.href);
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
-
     storageAPI.addUpdatePersonalDetailsDOB(personId,
       $('#personal-detail-dob-day').val(),
       $('#personal-detail-dob-month').val(),
@@ -131,13 +131,13 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
     if(isEditing) {
       e.preventDefault();
-      window.location.href = '../individual-details-summary/?person=' +
+      window.location.href = '../individual-details-summary/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
     }
 
     if(isVisitor){
       e.preventDefault();
-      window.location.href = '../individual-details-address-in-uk/?person=' +
+      window.location.href = '../individual-details-address-in-uk/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
     }
   }));

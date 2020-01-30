@@ -100,7 +100,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
 
-    window.location.href = '../individual-decision-enter-mobile-correct/?person=' + personId + '&mobile=' + encodeURI($('#mobile-number').val());
+    window.location.href = '../individual-decision-enter-mobile-correct/?person_id=' + personId + '&mobile=' + encodeURI($('#mobile-number').val());
   });
 
   /*function updateRouting() {
@@ -116,5 +116,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   /**
    * Routing
    */
-  $('#person').val(urlParams.get('person'));
+  $('#person_id').val(urlParams.get('person_id'));
+
+
+    function updateAllPreviousLinks() {
+        $('.js-previous-link').attr('href', '../individual-decision-method/?person_id=' + personId);
+    }
+
+    $(updateAllPreviousLinks);
 </script>
