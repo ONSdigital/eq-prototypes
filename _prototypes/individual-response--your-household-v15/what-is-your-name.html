@@ -22,7 +22,26 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                     <div class="feedback__border">
                     </div>
                 </div>
-
+                <div class="panel panel--error u-mb-m js-error-box u-d-no">
+                    <div class="panel__header">
+                        <div class="panel__title u-fs-r--b js-piping">The page has {x} error{s}</div>
+                    </div>
+                    <div class="panel__body">
+                        <p class="js-piping">This <strong>must be corrected</strong> to continue.</p>
+                        <ol class="list list--bare">
+                        <li class="list__item js-first-name u-d-no">
+                            1) <a href="#first-name" class="list__link js-inpagelink">
+                                Enter a first name
+                            </a>
+                        </li>
+                        <li class="list__item js-last-name u-d-no">
+                            <span class="js-piping">2</span>) <a href="#last-name" class="list__link js-inpagelink">
+                                Enter a last name
+                            </a>
+                        </li>
+                       </ol>
+                    </div>
+                </div>                
                 <div class="group u-mb-s">
                     <div class="block">
 
@@ -36,42 +55,48 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                     class="question__fieldset js-question-fieldset">
                                 <legend class="u-vh">What is your name?</legend>
 
-                                <div class="question__answers">
-                                    <div class="question__answer">
-                                        <label class="label"
-                                               for="first-name">
-                                            <div class="label__inner">
-                                                First name
-                                            </div>
-                                        </label>
-                                        <input class="input input--text"
-                                               id="first-name"
-                                               data-qa="input-text" value=""/>
-                                    </div>
-
-                                    <div class="question__answer">
-                                        <label class="label" for="middle-name">
-                                            <div class="label__inner">
-                                                Middle names
-                                            </div>
-                                        </label>
-                                        <input class="input input--text"
-                                               id="middle-name"
-                                               data-qa="input-text" value=""/>
-                                    </div>
-
-                                    <div class="question__answer">
-                                        <label class="label" for="last-name">
-                                            <div class="label__inner">
-                                                Last name
-                                            </div>
-                                        </label>
-                                        <input class="input input--text"
-                                               id="last-name"
-                                               data-qa="input-text" value=""/>
-                                    </div>
+                            <div class="question__answers">
+                                <div class="question__answer">
+                                  <p class="field">
+                                    <label class="label"
+                                           for="first-name">
+                                        <span class="label__inner">
+                                            First name
+                                        </span>
+                                    </label>
+                                    <input autocomplete="new-password" required data-error-msg="Enter a first name" class="input input--text"
+                                           id="first-name"
+                                           data-qa="input-text" value=""/>
+                                  </p>
                                 </div>
-                            </fieldset>
+
+                                <div class="question__answer">
+                                  <p class="field">
+                                    <label class="label" for="middle-name">
+                                        <span class="label__inner">
+                                            Middle names
+                                        </span>
+                                    </label>
+                                    <input autocomplete="new-password" class="input input--text"
+                                           id="middle-name"
+                                           data-qa="input-text" value=""/>
+                                  </p>
+                                </div>
+
+                                <div class="question__answer">
+                                  <p class="field">
+                                    <label class="label" for="last-name">
+                                        <span class="label__inner">
+                                            Last name
+                                        </span>
+                                    </label>
+                                    <input autocomplete="new-password" required data-error-msg="Enter a last name" class="input input--text"
+                                           id="last-name"
+                                           data-qa="input-text" value=""/>
+                                  </p>
+                                </div>
+                            </div>
+                          </fieldset>
                         </div>
                     </div>
                 </div>
@@ -116,7 +141,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     livesHere = sessionStorage.getItem('lives-here') === 'yes',
     storageAPI = window.ONS.storage,
     userAsMember = storageAPI.getUserAsHouseholdMember(),
-    userPerson = userAsMember && userAsMember['@person'];
+    userPerson = userAsMember && userAsMember['@person'],
+    hasErrors = false;
+      
 
   function removeMember_handler(member, e) {
     e.preventDefault();
@@ -153,38 +180,44 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       $('.js-remove-section').show();
     }
   }
-
+      
   $('.btn-submit').on('click', function(e) {
-    e.preventDefault(); // do not submit the form like usual
-    sessionStorage.setItem('name', getName());
+    e.preventDefault();
+    window.ONS.utils.validateInputs();
+    if (hasErrors) {
+      hasErrors = false;
+      return false;
+    } else {
+      sessionStorage.setItem('name', getName());
 
-    var newPersonObj = storageAPI.TYPES.person({
-      firstName: document.getElementById('first-name').value,
-      lastName: document.getElementById('last-name').value
-    });
+      var newPersonObj = storageAPI.TYPES.person({
+        firstName: document.getElementById('first-name').value,
+        lastName: document.getElementById('last-name').value
+      });
 
-    storageAPI.addUserPerson(newPersonObj);
+      storageAPI.addUserPerson(newPersonObj);
 
-    if(isEditing || livesHere) {
-      storageAPI.updateUserAsHouseholdMember(
-        newPersonObj,
-        isEditing
-          ? userAsMember
-          : {
-            type: window.ONS.storage.KEYS.HOUSEHOLD_MEMBER_TYPE
-          }
-      );
-    }
-    else {
-      storageAPI.deleteUserAsHouseholdMember();
-    }
+      if(isEditing || livesHere) {
+        storageAPI.updateUserAsHouseholdMember(
+          newPersonObj,
+          isEditing
+            ? userAsMember
+            : {
+              type: window.ONS.storage.KEYS.HOUSEHOLD_MEMBER_TYPE
+            }
+        );
+      }
+      else {
+        storageAPI.deleteUserAsHouseholdMember();
+      }
 
-    if(redirect) {
-      window.location.href = redirect;
-    }
-    else {
-      window.location.href = isEditing ? '../summary/' :
-        '../i-do-live-here/';
+      if(redirect) {
+        window.location.href = redirect;
+      }
+      else {
+        window.location.href = isEditing ? '../summary/' :
+          '../i-do-live-here/';
+      }
     }
   });
 

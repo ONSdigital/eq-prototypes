@@ -20,7 +20,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
                 <form name="trav" class="form qa-questionnaire-form" role="form"
-                      autocomplete="off" novalidate="">
+                      autocomplete="new-password" novalidate="">
                     <div class="group">
                         <div class="block">
                             <section class="section">
@@ -72,12 +72,14 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
 
 <script>
-  var members = window.ONS.storage.getAllHouseholdMembers();
+  var storageAPI = window.ONS.storage,
+      members = storageAPI.getAllHouseholdMembers(),
+      missingRelationship = storageAPI.findNextMissingRelationship();
+  
   var urlParams = new URLSearchParams(window.location.search),
     showPanel = urlParams.get('show-panel'),
-    nextPage = members.length > 1
-      ? '../relationships-intro/'
-      : '../hub';
+    nextPage = !missingRelationship ? '../hub' : '../relationships-intro/';
+
 
   function updateHouseholdMembersVisitors() {
       var userMember = members.filter(isUser)[0],

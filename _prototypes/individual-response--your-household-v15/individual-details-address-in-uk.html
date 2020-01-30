@@ -23,11 +23,11 @@ cdn: v2.0.0
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
-                      role="form" autocomplete="off"
+                      role="form" autocomplete="new-password"
                       action="../individual-details-dob">
-                    <input type="hidden" name="person" id="person"
+                    <input autocomplete="new-password" type="hidden" name="person" id="person"
                            value="#"/>
-                    <input type="hidden" name="survey" id="survey-type"
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
                            value="#"/>
                     <div class="group">
                         <div class="block">
@@ -45,7 +45,7 @@ cdn: v2.0.0
                                             <fieldset class="u-mb-xl">
                                                 <div
                                                         class="field__item js-focusable-box js-extra-option" style="display:none;">
-                                                    <input class="input input--radio js-focusable"
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
                                                            name="addrees-where"
                                                            id="same-as-visitor1"
@@ -59,7 +59,7 @@ cdn: v2.0.0
                                                     </label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
-                                                    <input class="input input--radio js-focusable"
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
                                                            name="addrees-where"
                                                            id="in-uk"
@@ -78,7 +78,7 @@ cdn: v2.0.0
                                                     <div class="field__other">
                                                         <label
                                                                 class="label u-fs-m--b" for="other-answer" id="label-checkbox-other-input">Please specify country</label>
-                                                        <input class="input input__text" id="other-answer" name="other-answer" type="text" data-qa="other-option">
+                                                        <input autocomplete="new-password" class="input input__text" id="other-answer" name="other-answer" type="text" data-qa="other-option">
                                                     </div>
                                                 </div>
                                             </fieldset>

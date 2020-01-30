@@ -23,7 +23,26 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                     <div class="feedback__border">
                     </div>
                 </div>
-
+                <div class="panel panel--error u-mb-m js-error-box u-d-no">
+                    <div class="panel__header">
+                        <div class="panel__title u-fs-r--b js-piping">The page has {x} error{s}</div>
+                    </div>
+                    <div class="panel__body">
+                        <p class="js-piping">This <strong>must be corrected</strong> to continue.</p>
+                        <ol class="list list--bare">
+                        <li class="list__item js-first-name u-d-no">
+                            1) <a href="#first-name" class="list__link js-inpagelink">
+                                Enter a first name
+                            </a>
+                        </li>
+                        <li class="list__item js-last-name u-d-no">
+                            <span class="js-piping">2</span>) <a href="#last-name" class="list__link js-inpagelink">
+                                Enter a last name
+                            </a>
+                        </li>
+                       </ol>
+                    </div>
+                </div>                
                 <div class="group u-mb-m">
                     <div class="block">
 
@@ -50,26 +69,43 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
                             <div class="question__answers">
                                 <div class="question__answer">
+                                  <p class="field">
                                     <label class="label"
                                            for="first-name">
-                                        <div class="label__inner">
+                                        <span class="label__inner">
                                             First name
-                                        </div>
+                                        </span>
                                     </label>
-                                    <input class="input input--text"
+                                    <input autocomplete="new-password" required data-error-msg="Enter a first name" class="input input--text"
                                            id="first-name"
                                            data-qa="input-text" value=""/>
+                                  </p>
                                 </div>
 
                                 <div class="question__answer">
-                                    <label class="label" for="last-name">
-                                        <div class="label__inner">
-                                            Last name
-                                        </div>
+                                  <p class="field">
+                                    <label class="label" for="middle-name">
+                                        <span class="label__inner">
+                                            Middle names
+                                        </span>
                                     </label>
-                                    <input class="input input--text"
+                                    <input autocomplete="new-password" class="input input--text"
+                                           id="middle-name"
+                                           data-qa="input-text" value=""/>
+                                  </p>
+                                </div>
+
+                                <div class="question__answer">
+                                  <p class="field">
+                                    <label class="label" for="last-name">
+                                        <span class="label__inner">
+                                            Last name
+                                        </span>
+                                    </label>
+                                    <input autocomplete="new-password" required data-error-msg="Enter a last name" class="input input--text"
                                            id="last-name"
                                            data-qa="input-text" value=""/>
+                                  </p>
                                 </div>
                             </div>
                         </fieldset>
@@ -153,46 +189,52 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     (redirect ? '&redirect=' + redirect : '')
   );
 
+  var hasErrors = false;
   $('.btn-submit').on('click', function(e) {
-    e.preventDefault(); // do not submit the form like usual
+    e.preventDefault();
+    window.ONS.utils.validateInputs();
+    if (hasErrors) {
+      hasErrors = false;
+      return false;
+    } else { 
+      var person = window.ONS.storage.TYPES.person({
+        firstName: document.getElementById('first-name').value,
+        lastName: document.getElementById('last-name').value
+      });
 
-    var person = window.ONS.storage.TYPES.person({
-      firstName: document.getElementById('first-name').value,
-      lastName: document.getElementById('last-name').value
-    });
+      var personType = window.ONS.storage.KEYS[
+        window.location.search.match(/journey=visitors/) ? 'VISITOR_TYPE' : 'HOUSEHOLD_MEMBER_TYPE'
+        ];
 
-    var personType = window.ONS.storage.KEYS[
-      window.location.search.match(/journey=visitors/) ? 'VISITOR_TYPE' : 'HOUSEHOLD_MEMBER_TYPE'
-      ];
+      if (editUserId && memberFound) {
+        person.id = editUserId;
+        window.ONS.storage['updateHouseholdMember'](person, {type: personType});
+      }
+      else {
+        window.ONS.storage['addHouseholdMember'](person, {type: personType});
+      }
 
-    if (editUserId && memberFound) {
-      person.id = editUserId;
-      window.ONS.storage['updateHouseholdMember'](person, {type: personType});
-    }
-    else {
-      window.ONS.storage['addHouseholdMember'](person, {type: personType});
-    }
-
-    /**
-     * Routing
-     */
-    if(redirect) {
-      window.location = redirect;
-    } else if(editUserId) {
-      window.location = '../summary/';
-    } else if (window.location.search.match(/journey=temp-living-here/)) {
-      window.location = userLiveAtAddress
-        ? '../are-there-any-other-visitors/?redirect=../temp-living-here-feedback/'
-        : '../temp-living-here-feedback/';
-    } else if (window.location.search.match(/journey=temp-away-from-home/)) {
-      window.location = '../temp-away-from-home/';
-    } else if (window.location.search.match(/journey=visitors/)) {
-      window.location =
-        '../are-there-any-other-visitors/?journey=visitors';
-    } else {
-      window.location = userLiveAtAddress
-        ? '../are-there-any-other-visitors/?redirect=../are-there-any-other-visitors/'
-        : '../are-there-any-other-visitors/';
+      /**
+      * Routing
+      */
+      if(redirect) {
+        window.location = redirect;
+      } else if(editUserId) {
+        window.location = '../summary/';
+      } else if (window.location.search.match(/journey=temp-living-here/)) {
+        window.location = userLiveAtAddress
+          ? '../are-there-any-other-visitors/?redirect=../temp-living-here-feedback/'
+          : '../temp-living-here-feedback/';
+      } else if (window.location.search.match(/journey=temp-away-from-home/)) {
+        window.location = '../temp-away-from-home/';
+      } else if (window.location.search.match(/journey=visitors/)) {
+        window.location =
+          '../are-there-any-other-visitors/?journey=visitors';
+      } else {
+        window.location = userLiveAtAddress
+          ? '../are-there-any-other-visitors/?redirect=../are-there-any-other-visitors/'
+          : '../are-there-any-other-visitors/';
+      }
     }
   });
 

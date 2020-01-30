@@ -33,11 +33,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         <div class="grid__col col-8@l">
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
-                      role="form" autocomplete="off"
+                      role="form" autocomplete="new-password"
                       action="../hub">
-                    <input type="hidden" name="person" id="person"
+                    <input autocomplete="new-password" type="hidden" name="person" id="person"
                            value="#"/>
-                    <input type="hidden" name="survey" id="survey-type"
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
                            value="#"/>
                     <div class="group u-mb-l">
                         <div class="block">
@@ -72,7 +72,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
 <div style="display:none;">
     <div id="member-radio-select-template" class="field__item">
-        <input class="input input--radio js-person-control"
+        <input autocomplete="new-password" class="input input--radio js-person-control"
                name="radio-answer"
                type="radio" />
         <label class="label label--inline u-fs-r js-person-name"></label>
@@ -105,14 +105,14 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       if (cannotAnswerPeopleAlready === -1) {
           cannotAnswerPeople.push({
             id: personId,
-            responseOption: 'new-survey',
-            phoneNumber: null,
           });
       } else {
           cannotAnswerPeople[cannotAnswerPeopleAlready] = {
             id: personId,
-            responseOption: 'new-survey',
-            phoneNumber: null,
+            responseOption: cannotAnswerPeople[cannotAnswerPeopleAlready].responseOption ? cannotAnswerPeople[cannotAnswerPeopleAlready].responseOption : null,
+            phoneNumber: cannotAnswerPeople[cannotAnswerPeopleAlready].phoneNumber ? cannotAnswerPeople[cannotAnswerPeopleAlready].phoneNumber : null,
+            emailAddress: cannotAnswerPeople[cannotAnswerPeopleAlready].emailAddress ? cannotAnswerPeople[cannotAnswerPeopleAlready].emailAddress : null,
+            postRequest: cannotAnswerPeople[cannotAnswerPeopleAlready].postRequest ? true : null,
           };
       }
       sessionStorage.setItem('cannot-answer-people', JSON.stringify(cannotAnswerPeople));

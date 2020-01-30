@@ -23,7 +23,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
-                      role="form" autocomplete="off"
+                      role="form" autocomplete="new-password"
                       action="../hub">
                     <div class="group u-mb-l">
                         <section class="section">
@@ -43,7 +43,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             <div class="field field--radio field--multiplechoice">
                                 <fieldset>
                                     <div class="field__item js-focusable-box">
-                                        <input class="input input--radio js-focusable"
+                                        <input autocomplete="new-password" class="input input--radio js-focusable"
                                                name="radio-answer"
                                                value="yes"
                                                id="yes"
@@ -53,7 +53,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                             Yes, send the access code now</label>
                                     </div>
                                     <div class="field__item js-focusable-box">
-                                        <input class="input input--radio js-focusable"
+                                        <input autocomplete="new-password" class="input input--radio js-focusable"
                                                name="radio-answer"
                                                value="no"
                                                id="no"
@@ -86,7 +86,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
 <div style="display:none;">
     <div id="member-checkbox-select-template" class="field__item">
-        <input class="input input--checkbox js-person-control"
+        <input autocomplete="new-password" class="input input--checkbox js-person-control"
                name="checkbox-answer" type="checkbox">
         <label class="label label--inline u-fs-r js-person-name"></label>
     </div>
@@ -99,11 +99,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     urlParams = new URLSearchParams(window.location.search),
     personId = urlParams.get('person_id'),
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
-    addressLines = (sessionStorage.getItem('address') || '').replace(/,/g, '<br />');
-
-    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
-    var possessive = person.fullName.slice(-1) === 's' ? "'" : "'s";
-
+    addressLines = (sessionStorage.getItem('address') || '').replace(/,/g, '<br />'),
+    pipingDestinations = Array.from(document.querySelectorAll('.js-piping')),
+    possessive = person.fullName.slice(-1) === 's' ? "'" : "'s",
+    cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people', '') || '[]'),
+    cannotAnswerPerson = cannotAnswerPeople.findIndex((e) => e.id === personId);
     pipingDestinations.forEach(function(pipingDestination) {
         pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', person.fullName).replace('{s}', possessive);
     });
@@ -112,14 +112,23 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         $('.js-address').html(person.fullName + ' <br> ' + addressLines);
     }
 
+
     $('.qa-btn-submit').on('click', function (e) {
         e.preventDefault();
-
-    window.location.href = $('[name=radio-answer]:checked').val() === 'yes'
-      ? '../individual-decision-confirm-address-sent/?person=' + personId
-      : document.referrer;
+        
+        if ($('[name=radio-answer]:checked').val() === 'yes') {
+            cannotAnswerPeople[cannotAnswerPerson] = {
+                id: personId,
+                responseOption: 'new-survey',
+                postRequest: true
+            };  
+            sessionStorage.setItem('cannot-answer-people', JSON.stringify(cannotAnswerPeople));
+            window.location.href = '../individual-decision-confirm-address-sent/?person_id=' + personId;
+        } else {
+            document.referrer;
+        }
+    
     });
-
     $(updateQuestion);
 
     /**
