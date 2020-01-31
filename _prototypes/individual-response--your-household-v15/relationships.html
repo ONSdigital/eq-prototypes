@@ -518,10 +518,80 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     }
 
     subjectRelationshipDescription = subjectRelationshipDescription ||
-      relationshipDescriptionVal;
+    relationshipDescriptionVal;
 
+    var allRelationships = storageAPI.getAllRelationships(),
 
-    var remainingMissingRelationships = sessionStorage.getItem('missingRelationshipsForPerson.length');
+    members = storageAPI.getAllHouseholdMembers().filter(function (member) {
+      return member.type === storageAPI.KEYS.HOUSEHOLD_MEMBER_TYPE;
+    }),
+
+    remainingPersonIds = members.map(function (member) {
+      return member['@person'].id;
+    });
+
+    function removeFromList(list, val) {
+      function doRemove(item) {
+        var foundId = list.indexOf(item);
+
+        /**
+          * Guard
+          */
+        if (foundId === -1) {
+          console.log('Attempt to remove from list failed: ', list, val);
+          return;
+        }
+
+        list.splice(foundId, 1);
+      }
+
+      if(_.isArray(val)) {
+        $.each(val, function (i, item) {
+          doRemove(item);
+        });
+      }
+      else {
+        doRemove(val);
+      }
+    }
+
+    function updateList() {
+      if (!personToId) {
+        console.log('person url parameter not found');
+        return;
+      }
+
+      /**
+       * Remove this person from the list
+       */
+      removeFromList(remainingPersonIds, personToId);
+
+      $.each(
+        allRelationships.filter(
+          storageAPI.isInRelationship.bind(null, personToId)
+        ),
+        function (i, relationship) {
+          var personIsIndex = remainingPersonIds.indexOf(relationship.personIsId),
+            personToIndex = remainingPersonIds.indexOf(relationship.personToId);
+
+          if(personIsIndex !== -1) {
+            removeFromList(remainingPersonIds, relationship.personIsId);
+            return;
+          }
+
+          if(personToIndex !== -1) {
+            removeFromList(remainingPersonIds, relationship.personToId);
+            return;
+          }
+        }
+      );
+      sessionStorage.setItem('remainingMissingPersonIds', remainingPersonIds);
+    }
+
+    updateList();
+
+    var remainingMissingRelationshipsPreviousPerson = sessionStorage.getItem('missingRelationshipsForPerson.length');
+    var remainingMissingPersonIds = sessionStorage.getItem('remainingMissingPersonIds');
     
     var nextPersonId = storageAPI.getNextPersonId(personToId);
     if(subjectPersonId) {
@@ -529,8 +599,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         personToId + '&relationship-description=' +
         'unrelated' +
         nextPageSurveyRouting;
-    } else if (sessionStorage.getItem('unrelatedFlag') && remainingMissingRelationships === '0') {
-        if (missingRelationshipsForPerson.length === '0') {
+    } else if (sessionStorage.getItem('unrelatedFlag') && remainingMissingRelationshipsPreviousPerson === '0') {
+        if (remainingMissingPersonIds.length === 0) {
           window.location.href = '../relationships';
         } else {
           window.location.href = '../relationships-person-select/?person_id=' +
