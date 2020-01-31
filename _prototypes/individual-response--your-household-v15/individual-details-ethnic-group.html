@@ -209,7 +209,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   if (details && details['ethnic-group']) {
     $('#' + details['ethnic-group'].val).attr('checked', true);
   }
+ function updateAllPreviousLinks() {
+      $('.js-previous-link').attr('href', '../individual-details-national-identity/?person_id=' + personId);
+  }
 
+  $(updateAllPreviousLinks);  
   $(updateQuestion);
   $(updateRouting);
 

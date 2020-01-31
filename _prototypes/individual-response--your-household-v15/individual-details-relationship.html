@@ -236,6 +236,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     $('#' + details.maritalStatus).attr('checked', true);
   }
 
+ function updateAllPreviousLinks() {
+      $('.js-previous-link').attr('href', '../individual-details-sex/?person_id=' + personId);
+  }
+
+  $(updateAllPreviousLinks);
   $(updateQuestion);
   $(updateRouting);
 
