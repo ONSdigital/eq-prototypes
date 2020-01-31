@@ -93,11 +93,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
         cannotAnswerPeople.push(cannotAnswerPerson)
     }
-
-    if (cannotAnswerPerson.responseOption) {
-        document.getElementById(cannotAnswerPerson.responseOption).checked = true;
-    }
-
+    
     var form = document.querySelector('form');
     
     form.addEventListener('submit', function(event) {
