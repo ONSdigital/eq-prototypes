@@ -264,10 +264,52 @@ a:focus:not(.btn--link):not(.btn--ghost):not(.js-clear-btn):not(.download__thumb
     -webkit-box-shadow: 0 0 0 3px #fd0;
     box-shadow: 0 0 0 3px #fd0;    
 }
+.typeahead--has-results .typeahead__input {
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.typeahead__listbox,
+.typeahead__combobox--focused .typeahead__listbox {
+    margin-top: .5rem;
+    border: 1px solid #222;
+    border-radius: 3px;
+}
+
+.typeahead__listbox:before {
+    content: 'Suggestions';
+    border-bottom: 1px solid #222;
+}
+.typeahead__listbox:before,
+.typeahead__option--more-results {
+    font-size: .7rem;
+    display: block;
+    background: #d0d0d0;
+    padding: 0.25rem 0.5rem;
+}
+.typeahead__option:not(:last-child){
+    border-bottom: 1px solid #222;
+}
+
+.typeahead__combobox--focused {
+    box-shadow: none!important;
+}
+.typeahead__combobox--focused input {
+    outline: none;
+    -webkit-box-shadow: 0 0 0 3px #fd0!important;
+    box-shadow: 0 0 0 3px #fd0!important;
+    outline: 1px solid #222;
+    outline-offset: -2px;
+}
+
+.typeahead__option--no-results {
+    background: none;
+}
 
 .field--multiplechoice .field__item.has-focus, 
 .field--multiplechoice .field__item.has-focus.is-checked {
     border-color: #222;
+    -webkit-box-shadow: 0 0 0 3px #fd0;
     box-shadow: 0 0 0 3px #fd0;
     outline: 1px solid #222;
     outline-offset: -2px;

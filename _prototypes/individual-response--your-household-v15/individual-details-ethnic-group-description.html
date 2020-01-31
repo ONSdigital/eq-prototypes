@@ -124,7 +124,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   }
 
   function updateQuestion() {
-    var str = 'Which of these best describes ' + 
+    var str = 'Which one best describes ' + 
       (storageAPI.getAnsweringIndividualByProxy()
         ? '<em class="highlight">' + person.fullName + window.ONS.utils.trailingNameS(person.fullName) + '</em>'
         : 'your') +
@@ -139,6 +139,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     var $template = $('.js-radio-template').clone(),
       $radioInput = $template.find('.js-radio-input'),
       $label = $template.find('.js-radio-label');
+      $description = $template.find('.js-radio-description');
 
     $template.attr('id', '');
     $template.find('.js-radio-label-strong').html(item.label);
@@ -169,6 +170,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       )
     );
   }
+ function updateAllPreviousLinks() {
+      $('.js-previous-link').attr('href', '../individual-details-ethnic-group-description/?person_id=' + personId + (ethnicGroup ? '&ethnic-group=' + ethnicGroup : ''));
+  }
+
+  $(updateAllPreviousLinks);    
 
   $(updateQuestion);
   $(updateRouting);

@@ -122,9 +122,13 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     else if(isVisitor) {
       route = '../individual-details-dob/';
     }
+    else if(val === 'yes'){
+      route = '../individual-details-sex/';
+    } 
     else {
-      route = val === 'yes' ? '../individual-details-sex/' :
-        '../individual-details-sex/';
+      val = '';
+      storageAPI.addUpdateAgeConfirm(personId, val);
+      route = '../individual-details-dob/';
     }
 
     window.location.href =
@@ -169,6 +173,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   if (details && details['age-confirm']) {
     $('#' + details['age-confirm'].val).attr('checked', true);
   }
+
+  function updateAllPreviousLinks() {
+      $('.js-previous-link').attr('href', '../individual-details-dob/?person_id=' + personId);
+  }
+
+  $(updateAllPreviousLinks);
 
   $(updateQuestion);
   $(updateRouting);
