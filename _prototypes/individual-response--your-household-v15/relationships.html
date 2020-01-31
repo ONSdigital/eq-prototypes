@@ -431,6 +431,20 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         personTo: personTo
       });
 
+      /*calculate if current person is 2 from end*/
+
+    var allRelationships = storageAPI.getAllRelationships(),
+
+      members = storageAPI.getAllHouseholdMembers().filter(function (member) {
+        return member.type === storageAPI.KEYS.HOUSEHOLD_MEMBER_TYPE;
+      }),
+
+      remainingPersonIds = members.map(function (member) {
+        return member['@person'].id;
+      });
+    
+    sessionStorage.setItem('currentHouseholders', remainingPersonIds);
+
       $('.qa-btn-submit').on('click', missingSubmit_handler);
     }
     else {
@@ -520,17 +534,24 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     subjectRelationshipDescription = subjectRelationshipDescription ||
       relationshipDescriptionVal;
 
+    var currentHouseholders = sessionStorage.getItem('currentHouseholders');
+    var currentHouseholdersArr = currentHouseholders.split(',');
+    var penultimutePerson = currentHouseholdersArr[currentHouseholdersArr.length - 2];
 
-    var remainingMissingRelationships = sessionStorage.getItem('missingRelationshipsForPerson.length');
-    
     var nextPersonId = storageAPI.getNextPersonId(personToId);
+    sessionStorage.setItem('personToId', nextPersonId);
+    sessionStorage.setItem('penultimutePerson', penultimutePerson);
+
+    var remainingMissingRelationshipsPreviousPerson = sessionStorage.getItem('missingRelationshipsForPerson.length');
+        
     if(subjectPersonId) {
       window.location.href = '../relationships-person-select/?person_id=' +
         personToId + '&relationship-description=' +
         'unrelated' +
         nextPageSurveyRouting;
-    } else if (sessionStorage.getItem('unrelatedFlag') && remainingMissingRelationships === '0') {
-        if (missingRelationshipsForPerson.length < 2) {
+    } else if (sessionStorage.getItem('unrelatedFlag') && remainingMissingRelationshipsPreviousPerson === '0') {
+        sessionStorage.setItem('missingRelationshipsForPerson.length', missingRelationshipsForPerson.length);
+        if (missingRelationshipsForPerson.length === '0' || nextPersonId === penultimutePerson) {
           window.location.href = '../relationships';
         } else {
           window.location.href = '../relationships-person-select/?person_id=' +
