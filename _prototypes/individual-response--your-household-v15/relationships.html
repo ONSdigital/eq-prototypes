@@ -525,18 +525,14 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     
     var nextPersonId = storageAPI.getNextPersonId(personToId);
     if(subjectPersonId) {
-      sessionStorage.setItem('1',1);
       window.location.href = '../relationships-person-select/?person_id=' +
         personToId + '&relationship-description=' +
         'unrelated' +
         nextPageSurveyRouting;
     } else if (sessionStorage.getItem('unrelatedFlag') && remainingMissingRelationships === '0') {
-            sessionStorage.setItem('1',2);
         if (missingRelationshipsForPerson.length === '0') {
-                sessionStorage.setItem('1',missingRelationshipsForPerson.length);
           window.location.href = '../relationships';
         } else {
-              sessionStorage.setItem('1',4);
           window.location.href = '../relationships-person-select/?person_id=' +
           nextPersonId + '&relationship-description=' +
           'unrelated' +
