@@ -457,13 +457,13 @@ function updateContinueNotice() {
   if (!isContinuing) {
     return false;
   }
-
+  const link = isVisitor(member) ? '../visitor-intro/' : '../individual-intro/';
   const template = `<div class="panel panel--simple panel--info u-mb-s">
       <div class="panel__body">
           <strong>This was the last unanswered question
               in the section</strong>
           <p>
-              <a href="../individual-intro/?person_id=${personId}">Go to the start 
+              <a href="${link}?person_id=${personId}">Go to the start 
               of this section</a>
           </p>
       </div>

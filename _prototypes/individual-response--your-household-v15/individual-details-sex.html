@@ -110,6 +110,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     surveyType = urlParams.get('survey');
     storageAPI.personalBookmark(personId, window.location.href);
 
+  if(isVisitor) {
+    $('.panel').addClass('u-d-no');
+  }
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function(e) {
 
@@ -125,7 +128,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
     if(isVisitor) {
       e.preventDefault();
-      window.location.href = '../individual-details-relationship/?person_id=' +
+      window.location.href = '../individual-details-address-in-uk/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
     }
   }));

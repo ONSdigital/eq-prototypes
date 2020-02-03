@@ -224,6 +224,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       return false;
     }
 
+    if(!personDetails['dob']) {
+      return false;
+    }
+
     if(!personDetails['address-where']) {
       return false;
     }
@@ -302,13 +306,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   }
 
   function getLinkHrefVisitor(person, status) {
-    var linkHref = status === 'completed'
-      ? '../individual-details-summary/'
-      : '../individual-intro/';
-
-    linkHref += '?person_id=' + person.id;
-
-    return linkHref;
+    return status === 'in-progress'
+      ? storageAPI.getBookmarkFor(person.id) + '&continuing=true'
+      : (status === 'completed'
+        ? '../individual-details-summary/' : '../visitor-intro/'
+      ) + '?person_id=' + person.id;
   }
 
   /**
