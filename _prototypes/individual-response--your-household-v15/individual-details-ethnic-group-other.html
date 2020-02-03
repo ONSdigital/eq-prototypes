@@ -35,7 +35,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title u-fs-xl js-heading">
-                                        You selected ‘Other White background’ for your White ethnic group, can you specify this further?
+                                        How would you describe your White ethnic group or background?
                                     </h1>
                                 </div>
 
@@ -44,7 +44,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                         <div
                                                 class="typeahead js-typeahead u-mt-m" data-content="{&quot;no_results&quot;:&quot;No results found&quot;,&quot;aria_no_results&quot;:&quot;No results found for the query&quot;,&quot;aria_you_have_selected&quot;:&quot;You have selected&quot;,&quot;aria_found_by_alternative_name&quot;:&quot;found by alternative name&quot;,&quot;aria_min_chars&quot;:&quot;Type in 2 or more characters for results.&quot;,&quot;aria_one_result&quot;:&quot;There is one result available.&quot;,&quot;aria_n_results&quot;:&quot;There are {n} results available.&quot;,&quot;aria_limited_results&quot;:&quot;Results have been limited to 10 results. Type more characters to refine your search.&quot;,&quot;more_results&quot;:&quot;Continue typing to refine results&quot;}">
                                             <label class="label js-typeahead-label" for="ethnic-group-input">
-                                                Enter your ethnic group or background
+                                                White ethnic group or background
+                                                <div class="label__description">
+                                                  <span>Enter your own answer or select from suggestions</span>
+                                                </div>
                                             </label>
                                             <div class="typeahead__combobox js-typeahead-combobox" role="combobox" aria-has-popup="ethnic-group-listbox" aria-expanded="false">
                                                 <input autocomplete="new-password" type="hidden"
@@ -97,8 +100,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   ethnicGroupMap = {
     'white': {
-      'question': 'Other White ethnic group or background',
-      'category': 'White',
+      'question': 'Any other White background',
+      'category': 'White ethnic group or background',
       'api-endpoint': 'ethnic-groups-white'
     },
     'mixed': {
@@ -142,17 +145,20 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   }
 
   function updateQuestion() {
-    var str = 'You selected ‘' + ethnicGroupMap[ethnicGroup].question + '’ for ' +
+    var str = 'You selected “' + ethnicGroupMap[ethnicGroup].question + '”. ' +
+      'How would you describe ' + 
       (storageAPI.getAnsweringIndividualByProxy()
-        ? person.fullName + window.ONS.utils.trailingNameS(person.fullName)
+        ? ('<em class="highlight">' + person.fullName + window.ONS.utils.trailingNameS(person.fullName) + '</em>')
         : 'your') +
       ' ' + ethnicGroupMap[ethnicGroup].category +
-      ' ethnic group, can you specify this further?';
+      '?';
 
     $('.js-heading').html(str);
   }
 
   function updateAnswer() {
+    $('.js-typeahead-label').html(ethnicGroupMap[ethnicGroup].category + '<div class="label__description"><span>Enter your own answer or select from suggestions</span></div>');
+
     $('.js-typeahead').attr('data-api-url',
       'https://ons-typeahead-prototypes.herokuapp.com/' +
       ethnicGroupMap[ethnicGroup]['api-endpoint']);
@@ -165,6 +171,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     details['ethnic-group'].otherText) {
     $('#ethnic-group-input').val(details['ethnic-group'].otherText);
   }
+
+ function updateAllPreviousLinks() {
+      $('.js-previous-link').attr('href', '../individual-details-ethnic-group-description/?person_id=' + personId);
+  }
+
+  $(updateAllPreviousLinks);    
 
   $(updateQuestion);
   $(updateRouting);

@@ -151,6 +151,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     $('#' + details.sex).attr('checked', true);
   }
 
+  function updateAllPreviousLinks() {
+      $('.js-previous-link').attr('href', '../individual-details-age-confirm/?person_id=' + personId);
+  }
+
+  $(updateAllPreviousLinks);  
+
   $(updateQuestion);
   $(updateRouting);
 

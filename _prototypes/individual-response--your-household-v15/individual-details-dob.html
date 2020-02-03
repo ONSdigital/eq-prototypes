@@ -166,6 +166,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     }
   }
 
+  function updateAllPreviousLinks() {
+      $('.js-previous-link').attr('href', '../individual-decision/?person_id=' + personId);
+  }
+
+  $(updateAllPreviousLinks);
+
   $(updateAnswer);
   $(updateQuestion);
   $(updateRouting);

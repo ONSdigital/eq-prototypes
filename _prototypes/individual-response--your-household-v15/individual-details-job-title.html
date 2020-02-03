@@ -36,13 +36,15 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title u-fs-xl js-heading">
-                                        In your main job, what is your job title?
+                                        What is your full job title?
                                     </h1>
                                 </div>
-
+                                <div class="question__description">
+                                <p>For example, retail assistant, office cleaner, district nurse, primary school teacher. Do not state their grade or pay band</p>
+                                </div>
                                 <div class="answer">
                                     <div class="answer__fields js-fields">
-                                        <div class="typeahead js-typeahead u-mt-m" data-content="{&quot;no_results&quot;:&quot;No results found&quot;,&quot;aria_no_results&quot;:&quot;No results found for the query&quot;,&quot;aria_you_have_selected&quot;:&quot;You have selected&quot;,&quot;aria_found_by_alternative_name&quot;:&quot;found by alternative name&quot;,&quot;aria_min_chars&quot;:&quot;Type in 2 or more characters for results.&quot;,&quot;aria_one_result&quot;:&quot;There is one result available.&quot;,&quot;aria_n_results&quot;:&quot;There are {n} results available.&quot;,&quot;aria_limited_results&quot;:&quot;Results have been limited to 10 results. Type more characters to refine your search.&quot;,&quot;more_results&quot;:&quot;Continue typing to refine results&quot;}" data-api-url="https://ons-typeahead-prototypes.herokuapp.com/occupation">
+                                        <div class="typeahead js-typeahead u-mt-m" data-content="{&quot;no_results&quot;:&quot;No results found&quot;,&quot;aria_no_results&quot;:&quot;No results found for the query&quot;,&quot;aria_you_have_selected&quot;:&quot;You have selected&quot;,&quot;aria_found_by_alternative_name&quot;:&quot;found by alternative name&quot;,&quot;aria_min_chars&quot;:&quot;Type in 2 or more characters for results.&quot;,&quot;aria_one_result&quot;:&quot;There is one result available.&quot;,&quot;aria_n_results&quot;:&quot;There are {n} results available.&quot;,&quot;aria_limited_results&quot;:&quot;Results have been limited to 10 results. Type more characters to refine your search.&quot;,&quot;more_results&quot;:&quot;Continue entering to improve suggestions&quot;}" data-api-url="https://ons-typeahead-prototypes.herokuapp.com/occupation">
                                             <label class="label js-typeahead-label" for="job-title-input">
                                                 Job title<br>
                                                 <span class="label__description">Enter your own answer or select from suggestions</span>
@@ -55,9 +57,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                 <div class="field u-mt-no">
                                                     <input autocomplete="new-password" type="text" id="job-title-input" class="input input--text input-type__input typeahead__input js-typeahead-input" name="job-title-input" data-autocomplete="new-password" />
                                                 </div>
-                                                <div class="typeahead__instructions u-vh js-typeahead-instructions" id="job-title-instructions">Use up and down keys to navigate results once you&#39;ve typed more than two characters. Use the enter key to select a result. Touch device users, explore by touch or with swipe gestures.</div>
-                                                <ul class="typeahead__listbox js-typeahead-listbox" role="listbox" id="job-title-listbox"></ul>
-                                                <div class="typeahead__status u-vh js-typeahead-aria-status" aria-live="polite" role="status"></div>
+                                                <div class="u-mt-xs">
+                                                    <div class="typeahead__instructions u-vh js-typeahead-instructions" id="job-title-instructions">Use up and down keys to navigate results once you&#39;ve typed more than two characters. Use the enter key to select a result. Touch device users, explore by touch or with swipe gestures.</div>
+                                                    <ul class="typeahead__listbox js-typeahead-listbox" role="listbox" id="job-title-listbox"></ul>
+                                                    <div class="typeahead__status u-vh js-typeahead-aria-status" aria-live="polite" role="status"></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -122,8 +126,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('In ' + '<em class="highlight">' + person.fullName + window.ONS.utils.trailingNameS(person.fullName) + '</em>' +
-        ' main job, what is your job title?');
+      $('.js-heading').html('What is ' + '<em class="highlight">' + person.fullName + window.ONS.utils.trailingNameS(person.fullName) + '</em>' +
+        ' full job title?');
     }
   }
 

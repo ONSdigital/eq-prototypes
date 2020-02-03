@@ -130,7 +130,8 @@ export const personalDetailsEthnicGroupMap = {
       },
       {
         val: 'other',
-        label: 'Other White ethnic group or background'
+        label: 'Any other White background',
+        description: 'You can enter an ethnic group or background on the next question'
       }
     ]
   },
@@ -176,7 +177,7 @@ export const personalDetailsEthnicGroupMap = {
       },
       {
         val: 'other',
-        label: 'Other Asian ethnic group or background'
+        label: 'Any other Asian ethnic group or background'
       }
     ]
   },
