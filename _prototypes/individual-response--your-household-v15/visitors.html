@@ -25,8 +25,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                     <input autocomplete="new-password" type="hidden" name="journey" value="visitors"/>
                     <div class="group">
                         <div class="block">
-                            <section class="section u-mb-xl">
-                                <div class="question u-mb-s">
+                            <section class="section">
+                                <div class="question">
                                     <h1 class="question__title u-fs-xl">
                                         Apart from everyone already included, who else is staying overnight on <span class="js-significant-date"></span> at
                                         <span class="full-address-text"></span>?
@@ -112,7 +112,18 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             </section>
                         </div>
                     </div>
-                    <button class="btn btn--primary btn--lg qa-btn-submit"
+                    <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple js-visitor-definition">
+                        <div class="js-collapsible-content">
+                            <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Why do I have to include visitors?">
+                            Why you have to include visitors
+                            </h3>
+                            <div class="collapsible__body js-collapsible-body">
+                                <p>We ask for information on visitors to ensure that everyone is counted. This helps to produce accurate population estimates. Add any visitors, even if you think they may have been included on a census form at another address.</p>
+                                <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Why do I have to include visitors?">Hide this</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit u-mt-xl"
                             type="submit" name="">Save and continue
                     </button>
                 </form>
