@@ -32,7 +32,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 <div class="question">
                                     <h1 class="question__title u-fs-xl u-mb-s">
                                         Are any of these people related to 
-                                        <span class="js-relationship-person-is"></span>?
+                                        <span class="js-relationship-person-is"></span>
                                     </h1>
                                     <div>
                                         <ul class="list list--records list--people u-mb-s js-records js-person-name">
@@ -204,7 +204,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
       if (updateOnScreen === true) {
 
-        $('.js-relationship-person-is').html((personToIsMe ? ' you' : '<em class=”highlight”>' + person.fullName + '</em>'));
+        $('.js-relationship-person-is').html((personToIsMe ? ' you?' : '<em class=”highlight”>' + person.fullName + '?</em>' ));
         $('.js-relationship-person-is-radio').html((personToIsMe ? ' me' : person.fullName));
 
         $.each(

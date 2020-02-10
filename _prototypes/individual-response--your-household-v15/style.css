@@ -115,6 +115,18 @@ a:focus:not(.btn--link):not(.btn--ghost):not(.js-clear-btn):not(.download__thumb
     text-decoration: none;
 }
 
+.collapsible {
+    margin-top: 1.5rem;
+}
+
+.question + .collapsible {
+    margin-top: 0;
+}
+
+p.js-declaration {
+    margin-bottom: .5rem;
+}
+
 .collapsible__title {
     text-decoration: underline!important;
 }
@@ -171,6 +183,11 @@ a:focus:not(.btn--link):not(.btn--ghost):not(.js-clear-btn):not(.download__thumb
 .question {
     margin-bottom: 0;
 }
+
+p.field {
+    margin-bottom: 0;
+}
+
 .field__legend {
     font-weight: normal!important;
   }
