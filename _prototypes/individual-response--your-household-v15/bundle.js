@@ -125,7 +125,7 @@ import {
 } from './assets/personal-details';
 import { removeFromList, trailingNameS } from './assets/utils';
 
-import { numberToPositionWord, numberToWordsStyleguide } from './assets/numbers-to-words';
+import { numberToPositionWord, numberToWordsStyleguide, precedingOrdinalWord } from './assets/numbers-to-words';
 
 import { tools } from './assets/prototype-tools';
 
@@ -711,6 +711,7 @@ window.ONS.utils = {
   trailingNameS,
   numberToPositionWord,
   numberToWordsStyleguide,
+  precedingOrdinalWord,
   getSignificant,
   cleanHTMLPlaceholderStringReplacment,
   validateInputs,

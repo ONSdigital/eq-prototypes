@@ -145,6 +145,14 @@ export function numberToPositionWord(num) {
   return result;
 }
 
+export function precedingOrdinalWord(number) {
+  if (number === (8 || 11 || 18)) {
+    return 'an';
+  } else {
+    return 'a';
+  }
+}
+
 export function numberToWordsStyleguide(number) {
   if (number > 9) {
     return number;
