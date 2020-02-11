@@ -164,7 +164,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
     if ((nextPosition) > 1) {
       $('.yes-answer').html(
-        'Yes, I need to add a ' +
+        'Yes, I need to add ' + window.ONS.utils.precedingOrdinalWord(nextPosition) + ' ' +
         window.ONS.utils.numberToPositionWord(nextPosition) +
         ' ' + (isVisitorJourney ? 'visitor' : 'person')
       );
