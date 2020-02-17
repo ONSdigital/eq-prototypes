@@ -34,8 +34,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
-                                        class="question__title u-fs-xl js-heading">
-                                        Who {tense} your legal marriage to?
+                                        class="question__title u-fs-xl js-heading js-piping">
                                     </h1>
                                 </div>
 
@@ -47,118 +46,24 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
                                                            name="marital-status"
-                                                           id="never"
-                                                           value="never">
+                                                           id="opposite-sex"
+                                                           value="opposite-sex">
                                                     <label class="label label--inline"
-                                                           for="never"
-                                                           id="never-label">
-                                                        Never married and
-                                                        never registered a
-                                                        civil partnership
+                                                           for="opposite-sex"
+                                                           id="opposite-sex-label">
+                                                        Someone of the opposite sex
                                                     </label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable"
                                                            type="radio"
                                                            name="marital-status"
-                                                           id="married"
-                                                           value="married">
+                                                           id="same-sex"
+                                                           value="same-sex">
                                                     <label class="label label--inline"
-                                                           for="married"
-                                                           id="married-label">
-                                                        Married
-                                                    </label>
-                                                </div>
-                                                <div class="field__item js-focusable-box">
-                                                    <input class="input input--radio js-focusable"
-                                                           type="radio"
-                                                           name="marital-status"
-                                                           id="registered"
-                                                           value="registered">
-                                                    <label class="label label--inline"
-                                                           for="registered"
-                                                           id="registered-label">
-                                                        In a registered civil
-                                                        partnership
-                                                    </label>
-                                                </div>
-                                                <div class="field__item js-focusable-box">
-                                                    <input class="input input--radio js-focusable"
-                                                           type="radio"
-                                                           name="marital-status"
-                                                           id="separated-married"
-                                                           value="separated-married">
-                                                    <label class="label label--inline"
-                                                           for="separated-married"
-                                                           id="separated-married-label">
-                                                        Separated, but still
-                                                        legally married
-                                                    </label>
-                                                </div>
-                                                <div class="field__item js-focusable-box">
-                                                    <input class="input input--radio js-focusable"
-                                                           type="radio"
-                                                           name="marital-status"
-                                                           id="separated-partnership"
-                                                           value="separated-partnership">
-                                                    <label class="label label--inline"
-                                                           for="separated-partnership"
-                                                           id="separated-partnership-label">
-                                                        Separated, but still
-                                                        legally in a civil partnership
-                                                    </label>
-                                                </div>
-                                                <div class="field__item js-focusable-box">
-                                                    <input class="input input--radio js-focusable"
-                                                           type="radio"
-                                                           name="marital-status"
-                                                           id="divorced"
-                                                           value="divorced">
-                                                    <label class="label label--inline"
-                                                           for="divorced"
-                                                           id="divorced-label">
-                                                        Divorced
-                                                    </label>
-                                                </div>
-                                                <div class="field__item js-focusable-box">
-                                                    <input class="input input--radio js-focusable"
-                                                           type="radio"
-                                                           name="marital-status"
-                                                           id="former-partnership"
-                                                           value="former-partnership">
-                                                    <label class="label label--inline"
-                                                           for="former-partnership"
-                                                           id="former-partnership-label">
-                                                        Formerly in a
-                                                        civil partnership
-                                                        which is now legally
-                                                        dissolved
-                                                    </label>
-                                                </div>
-                                                <div class="field__item js-focusable-box">
-                                                    <input class="input input--radio js-focusable"
-                                                           type="radio"
-                                                           name="marital-status"
-                                                           id="widowed"
-                                                           value="widowed">
-                                                    <label class="label label--inline"
-                                                           for="widowed"
-                                                           id="widowed-label">
-                                                        Widowed
-                                                    </label>
-                                                </div>
-                                                <div class="field__item js-focusable-box">
-                                                    <input class="input input--radio js-focusable"
-                                                           type="radio"
-                                                           name="marital-status"
-                                                           id="surviving-partner"
-                                                           value="surviving-partner">
-                                                    <label class="label label--inline"
-                                                           for="surviving-partner"
-                                                           id="surviving-partner-label">
-                                                        Surviving partner
-                                                        from a registered civil
-                                                        partnership
+                                                           for="same-sex"
+                                                           id="same-sex-label">
+                                                        Someone of the same sex
                                                     </label>
                                                 </div>
                                             </fieldset>
@@ -193,12 +98,13 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   var storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
     personId = urlParams.get('person_id'),
-    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
-    details = storageAPI.getPersonalDetailsFor(personId),
+    member = storageAPI.getHouseholdMemberByPersonId(personId),
+    person = member['@person'],
     isEditing = urlParams.get('edit'),
+    isVisitor = storageAPI.isVisitor(member),
+    details = storageAPI.getPersonalDetailsFor(personId),
     surveyType = urlParams.get('survey');
     storageAPI.personalBookmark(personId, window.location.href);
-
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
@@ -222,16 +128,39 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   }
 
   function updateQuestion() {
+    var maritalStatus = details.maritalStatus;
+
+    if(maritalStatus === 'registered' || maritalStatus === 'separated-partnership'){
+        var maritalStatusHeading = "registered civil partnership";
+        var headingTense = "is";
+    } else if(maritalStatus === 'former-partnership' || maritalStatus === 'surviving-partner'){
+        var maritalStatusHeading = "registered civil partnership";
+        var headingTense = "was";
+    } else if(maritalStatus === 'married' || maritalStatus === 'separated-married'){
+        var maritalStatusHeading = "legal marriage";
+        var headingTense = "is";
+    } else if(maritalStatus === 'divorced' || maritalStatus === 'widowed'){
+        var maritalStatusHeading = "legal marriage";
+        var headingTense = "was";
+    } else {
+        return null;
+    }
+
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('On <span class="js-significant-date">' + window.ONS.utils.getSignificant() + '</span>, what is ' + '<em class="highlight">' + person.fullName + 
-      window.ONS.utils.trailingNameS(person.fullName) + '</em>' +
-        ' legal marital or registered civil partnership status?');
+      $('.js-heading').html('Who ' + headingTense + ' <em class="highlight">' + person.fullName + 
+      window.ONS.utils.trailingNameS(person.fullName) + '</em> ' +
+        maritalStatusHeading + ' to?');
+    } else {
+      $('.js-heading').html('Who ' + headingTense + ' your ' +
+        maritalStatusHeading + ' to?');
     }
   }
 
-  if (details && details.maritalStatus) {
-    $('#' + details.maritalStatus).attr('checked', true);
+  function updateAllPreviousLinks() {
+    $('.js-previous-link').attr('href', '../individual-details-relationship/?person_id=' + personId);
   }
+
+  $(updateAllPreviousLinks);
 
   $(updateQuestion);
   $(updateRouting);
