@@ -43,7 +43,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                     </h3>
                                     <div class="collapsible__body js-collapsible-body">
                                         <p>You can <strong>share your household access code</strong> with the people you live with so they can complete their own sections.</p>
-                                        <p>If this is not possible, there are <a class="js-link-ir" href="#">other ways each person can do their own census</a>.</p>
+                                        <p>If this is not possible, there are <a class="js-link-ir" href="../cant-answer-for-others/">other ways each person can do their own census</a>.</p>
                                         <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Can’t answer someone else’s questions?">Hide this</button>
                                     </div>
                                   </div>
@@ -116,7 +116,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     });
     function updateAllPreviousLinks() {
       $('.js-previous-link').attr('href', '../summary/');
-      $('.js-ir-link').attr('href', '../cant-answer-for-others/?person_id=' + personId + '&previous=' + 'remove-household-member');
+      $('.js-link-ir').attr('href', '../cant-answer-for-others/?person_id=' + personId + '&previous=' + 'remove-household-member');
     }
+
     $(updateAllPreviousLinks);
 </script>
