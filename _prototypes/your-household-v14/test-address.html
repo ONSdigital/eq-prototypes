@@ -1,0 +1,136 @@
+---
+title: Household prototype v14
+project: your-household
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<style>
+    .input--text-lg {
+        width : 100%;
+    }
+
+    .input--text-postcode {
+        max-width : 9.25rem;
+    }
+</style>
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../index">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@l">
+        </div>
+
+        <div class="grid__col col-7@l pull-1@l">
+            <main role="main" id="main" class="page__main">
+                <div class="feedback__inline js-feedback-inline is-collapsed">
+                    <div class="feedback__border">
+                        <form id="feedback-form" method="POST"
+                              class="feedback__form">
+                            <div class="group">
+                                <div class="feedback__field">
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="block" id="what-is-your-address">
+                    <div class="question"
+                          id="what-is-your-address-question">
+                        <h1 class="question__title u-fs-l"
+                            data-qa="question-title">
+                            What is the first line of your address?
+                        </h1>
+
+                        <fieldset
+                                class="question__fieldset js-question-fieldset u-mb-m">
+
+                            <legend class="u-vh">What is the first line of your address?
+                            </legend>
+
+                            <div class="question__answers">
+                                <div class="question__answer">
+                                    <div class="answer answer--textfield  "
+                                          id="container-address-line-1">
+                                        <div class="answer__fields js-fields">
+                                            <div class="field">
+                                                <label class="label"
+                                                        for="address-line-1"
+                                                        id="label-address-line-1">
+                                                </label>
+                                                <input
+                                                        class="input input--text input--block u-mb-s"
+                                                        id="address-line-1"
+                                                        name="address-line-1"
+                                                        data-qa="input-text"
+                                                        value=""/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </dåiv>
+                </div>
+
+                <button class="btn btn-submit btn--primary btn--lg"
+                        data-qa="btn-submit" type="submit"
+                        name="action[save_continue]">Save and continue
+                </button>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/your-household-v14/bundle.js'></script>
+
+<script>
+  $('.btn-submit').click(function(e) {
+    e.preventDefault(); // do not submit the form like usual
+
+    var isEditing =
+      new URLSearchParams(window.location.search).get('edit') === 'true';
+
+    sessionStorage.setItem('address', getAddress());
+
+    sessionStorage.setItem('address-line-1',
+      document.getElementById('address-line-1').value);
+
+    window.location = '../confirm-address/';
+  });
+
+  function getAddress() {
+    var array = [
+
+      document.getElementById('address-line-1').value,
+
+    ];
+    return array.filter(filterAddressLine).join(', ');
+  }
+
+  function filterAddressLine(value) {
+    return value;
+  }
+
+  function updateEditableAddress() {
+    $('#address-line-1').val(sessionStorage.getItem('address-line-1'));
+  }
+
+  $(updateEditableAddress);
+
+  function updateAllPreviousLinks() {
+    $('.js-previous-link').attr('href', document.referrer);
+  }
+
+  $(updateAllPreviousLinks);
+</script>
+

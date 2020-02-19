@@ -2295,7 +2295,7 @@ em {
     z-index: 3;
     width: 100%;
     padding-left: 3.4rem;
-    width: calc(19.5rem - 2.9rem);
+    width: calc(2.9rem);
     margin-left: 2.5rem;
     border-left: 0; }
   .input-type .input-type__type {
@@ -2802,7 +2802,7 @@ em {
   -webkit-transition: border-color 200ms ease-in;
   -o-transition: border-color 200ms ease-in;
   transition: border-color 200ms ease-in;
-  width: 19.5rem; }
+  /*width: 19.5rem;*/ }
   .input:hover {
     border-color: #033e58; }
   .input:focus {
