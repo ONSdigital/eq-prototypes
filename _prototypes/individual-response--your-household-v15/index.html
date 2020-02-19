@@ -7,58 +7,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 hideSaveLater: true
 ---
 
-<style>
-    .lock {
-        font-weight : normal;
-        font-size: 1rem;
-        margin-top:1em;
-    }
-
-    .uac-border {
-        display: inline-block;
-        border-style: solid;
-        border-width: 0.4em;
-        border-color: #033e58;
-        padding: 0.7em;
-    }
-
-    .uac__input {
-        width: 14.9em!important;
-        max-width: 14.9em;
-        font-family: monospace;
-        font-weight: bold;
-        font-size: 24px;
-        text-transform: uppercase;
-        letter-spacing: .35rem;
-    }
-
-    p {
-        margin-bottom: 0.3em;
-    }
-
-    .label {
-        margin-bottom: 0;
-    }
-
-    .label__description {
-        font-size: .77777778rem;
-        font-weight: normal;
-    }
-
-    .textbox-div {
-        display: flex;
-    }
-
-    .textbox-space {
-        margin-right: 1em;
-    }
-
-    .input-length { 
-        width: 9.2rem !important; 
-    }
-</style>
-
 <link rel="stylesheet" href="../style.css"/>
+<link rel="stylesheet" href="../assets/modules/uac/uac.css"/>
 <div class="page__subheader">
 </div>
 
@@ -89,30 +39,29 @@ hideSaveLater: true
                                 data-qa="question-title">
                                 Start census
                             </h1>
-
-                            <div class = "uac-border">
-                                <p class="field">
-                                    <label class="label" for="uac">Enter your household access code printed on the letter
-                                        <span class="label__description">Keep this code safe and only share it with others in your household</span>
-                                    </label>
-                                    <input autocomplete="new-password" type="text" id="uac" class="input input--text input-type__input uac__input js-uac" name="uac" maxlength="19" data-group-size="4" autocomplete="new-password" />
-                                </p>
+                            <p class="field uac__field panel panel--branded panel--simple">
+                                <label class="label" for="uac">Enter the 16 character code printed on the letter
+                                    <br>
+                                    <span class="label__description">Keep this code safe and only share it with others in your household</span>
+                                </label>
+                                <input type="text" id="uac" class="input input--text input-type__input  uac__input js-uac" name="uac" maxlength="19" data-group-size="4" autocomplete="off" />
+                            </p>
+                            <div class="uac__security u-mt-m">
+                                <div class="uac__icon"><span class="icon icon--lock"></span></div>
+                                <p class="uac__message">Your personal information is protected by law and will be kept confidential.</p>
                             </div>
-                            <p class="lock">Your personal information is protected by law and will be kept confidential.</p>
+                            <button class="btn btn-submit btn--primary btn--lg"
+                                    data-qa="btn-submit" type="submit"
+                                    name="action[save_continue]">Access census
+                            </button>                        
                         </div>
                     </div>
-                </div>
-                <br>
-                <button class="btn btn-submit btn--primary btn--lg"
-                        data-qa="btn-submit" type="submit"
-                        name="action[save_continue]">Access census
-                </button>
-                <div>
-                <br>
-                    <strong>If you don't have a code</strong>
-                    <p>You can request a new code if you have lost, forgotten or not received an
-                    access code. <a href="#" class="footer2__link">Request a new code to start a new survey</a></p>
-                </div>
+                    <div>
+                        <br>
+                        <strong>If you don't have a code</strong>
+                        <p>You can request a new code if you have lost, forgotten or not received an
+                        access code. <a href="#" class="footer2__link">Request a new code to start a new survey</a></p>
+                    </div>
             </main>
         </div>
     </div>
@@ -121,6 +70,8 @@ hideSaveLater: true
 <script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
 
 <script>
+  document.dispatchEvent(new CustomEvent('UAC-READY'));
+
   $('.btn-submit').click(function(e) {
     e.preventDefault();
 

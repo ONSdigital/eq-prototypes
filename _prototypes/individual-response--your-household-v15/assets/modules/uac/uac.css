@@ -1,0 +1,18 @@
+.uac__field {
+    display: inline-block;
+    position: relative;
+}
+
+.uac__input {
+  height: 100%;
+  font-family: monospace;
+  font-weight: bold;
+  width: 14.9em !important;
+  max-width: 14.9em;
+  font-size: 24px;
+  letter-spacing: 0.14em;
+}
+
+.uac__security {
+  display: flex;
+}

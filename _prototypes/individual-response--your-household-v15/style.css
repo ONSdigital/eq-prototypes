@@ -180,6 +180,11 @@ p.js-declaration {
     display: block;
 }
 
+.panel--branded {
+    background-color: rgba(227,77,219,.15);
+    border-color: #93328e;
+}
+
 .question {
     margin-bottom: 0;
 }
@@ -508,6 +513,10 @@ hr {
  */
 .header {
   margin-bottom : 0;
+}
+
+.header__main {
+    background: #93328e;
 }
 
 .lock {

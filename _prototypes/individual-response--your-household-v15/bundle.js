@@ -13,6 +13,7 @@ import './assets/lib/abortcontroller-polyfill';
  * DOM modules
  */
 import './assets/modules/typeahead-refactored/typeahead.module';
+import './assets/modules/uac/uac';
 
 import {
   RELATIONSHIPS_STORAGE_KEY,
