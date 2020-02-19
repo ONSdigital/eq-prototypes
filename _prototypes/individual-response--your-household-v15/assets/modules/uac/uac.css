@@ -7,12 +7,25 @@
   height: 100%;
   font-family: monospace;
   font-weight: bold;
-  width: 14.9em !important;
-  max-width: 14.9em;
-  font-size: 24px;
-  letter-spacing: 0.14em;
 }
 
 .uac__security {
   display: flex;
+}
+
+
+@media only screen and (min-width: 375px) {
+  .uac__input {
+    font-size: 22px;
+    letter-spacing: 0.01em;
+  }
+}
+
+@media only screen and (min-width: 500px) {
+  .uac__input {
+      width: 14.9em!important;
+      max-width: 14.9em;
+      font-size: 24px;
+      letter-spacing: .14em;
+  }
 }
