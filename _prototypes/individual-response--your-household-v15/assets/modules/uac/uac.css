@@ -1,18 +1,20 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap');
+
 .uac__field {
-    display: inline-block;
+    display: block;
     position: relative;
 }
 
 .uac__input {
   height: 100%;
-  font-family: monospace;
   font-weight: bold;
+  font-family: 'Roboto Mono', monospace;
+  text-transform: uppercase;
 }
 
 .uac__security {
   display: flex;
 }
-
 
 @media only screen and (min-width: 375px) {
   .uac__input {
