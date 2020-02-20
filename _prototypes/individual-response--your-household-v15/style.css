@@ -43,6 +43,10 @@ h4 {
     font-size: .8rem;
 }
 
+.logo__img {
+    width: 220px;
+}
+
 /* over 740px */
 @media only screen and (min-width: 740px) {
     .u-fs-xl,
@@ -69,6 +73,14 @@ h4 {
     .u-fs-s {
         font-size: .8rem;
     }
+
+    .logo__img {
+        width: 220px;
+    }
+}
+
+.page__subheader {
+    padding: 1rem 0;
 }
 
 .header__title {
@@ -87,6 +99,10 @@ h4 {
     padding: 0;
     position: absolute;
     width: 1px;
+}
+
+.header__title--nav-adj {
+    padding-top: 0;
 }
 
 .btn:not(.btn--ghost):not(.btn--ghost-blue) {
