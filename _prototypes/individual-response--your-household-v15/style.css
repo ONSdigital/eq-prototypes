@@ -71,6 +71,24 @@ h4 {
     }
 }
 
+.header__title {
+    display: block;
+    background: url('../img/icons/census-logo-en.svg') no-repeat 0 50%;
+    max-width: 100%;
+    height: 44px;
+}
+
+.header__title span {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
 .btn:not(.btn--ghost):not(.btn--ghost-blue) {
     -webkit-box-shadow: 0px 3px 0px 0px rgba(0,0,0,0.8);
     -moz-box-shadow: 0px 3px 0px 0px rgba(0,0,0,0.8);
@@ -143,7 +161,7 @@ p.js-declaration {
     width: 100%;
 }
 
-.panel--error a {
+.panel a {
     color: #4263c2;
 }
 
