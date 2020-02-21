@@ -1,0 +1,61 @@
+---
+title: IR - Household prototype v15
+project: Individual Response
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<link rel="stylesheet" href="../census-home-style.css"/>
+
+<main id="main-content" role="main">
+    <section class="hero hero--with-image">
+        <picture>
+            <source media="(max-width: 768px)" srcset="{{site.baseurl}}/s/img/hero_banner_template_V4.jpg"><img class="hero__img" src="{{site.baseurl}}/s/img/hero_banner_template_V4.jpg" alt=""></picture>
+        <div class="hero__container">
+            <div class="hero__content grid grid--gutterless grid--flex grid--vertical-center">
+                <div class="container">
+                    <div class="grid__col col-6@m">
+                        <header>
+                            <h1 class="hero__title">Census 2021 is happening now</h1>
+                            <h2 class="hero__subtitle u-fs-m">Ready to start your census online? <br>You’ll need your 16 character access code.</h2>
+                        </header>
+                        <a href="/individual-response--your-household-v15/index/" role="button" class="btn u-mb-m btn--link">
+                            <span class="btn__inner icon--chevron-right-white">Start your census</span>
+                        </a>                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="u-pt-l u-pb-s u-grey-bg">
+        <div class="page__container container">
+            <div class="grid grid--column@xs@s u-mb-l">
+                <div class="grid__col col-4@m">
+                    <div class="card" aria-labelledby="about-the-census" aria-describedby="highlight-id-0" role="navigation" aria-label="Section highlight">
+                        <h2 class="u-fs-m" id="about-the-census"><a href="https://census.gov.uk/about-the-census">About the census</a></h2>
+                        <p id="highlight-id-0">The census is a survey that gives us information about all the households in England and Wales.</p>
+                    </div>
+                </div>
+                <div class="grid__col col-4@m">
+                    <div class="card" aria-labelledby="why-should-i-take-part-in-the-census?" aria-describedby="highlight-id-1" role="navigation" aria-label="Section highlight">
+                        <h2 class="u-fs-m" id="why-should-i-take-part-in-the-census?"><a href="https://census.gov.uk/about-the-census/why-should-i-take-part">Why should I take part in the census?</a></h2>
+                        <p id="highlight-id-1">Why the information we collect is important and what we use it for.</p>
+                    </div>
+                </div>
+                <div class="grid__col col-4@m">
+                    <div class="card" aria-labelledby="keeping-your-data-safe" aria-describedby="highlight-id-2" role="navigation" aria-label="Section highlight">
+                        <h2 class="u-fs-m" id="keeping-your-data-safe"><a href="https://census.gov.uk/keeping-your-data-safe">Keeping your data safe</a></h2>
+                        <p id="highlight-id-2">How we keep your data safe and what happens to your personal information.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="page__container container">
+        <div class="panel panel--simple panel--warning js-panel-info u-mt-m" style=""><span class="panel__icon" aria-hidden="true">!</span><span class="panel__text">You must complete the census by law or you could be fined up to £1000.</span></div>
+    </div>
+
+</main>

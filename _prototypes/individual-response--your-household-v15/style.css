@@ -189,6 +189,7 @@ p.js-declaration {
     font-weight: 600;
     padding-top: .5rem;
     padding-bottom: .5rem;
+    position: relative;
 }
 
 .panel--warning .panel__icon {
