@@ -39,14 +39,20 @@ hideSaveLater: true
                                 data-qa="question-title">
                                 Start census
                             </h1>
-                            <p class="field uac__field panel panel--info panel--simple">
+                            <div class="field uac__field panel panel--info panel--simple">
                                 <label class="label" for="uac">Enter your 16 character access code
                                     <br>
                                     <span class="label__description">Keep this code safe and only share it with others in your household</span>
                                 </label>
                                 <input type="text" id="uac" class="input input--text input-type__input uac__input js-uac u-mb-xs" name="uac" maxlength="19" data-group-size="4" autocomplete="off" />
-                                <span class="u-fs-s"><a href="#">Where to find your access code</a></span>
-                            </p>
+                                <details class="uac__help u-fs-r">
+                                    <summary>Need help with your access code?</summary>
+                                        <ul class="u-mt-xs u-mb-no">
+                                            <li><a href="#">Where to find your access code</a></li>
+                                            <li><a href="#">Request a new household access code</a> if you've lost, forgotten or not received an access code.</li>
+                                        </ul>
+                                </details>
+                            </div>
                             <div class="uac__security u-mt-m">
                                 <div class="uac__icon"><span class="icon icon--lock"></span></div>
                                 <p class="uac__message">Your personal information is protected by law and will be kept confidential.</p>
@@ -58,10 +64,8 @@ hideSaveLater: true
                         </div>
                     </div>
                     <div>
-                        <br>
-                        <strong>If you don't have a household code</strong>
-                        <p>You can request a new code if you have lost, forgotten or not received an
-                        access code. <a href="#" class="footer2__link">Request a new code to start a new survey</a></p>
+                        <h2 class="u-fs-m u-mt-xl">Need to answer separately from your household?</h2>
+                        <p>If you prefer to answer separately from the people you live with, you can <a href="#" class="f">request an individual access code</a> to start a separate census.</p>
                     </div>
             </main>
         </div>

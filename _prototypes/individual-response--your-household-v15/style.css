@@ -133,12 +133,12 @@ h4 {
 }
 
 a {
-    color: #334f9e;
+    color: #4263c2;
 }
 
 a:hover {
     text-decoration: underline;
-    color: #4263c2;
+    color: #033e58;
 }
 
 a:focus:not(.btn--link):not(.btn--ghost):not(.js-clear-btn):not(.download__thumbnail--link):not(.header__logo-link):not(.header__title-link):not(.tab--row) {
@@ -165,7 +165,8 @@ p.js-declaration {
     text-decoration: underline!important;
 }
 
-.collapsible--simple .collapsible__title:focus {
+.collapsible--simple .collapsible__title:focus,
+details summary:focus {
     outline: 3px solid transparent;
     color: #222;
     background-color: #fd0;
@@ -628,7 +629,7 @@ hr {
 .btn--ghost-blue:focus, .btn--ghost-blue:hover {
     color: #4263c2;
     background-color: transparent;
-    border-color: #4263c2
+    border-color: #4263c2;
 }
 
 .btn--ghost-blue:focus {
