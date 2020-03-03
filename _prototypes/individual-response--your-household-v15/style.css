@@ -79,6 +79,15 @@ h4 {
     }
 }
 
+/* Utility classes */
+.u-bb {
+    border-bottom: 1px solid #888;
+}
+
+.u-bl {
+    border-left: 1px solid #888;
+}
+
 .page__subheader {
     padding: 1rem 0;
 }

@@ -58,3 +58,7 @@
     border: 3px solid #fff;
     color: #3C388E;
 }
+
+.grid__col .card {
+    padding-right: 1rem;
+}
