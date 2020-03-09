@@ -55,19 +55,6 @@ hideSaveLater: true
         </div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
-                <div class="panel panel--error js-error-box u-mb-m u-d-no">
-                    <div class="panel__header">
-                        <div class="panel__title u-fs-r--b">This page has an error</div>
-                    </div>
-                    <div class="panel__body">
-                        <p class="u-fs-r">This must be corrected to continue</p>
-                        <ul class="list list--bare">
-                            <li class="list__item u-fs-r">
-                                1. <a class="js-inpagelink" href="#panel-error">Enter a valid email address, such as example@email.com</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
                 <div class="panel panel--simple panel--success u-mb-m">    
                     <div class="panel__body">
                         <h1 class="u-mb-xs">
@@ -83,8 +70,7 @@ hideSaveLater: true
                 <h2>Send this confirmation to an email address</h2>
                 <p>If you would like confirmation of your completed census please provide a valid email address.</p>
                 <form action="../complete--confirmation-sent/">
-            
-                    <div id="email-field" class="field">
+                    <div class="field">
                         <label class="label" for="email-address">
                                 Email address
                         </label>
@@ -92,7 +78,6 @@ hideSaveLater: true
                                 id="email-address"
                                 value="" />
                     </div>
-
                     <button type="submit" class="btn btn--small u-mb-l u-mt-s qa-btn-submit">
                         <span class="btn__inner">Send confirmation</span>
                     </button>
@@ -115,14 +100,10 @@ hideSaveLater: true
 <script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
 
 <script>
-    var queryString = window.location.search;
-    var searchParams = new URLSearchParams(queryString);
-
-
-    $('.qa-btn-submit').on('click', function (e) {
+        $('.qa-btn-submit').on('click', function (e) {
         e.preventDefault();
         if( !validateEmail($('#email-address').val()) || !$('#email-address').val()) {
-            window.location.href = '../complete/?invalid=true';
+            window.location.href = '../complete--confirmation-email-failed/?email=' + encodeURI($('#email-address').val());
         } else {
             window.location.href = '../complete--confirmation-sent/?email=' + encodeURI($('#email-address').val());
         }
@@ -132,15 +113,4 @@ hideSaveLater: true
         var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
         return emailReg.test( $email );
     }
-
-    function checkErrors() {
-        if(searchParams.get('invalid')) {
-            let param = searchParams.get('true');
-            $('.js-error-box').removeClass('u-d-no');
-            $('#email-field').wrap( '<div class="panel panel--simple panel--error"><div class="panel__body"></div></div>' );
-            $('#email-field').before('<p id="panel-error" class="panel__error u-fs-r--b">Enter a valid email address, such as example@email.com</p>');
-        };
-    }
-
-    $(checkErrors);
 </script>
