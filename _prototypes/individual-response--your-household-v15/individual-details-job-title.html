@@ -44,25 +44,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 </div>
                                 <div class="answer">
                                     <div class="answer__fields js-fields">
-                                        <div class="typeahead js-typeahead u-mt-m" data-content="{&quot;no_results&quot;:&quot;No results found&quot;,&quot;aria_no_results&quot;:&quot;No results found for the query&quot;,&quot;aria_you_have_selected&quot;:&quot;You have selected&quot;,&quot;aria_found_by_alternative_name&quot;:&quot;found by alternative name&quot;,&quot;aria_min_chars&quot;:&quot;Type in 2 or more characters for results.&quot;,&quot;aria_one_result&quot;:&quot;There is one result available.&quot;,&quot;aria_n_results&quot;:&quot;There are {n} results available.&quot;,&quot;aria_limited_results&quot;:&quot;Results have been limited to 10 results. Type more characters to refine your search.&quot;,&quot;more_results&quot;:&quot;Continue entering to improve suggestions&quot;}" data-api-url="https://ons-typeahead-prototypes.herokuapp.com/occupation">
+                                        <div class="field js-char-check">
                                             <label class="label js-typeahead-label" for="job-title-input">
-                                                Job title<br>
-                                                <span class="label__description">Enter your own answer or select from suggestions</span>
+                                                Job title
                                             </label>
-                                            <div class="typeahead__combobox js-typeahead-combobox" role="combobox" aria-has-popup="job-title-listbox" aria-expanded="false">
-                                                <input autocomplete="new-password" type="hidden" id="job-title-code" class="input input--text input-type__input js-typeahead-code" name="job-title-code" />
-                                                <div class="field">
-                                                    <input autocomplete="new-password" type="text" id="job-title-preview" class="input input--text input-type__input typeahead__preview js-typeahead-preview" readonly="true" aria-hidden="true" tabindex="-1" />
-                                                </div>
-                                                <div class="field u-mt-no">
-                                                    <input autocomplete="new-password" type="text" id="job-title-input" class="input input--text input-type__input typeahead__input js-typeahead-input" name="job-title-input" data-autocomplete="new-password" />
-                                                </div>
-                                                <div class="u-mt-xs">
-                                                    <div class="typeahead__instructions u-vh js-typeahead-instructions" id="job-title-instructions">Use up and down keys to navigate results once you&#39;ve typed more than two characters. Use the enter key to select a result. Touch device users, explore by touch or with swipe gestures.</div>
-                                                    <ul class="typeahead__listbox js-typeahead-listbox" role="listbox" id="job-title-listbox"></ul>
-                                                    <div class="typeahead__status u-vh js-typeahead-aria-status" aria-live="polite" role="status"></div>
-                                                </div>
-                                            </div>
+                                            <input autocomplete="new-password" id="job-title-code" class="input input--text input-type__input" name="job-title-code" data-char-check-ref="job-title-code-check-remaining" data-char-check-num="120" />
                                         </div>
                                     </div>
                                 </div>
@@ -129,6 +115,17 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       $('.js-heading').html('What is ' + '<em class="highlight">' + person.fullName + window.ONS.utils.trailingNameS(person.fullName) + '</em>' +
         ' full job title?');
     }
+  }
+
+  function charCheck() {
+    var inputClassLimitReached = 'input--limit-reached';
+    var remainingClassLimitReached = 'input__limit--reached';
+    var attrCharCheckRef = 'data-char-check-ref';
+    var attrCharCheckVal = 'data-char-check-num';
+    var input = $('.');
+    var button = this.context.querySelector('button');
+    var checkElement = document.getElementById(this.input.getAttribute(attrCharCheckRef));
+    var checkVal = this.input.getAttribute(attrCharCheckVal);
   }
 
   if (details && details['job-title'] &&
