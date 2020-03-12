@@ -14,6 +14,7 @@ import './assets/lib/abortcontroller-polyfill';
  */
 import './assets/modules/typeahead-refactored/typeahead.module';
 import './assets/modules/uac/uac';
+import './assets/modules/character-check';
 
 import {
   RELATIONSHIPS_STORAGE_KEY,

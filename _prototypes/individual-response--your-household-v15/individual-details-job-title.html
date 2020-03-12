@@ -40,16 +40,22 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                     </h1>
                                 </div>
                                 <div class="question__description">
-                                <p>For example, retail assistant, office cleaner, district nurse, primary school teacher. Do not state their grade or pay band</p>
+                                  <p>For example, retail assistant, office cleaner, district nurse, primary school teacher. Do not state their grade or pay band</p>
                                 </div>
                                 <div class="answer">
                                     <div class="answer__fields js-fields">
-                                        <div class="field js-char-check">
-                                            <label class="label js-typeahead-label" for="job-title-input">
-                                                Job title
-                                            </label>
-                                            <input autocomplete="new-password" id="job-title-code" class="input input--text input-type__input" name="job-title-code" data-char-check-ref="job-title-code-check-remaining" data-char-check-num="120" />
-                                        </div>
+                                      <div class="js-char-check">
+                                        <p class="field">
+                                          <label class="label" for="search-field">Job title</label>
+                                          <input type="text" id="search-field" class="input input--text input-type__input" data-char-check-ref="search-field-check-remaining" data-char-check-num="11" />
+                                        </p>
+                                      </div>
+                                      <span
+                                        id="search-field-check-remaining"
+                                        class="input__limit u-fs-s--b u-d-no"
+                                        data-charcount-limit-singular="{x} character too many"
+                                        data-charcount-limit-plural="{x} characters too many">
+                                      </span>
                                     </div>
                                 </div>
                             </section>
@@ -117,16 +123,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     }
   }
 
-  function charCheck() {
-    var inputClassLimitReached = 'input--limit-reached';
-    var remainingClassLimitReached = 'input__limit--reached';
-    var attrCharCheckRef = 'data-char-check-ref';
-    var attrCharCheckVal = 'data-char-check-num';
-    var input = $('.');
-    var button = this.context.querySelector('button');
-    var checkElement = document.getElementById(this.input.getAttribute(attrCharCheckRef));
-    var checkVal = this.input.getAttribute(attrCharCheckVal);
-  }
 
   if (details && details['job-title'] &&
     details['job-title'].val) {
