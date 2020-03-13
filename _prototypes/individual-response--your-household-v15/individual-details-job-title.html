@@ -25,14 +25,14 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
             <main role="main" id="main" class="page__main">
                 <div class="panel panel--error u-mb-m js-error-box u-d-no">
                     <div class="panel__header">
-                        <div class="panel__title u-fs-r--b js-piping">The page has {x} error{s}</div>
+                        <div class="panel__title u-fs-r--b js-piping">This page has an error</div>
                     </div>
                     <div class="panel__body">
                         <p class="js-piping">This <strong>must be corrected</strong> to continue.</p>
                         <ol class="list list--bare">
                         <li class="list__item js-job-field u-d-no">
                             1) <a href="#job-field" class="list__link js-inpagelink">
-                                You have entered too many characters. Enter up to 20 characters.
+                                You have entered too many characters. Enter up to 20 characters
                             </a>
                         </li>
                        </ol>
@@ -62,7 +62,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                       <div class="js-char-check">
                                         <p class="field">
                                           <label class="label" for="job-field">Job title</label>
-                                          <input required type="text" id="job-field" data-error-msg="You have entered too many characters. Enter up to 20 characters." class="input input--text input-type__input input--w-20" data-char-check-ref="search-field-check-remaining" data-char-check-num="20" />
+                                          <input required type="text" id="job-field" data-error-msg="You have entered too many characters. Enter up to 20 characters." class="input input--text input-type__input input--w-10" data-char-check-ref="search-field-check-remaining" data-char-check-num="20" />
                                       <span
                                         id="search-field-check-remaining"
                                         class="input__limit u-fs-s--b u-d-no"
@@ -80,9 +80,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             type="submit" name="">Save and continue
                     </button>
 
-                    <p>Can't complete this question?<br />
-                        <a href="../hub" class="js-choose-another-section">Choose another section and
-                            return to this later</a></p>
+                    
+                        <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
 
                     <!--<p class="u-mb-m"><span class="js-link-secure-label"></span><br />
                         <a class="js-link-secure"
@@ -145,7 +144,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         ' full job title?');
     }
   }
-
 
   if (details && details['job-title'] &&
     details['job-title'].val) {
