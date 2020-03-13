@@ -23,6 +23,21 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         </div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
+                <div class="panel panel--error u-mb-m js-error-box u-d-no">
+                    <div class="panel__header">
+                        <div class="panel__title u-fs-r--b js-piping">The page has {x} error{s}</div>
+                    </div>
+                    <div class="panel__body">
+                        <p class="js-piping">This <strong>must be corrected</strong> to continue.</p>
+                        <ol class="list list--bare">
+                        <li class="list__item js-job-field u-d-no">
+                            1) <a href="#job-field" class="list__link js-inpagelink">
+                                You have entered too many characters. Enter up to 100 characters.
+                            </a>
+                        </li>
+                       </ol>
+                    </div>
+                </div>                  
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password"
                       action="../individual-details-job-describe">
@@ -42,20 +57,20 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 <div class="question__description">
                                   <p>For example, retail assistant, office cleaner, district nurse, primary school teacher. Do not state their grade or pay band</p>
                                 </div>
-                                <div class="answer">
-                                    <div class="answer__fields js-fields">
+                                <div class="question__answers">
+                                    <div class="question__answer js-fields">
                                       <div class="js-char-check">
                                         <p class="field">
-                                          <label class="label" for="search-field">Job title</label>
-                                          <input type="text" id="search-field" class="input input--text input-type__input" data-char-check-ref="search-field-check-remaining" data-char-check-num="11" />
-                                        </p>
-                                      </div>
+                                          <label class="label" for="job-field">Job title</label>
+                                          <input required type="text" id="job-field" data-error-msg="You have entered too many characters. Enter up to 100 characters." class="input input--text input-type__input input--w-20" data-char-check-ref="search-field-check-remaining" data-char-check-num="30" />
                                       <span
                                         id="search-field-check-remaining"
                                         class="input__limit u-fs-s--b u-d-no"
                                         data-charcount-limit-singular="{x} character too many"
                                         data-charcount-limit-plural="{x} characters too many">
                                       </span>
+                                        </p>
+                                      </div>
                                     </div>
                                 </div>
                             </section>
@@ -89,23 +104,31 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     isEditing = urlParams.get('edit'),
     details = storageAPI.getPersonalDetailsFor(personId),
-    surveyType = urlParams.get('survey');
+    surveyType = urlParams.get('survey'),
+    hasErrors = false;
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+    e.preventDefault();
+    const testFails = document.getElementById('job-field').value.length >= 20 ? true : false;
+    window.ONS.utils.validateInputs(testFails);
+    if (hasErrors) {
+      hasErrors = false;
+      return false;
+    } else {
+      storageAPI.addUpdateJobTitle(personId, $('#job-title-input').val());
 
-    storageAPI.addUpdateJobTitle(personId, $('#job-title-input').val());
-
-    if(switchedFromUnemployed) {
-      e.preventDefault();
-      window.location.href = '../individual-details-job-describe/?person_id=' + personId +
-        (surveyType ? '&survey=' + surveyType : '') +
-        '&switchedFromUnemployed=true';
-    }
-    else if(isEditing) {
-      e.preventDefault();
-      window.location.href = '../individual-details-summary/?person_id=' +
-        personId + (surveyType ? '&survey=' + surveyType : '');
+      if(switchedFromUnemployed) {
+        e.preventDefault();
+        window.location.href = '../individual-details-job-describe/?person_id=' + personId +
+          (surveyType ? '&survey=' + surveyType : '') +
+          '&switchedFromUnemployed=true';
+      }
+      else if(isEditing) {
+        e.preventDefault();
+        window.location.href = '../individual-details-summary/?person_id=' +
+          personId + (surveyType ? '&survey=' + surveyType : '');
+      }
     }
   }));
 

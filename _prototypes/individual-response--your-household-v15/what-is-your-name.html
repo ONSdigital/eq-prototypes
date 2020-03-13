@@ -183,7 +183,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       
   $('.btn-submit').on('click', function(e) {
     e.preventDefault();
-    window.ONS.utils.validateInputs();
+    const testFails = '';
+    window.ONS.utils.validateInputs(testFails);
     if (hasErrors) {
       hasErrors = false;
       return false;
