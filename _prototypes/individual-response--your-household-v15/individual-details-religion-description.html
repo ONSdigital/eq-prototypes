@@ -186,8 +186,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
     var val = $('[name="religion"]:checked').val();
 
-    storageAPI.addUpdateEthnicGroupDescription(personId, val);
-
     if(val === 'other') {
       e.preventDefault();
       window.location.href =
@@ -220,42 +218,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     $('.js-heading').html(str);
   }
 
-  var $fieldEls =
-    storageAPI.personalDetailsEthnicGroupMap[ethnicGroup].options.map(function (item) {
-    var $template = $('.js-radio-template').clone(),
-      $radioInput = $template.find('.js-radio-input'),
-      $label = $template.find('.js-radio-label');
-      $description = $template.find('.js-radio-description');
-
-    $template.attr('id', '');
-    $template.find('.js-radio-label-strong').html(item.label);
-    $template.css('display', '');
-
-    $radioInput.attr('id', item.val);
-    $radioInput.attr('value', item.val);
-
-    if(item.val === details['religion'].description) {
-      $radioInput.attr('checked', true);
-    }
-
-    $label.attr('id', item.val + '-label');
-    $label.attr('for', item.val);
-
-    return $template;
-  });
-
-  function updateAnswer() {
-    $('#radio-placeholder').append(
-      /**
-       * Interlace break tags - temp fix for double banking display issues
-       */
-      _.flatten(
-        _.zip($fieldEls, _.range($fieldEls.length).map(function (){
-          return $('<br />');
-        }))
-      )
-    );
-  }
  function updateAllPreviousLinks() {
       $('.js-previous-link').attr('href', '../individual-details-religion-description/?person_id=' + personId + (religion ? '&religion=' + religion : ''));
   }
@@ -264,7 +226,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   $(updateQuestion);
   $(updateRouting);
-  $(updateAnswer);
 
   /**
    * Routing
