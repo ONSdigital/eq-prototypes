@@ -15,6 +15,7 @@ import "regenerator-runtime/runtime";
  */
 import './assets/modules/typeahead/typeahead';
 import './assets/modules/uac/uac';
+import './assets/modules/character-check';
 
 import {
   RELATIONSHIPS_STORAGE_KEY,
@@ -512,7 +513,7 @@ function fieldItemDisplayHack() {
   $('.field__item').after('<br />');
 }
 
-function validateInputs() {
+function validateInputs(testFails) {
   var inputs = Array.from(document.querySelectorAll('.input'));
   inputs
     .filter(function(input) { return input.required })
@@ -523,7 +524,7 @@ function validateInputs() {
             field = input.closest('.field'),
             errorMsg = input.getAttribute('data-error-msg');
 
-        if (input.value === '') {
+        if (input.value === testFails || testFails === true) {
           hasErrors = true;
           if (!listItem.classList.contains('js-visible')) {
             errorBox.classList.remove('u-d-no');

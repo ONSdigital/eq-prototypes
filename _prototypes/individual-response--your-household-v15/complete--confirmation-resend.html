@@ -68,22 +68,9 @@ hideSaveLater: true
                         </ul>
                     </div>
                 </div>
-                <div class="panel panel--simple panel--success u-mb-m">    
-                    <div class="panel__body">
-                        <h1 class="u-mb-xs">
-                            Your census has been submitted
-                        </h1>
-                        <p>Thank you for completing the census.
-                            We have received your answers and you do not need to do anything else.</p>
-                        <h2 class="u-fs-r--b u-mb-no">Your confirmation number</h2>
-                        <code class="u-fs-xl">1098 5379 24</code>
-                    </div>
-                </div>
-                <p class="lock u-mb-l">Your personal information is protected by law and will be kept confidential</p>
-                <h2>Get confirmation email</h2>
-                <p>If you would like to be sent confirmation that you have completed your census, enter your email address.</p>
-                <form action="../complete--confirmation-sent/">
+                <h2>Send another confirmation email</h2>
             
+                <form action="../complete--confirmation-sent/">
                     <div id="email-field" class="field">
                         <label class="label" for="email-address">
                                 Email address
@@ -92,7 +79,6 @@ hideSaveLater: true
                                 id="email-address"
                                 value="" />
                     </div>
-
                     <button type="submit" class="btn btn--small u-mb-l u-mt-s qa-btn-submit">
                         <span class="btn__inner">Send confirmation</span>
                     </button>
@@ -124,7 +110,7 @@ hideSaveLater: true
     $('.qa-btn-submit').on('click', function (e) {
         e.preventDefault();
         if( !validateEmail($('#email-address').val()) || !$('#email-address').val()) {
-            window.location.href = '../complete/?invalid=true';
+            window.location.href = '../complete--confirmation-resend/?invalid=true';
         } else {
             window.location.href = '../complete--confirmation-sent/?email=' + encodeURI($('#email-address').val());
         }

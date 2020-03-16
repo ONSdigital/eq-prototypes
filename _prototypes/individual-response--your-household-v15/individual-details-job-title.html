@@ -23,6 +23,21 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         </div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
+                <div class="panel panel--error u-mb-m js-error-box u-d-no">
+                    <div class="panel__header">
+                        <div class="panel__title u-fs-r--b js-piping">This page has an error</div>
+                    </div>
+                    <div class="panel__body">
+                        <p class="js-piping">This <strong>must be corrected</strong> to continue.</p>
+                        <ol class="list list--bare">
+                        <li class="list__item js-job-field u-d-no">
+                            1) <a href="#job-field" class="list__link js-inpagelink">
+                                You have entered too many characters. Enter up to 20 characters
+                            </a>
+                        </li>
+                       </ol>
+                    </div>
+                </div>                  
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password"
                       action="../individual-details-job-describe">
@@ -40,30 +55,22 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                     </h1>
                                 </div>
                                 <div class="question__description">
-                                <p>For example, retail assistant, office cleaner, district nurse, primary school teacher. Do not state their grade or pay band</p>
+                                  <p>For example, retail assistant, office cleaner, district nurse, primary school teacher. Do not state their grade or pay band</p>
                                 </div>
-                                <div class="answer">
-                                    <div class="answer__fields js-fields">
-                                        <div class="typeahead js-typeahead u-mt-m" data-content="{&quot;no_results&quot;:&quot;No results found&quot;,&quot;aria_no_results&quot;:&quot;No results found for the query&quot;,&quot;aria_you_have_selected&quot;:&quot;You have selected&quot;,&quot;aria_found_by_alternative_name&quot;:&quot;found by alternative name&quot;,&quot;aria_min_chars&quot;:&quot;Type in 2 or more characters for results.&quot;,&quot;aria_one_result&quot;:&quot;There is one result available.&quot;,&quot;aria_n_results&quot;:&quot;There are {n} results available.&quot;,&quot;aria_limited_results&quot;:&quot;Results have been limited to 10 results. Type more characters to refine your search.&quot;,&quot;more_results&quot;:&quot;Continue entering to improve suggestions&quot;}" data-api-url="https://ons-typeahead-prototypes.herokuapp.com/occupation">
-                                            <label class="label js-typeahead-label" for="job-title-input">
-                                                Job title<br>
-                                                <span class="label__description u-no-js-hide">Enter your own answer or select from suggestions</span>
-                                            </label>
-                                            <div class="typeahead__combobox js-typeahead-combobox" role="combobox" aria-has-popup="job-title-listbox" aria-expanded="false">
-                                                <input autocomplete="new-password" type="hidden" id="job-title-code" class="input input--text input-type__input js-typeahead-code" name="job-title-code" />
-                                                <div class="field">
-                                                    <input autocomplete="new-password" type="text" id="job-title-preview" class="input input--text input-type__input typeahead__preview js-typeahead-preview" readonly="true" aria-hidden="true" tabindex="-1" />
-                                                </div>
-                                                <div class="field u-mt-no">
-                                                    <input autocomplete="new-password" type="text" id="job-title-input" class="input input--text input-type__input typeahead__input js-typeahead-input" name="job-title-input" data-autocomplete="new-password" />
-                                                </div>
-                                                <div class="u-mt-xs">
-                                                    <div class="typeahead__instructions u-vh js-typeahead-instructions" id="job-title-instructions">Use up and down keys to navigate results once you&#39;ve typed more than two characters. Use the enter key to select a result. Touch device users, explore by touch or with swipe gestures.</div>
-                                                    <ul class="typeahead__listbox js-typeahead-listbox" role="listbox" id="job-title-listbox"></ul>
-                                                    <div class="typeahead__status u-vh js-typeahead-aria-status" aria-live="polite" role="status"></div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <div class="question__answers">
+                                    <div class="question__answer js-fields">
+                                      <div class="js-char-check">
+                                        <p class="field">
+                                          <label class="label" for="job-field">Job title</label>
+                                          <input required type="text" id="job-field" data-error-msg="You have entered too many characters. Enter up to 20 characters." class="input input--text input-type__input input--w-10" data-char-check-ref="search-field-check-remaining" data-char-check-num="20" />
+                                      <span
+                                        id="search-field-check-remaining"
+                                        class="input__limit u-fs-s--b u-d-no"
+                                        data-charcount-limit-singular="{x} character too many"
+                                        data-charcount-limit-plural="{x} characters too many">
+                                      </span>
+                                        </p>
+                                      </div>
                                     </div>
                                 </div>
                             </section>
@@ -73,9 +80,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             type="submit" name="">Save and continue
                     </button>
 
-                    <p>Can't complete this question?<br />
-                        <a href="../hub" class="js-choose-another-section">Choose another section and
-                            return to this later</a></p>
+                    
+                        <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
 
                     <!--<p class="u-mb-m"><span class="js-link-secure-label"></span><br />
                         <a class="js-link-secure"
@@ -97,23 +103,31 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     isEditing = urlParams.get('edit'),
     details = storageAPI.getPersonalDetailsFor(personId),
-    surveyType = urlParams.get('survey');
+    surveyType = urlParams.get('survey'),
+    hasErrors = false;
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
-
-    storageAPI.addUpdateJobTitle(personId, $('#job-title-input').val());
-
-    if(switchedFromUnemployed) {
+    const testFails = document.getElementById('job-field').value.length > 20 ? true : false;
+    window.ONS.utils.validateInputs(testFails);
+    if (hasErrors) {
       e.preventDefault();
-      window.location.href = '../individual-details-job-describe/?person_id=' + personId +
-        (surveyType ? '&survey=' + surveyType : '') +
-        '&switchedFromUnemployed=true';
-    }
-    else if(isEditing) {
-      e.preventDefault();
-      window.location.href = '../individual-details-summary/?person_id=' +
-        personId + (surveyType ? '&survey=' + surveyType : '');
+      hasErrors = false;
+      return false;
+    } else {
+      storageAPI.addUpdateJobTitle(personId, $('#job-title-input').val());
+
+      if(switchedFromUnemployed) {
+        e.preventDefault();
+        window.location.href = '../individual-details-job-describe/?person_id=' + personId +
+          (surveyType ? '&survey=' + surveyType : '') +
+          '&switchedFromUnemployed=true';
+      }
+      else if(isEditing) {
+        e.preventDefault();
+        window.location.href = '../individual-details-summary/?person_id=' +
+          personId + (surveyType ? '&survey=' + surveyType : '');
+      }
     }
   }));
 
