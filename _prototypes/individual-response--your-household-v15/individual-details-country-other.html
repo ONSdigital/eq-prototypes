@@ -17,9 +17,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            <!--{% include navigation.html
-            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
-            nav-title-id="section-individual" %}-->
         </div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
@@ -39,27 +36,27 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                     </h1>
                                 </div>
 
-                                <div class="answer">
-                                    <div class="answer__fields js-fields">
-                                        <div class="typeahead js-typeahead u-mt-m" data-content="{&quot;no_results&quot;:&quot;No results found&quot;,&quot;aria_no_results&quot;:&quot;No results found for the query&quot;,&quot;aria_you_have_selected&quot;:&quot;You have selected&quot;,&quot;aria_found_by_alternative_name&quot;:&quot;found by alternative name&quot;,&quot;aria_min_chars&quot;:&quot;Type in 2 or more characters for results.&quot;,&quot;aria_one_result&quot;:&quot;There is one result available.&quot;,&quot;aria_n_results&quot;:&quot;There are {n} results available.&quot;,&quot;aria_limited_results&quot;:&quot;Results have been limited to 10 results. Type more characters to refine your search.&quot;,&quot;more_results&quot;:&quot;Continue typing to refine results&quot;}" data-api-url="https://ons-typeahead-prototypes.herokuapp.com/country-of-birth">
-                                            <label class="label js-typeahead-label" for="country-of-birth-input">
-                                                Enter your country of birth
-                                            </label>
-                                            <div class="typeahead__combobox js-typeahead-combobox" role="combobox" aria-has-popup="country-of-birth-listbox" aria-expanded="false">
-                                                <input autocomplete="new-password" type="hidden" id="country-of-birth-code" class="input input--text input-type__input js-typeahead-code" name="country-of-birth-code" />
-                                                <div class="field">
-                                                    <input autocomplete="new-password" type="text" id="country-of-birth-preview" class="input input--text input-type__input typeahead__preview js-typeahead-preview" readonly="true" aria-hidden="true" tabindex="-1" />
-                                                </div>
-                                                <div class="field u-mt-no">
-                                                    <input autocomplete="new-password" type="text" id="country-of-birth-input" class="input input--text input-type__input typeahead__input js-typeahead-input" name="country-of-birth-input" data-autocomplete="new-password" />
-                                                </div>
-                                                <div class="typeahead__instructions u-vh js-typeahead-instructions" id="country-of-birth-instructions">Use up and down keys to navigate results once you&#39;ve typed more than two characters. Use the enter key to select a result. Touch device users, explore by touch or with swipe gestures.</div>
-                                                <ul class="typeahead__listbox js-typeahead-listbox" role="listbox" id="country-of-birth-listbox"></ul>
-                                                <div class="typeahead__status u-vh js-typeahead-aria-status" aria-live="polite" role="status"></div>
-                                            </div>
-                                        </div>
+                                <div class="grid grid--gutterless">
+                                    <div class="grid__col col-8@m">
+                                        <p class="field">
+                                          <label class="label" for="country-of-birth">Current name of country
+                                              <br>
+                                              <span class="label__description u-no-js-hide">Enter your own answer or select from suggestions</span>
+                                          </label>
+
+                                          <div id="country-of-birth-container" class="js-typeahead typeahead-input typeahead-input--initialised" data-instructions="Use up and down keys to navigate suggestions once you&#39;ve typed more than two characters. Use the enter key to select a suggestion. Touch device users, explore by touch or with swipe gestures." data-aria-you-have-selected="You have selected" data-aria-min-chars="Enter 3 or more characters for suggestions." data-aria-one-result="There is one suggestion available." data-aria-n-results="There are {n} suggestions available." data-aria-limited-results="Results have been limited to 10 suggestions. Type more characters to improve your search." data-more-results="Continue entering to improve suggestions" data-results-title="Suggestions" data-typeahead-data="https://gist.githubusercontent.com/rmccar/08794cd217fbc08b7c2a470371f0390d/raw/6fe79c0c082fd351b5e031db0dcdffd406f936b4/COB_FEL.json" data-no-results="No results found">
+                                              <input type="text" id="country-of-birth" class="input input--text input-type__input  js-typeahead-input  " autocomplete="off" aria-autocomplete="list" aria-controls="country-of-birth-listbox" aria-describedby="country-of-birth-instructions" aria-has-popup="true" aria-owns="country-of-birth-listbox" aria-expanded="false" role="combobox">
+                                              <div class="typeahead-input__results js-typeahead-results">
+                                              <header class="typeahead-input__results-title u-fs-s">Suggestions</header>
+                                              <ul class="typeahead-input__listbox js-typeahead-listbox" role="listbox" id="country-of-birth-listbox" tabindex="-1"></ul>
+                                              </div>
+                                              <div class="typeahead-input__instructions u-vh js-typeahead-instructions" id="country-of-birth-instructions" tabindex="-1">Use up and down keys to navigate suggestions once you&#39;ve typed more than two characters. Use the enter key to select a suggestion. Touch device users, explore by touch or with swipe gestures.</div>
+                                              <div class="typeahead-input__status u-vh js-typeahead-aria-status" aria-live="polite" role="status" tabindex="-1"></div>
+                                          </div>
+                                        </p>
                                     </div>
                                 </div>
+
                             </section>
                         </div>
                     </div>
@@ -70,11 +67,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                     <p>Can't complete this question?<br />
                         <a href="../hub" class="js-choose-another-section">Choose another section and
                             return to this later</a></p>
-
-                    <!--<p class="u-mb-m"><span class="js-link-secure-label"></span><br />
-                        <a class="js-link-secure"
-                           href="#">Get a separate access code to submit an
-                            individual response</a></p>-->
                 </form>
             </main>
         </div>

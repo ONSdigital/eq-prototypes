@@ -8,11 +8,12 @@ import './assets/lib/array-find-polyfill';
 import './assets/lib/CustomEvent-polyfill';
 import './assets/lib/fetch-polyfill';
 import './assets/lib/abortcontroller-polyfill';
+import "regenerator-runtime/runtime";
 
 /**
  * DOM modules
  */
-import './assets/modules/typeahead-refactored/typeahead.module';
+import './assets/modules/typeahead/typeahead';
 import './assets/modules/uac/uac';
 
 import {
@@ -124,6 +125,7 @@ import {
   clearPersonalBookmark,
   personalQuestionSubmitDecorator
 } from './assets/personal-details';
+
 import { removeFromList, trailingNameS } from './assets/utils';
 
 import { numberToPositionWord, numberToWordsStyleguide, precedingOrdinalWord } from './assets/numbers-to-words';
