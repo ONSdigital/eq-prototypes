@@ -364,7 +364,7 @@ function doILiveHere() {
 }
 
 function getSignificant() {
-  return 'Sunday 26 January 2020';
+  return 'Sunday 15 March 2020';
 }
 
 function updateSignificantDate() {
