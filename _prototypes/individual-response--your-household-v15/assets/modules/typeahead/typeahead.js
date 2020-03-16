@@ -1,27 +1,33 @@
-import TypeaheadCore from './typeahead-core';
+import TypeaheadUI from './typeahead.ui';
 
-class Typeahead {
+export default class Typeahead {
   constructor(context) {
     this.context = context;
-    this.typeahead = new TypeaheadCore({
+    this.lang = document.documentElement.getAttribute('lang').toLowerCase();
+    this.typeahead = new TypeaheadUI({
       context,
+      lang: this.lang,
       onSelect: this.onSelect.bind(this),
       onUnsetResult: this.onUnsetResult.bind(this),
+      onError: this.onError.bind(this),
     });
-
-    this.code = context.querySelector('.js-typeahead-code');
   }
 
   onSelect(result) {
     return new Promise(resolve => {
-      this.code.value = result.code;
-
+      this.typeahead.input.value = result.displayText;
       resolve();
     });
   }
 
   onUnsetResult() {
-    this.code.value = '';
+    return new Promise(resolve => {
+      resolve();
+    });
+  }
+
+  onError(error) {
+    console.error(error);
   }
 }
 

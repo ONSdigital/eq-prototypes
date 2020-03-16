@@ -1,57 +1,69 @@
-import AbortableFetch from '../abortable-fetch';
-import formBodyFromObject from '../form-body-from-object';
-import {sanitiseTypeaheadText} from './typeahead-helpers';
+import { sortBy } from 'sort-by-typescript';
 
-const classTypeaheadCombobox = 'js-typeahead-combobox';
-const classTypeaheadLabel = 'js-typeahead-label';
-const classTypeaheadInput = 'js-typeahead-input';
-const classTypeaheadInstructions = 'js-typeahead-instructions';
-const classTypeaheadListbox = 'js-typeahead-listbox';
-const classTypeaheadAriaStatus = 'js-typeahead-aria-status';
+import queryJson from './code.list.searcher';
+import { sanitiseTypeaheadText } from './typeahead.helpers';
+import fetch from '../abortable-fetch';
 
-const classTypeaheadOption = 'typeahead__option';
-const classTypeaheadOptionFocused = `${classTypeaheadOption}--focused`;
-const classTypeaheadOptionNoResults = `${classTypeaheadOption}--no-results`;
-const classTypeaheadOptionMoreResults = `${classTypeaheadOption}--more-results`;
-const classTypeaheadComboboxFocused = 'typeahead__combobox--focused';
-const classTypeaheadHasResults = 'typeahead--has-results';
+export const baseClass = 'js-typeahead';
 
-const KEYCODE = {
-  BACK_SPACE: 8,
-  RETURN: 13,
-  ENTER: 14,
-  LEFT: 37,
-  UP: 38,
-  RIGHT: 39,
-  DOWN: 40,
-  DELETE: 46,
-  V: 86
-};
+export const classTypeaheadOption = 'typeahead-input__option';
+export const classTypeaheadOptionFocused = `${classTypeaheadOption}--focused`;
+export const classTypeaheadOptionNoResults = `${classTypeaheadOption}--no-results u-fs-s`;
+export const classTypeaheadOptionMoreResults = `${classTypeaheadOption}--more-results u-fs-s`;
+export const classTypeaheadHasResults = 'typeahead-input--has-results';
 
-export default class TypeaheadCore {
-  constructor({context, apiUrl, onSelect, onUnsetResult, onError, minChars, resultLimit, sanitisedQueryReplaceChars = [], suggestionFunction}) {
+export default class TypeaheadUI {
+  constructor({
+    context,
+    typeaheadData,
+    sanitisedQueryReplaceChars,
+    minChars,
+    resultLimit,
+    suggestOnBoot,
+    onSelect,
+    onError,
+    onUnsetResult,
+    suggestionFunction,
+    lang,
+    ariaYouHaveSelected,
+    ariaMinChars,
+    ariaOneResult,
+    ariaNResults,
+    ariaLimitedResults,
+    moreResults,
+    resultsTitle,
+    noResults,
+  }) {
     // DOM Elements
     this.context = context;
-    this.combobox = context.querySelector(`.${classTypeaheadCombobox}`);
-    this.label = context.querySelector(`.${classTypeaheadLabel}`);
-    this.input = context.querySelector(`.${classTypeaheadInput}`);
-    this.listbox = context.querySelector(`.${classTypeaheadListbox}`);
-    this.instructions = context.querySelector(`.${classTypeaheadInstructions}`);
-    this.ariaStatus = context.querySelector(`.${classTypeaheadAriaStatus}`);
+    this.input = context.querySelector(`.${baseClass}-input`);
+    this.resultsContainer = context.querySelector(`.${baseClass}-results`);
+    this.listbox = this.resultsContainer.querySelector(`.${baseClass}-listbox`);
+    this.instructions = context.querySelector(`.${baseClass}-instructions`);
+    this.ariaStatus = context.querySelector(`.${baseClass}-aria-status`);
 
-    // Suggestion URL
-    this.apiUrl = apiUrl || context.getAttribute('data-api-url');
+    // Settings
+    this.typeaheadData = typeaheadData || context.getAttribute('data-typeahead-data');
+
+    this.ariaYouHaveSelected = ariaYouHaveSelected || context.getAttribute('data-aria-you-have-selected');
+    this.ariaMinChars = ariaMinChars || context.getAttribute('data-aria-min-chars');
+    this.ariaOneResult = ariaOneResult || context.getAttribute('data-aria-one-result');
+    this.ariaNResults = ariaNResults || context.getAttribute('data-aria-n-results');
+    this.ariaLimitedResults = ariaLimitedResults || context.getAttribute('data-aria-limited-results');
+    this.moreResults = moreResults || context.getAttribute('data-more-results');
+    this.resultsTitle = resultsTitle || context.getAttribute('data-results-title');
+    this.noResults = noResults || context.getAttribute('data-no-results');
+
+    this.listboxId = this.listbox.getAttribute('id');
+    this.minChars = minChars || 3;
+    this.resultLimit = resultLimit || 10;
+    this.suggestOnBoot = suggestOnBoot;
+    this.lang = lang || 'en-gb';
 
     // Callbacks
     this.onSelect = onSelect;
     this.onUnsetResult = onUnsetResult;
     this.onError = onError;
-
-    // Settings
-    this.content = JSON.parse(context.getAttribute('data-content'));
-    this.listboxId = this.listbox.getAttribute('id');
-    this.minChars = minChars || 2;
-    this.resultLimit = resultLimit || null;
 
     if (suggestionFunction) {
       this.fetchSuggestions = suggestionFunction;
@@ -72,19 +84,46 @@ export default class TypeaheadCore {
     this.resultSelected = false;
     this.blurring = false;
     this.blurTimeout = null;
-    this.sanitisedQueryReplaceChars = sanitisedQueryReplaceChars;
-    this.lang = document.documentElement.getAttribute('lang').toLowerCase();
+    this.sanitisedQueryReplaceChars = sanitisedQueryReplaceChars || [];
 
-    // Modify DOM
-    this.label.setAttribute('for', this.input.getAttribute('id'));
+    // Temporary fix as runner doesn't use full lang code
+    if (this.lang === 'en') {
+      this.lang = 'en-gb';
+    }
+    this.fetchData();
+    this.initialiseUI();
+  }
+
+  initialiseUI() {
     this.input.setAttribute('aria-autocomplete', 'list');
     this.input.setAttribute('aria-controls', this.listbox.getAttribute('id'));
     this.input.setAttribute('aria-describedby', this.instructions.getAttribute('id'));
-    this.input.setAttribute('autocomplete', this.input.getAttribute('data-autocomplete'));
-    this.context.classList.add('typeahead--initialised');
+    this.input.setAttribute('aria-has-popup', true);
+    this.input.setAttribute('aria-owns', this.listbox.getAttribute('id'));
+    this.input.setAttribute('aria-expanded', false);
+    this.input.setAttribute('role', 'combobox');
 
-    // Bind event listeners
+    this.context.classList.add('typeahead-input--initialised');
+
     this.bindEventListeners();
+  }
+
+  fetchData() {
+    async function loadJSON(jsonPath) {
+      try {
+        const jsonResponse = await fetch(jsonPath);
+        if (jsonResponse.status === 500) {
+          throw new Error('Error fetching json data: ' + jsonResponse.status);
+        }
+        const jsonData = await jsonResponse.json();
+        return jsonData;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    // Call loading of json file
+    this.data = loadJSON(this.typeaheadData);
   }
 
   bindEventListeners() {
@@ -99,21 +138,20 @@ export default class TypeaheadCore {
   }
 
   handleKeydown(event) {
-    this.ctrlKey = ((event.ctrlKey || event.metaKey) && event.keyCode !== KEYCODE.V);
+    this.ctrlKey = (event.ctrlKey || event.metaKey) && event.key !== 'v';
 
-    switch (event.keyCode) {
-      case KEYCODE.UP: {
+    switch (event.key) {
+      case 'ArrowUp': {
         event.preventDefault();
         this.navigateResults(-1);
         break;
       }
-      case KEYCODE.DOWN: {
+      case 'ArrowDown': {
         event.preventDefault();
         this.navigateResults(1);
         break;
       }
-      case KEYCODE.ENTER:
-      case KEYCODE.RETURN: {
+      case 'Enter': {
         event.preventDefault();
         break;
       }
@@ -121,19 +159,18 @@ export default class TypeaheadCore {
   }
 
   handleKeyup(event) {
-    switch (event.keyCode) {
-      case KEYCODE.UP:
-      case KEYCODE.DOWN: {
+    switch (event.key) {
+      case 'ArrowUp':
+      case 'ArrowDown': {
         event.preventDefault();
         break;
       }
-      case KEYCODE.ENTER:
-      case KEYCODE.RETURN: {
-        this.selectResult();
-        break;
-      }
-      case KEYCODE.LEFT:
-      case KEYCODE.RIGHT: {
+      case 'Enter': {
+        if (this.highlightedResultIndex == null) {
+          this.clearListbox();
+        } else {
+          this.selectResult();
+        }
         break;
       }
     }
@@ -142,14 +179,15 @@ export default class TypeaheadCore {
   }
 
   handleChange() {
-    if (!this.blurring) {
+    if (!this.blurring && this.input.value.trim()) {
       this.getSuggestions();
+    } else {
+      this.abortFetch();
     }
   }
 
   handleFocus() {
     clearTimeout(this.blurTimeout);
-    this.combobox.classList.add(classTypeaheadComboboxFocused);
     this.getSuggestions(true);
   }
 
@@ -158,7 +196,6 @@ export default class TypeaheadCore {
     this.blurring = true;
 
     this.blurTimeout = setTimeout(() => {
-      this.combobox.classList.remove(classTypeaheadComboboxFocused);
       this.blurring = false;
     }, 300);
   }
@@ -199,7 +236,6 @@ export default class TypeaheadCore {
     if (!this.settingResult) {
       const query = this.input.value;
       const sanitisedQuery = sanitiseTypeaheadText(query, this.sanitisedQueryReplaceChars);
-
       if (sanitisedQuery !== this.sanitisedQuery || (force && !this.resultSelected)) {
         this.unsetResults();
         this.setAriaStatus();
@@ -208,13 +244,15 @@ export default class TypeaheadCore {
         this.sanitisedQuery = sanitisedQuery;
 
         if (this.sanitisedQuery.length >= this.minChars) {
-          this.fetchSuggestions(this.sanitisedQuery)
-            .then(this.handleResults.bind(this))
-            .catch(error => {
-              if (error.name !== 'AbortError' && this.onError) {
-                this.onError(error);
-              }
-            });
+          this.data.then(data => {
+            this.fetchSuggestions(this.sanitisedQuery, data)
+              .then(this.handleResults.bind(this))
+              .catch(error => {
+                if (error.name !== 'AbortError' && this.onError) {
+                  this.onError(error);
+                }
+              });
+          });
         } else {
           this.clearListbox();
         }
@@ -222,57 +260,34 @@ export default class TypeaheadCore {
     }
   }
 
-  fetchSuggestions(sanitisedQuery) {
-    return new Promise((resolve, reject) => {
-      const query = {
-        query: sanitisedQuery,
-        lang: this.lang
-      };
+  async fetchSuggestions(sanitisedQuery, data) {
+    this.abortFetch();
+    const results = await queryJson(sanitisedQuery, data, this.lang, this.resultLimit);
+    results.forEach(result => {
+      result.sanitisedText = sanitiseTypeaheadText(result[this.lang], this.sanitisedQueryReplaceChars);
+      if (this.lang !== 'en-gb') {
+        const english = result['en-gb'];
+        const sanitisedAlternative = sanitiseTypeaheadText(english, this.sanitisedQueryReplaceChars);
 
-      if (this.fetch && this.fetch.status !== 'DONE') {
-        this.fetch.abort();
+        if (sanitisedAlternative.match(sanitisedQuery)) {
+          result.alternatives = [english];
+          result.sanitisedAlternatives = [sanitisedAlternative];
+        }
+      } else {
+        result.alternatives = [];
+        result.sanitisedAlternatives = [];
       }
-
-      const body = formBodyFromObject(query);
-
-      this.fetch = new AbortableFetch(this.apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body
-      });
-
-      this.fetch.send()
-        .then(async response => {
-          const data = await response.json();
-
-          const results = data.results;
-
-          results.forEach(result => {
-            result.sanitisedText = sanitiseTypeaheadText(result[this.lang], this.sanitisedQueryReplaceChars);
-
-            if (this.lang !== 'en-gb') {
-              const english = result['en-gb'];
-              const sanitisedAlternative = sanitiseTypeaheadText(english, this.sanitisedQueryReplaceChars);
-
-              if (sanitisedAlternative.match(sanitisedQuery)) {
-                result.alternatives = [english];
-                result.sanitisedAlternatives = [sanitisedAlternative];
-              }
-            } else {
-              result.alternatives = [];
-              result.sanitisedAlternatives = [];
-            }
-          });
-
-          resolve({
-            results,
-            totalResults: data.totalResults
-          });
-        })
-        .catch(reject);
     });
+    return {
+      results,
+      totalResults: results.length,
+    };
+  }
+
+  abortFetch() {
+    if (this.fetch && this.fetch.status !== 'DONE') {
+      this.fetch.abort();
+    }
   }
 
   unsetResults() {
@@ -289,7 +304,7 @@ export default class TypeaheadCore {
     this.listbox.innerHTML = '';
     this.context.classList.remove(classTypeaheadHasResults);
     this.input.removeAttribute('aria-activedescendant');
-    this.combobox.removeAttribute('aria-expanded');
+    this.input.removeAttribute('aria-expanded');
 
     if (!preventAriaStatusUpdate) {
       this.setAriaStatus();
@@ -298,11 +313,16 @@ export default class TypeaheadCore {
 
   handleResults(result) {
     this.foundResults = result.totalResults;
+
+    if (result.results.length > 10) {
+      result.results = result.results.slice(0, this.resultLimit);
+    }
+
     this.results = result.results;
     this.numberOfResults = Math.max(this.results.length, 0);
 
     if (!this.deleting || (this.numberOfResults && this.deleting)) {
-      if (this.numberOfResults.length === 1 && this.results[0].sanitisedText === this.sanitisedQuery) {
+      if (this.numberOfResults === 1 && this.results[0].sanitisedText === this.sanitisedQuery) {
         this.clearListbox(true);
         this.selectResult(0);
       } else {
@@ -312,7 +332,9 @@ export default class TypeaheadCore {
           let innerHTML = this.emboldenMatch(ariaLabel, this.query);
 
           if (Array.isArray(result.sanitisedAlternatives)) {
-            const alternativeMatch = result.sanitisedAlternatives.find(alternative => alternative !== result.sanitisedText && alternative.includes(this.sanitisedQuery));
+            const alternativeMatch = result.sanitisedAlternatives.find(
+              alternative => alternative !== result.sanitisedText && alternative.includes(this.sanitisedQuery),
+            );
 
             if (alternativeMatch) {
               const alternativeText = result.alternatives[result.sanitisedAlternatives.indexOf(alternativeMatch)];
@@ -325,7 +347,6 @@ export default class TypeaheadCore {
           listElement.className = classTypeaheadOption;
           listElement.setAttribute('id', `${this.listboxId}__option--${index}`);
           listElement.setAttribute('role', 'option');
-          listElement.setAttribute('tabindex', '-1');
           listElement.setAttribute('aria-label', ariaLabel);
           listElement.innerHTML = innerHTML;
 
@@ -340,30 +361,28 @@ export default class TypeaheadCore {
 
         if (this.numberOfResults < this.foundResults) {
           const listElement = document.createElement('li');
-          listElement.className = `${classTypeaheadOption} ${classTypeaheadOptionMoreResults} u-fs-b`;
-          listElement.setAttribute('tabindex', '-1');
+          listElement.className = `${classTypeaheadOption} ${classTypeaheadOptionMoreResults}`;
           listElement.setAttribute('aria-hidden', 'true');
-          listElement.innerHTML = this.content.more_results;
+          listElement.innerHTML = this.moreResults;
           this.listbox.appendChild(listElement);
         }
 
         this.setHighlightedResult(null);
-        this.combobox.setAttribute('aria-expanded', true);
-        this.context.classList.add(classTypeaheadHasResults);
+
+        this.input.setAttribute('aria-expanded', !!this.numberOfResults);
+        this.context.classList[!!this.numberOfResults ? 'add' : 'remove'](classTypeaheadHasResults);
       }
     }
-
-    if (this.numberOfResults === 0 && this.content.no_results) {
-      this.listbox.innerHTML = `<li class="${classTypeaheadOption} ${classTypeaheadOptionNoResults}">${this.content.no_results}</li>`;
-      this.combobox.setAttribute('aria-expanded', true);
-      this.context.classList.add(classTypeaheadHasResults);
+    if (this.numberOfResults === 0 && this.noResults) {
+      this.listbox.innerHTML = `<li class="${classTypeaheadOption} ${classTypeaheadOptionNoResults}">${this.noResults}</li>`;
+      this.input.setAttribute('aria-expanded', true);
     }
   }
 
   setHighlightedResult(index) {
     this.highlightedResultIndex = index;
 
-    if (this.setHighlightedResult === null) {
+    if (this.highlightedResultIndex === null) {
       this.input.removeAttribute('aria-activedescendant');
     } else if (this.numberOfResults) {
       this.resultOptions.forEach((option, optionIndex) => {
@@ -387,16 +406,16 @@ export default class TypeaheadCore {
       const noResults = this.numberOfResults === 0;
 
       if (queryTooShort) {
-        content = this.content.aria_min_chars;
+        content = this.ariaMinChars;
       } else if (noResults) {
-        content = `${this.content.aria_no_results}: "${this.query}"`;
+        content = `${this.ariaNoResults}: "${this.query}"`;
       } else if (this.numberOfResults === 1) {
-        content = this.content.aria_one_result;
+        content = this.ariaOneResult;
       } else {
-        content = this.content.aria_n_results.replace('{n}', this.numberOfResults);
+        content = this.ariaNResults.replace('{n}', this.numberOfResults);
 
         if (this.resultLimit && this.foundResults > this.resultLimit) {
-          content += ` ${this.content.aria_limited_results}`;
+          content += ` ${this.ariaLimitedResults}`;
         }
       }
     }
@@ -410,30 +429,30 @@ export default class TypeaheadCore {
 
       const result = this.results[index || this.highlightedResultIndex || 0];
 
-      // TODO: This condition should be removed if we go with the internal address lookup API, or made configurable if we use a third party API
-      if (result.type !== 'Postcode') {
-        this.input.value = result[this.lang];
-        this.query = result[this.lang];
-      }
-
       this.resultSelected = true;
 
-      this.onSelect(result).then(() => {
-        this.settingResult = false;
-        // this.input.setAttribute('autocomplete', 'false');
-      });
+      if (result.sanitisedText !== this.sanitisedQuery && result.sanitisedAlternatives && result.sanitisedAlternatives.length) {
+        const bestMatchingAlternative = result.sanitisedAlternatives
+          .map((alternative, index) => ({
+            score: dice(this.sanitisedQuery, alternative),
+            index,
+          }))
+          .sort(sortBy('score'))[0];
 
-      let ariaAlternativeMessage = '';
+        const scoredSanitised = dice(this.sanitisedQuery, result.sanitisedText);
 
-      if (!result.sanitisedText.includes(this.sanitisedQuery) && result.sanitisedAlternatives) {
-        const alternativeMatch = result.sanitisedAlternatives.find(alternative => alternative.includes(this.sanitisedQuery));
-
-        if (alternativeMatch) {
-          ariaAlternativeMessage = `, ${this.content.aria_found_by_alternative_name}: ${alternativeMatch}`;
+        if (bestMatchingAlternative.score >= scoredSanitised) {
+          result.displayText = result.alternatives[bestMatchingAlternative.index];
+        } else {
+          result.displayText = result[this.lang];
         }
+      } else {
+        result.displayText = result[this.lang];
       }
 
-      const ariaMessage = `${this.content.aria_you_have_selected}: ${result[this.lang]}${ariaAlternativeMessage}.`;
+      this.onSelect(result).then(() => (this.settingResult = false));
+
+      const ariaMessage = `${this.ariaYouHaveSelected}: ${result.displayText}.`;
 
       this.clearListbox();
       this.setAriaStatus(ariaMessage);
@@ -451,7 +470,7 @@ export default class TypeaheadCore {
       const match = string.substr(matchIndex, queryLength);
       const after = string.substr(matchEnd, string.length - matchEnd);
 
-      return `${before}<em>${match}</em>${after}`;
+      return `${before}<strong>${match}</strong>${after}`;
     } else {
       return string;
     }
