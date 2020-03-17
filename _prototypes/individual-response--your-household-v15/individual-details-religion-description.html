@@ -15,6 +15,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
 <div class="page__container container">
     <div class="grid grid--reverse">
+        <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl u-d-no"
+            type="submit" name="">Save and continue
+        </button>
         <div class="grid__col col-4@m"></div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
@@ -149,6 +152,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                         </p>
                                                     </label>
                                                 </div>
+                                                <button type="submit" class="btn btn--secondary btn--small js-clear-btn u-mt-s u-db-no-js_enabled u-vh" name="clear-radios">
+                                                    <span class="btn__inner">Clear selection</span>
+                                                </button>
                                             </fieldset>
                                         </div>
                                     </div>
@@ -163,7 +169,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                     <p>Can't complete this question?<br />
                         <a href="../hub" class="js-choose-another-section">Choose another section and
                             return to this later</a></p>
-
                 </form>
             </main>
         </div>
@@ -200,6 +205,22 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         (surveyType ? '&survey=' + surveyType : '');
     }
   }));
+
+  $('.js-clear-btn').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+    e.preventDefault();
+    var val = $('[name="religion"]:checked').val();
+
+    //uncheck val radio
+    $("input:radio").attr("checked", false);
+    $('.js-clear-btn').addClass('u-vh');
+  }));
+
+  $('.field__item').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+    $('.js-clear-btn').removeClass('u-vh');
+  }));
+
 
   function updateRouting() {
     if(surveyType) {
