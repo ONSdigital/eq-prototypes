@@ -33,14 +33,14 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title u-fs-xl js-heading">
-                                        You selected ‘Other’ for your national identity, can you specify this further?
+                                        You selected &ldquo;Other&rdquo;. How would you describe your national identity?
                                     </h1>
                                 </div>
 
                                 <div class="grid grid--gutterless">
                                     <div class="grid__col col-8@m">
                                         <p class="field">
-                                          <label class="label" for="national-identity">Your national identity
+                                          <label class="label" for="national-identity">National identity
                                               <br>
                                               <span class="label__description u-no-js-hide">Enter your own answer or select from suggestions</span>
                                           </label>
@@ -104,9 +104,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('You selected ‘Other’ for ' + '<em class="highlight">' + person.fullName +
+      $('.js-heading').html('You selected &ldquo;Other&rdquo;. How would you describe ' + '<em class="highlight">' + person.fullName +
         window.ONS.utils.trailingNameS(person.fullName) + '</em>' +
-        ' national identity, can you specify this further?');
+        ' national identity?');
     }
   }
 
