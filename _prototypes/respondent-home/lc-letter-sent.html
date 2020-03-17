@@ -1,0 +1,64 @@
+---
+title: IR - Household prototype v15
+project: Individual Response
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password"
+                      action="../hub">
+                    <div class="group u-mb-l">
+                        <section class="section">
+                            <div class="question u-mb-s">
+                                <div class="panel panel--simple panel--success u-mb-m">
+                                    <div class="panel__body">
+                                        <h1 id="question-title" class="question__title u-mb-xs u-fs-l js-piping">
+                                            A letter has been sent to <em class="first-line-address"></em> addressed to the householder.
+                                        </h1>
+                                        <p>The letter with an access code should
+                                            arrive soon for your household to complete their census.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <h2 class="u-fs-r--b u-mb-xs">Your response matters.</h2>
+                    <p class="u-mb-m">Census information helps a wide range of people and organisations to do their work. All information is anonymised and the actual census records are kept secure for 100 years.</p>
+                    <p class="u-mb-m"><a href="https://census.gov.uk/">Find out more</a></p>
+
+                    <!--
+                        <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>-->
+
+                    <!--<p class="u-mb-m"><span class="js-link-secure-label"></span><br />
+                        <a class="js-link-secure"
+                           href="#">Get a separate access code to submit an
+                            individual response</a></p>-->
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
+
+
+<script>
+    function updateAddress() {
+        const firstLine = (sessionStorage.getItem('address') || '').split(',')[0]
+        $('.first-line-address').html(firstLine);
+    }
+
+    $(updateAddress);
+</script>

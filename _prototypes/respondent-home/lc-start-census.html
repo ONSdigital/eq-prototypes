@@ -1,0 +1,59 @@
+---
+title: IR - Household prototype v15
+project: Individual Response
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="" href="../lc-confirm-linked-address-ir">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form name="trav" class="form qa-questionnaire-form u-mb-xl"
+                      role="form" autocomplete="new-password" novalidate="">
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 class="question__title u-fs-xl">
+                                        Start your census
+                                    </h1>
+                                </div>
+
+                                <p>Questions about the household accommodation and who lives here must be completed before you can answer your own questions. </p>
+                                <h3>Can’t answer for everyone in your house?</h3>
+                                <p>You can share your household access code with the people you live with so they can complete their own sections.</p>
+                                <h3>Need to answer separately from your household?</h3>
+                                <p>If you want to answer separately to your household, then you can keep the household code to yourself and request a separate census for everyone else to complete.</p>
+
+                            </section>
+                        </div>
+                    </div>
+                </form>
+            </main>
+        </div>
+    </div>
+
+    <button class="qa-btn-submit btn btn-submit btn--primary btn--lg" data-qa="btn-submit" type="submit"
+            name="action[save_continue]">Start
+    </button>
+</div>
+
+<script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
+
+
+<script>
+	$('.qa-btn-submit').on('click', function (e) {
+
+	});
+</script>
