@@ -92,6 +92,18 @@ h4 {
     padding: 1rem 0;
 }
 
+.header {
+    margin-bottom:0;
+}
+
+.header__main {
+    background: #93328e!important;
+}
+
+.header {
+    margin-bottom : 0!important;
+}
+
 .header__title {
     display: block;
     background: url('../img/icons/census-logo-en.svg') no-repeat 0 50%;
@@ -156,6 +168,12 @@ a:focus:not(.btn--link):not(.btn--ghost):not(.js-clear-btn):not(.download__thumb
     background-color: #fd0;
     box-shadow: 0 -2px #fd0, 0 4px #222;
     text-decoration: none;
+}
+
+.icon--external-link:before,
+.icon--external-link:after {
+    top: 5px;
+    right: -0.2rem;
 }
 
 .collapsible {
@@ -490,6 +508,10 @@ p.field {
   margin-left : .5rem;
 }
 
+@media only screen and (min-width: 500px) {
+.list--inline\@s .list__item {
+    margin: .25rem 1rem .25rem .5rem;
+}
 
 /**
  * Summary records
@@ -560,13 +582,6 @@ hr {
 /**
  * Pattern library fix
  */
-.header {
-  margin-bottom : 0;
-}
-
-.header__main {
-    background: #93328e;
-}
 
 .lock {
     padding-left : 1.5rem;
@@ -595,7 +610,11 @@ hr {
 }
 
 .footer {
-    margin-top : 7rem;
+    margin-top : 4.5rem;
+}
+
+.footer__crest-img {
+    width: 120px;
 }
 
 .util-language {
