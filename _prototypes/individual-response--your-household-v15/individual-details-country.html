@@ -9,7 +9,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
+        <a class="js-previous-link" href="../individual-details-30-day-address">Previous</a>
     </div>
 </div>
 
@@ -112,7 +112,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            for="elsewhere"
                                                            id="elsewhere-label">
                                                         Elsewhere
-                                                        <p class="u-fs-s u-db u-mb-no label--negative">You can enter your country of birth on the next question</p>
+                                                        <p class="u-fs-s u-db u-mb-no label--negative js-answer">You can enter your country of birth on the next question</p>
                                                     </label>
                                                 </div>
                                             </fieldset>
@@ -185,17 +185,24 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     }
   }
 
+  function updateAnswers() {
+    if(storageAPI.getAnsweringIndividualByProxy()) {
+      $('.js-answer').html('You can enter their country of birth on the next question');
+    }
+  }
+
   if (details && details.country && details.country.val) {
     $('#' + details.country.val).attr('checked', true);
   }
 
  function updateAllPreviousLinks() {
-      $('.js-previous-link').attr('href', '../individual-details-relationship/?person_id=' + personId);
+      $('.js-previous-link').attr('href', '../individual-details-30-day-address/?person_id=' + personId);
   }
 
   $(updateAllPreviousLinks);  
 
   $(updateQuestion);
+  $(updateAnswers);
   $(updateRouting);
 
   /**

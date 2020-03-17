@@ -23,18 +23,19 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
-                      role="form" autocomplete="off"
-                      action="../individual-details-30-day-address">
-                    <input type="hidden" name="person_id" id="person"
+                      role="form" autocomplete="new-password"
+                      action="../individual-details-country">
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
                            value="#"/>
-                    <input type="hidden" name="survey" id="survey-type"
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
                            value="#"/>
                     <div class="group">
                         <div class="block">
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
-                                        class="question__title u-fs-xl js-heading js-piping">
+                                        class="question__title u-fs-xl js-heading">
+                                        Do you stay at another address for more than 30 days a year?
                                     </h1>
                                 </div>
 
@@ -43,27 +44,39 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                         <div class="field field--radio field--multiplechoice ">
                                             <fieldset class="u-mb-xl">
                                                 <div class="field__item js-focusable-box">
-                                                    <input class="input input--radio js-focusable"
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="marital-status"
-                                                           id="opposite-sex"
-                                                           value="opposite-sex">
+                                                           name="30-day-address"
+                                                           id="no"
+                                                           value="no">
                                                     <label class="label label--inline"
-                                                           for="opposite-sex"
-                                                           id="opposite-sex-label">
-                                                        Someone of the opposite sex
+                                                           for="no"
+                                                           id="no-label">
+                                                        No
                                                     </label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
-                                                    <input class="input input--radio js-focusable"
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="marital-status"
-                                                           id="same-sex"
-                                                           value="same-sex">
+                                                           name="30-day-address"
+                                                           id="yes-uk"
+                                                           value="yes-uk">
                                                     <label class="label label--inline"
-                                                           for="same-sex"
-                                                           id="same-sex-label">
-                                                        Someone of the same sex
+                                                           for="yes-uk"
+                                                           id="yes-uk-label">
+                                                        Yes, an address within the UK
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="30-day-address"
+                                                           id="registered"
+                                                           value="registered">
+                                                    <label class="label label--inline"
+                                                           for="registered"
+                                                           id="registered-label">
+                                                        Yes, an address outside the UK
                                                     </label>
                                                 </div>
                                             </fieldset>
@@ -106,19 +119,20 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     surveyType = urlParams.get('survey');
     storageAPI.personalBookmark(personId, window.location.href);
 
-  $('.qa-btn-submit').on('click',
-    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
 
-    storageAPI.addUpdateMaritalStatus(personId,
-      $('[name="marital-status"]:checked').val()
-    );
+  $('.qa-btn-submit').on('click', function (e) {
 
     if(isEditing) {
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
     }
-  }));
+
+    if(val === 'no' || val == null) {
+      e.preventDefault();
+      window.location.href = '../individual-details-country/?person_id=' + personId;
+    }
+  });
 
   function updateRouting() {
     if(surveyType) {
@@ -128,40 +142,17 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   }
 
   function updateQuestion() {
-    var maritalStatus = details.maritalStatus;
-
-    if(maritalStatus === 'registered' || maritalStatus === 'separated-partnership'){
-        var maritalStatusHeading = "registered civil partnership";
-        var headingTense = "is";
-    } else if(maritalStatus === 'former-partnership' || maritalStatus === 'surviving-partner'){
-        var maritalStatusHeading = "registered civil partnership";
-        var headingTense = "was";
-    } else if(maritalStatus === 'married' || maritalStatus === 'separated-married'){
-        var maritalStatusHeading = "legal marriage";
-        var headingTense = "is";
-    } else if(maritalStatus === 'divorced' || maritalStatus === 'widowed'){
-        var maritalStatusHeading = "legal marriage";
-        var headingTense = "was";
-    } else {
-        return null;
-    }
-
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('Who ' + headingTense + ' <em class="highlight">' + person.fullName + 
-      window.ONS.utils.trailingNameS(person.fullName) + '</em> ' +
-        maritalStatusHeading + ' to?');
-    } else {
-      $('.js-heading').html('Who ' + headingTense + ' your ' +
-        maritalStatusHeading + ' to?');
+        $('.js-heading').html('Does ' + '<em class="highlight">' + person.fullName + '</em>' +
+        ' stay at another address for more than 30 days a year?');
     }
   }
 
-  function updateAllPreviousLinks() {
-    $('.js-previous-link').attr('href', '../individual-details-relationship/?person_id=' + personId);
+ function updateAllPreviousLinks() {
+      $('.js-previous-link').attr('href', '../individual-details-relationship/?person_id=' + personId);
   }
 
   $(updateAllPreviousLinks);
-
   $(updateQuestion);
   $(updateRouting);
 
