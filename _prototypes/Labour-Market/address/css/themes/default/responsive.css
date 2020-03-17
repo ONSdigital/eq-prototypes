@@ -3314,7 +3314,7 @@ em {
     padding-left: 3.4rem; }
     @media only screen and (min-width: 500px) {
       .input-type .input-type__input {
-        width: calc(19.5rem - 2.9rem); } }
+        width: calc(2.9rem); } }
   .input-type .input-type__type {
     display: inline-block;
     background-color: #f5f5f5;
@@ -3836,7 +3836,7 @@ em {
   transition: border-color 200ms ease-in; }
   @media only screen and (min-width: 500px) {
     .input {
-      width: 19.5rem; } }
+      /*width: 19.5rem;*/ } }
   .input:hover {
     border-color: #033e58; }
   .input:focus {

@@ -1,0 +1,159 @@
+.list.list--people-plain {
+  margin-bottom : 1rem;
+  list-style-type : none;
+}
+
+.list.list--people-plain .list__item {
+  background: url(/img/icons/person.svg) 0 .2rem no-repeat;
+}
+
+.list.list--people-plain .list__item-name {
+  padding-left: 1.5rem;
+}
+
+.list.list--people-plain .list__item-actions {
+  margin-top: -4px;
+}
+
+.list.list--people-plain .list__item-action + .list__item-action {
+  margin-left : .5rem;
+}
+
+
+/**
+ * Sumamry records
+ */
+.list.list--records .list__item {
+    margin-bottom: 0;
+    padding: 1rem 0;
+}
+
+.list.list--records .list__item + .list__item {
+    border-top: 1px solid #ccc;
+}
+
+.list.list--people {
+    list-style-type: none;
+}
+
+.list.list--people .list__item {
+    background: url(/img/icons/person.svg) 0 1.3rem no-repeat;
+}
+
+.list.list--people .list__item-name {
+    padding-left: 2rem;
+}
+
+.list.list--people .list__item-action + .list__item-action {
+    margin-left: .5rem;
+}
+
+
+.modal {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal__window {
+    position: relative;
+    background-color: white;
+    max-width: 520px;
+    padding: 2rem;
+    text-align: center;
+}
+
+/**
+ * Pattern library fix
+ */
+.header {
+  margin-bottom : 0;
+}
+
+.lock {
+    padding-left : 1.5rem;
+    background : url('../img/icons/lockicon.svg') no-repeat left top;
+}
+
+.tick {
+    height: 1.1em;
+    margin-bottom: -1.8em;
+    background : url('https://sdc-global-design-patterns.netlify.com/assets/img/icons/icons--check-green.svg') no-repeat;
+}
+
+.facebook {
+    padding-left : 2.5rem;
+    background : url('../img/icons/facebook.svg') no-repeat;
+}
+
+.twitter {
+    padding-left : 2.5rem;
+    background : url('../img/icons/twitter.svg') no-repeat;
+}
+
+.email {
+    padding-left : 2.5rem;
+    background : url('../img/icons/email.svg') no-repeat;
+}
+
+.footer {
+    margin-top : 7rem;
+}
+
+.util-language {
+    float : right;
+}
+
+.btn--danger {
+    background-color : #D0021B;
+    border-color : #D0021B;
+}
+
+.btn--danger:hover {
+    background-color : #b00015;
+    border-color : #b00015;
+}
+
+.page__content {
+    padding-bottom : .5rem;
+}
+
+.ghost-link {
+    position : absolute;
+    bottom : 1rem;
+    right : 1rem;
+    margin-right : 0 !important;
+    color : #aaa;
+}
+
+.footer {
+    position : relative;
+}
+
+/**
+ * Save and complete later - copied from design system
+ */
+.btn--ghost-blue {
+    background-color: transparent;
+    color: #4263c2;
+    border-color: #334f9e;
+    border-width: 2px;
+    padding: .5rem 1rem
+}
+
+.btn--ghost-blue:focus, .btn--ghost-blue:hover {
+    color: #4263c2;
+    background-color: transparent;
+    border-color: #4263c2
+}
+
+.btn--ghost-blue:focus {
+    outline: 3px solid #fe781f
+}

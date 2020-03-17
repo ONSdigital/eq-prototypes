@@ -1,0 +1,123 @@
+---
+title: Household prototype v12
+project: your-household
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@l">
+            <!--{% include navigation.html
+            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
+            nav-title-id="section-individual" %}-->
+        </div>
+        <div class="grid__col col-7@l pull-1@l">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="off"
+                      action="../hub">
+                    <div class="group u-mb-l">
+                        <section class="section">
+                            <div class="question u-mb-s">
+                                <h1 id="question-title"
+                                    class="question__title u-fs-l js-heading">
+                                    What is <span
+                                        class="js-remaining-name"></span>
+                                    mobile number?
+                                </h1>
+                                <p>We will send an access code by text to
+                                    this number</p>
+                            </div>
+
+                            <div class="field">
+                                <label class="label" for="mobile-number">
+                                    <div class="label__inner">
+                                        Enter mobile number
+                                    </div>
+                                </label>
+                                <input class="input input--text"
+                                       id="mobile-number"
+                                       value="" />
+                            </div>
+                        </section>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+
+                    <!--<p>Can't complete this question?<br />
+                        <a href="../hub" class="js-choose-another-section">Choose another section and
+                            return to this later</a></p>-->
+
+                    <!--<p class="u-mb-m"><span class="js-link-secure-label"></span><br />
+                        <a class="js-link-secure"
+                           href="#">Get a separate access code to submit an
+                            individual response</a></p>-->
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<div style="display:none;">
+    <div id="member-checkbox-select-template" class="field__item">
+        <input class="input input--checkbox js-person-control"
+               name="checkbox-answer" type="checkbox">
+        <label class="label label--inline u-fs-r js-person-name"></label>
+    </div>
+</div>
+
+<script src='/js/compiled/your-household-v12/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person'),
+    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+    remaining = JSON.parse(urlParams.get('remaining')) || [],
+    remainingPersonId = remaining.shift(),
+    remainingPerson;
+
+  if (remainingPersonId) {
+    remainingPerson = storageAPI.getHouseholdMemberByPersonId(remainingPersonId)['@person'];
+  }
+
+  $('.qa-btn-submit').on('click', function (e) {
+    e.preventDefault();
+
+    window.location.href = remaining.length
+      ? '../individual-decision-enter-mobile-correct/?person=' + personId +
+        '&remaining=' + encodeURI(JSON.stringify(remaining)) +
+        '&mobile=' + encodeURI($('#mobile-number').val())
+      : '../hub/';
+  });
+
+  /*function updateRouting() {
+    if(surveyType) {
+      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    }
+    $('#survey-type').val(surveyType);
+  }*/
+
+  function updateQuestion() {
+    $('.js-remaining-name').html(remainingPerson.fullName +
+      window.ONS.utils.trailingNameS(remainingPerson.fullName));
+  }
+
+  $(updateQuestion);
+  //$(updateRouting);
+
+  /**
+   * Routing
+   */
+  $('#person').val(urlParams.get('person'));
+</script>

@@ -1,0 +1,105 @@
+---
+title: Household prototype v13
+project: your-household
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="mars" href="../confirm-address">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@l">
+        </div>
+        <div class="grid__col col-7@l pull-1@l">
+            <main role="main" id="main" class="page__main">
+                <h1 id="question-title"
+                    class="question__title u-fs-l js-heading">
+                    Test data
+                </h1>
+
+                <div class="group u-mb-xl">
+                    <div class="block">
+                        <section class="section">
+                            <ul class="test-data-links">
+                            </ul>
+                        </section>
+                    </div>
+                </div>
+
+                <div class="u-mb-xl">
+                    <label class="label">Load session file</label>
+                    <input type="file" id="fileInput" />
+                </div>
+
+                <div>
+                    <label class="label">Save session</label>
+                    <input type="text" id="file-name"
+                           class="input input--text input-type__input u-mb-m"
+                           placeholder="Enter file name"
+                           data-autocomplete="off" />
+
+                    <button class="btn btn--primary venus js-btn-submit"
+                            type="submit">Save
+                    </button>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/your-household-v13/bundle.js'></script>
+
+<script>
+    $('.js-btn-submit').on('click', function(e) {
+      e.preventDefault();
+
+      var file = new File(
+        [JSON.stringify(sessionStorage)],
+        'census-prototype.json',
+        {
+          type: "application/json;charset=utf-8"
+        }
+      );
+
+      saveAs(file, $('#file-name').val().replace(' ', ''));
+    });
+
+    $(function() {
+      var fileInput = document.getElementById('fileInput');
+
+      fileInput.addEventListener('change', function(e) {
+        var file = fileInput.files[0];
+        var jsonType = /json.*/;
+
+        if (file.type.match(jsonType)) {
+          var reader = new FileReader();
+
+          reader.onload = function(e) {
+            var data = JSON.parse(reader.result),
+                bookmark = data['_session_bookmark'];
+
+            sessionStorage.clear();
+
+            $.each(Object.keys(data), function (i, k) {
+              sessionStorage.setItem(k, data[k]);
+            });
+
+            fileInput.value = '';
+
+            console.log(bookmark);
+
+            window.location.href = bookmark ? bookmark : '../hub';
+          };
+
+          reader.readAsText(fileInput.files[0]);
+        }
+      });
+    });
+</script>

@@ -28,7 +28,11 @@
         {% endif %}
     </div>
 </div>
+{% if page.assetPrefixUrl %}
+<script src="{{ page.assetPrefixUrl }}/assets/scripts/bundle.js"></script>
+{% else %}
 <script src="https://cdn.ons.gov.uk/sdc/{% if page.cdn %}{{ page.cdn }}{% else %}v1.0.0{% endif %}/scripts/bundle.js"></script>
+{% endif %}
 
 </body>
 </html>

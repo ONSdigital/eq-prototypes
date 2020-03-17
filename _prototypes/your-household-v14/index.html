@@ -1,0 +1,122 @@
+---
+title: Household prototype v14
+project: your-household
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+---
+
+<style>
+    .lock {
+        font-weight : normal;
+        font-size: 0.9em;
+        margin-top:1em;
+    }
+
+    .uac-border {
+        border-style: solid;
+        border-width: 0.4em;
+        border-color: #033e58;
+        padding: 0.7em;
+    }
+
+    p {
+        margin-bottom: 0.3em;
+    }
+
+    .label {
+        margin-bottom: 0;
+    }
+
+    .textbox-div {
+        display: flex;
+    }
+
+    .textbox-space {
+        margin-right: 1em;
+    }
+
+    .input-length { 
+        width: 9.2rem !important; 
+    }
+</style>
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@l">
+        </div>
+
+        <div class="grid__col col-7@l pull-1@l">
+            <main role="main" id="main" class="page__main">
+                <div class="feedback__inline js-feedback-inline is-collapsed">
+                    <div class="feedback__border">
+                        <form id="feedback-form" method="POST"
+                              class="feedback__form">
+                            <div class="group">
+                                <div class="feedback__field">
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="group" id="what-is-your-address-group">
+                    <div class="block" id="what-is-your-address">
+                        <div class="question">
+                            <h1 class="question__title u-fs-l"
+                                data-qa="question-title">
+                                Welcome to the survey
+                            </h1>
+
+                            <p>The Office for National Statistics (ONS) produces statistics which are relied on by central and local government, businesses and individuals to make decisions and to plan for the future. To make sure our statistics are reliable and relevant we need information which reflects the whole population.</p>
+                            <br>
+
+                            <div class = "uac-border">
+                                <p class="field">
+                                    <label class="label" for="uac">ENTER YOUR ACCESS CODE</label>
+                                    <div class="textbox-div textbox-width">
+                                        <input type="text" id="uac1" class="input-length input input--text input-type__input uac__input js-uac textbox-space" name="uac1" maxlength="4" data-group-size="4" autocomplete="off" />
+                                        <input type="text" id="uac2" class="input-length input input--text input-type__input uac__input js-uac textbox-space" name="uac2" maxlength="4" data-group-size="4" autocomplete="off" />
+                                        <input type="text" id="uac3" class="input-length input input--text input-type__input uac__input js-uac" name="uac3" maxlength="4" data-group-size="4" autocomplete="off" />
+                                    </div>
+                                </p>
+                            </div>
+                            <p class="lock">Your personal information is protected by law and will be kept confidential.</p>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <button class="btn btn-submit btn--primary btn--lg"
+                        data-qa="btn-submit" type="submit"
+                        name="action[save_continue]">Submit code
+                </button>
+                <div>
+                <br>
+                    <strong>Don't have a code?</strong>
+                    <p>You can request a new code if you have lost, forgotten or not recieved an
+                    access code. <a href="#" class="footer2__link">Request a new code to start a new survey</a></p>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/your-household-v14/bundle.js'></script>
+
+<script>
+  $('.btn-submit').click(function(e) {
+    e.preventDefault();
+
+    var urlParams = new URLSearchParams(window.location.search),
+      redirect = urlParams.get('redirect');
+
+    window.location = !redirect ? '../test-address/' : redirect;
+  });
+</script>
+
