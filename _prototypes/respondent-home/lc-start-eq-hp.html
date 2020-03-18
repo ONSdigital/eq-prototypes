@@ -1,0 +1,35 @@
+---
+title: IR - Household prototype v15
+project: Individual Response
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                Start EQ
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
+
+
+<script>
+    function updateAddress() {
+        const firstLine = (sessionStorage.getItem('address') || '').split(',')[0]
+        $('.first-line-address').html(firstLine);
+    }
+
+    $(updateAddress);
+</script>
