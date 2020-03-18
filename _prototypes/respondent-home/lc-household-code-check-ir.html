@@ -98,6 +98,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
 <script>
     document.getElementById('household-code').addEventListener('input', function (e) {
-      e.target.value = e.target.value.replace(/[^\dA-Z]/g, '').replace(/(.{4})/g, '$1 ').trim().slice(0, 19);
+      e.target.value = e.target.value.toUpperCase().replace(/[^\dA-Z]/g, '').replace(/(.{4})/g, '$1 ').trim().slice(0, 19);
     });
 </script>
