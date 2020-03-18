@@ -1,0 +1,20 @@
+---
+title: IR - Household prototype v15
+project: Individual Response
+globalcss: false
+householdMembers:
+visitors:
+cdn: v1.5.0
+---
+
+<script src='https://rawcdn.githack.com/ONSdigital/eq-prototypes/0258eab8bb1aaf8d2806c8a265e14cfcea70df6f/js/compiled/individual-response--your-household-v15/bundle.js'></script>
+
+<script>
+    var urlParams = new URLSearchParams(window.location.search),
+      surveyType = urlParams.get('survey'),
+      urlSuffix = surveyType ? '?survey=' + surveyType : '';
+
+    $(function () {
+      window.location.href = '../hub/' + urlSuffix;
+    });
+</script>

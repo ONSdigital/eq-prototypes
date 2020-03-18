@@ -1,0 +1,80 @@
+---
+title: IR - Household prototype v15
+project: Individual Response
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid">
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <div class="group u-mb-l">
+                    <div class="block">
+                        <section class="section">
+                            <form autocomplete="new-password">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title" class="question__title u-fs-xl js-piping">We have sent a text message to {n}</h1>
+                                    <p>A text message with their own access code should arrive soon for them to complete their own survey.</p>
+
+                                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mt-xl u-mb-xl" type="submit" name="">Continue</button>
+                                </div>
+                            </form>
+                        </section>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script>
+    var cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people') || '[]');
+    var searchParams = new URLSearchParams(window.location.search);
+    var personId = searchParams.get('person_id');
+
+    if (!personId) {
+        personId = cannotAnswerPeople[0].id;
+    }
+
+    var person = JSON.parse(sessionStorage.getItem('household-members')).find(function(person) { 
+        return person['@person'].id === personId;
+    })['@person'];
+
+    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
+    var possessive = person.fullName.slice(-1) === 's' ? "'" : "'s";
+
+    var cannotAnswerPerson = cannotAnswerPeople.find(function(p) {
+        return p.id === person.id;
+    });
+
+     pipingDestinations.forEach(function(pipingDestination) {
+        pipingDestination.innerHTML = pipingDestination.innerHTML
+            .replace('{x}', person.fullName)
+            .replace('{s}', possessive)
+            .replace('{n}', cannotAnswerPerson.phoneNumber.slice(0, 5) + ' ' + cannotAnswerPerson.phoneNumber.slice(5));
+    });
+
+    var form = document.querySelector('form');
+    
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var nextPerson = cannotAnswerPeople.find(function(person) {
+            return !person.phoneNumber;
+        });
+
+        if (nextPerson) {
+            window.location.href = '../individual-decision-method/?person_id=' + nextPerson.id;
+        } else {
+            window.location.href = '../hub';
+        }
+    });
+</script>

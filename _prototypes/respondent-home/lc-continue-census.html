@@ -1,0 +1,82 @@
+---
+title: IR - Household prototype v15
+project: Individual Response
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="" href="../lc-confirm-linked-address-ir">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form name="trav" class="form qa-questionnaire-form u-mb-xl"
+                      role="form" autocomplete="new-password" novalidate="">
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 class="question__title u-fs-xl">
+                                        Would you like to continue in the household census?
+                                    </h1>
+                                </div>
+
+                                <p>Your household census has been started. If you want to answer separately, you can request an individual census from within the household survey.</p>
+                                <h3>Completing the household census</h3>
+                                <p>In order for the census to be submitted, all members of the household must complete their sections. <strong>Any section left could lead to a fine up to £1000.</strong></p>
+                                <p>If this is not possible, you can request an individual code separate from the household.</p>
+
+                                <div class="field field--radio field--multiplechoice">
+                                    <fieldset>
+                                        <div class="field__item js-focusable-box">
+                                            <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                   name="radio-answer"
+                                                   value="yes"
+                                                   id="yes"
+                                                   type="radio">
+                                            <label class="label label--inline u-fs-r"
+                                                   for="yes">
+                                                Yes, continue to the household census</label>
+                                        </div>
+                                        <div class="field__item js-focusable-box">
+                                            <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                   name="radio-answer"
+                                                   value="no"
+                                                   id="no"
+                                                   type="radio">
+                                            <label class="label label--inline u-fs-r "
+                                                   for="no">
+                                                No, I need an individual census</label>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </form>
+            </main>
+        </div>
+    </div>
+
+    <button class="qa-btn-submit btn btn-submit btn--primary btn--lg" data-qa="btn-submit" type="submit"
+            name="action[save_continue]">Continue
+    </button>
+</div>
+
+<script src='https://rawcdn.githack.com/ONSdigital/eq-prototypes/0258eab8bb1aaf8d2806c8a265e14cfcea70df6f/js/compiled/individual-response--your-household-v15/bundle.js'></script>
+
+
+<script>
+    $('.qa-btn-submit').on('click', function (e) {
+
+    });
+</script>

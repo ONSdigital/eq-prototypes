@@ -1,0 +1,44 @@
+---
+title: IR - Household prototype v15
+project: Individual Response
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../summary">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <div><p>To complete your survey select ‘Submit’. Once you have submitted your information it will not be possible to change or view your answers.</p></div>
+                <div><p>The information you have provided will be held securely and treated as confidential as directed by the Code of Practice for Statistics.</p></div>
+                <button class="btn btn--primary btn--lg qa-btn-submit"
+                        onclick="window.location.href = '../complete';">Submit
+                </button>
+
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='https://rawcdn.githack.com/ONSdigital/eq-prototypes/0258eab8bb1aaf8d2806c8a265e14cfcea70df6f/js/compiled/individual-response--your-household-v15/bundle.js'></script>
+
+<script>
+
+  function updateAllPreviousLinks() {
+    $('.js-previous-link').attr('href', document.referrer);
+  }
+
+  $(updateAllPreviousLinks);
+
+</script>

@@ -1,0 +1,86 @@
+---
+title: IR - Household prototype v15
+project: Individual Response
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<link rel="stylesheet" href="../assets/modules/uac/uac.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="" href="../lc-how-to-receive">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password"
+                      action="../lc-send-by-post-ir">
+                    <div class="group u-mb-l">
+                        <section class="section">
+                            <div class="question u-mb-s">
+                                <h1 id="question-title"
+                                    class="question__title u-fs-xl js-piping">
+                                    What is your room name or number?
+                                </h1>
+                            </div>
+
+                            <div class="field">
+                                <label class="label" for="room-number">
+                                        Room name or number
+                                        <br>
+                                        <span class="label__description u-fs-s">This makes sure your code is sent to the right place</span>
+                                </label>
+                                <input autocomplete="new-password" class="input input--text js-room-number" type="tel"
+                                       type="tel"
+                                       id="room-number"
+                                       value="" />
+                            </div>
+                            <br />
+                            <a href="../lc-how-to-receive-ir">I don’t have a room name or number</a>
+                        </section>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+                </form>
+
+
+
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='https://rawcdn.githack.com/ONSdigital/eq-prototypes/0258eab8bb1aaf8d2806c8a265e14cfcea70df6f/js/compiled/individual-response--your-household-v15/bundle.js'></script>
+
+<script>
+
+  $('.qa-btn-submit').on('click', function (e) {
+    e.preventDefault();
+
+    window.location.href = '../lc-send-by-post-ir/?room=' + encodeURI($('#room-number').val());
+  });
+/*
+  document.dispatchEvent(new CustomEvent('UAC-READY'));
+
+  $('.btn-submit').click(function(e) {
+    e.preventDefault();
+
+    var urlParams = new URLSearchParams(window.location.search),
+      redirect = urlParams.get('redirect');
+
+    window.location = !redirect ? '../lc-confirm-address/' : redirect;
+  });
+  */
+</script>

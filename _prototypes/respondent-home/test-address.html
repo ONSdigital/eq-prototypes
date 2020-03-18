@@ -1,0 +1,151 @@
+---
+title: IR - Household prototype v15
+project: Individual Response
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<style>
+    p.field {
+      margin-bottom: 1rem!important;
+    }
+
+    .input--text-lg {
+        width : 100%;
+    }
+
+    .input--text-postcode {
+        max-width : 9.25rem;
+    }
+</style>
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <div class="feedback__inline js-feedback-inline is-collapsed">
+                    <div class="feedback__border">
+                        <form id="feedback-form" method="POST"
+                              class="feedback__form">
+                            <div class="group">
+                                <div class="feedback__field">
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="block" id="what-is-your-address">
+                    <div class="question"
+                          id="what-is-your-address-question">
+                        <h1 class="question__title u-fs-xl"
+                            data-qa="question-title">
+                            What is your address?
+                        </h1>
+
+                        <fieldset
+                                class="question__fieldset js-question-fieldset u-mb-m">
+
+                            <legend class="u-vh">What is the first line of your address?
+                            </legend>
+
+                            <div class="question__answers">
+                                <div class="question__answer">
+                                    <div class="answer answer--textfield " id="container-address-line-1">
+                                        <div class="answer__fields js-fields">
+                                          <p class="field">
+                                            <label class="label" for="address-line-1">Address line 1</label>
+                                            <input autocomplete="new-password" type="text" id="address-line-1" class="input input--text input-type__input input--w-20@m" name="address-line-1" />
+                                          </p>
+                                          <p class="field">
+                                            <label class="label" for="address-line-2">Address line 2</label>
+                                            <input autocomplete="new-password" type="text" id="address-line-2" class="input input--text input-type__input input--w-20@m" name="address-line-2" />
+                                          </p>
+                                          <p class="field">
+                                            <label class="label" for="address-town">Town or City</label>
+                                            <input autocomplete="new-password" type="text" id="address-town" class="input input--text input-type__input " name="address-town" />
+                                          </p>
+                                          <p class="field">
+                                            <label class="label" for="address-county">County</label>
+                                            <input autocomplete="new-password" type="text" id="address-county" class="input input--text input-type__input " name="address-county" />
+                                          </p>
+                                          <p class="field">
+                                            <label class="label" for="address-postcode">Postcode</label>
+                                            <input autocomplete="new-password" type="text" id="address-postcode" class="input input--text input-type__input input--w-5" name="address-postcode" />
+                                          </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+
+                <button class="btn btn-submit btn--primary btn--lg"
+                        data-qa="btn-submit" type="submit"
+                        name="action[save_continue]">Save and continue
+                </button>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='https://rawcdn.githack.com/ONSdigital/eq-prototypes/0258eab8bb1aaf8d2806c8a265e14cfcea70df6f/js/compiled/individual-response--your-household-v15/bundle.js'></script>
+
+<script>
+  $('.btn-submit').click(function(e) {
+    e.preventDefault(); // do not submit the form like usual
+
+    var isEditing =
+      new URLSearchParams(window.location.search).get('edit') === 'true';
+
+    sessionStorage.setItem('address', getAddress());
+
+    sessionStorage.setItem('address-line-1', document.getElementById('address-line-1').value);
+    sessionStorage.setItem('address-line-2', document.getElementById('address-line-2').value);
+    sessionStorage.setItem('address-town', document.getElementById('address-town').value);
+    sessionStorage.setItem('address-county', document.getElementById('address-county').value);
+    sessionStorage.setItem('address-postcode', document.getElementById('address-postcode').value);
+
+    window.location = '../confirm-address/';
+  });
+
+  function getAddress() {
+    var array = [
+
+      document.getElementById('address-line-1').value,
+      document.getElementById('address-line-2').value,
+      document.getElementById('address-town').value,
+      document.getElementById('address-county').value,
+      document.getElementById('address-postcode').value,
+
+    ];
+    return array.filter(filterAddressLine).join(', ');
+  }
+
+  function filterAddressLine(value) {
+    return value;
+  }
+
+  if (window.location.search == '?edit=true') {
+    function updateEditableAddress() {
+      $('#address-line-1').val(sessionStorage.getItem('address-line-1'));
+      $('#address-line-2').val(sessionStorage.getItem('address-line-2'));
+      $('#address-town').val(sessionStorage.getItem('address-town'));
+      $('#address-county').val(sessionStorage.getItem('address-county'));
+      $('#address-postcode').val(sessionStorage.getItem('address-postcode'));
+    }
+  $(updateEditableAddress);
+  }
+
+</script>

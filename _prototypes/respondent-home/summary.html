@@ -1,0 +1,193 @@
+---
+title: IR - Household prototype v15
+project: Individual Response
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../visitors">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form name="trav" class="form qa-questionnaire-form" role="form"
+                      autocomplete="new-password" novalidate="">
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 class="question__title u-fs-xl js-heading">
+                                        People who live at <span class="full-address-text"></span> and overnight
+                                        visitors
+                                    </h1>
+                                </div>
+
+                                <div class="js-household-people-list">
+                                  <h2
+                                      class="u-fs-l js-household-people-title">You said <span class="highlight">{n}</span><span class="js-household-people-plural" style="display: none"></span> {t} living here on <span class="js-significant-date"></span></h2>
+                                  <ul id="members-summary"
+                                      class="list list--records list--people js-records js-household-members-summary">
+                                  </ul>
+                                  <hr>
+                                  <p id="members-add-link" class="add-link-container u-pt-xl u-mb-xl">
+                                      <a
+                                        href="../who-else-to-add/?redirect=../summary/"
+                                        class="js-add-to-household">
+                                          Add someone to this household
+                                      </a>
+                                  </p>
+                                </div>
+                                <div class="js-visitors-people-list">
+                                    <h2 class="u-fs-l js-visitors-people-title">You said <span class="highlight">{n}</span> visitor<span class="js-visitors-people-plural"></span> {t} staying
+                                        overnight here on <span class="js-significant-date"></span></h2>
+                                    <ul id="visitors-summary" class="list list--records list--people js-records js-visitors-summary"></ul>
+                                    <hr>
+                                    <p id="visitors-add-link" class="add-link-container">
+                                      <a
+                                        href="../visitor-name?journey=visitors&redirect=../summary/">Add a visitor
+                                      </a>
+                                    </p>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg u-mt-xs qa-btn-submit"
+                            type="submit" name="">Continue
+                    </button>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='https://rawcdn.githack.com/ONSdigital/eq-prototypes/0258eab8bb1aaf8d2806c8a265e14cfcea70df6f/js/compiled/individual-response--your-household-v15/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+      members = storageAPI.getAllHouseholdMembers(),
+      missingRelationship = storageAPI.findNextMissingRelationship();
+  
+  var urlParams = new URLSearchParams(window.location.search),
+    showPanel = urlParams.get('show-panel'),
+    nextPage = !missingRelationship ? '../hub' : '../relationships-intro/';
+
+
+  function updateHouseholdMembersVisitors() {
+      var userMember = members.filter(isUser)[0],
+      otherHouseholdMembers = members.filter(window.ONS.storage.isOtherHouseholdMember),
+      visitors = members.filter(window.ONS.storage.isVisitor),
+      householdMembers = otherHouseholdMembers,
+      numberOfHouseholdMembers,
+      peopleListTitle,
+      numberOfVisitors,
+      visitorsListTitle;
+
+    if (userMember) {
+      householdMembers = [userMember].concat(otherHouseholdMembers);
+    }
+
+    numberOfHouseholdMembers = householdMembers.length;
+    peopleListTitle = document.querySelector('.js-household-people-list');
+    peopleListTitle.innerHTML = peopleListTitle.innerHTML.replace('{n}', (numberOfHouseholdMembers) || 0);
+
+    if (numberOfHouseholdMembers != 1) {
+      peopleListTitle.innerHTML = peopleListTitle.innerHTML.replace('{t}', 'are');
+    } else {
+      peopleListTitle.innerHTML = peopleListTitle.innerHTML.replace('{t}', 'is');
+    }
+
+    if(!numberOfHouseholdMembers) {
+      $('#members-summary').addClass('u-d-no');
+      $('#members-add-link').addClass('u-pt-no');
+      $('.js-household-people-list hr').hide();
+    }
+  
+
+    $('.js-household-people-plural').each(function(i, el) {
+      window.ONS.utils
+        .cleanHTMLPlaceholderStringReplacment(el,numberOfHouseholdMembers != 1 ? ' people' : ' person');
+    });
+
+    numberOfVisitors = visitors.length;
+
+    if(!numberOfVisitors) {
+      $('#visitors-summary').hide();
+      $('#visitors-add-link').addClass('u-pt-no');
+      $('.js-visitors-people-list hr').hide();
+    }
+
+    visitorsListTitle = document.querySelector('.js-visitors-people-list');
+
+    visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{n}', (numberOfVisitors) || 0);
+
+/*   if (//significantDate is before todaysDate) {
+      if (numberOfVisitors != 1) {
+        visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{t}', 'were');
+      } else {
+        visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{t}', 'was');
+      }
+    } else { 
+*/
+      if (numberOfVisitors != 1) {
+        visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{t}', 'are');
+      } else {
+        visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{t}', 'is');
+      }
+//    } 
+
+    $('.js-visitors-people-plural').each(function(i, el) {
+      window.ONS.utils
+        .cleanHTMLPlaceholderStringReplacment(el,numberOfVisitors != 1 ? 's' : '');
+    });
+  }
+
+  $('#modal .close-modal-button').on('click', function(e) {
+    e.preventDefault();
+    $('#modal').hide();
+  });
+
+  $('.qa-btn-submit').on('click', function(e) {
+    e.preventDefault();
+
+    if (window.ONS.storage.getAllHouseholdMembers().length > 0) {
+      window.location.href = nextPage;
+    }
+    else {
+      alert('Journey for less than one person in household, not yet implemented');
+    }
+  });
+
+  function isUser(member) {
+    return member['@person'].id === window.ONS.storage.IDS.USER_HOUSEHOLD_MEMBER_ID;
+  } 
+
+  function updateContent () {
+    var $addToHousehould = $('.js-add-to-household');
+
+	  if(sessionStorage.getItem('address-line-1')) {
+  		$('.full-address-text').html((sessionStorage.getItem('address-line-1') || '').replace(/,/g, ''));
+    }
+
+    if(showPanel) {
+      $('.js-panel').show();
+    }
+  }
+
+  function updateAllPreviousLinks() {
+    $('.js-previous-link').attr('href', document.referrer);
+  }
+
+  $(updateAllPreviousLinks);
+
+  $(updateContent);
+  $(updateHouseholdMembersVisitors);
+</script>

@@ -1,0 +1,52 @@
+.typeahead-input {
+  position: relative;
+}
+.typeahead-input__combobox {
+  display: inline-block;
+  border-radius: 3px;
+}
+.typeahead-input__results {
+  display: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid #222;
+  border-radius: 3px;
+}
+.typeahead-input__results-title {
+  padding: 0.25rem 0.5rem;
+  border-bottom: 1px solid #222;
+  background: #d0d0d0;
+}
+.typeahead-input__listbox {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: #fff;
+}
+.typeahead-input__option {
+  margin: 0;
+  padding: 0.5rem;
+  outline: none;
+  cursor: pointer;
+}
+.typeahead-input__option:not(:last-child) {
+  border-bottom: 1px solid #222;
+}
+.typeahead-input__option self:not(.typeahead-input__option--no-results):not(.typeahead-input__option--more-results):hover, .typeahead-input__option self--focused:not(.typeahead-input__option--no-results) {
+  border-color: #4263c2;
+  background: #4263c2;
+  color: #fff;
+}
+.typeahead-input__option--no-results, .typeahead-input__option--more-results {
+  padding: 0.25rem 0.5rem;
+  background: #d0d0d0;
+  cursor: not-allowed;
+}
+.typeahead-input self:not(.typeahead-input--initialised)self__instructions, .typeahead-input self:not(.typeahead-input--initialised)self__listbox, .typeahead-input self:not(.typeahead-input--initialised)self__status {
+  display: none;
+}
+.typeahead-input--has-results .typeahead-input__results {
+  display: block;
+}

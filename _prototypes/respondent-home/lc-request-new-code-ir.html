@@ -1,0 +1,159 @@
+---
+title: IR - Household prototype v15
+project: Individual Response
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<link rel="stylesheet" href="../assets/modules/uac/uac.css"/>
+<style>
+  .address-autocomplete {
+    display: none;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  .address-autocomplete__addresses {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    max-height: 340px;
+    overflow-y: auto;
+  }
+  .address-autocomplete__grey-bar,
+  .address-autocomplete__address {
+    margin: 0;
+    padding: 5px 10px;
+    border: 1px solid black;
+    border-top: 0;
+  }
+  .address-autocomplete__address {
+    cursor: pointer;
+  }
+  .address-autocomplete__address:hover {
+    background-color: #eee;
+  }
+  .address-autocomplete__grey-bar {
+    background-color: #ddd;
+    border-top: 1px solid black;
+    font-size: 14px;
+  }
+  .address-autocomplete__cant-find-link {
+    display: block;
+    margin-top: 10px;
+  }
+</style>
+<div class="page__subheader">
+    <div class="container">
+        <a class="" href="#" onclick="history.back()">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+
+
+                <form action="../lc-confirm-address-ir" _lpchecked="1">
+                  <div class="question">
+                    <h1 class="question__title">What is your address?</h1>
+                    <div class="question__description">
+                      <p>To request a new individual access code, we need your address.</p>
+                    </div>
+                    <p class="field">
+                      <label class="label" for="postcode">Start entering an address or postcode and select from results</label>
+                      <input type="postcode" id="postcode" class="input input--text input-type__input input--w-20" name="request-postcode" autocomplete="off">
+                      <div id="address-autocomplete" class="address-autocomplete">
+                        <div class="address-autocomplete__grey-bar">Select an address</div>
+                        <ul class="address-autocomplete__addresses">
+                          <li class="address-autocomplete__address" data-address="Holiday Inn, Leigh Road, Eastleigh, SO50 9PG"></li>
+                          <li class="address-autocomplete__address" data-address="1 High Street, Botley, Southampton, SO30 2EA"></li>
+                          <li class="address-autocomplete__address" data-address="2 High Street, Botley, Southampton, SO30 2EA"></li>
+                          <li class="address-autocomplete__address" data-address="3 High Street, Botley, Southampton, SO30 2EA"></li>
+                          <li class="address-autocomplete__address" data-address="4 High Street, Botley, Southampton, SO30 2EA"></li>
+                          <li class="address-autocomplete__address" data-address="5 High Street, Botley, Southampton, SO30 2EA"></li>
+                          <li class="address-autocomplete__address" data-address="6 High Street, Botley, Southampton, SO30 2EA"></li>
+                          <li class="address-autocomplete__address" data-address="7 High Street, Botley, Southampton, SO30 2EA"></li>
+                          <li class="address-autocomplete__address" data-address="8 High Street, Botley, Southampton, SO30 2EA"></li>
+                          <li class="address-autocomplete__address" data-address="9 High Street, Botley, Southampton, SO30 2EA"></li>
+                          <li class="address-autocomplete__address" data-address="10 High Street, Botley, Southampton, SO30 2EA"></li>
+                          <li class="address-autocomplete__address" data-address="1 Station Road, Totton, Southampton, SO40 9HP"></li>
+                          <li class="address-autocomplete__address" data-address="2 Station Road, Totton, Southampton, SO40 9HP"></li>
+                          <li class="address-autocomplete__address" data-address="3 Station Road, Totton, Southampton, SO40 9HP"></li>
+                          <li class="address-autocomplete__address" data-address="4 Station Road, Totton, Southampton, SO40 9HP"></li>
+                          <li class="address-autocomplete__address" data-address="5 Station Road, Totton, Southampton, SO40 9HP"></li>
+                          <li class="address-autocomplete__address" data-address="6 Station Road, Totton, Southampton, SO40 9HP"></li>
+                          <li class="address-autocomplete__address" data-address="7 Station Road, Totton, Southampton, SO40 9HP"></li>
+                          <li class="address-autocomplete__address" data-address="8 Station Road, Totton, Southampton, SO40 9HP"></li>
+                          <li class="address-autocomplete__address" data-address="9 Station Road, Totton, Southampton, SO40 9HP"></li>
+                          <li class="address-autocomplete__address" data-address="10 Station Road, Totton, Southampton, SO40 9HP"></li>
+                          <li class="address-autocomplete__address" data-address="1 Kittywell, Braunton, EX33 2LN"></li>
+                          <li class="address-autocomplete__address" data-address="2 Kittywell, Braunton, EX33 2LN"></li>
+                          <li class="address-autocomplete__address" data-address="3 Kittywell, Braunton, EX33 2LN"></li>
+                          <li class="address-autocomplete__address" data-address="4 Kittywell, Braunton, EX33 2LN"></li>
+                          <li class="address-autocomplete__address" data-address="5 Kittywell, Braunton, EX33 2LN"></li>
+                          <li class="address-autocomplete__address" data-address="6 Kittywell, Braunton, EX33 2LN"></li>
+                          <li class="address-autocomplete__address" data-address="7 Kittywell, Braunton, EX33 2LN"></li>
+                          <li class="address-autocomplete__address" data-address="8 Kittywell, Braunton, EX33 2LN"></li>
+                          <li class="address-autocomplete__address" data-address="9 Kittywell, Braunton, EX33 2LN"></li>
+                          <li class="address-autocomplete__address" data-address="10 Kittywell, Braunton, EX33 2LN"></li>
+                          <li class="address-autocomplete__address" data-address="1 Uxbridge Drive, Plymouth, PL5 2SE"></li>
+                          <li class="address-autocomplete__address" data-address="2 Uxbridge Drive, Plymouth, PL5 2SE"></li>
+                          <li class="address-autocomplete__address" data-address="3 Uxbridge Drive, Plymouth, PL5 2SE"></li>
+                          <li class="address-autocomplete__address" data-address="4 Uxbridge Drive, Plymouth, PL5 2SE"></li>
+                          <li class="address-autocomplete__address" data-address="5 Uxbridge Drive, Plymouth, PL5 2SE"></li>
+                          <li class="address-autocomplete__address" data-address="6 Uxbridge Drive, Plymouth, PL5 2SE"></li>
+                          <li class="address-autocomplete__address" data-address="7 Uxbridge Drive, Plymouth, PL5 2SE"></li>
+                          <li class="address-autocomplete__address" data-address="8 Uxbridge Drive, Plymouth, PL5 2SE"></li>
+                          <li class="address-autocomplete__address" data-address="9 Uxbridge Drive, Plymouth, PL5 2SE"></li>
+                          <li class="address-autocomplete__address" data-address="10 Uxbridge Drive, Plymouth, PL5 2SE"></li>
+                        </ul>
+                        <div class="address-autocomplete__grey-bar">Continue entering to improve results</div>
+                        <a href="../lc-address-not-found" class="address-autocomplete__cant-find-link">I can’t find my address</a>
+                      </div>
+                    </p>
+                  </div>
+                  <button type="button" class="btn u-mt-l">
+                    <span class="btn__inner">Continue</span>
+                  </button>
+                </form>
+
+
+
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='https://rawcdn.githack.com/ONSdigital/eq-prototypes/0258eab8bb1aaf8d2806c8a265e14cfcea70df6f/js/compiled/individual-response--your-household-v15/bundle.js'></script>
+
+<script>
+const input = document.getElementById('postcode')
+const autocomplete = document.getElementById('address-autocomplete')
+input.addEventListener('input', e => {
+  const searchTerm = e.target.value.toLowerCase()
+  autocomplete.style.display = e.target.value.length >= 3 ? 'block' : 'none'
+  let matchCount = 0
+  document.querySelectorAll('.address-autocomplete__address').forEach(el => {
+    const match = el.innerText.toLowerCase().indexOf(searchTerm) !== -1
+    if (match) matchCount++
+    el.style.display = match ? 'block' : 'none'
+    el.innerHTML = el.dataset.address.replace(new RegExp(searchTerm, 'ig'), '<strong>$&</strong>')
+  })
+  document.querySelectorAll('.address-autocomplete__grey-bar').forEach(el => {
+    el.style.display = matchCount === 0 ? 'none' : 'block'
+  })
+})
+document.querySelectorAll('.address-autocomplete__address').forEach(el => {
+  el.addEventListener('click', e => {
+    sessionStorage.setItem('address', el.dataset.address)
+    window.location.href = '../lc-confirm-address-ir'
+  })
+})
+</script>

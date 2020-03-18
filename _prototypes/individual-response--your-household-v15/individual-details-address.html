@@ -1,0 +1,181 @@
+---
+title: IR - Household prototype v15
+project: Individual Response
+globalcss: false
+layout: eq-default-extras
+cdn: v1.5.0
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link mars" href="../do-you-live-here">Previous</a>
+    </div>
+</div>
+
+<style>
+    .input--text-lg {
+        width : 100%;
+    }
+
+    .input--text-postcode {
+        max-width : 9.25rem;
+    }
+</style>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            <!--{% include navigation.html
+            items=site.data.your-household-v10.yourHouseholdV4_navigationItemsPersonalDetails
+            nav-title-id="section-individual" %}-->
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password"
+                      action="../individual-details-dob">
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
+                           value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group u-mb-xl">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title saturn js-heading">
+                                        What is <span class="js-person"></span>
+                                        usual address?
+                                    </h1>
+                                </div>
+
+                                <div class="question__answers">
+                                    <div class="question__answer">
+                                        <div class="answer answer--textfield  "
+                                             id="container-address-line-1">
+                                            <div class="answer__fields js-fields">
+                                                <p class="field">
+                                                    <label class="label" for="address-line-1">Address line 1</label>
+                                                    <input autocomplete="new-password" type="text" id="address-line-1" class="input input--text input-type__input input--w-20@m" name="address-line-1" />
+                                                </p>
+                                                <p class="field">
+                                                    <label class="label" for="address-line-2">Address line 2</label>
+                                                    <input autocomplete="new-password" type="text" id="address-line-2" class="input input--text input-type__input input--w-20@m" name="address-line-2" />
+                                                </p>
+                                                <p class="field">
+                                                    <label class="label" for="address-town">Town or City</label>
+                                                    <input autocomplete="new-password" type="text" id="address-town" class="input input--text input-type__input " name="address-town" />
+                                                </p>
+                                                <p class="field">
+                                                    <label class="label" for="address-county">County</label>
+                                                    <input autocomplete="new-password" type="text" id="address-county" class="input input--text input-type__input " name="address-county" />
+                                                </p>
+                                                <p class="field">
+                                                    <label class="label" for="address-postcode">Postcode</label>
+                                                    <input autocomplete="new-password" type="text" id="address-postcode" class="input input--text input-type__input input--w-5" name="address-postcode" />
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+
+                    <p class="mars">Can't complete this question?<br />
+                        <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
+
+                    <!--<p class="mars u-mb-m"><span class="js-link-secure-label"></span><br />
+                        <a class="js-link-secure"
+                           href="#">Get a separate access code to submit an
+                            individual response</a></p>-->
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person_id'),
+    member = storageAPI.getHouseholdMemberByPersonId(personId),
+    person = member['@person'],
+    isEditing = urlParams.get('edit'),
+    isVisitor = storageAPI.isVisitor(member),
+    details = storageAPI.getPersonalDetailsFor(personId),
+    surveyType = urlParams.get('survey');
+
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+    storageAPI.addUpdateAddressIndividual(personId,
+      {
+        'address-line-1': $('#address-line-1').val(),
+        'address-line-2': $('#address-line-2').val(),
+        'town-city': $('#town-city').val(),
+        'county': $('#county').val(),
+        'postcode': $('#postcode').val()
+      }
+    );
+    
+    if(isEditing) {
+      e.preventDefault();
+      window.location.href = '../individual-details-summary/?person_id=' +
+        personId + (surveyType ? '&survey=' + surveyType : '');
+    }
+
+    if(isVisitor) {
+      e.preventDefault();
+      window.location.href = '../hub/' + (surveyType ? '?survey=' +
+        surveyType : '');
+    }
+  }));
+
+  function updateRouting() {
+    if(surveyType) {
+      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    }
+    $('#survey-type').val(surveyType);
+  }
+
+  function updateQuestion() {
+    $('.js-person').html(person.fullName + window.ONS.utils.trailingNameS(person.fullName));
+
+    /*if(storageAPI.getAnsweringIndividualByProxy() || isVisitor) {
+      $('.js-heading').html('What is ' + '<em class="highlight">' + person.fullName +
+        window.ONS.utils.trailingNameS(person.fullName) + '</em>' + ' usual address?');
+    }*/
+  }
+
+  function updateAnswer() {
+    var visitors =
+      storageAPI.getAllHouseholdMembers().filter(storageAPI.isVisitor),
+      visitor1 = visitors[0],
+      visitor1Person = visitor1['@person'];
+
+    if((person.id !== visitor1Person.id) && visitors.length > 1) {
+      $('.js-extra-option').show();
+      $('.js-extra-option-label').html('Same address as ' +
+        visitor1Person.fullName);
+    }
+  }
+
+  if (details && details.country) {
+    $('#' + details.country).attr('checked', true);
+  }
+
+  $(updateQuestion);
+  $(updateAnswer);
+  $(updateRouting);
+
+  /**
+   * Routing
+   */
+  $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
+</script>
