@@ -104,7 +104,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                             id="other"
                                                             name="checkbox-answer" value="other" data-qa="has-other-option" type="checkbox" class="input input--checkbox">
                                                     <label id="label-checkbox-mandatory-answer-1" class="label label--inline u-fs-r" for="other">Other<br>
-                                                        <!--<span class="label__description label__inner u-fs-m">An answer is required.</span>-->
+                                                        <span class="label__description label__inner label--negative u-fs-m js-answer">You can enter your national identity on the next question</span>
                                                     </label>
                                                     <!--<div class="field__other">
                                                         <label class="label u-fs-r u-fs-m&#45;&#45;b"
@@ -189,6 +189,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     }
   }
 
+  function updateAnswers() {
+    if(storageAPI.getAnsweringIndividualByProxy()) {
+      $('.js-answer').html('You can enter their national identity on the next question');
+    }
+  }
+
   (function () {
     if (details && details['national-identity'] && details['national-identity'].collection) {
       var collection = details['national-identity'].collection;
@@ -206,8 +212,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   }
 
   $(updateAllPreviousLinks);
-
   $(updateQuestion);
+  $(updateAnswers);
   $(updateRouting);
 
   /**

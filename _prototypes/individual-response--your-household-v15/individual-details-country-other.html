@@ -103,9 +103,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('You selected ‘Elsewhere’ for ' + '<em class="highlight">' + person.fullName +
-        window.ONS.utils.trailingNameS(person.fullName) + '</em>' +
-        ' Country of brith, can you specify this further?');
+      $('.js-heading').html('You selected &ldquo;Elsewhere&rdquo;. ' + 'What is ' + '<em class="highlight">' + person.fullName +
+        window.ONS.utils.trailingNameS(person.fullName) + '</em>' + ' country of birth?</em>');
     }
   }
 
