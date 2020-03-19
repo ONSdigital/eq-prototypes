@@ -25,10 +25,6 @@ cdn: v1.5.0
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="off" action="../individual-details-summary">
                     <input type="hidden" name="person" id="person_id"
-                           value="#"/>
-                    <input type="hidden" name="survey" id="survey-type"
-                           value="#"/>
-                    <div class="group" id="rsi">
                         <div class="block" id="total-retail-turnover">
                             <section class="section">
                                 <div class="question u-mb-s">
@@ -75,11 +71,7 @@ cdn: v1.5.0
 
                     <p class="mars u-mb-m"><span class="js-link-secure-label"></span><br />
                         <a class="js-link-secure"
-                           href="#">Get a separate access code to submit an
-                            individual response</a></p>
-                </form>
-            </main>
-        </div>
+                            return to this question later</a></p>
     </div>
 </div>
 
@@ -132,3 +124,4 @@ cdn: v1.5.0
    */
   $('#person_id').val(new URLSearchParams(window.location.search).get('person'));
 </script>
+  $('#person_id').val(new URLSearchParams(window.location.search).get('person'));

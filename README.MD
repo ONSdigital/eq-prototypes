@@ -4,7 +4,7 @@
 ## Install
 Install [RVM](https://rvm.io/) and run:
 - `gem install bundler`
-- `git clone https://github.com/ONSdigital/eq-prototypes.git`
+- `git clone git@github.com:ONSdigital/eq-prototypes.git`
 - `cd eq-prototypes`
 - `bundle install`
 - `npm install`

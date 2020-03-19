@@ -26,10 +26,6 @@ cdn: v1.5.0
                       role="form" autocomplete="off"
                       action="../individual-details-country">
                     <input type="hidden" name="person" id="person_id"
-                           value="#"/>
-                    <input type="hidden" name="survey" id="survey-type"
-                           value="#"/>
-                    <div class="group" id="rsi">
                         <div class="block" id="total-retail-turnover">
                             <section class="section">
                                 <div class="question u-mb-s">
@@ -241,3 +237,4 @@ cdn: v1.5.0
    */
   $('#person_id').val(new URLSearchParams(window.location.search).get('person'));
 </script>
+  $('#person_id').val(new URLSearchParams(window.location.search).get('person'));

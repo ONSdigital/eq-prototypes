@@ -26,10 +26,6 @@ cdn: v2.0.0
                       role="form" autocomplete="off"
                       action="../individual-details-dob">
                     <input type="hidden" name="person" id="person_id"
-                           value="#"/>
-                    <input type="hidden" name="survey" id="survey-type"
-                           value="#"/>
-                    <div class="group">
                         <div class="block">
                             <section class="section">
                                 <div class="question u-mb-s">
@@ -96,15 +92,9 @@ cdn: v2.0.0
                         <a href="../hub" class="js-choose-another-section">Choose another section and
                             return to this question later</a></p>
 
-                    <!--<p class="u-mb-m"><span class="js-link-secure-label"></span><br />
-                        <a class="js-link-secure"
-                           href="#">Get a separate access code to submit an
-                            individual response</a></p>-->
-                </form>
-            </main>
-        </div>
-    </div>
-</div>
+                    
+                        <a href="../hub" class="js-choose-another-section">Choose another section and
+                            return to this question later</a></p>
 
 <script src='/js/compiled/your-household-v10/bundle.js'></script>
 
@@ -193,3 +183,4 @@ cdn: v2.0.0
    */
   $('#person_id').val(new URLSearchParams(window.location.search).get('person'));
 </script>
+  $('#person_id').val(new URLSearchParams(window.location.search).get('person'));
