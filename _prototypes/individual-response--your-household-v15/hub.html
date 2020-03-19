@@ -285,24 +285,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   /**
    * Link routing
    */
-  function getLinkHrefHouseholdMember(person, status/*, personPin*/) {
+  function getLinkHrefHouseholdMember(person, status) {
     return status === 'in-progress'
       ? storageAPI.getBookmarkFor(person.id) + '&continuing=true'
       : (status === 'completed'
         ? '../individual-details-summary/' : '../individual-intro/'
       ) + '?person_id=' + person.id;
-
-    //+ '?person_id=' + person.id
-
-    /*if (personPin && personPin.pin) {
-      linkHref = '../individual-pin-security/?returnurl=' + linkHref +
-        '&person_id=' + person.id;
-    }
-    else {
-      linkHref += '?person_id=' + person.id;
-    }*/
-
-    //return linkHref;
   }
 
   function getLinkHrefVisitor(person, status) {
