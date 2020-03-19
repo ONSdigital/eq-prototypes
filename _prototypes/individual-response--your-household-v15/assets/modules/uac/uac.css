@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap');
+
+.uac__field {
+    display: block;
+    position: relative;
+}
+
+.uac__input {
+  height: 100%;
+  font-weight: bold;
+  font-family: 'Roboto Mono', monospace;
+  text-transform: uppercase;
+}
+
+.uac__security {
+  display: flex;
+}
+
+.uac__help {
+  cursor: pointer;
+}
+
+.uac__help summary {
+  display: inline-block;
+  color: #4263c2;
+  text-decoration: underline;
+}
+
+.icon--lock:before {
+  background-image: url(/img/icons/lock.svg);
+}
+
+@media only screen and (min-width: 375px) {
+  .uac__input {
+    font-size: 22px;
+    letter-spacing: 0.01em;
+  }
+}
+
+@media only screen and (min-width: 500px) {
+  .uac__input {
+      width: 14.9em!important;
+      max-width: 14.9em;
+      font-size: 24px;
+      letter-spacing: .14em;
+  }
+}

@@ -25,7 +25,7 @@ cdn: v1.5.0
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="off"
                       action="../individual-details-dob">
-                    <input type="hidden" name="person" id="person"
+                    <input type="hidden" name="person" id="person_id"
                            value="#"/>
                     <input type="hidden" name="survey" id="survey-type"
                            value="#"/>
@@ -80,7 +80,7 @@ cdn: v1.5.0
 
                     <p class="mars">Can't complete this question?<br />
                         <a href="../hub" class="js-choose-another-section">Choose another section and
-                            return to this later</a></p>
+                            return to this question later</a></p>
 
                     <!--<p class="mars u-mb-m"><span class="js-link-secure-label"></span><br />
                         <a class="js-link-secure"
@@ -147,5 +147,5 @@ cdn: v1.5.0
   /**
    * Routing
    */
-  $('#person').val(new URLSearchParams(window.location.search).get('person'));
+  $('#person_id').val(new URLSearchParams(window.location.search).get('person'));
 </script>

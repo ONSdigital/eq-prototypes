@@ -1,0 +1,223 @@
+---
+title: IR - Household prototype v15
+project: Individual Response
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            <!--{% include navigation.html
+            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
+            nav-title-id="section-individual" %}-->
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password"
+                      action="../individual-details-ethnic-group-description">
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
+                           value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group" id="rsi">
+                        <div class="block" id="total-retail-turnover">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-xl js-heading">
+                                        What is your ethnic group?
+                                    </h1>
+                                </div>
+
+                                <div class="answer">
+                                    <div class="answer__fields js-fields">
+                                        <div class="field field--radio field--multiplechoice ">
+                                            <fieldset class="u-mb-xl">
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="ethnic-group"
+                                                           id="white"
+                                                           value="white">
+                                                    <label class="label label--inline"
+                                                           for="white"
+                                                           id="white-label">
+                                                        <strong class="u-fs-r">White</strong>
+                                                        <p class="u-fs-s u-db u-mb-no label--negative">
+                                                            Includes British,
+                                                            Northern Irish,
+                                                            Irish, Gypsy, Irish
+                                                            Traveller, Roma or
+                                                            any other White
+                                                            background
+                                                        </p>
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="ethnic-group"
+                                                           id="mixed"
+                                                           value="mixed">
+                                                    <label class="label label--inline"
+                                                           for="mixed"
+                                                           id="mixed-label">
+                                                        <strong class="u-fs-r">Mixed or Multiple
+                                                            ethnic groups</strong>
+                                                        <p class="u-fs-s u-db u-mb-no label--negative">
+                                                            Includes White and
+                                                            Black Caribbean,
+                                                            White and Black
+                                                            African, White and
+                                                            Asian or any other
+                                                            Mixed or Multiple
+                                                            backgrounds
+                                                        </p>
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="ethnic-group"
+                                                           id="asian"
+                                                           value="asian">
+                                                    <label class="label label--inline"
+                                                           for="asian"
+                                                           id="asian-label">
+                                                        <strong class="u-fs-r">Asian or Asian
+                                                            British</strong>
+                                                        <p class="u-fs-s u-db u-mb-no label--negative">
+                                                            Includes Indian,
+                                                            Pakistani,
+                                                            Bangladeshi, Chinese
+                                                            or any other Asian
+                                                            background
+                                                        </p>
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="ethnic-group"
+                                                           id="black"
+                                                           value="black">
+                                                    <label class="label label--inline"
+                                                           for="black"
+                                                           id="black-label">
+                                                        <strong class="u-fs-r">Black, Caribbean,
+                                                            African or Black
+                                                            British</strong>
+                                                        <p class="u-fs-s u-db u-mb-no label--negative">
+                                                            Includes Black British, Caribbean, African or any other Black background
+                                                        </p>
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="ethnic-group"
+                                                           id="other"
+                                                           value="other">
+                                                    <label class="label label--inline"
+                                                           for="other"
+                                                           id="other-label">
+                                                        <strong class="u-fs-r">Other ethnic group</strong>
+                                                        <p class="u-fs-s u-db u-mb-no label--negative">
+                                                            Includes Arab or any other ethnic group
+                                                        </p>
+                                                    </label>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+
+                    
+                        <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
+
+                    <!--<p class="u-mb-m"><span class="js-link-secure-label"></span><br />
+                        <a class="js-link-secure"
+                           href="#">Get a separate access code to submit an
+                            individual response</a></p>-->
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person_id'),
+    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+    isEditing = urlParams.get('edit'),
+    details = storageAPI.getPersonalDetailsFor(personId),
+    surveyType = urlParams.get('survey');
+
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+    var val = $('[name="ethnic-group"]:checked').val();
+
+    storageAPI.addUpdateEthnicGroup(personId, val);
+
+    /**
+     * Will always need to elaborate further on this question
+     */
+    if(isEditing) {
+      e.preventDefault();
+      window.location.href = '../individual-details-ethnic-group-description/?person_id=' + personId +
+        (surveyType ? '&survey=' + surveyType : '') +
+        '&ethnic-group=' + val +
+        (isEditing ? '&edit=true' : '');
+    }
+  }));
+
+  function updateRouting() {
+    if(surveyType) {
+      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    }
+    $('#survey-type').val(surveyType);
+  }
+
+  function updateQuestion() {
+    if(storageAPI.getAnsweringIndividualByProxy()) {
+      $('.js-heading').html('What is ' + '<em class="highlight">' + person.fullName +
+      window.ONS.utils.trailingNameS(person.fullName) + '</em>' +
+        ' ethnic group?');
+    }
+  }
+
+  if (details && details['ethnic-group']) {
+    $('#' + details['ethnic-group'].val).attr('checked', true);
+  }
+ function updateAllPreviousLinks() {
+      $('.js-previous-link').attr('href', '../individual-details-national-identity/?person_id=' + personId);
+  }
+
+  $(updateAllPreviousLinks);  
+  $(updateQuestion);
+  $(updateRouting);
+
+  /**
+   * Routing
+   */
+  $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
+</script>

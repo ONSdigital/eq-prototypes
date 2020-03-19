@@ -245,7 +245,7 @@ gulp.task('fonts', () => {
 });
 
 gulp.task('img', () => {
-  gulp.src('./_img/**/*').pipe(gulp.dest('./img'));
+  gulp.src('./_img/**/*').pipe(gulp.dest('./s/img'));
 });
 
 /**
