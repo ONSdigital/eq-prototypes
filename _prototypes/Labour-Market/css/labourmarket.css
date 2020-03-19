@@ -1,0 +1,18 @@
+.address_banner
+
+{
+    background-color: #faf4fc;
+
+
+
+}
+.address_banner p{margin-bottom: 0 !important;}
+.address_banner_container
+
+{
+max-width: 57.445rem !important;
+margin: 0 auto !important;
+padding: 0 1rem !important;
+display:flex !important;
+width:100% !important;
+}

@@ -1,0 +1,143 @@
+---
+title:  Mutually exclusive (Business example)
+project: Checkboxes (mutually exclusive)
+globalcss: false
+---
+
+<link rel="stylesheet" href="{{ '/css/census-header-footer.css' | prepend: site.baseurl }}" />
+<style>
+    @media only screen and (min-width: 740px) {
+        .field__item--half {
+            min-width: 9.7rem;
+            margin-bottom : 0;
+        }
+    }
+
+    .screen-reader {
+        position: absolute;
+        left: -9999rem;
+    }
+</style>
+
+<header class="page__header">
+    {% include bar.html %}
+    {% include header-census.html %}
+</header>
+
+<div class="page__subheader">
+    <div class="container">
+        <a class="mars" href="../index">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-7@m pull-1@m">
+            <main role="main" id="main" class="page__main">
+                <form action="../../../thankyou-census/index.html" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
+                    <div class="group">
+                        <div class="block" id="total-retail-turnover">
+                            <section class="section" id="total-retail-turnover-section">
+
+                                <div class="question" id="heating-type">
+                                    <h1 class="question__title saturn">What type of vehicle do you have access to?</h1>
+
+                                    <div class="question__answers">
+                                        <div class="question__answer">
+                                            <div class="answer">
+                                                <div class="answer__fields js-fields">
+                                                    <div class="field field--checkbox field--multiplechoice">
+                                                        <label class="label venus">
+                                                            <div class="label__inner">Select all that apply:</div>
+                                                        </label>
+
+                                                        <div class="field__item js-focusable-box">
+                                                            <input class="input input--checkbox js-focusable" value="private-car" name="question-type" type="checkbox" id="checkbox1">
+                                                            <label class="label label--inline venus js-label" for="checkbox1">Private car</label>
+                                                        </div>
+                                                        <div class="field__item js-focusable-box">
+                                                            <input class="input input--checkbox js-focusable" value="company-car" name="question-type" type="checkbox" id="checkbox2">
+                                                            <label class="label label--inline venus js-label" for="checkbox2">Company car</label>
+                                                        </div>
+                                                        <div class="field__item js-focusable-box">
+                                                            <input class="input input--checkbox js-focusable" value="van" name="question-type" type="checkbox" id="checkbox3">
+                                                            <label class="label label--inline venus js-label" for="checkbox3">Van</label>
+                                                        </div>
+                                                        <div class="field__item js-focusable-box">
+                                                            <input class="input input--checkbox js-focusable" value="motorbike" name="question-type" type="checkbox" id="checkbox4">
+                                                            <label class="label label--inline venus js-label" for="checkbox4">Motorbike</label>
+                                                        </div>
+                                                        <div class="field__item js-focusable-box">
+                                                            <input class="input input--checkbox js-focusable" value="minibus" name="question-type" type="checkbox" id="checkbox5">
+                                                            <label class="label label--inline venus js-label" for="checkbox5">Minibus</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="question">
+                                    <h2 aria-hidden="true" class="question__title neptune">Or</h2>
+
+                                    <div class="question__answers">
+                                        <div class="question__answer">
+                                            <div class="answer">
+                                                <div class="answer__fields js-fields">
+                                                    <div class="field field--checkbox field--multiplechoice">
+                                                        <!--<label class="label venus">
+                                                            <div class="label__inner">Select all that apply:</div>
+                                                        </label>-->
+                                                        <div class="field__item js-focusable-box">
+                                                            <input class="input input--checkbox js-focusable" value="none" name="question-type" type="checkbox" id="checkbox6">
+                                                            <label class="label label--inline venus js-label" for="checkbox6"><span class="screen-reader">Or</span> I don’t have access to a vehicle</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Save and continue</button>
+                    <div class="u-mb-m">
+                        <button class="btn btn--link mars js-btn-save" type="submit" name="action[save_sign_out]">Save and complete later</button>
+                    </div>
+                </form>
+                <a class="page__previous page__previous--bottom js-previous-link" href="../index" id="bottom-previous">Previous</a>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/standard-bundle.js'></script>
+<script src='/js/compiled/checkboxes-mutually-exclusive/mutually-exclusive/bundle.js'></script>
+
+<script>
+    $(document).ready(function () {
+
+        new window.NAMESPACE.CheckboxGroup({
+            name: 'question-type',
+
+            /**
+             * Define groups for mutually exclusive behaviour
+             */
+            mutullyExclusiveGroupsByValue: [
+                [
+                  'private-car',
+                  'company-car',
+                  'van',
+                  'motorbike',
+                  'minibus'
+                ],
+                ['none']
+            ]
+        });
+    });
+</script>

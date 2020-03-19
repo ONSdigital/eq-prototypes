@@ -1,0 +1,56 @@
+---
+title: Version 1
+project: End to end prototype
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../household-accom-shared-rooms">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password" novalidate=""
+                      action="../household-accom-heating">
+                    <div class="group" id="rsi">
+                        <div class="block" id="total-retail-turnover">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-xl js-heading">
+                                        How many bedrooms are available for use only by this household?
+                                    </h1>
+                                </div>
+                                <div class="answer answer--date">
+                                    <div class="fieldgroup__fields">
+                                      <div class="field field--input input--w-2">
+                                          <label class="label" for="detail-number-bedrooms">
+                                              Number of bedrooms
+                                          </label>
+                                          <input type="text" id="detail-number-bedrooms" class="input input--StringField input--text input-type__input  input--w-2" name="bedrrooms" min="1" max="31" maxlength="2" pattern="[0-9]*" inputmode="numeric" autocomplete="number-bedrooms" />
+                                      </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>

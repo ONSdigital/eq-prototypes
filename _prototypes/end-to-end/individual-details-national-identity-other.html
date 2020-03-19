@@ -1,0 +1,127 @@
+---
+title: Version 1
+project: End to end prototype
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<link rel="stylesheet" href="../assets/modules/typeahead/typeahead.css"/>
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password"
+                      action="../individual-details-ethnic-group">
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
+                           value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group u-mb-l">
+                        <div class="block" id="total-retail-turnover">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-xl js-heading">
+                                        You selected &ldquo;Other&rdquo;. How would you describe your national identity?
+                                    </h1>
+                                </div>
+
+                                <div class="grid grid--gutterless">
+                                    <div class="grid__col col-8@m">
+                                        <p class="field">
+                                          <label class="label" for="national-identity">National identity
+                                              <br>
+                                              <span class="label__description u-no-js-hide">Enter your own answer or select from suggestions</span>
+                                          </label>
+
+                                          <div id="national-identity-container" class="js-typeahead typeahead-input typeahead-input--initialised" data-instructions="Use up and down keys to navigate suggestions once you&#39;ve typed more than two characters. Use the enter key to select a suggestion. Touch device users, explore by touch or with swipe gestures." data-aria-you-have-selected="You have selected" data-aria-min-chars="Enter 3 or more characters for suggestions." data-aria-one-result="There is one suggestion available." data-aria-n-results="There are {n} suggestions available." data-aria-limited-results="Results have been limited to 10 suggestions. Type more characters to improve your search." data-more-results="Continue entering to improve suggestions" data-results-title="Suggestions" data-typeahead-data="https://gist.githubusercontent.com/rmccar/045965173d8ce59f4e78e7de42d33dbc/raw/69946d6e4e90e3eaa2507fd8052ac0cb6d37fb5a/National_Identity_FEL.json" data-no-results="No results found">
+                                              <input type="text" id="national-identity" class="input input--text input-type__input  js-typeahead-input  " autocomplete="off" aria-autocomplete="list" aria-controls="national-identity-listbox" aria-describedby="national-identity-instructions" aria-has-popup="true" aria-owns="national-identity-listbox" aria-expanded="false" role="combobox">
+                                              <div class="typeahead-input__results js-typeahead-results">
+                                              <header class="typeahead-input__results-title u-fs-s">Suggestions</header>
+                                              <ul class="typeahead-input__listbox js-typeahead-listbox" role="listbox" id="national-identity-listbox" tabindex="-1"></ul>
+                                              </div>
+                                              <div class="typeahead-input__instructions u-vh js-typeahead-instructions" id="national-identity-instructions" tabindex="-1">Use up and down keys to navigate suggestions once you&#39;ve typed more than two characters. Use the enter key to select a suggestion. Touch device users, explore by touch or with swipe gestures.</div>
+                                              <div class="typeahead-input__status u-vh js-typeahead-aria-status" aria-live="polite" role="status" tabindex="-1"></div>
+                                          </div>
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+                    <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person_id'),
+    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+    isEditing = urlParams.get('edit'),
+    details = storageAPI.getPersonalDetailsFor(personId),
+    surveyType = urlParams.get('survey');
+
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+    var otherText = $('#national-identity-input').val();
+
+    storageAPI.addUpdateNationalIdentityOther(personId, otherText);
+
+    if(isEditing) {
+      e.preventDefault();
+      window.location.href = '../individual-details-summary/?person_id=' +
+        personId + (surveyType ? '&survey=' + surveyType : '');
+    }
+  }));
+
+  function updateRouting() {
+    if(surveyType) {
+      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    }
+    $('#survey-type').val(surveyType);
+  }
+
+  function updateQuestion() {
+    if(storageAPI.getAnsweringIndividualByProxy()) {
+      $('.js-heading').html('You selected &ldquo;Other&rdquo;. How would you describe ' + '<em class="highlight">' + person.fullName +
+        window.ONS.utils.trailingNameS(person.fullName) + '</em>' +
+        ' national identity?');
+    }
+  }
+
+  if (details && details['national-identity'] &&
+    details['national-identity'].otherText) {
+    $('#national-identity-input').val(details['national-identity'].otherText);
+  }
+
+  $(updateQuestion);
+  $(updateRouting);
+
+  document.dispatchEvent(new CustomEvent('TYPEAHEAD-READY'));
+
+  /**
+   * Routing
+   */
+  $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
+</script>

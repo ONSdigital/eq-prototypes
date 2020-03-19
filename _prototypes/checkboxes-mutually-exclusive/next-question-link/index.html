@@ -1,0 +1,100 @@
+---
+title:  Next question link
+project: Checkboxes (mutually exclusive)
+globalcss: false
+---
+
+<link rel="stylesheet" href="{{ '/css/census-header-footer.css' | prepend: site.baseurl }}" />
+<style>
+    @media only screen and (min-width: 740px) {
+        .field__item--half {
+            min-width: 9.7rem;
+            margin-bottom : 0;
+        }
+    }
+</style>
+
+<header class="page__header">
+    {% include bar.html %}
+    {% include header-census.html %}
+</header>
+
+<div class="page__subheader">
+    <div class="container">
+        <a class="mars" href="../index">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-7@m pull-1@m">
+            <main role="main" id="main" class="page__main">
+                <form action="../../thankyou/index.html" class="form qa-questionnaire-form" role="form" autocomplete="off" novalidate="">
+                    <div class="group">
+                        <div class="block" id="total-retail-turnover">
+                            <section class="section" id="total-retail-turnover-section">
+
+                                <div class="question" id="heating-type">
+                                    <h2 class="question__title neptune">What type of central heating do you have?</h2>
+
+                                    <div class="question__answers">
+                                        <div class="question__answer">
+                                            <div class="answer">
+                                                <div class="answer__fields js-fields">
+                                                    <div class="field field--checkbox field--multiplechoice">
+                                                        <label class="label venus">
+                                                            <div class="label__inner">Select all that apply:</div>
+                                                        </label>
+                                                        <div class="field__item js-focusable-box">
+                                                            <input class="input input--checkbox js-focusable" type="checkbox" id="checkbox1">
+                                                            <label class="label label--inline venus" for="checkbox1">Gas</label>
+                                                        </div>
+                                                        <div class="field__item js-focusable-box">
+                                                            <input class="input input--checkbox js-focusable" type="checkbox" id="checkbox2">
+                                                            <label class="label label--inline venus" for="checkbox2">Electric</label>
+                                                        </div>
+                                                        <div class="field__item js-focusable-box">
+                                                            <input class="input input--checkbox js-focusable" type="checkbox" id="checkbox3">
+                                                            <label class="label label--inline venus" for="checkbox3">Solid fuel</label>
+                                                        </div>
+                                                        <div class="field__item js-focusable-box">
+                                                            <input class="input input--checkbox js-focusable" type="checkbox" id="checkbox4">
+                                                            <label class="label label--inline venus" for="checkbox4">Other</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+
+                    <p class="u-mb-l"><a href="../next-question/index.html">I don’t have central heating, take me to the next question</a></p>
+
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Save and continue</button>
+                    <div class="u-mb-m">
+                        <button class="btn btn--link mars js-btn-save" type="submit" name="action[save_sign_out]">Save and complete later</button>
+                    </div>
+                </form>
+                <a class="page__previous page__previous--bottom js-previous-link" href="../index" id="bottom-previous">Previous</a>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/standard-bundle.js'></script>
+
+<script>
+    $(document).ready(function () {
+
+    	$('input:radio[name=radio-answer][value=yes]').prop('checked', true);
+
+        $('input:radio[name=radio-answer]').change(function () {
+            $('#heating-type')[$(this).val() === 'yes' ? 'show' : 'hide']();
+        });
+    });
+</script>

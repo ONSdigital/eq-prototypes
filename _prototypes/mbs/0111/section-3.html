@@ -5,12 +5,13 @@ globalcss: false
 ---
 
 <header class="page__header">
-{% include survey-header.html %}
-{% include bar.html %}
+{% include survey-header-no-info-panel.html %}
+{% include bar-2.html %}
 </header>
 
 <div class="page__subheader">
   <div class="container">
+    {% include beta-feedback.html %}
     <a class="mars" href="../section-2/">Previous</a>
   </div>
 </div>

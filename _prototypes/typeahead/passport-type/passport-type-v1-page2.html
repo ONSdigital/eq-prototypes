@@ -1,0 +1,133 @@
+---
+title: Passport questions v1
+project: Typeahead
+globalcss: false
+---
+
+<!--[if lt IE 9]>
+<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+<![endif]-->
+<!--[if gt IE 8]><!-->
+  <script>document.documentElement.className = document.documentElement.className.replace('no-js','has-js')</script>
+<!--<![endif]-->
+
+<link rel="stylesheet" href="{{ "/css/census-header-footer.css" | prepend: site.baseurl }}">
+<link href="../css/autocomplete.css" rel="stylesheet">
+<link href="../css/typeahead.css" rel="stylesheet">
+<link href="../css/passport-types.css" rel="stylesheet">
+
+
+<header class="page__header">
+  {% include bar.html %}
+  {% include header-census.html %}
+</header>
+
+<div class="page">
+    <div class="page__content">
+        <div class="page__subheader">
+            <div class="container">
+                <a class="mars" href="../passport-type-v1-page1">Previous</a>
+            </div>
+        </div>
+        <div class="page__container container">
+            <div class="grid grid--reverse">
+                <div class="grid__col col-4@m"></div>
+                <div class="grid__col col-7@m pull-1@m">
+                    <main role="main" id="main" class="page__main">
+                        <form name="otherPassports" class="form qa-questionnaire-form" role="form" autocomplete="off">
+                            <input id="csrf_token" name="csrf_token" type="hidden" value="ImUyNGQ4ZTliMTQxZDY4MGI3NzgyYjkyMjI4M2Y3ZWRmMGJlZmZjZWYi.DKKFlA.U3YKd3C5S0R9193pylUknvdyOTc">
+                            <div class="group u-m-no" id="who-lives-here-relationship">
+                                <div class="block" id="household-relationships">
+                                    <p class="block__title neptune" data-qa="block-title"></p>
+                                    <div class="question question--repeatinganswer" id="household-relationships-question">
+                                        <h1 class="question__title saturn">What passports does <span class="highlight q1">Bob Smith</span> hold? </h1>
+                                        <fieldset>
+                                            <div class="question__answers">
+                                                <div class="question__answer">
+                                                    <div class="question__description mars">
+                                                      To add more than one passport add each one in turn.
+                                                    </div>
+                                                    <div class="answer">
+                                                        <div class="answer__fields">
+                                                            <div class="field field--select">
+                                                                <label class="label venus">
+                                                                    Start entering the country of the passport and select
+                                                                </label>
+                                                                <div class="js-typeahead-component typeahead-component">
+                                                                    <input class="input input--text js-typeahead-input" placeholder=""type="text" />
+
+                                                                    <div class="pac-container-wrapper">
+                                                                        <div class="pac-container pac-logo hide"></div>
+                                                                    </div>
+                                                                </div>
+                                                                <a href="javascript:removeAllPlayback()" class="mars btn btn--link hide js-address-start-again-trigger">Start again</a>
+                                                                <div id="playback" class="playback playback--basic-toggle">
+                                                                    <div class="playback__main" aria-hidden="true" id="">
+                                                                        <div class="mars">
+                                                                          <div id="passport-types-country-playback u-cf">
+                                                                            <div class="playback u-mt-m">
+                                                                              <h2 class="playback__title mars u-fw-b" id="playback-heading">All passports held by Bob Smith</h2>
+                                                                              <div id="playback-container" class="playback__block"></div>
+                                                                            </div>
+                                                                          </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <br />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Save and continue</button>
+                            <div class="u-mb-m">
+                                <button class="btn btn--link mars js-btn-save" type="submit" name="action[save_sign_out]" data-ga="click" data-ga-category="Navigation" data-ga-action="Save and complete later click">Save and complete later</button>
+                            </div>
+                        </form>
+                        <a class="page__previous page__previous--bottom"  data-ga="click" data-ga-label="bottom" data-ga-category="Navigation" data-ga-action="Previous link click" href="../passport-type-v1-page1" id="bottom-previous">Previous</a>
+                    </main>
+                </div>
+            </div>
+        </div>
+    </div>
+{% include footer-census.html %}
+</div>
+{% include timeout-census.html %}
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<script src="../js/Typeahead.js"></script>
+<script src="../js/passport-types.js"></script>
+<script>
+	$(document).ready(function () {
+		passportTypes({});
+	});
+</script>
+<style>
+    /* Patch */
+    .page__content {
+        overflow-x: visible;
+    }
+
+    .pac-container {
+        width : 20.1rem;
+    }
+
+    @media only screen and (max-width: 500px) {
+        .pac-container {
+            width : auto;
+        }
+    }
+</style>
+
+<script>
+  $('.qa-btn-submit').click(function(e) {
+      document.otherPassports.action = "../end-page";
+  });
+</script>

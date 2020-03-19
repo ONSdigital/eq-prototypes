@@ -1,0 +1,192 @@
+---
+title: Version 1
+project: End to end prototype
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../household-accom-number-bedrooms">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m"></div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password" action="../household-accom-own-rent">
+                    <div class="group" id="rsi">
+                        <div class="block" id="total-retail-turnover">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-xl js-heading">
+                                        What type of central heating does <span class="full-address-text"></span> have?
+                                    </h1>
+                                </div>
+                                  <div class="answer">
+                                    <div class="answer__fields js-fields">
+                                        <div class="field field--radio field--multiplechoice ">
+                                            <fieldset class="u-mb-xl">
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="heating-type"
+                                                           id="no-heating"
+                                                           value="no-heating">
+                                                    <label class="label label--inline"
+                                                           for="no-heating"
+                                                           id="no-heating-label">
+                                                        No central heating
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="heating-type"
+                                                           id="mains-gas"
+                                                           value="mains-gas">
+                                                    <label class="label label--inline"
+                                                           for="mains-gas"
+                                                           id="mains-gas-label">
+                                                        Mains gas
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="heating-type"
+                                                           id="bottled-gas"
+                                                           value="bottled-gas">
+                                                    <label class="label label--inline"
+                                                           for="bottled-gas"
+                                                           id="bottled-gas-label">
+                                                        Tank or bottled gas
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="heating-type"
+                                                           id="electric"
+                                                           value="electric">
+                                                    <label class="label label--inline"
+                                                           for="electric"
+                                                           id="electric-label">
+                                                        Electric
+                                                        <p class="u-fs-s u-db u-mb-no label--negative">
+                                                            Including storage heaters
+                                                        </p>
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="heating-type"
+                                                           id="oil"
+                                                           value="oil">
+                                                    <label class="label label--inline"
+                                                           for="oil"
+                                                           id="oil-label">
+                                                        Oil
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="heating-type"
+                                                           id="wood"
+                                                           value="wood">
+                                                    <label class="label label--inline"
+                                                           for="wood"
+                                                           id="wood-label">
+                                                        Wood
+                                                        <p class="u-fs-s u-db u-mb-no label--negative">
+                                                            For example, logs, waste wood or pellets
+                                                        </p>
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="heating-type"
+                                                           id="solid-fuel"
+                                                           value="solid-fuel">
+                                                    <label class="label label--inline"
+                                                           for="solid-fuel"
+                                                           id="solid-fuel-label">
+                                                        Solid fuel
+                                                        <p class="u-fs-s u-db u-mb-no label--negative">
+                                                            For example, coal
+                                                        </p>
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="heating-type"
+                                                           id="renewable"
+                                                           value="renewable">
+                                                    <label class="label label--inline"
+                                                           for="renewable"
+                                                           id="renewable-label">
+                                                        Renewable energy
+                                                        <p class="u-fs-s u-db u-mb-no label--negative">
+                                                            For example, solar thermal or heat pumps
+                                                        </p>
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="heating-type"
+                                                           id="communal-heat-networks"
+                                                           value="communal-heat-networks">
+                                                    <label class="label label--inline"
+                                                           for="communal-heat-networks"
+                                                           id="communal-heat-networks-label">
+                                                        District or communal heat networks
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="heating-type"
+                                                           id="Other"
+                                                           value="Other">
+                                                    <label class="label label--inline"
+                                                           for="Other"
+                                                           id="Other-label">
+                                                        Other
+                                                    </label>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+    $(function () {
+        if(sessionStorage.getItem('address-line-1')) {
+        $('.full-address-text').html((sessionStorage.getItem('address-line-1') || '').replace(/,/g, ''));
+        }
+    });
+</script>

@@ -1,0 +1,162 @@
+---
+title: Version 1
+project: End to end prototype
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<link rel="stylesheet" href="../assets/modules/typeahead/typeahead.css"/>
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            <!--{% include navigation.html
+            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
+            nav-title-id="section-individual" %}-->
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <div class="panel panel--error u-mb-m js-error-box u-d-no">
+                    <div class="panel__header">
+                        <div class="panel__title u-fs-r--b js-piping">This page has an error</div>
+                    </div>
+                    <div class="panel__body">
+                        <p class="js-piping">This <strong>must be corrected</strong> to continue.</p>
+                        <ol class="list list--bare">
+                        <li class="list__item js-job-field u-d-no">
+                            1) <a href="#job-field" class="list__link js-inpagelink">
+                                You have entered too many characters. Enter up to 20 characters
+                            </a>
+                        </li>
+                       </ol>
+                    </div>
+                </div>                  
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password"
+                      action="../individual-details-job-describe">
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
+                           value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group u-mb-l">
+                        <div class="block" id="total-retail-turnover">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-xl js-heading">
+                                        What is your full job title?
+                                    </h1>
+                                </div>
+                                <div class="question__description">
+                                  <p>For example, retail assistant, office cleaner, district nurse, primary school teacher. Do not state their grade or pay band</p>
+                                </div>
+                                <div class="question__answers">
+                                    <div class="question__answer js-fields">
+                                      <div class="js-char-check">
+                                        <p class="field">
+                                          <label class="label" for="job-field">Job title</label>
+                                          <input autocomplete="new-password" required type="text" id="job-field" data-error-msg="You have entered too many characters. Enter up to 20 characters." class="input input--text input-type__input input--w-10" data-char-check-ref="search-field-check-remaining" data-char-check-num="20" />
+                                      <span
+                                        id="search-field-check-remaining"
+                                        class="input__limit u-fs-s--b u-mt-xs u-d-no"
+                                        data-charcount-limit-singular="{x} character too many"
+                                        data-charcount-limit-plural="{x} characters too many">
+                                      </span>
+                                        </p>
+                                      </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+
+                    
+                        <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
+
+                    <!--<p class="u-mb-m"><span class="js-link-secure-label"></span><br />
+                        <a class="js-link-secure"
+                           href="#">Get a separate access code to submit an
+                            individual response</a></p>-->
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    switchedFromUnemployed = urlParams.get('switchedFromUnemployed'),
+    personId = urlParams.get('person_id'),
+    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+    isEditing = urlParams.get('edit'),
+    details = storageAPI.getPersonalDetailsFor(personId),
+    surveyType = urlParams.get('survey'),
+    hasErrors = false;
+
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+    const testFails = document.getElementById('job-field').value.length > 20 ? true : false;
+    window.ONS.utils.validateInputs(testFails);
+    if (hasErrors) {
+      e.preventDefault();
+      hasErrors = false;
+      return false;
+    } else {
+      storageAPI.addUpdateJobTitle(personId, $('#job-title-input').val());
+
+      if(switchedFromUnemployed) {
+        e.preventDefault();
+        window.location.href = '../individual-details-job-describe/?person_id=' + personId +
+          (surveyType ? '&survey=' + surveyType : '') +
+          '&switchedFromUnemployed=true';
+      }
+      else if(isEditing) {
+        e.preventDefault();
+        window.location.href = '../individual-details-summary/?person_id=' +
+          personId + (surveyType ? '&survey=' + surveyType : '');
+      }
+    }
+  }));
+
+  function updateRouting() {
+    if(surveyType) {
+      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    }
+    $('#survey-type').val(surveyType);
+  }
+
+  function updateQuestion() {
+    if(storageAPI.getAnsweringIndividualByProxy()) {
+      $('.js-heading').html('What is ' + '<em class="highlight">' + person.fullName + window.ONS.utils.trailingNameS(person.fullName) + '</em>' +
+        ' full job title?');
+    }
+  }
+
+  if (details && details['job-title'] &&
+    details['job-title'].val) {
+    $('#job-title-input').val(details['job-title'].val);
+  }
+
+  document.dispatchEvent(new CustomEvent('TYPEAHEAD-READY'));
+
+  $(updateQuestion);
+  $(updateRouting);
+
+  /**
+   * Routing
+   */
+  $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
+</script>

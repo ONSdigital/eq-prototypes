@@ -1,0 +1,55 @@
+.input-type {
+  display: block;
+}
+.input-type__inner {
+  display: inline-flex;
+  position: relative;
+}
+.input-type .input-type__input {
+  z-index: 1;
+  flex: 1 1 auto;
+  position: relative;
+}
+.input-type .input-type__input:focus {
+  box-shadow: none;
+}
+.input-type__type[title] {
+  display: block;
+  flex: 0 0 auto;
+  padding: rem-calc(rem-calc(rems(40px) - 1.444rem) / 2) 1rem;
+  border: 1px solid #222;
+  background-color: #f0f0f0;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: normal;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.input-type__input:focus + .input-type__type[title]:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 3px;
+  box-shadow: 0 0 0 3px #fd0;
+}
+.input-type self:not(.input-type--prefix)self__type[title] {
+  border-left: 0;
+  border-radius: 0 3px 3px 0;
+}
+.input-type self:not(.input-type--prefix)self__input {
+  border-radius: 3px 0 0 3px;
+}
+.input-type--prefix .input-type__type[title] {
+  order: 0;
+  border-right: 0;
+  border-radius: 3px 0 0 3px;
+}
+.input-type--prefix .input-type__input {
+  order: 1;
+  border-radius: 0 3px 3px 0;
+}

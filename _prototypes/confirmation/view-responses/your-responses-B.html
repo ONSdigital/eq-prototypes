@@ -27,7 +27,7 @@ globalcss: false
     font-size: 18px;
   }
   .label_guide_text{
-    font-size: 14px; font-weight: lighter;
+    font-size: 14px; font-weight: normal;
     padding-bottom: 10px;
   }
   .print::before {
@@ -37,7 +37,7 @@ globalcss: false
     }
 
   .print-icon {
-    margin-right: 4px;
+    margin-right: 8px;
     margin-left: 4px;
   }
 
@@ -86,40 +86,24 @@ globalcss: false
 <div class="page__container container">
   <div class="grid grid--reverse">
   <div class="grid__col col-12@m">
-    <h1 class="saturn">Submitted responses</h1>
+    <h1 class="saturn">Submitted answers</h1>
   </div>
     <div class="grid__col col-4@m transaction-id-col">
 
-      <nav class="nav nav--sections js-nav page__nav" id="section-nav">
-      <p class="nav__title venus">Bolts & Ratchets Ltd</p>
-        <ul class="nav__list transaction-id">
-
-          <li class=" ">
-              <span class="color">Transaction ID:</span>
-            </li>
-            <li class=" ">
-                <span class="color">296C - 3442 - BBBA - 3442</span>
-              </li>
-            <li class="">
-              <span class="date_stamp">Submitted: 14:05 13 September 2016</span>
-            </li>
-            <li class="">
-              <span class="date_stamp">(Please quote for any support queries)</span>
-            </li>
-
-            </ul>
-          </nav>
-
     </div>
     <div class="grid__col col-7@m pull-1@m">
+
       <main role="main" id="main" class="page__main">
-        <div class="u-mb-s">
+        <div class="panel panel--simple panel--success u-mb-s">
+                <p class="mars">
+                  Your answers were submitted for <strong>Bolts &amp; Ratchets Ltd</strong> on 13 September 2016 at 14:05.
+                </p>
+                <p class="venus">Transaction ID: 296C - 3442 - BBBA - 3442</p>
+        </div>
+<div>
+  <p class="dl__data mars"><img class="print-icon" src="{{site.baseurl}}/s/img/icons/ic_print_black_24dp_1x.png"/><a class="print-page" href="#" onclick="window.print();return false;">Print this page</a></p>
 
-  <dd class="dl__data mars">Below are your responses to the <b>Monthly Wages and Salaries Survey</b></dd>
 
-  <dd class="dl__data mars">If you would like to retain a copy of your responses <img class="print-icon" src="{{site.baseurl}}/s/img/icons/ic_print_black_24dp_1x.png"/><a class="print-page" href="#" onclick="window.print();return false;">print this page</a></dd>
-
-  <dd class="dl__data mars information_availablity">This information will no longer be available in 5 minutes</dd>
 
 
       <h2 class="summary__title saturn" id="pay-pattern">Pay Pattern</h2>
@@ -135,7 +119,7 @@ globalcss: false
 
 
                 <div class="summary__question" id="pay-pattern-frequency-question">
-                  1.1 Please indicate how frequently employees are paid:
+                  Please indicate how frequently employees are paid:
                 </div>
 
 
@@ -166,7 +150,7 @@ globalcss: false
 
 
                 <div class="summary__question" id="weekly-pay-paid-employees-question">
-                  2.1 What was the number of weekly paid employees paid in the last week of May 2016?
+                  What was the number of weekly paid employees paid in the last week of May 2016?
                 </div>
 
 
@@ -187,7 +171,7 @@ globalcss: false
 
 
                 <div class="summary__question" id="weekly-pay-gross-pay-question">
-                  2.2 What was the total gross weekly pay paid to employees in the last week of May 2016?
+                  What was the total gross weekly pay paid to employees in the last week of May 2016?
                 </div>
                       <div class="summary__answer">
                         <div class="summary__answer-text" id="weekly-pay-gross-pay-answer-answer" data-qa="weekly-pay-gross-pay-answer-answer">£100</div>
@@ -212,7 +196,7 @@ globalcss: false
 
 
                 <div class="summary__question" id="weekly-pay-breakdown-question">
-                  2.3 Of the £100 paid to weekly paid employees in the last week of May 2016, what amount was:
+                  Of the £100 paid to weekly paid employees in the last week of May 2016, what amount was:
                 </div>
 
 
@@ -267,7 +251,7 @@ globalcss: false
 
 
                 <div class="summary__question" id="weekly-pay-significant-changes-paid-employees-question">
-                  2.4 Did any significant changes occur to the number of weekly paid employees?
+                  Did any significant changes occur to the number of weekly paid employees?
                 </div>
 
 
@@ -301,7 +285,7 @@ globalcss: false
 
 
                 <div class="summary__question" id="weekly-pay-significant-changes-gross-pay-question">
-                  2.7 Did any significant changes occur to the total gross pay paid to weekly paid employees?
+                  Did any significant changes occur to the total gross pay paid to weekly paid employees?
                 </div>
 
 
@@ -335,7 +319,7 @@ globalcss: false
 
 
                 <div class="summary__question" id="weekly-pay-significant-changes-other-question">
-                  2.12 Did any other significant changes occur to the pay or number of weekly paid employees?
+                  Did any other significant changes occur to the pay or number of weekly paid employees?
                 </div>
 
 
@@ -378,7 +362,7 @@ globalcss: false
 
 
                 <div class="summary__question" id="general-comments-question">
-                  7.1 Please write any additional comments you would like to make on the information you have provided.
+                  Please write any additional comments you would like to make on the information you have provided.
                 </div>
 
 
@@ -405,15 +389,15 @@ globalcss: false
   </div>
 </div>
 
-<p><b>Feedback. Has this service been helpful?</b></p>
-
 <div class="js-details" data-show-label="Tell us how we should improve it" data-hide-label="Close feedback">
-<a class="js-details-trigger js-details-label mars" href="#guidance-permanent-or-family-home-answer" aria-expanded="false" data-guidance-trigger="true" aria-controls="guidance-permanent-or-family-home-answer-body" id="guidance-permanent-or-family-home-answer-trigger" data-ga-category="Help" data-ga-label="permanent-or-family-home-answer" data-ga="click" data-ga-action="Guidance click">Tell us how we should improve it</a>
+<a class="js-details-trigger js-details-label mars" href="#guidance-permanent-or-family-home-answer" aria-expanded="false" data-guidance-trigger="true" aria-controls="guidance-permanent-or-family-home-answer-body" id="guidance-permanent-or-family-home-answer-trigger" data-ga-category="Help" data-ga-label="permanent-or-family-home-answer" data-ga="click" data-ga-action="Guidance click">Tell us how we should improve this survey</a>
 <div class="guidance__main js-details-body" id="guidance-permanent-or-family-home-answer-body" aria-hidden="true">
 <div class=" mars">
 <br/>
 
-  <h2 class="summary__title saturn" id="pay-pattern">Satisfaction survey</h2>
+
+
+  <h2 class="summary__title saturn" id="pay-pattern">Give feedback</h2>
 
   <div class="answer answer--radio  " id="satisfaction-survey">
 
@@ -422,6 +406,7 @@ globalcss: false
   <div class="answer__fields js-fields">
 
   <div class="field field--radio field--multiplechoice ">
+
   <fieldset>
   <div class="field__item js-focusable-box">
   <input  class="input input--radio js-focusable" type="radio" name="feel-about-service" id="feel-about-service-0" value="very-satisfied">
@@ -459,10 +444,7 @@ globalcss: false
     </div>
     <h4>How could we improve this service?</h4>
 
-      <label  id="" class="" for="answer">
-        <div class="label_guide_text label__inner">
-          Please do not include any personal information like credit card numbers or email addresses</div>
-      </label>
+
           <textarea  cols="60" class="input input--textarea js-charlimit-input" rows="8" aria-describedby="description-question guidance-answer-trigger" name="answer" id="answer" maxlength="20"></textarea>
 
 
@@ -471,7 +453,7 @@ globalcss: false
 
       <br/>
 
-    <h4>If you would like us to get back to you, please complete the following:</h4>
+    <h4>Please include your name and email address if you’re interested in taking part in further research to improve this service</h4>
 
 
     <div class="question" id="feedback-name-question">
@@ -526,11 +508,6 @@ globalcss: false
 </div>
 </div>
 
-<div class="u-mt-s">
-  <div class="mars">For more information on how we use this data.</div>
-  <p class="u-mb-m@s mars"><a href="https://www.ons.gov.uk/surveys">https://www.ons.gov.uk/surveys</a></p>
-
-</div>
 
 
     </main>
