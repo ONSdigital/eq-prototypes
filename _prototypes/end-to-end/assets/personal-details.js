@@ -341,6 +341,30 @@ export function addUpdateMaritalStatus(personId, val) {
     }));
 }
 
+export function addUpdate30DayAddressUk(personId, val) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'Address30DayUK': val
+    }));
+}
+
+export function addUpdate30DayAddressType(personId, val) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'Address30DayType': val
+    }));
+}
+
+export function addUpdate30DayCountry(personId, value) {
+  return changeDetailsFor(personId, details =>
+    ({
+      'Address30DayCountry': {
+        ...(details['Address30DayCountry'] || {}),
+        value
+      }
+    }));
+}
+
 export function addUpdateCountry(personId, val) {
   return changeDetailsFor(personId, () =>
     ({
@@ -447,6 +471,27 @@ export function addUpdateSex(personId, val) {
   return changeDetailsFor(personId, () =>
     ({
       'sex': val
+    }));
+}
+
+export function addUpdateSchool(personId, val) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'school': val
+    }));
+}
+
+export function addUpdateStudent(personId, val) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'student': val
+    }));
+}
+
+export function addUpdateStudentAddress(personId, val) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'studentAddress': val
     }));
 }
 

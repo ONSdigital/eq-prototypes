@@ -1,0 +1,118 @@
+---
+title: Version 1
+project: End to end prototype
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<link rel="stylesheet" href="../assets/modules/typeahead/typeahead.css"/>
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../individual-details-30-day-address">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password" action="../individual-details-national-identity">
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
+                           value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group u-mb-l">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-xl js-heading">
+                                            You selected "Yes an address outside the UK". Which country outside the UK do you  stay in for more than 30 days a year?                                    </h1>
+                                </div>
+
+                                <div class="grid grid--gutterless">
+                                    <div class="grid__col col-8@m">
+                                        <p class="field">
+                                          <label class="label" for="country-of-birth">Current name of country
+                                              <br>
+                                              <span class="label__description u-no-js-hide">Enter your own answer or select from suggestions</span>
+                                          </label>
+
+                                          <div id="country-container" class="js-typeahead typeahead-input typeahead-input--initialised" data-instructions="Use up and down keys to navigate suggestions once you&#39;ve typed more than two characters. Use the enter key to select a suggestion. Touch device users, explore by touch or with swipe gestures." data-aria-you-have-selected="You have selected" data-aria-min-chars="Enter 3 or more characters for suggestions." data-aria-one-result="There is one suggestion available." data-aria-n-results="There are {n} suggestions available." data-aria-limited-results="Results have been limited to 10 suggestions. Type more characters to improve your search." data-more-results="Continue entering to improve suggestions" data-results-title="Suggestions" data-typeahead-data="https://gist.githubusercontent.com/rmccar/08794cd217fbc08b7c2a470371f0390d/raw/6fe79c0c082fd351b5e031db0dcdffd406f936b4/COB_FEL.json" data-no-results="No results found">
+                                              <input type="text" id="country-input" class="input input--text input-type__input  js-typeahead-input  " autocomplete="off" aria-autocomplete="list" aria-controls="country-listbox" aria-describedby="country-instructions" aria-has-popup="true" aria-owns="country-listbox" aria-expanded="false" role="combobox">
+                                              <div class="typeahead-input__results js-typeahead-results">
+                                              <header class="typeahead-input__results-title u-fs-s">Suggestions</header>
+                                              <ul class="typeahead-input__listbox js-typeahead-listbox" role="listbox" id="country-listbox" tabindex="-1"></ul>
+                                              </div>
+                                              <div class="typeahead-input__instructions u-vh js-typeahead-instructions" id="country-instructions" tabindex="-1">Use up and down keys to navigate suggestions once you&#39;ve typed more than two characters. Use the enter key to select a suggestion. Touch device users, explore by touch or with swipe gestures.</div>
+                                              <div class="typeahead-input__status u-vh js-typeahead-aria-status" aria-live="polite" role="status" tabindex="-1"></div>
+                                          </div>
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+                    <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person_id'),
+    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+    isEditing = urlParams.get('edit'),
+    details = storageAPI.getPersonalDetailsFor(personId);
+
+    storageAPI.personalBookmark(personId, window.location.href);
+
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+    e.preventDefault();
+    var value = $('#country-input').val();
+
+    storageAPI.addUpdate30DayCountry(personId, value);
+
+    if(isEditing) {
+      window.location.href = '../individual-details-summary/?person_id=' + personId;
+    } else {
+      window.location.href = '../individual-details-30-day-address-type/?person_id=' + personId;
+    }
+  }));
+
+  function updateQuestion() {
+    if(storageAPI.getAnsweringIndividualByProxy()) {
+        $('.js-heading').html('You selected "An address outside the UK". Which country outside the UK does ' + '<em class="highlight">' + person.fullName + '</em>' +
+        ' stay in for more than 30 days a year');
+    }
+  }
+
+  if (details && details['Address30DayCountry'] &&
+    details['Address30DayCountry'].value) {
+    $('#country-input').val(details['Address30DayCountry'].value);
+  }
+
+  $(updateQuestion);
+
+  document.dispatchEvent(new CustomEvent('TYPEAHEAD-READY'));
+
+  /**
+   * Routing
+   */
+  $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
+</script>

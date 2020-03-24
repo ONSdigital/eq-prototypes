@@ -1,0 +1,186 @@
+---
+title: Version 1
+project: End to end prototype
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<style>
+    p.field {
+      margin-bottom: 1rem!important;
+    }
+
+    .input--text-lg {
+        width : 100%;
+    }
+
+    .input--text-postcode {
+        max-width : 9.25rem;
+    }
+</style>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../individual-details-30-day-address">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            <!--{% include navigation.html
+            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
+            nav-title-id="section-individual" %}-->
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password"
+                      action="../individual-details-30-day-address-in-uk-type">
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
+                           value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-xl js-heading">
+                                       You selected "Another address in the UK". Enter details of the other UK address where you stay for more than 30 days a year.
+                                    </h1>
+                                </div>
+
+                                <fieldset
+                                        class="question__fieldset js-question-fieldset u-mb-m">
+
+                                    <legend class="u-vh">What is the first line of your address?
+                                    </legend>
+
+                                    <div class="question__answers">
+                                        <div class="question__answer">
+                                            <div class="answer answer--textfield " id="container-address-line-1">
+                                                <div class="answer__fields js-fields">
+                                                <p class="field">
+                                                    <label class="label" for="address-line-1">Address line 1</label>
+                                                    <input autocomplete="new-password" type="text" id="address-line-1" class="input input--text input-type__input input--w-20@m" name="address-line-1" />
+                                                </p>
+                                                <p class="field">
+                                                    <label class="label" for="address-line-2">Address line 2</label>
+                                                    <input autocomplete="new-password" type="text" id="address-line-2" class="input input--text input-type__input input--w-20@m" name="address-line-2" />
+                                                </p>
+                                                <p class="field">
+                                                    <label class="label" for="address-town">Town or City</label>
+                                                    <input autocomplete="new-password" type="text" id="address-town" class="input input--text input-type__input " name="address-town" />
+                                                </p>
+                                                <p class="field">
+                                                    <label class="label" for="address-county">County</label>
+                                                    <input autocomplete="new-password" type="text" id="address-county" class="input input--text input-type__input " name="address-county" />
+                                                </p>
+                                                <p class="field">
+                                                    <label class="label" for="address-postcode">Postcode</label>
+                                                    <input autocomplete="new-password" type="text" id="address-postcode" class="input input--text input-type__input input--w-5" name="address-postcode" />
+                                                </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+
+                    
+                        <p><a href="../hub" class="js-choose-another-section">Choose another section and
+                            return
+                            to this question later</a></p>
+
+                    <!--<p class="u-mb-m"><span class="js-link-secure-label"></span><br />
+                        <a class="js-link-secure"
+                           href="#">Get a separate access code to submit an
+                            individual response</a></p>-->
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person_id'),
+    member = storageAPI.getHouseholdMemberByPersonId(personId),
+    person = member['@person'],
+    isEditing = urlParams.get('edit'),
+    details = storageAPI.getPersonalDetailsFor(personId);
+    storageAPI.personalBookmark(personId, window.location.href);
+
+
+  $('.qa-btn-submit').on('click', function (e) {
+    e.preventDefault();
+    storageAPI.addUpdate30DayAddressUk(personId, get30DayAddress());
+
+    if(isEditing) {
+      window.location.href = '../individual-details-summary/?person_id=' + personId;
+    } else {
+        window.location.href = '../individual-details-30-day-address-type/?person_id=' +
+        personId;
+    }
+  });
+
+  function get30DayAddress() {
+    var array = [
+      document.getElementById('address-line-1').value,
+      document.getElementById('address-line-2').value,
+      document.getElementById('address-town').value,
+      document.getElementById('address-county').value,
+      document.getElementById('address-postcode').value,
+    ];
+
+    var obj = {
+      'addressLine1': array[0],
+      'addressLine2': array[1],
+      'addressTown': array[2],
+      'addressCounty': array[3],
+      'addressPostcode': array[4],
+      'address': array.filter(filterAddressLine).join(', '),
+    };
+    return obj;
+  }
+
+  function filterAddressLine(value) {
+    return value;
+  }
+
+  function updateQuestion() {
+    if(storageAPI.getAnsweringIndividualByProxy()) {
+        $('.js-heading').html('You selected "Another address in the UK". Enter details of the other UK address where ' + '<em class="highlight">' + person.fullName + '</em>' +
+        ' stays for more than 30 days a year');
+    }
+  }
+
+  function updateAnswer() {
+    if (details && details.Address30DayUK) {
+      $('#address-line-1').val(details.Address30DayUK.addressLine1);
+      $('#address-line-2').val(details.Address30DayUK.addressLine2);
+      $('#address-town').val(details.Address30DayUK.addressTown);
+      $('#address-county').val(details.Address30DayUK.addressCounty);
+      $('#address-postcode').val(details.Address30DayUK.addressPostcode);
+    }
+  }
+
+  $(updateAnswer);
+  $(updateQuestion);
+
+
+  /**
+   * Routing
+   */
+  $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
+</script>

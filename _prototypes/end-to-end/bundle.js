@@ -74,8 +74,14 @@ import {
   getPersonalDetailsFor,
   removePersonalDetailsFor,
   addUpdateMaritalStatus,
+  addUpdate30DayAddressUk,
+  addUpdate30DayAddressType,
+  addUpdate30DayCountry,
   addUpdateCountry,
   addUpdateCountryOther,
+  addUpdateSchool,
+  addUpdateStudent,
+  addUpdateStudentAddress,
   addUpdateNationalIdentity,
   addUpdateNationalIdentityOther,
   addUpdateEthnicGroup,
@@ -329,13 +335,13 @@ function updateBySurveyType() {
   const urlParams = new URLSearchParams(window.location.search),
     surveyType = urlParams.get('survey');
 
-  if (surveyType) {
-    $('.js-header-title').html(surveyTypeConfig[surveyType].title);
-    $('#people-living-here').html(surveyTypeConfig[surveyType].householdSectionTitle);
-    $('#people-living-here').attr('href', surveyTypeConfig[surveyType].householdSectionLink);
-    $('#relationships-section').attr('href', surveyTypeConfig[surveyType].relationshipsSection);
-    $('title').html(surveyTypeConfig[surveyType].title);
-  }
+  // if (surveyType) {
+  //   $('.js-header-title').html(surveyTypeConfig[surveyType].title);
+  //   $('#people-living-here').html(surveyTypeConfig[surveyType].householdSectionTitle);
+  //   $('#people-living-here').attr('href', surveyTypeConfig[surveyType].householdSectionLink);
+  //   $('#relationships-section').attr('href', surveyTypeConfig[surveyType].relationshipsSection);
+  //   $('title').html(surveyTypeConfig[surveyType].title);
+  // }
 }
 
 function setAnsweringIndividualByProxy(bool) {
@@ -628,6 +634,12 @@ window.ONS.storage = {
   getPersonalDetailsFor,
   removePersonalDetailsFor,
   addUpdateMaritalStatus,
+  addUpdate30DayAddressType,
+  addUpdate30DayAddressUk,
+  addUpdate30DayCountry,
+  addUpdateSchool,
+  addUpdateStudent,
+  addUpdateStudentAddress,
   addUpdateCountry,
   addUpdateCountryOther,
   addUpdateNationalIdentity,
