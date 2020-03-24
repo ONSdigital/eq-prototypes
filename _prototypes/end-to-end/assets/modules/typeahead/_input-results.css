@@ -34,7 +34,7 @@
 .typeahead-input__option:not(:last-child) {
   border-bottom: 1px solid #222;
 }
-.typeahead-input__option self:not(.typeahead-input__option--no-results):not(.typeahead-input__option--more-results):hover, .typeahead-input__option self--focused:not(.typeahead-input__option--no-results) {
+.typeahead-input__option:not(.typeahead-input__option--no-results):not(.typeahead-input__option--more-results):hover, .typeahead-input__option--focused:not(.typeahead-input__option--no-results) {
   border-color: #4263c2;
   background: #4263c2;
   color: #fff;
@@ -44,7 +44,7 @@
   background: #d0d0d0;
   cursor: not-allowed;
 }
-.typeahead-input self:not(.typeahead-input--initialised)self__instructions, .typeahead-input self:not(.typeahead-input--initialised)self__listbox, .typeahead-input self:not(.typeahead-input--initialised)self__status {
+.typeahead-input:not(.typeahead-input--initialised) .typeahead-input__instructions, .typeahead-input:not(.typeahead-input--initialised) .typeahead-input__listbox, .typeahead-input:not(.typeahead-input--initialised) .typeahead-input__status {
   display: none;
 }
 .typeahead-input--has-results .typeahead-input__results {
