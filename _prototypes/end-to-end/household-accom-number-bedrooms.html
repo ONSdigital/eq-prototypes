@@ -9,7 +9,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous-link" href="../household-accom-shared-rooms">Previous</a>
+        <a class="js-previous" href="../household-accom-shared-rooms">Previous</a>
     </div>
 </div>
 
@@ -22,8 +22,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password" novalidate=""
                       action="../household-accom-heating">
-                    <div class="group" id="rsi">
-                        <div class="block" id="total-retail-turnover">
+                    <div class="group" id="accommodation">
+                        <div class="block" id="bedrooms">
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
@@ -33,11 +33,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 </div>
                                 <div class="answer answer--date">
                                     <div class="fieldgroup__fields">
-                                      <div class="field field--input input--w-2">
+                                      <div class="field field--input">
                                           <label class="label" for="detail-number-bedrooms">
                                               Number of bedrooms
                                           </label>
-                                          <input type="text" id="detail-number-bedrooms" class="input input--StringField input--text input-type__input  input--w-2" name="bedrrooms" min="1" max="31" maxlength="2" pattern="[0-9]*" inputmode="numeric" autocomplete="number-bedrooms" />
+                                          <input type="text" id="detail-number-bedrooms" class="input input--StringField input--text input-type__input input--w-2" name="bedrooms" min="1" max="31" maxlength="2" pattern="[0-9]*" inputmode="numeric" autocomplete="number-bedrooms"/>
+                                          <br>
                                       </div>
                                     </div>
                                 </div>
@@ -54,3 +55,22 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 </div>
 
 <script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+    var storageAPI = window.ONS.storage,
+        question = $('#question-title').html(),
+        currentPage = '../household-accom-number-bedrooms';
+
+    window.sessionStorage.setItem('accommodation-completed-status', currentPage);
+
+    $('.qa-btn-submit').click(function (e) {
+        var val =$("#detail-number-bedrooms").val();
+        question = question.trim();
+        window.sessionStorage.setItem('accommodation-bedrooms', JSON.stringify([question, val, currentPage]));
+        e.preventDefault();
+        window.location.href = '../household-accom-heating';
+    });
+
+    $('.js-previous').attr('href', '../household-accom-shared-rooms');
+
+</script>

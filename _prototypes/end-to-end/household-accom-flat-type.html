@@ -9,7 +9,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
+        <a class="js-previous" href="../household-accom-type">Previous</a>
     </div>
 </div>
 
@@ -21,12 +21,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password"
                       action="../household-accom-shared-rooms">
-                    <div class="group" id="rsi">
-                        <div class="block" id="total-retail-turnover">
+                    <div class="group" id="accommodation">
+                        <div class="block" id="flat">
                             <section class="section">
                                 <div class="question u-mb-s">
-                                    <h1 id="question-title"
-                                        class="question__title u-fs-xl js-heading">
+                                    <h1 id="question-title" class="question__title u-fs-xl js-heading">
                                         Where is your flat, maisonette or apartment?
                                     </h1>
                                 </div>
@@ -39,7 +38,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="flat-type"
                                                            id="block-type"
-                                                           value="block-type">
+                                                           value="In a purpose-built block of flats or tenement">
                                                     <label class="label label--inline"
                                                            for="block-type"
                                                            id="block-label">
@@ -51,7 +50,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="flat-type"
                                                            id="shared"
-                                                           value="shared">
+                                                           value="Part of a converted or shared house">
                                                     <label class="label label--inline"
                                                            for="shared"
                                                            id="shared-label">
@@ -67,7 +66,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="flat-type"
                                                            id="converted"
-                                                           value="teconvertedrraced">
+                                                           value="Part of another converted building">
                                                     <label class="label label--inline"
                                                            for="converted"
                                                            id="converted-label">
@@ -82,7 +81,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="flat-type"
                                                            id="commercial"
-                                                           value="commercial">
+                                                           value="In a commercial building">
                                                     <label class="label label--inline"
                                                            for="commercial"
                                                            id="commercial-label">
@@ -109,3 +108,23 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 </div>
 
 <script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+    var storageAPI = window.ONS.storage,
+        question = $('#question-title').html(),
+        currentPage = '../household-accom-flat-type';
+
+    window.sessionStorage.setItem('accommodation-completed-status', currentPage);
+
+    $('.qa-btn-submit').click(function (e) {
+
+        var val =$('input[type=radio][name=flat-type]:checked').attr('value');
+        question = question.trim();
+        window.sessionStorage.setItem('accommodation-flat-type', JSON.stringify([question, val, currentPage]));
+        e.preventDefault();
+        window.location.href = '../household-accom-shared-rooms/';
+    });
+
+    $('.js-previous').attr('href', '../household-accom-type');
+
+</script>

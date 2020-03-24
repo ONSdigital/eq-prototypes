@@ -9,7 +9,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous-link" href="../household-accom-own-rent">Previous</a>
+        <a class="js-previous" href="../household-accom-own-rent">Previous</a>
     </div>
 </div>
 
@@ -20,8 +20,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password" action="../household-accom-veichles">
-                    <div class="group" id="rsi">
-                        <div class="block" id="total-retail-turnover">
+                    <div class="group" id="accommodation">
+                        <div class="block" id="landlord">
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
@@ -38,7 +38,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="landlord"
                                                            id="housing-association"
-                                                           value="housing-association">
+                                                           value="Housing association, housing co-operative, charitable trust, registered social landlord">
                                                     <label class="label label--inline"
                                                            for="housing-association"
                                                            id="housing-association-label">
@@ -50,7 +50,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="landlord"
                                                            id="council"
-                                                           value="council">
+                                                           value="Council or local authority">
                                                     <label class="label label--inline"
                                                            for="council"
                                                            id="council-label">
@@ -62,7 +62,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="landlord"
                                                            id="private"
-                                                           value="private">
+                                                           value="Private landlord or letting agency">
                                                     <label class="label label--inline"
                                                            for="private"
                                                            id="private-label">
@@ -74,7 +74,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="landlord"
                                                            id="employer"
-                                                           value="employer">
+                                                           value="Employer of a household member">
                                                     <label class="label label--inline"
                                                            for="employer"
                                                            id="employer-label">
@@ -86,7 +86,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="landlord"
                                                            id="relative"
-                                                           value="relative">
+                                                           value="Relative or friend of a household member">
                                                     <label class="label label--inline"
                                                            for="relative"
                                                            id="relative-label">
@@ -98,7 +98,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="landlord"
                                                            id="other"
-                                                           value="other">
+                                                           value="Other">
                                                     <label class="label label--inline"
                                                            for="other"
                                                            id="other-label">
@@ -124,9 +124,20 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
-    $(function () {
-        if(sessionStorage.getItem('address-line-1')) {
-        $('.full-address-text').html((sessionStorage.getItem('address-line-1') || '').replace(/,/g, ''));
-        }
+    var storageAPI = window.ONS.storage,
+        question = $('#question-title').html(),
+        currentPage = '../household-accom-landlord';
+
+    window.sessionStorage.setItem('accommodation-completed-status', currentPage);
+
+    $('.qa-btn-submit').click(function (e) {
+        var val =$('input[type=radio][name=landlord]:checked').attr('value');
+        question = question.trim();
+        window.sessionStorage.setItem('accommodation-landlord', JSON.stringify([question, val, currentPage]));
+        e.preventDefault();
+        window.location.href = '../household-accom-veichles';
     });
+
+    $('.js-previous').attr('href', '../household-accom-own-rent');
+
 </script>

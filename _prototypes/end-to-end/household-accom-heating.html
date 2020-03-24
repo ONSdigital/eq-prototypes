@@ -9,7 +9,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous-link" href="../household-accom-number-bedrooms">Previous</a>
+        <a class="js-previous" href="../household-accom-number-bedrooms">Previous</a>
     </div>
 </div>
 
@@ -20,8 +20,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password" action="../household-accom-own-rent">
-                    <div class="group" id="rsi">
-                        <div class="block" id="total-retail-turnover">
+                    <div class="group" id="accommodation">
+                        <div class="block" id="heating">
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
@@ -38,7 +38,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="heating-type"
                                                            id="no-heating"
-                                                           value="no-heating">
+                                                           value="No central heating">
                                                     <label class="label label--inline"
                                                            for="no-heating"
                                                            id="no-heating-label">
@@ -50,7 +50,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="heating-type"
                                                            id="mains-gas"
-                                                           value="mains-gas">
+                                                           value="Mains gas">
                                                     <label class="label label--inline"
                                                            for="mains-gas"
                                                            id="mains-gas-label">
@@ -62,7 +62,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="heating-type"
                                                            id="bottled-gas"
-                                                           value="bottled-gas">
+                                                           value="Tank or bottled gas">
                                                     <label class="label label--inline"
                                                            for="bottled-gas"
                                                            id="bottled-gas-label">
@@ -74,7 +74,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="heating-type"
                                                            id="electric"
-                                                           value="electric">
+                                                           value="Electric">
                                                     <label class="label label--inline"
                                                            for="electric"
                                                            id="electric-label">
@@ -89,7 +89,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="heating-type"
                                                            id="oil"
-                                                           value="oil">
+                                                           value="Oil">
                                                     <label class="label label--inline"
                                                            for="oil"
                                                            id="oil-label">
@@ -101,7 +101,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="heating-type"
                                                            id="wood"
-                                                           value="wood">
+                                                           value="Wood">
                                                     <label class="label label--inline"
                                                            for="wood"
                                                            id="wood-label">
@@ -116,7 +116,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="heating-type"
                                                            id="solid-fuel"
-                                                           value="solid-fuel">
+                                                           value="Solid fuel">
                                                     <label class="label label--inline"
                                                            for="solid-fuel"
                                                            id="solid-fuel-label">
@@ -131,7 +131,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="heating-type"
                                                            id="renewable"
-                                                           value="renewable">
+                                                           value="Renewable energy">
                                                     <label class="label label--inline"
                                                            for="renewable"
                                                            id="renewable-label">
@@ -146,7 +146,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="heating-type"
                                                            id="communal-heat-networks"
-                                                           value="communal-heat-networks">
+                                                           value="District or communal heat networks">
                                                     <label class="label label--inline"
                                                            for="communal-heat-networks"
                                                            id="communal-heat-networks-label">
@@ -157,11 +157,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                     <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
                                                            name="heating-type"
-                                                           id="Other"
+                                                           id="other"
                                                            value="Other">
                                                     <label class="label label--inline"
-                                                           for="Other"
-                                                           id="Other-label">
+                                                           for="other"
+                                                           id="other-label">
                                                         Other
                                                     </label>
                                                 </div>
@@ -184,9 +184,25 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
-    $(function () {
-        if(sessionStorage.getItem('address-line-1')) {
+    if(sessionStorage.getItem('address-line-1')) {
         $('.full-address-text').html((sessionStorage.getItem('address-line-1') || '').replace(/,/g, ''));
-        }
+    }
+
+    var storageAPI = window.ONS.storage,
+        question = $('#question-title').html(),
+        currentPage = '../household-accom-heating';
+
+    window.sessionStorage.setItem('accommodation-completed-status', currentPage);
+
+    $('.qa-btn-submit').click(function (e) {
+        var val =$('input[type=radio][name=heating-type]:checked').attr('value')
+        question = question.trim();
+        question = question.replace(/(<([^>]+)>)/ig,"");
+        window.sessionStorage.setItem('accommodation-heating-type', JSON.stringify([question, val, currentPage]));
+        e.preventDefault();
+        window.location.href = '../household-accom-own-rent';
     });
+
+    $('.js-previous').attr('href', '../household-accom-number-bedrooms');
+
 </script>
