@@ -50,8 +50,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                         <div class="block">
                             <section class="section">
                                 <div class="question u-mb-s">
-                                    <h1
-                                            class="question__title u-fs-xl js-heading">
+                                    <h1 class="question__title u-fs-xl js-heading">
                                         Choose another section to complete
                                     </h1>
                                 </div>
@@ -61,29 +60,46 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                     <div class="summary__block u-mb-s">
                                         <div class="summary__item">
                                             <div class="grid">
-                                                <div
-                                                        class="grid__col col-12@xs col-5@s">
-                                                    <div
-                                                            class="summary__question completed">
+                                                <div class="grid__col col-12@xs col-5@s">
+                                                    <div class="summary__question completed">
                                                         <strong>
                                                             People who live
                                                             here
                                                         </strong>
-                                                        <span
-                                                                class="u-d-no@s">&mdash; Completed</span>
+                                                        <span class="u-d-no@s">&mdash; Completed</span>
+                                                    </div>
+                                                </div>
+                                                <div class="grid__col col-3@xs col-3@s">
+                                                    <div class="summary__answer u-d-no u-d-b@s">Completed</div>
+                                                </div>
+                                                <div class="grid__col col-12@xs col-4@s">
+                                                    <div class="summary__link">
+                                                        <a href="../summary/?show-panel=true" class="js-view-summary u-fr@m">
+                                                            View answers
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="summary__item">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-5@s">
+                                                    <div id='accommodation-row' class="summary__question">
+                                                        <strong>
+                                                            Household accommodation
+                                                        </strong>
+                                                        <span id='accommodation' class="u-d-no@s">&mdash; Not started</span>
                                                     </div>
                                                 </div>
                                                 <div
                                                         class="grid__col col-3@xs col-3@s">
-                                                    <div
-                                                            class="summary__answer u-d-no u-d-b@s">Completed</div>
+                                                    <div id='accommodation-status' class="summary__answer u-d-no u-d-b@s">Not started</div>
                                                 </div>
                                                 <div
                                                         class="grid__col col-12@xs col-4@s">
                                                     <div class="summary__link">
-                                                        <a
-                                                                href="../summary/?show-panel=true" class="js-view-summary u-fr@m">
-                                                            View answers
+                                                        <a id='accommodation-link'href="../household-accom-summary" class="js-view-summary u-fr@m">
+                                                            Start section
                                                         </a>
                                                     </div>
                                                 </div>
@@ -199,6 +215,24 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     }
   };
 
+  var accommodationStatus = window.sessionStorage.getItem('accommodation-completed-status');
+  if (accommodationStatus != null) {
+    if (accommodationStatus === 'completed') {
+      $('#accommodation-row').addClass('completed');
+      $('#accommodation').html('Completed');
+      $('#accommodation-status').html('Completed');
+      $('#accommodation-link').html('View Answers');
+      $('#accommodation-link').attr("href", "../household-accom-summary");
+    } else {
+      $('#accommodation').html('Partially completed');
+      $('#accommodation-status').html('Partially completed');
+      $('#accommodation-link').html('Continue with section');
+      $('#accommodation-link').attr("href", accommodationStatus);
+    }
+  } else {
+    $('#accommodation-link').attr("href", "../household-accom-intro");
+  }
+
   var allHouseholdMembers = storageAPI.getAllHouseholdMembers(),
 
     people = allHouseholdMembers.filter(storageAPI.isHouseholdMember),
@@ -259,7 +293,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     else if(
       personId &&
       cannotAnswerPeople.find(function(person) { return person.id === personId}) &&
-      cannotAnswerPeople.find(function(person) { return person.id === personId}).responseOption === 'new-survey'    ) {
+      cannotAnswerPeople.find(function(person) { return person.id === personId}).responseOption === 'new-survey') {
       status = 'seperate-survey-requested';
     }
     else if (!personDetails ||
@@ -397,38 +431,43 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       $('.js-submit-btn').on('click', function (e) {
         e.preventDefault();
 
-        var nextStartPersonId;
+        if (window.sessionStorage.getItem("accommodation-completed-status") !== "completed") {
+          window.location.href = "http://localhost:4000/end-to-end/household-accom-intro/"
+        } else {
 
-        /**
-         * Attempt to find next bookmark
-         */
-        var nextBookmarkPersonId = _.find(peopleIds, function (personId) {
-          var personalDetails = storageAPI.getPersonalDetailsFor(personId);
+          var nextStartPersonId;
 
-          return personalDetails && personalDetails['_bookmark'];
-        });
+          /**
+          * Attempt to find next bookmark
+          */
+          var nextBookmarkPersonId = _.find(peopleIds, function (personId) {
+            var personalDetails = storageAPI.getPersonalDetailsFor(personId);
 
-        /**
-         * If no bookmark is found, attempt to find next section to start
-         */
-        if (!nextBookmarkPersonId) {
-          nextStartPersonId = _.find(allHouseholdMembers, function(member) {
-            var person = member['@person'];
-            var personDetails = storageAPI.getPersonalDetailsFor(person.id);
-            var status = getSurveyStatus(personDetails, null, storageAPI.isVisitor(member), person.id);
+            return personalDetails && personalDetails['_bookmark'];
+          });
 
-            return status === 'not-started';
+          /**
+          * If no bookmark is found, attempt to find next section to start
+          */
+          if (!nextBookmarkPersonId) {
+            nextStartPersonId = _.find(allHouseholdMembers, function(member) {
+              var person = member['@person'];
+              var personDetails = storageAPI.getPersonalDetailsFor(person.id);
+              var status = getSurveyStatus(personDetails, null, storageAPI.isVisitor(member), person.id);
 
-          })['@person'].id;
+              return status === 'not-started';
+
+            })['@person'].id;
+          }
+
+          if (nextBookmarkPersonId) {
+            storageAPI.setAnsweringIndividualByProxy(true);
+          }
+
+          window.location.href = nextBookmarkPersonId
+            ? storageAPI.getBookmarkFor(nextBookmarkPersonId) + '&continuing=true'
+            : '../individual-intro/?person_id=' + nextStartPersonId;
         }
-
-        if (nextBookmarkPersonId) {
-          storageAPI.setAnsweringIndividualByProxy(true);
-        }
-
-        window.location.href = nextBookmarkPersonId
-          ? storageAPI.getBookmarkFor(nextBookmarkPersonId) + '&continuing=true'
-          : '../individual-intro/?person_id=' + nextStartPersonId;
       });
     }
   }

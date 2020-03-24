@@ -9,7 +9,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
+        <a class="js-previous" href="../household-accom-type">Previous</a>
     </div>
 </div>
 
@@ -19,9 +19,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
-                      role="form" autocomplete="new-password">
-                    <div class="group" id="rsi">
-                        <div class="block" id="total-retail-turnover">
+                      role="form" autocomplete="new-password"
+                      action="../household-accom-shared-rooms">
+                    <div class="group" id="accommodation">
+                        <div class="block" id="house-type">
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
@@ -36,9 +37,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                 <div class="field__item js-focusable-box">
                                                     <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="accommodation-type"
+                                                           name="accommodation-house-type"
                                                            id="detached-type"
-                                                           value="detached-type">
+                                                           value="Detached">
                                                     <label class="label label--inline"
                                                            for="detached-type"
                                                            id="detached-label">
@@ -48,9 +49,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                 <div class="field__item js-focusable-box">
                                                     <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="accommodation-type"
+                                                           name="accommodation-house-type"
                                                            id="semi-detached"
-                                                           value="semi-detached">
+                                                           value="Semi-detached">
                                                     <label class="label label--inline"
                                                            for="semi-detached"
                                                            id="semi-detached-label">
@@ -61,9 +62,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                 <div class="field__item js-focusable-box">
                                                     <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="accommodation-type"
+                                                           name="accommodation-house-type"
                                                            id="terraced"
-                                                           value="terraced">
+                                                           value="Terraced">
                                                     <label class="label label--inline"
                                                            for="terraced"
                                                            id="terraced-label">
@@ -89,24 +90,19 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
-    var storageAPI = window.ONS.storage;
+    var storageAPI = window.ONS.storage,
+        question = $('#question-title').html(),
+        currentPage = '../household-accom-house-type';
 
-  $('.qa-btn-submit').on('click',
-    storageAPI.personalQuestionSubmitDecorator.bind(null, function (e) {
-    var val = $('[id="accommodation-type"]:checked').val();
+    window.sessionStorage.setItem('accommodation-completed-status', currentPage);
 
-    if(val === 'house-bungalow-type') {
-      e.preventDefault();
-      window.location.href = '../household-accom-house-type/';
-    }
-    else if(val === 'flat') {
-      e.preventDefault();
-      window.location.href = '../household-accom-flat-type/';
-    }
-    else if(val === 'caravan') {
-      e.preventDefault();
-      window.location.href = '../household-accom-shared-rooms/';
-    }
-  }));
+    $('.qa-btn-submit').click(function (e) {
+        var val =$('input[type=radio][name=accommodation-house-type]:checked').attr('value');
+        question = question.trim();
+        window.sessionStorage.setItem('accommodation-house-type', JSON.stringify([question, val, currentPage]));
+        e.preventDefault();
+        window.location.href = '../household-accom-shared-rooms/';
+    });
 
+    $('.js-previous').attr('href', '../household-accom-type');
 </script>

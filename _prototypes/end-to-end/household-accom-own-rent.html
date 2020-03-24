@@ -9,7 +9,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous-link" href="../household-accom-heating">Previous</a>
+        <a class="js-previous" href="../household-accom-heating">Previous</a>
     </div>
 </div>
 
@@ -19,9 +19,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
-                      role="form" autocomplete="new-password">
-                    <div class="group" id="rsi">
-                        <div class="block" id="total-retail-turnover">
+                      role="form" autocomplete="new-password" action="../household-accom-veichles">
+                    <div class="group" id="accommodation">
+                        <div class="block" id="own-rent">
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
@@ -38,7 +38,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="own-rent"
                                                            id="owns"
-                                                           value="owns">
+                                                           value="Owns outright">
                                                     <label class="label label--inline"
                                                            for="owns"
                                                            id="owns-label">
@@ -50,7 +50,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="own-rent"
                                                            id="mortgage"
-                                                           value="mortgage">
+                                                           value="Owns with a mortgage or loan">
                                                     <label class="label label--inline"
                                                            for="mortgage"
                                                            id="mortgage-label">
@@ -62,7 +62,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="own-rent"
                                                            id="part"
-                                                           value="part">
+                                                           value="Part-owns and part-rents">
                                                     <label class="label label--inline"
                                                            for="part"
                                                            id="part-label">
@@ -76,11 +76,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                     <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
                                                            name="own-rent"
-                                                           id="housing-benefit"
-                                                           value="housing-benefit">
+                                                           id="rents"
+                                                           value="Rents">
                                                     <label class="label label--inline"
-                                                           for="housing-benefit"
-                                                           id="housing-benefit-label">
+                                                           for="rents"
+                                                           id="rents-label">
                                                         Rents
                                                         <p class="u-fs-s u-db u-mb-no label--negative">
                                                             With or without housing benefit
@@ -92,7 +92,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="own-rent"
                                                            id="rent-free"
-                                                           value="rent-free">
+                                                           value="Lives here rent-free">
                                                     <label class="label label--inline"
                                                            for="rent-free"
                                                            id="rent-free-label">
@@ -118,25 +118,30 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
-    $(function () {
-        if(sessionStorage.getItem('address-line-1')) {
+    if(sessionStorage.getItem('address-line-1')) {
         $('.full-address-text').html((sessionStorage.getItem('address-line-1') || '').replace(/,/g, ''));
+    }
+
+    var storageAPI = window.ONS.storage,
+        question = $('#question-title').html(),
+        currentPage = '../household-accom-own-rent';
+
+    window.sessionStorage.setItem('accommodation-completed-status', currentPage);
+
+    $('.qa-btn-submit').click(function (e) {
+        var val =$('input[type=radio][name=own-rent]:checked').attr('value');
+        question = question.trim();
+        question = question.replace(/(<([^>]+)>)/ig,"");
+        window.sessionStorage.setItem('accommodation-own-rent', JSON.stringify([question, val, currentPage]));
+        e.preventDefault();
+
+        if((val === 'Part-owns and part-rents') || (val === 'Rents')) {
+            window.location.href = '../household-accom-landlord';
+        }
+        else {
+            window.location.href = '../household-accom-veichles';
         }
     });
 
-    $('.qa-btn-submit').click(function(e) {
-    if (!nobox.checked) {
-      e.preventDefault();
-
-      var awayTypes = [];
-
-      $('[name=away-type]:checked').each(function (i, el) {
-        awayTypes.push($(el).val());
-      });
-
-      window.location.href ='../visitor-name';
-    } else {
-      document.trav.action = "../household-accom-veichles";
-    }
-  });
+    $('.js-previous').attr('href', '../household-accom-heating');
 </script>

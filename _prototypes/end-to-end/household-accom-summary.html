@@ -7,187 +7,110 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 ---
 
 <link rel="stylesheet" href="../style.css"/>
-<div class="page__subheader">
-    <div class="container">
-        <a class="js-previous-link" href="../visitors">Previous</a>
-    </div>
-</div>
+<div class="page__subheader"></div>
 
 <div class="page__container container">
     <div class="grid grid--reverse">
-        <div class="grid__col col-4@m">
-        </div>
+        <div class="grid__col col-4@m"></div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
                 <form name="trav" class="form qa-questionnaire-form" role="form"
-                      autocomplete="new-password" novalidate="">
+                      autocomplete="new-password" novalidate=""
+                      action="../hub">
                     <div class="group">
                         <div class="block">
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 class="question__title u-fs-xl js-heading">
-                                        People who live at <span class="full-address-text"></span> and overnight
-                                        visitors
+                                        Household accommodation
                                     </h1>
                                 </div>
-
-                                <div class="js-household-people-list">
-                                  <h2
-                                      class="u-fs-l js-household-people-title">You said <span class="highlight">{n}</span><span class="js-household-people-plural" style="display: none"></span> {t} living here on <span class="js-significant-date"></span></h2>
-                                  <ul id="members-summary"
-                                      class="list list--records list--people js-records js-household-members-summary">
-                                  </ul>
-                                  <hr>
-                                  <p id="members-add-link" class="add-link-container u-pt-xl u-mb-xl">
-                                      <a
-                                        href="../who-else-to-add/?redirect=../summary/"
-                                        class="js-add-to-household">
-                                          Add someone to this household
-                                      </a>
-                                  </p>
-                                </div>
-                                <div class="js-visitors-people-list">
-                                    <h2 class="u-fs-l js-visitors-people-title">You said <span class="highlight">{n}</span> visitor<span class="js-visitors-people-plural"></span> {t} staying
-                                        overnight here on <span class="js-significant-date"></span></h2>
-                                    <ul id="visitors-summary" class="list list--records list--people js-records js-visitors-summary"></ul>
-                                    <hr>
-                                    <p id="visitors-add-link" class="add-link-container">
-                                      <a
-                                        href="../visitor-name?journey=visitors&redirect=../summary/">Add a visitor
-                                      </a>
-                                    </p>
+                                <div class="summary">
+                                    <div class="summary__block u-mb-s">
+                                        <div id="accommodation-questions-answers"></div>
+                                    </div>
                                 </div>
                             </section>
                         </div>
                     </div>
-                    <button class="btn btn--primary btn--lg u-mt-xs qa-btn-submit"
-                            type="submit" name="">Continue
-                    </button>
+                    <div class="submit-notice">
+                      <p class="js-declaration"></p>
+                        <button class="btn btn--primary btn--lg js-submit-btn u-mt-xs"
+                                type="submit">Continue
+                        </button>
+                    </div>
                 </form>
             </main>
         </div>
     </div>
 </div>
 
+<ul style="display:none;">
+    <div id="accommodation-item-template" class="summary__item">
+        <div class="grid">
+            <div class="grid__col col-12@xs col-5@s">
+                <div class="summary__question js-question">
+                    Question
+                </div>
+            </div>
+            <div class="grid__col col-8@xs col-3@s">
+                <div class="summary__answer js-answer u-d-no u-d-b@s">Answer</div>
+            </div>
+            <div class="grid__col col-12@xs col-4@s">
+                <div class="summary__link">
+                    <a href="#" class="js-link">Change</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</ul>
+
 <script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
-  var storageAPI = window.ONS.storage,
-      members = storageAPI.getAllHouseholdMembers(),
-      missingRelationship = storageAPI.findNextMissingRelationship();
-  
-  var urlParams = new URLSearchParams(window.location.search),
-    showPanel = urlParams.get('show-panel'),
-    nextPage = !missingRelationship ? '../hub' : '../relationships-intro/';
+    var storageAPI = window.ONS.storage;
 
+    /**
+      * Create list item from state
+      */
+    function createListItem(sessionItem) {
+        
+        if (sessionItem !== null) {
+            var sessionArray = JSON.parse(sessionItem);
 
-  function updateHouseholdMembersVisitors() {
-      var userMember = members.filter(isUser)[0],
-      otherHouseholdMembers = members.filter(window.ONS.storage.isOtherHouseholdMember),
-      visitors = members.filter(window.ONS.storage.isVisitor),
-      householdMembers = otherHouseholdMembers,
-      numberOfHouseholdMembers,
-      peopleListTitle,
-      numberOfVisitors,
-      visitorsListTitle;
+            var $nodeEl = $('#accommodation-item-template').clone(),
+                $answer = $nodeEl.find('.js-answer'),
+                $question = $nodeEl.find('.js-question');
 
-    if (userMember) {
-      householdMembers = [userMember].concat(otherHouseholdMembers);
+            /**
+              * Manipulate DOM fragment
+              */
+            $nodeEl.attr('id', '');
+            $nodeEl.find('.js-question').html(sessionArray[0]);
+            $nodeEl.find('.js-answer').html(sessionArray[1]);
+            $nodeEl.find('.js-link').attr('href', sessionArray[2]);
+
+            return $nodeEl;
+        }
     }
 
-    numberOfHouseholdMembers = householdMembers.length;
-    peopleListTitle = document.querySelector('.js-household-people-list');
-    peopleListTitle.innerHTML = peopleListTitle.innerHTML.replace('{n}', (numberOfHouseholdMembers) || 0);
+    function createList() {
 
-    if (numberOfHouseholdMembers != 1) {
-      peopleListTitle.innerHTML = peopleListTitle.innerHTML.replace('{t}', 'are');
-    } else {
-      peopleListTitle.innerHTML = peopleListTitle.innerHTML.replace('{t}', 'is');
+        var $container = $('<div></div>');
+
+        $container.append(createListItem(window.sessionStorage.getItem('accommodation-type')));
+        $container.append(createListItem(window.sessionStorage.getItem('accommodation-house-type')));
+        $container.append(createListItem(window.sessionStorage.getItem('accommodation-flat-type')));
+        $container.append(createListItem(window.sessionStorage.getItem('accommodation-shared-rooms')));
+        $container.append(createListItem(window.sessionStorage.getItem('accommodation-bedrooms')));
+        $container.append(createListItem(window.sessionStorage.getItem('accommodation-heating-type')));
+        $container.append(createListItem(window.sessionStorage.getItem('accommodation-own-rent')));
+        $container.append(createListItem(window.sessionStorage.getItem('accommodation-landlord')));
+        $container.append(createListItem(window.sessionStorage.getItem('accommodation-no-of-veichles')));
+
+        return $container;
     }
 
-    if(!numberOfHouseholdMembers) {
-      $('#members-summary').addClass('u-d-no');
-      $('#members-add-link').addClass('u-pt-no');
-      $('.js-household-people-list hr').hide();
-    }
-  
+    $('#accommodation-questions-answers').append(createList());
 
-    $('.js-household-people-plural').each(function(i, el) {
-      window.ONS.utils
-        .cleanHTMLPlaceholderStringReplacment(el,numberOfHouseholdMembers != 1 ? ' people' : ' person');
-    });
-
-    numberOfVisitors = visitors.length;
-
-    if(!numberOfVisitors) {
-      $('#visitors-summary').hide();
-      $('#visitors-add-link').addClass('u-pt-no');
-      $('.js-visitors-people-list hr').hide();
-    }
-
-    visitorsListTitle = document.querySelector('.js-visitors-people-list');
-
-    visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{n}', (numberOfVisitors) || 0);
-
-/*   if (//significantDate is before todaysDate) {
-      if (numberOfVisitors != 1) {
-        visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{t}', 'were');
-      } else {
-        visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{t}', 'was');
-      }
-    } else { 
-*/
-      if (numberOfVisitors != 1) {
-        visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{t}', 'are');
-      } else {
-        visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{t}', 'is');
-      }
-//    } 
-
-    $('.js-visitors-people-plural').each(function(i, el) {
-      window.ONS.utils
-        .cleanHTMLPlaceholderStringReplacment(el,numberOfVisitors != 1 ? 's' : '');
-    });
-  }
-
-  $('#modal .close-modal-button').on('click', function(e) {
-    e.preventDefault();
-    $('#modal').hide();
-  });
-
-  $('.qa-btn-submit').on('click', function(e) {
-    e.preventDefault();
-
-    if (window.ONS.storage.getAllHouseholdMembers().length > 0) {
-      window.location.href = nextPage;
-    }
-    else {
-      alert('Journey for less than one person in household, not yet implemented');
-    }
-  });
-
-  function isUser(member) {
-    return member['@person'].id === window.ONS.storage.IDS.USER_HOUSEHOLD_MEMBER_ID;
-  } 
-
-  function updateContent () {
-    var $addToHousehould = $('.js-add-to-household');
-
-	  if(sessionStorage.getItem('address-line-1')) {
-  		$('.full-address-text').html((sessionStorage.getItem('address-line-1') || '').replace(/,/g, ''));
-    }
-
-    if(showPanel) {
-      $('.js-panel').show();
-    }
-  }
-
-  function updateAllPreviousLinks() {
-    $('.js-previous-link').attr('href', document.referrer);
-  }
-
-  $(updateAllPreviousLinks);
-
-  $(updateContent);
-  $(updateHouseholdMembersVisitors);
 </script>
