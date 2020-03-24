@@ -495,6 +495,23 @@ export function addUpdateStudentAddress(personId, val) {
     }));
 }
 
+export function addUpdateStudentAddressUk(personId, val) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'AddressStudentUK': val
+    }));
+}
+
+export function addUpdateStudentAddressCountry(personId, value) {
+  return changeDetailsFor(personId, details =>
+    ({
+      'AddressStudentCountry': {
+        ...(details['AddressStudentCountry'] || {}),
+        value
+      }
+    }));
+}
+
 export function addUpdateAddressWhere(personId, val) {
   return changeDetailsFor(personId, () =>
     ({
