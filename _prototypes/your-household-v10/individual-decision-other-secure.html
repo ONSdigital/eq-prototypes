@@ -25,10 +25,6 @@ cdn: v1.5.0
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="off" novalidate="">
                     <input type="hidden" name="person" id="person_id"
-                           value="#"/>
-                    <input type="hidden" name="survey" id="survey-type"
-                           value="#"/>
-                    <div class="group" id="rsi">
                         <div class="block" id="total-retail-turnover">
                             <section class="section">
                                 <div class="question u-mb-s">
@@ -115,11 +111,7 @@ cdn: v1.5.0
 
     /**
      * Routing
-     */
-    if (yesbox.checked) {
-      storageAPI.setAnsweringIndividualByProxy(true);
-      document.trav.action = "../individual-details-dob";
-    } else {
+    $('#person_id').val(personId);
       document.trav.action = "../individual-decision-other-pin";
     }
   });

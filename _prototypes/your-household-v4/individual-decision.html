@@ -25,10 +25,6 @@ cdn: v1.5.0
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="off" novalidate="">
                     <input type="hidden" name="person" id="person_id"
-                           value="#"/>
-                    <input type="hidden" name="survey" id="survey-type"
-                           value="#"/>
-                    <div class="group" id="rsi">
                         <div class="block" id="total-retail-turnover">
                             <section class="section">
                                 <div class="question u-mb-s">
@@ -113,10 +109,6 @@ cdn: v1.5.0
       $('#survey-type').val(surveyType);
     }
 
-	function updateName() {
-		$('.js-person-name').html(storageAPI.getHouseholdMemberByPersonId(personId)['@person'].fullName);
-	}
-
-	$(updateName);
+      $('#person_id').val(personId);
     $(updateRouting);
 </script>

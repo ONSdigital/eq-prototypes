@@ -26,10 +26,6 @@ cdn: v1.5.0
                       role="form" autocomplete="off" novalidate="">
                     <input type="hidden" name="person" id="person_id"
                            value="#"/>
-                    <input type="hidden" name="returnurl" id="returnurl"
-                           value="#"/>
-                    <input type="hidden" name="survey" id="survey-type"
-                           value="#"/>
                     <div class="group" id="rsi">
                         <div class="block" id="total-retail-turnover">
                             <section class="section">
@@ -119,11 +115,7 @@ cdn: v1.5.0
     $('#returnurl').val(returnURL);
 
     /**
-     * Routing
-     */
-    if (nobox.checked) {
-      storageAPI.unsetPinFor(personId);
-
+    $('#person_id').val(personId);
       /**
        * Return to URL
        * @type {string}

@@ -20,10 +20,6 @@ cdn: v1.5.0
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="off" novalidate="">
                     <input type="hidden" name="person" id="person_id"
-                           value="#"/>
-                    <input type="hidden" name="survey" id="survey-type"
-                           value="#"/>
-                    <div class="group u-mb-xl">
                         <div class="block">
                             <section class="section">
                                 <div class="question u-mb-s">
@@ -108,11 +104,7 @@ cdn: v1.5.0
       document.trav.action = returnURL;
 	});
 
-    function updateRouting() {
-      $('#survey-type').val(surveyType);
-    }
-
-	function updateName() {
+	  $('#person_id').val(personId);
 		$('.js-person-name').html(storageAPI.getHouseholdMemberByPersonId(personId)['@person'].fullName);
 	}
 
