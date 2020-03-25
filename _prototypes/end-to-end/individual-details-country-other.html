@@ -10,7 +10,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
+        <a class="js-previous-link" href="../individual-details-country">Previous</a>
     </div>
 </div>
 
@@ -21,7 +21,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
-                      role="form" autocomplete="new-password" action="../individual-details-national-identity">
+                      role="form" autocomplete="new-password" action="../individual-details-country-other-arrive">
                     <input autocomplete="new-password" type="hidden" name="person_id" id="person"
                            value="#"/>
                     <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
@@ -83,23 +83,18 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
-    var otherText = $('#country-of-birth-input').val();
+    var val = $('#country-of-birth').val();
 
-    storageAPI.addUpdateCountryOther(personId, otherText);
+    storageAPI.addUpdateCountryOther(personId, val);
 
     if(isEditing) {
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
+    } else {
+
     }
   }));
-
-  function updateRouting() {
-    if(surveyType) {
-      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
-    }
-    $('#survey-type').val(surveyType);
-  }
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
@@ -108,13 +103,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     }
   }
 
-  if (details && details['country'] &&
-    details['country'].otherText) {
-    $('#country-of-birth-input').val(details['country'].otherText);
+  if (details && details['country-other'] &&
+    details['country-other'].otherText) {
+    $('#country-of-birth').val(details['country-other'].val);
   }
 
   $(updateQuestion);
-  $(updateRouting);
 
   document.dispatchEvent(new CustomEvent('TYPEAHEAD-READY'));
 

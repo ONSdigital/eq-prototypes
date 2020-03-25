@@ -79,6 +79,9 @@ import {
   addUpdate30DayCountry,
   addUpdateCountry,
   addUpdateCountryOther,
+  addUpdateCountryOtherArrive,
+  addUpdateCountryOtherArriveCensus,
+  addUpdateCountryOtherStay,
   addUpdateSchool,
   addUpdateStudent,
   addUpdateStudentAddress,
@@ -469,6 +472,8 @@ function updateContinueNotice() {
   if (!isContinuing) {
     return false;
   }
+  
+  const member = storageAPI.getAllHouseholdMembers().filter(storageAPI.isVisitor);
   const link = isVisitor(member) ? '../visitor-intro/' : '../individual-intro/';
   const template = `<div class="panel panel--simple panel--info u-mb-s">
       <div class="panel__body">
@@ -646,6 +651,9 @@ window.ONS.storage = {
   addUpdateStudentAddressCountry,
   addUpdateCountry,
   addUpdateCountryOther,
+  addUpdateCountryOtherArrive,
+  addUpdateCountryOtherArriveCensus,
+  addUpdateCountryOtherStay,
   addUpdateNationalIdentity,
   addUpdateNationalIdentityOther,
   addUpdateEthnicGroup,

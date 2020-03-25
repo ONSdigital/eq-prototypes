@@ -374,13 +374,37 @@ export function addUpdateCountry(personId, val) {
     }));
 }
 
-export function addUpdateCountryOther(personId, otherText) {
+export function addUpdateCountryOther(personId, val) {
   return changeDetailsFor(personId, details =>
     ({
-      'country': {
-        ...(details['country'] || {}),
-        otherText
+      'country-other': {
+        ...(details['country-other'] || {}),
+        val
       }
+    }));
+}
+
+export function addUpdateCountryOtherArrive(personId, month, year) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'dateArriveUk': {
+        month,
+        year
+      }
+    }));
+}
+
+export function addUpdateCountryOtherArriveCensus(personId, val) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'arriveCensusDay': val
+    }));
+}
+
+export function addUpdateCountryOtherStay(personId, val) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'stayInUk': val
     }));
 }
 
