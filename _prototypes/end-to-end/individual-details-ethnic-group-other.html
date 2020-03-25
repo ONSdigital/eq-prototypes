@@ -106,6 +106,17 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     document.dispatchEvent(new CustomEvent('TYPEAHEAD-READY'));
   }
 
+  function updateQuestion() {
+    var str = 'How would you describe ' + 
+      (storageAPI.getAnsweringIndividualByProxy()
+        ? '<em class="highlight">' + person.fullName + window.ONS.utils.trailingNameS(person.fullName) + '</em>'
+        : 'your') +
+      ' ' + storageAPI.personalDetailsEthnicGroupMap[ethnicGroup].question +
+      ' ethnic group or background?';
+
+    $('.js-heading').html(str);
+  }
+
   if (details && details['ethnic-group'] &&
     details['ethnic-group'].otherText) {
     $('#ethnic-group-input').val(details['ethnic-group'].otherText);
@@ -119,6 +130,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   $(updateRouting);
   $(updateAnswer);
+  $(updateQuestion);
 
   /**
    * Routing
