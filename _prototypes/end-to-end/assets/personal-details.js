@@ -341,6 +341,30 @@ export function addUpdateMaritalStatus(personId, val) {
     }));
 }
 
+export function addUpdate30DayAddressUk(personId, val) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'Address30DayUK': val
+    }));
+}
+
+export function addUpdate30DayAddressType(personId, val) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'Address30DayType': val
+    }));
+}
+
+export function addUpdate30DayCountry(personId, value) {
+  return changeDetailsFor(personId, details =>
+    ({
+      'Address30DayCountry': {
+        ...(details['Address30DayCountry'] || {}),
+        value
+      }
+    }));
+}
+
 export function addUpdateCountry(personId, val) {
   return changeDetailsFor(personId, () =>
     ({
@@ -350,13 +374,37 @@ export function addUpdateCountry(personId, val) {
     }));
 }
 
-export function addUpdateCountryOther(personId, otherText) {
+export function addUpdateCountryOther(personId, val) {
   return changeDetailsFor(personId, details =>
     ({
-      'country': {
-        ...(details['country'] || {}),
-        otherText
+      'country-other': {
+        ...(details['country-other'] || {}),
+        val
       }
+    }));
+}
+
+export function addUpdateCountryOtherArrive(personId, month, year) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'dateArriveUk': {
+        month,
+        year
+      }
+    }));
+}
+
+export function addUpdateCountryOtherArriveCensus(personId, val) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'arriveCensusDay': val
+    }));
+}
+
+export function addUpdateCountryOtherStay(personId, val) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'stayInUk': val
     }));
 }
 
@@ -447,6 +495,44 @@ export function addUpdateSex(personId, val) {
   return changeDetailsFor(personId, () =>
     ({
       'sex': val
+    }));
+}
+
+export function addUpdateSchool(personId, val) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'school': val
+    }));
+}
+
+export function addUpdateStudent(personId, val) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'student': val
+    }));
+}
+
+export function addUpdateStudentAddress(personId, val) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'studentAddress': val
+    }));
+}
+
+export function addUpdateStudentAddressUk(personId, val) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'AddressStudentUK': val
+    }));
+}
+
+export function addUpdateStudentAddressCountry(personId, value) {
+  return changeDetailsFor(personId, details =>
+    ({
+      'AddressStudentCountry': {
+        ...(details['AddressStudentCountry'] || {}),
+        value
+      }
     }));
 }
 

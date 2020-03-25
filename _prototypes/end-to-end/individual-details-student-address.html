@@ -9,7 +9,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous-link" href="../individual-details-relationship">Previous</a>
+        <a class="js-previous-link" href="../individual-details-school">Previous</a>
     </div>
 </div>
 
@@ -35,7 +35,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title u-fs-xl js-heading">
-                                        Do you stay at another address for more than 30 days a year?
+                                        During term time, where do you usually live?
                                     </h1>
                                 </div>
 
@@ -46,37 +46,25 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                 <div class="field__item js-focusable-box">
                                                     <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="30-day-address"
-                                                           id="no"
-                                                           value="no">
+                                                           name="student-address"
+                                                           id="home-address"
+                                                           value="home-address">
                                                     <label class="label label--inline"
-                                                           for="no"
-                                                           id="no-label">
-                                                        No
+                                                           for="home-address"
+                                                           id="home-address-label">
+                                                        Address not set
                                                     </label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
                                                     <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="30-day-address"
-                                                           id="yes-uk"
-                                                           value="yes-uk">
+                                                           name="student-address"
+                                                           id="other-student-address"
+                                                           value="other-student-address">
                                                     <label class="label label--inline"
-                                                           for="yes-uk"
-                                                           id="yes-uk-label">
-                                                        Yes, an address within the UK
-                                                    </label>
-                                                </div>
-                                                <div class="field__item js-focusable-box">
-                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
-                                                           type="radio"
-                                                           name="30-day-address"
-                                                           id="yes-outside"
-                                                           value="yes-outside">
-                                                    <label class="label label--inline"
-                                                           for="yes-outside"
-                                                           id="yes-outside-label">
-                                                        Yes, an address outside the UK
+                                                           for="other-student-address"
+                                                           id="other-student-address-label">
+                                                        Another address
                                                     </label>
                                                 </div>
                                             </fieldset>
@@ -118,38 +106,52 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     details = storageAPI.getPersonalDetailsFor(personId),
     surveyType = urlParams.get('survey');
     storageAPI.personalBookmark(personId, window.location.href);
+  
+  $('#home-address-label').text(updateAddress());
 
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+        e.preventDefault();
 
-  $('.qa-btn-submit').on('click', function (e) {
-    e.preventDefault();
+        var val = $('[name="student-address"]:checked').val();
+        if (val == 'home-address') {
+            val = updateAddress();
+        }
+        storageAPI.addUpdateStudentAddress(personId, val);
 
-    if(isEditing) {
-      window.location.href = '../individual-details-summary/?person_id=' +
-        personId + (surveyType ? '&survey=' + surveyType : '');
-    }
-    
-    var val = $('[name="30-day-address"]:checked').val();
-    if(val === 'no' || val == null) {
-      window.location.href = '../individual-details-school/?person_id=' + personId;
-    } else if (val === 'yes-uk'){
-      window.location.href = '../individual-details-30-day-address-in-uk/?person_id=' + personId;
-    } else if (val === 'yes-outside'){
-      window.location.href = '../individual-details-30-day-address-country/?person_id=' + personId;
-    }
-  });
+        if(isEditing) {
+            e.preventDefault();
+            window.location.href = '../individual-details-summary/?person_id=' +
+                personId + (surveyType ? '&survey=' + surveyType : '');
+        }
+        
+        if(val === 'home-address' || val == null) {
+            window.location.href = '../individual-details-country/?person_id=' + personId;
+        } else if (val === 'other-student-address'){
+            window.location.href = '../individual-details-student-address-other/?person_id=' + personId;
+        }
+  }));
+
+  function updateAddress() {
+    var addressLines = (sessionStorage.getItem('address') || '').split(','),
+    addressLine1 = addressLines[0];
+
+    return addressLine1;
+  }
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-        $('.js-heading').html('Does ' + '<em class="highlight">' + person.fullName + '</em>' +
-        ' stay at another address for more than 30 days a year?');
+        $('.js-heading').html(' During term time, where does ' + '<em class="highlight">' + person.fullName + '</em>' +
+        ' usually live?');
     }
   }
 
  function updateAllPreviousLinks() {
-      $('.js-previous-link').attr('href', '../individual-details-relationship/?person_id=' + personId);
+      $('.js-previous-link').attr('href', '../individual-details-school/?person_id=' + personId);
   }
 
   $(updateAllPreviousLinks);
+  $(updateAddress);
   $(updateQuestion);
 
   /**

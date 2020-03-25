@@ -10,7 +10,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous-link" href="../individual-details-country">Previous</a>
+        <a class="js-previous-link" href="../individual-details-student-address-other">Previous</a>
     </div>
 </div>
 
@@ -21,7 +21,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
-                      role="form" autocomplete="new-password" action="../individual-details-country-other-arrive">
+                      role="form" autocomplete="new-password" action="../individual-details-national-identity">
                     <input autocomplete="new-password" type="hidden" name="person_id" id="person"
                            value="#"/>
                     <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
@@ -32,7 +32,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title u-fs-xl js-heading">
-                                        You selected &ldquo;Elsewhere&rdquo;. What is your country of birth?
+                                            During term time, in which country outside the UK do you usually live?
                                     </h1>
                                 </div>
 
@@ -44,13 +44,13 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                               <span class="label__description u-no-js-hide">Enter your own answer or select from suggestions</span>
                                           </label>
 
-                                          <div id="country-of-birth-container" class="js-typeahead typeahead-input typeahead-input--initialised" data-instructions="Use up and down keys to navigate suggestions once you&#39;ve typed more than two characters. Use the enter key to select a suggestion. Touch device users, explore by touch or with swipe gestures." data-aria-you-have-selected="You have selected" data-aria-min-chars="Enter 3 or more characters for suggestions." data-aria-one-result="There is one suggestion available." data-aria-n-results="There are {n} suggestions available." data-aria-limited-results="Results have been limited to 10 suggestions. Type more characters to improve your search." data-more-results="Continue entering to improve suggestions" data-results-title="Suggestions" data-typeahead-data="https://gist.githubusercontent.com/rmccar/08794cd217fbc08b7c2a470371f0390d/raw/6fe79c0c082fd351b5e031db0dcdffd406f936b4/COB_FEL.json" data-no-results="No results found">
-                                              <input type="text" id="country-of-birth" class="input input--text input-type__input js-typeahead-input" autocomplete="off" aria-autocomplete="list" aria-controls="country-of-birth-listbox" aria-describedby="country-of-birth-instructions" aria-has-popup="true" aria-owns="country-of-birth-listbox" aria-expanded="false" role="combobox">
+                                          <div id="country-container" class="js-typeahead typeahead-input typeahead-input--initialised" data-instructions="Use up and down keys to navigate suggestions once you&#39;ve typed more than two characters. Use the enter key to select a suggestion. Touch device users, explore by touch or with swipe gestures." data-aria-you-have-selected="You have selected" data-aria-min-chars="Enter 3 or more characters for suggestions." data-aria-one-result="There is one suggestion available." data-aria-n-results="There are {n} suggestions available." data-aria-limited-results="Results have been limited to 10 suggestions. Type more characters to improve your search." data-more-results="Continue entering to improve suggestions" data-results-title="Suggestions" data-typeahead-data="https://gist.githubusercontent.com/rmccar/08794cd217fbc08b7c2a470371f0390d/raw/6fe79c0c082fd351b5e031db0dcdffd406f936b4/COB_FEL.json" data-no-results="No results found">
+                                              <input type="text" id="country-input" class="input input--text input-type__input  js-typeahead-input  " autocomplete="off" aria-autocomplete="list" aria-controls="country-listbox" aria-describedby="country-instructions" aria-has-popup="true" aria-owns="country-listbox" aria-expanded="false" role="combobox">
                                               <div class="typeahead-input__results js-typeahead-results">
                                               <header class="typeahead-input__results-title u-fs-s">Suggestions</header>
-                                              <ul class="typeahead-input__listbox js-typeahead-listbox" role="listbox" id="country-of-birth-listbox" tabindex="-1"></ul>
+                                              <ul class="typeahead-input__listbox js-typeahead-listbox" role="listbox" id="country-listbox" tabindex="-1"></ul>
                                               </div>
-                                              <div class="typeahead-input__instructions u-vh js-typeahead-instructions" id="country-of-birth-instructions" tabindex="-1">Use up and down keys to navigate suggestions once you&#39;ve typed more than two characters. Use the enter key to select a suggestion. Touch device users, explore by touch or with swipe gestures.</div>
+                                              <div class="typeahead-input__instructions u-vh js-typeahead-instructions" id="country-instructions" tabindex="-1">Use up and down keys to navigate suggestions once you&#39;ve typed more than two characters. Use the enter key to select a suggestion. Touch device users, explore by touch or with swipe gestures.</div>
                                               <div class="typeahead-input__status u-vh js-typeahead-aria-status" aria-live="polite" role="status" tabindex="-1"></div>
                                           </div>
                                         </p>
@@ -78,34 +78,34 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     personId = urlParams.get('person_id'),
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     isEditing = urlParams.get('edit'),
-    details = storageAPI.getPersonalDetailsFor(personId),
-    surveyType = urlParams.get('survey');
+    details = storageAPI.getPersonalDetailsFor(personId);
+
+    storageAPI.personalBookmark(personId, window.location.href);
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
-    var val = $('#country-of-birth').val();
+    e.preventDefault();
+    var value = $('#country-input').val();
 
-    storageAPI.addUpdateCountryOther(personId, val);
+    storageAPI.addUpdateStudentAddressCountry(personId, value);
 
     if(isEditing) {
-      e.preventDefault();
-      window.location.href = '../individual-details-summary/?person_id=' +
-        personId + (surveyType ? '&survey=' + surveyType : '');
+      window.location.href = '../individual-details-summary/?person_id=' + personId;
     } else {
-
+      window.location.href = '../individual-details-country/?person_id=' + personId;
     }
   }));
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('You selected &ldquo;Elsewhere&rdquo;. ' + 'What is ' + '<em class="highlight">' + person.fullName +
-        window.ONS.utils.trailingNameS(person.fullName) + '</em>' + ' country of birth?</em>');
+        $('.js-heading').html('During term time, in which country outside the UK does ' + '<em class="highlight">' + person.fullName + '</em>' +
+        ' usually live?');
     }
   }
 
-  if (details && details['country-other'] &&
-    details['country-other'].otherText) {
-    $('#country-of-birth').val(details['country-other'].val);
+  if (details && details['AddressStudentCountry'] &&
+    details['AddressStudentCountry'].value) {
+    $('#country-input').val(details['AddressStudentCountry'].value);
   }
 
   $(updateQuestion);
