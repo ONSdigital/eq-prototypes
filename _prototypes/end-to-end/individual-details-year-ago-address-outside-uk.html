@@ -10,7 +10,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous-link" href="../individual-details-student-address-other">Previous</a>
+        <a class="js-previous-link" href="../individual-details-year-ago-address">Previous</a>
     </div>
 </div>
 
@@ -21,7 +21,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
-                      role="form" autocomplete="new-password" action="../individual-details-country">
+                      role="form" autocomplete="new-password" action="../individual-details-national-identity">
                     <input autocomplete="new-password" type="hidden" name="person_id" id="person"
                            value="#"/>
                     <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
@@ -32,7 +32,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title u-fs-xl js-heading">
-                                            During term time, in which country outside the UK do you usually live?
+                                            You selected "Another address outside the UK". In Which country outside the UK was your address one year ago?
                                     </h1>
                                 </div>
 
@@ -87,25 +87,24 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     e.preventDefault();
     var value = $('#country-input').val();
 
-    storageAPI.addUpdateStudentAddressCountry(personId, value);
+    storageAPI.addUpdateYearAgoAddressCountry(personId, value);
 
     if(isEditing) {
       window.location.href = '../individual-details-summary/?person_id=' + personId;
     } else {
-      window.location.href = '../individual-details-country/?person_id=' + personId;
+      window.location.href = '../individual-details-national-identity/?person_id=' + personId;
     }
   }));
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-        $('.js-heading').html('During term time, in which country outside the UK does ' + '<em class="highlight">' + person.fullName + '</em>' +
-        ' usually live?');
+        $('.js-heading').html('You selected "Another address outside the UK". In Which country outside the UK was '  + '<em class="highlight">' + person.fullName + window.ONS.utils.trailingNameS(person.fullName) + '</em>' + ' address one year ago.');
     }
   }
 
-  if (details && details['AddressStudentCountry'] &&
-    details['AddressStudentCountry'].value) {
-    $('#country-input').val(details['AddressStudentCountry'].value);
+  if (details && details['yearAgoAddressCountry'] &&
+    details['yearAgoAddressCountry'].value) {
+    $('#country-input').val(details['yearAgoAddressCountry'].value);
   }
 
   $(updateQuestion);

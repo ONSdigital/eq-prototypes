@@ -543,6 +543,30 @@ export function addUpdateAddressWhere(personId, val) {
     }));
 }
 
+export function addUpdateYearAgoAddress(personId, val) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'yearAgoAddress': val
+    }));
+}
+
+export function addUpdateYearAgoAddressUk(personId, val) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'yearAgoAddressUK': val
+    }));
+}
+
+export function addUpdateYearAgoAddressCountry(personId, value) {
+  return changeDetailsFor(personId, details =>
+    ({
+      'yearAgoAddressCountry': {
+        ...(details['yearAgoAddressCountry'] || {}),
+        value
+      }
+    }));
+}
+
 export function addUpdateAge(personId, val, { isApproximate = false }) {
   return changeDetailsFor(personId, () =>
     ({

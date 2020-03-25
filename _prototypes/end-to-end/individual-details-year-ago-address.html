@@ -146,22 +146,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     surveyType = urlParams.get('survey');
     storageAPI.personalBookmark(personId, window.location.href);
   
-  $('#home-address-label').text(updateAddress());
-  if (personId !== 'person_me' && storageAPI.getPersonalDetailsFor('person_me').oneYearAgoAddress) {
-    $('#same-address-label').text(storageAPI.getPersonalDetailsFor('person_me').fullName);
-  } else {
-
-  }
-
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
         e.preventDefault();
 
         var val = $('[name="year-ago-address"]:checked').val();
-        if (val == 'home-address') {
-            val = updateAddress();
-        }
-        storageAPI.addUpdateStudentAddress(personId, val);
+        storageAPI.addUpdateYearAgoAddress(personId, val);
 
         if(isEditing) {
             e.preventDefault();
@@ -169,18 +159,23 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                 personId + (surveyType ? '&survey=' + surveyType : '');
         }
         
-        if(val === 'home-address' || val == null) {
-            window.location.href = '../individual-details-country/?person_id=' + personId;
-        } else if (val === 'other-student-address'){
-            window.location.href = '../individual-details-student-address-other/?person_id=' + personId;
+        if(val === 'another-uk-address') {
+            window.location.href = '../individual-details-year-ago-address-uk/?person_id=' + personId;
+        } else if (val === 'another-outside-uk-address'){
+            window.location.href = '../individual-details-year-ago-address-outside-uk/?person_id=' + personId;
+        } else {
+            window.location.href = '../individual-details-national-identity/?person_id=' + personId;
         }
   }));
 
-  function updateAddress() {
-    var addressLines = (sessionStorage.getItem('address') || '').split(','),
-    addressLine1 = addressLines[0];
+  function updateAddresses() {
+    $('#home-address-label').text(sessionStorage.getItem('address'));
 
-    return addressLine1;
+    if (personId !== 'person_me' && storageAPI.getPersonalDetailsFor('person_me').oneYearAgoAddress) {
+        $('#same-address-label').text('Same as address ' + storageAPI.getPersonalDetailsFor('person_me').fullName);
+    } else {
+        $('#same-address-field').remove();
+    }
   }
 
   function updateQuestion() {
@@ -195,7 +190,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   }
 
   $(updateAllPreviousLinks);
-  $(updateAddress);
+  $(updateAddresses);
   $(updateQuestion);
 
   /**

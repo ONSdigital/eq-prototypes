@@ -24,7 +24,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password"
-                      action="../individual-details-national-identity">
+                      action="../individual-details-year-ago-address">
                     <input autocomplete="new-password" type="hidden" name="person_id" id="person"
                            value="#"/>
                     <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
@@ -118,7 +118,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         personId + (surveyType ? '&survey=' + surveyType : '');
     }
     
-    window.location.href = '../individual-details-national-identity/?person_id=' + personId;
+    window.location.href = '../individual-details-year-ago-address/?person_id=' + personId;
 
   });
 
