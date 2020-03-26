@@ -527,6 +527,46 @@ export function addUpdatePassportCountryOther(personId, otherText) {
     }));
 }
 
+export function addUpdateHealth(personId, val) {
+  return changeDetailsFor(personId, details =>
+    ({
+      'health': {
+        ...(details['health'] || {}),
+        val
+      }
+    }));
+}
+
+export function addUpdateHealthConditions(personId, conditions) {
+  return changeDetailsFor(personId, details =>
+    ({
+      'health': {
+        ...(details['health'] || {}),
+        conditions
+      }
+    }));
+}
+
+export function addUpdateHealthConditionsAbilities(personId, abilities) {
+  return changeDetailsFor(personId, details =>
+    ({
+      'health': {
+        ...(details['health'] || {}),
+        abilities
+      }
+    }));
+}
+
+export function addUpdateHealthSupport(personId, amount) {
+  return changeDetailsFor(personId, details =>
+    ({
+      'health': {
+        ...(details['health'] || {}),
+        amount
+      }
+    }));
+}
+
 export function addUpdateOrientation(personId, val) {
   return changeDetailsFor(personId, () =>
     ({
