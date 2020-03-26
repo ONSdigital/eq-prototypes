@@ -457,6 +457,46 @@ export function addUpdateEthnicGroupOther(personId, otherText) {
     }));
 }
 
+export function addUpdateReligion(personId, description) {
+  return changeDetailsFor(personId, details =>
+    ({
+      'religion': {
+        ...(details['religion'] || {}),
+        ...{ description }
+      }
+    }));
+}
+
+export function addUpdateReligionOther(personId, otherText) {
+  return changeDetailsFor(personId, details =>
+    ({
+      'religion': {
+        ...(details['religion'] || {}),
+        ...{ otherText }
+      }
+    }));
+}
+
+export function addUpdateLanguage(personId, val) {
+  return changeDetailsFor(personId, () =>
+  ({
+    'language': {
+      ...(details['language'] || {}),
+      ...{ val }
+    }
+  }));
+}
+
+export function addUpdateLanguageOther(personId, val) {
+  return changeDetailsFor(personId, () =>
+  ({
+    'language': {
+      ...(details['language'] || {}),
+      ...{ val }
+    }
+  }));
+}
+
 export function addUpdatePassportCountry(personId, countries) {
   return changeDetailsFor(personId, details =>
     ({
