@@ -82,11 +82,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                     <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
                                                            name="english-level"
-                                                           id="not"
-                                                           value="not">
+                                                           id="none"
+                                                           value="none">
                                                     <label class="label label--inline"
-                                                           for="not"
-                                                           id="not-label">
+                                                           for="none"
+                                                           id="none-label">
                                                         Not at all
                                                     </label>
                                                 </div>
@@ -135,13 +135,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('What is ' + '<em class="highlight">' + person.fullName +
-      window.ONS.utils.trailingNameS(person.fullName) + '</em>' +
-        ' main language?');
+      $('.js-heading').html('How well can ' + '<em class="highlight">' + person.fullName + '</em>' +
+        ' speak English?');
     }  }
 
  function updateAllPreviousLinks() {
-      $('.js-previous-link').attr('href', '..//individual-details-ethnic-group/?person_id=' + personId);
+      $('.js-previous-link').attr('href', '../individual-details-ethnic-group/?person_id=' + personId);
   }
 
   $(updateAllPreviousLinks);
