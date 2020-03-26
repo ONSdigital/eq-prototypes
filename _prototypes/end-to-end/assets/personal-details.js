@@ -477,22 +477,32 @@ export function addUpdateReligionOther(personId, otherText) {
     }));
 }
 
-export function addUpdateLanguage(personId, val) {
+export function addUpdateLanguage(personId, lang) {
   return changeDetailsFor(personId, () =>
   ({
     'language': {
       ...(details['language'] || {}),
-      ...{ val }
+      ...{ lang }
     }
   }));
 }
 
-export function addUpdateLanguageOther(personId, val) {
+export function addUpdateLanguageOther(personId, other) {
   return changeDetailsFor(personId, () =>
   ({
     'language': {
       ...(details['language'] || {}),
-      ...{ val }
+      ...{ other }
+    }
+  }));
+}
+
+export function addUpdateLanguageEnglish(personId, english) {
+  return changeDetailsFor(personId, () =>
+  ({
+    'language': {
+      ...(details['language'] || {}),
+      ...{ english }
     }
   }));
 }

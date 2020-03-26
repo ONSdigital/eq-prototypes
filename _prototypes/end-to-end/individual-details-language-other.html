@@ -10,7 +10,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous-link" href="../individual-details-language-other">Previous</a>
+        <a class="js-previous-link" href="../individual-details-language">Previous</a>
     </div>
 </div>
 
@@ -21,7 +21,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
-                      role="form" autocomplete="new-password" action="../individual-details-passport-country">
+                      role="form" autocomplete="new-password" action="../individual-details-language-english">
                     <input autocomplete="new-password" type="hidden" name="person_id" id="person"
                            value="#"/>
                     <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
@@ -106,9 +106,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('You selected "Other, including British Sign Language". What is ' + '<em class="highlight">' + person.fullName +
+      $('.js-heading').html('How well does ' + '<em class="highlight">' + person.fullName +
         window.ONS.utils.trailingNameS(person.fullName) + '</em>' +
-        ' main language?');
+        ' speak English?');
     }
   }
 
