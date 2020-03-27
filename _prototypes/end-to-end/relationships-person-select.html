@@ -267,12 +267,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
                 $(updateList(false));
                 
-                if (remainingPersonIds.length < 2) {
-                  window.location.href = '../relationships';
-                } else {
                   window.location.href = '../relationships-person-select/?person_id=' +
                     personId + '&relationship-description=unrelated';
-                }
 
             }
             else {
