@@ -48,16 +48,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                         </section>
                     </div>
                 </div>
-                <form id="form" name="trav" class="form qa-questionnaire-form"
-                      role="form" autocomplete="new-password" action="../individual-details-apprenticeship">
-                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
-                           value="#"/>
-                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
-                           value="#"/>
                     <button class="btn btn--primary btn--lg qa-btn-submit btn-submit u-mt-xl"
                             type="submit" name="">Continue
                     </button>
-                </form>
             </main>
         </div>
     </div>
@@ -72,7 +65,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     surveyType = urlParams.get('survey'),
     personDetails = storageAPI.getHouseholdMemberByPersonId(personId);
-
+    
+    $('.qa-btn-submit').on('click',
+        storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+            window.location.href = '../individual-details-apprenticeship/?person_id=' +
+                personId + (surveyType ? '&survey=' + surveyType : '');
+    }));
 
     $('.js-link-ir').click(function(e) {
         e.preventDefault();
