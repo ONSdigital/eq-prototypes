@@ -9,7 +9,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a href="../do-you-live-here">Previous</a>
+        <a href="../individual-details-orientation">Previous</a>
     </div>
 </div>
 
@@ -23,7 +23,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
-                      role="form" autocomplete="new-password" action="../individual-details-gender-identity">
+                      role="form" autocomplete="new-password" action="../individual-details-qualifications">
                     <input autocomplete="new-password" type="hidden" name="person_id" id="person"
                            value="#"/>
                     <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
@@ -34,7 +34,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title u-fs-xl js-heading">
-                                        Which of the following best describes your sexual orientation?
+                                        Is the gender you identify with the same as your sex registered at birth?
                                     </h1>
                                 </div>
                                   <div class="panel panel--info panel--simple">
@@ -51,53 +51,29 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                 <div class="field__item js-focusable-box">
                                                     <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="orientation"
-                                                           id="straight"
-                                                           value="straight">
+                                                           name="identity"
+                                                           id="yes"
+                                                           value="Yes">
                                                     <label class="label label--inline"
-                                                           for="straight"
-                                                           id="straight-label">
-                                                        Straight or heterosexual
+                                                           for="yes"
+                                                           id="yes-label">
+                                                        Yes
                                                     </label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
                                                     <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="orientation"
-                                                           id="gay"
-                                                           value="gay">
+                                                           name="identity"
+                                                           id="no"
+                                                           value="No">
                                                     <label class="label label--inline"
-                                                           for="gay"
-                                                           id="gay-label">
-                                                        Gay or lesbian
-                                                    </label>
-                                                </div>
-                                                <div class="field__item js-focusable-box">
-                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
-                                                           type="radio"
-                                                           name="orientation"
-                                                           id="bisexual"
-                                                           value="bisexual">
-                                                    <label class="label label--inline"
-                                                           for="bisexual"
-                                                           id="bisexual-label">
-                                                        Bisexual
-                                                    </label>
-                                                </div>
-                                                <div class="field__item js-focusable-box">
-                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
-                                                           type="radio"
-                                                           name="orientation"
-                                                           id="other"
-                                                           value="other">
-                                                    <label class="label label--inline"
-                                                           for="other"
-                                                           id="other-label">
-                                                        Other sexual orientation<br>
-                                                        <span class="label__description label__inner label--negative u-fs-m js-answer">Enter your sexual orientation</span>
+                                                           for="no"
+                                                           id="no-label">
+                                                        No<br>
+                                                        <span class="label__description label__inner label--negative u-fs-m js-answer">Enter your gender</span>
                                                     </label>
                                                     <div class="field__other field__other--open">
-                                                        <input autocomplete="new-password" class="input input__text js-focusable" id="other-answer" name="orientation" type="text" data-qa="other-option">
+                                                        <input autocomplete="new-password" class="input input__text js-focusable" id="other-answer" name="identity" type="text" data-qa="other-option">
                                                     </div>
                                                 </div>
 
@@ -141,7 +117,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
-        var input = $('[name="orientation"]:checked'),
+        var input = $('[name="identity"]:checked'),
             val = input.val(),
             textInput = $('#other-answer');
 
@@ -149,7 +125,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
             val = textInput.val();
         }
 
-        storageAPI.addUpdateOrientation(personId, val);
+        storageAPI.addUpdateIdentity(personId, val);
 
         if(isEditing) {
         e.preventDefault();
@@ -167,14 +143,13 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('Which of the following options best describes '  + '<em class="highlight">' + 
-        person.fullName + window.ONS.utils.trailingNameS(person.fullName)
-        + '</em>' + ' sexual orientation?');
+      $('.js-heading').html('Is the gender '  + '<em class="highlight">' + 
+        person.fullName + '</em>' + ' identifies with the same as their sex registered at birth?');
     }
   }
 
-  if (details && details.orientation) {
-    $('#' + details.orientation).attr('checked', true);
+  if (details && details.identity) {
+    $('#' + details.identity).attr('checked', true);
   }
 
   function clearRadios() {

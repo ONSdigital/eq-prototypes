@@ -574,6 +574,13 @@ export function addUpdateOrientation(personId, val) {
     }));
 }
 
+export function addUpdateIdentity(personId, val) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'identity': val
+    }));
+}
+
 export function addUpdateSalary(personId, val) {
   return changeDetailsFor(personId, () =>
     ({
