@@ -457,6 +457,56 @@ export function addUpdateEthnicGroupOther(personId, otherText) {
     }));
 }
 
+export function addUpdateReligion(personId, description) {
+  return changeDetailsFor(personId, details =>
+    ({
+      'religion': {
+        ...(details['religion'] || {}),
+        ...{ description }
+      }
+    }));
+}
+
+export function addUpdateReligionOther(personId, otherText) {
+  return changeDetailsFor(personId, details =>
+    ({
+      'religion': {
+        ...(details['religion'] || {}),
+        ...{ otherText }
+      }
+    }));
+}
+
+export function addUpdateLanguage(personId, lang) {
+  return changeDetailsFor(personId, () =>
+  ({
+    'language': {
+      ...(details['language'] || {}),
+      ...{ lang }
+    }
+  }));
+}
+
+export function addUpdateLanguageOther(personId, other) {
+  return changeDetailsFor(personId, () =>
+  ({
+    'language': {
+      ...(details['language'] || {}),
+      ...{ other }
+    }
+  }));
+}
+
+export function addUpdateLanguageEnglish(personId, english) {
+  return changeDetailsFor(personId, () =>
+  ({
+    'language': {
+      ...(details['language'] || {}),
+      ...{ english }
+    }
+  }));
+}
+
 export function addUpdatePassportCountry(personId, countries) {
   return changeDetailsFor(personId, details =>
     ({
@@ -473,6 +523,46 @@ export function addUpdatePassportCountryOther(personId, otherText) {
       'passport': {
         ...(details['passport'] || {}),
         otherText
+      }
+    }));
+}
+
+export function addUpdateHealth(personId, val) {
+  return changeDetailsFor(personId, details =>
+    ({
+      'health': {
+        ...(details['health'] || {}),
+        val
+      }
+    }));
+}
+
+export function addUpdateHealthConditions(personId, conditions) {
+  return changeDetailsFor(personId, details =>
+    ({
+      'health': {
+        ...(details['health'] || {}),
+        conditions
+      }
+    }));
+}
+
+export function addUpdateHealthConditionsAbilities(personId, abilities) {
+  return changeDetailsFor(personId, details =>
+    ({
+      'health': {
+        ...(details['health'] || {}),
+        abilities
+      }
+    }));
+}
+
+export function addUpdateHealthSupport(personId, amount) {
+  return changeDetailsFor(personId, details =>
+    ({
+      'health': {
+        ...(details['health'] || {}),
+        amount
       }
     }));
 }
