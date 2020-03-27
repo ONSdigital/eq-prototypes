@@ -193,6 +193,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
       var newPersonObj = storageAPI.TYPES.person({
         firstName: document.getElementById('first-name').value,
+        middleName: document.getElementById('middle-name').value,
         lastName: document.getElementById('last-name').value
       });
 
@@ -236,6 +237,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
     if (userPerson) {
       $('#first-name').val(userPerson.firstName);
+      $('#middle-name').val(userPerson.middleName);
       $('#last-name').val(userPerson.lastName);
     }
   });

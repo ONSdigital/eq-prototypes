@@ -15,15 +15,25 @@ export function person(opts) {
       !opts.middleName,
       !opts.lastName);
   }
-
+  let fullName = opts.firstName + ' ' + opts.lastName;
   let middleName = opts.middleName || '';
 
-  return {
-    fullName: opts.firstName + ' ' + middleName + ' ' + opts.lastName,
-    firstName: opts.firstName,
-    middleName,
-    lastName: opts.lastName
-  };
+  if (householdMemberExistByFullName(fullName)) {
+    return {
+
+      fullName: opts.firstName + ' ' + middleName.split(" ", 1).toString() + ' ' + opts.lastName,
+      firstName: opts.firstName,
+      middleName,
+      lastName: opts.lastName
+    };
+  } else {
+    return {
+      fullName: opts.firstName + ' ' + opts.lastName,
+      firstName: opts.firstName,
+      middleName,
+      lastName: opts.lastName
+    };
+  }
 }
 
 /**
@@ -96,6 +106,12 @@ export function getAllHouseholdMembers() {
 export function getHouseholdMemberByPersonId(id) {
   return getAllHouseholdMembers().find(function(member) {
     return member['@person'].id === id;
+  });
+}
+
+export function householdMemberExistByFullName(fullName) {
+  return getAllHouseholdMembers().find(function(member) {
+    return ((member['@person'].fullName.toLowerCase() === fullName.toLowerCase()) ? true : false);
   });
 }
 
