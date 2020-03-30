@@ -20,7 +20,6 @@ export function person(opts) {
 
   if (householdMemberExistByFullName(fullName)) {
     return {
-
       fullName: opts.firstName + ' ' + middleName.split(" ", 1).toString() + ' ' + opts.lastName,
       firstName: opts.firstName,
       middleName,
