@@ -34,7 +34,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title u-fs-xl js-heading">
-                                        Briefly  describe what you do in your main job
+                                        Briefly describe what you do in your main job
                                     </h1>
                                 </div>
 
@@ -97,14 +97,14 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
     var url = '';
 
-    storageAPI.addUpdateJobDescribe(personId, $('#text-input').val());
+    storageAPI.addUpdateEmploymentJobDescription(personId, $('#text-input').val());
     storageAPI.clearPersonalBookmark(personId);
 
     if(isEditing || switchedFromUnemployed) {
       url += '../individual-details-summary/?person_id=';
     }
     else {
-      url += '../hub/?person_id=';
+      url += '../individual-details-employment-activity/?person_id=';
     }
 
     url += personId + (surveyType ? ('&survey=' + surveyType) : '');
@@ -125,9 +125,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     }
   }
 
-  if (details && details['job-describe'] &&
-    details['job-describe'].val) {
-    $('#text-input').val(details['job-describe'].val);
+  if (details && details['employment'] &&
+    details['employment'].jobDescription) {
+    $('#text-input').val(details['employment'].jobDescription);
   }
 
   $(updateQuestion);

@@ -756,29 +756,131 @@ export function addUpdateQualificationsOtherWhere(personId, othersWhere) {
     }));
 }
 
-export function addUpdateEmploymentStatus(personId, val) {
+export function addUpdateArmedForces(personId, val) {
   return changeDetailsFor(personId, () =>
     ({
-      'employment-status': {
+      'armed-forces': {
         val
       }
     }));
 }
 
-export function addUpdateJobTitle(personId, val) {
+export function addUpdateLastSevenDays(personId, sevenDaysAgo) {
   return changeDetailsFor(personId, () =>
     ({
-      'job-title': {
-        val
+      'employment': {
+        ...(details['employment'] || {}),
+        sevenDaysAgo
       }
     }));
 }
 
-export function addUpdateJobDescribe(personId, val) {
+export function addUpdateLastSevenDaysDescription(personId, description) {
   return changeDetailsFor(personId, () =>
     ({
-      'job-describe': {
-        val
+      'employment': {
+        ...(details['employment'] || {}),
+        description
+      }
+    }));
+}
+
+export function addUpdateEmploymentFourWeeks(personId, fourWeeksAgo) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'employment': {
+        ...(details['employment'] || {}),
+        fourWeeksAgo
+      }
+    }));
+}
+
+export function addUpdateEmploymentAvailableTwoWeeks(personId, availableInTwoWeeks) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'employment': {
+        ...(details['employment'] || {}),
+        availableInTwoWeeks
+      }
+    }));
+}
+
+export function addUpdateEmploymentPaidWorkConfirm(personId, paidWorkConfirm) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'employment': {
+        ...(details['employment'] || {}),
+        paidWorkConfirm
+      }
+    }));
+}
+
+export function addUpdateEmploymentAcceptedJob(personId, acceptedJob) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'employment': {
+        ...(details['employment'] || {}),
+        acceptedJob
+      }
+    }));
+}
+
+export function addUpdateEmploymentStatus(personId, status) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'employment': {
+        ...(details['employment'] || {}),
+        status
+      }
+    }));
+}
+
+export function addUpdateEmploymentName(personId, name) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'employment': {
+        ...(details['employment'] || {}),
+        name
+      }
+    }));
+}
+
+export function addUpdateEmploymentJobTitle(personId, jobTitle) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'employment': {
+        ...(details['employment'] || {}),
+        jobTitle
+      }
+    }));
+}
+
+export function addUpdateEmploymentJobDescription(personId, jobDescription) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'employment': {
+        ...(details['employment'] || {}),
+        jobDescription
+      }
+    }));
+}
+
+export function addUpdateEmploymentBusinessActivity(personId, businessActivity) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'employment': {
+        ...(details['employment'] || {}),
+        businessActivity
+      }
+    }));
+}
+
+export function addUpdateEmploymentResponsibilities(personId, responsibilities) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'employment': {
+        ...(details['employment'] || {}),
+        responsibilities
       }
     }));
 }
