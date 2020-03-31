@@ -192,9 +192,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       sessionStorage.setItem('name', getName());
 
       var newPersonObj = storageAPI.TYPES.person({
-        firstName: document.getElementById('first-name').value,
-        middleName: document.getElementById('middle-name').value,
-        lastName: document.getElementById('last-name').value
+        firstName: document.getElementById('first-name').value.trim(),
+        middleName: document.getElementById('middle-name').value.trim(),
+        lastName: document.getElementById('last-name').value.trim()
       });
 
       storageAPI.addUserPerson(newPersonObj);
