@@ -17,12 +17,9 @@ export function person(opts) {
   }
   let fullName = opts.firstName + ' ' + opts.lastName;
   let middleName = opts.middleName || '';
-  let memberFound = null;
+  let memberFound = householdMemberExistByFullName(fullName);
 
-  if (householdMemberExistByFullName(fullName)) {
-    memberFound = getAllHouseholdMembers().filter(function(member) {
-      return member['@person'].fullName.toLowerCase() === fullName.toLowerCase();
-    })[0]
+  if (memberFound) {
     memberFound['@person'].fullName = memberFound['@person'].firstName + ' ' + memberFound['@person'].middleName.split(" ", 1).toString() + ' ' + memberFound['@person'].lastName
     memberFound = memberFound['@person'];
     updateHouseholdMember(memberFound, {type: 'household-member'});
@@ -116,7 +113,7 @@ export function getHouseholdMemberByPersonId(id) {
 
 export function householdMemberExistByFullName(fullName) {
   return getAllHouseholdMembers().find(function(member) {
-    return ((member['@person'].firstName.toLowerCase() + ' ' + member['@person'].lastName.toLowerCase() === fullName.toLowerCase()) ? true : false);
+    return (member['@person'].firstName.toLowerCase() + ' ' + member['@person'].lastName.toLowerCase() === fullName.toLowerCase());
   });
 }
 
