@@ -16,34 +16,24 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            <!--{% include navigation.html
-            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
-            nav-title-id="section-individual" %}-->
         </div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password"
-                      action="../individual-details-qualifications-nvq-equivalent">
+                      action="../individual-details-employment-seven-days-accepted-job">
                     <input autocomplete="new-password" type="hidden" name="person_id" id="person"
                            value="#"/>
                     <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
                            value="#"/>
-                    <div class="group" id="rsi">
-                        <div class="block" id="total-retail-turnover">
+                    <div class="group">
+                        <div class="block">
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title u-fs-xl js-heading">
-                                        Have you achieved a qualification at degree level or above?
+                                        Are you available to start work in the next two weeks?    
                                     </h1>
-                                </div>
-
-                                <div
-                                        class="panel panel--simple panel--info u-mb-s">
-                                    <div class="panel__body">
-                                        <p class="u-fs-r">Include equivalent qualifications achieved anywhere outside England and Wales</p>
-                                    </div>
                                 </div>
 
                                 <div class="answer">
@@ -53,7 +43,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                 <div class="field__item js-focusable-box">
                                                     <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="checkbox-answer"
+                                                           name="radio-group"
                                                            id="yes"
                                                            value="yes">
                                                     <label class="label label--inline"
@@ -61,15 +51,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            id="yes-label">
                                                         <strong
                                                                 class="u-fs-r">Yes</strong>
-                                                        <p class="u-fs-s u-db u-mb-no label--negative">
-                                                            For example degree, foundation degree, HND or HNC, NVQ level 4 and above, teaching or nursing
-                                                        </p>
                                                     </label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
                                                     <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="checkbox-answer"
+                                                           name="radio-group"
                                                            id="no"
                                                            value="no">
                                                     <label class="label label--inline"
@@ -77,9 +64,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            id="no-label">
                                                         <strong
                                                                 class="u-fs-r">No</strong>
-                                                        <p class="u-fs-s u-db u-mb-no label--negative">
-                                                                Questions on other NVQs, A levels, GCSEs and equivalents will follow
-                                                        </p>
                                                     </label>
                                                 </div>
                                             </fieldset>
@@ -92,9 +76,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                     <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
                             type="submit" name="">Save and continue
                     </button>
-
-                    
-                        <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
+                    <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
 
                     <!--<p class="u-mb-m"><span class="js-link-secure-label"></span><br />
                         <a class="js-link-secure"
@@ -120,15 +102,19 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
 
-    storageAPI.addUpdateHasQualificationAbove(personId,
-      $('[name="checkbox-answer"]:checked').val()
-    );
+    var val = $('[name="radio-group"]:checked').val();
+
+    storageAPI.addUpdateEmploymentAvailableTwoWeeks(personId, val);
 
     if(isEditing) {
       e.preventDefault();
-      window.location.href = '../individual-details-summary/?person_id=' +
-        personId + (surveyType ? '&survey=' + surveyType : '');
+        window.location.href = '../individual-details-summary/?person_id=' + personId +
+          (surveyType ? '&survey=' + surveyType : '');
+    } else if (val === 'yes') {
+      e.preventDefault();
+        window.location.href = '../individual-details-employment-paid-work-confirm/?person_id=' + personId;
     }
+
   }));
 
   function updateRouting() {
@@ -140,13 +126,13 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('Has ' + '<em class="highlight">' + person.fullName + '</em>' +
-        ' achieved a qualification at degree level or above?');
+      $('.js-heading').html('Is ' + '<em class="highlight">' + person.fullName + '</em>' +
+        ' available to start work in the next two weeks?');
     }
   }
 
-  if (details && details['qualifications'] && details['qualifications'].aboveDegree) {
-    $('#' + details['qualifications'].aboveDegree).attr('checked', true);
+  if (details && details['employment']) {
+    $('#' + details['employment'].availableInTwoWeeks).attr('checked', true);
   }
 
   $(updateQuestion);

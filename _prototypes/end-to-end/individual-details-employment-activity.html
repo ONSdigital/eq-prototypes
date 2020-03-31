@@ -40,7 +40,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                 </div>                  
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password"
-                      action="../individual-details-job-describe">
+                      action="../individual-details-employment-job-responsibilities">
                     <input autocomplete="new-password" type="hidden" name="person_id" id="person"
                            value="#"/>
                     <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
@@ -51,17 +51,17 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title u-fs-xl js-heading">
-                                        What is your full job title?
+                                        What is the main activity of your organisation, business or freelance work?
                                     </h1>
                                 </div>
                                 <div class="question__description">
-                                  <p>For example, retail assistant, office cleaner, district nurse, primary school teacher. Do not state their grade or pay band</p>
+                                  <p>For example, clothing retail, general healthcare, primary education, food wholesale, civil service DWP, local government housing</p>
                                 </div>
                                 <div class="question__answers">
                                     <div class="question__answer js-fields">
                                       <div class="js-char-check">
                                         <p class="field">
-                                          <label class="label" for="job-field">Job title</label>
+                                          <label class="label" for="job-field">Main activity</label>
                                           <input autocomplete="new-password" required type="text" id="job-field" data-error-msg="You have entered too many characters. Enter up to 20 characters." class="input input--text input-type__input input--w-10" data-char-check-ref="search-field-check-remaining" data-char-check-num="20" />
                                       <span
                                         id="search-field-check-remaining"
@@ -115,15 +115,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       hasErrors = false;
       return false;
     } else {
-      storageAPI.addUpdateJobTitle(personId, $('#job-title-input').val());
+      storageAPI.addUpdateEmploymentBusinessActivity(personId, $('#job-field').val());
 
-      if(switchedFromUnemployed) {
-        e.preventDefault();
-        window.location.href = '../individual-details-job-describe/?person_id=' + personId +
-          (surveyType ? '&survey=' + surveyType : '') +
-          '&switchedFromUnemployed=true';
-      }
-      else if(isEditing) {
+      if(isEditing) {
         e.preventDefault();
         window.location.href = '../individual-details-summary/?person_id=' +
           personId + (surveyType ? '&survey=' + surveyType : '');
@@ -140,14 +134,14 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('What is ' + '<em class="highlight">' + person.fullName + window.ONS.utils.trailingNameS(person.fullName) + '</em>' +
-        ' full job title?');
+      $('.js-heading').html('What is the main activity of ' + '<em class="highlight">' + person.fullName + window.ONS.utils.trailingNameS(person.fullName) + '</em>' +
+        ' organisation, business or freelance work?');
     }
   }
 
-  if (details && details['job-title'] &&
-    details['job-title'].val) {
-    $('#job-title-input').val(details['job-title'].val);
+  if (details && details['employment'] &&
+    details['employment'].businessActivity) {
+    $('#job-field').val(details['employment'].businessActivity);
   }
 
   document.dispatchEvent(new CustomEvent('TYPEAHEAD-READY'));
