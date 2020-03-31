@@ -17,10 +17,17 @@ export function person(opts) {
   }
   let fullName = opts.firstName + ' ' + opts.lastName;
   let middleName = opts.middleName || '';
+  let memberFound = null;
 
   if (householdMemberExistByFullName(fullName)) {
+    memberFound = getAllHouseholdMembers().filter(function(member) {
+      return member['@person'].fullName.toLowerCase() === fullName.toLowerCase();
+    })[0]
+    sessionStorage.setItem('bum', JSON.stringify(memberFound));
+    memberFound['@person'].fullName = memberFound['@person'].firstName + ' ' + memberFound['@person'].middleName.split(" ", 1).toString() + ' ' + memberFound['@person'].lastName
+    memberFound = memberFound['@person'];
+    updateHouseholdMember(memberFound, {type: 'household-member'});
     return {
-
       fullName: opts.firstName + ' ' + middleName.split(" ", 1).toString() + ' ' + opts.lastName,
       firstName: opts.firstName,
       middleName,
@@ -75,7 +82,6 @@ export function updateHouseholdMember(person, memberData) {
       ? {...member, ...memberData, '@person': {...member['@person'], ...person}}
       : member;
   });
-
   sessionStorage.setItem(HOUSEHOLD_MEMBERS_STORAGE_KEY,
     JSON.stringify(membersUpdated));
 }
@@ -111,7 +117,7 @@ export function getHouseholdMemberByPersonId(id) {
 
 export function householdMemberExistByFullName(fullName) {
   return getAllHouseholdMembers().find(function(member) {
-    return ((member['@person'].fullName.toLowerCase() === fullName.toLowerCase()) ? true : false);
+    return ((member['@person'].firstName.toLowerCase() + ' ' + member['@person'].lastName.toLowerCase() === fullName.toLowerCase()) ? true : false);
   });
 }
 

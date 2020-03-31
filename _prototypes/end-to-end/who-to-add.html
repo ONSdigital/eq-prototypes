@@ -222,8 +222,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       return false;
     } else {
       var person = window.ONS.storage.TYPES.person({
-        firstName: document.getElementById('first-name').value,
-        lastName: document.getElementById('last-name').value
+        firstName: document.getElementById('first-name').value.trim(),
+        middleName: document.getElementById('middle-name').value.trim(),
+        lastName: document.getElementById('last-name').value.trim()
       });
 
       var personType = window.ONS.storage.KEYS[
