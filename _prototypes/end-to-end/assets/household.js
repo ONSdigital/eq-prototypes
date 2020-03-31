@@ -23,7 +23,6 @@ export function person(opts) {
     memberFound = getAllHouseholdMembers().filter(function(member) {
       return member['@person'].fullName.toLowerCase() === fullName.toLowerCase();
     })[0]
-    sessionStorage.setItem('bum', JSON.stringify(memberFound));
     memberFound['@person'].fullName = memberFound['@person'].firstName + ' ' + memberFound['@person'].middleName.split(" ", 1).toString() + ' ' + memberFound['@person'].lastName
     memberFound = memberFound['@person'];
     updateHouseholdMember(memberFound, {type: 'household-member'});
