@@ -885,6 +885,55 @@ export function addUpdateEmploymentResponsibilities(personId, responsibilities) 
     }));
 }
 
+export function addUpdateEmploymentHoursWorked(personId, hours) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'employment': {
+        ...(details['employment'] || {}),
+        hours
+      }
+    }));
+}
+
+export function addUpdateEmploymentTravel(personId, modeOfTravel) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'employment': {
+        ...(details['employment'] || {}),
+        modeOfTravel
+      }
+    }));
+}
+
+export function addUpdateEmploymentMainlyWork(personId, mainlyWork) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'employment': {
+        ...(details['employment'] || {}),
+        mainlyWork
+      }
+    }));
+    
+}export function addUpdateEmploymentWorkUK(personId, workUK) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'employment': {
+        ...(details['employment'] || {}),
+        workUK
+      }
+    }));
+}
+
+export function addUpdateEmploymentWorkplaceAddress(personId, workAddress) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'employment': {
+        ...(details['employment'] || {}),
+        workAddress
+      }
+    }));
+}
+
 export function getPins() {
   return JSON.parse(sessionStorage.getItem(PERSONAL_PINS_KEY)) || {};
 }

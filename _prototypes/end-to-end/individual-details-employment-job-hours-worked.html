@@ -21,7 +21,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password"
-                      action="../individual-details-employment-job-hours-worked">
+                      action="../individual-details-employment-job-travel-to">
                     <input autocomplete="new-password" type="hidden" name="person_id" id="person"
                            value="#"/>
                     <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
@@ -32,7 +32,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title u-fs-xl js-heading">
-                                        Do you supervise or oversee the work of other employees on a day-to-day basis?
+                                        In your main job, how many hours a week do you usually work?
                                     </h1>
                                 </div>
 
@@ -44,26 +44,52 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                     <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
                                                            name="radio-group"
-                                                           id="yes"
-                                                           value="yes">
+                                                           id="0-15"
+                                                           value="0 to 15 hours">
                                                     <label class="label label--inline"
-                                                           for="yes"
-                                                           id="yes-label">
+                                                           for="0-15"
+                                                           id="0-15-label">
                                                         <strong
-                                                                class="u-fs-r">Yes</strong>
+                                                                class="u-fs-r">0 to 15 hours</strong>
                                                     </label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
                                                     <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
                                                            name="radio-group"
-                                                           id="no"
-                                                           value="no">
+                                                           id="16-30"
+                                                           value="16 to 30 hours">
                                                     <label class="label label--inline"
-                                                           for="no"
-                                                           id="no-label">
+                                                           for="16-30"
+                                                           id="16-30-label">
                                                         <strong
-                                                                class="u-fs-r">No</strong>
+                                                                class="u-fs-r">16 to 30 hours</strong>
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="radio-group"
+                                                           id="31-48"
+                                                           value="31 to 48 hours">
+                                                    <label class="label label--inline"
+                                                           for="31-48"
+                                                           id="31-48-label">
+                                                        <strong
+                                                                class="u-fs-r">31 to 48 hours</strong>
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="radio-group"
+                                                           id="49-more"
+                                                           value="49 hours or more">
+                                                    <label class="label label--inline"
+                                                           for="49-more"
+                                                           id="49-more-label">
+                                                        <strong
+                                                                class="u-fs-r">49 hours or more</strong>
                                                     </label>
                                                 </div>
                                             </fieldset>
@@ -99,7 +125,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
     var val = $('[name="radio-group"]:checked').val();
 
-    storageAPI.addUpdateEmploymentResponsibilities(personId, val);
+    storageAPI.addUpdateEmploymentHoursWorked(personId, val);
 
     if(isEditing) {
       e.preventDefault();
@@ -118,13 +144,13 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('Does ' + '<em class="highlight">' + person.fullName + '</em>' +
-        ' supervise or oversee the work of other employees on a day-to-day basis?');
+      $('.js-heading').html('In ' + '<em class="highlight">' + person.fullName + window.ONS.utils.trailingNameS(person.fullName) + '</em>' +
+        ' main job, how many hours a week do they usually work?');
     }
   }
 
   if (details && details['employment']) {
-    $('#' + details['employment'].responsibilities).attr('checked', true);
+    $('#' + details['employment'].hours).attr('checked', true);
   }
 
   $(updateQuestion);
