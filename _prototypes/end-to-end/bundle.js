@@ -133,6 +133,11 @@ import {
   addUpdateEmploymentJobDescription,
   addUpdateEmploymentBusinessActivity,
   addUpdateEmploymentResponsibilities,
+  addUpdateEmploymentHoursWorked,
+  addUpdateEmploymentTravel,
+  addUpdateEmploymentMainlyWork,
+  addUpdateEmploymentWorkUK,
+  addUpdateEmploymentWorkplaceAddress,
 
   personalDetailsMaritalStatusMap,
   personalDetailsCountryMap,
@@ -722,6 +727,11 @@ window.ONS.storage = {
   addUpdateEmploymentJobDescription,
   addUpdateEmploymentBusinessActivity,
   addUpdateEmploymentResponsibilities,
+  addUpdateEmploymentHoursWorked,
+  addUpdateEmploymentTravel,
+  addUpdateEmploymentMainlyWork,
+  addUpdateEmploymentWorkUK,
+  addUpdateEmploymentWorkplaceAddress,
 
   personalDetailsMaritalStatusMap,
   personalDetailsCountryMap,
