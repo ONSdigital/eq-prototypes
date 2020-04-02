@@ -7,9 +7,23 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 hideSaveLater: true
 ---
 
+<style>
+    p.field {
+      margin-bottom: 1rem!important;
+    }
+
+    .input--text-lg {
+        width : 100%;
+    }
+
+    .input--text-postcode {
+        max-width : 9.25rem;
+    }
+</style>
+
 <link rel="stylesheet" href="../style.css"/>
-<link rel="stylesheet" href="../assets/modules/uac/uac.css"/>
 <div class="page__subheader">
+
 </div>
 
 <div class="page__container container">
@@ -32,45 +46,56 @@ hideSaveLater: true
                     </div>
                 </div>
 
-                <div class="group" id="what-is-your-address-group">
-                    <div class="block" id="what-is-your-address">
-                        <div class="question">
-                            <h1 class="question__title u-fs-xl"
-                                data-qa="question-title">
-                                Start census
-                            </h1>
-                            <div class="field uac__field panel panel--info panel--simple">
-                                <label class="label" for="uac">Enter your 16 character access code
-                                    <br>
-                                    <span class="label__description">Keep this code safe and only share it with others in your household</span>
-                                </label>
-                                <input type="text" id="uac" class="input input--text input-type__input uac__input js-uac u-mb-xs" name="uac" maxlength="19" data-group-size="4" autocomplete="off" />
-                                <a href="#" class="u-fs-s">Where to find your access code</a>
+                <div class="block" id="what-is-your-address">
+                    <div class="question"
+                          id="what-is-your-address-question">
+                        <h1 class="question__title u-fs-xl"
+                            data-qa="question-title">
+                            Initiate prototype. Enter participant's address
+                        </h1>
+
+                        <fieldset
+                                class="question__fieldset js-question-fieldset u-mb-m">
+
+                            <legend class="u-vh">Initiate prototype. Enter participant's address
+                            </legend>
+
+                            <div class="question__answers">
+                                <div class="question__answer">
+                                    <div class="answer answer--textfield " id="container-address-line-1">
+                                        <div class="answer__fields js-fields">
+                                          <p class="field">
+                                            <label class="label" for="address-line-1">Address line 1</label>
+                                            <input autocomplete="new-password" type="text" id="address-line-1" class="input input--text input-type__input input--w-20@m" name="address-line-1" />
+                                          </p>
+                                          <p class="field">
+                                            <label class="label" for="address-line-2">Address line 2</label>
+                                            <input autocomplete="new-password" type="text" id="address-line-2" class="input input--text input-type__input input--w-20@m" name="address-line-2" />
+                                          </p>
+                                          <p class="field">
+                                            <label class="label" for="address-town">Town or City</label>
+                                            <input autocomplete="new-password" type="text" id="address-town" class="input input--text input-type__input " name="address-town" />
+                                          </p>
+                                          <p class="field">
+                                            <label class="label" for="address-county">County</label>
+                                            <input autocomplete="new-password" type="text" id="address-county" class="input input--text input-type__input " name="address-county" />
+                                          </p>
+                                          <p class="field">
+                                            <label class="label" for="address-postcode">Postcode</label>
+                                            <input autocomplete="new-password" type="text" id="address-postcode" class="input input--text input-type__input input--w-5" name="address-postcode" />
+                                          </p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="uac__security u-mt-m">
-                                <div class="uac__icon"><span class="icon icon--lock"></span></div>
-                                <p class="uac__message">Your personal information is protected by law and will be kept confidential.</p>
-                            </div>
-                            <button class="btn btn-submit btn--primary btn--lg"
-                                    data-qa="btn-submit" type="submit"
-                                    name="action[save_continue]">Access census
-                            </button>                        
-                        </div>
-                    </div>
-                    <div>
-                        <h2 class="u-fs-m u-mt-xl">If you don't have a household access code</h2>
-                        <p>You can <a href="#" class="f">request a new household access code</a> to start a new census if you have lost or not received an access code.</p>
-                    </div>
-                    <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple js-visitor-definition u-mb-xs">
-                        <div class="js-collapsible-content">
-                            <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Why do I have to include visitors?">Need to answer separately from your household?</h3>
-                            <div class="collapsible__body js-collapsible-body">
-                                <p>If you need to answer separately from the people you live with, you can <a href="#" class="f">request an individual access code</a> to start a separate census.</p>
-                                <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="What does /"usually live/" mean?">Hide this</button>                                           
-                            </div>
-                        </div>
+                        </fieldset>
                     </div>
                 </div>
+
+                <button class="btn btn-submit btn--primary btn--lg"
+                        data-qa="btn-submit" type="submit"
+                        name="action[save_continue]">Save and launch prototype
+                </button>
             </main>
         </div>
     </div>
@@ -79,14 +104,49 @@ hideSaveLater: true
 <script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
-  document.dispatchEvent(new CustomEvent('UAC-READY'));
-
   $('.btn-submit').click(function(e) {
-    e.preventDefault();
+    e.preventDefault(); // do not submit the form like usual
 
-    var urlParams = new URLSearchParams(window.location.search),
-      redirect = urlParams.get('redirect');
+    var isEditing =
+      new URLSearchParams(window.location.search).get('edit') === 'true';
 
-    window.location = !redirect ? '../test-address/' : redirect;
+    sessionStorage.setItem('address', getAddress());
+
+    sessionStorage.setItem('address-line-1', document.getElementById('address-line-1').value);
+    sessionStorage.setItem('address-line-2', document.getElementById('address-line-2').value);
+    sessionStorage.setItem('address-town', document.getElementById('address-town').value);
+    sessionStorage.setItem('address-county', document.getElementById('address-county').value);
+    sessionStorage.setItem('address-postcode', document.getElementById('address-postcode').value);
+
+    window.location = '../home/';
   });
+
+  function getAddress() {
+    var array = [
+
+      document.getElementById('address-line-1').value,
+      document.getElementById('address-line-2').value,
+      document.getElementById('address-town').value,
+      document.getElementById('address-county').value,
+      document.getElementById('address-postcode').value,
+
+    ];
+    return array.filter(filterAddressLine).join(', ');
+  }
+
+  function filterAddressLine(value) {
+    return value;
+  }
+
+  if (window.location.search == '?edit=true') {
+    function updateEditableAddress() {
+      $('#address-line-1').val(sessionStorage.getItem('address-line-1'));
+      $('#address-line-2').val(sessionStorage.getItem('address-line-2'));
+      $('#address-town').val(sessionStorage.getItem('address-town'));
+      $('#address-county').val(sessionStorage.getItem('address-county'));
+      $('#address-postcode').val(sessionStorage.getItem('address-postcode'));
+    }
+  $(updateEditableAddress);
+  }
+
 </script>

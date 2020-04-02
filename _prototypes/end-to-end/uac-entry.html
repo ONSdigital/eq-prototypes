@@ -6,6 +6,7 @@ layout: eq-default-extras
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 hideSaveLater: true
 ---
+
 <link rel="stylesheet" href="../style.css"/>
 <link rel="stylesheet" href="../assets/modules/uac/uac.css"/>
 <div class="page__subheader">
@@ -38,14 +39,14 @@ hideSaveLater: true
                                 data-qa="question-title">
                                 Start census
                             </h1>
-                            <p class="field uac__field panel panel--info panel--simple">
+                            <div class="field uac__field panel panel--info panel--simple">
                                 <label class="label" for="uac">Enter your 16 character access code
                                     <br>
                                     <span class="label__description">Keep this code safe and only share it with others in your household</span>
                                 </label>
                                 <input type="text" id="uac" class="input input--text input-type__input uac__input js-uac u-mb-xs" name="uac" maxlength="19" data-group-size="4" autocomplete="off" />
-                                <span class="u-fs-s"><a href="#">Where to find your access code</a></span>
-                            </p>
+                                <a href="#" class="u-fs-s">Where to find your access code</a>
+                            </div>
                             <div class="uac__security u-mt-m">
                                 <div class="uac__icon"><span class="icon icon--lock"></span></div>
                                 <p class="uac__message">Your personal information is protected by law and will be kept confidential.</p>
@@ -57,11 +58,19 @@ hideSaveLater: true
                         </div>
                     </div>
                     <div>
-                        <br>
-                        <strong>If you don't have a code</strong>
-                        <p>You can request a new code if you have lost, forgotten or not received an
-                        access code. <a href="#" class="footer2__link">Request a new code to start a new survey</a></p>
+                        <h2 class="u-fs-m u-mt-xl">If you don't have a household access code</h2>
+                        <p>You can <a href="#" class="f">request a new household access code</a> to start a new census if you have lost or not received an access code.</p>
                     </div>
+                    <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple js-visitor-definition u-mb-xs">
+                        <div class="js-collapsible-content">
+                            <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Why do I have to include visitors?">Need to answer separately from your household?</h3>
+                            <div class="collapsible__body js-collapsible-body">
+                                <p>If you need to answer separately from the people you live with, you can <a href="#" class="f">request an individual access code</a> to start a separate census.</p>
+                                <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="What does /"usually live/" mean?">Hide this</button>                                           
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </main>
         </div>
     </div>
@@ -70,12 +79,14 @@ hideSaveLater: true
 <script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
+  document.dispatchEvent(new CustomEvent('UAC-READY'));
+
   $('.btn-submit').click(function(e) {
     e.preventDefault();
 
     var urlParams = new URLSearchParams(window.location.search),
       redirect = urlParams.get('redirect');
 
-    window.location = !redirect ? '../confirm-address/' : redirect;
+    window.location = !redirect ? '../confirm-address/?previous=uac-entry' : redirect;
   });
 </script>
