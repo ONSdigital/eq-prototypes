@@ -1,0 +1,154 @@
+---
+title: Version 1
+project: End to end prototype
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../individual-details-school">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password"
+                      action="../individual-details-country">
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
+                           value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-xl js-heading">
+                                        During term time, where do you usually live?
+                                    </h1>
+                                </div>
+
+                                <div class="answer">
+                                    <div class="answer__fields js-fields">
+                                        <div class="field field--radio field--multiplechoice ">
+                                            <fieldset class="u-mb-xl">
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="student-address"
+                                                           id="home-address"
+                                                           value="Home address">
+                                                    <label class="label label--inline"
+                                                           for="home-address"
+                                                           id="home-address-label">
+                                                        Address not set
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="student-address"
+                                                           id="other-student-address"
+                                                           value="Another address">
+                                                    <label class="label label--inline"
+                                                           for="other-student-address"
+                                                           id="other-student-address-label">
+                                                        Another address
+                                                    </label>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+
+                    
+                        <p><a href="../hub" class="js-choose-another-section">Choose another section and
+                            return
+                            to this question later</a></p>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person_id'),
+    member = storageAPI.getHouseholdMemberByPersonId(personId),
+    person = member['@person'],
+    isEditing = urlParams.get('edit'),
+    isVisitor = storageAPI.isVisitor(member),
+    details = storageAPI.getPersonalDetailsFor(personId),
+    surveyType = urlParams.get('survey');
+    storageAPI.personalBookmark(personId, window.location.href);
+  
+  $('#home-address-label').text(updateAddress());
+
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+        e.preventDefault();
+
+        var val = $('[name="student-address"]:checked').val();
+        if (val == 'home-address') {
+            val = updateAddress();
+        }
+        storageAPI.addUpdateStudentAddress(personId, val);
+
+        if(isEditing) {
+            window.location.href = '../individual-details-summary/?person_id=' +
+                personId + (surveyType ? '&survey=' + surveyType : '');
+        }
+        
+        if(val === 'Home address' || val == null) {
+            window.location.href = '../individual-details-country/?person_id=' +
+                personId + (surveyType ? '&survey=' + surveyType : '');
+        } else if (val === 'Another address'){
+            window.location.href = '../individual-details-student-address-other/?person_id=' +
+                personId + (surveyType ? '&survey=' + surveyType : '');
+        }
+  }));
+
+  function updateAddress() {
+    var addressLines = (sessionStorage.getItem('address') || '').split(','),
+    addressLine1 = addressLines[0];
+
+    return addressLine1;
+  }
+
+  function updateQuestion() {
+    if(storageAPI.getAnsweringIndividualByProxy()) {
+        $('.js-heading').html(' During term time, where does ' + '<em class="highlight">' + person.firstLastName + '</em>' +
+        ' usually live?');
+    }
+  }
+
+ function updateAllPreviousLinks() {
+      $('.js-previous-link').attr('href', '../individual-details-school/?person_id=' + personId);
+  }
+
+  $(updateAllPreviousLinks);
+  $(updateAddress);
+  $(updateQuestion);
+
+  /**
+   * Routing
+   */
+  $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
+</script>
