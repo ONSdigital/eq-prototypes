@@ -1,6 +1,6 @@
 ---
-title: IR - Household prototype v15
-project: Individual Response
+title: Version 1
+project: End to end prototype
 globalcss: false
 layout: eq-default-extras
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
@@ -190,7 +190,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     </div>
 </div>
 
-<script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
+<script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
   var storageAPI = window.ONS.storage,
@@ -234,8 +234,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('On <span class="js-significant-date">' + window.ONS.utils.getSignificant() + '</span>, what is ' + '<em class="highlight">' + person.fullName + 
-      window.ONS.utils.trailingNameS(person.fullName) + '</em>' +
+      $('.js-heading').html('On <span class="js-significant-date">' + window.ONS.utils.getSignificant() + '</span>, what is ' + '<em class="highlight">' + person.firstLastName + 
+      window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
         ' legal marital or registered civil partnership status?');
     }
   }

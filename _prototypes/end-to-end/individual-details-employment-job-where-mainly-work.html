@@ -1,0 +1,179 @@
+---
+title: Version 1
+project: End to end prototype
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password"
+                      action="../individual-details-summary">
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
+                           value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-xl js-heading">
+                                        Where do you mainly work?
+                                    </h1>
+                                </div>
+
+                                <div class="answer">
+                                    <div class="answer__fields js-fields">
+                                        <div class="field field--radio field--multiplechoice ">
+                                            <fieldset class="u-mb-xl">
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="radio-group"
+                                                           id="workplace"
+                                                           value="At a workplace">
+                                                    <label class="label label--inline"
+                                                           for="workplace"
+                                                           id="workplace-label">
+                                                        <strong class="u-fs-r">At a workplace</strong>
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="radio-group"
+                                                           id="depot"
+                                                           value="Report to a depot">
+                                                    <label class="label label--inline"
+                                                           for="depot"
+                                                           id="depot-label">
+                                                        <strong class="u-fs-r">Report to a depot</strong>
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="radio-group"
+                                                           id="home"
+                                                           value="At or from home">
+                                                    <label class="label label--inline"
+                                                           for="home"
+                                                           id="home-label">
+                                                        <strong class="u-fs-r">At or from home</strong>
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="radio-group"
+                                                           id="offshore"
+                                                           value="An offshore installation">
+                                                    <label class="label label--inline"
+                                                           for="offshore"
+                                                           id="offshore-label">
+                                                        <strong class="u-fs-r">An offshore installation</strong>
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="radio-group"
+                                                           id="no-fixed"
+                                                           value="No fixed place">
+                                                    <label class="label label--inline"
+                                                           for="no-fixed"
+                                                           id="no-fixed-label">
+                                                        <strong class="u-fs-r">No fixed place</strong>
+                                                    </label>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+                    <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person_id'),
+    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+    isEditing = urlParams.get('edit'),
+    details = storageAPI.getPersonalDetailsFor(personId),
+    surveyType = urlParams.get('survey');
+
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+
+    var val = $('[name="radio-group"]:checked').val();
+
+    storageAPI.addUpdateEmploymentMainlyWork(personId, val);
+    e.preventDefault();
+
+    if(isEditing) {
+      window.location.href = '../individual-details-summary/?person_id=' + personId +
+        (surveyType ? '&survey=' + surveyType : '');
+    }
+
+    if((val === 'At a workplace') || (val === 'Report to a depot')) {
+        window.location.href = '../individual-details-employment-job-work-in-uk/?person_id=' + personId +
+        (surveyType ? '&survey=' + surveyType : '');
+    }
+    else {
+        window.location.href = '../individual-details-summary/?person_id=' + personId +
+        (surveyType ? '&survey=' + surveyType : '');
+    }
+  }));
+
+  function updateRouting() {
+    if(surveyType) {
+      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    }
+    $('#survey-type').val(surveyType);
+  }
+
+  function updateQuestion() {
+    if(storageAPI.getAnsweringIndividualByProxy()) {
+      $('.js-heading').html('Where does ' + '<em class="highlight">' + person.firstLastName + '</em>' +
+        ' mainly work?');
+    }
+  }
+
+  if (details && details['employment']) {
+    $('#' + details['employment'].mainlyWork).attr('checked', true);
+  }
+
+  $(updateQuestion);
+  $(updateRouting);
+
+  /**
+   * Routing
+   */
+  $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
+</script>

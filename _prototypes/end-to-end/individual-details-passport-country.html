@@ -1,6 +1,6 @@
 ---
-title: IR - Household prototype v15
-project: Individual Response
+title: Version 1
+project: End to end prototype
 globalcss: false
 layout: eq-default-extras
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
@@ -24,7 +24,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password"
-                      action="../individual-details-apprenticeship/">
+                      action="../individual-details-health/">
                     <input autocomplete="new-password" type="hidden" name="person_id" id="person"
                            value="#"/>
                     <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
@@ -76,7 +76,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                     <label class="label label--inline u-fs-r "
                                                            for="other"
                                                            id="other-label">
-                                                        Other</label>
+                                                        Other
+                                                        <br>
+                                                        <p class="u-fs-s u-db u-mb-no label--negative">
+                                                            You can enter your passports on the next question
+                                                        </p>
+                                                        </label>
                                                 </div>
                                                 <div class="field__label u-mt-s u-fs-r--b" aria-hidden="true">Or</div>
                                                 <div class="field__item">
@@ -121,7 +126,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     </div>
 </div>
 
-<script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
+<script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
   var storageAPI = window.ONS.storage,
@@ -165,8 +170,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('What passports does ' + '<em class="highlight">' + person.fullName + '</em>' +
-        ' hold?');
+      $('.js-heading').html('What passports do ' + '<em class="highlight">' + person.firstLastName + '</em>' + ' hold?');
     }
   }
 

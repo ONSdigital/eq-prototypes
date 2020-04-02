@@ -74,16 +74,40 @@ import {
   getPersonalDetailsFor,
   removePersonalDetailsFor,
   addUpdateMaritalStatus,
+  addUpdate30DayAddressUk,
+  addUpdate30DayAddressType,
+  addUpdate30DayCountry,
   addUpdateCountry,
   addUpdateCountryOther,
+  addUpdateCountryOtherArrive,
+  addUpdateCountryOtherArriveCensus,
+  addUpdateCountryOtherStay,
+  addUpdateSchool,
+  addUpdateStudent,
+  addUpdateStudentAddress,
+  addUpdateStudentAddressUk,
+  addUpdateStudentAddressCountry,
+  addUpdateYearAgoAddress,
+  addUpdateYearAgoAddressUk,
+  addUpdateYearAgoAddressCountry,
   addUpdateNationalIdentity,
   addUpdateNationalIdentityOther,
   addUpdateEthnicGroup,
   addUpdateEthnicGroupDescription,
   addUpdateEthnicGroupOther,
+  addUpdateReligion,
+  addUpdateReligionOther,
+  addUpdateLanguage,
+  addUpdateLanguageOther,
+  addUpdateLanguageEnglish,
   addUpdatePassportCountry,
   addUpdatePassportCountryOther,
+  addUpdateHealth,
+  addUpdateHealthConditions,
+  addUpdateHealthConditionsAbilities,
+  addUpdateHealthSupport,
   addUpdateOrientation,
+  addUpdateIdentity,
   addUpdateSalary,
   addUpdateSex,
   addUpdateAddressWhere,
@@ -97,9 +121,23 @@ import {
   addUpdateQualificationsALevel,
   addUpdateQualificationsGCSEs,
   addUpdateQualificationsOtherWhere,
+  addUpdateArmedForces,
+  addUpdateLastSevenDays,
+  addUpdateLastSevenDaysDescription,
+  addUpdateEmploymentFourWeeks,
+  addUpdateEmploymentPaidWorkConfirm,
+  addUpdateEmploymentAcceptedJob,
   addUpdateEmploymentStatus,
-  addUpdateJobTitle,
-  addUpdateJobDescribe,
+  addUpdateEmploymentName,
+  addUpdateEmploymentJobTitle,
+  addUpdateEmploymentJobDescription,
+  addUpdateEmploymentBusinessActivity,
+  addUpdateEmploymentResponsibilities,
+  addUpdateEmploymentHoursWorked,
+  addUpdateEmploymentTravel,
+  addUpdateEmploymentMainlyWork,
+  addUpdateEmploymentWorkUK,
+  addUpdateEmploymentWorkplaceAddress,
 
   personalDetailsMaritalStatusMap,
   personalDetailsCountryMap,
@@ -329,13 +367,13 @@ function updateBySurveyType() {
   const urlParams = new URLSearchParams(window.location.search),
     surveyType = urlParams.get('survey');
 
-  if (surveyType) {
-    $('.js-header-title').html(surveyTypeConfig[surveyType].title);
-    $('#people-living-here').html(surveyTypeConfig[surveyType].householdSectionTitle);
-    $('#people-living-here').attr('href', surveyTypeConfig[surveyType].householdSectionLink);
-    $('#relationships-section').attr('href', surveyTypeConfig[surveyType].relationshipsSection);
-    $('title').html(surveyTypeConfig[surveyType].title);
-  }
+  // if (surveyType) {
+  //   $('.js-header-title').html(surveyTypeConfig[surveyType].title);
+  //   $('#people-living-here').html(surveyTypeConfig[surveyType].householdSectionTitle);
+  //   $('#people-living-here').attr('href', surveyTypeConfig[surveyType].householdSectionLink);
+  //   $('#relationships-section').attr('href', surveyTypeConfig[surveyType].relationshipsSection);
+  //   $('title').html(surveyTypeConfig[surveyType].title);
+  // }
 }
 
 function setAnsweringIndividualByProxy(bool) {
@@ -461,6 +499,8 @@ function updateContinueNotice() {
   if (!isContinuing) {
     return false;
   }
+  
+  const member = storageAPI.getAllHouseholdMembers().filter(storageAPI.isVisitor);
   const link = isVisitor(member) ? '../visitor-intro/' : '../individual-intro/';
   const template = `<div class="panel panel--simple panel--info u-mb-s">
       <div class="panel__body">
@@ -628,16 +668,40 @@ window.ONS.storage = {
   getPersonalDetailsFor,
   removePersonalDetailsFor,
   addUpdateMaritalStatus,
+  addUpdate30DayAddressType,
+  addUpdate30DayAddressUk,
+  addUpdate30DayCountry,
+  addUpdateSchool,
+  addUpdateStudent,
+  addUpdateStudentAddress,
+  addUpdateStudentAddressUk,
+  addUpdateStudentAddressCountry,
   addUpdateCountry,
   addUpdateCountryOther,
+  addUpdateCountryOtherArrive,
+  addUpdateCountryOtherArriveCensus,
+  addUpdateCountryOtherStay,
+  addUpdateYearAgoAddress,
+  addUpdateYearAgoAddressUk,
+  addUpdateYearAgoAddressCountry,
   addUpdateNationalIdentity,
   addUpdateNationalIdentityOther,
   addUpdateEthnicGroup,
   addUpdateEthnicGroupDescription,
   addUpdateEthnicGroupOther,
+  addUpdateReligion,
+  addUpdateReligionOther,
+  addUpdateLanguage,
+  addUpdateLanguageOther,
+  addUpdateLanguageEnglish,
   addUpdatePassportCountry,
   addUpdatePassportCountryOther,
+  addUpdateHealth,
+  addUpdateHealthConditions,
+  addUpdateHealthConditionsAbilities,
+  addUpdateHealthSupport,
   addUpdateOrientation,
+  addUpdateIdentity,
   addUpdateSalary,
   addUpdateSex,
   addUpdateAddressWhere,
@@ -651,9 +715,23 @@ window.ONS.storage = {
   addUpdateQualificationsALevel,
   addUpdateQualificationsGCSEs,
   addUpdateQualificationsOtherWhere,
+  addUpdateArmedForces,
+  addUpdateLastSevenDays,
+  addUpdateLastSevenDaysDescription,
+  addUpdateEmploymentFourWeeks,
+  addUpdateEmploymentPaidWorkConfirm,
+  addUpdateEmploymentAcceptedJob,
   addUpdateEmploymentStatus,
-  addUpdateJobTitle,
-  addUpdateJobDescribe,
+  addUpdateEmploymentName,
+  addUpdateEmploymentJobTitle,
+  addUpdateEmploymentJobDescription,
+  addUpdateEmploymentBusinessActivity,
+  addUpdateEmploymentResponsibilities,
+  addUpdateEmploymentHoursWorked,
+  addUpdateEmploymentTravel,
+  addUpdateEmploymentMainlyWork,
+  addUpdateEmploymentWorkUK,
+  addUpdateEmploymentWorkplaceAddress,
 
   personalDetailsMaritalStatusMap,
   personalDetailsCountryMap,

@@ -1,6 +1,6 @@
 ---
-title: IR - Household prototype v15
-project: Individual Response
+title: Version 1
+project: End to end prototype
 globalcss: false
 layout: eq-default-extras
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
@@ -79,7 +79,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            id="a-level-1-btec-label">
                                                         <strong class="u-fs-r">1 A level</strong>
                                                         <p class="u-fs-s u-db u-mb-no label--negative">
-                                                            For example BTEC General, City and Guilds Craft
+                                                            Include 2 to 3 AS levels
                                                         </p>
                                                     </label>
                                                 </div>
@@ -118,8 +118,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            for="none"
                                                            id="none-label">
                                                         <span class="u-vh">Or,</span>
-                                                        None<span
+                                                        None of these apply<span
                                                             class="u-vh">. Selecting this will uncheck all other checkboxes</span>
+                                                        <p class="u-fs-s u-db u-mb-no label--negative">
+                                                            Questions on GCSEs and equivalent will follow
+                                                        </p>
                                                     </label>
                                                     <span class="js-exclusive-alert u-vh"
                                                           role="alert"
@@ -151,7 +154,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     </div>
 </div>
 
-<script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
+<script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
   var storageAPI = window.ONS.storage,
@@ -188,7 +191,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('Has ' + '<em class="highlight">' + person.fullName + '</em>' +
+      $('.js-heading').html('Has ' + '<em class="highlight">' + person.firstLastName + '</em>' +
         ' achieved an AS, A level or equivalent qualification?');
     }
   }

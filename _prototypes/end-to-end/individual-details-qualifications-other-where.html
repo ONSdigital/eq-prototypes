@@ -1,6 +1,6 @@
 ---
-title: IR - Household prototype v15
-project: Individual Response
+title: Version 1
+project: End to end prototype
 globalcss: false
 layout: eq-default-extras
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
@@ -24,7 +24,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password"
-                      action="../individual-details-employment-status">
+                      action="../individual-details-armed-forces">
                     <input autocomplete="new-password" type="hidden" name="person_id" id="person"
                            value="#"/>
                     <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
@@ -115,7 +115,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     </div>
 </div>
 
-<script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
+<script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
   var storageAPI = window.ONS.storage,
@@ -152,7 +152,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('Has ' + '<em class="highlight">' + person.fullName + '</em>' +
+      $('.js-heading').html('Has ' + '<em class="highlight">' + person.firstLastName + '</em>' +
         ' achieved any other qualifications?');
     }
   }

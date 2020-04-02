@@ -1,6 +1,6 @@
 ---
-title: IR - Household prototype v15
-project: Individual Response
+title: Version 1
+project: End to end prototype
 globalcss: false
 layout: eq-default-extras
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
@@ -9,7 +9,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous-link" href="../household-accom-heating">Previous</a>
+        <a class="js-previous" href="../household-accom-own-rent">Previous</a>
     </div>
 </div>
 
@@ -20,8 +20,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password">
-                    <div class="group" id="rsi">
-                        <div class="block" id="total-retail-turnover">
+                    <div class="group" id="accommodation">
+                        <div class="block" id="veichles">
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
@@ -93,32 +93,30 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                         4
                                                     </label>
                                                 </div>
-                                                <p class="radios__item">
-                                                    <span class="radio">
-                                                        <div class="field__item js-focusable-box">
-                                                            <input autocomplete="new-password" class="input input--radio js-focusable"
-                                                                type="radio"
-                                                                name="no-of-veichles"
-                                                                id="5-or-more"
-                                                                value="5-or-more">
-                                                            <label class="label label--inline"
-                                                                for="5-or-more"
-                                                                id="5-or-more-label">
-                                                                5 or more
-                                                            </label>
-                                                            <span class="radio__other " id="5-or-more-radio-wrap">
-                                                                <label class="label u-fs-s--b"
-                                                                    for="other-radio">Please specify</label>
-                                                                <input
-                                                                    type="text"
-                                                                    id="other-radio"
-                                                                    class="input input--text input-type__input input--w-auto "
-                                                                    name="other-answer"
-                                                                />
-                                                            </span>
-                                                        </div>
+                                                <div>
+                                                    <span id="5-or-more-radio-wrap-field" class="field__item js-focusable-box">
+                                                        <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                            type="radio"
+                                                            name="no-of-veichles"
+                                                            id="5-or-more"
+                                                            value="5 or more">
+                                                        <label class="label label--inline"
+                                                            for="5-or-more"
+                                                            id="5-or-more-label">
+                                                            5 or more
+                                                        </label>
+                                                        <span class="radio__other radio__other--open" id="5-or-more-radio-wrap">
+                                                            <label id="5-or-more-radio-wrap-label" class="label u-fs-s--b"
+                                                                for="other-textbox">Please specify</label>
+                                                            <input
+                                                                type="text"
+                                                                id="other-textbox"
+                                                                class="input input--text input-type__input  input--w-auto"
+                                                                name="other-answer"
+                                                            />
+                                                        </span>
                                                     </span>
-                                                </p>
+                                                </div>
                                             </fieldset>
                                         </div>
                                     </div>
@@ -135,28 +133,45 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     </div>
 </div>
 
-<script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
+<script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
-    $(function () {
-        if(sessionStorage.getItem('address-line-1')) {
-        $('.full-address-text').html((sessionStorage.getItem('address-line-1') || '').replace(/,/g, ''));
+    var question = $('#question-title').html(),
+        currentPage = '../household-accom-veichles';
+    window.sessionStorage.setItem('accommodation-completed-status', currentPage);
+/*
+    $(window).on('load', function() {
+        if ($('input[type=radio][id=5-or-more]').prop('checked')) {
+            $('#5-or-more-radio-wrap').removeClass('u-vh');
         }
     });
+*/
+    $('#other-textbox').focus(function() {
+        $('input[type=radio][id=5-or-more]').prop('checked', true);
+        //$('#5-or-more-radio-wrap').removeClass('u-vh');
+    });
+/*
+    $('input[type=radio][id=5-or-more]').change(function() {
+        $('#5-or-more-radio-wrap').removeClass('u-vh');
+    });
+*/
+    $('.qa-btn-submit').on('click', function (e) {
+        var val = $('input[type=radio][name=no-of-veichles]:checked').attr('value')
+        question = question.trim();
 
-    $('.qa-btn-submit').click(function(e) {
-    if (!nobox.checked) {
-      e.preventDefault();
+        if(val === '5 or more') {
+            var otherVal = $("input[type=text][id=other-textbox]").val();
+            window.sessionStorage.setItem('accommodation-no-of-veichles', JSON.stringify([question, otherVal, currentPage]));
+        } else {
+            window.sessionStorage.setItem('accommodation-no-of-veichles', JSON.stringify([question, val, currentPage]));
+        }
 
-      var awayTypes = [];
+        window.sessionStorage.setItem('accommodation-completed-status', 'completed');
+        e.preventDefault();
 
-      $('[name=away-type]:checked').each(function (i, el) {
-        awayTypes.push($(el).val());
-      });
+        window.location.href = '../hub';
+    });
 
-      window.location.href ='../visitor-name';
-    } else {
-      document.trav.action = "../household-accom-veichles";
-    }
-  });
+    $('.js-previous').attr('href', '../household-accom-own-rent');
+
 </script>

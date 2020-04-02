@@ -1,6 +1,6 @@
 ---
-title: IR - Household prototype v15
-project: Individual Response
+title: Version 1
+project: End to end prototype
 globalcss: false
 layout: eq-default-extras
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
@@ -61,20 +61,32 @@ hideSaveLater: true
                         </h1>
                     </div>
                 </div>
-                <h2 class="u-fs-r--b u-mb-xs">Didn't receive an email?</h2>
-                <p class="u-mb-m">It can take a few minutes for the email to arrive. If it doesn't arrive, you can <a href="../complete--confirmation-resend">send another confirmation email</a>.</p>
-               
+                <div class="js-resend-confirmation">
+                    <h2 class="u-fs-r--b u-mb-xs">Didn't receive an email?</h2>
+                    <p class="u-mb-m">It can take a few minutes for the email to arrive. If it doesn't arrive, you can <a class="js-resend-confirmation" href="../complete--confirmation-resend">send another confirmation email</a>.</p>
+                </div>
             </main>
         </div>
     </div>
 </div>
 
-<script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
+<script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
     var searchParams = new URLSearchParams(window.location.search);
     var emailAddress = searchParams.get('email');
     var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
+    var confirmationCounter = sessionStorage.getItem('confirmationCounter');
+
+
+    if (confirmationCounter) { 
+        var confirmationCounter = parseInt(confirmationCounter) + 1;
+        sessionStorage.setItem('confirmationCounter', confirmationCounter);
+    } else { 
+        var confirmationCounter = 1;
+        sessionStorage.setItem('confirmationCounter', confirmationCounter);
+    }
+    if (confirmationCounter > 2) { $('.js-resend-confirmation').hide() }
 
     pipingDestinations.forEach(function(pipingDestination) {
         pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', emailAddress);

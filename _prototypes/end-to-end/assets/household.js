@@ -8,22 +8,47 @@ export const VISITOR_TYPE = 'visitor';
 /**
  * Types
  */
-export function person(opts) {
+export function person(opts, change) {
   if (opts.firstName === '' || opts.lastName === '') {
     console.log('Unable to create person with data: ',
       opts.firstName,
       !opts.middleName,
       !opts.lastName);
   }
-
+  let fullName = opts.firstName + ' ' + opts.lastName;
   let middleName = opts.middleName || '';
-
-  return {
-    fullName: opts.firstName + ' ' + middleName + ' ' + opts.lastName,
-    firstName: opts.firstName,
-    middleName,
-    lastName: opts.lastName
-  };
+  let memberFound = householdMemberExistByFullName(fullName);
+  if (memberFound) {
+    let middleNameCheck = JSON.stringify(memberFound['@person'].fullName).split(' ').length;
+    if (change && middleNameCheck < 3) {
+      return {
+        fullName: fullName,
+        firstLastName: fullName,
+        firstName: opts.firstName,
+        middleName: middleName,
+        lastName: opts.lastName
+      };
+    } else {
+      memberFound['@person'].fullName = memberFound['@person'].firstName + ' ' + memberFound['@person'].middleName + ' ' + memberFound['@person'].lastName
+      memberFound = memberFound['@person'];
+      updateHouseholdMember(memberFound, {type: 'household-member'});
+      return {
+        fullName: opts.firstName + ' ' + middleName + ' ' + opts.lastName,
+        firstLastName: fullName,
+        firstName: opts.firstName,
+        middleName: middleName,
+        lastName: opts.lastName
+      };
+    }
+  } else {
+    return {
+      fullName: fullName,
+      firstLastName: fullName,
+      firstName: opts.firstName,
+      middleName: middleName,
+      lastName: opts.lastName
+    };
+  }
 }
 
 /**
@@ -65,7 +90,6 @@ export function updateHouseholdMember(person, memberData) {
       ? {...member, ...memberData, '@person': {...member['@person'], ...person}}
       : member;
   });
-
   sessionStorage.setItem(HOUSEHOLD_MEMBERS_STORAGE_KEY,
     JSON.stringify(membersUpdated));
 }
@@ -96,6 +120,12 @@ export function getAllHouseholdMembers() {
 export function getHouseholdMemberByPersonId(id) {
   return getAllHouseholdMembers().find(function(member) {
     return member['@person'].id === id;
+  });
+}
+
+export function householdMemberExistByFullName(fullName) {
+  return getAllHouseholdMembers().find(function(member) {
+    return (member['@person'].firstName.toLowerCase() + ' ' + member['@person'].lastName.toLowerCase() === fullName.toLowerCase());
   });
 }
 

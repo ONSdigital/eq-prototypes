@@ -309,6 +309,17 @@ p.field {
     font-weight: normal;
 }
 
+.radio__other {
+    display: block;
+    padding-bottom: .6rem;
+    padding-left: .6rem;
+    padding-right: .6rem;
+}
+
+.input--radio:checked~.radio__other--open {
+    background-color: #f5f5f5;
+}
+
 .input--checkbox:checked~.label:before, 
 .input--radio:checked~.label:before {
     box-shadow: 0 0 0 2px #222;
@@ -337,7 +348,6 @@ p.field {
 
 .radio__input {
     border-radius: 50%;
-    background: #f0f0f0;
     -webkit-box-shadow: inset 0 0 0 3px #fff;
     box-shadow: inset 0 0 0 3px #fff;
     outline: none;
@@ -376,6 +386,7 @@ p.field {
     background: #d0d0d0;
     padding: 0.25rem 0.5rem;
 }
+
 .typeahead__option:not(:last-child){
     border-bottom: 1px solid #222;
 }
@@ -383,6 +394,7 @@ p.field {
 .typeahead__combobox--focused {
     box-shadow: none!important;
 }
+
 .typeahead__combobox--focused input {
     outline: none;
     -webkit-box-shadow: 0 0 0 3px #fd0!important;
@@ -403,6 +415,8 @@ p.field {
     outline: 1px solid #222;
     outline-offset: -2px;
 }
+
+
 .fieldset__legend {
     display: block;
     margin-bottom: .4rem;
@@ -410,14 +424,10 @@ p.field {
     font-weight: 400;
     font-size: 1rem;
 }
-/* .field__item > .label > p,
-.checkbox__description, 
-.radio__description,
-.label__description {
+
+.input--radio:not(:checked)~.field__other--open {
     display: block;
-    margin-top: .25rem;
-    margin-left: -1.85rem!important;
-} */
+}
 
 .collapsible__body {
     padding-left: 1.3rem;
