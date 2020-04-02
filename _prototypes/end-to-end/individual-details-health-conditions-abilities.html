@@ -123,8 +123,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
         if(storageAPI.getAnsweringIndividualByProxy()) {
-        $('.js-heading').html('Do any of ' + '<em class="highlight">' + person.fullName +
-            window.ONS.utils.trailingNameS(person.fullName) + '</em>' +
+        $('.js-heading').html('Do any of ' + '<em class="highlight">' + person.firstLastName +
+            window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
             ' conditions or illnesses reduce their ability to carry out day-to-day activities?');
         }
     }

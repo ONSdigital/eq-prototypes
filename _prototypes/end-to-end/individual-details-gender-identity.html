@@ -144,7 +144,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
       $('.js-heading').html('Is the gender '  + '<em class="highlight">' + 
-        person.fullName + '</em>' + ' identifies with the same as their sex registered at birth?');
+        person.firstLastName + '</em>' + ' identifies with the same as their sex registered at birth?');
     }
   }
 

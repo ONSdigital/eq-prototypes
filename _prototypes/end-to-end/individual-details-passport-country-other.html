@@ -113,11 +113,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     if(details && details.passport && details.passport.countries.length > 1) {
       $('.js-heading').html('You selected "Other". What other passports do you hold?');
       if(storageAPI.getAnsweringIndividualByProxy()) {
-        $('.js-heading').html('You selected "Other". What other passports do ' + '<em class="highlight">' + person.fullName + '</em>' +
+        $('.js-heading').html('You selected "Other". What other passports do ' + '<em class="highlight">' + person.firstLastName + '</em>' +
           ' hold.');
       }
     } else if(storageAPI.getAnsweringIndividualByProxy()) {
-        $('.js-heading').html('You selected "Other". What passports do ' + '<em class="highlight">' + person.fullName + '</em>' +
+        $('.js-heading').html('You selected "Other". What passports do ' + '<em class="highlight">' + person.firstLastName + '</em>' +
           ' hold.');
     }
   }

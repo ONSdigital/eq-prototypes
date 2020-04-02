@@ -98,7 +98,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-        $('.js-heading').html('You selected "Another address outside the UK". In Which country outside the UK was '  + '<em class="highlight">' + person.fullName + window.ONS.utils.trailingNameS(person.fullName) + '</em>' + ' address one year ago.');
+        $('.js-heading').html('You selected "Another address outside the UK". In Which country outside the UK was '  + '<em class="highlight">' + person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' + ' address one year ago.');
     }
   }
 

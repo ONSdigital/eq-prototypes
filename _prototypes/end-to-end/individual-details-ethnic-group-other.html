@@ -109,7 +109,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   function updateQuestion() {
     var str = 'How would you describe ' + 
       (storageAPI.getAnsweringIndividualByProxy()
-        ? '<em class="highlight">' + person.fullName + window.ONS.utils.trailingNameS(person.fullName) + '</em>'
+        ? '<em class="highlight">' + person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName) + '</em>'
         : 'your') +
       ' ' + storageAPI.personalDetailsEthnicGroupMap[ethnicGroup].question +
       ' ethnic group or background?';

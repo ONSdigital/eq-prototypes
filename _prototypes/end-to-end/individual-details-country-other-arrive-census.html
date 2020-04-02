@@ -124,7 +124,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-        $('.js-heading').html('Did ' + '<em class="highlight">' + person.fullName + '</em>' +
+        $('.js-heading').html('Did ' + '<em class="highlight">' + person.firstLastName + '</em>' +
         ' arrive in the UK on or after 12 October 2021?');
     }
   }

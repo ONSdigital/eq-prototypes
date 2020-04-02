@@ -8,7 +8,7 @@ export const VISITOR_TYPE = 'visitor';
 /**
  * Types
  */
-export function person(opts) {
+export function person(opts, change) {
   if (opts.firstName === '' || opts.lastName === '') {
     console.log('Unable to create person with data: ',
       opts.firstName,
@@ -18,22 +18,34 @@ export function person(opts) {
   let fullName = opts.firstName + ' ' + opts.lastName;
   let middleName = opts.middleName || '';
   let memberFound = householdMemberExistByFullName(fullName);
-
   if (memberFound) {
-    memberFound['@person'].fullName = memberFound['@person'].firstName + ' ' + memberFound['@person'].middleName.split(" ", 1).toString() + ' ' + memberFound['@person'].lastName
-    memberFound = memberFound['@person'];
-    updateHouseholdMember(memberFound, {type: 'household-member'});
-    return {
-      fullName: opts.firstName + ' ' + middleName.split(" ", 1).toString() + ' ' + opts.lastName,
-      firstName: opts.firstName,
-      middleName,
-      lastName: opts.lastName
-    };
+    let middleNameCheck = JSON.stringify(memberFound['@person'].fullName).split(' ').length;
+    if (change && middleNameCheck < 3) {
+      return {
+        fullName: fullName,
+        firstLastName: fullName,
+        firstName: opts.firstName,
+        middleName: middleName,
+        lastName: opts.lastName
+      };
+    } else {
+      memberFound['@person'].fullName = memberFound['@person'].firstName + ' ' + memberFound['@person'].middleName + ' ' + memberFound['@person'].lastName
+      memberFound = memberFound['@person'];
+      updateHouseholdMember(memberFound, {type: 'household-member'});
+      return {
+        fullName: opts.firstName + ' ' + middleName + ' ' + opts.lastName,
+        firstLastName: fullName,
+        firstName: opts.firstName,
+        middleName: middleName,
+        lastName: opts.lastName
+      };
+    }
   } else {
     return {
-      fullName: opts.firstName + ' ' + opts.lastName,
+      fullName: fullName,
+      firstLastName: fullName,
       firstName: opts.firstName,
-      middleName,
+      middleName: middleName,
       lastName: opts.lastName
     };
   }

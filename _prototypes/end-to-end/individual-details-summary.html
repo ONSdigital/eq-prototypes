@@ -518,6 +518,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     visitors = storageAPI.getAllHouseholdMembers().filter(storageAPI.isVisitor),
     visitor1 = visitors.length ? visitors[0] : null;
 
+  storageAPI.clearPersonalBookmark(personId);
+
   function createDataObj(year, month, day) {
     return moment(year + '-' + month + '-' + day, 'YYYY-MM-DD');
   }

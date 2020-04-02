@@ -234,8 +234,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('On <span class="js-significant-date">' + window.ONS.utils.getSignificant() + '</span>, what is ' + '<em class="highlight">' + person.fullName + 
-      window.ONS.utils.trailingNameS(person.fullName) + '</em>' +
+      $('.js-heading').html('On <span class="js-significant-date">' + window.ONS.utils.getSignificant() + '</span>, what is ' + '<em class="highlight">' + person.firstLastName + 
+      window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
         ' legal marital or registered civil partnership status?');
     }
   }

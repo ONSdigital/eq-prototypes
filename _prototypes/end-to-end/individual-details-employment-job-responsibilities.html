@@ -118,7 +118,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('Does ' + '<em class="highlight">' + person.fullName + '</em>' +
+      $('.js-heading').html('Does ' + '<em class="highlight">' + person.firstLastName + '</em>' +
         ' supervise or oversee the work of other employees on a day-to-day basis?');
     }
   }

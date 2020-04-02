@@ -147,8 +147,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     }
 
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('Who ' + headingTense + ' <em class="highlight">' + person.fullName + 
-      window.ONS.utils.trailingNameS(person.fullName) + '</em> ' +
+      $('.js-heading').html('Who ' + headingTense + ' <em class="highlight">' + person.firstLastName + 
+      window.ONS.utils.trailingNameS(person.firstLastName) + '</em> ' +
         maritalStatusHeading + ' to?');
     } else {
       $('.js-heading').html('Who ' + headingTense + ' your ' +

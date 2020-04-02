@@ -156,10 +156,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
     if(storageAPI.getAnsweringIndividualByProxy()) {
       $('.js-heading').html(
-        '<em class="highlight">' + person.fullName + '</em>' + ' is ' + age + ' years old. Is this correct?'
+        '<em class="highlight">' + person.firstLastName + '</em>' + ' is ' + age + ' years old. Is this correct?'
       );
       $('#yes-label').html(
-        'Yes, ' + person.fullName + ' is ' + age + ' years old');
+        'Yes, ' + person.firstLastName + ' is ' + age + ' years old');
 
       $('#no-label').html('No, I need to correct their date of birth');
     }

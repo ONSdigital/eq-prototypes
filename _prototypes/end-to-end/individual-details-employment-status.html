@@ -143,7 +143,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('In their main job, what is ' + '<em class="highlight">' + person.fullName + window.ONS.utils.trailingNameS(person.fullName) + '</em>' +
+      $('.js-heading').html('In their main job, what is ' + '<em class="highlight">' + person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
         ' employment status?');
     }
   }
