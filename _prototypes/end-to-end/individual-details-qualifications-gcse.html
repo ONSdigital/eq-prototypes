@@ -1,0 +1,230 @@
+---
+title: Version 1
+project: End to end prototype
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            <!--{% include navigation.html
+            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
+            nav-title-id="section-individual" %}-->
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password"
+                      action="../individual-details-qualifications-other-where">
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
+                           value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group u-mb-xl">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-xl js-heading">
+                                        Have you achieved a GCSE or equivalent qualification?
+                                    </h1>
+                                </div>
+
+                                <div
+                                        class="panel panel--simple panel--info u-mb-s">
+                                    <div class="panel__body">
+                                        <p class="u-fs-r">Include equivalent qualifications achieved anywhere outside England and Wales</p>
+                                    </div>
+                                </div>
+
+                                <div class="answer">
+                                    <div class="answer__fields js-fields">
+                                        <div class="field field--radio field--multiplechoice field--exclusive">
+                                            <fieldset>
+                                                <legend class="field__legend u-fs-r--b">Select all that apply</legend>
+                                                <div class="field__item">
+                                                    <input
+                                                            class="input input--checkbox js-exclusive-group"
+                                                            name="checkbox-answer"
+                                                            value="gcse-5"
+                                                            id="gcse-5"
+                                                            type="checkbox"/>
+                                                    <label class="label label--inline u-fs-r "
+                                                           for="gcse-5"
+                                                           id="gcse-5-label">
+                                                        <strong
+                                                                class="u-fs-r">5 or more GCSEs grades A* to C or 9 to 4
+                                                        </strong>
+                                                        <p class="u-fs-s u-db u-mb-no label--negative">
+                                                            Include 5 or more O level passes or CSEs grades 1
+                                                        </p>
+                                                    </label>
+                                                </div>
+                                                <div class="field__item">
+                                                    <input autocomplete="new-password" class="input input--checkbox js-exclusive-group"
+                                                           name="checkbox-answer"
+                                                           value="other-gcses"
+                                                           id="other-gcses"
+                                                           type="checkbox">
+                                                    <label class="label label--inline u-fs-r "
+                                                           for="other-gcses"
+                                                           id="other-gcses-label">
+                                                        <strong class="u-fs-r">Any other GCSEs</strong>
+                                                        <p class="u-fs-s u-db u-mb-no label--negative">
+                                                            Include any other O levels or CSEs at any grades
+                                                        </p>
+                                                    </label>
+                                                </div>
+                                                <div class="field__item">
+                                                    <input autocomplete="new-password" class="input input--checkbox js-exclusive-group"
+                                                           name="checkbox-answer"
+                                                           value="basic-skills"
+                                                           id="basic-skills"
+                                                           type="checkbox">
+                                                    <label class="label label--inline u-fs-r "
+                                                           for="basic-skills"
+                                                           id="basic-skills-label">
+                                                        <strong class="u-fs-r">Basic skills course</strong>
+                                                        <p class="u-fs-s u-db u-mb-no label--negative">
+                                                            Skills for life, literacy, numeracy and language
+                                                        </p>
+                                                    </label>
+                                                </div>
+                                                <div class="field__item">
+                                                    <input autocomplete="new-password" class="input input--checkbox js-exclusive-group"
+                                                           name="checkbox-answer"
+                                                           value="national-baccalaureate"
+                                                           id="national-baccalaureate"
+                                                           type="checkbox">
+                                                    <label class="label label--inline u-fs-r "
+                                                           for="national-baccalaureate"
+                                                           id="national-baccalaureate-label">
+                                                        <strong class="u-fs-r">National Welsh Baccalaureate</strong>
+                                                    </label>
+                                                </div>
+                                                <div class="field__item">
+                                                    <input autocomplete="new-password" class="input input--checkbox js-exclusive-group"
+                                                           name="checkbox-answer"
+                                                           value="foundation-baccalaureate"
+                                                           id="foundation-baccalaureate"
+                                                           type="checkbox">
+                                                    <label class="label label--inline u-fs-r "
+                                                           for="foundation-baccalaureate"
+                                                           id="foundation-baccalaureate-label">
+                                                        <strong class="u-fs-r">Foundation Welsh Baccalaureate</strong>
+                                                    </label>
+                                                </div>
+                                                <div class="field__label u-mt-s u-fs-r--b" aria-hidden="true">Or</div>
+                                                <div class="field__item">
+                                                    <input autocomplete="new-password" class="input input--checkbox js-exclusive-checkbox"
+                                                           name="checkbox-answer"
+                                                           value="none"
+                                                           id="none"
+                                                           type="checkbox">
+                                                    <label class="label label--inline u-fs-r "
+                                                           for="none"
+                                                           id="none-label">
+                                                        <span class="u-vh">Or,</span>
+                                                        None of these apply<span
+                                                            class="u-vh">. Selecting this will uncheck all other checkboxes</span>
+                                                    </label>
+                                                    <span class="js-exclusive-alert u-vh"
+                                                          role="alert"
+                                                          aria-live="polite"
+                                                          data-adjective="deselected"></span>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+
+                    
+                        <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
+
+                    <!--<p class="u-mb-m"><span class="js-link-secure-label"></span><br />
+                        <a class="js-link-secure"
+                           href="#">Get a separate access code to submit an
+                            individual response</a></p>-->
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person_id'),
+    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+    isEditing = urlParams.get('edit'),
+    details = storageAPI.getPersonalDetailsFor(personId),
+    surveyType = urlParams.get('survey');
+
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+    var collection = [];
+
+    $('[name="checkbox-answer"]:checked').each(function(i, el) {
+      collection.push($(el).val());
+    });
+
+    storageAPI.addUpdateQualificationsGCSEs(personId, collection);
+
+    if(isEditing) {
+      e.preventDefault();
+      window.location.href = '../individual-details-summary/?person_id=' +
+        personId + (surveyType ? '&survey=' + surveyType : '');
+    }
+  }));
+
+  function updateRouting() {
+    if(surveyType) {
+      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    }
+    $('#survey-type').val(surveyType);
+  }
+
+  function updateQuestion() {
+    if(storageAPI.getAnsweringIndividualByProxy()) {
+      $('.js-heading').html('Has ' + '<em class="highlight">' + person.firstLastName + '</em>' +
+        ' achieved a GCSE or equivalent qualification?');
+    }
+  }
+
+  (function () {
+    if (details && details['qualifications'] &&
+      details['qualifications'].gcses) {
+      var collection = details['qualifications'].gcses;
+
+      $.each(collection, function (i, val) {
+        $('#' + val).attr('checked', true);
+      });
+    }
+  }());
+
+  $(updateQuestion);
+  $(updateRouting);
+
+  /**
+   * Routing
+   */
+  $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
+</script>

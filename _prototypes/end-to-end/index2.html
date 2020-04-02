@@ -1,0 +1,81 @@
+---
+title: Version 1
+project: End to end prototype
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+---
+<link rel="stylesheet" href="../style.css"/>
+<link rel="stylesheet" href="../assets/modules/uac/uac.css"/>
+<div class="page__subheader">
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <div class="feedback__inline js-feedback-inline is-collapsed">
+                    <div class="feedback__border">
+                        <form id="feedback-form" method="POST"
+                              class="feedback__form">
+                            <div class="group">
+                                <div class="feedback__field">
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="group" id="what-is-your-address-group">
+                    <div class="block" id="what-is-your-address">
+                        <div class="question">
+                            <h1 class="question__title u-fs-xl"
+                                data-qa="question-title">
+                                Start census
+                            </h1>
+                            <p class="field uac__field panel panel--info panel--simple">
+                                <label class="label" for="uac">Enter your 16 character access code
+                                    <br>
+                                    <span class="label__description">Keep this code safe and only share it with others in your household</span>
+                                </label>
+                                <input type="text" id="uac" class="input input--text input-type__input uac__input js-uac u-mb-xs" name="uac" maxlength="19" data-group-size="4" autocomplete="off" />
+                                <span class="u-fs-s"><a href="#">Where to find your access code</a></span>
+                            </p>
+                            <div class="uac__security u-mt-m">
+                                <div class="uac__icon"><span class="icon icon--lock"></span></div>
+                                <p class="uac__message">Your personal information is protected by law and will be kept confidential.</p>
+                            </div>
+                            <button class="btn btn-submit btn--primary btn--lg"
+                                    data-qa="btn-submit" type="submit"
+                                    name="action[save_continue]">Access census
+                            </button>                        
+                        </div>
+                    </div>
+                    <div>
+                        <br>
+                        <strong>If you don't have a code</strong>
+                        <p>You can request a new code if you have lost, forgotten or not received an
+                        access code. <a href="#" class="footer2__link">Request a new code to start a new survey</a></p>
+                    </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+  $('.btn-submit').click(function(e) {
+    e.preventDefault();
+
+    var urlParams = new URLSearchParams(window.location.search),
+      redirect = urlParams.get('redirect');
+
+    window.location = !redirect ? '../confirm-address2/' : redirect;
+  });
+</script>
