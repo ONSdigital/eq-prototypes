@@ -204,7 +204,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('Has ' + '<em class="highlight">' + person.fullName + '</em>' +
+      $('.js-heading').html('Has ' + '<em class="highlight">' + person.firstLastName + '</em>' +
         ' achieved a GCSE or equivalent qualification?');
     }
   }

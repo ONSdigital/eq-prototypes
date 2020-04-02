@@ -123,7 +123,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('In the last seven days, was ' + '<em class="highlight">' + person.fullName + '</em>' +
+      $('.js-heading').html('In the last seven days, was ' + '<em class="highlight">' + person.firstLastName + '</em>' +
         ' waiting to start a job already accepted?');
     }
   }

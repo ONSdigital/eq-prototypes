@@ -210,12 +210,20 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       hasErrors = false;
       return false;
     } else {
-      var person = window.ONS.storage.TYPES.person({
-        firstName: document.getElementById('first-name').value.trim(),
-        middleName: document.getElementById('middle-name').value.trim(),
-        lastName: document.getElementById('last-name').value.trim()
-      });
-
+      if (editUserId) {
+        var change = true,
+        person = window.ONS.storage.TYPES.person({
+          firstName: document.getElementById('first-name').value.trim(),
+          middleName: document.getElementById('middle-name').value.trim(),
+          lastName: document.getElementById('last-name').value.trim()
+        }, change);
+      } else {
+        var person = window.ONS.storage.TYPES.person({
+          firstName: document.getElementById('first-name').value.trim(),
+          middleName: document.getElementById('middle-name').value.trim(),
+          lastName: document.getElementById('last-name').value.trim()
+        });
+      }
       var personType = window.ONS.storage.KEYS[
         window.location.search.match(/journey=visitors/) ? 'VISITOR_TYPE' : 'HOUSEHOLD_MEMBER_TYPE'
         ];

@@ -149,8 +149,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy() || isVisitor) {
-      $('.js-heading').html('What is ' + '<em class="highlight">' + person.fullName +
-        window.ONS.utils.trailingNameS(person.fullName) + '</em>' + ' date of birth?');
+      $('.js-heading').html('What is ' + '<em class="highlight">' + person.firstLastName +
+        window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' + ' date of birth?');
     }
   }
 

@@ -97,7 +97,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-        $('.js-heading').html('You selected "An address outside the UK". Which country outside the UK does ' + '<em class="highlight">' + person.fullName + '</em>' +
+        $('.js-heading').html('You selected "An address outside the UK". Which country outside the UK does ' + '<em class="highlight">' + person.firstLastName + '</em>' +
         ' stay in for more than 30 days a year');
     }
   }

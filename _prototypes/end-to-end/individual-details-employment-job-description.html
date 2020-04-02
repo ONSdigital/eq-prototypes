@@ -98,7 +98,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     var url = '';
 
     storageAPI.addUpdateEmploymentJobDescription(personId, $('#text-input').val());
-    storageAPI.clearPersonalBookmark(personId);
 
     if(isEditing || switchedFromUnemployed) {
       url += '../individual-details-summary/?person_id=';
@@ -119,7 +118,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('Can you briefly describe what ' + '<em class="highlight">' + person.fullName + '</em>' +
+      $('.js-heading').html('Can you briefly describe what ' + '<em class="highlight">' + person.firstLastName + '</em>' +
         ' does in their main job?');
     }
   }

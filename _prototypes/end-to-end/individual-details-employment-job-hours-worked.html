@@ -144,7 +144,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('In ' + '<em class="highlight">' + person.fullName + window.ONS.utils.trailingNameS(person.fullName) + '</em>' +
+      $('.js-heading').html('In ' + '<em class="highlight">' + person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
         ' main job, how many hours a week do they usually work?');
     }
   }

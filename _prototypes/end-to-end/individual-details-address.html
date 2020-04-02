@@ -145,7 +145,7 @@ cdn: v1.5.0
   }
 
   function updateQuestion() {
-    $('.js-person').html(person.fullName + window.ONS.utils.trailingNameS(person.fullName));
+    $('.js-person').html(person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName));
 
     /*if(storageAPI.getAnsweringIndividualByProxy() || isVisitor) {
       $('.js-heading').html('What is ' + '<em class="highlight">' + person.fullName +

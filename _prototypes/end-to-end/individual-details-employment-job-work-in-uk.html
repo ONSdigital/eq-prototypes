@@ -98,7 +98,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
 
     var val = $('[name="radio-group"]:checked').val();
-    sessionStorage.setItem('bum', JSON.stringify(details.employment.mainlyWork));
     storageAPI.addUpdateEmploymentWorkUK(personId, val);
 
     e.preventDefault();
@@ -108,16 +107,13 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     }
 
     if(JSON.stringify(details.employment.mainlyWork) === '"At a workplace"') {
-        sessionStorage.setItem('bumbum', 1);
         window.location.href = '../individual-details-employment-address-workplace?person_id=' + personId +
         (surveyType ? '&survey=' + surveyType : '');
     }
     else if (JSON.stringify(details.employment.mainlyWork) === '"Report to a depot"') {
-      sessionStorage.setItem('bumbum', 2);
         window.location.href = '../individual-details-employment-address-depot/?person_id=' + personId +
         (surveyType ? '&survey=' + surveyType : '');
     }
-
   }));
 
   function updateRouting() {
@@ -129,7 +125,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('Does ' + '<em class="highlight">' + person.fullName + '</em>' +
+      $('.js-heading').html('Does ' + '<em class="highlight">' + person.firstLastName + '</em>' +
         ' mainly work in the UK?');
     }
   }

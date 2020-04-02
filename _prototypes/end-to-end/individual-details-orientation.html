@@ -168,7 +168,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
       $('.js-heading').html('Which of the following options best describes '  + '<em class="highlight">' + 
-        person.fullName + window.ONS.utils.trailingNameS(person.fullName)
+        person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName)
         + '</em>' + ' sexual orientation?');
     }
   }
