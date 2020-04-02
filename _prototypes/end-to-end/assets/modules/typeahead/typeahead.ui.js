@@ -1,4 +1,3 @@
-import dice from 'dice-coefficient';
 import { sortBy } from 'sort-by-typescript';
 
 import queryJson from './code.list.searcher';

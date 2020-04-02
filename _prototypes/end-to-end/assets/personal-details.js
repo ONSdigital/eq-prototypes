@@ -341,30 +341,6 @@ export function addUpdateMaritalStatus(personId, val) {
     }));
 }
 
-export function addUpdate30DayAddressUk(personId, val) {
-  return changeDetailsFor(personId, () =>
-    ({
-      'Address30DayUK': val
-    }));
-}
-
-export function addUpdate30DayAddressType(personId, val) {
-  return changeDetailsFor(personId, () =>
-    ({
-      'Address30DayType': val
-    }));
-}
-
-export function addUpdate30DayCountry(personId, value) {
-  return changeDetailsFor(personId, details =>
-    ({
-      'Address30DayCountry': {
-        ...(details['Address30DayCountry'] || {}),
-        value
-      }
-    }));
-}
-
 export function addUpdateCountry(personId, val) {
   return changeDetailsFor(personId, () =>
     ({
@@ -374,37 +350,13 @@ export function addUpdateCountry(personId, val) {
     }));
 }
 
-export function addUpdateCountryOther(personId, val) {
+export function addUpdateCountryOther(personId, otherText) {
   return changeDetailsFor(personId, details =>
     ({
-      'country-other': {
-        ...(details['country-other'] || {}),
-        val
+      'country': {
+        ...(details['country'] || {}),
+        otherText
       }
-    }));
-}
-
-export function addUpdateCountryOtherArrive(personId, month, year) {
-  return changeDetailsFor(personId, () =>
-    ({
-      'dateArriveUk': {
-        month,
-        year
-      }
-    }));
-}
-
-export function addUpdateCountryOtherArriveCensus(personId, val) {
-  return changeDetailsFor(personId, () =>
-    ({
-      'arriveCensusDay': val
-    }));
-}
-
-export function addUpdateCountryOtherStay(personId, val) {
-  return changeDetailsFor(personId, () =>
-    ({
-      'stayInUk': val
     }));
 }
 
@@ -457,56 +409,6 @@ export function addUpdateEthnicGroupOther(personId, otherText) {
     }));
 }
 
-export function addUpdateReligion(personId, description) {
-  return changeDetailsFor(personId, details =>
-    ({
-      'religion': {
-        ...(details['religion'] || {}),
-        ...{ description }
-      }
-    }));
-}
-
-export function addUpdateReligionOther(personId, otherText) {
-  return changeDetailsFor(personId, details =>
-    ({
-      'religion': {
-        ...(details['religion'] || {}),
-        ...{ otherText }
-      }
-    }));
-}
-
-export function addUpdateLanguage(personId, lang) {
-  return changeDetailsFor(personId, () =>
-  ({
-    'language': {
-      ...(details['language'] || {}),
-      ...{ lang }
-    }
-  }));
-}
-
-export function addUpdateLanguageOther(personId, other) {
-  return changeDetailsFor(personId, () =>
-  ({
-    'language': {
-      ...(details['language'] || {}),
-      ...{ other }
-    }
-  }));
-}
-
-export function addUpdateLanguageEnglish(personId, english) {
-  return changeDetailsFor(personId, () =>
-  ({
-    'language': {
-      ...(details['language'] || {}),
-      ...{ english }
-    }
-  }));
-}
-
 export function addUpdatePassportCountry(personId, countries) {
   return changeDetailsFor(personId, details =>
     ({
@@ -527,57 +429,10 @@ export function addUpdatePassportCountryOther(personId, otherText) {
     }));
 }
 
-export function addUpdateHealth(personId, val) {
-  return changeDetailsFor(personId, details =>
-    ({
-      'health': {
-        ...(details['health'] || {}),
-        val
-      }
-    }));
-}
-
-export function addUpdateHealthConditions(personId, conditions) {
-  return changeDetailsFor(personId, details =>
-    ({
-      'health': {
-        ...(details['health'] || {}),
-        conditions
-      }
-    }));
-}
-
-export function addUpdateHealthConditionsAbilities(personId, abilities) {
-  return changeDetailsFor(personId, details =>
-    ({
-      'health': {
-        ...(details['health'] || {}),
-        abilities
-      }
-    }));
-}
-
-export function addUpdateHealthSupport(personId, amount) {
-  return changeDetailsFor(personId, details =>
-    ({
-      'health': {
-        ...(details['health'] || {}),
-        amount
-      }
-    }));
-}
-
 export function addUpdateOrientation(personId, val) {
   return changeDetailsFor(personId, () =>
     ({
       'orientation': val
-    }));
-}
-
-export function addUpdateIdentity(personId, val) {
-  return changeDetailsFor(personId, () =>
-    ({
-      'identity': val
     }));
 }
 
@@ -595,72 +450,10 @@ export function addUpdateSex(personId, val) {
     }));
 }
 
-export function addUpdateSchool(personId, val) {
-  return changeDetailsFor(personId, () =>
-    ({
-      'school': val
-    }));
-}
-
-export function addUpdateStudent(personId, val) {
-  return changeDetailsFor(personId, () =>
-    ({
-      'student': val
-    }));
-}
-
-export function addUpdateStudentAddress(personId, val) {
-  return changeDetailsFor(personId, () =>
-    ({
-      'studentAddress': val
-    }));
-}
-
-export function addUpdateStudentAddressUk(personId, val) {
-  return changeDetailsFor(personId, () =>
-    ({
-      'AddressStudentUK': val
-    }));
-}
-
-export function addUpdateStudentAddressCountry(personId, value) {
-  return changeDetailsFor(personId, details =>
-    ({
-      'AddressStudentCountry': {
-        ...(details['AddressStudentCountry'] || {}),
-        value
-      }
-    }));
-}
-
 export function addUpdateAddressWhere(personId, val) {
   return changeDetailsFor(personId, () =>
     ({
       'address-where': val
-    }));
-}
-
-export function addUpdateYearAgoAddress(personId, val) {
-  return changeDetailsFor(personId, () =>
-    ({
-      'yearAgoAddress': val
-    }));
-}
-
-export function addUpdateYearAgoAddressUk(personId, val) {
-  return changeDetailsFor(personId, () =>
-    ({
-      'yearAgoAddressUK': val
-    }));
-}
-
-export function addUpdateYearAgoAddressCountry(personId, value) {
-  return changeDetailsFor(personId, details =>
-    ({
-      'yearAgoAddressCountry': {
-        ...(details['yearAgoAddressCountry'] || {}),
-        value
-      }
     }));
 }
 
@@ -756,180 +549,29 @@ export function addUpdateQualificationsOtherWhere(personId, othersWhere) {
     }));
 }
 
-export function addUpdateArmedForces(personId, val) {
+export function addUpdateEmploymentStatus(personId, val) {
   return changeDetailsFor(personId, () =>
     ({
-      'armed-forces': {
+      'employment-status': {
         val
       }
     }));
 }
 
-export function addUpdateLastSevenDays(personId, sevenDaysAgo) {
+export function addUpdateJobTitle(personId, val) {
   return changeDetailsFor(personId, () =>
     ({
-      'employment': {
-        ...(details['employment'] || {}),
-        sevenDaysAgo
+      'job-title': {
+        val
       }
     }));
 }
 
-export function addUpdateLastSevenDaysDescription(personId, description) {
+export function addUpdateJobDescribe(personId, val) {
   return changeDetailsFor(personId, () =>
     ({
-      'employment': {
-        ...(details['employment'] || {}),
-        description
-      }
-    }));
-}
-
-export function addUpdateEmploymentFourWeeks(personId, fourWeeksAgo) {
-  return changeDetailsFor(personId, () =>
-    ({
-      'employment': {
-        ...(details['employment'] || {}),
-        fourWeeksAgo
-      }
-    }));
-}
-
-export function addUpdateEmploymentAvailableTwoWeeks(personId, availableInTwoWeeks) {
-  return changeDetailsFor(personId, () =>
-    ({
-      'employment': {
-        ...(details['employment'] || {}),
-        availableInTwoWeeks
-      }
-    }));
-}
-
-export function addUpdateEmploymentPaidWorkConfirm(personId, paidWorkConfirm) {
-  return changeDetailsFor(personId, () =>
-    ({
-      'employment': {
-        ...(details['employment'] || {}),
-        paidWorkConfirm
-      }
-    }));
-}
-
-export function addUpdateEmploymentAcceptedJob(personId, acceptedJob) {
-  return changeDetailsFor(personId, () =>
-    ({
-      'employment': {
-        ...(details['employment'] || {}),
-        acceptedJob
-      }
-    }));
-}
-
-export function addUpdateEmploymentStatus(personId, status) {
-  return changeDetailsFor(personId, () =>
-    ({
-      'employment': {
-        ...(details['employment'] || {}),
-        status
-      }
-    }));
-}
-
-export function addUpdateEmploymentName(personId, name) {
-  return changeDetailsFor(personId, () =>
-    ({
-      'employment': {
-        ...(details['employment'] || {}),
-        name
-      }
-    }));
-}
-
-export function addUpdateEmploymentJobTitle(personId, jobTitle) {
-  return changeDetailsFor(personId, () =>
-    ({
-      'employment': {
-        ...(details['employment'] || {}),
-        jobTitle
-      }
-    }));
-}
-
-export function addUpdateEmploymentJobDescription(personId, jobDescription) {
-  return changeDetailsFor(personId, () =>
-    ({
-      'employment': {
-        ...(details['employment'] || {}),
-        jobDescription
-      }
-    }));
-}
-
-export function addUpdateEmploymentBusinessActivity(personId, businessActivity) {
-  return changeDetailsFor(personId, () =>
-    ({
-      'employment': {
-        ...(details['employment'] || {}),
-        businessActivity
-      }
-    }));
-}
-
-export function addUpdateEmploymentResponsibilities(personId, responsibilities) {
-  return changeDetailsFor(personId, () =>
-    ({
-      'employment': {
-        ...(details['employment'] || {}),
-        responsibilities
-      }
-    }));
-}
-
-export function addUpdateEmploymentHoursWorked(personId, hours) {
-  return changeDetailsFor(personId, () =>
-    ({
-      'employment': {
-        ...(details['employment'] || {}),
-        hours
-      }
-    }));
-}
-
-export function addUpdateEmploymentTravel(personId, modeOfTravel) {
-  return changeDetailsFor(personId, () =>
-    ({
-      'employment': {
-        ...(details['employment'] || {}),
-        modeOfTravel
-      }
-    }));
-}
-
-export function addUpdateEmploymentMainlyWork(personId, mainlyWork) {
-  return changeDetailsFor(personId, () =>
-    ({
-      'employment': {
-        ...(details['employment'] || {}),
-        mainlyWork
-      }
-    }));
-    
-}export function addUpdateEmploymentWorkUK(personId, workUK) {
-  return changeDetailsFor(personId, () =>
-    ({
-      'employment': {
-        ...(details['employment'] || {}),
-        workUK
-      }
-    }));
-}
-
-export function addUpdateEmploymentWorkplaceAddress(personId, workAddress) {
-  return changeDetailsFor(personId, () =>
-    ({
-      'employment': {
-        ...(details['employment'] || {}),
-        workAddress
+      'job-describe': {
+        val
       }
     }));
 }

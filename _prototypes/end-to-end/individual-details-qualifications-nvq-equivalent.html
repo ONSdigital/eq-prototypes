@@ -1,6 +1,6 @@
 ---
-title: Version 1
-project: End to end prototype
+title: IR - Household prototype v15
+project: Individual Response
 globalcss: false
 layout: eq-default-extras
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
@@ -55,14 +55,14 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                     <input
                                                             class="input input--checkbox js-exclusive-group"
                                                             name="checkbox-answer"
-                                                            value="nvq-level-3"
-                                                            id="nvq-level-3"
+                                                            value="nvq-level-1"
+                                                            id="nvq-level-1"
                                                             type="checkbox"/>
                                                     <label class="label label--inline u-fs-r "
-                                                           for="nvq-level-3"
-                                                           id="nvq-level-3-label">
+                                                           for="nvq-level-1"
+                                                           id="nvq-level-1-label">
                                                         <strong
-                                                                class="u-fs-r">NVQ level 3 or equivalent</strong>
+                                                                class="u-fs-r">NVQ level 1 or equivalent</strong>
                                                         <p class="u-fs-s u-db u-mb-no label--negative">
                                                             For example BTEC National, OND or ONC, City and Guilds Advanced Craft
                                                         </p>
@@ -87,14 +87,14 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                 <div class="field__item">
                                                     <input autocomplete="new-password" class="input input--checkbox js-exclusive-group"
                                                            name="checkbox-answer"
-                                                           value="nvq-level-1"
-                                                           id="nvq-level-1"
+                                                           value="nvq-level-3"
+                                                           id="nvq-level-3"
                                                            type="checkbox">
                                                     <label class="label label--inline u-fs-r "
-                                                           for="nvq-level-1"
-                                                           id="nvq-level-1-label">
+                                                           for="nvq-level-3"
+                                                           id="nvq-level-3-label">
                                                         <strong
-                                                                class="u-fs-r">NVQ level 1 or equivalent</strong>
+                                                                class="u-fs-r">NVQ level 3 or equivalent</strong>
                                                     </label>
                                                 </div>
                                                 <div class="field__label u-mt-s u-fs-r--b" aria-hidden="true">Or</div>
@@ -110,10 +110,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                         <span class="u-vh">Or,</span>
                                                         None<span
                                                             class="u-vh">. Selecting this will uncheck all other checkboxes</span>
-                                                        <p class="u-fs-s u-db u-mb-no label--negative">
-                                                            Questions on A levels, GCSEs and equivalents will follow
-                                                        </p>
-
                                                     </label>
                                                     <span class="js-exclusive-alert u-vh"
                                                           role="alert"
@@ -145,7 +141,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     </div>
 </div>
 
-<script src='/js/compiled/end-to-end/bundle.js'></script>
+<script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
 
 <script>
   var storageAPI = window.ONS.storage,
@@ -182,7 +178,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('Has ' + '<em class="highlight">' + person.firstLastName + '</em>' +
+      $('.js-heading').html('Has ' + '<em class="highlight">' + person.fullName + '</em>' +
         ' achieved an NVQ or equivalent qualification?');
     }
   }

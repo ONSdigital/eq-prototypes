@@ -1,6 +1,6 @@
 ---
-title: Version 1
-project: End to end prototype
+title: IR - Household prototype v15
+project: Individual Response
 globalcss: false
 layout: eq-default-extras
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
@@ -40,7 +40,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                 </div>                  
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password"
-                      action="../individual-details-employment-job-description">
+                      action="../individual-details-job-describe">
                     <input autocomplete="new-password" type="hidden" name="person_id" id="person"
                            value="#"/>
                     <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
@@ -93,7 +93,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     </div>
 </div>
 
-<script src='/js/compiled/end-to-end/bundle.js'></script>
+<script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
 
 <script>
   var storageAPI = window.ONS.storage,
@@ -115,9 +115,15 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       hasErrors = false;
       return false;
     } else {
-      storageAPI.addUpdateEmploymentJobTitle(personId, $('#job-field').val());
+      storageAPI.addUpdateJobTitle(personId, $('#job-title-input').val());
 
-      if(isEditing) {
+      if(switchedFromUnemployed) {
+        e.preventDefault();
+        window.location.href = '../individual-details-job-describe/?person_id=' + personId +
+          (surveyType ? '&survey=' + surveyType : '') +
+          '&switchedFromUnemployed=true';
+      }
+      else if(isEditing) {
         e.preventDefault();
         window.location.href = '../individual-details-summary/?person_id=' +
           personId + (surveyType ? '&survey=' + surveyType : '');
@@ -134,14 +140,14 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('What is ' + '<em class="highlight">' + person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
+      $('.js-heading').html('What is ' + '<em class="highlight">' + person.fullName + window.ONS.utils.trailingNameS(person.fullName) + '</em>' +
         ' full job title?');
     }
   }
 
-  if (details && details['employment'] &&
-    details['employment'].jobTitle) {
-    $('#job-field').val(details['employment'].jobTitle);
+  if (details && details['job-title'] &&
+    details['job-title'].val) {
+    $('#job-title-input').val(details['job-title'].val);
   }
 
   document.dispatchEvent(new CustomEvent('TYPEAHEAD-READY'));

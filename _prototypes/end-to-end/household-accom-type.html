@@ -1,6 +1,6 @@
 ---
-title: Version 1
-project: End to end prototype
+title: IR - Household prototype v15
+project: Individual Response
 globalcss: false
 layout: eq-default-extras
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
@@ -9,7 +9,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous" href="../household-accom-intro">Previous</a>
+        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
     </div>
 </div>
 
@@ -20,8 +20,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password">
-                    <div class="group" id="accommodation">
-                        <div class="block" id="accommodation-type">
+                    <div class="group" id="rsi">
+                        <div class="block" id="total-retail-turnover">
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
@@ -37,11 +37,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                     <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
                                                            name="accommodation-type"
-                                                           id="house-bungalow"
-                                                           value="Whole house or bungalow">
+                                                           id="house-bungalow-type"
+                                                           value="house-bungalow-type">
                                                     <label class="label label--inline"
-                                                           for="house-bungalow"
-                                                           id="house-bungalow-label">
+                                                           for="house-bungalow-type"
+                                                           id="house-bungalow-type-label">
                                                         Whole house or bungalow
                                                     </label>
                                                 </div>
@@ -50,7 +50,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="accommodation-type"
                                                            id="flat"
-                                                           value="Flat, maisonette or apartment">
+                                                           value="flat">
                                                     <label class="label label--inline"
                                                            for="flat"
                                                            id="flat-label">
@@ -59,13 +59,14 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                             Including purpose-built flats and flats within converted buildings
                                                         </p>
                                                     </label>
+
                                                 </div>
                                                 <div class="field__item js-focusable-box">
                                                     <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
                                                            name="accommodation-type"
                                                            id="caravan"
-                                                           value="Caravan or other mobile or temporary structure">
+                                                           value="caravan">
                                                     <label class="label label--inline"
                                                            for="caravan"
                                                            id="caravan-label">
@@ -88,38 +89,33 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     </div>
 </div>
 
-<script src='/js/compiled/end-to-end/bundle.js'></script>
+<script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
 
 <script>
+    var storageAPI = window.ONS.storage;
 
-    if(sessionStorage.getItem('address-line-1')) {
-        $('.full-address-text').html((sessionStorage.getItem('address-line-1') || '').replace(/,/g, ''));
+	$(function () {
+	  if(sessionStorage.getItem('address-line-1')) {
+		$('.full-address-text').html((sessionStorage.getItem('address-line-1') || '').replace(/,/g, ''));
+      }
+	});
+
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, function (e) {
+    var id = $('[id="accommodation-type"]:checked').value();
+
+    if(id === 'house-bungalow-type') {
+      e.preventDefault();
+      window.location.href = '../household-accom-house-type/';
     }
-
-    var storageAPI = window.ONS.storage,
-        question = $('#question-title').html(),
-        currentPage = '../household-accom-type';
-
-    window.sessionStorage.setItem('accommodation-completed-status', currentPage);
-
-    $('.qa-btn-submit').on('click', function (e) {
-        var val =$('input[type=radio][name=accommodation-type]:checked').attr('value')
-        question = question.trim();
-        question = question.replace(/(<([^>]+)>)/ig,"");
-        window.sessionStorage.setItem('accommodation-type', JSON.stringify([question, val, currentPage]));
-        e.preventDefault();
-
-        if(val === 'Whole house or bungalow') {
-            window.location.href = '../household-accom-house-type/';
-        }
-        else if(val === 'Flat, maisonette or apartment') {
-            window.location.href = '../household-accom-flat-type/';
-        }
-        else if(val === 'Caravan or other mobile or temporary structure') {
-            window.location.href = '../household-accom-shared-rooms/';
-        }
-    });
-
-    $('.js-previous').attr('href', '../household-accom-intro');
+    else if(id === 'flat') {
+      e.preventDefault();
+      window.location.href = '../household-accom-flat-type/';
+    }
+    else if(id === 'caravan') {
+      e.preventDefault();
+      window.location.href = '../household-accom-shared-rooms/';
+    }
+  }));
 
 </script>

@@ -1,6 +1,6 @@
 ---
-title: Version 1
-project: End to end prototype
+title: IR - Household prototype v15
+project: Individual Response
 globalcss: false
 layout: eq-default-extras
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
@@ -159,7 +159,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     </div>
 </div>
 
-<script src='/js/compiled/end-to-end/bundle.js'></script>
+<script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
 
 <script>
   var urlParams = new URLSearchParams(window.location.search),
@@ -222,9 +222,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       return false;
     } else {
       var person = window.ONS.storage.TYPES.person({
-        firstName: document.getElementById('first-name').value.trim(),
-        middleName: document.getElementById('middle-name').value.trim(),
-        lastName: document.getElementById('last-name').value.trim()
+        firstName: document.getElementById('first-name').value,
+        lastName: document.getElementById('last-name').value
       });
 
       var personType = window.ONS.storage.KEYS[

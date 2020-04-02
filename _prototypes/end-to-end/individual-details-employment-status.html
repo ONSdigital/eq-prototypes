@@ -1,6 +1,6 @@
 ---
-title: Version 1
-project: End to end prototype
+title: IR - Household prototype v15
+project: Individual Response
 globalcss: false
 layout: eq-default-extras
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
@@ -9,7 +9,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous-link" href="../individual-details-employment-main-job">Previous</a>
+        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
     </div>
 </div>
 
@@ -24,7 +24,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password"
-                      action="../individual-details-employment-business-name">
+                      action="../individual-details-job-title">
                     <input autocomplete="new-password" type="hidden" name="person_id" id="person"
                            value="#"/>
                     <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
@@ -68,8 +68,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            id="freelance-without-employees-label">
                                                         <strong
                                                                 class="u-fs-r">Self-employed or freelance without employees</strong>
-                                                        <br>
-                                                        <span class="label__description label__inner label--negative u-fs-m js-answer">Freelance means that you are self-employed and work for different companies or people on particular pieces of work.</span>
                                                     </label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
@@ -83,6 +81,20 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            id="freelance-with-employees-label">
                                                         <strong
                                                                 class="u-fs-r">Self-employed with employees</strong>
+                                                    </label>
+                                                </div>
+
+                                                <div class="field__label u-mt-s u-fs-r--b" aria-hidden="true">Or</div>
+                                                <div class="field__item">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="radio-group"
+                                                           id="not-employed"
+                                                           value="not-employed" />
+                                                    <label class="label label--inline u-fs-r "
+                                                           for="not-employed">
+                                                        <span class="u-vh">Or,</span>
+                                                        Not employed
                                                     </label>
                                                 </div>
                                             </fieldset>
@@ -109,7 +121,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     </div>
 </div>
 
-<script src='/js/compiled/end-to-end/bundle.js'></script>
+<script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
 
 <script>
   var storageAPI = window.ONS.storage,
@@ -129,8 +141,25 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
     if(isEditing) {
       e.preventDefault();
+
+      if(val === 'not-employed') {
         window.location.href = '../individual-details-summary/?person_id=' + personId +
           (surveyType ? '&survey=' + surveyType : '');
+      }
+      else {
+        /**
+         * Pass through to specify additional details
+         */
+        window.location.href = '../individual-details-job-title/?person_id=' + personId +
+          (surveyType ? '&survey=' + surveyType : '') +
+          '&switchedFromUnemployed=true';
+      }
+    }
+    else if(val === 'not-employed') {
+      e.preventDefault();
+
+      storageAPI.clearPersonalBookmark(personId);
+      window.location.href = '../hub/?person_id=' + personId;
     }
   }));
 
@@ -143,13 +172,13 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('In their main job, what is ' + '<em class="highlight">' + person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
+      $('.js-heading').html('In their main job, what is ' + '<em class="highlight">' + person.fullName + window.ONS.utils.trailingNameS(person.fullName) + '</em>' +
         ' employment status?');
     }
   }
 
   if (details && details['employment-status']) {
-    $('#' + details['employment-status'].status).attr('checked', true);
+    $('#' + details['employment-status'].val).attr('checked', true);
   }
 
   $(updateQuestion);

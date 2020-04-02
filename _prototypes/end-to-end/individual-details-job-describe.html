@@ -1,6 +1,6 @@
 ---
-title: Version 1
-project: End to end prototype
+title: IR - Household prototype v15
+project: Individual Response
 globalcss: false
 layout: eq-default-extras
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
@@ -34,7 +34,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title u-fs-xl js-heading">
-                                        Briefly describe what you do in your main job
+                                        Briefly  describe what you do in your main job
                                     </h1>
                                 </div>
 
@@ -79,7 +79,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     </div>
 </div>
 
-<script src='/js/compiled/end-to-end/bundle.js'></script>
+<script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
 
 <script>
   var storageAPI = window.ONS.storage,
@@ -97,14 +97,16 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
     var url = '';
 
-    storageAPI.addUpdateEmploymentJobDescription(personId, $('#text-input').val());
+    storageAPI.addUpdateJobDescribe(personId, $('#text-input').val());
+    storageAPI.clearPersonalBookmark(personId);
 
     if(isEditing || switchedFromUnemployed) {
       url += '../individual-details-summary/?person_id=';
     }
     else {
-      url += '../individual-details-employment-activity/?person_id=';
+      url += '../hub/?person_id=';
     }
+
     url += personId + (surveyType ? ('&survey=' + surveyType) : '');
     window.location.href = url;
   }));
@@ -118,14 +120,14 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('Can you briefly describe what ' + '<em class="highlight">' + person.firstLastName + '</em>' +
+      $('.js-heading').html('Can you briefly describe what ' + '<em class="highlight">' + person.fullName + '</em>' +
         ' does in their main job?');
     }
   }
 
-  if (details && details['employment'] &&
-    details['employment'].jobDescription) {
-    $('#text-input').val(details['employment'].jobDescription);
+  if (details && details['job-describe'] &&
+    details['job-describe'].val) {
+    $('#text-input').val(details['job-describe'].val);
   }
 
   $(updateQuestion);

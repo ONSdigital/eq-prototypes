@@ -1,6 +1,6 @@
 ---
-title: Version 1
-project: End to end prototype
+title: IR - Household prototype v15
+project: Individual Response
 globalcss: false
 layout: eq-default-extras
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
@@ -68,15 +68,15 @@ hideSaveLater: true
                         </ul>
                     </div>
                 </div>
-                <div class="panel panel--simple panel--success u-mb-m">
+                <div class="panel panel--simple panel--success u-mb-m">    
                     <div class="panel__body">
                         <h1 class="u-mb-xs">
-                            Thank you for submitting your census for <span class="full-address-text">Address not set</span>
+                            Your census has been submitted
                         </h1>
-                       <!-- <p>Thank you for completing the census.
+                        <p>Thank you for completing the census.
                             We have received your answers and you do not need to do anything else.</p>
                         <h2 class="u-fs-r--b u-mb-no">Your confirmation number</h2>
-                        <code class="u-fs-xl">1098 5379 24</code> -->
+                        <code class="u-fs-xl">1098 5379 24</code>
                     </div>
                 </div>
                 <p class="lock u-mb-l">Your personal information is protected by law and will be kept confidential</p>
@@ -114,7 +114,7 @@ hideSaveLater: true
     </div>
 </div>
 
-<script src='/js/compiled/end-to-end/bundle.js'></script>
+<script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
 
 <script>
     var queryString = window.location.search;
@@ -143,12 +143,6 @@ hideSaveLater: true
             $('#email-field').before('<p id="panel-error" class="panel__error u-fs-r--b">Enter a valid email address, such as example@email.com</p>');
         };
     }
-
-    $(function () {
-	  if(sessionStorage.getItem('address')) {
-		$('.full-address-text').html((sessionStorage.getItem('address-line-1') || '').replace(/,/g, ''));
-      }
-	});
 
     $(checkErrors);
 </script>

@@ -1,6 +1,6 @@
 ---
-title: Version 1
-project: End to end prototype
+title: IR - Household prototype v15
+project: Individual Response
 globalcss: false
 layout: eq-default-extras
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
@@ -23,7 +23,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
-                      role="form" autocomplete="new-password" action="../individual-details-gender-identity">
+                      role="form" autocomplete="new-password" action="../individual-details-salary">
                     <input autocomplete="new-password" type="hidden" name="person_id" id="person"
                            value="#"/>
                     <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
@@ -37,12 +37,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                         Which of the following best describes your sexual orientation?
                                     </h1>
                                 </div>
-                                  <div class="panel panel--info panel--simple">
-                                    <div class="panel__body">
-                                      <p>This question is voluntary</p>
-                                    </div>
-                                  </div>
-                                  <br>
 
                                 <div class="answer">
                                     <div class="answer__fields js-fields">
@@ -93,17 +87,28 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                     <label class="label label--inline"
                                                            for="other"
                                                            id="other-label">
-                                                        Other sexual orientation<br>
-                                                        <span class="label__description label__inner label--negative u-fs-m js-answer">Enter your sexual orientation</span>
+                                                        Other sexual
+                                                        orientation, please
+                                                        specify...
                                                     </label>
-                                                    <div class="field__other field__other--open">
+                                                    <div class="field__other">
+                                                        <!--<label
+                                                                class="label mercury" for="other-answer" id="label-checkbox-other-input">Enter your mobile number</label>-->
                                                         <input autocomplete="new-password" class="input input__text js-focusable" id="other-answer" name="orientation" type="text" data-qa="other-option">
                                                     </div>
                                                 </div>
-
-                                                <button type="submit" class="btn btn--secondary btn--small js-clear-btn u-mt-s u-db-no-js_enabled u-vh" name="clear-radios">
-                                                    <span class="btn__inner">Clear selection</span>
-                                                </button>                                            
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="orientation"
+                                                           id="no-say"
+                                                           value="no-say">
+                                                    <label class="label label--inline"
+                                                           for="no-say"
+                                                           id="no-say-label">
+                                                        Prefer not to say
+                                                    </label>
+                                                </div>
                                             </fieldset>
                                         </div>
                                     </div>
@@ -128,7 +133,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     </div>
 </div>
 
-<script src='/js/compiled/end-to-end/bundle.js'></script>
+<script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
 
 <script>
   var storageAPI = window.ONS.storage,
@@ -138,24 +143,18 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     isEditing = urlParams.get('edit'),
     details = storageAPI.getPersonalDetailsFor(personId),
     surveyType = urlParams.get('survey');
-  
+
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
-        var input = $('[name="orientation"]:checked'),
-            val = input.val(),
-            textInput = $('#other-answer');
+    storageAPI.addUpdateOrientation(personId,
+      $('[name="orientation"]:checked').val()
+    );
 
-        if(textInput.val()) {
-            val = textInput.val();
-        }
-
-        storageAPI.addUpdateOrientation(personId, val);
-
-        if(isEditing) {
-        e.preventDefault();
-        window.location.href = '../individual-details-summary/?person_id=' +
-            personId + (surveyType ? '&survey=' + surveyType : '');
-        }
+    if(isEditing) {
+      e.preventDefault();
+      window.location.href = '../individual-details-summary/?person_id=' +
+        personId + (surveyType ? '&survey=' + surveyType : '');
+    }
   }));
 
   function updateRouting() {
@@ -167,9 +166,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('Which of the following options best describes '  + '<em class="highlight">' + 
-        person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName)
-        + '</em>' + ' sexual orientation?');
+      $('.js-heading').html('Which of the following options best describes how you think of ' +
+        person.fullName + window.ONS.utils.trailingNameS(person.fullName)
+        +' sexual orientation?');
     }
   }
 
@@ -177,34 +176,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     $('#' + details.orientation).attr('checked', true);
   }
 
-  function clearRadios() {
-    $('.js-clear-btn').on('click',
-        storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
-        e.preventDefault();
-
-        //uncheck val radio
-        $("input:radio").attr("checked", false);
-        $('.js-clear-btn').addClass('u-vh');
-    }));
-
-    $('.input').on('click',
-        storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
-        $('.js-clear-btn').removeClass('u-vh');
-    }));
-  }
-
-  function checkRadios() {
-    $('.input__text').on('click',
-        storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
-        $("#other").attr("checked", true);
-    }));
-  }
-
-
   $(updateQuestion);
   $(updateRouting);
-  $(clearRadios);
-  $(checkRadios);
 
   /**
    * Routing

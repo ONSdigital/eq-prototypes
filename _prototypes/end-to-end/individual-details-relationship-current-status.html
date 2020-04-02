@@ -1,6 +1,6 @@
 ---
-title: Version 1
-project: End to end prototype
+title: IR - Household prototype v15
+project: Individual Response
 globalcss: false
 layout: eq-default-extras
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
@@ -92,7 +92,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     </div>
 </div>
 
-<script src='/js/compiled/end-to-end/bundle.js'></script>
+<script src='/js/compiled/individual-response--your-household-v15/bundle.js'></script>
 
 <script>
   var storageAPI = window.ONS.storage,
@@ -147,8 +147,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     }
 
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('Who ' + headingTense + ' <em class="highlight">' + person.firstLastName + 
-      window.ONS.utils.trailingNameS(person.firstLastName) + '</em> ' +
+      $('.js-heading').html('Who ' + headingTense + ' <em class="highlight">' + person.fullName + 
+      window.ONS.utils.trailingNameS(person.fullName) + '</em> ' +
         maritalStatusHeading + ' to?');
     } else {
       $('.js-heading').html('Who ' + headingTense + ' your ' +
