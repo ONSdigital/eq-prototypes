@@ -90,6 +90,9 @@ hideSaveLater: true
 <script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
+  var urlParams = new URLSearchParams(window.location.search),
+    previousPage = urlParams.get('previous');
+
   $('.btn-submit').click(function(e) {
     e.preventDefault(); // do not submit the form like usual
 
@@ -98,7 +101,7 @@ hideSaveLater: true
 
     sessionStorage.setItem('address', document.getElementById('rh-proto-address').value);
 
-    window.location = '../confirm-rh-address/?previous=test-address';
+    window.location = '../confirm-rh-address/?previous=request-uac-hh-address';
   });
 
   if (window.location.search == '?edit=true') {
@@ -109,7 +112,11 @@ hideSaveLater: true
   }
 
   function updateAllPreviousLinks() {
-    $('.js-previous-link').attr('href', '../confirm-address/?previous=test-address');
+      if (previousPage === 'home') {
+        $('.js-previous-link').attr('href', '../home');
+      } else {
+        $('.js-previous-link').attr('href', '../uac-entry');
+      }
   }
   document.dispatchEvent(new CustomEvent('TYPEAHEAD-READY'));
 
