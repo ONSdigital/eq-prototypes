@@ -185,12 +185,15 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     isEditing = urlParams.get('edit'),
     religion = urlParams.get('religion'),
     details = storageAPI.getPersonalDetailsFor(personId),
-    surveyType = urlParams.get('survey');
+    surveyType = urlParams.get('survey'),
+    question = $('#question-title').html();
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
     var val = $('[name="religion"]:checked').val();
-    storageAPI.addUpdateReligion(personId, val);
+    let url = '../individual-details-religion-description/?person_id=' + personId + '&edit=true';
+    question = question.trim();
+    storageAPI.addUpdateReligion(personId, val, question, url);
 
     if(val === 'other') {
       e.preventDefault();

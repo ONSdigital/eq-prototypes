@@ -144,14 +144,17 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     isVisitor = storageAPI.isVisitor(member),
     details = storageAPI.getPersonalDetailsFor(personId),
     surveyType = urlParams.get('survey');
-    storageAPI.personalBookmark(personId, window.location.href);
+    storageAPI.personalBookmark(personId, window.location.href),
+    question = $('#question-title').html();
   
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
         e.preventDefault();
 
         var val = $('[name="year-ago-address"]:checked').val();
-        storageAPI.addUpdateYearAgoAddress(personId, val);
+        let url = '../individual-details-year-ago-address/?person_id=' + personId + '&edit=true';
+        question = question.trim();
+        storageAPI.addUpdateYearAgoAddress(personId, val, question, url);
 
         if(isEditing) {
             e.preventDefault();

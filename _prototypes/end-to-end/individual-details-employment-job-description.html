@@ -16,9 +16,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            <!--{% include navigation.html
-            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
-            nav-title-id="section-individual" %}-->
         </div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
@@ -65,14 +62,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                     <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
                             type="submit" name="">Save and continue
                     </button>
-
-                    
                         <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
-
-                    <!--<p class="u-mb-m"><span class="js-link-secure-label"></span><br />
-                        <a class="js-link-secure"
-                           href="#">Get a separate access code to submit an
-                            individual response</a></p>-->
                 </form>
             </main>
         </div>
@@ -89,15 +79,17 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     isEditing = urlParams.get('edit'),
     details = storageAPI.getPersonalDetailsFor(personId),
-    surveyType = urlParams.get('survey');
+    surveyType = urlParams.get('survey'),
+    question = $('#question-title').html();
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
     e.preventDefault();
 
     var url = '';
-
-    storageAPI.addUpdateEmploymentJobDescription(personId, $('#text-input').val());
+    let urlEdit = '../individual-details-employment-job-description' + '?edit=' + personId;
+    question = question.trim();
+    storageAPI.addUpdateEmploymentJobDescription(personId, $('#text-input').val(), question, urlEdit);
 
     if(isEditing || switchedFromUnemployed) {
       url += '../individual-details-summary/?person_id=';

@@ -104,7 +104,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     isVisitor = storageAPI.isVisitor(member),
     details = storageAPI.getPersonalDetailsFor(personId),
     surveyType = urlParams.get('survey');
-    storageAPI.personalBookmark(personId, window.location.href);
+    storageAPI.personalBookmark(personId, window.location.href),
+    question = $('#question-title').html();
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
@@ -112,8 +113,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
     var route = '',
       val = $('[name="age-confirm"]:checked').val();
-
-    storageAPI.addUpdateAgeConfirm(personId, val);
+    let url = '../individual-details-age-confirm/?person_id=' + personId + '&edit=true';
+    question = question.trim();
+    storageAPI.addUpdateAgeConfirm(personId, val, question, url);
 
     if(isEditing) {
       route = '../individual-details-summary/';
@@ -126,7 +128,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     } 
     else {
       val = '';
-      storageAPI.addUpdateAgeConfirm(personId, val);
+      storageAPI.addUpdateAgeConfirm(personId, val, question, url);
       route = '../individual-details-dob/';
     }
 
@@ -169,8 +171,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     }
   }
 
-  if (details && details['age-confirm']) {
-    $('#' + details['age-confirm'].val).attr('checked', true);
+  if (details && details['ageConfirm']) {
+    $('#' + details['ageConfirm'].val).attr('checked', true);
   }
 
   function updateAllPreviousLinks() {

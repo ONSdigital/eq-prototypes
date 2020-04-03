@@ -21,7 +21,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password"
-                      action="../individual-details-summary">
+                      action="../hub/">
                     <input autocomplete="new-password" type="hidden" name="person_id" id="person"
                            value="#"/>
                     <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
@@ -126,14 +126,18 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     isEditing = urlParams.get('edit'),
     details = storageAPI.getPersonalDetailsFor(personId),
-    surveyType = urlParams.get('survey');
+    surveyType = urlParams.get('survey'),
+    question = $('#question-title').html();
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
 
     var val = $('[name="radio-group"]:checked').val();
 
-    storageAPI.addUpdateEmploymentMainlyWork(personId, val);
+    let url = '../individual-details-employment-job-where-mainly-work/?person_id=' + personId + '&edit=true';
+    question = question.trim();
+
+    storageAPI.addUpdateEmploymentMainlyWork(personId, val, question, url);
     e.preventDefault();
 
     if(isEditing) {
@@ -146,8 +150,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         (surveyType ? '&survey=' + surveyType : '');
     }
     else {
-        window.location.href = '../individual-details-summary/?person_id=' + personId +
-        (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.clearPersonalBookmark(personId);
+        window.location.href = '../hub/'
     }
   }));
 

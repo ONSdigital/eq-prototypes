@@ -262,18 +262,18 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       return false;
     }
 
-    if(!personDetails['address-where']) {
+    if(!personDetails['addressWhere']) {
       return false;
     }
 
-    if(personDetails['address-where'] === 'in-uk' &&
+    if(personDetails['addressWhere'] === 'in-uk' &&
       !personDetails.address
     ) {
       return false;
     }
 
-    if(personDetails['address-where'] === 'outside-uk' &&
-      !personDetails['address-outside-uk']
+    if(personDetails['addressWhere'] === 'outside-uk' &&
+      !personDetails['addressOutsideUk']
     ) {
       return false;
     }

@@ -149,12 +149,15 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     isEditing = urlParams.get('edit'),
     details = storageAPI.getPersonalDetailsFor(personId),
     surveyType = urlParams.get('survey');
-    storageAPI.personalBookmark(personId, window.location.href);
+    storageAPI.personalBookmark(personId, window.location.href),
+    question = $('#question-title').html();
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
     var val = $('[name="country"]:checked').val();
-    storageAPI.addUpdateCountry(personId, val);
+    let url = '../individual-details-country/?person_id=' + personId + '&edit=true';
+    question = question.trim();
+    storageAPI.addUpdateCountry(personId, val, question, url);
 
     if(isEditing) {
       e.preventDefault();

@@ -202,15 +202,19 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     isVisitor = storageAPI.isVisitor(member),
     details = storageAPI.getPersonalDetailsFor(personId),
     surveyType = urlParams.get('survey');
-    storageAPI.personalBookmark(personId, window.location.href);
-
+    storageAPI.personalBookmark(personId, window.location.href),
+    question = 'what is your legal marital or registered civil partnership status?';
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+    let url = '../individual-details-relationship/?person_id=' + personId + '&edit=true';
+    question = question.trim();
     var val = $('[name="marital-status"]:checked').val();
 
     storageAPI.addUpdateMaritalStatus(personId,
-      $('[name="marital-status"]:checked').val()
+      $('[name="marital-status"]:checked').val(),
+      question,
+      url
     );
 
     if(isEditing) {
@@ -219,7 +223,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         personId + (surveyType ? '&survey=' + surveyType : '');
     }
 
-    if(val === 'never' || val == null) {
+    if(val === 'never' || val === null) {
       e.preventDefault();
       window.location.href = '../individual-details-30-day-address/?person_id=' + personId;
     }
@@ -241,7 +245,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   }
 
   if (details && details.maritalStatus) {
-    $('#' + details.maritalStatus).attr('checked', true);
+    $('#' + details.maritalStatus.val).attr('checked', true);
   }
 
  function updateAllPreviousLinks() {

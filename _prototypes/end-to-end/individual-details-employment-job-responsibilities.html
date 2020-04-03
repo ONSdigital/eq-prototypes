@@ -92,14 +92,16 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     isEditing = urlParams.get('edit'),
     details = storageAPI.getPersonalDetailsFor(personId),
-    surveyType = urlParams.get('survey');
+    surveyType = urlParams.get('survey'),
+    question = $('#question-title').html();
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
 
     var val = $('[name="radio-group"]:checked').val();
-
-    storageAPI.addUpdateEmploymentResponsibilities(personId, val);
+    let url = '../individual-details-employment-job-responsibilities/?person_id=' + personId + '&edit=true';
+    question = question.trim();
+    storageAPI.addUpdateEmploymentResponsibilities(personId, val, question, url);
 
     if(isEditing) {
       e.preventDefault();

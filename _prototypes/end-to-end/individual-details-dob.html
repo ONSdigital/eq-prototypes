@@ -16,9 +16,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            <!--{% include navigation.html
-            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
-            nav-title-id="section-individual" %}-->
         </div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
@@ -85,11 +82,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             section and
                             return
                             to this later</a></p>
-
-                    <!--<p class="u-mb-m"><span class="js-link-secure-label"></span><br />
-                        <a class="js-link-secure"
-                           href="#">Get a separate access code to submit an
-                            individual response</a></p>-->
                 </form>
             </main>
         </div>
@@ -107,14 +99,19 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     isEditing = urlParams.get('edit'),
     isVisitor = storageAPI.isVisitor(member),
     surveyType = urlParams.get('survey');
-    storageAPI.personalBookmark(personId, window.location.href);
+    storageAPI.personalBookmark(personId, window.location.href),
+    question = $('#question-title').html();
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+    let url = '../individual-details-dob/?person_id=' + personId + '&edit=true';
+    question = question.trim();
     storageAPI.addUpdatePersonalDetailsDOB(personId,
       $('#personal-detail-dob-day').val(),
       $('#personal-detail-dob-month').val(),
-      $('#personal-detail-dob-year').val()
+      $('#personal-detail-dob-year').val(),
+      question,
+      url
     );
 
     if(isEditing) {

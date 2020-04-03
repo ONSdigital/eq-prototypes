@@ -105,7 +105,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     isEditing = urlParams.get('edit'),
     details = storageAPI.getPersonalDetailsFor(personId),
-    surveyType = urlParams.get('survey');
+    surveyType = urlParams.get('survey'),
+    question = $('#question-title').html();
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
@@ -113,8 +114,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     if (val === '') {
         val = $('[name="business-name"]:checked').val();
     }
-
-    storageAPI.addUpdateEmploymentName(personId, val);
+    let url = '../individual-details-employment-business-name/?person_id=' + personId + '&edit=true';
+    question = question.trim();
+    storageAPI.addUpdateEmploymentName(personId, val, question, url);
 
     if(isEditing) {
       e.preventDefault();

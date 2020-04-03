@@ -137,7 +137,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     isEditing = urlParams.get('edit'),
     details = storageAPI.getPersonalDetailsFor(personId),
-    surveyType = urlParams.get('survey');
+    surveyType = urlParams.get('survey'),
+    question = $('#question-title').html();
   
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
@@ -148,8 +149,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         if(textInput.val()) {
             val = textInput.val();
         }
-
-        storageAPI.addUpdateOrientation(personId, val);
+        let url = '../individual-details-orientation/?person_id=' + personId + '&edit=true';
+        question = question.trim();
+        storageAPI.addUpdateOrientation(personId, val, question, url);
 
         if(isEditing) {
         e.preventDefault();
@@ -174,7 +176,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   }
 
   if (details && details.orientation) {
-    $('#' + details.orientation).attr('checked', true);
+    $('#' + details.orientation.val).attr('checked', true);
   }
 
   function clearRadios() {

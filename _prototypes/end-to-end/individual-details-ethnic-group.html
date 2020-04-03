@@ -170,13 +170,16 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     isEditing = urlParams.get('edit'),
     details = storageAPI.getPersonalDetailsFor(personId),
-    surveyType = urlParams.get('survey');
+    surveyType = urlParams.get('survey'),
+    question = $('#question-title').html();
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
     var val = $('[name="ethnic-group"]:checked').val();
 
-    storageAPI.addUpdateEthnicGroup(personId, val);
+    let url = '../individual-details-ethnic-group/?person_id=' + personId + '&edit=true';
+    question = question.trim();
+    storageAPI.addUpdateEthnicGroup(personId, val, question, url);
 
     /**
      * Will always need to elaborate further on this question
@@ -205,8 +208,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     }
   }
 
-  if (details && details['ethnic-group']) {
-    $('#' + details['ethnic-group'].val).attr('checked', true);
+  if (details && details['ethnicGroup']) {
+    $('#' + details['ethnicGroup'].val).attr('checked', true);
   }
  function updateAllPreviousLinks() {
       $('.js-previous-link').attr('href', '../individual-details-national-identity/?person_id=' + personId);

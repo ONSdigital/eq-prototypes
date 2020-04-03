@@ -7,768 +7,271 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 ---
 
 <link rel="stylesheet" href="../style.css"/>
-<div class="page__subheader">
-    <div class="container">
-        <a class="js-previous-link" href="../visitors">Previous</a>
-    </div>
-</div>
-
-<style>
-    .completed {
-        position: relative;
-    }
-
-    .completed::before {
-        z-index:2;
-        content:"";
-        background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAbCAYAAAAZMl2nAAAABGdBTUEAALGPC/xhBQAAAjtJREFUSA29l0FLW0EQx2f2NWDSQ196sFBELKFfwVMPNcmLFZV68eRFPBd6K4IexKT0IHjpqdDi0aMg5iCKUvDkqdBDQYiKIIJY0oO1wZhMd0L3+V6yz+TlrZ1DNjOzM/9f9u1uEoD/aH3Lk/EgORGUMB1/VHDeXf4u7z9ZyvXqeqMuaDqWLGTf1Ov0sdEX8UdMWJmLuc0zr869g9iL2RlC+gwEHi08eCB60j/nN04VjCepQuZGe9GZJqAvANS6BRBKIobp8uz2CSu2TjDEcScEaxCk6Jq+2h9eDbB7LyBtIVhZGgEMQLVaXKAFYfzRdArBIFL8EgWOlOe394yCdAvBUBa/NNvTT+MJa7B/rSf7/KyyUzpuzuv10KBDcr2WPMMTV+Z+i3O2jUKtt2O+Hh3TC3lhUCO7lezQuBNFLJYSAV2BZY7/mNndVzDuagOB+7oroIHiCXJkE1G+Kj/NOjn2vmYLgng2QIAglSgTxGtB6spAbVzGTENwTiQiTeWdLfvKMEgkcEaqAYgrr8DDwxmwq9h7RppTPFYhIKGgFEGu+jM4hiAHRqmkIlmoc38rO0fdE5llJfi+9ljF33+hY/uV9m1w3r9OVULXuPRISRtVrx7AQ3MQFYccETDcQLSBRYbqF0IJ0CxMFIhAkLExUiDtBOoUxAdEWxAdDOCF9qXtrpiC4o+/U3Er43/Fpig+lTuQ9zPdMA8YkBKt1BMITK7uH3xLp1Ln8eTdqGoL7hzY777yV/1NehC5sU/AXb484yamkz/AAAAAASUVORK5CYII=") no-repeat 50%;
-        background-size:1rem;
-        position:absolute;
-        left:9px;left:-1.5rem;
-        width:1.2em;
-        height:1.2em;
-        bottom:0;
-        top:0;
-        margin:auto;
-    }
-</style>
+<div class="page__subheader"></div>
 
 <div class="page__container container">
     <div class="grid grid--reverse">
-        <div class="grid__col col-4@m">
-            <!--{% include navigation.html
-            items=site.data.your-household-v10.yourHouseholdV4_navigationItemsPersonalDetails
-            nav-title-id="section-individual" %}-->
-        </div>
+        <div class="grid__col col-4@m"></div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
                 <form name="trav" class="form qa-questionnaire-form" role="form"
-                      autocomplete="new-password" action="../hub">
-                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
-                           value="#"/>
-                    <div class="group" id="rsi">
-                        <div class="block" id="total-retail-turnover">
-                            <section class="section"
-                                     id="total-retail-turnover-section">
-                                <div class="question u-mb-s"
-                                     id="total-retail-turnover-question">
-                                    <h1
-                                            class="question__title u-fs-xl">
+                      autocomplete="new-password" novalidate=""
+                      action="../hub">
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 class="question__title u-fs-xl">
                                         <span class="js-person-fullname-from-url-id"></span>
                                     </h1>
                                 </div>
-
-                                <!-- <div class="panel panel--simple panel--success"
-                                     id="question-guidance-everyone-at-address-confirmation-question">
-                                    <strong class="u-mb-s">This section
-                                        is now complete</strong>
-                                    <p>You can check your
-                                        answers below</p>
-                                </div>
-                                <br /> -->
-
-                                <div class="summary u-mb-xl">
-                                <h2>Personal details</h2>
-
-                                    <!-- Personal Details -->
-                                    <div class="summary__block">
-                                        <div class="summary__item js-dob-field" style="display:none;">
-                                            <div class="grid">
-                                                <div class="grid__col col-12@xs col-6@m">
-                                                    <div
-                                                            class="summary__question">Date of birth</div>
-                                                </div>
-                                                <div class="grid__col col-8@xs col-4@m">
-                                                    <div
-                                                            class="summary__answer js-dob"></div>
-                                                </div>
-                                                <div class="grid__col col-4@xs col-2@m">
-                                                    <div class="summary__link">
-                                                        <a
-                                                                class="js-change-person-link"
-                                                                href="../individual-details-dob/?edit=true">Change
-                                                            <span class="u-vh"></span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="summary__item js-country-field" style="display:none;">
-                                            <div class="grid">
-                                                <div class="grid__col col-12@xs col-6@m">
-                                                    <div
-                                                            class="summary__question">Country of birth</div>
-                                                </div>
-                                                <div class="grid__col col-8@xs col-4@m">
-                                                    <div
-                                                            class="summary__answer js-country"></div>
-                                                </div>
-                                                <div class="grid__col col-4@xs col-2@m">
-                                                    <div class="summary__link">
-                                                        <a
-                                                                class="js-change-person-link"
-                                                                href="../individual-details-country/?edit=true">Change
-                                                            <span class="u-vh"></span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="summary__item js-address-individual-field" style="display:none;">
-                                            <div class="grid">
-                                                <div class="grid__col col-12@xs col-6@m">
-                                                    <div
-                                                            class="summary__question">Address</div>
-                                                </div>
-                                                <div class="grid__col col-8@xs col-4@m">
-                                                    <div
-                                                            class="summary__answer js-address-individual"></div>
-                                                </div>
-                                                <div class="grid__col col-4@xs col-2@m">
-                                                    <div class="summary__link">
-                                                        <a
-                                                                class="js-change-person-link"
-                                                                href="../individual-details-address/?edit=true">Change
-                                                            <span class="u-vh"></span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="summary__item js-marital-status-field" style="display:none;">
-                                            <div class="grid">
-                                                <div class="grid__col col-12@xs col-6@m">
-                                                    <div
-                                                            class="summary__question">Marital status</div>
-                                                </div>
-                                                <div class="grid__col col-8@xs col-4@m">
-                                                    <div
-                                                            class="summary__answer js-marital-status"></div>
-                                                </div>
-                                                <div class="grid__col col-4@xs col-2@m">
-                                                    <div class="summary__link">
-                                                        <a
-                                                                class="js-change-person-link"
-                                                                href="../individual-details-relationship/?edit=true">Change
-                                                            <span class="u-vh"></span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="summary__item js-sexual-orientation-field" style="display:none;">
-                                            <div class="grid">
-                                                <div class="grid__col col-12@xs col-6@m">
-                                                    <div
-                                                            class="summary__question">Sexual orientation</div>
-                                                </div>
-                                                <div class="grid__col col-8@xs col-4@m">
-                                                    <div
-                                                            class="summary__answer js-orientation"></div>
-                                                </div>
-                                                <div class="grid__col col-4@xs col-2@m">
-                                                    <div class="summary__link">
-                                                        <a
-                                                                class="js-change-person-link"
-                                                                href="../individual-details-orientation/?edit=true">Change
-                                                            <span class="u-vh"></span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="summary__item js-gender-field" style="display:none;">
-                                            <div class="grid">
-                                                <div class="grid__col col-12@xs col-6@m">
-                                                    <div
-                                                            class="summary__question">Gender</div>
-                                                </div>
-                                                <div class="grid__col col-8@xs col-4@m">
-                                                    <div
-                                                            class="summary__answer js-gender"></div>
-                                                </div>
-                                                <div class="grid__col col-4@xs col-2@m">
-                                                    <div class="summary__link">
-                                                        <a
-                                                                class="js-change-person-link"
-                                                                href="../individual-details-sex/?edit=true">Change
-                                                            <span class="u-vh"></span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="summary__item js-salary-field" style="display:none;">
-                                            <div class="grid">
-                                                <div class="grid__col col-12@xs col-6@m">
-                                                    <div
-                                                            class="summary__question">Salary</div>
-                                                </div>
-                                                <div class="grid__col col-8@xs col-4@m">
-                                                    <div
-                                                            class="summary__answer js-salary"></div>
-                                                </div>
-                                                <div class="grid__col col-4@xs col-2@m">
-                                                    <div class="summary__link">
-                                                        <a
-                                                                class="js-change-person-link"
-                                                                href="../individual-details-salary/?edit=true">Change
-                                                            <span class="u-vh"></span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Health and Identity -->
-                                        <div
-                                                class="summary__item js-national-identity-field" style="display:none;">
-                                            <div class="grid">
-                                                <div class="grid__col col-12@xs col-6@m">
-                                                    <div
-                                                            class="summary__question">National identity</div>
-                                                </div>
-                                                <div class="grid__col col-8@xs col-4@m">
-                                                    <div
-                                                            class="summary__answer js-national-identity"></div>
-                                                </div>
-                                                <div class="grid__col col-4@xs col-2@m">
-                                                    <div class="summary__link">
-                                                        <a
-                                                                class="js-change-person-link"
-                                                                href="../individual-details-national-identity/?edit=true">Change
-                                                            <span class="u-vh"></span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                                class="summary__item js-ethinic-group-field" style="display:none;">
-                                            <div class="grid">
-                                                <div class="grid__col col-12@xs col-6@m">
-                                                    <div
-                                                            class="summary__question">Ethnic group</div>
-                                                </div>
-                                                <div class="grid__col col-8@xs col-4@m">
-                                                    <div
-                                                            class="summary__answer js-ethinic-group"></div>
-                                                </div>
-                                                <div class="grid__col col-4@xs col-2@m">
-                                                    <div class="summary__link">
-                                                        <a
-                                                                class="js-change-person-link"
-                                                                href="../individual-details-ethnic-group/?edit=true">Change
-                                                            <span class="u-vh"></span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                                class="summary__item js-passport-field" style="display:none;">
-                                            <div class="grid">
-                                                <div class="grid__col col-12@xs col-6@m">
-                                                    <div
-                                                            class="summary__question">Passport</div>
-                                                </div>
-                                                <div class="grid__col col-8@xs col-4@m">
-                                                    <div
-                                                            class="summary__answer js-passport"></div>
-                                                </div>
-                                                <div class="grid__col col-4@xs col-2@m">
-                                                    <div class="summary__link">
-                                                        <a
-                                                                class="js-change-person-link"
-                                                                href="../individual-details-passport-country/?edit=true">Change
-                                                            <span class="u-vh"></span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                                class="summary__item js-apprenticeship-field" style="display:none;">
-                                            <div class="grid">
-                                                <div class="grid__col col-12@xs col-6@m">
-                                                    <div
-                                                            class="summary__question">Has apprenticeship</div>
-                                                </div>
-                                                <div class="grid__col col-8@xs col-4@m">
-                                                    <div
-                                                            class="summary__answer js-apprenticeship"></div>
-                                                </div>
-                                                <div class="grid__col col-4@xs col-2@m">
-                                                    <div class="summary__link">
-                                                        <a
-                                                                class="js-change-person-link"
-                                                                href="../individual-details-apprenticeship/?edit=true">Change
-                                                            <span class="u-vh"></span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                                class="summary__item js-degree-qualification-field" style="display:none;">
-                                            <div class="grid">
-                                                <div class="grid__col col-12@xs col-6@m">
-                                                    <div
-                                                            class="summary__question">Has degree qualification</div>
-                                                </div>
-                                                <div class="grid__col col-8@xs col-4@m">
-                                                    <div
-                                                            class="summary__answer js-degree-qualification"></div>
-                                                </div>
-                                                <div class="grid__col col-4@xs col-2@m">
-                                                    <div class="summary__link">
-                                                        <a
-                                                                class="js-change-person-link"
-                                                                href="../individual-details-qualifications-degree/?edit=true">Change
-                                                            <span class="u-vh"></span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                                class="summary__item js-nvq-qualification-field" style="display:none;">
-                                            <div class="grid">
-                                                <div class="grid__col col-12@xs col-6@m">
-                                                    <div
-                                                            class="summary__question">NVQ qualifications</div>
-                                                </div>
-                                                <div class="grid__col col-8@xs col-4@m">
-                                                    <div
-                                                            class="summary__answer js-nvq-qualification"></div>
-                                                </div>
-                                                <div class="grid__col col-4@xs col-2@m">
-                                                    <div class="summary__link">
-                                                        <a
-                                                                class="js-change-person-link"
-                                                                href="../individual-details-qualifications-nvq-equivalent/?edit=true">Change
-                                                            <span class="u-vh"></span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                                class="summary__item js-a-level-qualification-field" style="display:none;">
-                                            <div class="grid">
-                                                <div class="grid__col col-12@xs col-6@m">
-                                                    <div
-                                                            class="summary__question">AS, A level or equivalent qualifications</div>
-                                                </div>
-                                                <div class="grid__col col-8@xs col-4@m">
-                                                    <div
-                                                            class="summary__answer js-a-level-qualification"></div>
-                                                </div>
-                                                <div class="grid__col col-4@xs col-2@m">
-                                                    <div class="summary__link">
-                                                        <a
-                                                                class="js-change-person-link"
-                                                                href="../individual-details-qualifications-a-level/?edit=true">Change
-                                                            <span class="u-vh"></span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                                class="summary__item js-gcse-qualification-field" style="display:none;">
-                                            <div class="grid">
-                                                <div class="grid__col col-12@xs col-6@m">
-                                                    <div
-                                                            class="summary__question">GCSE or equivalent qualifications</div>
-                                                </div>
-                                                <div class="grid__col col-8@xs col-4@m">
-                                                    <div
-                                                            class="summary__answer js-gcse-qualification"></div>
-                                                </div>
-                                                <div class="grid__col col-4@xs col-2@m">
-                                                    <div class="summary__link">
-                                                        <a
-                                                                class="js-change-person-link"
-                                                                href="../individual-details-qualifications-gcse/?edit=true">Change
-                                                            <span class="u-vh"></span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                                class="summary__item js-other-qualification-field" style="display:none;">
-                                            <div class="grid">
-                                                <div class="grid__col col-12@xs col-6@m">
-                                                    <div
-                                                            class="summary__question">Other places qualified</div>
-                                                </div>
-                                                <div class="grid__col col-8@xs col-4@m">
-                                                    <div
-                                                            class="summary__answer js-other-qualification"></div>
-                                                </div>
-                                                <div class="grid__col col-4@xs col-2@m">
-                                                    <div class="summary__link">
-                                                        <a
-                                                                class="js-change-person-link"
-                                                                href="../individual-details-qualifications-other-where/?edit=true">Change
-                                                            <span class="u-vh"></span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                                class="summary__item js-employment-status-field" style="display:none;">
-                                            <div class="grid">
-                                                <div class="grid__col col-12@xs col-6@m">
-                                                    <div
-                                                            class="summary__question">Employment status</div>
-                                                </div>
-                                                <div class="grid__col col-8@xs col-4@m">
-                                                    <div
-                                                            class="summary__answer js-employment-status"></div>
-                                                </div>
-                                                <div class="grid__col col-4@xs col-2@m">
-                                                    <div class="summary__link">
-                                                        <a
-                                                                class="js-change-person-link"
-                                                                href="../individual-details-employment-status/?edit=true">Change
-                                                            <span class="u-vh"></span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                                class="summary__item js-job-title-field" style="display:none;">
-                                            <div class="grid">
-                                                <div class="grid__col col-12@xs col-6@m">
-                                                    <div
-                                                            class="summary__question">Job title</div>
-                                                </div>
-                                                <div class="grid__col col-8@xs col-4@m">
-                                                    <div
-                                                            class="summary__answer js-job-title"></div>
-                                                </div>
-                                                <div class="grid__col col-4@xs col-2@m">
-                                                    <div class="summary__link">
-                                                        <a
-                                                                class="js-change-person-link"
-                                                                href="../individual-details-job-title/?edit=true">Change
-                                                            <span class="u-vh"></span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                                class="summary__item js-job-description-field" style="display:none;">
-                                            <div class="grid">
-                                                <div class="grid__col col-12@xs col-6@m">
-                                                    <div
-                                                            class="summary__question">Job description</div>
-                                                </div>
-                                                <div class="grid__col col-8@xs col-4@m">
-                                                    <div
-                                                            class="summary__answer js-job-description"></div>
-                                                </div>
-                                                <div class="grid__col col-4@xs col-2@m">
-                                                    <div class="summary__link">
-                                                        <a
-                                                                class="js-change-person-link"
-                                                                href="../individual-details-job-describe/?edit=true">Change
-                                                            <span class="u-vh"></span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <div class="summary">
+                                    <h2 class="question__title u-fs-xl js-heading">
+                                        Personal details
+                                    </h2>
+                                    <div class="summary__block u-mb-s">
+                                        <div id="individual-questions-answers"></div>
                                     </div>
                                 </div>
                             </section>
                         </div>
                     </div>
-                    <button
-                            class="btn btn--primary btn--lg qa-btn-submit u-mb-xl"
-                            type="submit" name="">Continue
-                    </button>
-
-                    <!--<p class="mars u-mb-m"><span class="js-link-secure-label"></span><br />
-                        <a class="js-link-secure"
-                           href="#">Get a separate access code to submit an
-                            individual response</a></p>-->
+                    <div class="submit-notice">
+                      <p class="js-declaration"></p>
+                        <button class="btn btn--primary btn--lg js-submit-btn u-mt-xs"
+                                type="submit">Continue
+                        </button>
+                    </div>
                 </form>
             </main>
         </div>
     </div>
 </div>
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+<ul style="display:none;">
+    <div id="individual-item-template" class="summary__item">
+        <div class="grid">
+            <div class="grid__col col-12@xs col-5@s">
+                <div class="summary__question js-question">
+                    Question
+                </div>
+            </div>
+            <div class="grid__col col-8@xs col-3@s">
+                <div class="summary__answer js-answer u-d-no u-d-b@s">Answer</div>
+            </div>
+            <div class="grid__col col-12@xs col-4@s">
+                <div class="summary__link">
+                    <a href="#" class="js-link">Change</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</ul>
+
 <script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
-  var storageAPI = window.ONS.storage,
-    urlParams = new URLSearchParams(window.location.search),
-    personId = urlParams.get('person_id'),
-    details = storageAPI.getPersonalDetailsFor(personId),
-    member = storageAPI.getHouseholdMemberByPersonId(personId),
-    surveyType = urlParams.get('survey'),
-    visitors = storageAPI.getAllHouseholdMembers().filter(storageAPI.isVisitor),
-    visitor1 = visitors.length ? visitors[0] : null;
-
-  storageAPI.clearPersonalBookmark(personId);
-
-  function createDataObj(year, month, day) {
-    return moment(year + '-' + month + '-' + day, 'YYYY-MM-DD');
-  }
-
-  function formatAddress(address) {
-    return address['address-line-1'] + '<br />' +
-      address['address-line-2'] + '<br />' +
-      address['county'] + '<br />' +
-      address['town-city'] + '<br />' +
-      address['postcode'] + '<br />';
-  }
-
-  function getDescriptionOf(config) {
-    return config.description;
-  }
-
-  function createAnswerList(collection, getTextCallback) {
-    return $('<ul class="u-m-no"></ul>').append(
-      collection.map(function (item) {
-        return $('<li></li>').html(getTextCallback(item))
-      })
-    )
-  }
-
-  function showHouseholdMemberFields() {
+    var storageAPI = window.ONS.storage;
 
     /**
-     * Date of birth
-     */
-    $('.js-dob-field').show();
-    $('.js-dob').html(
-      createDataObj(details.dob.year, details.dob.month, details.dob.day)
-        .format('MMMM Do YYYY')
-    );
+      * Create list item from state
+      */
+    function createListItem(sessionItem, question, url) {
+        if (sessionItem) {
+            
+            var $nodeEl = $('#individual-item-template').clone(),
+                $answer = $nodeEl.find('.js-answer'),
+                $question = $nodeEl.find('.js-question');
 
-    /**
-     * Marital status
-     */
-    $('.js-marital-status-field').show();
-    $('.js-marital-status').html(getDescriptionOf(storageAPI.personalDetailsMaritalStatusMap[details.maritalStatus]));
+            /**
+              * Manipulate DOM fragment
+              */
+            $nodeEl.attr('id', '');
+            $nodeEl.find('.js-question').html(question);
+            $nodeEl.find('.js-answer').html(sessionItem);
+            $nodeEl.find('.js-link').attr('href', url);
 
-    /**
-     * Country
-     */
-    $('.js-country-field').show();
-    $('.js-country').html(
-      details.country.val === 'elsewhere'
-        ? details.country.otherText
-        : getDescriptionOf(storageAPI.personalDetailsCountryMap[details.country.val])
-    );
-
-    /**
-     * Gender
-     */
-    $('.js-gender-field').show();
-    $('.js-gender').html(getDescriptionOf(storageAPI.personalDetailsGenderMap[details.sex]));
-
-    /**
-     * National identity
-     */
-    $('.js-national-identity-field').show();
-    $('.js-national-identity').html(
-      createAnswerList(details['national-identity'].collection, function (dataItem) {
-        return (dataItem !== 'other'
-          ? storageAPI.personalDetailsNationalIdentityMap[dataItem].description
-          : details['national-identity'].otherText
-        );
-      })
-    );
-
-    /**
-     * Enthnic group
-     */
-    (function () {
-      var ethnicGroup = details['ethnic-group'];
-
-      $('.js-ethinic-group-field').show();
-      $('.js-ethinic-group').html(
-        storageAPI.personalDetailsEthnicGroupMap[ethnicGroup.val].question +
-
-        (ethnicGroup.description
-          ? ': ' +
-            _.find(
-              storageAPI.personalDetailsEthnicGroupMap[ethnicGroup.val].options,
-              function (option) {
-                return option.val === ethnicGroup.description;
-              }
-            ).label
-          : ''
-        ) +
-
-        (ethnicGroup.otherText ? ': ' + ethnicGroup.otherText : '')
-      );
-    })();
-
-    /**
-     * Passport
-     */
-    $('.js-passport-field').show();
-    $('.js-passport').html(
-      createAnswerList(details['passport'].countries, function (dataItem) {
-        return (dataItem !== 'other'
-          ?
-            storageAPI.personalDetailsPassportCountriesMap[dataItem].description
-          : details['passport'].otherText
-        );
-      })
-    );
-
-    /**
-     * Apprenticeship
-     */
-    $('.js-apprenticeship-field').show();
-    $('.js-apprenticeship').html(getDescriptionOf(storageAPI.personalDetailsApprenticeshipMap[details.apprenticeship.hasApprenticeship]));
-
-    /**
-     * Degree qualifications
-     */
-    $('.js-degree-qualification-field').show();
-    $('.js-degree-qualification').html(getDescriptionOf(storageAPI.personalDetailsDegreeAboveMap[details.qualifications.aboveDegree]));
-
-    /**
-     * NVQ qualifications
-     */
-    $('.js-nvq-qualification-field').show();
-    $('.js-nvq-qualification').html(
-      createAnswerList(details['qualifications'].nvqEquivalent, function (dataItem) {
-        return getDescriptionOf(storageAPI.personalDetailsNVQMap[dataItem]);
-      })
-    );
-
-    /**
-     * A level qualifications
-     */
-    $('.js-a-level-qualification-field').show();
-    $('.js-a-level-qualification').html(
-      createAnswerList(details['qualifications'].aLevels, function (dataItem) {
-        return getDescriptionOf(storageAPI.personalDetailsALevelMap[dataItem]);
-      })
-    );
-
-    /**
-     * GCSE qualifications
-     */
-    $('.js-gcse-qualification-field').show();
-    $('.js-gcse-qualification').html(
-      createAnswerList(details['qualifications'].gcses, function (dataItem) {
-        return getDescriptionOf(storageAPI.personalDetailsGCSEMap[dataItem]);
-      })
-    );
-
-    /**
-     * Other qualifications
-     */
-    $('.js-other-qualification-field').show();
-    $('.js-other-qualification').html(
-      createAnswerList(details['qualifications'].othersWhere, function (dataItem) {
-        return getDescriptionOf(storageAPI.personalDetailsOtherWhere[dataItem]);
-      })
-    );
-
-    /**
-     * Employment status
-     */
-    $('.js-employment-status-field').show();
-    $('.js-employment-status').html(
-      getDescriptionOf(storageAPI.personalDetailsEmploymentStatus[details['employment-status'].val])
-    );
-
-    /**
-     * Job title
-     */
-    if(details['employment-status'].val !== 'not-employed') {
-      $('.js-job-title-field').show();
-      $('.js-job-title').html(details['job-title'].val);
+            return $nodeEl;
+        }
     }
 
-    /**
-     * Job description
-     */
-    if(details['employment-status'].val !== 'not-employed') {
-      $('.js-job-description-field').show();
-      $('.js-job-description').html(details['job-describe'].val);
+    function createList() {
+        var urlParams = new URLSearchParams(window.location.search),
+            person = urlParams.get('person_id'),
+            $container = $('<div></div>'),
+            individualDetails = JSON.parse(window.sessionStorage.getItem('individual-details'));
+
+        if (individualDetails[person].dob) {
+            $container.append(createListItem(individualDetails[person].dob.fullDate, individualDetails[person].dob.question, individualDetails[person].dob.url));
+        }
+
+        if (individualDetails[person].sex) {
+            $container.append(createListItem(individualDetails[person].sex.val, individualDetails[person].sex.question, individualDetails[person].sex.url));
+        }
+        
+        if (individualDetails[person].maritalStatus) {
+            $container.append(createListItem(individualDetails[person].maritalStatus.val, individualDetails[person].maritalStatus.question, individualDetails[person].maritalStatus.url));
+        }
+        
+        if (individualDetails[person].Address30DayUK) {
+            $container.append(createListItem(individualDetails[person].Address30DayUK.val, individualDetails[person].Address30DayUK.question, individualDetails[person].Address30DayUK.url));
+        }
+
+        if (individualDetails[person].Address30DayType) {
+            $container.append(createListItem(individualDetails[person].Address30DayType.val, individualDetails[person].Address30DayType.question, individualDetails[person].Address30DayType.url));
+        }
+        
+        if (individualDetails[person].Address30DayCountry) {
+            $container.append(createListItem(individualDetails[person].Address30DayCountry.val, individualDetails[person].Address30DayCountry.question, individualDetails[person].Address30DayCountry.url));
+        }
+        
+        if (individualDetails[person].country) {
+            $container.append(createListItem(individualDetails[person].country.val, individualDetails[person].country.question, individualDetails[person].country.url));
+        }
+        
+        if (individualDetails[person].countryOther) {
+            $container.append(createListItem(individualDetails[person].countryOther.val, individualDetails[person].countryOther.question, individualDetails[person].countryOther.url));
+        }
+        
+        if (individualDetails[person].dateArriveUk) {
+            $container.append(createListItem(individualDetails[person].dateArriveUk.val, individualDetails[person].dateArriveUk.question, individualDetails[person].dateArriveUk.url));
+        }
+        
+        if (individualDetails[person].arriveCensusDay) {
+            $container.append(createListItem(individualDetails[person].arriveCensusDay.val, individualDetails[person].arriveCensusDay.question, individualDetails[person].arriveCensusDay.url));
+        }
+        
+        if (individualDetails[person].stayInUk) {
+            $container.append(createListItem(individualDetails[person].stayInUk.val, individualDetails[person].stayInUk.question, individualDetails[person].stayInUk.url));
+        }
+        
+        if (individualDetails[person].nationalIdentity) {
+            $container.append(createListItem(individualDetails[person].nationalIdentity.otherText, individualDetails[person].nationalIdentity.question, individualDetails[person].nationalIdentity.url));
+        }
+        
+        if (individualDetails[person].ethnicGroup) {
+            $container.append(createListItem(individualDetails[person].ethnicGroup.otherText, individualDetails[person].ethnicGroup.question, individualDetails[person].ethnicGroup.url));
+        }
+
+        if (individualDetails[person].religion) {
+            $container.append(createListItem(individualDetails[person].religion.description, individualDetails[person].religion.question, individualDetails[person].religion.url));
+        }
+        
+        if (individualDetails[person].language) {
+            $container.append(createListItem(individualDetails[person].language.lang, individualDetails[person].language.question, individualDetails[person].language.url));
+        }
+        
+        if (individualDetails[person].passport) {
+            $container.append(createListItem(individualDetails[person].passport.otherText, individualDetails[person].passport.question, individualDetails[person].passport.url));
+        }
+        
+        if (individualDetails[person].health) {
+            $container.append(createListItem(individualDetails[person].health.val, individualDetails[person].health.question, individualDetails[person].health.url));
+            $container.append(createListItem(individualDetails[person].health.conditions, individualDetails[person].health.questionConditions, individualDetails[person].health.urlConditions));
+            $container.append(createListItem(individualDetails[person].health.amount, individualDetails[person].health.questionSupport, individualDetails[person].health.urlSupport));
+        }
+        
+        if (individualDetails[person].orientation) {
+            $container.append(createListItem(individualDetails[person].orientation.val, individualDetails[person].orientation.question, individualDetails[person].orientation.url));
+        }
+        
+        if (individualDetails[person].identity) {
+            $container.append(createListItem(individualDetails[person].identity.val, individualDetails[person].identity.question, individualDetails[person].identity.url));
+        }
+        
+        if (individualDetails[person].salary) {
+            $container.append(createListItem(individualDetails[person].salary.val, individualDetails[person].salary.question, individualDetails[person].salary.url));
+        }
+        
+        if (individualDetails[person].school) {
+            $container.append(createListItem(individualDetails[person].school.val, individualDetails[person].school.question, individualDetails[person].school.url));
+        }
+        
+        if (individualDetails[person].student) {
+            $container.append(createListItem(individualDetails[person].student.val, individualDetails[person].student.question, individualDetails[person].student.url));
+        }
+        
+        if (individualDetails[person].studentAddress) {
+            $container.append(createListItem(individualDetails[person].studentAddress.val, individualDetails[person].studentAddress.question, individualDetails[person].studentAddress.url));
+        }
+        
+        if (individualDetails[person].AddressStudentUK) {
+            $container.append(createListItem(individualDetails[person].AddressStudentUK.val, individualDetails[person].AddressStudentUK.question, individualDetails[person].AddressStudentUK.url));
+        }
+
+        if (individualDetails[person].AddressStudentCountry) {
+            $container.append(createListItem(individualDetails[person].AddressStudentCountry.val, individualDetails[person].AddressStudentCountry.question, individualDetails[person].AddressStudentCountry.url));
+        }
+        
+        if (individualDetails[person].addressWhere) {
+            $container.append(createListItem(individualDetails[person].addressWhere.val, individualDetails[person].addressWhere.question, individualDetails[person].addressWhere.url));
+        }
+
+        if (individualDetails[person].yearAgoAddress) {
+            $container.append(createListItem(individualDetails[person].yearAgoAddress.val, individualDetails[person].yearAgoAddress.question, individualDetails[person].yearAgoAddress.url));
+        }
+        
+        if (individualDetails[person].yearAgoAddressUK) {
+            $container.append(createListItem(individualDetails[person].yearAgoAddressUK.val, individualDetails[person].yearAgoAddressUK.question, individualDetails[person].yearAgoAddressUK.url));
+        }
+        
+        if (individualDetails[person].yearAgoAddressCountry) {
+            $container.append(createListItem(individualDetails[person].yearAgoAddressCountry.value, individualDetails[person].yearAgoAddressCountry.question, individualDetails[person].yearAgoAddressCountry.url));
+        }
+        
+        if (individualDetails[person].ageConfirm) {
+            $container.append(createListItem(individualDetails[person].ageConfirm.val, individualDetails[person].ageConfirm.question, individualDetails[person].ageConfirm.url));
+        }
+        
+        if (individualDetails[person].addressOutsideUk) {
+            $container.append(createListItem(individualDetails[person].addressOutsideUk.val, individualDetails[person].addressOutsideUk.question, individualDetails[person].addressOutsideUk.url));
+        }
+        
+        if (individualDetails[person].address) {
+            $container.append(createListItem(individualDetails[person].address.val, individualDetails[person].address.question, individualDetails[person].address.url));
+        }
+        
+        if (individualDetails[person].apprenticeship) {
+            $container.append(createListItem(individualDetails[person].apprenticeship.hasApprenticeship, individualDetails[person].apprenticeship.question, individualDetails[person].apprenticeship.url));
+        }
+        
+        if (individualDetails[person].qualifications) {
+            $container.append(createListItem(individualDetails[person].qualifications.aboveDegree, individualDetails[person].qualifications.question, individualDetails[person].qualifications.url));
+            $container.append(createListItem(individualDetails[person].qualifications.nvqEquivalent, individualDetails[person].qualifications.question, individualDetails[person].qualifications.url));
+            $container.append(createListItem(individualDetails[person].qualifications.aLevels, individualDetails[person].qualifications.question, individualDetails[person].qualifications.url));
+            $container.append(createListItem(individualDetails[person].qualifications.gcses, individualDetails[person].qualifications.question, individualDetails[person].qualifications.url));
+            $container.append(createListItem(individualDetails[person].qualifications.othersWhere, individualDetails[person].qualifications.question, individualDetails[person].qualifications.url));
+        }
+
+        if (individualDetails[person].armedForces) {
+            $container.append(createListItem(individualDetails[person].armedForces.val, individualDetails[person].armedForces.question, individualDetails[person].armedForces.url));
+        }
+        
+        if (individualDetails[person].employment) {
+            $container.append(createListItem(individualDetails[person].employment.sevenDaysAgo, individualDetails[person].employment.question, individualDetails[person].employment.url));
+            $container.append(createListItem(individualDetails[person].employment.description, individualDetails[person].employment.questionSevenDaysDescription, individualDetails[person].employment.urlSevenDaysDescription));
+            $container.append(createListItem(individualDetails[person].employment.fourWeeksAgo, individualDetails[person].employment.questionFourWeeks, individualDetails[person].employment.urlFourWeeks));
+            $container.append(createListItem(individualDetails[person].employment.availableInTwoWeeks, individualDetails[person].employment.questionAvailableTwoWeeks, individualDetails[person].employment.urlAvailableTwoWeeks));
+            $container.append(createListItem(individualDetails[person].employment.paidWorkConfirm, individualDetails[person].employment.questionPaidWorkConfirm, individualDetails[person].employment.urlPaidWorkConfirm));
+            $container.append(createListItem(individualDetails[person].employment.acceptedJob, individualDetails[person].employment.questionAcceptedJob, individualDetails[person].employment.urlAcceptedJob));
+            $container.append(createListItem(individualDetails[person].employment.status, individualDetails[person].employment.questionStatus, individualDetails[person].employment.urlStatus));
+            $container.append(createListItem(individualDetails[person].employment.name, individualDetails[person].employment.questionName, individualDetails[person].employment.urlName));
+            $container.append(createListItem(individualDetails[person].employment.jobTitle, individualDetails[person].employment.questionJobTitle, individualDetails[person].employment.urlJobTitle));
+            $container.append(createListItem(individualDetails[person].employment.jobDescription, individualDetails[person].employment.questionJobDescription, individualDetails[person].employment.ururlJobDescriptionl));
+            $container.append(createListItem(individualDetails[person].employment.businessActivity, individualDetails[person].employment.questionBusinessActivity, individualDetails[person].employment.urlBusinessActivity));
+            $container.append(createListItem(individualDetails[person].employment.responsibilities, individualDetails[person].employment.questionResponsibilities, individualDetails[person].employment.urlResponsibilities));
+            $container.append(createListItem(individualDetails[person].employment.hours, individualDetails[person].employment.questionHoursWorked, individualDetails[person].employment.urlHoursWorked));
+            $container.append(createListItem(individualDetails[person].employment.modeOfTravel, individualDetails[person].employment.questionEmploymentTravel, individualDetails[person].employment.urlEmploymentTravel));
+            $container.append(createListItem(individualDetails[person].employment.mainlyWork, individualDetails[person].employment.questionMainlyWork, individualDetails[person].employment.urlMainlyWork));
+            $container.append(createListItem(individualDetails[person].employment.workUK, individualDetails[person].employment.questionWorkUK, individualDetails[person].employment.urlWorkUK));
+            $container.append(createListItem(individualDetails[person].employment.workAddress, individualDetails[person].employment.questionWorkplaceAddress, individualDetails[person].employment.urlWorkplaceAddress));
+        }
+        
+        
+
+        return $container;
     }
 
-    /*$('.js-sexual-orientation-field').show();
-    $('.js-orientation').html(storageAPI.personalDetailsOrientationMap[details.orientation].description);*/
-
-    /*$('.js-salary-field').show();
-    $('.js-salary').html(details.salary);*/
-  }
-
-  function showVisitorFields() {
-    var visitor1PersonalDetails,
-      $addressContainer = $('.js-address-individual-field');
-
-    /**
-     * Address
-     */
-    if(details['address-where'] === 'same-as-visitor1') {
-      visitor1PersonalDetails =
-        storageAPI.getPersonalDetailsFor(visitor1['@person'].id);
-
-      $addressContainer.find('.js-change-person-link').attr('href', '../individual-details-address-in-uk/?edit=true');
-
-      $addressContainer.show();
-      $('.js-address-individual').html(formatAddress(visitor1PersonalDetails.address));
-    }
-    else if(details['address-where'] === 'outside-uk') {
-      $addressContainer.show();
-      $('.js-address-individual').html(details['address-outside-uk'] +
-        ' (Outside UK)');
-    }
-    else {
-      $addressContainer.show();
-      $('.js-address-individual').html(formatAddress(details.address));
-    }
-
-    $('.js-gender-field').show();
-    $('.js-gender').html(storageAPI.personalDetailsGenderMap[details.sex].description);
-
-    $('.js-dob-field').show();
-    $('.js-dob').html(
-      createDataObj(details.dob.year, details.dob.month, details.dob.day)
-        .format('MMMM Do YYYY')
-    );
-  }
-
-  function updateRouting() {
-    $('#survey-type').val(surveyType);
-  }
-
-  $(function () {
-    /**
-     * Branch
-     */
-    storageAPI.isVisitor(member)
-      ? showVisitorFields()
-      : showHouseholdMemberFields();
-
-    /**
-     * Update links
-     */
-    $('.js-change-person-link').each(function () {
-      $(this).attr('href', $(this).attr('href') + '&person_id=' + personId +
-        (surveyType ? '&survey=' + surveyType : ''));
-    });
-  });
-
-  $(updateRouting);
+    $('#individual-questions-answers').append(createList());
 
 </script>

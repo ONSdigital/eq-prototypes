@@ -16,9 +16,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            <!--{% include navigation.html
-            items=site.data.your-household-v10.yourHouseholdV4_navigationItemsPersonalDetails
-            nav-title-id="section-individual" %}-->
         </div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
@@ -81,14 +78,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                     <button class="btn btn--primary btn--lg qa-btn-submit u-mb-xl"
                             type="submit" name="">Save and continue
                     </button>
-
                     
                         <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
-
-                    <!--<p class="u-mb-m"><span class="js-link-secure-label"></span><br />
-                        <a class="js-link-secure"
-                           href="#">Get a separate access code to submit an
-                            individual response</a></p>-->
                 </form>
             </main>
         </div>
@@ -107,16 +98,20 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     isVisitor = storageAPI.isVisitor(member),
     details = storageAPI.getPersonalDetailsFor(personId),
     surveyType = urlParams.get('survey');
-    storageAPI.personalBookmark(personId, window.location.href);
+    storageAPI.personalBookmark(personId, window.location.href),
+    question = $('#question-title').html();
 
   if(isVisitor) {
     $('.panel').addClass('u-d-no');
   }
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function(e) {
-
+    let url = '../individual-details-sex/?person_id=' + personId + '&edit=true';
+    question = question.trim();
     storageAPI.addUpdateSex(personId,
-      $('[name="sex"]:checked').val()
+      $('[name="sex"]:checked').val(),
+      question,
+      url
     );
 
     if(isEditing) {
@@ -147,7 +142,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   }
 
   if (details && details.sex) {
-    $('#' + details.sex).attr('checked', true);
+    $('#' + details.sex.val).attr('checked', true);
   }
 
   function updateAllPreviousLinks() {
@@ -155,7 +150,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   }
 
   $(updateAllPreviousLinks);  
-
   $(updateQuestion);
   $(updateRouting);
 

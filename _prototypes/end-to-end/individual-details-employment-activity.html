@@ -104,7 +104,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     isEditing = urlParams.get('edit'),
     details = storageAPI.getPersonalDetailsFor(personId),
     surveyType = urlParams.get('survey'),
-    hasErrors = false;
+    hasErrors = false,
+    question = $('#question-title').html();
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
@@ -115,7 +116,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       hasErrors = false;
       return false;
     } else {
-      storageAPI.addUpdateEmploymentBusinessActivity(personId, $('#job-field').val());
+      let url = '../individual-details-employment-activity/?person_id=' + personId + '&edit=true';
+      question = question.trim();
+      storageAPI.addUpdateEmploymentBusinessActivity(personId, $('#job-field').val(), question, url);
 
       if(isEditing) {
         e.preventDefault();

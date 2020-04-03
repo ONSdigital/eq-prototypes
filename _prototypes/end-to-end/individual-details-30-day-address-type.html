@@ -16,15 +16,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            <!--{% include navigation.html
-            items=site.data.your-household-v10.yourHouseholdV4_navigationItemsPersonalDetails
-            nav-title-id="section-individual" %}-->
         </div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password"
-                      action="../individual-details-student-under-18">
+                      action="../individual-details-student">
                     <input autocomplete="new-password" type="hidden" name="person_id" id="person"
                            value="#"/>
                     <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
@@ -85,14 +82,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                     <button class="btn btn--primary btn--lg qa-btn-submit u-mb-xl"
                             type="submit" name="">Save and continue
                     </button>
-
                     
                         <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
-
-                    <!--<p class="u-mb-m"><span class="js-link-secure-label"></span><br />
-                        <a class="js-link-secure"
-                           href="#">Get a separate access code to submit an
-                            individual response</a></p>-->
                 </form>
             </main>
         </div>
@@ -109,7 +100,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     person = member['@person'],
     isEditing = urlParams.get('edit'),
     details = storageAPI.getPersonalDetailsFor(personId);
-    storageAPI.personalBookmark(personId, window.location.href);
+    storageAPI.personalBookmark(personId, window.location.href),
+    question = $('#question-title').html();
 
 
   $('.qa-btn-submit').on('click',
@@ -120,27 +112,28 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     $('[name="checkbox-answer"]:checked').each(function(i, el) {
       addressTypes.push($(el).val());
     });
-
-    storageAPI.addUpdate30DayAddressType(personId, addressTypes);
+    let url = '../individual-details-30-day-address-type/?person_id=' + personId + '&edit=true';
+    question = question.trim();
+    storageAPI.addUpdate30DayAddressType(personId, addressTypes, question, url);
 
     if(isEditing) {
       window.location.href = '../individual-details-summary/?person_id=' + personId;
     } else {
-      window.location.href = '../individual-details-student-under-18/?person_id=' + personId;
+      window.location.href = '../individual-details-student/?person_id=' + personId;
     }
   }));
 
   function updateQuestion() {
     if (details && details.Address30DayUK) {
-      $('.js-heading').html('What type of address is ' + '<em class="highlight">' + details.Address30DayUK.addressLine1 + '</em>' + '?');
+      $('.js-heading').html('What type of address is ' + '<em class="highlight">' + details.Address30DayUK.val + '</em>' + '?');
     } else if (details && details.Address30DayCountry){
-      $('.js-heading').html('What type of address is your address in' + '<em class="highlight">' + details.Address30DayCountry.value + '</em>' + '?');
+      $('.js-heading').html('What type of address is your address in ' + '<em class="highlight">' + details.Address30DayCountry.value + '</em>' + '?');
     }
   }
 
   function updateAnswer() {
     if (details && details.Address30DayType) {
-        $(details.Address30DayType).each(function(i, el) {
+        $(details.Address30DayType.val).each(function(i, el) {
             $('#' + el).attr('checked', true);
         });      
     }

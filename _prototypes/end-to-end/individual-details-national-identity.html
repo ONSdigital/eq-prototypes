@@ -146,7 +146,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     isEditing = urlParams.get('edit'),
     details = storageAPI.getPersonalDetailsFor(personId),
-    surveyType = urlParams.get('survey');
+    surveyType = urlParams.get('survey'),
+    question = $('#question-title').html();
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
@@ -156,9 +157,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     $('[name="checkbox-answer"]:checked').each(function(i, el) {
       nationalIdentities.push($(el).val());
     });
-
+    let url = '../individual-details-national-identity/?person_id=' + personId + '&edit=true';
+    question = question.trim();
     storageAPI.addUpdateNationalIdentity(personId, nationalIdentities,
-      otherText);
+      otherText, question, url);
 
     if(isEditing) {
       e.preventDefault();
@@ -196,14 +198,14 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   }
 
   (function () {
-    if (details && details['national-identity'] && details['national-identity'].collection) {
-      var collection = details['national-identity'].collection;
+    if (details && details['nationalIdentity'] && details['nationalIdentity'].collection) {
+      var collection = details['nationalIdentity'].collection;
 
       $.each(collection, function (i, val) {
         $('#' + val).attr('checked', true);
       });
 
-      $('#other-answer').val(details['national-identity'].otherText);
+      $('#other-answer').val(details['nationalIdentity'].otherText);
     }
   }());
 

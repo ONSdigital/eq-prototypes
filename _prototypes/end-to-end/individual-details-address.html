@@ -110,10 +110,13 @@ cdn: v1.5.0
     isEditing = urlParams.get('edit'),
     isVisitor = storageAPI.isVisitor(member),
     details = storageAPI.getPersonalDetailsFor(personId),
-    surveyType = urlParams.get('survey');
+    surveyType = urlParams.get('survey'),
+    question = $('#question-title').html();
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+    let url = '../individual-details-address/?person_id=' + personId + '&edit=true';
+    question = question.trim();
     storageAPI.addUpdateAddressIndividual(personId,
       {
         'address-line-1': $('#address-line-1').val(),
@@ -121,7 +124,9 @@ cdn: v1.5.0
         'town-city': $('#town-city').val(),
         'county': $('#county').val(),
         'postcode': $('#postcode').val()
-      }
+      },
+      question,
+      url
     );
     
     if(isEditing) {
@@ -167,7 +172,7 @@ cdn: v1.5.0
   }
 
   if (details && details.country) {
-    $('#' + details.country).attr('checked', true);
+    $('#' + details.country.val).attr('checked', true);
   }
 
   $(updateQuestion);

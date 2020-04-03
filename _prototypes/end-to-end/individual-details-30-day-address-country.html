@@ -77,7 +77,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     personId = urlParams.get('person_id'),
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     isEditing = urlParams.get('edit'),
-    details = storageAPI.getPersonalDetailsFor(personId);
+    details = storageAPI.getPersonalDetailsFor(personId),
+    question = $('#question-title').html();
 
     storageAPI.personalBookmark(personId, window.location.href);
 
@@ -85,8 +86,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
     e.preventDefault();
     var value = $('#country-input').val();
+    let url = '../individual-details-30-day-address-country/?person_id=' + personId + '&edit=true';
+    question = question.trim();
 
-    storageAPI.addUpdate30DayCountry(personId, value);
+    storageAPI.addUpdate30DayCountry(personId, value, question, url);
 
     if(isEditing) {
       window.location.href = '../individual-details-summary/?person_id=' + personId;

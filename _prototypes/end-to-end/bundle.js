@@ -112,7 +112,7 @@ import {
   addUpdateSex,
   addUpdateAddressWhere,
   addUpdateAddressIndividual,
-  addUpdateAge,
+  //addUpdateAge,
   addUpdateAgeConfirm,
   addUpdateAddressOutsideUK,
   addUpdateApprenticeship,
@@ -138,6 +138,7 @@ import {
   addUpdateEmploymentMainlyWork,
   addUpdateEmploymentWorkUK,
   addUpdateEmploymentWorkplaceAddress,
+  addUpdateEmploymentAvailableTwoWeeks,
 
   personalDetailsMaritalStatusMap,
   personalDetailsCountryMap,
@@ -706,7 +707,7 @@ window.ONS.storage = {
   addUpdateSex,
   addUpdateAddressWhere,
   addUpdateAddressIndividual,
-  addUpdateAge,
+  //addUpdateAge,
   addUpdateAgeConfirm,
   addUpdateAddressOutsideUK,
   addUpdateApprenticeship,
@@ -732,6 +733,7 @@ window.ONS.storage = {
   addUpdateEmploymentMainlyWork,
   addUpdateEmploymentWorkUK,
   addUpdateEmploymentWorkplaceAddress,
+  addUpdateEmploymentAvailableTwoWeeks,
 
   personalDetailsMaritalStatusMap,
   personalDetailsCountryMap,

@@ -31,7 +31,7 @@ cdn: v1.5.0
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password"
-                      action="../individual-details-summary">
+                      action="../hub/">
                     <input autocomplete="new-password" type="hidden" name="person_id" id="person"
                            value="#"/>
                     <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
@@ -100,10 +100,13 @@ cdn: v1.5.0
     isEditing = urlParams.get('edit'),
     isVisitor = storageAPI.isVisitor(member),
     details = storageAPI.getPersonalDetailsFor(personId),
-    surveyType = urlParams.get('survey');
+    surveyType = urlParams.get('survey'),
+    question = $('#question-title').html();
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+    let url = '../individual-details-employment-address-workplace/?person_id=' + personId + '&edit=true';
+    question = question.trim();
     storageAPI.addUpdateEmploymentWorkplaceAddress(personId,
       {
         'address-line-1': $('#address-line-1').val(),
@@ -111,10 +114,12 @@ cdn: v1.5.0
         'town-city': $('#town-city').val(),
         'county': $('#county').val(),
         'postcode': $('#postcode').val()
-      }
+      },
+      question,
+      url
     );
-    window.location.href = '../individual-details-summary/?person_id=' +
-      personId + (surveyType ? '&survey=' + surveyType : '');
+    storageAPI.clearPersonalBookmark(personId);
+    window.location.href = '../hub/';
   }));
 
   function updateRouting() {

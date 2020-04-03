@@ -115,13 +115,17 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     isEditing = urlParams.get('edit'),
     details = storageAPI.getPersonalDetailsFor(personId),
-    surveyType = urlParams.get('survey');
+    surveyType = urlParams.get('survey'),
+    question = $('#question-title').html();
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
-
+    let url = '../individual-details-qualifications-degree/?person_id=' + personId + '&edit=true';
+    question = question.trim();
     storageAPI.addUpdateHasQualificationAbove(personId,
-      $('[name="checkbox-answer"]:checked').val()
+      $('[name="checkbox-answer"]:checked').val(),
+      question,
+      url
     );
 
     if(isEditing) {

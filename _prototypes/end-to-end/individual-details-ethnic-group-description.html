@@ -86,13 +86,17 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     isEditing = urlParams.get('edit'),
     ethnicGroup = urlParams.get('ethnic-group'),
     details = storageAPI.getPersonalDetailsFor(personId),
-    surveyType = urlParams.get('survey');
+    surveyType = urlParams.get('survey'),
+    question = $('#question-title').html();
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
     var val = $('[name="ethnic-description"]:checked').val();
 
-    storageAPI.addUpdateEthnicGroupDescription(personId, val);
+    let url = '../individual-details-ethnic-group-description/?person_id=' + personId + '&edit=true';
+    question = question.trim();
+
+    storageAPI.addUpdateEthnicGroupDescription(personId, val, question, url);
 
     if(val === 'other') {
       e.preventDefault();
@@ -141,7 +145,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     $radioInput.attr('id', item.val);
     $radioInput.attr('value', item.val);
 
-    if(item.val === details['ethnic-group'].description) {
+    if(item.val === details['ethnicGroup']) {
       $radioInput.attr('checked', true);
     }
 

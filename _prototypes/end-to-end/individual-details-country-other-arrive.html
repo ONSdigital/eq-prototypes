@@ -101,13 +101,18 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     isEditing = urlParams.get('edit'),
     isVisitor = storageAPI.isVisitor(member),
     surveyType = urlParams.get('survey');
-    storageAPI.personalBookmark(personId, window.location.href);
+    storageAPI.personalBookmark(personId, window.location.href),
+    question = $('#question-title').html();
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+    let url = '../individual-details-country-other-arrive/?person_id=' + personId + '&edit=true';
+    question = question.trim();
     storageAPI.addUpdateCountryOtherArrive(personId,
       $('#uk-arrive-month').val(),
-      $('#uk-arrive-year').val()
+      $('#uk-arrive-year').val(),
+      question,
+      url
     );
 
     if(isEditing) {
@@ -118,7 +123,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
     if(isVisitor){
       e.preventDefault();
-      window.location.href = '../individual-details-sex/?person_id=' +
+      window.location.href = '../individual-details-country-other-arrive/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
     }
   }));

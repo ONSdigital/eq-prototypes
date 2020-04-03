@@ -80,13 +80,15 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     isEditing = urlParams.get('edit'),
     details = storageAPI.getPersonalDetailsFor(personId),
-    surveyType = urlParams.get('survey');
+    surveyType = urlParams.get('survey'),
+    question = $('#question-title').html();
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
     var otherText = $('#national-identity-input').val();
-
-    storageAPI.addUpdateNationalIdentityOther(personId, otherText);
+    let url = '../individual-details-national-identity-other/?person_id=' + personId + '&edit=true';
+    question = question.trim();
+    storageAPI.addUpdateNationalIdentityOther(personId, otherText, question, url);
 
     if(isEditing) {
       e.preventDefault();
@@ -110,9 +112,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     }
   }
 
-  if (details && details['national-identity'] &&
-    details['national-identity'].otherText) {
-    $('#national-identity-input').val(details['national-identity'].otherText);
+  if (details && details['nationalIdentity'] &&
+    details['nationalIdentity'].otherText) {
+    $('#national-identity-input').val(details['nationalIdentity'].otherText);
   }
 
   $(updateQuestion);

@@ -90,15 +90,20 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     personId = urlParams.get('person_id'),
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     isEditing = urlParams.get('edit'),
-    surveyType = urlParams.get('survey');
+    surveyType = urlParams.get('survey'),
+    question = $('#question-title').html();
+
 
   $('#text-input').val(storageAPI.getPersonalDetailsFor(personId).salary);
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
-
+    let url = '../individual-details-religion-other/?person_id=' + personId + '&edit=true';
+    question = question.trim();
     storageAPI.addUpdateSalary(personId,
-      $('#text-input').val()
+      $('#text-input').val(),
+      question,
+      url
     );
 
     if(isEditing) {

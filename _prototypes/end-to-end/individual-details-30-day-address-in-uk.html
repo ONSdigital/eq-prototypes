@@ -119,12 +119,15 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     person = member['@person'],
     isEditing = urlParams.get('edit'),
     details = storageAPI.getPersonalDetailsFor(personId);
-    storageAPI.personalBookmark(personId, window.location.href);
+    storageAPI.personalBookmark(personId, window.location.href),
+    question = $('#question-title').html();
 
 
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
-    storageAPI.addUpdate30DayAddressUk(personId, get30DayAddress());
+    let url = '../individual-details-30-day-address-in-uk/?person_id=' + personId + '&edit=true';
+    question = question.trim();
+    storageAPI.addUpdate30DayAddressUk(personId, get30DayAddress(), question, url);
 
     if(isEditing) {
       window.location.href = '../individual-details-summary/?person_id=' + personId;

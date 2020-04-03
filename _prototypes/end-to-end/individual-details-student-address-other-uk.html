@@ -30,9 +30,6 @@ cdn: v1.5.0
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            <!--{% include navigation.html
-            items=site.data.your-household-v10.yourHouseholdV4_navigationItemsPersonalDetails
-            nav-title-id="section-individual" %}-->
         </div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
@@ -98,11 +95,6 @@ cdn: v1.5.0
 
                     <p class="mars">Can't complete this question?<br />
                         <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
-
-                    <!--<p class="mars u-mb-m"><span class="js-link-secure-label"></span><br />
-                        <a class="js-link-secure"
-                           href="#">Get a separate access code to submit an
-                            individual response</a></p>-->
                 </form>
             </main>
         </div>
@@ -120,11 +112,15 @@ cdn: v1.5.0
     isEditing = urlParams.get('edit'),
     isVisitor = storageAPI.isVisitor(member),
     details = storageAPI.getPersonalDetailsFor(personId),
-    surveyType = urlParams.get('survey');
+    surveyType = urlParams.get('survey'),
+    question = $('#question-title').html();
 
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
-    storageAPI.addUpdateStudentAddressUk(personId, getStudentAddress());
+
+    let url = '../individual-details-student-address-other-uk/?person_id=' + personId + '&edit=true';
+    question = question.trim();
+    storageAPI.addUpdateStudentAddressUk(personId, getStudentAddress(), question, url);
 
     if(isEditing) {
       window.location.href = '../individual-details-summary/?person_id=' + personId;

@@ -135,7 +135,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     isEditing = urlParams.get('edit'),
     details = storageAPI.getPersonalDetailsFor(personId),
-    surveyType = urlParams.get('survey');
+    surveyType = urlParams.get('survey'),
+    question = $('#question-title').html();
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
@@ -144,8 +145,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     $('[name="passport-country"]:checked').each(function(i, el) {
       passportCountries.push($(el).val());
     });
-
-    storageAPI.addUpdatePassportCountry(personId, passportCountries);
+    let url = '../individual-details-passport-country/?person_id=' + personId + '&edit=true';
+    question = question.trim();
+    storageAPI.addUpdatePassportCountry(personId, passportCountries, question, url);
 
     if($('#other:checked').length) {
       e.preventDefault();
