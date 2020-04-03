@@ -363,19 +363,6 @@ function updatePersonLink() {
   }
 }
 
-function updateBySurveyType() {
-  const urlParams = new URLSearchParams(window.location.search),
-    surveyType = urlParams.get('survey');
-
-  // if (surveyType) {
-  //   $('.js-header-title').html(surveyTypeConfig[surveyType].title);
-  //   $('#people-living-here').html(surveyTypeConfig[surveyType].householdSectionTitle);
-  //   $('#people-living-here').attr('href', surveyTypeConfig[surveyType].householdSectionLink);
-  //   $('#relationships-section').attr('href', surveyTypeConfig[surveyType].relationshipsSection);
-  //   $('title').html(surveyTypeConfig[surveyType].title);
-  // }
-}
-
 function setAnsweringIndividualByProxy(bool) {
   sessionStorage.setItem(INDIVIDUAL_PROXY_STORAGE_KEY, JSON.stringify(bool));
 }
@@ -806,7 +793,6 @@ $(updateAddresses);
 $(updatePersonLink);
 $(tools);
 $(updateAllPreviousLinks);
-$(updateBySurveyType);
 $(updateSignificantDate);
 $(updateHouseholdSummary);
 $(updateVisitorsSummary);
