@@ -180,6 +180,11 @@ a:focus:not(.btn--link):not(.btn--ghost):not(.js-clear-btn):not(.download__thumb
     margin-top: 1.5rem;
 }
 
+.collapsible__body.is-expanded, 
+.no-js .collapsible__body {
+    margin-top: .5rem;
+}
+
 .question + .collapsible {
     margin-top: 0;
 }

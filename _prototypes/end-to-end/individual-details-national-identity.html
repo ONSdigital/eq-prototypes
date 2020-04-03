@@ -37,7 +37,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                         How would you describe your national identity?
                                     </h1>
                                 </div>
-                                <p>This relates to where you feel you belong, such as the country or countries you think of as home. This could be different from your citizenship or ethnic group.</p>
+                                <p class="js-question-guidance-line1">This relates to where you feel you belong, such as the country or countries you think of as home.</p>
+                                <p class="js-question-guidance-line2">This could be different from your citizenship or ethnic group.</p>
 
                                 <div class="answer">
                                     <div class="answer__fields js-fields">
@@ -172,6 +173,13 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     }
   }
 
+   function updateHelp() {
+    if(storageAPI.getAnsweringIndividualByProxy()) {
+      $('.js-question-guidance-line1').html('This relates to where they feel they belong, such as the country or countries they think of as home.');
+      $('.js-question-guidance-line2').html('This could be different from their citizenship or ethnic group.');
+    }
+  }
+
   function updateAnswers() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
       $('.js-answer').html('You can enter their national identity on the next question');
@@ -196,6 +204,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   $(updateAllPreviousLinks);
   $(updateQuestion);
+  $(updateHelp);
   $(updateAnswers);
   $(updateRouting);
 
