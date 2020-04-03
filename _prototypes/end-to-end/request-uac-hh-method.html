@@ -4,6 +4,7 @@ project: End to end prototype
 globalcss: false
 layout: eq-default-extras
 cdn: v1.5.0
+hideSaveLater: true
 ---
 
 <link rel="stylesheet" href="../style.css"/>
@@ -34,11 +35,8 @@ cdn: v1.5.0
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title saturn js-piping">
-                                        How would you like <em class="highlight">{x}</em> to receive a separate census?
+                                        How would you like to receive a new household access code?
                                     </h1>
-                                    <p class="mars u-mb-m">
-                                        For someone to complete a separate census, we need to send them an individual access code.
-                                    </p>
                                 </div>
 
                                 <div class="answer">
@@ -57,19 +55,7 @@ cdn: v1.5.0
                                                            id="no-label">
                                                         Text message
                                                         <br>
-                                                        <p class="radio__description label--negative u-fs-s u-mb-no">We will need their mobile number for this</p>
-                                                    </label>
-                                                </div>                                                
-                                                <div class="field__item js-focusable-box u-d-no">
-                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
-                                                           type="radio"
-                                                           name="does-anyone-else-live-here"
-                                                           id="email" value="email">
-                                                    <label class="label label--inline"
-                                                           for="email">
-                                                        Email
-                                                        <br>
-                                                        <p class="radio__description label--negative u-fs-s u-mb-no">We will need their email address for this</p>
+                                                        <p class="radio__description label--negative u-fs-s u-mb-no">We will need your mobile number for this</p>
                                                     </label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
@@ -81,7 +67,7 @@ cdn: v1.5.0
                                                            for="post">
                                                         Post
                                                         <br>
-                                                        <p class="radio__description label--negative u-fs-s u-mb-no">We can only send this to an unnamed resident at the registered household address</p>
+                                                        <p class="radio__description label--negative u-fs-s u-mb-no">We can only send this to the registered household address</p>
                                                     </label>
                                                 </div>
                                             </fieldset>
@@ -94,7 +80,7 @@ cdn: v1.5.0
                     <button class="btn btn--primary btn--lg qa-btn-submit u-mb-xl"
                             type="submit" name="">Save and continue
                     </button>
-                    <p>To request a census in a different format or for further help, please <a href="/">contact us</a></p>
+                    <p>To request a census in a different format or for further help, please <a href="#">contact us</a></p>
 
                 </form>
             </main>
@@ -110,9 +96,7 @@ cdn: v1.5.0
     var personId = searchParams.get('person_id');
     var previousLink = document.querySelector('.js-previous-link');
     var phoneInput = document.getElementById('phone');
-    var phoneInputOther = document.getElementById('phone-other');
-    var emailInput = document.getElementById('email');
-    var emailInputOther = document.getElementById('email-other');
+    var postInput = document.getElementById('post');    
     var previousPage = searchParams.get('previous');
 
     if (!personId) {
@@ -142,12 +126,9 @@ cdn: v1.5.0
     form.addEventListener('submit', function(event) {
         event.preventDefault();
         if (phoneInput.checked) {
-            var url = '../individual-decision-enter-mobile';
-        } else if (emailInput.checked) {
-            var url = '../individual-decision-enter-email';
-        } else {
-            var url = '../individual-decision-confirm-address';
-
+            var url = '../uac-request-hh-enter-mobile';
+        } else if (postInput.checked) {
+            var url = '../uac-request-hh-confirm-address';
         }
         sessionStorage.setItem('cannot-answer-people', JSON.stringify(cannotAnswerPeople));
 

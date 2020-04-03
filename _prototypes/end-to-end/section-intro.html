@@ -8,9 +8,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
-    <div class="container">
-        <a class="js-previous-link" href="../visitors">Previous</a>
-    </div>
+
 </div>
 
 <div class="page__container container">
@@ -31,7 +29,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 <li>Names of people living at this address, including anyone currently away.</li>
                                 <li>Names of visitors staying overnight in this household on <span class="js-significant-date"></span>.</li>
                             </ul>
-                            
+
                             <p>The Householder is responsible for ensuring that this questionnaire is completed and submitted.</p>
                         </section>
                     </div>
@@ -61,7 +59,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   });
 
   function updateAllPreviousLinks() {
-    $('.js-previous-link').attr('href', '../hub');
+    $('.js-previous-link').attr('href', '../confirm-address/?previous=confirm-address');
   }
 
   $(updateAllPreviousLinks);

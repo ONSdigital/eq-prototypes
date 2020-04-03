@@ -4,6 +4,7 @@ project: End to end prototype
 globalcss: false
 layout: eq-default-extras
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
 ---
 
 <link rel="stylesheet" href="../style.css"/>
@@ -30,14 +31,13 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             <div class="question u-mb-s">
                                 <h1 id="question-title"
                                     class="question__title u-fs-xl js-piping">
-                                    Do you want to send an individual access code to <em class="highlight">{x}</em> by post?
+                                    Do you want to send a household access code to this address?
                                 </h1>
                             </div>
-                            <p>A letter with an individual access code will be sent to:</p>
                             <div class="u-mb-m js-address"></div>
                              <div class="panel panel--simple panel--info u-mb-m">
                                 <div class="panel__body">
-                                    For security reasons we can only send access codes to an unnamed resident at the registered household address.
+                                    For security reasons we can only send access codes to the registered household address.
                                 </div>
                             </div>
                             <div class="field field--radio field--multiplechoice">
@@ -99,6 +99,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     personId = urlParams.get('person_id'),
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     addressLines = (sessionStorage.getItem('address') || '').replace(/,/g, '<br />'),
+    addresseeName = (sessionStorage.getItem('addressee-name') || ''),
     pipingDestinations = Array.from(document.querySelectorAll('.js-piping')),
     possessive = person.fullName.slice(-1) === 's' ? "'" : "'s",
     cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people', '') || '[]'),
@@ -108,7 +109,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     });
 
     function updateQuestion() {
-        $('.js-address').html('<strong>Individual Resident</strong>' + ' <br> ' + addressLines);
+        $('.js-address').html('<strong>' + addresseeName + '</strong>' + ' <br> ' + addressLines);
     }
 
 
@@ -116,15 +117,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         e.preventDefault();
         
         if ($('[name=radio-answer]:checked').val() === 'yes') {
-            cannotAnswerPeople[cannotAnswerPerson] = {
-                id: personId,
-                responseOption: 'new-survey',
-                postRequest: true
-            };  
-            sessionStorage.setItem('cannot-answer-people', JSON.stringify(cannotAnswerPeople));
-            window.location.href = '../individual-decision-confirm-address-sent/?person_id=' + personId;
+            window.location.href = '../uac-request-hh-confirm-address-sent/';
         } else {
-            window.location.href = '../individual-decision-method/?person_id=' + personId;
+            window.location.href = '../uac-request-hh-method/';
         }
     
     });
@@ -137,7 +132,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
 
     function updateAllPreviousLinks() {
-        $('.js-previous-link').attr('href', '../individual-decision-method/?person_id=' + personId + (previousPage ? '&previous=' + previousPage : ''));
+        $('.js-previous-link').attr('href', '../uac-request-hh-method/' + (previousPage ? '&previous=' + previousPage : ''));
     }
 
     $(updateAllPreviousLinks);

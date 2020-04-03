@@ -22,7 +22,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
-
+    <div class="container">
+        <a class="js-previous-link" href="../confirm-address/?previous=test-address">Previous</a>
+    </div>
 </div>
 
 <div class="page__container container">
@@ -56,7 +58,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                         <fieldset
                                 class="question__fieldset js-question-fieldset u-mb-m">
 
-                            <legend class="u-vh">What is the first line of your address?
+                            <legend class="u-vh">What is your address?
                             </legend>
 
                             <div class="question__answers">
@@ -117,7 +119,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     sessionStorage.setItem('address-county', document.getElementById('address-county').value);
     sessionStorage.setItem('address-postcode', document.getElementById('address-postcode').value);
 
-    window.location = '../confirm-address/';
+    window.location = '../confirm-address/?previous=test-address';
   });
 
   function getAddress() {
@@ -147,5 +149,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     }
   $(updateEditableAddress);
   }
+
+  function updateAllPreviousLinks() {
+    $('.js-previous-link').attr('href', '../confirm-address/?previous=test-address');
+  }
+
+  $(updateAllPreviousLinks);
 
 </script>
