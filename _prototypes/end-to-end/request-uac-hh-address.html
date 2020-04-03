@@ -1,0 +1,118 @@
+---
+title: Version 1
+project: End to end prototype
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+---
+
+<style>
+    .input--text-lg {
+        width : 100%;
+    }
+
+    .input--text-postcode {
+        max-width : 9.25rem;
+    }
+</style>
+
+<link rel="stylesheet" href="../assets/modules/typeahead/typeahead.css"/>
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../confirm-address/?previous=test-address">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <div class="feedback__inline js-feedback-inline is-collapsed">
+                    <div class="feedback__border">
+                        <form id="feedback-form" method="POST"
+                              class="feedback__form">
+                            <div class="group">
+                                <div class="feedback__field">
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="block" id="what-is-your-address">
+                    <div class="question"
+                          id="what-is-your-address-question">
+                        <h1 class="question__title u-fs-xl"
+                            data-qa="question-title">
+                            What is your address?
+                        </h1>
+
+                        <fieldset
+                                class="question__fieldset js-question-fieldset u-mb-m">
+
+                            <legend class="u-vh">What is your address?
+                            </legend>
+                            <p>To request a new household access code, we need your address.</p>
+
+                            <p class="field">
+                              <label class="label" for="rh-proto-address">Enter address or postcode and select from results
+                              </label>
+
+                              <div id="rh-proto-address-container" class="js-typeahead typeahead-input typeahead-input--initialised" data-instructions="Use up and down keys to navigate suggestions once you&#39;ve typed more than two characters. Use the enter key to select a suggestion. Touch device users, explore by touch or with swipe gestures." data-aria-you-have-selected="You have selected" data-aria-min-chars="Enter 3 or more characters for suggestions." data-aria-one-result="There is one suggestion available." data-aria-n-results="There are {n} suggestions available." data-aria-limited-results="Results have been limited to 10 suggestions. Type more characters to improve your search." data-more-results="Continue entering to improve results" data-results-title="Select an address" data-typeahead-data="https://gist.githubusercontent.com/jrbarnes9/27855a3618d50c407afe6af6718b2a44/raw/5bc2953ccfa9177df582e8d38ce6eeec4fa4fdb8/rh_proto_address_list.json" data-no-results="No results found">
+                                  <input type="text" id="rh-proto-address" class="input input--text input-type__input input--w-50 js-typeahead-input " autocomplete="off" aria-autocomplete="list" aria-controls="rh-proto-address-listbox" aria-describedby="rh-proto-address-instructions" aria-has-popup="true" aria-owns="rh-proto-address-listbox" aria-expanded="false" role="combobox">
+                                  <div class="typeahead-input__results js-typeahead-results">
+                                  <header class="typeahead-input__results-title u-fs-s">Select an address</header>
+                                  <ul class="typeahead-input__listbox js-typeahead-listbox" role="listbox" id="rh-proto-address-listbox" tabindex="-1"></ul>
+                                  </div>
+                                  <div class="typeahead-input__instructions u-vh js-typeahead-instructions" id="rh-proto-address-instructions" tabindex="-1">Use up and down keys to navigate suggestions once you&#39;ve typed more than two characters. Use the enter key to select a suggestion. Touch device users, explore by touch or with swipe gestures.</div>
+                                  <div class="typeahead-input__status u-vh js-typeahead-aria-status" aria-live="polite" role="status" tabindex="-1"></div>
+                              </div>
+                            </p>
+                        </fieldset>
+                    </div>
+                </div>
+
+                <button class="btn btn-submit btn--primary btn--lg"
+                        data-qa="btn-submit" type="submit"
+                        name="action[save_continue]">Continue
+                </button>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+  $('.btn-submit').click(function(e) {
+    e.preventDefault(); // do not submit the form like usual
+
+    var isEditing =
+      new URLSearchParams(window.location.search).get('edit') === 'true';
+
+    sessionStorage.setItem('address', document.getElementById('rh-proto-address').value);
+
+    window.location = '../confirm-rh-address/?previous=test-address';
+  });
+
+  if (window.location.search == '?edit=true') {
+    function updateEditableAddress() {
+      $('#rh-proto-address').val(sessionStorage.getItem('address'));
+    }
+  $(updateEditableAddress);
+  }
+
+  function updateAllPreviousLinks() {
+    $('.js-previous-link').attr('href', '../confirm-address/?previous=test-address');
+  }
+  document.dispatchEvent(new CustomEvent('TYPEAHEAD-READY'));
+
+  $(updateAllPreviousLinks);
+
+</script>
