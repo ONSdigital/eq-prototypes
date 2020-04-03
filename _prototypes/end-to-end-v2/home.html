@@ -1,0 +1,95 @@
+---
+title: Version 2
+project: End to end prototype v2
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<link rel="stylesheet" href="../census-home-style.css"/>
+
+<main id="main-content" role="main">
+    <section class="hero hero--with-image">
+        <picture>
+            <source media="(max-width: 768px)" srcset="{{site.baseurl}}/s/img/hero_banner_template_V4.jpg"><img class="hero__img" src="{{site.baseurl}}/s/img/hero_banner_template_V4.jpg" alt=""></picture>
+        <div class="hero__container">
+            <div class="hero__content grid grid--gutterless grid--flex grid--vertical-center">
+                <div class="container">
+                    <div class="grid__col col-6@m">
+                        <header>
+                            <h1 class="hero__title">Census 2021 is happening now</h1>
+                            <h2 class="hero__subtitle u-fs-m">Ready to start your census online? <br>You’ll need your 16<span aria-hidden="true">-<span>character access code.</h2>
+                        </header>
+                        <a href="../uac-entry/" role="button" class="btn u-mb-m btn--link">
+                            <span class="btn__inner icon--chevron-right-white">Start census</span>
+                        </a>                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="warning">
+        <div class="page__container container">
+            <div class="panel panel--simple panel--warning js-panel-info" style=""><span class="panel__icon" aria-hidden="true">!</span><span class="panel__text">You must complete the census by law or you could be fined up to £1000.</span></div>
+        </div>
+    </section>
+    <div class="page__container container">
+        <section class="u-pt-l u-mb-s u-bb u-pb-m">
+            <div class="grid grid--column@xs@s">
+                <div class="grid__col col-4@m">
+                    <div class="card" aria-labelledby="about-the-census" aria-describedby="highlight-id-0" role="navigation" aria-label="Section highlight">
+                        <h2 class="u-fs-m" id="about-the-census"><a href="https://census.gov.uk/about-the-census">About the census</a></h2>
+                        <p id="highlight-id-0">The census is a survey that gives us information about all the households in England and Wales.</p>
+                    </div>
+                </div>
+                <div class="grid__col col-4@m">
+                    <div class="card" aria-labelledby="why-should-i-take-part-in-the-census?" aria-describedby="highlight-id-1" role="navigation" aria-label="Section highlight">
+                        <h2 class="u-fs-m" id="why-should-i-take-part-in-the-census?"><a href="https://census.gov.uk/about-the-census/why-should-i-take-part">Why should I take part in the census?</a></h2>
+                        <p id="highlight-id-1">Why the information we collect is important and what we use it for.</p>
+                    </div>
+                </div>
+                <div class="grid__col col-4@m">
+                    <div class="card" aria-labelledby="keeping-your-data-safe" aria-describedby="highlight-id-2" role="navigation" aria-label="Section highlight">
+                        <h2 class="u-fs-m" id="keeping-your-data-safe"><a href="https://census.gov.uk/keeping-your-data-safe">Keeping your data safe</a></h2>
+                        <p id="highlight-id-2">How we keep your data safe and what happens to your personal information.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="page__container container">
+        <section class="u-pt-m u-pb-s">
+            <h2 class="u-mb-l">Help with your census</h2>
+            <div class="grid grid--column@xs@s u-mb-l">
+                <div class="grid__col col-7@m">
+                    <div class="card" aria-labelledby="about-the-census" aria-describedby="highlight-id-0" role="navigation" aria-label="Section highlight">
+                        <h2 class="u-fs-m" id="about-the-census"><a href="https://census.gov.uk/about-the-census">How to answer the questions</a></h2>
+                        <p id="highlight-id-0">Guidance on answering the census questions and why we ask them.</p>
+                    </div>
+                    <div class="card u-mt-m" aria-labelledby="why-should-i-take-part-in-the-census?" aria-describedby="highlight-id-1" role="navigation" aria-label="Section highlight">
+                        <h2 class="u-fs-m" id="why-should-i-take-part-in-the-census?"><a href="https://census.gov.uk/about-the-census/why-should-i-take-part">Languages and accessibility</a></h2>
+                        <p id="highlight-id-1">Census in other formats, guides in other languages and accessible formats.</p>
+                    </div>
+                    <div class="card u-mt-m" aria-labelledby="keeping-your-data-safe" aria-describedby="highlight-id-2" role="navigation" aria-label="Section highlight">
+                        <h2 class="u-fs-m" id="keeping-your-data-safe"><a href="https://census.gov.uk/keeping-your-data-safe">Get help where you live</a></h2>
+                        <p id="highlight-id-2">You can get help from a friend or neighbour, or one of our advisers face-to-face or over the phone.</p>
+                    </div>
+                    <div class="card u-mt-m" aria-labelledby="keeping-your-data-safe" aria-describedby="highlight-id-2" role="navigation" aria-label="Section highlight">
+                        <p><a href="#">View all help and guidance</a></p>
+                    </div>
+                </div>
+                <div class="grid__col push-1@m col-4@m u-bl">
+                    <div class="u-pl-m@m u-bl@m u-pt-m@xs@m u-bt@xs@m">
+                        <h3 class="u-fs-r--b">If you don't have a household access code</h3>
+                        <p>You can <a hre="#">request a new household access code</a> to start a new census if you have lost or not received an access code.</p>
+                        <h3 class="u-fs-r--b">Answering separately from your household</h3>
+                        <p>If you prefer to answer separately from the people you live with, you can <a hre="#">request an individual access code</a> to start a separate census.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</main>

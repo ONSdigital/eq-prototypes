@@ -1,0 +1,111 @@
+---
+title: Version 2
+project: End to end prototype v2
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous" href="../household-accom-type">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m"></div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password"
+                      action="../household-accom-shared-rooms">
+                    <div class="group" id="accommodation">
+                        <div class="block" id="house-type">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-xl js-heading">
+                                        Which of the following is your house or bungalow?
+                                    </h1>
+                                </div>
+                                  <div class="answer">
+                                    <div class="answer__fields js-fields">
+                                        <div class="field field--radio field--multiplechoice ">
+                                            <fieldset class="u-mb-xl">
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="accommodation-house-type"
+                                                           id="detached-type"
+                                                           value="Detached">
+                                                    <label class="label label--inline"
+                                                           for="detached-type"
+                                                           id="detached-label">
+                                                        Detached
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="accommodation-house-type"
+                                                           id="semi-detached"
+                                                           value="Semi-detached">
+                                                    <label class="label label--inline"
+                                                           for="semi-detached"
+                                                           id="semi-detached-label">
+                                                        Semi-detached
+                                                    </label>
+
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="accommodation-house-type"
+                                                           id="terraced"
+                                                           value="Terraced">
+                                                    <label class="label label--inline"
+                                                           for="terraced"
+                                                           id="terraced-label">
+                                                        Terraced
+                                                        <p class="u-fs-s u-db u-mb-no label--negative">
+                                                            Including end terrace
+                                                        </p>
+                                                    </label>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+    var storageAPI = window.ONS.storage,
+        question = $('#question-title').html(),
+        currentPage = '../household-accom-house-type';
+
+    window.sessionStorage.setItem('accommodation-completed-status', currentPage);
+
+    $('.qa-btn-submit').click(function (e) {
+        var val =$('input[type=radio][name=accommodation-house-type]:checked').attr('value');
+        question = question.trim();
+        window.sessionStorage.setItem('accommodation-house-type', JSON.stringify([question, val, currentPage]));
+        e.preventDefault();
+        window.location.href = '../household-accom-shared-rooms/';
+    });
+
+    $('.js-previous').attr('href', '../household-accom-type');
+</script>
