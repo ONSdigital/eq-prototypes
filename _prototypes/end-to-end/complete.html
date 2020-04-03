@@ -71,8 +71,10 @@ hideSaveLater: true
                 <div class="panel panel--simple panel--success u-mb-m">
                     <div class="panel__body">
                         <h1 class="u-mb-xs">
-                            Thank you for submitting your census for <span class="full-address-text">Address not set</span>
+                            Thank you for completing the census
                         </h1>
+                        <p class="u-mb-xs">Your census has been submitted for the household at:<br>
+                        <div class="full-address-text u-fs-r--b">Address not set</div>
                        <!-- <p>Thank you for completing the census.
                             We have received your answers and you do not need to do anything else.</p>
                         <h2 class="u-fs-r--b u-mb-no">Your confirmation number</h2>
@@ -146,7 +148,7 @@ hideSaveLater: true
 
     $(function () {
 	  if(sessionStorage.getItem('address')) {
-		$('.full-address-text').html((sessionStorage.getItem('address-line-1') || '').replace(/,/g, ''));
+		$('.full-address-text').html((sessionStorage.getItem('address') || '').replace(/,/g, '<br>'));
       }
 	});
 
