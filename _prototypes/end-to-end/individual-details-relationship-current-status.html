@@ -128,16 +128,16 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       console.log(details.maritalStatus);
     var maritalStatus = urlParams.get('marital-status');
 
-    if(maritalStatus === 'registered' || maritalStatus === 'separated-partnership'){
+    if(maritalStatus === 'Registered' || maritalStatus === 'Separated+partnership'){
         var maritalStatusHeading = "registered civil partnership";
         var headingTense = "is";
-    } else if(maritalStatus === 'former-partnership' || maritalStatus === 'surviving-partner'){
+    } else if(maritalStatus === 'Former+partnership' || maritalStatus === 'Surviving+partner'){
         var maritalStatusHeading = "registered civil partnership";
         var headingTense = "was";
-    } else if(maritalStatus === 'married' || maritalStatus === 'separated-married'){
+    } else if(maritalStatus === 'Married' || maritalStatus === 'Separated+married'){
         var maritalStatusHeading = "legal marriage";
         var headingTense = "is";
-    } else if(maritalStatus === 'divorced' || maritalStatus === 'widowed'){
+    } else if(maritalStatus === 'Divorced' || maritalStatus === 'Widowed'){
         var maritalStatusHeading = "legal marriage";
         var headingTense = "was";
     } else {
