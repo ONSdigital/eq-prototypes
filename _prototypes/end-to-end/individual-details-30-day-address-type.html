@@ -125,7 +125,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if (details && details.Address30DayUK) {
-      $('.js-heading').html('What type of address is ' + '<em class="highlight">' + details.Address30DayUK.val + '</em>' + '?');
+      $('.js-heading').html('What type of address is ' + '<em class="highlight">' + details.Address30DayUK.address + '</em>' + '?');
     } else if (details && details.Address30DayCountry){
       $('.js-heading').html('What type of address is your address in ' + '<em class="highlight">' + details.Address30DayCountry.value + '</em>' + '?');
     }
