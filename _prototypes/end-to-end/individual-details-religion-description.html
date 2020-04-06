@@ -147,7 +147,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            for="other"
                                                            id="other-label">
                                                         Any other religion
-                                                        <p class="u-fs-s u-db u-mb-no label--negative">
+                                                        <p class="u-fs-s u-db u-mb-no label--negative js-other-piping">
                                                             You can enter your religion on the next question
                                                         </p>
                                                     </label>
@@ -243,6 +243,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     $('.js-heading').html(str);
   }
 
+  function updateAnswers() {
+    $('.js-other-piping').html('You can enter their religion on the next question');
+  }
+
  function updateAllPreviousLinks() {
       $('.js-previous-link').attr('href', '../individual-details-religion-description/?person_id=' + personId + (religion ? '&religion=' + religion : ''));
   }
@@ -250,6 +254,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   $(updateAllPreviousLinks);    
 
   $(updateQuestion);
+  $(updateAnswers);
   $(updateRouting);
 
   /**
