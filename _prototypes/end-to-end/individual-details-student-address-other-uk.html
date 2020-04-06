@@ -46,7 +46,7 @@ cdn: v1.5.0
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title saturn js-heading">
-                                        You selected "Yes". Enter details of the UK address where you usually stay during term time.
+                                        You selected &ldquo;Yes&rdquo;. Enter details of the UK address where you usually stay during term time
                                     </h1>
                                 </div>
 
@@ -128,6 +128,9 @@ cdn: v1.5.0
         window.location.href = '../individual-details-country/?person_id=' +
         personId;
     }
+
+    storageAPI.clearPersonalBookmark(personId);
+    window.location.href = '../hub';
   });
 
   function getStudentAddress() {
@@ -156,7 +159,7 @@ cdn: v1.5.0
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-        $('.js-heading').html('You selected "Yes". Enter details of the UK address where '  + '<em class="highlight">' + person.firstLastName + '</em>' + ' usually stay during term time.');
+        $('.js-heading').html('You selected &ldquo;Yes&rdquo;. Enter details of the UK address where '  + '<em class="highlight">' + person.firstLastName + '</em>' + ' usually stay during term time.');
     }
   }
 
