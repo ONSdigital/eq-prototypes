@@ -166,9 +166,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             type="submit" name="">Save and continue
                     </button>
 
-                    <p>Can't complete this question?<br />
+                    <p>
                         <a href="../hub" class="js-choose-another-section">Choose another section and
-                            return to this later</a></p>
+                            return to this question later</a></p>
                 </form>
             </main>
         </div>
@@ -234,7 +234,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   }
 
   function updateQuestion() {
-    var str = 'Which one best describes ' + 
+    var str = 'What is ' + 
       (storageAPI.getAnsweringIndividualByProxy()
         ? '<em class="highlight">' + person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName) + '</em>'
         : 'your') +

@@ -99,28 +99,6 @@ hideSaveLater: true
     var postInput = document.getElementById('post');    
     var previousPage = searchParams.get('previous');
 
-    if (!personId) {
-        personId = cannotAnswerPeople[0].id;
-    }
-
-    previousLink.setAttribute('href', previousLink.getAttribute('href') + '?person_id=' + personId);
-
-    var person = JSON.parse(sessionStorage.getItem('household-members')).find(function(person) { 
-        return person['@person'].id === personId;
-    })['@person'];
-
-    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
-    var possessive = person.fullName.slice(-1) === 's' ? "'" : "'s";
-
-    pipingDestinations.forEach(function(pipingDestination) {
-        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', person.fullName).replace('{s}', possessive);
-    });
-
-    var cannotAnswerPerson = cannotAnswerPeople.find(function(p) {
-        return p.id === person.id;
-    });
-
-
     var form = document.querySelector('form');
 
     form.addEventListener('submit', function(event) {
@@ -130,9 +108,8 @@ hideSaveLater: true
         } else if (postInput.checked) {
             var url = '../uac-request-hh-confirm-address';
         }
-        sessionStorage.setItem('cannot-answer-people', JSON.stringify(cannotAnswerPeople));
 
-        window.location.href = url + '?person_id=' + personId + '&previous=' + previousPage;
+        window.location.href = url + '?previous=' + previousPage;
     });
 
     function updateAllPreviousLinks() {

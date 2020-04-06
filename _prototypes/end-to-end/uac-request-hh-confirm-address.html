@@ -96,22 +96,12 @@ hideSaveLater: true
 <script>
   var storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
-    personId = urlParams.get('person_id'),
-    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     addressLines = (sessionStorage.getItem('address') || '').replace(/,/g, '<br />'),
-    addresseeName = (sessionStorage.getItem('addressee-name') || ''),
-    pipingDestinations = Array.from(document.querySelectorAll('.js-piping')),
-    possessive = person.fullName.slice(-1) === 's' ? "'" : "'s",
-    cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people', '') || '[]'),
-    cannotAnswerPerson = cannotAnswerPeople.findIndex((e) => e.id === personId);
-    pipingDestinations.forEach(function(pipingDestination) {
-        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', person.fullName).replace('{s}', possessive);
-    });
-
+    addresseeName = (sessionStorage.getItem('addressee-name') || '');
+    
     function updateQuestion() {
         $('.js-address').html('<strong>' + addresseeName + '</strong>' + ' <br> ' + addressLines);
     }
-
 
     $('.qa-btn-submit').on('click', function (e) {
         e.preventDefault();
@@ -124,12 +114,6 @@ hideSaveLater: true
     
     });
     $(updateQuestion);
-
-    /**
-    * Routing
-    */
-    $('#person').val(urlParams.get('person_id'));
-
 
     function updateAllPreviousLinks() {
         $('.js-previous-link').attr('href', '../uac-request-hh-method/' + (previousPage ? '&previous=' + previousPage : ''));

@@ -33,11 +33,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title u-fs-xl js-heading">
-                                        You selected "Other". What passports do you hold?
+                                        You selected &ldquo;Other&rdquo;. What passports do you hold?
                                     </h1>
                                 </div>
-                                <div class="panel panel--simple panel--info u-mb-m js-visitor-panel">
-                                    <div class="panel__body">
+                                <div class="panel panel--simple panel--info u-mb-m">
+                                    <div class="panel__body js-panel">
                                          Include all passports. If you have more than one, enter them all separated by a comma.</strong>
                                     </div>
                                 </div>
@@ -113,14 +113,17 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(details && details.passport && details.passport.countries.length > 1) {
-      $('.js-heading').html('You selected "Other". What other passports do you hold?');
+      $('.js-heading').html('You selected &ldquo;Other&rdquo;. What other passports do you hold?');
+      $('.js-panel').html('Include all other passports. If you have more than one, enter them all separated by a comma.');
       if(storageAPI.getAnsweringIndividualByProxy()) {
-        $('.js-heading').html('You selected "Other". What other passports do ' + '<em class="highlight">' + person.firstLastName + '</em>' +
-          ' hold.');
+        $('.js-heading').html('You selected &ldquo;Other&rdquo;. What other passports does ' + '<em class="highlight">' + person.firstLastName + '</em>' +
+          ' hold?');
+        $('.js-panel').html('Include all other passports. If they have more than one, enter them all separated by a comma.');
       }
     } else if(storageAPI.getAnsweringIndividualByProxy()) {
-        $('.js-heading').html('You selected "Other". What passports do ' + '<em class="highlight">' + person.firstLastName + '</em>' +
-          ' hold.');
+      $('.js-heading').html('You selected &ldquo;Other&rdquo;. What passports does ' + '<em class="highlight">' + person.firstLastName + '</em>' +
+          ' hold?');
+      $('.js-panel').html('Include all passports. If they have more than one, enter them all separated by a comma.');
     }
   }
 

@@ -98,6 +98,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     } else {
       window.location.href = '../individual-details-country/?person_id=' + personId;
     }
+
+    storageAPI.clearPersonalBookmark(personId);
+    window.location.href = '../hub';
   }));
 
   function updateQuestion() {
