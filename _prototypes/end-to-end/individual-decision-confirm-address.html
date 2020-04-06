@@ -45,7 +45,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                     <div class="field__item js-focusable-box">
                                         <input autocomplete="new-password" class="input input--radio js-focusable"
                                                name="radio-answer"
-                                               value="yes"
+                                               value="Yes"
                                                id="yes"
                                                type="radio">
                                         <label class="label label--inline u-fs-r"
@@ -55,7 +55,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                     <div class="field__item js-focusable-box">
                                         <input autocomplete="new-password" class="input input--radio js-focusable"
                                                name="radio-answer"
-                                               value="no"
+                                               value="No"
                                                id="no"
                                                type="radio">
                                         <label class="label label--inline u-fs-r "
@@ -115,7 +115,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     $('.qa-btn-submit').on('click', function (e) {
         e.preventDefault();
         
-        if ($('[name=radio-answer]:checked').val() === 'yes') {
+        if ($('[name=radio-answer]:checked').val() === 'Yes') {
             cannotAnswerPeople[cannotAnswerPerson] = {
                 id: personId,
                 responseOption: 'new-survey',

@@ -114,7 +114,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         }
         
         if (individualDetails[person].Address30DayUK) {
-            $container.append(createListItem(individualDetails[person].Address30DayUK.val, individualDetails[person].Address30DayUK.question, individualDetails[person].Address30DayUK.url));
+            $container.append(createListItem(individualDetails[person].Address30DayUK.address, individualDetails[person].Address30DayUK.question, individualDetails[person].Address30DayUK.url));
         }
 
         if (individualDetails[person].Address30DayType) {
@@ -194,9 +194,13 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         if (individualDetails[person].studentAddress) {
             $container.append(createListItem(individualDetails[person].studentAddress.val, individualDetails[person].studentAddress.question, individualDetails[person].studentAddress.url));
         }
+
+        if (individualDetails[person].studentAddressInUK) {
+            $container.append(createListItem(individualDetails[person].studentAddressInUK.val, individualDetails[person].studentAddressInUK.question, individualDetails[person].studentAddressInUK.url));
+        }
         
         if (individualDetails[person].AddressStudentUK) {
-            $container.append(createListItem(individualDetails[person].AddressStudentUK.val, individualDetails[person].AddressStudentUK.question, individualDetails[person].AddressStudentUK.url));
+            $container.append(createListItem(individualDetails[person].AddressStudentUK.address, individualDetails[person].AddressStudentUK.question, individualDetails[person].AddressStudentUK.url));
         }
 
         if (individualDetails[person].AddressStudentCountry) {

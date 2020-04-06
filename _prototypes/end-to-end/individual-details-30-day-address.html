@@ -61,7 +61,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="30-day-address"
                                                            id="no"
-                                                           value="no">
+                                                           value="No">
                                                     <label class="label label--inline"
                                                            for="no"
                                                            id="no-label">
@@ -73,7 +73,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="30-day-address"
                                                            id="yes-uk"
-                                                           value="yes-uk">
+                                                           value="Yes, in the UK">
                                                     <label class="label label--inline"
                                                            for="yes-uk"
                                                            id="yes-uk-label">
@@ -85,7 +85,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="30-day-address"
                                                            id="yes-outside"
-                                                           value="yes-outside">
+                                                           value="Yes, outside the UK">
                                                     <label class="label label--inline"
                                                            for="yes-outside"
                                                            id="yes-outside-label">
@@ -142,11 +142,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     }
     
     var val = $('[name="30-day-address"]:checked').val();
-    if(val === 'no' || val == null) {
+    if(val === 'No' || val == null) {
       window.location.href = '../individual-details-school/?person_id=' + personId;
-    } else if (val === 'yes-uk'){
+    } else if (val === 'Yes, in the UK'){
       window.location.href = '../individual-details-30-day-address-in-uk/?person_id=' + personId;
-    } else if (val === 'yes-outside'){
+    } else if (val === 'Yes, outside the UK'){
       window.location.href = '../individual-details-30-day-address-country/?person_id=' + personId;
     }
   });

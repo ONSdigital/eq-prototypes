@@ -53,7 +53,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="religion"
                                                            id="no-religion"
-                                                           value="no-religion">
+                                                           value="No religion">
                                                     <label class="label label--inline"
                                                            for="no-religion"
                                                            id="no-religion-label">
@@ -65,7 +65,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="religion"
                                                            id="christian"
-                                                           value="christian">
+                                                           value="Christian">
                                                     <label class="label label--inline"
                                                            for="christian"
                                                            id="christian-label">
@@ -82,7 +82,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="religion"
                                                            id="buddhist"
-                                                           value="buddhist">
+                                                           value="Buddhist">
                                                     <label class="label label--inline"
                                                            for="buddhist"
                                                            id="buddhist-label">
@@ -94,7 +94,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="religion"
                                                            id="hindu"
-                                                           value="hindu">
+                                                           value="Hindu">
                                                     <label class="label label--inline"
                                                            for="hindu"
                                                            id="hindu-label">
@@ -106,7 +106,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="religion"
                                                            id="jewish"
-                                                           value="jewish">
+                                                           value="Jewish">
                                                     <label class="label label--inline"
                                                            for="jewish"
                                                            id="jewish-label">
@@ -118,7 +118,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="religion"
                                                            id="muslim"
-                                                           value="muslim">
+                                                           value="Muslim">
                                                     <label class="label label--inline"
                                                            for="muslim"
                                                            id="muslim">
@@ -130,7 +130,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="religion"
                                                            id="sikh"
-                                                           value="sikh">
+                                                           value="Sikh">
                                                     <label class="label label--inline"
                                                            for="sikh"
                                                            id="sikh">
@@ -142,7 +142,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="religion"
                                                            id="other"
-                                                           value="other">
+                                                           value="Other">
                                                     <label class="label label--inline"
                                                            for="other"
                                                            id="other-label">
@@ -195,7 +195,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     question = question.trim();
     storageAPI.addUpdateReligion(personId, val, question, url);
 
-    if(val === 'other') {
+    if(val === 'Other') {
       e.preventDefault();
       window.location.href =
         '../individual-details-religion-other/?person_id=' + personId +

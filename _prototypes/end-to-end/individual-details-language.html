@@ -56,7 +56,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="language"
                                                            id="english"
-                                                           value="english">
+                                                           value="English">
                                                     <label class="label label--inline"
                                                            for="english"
                                                            id="english-label">
@@ -68,7 +68,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="language"
                                                            id="other"
-                                                           value="other">
+                                                           value="Other">
                                                     <label class="label label--inline"
                                                            for="other"
                                                            id="other-label">
@@ -118,7 +118,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     question = question.trim();
     storageAPI.addUpdateLanguage(personId, val, question, url);
     
-    if(val === 'other') {
+    if(val === 'Other') {
       e.preventDefault();
       window.location.href =
         '../individual-details-language-other/?person_id=' + personId +

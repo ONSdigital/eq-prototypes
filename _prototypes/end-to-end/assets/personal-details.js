@@ -350,9 +350,11 @@ export function addUpdateMaritalStatus(personId, val, question, url) {
 }
 
 export function addUpdate30DayAddressUk(personId, val, question, url) {
+  let address = val.addressLine1 + ', ' + val.addressLine2
   return changeDetailsFor(personId, () =>
     ({
       'Address30DayUK': {
+        address,
         val,
         question,
         url
@@ -702,6 +704,17 @@ export function addUpdateStudent(personId, val, question, url) {
     }));
 }
 
+export function addUpdateStudentAddaddressInUK(personId, val, question, url) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'studentAddressInUK': {
+        val,
+        question,
+        url
+      }
+    }));
+}
+
 export function addUpdateStudentAddress(personId, val, question, url) {
   return changeDetailsFor(personId, () =>
     ({
@@ -714,9 +727,11 @@ export function addUpdateStudentAddress(personId, val, question, url) {
 }
 
 export function addUpdateStudentAddressUk(personId, val, question, url) {
+  let address = val.addressLine1 + ', ' + val.addressLine2
   return changeDetailsFor(personId, () =>
     ({
       'AddressStudentUK': {
+        address,
         val,
         question,
         url
