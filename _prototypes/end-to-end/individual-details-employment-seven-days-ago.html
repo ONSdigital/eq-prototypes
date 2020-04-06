@@ -45,7 +45,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="checkbox"
                                                            name="checkbox-group"
                                                            id="employee"
-                                                           value="employee">
+                                                           value="Employee">
                                                     <label class="label label--inline"
                                                            for="employee"
                                                            id="employee-label">
@@ -58,7 +58,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="checkbox"
                                                            name="checkbox-group"
                                                            id="self-employed"
-                                                           value="self-employed">
+                                                           value="Self employed">
                                                     <label class="label label--inline"
                                                            for="self-employed"
                                                            id="self-employed-label">
@@ -73,7 +73,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="checkbox"
                                                            name="checkbox-group"
                                                            id="temp-off"
-                                                           value="temp-off">
+                                                           value="Temporarily off work">
                                                     <label class="label label--inline"
                                                            for="temp-off"
                                                            id="temp-off-label">
@@ -86,7 +86,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="checkbox"
                                                            name="checkbox-group"
                                                            id="mat-leave"
-                                                           value="mat-leave">
+                                                           value="On maternity or paternity leave">
                                                     <label class="label label--inline"
                                                            for="mat-leave"
                                                            id="mat-leave-label">
@@ -99,7 +99,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="checkbox"
                                                            name="checkbox-group"
                                                            id="other-work"
-                                                           value="other-work">
+                                                           value="Other paid work">
                                                     <label class="label label--inline"
                                                            for="other-work"
                                                            id="other-work-label">
@@ -114,7 +114,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="checkbox"
                                                            name="checkbox-group"
                                                            id="no"
-                                                           value="no" />
+                                                           value="No" />
                                                     <label class="label label--inline u-fs-r "
                                                            for="no">
                                                         <span class="u-vh">Or,</span>
@@ -139,10 +139,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                     
                         <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
 
-                    <!--<p class="u-mb-m"><span class="js-link-secure-label"></span><br />
-                        <a class="js-link-secure"
-                           href="#">Get a separate access code to submit an
-                            individual response</a></p>-->
                 </form>
             </main>
         </div>
@@ -175,7 +171,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       e.preventDefault();
         window.location.href = '../individual-details-summary/?person_id=' + personId +
           (surveyType ? '&survey=' + surveyType : '');
-    } else if (val === 'no'){
+    } else if (val === 'No'){
         e.preventDefault();
         window.location.href = '../individual-details-employment-seven-days-ago-description/?person_id=' + personId;
     }

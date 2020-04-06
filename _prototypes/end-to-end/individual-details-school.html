@@ -48,7 +48,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="schoolchild"
                                                            id="yes"
-                                                           value="yes">
+                                                           value="Yes">
                                                     <label class="label label--inline"
                                                            for="yes"
                                                            id="yes-label">
@@ -60,7 +60,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="schoolchild"
                                                            id="no"
-                                                           value="no">
+                                                           value="No">
                                                     <label class="label label--inline"
                                                            for="no"
                                                            id="no-label">
@@ -123,9 +123,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     }
     
     var val = $('[name="schoolchild"]:checked').val();
-    if(val === 'no' || val == null) {
+    if(val === 'No' || val == null) {
       window.location.href = '../individual-details-student/?person_id=' + personId;
-    } else if (val === 'yes'){
+    } else if (val === 'Yes'){
       window.location.href = '../individual-details-student-address/?person_id=' + personId;
     }
   });

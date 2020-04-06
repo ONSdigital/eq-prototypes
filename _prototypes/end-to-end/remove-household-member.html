@@ -57,7 +57,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                     <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
                                                            name="remove"
-                                                           value="yes"
+                                                           value="Yes"
                                                            id="yes">
                                                     <label class="label label--inline"
                                                            for="yes">
@@ -69,7 +69,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                     <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
                                                            name="remove"
-                                                           value="no"
+                                                           value="No"
                                                            id="no">
                                                     <label class="label label--inline"
                                                            for="no">
@@ -103,7 +103,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     $('.qa-btn-submit').on('click', function (e) {
       e.preventDefault();
 
-      if($('[name="remove"]:checked').val() === 'yes') {
+      if($('[name="remove"]:checked').val() === 'Yes') {
         storageAPI.deleteHouseholdMember(personId);
         storageAPI.deleteAllRelationshipsForMember(personId);
         storageAPI.removePersonalDetailsFor(personId);

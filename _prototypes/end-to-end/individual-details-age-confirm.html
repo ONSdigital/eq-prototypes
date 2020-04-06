@@ -16,9 +16,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            <!--{% include navigation.html
-            items=site.data.your-household-v10.yourHouseholdV4_navigationItemsPersonalDetails
-            nav-title-id="section-individual" %}-->
         </div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
@@ -35,7 +32,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title u-fs-xl js-heading">
-
+                                        You are this many years old. Is this correct?
                                     </h1>
                                 </div>
 
@@ -48,7 +45,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="age-confirm"
                                                            id="yes"
-                                                           value="yes">
+                                                           value="Yes">
                                                     <label class="label label--inline"
                                                            for="yes"
                                                            id="yes-label">
@@ -59,7 +56,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            type="radio"
                                                            name="age-confirm"
                                                            id="no"
-                                                           value="no">
+                                                           value="No">
                                                     <label class="label label--inline"
                                                            for="no"
                                                            id="no-label">
@@ -81,10 +78,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                     
                         <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
 
-                    <!--<p class="u-mb-m"><span class="js-link-secure-label"></span><br />
-                        <a class="js-link-secure"
-                           href="#">Get a separate access code to submit an
-                            individual response</a></p>-->
                 </form>
             </main>
         </div>
@@ -105,12 +98,13 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     details = storageAPI.getPersonalDetailsFor(personId),
     surveyType = urlParams.get('survey');
     storageAPI.personalBookmark(personId, window.location.href),
-    question = $('#question-title').html();
+    age = '';
+
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
     e.preventDefault();
-
+    var question = 'You are ' + age + ' years old. Is this correct?';
     var route = '',
       val = $('[name="age-confirm"]:checked').val();
     let url = '../individual-details-age-confirm/?person_id=' + personId + '&edit=true';
@@ -123,7 +117,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     else if(isVisitor) {
       route = '../individual-details-dob/';
     }
-    else if(val === 'yes'){
+    else if(val === 'Yes'){
       route = '../individual-details-sex/';
     } 
     else {
@@ -149,8 +143,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     var dob = details.dob,
-      dobObj = createDataObj(dob.year, dob.month, dob.day),
-      age = moment().diff(dobObj, 'years');
+      dobObj = createDataObj(dob.year, dob.month, dob.day);
+    age = moment().diff(dobObj, 'years');
 
     if(!dob) {
       console.log('Unable to find date of birth for details: ', details);
