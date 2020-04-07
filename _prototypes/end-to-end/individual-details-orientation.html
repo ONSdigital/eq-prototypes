@@ -57,7 +57,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                     <label class="label label--inline"
                                                            for="straight"
                                                            id="straight-label">
-                                                        Straight or heterosexual
+                                                        Straight or Heterosexual
                                                     </label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
@@ -69,7 +69,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                     <label class="label label--inline"
                                                            for="gay"
                                                            id="gay-label">
-                                                        Gay or lesbian
+                                                        Gay or Lesbian
                                                     </label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
@@ -175,6 +175,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     }
   }
 
+    function updateAnswer() {
+        if(storageAPI.getAnsweringIndividualByProxy()) {
+            $('.js-answer').html('Enter their sexual orientation');
+        }
+    }
+
   if (details && details.orientation) {
     $('#' + details.orientation.val).attr('checked', true);
   }
@@ -204,6 +210,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
 
   $(updateQuestion);
+  $(updateAnswer);
   $(updateRouting);
   $(clearRadios);
   $(checkRadios);
