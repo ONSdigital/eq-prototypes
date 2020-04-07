@@ -98,7 +98,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
     storageAPI.addUpdateEthnicGroupDescription(personId, val, question, url);
 
-    if(val === 'other') {
+    if(val === 'Other') {
       e.preventDefault();
       window.location.href =
         '../individual-details-ethnic-group-other/?person_id=' + personId +
@@ -171,8 +171,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       $('.js-previous-link').attr('href', '../individual-details-ethnic-group-description/?person_id=' + personId + (ethnicGroup ? '&ethnic-group=' + ethnicGroup : ''));
   }
 
-  $(updateAllPreviousLinks);    
-
+  $(updateAllPreviousLinks);
   $(updateQuestion);
   $(updateRouting);
   $(updateAnswer);
