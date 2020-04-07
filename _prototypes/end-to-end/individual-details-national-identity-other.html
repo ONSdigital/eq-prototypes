@@ -37,7 +37,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                     </h1>
                                 </div>
                                 <div class="panel panel--simple panel--info u-mb-m">
-                                  <div class="panel__body">
+                                  <div class="panel__body js-help">
                                       Include all national identities. If you have more than one, enter them all separated by a comma.
                                   </div>
                                 </div>
@@ -116,6 +116,13 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     }
   }
 
+  function updateHelp() {
+    if(storageAPI.getAnsweringIndividualByProxy()) {
+      $('.js-help').html('Include all national identities. If they have more than one, enter them all separated by a comma.');
+    }
+  }
+                                      
+
   if (details && details['nationalIdentity'] &&
     details['nationalIdentity'].otherText) {
     $('#national-identity-input').val(details['nationalIdentity'].otherText);
@@ -123,6 +130,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   $(updateQuestion);
   $(updateRouting);
+  $(updateHelp);
 
   document.dispatchEvent(new CustomEvent('TYPEAHEAD-READY'));
 
