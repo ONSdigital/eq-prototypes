@@ -21,7 +21,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password">
                     <div class="group" id="accommodation">
-                        <div class="block" id="veichles">
+                        <div class="block" id="vehicles">
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
@@ -36,7 +36,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                 <div class="field__item js-focusable-box">
                                                     <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="no-of-veichles"
+                                                           name="no-of-vehicles"
                                                            id="none"
                                                            value="none">
                                                     <label class="label label--inline"
@@ -48,7 +48,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                 <div class="field__item js-focusable-box">
                                                     <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="no-of-veichles"
+                                                           name="no-of-vehicles"
                                                            id="1"
                                                            value="1">
                                                     <label class="label label--inline"
@@ -60,7 +60,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                 <div class="field__item js-focusable-box">
                                                     <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="no-of-veichles"
+                                                           name="no-of-vehicles"
                                                            id="2"
                                                            value="2">
                                                     <label class="label label--inline"
@@ -72,7 +72,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                 <div class="field__item js-focusable-box">
                                                     <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="no-of-veichles"
+                                                           name="no-of-vehicles"
                                                            id="3"
                                                            value="3">
                                                     <label class="label label--inline"
@@ -84,7 +84,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                 <div class="field__item js-focusable-box">
                                                     <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="no-of-veichles"
+                                                           name="no-of-vehicles"
                                                            id="4"
                                                            value="4">
                                                     <label class="label label--inline"
@@ -97,7 +97,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                     <span id="5-or-more-radio-wrap-field" class="field__item js-focusable-box">
                                                         <input autocomplete="new-password" class="input input--radio js-focusable"
                                                             type="radio"
-                                                            name="no-of-veichles"
+                                                            name="no-of-vehicles"
                                                             id="5-or-more"
                                                             value="5 or more">
                                                         <label class="label label--inline"
@@ -107,7 +107,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                         </label>
                                                         <span class="radio__other radio__other--open" id="5-or-more-radio-wrap">
                                                             <label id="5-or-more-radio-wrap-label" class="label u-fs-s--b"
-                                                                for="other-textbox">Please specify</label>
+                                                                for="other-textbox">Enter the number of cars or vans</label>
                                                             <input
                                                                 type="text"
                                                                 id="other-textbox"
@@ -137,7 +137,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
 <script>
     var question = $('#question-title').html(),
-        currentPage = '../household-accom-veichles';
+        currentPage = '../household-accom-vehicles';
     window.sessionStorage.setItem('accommodation-completed-status', currentPage);
 /*
     $(window).on('load', function() {
@@ -156,14 +156,14 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     });
 */
     $('.qa-btn-submit').on('click', function (e) {
-        var val = $('input[type=radio][name=no-of-veichles]:checked').attr('value')
+        var val = $('input[type=radio][name=no-of-vehicles]:checked').attr('value')
         question = question.trim();
 
         if(val === '5 or more') {
             var otherVal = $("input[type=text][id=other-textbox]").val();
-            window.sessionStorage.setItem('accommodation-no-of-veichles', JSON.stringify([question, otherVal, currentPage]));
+            window.sessionStorage.setItem('accommodation-no-of-vehicles', JSON.stringify([question, otherVal, currentPage]));
         } else {
-            window.sessionStorage.setItem('accommodation-no-of-veichles', JSON.stringify([question, val, currentPage]));
+            window.sessionStorage.setItem('accommodation-no-of-vehicles', JSON.stringify([question, val, currentPage]));
         }
 
         window.sessionStorage.setItem('accommodation-completed-status', 'completed');
