@@ -109,104 +109,104 @@ export const personalDetailsPassportCountriesMap = {
 };
 
 export const personalDetailsEthnicGroupMap = {
-  'white': {
+  'White': {
     'question': 'White',
     'options': [
       {
-        val: 'british',
+        val: 'British',
         label: 'English, Welsh, Scottish, Northern Irish or British'
       },
       {
-        val: 'irish',
+        val: 'Irish',
         label: 'Irish'
       },
       {
-        val: 'gypsy',
+        val: 'Gypsy',
         label: 'Gypsy or Irish Traveler'
       },
       {
-        val: 'roma',
+        val: 'Roma',
         label: 'Roma'
       },
       {
-        val: 'other',
+        val: 'Other',
         label: 'Any other White background',
         description: 'You can enter an ethnic group or background on the next question'
       }
     ]
   },
-  'mixed': {
+  'Mixed': {
     'question': 'Mixed or Multiple',
     'options': [
       {
-        val: 'white-black-caribbean',
+        val: 'White and Black Caribbean',
         label: 'White and Black Caribbean'
       },
       {
-        val: 'white-black-african',
+        val: 'White and Black African',
         label: 'White and Black African'
       },
       {
-        val: 'white-asian',
+        val: 'White and Asian',
         label: 'White and Asian'
       },
       {
-        val: 'other',
+        val: 'Other',
         label: 'Any other Mixed or Multiple background'
       }
     ]
   },
-  'asian': {
+  'Asian': {
     'question': 'Asian or Asian British',
     'options': [
       {
-        val: 'indian',
+        val: 'Indian',
         label: 'Indian'
       },
       {
-        val: 'pakistani',
+        val: 'Pakistani',
         label: 'Pakistani'
       },
       {
-        val: 'bangladeshi',
+        val: 'Bangladeshi',
         label: 'Bangladeshi'
       },
       {
-        val: 'chinese',
+        val: 'Chinese',
         label: 'Chinese'
       },
       {
-        val: 'other',
+        val: 'Other',
         label: 'Any other Asian ethnic group or background'
       }
     ]
   },
-  'black': {
+  'Black': {
     'question': 'Black, African, Caribbean or Black British',
     'options': [
       {
-        val: 'african',
+        val: 'African',
         label: 'African'
       },
       {
-        val: 'caribbean',
+        val: 'Caribbean',
         label: 'Caribbean'
       },
       {
-        val: 'other',
+        val: 'Other',
         label: 'Any other Black, African or Caribbean background'
       }
     ]
   },
-  'other': {
+  'Other': {
     'question': 'Other',
     'options': [
       {
-        val: 'arab',
+        val: 'Arab',
         label: 'Arab'
       },
       {
-        val: 'other',
+        val: 'Other',
         label: 'Any other ethnic group'
       }
     ]
