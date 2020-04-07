@@ -37,7 +37,22 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                         Do any of your conditions or illnesses reduce your ability to carry out day-to-day activities?
                                     </h1>
                                 </div>
-
+                                <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple u-mb-m">
+                                    <div class="js-collapsible-content">
+                                        <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b js-help-0" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="What we mean by &ldquo;reduce your ability&rdquo;">
+                                        What we mean by &ldquo;reduce your ability&rdquo;</h3>
+                                        <div class="collapsible__body js-collapsible-body">
+                                            <p class="js-help-1">This is about whether your health condition or illness currently affects your ability to carry out day-to-day activities. 
+                                            </p> 
+                                            <p class="js-help-2">Consider whether you are still affected while receiving any treatment, medication or using any devices for your condition or illness. For example, if you use a hearing aid and are not restricted in carrying out your day-to-day activities when doing so, select “Not at all”.
+                                            </p>
+                                            <p class="js-help-3">You should select &ldquo;Yes, a lot&rdquo; if you usually need some level of support from family members, friends or personal social services for most normal daily activities.
+                                            </p>
+                                            <button
+                                                    class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="What we mean by &ldquo;reduce your ability&rdquo;">Hide this</button>
+                                        </div>
+                                    </div>
+                                </div>
                                   <div class="answer">
                                     <div class="answer__fields js-fields">
                                         <div class="field field--radio field--multiplechoice ">
@@ -75,7 +90,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                     <label class="label label--inline"
                                                            for="no"
                                                            id="no-label">
-                                                        No
+                                                        No, not at all
                                                     </label>
                                                 </div>
                                             </fieldset>
@@ -109,6 +124,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     details = storageAPI.getPersonalDetailsFor(personId),
     surveyType = urlParams.get('survey'),
     question = $('#question-title').html();
+    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
+
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
@@ -132,13 +149,26 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         }
     }
 
+  function updateHelp() {
+        if(storageAPI.getAnsweringIndividualByProxy()) {
+            $('.js-help-0').html('What we mean by &ldquo;reduce their ability&rdquo;');
+            $('.js-help-1').html('This is about whether their health condition or illness currently affects their ability to carry out day-to-day activities.');
+            $('.js-help-2').html('Consider whether they are still affected while receiving any treatment, medication or using any devices for their condition or illness. For example, if they use a hearing aid and are not restricted in carrying out their day-to-day activities when doing so, select &ldquo;Not at all&rdquo;.');
+            $('.js-help-3').html('You should select &ldquo;Yes, a lot&rdquo; if they usually need some level of support from family members, friends or personal social services for most normal daily activities.');
+        }
+    }
+
  function updateAllPreviousLinks() {
       $('.js-previous-link').attr('href', '../individual-details-passport-country/?person_id=' + personId);
   }
 
-  $(updateAllPreviousLinks);
 
-  $(updateQuestion);
+
+    $(updateAllPreviousLinks);
+
+    $(updateQuestion);
+    $(updateHelp);
+
 
   /**
    * Routing
