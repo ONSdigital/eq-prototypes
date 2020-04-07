@@ -16,9 +16,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            <!--{% include navigation.html
-            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
-            nav-title-id="section-individual" %}-->
         </div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
@@ -119,8 +116,14 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       window.location.href = '../individual-details-summary/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
     }
+
+    if ($('[name="arrive-census"]:checked').val() === 'Yes') {
+        window.location.href = '../individual-details-country-other-stay/?person_id=' + personId;
+    } else if ($('[name="arrive-census"]:checked').val() === 'No') {
+        window.location.href = '../individual-details-year-ago-address/?person_id=' + personId;
+    }
     
-    window.location.href = '../individual-details-country-other-stay/?person_id=' + personId;
+    
 
   });
 
