@@ -54,7 +54,7 @@ hideSaveLater: true
                         </h1>
 
                         <fieldset
-                                class="question__fieldset js-question-fieldset u-mb-m">
+                                class="question__fieldset js-question-fieldset">
 
                             <legend class="u-vh">What is your address?
                             </legend>
@@ -66,7 +66,7 @@ hideSaveLater: true
 
                               <div id="rh-proto-address-container" class="js-typeahead typeahead-input typeahead-input--initialised" data-instructions="Use up and down keys to navigate suggestions once you&#39;ve typed more than two characters. Use the enter key to select a suggestion. Touch device users, explore by touch or with swipe gestures." data-aria-you-have-selected="You have selected" data-aria-min-chars="Enter 3 or more characters for suggestions." data-aria-one-result="There is one suggestion available." data-aria-n-results="There are {n} suggestions available." data-aria-limited-results="Results have been limited to 10 suggestions. Type more characters to improve your search." data-more-results="Continue entering to improve results" data-results-title="Select an address" 
                               data-typeahead-data="
-                              https://gist.githubusercontent.com/jrbarnes9/fae58a6a5a251ef4cf2a92be0fbe2b96/raw/452a5d5f23ac8ddf96fbb89e7c04066e47468839/rh_proto_address_list_07042020.json" 
+                              https://gist.githubusercontent.com/jrbarnes9/fae58a6a5a251ef4cf2a92be0fbe2b96/raw/f475c5e60474138079873a16390afeee012a8678/rh_proto_address_list_07042020.json"
                               data-no-results="No results found">
                                   <input type="text" id="rh-proto-address" class="input input--text input-type__input input--w-50 js-typeahead-input " autocomplete="off" aria-autocomplete="list" aria-controls="rh-proto-address-listbox" aria-describedby="rh-proto-address-instructions" aria-has-popup="true" aria-owns="rh-proto-address-listbox" aria-expanded="false" role="combobox">
                                   <div class="typeahead-input__results js-typeahead-results">
@@ -78,10 +78,11 @@ hideSaveLater: true
                               </div>
                             </p>
                         </fieldset>
+                        <p><a href="../address-correction/?previous=request-uac-hh-address">I can't find my address</a></p>
                     </div>
                 </div>
 
-                <button class="btn btn-submit btn--primary btn--lg"
+                <button class="btn btn-submit btn--primary btn--lg u-mt-m"
                         data-qa="btn-submit" type="submit"
                         name="action[save_continue]">Continue
                 </button>

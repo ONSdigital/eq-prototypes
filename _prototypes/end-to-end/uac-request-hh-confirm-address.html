@@ -32,11 +32,7 @@ hideSaveLater: true
                                 </h1>
                             </div>
                             <div class="u-mb-m js-address"></div>
-                             <div class="panel panel--simple panel--info u-mb-m">
-                                <div class="panel__body">
-                                    For security reasons we can only send access codes to the registered household address.
-                                </div>
-                            </div>
+                            
                             <div class="field field--radio field--multiplechoice">
                                 <fieldset>
                                     <div class="field__item js-focusable-box">
@@ -85,11 +81,13 @@ hideSaveLater: true
 <script>
   var storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
-    addressLines = (sessionStorage.getItem('address') || '').replace(/,/g, '<br />'),
+    addressLine1 = (sessionStorage.getItem('address') || '').replace(/,/g, ' '),
     addresseeName = (sessionStorage.getItem('addressee-name') || '');
+    var urlParams = new URLSearchParams(window.location.search);
+    var previousPage = urlParams.get('previous');
     
     function updateQuestion() {
-        $('.js-address').html('<strong>' + addresseeName + '</strong>' + ' <br> ' + addressLines);
+        $('.js-address').html('<strong>' + addresseeName + '</strong>' + ' <br> ' + addressLine1);
     }
 
     $('.qa-btn-submit').on('click', function (e) {
