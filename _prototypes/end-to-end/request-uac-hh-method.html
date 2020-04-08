@@ -118,7 +118,7 @@ hideSaveLater: true
         } else if (previousPage === 'uac-question') {
             $('.js-previous-link').attr('href', '../uac-question/?person_id=' + personId + (previousPage ? '&previous=' + previousPage : ''));
         } else {
-            $('.js-previous-link').attr('href', '../cant-answer-for-others/?person_id=' + personId + (previousPage ? '&previous=' + previousPage : ''));
+            $('.js-previous-link').attr('href', '../' + previousPage + '/?person_id=' + personId + (previousPage ? '&previous=' + previousPage : ''));
         }
     }
 
