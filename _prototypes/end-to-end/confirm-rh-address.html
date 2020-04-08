@@ -84,13 +84,13 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         * Routing
         */
         if (yesbox.checked) {
-            window.location.href = "../request-uac-hh-method";
+            window.location.href = "../request-uac-hh-method?previous=request-uac-hh-address";
         }
         else if (changebox.checked) {
-            window.location.href = "../address-correction";
+            window.location.href = "../address-correction?previous=request-uac-hh-address";
         } 
         else {
-            window.location.href = "../request-uac-hh-address";
+            window.location.href = "../request-uac-hh-address/?previous=request-uac-hh-address";
         }
     });
 
