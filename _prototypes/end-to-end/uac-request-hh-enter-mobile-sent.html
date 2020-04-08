@@ -41,6 +41,9 @@ hideSaveLater: true
                             <p class="u-mb-m">It can take a few minutes for the text to arrive. If it doesn’t arrive, you can <a href="../uac-request-hh-enter-mobile">request a new code</a>.</p>
                         </section>
                     </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-s"
+                            type="submit" name="">Continue
+                    </button>
                 </form>
             </main>
         </div>
@@ -67,7 +70,11 @@ hideSaveLater: true
     pipingDestinations.forEach(function(pipingDestination) {
         pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', mobileNo);
     });
-
+    $('.qa-btn-submit').on('click', function (e) {
+        e.preventDefault();
+        window.location.href = '../home/';
+    
+    });
   function updateDescription () {
     $('.js-mobile-no').html(mobileNo);
   }
