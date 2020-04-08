@@ -7,6 +7,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 ---
 
 <link rel="stylesheet" href="../style.css"/>
+<style>
+.field__other {
+    background-color: transparent;
+}
+</style>
 <div class="page__subheader">
     <div class="container">
         <a href="../individual-details-orientation">Previous</a>
@@ -149,6 +154,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         person.firstLastName + '</em>' + ' identifies with the same as their sex registered at birth?');
     }
   }
+  
+  function updateAnswer() {
+    if(storageAPI.getAnsweringIndividualByProxy()) {
+      $('.js-answer').html('Enter their gender');
+    }
+  }
 
   if (details && details.identity) {
     $('#' + details.identity.val).attr('checked', true);
@@ -179,6 +190,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
 
   $(updateQuestion);
+  $(updateAnswer);
   $(updateRouting);
   $(clearRadios);
   $(checkRadios);
