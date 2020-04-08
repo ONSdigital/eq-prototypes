@@ -16,9 +16,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            <!--{% include navigation.html
-            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
-            nav-title-id="section-individual" %}-->
         </div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
@@ -37,12 +34,28 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                         Which of the following best describes your sexual orientation?
                                     </h1>
                                 </div>
-                                  <div class="panel panel--info panel--simple">
+                                <div class="panel panel--info panel--simple">
                                     <div class="panel__body">
-                                      <p>This question is voluntary</p>
+                                        <p>This question is voluntary</p>
                                     </div>
-                                  </div>
-                                  <br>
+                                </div>
+
+                                <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple u-mb-m">
+                                    <div class="js-collapsible-content">
+                                        <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Why we ask for term-time address">Why your answer is important</h3>
+                                        <div class="collapsible__body js-collapsible-body">
+                                            <p>Your answer will help your local community by providing organisations, such as charities, with an understanding of 
+                                            the services people might need.</p>
+                                            <p>Councils and government will use this information to:</p>
+                                            <ul>
+                                                <li>monitor equality to ensure that everyone is treated fairly</li>
+                                                <li>provide services and share funding</li>
+                                            </ul>
+
+                                            <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Why we ask for term-time address">Hide this</button>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="answer">
                                     <div class="answer__fields js-fields">
@@ -114,14 +127,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                     <button class="btn btn--primary btn--lg qa-btn-submit u-mb-xl"
                             type="submit" name="">Save and continue
                     </button>
-
-                    
-                        <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
-
-                    <!-- <p class="u-mb-m"><span class="js-link-secure-label"></span><br />
-                        <a class="js-link-secure"
-                           href="#">Get a separate access code to submit an
-                            individual response</a></p> -->
+                    <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
                 </form>
             </main>
         </div>
@@ -169,9 +175,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('Which of the following options best describes '  + '<em class="highlight">' + 
-        person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName)
-        + '</em>' + ' sexual orientation?');
+        $('.js-heading').html('Which of the following options best describes '  + '<em class="highlight">' + 
+            person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName)
+            + '</em>' + ' sexual orientation?');
+        $('.js-collapsible-content h3').html('Why their answer is important');
+        $('.js-collapsible-body p').first().html('Their answer will help your local community by providing organisations, such as charities, with an understanding of ' +
+            'the services people might need.');
     }
   }
 

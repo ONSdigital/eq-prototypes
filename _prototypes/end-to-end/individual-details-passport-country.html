@@ -16,9 +16,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            <!--{% include navigation.html
-            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
-            nav-title-id="section-individual" %}-->
         </div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
@@ -46,6 +43,17 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                       <li>passports and travel documents that have expired, if you are entitled to renew them</li>
                                     </ul>
                                   </div>
+                                </div>
+
+                                <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple u-mb-m">
+                                    <div class="js-collapsible-content">
+                                        <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Why we ask for term-time address">What official documents can be included</h3>
+                                        <div class="collapsible__body js-collapsible-body">
+                                            <p>You may have other travel documents that show you are a citizen of a particular country. Please
+                                            complete this question as if your travel documents are passports</p>
+                                            <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Why we ask for term-time address">Hide this</button>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="answer">
                                     <div class="answer__fields js-fields">
@@ -121,9 +129,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             type="submit" name="">Save and continue
                     </button>
 
-                    
-                        <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
-
+                    <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
                 </form>
             </main>
         </div>
@@ -177,6 +183,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
       $('.js-heading').html('What passports does ' + '<em class="highlight">' + person.firstLastName + '</em>' + ' hold?');
+      $('.js-collapsible-body p').html('They may have other travel documents that show they are a citizen of a particular country. Please complete ' +
+        'this question as if their travel documents are passports');
     }
   }
 
