@@ -9,9 +9,10 @@ export const baseClass = 'js-typeahead';
 
 export const classTypeaheadOption = 'typeahead-input__option';
 export const classTypeaheadOptionFocused = `${classTypeaheadOption}--focused`;
-export const classTypeaheadOptionNoResults = `${classTypeaheadOption}--no-results u-fs-s`;
+export const classTypeaheadOptionNoResults = `${classTypeaheadOption}--no-results`;
 export const classTypeaheadOptionMoreResults = `${classTypeaheadOption}--more-results u-fs-s`;
 export const classTypeaheadHasResults = 'typeahead-input--has-results';
+export const classTypeaheadResultsTitle = 'typeahead-input__results-title';
 
 export default class TypeaheadUI {
   constructor({
@@ -25,15 +26,8 @@ export default class TypeaheadUI {
     onError,
     onUnsetResult,
     suggestionFunction,
+    handleUpdate,
     lang,
-    ariaYouHaveSelected,
-    ariaMinChars,
-    ariaOneResult,
-    ariaNResults,
-    ariaLimitedResults,
-    moreResults,
-    resultsTitle,
-    noResults,
   }) {
     // DOM Elements
     this.context = context;
@@ -42,19 +36,9 @@ export default class TypeaheadUI {
     this.listbox = this.resultsContainer.querySelector(`.${baseClass}-listbox`);
     this.instructions = context.querySelector(`.${baseClass}-instructions`);
     this.ariaStatus = context.querySelector(`.${baseClass}-aria-status`);
-
     // Settings
-    this.typeaheadData = typeaheadData || context.getAttribute('data-typeahead-data');
-
-    this.ariaYouHaveSelected = ariaYouHaveSelected || context.getAttribute('data-aria-you-have-selected');
-    this.ariaMinChars = ariaMinChars || context.getAttribute('data-aria-min-chars');
-    this.ariaOneResult = ariaOneResult || context.getAttribute('data-aria-one-result');
-    this.ariaNResults = ariaNResults || context.getAttribute('data-aria-n-results');
-    this.ariaLimitedResults = ariaLimitedResults || context.getAttribute('data-aria-limited-results');
-    this.moreResults = moreResults || context.getAttribute('data-more-results');
-    this.resultsTitle = resultsTitle || context.getAttribute('data-results-title');
-    this.noResults = noResults || context.getAttribute('data-no-results');
-
+    this.typeaheadData = typeaheadData || context.getAttribute('typeahead-data');
+    this.content = JSON.parse(context.getAttribute('data-content'));
     this.listboxId = this.listbox.getAttribute('id');
     this.minChars = minChars || 3;
     this.resultLimit = resultLimit || 10;
@@ -65,9 +49,12 @@ export default class TypeaheadUI {
     this.onSelect = onSelect;
     this.onUnsetResult = onUnsetResult;
     this.onError = onError;
+    this.handleUpdate = handleUpdate;
 
     if (suggestionFunction) {
       this.fetchSuggestions = suggestionFunction;
+    } else {
+      this.fetchData();
     }
 
     // State
@@ -78,6 +65,7 @@ export default class TypeaheadUI {
     this.previousQuery = '';
     this.results = [];
     this.resultOptions = [];
+    this.data = [];
     this.foundResults = 0;
     this.numberOfResults = 0;
     this.highlightedResultIndex = 0;
@@ -91,7 +79,6 @@ export default class TypeaheadUI {
     if (this.lang === 'en') {
       this.lang = 'en-gb';
     }
-    this.fetchData();
     this.initialiseUI();
   }
 
@@ -102,6 +89,7 @@ export default class TypeaheadUI {
     this.input.setAttribute('aria-has-popup', true);
     this.input.setAttribute('aria-owns', this.listbox.getAttribute('id'));
     this.input.setAttribute('aria-expanded', false);
+    this.input.setAttribute('autocomplete', this.input.getAttribute('data-autocomplete'));
     this.input.setAttribute('role', 'combobox');
 
     this.context.classList.add('typeahead-input--initialised');
@@ -136,6 +124,7 @@ export default class TypeaheadUI {
 
     this.listbox.addEventListener('mouseover', this.handleMouseover.bind(this));
     this.listbox.addEventListener('mouseout', this.handleMouseout.bind(this));
+
   }
 
   handleKeydown(event) {
@@ -180,7 +169,10 @@ export default class TypeaheadUI {
   }
 
   handleChange() {
-    if (!this.blurring && this.input.value.trim()) {
+    if (!this.blurring && this.input.value.trim() || this.handleUpdate) {
+      if (this.handleUpdate) {
+        this.settingResult = false;
+      }
       this.getSuggestions();
     } else {
       this.abortFetch();
@@ -237,6 +229,7 @@ export default class TypeaheadUI {
     if (!this.settingResult) {
       const query = this.input.value;
       const sanitisedQuery = sanitiseTypeaheadText(query, this.sanitisedQueryReplaceChars);
+
       if (sanitisedQuery !== this.sanitisedQuery || (force && !this.resultSelected)) {
         this.unsetResults();
         this.setAriaStatus();
@@ -245,15 +238,13 @@ export default class TypeaheadUI {
         this.sanitisedQuery = sanitisedQuery;
 
         if (this.sanitisedQuery.length >= this.minChars) {
-          this.data.then(data => {
-            this.fetchSuggestions(this.sanitisedQuery, data)
-              .then(this.handleResults.bind(this))
-              .catch(error => {
-                if (error.name !== 'AbortError' && this.onError) {
-                  this.onError(error);
-                }
-              });
-          });
+          this.fetchSuggestions(this.sanitisedQuery, this.data)
+            .then(this.handleResults.bind(this))
+            .catch(error => {
+              if (error.name !== 'AbortError' && this.onError) {
+                this.onError(error);
+              }
+            });
         } else {
           this.clearListbox();
         }
@@ -314,8 +305,7 @@ export default class TypeaheadUI {
 
   handleResults(result) {
     this.foundResults = result.totalResults;
-
-    if (result.results.length > 10) {
+    if (result.results.length > 50) {
       result.results = result.results.slice(0, this.resultLimit);
     }
 
@@ -354,8 +344,10 @@ export default class TypeaheadUI {
           listElement.addEventListener('click', () => {
             this.selectResult(index);
           });
-
+          
           this.listbox.appendChild(listElement);
+          
+          this.context.querySelector(`.${classTypeaheadResultsTitle}`).classList.remove('u-d-no');
 
           return listElement;
         });
@@ -364,7 +356,7 @@ export default class TypeaheadUI {
           const listElement = document.createElement('li');
           listElement.className = `${classTypeaheadOption} ${classTypeaheadOptionMoreResults}`;
           listElement.setAttribute('aria-hidden', 'true');
-          listElement.innerHTML = this.moreResults;
+          listElement.innerHTML = this.content.more_results;
           this.listbox.appendChild(listElement);
         }
 
@@ -374,8 +366,10 @@ export default class TypeaheadUI {
         this.context.classList[!!this.numberOfResults ? 'add' : 'remove'](classTypeaheadHasResults);
       }
     }
-    if (this.numberOfResults === 0 && this.noResults) {
-      this.listbox.innerHTML = `<li class="${classTypeaheadOption} ${classTypeaheadOptionNoResults}">${this.noResults}</li>`;
+    if (this.numberOfResults === 0 && this.content.no_results) {
+      this.context.classList.add(classTypeaheadHasResults);
+      this.context.querySelector(`.${classTypeaheadResultsTitle}`).classList.add('u-d-no');
+      this.listbox.innerHTML = `<li class="${classTypeaheadOption} ${classTypeaheadOptionNoResults}">${this.content.no_results}</li>`;
       this.input.setAttribute('aria-expanded', true);
     }
   }
@@ -407,16 +401,16 @@ export default class TypeaheadUI {
       const noResults = this.numberOfResults === 0;
 
       if (queryTooShort) {
-        content = this.ariaMinChars;
+        content = this.content.aria_min_chars;
       } else if (noResults) {
-        content = `${this.ariaNoResults}: "${this.query}"`;
+        content = `${this.content.aria_no_results}: "${this.query}"`;
       } else if (this.numberOfResults === 1) {
-        content = this.ariaOneResult;
+        content = this.content.aria_one_result;
       } else {
-        content = this.ariaNResults.replace('{n}', this.numberOfResults);
+        content = this.content.aria_n_results.replace('{n}', this.numberOfResults);
 
         if (this.resultLimit && this.foundResults > this.resultLimit) {
-          content += ` ${this.ariaLimitedResults}`;
+          content += ` ${this.content.aria_limited_results}`;
         }
       }
     }
@@ -448,12 +442,11 @@ export default class TypeaheadUI {
           result.displayText = result[this.lang];
         }
       } else {
-        result.displayText = result[this.lang];
+        result.displayText = result;
       }
-
       this.onSelect(result).then(() => (this.settingResult = false));
 
-      const ariaMessage = `${this.ariaYouHaveSelected}: ${result.displayText}.`;
+      const ariaMessage = `${this.content.aria_you_have_selected}: ${result.displayText}.`;
 
       this.clearListbox();
       this.setAriaStatus(ariaMessage);
@@ -461,19 +454,11 @@ export default class TypeaheadUI {
   }
 
   emboldenMatch(string, query) {
-    query = query.toLowerCase().trim();
+    let reg = new RegExp(this.escapeRegExp(query).split('').join('\\s*'), 'gi');
+    return string.replace(reg, '<strong>$&</strong>');
+  }
 
-    if (string.toLowerCase().includes(query)) {
-      const queryLength = query.length;
-      const matchIndex = string.toLowerCase().indexOf(query);
-      const matchEnd = matchIndex + queryLength;
-      const before = string.substr(0, matchIndex);
-      const match = string.substr(matchIndex, queryLength);
-      const after = string.substr(matchEnd, string.length - matchEnd);
-
-      return `${before}<strong>${match}</strong>${after}`;
-    } else {
-      return string;
-    }
+  escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
 }
