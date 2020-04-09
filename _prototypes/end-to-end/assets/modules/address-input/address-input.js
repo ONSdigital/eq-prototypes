@@ -2,7 +2,7 @@ import TypeaheadUI from '../typeahead/typeahead.ui';
 import { sanitiseTypeaheadText } from '../typeahead/typeahead.helpers';
 
 import triggerChange from '../trigger-change-event';
-import AbortableFetch from '../abortable-fetch';
+import AbortableFetch from './abortable-fetch';
 
 const baseURL = 'https://whitelodge-ai-api.ai.census-gcp.onsdigital.uk/addresses/eq';
 const lookupURL = `${baseURL}?input=`;

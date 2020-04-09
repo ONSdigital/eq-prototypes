@@ -16,9 +16,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            <!--{% include navigation.html
-            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
-            nav-title-id="section-individual" %}-->
         </div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
@@ -39,10 +36,20 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                     </h1>
                                 </div>
 
-                                <div
-                                        class="panel panel--simple panel--info u-mb-s">
-                                    <div class="panel__body">
-                                        <p class="u-fs-r">Include equivalent qualifications achieved anywhere outside England and Wales</p>
+                                <div>
+                                    <p>This could be equivalent apprenticeships completed anywhere outside England and Wales</p>
+                                </div>
+
+                                <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple u-mb-m">
+                                    <div class="js-collapsible-content">
+                                        <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="What we mean by &ldquo;GCSE&rdquo;">What we mean by &ldquo;GCSE&rdquo;</h3>
+                                        <div class="collapsible__body js-collapsible-body">
+                                            <p>This is a General Certificate of Secondary Education. GCSEs are subject based. Students in England and Wales 
+                                            usually complete GCSEs at school by the age of 16 years.</p>
+                                            <p>If you have achieved CSEs, O levels or any other similar qualifications outside of England and Wales, choose the 
+                                            options you think are the closest match.</p>
+                                            <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="What we mean by &ldquo;GCSE&rdquo;">Hide this</button>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -154,13 +161,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             type="submit" name="">Save and continue
                     </button>
 
-                    
-                        <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
-
-                    <!--<p class="u-mb-m"><span class="js-link-secure-label"></span><br />
-                        <a class="js-link-secure"
-                           href="#">Get a separate access code to submit an
-                            individual response</a></p>-->
+                    <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
                 </form>
             </main>
         </div>
@@ -208,8 +209,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('Has ' + '<em class="highlight">' + person.firstLastName + '</em>' +
-        ' achieved a GCSE or equivalent qualification?');
+        $('.js-heading').html('Has ' + '<em class="highlight">' + person.firstLastName + '</em>' +
+            ' achieved a GCSE or equivalent qualification?');
+        $('.js-collapsible-body p').last().html('If they have achieved CSEs, O levels or any other similar qualifications outside of England and Wales, choose the ' +
+            'options they think are the closest match.');
     }
   }
 

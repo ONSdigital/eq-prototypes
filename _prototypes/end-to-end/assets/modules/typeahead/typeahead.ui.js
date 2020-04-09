@@ -3,7 +3,7 @@ import { sortBy } from 'sort-by-typescript';
 
 import queryJson from './code.list.searcher';
 import { sanitiseTypeaheadText } from './typeahead.helpers';
-import fetch from '../abortable-fetch';
+import fetch from './abortable-fetch';
 
 export const baseClass = 'js-typeahead';
 
@@ -37,7 +37,7 @@ export default class TypeaheadUI {
     this.instructions = context.querySelector(`.${baseClass}-instructions`);
     this.ariaStatus = context.querySelector(`.${baseClass}-aria-status`);
     // Settings
-    this.typeaheadData = typeaheadData || context.getAttribute('typeahead-data');
+    this.typeaheadData = typeaheadData || context.getAttribute('data-typeahead-data');
     this.content = JSON.parse(context.getAttribute('data-content'));
     this.listboxId = this.listbox.getAttribute('id');
     this.minChars = minChars || 3;
@@ -98,21 +98,14 @@ export default class TypeaheadUI {
   }
 
   fetchData() {
-    async function loadJSON(jsonPath) {
-      try {
-        const jsonResponse = await fetch(jsonPath);
-        if (jsonResponse.status === 500) {
-          throw new Error('Error fetching json data: ' + jsonResponse.status);
-        }
-        const jsonData = await jsonResponse.json();
-        return jsonData;
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
-    // Call loading of json file
-    this.data = loadJSON(this.typeaheadData);
+    return new Promise((resolve, reject) => {
+      fetch(this.typeaheadData)
+        .then(async response => {
+          this.data = await response.json();
+          resolve(this.data);
+        })
+        .catch(reject);
+    });
   }
 
   bindEventListeners() {
@@ -238,13 +231,13 @@ export default class TypeaheadUI {
         this.sanitisedQuery = sanitisedQuery;
 
         if (this.sanitisedQuery.length >= this.minChars) {
-          this.fetchSuggestions(this.sanitisedQuery, this.data)
-            .then(this.handleResults.bind(this))
-            .catch(error => {
-              if (error.name !== 'AbortError' && this.onError) {
-                this.onError(error);
-              }
-            });
+            this.fetchSuggestions(this.sanitisedQuery, this.data)
+              .then(this.handleResults.bind(this))
+              .catch(error => {
+                if (error.name !== 'AbortError' && this.onError) {
+                  this.onError(error);
+                }
+          });
         } else {
           this.clearListbox();
         }
@@ -442,7 +435,7 @@ export default class TypeaheadUI {
           result.displayText = result[this.lang];
         }
       } else {
-        result.displayText = result;
+        result.displayText = result[this.lang];
       }
       this.onSelect(result).then(() => (this.settingResult = false));
 

@@ -18,6 +18,15 @@
     display: block
 }
 
+.group-text {
+  color: #4263c2;
+  text-decoration: underline;
+}
+
+.typeahead-input__option--focused:not(.typeahead-input__option--no-results) .group-text, .typeahead-input__option:not(.typeahead-input__option--no-results):not(.typeahead-input__option--more-results):hover .group-text {
+    color: #fff;
+}
+
 .previous-link {
     line-height: 1
 }

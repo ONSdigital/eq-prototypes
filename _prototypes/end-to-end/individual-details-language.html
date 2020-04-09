@@ -41,7 +41,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                     <div class="js-collapsible-content">
                                         <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="What we mean by &ldquo;main language&rdquo;">What we mean by &ldquo;main language&rdquo;</h3>
                                         <div class="collapsible__body js-collapsible-body">
-                                            <p>This is the language you use most naturally. For example, it could be the language you use at home.</p>
+                                            <p class="js-help">This is the language you use most naturally. For example, it could be the language you use at home.</p>
                                             <button
                                                     class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="What we mean by &ldquo;main language&rdquo;">Hide this</button>
                                         </div>
@@ -73,7 +73,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            for="other"
                                                            id="other-label">
                                                         Other, including British Sign Language
-                                                        <p class="u-fs-s u-db u-mb-no label--negative">
+                                                        <p class="u-fs-s u-db u-mb-no label--negative js-answer">
                                                             You can enter your main language on the next question
                                                         </p>
                                                     </label>
@@ -137,13 +137,27 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         ' main language?');
     }  }
 
+  function updateHelp() {
+        if(storageAPI.getAnsweringIndividualByProxy()) {
+        $('.js-help').html('This is the language they use most naturally. For example, it could be the language they use at home.');
+        }  
+    }
+    
+  function updateAnswers() {
+        if(storageAPI.getAnsweringIndividualByProxy()) {
+        $('.js-answer').html('You can enter their main language on the next question');
+        }  
+    }
+        
+
  function updateAllPreviousLinks() {
       $('.js-previous-link').attr('href', '..//individual-details-ethnic-group/?person_id=' + personId);
   }
 
   $(updateAllPreviousLinks);
-
+  $(updateHelp);
   $(updateQuestion);
+  $(updateAnswers);
 
   /**
    * Routing

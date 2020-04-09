@@ -123,7 +123,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     userAsMember = storageAPI.getUserAsHouseholdMember(),
     userPerson = userAsMember && userAsMember['@person'],
     hasErrors = false;
-      
+    var urlParams = new URLSearchParams(window.location.search);
+    var previousPage = urlParams.get('previous');
 
   function removeMember_handler(member, e) {
     e.preventDefault();
@@ -169,7 +170,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       hasErrors = false;
       return false;
     } else {
-      sessionStorage.setItem('name', getName());
+      sessionStorage.setItem('addressee-name', getName());
 
       var newPersonObj = storageAPI.TYPES.person({
         firstName: document.getElementById('first-name').value.trim(),
@@ -198,7 +199,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       }
       else {
         window.location.href = isEditing ? '../summary/' :
-          '../i-do-live-here/';
+          '../uac-request-hh-confirm-address/';
       }
     }
   });
@@ -225,7 +226,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   $(updateQuestion);
 
   function updateAllPreviousLinks() {
-    $('.js-previous-link').attr('href', '../do-you-live-here');
+    $('.js-previous-link').attr('href', '../' + previousPage);
   }
 
   $(updateAllPreviousLinks);

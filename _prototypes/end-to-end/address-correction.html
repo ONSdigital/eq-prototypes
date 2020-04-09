@@ -52,13 +52,7 @@ hideSaveLater: true
     previousPage = urlParams.get('previous');
 
     function updateAllPreviousLinks() {
-        if (previousPage === 'hub') {
-            $('.js-previous-link').attr('href', '../' + previousPage);
-        } else if (previousPage === 'remove-household-member') {
-            $('.js-previous-link').attr('href', '../' + previousPage);
-        } else {
-            $('.js-previous-link').attr('href', '../confirm-rh-address/');
-        }
+        $('.js-previous-link').attr('href', '../' + previousPage + '?' + 'previous=' + previousPage);
     }
 
     $(updateAllPreviousLinks);

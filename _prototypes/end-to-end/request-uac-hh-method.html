@@ -91,9 +91,7 @@ hideSaveLater: true
 <script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
-    var cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people') || '[]');
     var searchParams = new URLSearchParams(window.location.search);
-    var personId = searchParams.get('person_id');
     var previousLink = document.querySelector('.js-previous-link');
     var phoneInput = document.getElementById('phone');
     var postInput = document.getElementById('post');    
@@ -106,20 +104,13 @@ hideSaveLater: true
         if (phoneInput.checked) {
             var url = '../uac-request-hh-enter-mobile';
         } else if (postInput.checked) {
-            var url = '../uac-request-hh-confirm-address';
+            var url = '../uac-request-hh-enter-name';
         }
-
-        window.location.href = url + '?previous=' + previousPage;
+        window.location.href = url + '?previous=' + 'request-uac-hh-method';
     });
 
     function updateAllPreviousLinks() {
-        if (previousPage === 'cant-answer-for-others-who') {
-            $('.js-previous-link').attr('href', '../cant-answer-for-others-who');
-        } else if (previousPage === 'uac-question') {
-            $('.js-previous-link').attr('href', '../uac-question/?person_id=' + personId + (previousPage ? '&previous=' + previousPage : ''));
-        } else {
-            $('.js-previous-link').attr('href', '../cant-answer-for-others/?person_id=' + personId + (previousPage ? '&previous=' + previousPage : ''));
-        }
+        $('.js-previous-link').attr('href', '../' + previousPage + '/?' + (previousPage ? 'previous=' + previousPage : ''));
     }
 
     $(updateAllPreviousLinks);
