@@ -246,7 +246,7 @@ class AddressInput {
             if (this.isEditable) {
               this.setAddress(data, resolve);
             } else {
-              this.typeahead.input.value = selectedResult.displayText['en-gb'];
+              this.typeahead.input.value = selectedResult.displayText;
             }
           })
           .catch(reject);
