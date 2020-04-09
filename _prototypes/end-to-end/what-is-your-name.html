@@ -106,6 +106,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                         name="action[save_continue]">
                     Save and continue
                 </button>
+                <p class="u-mt-l"><a class="js-cancel-return" href="../summary">Cancel and return to the previous page</a></p>
             </main>
         </div>
     </div>
@@ -176,7 +177,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(isEditing && userPerson) {
-      $('.js-heading').html('Change details for ' + userPerson.fullName + ' (You)');
+      $('.js-heading').html('Change details for ' + userPerson.fullName);
       $('.js-remove-section').show();
     }
   }
