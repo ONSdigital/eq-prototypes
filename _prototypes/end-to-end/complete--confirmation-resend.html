@@ -4,7 +4,7 @@ project: End to end prototype
 globalcss: false
 layout: eq-default-extras
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
-hideSaveLater: true
+exit: true
 ---
 
 <style type="text/css">
@@ -131,6 +131,12 @@ hideSaveLater: true
             $('#email-field').before('<p id="panel-error" class="panel__error u-fs-r--b">Enter a valid email address, such as example@email.com</p>');
         };
     }
+
+    $('.exit').on('click', function (e) {
+        e.preventDefault();
+        window.location.href = '../home/';
+        sessionStorage.clear();
+    });    
 
     $(checkErrors);
 </script>

@@ -683,3 +683,15 @@ hr {
 .btn--ghost-blue:focus {
     outline: 3px solid #fe781f
 }
+
+.btn--ghost.exit:after {
+    content: '';
+    display: inline-block;
+    width: .8rem;
+    height: .8rem;
+    background-image: url(/img/icons/guidance-white.svg);
+    background-repeat: no-repeat;
+    background-size: .8rem .8rem;
+    margin: 0 0 .2rem .5rem;
+    vertical-align: middle;
+}

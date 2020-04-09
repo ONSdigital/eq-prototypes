@@ -27,8 +27,12 @@
                             {% endif %}
                         </span>
                         {% unless page.hideSaveLater %}
-                        <button
-                                class="btn btn--ghost u-fr u-d-no@xs@m complete-later">Save and sign out</button>
+                                    {% if page.exit %}
+                                    <button class="btn btn--ghost u-fr u-d-no@xs@m exit">Exit</button>
+                                    {% else %}
+                                    <button class="btn btn--ghost u-fr u-d-no@xs@m complete-later">Save and sign out</button>
+                                    {% endif %}
+                        
                         <!--<button class="btn btn&#45;&#45;ghost u-fr">Cadw a chwblhau'n ddiweddarach</button>-->
                         {% endunless %}
                     </h1>
