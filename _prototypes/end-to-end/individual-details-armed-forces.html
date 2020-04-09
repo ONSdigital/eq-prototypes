@@ -38,11 +38,15 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                         Have you previously served in the UK Armed Forces?
                                     </h1>
                                 </div>
-
+                                <div class="panel panel--info panel--simple u-mb-m">
+                                    <div class="panel__body">
+                                        <p><strong>Current serving members</strong> should only select &ldquo;No&rdquo;</p>
+                                    </div>
+                                </div>
                                 <div class="answer">
                                     <div class="answer__fields js-fields">
                                         <div class="field field--radio field--multiplechoice ">
-                                            <fieldset class="u-mb-xl">
+                                            <fieldset>
                                                 <div class="field__item js-focusable-box">
                                                     <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
@@ -85,12 +89,23 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                 </div>
                                             </fieldset>
                                         </div>
+                                        <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple">
+                                                <div class="js-collapsible-content">
+                                                    <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Why your answer is important">Why your answer is important</h3>
+                                                    <div class="collapsible__body js-collapsible-body">
+                                                        <p>Your answer will help your local community by providing information needed to support people who used to serve in the UK Armed Forces but have now left.</p>
+                                                        <p>Councils and government will use this information to carry out the commitments they made under the Armed Forces Covenant. This is a promise by the nation to ensure that those who serve or who have served in the UK Armed Forces, and their families, are not disadvantaged.</p>
+                                                        
+                                                        <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Why your answer is important">Hide this</button>
+                                                    </div>
+                                                </div>
+                                        </div>
                                     </div>
                                 </div>
                             </section>
                         </div>
                     </div>
-                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl u-mt-xl"
                             type="submit" name="">Save and continue
                     </button>
 
