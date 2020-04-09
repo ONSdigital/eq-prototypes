@@ -84,13 +84,14 @@ hideSaveLater: true
     isEditing = urlParams.get('edit'),
     mobileNo = urlParams.get('mobile');
     var previousPage = urlParams.get('previous');
+    var currentPage = 'uac-request-hh-enter-mobile-correct';
 
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
 
     window.location.href = $('[name=radio-answer]:checked').val() === 'Yes'
-      ? '../uac-request-hh-enter-mobile-sent/?mobile=' + mobileNo
-      : '../uac-request-hh-enter-mobile/?mobile=' + mobileNo;
+      ? '../uac-request-hh-enter-mobile-sent/?mobile=' + mobileNo + '&previous=' + currentPage
+      : '../uac-request-hh-enter-mobile/?mobile=' + mobileNo + '&previous=' + currentPage;
   });
 
   function updateDescription () {
