@@ -31,7 +31,7 @@ hideSaveLater: true
                                     Do you want to send a household access code to this address?
                                 </h1>
                             </div>
-                            <div class="u-mb-m js-address"></div>
+                            <div class="u-mb-m js-name-address"></div>
                             
                             <div class="field field--radio field--multiplechoice">
                                 <fieldset>
@@ -87,7 +87,7 @@ hideSaveLater: true
     var previousPage = urlParams.get('previous');
     
     function updateQuestion() {
-        $('.js-address').html('<strong>' + addresseeName + '</strong>' + ' <br> ' + addressLine1);
+        $('.js-name-address').html('<strong>' + addresseeName + '</strong>' + ' <br> ' + addressLine1);
     }
 
     $('.qa-btn-submit').on('click', function (e) {
