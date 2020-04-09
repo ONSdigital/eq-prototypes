@@ -432,7 +432,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     if (allHouseholdMembers.length === 1 && sessionStorage.getItem('lives-here') === 'yes') {
         $('.js-collapsible-simple').hide();
     } 
-    if (peopleIdsToComplete.length === 0) {
+    if (peopleIdsToComplete.length === 0 && sessionStorage.getItem('accommodation-completed-status') === 'completed') {
       $('.js-submit-btn').html('Submit census');
       $('.js-heading').html('Submit census');
       $('.js-panel-info').show().html('<span class="panel__icon" aria-hidden="true">!</span><span class="panel__text">You must submit this census to complete it</span>');
