@@ -81,7 +81,7 @@ hideSaveLater: true
 <script>
   var storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
-    addressLine1 = (sessionStorage.getItem('address') || '').replace(/,/g, ' '),
+    addressLine1 = (sessionStorage.getItem('address') || '').replace(/,/g, '<br>'),
     addresseeName = (sessionStorage.getItem('addressee-name') || '');
     var urlParams = new URLSearchParams(window.location.search);
     var previousPage = urlParams.get('previous');
