@@ -31,8 +31,8 @@ hideSaveLater: true
                                     Do you want to send a household access code to this address?
                                 </h1>
                             </div>
-                            <div class="u-mb-m js-name-address"></div>
-                            
+                            <div class="u-mb-xs js-name-address"></div>
+                            <p class="u-mb-m"><a href="../uac-request-hh-enter-name/?previous=uac-request-confirm-address">Change name</a></p>
                             <div class="field field--radio field--multiplechoice">
                                 <fieldset>
                                     <div class="field__item js-focusable-box">
@@ -96,14 +96,14 @@ hideSaveLater: true
         if ($('[name=radio-answer]:checked').val() === 'Yes') {
             window.location.href = '../uac-request-hh-confirm-address-sent/';
         } else {
-            window.location.href = '../uac-request-hh-method/';
+            window.location.href = '../request-uac-hh-method/';
         }
     
     });
     $(updateQuestion);
 
     function updateAllPreviousLinks() {
-        $('.js-previous-link').attr('href', '../uac-request-hh-method/' + (previousPage ? '&previous=' + previousPage : ''));
+        $('.js-previous-link').attr('href', '../request-uac-hh-method/' + (previousPage ? '&previous=' + previousPage : ''));
     }
 
     $(updateAllPreviousLinks);
