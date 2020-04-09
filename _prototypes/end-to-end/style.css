@@ -223,6 +223,7 @@ details summary:focus {
     padding-top: .5rem;
     padding-bottom: .5rem;
     position: relative;
+    border-left: none;
 }
 
 .panel--warning .panel__icon {
@@ -244,7 +245,7 @@ details summary:focus {
 }
 
 .panel--warning .panel__text {
-    padding-left: 1.3rem;
+    padding-left: 1.5rem;
     display: block;
 }
 
