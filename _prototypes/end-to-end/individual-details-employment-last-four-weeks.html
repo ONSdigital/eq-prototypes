@@ -21,7 +21,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password"
-                      action="../individual-details-employment-seven-days-accepted-job">
+                      action="../individual-details-employment-start-two-weeks">
                     <input autocomplete="new-password" type="hidden" name="person_id" id="person"
                            value="#"/>
                     <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
@@ -124,9 +124,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       e.preventDefault();
         window.location.href = '../individual-details-summary/?person_id=' + personId +
           (surveyType ? '&survey=' + surveyType : '');
-    } else if (val === 'yes') {
-        e.preventDefault();
-        window.location.href = '../individual-details-employment-start-two-weeks/?person_id=' + personId;
     }
 
   }));
