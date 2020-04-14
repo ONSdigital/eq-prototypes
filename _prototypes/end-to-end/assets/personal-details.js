@@ -350,7 +350,7 @@ export function addUpdateMaritalStatus(personId, val, question, url) {
 }
 
 export function addUpdate30DayAddressUk(personId, val, question, url) {
-  let address = val.addressLine1 + ' ' + val.addressLine2
+  let address = val.address
   return changeDetailsFor(personId, () =>
     ({
       'Address30DayUK': {
