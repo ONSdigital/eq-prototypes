@@ -40,7 +40,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                 </div>
 
                                 <div>
-                                    <p>This could be any qualifications you have ever achieved, even if you are not using them now</p>
+                                    <p class="js-piping">This could be any qualifications you have ever achieved, even if you are not using them now</p>
                                 </div>
 
                                 <div class="answer">
@@ -156,6 +156,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     if(storageAPI.getAnsweringIndividualByProxy()) {
       $('.js-heading').html('Has ' + '<em class="highlight">' + person.firstLastName + '</em>' +
         ' achieved any other qualifications?');
+      $('.js-piping').html('This could be any qualifications they have ever achieved, even if they are not using them now');
     }
   }
 

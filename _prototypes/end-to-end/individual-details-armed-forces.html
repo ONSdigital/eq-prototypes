@@ -91,9 +91,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                         </div>
                                         <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple">
                                                 <div class="js-collapsible-content">
-                                                    <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Why your answer is important">Why your answer is important</h3>
+                                                    <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b js-definition" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Why your answer is important">Why your answer is important</h3>
                                                     <div class="collapsible__body js-collapsible-body">
-                                                        <p>Your answer will help your local community by providing information needed to support people who used to serve in the UK Armed Forces but have now left.</p>
+                                                        <p class="js-piping">Your answer will help your local community by providing information needed to support people who used to serve in the UK Armed Forces but have now left.</p>
                                                         <p>Councils and government will use this information to carry out the commitments they made under the Armed Forces Covenant. This is a promise by the nation to ensure that those who serve or who have served in the UK Armed Forces, and their families, are not disadvantaged.</p>
                                                         
                                                         <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Why your answer is important">Hide this</button>
@@ -163,6 +163,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     if(storageAPI.getAnsweringIndividualByProxy()) {
       $('.js-heading').html('Has ' + '<em class="highlight">' + person.firstLastName + '</em>' +
         ' previously served in the UK Armed Forces?');
+      $('.js-definition').html('Why their answer is important');
+      $('.js-piping').html('Their answer will help their local community by providing information needed to support people who used to serve in the UK Armed Forces but have now left.');
     }
   }
 
