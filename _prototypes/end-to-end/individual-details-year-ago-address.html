@@ -165,9 +165,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateAddresses() {
     $('#home-address-label').text(sessionStorage.getItem('address'));
-
-    if (personId !== 'person_me' && storageAPI.getPersonalDetailsFor('person_me').oneYearAgoAddress) {
-        $('#same-address-label').text('Same as address ' + storageAPI.getPersonalDetailsFor('person_me').firstLastName);
+    if (personId !== 'person_me' && storageAPI.getHouseholdMemberByPersonId('person_me')) {
+        $('#same-address-label').text('Same as address ' + storageAPI.getHouseholdMemberByPersonId('person_me')['@person'].firstLastName);
     } else {
         $('#same-address-field').remove();
     }

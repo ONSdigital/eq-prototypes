@@ -177,7 +177,7 @@ cdn: v1.5.0
   }
 
   function updateQuestion() {
-    $('.js-person').html(person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName));
+    $('.js-person').html('<em class="highlight">' + person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName) + '<em>');
 
     /*if(storageAPI.getAnsweringIndividualByProxy() || isVisitor) {
       $('.js-heading').html('What is ' + '<em class="highlight">' + person.fullName +
@@ -185,25 +185,7 @@ cdn: v1.5.0
     }*/
   }
 
-  function updateAnswer() {
-    var visitors =
-      storageAPI.getAllHouseholdMembers().filter(storageAPI.isVisitor),
-      visitor1 = visitors[0],
-      visitor1Person = visitor1['@person'];
-
-    if((person.id !== visitor1Person.id) && visitors.length > 1) {
-      $('.js-extra-option').show();
-      $('.js-extra-option-label').html('Same address as ' +
-        visitor1Person.fullName);
-    }
-  }
-
-  if (details && details.country) {
-    $('#' + details.country.val).attr('checked', true);
-  }
-
   $(updateQuestion);
-  $(updateAnswer);
   $(updateRouting);
 
   /**
