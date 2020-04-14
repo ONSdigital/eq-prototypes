@@ -62,7 +62,7 @@ hideSaveLater: true
 
                             <legend class="u-vh">What is your address?
                             </legend>
-                            <p>To request a new household access code, we need your address.</p>
+                            <p class="js-piping">To request a new household access code, we need your address.</p>
 
                   <div id="address" class="field address-input js-address u-mt-s address-input--search">
                     <div class="address-input__manual">
@@ -123,7 +123,8 @@ hideSaveLater: true
 
 <script>
   var urlParams = new URLSearchParams(window.location.search),
-    previousPage = urlParams.get('previous');
+    previousPage = urlParams.get('previous'),
+    previousLink = urlParams.get('link');
 
   $('.btn-submit').click(function(e) {
     e.preventDefault(); // do not submit the form like usual
@@ -143,6 +144,12 @@ hideSaveLater: true
   $(updateEditableAddress);
   }
 
+  function updateHelp() {
+    if (previousLink === 'new-ir-uac') {
+      $('.js-piping').html('To request a new individual access code, we need your address.');
+    }
+  }
+
   function updateAllPreviousLinks() {
       if (previousPage === 'home') {
         $('.js-previous-link').attr('href', '../home');
@@ -153,5 +160,6 @@ hideSaveLater: true
   document.dispatchEvent(new CustomEvent('TYPEAHEAD-READY'));
 
   $(updateAllPreviousLinks);
+  $(updateHelp);
 
 </script>

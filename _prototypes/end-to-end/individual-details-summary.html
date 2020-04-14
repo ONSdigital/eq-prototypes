@@ -149,6 +149,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
             $container.append(createListItem(individualDetails[person].nationalIdentity.otherText, individualDetails[person].nationalIdentity.question, individualDetails[person].nationalIdentity.url));
         }
         
+        if (individualDetails[person].nationalIdentityOther) {
+            $container.append(createListItem(individualDetails[person].nationalIdentityOther.otherText, individualDetails[person].nationalIdentityOther.question, individualDetails[person].nationalIdentityOther.url));
+        }
+
         if (individualDetails[person].ethnicGroup) {
             $container.append(createListItem(individualDetails[person].ethnicGroup.otherText, individualDetails[person].ethnicGroup.question, individualDetails[person].ethnicGroup.url));
         }
@@ -163,6 +167,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         
         if (individualDetails[person].passport) {
             $container.append(createListItem(individualDetails[person].passport.otherText, individualDetails[person].passport.question, individualDetails[person].passport.url));
+        }
+
+        if (individualDetails[person].passportOther) {
+            $container.append(createListItem(individualDetails[person].passportOther.otherText, individualDetails[person].passportOther.question, individualDetails[person].passportOther.url));
         }
         
         if (individualDetails[person].health) {
