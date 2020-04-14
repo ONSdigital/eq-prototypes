@@ -104,7 +104,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     surveyType = urlParams.get('survey');
     storageAPI.personalBookmark(personId, window.location.href),
     question = $('#question-title').html();
-
+    var censusDate = window.ONS.utils.getSignificant();
+    var censusDateYearBefore = (censusDate.slice(-4) -1);
+    var yearBeforeCensusDate = censusDate.replace(/.{4}$/, censusDateYearBefore);
 
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
@@ -130,7 +132,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
         $('.js-heading').html('Did ' + '<em class="highlight">' + person.firstLastName + '</em>' +
-        ' arrive in the UK on or after 12 October 2021?');
+        ' arrive in the UK on or after ' + yearBeforeCensusDate);
+    } else {
+        $('.js-heading').html('Did you arrive in the UK on or after ' + yearBeforeCensusDate);
     }
   }
 
