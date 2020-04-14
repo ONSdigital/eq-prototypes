@@ -112,22 +112,20 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     storageAPI.addUpdateAgeConfirm(personId, val, question, url);
 
     if(isEditing) {
-      route = '../individual-details-summary/';
+      window.location.href = '../individual-details-summary/' + '?person_id=' + personId + (surveyType ? '&survey=' + surveyType :'');
     }
     else if(isVisitor) {
-      route = '../individual-details-dob/';
+      window.location.href = '../individual-details-dob/' + '?person_id=' + personId + (surveyType ? '&survey=' + surveyType :'');
     }
     else if(val === 'Yes'){
-      route = '../individual-details-sex/';
+      window.location.href = '../individual-details-sex/?person_id=' + personId + '&age=' + age;
     } 
     else {
       val = '';
       storageAPI.addUpdateAgeConfirm(personId, val, question, url);
-      route = '../individual-details-dob/';
+      window.location.href = '../individual-details-dob/' + '?person_id=' + personId + (surveyType ? '&survey=' + surveyType :'');
     }
 
-    window.location.href =
-      route + '?person_id=' + personId + (surveyType ? '&survey=' + surveyType :'');
   }));
 
   function updateRouting() {
