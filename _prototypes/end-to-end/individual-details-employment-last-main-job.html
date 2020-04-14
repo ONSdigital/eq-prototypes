@@ -27,23 +27,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                         <section class="section">
                             <h1 class="u-fs-xl">Last main job</h1>
 
-                            <!--<p>In this sub section, we’re going to
-                                ask you questions about <span class="js-person-name"></span>.
-                            </p>-->
-                            <p class="js-text">The next set of questions is about your last main job. This is the last job you had. If you had more than one job at the same time, answer for the job in which you usually worked the most hours.                            </p>
+                            <p class="js-text-0">The next set of questions is about your last main job. This is the most recent job you had.</p>
+                            <p class="js-text-1">If you had more than one job at the same time, answer for the job in which you usually worked the most hours.</p>
 
-                            <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple u-mt-m u-vh">
-                                <div class="js-collapsible-content">
-                                    <h2 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="If you can’t answer questions for this person">
-                                        If you can’t answer questions for this person
-                                    </h2>
-                                    <div class="collapsible__body js-collapsible-body">
-                                        <p>You can <strong>share your household access code</strong> with the people you live with so they can complete their own sections.</p>
-                                        <p>If this is not possible, there are <a class="js-link-ir" href="#">other ways each person can complete their own census</a>.</p>
-                                        <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Can’t answer someone else’s questions?">Hide this</button>
-                                    </div>
-                                </div>
-                            </div>
                         </section>
                     </div>
                 </div>
@@ -86,8 +72,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updatePara() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-text').html('The next set of questions is about '  + '<em class="highlight">' + person.firstLastName +
-      window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' + ' last main job. This is the last job they had. If they had more than one job at the same time, answer for the job in which they usually worked the most hours.');
+      $('.js-text-0').html('The next set of questions is about '  + '<em class="highlight">' + person.firstLastName +
+      window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' + ' last main job. This is the most recent job they had.');
+      $('.js-text-1').html('If they had more than one job at the same time, answer for the job in which they usually worked the most hours.');
     }
   }
 
