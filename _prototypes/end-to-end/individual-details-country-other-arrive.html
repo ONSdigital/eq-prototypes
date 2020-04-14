@@ -113,10 +113,15 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         personId + (surveyType ? '&survey=' + surveyType : '');
     }
 
-    var censusDateMinus1Year = new Date(2020,02),
+    var censusDateMinus1Year = new Date(window.ONS.utils.getSignificant()),
+      censusDateMinus1YearBeginingMonth = new Date(window.ONS.utils.getSignificant()),
       dateEntered = new Date($('#uk-arrive-year').val(), $('#uk-arrive-month').val() - 1);
 
-    if(dateEntered.getTime() === censusDateMinus1Year.getTime()) {
+      censusDateMinus1Year.setFullYear(censusDateMinus1Year.getFullYear() - 1);
+      censusDateMinus1YearBeginingMonth.setFullYear(censusDateMinus1YearBeginingMonth.getFullYear() - 1);
+      censusDateMinus1YearBeginingMonth.setDate(1);
+
+    if(dateEntered.getTime() === censusDateMinus1YearBeginingMonth.getTime()) {
         e.preventDefault();
         window.location.href = '../individual-details-country-other-arrive-census/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');

@@ -457,11 +457,10 @@ export function addUpdateNationalIdentity(personId, collection, otherText, quest
 }
 
 export function addUpdateNationalIdentityOther(personId, otherText, question, url) {
-  return changeDetailsFor(personId, details =>
+  return changeDetailsFor(personId, () =>
     ({
-      'nationalIdentity': {
-        ...(details['nationalIdentity'] || {}),
-        ...{ otherText },
+      'nationalIdentityOther': {
+        otherText,
         question,
         url
       }
@@ -579,10 +578,9 @@ export function addUpdatePassportCountry(personId, countries, question, url) {
 }
 
 export function addUpdatePassportCountryOther(personId, otherText, question, url) {
-  return changeDetailsFor(personId, details =>
+  return changeDetailsFor(personId, () =>
     ({
-      'passport': {
-        ...(details['passport'] || {}),
+      'passportOther': {
         otherText,
         question,
         url
