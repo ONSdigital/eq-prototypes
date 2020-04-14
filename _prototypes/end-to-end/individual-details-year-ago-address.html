@@ -154,7 +154,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                 personId + (surveyType ? '&survey=' + surveyType : '');
         }
         
-        if(val === 'another-uk-address') {
+        if(val === 'another-uk-address' || 'student-address') {
             window.location.href = '../individual-details-year-ago-address-uk/?person_id=' + personId;
         } else if (val === 'another-outside-uk-address'){
             window.location.href = '../individual-details-year-ago-address-outside-uk/?person_id=' + personId;
