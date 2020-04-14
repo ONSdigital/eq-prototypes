@@ -34,7 +34,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                         class="question__title u-fs-xl js-heading">
                                         One year ago, what was your usual address?
                                     </h1>
-                                     <p class="question__description">
+                                     <p class="question__description js-piping">
                                         If you had no usual address one year ago, select the address where you were staying
                                     </p>
                                 </div>
@@ -175,8 +175,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-        $('.js-heading').html(' During term time, where does ' + '<em class="highlight">' + person.firstLastName + '</em>' +
-        ' usually live?');
+        $('.js-heading').html('One year ago, what was ' + '<em class="highlight">' + person.firstLastName +
+        window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
+        ' usual address?');
+        $('.js-piping').html('If they had no usual address one year ago, select the address where they were staying');
     }
   }
 
