@@ -564,12 +564,11 @@ function validateInputs(testFails) {
         var errorBox = document.querySelector('.js-error-box'),
             listItem = document.querySelector('.js-' + input.id),
             answer = input.closest('.question__answer'),
-            field = input.closest('.field'),
+            field = document.querySelector('.fieldgroup') ? input.closest('.fieldgroup') : input.closest('.field'),
             errorMsg = input.getAttribute('data-error-msg');
-
         if (input.value === testFails || testFails === true) {
           hasErrors = true;
-          if (!listItem.classList.contains('js-visible')) {
+          if (!listItem.classList.contains('js-visible')) { 
             errorBox.classList.remove('u-d-no');
             listItem.classList.remove('u-d-no'), 
             listItem.classList.add('js-visible');
