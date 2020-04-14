@@ -126,7 +126,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       e.preventDefault();
         window.location.href = '../individual-details-summary/?person_id=' + personId +
           (surveyType ? '&survey=' + surveyType : '');
-    } else if (val === 'no') {
+    } else if (val === 'No') {
+      e.preventDefault();
         window.location.href = '../hub/?person_id=' + personId;
     }
 
