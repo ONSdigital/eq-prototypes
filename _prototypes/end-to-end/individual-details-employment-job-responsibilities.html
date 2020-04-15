@@ -98,16 +98,18 @@ noONSLogoLink: true
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
-
+    e.preventDefault();
     var val = $('[name="radio-group"]:checked').val();
     let url = '../individual-details-employment-job-responsibilities/?person_id=' + personId + '&edit=true';
     question = question.trim();
     storageAPI.addUpdateEmploymentResponsibilities(personId, val, question, url);
 
     if(isEditing) {
-      e.preventDefault();
         window.location.href = '../individual-details-summary/?person_id=' + personId +
           (surveyType ? '&survey=' + surveyType : '');
+    } else if(details['employment'].sevenDaysAgo === 'No') {
+        storageAPI.clearPersonalBookmark(personId);
+        window.location.href = '../hub/'
     }
 
   }));
