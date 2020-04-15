@@ -35,7 +35,7 @@ noONSLogoLink: true
                                 </h1>
                             </div>
                             <p>A letter with an individual access code will be sent to:</p>
-                            <div class="u-mb-m js-address"></div>
+                            <div class="u-mb-m js-address-title"></div>
                              <div class="panel panel--simple panel--info u-mb-m">
                                 <div class="panel__body">
                                     For security reasons we can only send access codes to an unnamed resident at the registered household address.
@@ -109,7 +109,7 @@ noONSLogoLink: true
     });
 
     function updateQuestion() {
-        $('.js-address').html('<strong>Individual Resident</strong>' + ' <br> ' + addressLines);
+        $('.js-address-title').html('<strong>Individual Resident</strong>' + ' <br> ' + addressLines);
     }
 
 
