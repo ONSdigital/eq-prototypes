@@ -4,6 +4,7 @@ project: End to end prototype
 globalcss: false
 layout: eq-default-extras
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
 ---
 
 <link rel="stylesheet" href="../style.css"/>
@@ -99,9 +100,11 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     details = storageAPI.getPersonalDetailsFor(personId),
     surveyType = urlParams.get('survey');
     storageAPI.personalBookmark(personId, window.location.href),
-    question = $('#question-title').html();
+    question = $('#question-title').html(),
+    age = urlParams.get('age');
 
-  if(isVisitor) {
+    console.log(age);
+    if(isVisitor) {
     $('.panel').addClass('u-d-no');
   }
   $('.qa-btn-submit').on('click',
@@ -123,6 +126,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     if(isVisitor) {
       e.preventDefault();
       window.location.href = '../individual-details-address-in-uk/?person_id=' +
+        personId + (surveyType ? '&survey=' + surveyType : '');
+    }
+
+    if(age < 16) {
+      e.preventDefault();
+      window.location.href = '../individual-details-30-day-address/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
     }
   }));

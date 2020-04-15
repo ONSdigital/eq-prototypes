@@ -5,22 +5,8 @@ globalcss: false
 layout: eq-default-extras
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 hideSaveLater: true
+logoUrl: ../home
 ---
-
-<style>
-    .input--text-lg {
-        width : 100%;
-    }
-
-    .input--text-postcode {
-        max-width : 9.25rem;
-    }
-      
-    p.field {
-      margin-bottom: 1rem!important;
-    }
-</style>
-
 <link rel="stylesheet" href="../assets/modules/typeahead/typeahead.css"/>
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
@@ -62,7 +48,7 @@ hideSaveLater: true
 
                             <legend class="u-vh">What is your address?
                             </legend>
-                            <p>To request a new household access code, we need your address.</p>
+                            <p class="js-piping">To request a new household access code, we need your address.</p>
 
                   <div id="address" class="field address-input js-address u-mt-s address-input--search">
                     <div class="address-input__manual">
@@ -93,7 +79,7 @@ hideSaveLater: true
                     <div class="address-input__search js-address-not-editable">
                       <p class="field">
                         <label class="label" for="rh-proto-address">Enter address or postcode and select from results</label>
-                        <div id="address-typeahead-container" class="typeahead-input js-address-typeahead " data-content="{&quot;no_results&quot;:&quot;No results found. Try entering a different part of the address.&quot;,&quot;aria_no_results&quot;:&quot;No addresses found for the query&quot;,&quot;aria_you_have_selected&quot;:&quot;You have selected&quot;,&quot;aria_found_by_alternative_name&quot;:&quot;found by alternative name&quot;,&quot;aria_min_chars&quot;:&quot;Type in 5 or more characters for addresses.&quot;,&quot;aria_one_result&quot;:&quot;There is one address available.&quot;,&quot;aria_n_results&quot;:&quot;There are {n} addresses available.&quot;,&quot;aria_limited_results&quot;:&quot;Results have been limited to 10 addresses. Type more characters to refine your search.&quot;,&quot;more_results&quot;:&quot;Continue entering to improve results&quot;,&quot;results_title&quot;:&quot;Select an address&quot;}" typeahead-data="">
+                        <div id="address-typeahead-container" class="typeahead-input js-address-typeahead " data-content="{&quot;no_results&quot;:&quot;No results found. Try entering a different part of the address&quot;,&quot;aria_no_results&quot;:&quot;No addresses found for the query&quot;,&quot;aria_you_have_selected&quot;:&quot;You have selected&quot;,&quot;aria_found_by_alternative_name&quot;:&quot;found by alternative name&quot;,&quot;aria_min_chars&quot;:&quot;Type in 5 or more characters for addresses.&quot;,&quot;aria_one_result&quot;:&quot;There is one address available.&quot;,&quot;aria_n_results&quot;:&quot;There are {n} addresses available.&quot;,&quot;aria_limited_results&quot;:&quot;Results have been limited to 10 addresses. Type more characters to refine your search.&quot;,&quot;more_results&quot;:&quot;Continue entering to improve results&quot;,&quot;results_title&quot;:&quot;Select an address&quot;}" typeahead-data="">
                           <input type="text" id="rh-proto-address" class="input input--text input-type__input  address-input__typeahead js-typeahead-input input--w-50" />
                           <div class="typeahead-input__results js-typeahead-results">
                             <header class="typeahead-input__results-title u-fs-s">Select an address</header>
@@ -103,14 +89,14 @@ hideSaveLater: true
                           <div class="typeahead-input__status u-vh js-typeahead-aria-status" aria-live="polite" role="status" tabindex="-1"></div>
                         </div>
                       </p>
-                      <a href="../address-correction/?previous=request-uac-hh-address">I can't find my address</a>
+                      <a href="../address-correction/?previous=uac-request-address">I can't find my address</a>
                     </div>
                   </div>
                   </fieldset>
                     </div>
                 </div>
 
-                <button class="btn btn-submit btn--primary btn--lg u-mt-m"
+                <button class="btn btn-submit btn--primary btn--lg u-mt-xl"
                         data-qa="btn-submit" type="submit"
                         name="action[save_continue]">Continue
                 </button>
@@ -123,7 +109,8 @@ hideSaveLater: true
 
 <script>
   var urlParams = new URLSearchParams(window.location.search),
-    previousPage = urlParams.get('previous');
+    previousPage = urlParams.get('previous'),
+    previousLink = urlParams.get('link');
 
   $('.btn-submit').click(function(e) {
     e.preventDefault(); // do not submit the form like usual
@@ -133,7 +120,11 @@ hideSaveLater: true
 
     sessionStorage.setItem('address', document.getElementById('rh-proto-address').value);
 
-    window.location = '../confirm-rh-address/?previous=request-uac-hh-address';
+    if(previousLink === 'new-ir-uac'){
+      window.location = '../confirm-rh-address/?' + 'previous=' + 'uac-request-address' + '&' + 'link=' + previousLink;
+    } else {
+      window.location = '../confirm-rh-address/?' + 'previous=' + 'uac-request-address' + '&' + 'link=' + previousLink;
+    }
   });
 
   if (window.location.search == '?edit=true') {
@@ -141,6 +132,12 @@ hideSaveLater: true
       $('#rh-proto-address').val(sessionStorage.getItem('address'));
     }
   $(updateEditableAddress);
+  }
+
+  function updateHelp() {
+    if (previousLink === 'new-ir-uac') {
+      $('.js-piping').html('To request a new individual access code, we need your address.');
+    }
   }
 
   function updateAllPreviousLinks() {
@@ -153,5 +150,6 @@ hideSaveLater: true
   document.dispatchEvent(new CustomEvent('TYPEAHEAD-READY'));
 
   $(updateAllPreviousLinks);
+  $(updateHelp);
 
 </script>

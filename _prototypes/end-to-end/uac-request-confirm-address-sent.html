@@ -4,7 +4,7 @@ project: End to end prototype
 globalcss: false
 layout: eq-default-extras
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
-hideSaveLater: true
+noONSLogoLink: true
 ---
 
 <link rel="stylesheet" href="../style.css"/>
@@ -30,20 +30,26 @@ hideSaveLater: true
                                 <div class="panel panel--simple panel--success u-mb-m">
                                     <div class="panel__body">
                                         <h1 id="question-title" class="question__title u-mb-xs u-fs-l js-piping">
-                                            We have sent a text to {x}
+                                            A letter has been sent to {x}
                                         </h1>
-                                        <p>The text message with a household access code should
-                                            arrive soon for you complete your census.</p>
+                                        <p class="js-piping">The letter with {y} access code should
+                                            arrive soon for you to complete the census.</p>
                                     </div>
                                 </div>
                             </div>
-                            <h2 class="u-fs-r--b u-mb-xs">Didn’t receive a text?</h2>
-                            <p class="u-mb-m">It can take a few minutes for the text to arrive. If it doesn’t arrive, you can <a href="../uac-request-hh-enter-mobile">request a new code</a>.</p>
                         </section>
                     </div>
-                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-s"
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
                             type="submit" name="">Continue
                     </button>
+
+                    <!--
+                        <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>-->
+
+                    <!--<p class="u-mb-m"><span class="js-link-secure-label"></span><br />
+                        <a class="js-link-secure"
+                           href="#">Get a separate access code to submit an
+                            individual response</a></p>-->
                 </form>
             </main>
         </div>
@@ -61,23 +67,37 @@ hideSaveLater: true
 <script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
-  var storageAPI = window.ONS.storage,
-    urlParams = new URLSearchParams(window.location.search),
-    mobileNo = urlParams.get('mobile');
+    var storageAPI = window.ONS.storage;
+    var urlParams = new URLSearchParams(window.location.search);
+    var addressLines = (sessionStorage.getItem('address-line-1') || '');
+    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
+    var addresseeName = (sessionStorage.getItem('addressee-name') || '');
+    var previousPage = urlParams.get('previous');
+    var previousLink = urlParams.get('link');    
+    var codeType;
+
+    if(previousLink === 'new-ir-uac'){
+        var codeType = 'an individual'
+    } else {
+        $('.js-panel').hide();
+        var codeType = 'a household'
+    }
 
     var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
 
     pipingDestinations.forEach(function(pipingDestination) {
-        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', mobileNo);
+        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', addresseeName + ' at ' + addressLines);
+        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{y}', codeType);
     });
+
     $('.qa-btn-submit').on('click', function (e) {
         e.preventDefault();
         window.location.href = '../home/';
     
     });
-  function updateDescription () {
-    $('.js-mobile-no').html(mobileNo);
-  }
 
-  $(updateDescription);
+  /**
+   * Routing
+   */
+  $('#person').val(urlParams.get('person_id'));
 </script>

@@ -3,8 +3,9 @@ title: Version 1
 project: End to end prototype
 globalcss: false
 layout: eq-default-extras
-cdn: v1.5.0
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 hideSaveLater: true
+logoUrl: ../home
 ---
 
 <link rel="stylesheet" href="../style.css"/>
@@ -43,7 +44,7 @@ hideSaveLater: true
                                     <div class="answer__fields js-fields">
                                         <div class="field field--radio field--multiplechoice ">
                                             <fieldset class="u-mb-xl">
-                                                <legend class="fieldset__legend">Select how to send the access code</legend>
+                                                <legend class="fieldset__legend">Select how to send access code</legend>
                                                 <div class="field__item js-focusable-box">
                                                     <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
@@ -67,7 +68,7 @@ hideSaveLater: true
                                                            for="post">
                                                         Post
                                                         <br>
-                                                        <p class="radio__description label--negative u-fs-s u-mb-no">We can only send this to the registered household address</p>
+                                                        <p class="radio__description label--negative u-fs-s u-mb-no">We can only send access codes to the registered household address</p>
                                                     </label>
                                                 </div>
                                             </fieldset>
@@ -96,22 +97,29 @@ hideSaveLater: true
     var phoneInput = document.getElementById('phone');
     var postInput = document.getElementById('post');    
     var previousPage = searchParams.get('previous');
-
+    var previousLink = searchParams.get('link');
     var form = document.querySelector('form');
 
     form.addEventListener('submit', function(event) {
         event.preventDefault();
         if (phoneInput.checked) {
-            var url = '../uac-request-hh-enter-mobile';
+            var url = '../uac-request-enter-mobile';
         } else if (postInput.checked) {
-            var url = '../uac-request-hh-enter-name';
+            var url = '../uac-request-enter-name';
         }
-        window.location.href = url + '?previous=' + 'request-uac-hh-method';
+        window.location.href = url + '?' + 'previous=' + 'uac-request-method' + '&' + 'link=' + previousLink;
     });
 
-    function updateAllPreviousLinks() {
-        $('.js-previous-link').attr('href', '../' + previousPage + '/?' + (previousPage ? 'previous=' + previousPage : ''));
+    function updateQuestion() {
+        if(previousLink === 'new-ir-uac') {
+            $('.js-piping').html('How would you like to receive a new individual access code?');
+        }
     }
 
+    function updateAllPreviousLinks() {
+        $('.js-previous-link').attr('href', '../' + previousPage + '?' + (previousPage ? 'previous=' + 'uac-request-method' : '') + (previousLink ? '&link=' + previousLink : ''));
+    }
+
+    $(updateQuestion);
     $(updateAllPreviousLinks);
 </script>

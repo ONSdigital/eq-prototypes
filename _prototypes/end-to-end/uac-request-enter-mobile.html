@@ -4,11 +4,15 @@ project: End to end prototype
 globalcss: false
 layout: eq-default-extras
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+logoUrl: ../home
 ---
 
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
-
+    <div class="container">
+        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
+    </div>
 </div>
 
 <div class="page__container container">
@@ -26,20 +30,25 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                     <div class="group u-mb-l">
                         <section class="section">
                             <div class="question u-mb-s">
-                                <div class="panel panel--simple panel--success u-mb-m">
-                                    <div class="panel__body">
-                                        <h1 id="question-title" class="question__title u-mb-xs u-fs-l js-piping">
-                                            A letter has been sent to {x}
-                                        </h1>
-                                        <p>The letter with a household access code should
-                                            arrive soon for you to complete the census.</p>
-                                    </div>
-                                </div>
+                                <h1 id="question-title"
+                                    class="question__title u-fs-xl js-piping">
+                                    What is your mobile number?
+                                </h1>
+                            </div>
+
+                            <div class="field">
+                                <label class="label" for="mobile-number">
+                                    UK mobile number
+                                </label>
+                                <input autocomplete="new-password" class="input input--text js-mobile-number" type="tel"
+                                       type="tel"
+                                       id="mobile-number"
+                                       value="" />
                             </div>
                         </section>
                     </div>
                     <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
-                            type="submit" name="">Continue
+                            type="submit" name="">Save and continue
                     </button>
 
                     <!--
@@ -66,24 +75,21 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
-  var storageAPI = window.ONS.storage,
-    urlParams = new URLSearchParams(window.location.search),
-    addressLines = (sessionStorage.getItem('address-line-1') || '');
-    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
-    addresseeName = (sessionStorage.getItem('addressee-name') || '');
-
-    pipingDestinations.forEach(function(pipingDestination) {
-        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', addresseeName + ' at ' + addressLines);
-    });
-
-    $('.qa-btn-submit').on('click', function (e) {
-        e.preventDefault();
-        window.location.href = '../home/';
+    var storageAPI = window.ONS.storage;
+    var urlParams = new URLSearchParams(window.location.search);
+    var previousPage = urlParams.get('previous');
+    var previousLink = urlParams.get('link');
     
-    });
+  $('.qa-btn-submit').on('click', function (e) {
+    e.preventDefault();
+    
+    var url = '../uac-request-enter-mobile-correct';
+    window.location.href = url + '?mobile=' + encodeURI($('#mobile-number').val() + '&previous=' + 'uac-request-enter-mobile' + '&link=' + previousLink);
+  });
 
-  /**
-   * Routing
-   */
-  $('#person').val(urlParams.get('person_id'));
+    function updateAllPreviousLinks() {
+        $('.js-previous-link').attr('href', '../uac-request-method/');
+    }
+
+    $(updateAllPreviousLinks);
 </script>

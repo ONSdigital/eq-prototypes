@@ -5,6 +5,7 @@ globalcss: false
 layout: eq-default-extras
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 hideSaveLater: true
+logoUrl: ../home
 ---
 
 <link rel="stylesheet" href="../style.css"/>
@@ -28,11 +29,16 @@ hideSaveLater: true
                             <div class="question u-mb-s">
                                 <h1 id="question-title"
                                     class="question__title u-fs-xl js-piping">
-                                    Do you want to send a household access code to this address?
+                                    Do you want to send {x} access code to this address?
                                 </h1>
                             </div>
                             <div class="u-mb-xs js-name-address"></div>
-                            <p class="u-mb-m"><a href="../uac-request-hh-enter-name/?previous=uac-request-confirm-address">Change name</a></p>
+                            <p class="u-mb-m"><a href="../uac-request-enter-name/?previous=uac-request-confirm-address">Change name</a></p>
+                            <div class="panel panel--simple panel--info u-mb-m js-panel">
+                                  <div class="panel__body">
+                                      Your individual access code will arrive in a plain white envelope
+                                  </div>
+                                </div>
                             <div class="field field--radio field--multiplechoice">
                                 <fieldset>
                                     <div class="field__item js-focusable-box">
@@ -83,27 +89,42 @@ hideSaveLater: true
     urlParams = new URLSearchParams(window.location.search),
     addressLine1 = (sessionStorage.getItem('address') || '').replace(/,/g, '<br>'),
     addresseeName = (sessionStorage.getItem('addressee-name') || '');
-    var urlParams = new URLSearchParams(window.location.search);
     var previousPage = urlParams.get('previous');
+    var previousLink = urlParams.get('link');
+    var codeType;
+
+    if(previousLink === 'new-ir-uac'){
+        var codeType = 'an individual'
+    } else {
+        $('.js-panel').hide();
+        var codeType = 'a household'
+    }    
     
     function updateQuestion() {
         $('.js-name-address').html('<strong>' + addresseeName + '</strong>' + ' <br> ' + addressLine1);
     }
 
+    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
+
+    pipingDestinations.forEach(function(pipingDestination) {
+        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', codeType);
+    });
+
     $('.qa-btn-submit').on('click', function (e) {
         e.preventDefault();
         
         if ($('[name=radio-answer]:checked').val() === 'Yes') {
-            window.location.href = '../uac-request-hh-confirm-address-sent/';
+            var url = '../uac-request-confirm-address-sent/';
         } else {
-            window.location.href = '../request-uac-hh-method/';
+            var url = '../uac-request-method/';
         }
+        window.location.href = url + '?previous=' + previousPage + '&link=' + previousLink;
     
     });
     $(updateQuestion);
 
     function updateAllPreviousLinks() {
-        $('.js-previous-link').attr('href', '../request-uac-hh-method/' + (previousPage ? '&previous=' + previousPage : ''));
+        $('.js-previous-link').attr('href', '../uac-request-method/' + (previousPage ? '&previous=' + previousPage : ''));
     }
 
     $(updateAllPreviousLinks);

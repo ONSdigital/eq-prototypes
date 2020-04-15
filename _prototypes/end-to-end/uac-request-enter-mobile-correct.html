@@ -5,6 +5,7 @@ globalcss: false
 layout: eq-default-extras
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 hideSaveLater: true
+logoUrl: ../home
 ---
 
 <link rel="stylesheet" href="../style.css"/>
@@ -22,7 +23,7 @@ hideSaveLater: true
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password"
-                      action="../uac-request-hh-enter-mobile-correct/">
+                      action="../uac-request-enter-mobile-correct/">
                     <div class="group u-mb-l">
                         <section class="section">
                             <div class="question u-mb-s">
@@ -84,14 +85,15 @@ hideSaveLater: true
     isEditing = urlParams.get('edit'),
     mobileNo = urlParams.get('mobile');
     var previousPage = urlParams.get('previous');
-    var currentPage = 'uac-request-hh-enter-mobile-correct';
+    var previousLink = urlParams.get('link');
+    var currentPage = 'uac-request-enter-mobile-correct';
 
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
 
     window.location.href = $('[name=radio-answer]:checked').val() === 'Yes'
-      ? '../uac-request-hh-enter-mobile-sent/?mobile=' + mobileNo + '&previous=' + currentPage
-      : '../uac-request-hh-enter-mobile/?mobile=' + mobileNo + '&previous=' + currentPage;
+      ? '../uac-request-enter-mobile-sent/?mobile=' + mobileNo + '&previous=' + currentPage + '&link=' + previousLink
+      : '../uac-request-enter-mobile/?mobile=' + mobileNo + '&previous=' + currentPage + '&link=' + previousLink;
   });
 
   function updateDescription () {
