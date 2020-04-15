@@ -110,6 +110,8 @@ noONSLogoLink: true
     } else if(details['employment'].sevenDaysAgo === 'No') {
         storageAPI.clearPersonalBookmark(personId);
         window.location.href = '../hub/'
+    } else {
+        window.location.href = '../individual-details-employment-job-hours-worked?person_id=' + personId;
     }
 
   }));

@@ -17,10 +17,6 @@ noONSLogoLink: true
 </div>
 
 <style>
-    p.field {
-      margin-bottom: 1rem!important;
-    }
-
     .input--text-lg {
         width : 100%;
     }
@@ -104,6 +100,17 @@ noONSLogoLink: true
                                     </div>
                                 </div>
                             </section>
+                        <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple">
+                                    <div class="js-collapsible-content">
+                                        <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b js-definition" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Why your answer is important">Why your answer is important</h3>
+                                        <div class="collapsible__body js-collapsible-body">
+                                            <p class="js-help-1">Your answer will help your community by allowing the government and councils to understand commuting patterns.</p>
+                                            <p class="js-help-2">Information about your workplace address and how you travel to work are used together to work out local public transport needs, develop transport policies and plan services.</p>
+                                            
+                                            <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Why your answer is important">Hide this</button>
+                                        </div>
+                                    </div>
+                            </div>                            
                         </div>
                     </div>
                     <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
@@ -161,6 +168,10 @@ noONSLogoLink: true
     if(storageAPI.getAnsweringIndividualByProxy()) {
       $('.js-heading').html('What is the address of ' + '<em class="highlight">' + person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
         ' depot?');
+      $('.js-definition').html('Why their answer is important');
+      $('.js-help-1').html('Their answer will help their community by allowing the government and councils to understand commuting patterns.');
+      $('.js-help-2').html('Information about their workplace address and how they travel to work are used together to work out local public transport needs, develop transport policies and plan services.');                                  
+           
     }
     if (details['employment'].sevenDaysAgo === 'No') {
         var replaceQuestion = $('.js-heading').html().replace('is', 'was');
