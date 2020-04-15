@@ -32,13 +32,13 @@ hideSaveLater: true
                                         <h1 id="question-title" class="question__title u-mb-xs u-fs-l js-piping">
                                             We have sent a text to {x}
                                         </h1>
-                                        <p>The text message with a household access code should
+                                        <p class="js-piping">The text message with {y} access code should
                                             arrive soon for you complete your census.</p>
                                     </div>
                                 </div>
                             </div>
                             <h2 class="u-fs-r--b u-mb-xs">Didn’t receive a text?</h2>
-                            <p class="u-mb-m">It can take a few minutes for the text to arrive. If it doesn’t arrive, you can <a href="../uac-request-hh-enter-mobile">request a new code</a>.</p>
+                            <p class="u-mb-m">It can take a few minutes for the text to arrive. If it doesn’t arrive, you can <a class="js-link" href="">request a new code</a>.</p>
                         </section>
                     </div>
                     <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-s"
@@ -63,18 +63,35 @@ hideSaveLater: true
 <script>
   var storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
-    mobileNo = urlParams.get('mobile');
+    mobileNo = urlParams.get('mobile'),
+    previousLink = urlParams.get('link');
+    var codeType;
+
+    if(previousLink === 'new-ir-uac'){
+        var codeType = 'an individual'
+    } else {
+        var codeType = 'a household'
+    }
 
     var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
 
     pipingDestinations.forEach(function(pipingDestination) {
         pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', mobileNo);
+        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{y}', codeType);
     });
+
     $('.qa-btn-submit').on('click', function (e) {
         e.preventDefault();
         window.location.href = '../home/';
     
     });
+
+    $('.js-link').on('click', function (e) {
+        e.preventDefault();
+        var url = '../uac-request-enter-mobile';
+        window.location.href = url + '?' + 'link=' + previousLink;
+    });
+
   function updateDescription () {
     $('.js-mobile-no').html(mobileNo);
   }

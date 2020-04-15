@@ -31,7 +31,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                         <h1 id="question-title" class="question__title u-mb-xs u-fs-l js-piping">
                                             A letter has been sent to {x}
                                         </h1>
-                                        <p>The letter with a household access code should
+                                        <p class="js-piping">The letter with {y} access code should
                                             arrive soon for you to complete the census.</p>
                                     </div>
                                 </div>
@@ -66,14 +66,27 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
-  var storageAPI = window.ONS.storage,
-    urlParams = new URLSearchParams(window.location.search),
-    addressLines = (sessionStorage.getItem('address-line-1') || '');
+    var storageAPI = window.ONS.storage;
+    var urlParams = new URLSearchParams(window.location.search);
+    var addressLines = (sessionStorage.getItem('address-line-1') || '');
     var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
-    addresseeName = (sessionStorage.getItem('addressee-name') || '');
+    var addresseeName = (sessionStorage.getItem('addressee-name') || '');
+    var previousPage = urlParams.get('previous');
+    var previousLink = urlParams.get('link');    
+    var codeType;
+
+    if(previousLink === 'new-ir-uac'){
+        var codeType = 'an individual'
+    } else {
+        $('.js-panel').hide();
+        var codeType = 'a household'
+    }
+
+    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
 
     pipingDestinations.forEach(function(pipingDestination) {
         pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', addresseeName + ' at ' + addressLines);
+        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{y}', codeType);
     });
 
     $('.qa-btn-submit').on('click', function (e) {

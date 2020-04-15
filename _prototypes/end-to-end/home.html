@@ -83,9 +83,19 @@ hideSaveLater: true
                 <div class="grid__col push-1@m col-4@m u-bl">
                     <div class="u-pl-m@m u-bl@m u-pt-m@xs@m u-bt@xs@m">
                         <h3 class="u-fs-r--b">If you don't have a household access code</h3>
-                        <p>You can <a href="../request-uac-hh-address">request a new household access code</a> to start a new census if you have lost or not received an access code.</p>
-                        <h3 class="u-fs-r--b">Answering separately from your household</h3>
-                        <p>If you prefer to answer separately from the people you live with, you can <a href="#">request an individual access code</a> to start a separate census.</p>
+                        <p>You can <a href="../uac-request-address?previous=home&link=new-hh-uac">request a new household access code</a> to start a new census if you have lost or not received an access code.</p>
+                        <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple js-visitor-definition u-mb-xs">
+                            <div class="js-collapsible-content">
+                                <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Why do I have to include visitors?">Need to answer separately from your household?</h3>
+                                <div class="collapsible__body js-collapsible-body">
+                                    <p class="u-mb-xs">If you need to answer separately from the people you live with, you can <a href="../uac-request-address?previous=home&link=new-ir-uac">request an individual access code</a> to start a separate census.</p>
+                                    <div class="panel panel--simple panel--warning js-panel-info u-mb-xs">
+                                        <span class="panel__icon" aria-hidden="true">!</span><span class="panel__text">Someone in your household must still complete a census using a household access code</span>
+                                    </div>                                
+                                    <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="What does /"usually live/" mean?">Hide this</button>                                           
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

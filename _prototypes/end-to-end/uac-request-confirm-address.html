@@ -22,17 +22,22 @@ hideSaveLater: true
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password"
-                      action="../uac-request-hh-enter-mobile-correct/">
+                      action="../hub">
                     <div class="group u-mb-l">
                         <section class="section">
                             <div class="question u-mb-s">
                                 <h1 id="question-title"
-                                    class="question__title u-fs-xl js-heading">
-                                    Is this mobile number correct?
+                                    class="question__title u-fs-xl js-piping">
+                                    Do you want to send {x} access code to this address?
                                 </h1>
-                                <p class="js-mobile-no"></p>
                             </div>
-
+                            <div class="u-mb-xs js-name-address"></div>
+                            <p class="u-mb-m"><a href="../uac-request-enter-name/?previous=uac-request-confirm-address">Change name</a></p>
+                            <div class="panel panel--simple panel--info u-mb-m js-panel">
+                                  <div class="panel__body">
+                                      Your individual access code will arrive in a plain white envelope
+                                  </div>
+                                </div>
                             <div class="field field--radio field--multiplechoice">
                                 <fieldset>
                                     <div class="field__item js-focusable-box">
@@ -43,7 +48,7 @@ hideSaveLater: true
                                                type="radio">
                                         <label class="label label--inline u-fs-r"
                                                for="yes">
-                                            Yes, send the text now</label>
+                                            Yes, send the access code now</label>
                                     </div>
                                     <div class="field__item js-focusable-box">
                                         <input autocomplete="new-password" class="input input--radio js-focusable"
@@ -53,14 +58,14 @@ hideSaveLater: true
                                                type="radio">
                                         <label class="label label--inline u-fs-r "
                                                for="no">
-                                            No, I need to change it</label>
+                                            No, send it another way</label>
                                     </div>
                                 </fieldset>
                             </div>
                         </section>
                     </div>
-                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
-                            type="submit" name="">Save and continue
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-s"
+                            type="submit" name="">Continue
                     </button>
                 </form>
             </main>
@@ -81,27 +86,45 @@ hideSaveLater: true
 <script>
   var storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
-    isEditing = urlParams.get('edit'),
-    mobileNo = urlParams.get('mobile');
+    addressLine1 = (sessionStorage.getItem('address') || '').replace(/,/g, '<br>'),
+    addresseeName = (sessionStorage.getItem('addressee-name') || '');
     var previousPage = urlParams.get('previous');
-    var currentPage = 'uac-request-hh-enter-mobile-correct';
+    var previousLink = urlParams.get('link');
+    var codeType;
 
-  $('.qa-btn-submit').on('click', function (e) {
-    e.preventDefault();
+    if(previousLink === 'new-ir-uac'){
+        var codeType = 'an individual'
+    } else {
+        $('.js-panel').hide();
+        var codeType = 'a household'
+    }    
+    
+    function updateQuestion() {
+        $('.js-name-address').html('<strong>' + addresseeName + '</strong>' + ' <br> ' + addressLine1);
+    }
 
-    window.location.href = $('[name=radio-answer]:checked').val() === 'Yes'
-      ? '../uac-request-hh-enter-mobile-sent/?mobile=' + mobileNo + '&previous=' + currentPage
-      : '../uac-request-hh-enter-mobile/?mobile=' + mobileNo + '&previous=' + currentPage;
-  });
+    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
 
-  function updateDescription () {
-    $('.js-mobile-no').html(mobileNo);
-  }
+    pipingDestinations.forEach(function(pipingDestination) {
+        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', codeType);
+    });
 
-  $(updateDescription);
+    $('.qa-btn-submit').on('click', function (e) {
+        e.preventDefault();
+        
+        if ($('[name=radio-answer]:checked').val() === 'Yes') {
+            var url = '../uac-request-confirm-address-sent/';
+        } else {
+            var url = '../uac-request-method/';
+        }
+        window.location.href = url + '?previous=' + previousPage + '&link=' + previousLink;
+    
+    });
+    $(updateQuestion);
 
-  /**
-   * Routing
-   */
-  $('#person').val(urlParams.get('person_id'));
+    function updateAllPreviousLinks() {
+        $('.js-previous-link').attr('href', '../uac-request-method/' + (previousPage ? '&previous=' + previousPage : ''));
+    }
+
+    $(updateAllPreviousLinks);
 </script>

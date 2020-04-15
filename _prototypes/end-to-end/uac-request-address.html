@@ -6,21 +6,6 @@ layout: eq-default-extras
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 hideSaveLater: true
 ---
-
-<style>
-    .input--text-lg {
-        width : 100%;
-    }
-
-    .input--text-postcode {
-        max-width : 9.25rem;
-    }
-      
-    p.field {
-      margin-bottom: 1rem!important;
-    }
-</style>
-
 <link rel="stylesheet" href="../assets/modules/typeahead/typeahead.css"/>
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
@@ -103,14 +88,14 @@ hideSaveLater: true
                           <div class="typeahead-input__status u-vh js-typeahead-aria-status" aria-live="polite" role="status" tabindex="-1"></div>
                         </div>
                       </p>
-                      <a href="../address-correction/?previous=request-uac-hh-address">I can't find my address</a>
+                      <a href="../address-correction/?previous=uac-request-address">I can't find my address</a>
                     </div>
                   </div>
                   </fieldset>
                     </div>
                 </div>
 
-                <button class="btn btn-submit btn--primary btn--lg u-mt-m"
+                <button class="btn btn-submit btn--primary btn--lg u-mt-xl"
                         data-qa="btn-submit" type="submit"
                         name="action[save_continue]">Continue
                 </button>
@@ -134,7 +119,11 @@ hideSaveLater: true
 
     sessionStorage.setItem('address', document.getElementById('rh-proto-address').value);
 
-    window.location = '../confirm-rh-address/?previous=request-uac-hh-address';
+    if(previousLink === 'new-ir-uac'){
+      window.location = '../confirm-rh-address/?' + 'previous=' + 'uac-request-address' + '&' + 'link=' + previousLink;
+    } else {
+      window.location = '../confirm-rh-address/?' + 'previous=' + 'uac-request-address' + '&' + 'link=' + previousLink;
+    }
   });
 
   if (window.location.search == '?edit=true') {

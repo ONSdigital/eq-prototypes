@@ -125,6 +125,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     hasErrors = false;
     var urlParams = new URLSearchParams(window.location.search);
     var previousPage = urlParams.get('previous');
+    var previousLink = urlParams.get('link');
 
   function removeMember_handler(member, e) {
     e.preventDefault();
@@ -199,7 +200,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
       }
       else {
         window.location.href = isEditing ? '../summary/' :
-          '../uac-request-hh-confirm-address/';
+          '../uac-request-confirm-address/?previous=' + previousPage + '&link=' + previousLink;
       }
     }
   });

@@ -75,7 +75,13 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <script>
 	var yesbox = document.getElementById("address-correct-yes");
 	var changebox = document.getElementById("address-correct-change");
-    storageAPI = window.ONS.storage;
+    var urlParams = new URLSearchParams(window.location.search);
+    var previousPage = urlParams.get('previous');
+    var addressParam = urlParams.get('address');
+    var storageAPI = window.ONS.storage;
+    var previousPage = urlParams.get('previous');
+    var previousLink = urlParams.get('link');
+    var currentPage = 'confirm-rh-address';
 
 	$('.qa-btn-submit').on('click', function (e) {
         e.preventDefault();
@@ -84,19 +90,16 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         * Routing
         */
         if (yesbox.checked) {
-            window.location.href = "../request-uac-hh-method?previous=request-uac-hh-address";
+            var url  = '../uac-request-method';
         }
         else if (changebox.checked) {
-            window.location.href = "../address-correction?previous=request-uac-hh-address";
+            var url = '../address-correction';
         } 
         else {
-            window.location.href = "../request-uac-hh-address/?previous=request-uac-hh-address";
+            var url = '../uac-request-address';
         }
+        window.location.href = url + '?' + 'previous=' + currentPage + '&' + 'link=' + previousLink;
     });
-
-    var searchParams = new URLSearchParams(window.location.search);
-    var previousPage = searchParams.get('previous');
-    var addressParam = searchParams.get('address');
 
     if (addressParam) {
         var address = JSON.parse(addressParam);
@@ -129,7 +132,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
     function updateAllPreviousLinks() {
         if (previousPage === 'uac-entry') {
-            console.log(previousPage);
             $('.js-previous-link').hide();
         } else {
             $('.js-previous-link').attr('href', '../' + previousPage + '?edit=true');
