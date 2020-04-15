@@ -40,7 +40,7 @@ noONSLogoLink: true
                                 <div class="answer">
                                     <div class="answer__fields js-fields">
                                         <div class="field field--radio field--multiplechoice ">
-                                            <fieldset class="u-mb-xl">
+                                            <fieldset>
                                                 <div class="field__item js-focusable-box">
                                                     <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
@@ -108,7 +108,17 @@ noONSLogoLink: true
                             </section>
                         </div>
                     </div>
-                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                    <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple">
+                        <div class="js-collapsible-content">
+                            <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Why we ask for workplace">Why we ask for workplace</h3>
+                            <div class="collapsible__body js-collapsible-body">
+                                <p class="js-help-1">Your answer will help your community by allowing the government and councils to understand commuting patterns.</p>
+                                <p class="js-help-2">Information about your workplace and how you travel to work are used together to work out local public transport needs, develop transport policies and plan services.</p>
+                                <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Why we ask for workplace">Hide this</button>
+                            </div>
+                        </div>
+                    </div>                    
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl u-mt-xl"
                             type="submit" name="">Save and continue
                     </button>
                     <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
@@ -167,6 +177,8 @@ noONSLogoLink: true
     if(storageAPI.getAnsweringIndividualByProxy()) {
       $('.js-heading').html('Where does ' + '<em class="highlight">' + person.firstLastName + '</em>' +
         ' mainly work?');
+      $('.js-help-1').html('Their answer will help their community by allowing the government and councils to understand commuting patterns.');
+      $('.js-help-2').html('Information about their workplace and how you travel to work are used together to work out local public transport needs, develop transport policies and plan services.');
     }
   }
 
