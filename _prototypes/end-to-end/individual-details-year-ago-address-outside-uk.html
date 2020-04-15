@@ -33,7 +33,7 @@ noONSLogoLink: true
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title u-fs-xl js-heading">
-                                            You selected "Another address outside the UK". In Which country outside the UK was your address one year ago?
+                                            You selected "Another address outside the UK". In which country outside the UK was your address one year ago?
                                     </h1>
                                 </div>
 
@@ -102,7 +102,7 @@ noONSLogoLink: true
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-        $('.js-heading').html('You selected "Another address outside the UK". In Which country outside the UK was '  + '<em class="highlight">' + person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' + ' address one year ago.');
+        $('.js-heading').html('You selected &ldquo;Another address outside the UK&rdquo;. In which country outside the UK was '  + '<em class="highlight">' + person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' + ' address one year ago?');
     }
   }
 

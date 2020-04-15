@@ -73,8 +73,8 @@ noONSLogoLink: true
 
   function updatePara() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-text-0').html('The next set of questions is about '  + '<em class="highlight">' + person.firstLastName +
-      window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' + ' last main job. This is the most recent job they had.');
+      $('.js-text-0').html('The next set of questions is about '  + '<strong>' + person.firstLastName +
+      window.ONS.utils.trailingNameS(person.firstLastName) + '</strong>' + ' last main job. This is the most recent job they had.');
       $('.js-text-1').html('If they had more than one job at the same time, answer for the job in which they usually worked the most hours.');
     }
   }
