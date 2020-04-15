@@ -167,7 +167,7 @@ noONSLogoLink: true
   function updateAddresses() {
     $('#home-address-label').text(sessionStorage.getItem('address'));
     if (personId !== 'person_me' && storageAPI.getHouseholdMemberByPersonId('person_me')) {
-        $('#same-address-label').text('Same as address ' + storageAPI.getHouseholdMemberByPersonId('person_me')['@person'].firstLastName);
+        $('#same-address-label').text('Same address as ' + storageAPI.getHouseholdMemberByPersonId('person_me')['@person'].firstLastName);
     } else {
         $('#same-address-field').remove();
     }
