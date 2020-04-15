@@ -17,9 +17,6 @@ noONSLogoLink: true
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            <!--{% include navigation.html
-            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
-            nav-title-id="section-individual" %}-->
         </div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
@@ -86,11 +83,6 @@ noONSLogoLink: true
 
                     
                         <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
-
-                    <!--<p class="u-mb-m"><span class="js-link-secure-label"></span><br />
-                        <a class="js-link-secure"
-                           href="#">Get a separate access code to submit an
-                            individual response</a></p>-->
                 </form>
             </main>
         </div>
@@ -137,6 +129,15 @@ noONSLogoLink: true
     if(storageAPI.getAnsweringIndividualByProxy()) {
       $('.js-heading').html('What is the name of the organisation or business ' + '<em class="highlight">' + person.firstLastName + '</em> works for?');
       $('.js-help').html('If they are self-employed in their own business, give the business name');
+    }
+
+    if (details['employment'].sevenDaysAgo === 'No') {
+        var replaceQuestion = $('.js-heading').html().replace('is', 'was');
+        $('.js-heading').html(replaceQuestion);
+        var replaceQuestion = $('.js-heading').html().replace('works', 'worked');
+        $('.js-heading').html(replaceQuestion);
+        var replaceHelp = $('.js-help').html().replace('are', 'were');
+        $('.js-help').html(replaceHelp);
     }
   }
 

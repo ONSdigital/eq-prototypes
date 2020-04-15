@@ -132,6 +132,10 @@ noONSLogoLink: true
       $('.js-heading').html('Does ' + '<em class="highlight">' + person.firstLastName + '</em>' +
         ' mainly work in the UK?');
     }
+    if (details['employment'].sevenDaysAgo === 'No') {
+        var replaceQuestion = $('.js-heading').html().replace('Does', 'Did');
+        $('.js-heading').html(replaceQuestion);
+    }
   }
 
   if (details && details['employment']) {

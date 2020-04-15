@@ -114,6 +114,10 @@ noONSLogoLink: true
       $('.js-heading').html('Biefly describe what ' + '<em class="highlight">' + person.firstLastName + '</em>' +
         ' does in their main job');
     }
+    if (details['employment'].sevenDaysAgo === 'No') {
+        var replaceQuestion = $('.js-heading').html().replace('does', 'did');
+        $('.js-heading').html(replaceQuestion);
+    }
   }
 
   if (details && details['employment'] &&

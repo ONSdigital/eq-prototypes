@@ -17,9 +17,6 @@ noONSLogoLink: true
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            <!--{% include navigation.html
-            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
-            nav-title-id="section-individual" %}-->
         </div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
@@ -143,6 +140,10 @@ noONSLogoLink: true
     if(storageAPI.getAnsweringIndividualByProxy()) {
       $('.js-heading').html('In their main job, what is ' + '<em class="highlight">' + person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
         ' employment status?');
+    }
+    if (details['employment'].sevenDaysAgo === 'No') {
+        var replaceQuestion = $('.js-heading').html().replace('is', 'was');
+        $('.js-heading').html(replaceQuestion);
     }
   }
 
