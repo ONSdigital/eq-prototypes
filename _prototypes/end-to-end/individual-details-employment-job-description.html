@@ -4,6 +4,7 @@ project: End to end prototype
 globalcss: false
 layout: eq-default-extras
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
 ---
 
 <link rel="stylesheet" href="../style.css"/>
@@ -110,8 +111,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('Can you briefly describe what ' + '<em class="highlight">' + person.firstLastName + '</em>' +
-        ' does in their main job?');
+      $('.js-heading').html('Biefly describe what ' + '<em class="highlight">' + person.firstLastName + '</em>' +
+        ' does in their main job');
     }
   }
 
