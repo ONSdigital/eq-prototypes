@@ -202,7 +202,8 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         e.preventDefault();
 
         //uncheck val radio
-        $("input:radio").attr("checked", false);
+        $("input:radio").prop("checked", false);
+        $(".input__text").val("");
         $('.js-clear-btn').addClass('u-vh');
     }));
 
@@ -215,7 +216,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   function checkRadios() {
     $('.input__text').on('click',
         storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
-        $("#other").attr("checked", true);
+        $("#other").prop("checked", true);
     }));
   }
 
