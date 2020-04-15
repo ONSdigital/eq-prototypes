@@ -231,6 +231,11 @@ noONSLogoLink: true
       $('.js-heading').html('How does ' + '<em class="highlight">' + person.firstLastName + '</em>' +
         ' usually travel to work?');
     }
+
+    if (details['employment'].sevenDaysAgo === 'No') {
+        var replaceQuestion = $('.js-heading').html().replace('does', 'did');
+        $('.js-heading').html(replaceQuestion);
+    }
   }
 
   if (details && details['employment']) {

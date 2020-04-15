@@ -162,6 +162,10 @@ noONSLogoLink: true
       $('.js-heading').html('What is the address of ' + '<em class="highlight">' + person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
         ' depot?');
     }
+    if (details['employment'].sevenDaysAgo === 'No') {
+        var replaceQuestion = $('.js-heading').html().replace('is', 'was');
+        $('.js-heading').html(replaceQuestion);
+    }
   }
 
   $(updateQuestion);
