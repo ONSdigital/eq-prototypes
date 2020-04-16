@@ -377,13 +377,13 @@ noONSLogoLink: true
       $nodeEl.find('.js-link').attr('href', '../uac-question?person_id=' + person.id);
     }
 
-    // $nodeEl.find('.js-link').on('click', function () {
-    //  if(person.id === 'person_me') {
-    //    storageAPI.unsetAnsweringIndividualByProxy();
-    //  } else {
-    //    storageAPI.setAnsweringIndividualByProxy(true);
-    //  }
-    // });
+    $nodeEl.find('.js-link').on('click', function () {
+      if(person.id === 'person_me') {
+        storageAPI.unsetAnsweringIndividualByProxy();
+      } else {
+        storageAPI.setAnsweringIndividualByProxy(true);
+      }
+     });
     
     return $nodeEl;
   }

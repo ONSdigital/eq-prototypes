@@ -110,13 +110,19 @@ noONSLogoLink: true
           (surveyType ? '&survey=' + surveyType : '');
     }
 
-    if(JSON.stringify(details.employment.mainlyWork) === '"At a workplace"') {
-        window.location.href = '../individual-details-employment-address-workplace?person_id=' + personId +
-        (surveyType ? '&survey=' + surveyType : '');
-    }
-    else if (JSON.stringify(details.employment.mainlyWork) === '"Report to a depot"') {
-        window.location.href = '../individual-details-employment-address-depot/?person_id=' + personId +
-        (surveyType ? '&survey=' + surveyType : '');
+    if (val === 'No') {
+        window.location.href = '../individual-details-employment-job-work-outside-uk/?person_id=' + personId +
+          (surveyType ? '&survey=' + surveyType : '');
+    } else {
+
+        if(JSON.stringify(details.employment.mainlyWork) === '"At a workplace"') {
+            window.location.href = '../individual-details-employment-address-workplace?person_id=' + personId +
+            (surveyType ? '&survey=' + surveyType : '');
+        }
+        else if (JSON.stringify(details.employment.mainlyWork) === '"Report to a depot"') {
+            window.location.href = '../individual-details-employment-address-depot/?person_id=' + personId +
+            (surveyType ? '&survey=' + surveyType : '');
+        }
     }
   }));
 

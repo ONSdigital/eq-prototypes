@@ -1095,7 +1095,9 @@ export function addUpdateEmploymentMainlyWork(personId, mainlyWork, questionMain
       }
     }));
     
-}export function addUpdateEmploymentWorkUK(personId, workUK, questionWorkUK, urlWorkUK) {
+}
+
+export function addUpdateEmploymentWorkUK(personId, workUK, questionWorkUK, urlWorkUK) {
   return changeDetailsFor(personId, () =>
     ({
       'employment': {
@@ -1103,6 +1105,18 @@ export function addUpdateEmploymentMainlyWork(personId, mainlyWork, questionMain
         workUK,
         questionWorkUK,
         urlWorkUK
+      }
+    }));
+}
+
+export function addUpdateEmploymentOutsideUK(personId, workOustideUK, questionWorkOustideUK, urlWorkOutsideUK) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'employment': {
+        ...(details['employment'] || {}),
+        workOustideUK,
+        questionWorkOustideUK,
+        urlWorkOutsideUK
       }
     }));
 }
