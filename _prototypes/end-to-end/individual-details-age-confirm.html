@@ -120,7 +120,7 @@ noONSLogoLink: true
     }
     else if(val === 'Yes'){
       window.location.href = '../individual-details-sex/?person_id=' + personId + '&age=' + age;
-      storageAPI.addUpdateAge(personId, age);
+      storageAPI.addUpdateAge(personId, ageYear);
     } 
     else {
       val = '';
@@ -145,6 +145,7 @@ noONSLogoLink: true
     var dob = details.dob,
       unit = 'years',
       dobObj = createDataObj(dob.year, dob.month, dob.day);
+    ageYear = moment().diff(dobObj, 'years');
     age = moment().diff(dobObj, 'years');
     if (age === 0) {
       age = moment().diff(dobObj, 'months');
