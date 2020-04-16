@@ -52,8 +52,8 @@ noONSLogoLink: true
                                         What is your full job title?
                                     </h1>
                                 </div>
-                                <div class="question__description">
-                                  <p>For example, retail assistant, office cleaner, district nurse, primary school teacher. Do not state their grade or pay band</p>
+                                <div class="question__description js-piping">
+                                  <p>For example, retail assistant, office cleaner, district nurse, primary school teacher. Do not state your grade or pay band</p>
                                 </div>
                                 <div class="question__answers">
                                     <div class="question__answer js-fields">
@@ -130,6 +130,7 @@ noONSLogoLink: true
     if(storageAPI.getAnsweringIndividualByProxy()) {
       $('.js-heading').html('What is ' + '<em class="highlight">' + person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
         ' full job title?');
+      $('.js-piping p').html('For example, retail assistant, office cleaner, district nurse, primary school teacher. Do not state their grade or pay band');
     }
 
     if (details['employment'].sevenDaysAgo === 'No') {
