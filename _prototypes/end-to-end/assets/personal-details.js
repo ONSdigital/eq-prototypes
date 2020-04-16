@@ -794,17 +794,12 @@ export function addUpdateYearAgoAddressCountry(personId, value, question, url) {
     }));
 }
 
-// export function addUpdateAge(personId, val, { isApproximate = false }, question, url) {
-//   return changeDetailsFor(personId, () =>
-//     ({
-//       'age': {
-//         val,
-//         isApproximate,
-//         question,
-//         url
-//       }
-//     }));
-// }
+export function addUpdateAge(personId, age) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'age': age
+    }));
+}
 
 export function addUpdateAgeConfirm(personId, val, question, url) {
   return changeDetailsFor(personId, () =>

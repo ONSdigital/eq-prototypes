@@ -128,6 +128,10 @@ noONSLogoLink: true
         $('.js-heading').html('Is ' + '<em class="highlight">' + person.firstLastName + '</em>' +
         ' a schoolchild or student in full-time education?');
     }
+    if (details['age'] < 3 || details['age'] > 19) {
+        var replaceQuestion = $('.js-heading').html().replace('schoolchild or', '');
+        $('.js-heading').html(replaceQuestion);
+    }
   }
 
  function updateAllPreviousLinks() {

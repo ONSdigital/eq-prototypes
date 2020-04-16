@@ -203,11 +203,13 @@ noONSLogoLink: true
         (surveyType ? '&survey=' + surveyType : '') +
         (religion ? '&religion=' + religion : '') +
         (isEditing ? '&edit=true' : '');
-    }
-    else if(isEditing) {
+    } else if(isEditing) {
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person_id=' + personId +
         (surveyType ? '&survey=' + surveyType : '');
+    } else if(details['age'] < 3) {
+      e.preventDefault();
+      window.location.href = '../individual-details-passport-country/?person_id=' + personId
     }
   }));
 
