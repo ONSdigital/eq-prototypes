@@ -103,6 +103,11 @@ noONSLogoLink: true
       $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
     }
     $('#survey-type').val(surveyType);
+    
+    if(details['age'] < 3) {
+      e.preventDefault();
+      window.location.href = '../individual-details-passport-country/?person_id=' + personId
+    }
   }
 
   function updateQuestion() {

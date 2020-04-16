@@ -123,6 +123,10 @@ noONSLogoLink: true
         } else if(val === 'Yes') {
             e.preventDefault();
             window.location.href = '../individual-details-health-conditions-abilities/?person_id=' + personId;
+        } else if(val === 'No' && details['age'] < 5) {
+            e.preventDefault();
+            storageAPI.clearPersonalBookmark(personId);
+            window.location.href = '../hub';
         }
     }));
 

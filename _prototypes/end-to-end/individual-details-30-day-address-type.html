@@ -119,6 +119,8 @@ noONSLogoLink: true
 
     if(isEditing) {
       window.location.href = '../individual-details-summary/?person_id=' + personId;
+    } else if (details['age'] < 4) {
+        window.location.href = '../individual-details-country/?person_id=' + personId;
     } else {
       window.location.href = '../individual-details-school/?person_id=' + personId;
     }

@@ -120,6 +120,7 @@ noONSLogoLink: true
     }
     else if(val === 'Yes'){
       window.location.href = '../individual-details-sex/?person_id=' + personId + '&age=' + age;
+      storageAPI.addUpdateAge(personId, age);
     } 
     else {
       val = '';

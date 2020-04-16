@@ -36,7 +36,7 @@ noONSLogoLink: true
                                         What is your sex?
                                     </h1>
                                 </div>
-                                <div class="panel panel--simple panel--info u-mb-m">
+                                <div class="panel panel--simple panel--info u-mb-m u-vh">
                                   <div class="panel__body">
                                       A question about gender identity will follow later on in the questionnaire
                                   </div>
@@ -103,7 +103,6 @@ noONSLogoLink: true
     question = $('#question-title').html(),
     age = urlParams.get('age');
 
-    console.log(age);
     if(isVisitor) {
     $('.panel').addClass('u-d-no');
   }
@@ -129,7 +128,7 @@ noONSLogoLink: true
         personId + (surveyType ? '&survey=' + surveyType : '');
     }
 
-    if(age < 16) {
+    if(age < 15) {
       e.preventDefault();
       window.location.href = '../individual-details-30-day-address/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
@@ -147,6 +146,9 @@ noONSLogoLink: true
     if(storageAPI.getAnsweringIndividualByProxy() || isVisitor) {
       $('.js-heading').html('What is ' + '<em class="highlight">' + person.firstLastName +
         window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' + ' sex?');
+    }
+    if (details['age'] > 15) {
+        $('.panel--simple').removeClass('u-vh');
     }
   }
 

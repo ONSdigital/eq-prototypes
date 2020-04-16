@@ -133,7 +133,11 @@ noONSLogoLink: true
     
     var val = $('[name="30-day-address"]:checked').val();
     if(val === 'No' || val == null) {
-      window.location.href = '../individual-details-school/?person_id=' + personId;
+      if (details['age'] < 4) {
+        window.location.href = '../individual-details-country/?person_id=' + personId;
+      } else {
+        window.location.href = '../individual-details-school/?person_id=' + personId;
+      }
     } else if (val === 'Yes, in the UK'){
       window.location.href = '../individual-details-30-day-address-in-uk/?person_id=' + personId;
     } else if (val === 'Yes, outside the UK'){

@@ -139,6 +139,10 @@ noONSLogoLink: true
     if(isEditing) {
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person_id=' + personId;
+    } else if(details['age'] < 5) {
+      e.preventDefault();
+      storageAPI.clearPersonalBookmark(personId);
+      window.location.href = '../hub';
     }
   }));
 
