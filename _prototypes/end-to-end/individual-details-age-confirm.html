@@ -143,8 +143,22 @@ noONSLogoLink: true
 
   function updateQuestion() {
     var dob = details.dob,
+      unit = 'years',
       dobObj = createDataObj(dob.year, dob.month, dob.day);
     age = moment().diff(dobObj, 'years');
+    if (age === 0) {
+      age = moment().diff(dobObj, 'months');
+      unit = 'months';
+      if (age === 1) {
+        unit = 'month';
+      } else if (age === 0) {
+        age = moment().diff(dobObj, 'days');
+        unit = 'days'
+        if (age === 1) {
+          unit = 'day';
+        }
+      }
+    }
 
     if(!dob) {
       console.log('Unable to find date of birth for details: ', details);
@@ -152,16 +166,16 @@ noONSLogoLink: true
 
     if(storageAPI.getAnsweringIndividualByProxy()) {
       $('.js-heading').html(
-        '<em class="highlight">' + person.firstLastName + '</em>' + ' is ' + age + ' years old. Is this correct?'
+        '<em class="highlight">' + person.firstLastName + '</em>' + ' is ' + age + ' ' + unit + ' old. Is this correct?'
       );
       $('#yes-label').html(
-        'Yes, ' + person.firstLastName + ' is ' + age + ' years old');
+        'Yes, ' + person.firstLastName + ' is ' + age + ' ' + unit + ' old');
 
       $('#no-label').html('No, I need to correct their date of birth');
     }
     else {
-      $('.js-heading').html('You are ' + age + ' years old. Is this correct?');
-      $('#yes-label').html('Yes, I am ' + age + ' years old');
+      $('.js-heading').html('You are ' + age + ' ' + unit + ' old. Is this correct?');
+      $('#yes-label').html('Yes, I am ' + age + ' ' + unit + ' old');
     }
   }
 
