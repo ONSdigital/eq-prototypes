@@ -139,6 +139,7 @@ import {
   addUpdateEmploymentTravel,
   addUpdateEmploymentMainlyWork,
   addUpdateEmploymentWorkUK,
+  addUpdateEmploymentOutsideUK,
   addUpdateEmploymentWorkplaceAddress,
   addUpdateEmploymentAvailableTwoWeeks,
 
@@ -734,6 +735,7 @@ window.ONS.storage = {
   addUpdateEmploymentTravel,
   addUpdateEmploymentMainlyWork,
   addUpdateEmploymentWorkUK,
+  addUpdateEmploymentOutsideUK,
   addUpdateEmploymentWorkplaceAddress,
   addUpdateEmploymentAvailableTwoWeeks,
 
