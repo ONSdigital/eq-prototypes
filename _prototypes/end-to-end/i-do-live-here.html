@@ -182,6 +182,7 @@ noONSLogoLink: true
      */
     if (!otherbox.checked) {
       document.trav.action = "../who-else-to-add";
+      storageAPI.storePageData('/end-to-end/who-else-to-add/', window.location.pathname);
       } else {
         document.trav.action = "../people-count-confirmation";
       }
@@ -215,10 +216,4 @@ noONSLogoLink: true
 		$('.full-address-text').html((sessionStorage.getItem('address-line-1') || '').replace(/,/g, ''));
       }
 	});
-
-    function updateAllPreviousLinks() {
-      $('.js-previous-link').attr('href', document.referrer);
-    }
-
-    $(updateAllPreviousLinks);
 </script>

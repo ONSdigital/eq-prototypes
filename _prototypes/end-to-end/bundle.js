@@ -17,6 +17,7 @@ import './assets/modules/typeahead/typeahead';
 import './assets/modules/address-input/address-input';
 import './assets/modules/uac/uac';
 import './assets/modules/character-check';
+import './assets/previous-link';
 
 import {
   RELATIONSHIPS_STORAGE_KEY,
@@ -616,8 +617,17 @@ function validateInputs(testFails) {
 
 }
 
+function storePageData(url, previousUrl) {
+  let pageDataContents = JSON.parse(sessionStorage.getItem('pageData')) || {};
+  sessionStorage.setItem('pageData', JSON.stringify({
+      ...(pageDataContents || {}),
+      [url]: previousUrl
+  }));
+}
+
 window.ONS = window.ONS || {};
 window.ONS.storage = {
+  storePageData,
   getAddress,
   addHouseholdMember,
   updateHouseholdMember,
@@ -802,7 +812,7 @@ window.ONS.utils = {
   precedingOrdinalWord,
   getSignificant,
   cleanHTMLPlaceholderStringReplacment,
-  validateInputs,
+  validateInputs
 };
 
 $(populateHouseholdList);

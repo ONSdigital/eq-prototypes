@@ -140,12 +140,12 @@ noONSLogoLink: true
   var urlParams = new URLSearchParams(window.location.search),
     isEditing = urlParams.get('edit') === 'true',
     redirect = urlParams.get('redirect'),
+    previous = urlParams.get('previous'),
     livesHere = sessionStorage.getItem('lives-here') === 'yes',
     storageAPI = window.ONS.storage,
     userAsMember = storageAPI.getUserAsHouseholdMember(),
     userPerson = userAsMember && userAsMember['@person'],
     hasErrors = false;
-      
 
   function removeMember_handler(member, e) {
     e.preventDefault();
@@ -217,11 +217,19 @@ noONSLogoLink: true
 
       if(redirect) {
         window.location.href = redirect;
+        storageAPI.storePageData(redirect, window.location.pathname);
+
       }
       else {
-        window.location.href = isEditing ? '../summary/' :
-          '../i-do-live-here/';
+        if(isEditing) {
+          window.location.href = '../summary/';
+          storageAPI.storePageData('/end-to-end/summary/', window.location.pathname);
+        } else {
+          window.location.href = '../i-do-live-here/';
+          storageAPI.storePageData('/end-to-end/i-do-live-here/', window.location.pathname);
+        }
       }
+
     }
   });
 
@@ -246,9 +254,4 @@ noONSLogoLink: true
 
   $(updateQuestion);
 
-  function updateAllPreviousLinks() {
-    $('.js-previous-link').attr('href', '../do-you-live-here');
-  }
-
-  $(updateAllPreviousLinks);
 </script>
