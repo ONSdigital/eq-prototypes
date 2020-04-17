@@ -262,6 +262,10 @@ p.field {
     margin-bottom: 0;
 }
 
+p.field + p.field {
+    margin-top: 1rem;
+}
+
 .field__legend {
     font-weight: normal!important;
   }
@@ -525,8 +529,9 @@ p.field {
 }
 
 @media only screen and (min-width: 500px) {
-.list--inline\@s .list__item {
-    margin: .25rem 1rem .25rem .5rem;
+    .list--inline\@s .list__item {
+        margin: .25rem 1rem .25rem .5rem;
+    }
 }
 
 /**
@@ -534,7 +539,7 @@ p.field {
  */
 hr {
     box-sizing: content-box;
-    height: 0;
+    height: 1px;
     overflow: visible;
     border: 0;
     border-bottom: 1px solid #888;
