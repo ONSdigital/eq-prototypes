@@ -118,12 +118,17 @@ noONSLogoLink: true
     if(isEditing) {
       window.location.href = '../individual-details-summary/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+
     }
 
     if ($('[name="arrive-census"]:checked').val() === 'Yes') {
         window.location.href = '../individual-details-country-other-stay/?person_id=' + personId;
+        storageAPI.storePageData('/end-to-end/individual-country-other-stay/', window.location.pathname);
     } else if ($('[name="arrive-census"]:checked').val() === 'No') {
         window.location.href = '../individual-details-year-ago-address/?person_id=' + personId;
+        storageAPI.storePageData('/end-to-end/individual-details-year-ago-address/', window.location.pathname);
+
     }
     
     
@@ -139,11 +144,6 @@ noONSLogoLink: true
     }
   }
 
- function updateAllPreviousLinks() {
-      $('.js-previous-link').attr('href', '../individual-details-country-other-arrive/?person_id=' + personId);
-  }
-
-  $(updateAllPreviousLinks);
   $(updateQuestion);
 
   /**

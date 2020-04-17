@@ -156,6 +156,7 @@ noONSLogoLink: true
     );
     storageAPI.clearPersonalBookmark(personId);
     window.location.href = '../hub/';
+    storageAPI.storePageData('/end-to-end/hub/', window.location.pathname);
   }));
 
   function updateRouting() {

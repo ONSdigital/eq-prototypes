@@ -96,8 +96,10 @@ noONSLogoLink: true
 
     if(isEditing) {
       window.location.href = '../individual-details-summary/?person_id=' + personId;
+      storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
     } else {
       window.location.href = '../hub/?person_id=' + personId;
+      storageAPI.storePageData('/end-to-end/hub/', window.location.pathname);
     }
 
     storageAPI.clearPersonalBookmark(personId);

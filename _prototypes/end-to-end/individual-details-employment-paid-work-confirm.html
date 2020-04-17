@@ -117,15 +117,18 @@ noONSLogoLink: true
     let url = '../individual-details-employment-paid-work-confirm/?person_id=' + personId + '&edit=true';
     question = question.trim();
     storageAPI.addUpdateEmploymentPaidWorkConfirm(personId, val, question, url);
+    storageAPI.storePageData('/end-to-end/individual-details-last-main-job/', window.location.pathname);
 
     if(isEditing) {
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person_id=' + personId +
         (surveyType ? '&survey=' + surveyType : '');
+      storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
     } else if (val === 'No') {
       e.preventDefault();
       storageAPI.clearPersonalBookmark(personId);
       window.location.href = '../hub/?person_id=' + personId;
+      storageAPI.storePageData('/end-to-end/hub/', window.location.pathname);
     }
 
   }));

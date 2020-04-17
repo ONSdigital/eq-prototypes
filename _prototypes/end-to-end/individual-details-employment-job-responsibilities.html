@@ -107,11 +107,15 @@ noONSLogoLink: true
     if(isEditing) {
         window.location.href = '../individual-details-summary/?person_id=' + personId +
           (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+
     } else if(details['employment'].sevenDaysAgo === 'No') {
         storageAPI.clearPersonalBookmark(personId);
         window.location.href = '../hub/'
+        storageAPI.storePageData('/end-to-end/hub/', window.location.pathname);
     } else {
         window.location.href = '../individual-details-employment-job-hours-worked?person_id=' + personId;
+        storageAPI.storePageData('/end-to-end/individual-details-job-hours-worked/', window.location.pathname);
     }
 
   }));

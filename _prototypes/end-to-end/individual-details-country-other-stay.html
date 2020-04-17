@@ -111,12 +111,16 @@ noONSLogoLink: true
     if(isEditing) {
       window.location.href = '../individual-details-summary/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
     }
     
     if ($('[name="stay-uk"]:checked').val() === 'Under 12 months') {
         window.location.href = '../individual-details-national-identity/?person_id=' + personId;
+        storageAPI.storePageData('/end-to-end/individual-details-national-identity/', window.location.pathname);
+
     } else if ($('[name="stay-uk"]:checked').val() === 'Over 12 months')  {
         window.location.href = '../individual-details-year-ago-address/?person_id=' + personId;
+        storageAPI.storePageData('/end-to-end/individual-details-year-ago-addres/', window.location.pathname);
     }
     
   });
@@ -128,11 +132,6 @@ noONSLogoLink: true
     }
   }
 
- function updateAllPreviousLinks() {
-      $('.js-previous-link').attr('href', '../individual-details-country-other-arrive-census/?person_id=' + personId);
-  }
-
-  $(updateAllPreviousLinks);
   $(updateQuestion);
 
   /**

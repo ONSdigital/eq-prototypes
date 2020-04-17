@@ -94,7 +94,9 @@ noONSLogoLink: true
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
     } else {
+        storageAPI.storePageData('/end-to-end/individual-details-country-other-arrive/', window.location.pathname);
 
     }
   }));

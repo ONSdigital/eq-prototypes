@@ -154,6 +154,7 @@ noONSLogoLink: true
       url
     );
     storageAPI.clearPersonalBookmark(personId);
+    storageAPI.storePageData('/end-to-end/hub/', window.location.pathname);
     window.location.href = '../hub';
   }));
 

@@ -172,14 +172,17 @@ noONSLogoLink: true
     question = question.trim();
 
     storageAPI.addUpdateLastSevenDays(personId, val, question, url);
+    window.location.href = '../individual-details-employment-main-job/?person_id=' + personId;
 
     if(isEditing) {
       e.preventDefault();
         window.location.href = '../individual-details-summary/?person_id=' + personId +
           (surveyType ? '&survey=' + surveyType : '');
+    storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
     } else if (val === 'No'){
         e.preventDefault();
         window.location.href = '../individual-details-employment-seven-days-ago-description/?person_id=' + personId;
+        storageAPI.storePageData('/end-to-end/individual-details-employment-seven-days-ago-description/', window.location.pathname);
     }
 
   }));

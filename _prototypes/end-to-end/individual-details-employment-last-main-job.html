@@ -53,6 +53,7 @@ noONSLogoLink: true
         storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
             window.location.href = '../individual-details-employment-status/?person_id=' +
                 personId + (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end/individual-details-employment-status/', window.location.pathname);
     }));
 
     $('.js-link-ir').click(function(e) {
@@ -76,11 +77,6 @@ noONSLogoLink: true
     }
   }
 
- function updateAllPreviousLinks() {
-      $('.js-previous-link').attr('href', '../individual-details-gender-identity/?person_id=' + personId);
-  }
-
-  $(updateAllPreviousLinks);
   $(updatePara);
   $(showIrDetails);
 

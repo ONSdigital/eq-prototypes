@@ -128,6 +128,8 @@ noONSLogoLink: true
         return false;
     } else {
       window.location.href = '../individual-details-age-confirm/?person_id=' + personId;
+      storageAPI.storePageData('/end-to-end/individual-details-age-confirm/', window.location.pathname);
+
       let url = '../individual-details-dob/?person_id=' + personId + '&edit=true';
       question = question.trim();
       storageAPI.addUpdatePersonalDetailsDOB(personId,
@@ -142,12 +144,14 @@ noONSLogoLink: true
         e.preventDefault();
         window.location.href = '../individual-details-summary/?person_id=' +
           personId + (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
       }
 
       if(isVisitor){
         e.preventDefault();
         window.location.href = '../individual-details-sex/?person_id=' +
           personId + (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end/individual-details-sex/', window.location.pathname);
       }
     }
   }));
@@ -177,13 +181,7 @@ noONSLogoLink: true
       $('#personal-detail-dob-day').attr('data-error-msg', 'Enter their date of birth');
     }
   }
-
-  function updateAllPreviousLinks() {
-      $('.js-previous-link').attr('href', '../individual-decision/?person_id=' + personId);
-  }
-
-  $(updateAllPreviousLinks);
-
+  
   $(updateAnswer);
   $(updateQuestion);
   $(updateRouting);
