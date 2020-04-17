@@ -10,7 +10,7 @@ noONSLogoLink: true
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous-link" href="../individual-details-30-day-address-in-uk/">Previous</a>
+        <a class="js-previous-link" href="">Previous</a>
     </div>
 </div>
 
@@ -118,11 +118,15 @@ noONSLogoLink: true
     storageAPI.addUpdate30DayAddressType(personId, addressTypes, question, url);
 
     if(isEditing) {
-      window.location.href = '../individual-details-summary/?person_id=' + personId;
+        window.location.href = '../individual-details-summary/?person_id=' + personId;
+        storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+
     } else if (details['age'] < 4) {
         window.location.href = '../individual-details-country/?person_id=' + personId;
+        storageAPI.storePageData('/end-to-end/individual-details-country/', window.location.pathname);
     } else {
       window.location.href = '../individual-details-school/?person_id=' + personId;
+      storageAPI.storePageData('/end-to-end/individual-details-school/', window.location.pathname);
     }
   }));
 
@@ -142,11 +146,6 @@ noONSLogoLink: true
     }
   }
 
-  function updateAllPreviousLinks() {
-      $('.js-previous-link').attr('href', '../individual-details-address-in-uk/?person_id=' + personId);
-  }
-
-  $(updateAllPreviousLinks);  
   $(updateQuestion);
   $(updateAnswer);
 
