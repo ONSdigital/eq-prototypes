@@ -115,23 +115,30 @@ noONSLogoLink: true
       question,
       url
     );
+    storageAPI.storePageData('/end-to-end/individual-details-relationship/', window.location.pathname);
 
     if(isEditing) {
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+
     }
 
     if(isVisitor) {
       e.preventDefault();
       window.location.href = '../individual-details-address-in-uk/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end/individual-details-address-in-uk/', window.location.pathname);
+
     }
 
     if(age < 15) {
       e.preventDefault();
       window.location.href = '../individual-details-30-day-address/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end/individual-details-30-day-address/', window.location.pathname);
+
     }
   }));
 
@@ -156,11 +163,6 @@ noONSLogoLink: true
     $('#' + details.sex.val).attr('checked', true);
   }
 
-  function updateAllPreviousLinks() {
-      $('.js-previous-link').attr('href', '../individual-details-age-confirm/?person_id=' + personId);
-  }
-
-  $(updateAllPreviousLinks);  
   $(updateQuestion);
   $(updateRouting);
 

@@ -108,18 +108,25 @@ noONSLogoLink: true
     question = question.trim();
 
     storageAPI.addUpdateSchool(personId, $('[name="schoolchild"]:checked').val(), question, url);
+    storageAPI.storePageData('/end-to-end/individual-details-country/', window.location.pathname);
 
     if(isEditing) {
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+
     }
     
     var val = $('[name="schoolchild"]:checked').val();
     if(val === 'No' || val == null) {
       window.location.href = '../individual-details-country/?person_id=' + personId;
+      storageAPI.storePageData('/end-to-end/individual-details-country/', window.location.pathname);
+
     } else if (val === 'Yes'){
       window.location.href = '../individual-details-student-address/?person_id=' + personId;
+      storageAPI.storePageData('/end-to-end/individual-details-student-address/', window.location.pathname);
+
     }
   });
 
@@ -134,11 +141,6 @@ noONSLogoLink: true
     }
   }
 
- function updateAllPreviousLinks() {
-      $('.js-previous-link').attr('href', '../individual-details-30-day-address/?person_id=' + personId);
-  }
-
-  $(updateAllPreviousLinks);
   $(updateQuestion);
 
   /**

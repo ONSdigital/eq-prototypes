@@ -209,16 +209,19 @@ noONSLogoLink: true
       question,
       url
     );
+    storageAPI.storePageData('/end-to-end/individual-details-relationship-current-status/', window.location.pathname);
 
     if(isEditing) {
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
     }
 
     if(val === 'Never' || val === null) {
       e.preventDefault();
       window.location.href = '../individual-details-30-day-address/?person_id=' + personId;
+      storageAPI.storePageData('/end-to-end/individual-details-30-day-address/', window.location.pathname);
     }
   }));
 
@@ -241,11 +244,6 @@ noONSLogoLink: true
     $('#' + details.maritalStatus.val).attr('checked', true);
   }
 
- function updateAllPreviousLinks() {
-      $('.js-previous-link').attr('href', '../individual-details-sex/?person_id=' + personId);
-  }
-
-  $(updateAllPreviousLinks);
   $(updateQuestion);
   $(updateRouting);
 

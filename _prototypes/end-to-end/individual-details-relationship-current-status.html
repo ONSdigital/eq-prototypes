@@ -110,11 +110,13 @@ noONSLogoLink: true
       question,
       url
     );
+    storageAPI.storePageData('/end-to-end/individual-details-30-day-address/', window.location.pathname);
 
     if(isEditing) {
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
     }
   }));
 
@@ -154,11 +156,6 @@ noONSLogoLink: true
     }
   }
 
-  function updateAllPreviousLinks() {
-    $('.js-previous-link').attr('href', '../individual-details-relationship/?person_id=' + personId);
-  }
-
-  $(updateAllPreviousLinks);
   $(updateQuestion);
   $(updateRouting);
 

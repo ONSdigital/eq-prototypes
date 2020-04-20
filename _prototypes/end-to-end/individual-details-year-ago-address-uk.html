@@ -144,9 +144,13 @@ noONSLogoLink: true
 
     if(isEditing) {
       window.location.href = '../individual-details-summary/?person_id=' + personId;
+      storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+
     } else {
         window.location.href = '../individual-details-national-identity/?person_id=' +
         personId;
+        storageAPI.storePageData('/end-to-end/individual-details-national-identity/', window.location.pathname);
+
     }
   });
 
