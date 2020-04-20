@@ -8,7 +8,12 @@ noONSLogoLink: true
 ---
 
 <link rel="stylesheet" href="../style.css"/>
-<div class="page__subheader"></div>
+
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="#">Previous</a>
+    </div>
+</div>
 
 <div class="page__container container">
     <div class="grid grid--reverse">
@@ -113,5 +118,7 @@ noONSLogoLink: true
     }
 
     $('#accommodation-questions-answers').append(createList());
+    
+    storageAPI.storePageData('/end-to-end/hub/', window.location.pathname);
 
 </script>
