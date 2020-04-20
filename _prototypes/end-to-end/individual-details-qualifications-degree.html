@@ -128,11 +128,14 @@ noONSLogoLink: true
       question,
       url
     );
+    storageAPI.storePageData('/end-to-end/individual-details-qualifications-nvq-equivalent/', window.location.pathname);
 
     if(isEditing) {
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+
     }
   }));
 

@@ -118,16 +118,21 @@ noONSLogoLink: true
     let url = '../individual-details-language/?person_id=' + personId + '&edit=true';
     question = question.trim();
     storageAPI.addUpdateLanguage(personId, val, question, url);
-    
+    storageAPI.storePageData('/end-to-end/individual-details-passport-country/', window.location.pathname);
+
     if(val === 'Other') {
       e.preventDefault();
       window.location.href =
         '../individual-details-language-other/?person_id=' + personId +
         (isEditing ? '&edit=true' : '');
+        storageAPI.storePageData('/end-to-end/individual-details-language-other/', window.location.pathname);
+
     }
     else if(isEditing) {
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person_id=' + personId;
+      storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+
     }
   }));
 
@@ -149,14 +154,8 @@ noONSLogoLink: true
         $('.js-answer').html('You can enter their main language on the next question');
         }  
     }
-        
 
- function updateAllPreviousLinks() {
-      $('.js-previous-link').attr('href', '..//individual-details-ethnic-group/?person_id=' + personId);
-  }
-
-  $(updateAllPreviousLinks);
-  $(updateHelp);
+    $(updateHelp);
   $(updateQuestion);
   $(updateAnswers);
 

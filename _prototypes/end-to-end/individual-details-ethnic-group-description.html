@@ -98,6 +98,7 @@ noONSLogoLink: true
     question = question.trim();
 
     storageAPI.addUpdateEthnicGroupDescription(personId, val, question, url);
+    storageAPI.storePageData('/end-to-end/individual-details-religion-description/', window.location.pathname);
 
     if(val === 'Other') {
       e.preventDefault();
@@ -106,11 +107,14 @@ noONSLogoLink: true
         (surveyType ? '&survey=' + surveyType : '') +
         (ethnicGroup ? '&ethnic-group=' + ethnicGroup : '') +
         (isEditing ? '&edit=true' : '');
+        storageAPI.storePageData('/end-to-end/individual-details-ethnic-group-other/', window.location.pathname);
+
     }
     else if(isEditing) {
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person_id=' + personId +
         (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
     }
   }));
 
@@ -168,11 +172,6 @@ noONSLogoLink: true
       )
     );
   }
- function updateAllPreviousLinks() {
-      $('.js-previous-link').attr('href', '../individual-details-ethnic-group-description/?person_id=' + personId + (ethnicGroup ? '&ethnic-group=' + ethnicGroup : ''));
-  }
-
-  $(updateAllPreviousLinks);
   $(updateQuestion);
   $(updateRouting);
   $(updateAnswer);

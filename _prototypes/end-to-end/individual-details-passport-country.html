@@ -148,6 +148,7 @@ noONSLogoLink: true
     let url = '../individual-details-passport-country/?person_id=' + personId + '&edit=true';
     question = question.trim();
     storageAPI.addUpdatePassportCountry(personId, passportCountries, question, url);
+    storageAPI.storePageData('/end-to-end/individual-details-health/', window.location.pathname);
 
     if($('#other:checked').length) {
       e.preventDefault();
@@ -155,11 +156,15 @@ noONSLogoLink: true
         '../individual-details-passport-country-other/?person_id=' + personId +
         (surveyType ? '&survey=' + surveyType : '') +
         (isEditing ? '&edit=true' : '');
+        storageAPI.storePageData('/end-to-end/individual-details-passport-country-other/', window.location.pathname);
+
     }
     else if(isEditing) { console.log('editing');
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+
     }
   }));
 

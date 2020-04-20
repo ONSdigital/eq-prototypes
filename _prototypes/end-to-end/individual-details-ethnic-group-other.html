@@ -88,11 +88,14 @@ noONSLogoLink: true
     var otherText = $('#ethnic-group-input').val();
 
     storageAPI.addUpdateEthnicGroupOther(personId, otherText);
+    storageAPI.storePageData('/end-to-end/individual-details-religion-description/', window.location.pathname);
 
     if(isEditing) {
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+
     }
   }));
 
@@ -121,13 +124,7 @@ noONSLogoLink: true
   if (details && details['ethnicGroup'] &&
     details['ethnicGroup'].otherText) {
     $('#ethnic-group-input').val(details['ethnicGroup'].otherText);
-  }
-
- function updateAllPreviousLinks() {
-      $('.js-previous-link').attr('href', '../individual-details-ethnic-group-description/?person_id=' + personId);
-  }
-
-  $(updateAllPreviousLinks);    
+  } 
 
   $(updateRouting);
   $(updateAnswer);

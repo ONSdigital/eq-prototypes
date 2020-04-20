@@ -128,11 +128,13 @@ noONSLogoLink: true
     question = question.trim();
     storageAPI.addUpdateNationalIdentity(personId, nationalIdentities,
       otherText, question, url);
+      storageAPI.storePageData('/end-to-end/individual-details-ethnic-group/', window.location.pathname);
 
     if(isEditing) {
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
     }
 
     if($('#other:checked').length) {
@@ -140,6 +142,7 @@ noONSLogoLink: true
       window.location.href = '../individual-details-national-identity-other/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '') +
         (isEditing ? '&edit=true' : '');
+        storageAPI.storePageData('/end-to-end/individual-details-national-identity-other/', window.location.pathname);
     }
   }));
 
@@ -183,11 +186,6 @@ noONSLogoLink: true
     }
   }());
 
-  function updateAllPreviousLinks() {
-      $('.js-previous-link').attr('href', '../individual-details-country/?person_id=' + personId);
-  }
-
-  $(updateAllPreviousLinks);
   $(updateQuestion);
   $(updateHelp);
   $(updateAnswers);
