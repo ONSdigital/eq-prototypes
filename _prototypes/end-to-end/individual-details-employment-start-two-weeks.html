@@ -110,15 +110,18 @@ noONSLogoLink: true
     question = question.trim();
 
     storageAPI.addUpdateEmploymentAvailableTwoWeeks(personId, val, question, url);
+    storageAPI.storePageData('/end-to-end/individual-details-employment-seven-days-accepted-job/', window.location.pathname);
 
     if(isEditing) {
       e.preventDefault();
         window.location.href = '../individual-details-summary/?person_id=' + personId +
           (surveyType ? '&survey=' + surveyType : '');
+          storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
     } else if (val === 'Yes') {
       e.preventDefault();
         window.location.href = '../individual-details-employment-paid-work-confirm/?person_id=' + personId;
-    }
+        storageAPI.storePageData('/end-to-end/individual-details-employment-paid-work-confirm/', window.location.pathname);
+      }
 
   }));
 
