@@ -126,20 +126,24 @@ noONSLogoLink: true
         e.preventDefault();
         window.location.href = '../individual-details-country-other-arrive-census/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end/individual-details-country-other-arrive-census/', window.location.pathname);
     } else if (dateEntered > censusDateMinus1Year){
         e.preventDefault();
         window.location.href = '../individual-details-country-other-stay/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end/individual-details-country-other-stay/', window.location.pathname);
     } else {
         e.preventDefault();
         window.location.href = '../individual-details-year-ago-address/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end/individual-details-year-ago-address/', window.location.pathname);
     }
 
     if(isVisitor){
       e.preventDefault();
       window.location.href = '../individual-details-country-other-arrive/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end/individual-details-country-other-arrive/', window.location.pathname);
     }
   }));
 
@@ -164,12 +168,6 @@ noONSLogoLink: true
       $('.js-heading').html('When did ' + '<em class="highlight">' + person.firstLastName + '</em>' + ' recently arrive to live in the United Kingdom?');
     }
   }
-
-  function updateAllPreviousLinks() {
-      $('.js-previous-link').attr('href', '../individual-decision/?person_id=' + personId);
-  }
-
-  $(updateAllPreviousLinks);
 
   $(updateAnswer);
   $(updateQuestion);

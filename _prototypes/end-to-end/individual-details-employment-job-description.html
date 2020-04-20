@@ -94,9 +94,13 @@ noONSLogoLink: true
 
     if(isEditing || switchedFromUnemployed) {
       url += '../individual-details-summary/?person_id=';
+      storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+
     }
     else {
       url += '../individual-details-employment-activity/?person_id=';
+      storageAPI.storePageData('/end-to-end/individual-details-employment-activity/', window.location.pathname);
+
     }
     url += personId + (surveyType ? ('&survey=' + surveyType) : '');
     window.location.href = url;

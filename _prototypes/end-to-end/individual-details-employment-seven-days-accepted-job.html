@@ -119,11 +119,13 @@ noONSLogoLink: true
     let url = '../individual-details-employment-seven-days-accepted-job/?person_id=' + personId + '&edit=true';
     question = question.trim();
     storageAPI.addUpdateEmploymentAcceptedJob(personId, val, question, url);
+    storageAPI.storePageData('/end-to-end/individual-details-paid-work-confirm/', window.location.pathname);
 
     if(isEditing) {
       e.preventDefault();
         window.location.href = '../individual-details-employment-seven-days-accepted-job/?person_id=' + personId +
           (surveyType ? '&survey=' + surveyType : '');
+      storageAPI.storePageData('/end-to-end/individual-details-employment-seven-days-accepted-job/', window.location.pathname);
     }
 
   }));

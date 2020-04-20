@@ -110,11 +110,13 @@ noONSLogoLink: true
     let url = '../individual-details-employment-business-name/?person_id=' + personId + '&edit=true';
     question = question.trim();
     storageAPI.addUpdateEmploymentName(personId, val, question, url);
+    storageAPI.storePageData('/end-to-end/individual-details-employment-job-title/', window.location.pathname);
 
     if(isEditing) {
       e.preventDefault();
         window.location.href = '../individual-details-summary/?person_id=' + personId +
           (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
     }
   }));
 

@@ -154,15 +154,18 @@ noONSLogoLink: true
     if(isEditing) {
       window.location.href = '../individual-details-summary/?person_id=' + personId +
         (surveyType ? '&survey=' + surveyType : '');
+    storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
     }
 
     if((val === 'At a workplace') || (val === 'Report to a depot')) {
         window.location.href = '../individual-details-employment-job-work-in-uk/?person_id=' + personId +
         (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end/individual-details-employment-job-work-in-uk/', window.location.pathname);
     }
     else {
         storageAPI.clearPersonalBookmark(personId);
-        window.location.href = '../hub/'
+        window.location.href = '../hub/';
+        storageAPI.storePageData('/end-to-end/hub/', window.location.pathname);
     }
   }));
 

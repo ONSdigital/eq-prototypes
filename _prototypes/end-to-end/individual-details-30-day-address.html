@@ -127,21 +127,27 @@ noONSLogoLink: true
     e.preventDefault();
 
     if(isEditing) {
-      window.location.href = '../individual-details-summary/?person_id=' +
-        personId + (surveyType ? '&survey=' + surveyType : '');
+        window.location.href = '../individual-details-summary/?person_id=' +
+            personId + (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
     }
     
     var val = $('[name="30-day-address"]:checked').val();
     if(val === 'No' || val == null) {
       if (details['age'] < 4) {
         window.location.href = '../individual-details-country/?person_id=' + personId;
+        storageAPI.storePageData('/end-to-end/individual-details-country/', window.location.pathname);
+
       } else {
         window.location.href = '../individual-details-school/?person_id=' + personId;
+        storageAPI.storePageData('/end-to-end/individual-details-school/', window.location.pathname);
       }
     } else if (val === 'Yes, in the UK'){
-      window.location.href = '../individual-details-30-day-address-in-uk/?person_id=' + personId;
+        window.location.href = '../individual-details-30-day-address-in-uk/?person_id=' + personId;
+        storageAPI.storePageData('/end-to-end/individual-details-30-day-address-in-uk/', window.location.pathname);
     } else if (val === 'Yes, outside the UK'){
-      window.location.href = '../individual-details-30-day-address-country/?person_id=' + personId;
+        window.location.href = '../individual-details-30-day-address-country/?person_id=' + personId;
+        storageAPI.storePageData('/end-to-end/individual-details-30-day-address-country/', window.location.pathname);
     }
   });
 
@@ -151,12 +157,6 @@ noONSLogoLink: true
         ' stay at another address for more than 30 days a year?');
     }
   }
-
- function updateAllPreviousLinks() {
-      $('.js-previous-link').attr('href', '../individual-details-relationship/?person_id=' + personId);
-  }
-
-  $(updateAllPreviousLinks);
   $(updateQuestion);
 
   /**

@@ -115,18 +115,23 @@ noONSLogoLink: true
 
     if(isEditing) {
       window.location.href = '../individual-details-summary/' + '?person_id=' + personId + (surveyType ? '&survey=' + surveyType :'');
+      storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+
     }
     else if(isVisitor) {
       window.location.href = '../individual-details-dob/' + '?person_id=' + personId + (surveyType ? '&survey=' + surveyType :'');
+      storageAPI.storePageData('/end-to-end/individual-details-dob/', window.location.pathname);
     }
     else if(val === 'Yes'){
       window.location.href = '../individual-details-sex/?person_id=' + personId + '&age=' + age;
       storageAPI.addUpdateAge(personId, ageYear);
+      storageAPI.storePageData('/end-to-end/individual-details-sex/', window.location.pathname);
     } 
     else {
       val = '';
       storageAPI.addUpdateAgeConfirm(personId, val, question, url);
       window.location.href = '../individual-details-dob/' + '?person_id=' + personId + (surveyType ? '&survey=' + surveyType :'');
+      storageAPI.storePageData('/end-to-end/individual-details-dob/', window.location.pathname);
     }
 
   }));
@@ -184,12 +189,6 @@ noONSLogoLink: true
   if (details && details['ageConfirm']) {
     $('#' + details['ageConfirm'].val).attr('checked', true);
   }
-
-  function updateAllPreviousLinks() {
-      $('.js-previous-link').attr('href', '../individual-details-dob/?person_id=' + personId);
-  }
-
-  $(updateAllPreviousLinks);
 
   $(updateQuestion);
   $(updateRouting);

@@ -104,6 +104,7 @@ noONSLogoLink: true
     let url = '../individual-details-address-in-uk/?person_id=' + personId + '&edit=true';
     question = question.trim();
     storageAPI.addUpdateAddressWhere(personId, val, question, url);
+    storageAPI.storePageData('/end-to-end/individual-details-dob/', window.location.pathname);
 
     if(val === 'outside-uk'){
       storageAPI.addUpdateAddressOutsideUK(personId, $('#other-answer').val(), question, url);
@@ -113,6 +114,7 @@ noONSLogoLink: true
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
+      storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
     }
 
     if(isVisitor) {
@@ -120,20 +122,21 @@ noONSLogoLink: true
 
       var routeMap = {
         'same-as-visitor1': {
-          url: '../hub/?noop=fake'
+          url: '/end-to-end/hub/'
         },
         'in-uk': {
-          url: '../individual-details-address/?person_id=' + personId
+          url: '/end-to-end/individual-details-address/'
         },
         'outside-uk': {
-          url: '../hub/?noop=fake'
+          url: '/end-to-end/hub/'
         }
       };
 
-      window.location.href = routeMap[val].url +
-        (surveyType ? '&survey=' + surveyType : '');
+      window.location.href = routeMap[val].url + 
+        (personId ? '?person_id=' + personId : '');
     }
-  }));
+      storageAPI.storePageData(routseMap[val].url, window.location.pathname);
+  }));  
 
   function updateRouting() {
     if(surveyType) {
