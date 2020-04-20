@@ -10,7 +10,7 @@ noONSLogoLink: true
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous" href="../household-accom-shared-rooms">Previous</a>
+        <a class="js-previous-link" href="#">Previous</a>
     </div>
 </div>
 
@@ -75,8 +75,6 @@ noONSLogoLink: true
         window.sessionStorage.setItem('accommodation-bedrooms', JSON.stringify([question, val, currentPage]));
         e.preventDefault();
         window.location.href = '../household-accom-heating';
+        storageAPI.storePageData('/end-to-end/household-accom-heating/', window.location.pathname);
     });
-
-    $('.js-previous').attr('href', '../household-accom-shared-rooms');
-
 </script>

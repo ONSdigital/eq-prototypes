@@ -10,7 +10,7 @@ noONSLogoLink: true
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous" href="../hub">Previous</a>
+        <a class="js-previous-link" href="#">Previous</a>
     </div>
 </div>
 
@@ -51,8 +51,7 @@ noONSLogoLink: true
     $('.btn-submit').click(function(e) {
     e.preventDefault();
         window.location = '../household-accom-type/';
+        storageAPI.storePageData('/end-to-end/household-accom-type/', window.location.pathname);
     });
-
-    $('.js-previous').attr('href', '../hub');
 
 </script>

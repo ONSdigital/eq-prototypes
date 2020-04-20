@@ -10,7 +10,7 @@ noONSLogoLink: true
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous" href="../household-accom-intro">Previous</a>
+        <a class="js-previous-link" href="#">Previous</a>
     </div>
 </div>
 
@@ -92,14 +92,14 @@ noONSLogoLink: true
 <script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
+    var storageAPI = window.ONS.storage,
+        question = $('#question-title').html(),
+        currentPage = '../household-accom-type';
+
 
     if(sessionStorage.getItem('address-line-1')) {
         $('.full-address-text').html((sessionStorage.getItem('address-line-1') || '').replace(/,/g, ''));
     }
-
-    var storageAPI = window.ONS.storage,
-        question = $('#question-title').html(),
-        currentPage = '../household-accom-type';
 
     window.sessionStorage.setItem('accommodation-completed-status', currentPage);
 
@@ -112,15 +112,16 @@ noONSLogoLink: true
 
         if(val === 'Whole house or bungalow') {
             window.location.href = '../household-accom-house-type/';
+            storageAPI.storePageData('/end-to-end/household-accom-house-type/', window.location.pathname);
         }
         else if(val === 'Flat, maisonette or apartment') {
             window.location.href = '../household-accom-flat-type/';
+            storageAPI.storePageData('/end-to-end/household-accom-house-type/', window.location.pathname);
         }
         else if(val === 'Caravan or other mobile or temporary structure') {
             window.location.href = '../household-accom-shared-rooms/';
+            storageAPI.storePageData('/end-to-end/household-accom-house-type/', window.location.pathname);
         }
     });
-
-    $('.js-previous').attr('href', '../household-accom-intro');
 
 </script>
