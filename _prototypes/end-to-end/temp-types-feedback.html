@@ -117,9 +117,13 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
      */
     if (!yesbox.checked) {
       window.location.href = '../visitors/';
+      storageAPI.storePageData('/end-to-end/visitors', window.location.pathname);
+
     } else {
       window.location.href = '../temp-types-question?away-types=' +
         JSON.stringify(awayTypes);
+        storageAPI.storePageData('/end-to-end/temp-types-question', window.location.pathname);
+
     }
   });
 
@@ -130,9 +134,4 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     window.ONS.helpers.populateHouseholdList();
   });
 
-  function updateAllPreviousLinks() {
-    $('.js-previous-link').attr('href', document.referrer);
-  }
-
-  $(updateAllPreviousLinks);
 </script>

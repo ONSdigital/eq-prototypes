@@ -49,6 +49,8 @@ noONSLogoLink: true
   $('.btn-submit').click(function(e) {
     e.preventDefault(); // do not submit the form like usual
     window.location.href = nextPage;
+    storageAPI.storePageData('/end-to-end/' + nextPage, window.location.pathname);
+
   });
 
   $(function() {

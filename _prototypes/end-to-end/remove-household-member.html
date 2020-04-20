@@ -110,13 +110,16 @@ noONSLogoLink: true
         storageAPI.removePersonalDetailsFor(personId);
 
         window.location.href = redirect || '../summary/';
+        storageAPI.storePageData('/end-to-end/' + redirect, window.location.pathname);
+
       }
       else {
         window.location.href = redirect || '../summary/';
+        storageAPI.storePageData('/end-to-end/' + redirect, window.location.pathname);
+
       }
     });
     function updateAllPreviousLinks() {
-      $('.js-previous-link').attr('href', '../summary/');
       $('.js-link-ir').attr('href', '../cant-answer-for-others/?person_id=' + personId + '&previous=' + 'remove-household-member');
     }
 

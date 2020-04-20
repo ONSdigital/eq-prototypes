@@ -95,14 +95,13 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
     if($('[name=away-type]:checked').val() === "No") {
       document.trav.action = "../visitors";
+      storageAPI.storePageData('/end-to-end/visitors', window.location.pathname);
+
     } else {
       document.trav.action = "../who-else-to-add";
+      storageAPI.storePageData('/end-to-end/who-else-to-add', window.location.pathname);
+
     }
   });
 
-  function updateAllPreviousLinks() {
-    $('.js-previous-link').attr('href', document.referrer);
-  }
-
-  $(updateAllPreviousLinks);
 </script>

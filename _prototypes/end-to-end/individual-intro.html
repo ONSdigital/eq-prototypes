@@ -81,14 +81,14 @@ noONSLogoLink: true
             var url = '/individual-decision/';
         }
         window.location = '../' + url + '?person_id=' + personId;
-        storageAPI.storePageData(url, window.location.pathname);
+        storageAPI.storePageData('/end-to-end/' + url, window.location.pathname);
     });
 
     $('.js-link-ir').click(function(e) {
         e.preventDefault();
 
         window.location = '../cant-answer-for-others/?person_id=' + personId;
-        storageAPI.storePageData('/cant-answer-for-others/', window.location.pathname);
+        storageAPI.storePageData('/end-to-end/cant-answer-for-others/', window.location.pathname);
     });
 
   function updateName() {
