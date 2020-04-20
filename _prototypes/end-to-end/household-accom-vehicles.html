@@ -10,7 +10,7 @@ noONSLogoLink: true
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous" href="../household-accom-own-rent">Previous</a>
+        <a class="js-previous-link" href="#">Previous</a>
     </div>
 </div>
 
@@ -112,8 +112,10 @@ noONSLogoLink: true
                                                             <input
                                                                 type="text"
                                                                 id="other-textbox"
-                                                                class="input input--text input-type__input  input--w-auto"
+                                                                class="input input--text input-type__input  input--w-2"
                                                                 name="other-answer"
+                                                                max="20"
+                                                                maxlength="2"
                                                             />
                                                         </span>
                                                     </span>
@@ -171,8 +173,6 @@ noONSLogoLink: true
         e.preventDefault();
 
         window.location.href = '../hub';
+        storageAPI.storePageData('/end-to-end/hub/', window.location.pathname);
     });
-
-    $('.js-previous').attr('href', '../household-accom-own-rent');
-
 </script>

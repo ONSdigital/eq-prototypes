@@ -10,7 +10,7 @@ noONSLogoLink: true
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous" href="../household-accom-heating">Previous</a>
+        <a class="js-previous-link" href="#">Previous</a>
     </div>
 </div>
 
@@ -130,7 +130,7 @@ noONSLogoLink: true
     window.sessionStorage.setItem('accommodation-completed-status', currentPage);
 
     $('.qa-btn-submit').click(function (e) {
-        var val =$('input[type=radio][name=own-rent]:checked').attr('value');
+        var val = $('input[type=radio][name=own-rent]:checked').attr('value');
         question = question.trim();
         question = question.replace(/(<([^>]+)>)/ig,"");
         window.sessionStorage.setItem('accommodation-own-rent', JSON.stringify([question, val, currentPage]));
@@ -138,11 +138,11 @@ noONSLogoLink: true
 
         if((val === 'Part-owns and part-rents') || (val === 'Rents')) {
             window.location.href = '../household-accom-landlord';
+            storageAPI.storePageData('/end-to-end/household-accom-landlord/', window.location.pathname);
         }
         else {
             window.location.href = '../household-accom-vehicles';
+            storageAPI.storePageData('/end-to-end/household-accom-vehicles/', window.location.pathname);
         }
     });
-
-    $('.js-previous').attr('href', '../household-accom-heating');
 </script>
