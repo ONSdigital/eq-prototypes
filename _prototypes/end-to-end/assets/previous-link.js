@@ -8,7 +8,7 @@ domready(() => {
   const pathName = window.location.pathname;
   const pageData = JSON.parse(sessionStorage.getItem('pageData'));
 
-  if (pageData[pathName]) {
+  if (pageData) {
     previousURL = pageData[pathName];
   }
 
