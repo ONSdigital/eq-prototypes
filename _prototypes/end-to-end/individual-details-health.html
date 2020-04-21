@@ -141,10 +141,13 @@ noONSLogoLink: true
     question = question.trim();
     var val = $('[name="health"]:checked').val();
     storageAPI.addUpdateHealth(personId, val, question, url);
-    
+    storageAPI.storePageData('/end-to-end/individual-details-health-conditions/', window.location.pathname);
+
     if(isEditing) {
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person_id=' + personId;
+      storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+
     }
   }));
 
@@ -155,12 +158,6 @@ noONSLogoLink: true
             ' health in general?');
         }
     }
-
- function updateAllPreviousLinks() {
-      $('.js-previous-link').attr('href', '../individual-details-passport-country/?person_id=' + personId);
-  }
-
-  $(updateAllPreviousLinks);
 
   $(updateQuestion);
 

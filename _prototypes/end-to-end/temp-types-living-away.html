@@ -138,6 +138,8 @@ noONSLogoLink: true
     window.location = yesbox.checked
       ? '../who-else-to-add/?previous=temp-types-living-away&redirect=../temp-types-living-away'
       : '../visitors/';
+      storageAPI.storePageData('/end-to-end/who-else-to-add/?previous=temp-types-living-away&redirect=../temp-types-living-away', window.location.pathname);
+
   });
 
   function createIncludeItem(text) {

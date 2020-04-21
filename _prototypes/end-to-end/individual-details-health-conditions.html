@@ -116,17 +116,24 @@ noONSLogoLink: true
         let url = '../individual-details-health-conditions/?person_id=' + personId + '&edit=true';
         question = question.trim();
         storageAPI.addUpdateHealthConditions(personId, val, question, url);
+        storageAPI.storePageData('/end-to-end/individual-details-health-support/', window.location.pathname);
 
         if(isEditing) {
             e.preventDefault();
             window.location.href = '../individual-details-summary/?person_id=' + personId;
+            storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+
         } else if(val === 'Yes') {
             e.preventDefault();
             window.location.href = '../individual-details-health-conditions-abilities/?person_id=' + personId;
+            storageAPI.storePageData('/end-to-end/individual-details-health-conditions-abilities/', window.location.pathname);
+
         } else if(val === 'No' && details['age'] < 5) {
             e.preventDefault();
             storageAPI.clearPersonalBookmark(personId);
             window.location.href = '../hub';
+            storageAPI.storePageData('/end-to-end/hub/', window.location.pathname);
+
         }
     }));
 
@@ -144,11 +151,6 @@ noONSLogoLink: true
         }
     }
 
-    function updateAllPreviousLinks() {
-        $('.js-previous-link').attr('href', '../individual-details-passport-country/?person_id=' + personId);
-    }
-
-    $(updateAllPreviousLinks);
     $(updateQuestion);
     $(updateHelp);
 

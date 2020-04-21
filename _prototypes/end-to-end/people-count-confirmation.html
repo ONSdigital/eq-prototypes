@@ -140,6 +140,8 @@ noONSLogoLink: true
     window.location = yesbox.checked
       ? '../adding-another-person/'
       : '../visitors/';
+      storageAPI.storePageData('/end-to-end/adding-another-person/', window.location.pathname);
+
   });
 
   function createIncludeItem(text) {
@@ -203,11 +205,6 @@ noONSLogoLink: true
       );
     }
   }
-  function updateAllPreviousLinks() {
-    $('.js-previous-link').attr('href', document.referrer);
-  }
-
-  $(updateAllPreviousLinks);
 
   $(updateQuestionList);
   $(updateQuestion);

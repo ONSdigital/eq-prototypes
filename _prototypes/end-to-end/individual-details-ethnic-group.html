@@ -177,6 +177,7 @@ noONSLogoLink: true
     let url = '../individual-details-ethnic-group/?person_id=' + personId + '&edit=true';
     question = question.trim();
     storageAPI.addUpdateEthnicGroup(personId, val, question, url);
+    storageAPI.storePageData('/end-to-end/individual-details-ethnic-group-description/', window.location.pathname);
 
     /**
      * Will always need to elaborate further on this question
@@ -208,11 +209,6 @@ noONSLogoLink: true
   if (details && details['ethnicGroup']) {
     $('#' + details['ethnicGroup'].val).attr('checked', true);
   }
- function updateAllPreviousLinks() {
-      $('.js-previous-link').attr('href', '../individual-details-national-identity/?person_id=' + personId);
-  }
-
-  $(updateAllPreviousLinks);  
   $(updateQuestion);
   $(updateRouting);
 

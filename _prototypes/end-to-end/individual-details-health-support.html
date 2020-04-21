@@ -159,14 +159,19 @@ noONSLogoLink: true
     question = question.trim();
 
     storageAPI.addUpdateHealthSupport(personId, val, question, url);
-    
+    storageAPI.storePageData('/end-to-end/individual-details-orientation/', window.location.pathname);
+
     if(isEditing) {
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person_id=' + personId;
+      storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+
     } else if(details['age'] < 16) {
       e.preventDefault();
       storageAPI.clearPersonalBookmark(personId);
       window.location.href = '../hub';
+      storageAPI.storePageData('/end-to-end/hub/', window.location.pathname);
+
     }
   }));
 
@@ -183,13 +188,6 @@ noONSLogoLink: true
         }
     }
                                             
-
-
- function updateAllPreviousLinks() {
-      $('.js-previous-link').attr('href', '../individual-details-passport-country/?person_id=' + personId);
-  }
-
-  $(updateAllPreviousLinks);
   $(updateQuestion);
   $(updateHelp);
 

@@ -409,6 +409,8 @@ noONSLogoLink: true
     else {
       window.location.href = '../relationships-summary-proxy/?noop=1' +
         nextPageSurveyRouting;
+        storageAPI.storePageData('/end-to-end/relationships-summary-proxy/', window.location.pathname);
+
     }
   }
 
@@ -455,6 +457,8 @@ noONSLogoLink: true
         e.preventDefault();
 
         window.location.href = '../relationships-summary-proxy/?noop=1' + nextPageSurveyRouting;
+        storageAPI.storePageData('/end-to-end/relationships-summary-proxy/', window.location.pathname);
+
       });
     }
   }

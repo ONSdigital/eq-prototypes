@@ -129,10 +129,13 @@ noONSLogoLink: true
     question = question.trim();
     var val = $('[name="english-level"]:checked').val();
     storageAPI.addUpdateLanguageEnglish(personId, val, question, url);
-    
+    storageAPI.storePageData('/end-to-end/individual-details-passport-country/', window.location.pathname);
+
     if(isEditing) {
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person_id=' + personId;
+      storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+
     }
   }));
 
@@ -141,12 +144,6 @@ noONSLogoLink: true
       $('.js-heading').html('How well can ' + '<em class="highlight">' + person.firstLastName + '</em>' +
         ' speak English?');
     }  }
-
- function updateAllPreviousLinks() {
-      $('.js-previous-link').attr('href', '../individual-details-ethnic-group/?person_id=' + personId);
-  }
-
-  $(updateAllPreviousLinks);
 
   $(updateQuestion);
 

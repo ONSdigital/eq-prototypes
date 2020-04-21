@@ -135,14 +135,19 @@ noONSLogoLink: true
     let url = '../individual-details-health-conditions-abilities/?person_id=' + personId + '&edit=true';
     question = question.trim();
     storageAPI.addUpdateHealthConditionsAbilities(personId, val, question, url);
-    
+    storageAPI.storePageData('/end-to-end/individual-details-health-support/', window.location.pathname);
+
     if(isEditing) {
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person_id=' + personId;
+      storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+
     } else if(details['age'] < 5) {
       e.preventDefault();
       storageAPI.clearPersonalBookmark(personId);
       window.location.href = '../hub';
+      storageAPI.storePageData('/end-to-end/hub/', window.location.pathname);
+
     }
   }));
 
@@ -162,14 +167,6 @@ noONSLogoLink: true
             $('.js-help-3').html('You should select &ldquo;Yes, a lot&rdquo; if they usually need some level of support from family members, friends or personal social services for most normal daily activities.');
         }
     }
-
- function updateAllPreviousLinks() {
-      $('.js-previous-link').attr('href', '../individual-details-passport-country/?person_id=' + personId);
-  }
-
-
-
-    $(updateAllPreviousLinks);
 
     $(updateQuestion);
     $(updateHelp);

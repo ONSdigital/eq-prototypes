@@ -125,18 +125,25 @@ noONSLogoLink: true
         let url = '../individual-details-student-address/?person_id=' + personId + '&edit=true';
         question = question.trim();
         storageAPI.addUpdateStudentAddress(personId, val, question, url);
+        storageAPI.storePageData('/end-to-end/individual-details-country/', window.location.pathname);
 
         if(isEditing) {
             window.location.href = '../individual-details-summary/?person_id=' +
                 personId + (surveyType ? '&survey=' + surveyType : '');
+                storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+
         }
         
         if(val === 'Home address' || val == null) {
             window.location.href = '../individual-details-country/?person_id=' +
                 personId + (surveyType ? '&survey=' + surveyType : '');
+                storageAPI.storePageData('/end-to-end/individual-details-country/', window.location.pathname);
+
         } else if (val === 'Another address'){
             window.location.href = '../individual-details-student-address-other/?person_id=' +
                 personId + (surveyType ? '&survey=' + surveyType : '');
+                storageAPI.storePageData('/end-to-end/individual-details-student-address-other/', window.location.pathname);
+
         }
   }));
 
@@ -157,11 +164,6 @@ noONSLogoLink: true
     }
   }
 
- function updateAllPreviousLinks() {
-      $('.js-previous-link').attr('href', '../individual-details-school/?person_id=' + personId);
-  }
-
-  $(updateAllPreviousLinks);
   $(updateAddress);
   $(updateQuestion);
 

@@ -245,21 +245,33 @@ noONSLogoLink: true
       */
       if(redirect) {
         window.location = redirect;
+        storageAPI.storePageData('/end-to-end/' + redirect, window.location.pathname);
+
       } else if(editUserId) {
         window.location = '../summary/';
+        storageAPI.storePageData('/end-to-end/summary', window.location.pathname);
+
       } else if (window.location.search.match(/journey=temp-living-here/)) {
         window.location = userLiveAtAddress
           ? '../does-anyone-else-live-here/?redirect=../temp-living-here-feedback/'
           : '../temp-living-here-feedback/';
+          storageAPI.storePageData('/end-to-end/temp-living-here-feedback', window.location.pathname);
+
       } else if (window.location.search.match(/journey=temp-away-from-home/)) {
         window.location = '../temp-away-from-home/';
+        storageAPI.storePageData('/end-to-end/temp-away-from-home/', window.location.pathname);
+
       } else if (window.location.search.match(/journey=visitors/)) {
         window.location =
           '../does-anyone-else-live-here/?journey=visitors&visitor-types=' + visitorTypesStr;
+          storageAPI.storePageData('/end-to-end/does-anyone-else-live-here/?journey=visitors&visitor-types=' + visitorTypesStr, window.location.pathname);
+
       } else {
         window.location = userLiveAtAddress
           ? '../does-anyone-else-live-here/?redirect=../does-anyone-else-live-here/'
           : '../does-anyone-else-live-here/';
+          storageAPI.storePageData('/end-to-end/does-anyone-else-live-here', window.location.pathname);
+
       }
     }
   });

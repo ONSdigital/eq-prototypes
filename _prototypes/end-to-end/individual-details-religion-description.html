@@ -195,6 +195,7 @@ noONSLogoLink: true
     let url = '../individual-details-religion-description/?person_id=' + personId + '&edit=true';
     question = question.trim();
     storageAPI.addUpdateReligion(personId, val, question, url);
+    storageAPI.storePageData('/end-to-end/individual-details-religion/', window.location.pathname);
 
     if(val === 'Other') {
       e.preventDefault();
@@ -203,13 +204,19 @@ noONSLogoLink: true
         (surveyType ? '&survey=' + surveyType : '') +
         (religion ? '&religion=' + religion : '') +
         (isEditing ? '&edit=true' : '');
+        storageAPI.storePageData('/end-to-end/individual-details-religion-other/', window.location.pathname);
+
     } else if(isEditing) {
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person_id=' + personId +
         (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+
     } else if(details['age'] < 3) {
       e.preventDefault();
-      window.location.href = '../individual-details-passport-country/?person_id=' + personId
+      window.location.href = '../individual-details-passport-country/?person_id=' + personId;
+      storageAPI.storePageData('/end-to-end/individual-details-passport-country/', window.location.pathname);
+
     }
   }));
 
@@ -249,12 +256,6 @@ noONSLogoLink: true
   function updateAnswers() {
     $('.js-other-piping').html('You can enter their religion on the next question');
   }
-
- function updateAllPreviousLinks() {
-      $('.js-previous-link').attr('href', '../individual-details-religion-description/?person_id=' + personId + (religion ? '&religion=' + religion : ''));
-  }
-
-  $(updateAllPreviousLinks);    
 
   $(updateQuestion);
   $(updateAnswers);

@@ -79,6 +79,7 @@ noONSLogoLink: true
         cannotAnswerPerson.phoneNumber = input.value.trim().replace(/ /g, '');
 
         sessionStorage.setItem('cannot-answer-people', JSON.stringify(cannotAnswerPeople));
+        storageAPI.storePageData('/end-to-end/request-survey-confirm-number', window.location.pathname);
 
         window.location.href = '../request-survey-confirm-number?person_id=' + personId;
     });

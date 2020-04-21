@@ -93,5 +93,8 @@ noONSLogoLink: true
             '../request-survey-confirmation' :
             '../request-survey')
             + '?person_id=' + personId;
+        
+            storageAPI.storePageData('/end-to-end/request-survey-confirmation', window.location.pathname);
+
     });
 </script>

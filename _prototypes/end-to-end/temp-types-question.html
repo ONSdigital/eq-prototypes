@@ -160,13 +160,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     }
 
     window.location = '../temp-types-feedback/?away-types=' + JSON.stringify(awayTypes);
+    storageAPI.storePageData('/end-to-end/temp-types-feedback/?away-types=' + JSON.stringify(awayTypes), window.location.pathname);
+
   });
 
   $(updateQuestionList);
-
-  function updateAllPreviousLinks() {
-    $('.js-previous-link').attr('href', document.referrer);
-  }
-
-  $(updateAllPreviousLinks);
 </script>

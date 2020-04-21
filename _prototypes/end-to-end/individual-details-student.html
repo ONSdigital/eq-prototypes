@@ -121,13 +121,19 @@ noONSLogoLink: true
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+
     }
     
     var val = $('[name="student"]:checked').val();
     if(val === 'no' || val == null) {
       window.location.href = '../individual-details-country/?person_id=' + personId;
+      storageAPI.storePageData('/end-to-end/individual-details-country/', window.location.pathname);
+
     } else if (val === 'yes'){
       window.location.href = '../individual-details-student-address/?person_id=' + personId;
+      storageAPI.storePageData('/end-to-end/individual-details-student-address/', window.location.pathname);
+
     }
   });
 
@@ -138,11 +144,6 @@ noONSLogoLink: true
     }
   }
 
- function updateAllPreviousLinks() {
-      $('.js-previous-link').attr('href', '../individual-details-school/?person_id=' + personId);
-  }
-
-  $(updateAllPreviousLinks);
   $(updateQuestion);
 
   /**

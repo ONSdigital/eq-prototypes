@@ -95,11 +95,13 @@ noONSLogoLink: true
     let url = '../individual-details-national-identity-other/?person_id=' + personId + '&edit=true';
     question = question.trim();
     storageAPI.addUpdateNationalIdentityOther(personId, otherText, question, url);
+    storageAPI.storePageData('/end-to-end/individual-details-ethnic-group/', window.location.pathname);
 
     if(isEditing) {
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
     }
   }));
 

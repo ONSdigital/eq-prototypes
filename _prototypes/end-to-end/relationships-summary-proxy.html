@@ -17,5 +17,7 @@ noONSLogoLink: true
 
     $(function () {
       window.location.href = '../hub/' + urlSuffix;
+      storageAPI.storePageData('/end-to-end/hub/', window.location.pathname);
+
     });
 </script>
