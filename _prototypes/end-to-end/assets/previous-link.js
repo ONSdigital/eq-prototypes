@@ -13,9 +13,9 @@ domready(() => {
   }
 
   if (previousURL) {
-    const previousLinks = [...document.querySelectorAll('.js-previous-link')];
+    const currentJourneys = [...document.querySelectorAll('.js-previous-link')];
 
-    previousLinks.forEach(link => {
+    currentJourneys.forEach(link => {
       link.setAttribute('href', previousURL + (personID ? '?person_id=' + personID : ''));
     });
   }

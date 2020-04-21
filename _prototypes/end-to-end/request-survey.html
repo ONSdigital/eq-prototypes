@@ -47,14 +47,14 @@ noONSLogoLink: true
     var cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people') || '[]');
     var searchParams = new URLSearchParams(window.location.search);
     var personId = searchParams.get('person_id');
-    var previousLink = document.querySelector('.js-previous-link');
+    var currentJourney = document.querySelector('.js-previous-link');
     var input = document.getElementById('phone');
 
     if (!personId) {
         personId = cannotAnswerPeople[0].id;
     }
 
-    previousLink.setAttribute('href', previousLink.getAttribute('href') + '?person_id=' + personId);
+    currentJourney.setAttribute('href', currentJourney.getAttribute('href') + '?person_id=' + personId);
 
     var person = JSON.parse(sessionStorage.getItem('household-members')).find(function(person) { 
         return person['@person'].id === personId;

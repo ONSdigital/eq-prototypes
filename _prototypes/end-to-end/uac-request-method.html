@@ -93,11 +93,11 @@ logoUrl: ../home
 
 <script>
     var searchParams = new URLSearchParams(window.location.search);
-    var previousLink = document.querySelector('.js-previous-link');
+    var currentJourney = document.querySelector('.js-previous-link');
     var phoneInput = document.getElementById('phone');
     var postInput = document.getElementById('post');    
     var previousPage = searchParams.get('previous');
-    var previousLink = searchParams.get('link');
+    var currentJourney = searchParams.get('current-journey');
     var form = document.querySelector('form');
 
     form.addEventListener('submit', function(event) {
@@ -107,19 +107,19 @@ logoUrl: ../home
         } else if (postInput.checked) {
             var url = '../uac-request-enter-name';
         }
-        window.location.href = url + '?' + 'previous=' + 'uac-request-method' + '&' + 'link=' + previousLink;
+        window.location.href = url + '?' + 'previous=' + 'uac-request-method' + '&' + 'current-journey=' + currentJourney;
     });
 
     function updateQuestion() {
-        if(previousLink === 'new-ir-uac') {
+        if(currentJourney === 'new-ir-uac') {
             $('.js-piping').html('How would you like to receive a new individual access code?');
         }
     }
 
-    function updateAllPreviousLinks() {
-        $('.js-previous-link').attr('href', '../' + previousPage + '?' + (previousPage ? 'previous=' + 'uac-request-method' : '') + (previousLink ? '&link=' + previousLink : ''));
+    function updateAllcurrentJourneys() {
+        $('.js-previous-link').attr('href', '../' + previousPage + '?' + (previousPage ? 'previous=' + 'uac-request-method' : '') + (currentJourney ? '&current-journey=' + currentJourney : ''));
     }
 
     $(updateQuestion);
-    $(updateAllPreviousLinks);
+    $(updateAllcurrentJourneys);
 </script>

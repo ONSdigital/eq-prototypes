@@ -89,7 +89,7 @@ logoUrl: ../home
                           <div class="typeahead-input__status u-vh js-typeahead-aria-status" aria-live="polite" role="status" tabindex="-1"></div>
                         </div>
                       </p>
-                      <a href="../address-correction/?previous=uac-request-address">I can't find my address</a>
+                      <a class="js-link" href="#">I can't find my address</a>
                     </div>
                   </div>
                   </fieldset>
@@ -110,7 +110,7 @@ logoUrl: ../home
 <script>
   var urlParams = new URLSearchParams(window.location.search),
     previousPage = urlParams.get('previous'),
-    previousLink = urlParams.get('link');
+    currentJourney = urlParams.get('current-journey');
 
   $('.btn-submit').click(function(e) {
     e.preventDefault(); // do not submit the form like usual
@@ -120,10 +120,10 @@ logoUrl: ../home
 
     sessionStorage.setItem('address', document.getElementById('rh-proto-address').value);
 
-    if(previousLink === 'new-ir-uac'){
-      window.location = '../confirm-rh-address/?' + 'previous=' + 'uac-request-address' + '&' + 'link=' + previousLink;
+    if(currentJourney === 'new-ir-uac'){
+      window.location = '../confirm-rh-address/?' + 'previous=' + 'uac-request-address' + '&' + 'current-journey=' + currentJourney;
     } else {
-      window.location = '../confirm-rh-address/?' + 'previous=' + 'uac-request-address' + '&' + 'link=' + previousLink;
+      window.location = '../confirm-rh-address/?' + 'previous=' + 'uac-request-address' + '&' + 'current-journey=' + currentJourney;
     }
   });
 
@@ -134,13 +134,21 @@ logoUrl: ../home
   $(updateEditableAddress);
   }
 
+  $('.js-link').click(function(e) {
+    e.preventDefault();
+
+    window.location = '../address-correction/?' + 'previous=' + 'uac-request-address' + '&' + 'current-journey=' + currentJourney;
+  });
+
   function updateHelp() {
-    if (previousLink === 'new-ir-uac') {
+    if (currentJourney === 'new-ir-uac') {
       $('.js-piping').html('To request a new individual access code, we need your address.');
+    } else if (currentJourney === 'new-hh-paper') {
+      $('.js-piping').html('To send a paper questionnaire, we need your address.');
     }
   }
 
-  function updateAllPreviousLinks() {
+  function updateAllcurrentJourneys() {
       if (previousPage === 'home') {
         $('.js-previous-link').attr('href', '../home');
       } else {
@@ -149,7 +157,7 @@ logoUrl: ../home
   }
   document.dispatchEvent(new CustomEvent('TYPEAHEAD-READY'));
 
-  $(updateAllPreviousLinks);
+  $(updateAllcurrentJourneys);
   $(updateHelp);
 
 </script>

@@ -126,7 +126,8 @@ noONSLogoLink: true
     hasErrors = false;
     var urlParams = new URLSearchParams(window.location.search);
     var previousPage = urlParams.get('previous');
-    var previousLink = urlParams.get('link');
+    var currentJourney = urlParams.get('current-journey');
+    var householdNumber = urlParams.get('hh-members');
 
   function removeMember_handler(member, e) {
     e.preventDefault();
@@ -196,12 +197,11 @@ noONSLogoLink: true
         storageAPI.deleteUserAsHouseholdMember();
       }
 
-      if(redirect) {
-        window.location.href = redirect;
+      if(currentJourney === 'new-hh-paper') {
+        window.location.href = '../uac-request-confirm-address/?' + 'hh-members=' + householdNumber + '&previous=' + 'uac-request-enter-name' + '&current-journey=' + currentJourney;
       }
       else {
-        window.location.href = isEditing ? '../summary/' :
-          '../uac-request-confirm-address/?previous=' + previousPage + '&link=' + previousLink;
+        window.location.href = '../uac-request-confirm-address/?previous=' + 'uac-request-enter-name' + '&current-journey=' + currentJourney;
       }
     }
   });
@@ -227,9 +227,9 @@ noONSLogoLink: true
 
   $(updateQuestion);
 
-  function updateAllPreviousLinks() {
+  function updateAllcurrentJourneys() {
     $('.js-previous-link').attr('href', '../' + previousPage);
   }
 
-  $(updateAllPreviousLinks);
+  $(updateAllcurrentJourneys);
 </script>

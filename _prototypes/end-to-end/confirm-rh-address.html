@@ -82,7 +82,7 @@ logoUrl: ../home
     var addressParam = urlParams.get('address');
     var storageAPI = window.ONS.storage;
     var previousPage = urlParams.get('previous');
-    var previousLink = urlParams.get('link');
+    var currentJourney = urlParams.get('current-journey');
     var currentPage = 'confirm-rh-address';
 
 	$('.qa-btn-submit').on('click', function (e) {
@@ -92,7 +92,11 @@ logoUrl: ../home
         * Routing
         */
         if (yesbox.checked) {
-            var url  = '../uac-request-method';
+            if (currentJourney === 'new-hh-paper') {
+                var url  = '../paper-request-hh-number';
+            } else {
+                var url  = '../uac-request-method';
+            }
         }
         else if (changebox.checked) {
             var url = '../address-correction';
@@ -100,7 +104,7 @@ logoUrl: ../home
         else {
             var url = '../uac-request-address';
         }
-        window.location.href = url + '?' + 'previous=' + currentPage + '&' + 'link=' + previousLink;
+        window.location.href = url + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney;
     });
 
     if (addressParam) {
@@ -132,7 +136,7 @@ logoUrl: ../home
 		$('.one-week-ago').text(oneWeekAgo.toLocaleString('en-GB', options));
 	});
 
-    function updateAllPreviousLinks() {
+    function updateAllcurrentJourneys() {
         if (previousPage === 'uac-entry') {
             $('.js-previous-link').hide();
         } else {
@@ -140,5 +144,5 @@ logoUrl: ../home
         }
     }
 
-    $(updateAllPreviousLinks);
+    $(updateAllcurrentJourneys);
 </script>

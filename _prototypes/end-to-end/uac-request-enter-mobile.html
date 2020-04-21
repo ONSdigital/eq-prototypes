@@ -78,18 +78,18 @@ logoUrl: ../home
     var storageAPI = window.ONS.storage;
     var urlParams = new URLSearchParams(window.location.search);
     var previousPage = urlParams.get('previous');
-    var previousLink = urlParams.get('link');
+    var currentJourney = urlParams.get('current-journey');
     
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
     
     var url = '../uac-request-enter-mobile-correct';
-    window.location.href = url + '?mobile=' + encodeURI($('#mobile-number').val() + '&previous=' + 'uac-request-enter-mobile' + '&link=' + previousLink);
+    window.location.href = url + '?mobile=' + encodeURI($('#mobile-number').val() + '&previous=' + 'uac-request-enter-mobile' + '&current-journey=' + currentJourney);
   });
 
-    function updateAllPreviousLinks() {
+    function updateAllcurrentJourneys() {
         $('.js-previous-link').attr('href', '../uac-request-method/');
     }
 
-    $(updateAllPreviousLinks);
+    $(updateAllcurrentJourneys);
 </script>

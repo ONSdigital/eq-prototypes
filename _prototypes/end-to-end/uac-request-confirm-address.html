@@ -24,17 +24,17 @@ logoUrl: ../home
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password"
                       action="../hub">
-                    <div class="group u-mb-l">
+                    <div class="group">
                         <section class="section">
                             <div class="question u-mb-s">
                                 <h1 id="question-title"
                                     class="question__title u-fs-xl js-piping">
-                                    Do you want to send {x} access code to this address?
+                                    Do you want to send {x} to this address?
                                 </h1>
                             </div>
                             <div class="u-mb-xs js-name-address"></div>
                             <p class="u-mb-m"><a href="../uac-request-enter-name/?previous=uac-request-confirm-address">Change name</a></p>
-                            <div class="panel panel--simple panel--info u-mb-m js-panel">
+                            <div class="panel panel--simple panel--info u-mb-m js-panel u-d-no">
                                   <div class="panel__body">
                                       Your individual access code will arrive in a plain white envelope
                                   </div>
@@ -47,9 +47,9 @@ logoUrl: ../home
                                                value="Yes"
                                                id="yes"
                                                type="radio">
-                                        <label class="label label--inline u-fs-r"
+                                        <label class="label label--inline u-fs-r js-piping"
                                                for="yes">
-                                            Yes, send the access code</label>
+                                            Yes, send the {y}</label>
                                     </div>
                                     <div class="field__item js-focusable-box">
                                         <input autocomplete="new-password" class="input input--radio js-focusable"
@@ -57,28 +57,28 @@ logoUrl: ../home
                                                value="No"
                                                id="no"
                                                type="radio">
-                                        <label class="label label--inline u-fs-r "
+                                        <label class="label label--inline u-fs-r no-answer"
                                                for="no">
                                             No, send it another way</label>
                                     </div>
                                 </fieldset>
                             </div>
+                            <div class="large-print u-mt-l field field--checkbox field--multiplechoice u-d-no">
+                                <h2 class="u-fs-m">Large print</h2>
+                                <div class="field__item">
+                                    <input class="input input--checkbox large-print-checkbox-answer" name="large-print-checkbox-answer" value="large-print" id="large-print" type="checkbox">
+                                    <label class="label label--inline u-fs-r" for="large-print">
+                                        I need a large print questionnaire</label>
+                                </div>
+                            </div>
                         </section>
                     </div>
-                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-s"
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-s u-mt-xl"
                             type="submit" name="">Continue
                     </button>
                 </form>
             </main>
         </div>
-    </div>
-</div>
-
-<div style="display:none;">
-    <div id="member-checkbox-select-template" class="field__item">
-        <input autocomplete="new-password" class="input input--checkbox js-person-control"
-               name="checkbox-answer" type="checkbox">
-        <label class="label label--inline u-fs-r js-person-name"></label>
     </div>
 </div>
 
@@ -90,16 +90,24 @@ logoUrl: ../home
     addressLine1 = (sessionStorage.getItem('address') || '').replace(/,/g, '<br>'),
     addresseeName = (sessionStorage.getItem('addressee-name') || '');
     var previousPage = urlParams.get('previous');
-    var previousLink = urlParams.get('link');
+    var currentJourney = urlParams.get('current-journey');
     var codeType;
+    var codeTypeShort;
 
-    if(previousLink === 'new-ir-uac'){
-        var codeType = 'an individual'
+    if(currentJourney === 'new-ir-uac'){
+        var codeType = 'an individual access code'
+        var codeTypeShort = 'access code';
+        $('.js-panel').removeClass('u-d-no');
+    } else if(currentJourney === 'new-hh-paper') {
+        var codeType = 'paper questionnaire';
+        var codeTypeShort = ' questionnaire';
+        $('.large-print').removeClass('u-d-no');
+        $('.no-answer').html('No, cancel and return');
     } else {
-        $('.js-panel').hide();
-        var codeType = 'a household'
-    }    
-    
+        var codeType = 'a household access code';
+        var codeTypeShort = 'access code';
+    }
+
     function updateQuestion() {
         $('.js-name-address').html('<strong>' + addresseeName + '</strong>' + ' <br> ' + addressLine1);
     }
@@ -108,6 +116,7 @@ logoUrl: ../home
 
     pipingDestinations.forEach(function(pipingDestination) {
         pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', codeType);
+        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{y}', codeTypeShort);
     });
 
     $('.qa-btn-submit').on('click', function (e) {
@@ -115,17 +124,20 @@ logoUrl: ../home
         
         if ($('[name=radio-answer]:checked').val() === 'Yes') {
             var url = '../uac-request-confirm-address-sent/';
+            if ($('.large-print-checkbox-answer').is(':checked')) {
+                var param = '&large-print=true';
+            }
         } else {
             var url = '../uac-request-method/';
         }
-        window.location.href = url + '?previous=' + previousPage + '&link=' + previousLink;
+        window.location.href = url + '?previous=' + previousPage + '&current-journey=' + currentJourney + param;
     
     });
     $(updateQuestion);
 
-    function updateAllPreviousLinks() {
+    function updateAllcurrentJourneys() {
         $('.js-previous-link').attr('href', '../uac-request-method/' + (previousPage ? '&previous=' + previousPage : ''));
     }
 
-    $(updateAllPreviousLinks);
+    $(updateAllcurrentJourneys);
 </script>

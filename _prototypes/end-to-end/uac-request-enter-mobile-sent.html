@@ -65,10 +65,10 @@ logoUrl: ../home
   var storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
     mobileNo = urlParams.get('mobile'),
-    previousLink = urlParams.get('link');
+    currentJourney = urlParams.get('current-journey');
     var codeType;
 
-    if(previousLink === 'new-ir-uac'){
+    if(currentJourney === 'new-ir-uac'){
         var codeType = 'an individual'
     } else {
         var codeType = 'a household'
@@ -90,7 +90,7 @@ logoUrl: ../home
     $('.js-link').on('click', function (e) {
         e.preventDefault();
         var url = '../uac-request-enter-mobile';
-        window.location.href = url + '?' + 'link=' + previousLink;
+        window.location.href = url + '?' + 'current-journey=' + currentJourney;
     });
 
   function updateDescription () {

@@ -137,9 +137,9 @@ noONSLogoLink: true
     $('#person').val(urlParams.get('person_id'));
 
 
-    function updateAllPreviousLinks() {
+    function updateAllcurrentJourneys() {
         $('.js-previous-link').attr('href', '../individual-decision-method/?person_id=' + personId + (previousPage ? '&previous=' + previousPage : ''));
     }
 
-    $(updateAllPreviousLinks);
+    $(updateAllcurrentJourneys);
 </script>

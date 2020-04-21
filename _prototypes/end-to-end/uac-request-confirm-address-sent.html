@@ -30,9 +30,9 @@ noONSLogoLink: true
                                 <div class="panel panel--simple panel--success u-mb-m">
                                     <div class="panel__body">
                                         <h1 id="question-title" class="question__title u-mb-xs u-fs-l js-piping">
-                                            A letter has been sent to {x}
+                                            A {q}{z} has been sent to {x}
                                         </h1>
-                                        <p class="js-piping">The letter with {y} access code should
+                                        <p class="js-piping js-panel">The letter with {y} access code should
                                             arrive soon for you to complete the census.</p>
                                     </div>
                                 </div>
@@ -73,14 +73,23 @@ noONSLogoLink: true
     var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
     var addresseeName = (sessionStorage.getItem('addressee-name') || '');
     var previousPage = urlParams.get('previous');
-    var previousLink = urlParams.get('link');    
+    var currentJourney = urlParams.get('current-journey');
+    var largePrint = urlParams.get('large-print');
     var codeType;
+    var modeType;
 
-    if(previousLink === 'new-ir-uac'){
+    if(currentJourney === 'new-ir-uac'){
         var codeType = 'an individual'
+        var modeType = 'letter'
+    } else if (currentJourney === 'new-hh-paper') {
+        if (largePrint) {
+            var paperType = 'large print '
+        }
+        var modeType = 'paper questionnaire'
+        $('.js-panel').html('This should arrive soon for you to complete your census.');
     } else {
-        $('.js-panel').hide();
         var codeType = 'a household'
+        var modeType = 'letter'
     }
 
     var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
@@ -88,6 +97,8 @@ noONSLogoLink: true
     pipingDestinations.forEach(function(pipingDestination) {
         pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', addresseeName + ' at ' + addressLines);
         pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{y}', codeType);
+        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{z}', modeType);
+        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{q}', paperType);
     });
 
     $('.qa-btn-submit').on('click', function (e) {

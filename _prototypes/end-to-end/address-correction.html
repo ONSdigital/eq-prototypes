@@ -51,10 +51,11 @@ logoUrl: ../home
     storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
     previousPage = urlParams.get('previous');
+    currentJourney = urlParams.get('current-journey');
 
-    function updateAllPreviousLinks() {
-        $('.js-previous-link').attr('href', '../' + previousPage + '?' + 'previous=' + previousPage);
+    function updateAllcurrentJourneys() {
+        $('.js-previous-link').attr('href', '../' + previousPage + '?' + 'previous=' + previousPage + '&' + 'current-journey=' + currentJourney);
     }
 
-    $(updateAllPreviousLinks);
+    $(updateAllcurrentJourneys);
 </script>
