@@ -329,6 +329,9 @@ p.field + p.field {
 .input--radio:checked~.radio__other--open {
     background-color: #f5f5f5;
 }
+.input--radio:checked~.radio__other {
+    background-color: #f5f5f5;
+}
 
 .input--checkbox:checked~.label:before, 
 .input--radio:checked~.label:before {
@@ -437,6 +440,10 @@ p.field + p.field {
 
 .input--radio:not(:checked)~.field__other--open {
     display: block;
+}
+
+.input--radio:not(:checked)~.radio__other {
+    display: none;
 }
 
 .collapsible__body {
