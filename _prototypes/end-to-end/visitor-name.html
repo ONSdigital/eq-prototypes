@@ -156,8 +156,6 @@ noONSLogoLink: true
     userLiveAtAddress = storageAPI.doILiveHere(),
     isLateAddition = !!urlParams.get('late-addition');
 
-  console.log(redirect);
-
   if (editUserId) {
     memberFound = window.ONS.storage.getAllHouseholdMembers()
       .filter(function(member) {
@@ -223,8 +221,8 @@ noONSLogoLink: true
 
       } else if (window.location.search.match(/journey=visitors/)) {
         window.location =
-          '../does-anyone-else-live-here/?journey=visitors&visitor-types=' + visitorTypesStr;
-          storageAPI.storePageData('/end-to-end/does-anyone-else-live-here/?journey=visitors&visitor-types=' + visitorTypesStr, window.location.pathname);
+          '../does-anyone-else-live-here/?journey=visitors';
+          storageAPI.storePageData('/end-to-end/does-anyone-else-live-here/?journey=visitors', window.location.pathname);
 
       } else {
         window.location = userLiveAtAddress

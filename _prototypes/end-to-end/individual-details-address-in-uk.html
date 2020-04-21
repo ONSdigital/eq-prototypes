@@ -53,24 +53,30 @@ noONSLogoLink: true
                                                         An address in the UK
                                                     </label>
                                                 </div>
-                                                <div class="field__item js-focusable-box js-extra-option" id="same-address-field">
+                                                <div class="field__item js-focusable-box js-extra-option">
                                                     <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
-                                                           name="year-ago-address"
+                                                           name="address-where"
                                                            id="same-as-visitor1"
                                                            value="same-as-visitor1">
                                                     <label class="label label--inline js-extra-option-label"
                                                            for="same-as-visitor1"
-                                                           id="same-as-visitor1">
+                                                           id="same-as-visitor1-label">
                                                         Address not set
                                                     </label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
-                                                    <input
-                                                            class="input input--radio js-focusable" name="addrees-where" value="outside-uk" id="outside-uk" type="radio" data-qa="has-other-option">
-                                                    <label
-                                                            class="label label--inline u-fs-r " for="outside-uk" id="label-radio-answer-other">
-                                                        An address outside the UK</label>
+                                                    <input class="input input--radio js-focusable" 
+                                                      name="address-where" 
+                                                      value="outside-uk" 
+                                                      id="outside-uk" 
+                                                      type="radio" 
+                                                      data-qa="has-other-option">
+                                                    <label class="label label--inline u-fs-r " 
+                                                      for="outside-uk" 
+                                                      id="label-radio-answer-other">
+                                                        An address outside the UK
+                                                    </label>
                                                 </div>
                                             </fieldset>
                                         </div>
@@ -119,7 +125,7 @@ noONSLogoLink: true
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
-    var val = $('[name="addrees-where"]:checked').val();
+    var val = $('[name="address-where"]:checked').val();
     let url = '../individual-details-address-in-uk/?person_id=' + personId + '&edit=true';
     question = question.trim();
     storageAPI.addUpdateAddressWhere(personId, val, question, url);
