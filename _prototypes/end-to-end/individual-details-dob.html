@@ -92,6 +92,17 @@ noONSLogoLink: true
                             </section>
                         </div>
                     </div>
+                    <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple u-mt-m u-d-no">
+                      <div class="js-collapsible-content">
+                          <h2 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="If you can’t answer questions for this person">
+                              Why we ask for visitor details
+                          </h2>
+                          <div class="collapsible__body js-collapsible-body">
+                              <p>Your answer helps to ensure that everyone is counted in the census. Add visitor details, even if you think they have been included on a census questionnaire at another address.</p>
+                              <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Can’t answer someone else’s questions?">Hide this</button>
+                          </div>
+                      </div>
+                    </div>
                     <button class="btn btn--primary btn--lg qa-btn-submit u-mb-xl u-mt-xl"
                             type="submit" name="">Save and continue
                     </button>
@@ -170,6 +181,10 @@ noONSLogoLink: true
       details.dob.day && $('#personal-detail-dob-day').val(details.dob.day);
       details.dob.month && $('#personal-detail-dob-month').val(details.dob.month);
       details.dob.year && $('#personal-detail-dob-year').val(details.dob.year);
+    }
+
+    if(isVisitor){
+      $('.js-collapsible').removeClass('u-d-no');
     }
   }
 
