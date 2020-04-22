@@ -30,7 +30,7 @@ noONSLogoLink: true
                                 <div class="panel panel--simple panel--success u-mb-m">
                                     <div class="panel__body">
                                         <h1 id="question-title" class="question__title u-mb-xs u-fs-l js-piping">
-                                            A {q}{z} has been sent to {x}
+                                            A {z} has been sent to {x}
                                         </h1>
                                         <p class="js-piping js-panel">The letter with {y} access code should
                                             arrive soon for you to complete the census.</p>
@@ -81,11 +81,12 @@ noONSLogoLink: true
     if(currentJourney === 'new-ir-uac'){
         var codeType = 'an individual'
         var modeType = 'letter'
-    } else if (currentJourney === 'new-hh-paper' || currentJourney === 'new-ir-paper') {
+    } else if (currentJourney === 'new-hh-paper' || 'new-ir-paper') {
         if (largePrint) {
-            var paperType = 'large print '
+            var modeType = 'large print paper questionnaire'
+        } else {
+            var modeType = 'paper questionnaire'
         }
-        var modeType = 'paper questionnaire'
         $('.js-panel').html('This should arrive soon for you to complete your census.');
     } else {
         var codeType = 'a household'
@@ -98,7 +99,6 @@ noONSLogoLink: true
         pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', addresseeName + ' at ' + addressLines);
         pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{y}', codeType);
         pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{z}', modeType);
-        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{q}', paperType);
     });
 
     $('.qa-btn-submit').on('click', function (e) {

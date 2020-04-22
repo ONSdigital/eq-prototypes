@@ -133,8 +133,6 @@ logoUrl: ../home
             if ($('.large-print-checkbox-answer').is(':checked')) {
                 var param = '&large-print=true';
             }
-        } else {
-            var url = '../uac-request-method/';
         }
         window.location.href = url + '?previous=' + previousPage + '&current-journey=' + currentJourney + param;
     
