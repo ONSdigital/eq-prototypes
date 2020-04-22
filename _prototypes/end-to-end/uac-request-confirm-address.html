@@ -36,7 +36,7 @@ logoUrl: ../home
                             <p class="u-mb-m"><a href="../uac-request-enter-name/?previous=uac-request-confirm-address">Change name</a></p>
                             <div class="panel panel--simple panel--info u-mb-m js-panel u-d-no">
                                   <div class="panel__body">
-                                      Your individual access code will arrive in a plain white envelope
+                                      A letter with your individual access code will arrive in a plain white envelope
                                   </div>
                                 </div>
                             <div class="field field--radio field--multiplechoice">
@@ -99,10 +99,16 @@ logoUrl: ../home
         var codeTypeShort = 'access code';
         $('.js-panel').removeClass('u-d-no');
     } else if(currentJourney === 'new-hh-paper') {
-        var codeType = 'paper questionnaire';
+        var codeType = 'a paper questionnaire';
         var codeTypeShort = ' questionnaire';
         $('.large-print').removeClass('u-d-no');
         $('.no-answer').html('No, cancel and return');
+    } else if(currentJourney === 'new-ir-paper') {
+        var codeType = 'a paper questionnaire';
+        var codeTypeShort = ' questionnaire';
+        $('.large-print').removeClass('u-d-no');
+        $('.no-answer').html('No, cancel and return');
+        $('.js-panel').removeClass('u-d-no').html('Your individual paper questionnaire will arrive in a plain white envelope');
     } else {
         var codeType = 'a household access code';
         var codeTypeShort = 'access code';

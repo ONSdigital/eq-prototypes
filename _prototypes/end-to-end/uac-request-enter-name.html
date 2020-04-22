@@ -200,6 +200,9 @@ noONSLogoLink: true
       if(currentJourney === 'new-hh-paper') {
         window.location.href = '../uac-request-confirm-address/?' + 'hh-members=' + householdNumber + '&previous=' + 'uac-request-enter-name' + '&current-journey=' + currentJourney;
       }
+      if(currentJourney === 'new-ir-paper') {
+        window.location.href = '../uac-request-confirm-address/?' + 'hh-members=' + householdNumber + '&previous=' + 'uac-request-enter-name' + '&current-journey=' + currentJourney;
+      }
       else {
         window.location.href = '../uac-request-confirm-address/?previous=' + 'uac-request-enter-name' + '&current-journey=' + currentJourney;
       }
