@@ -4,10 +4,6 @@ import { sanitiseTypeaheadText } from '../typeahead/typeahead.helpers';
 import triggerChange from '../trigger-change-event';
 import AbortableFetch from './abortable-fetch';
 
-const baseURL = 'https://whitelodge-ai-api.ai.census-gcp.onsdigital.uk/addresses/eq';
-const lookupURL = `${baseURL}?input=`;
-const retrieveURL = `${baseURL}/uprn/`;
-const addressReplaceChars = [','];
 
 const classAddress = 'js-address';
 const baseClass = 'js-address-typeahead';
@@ -21,6 +17,7 @@ const classSearchButtonContainer = 'js-address-search-btn-container';
 const classSearchButton = 'js-address-search-btn';
 const classManualButton = 'js-address-manual-btn';
 const classNotEditable = 'js-address-not-editable';
+const classRHLookup = 'js-rh-address-lookup';
 
 class AddressInput {
   constructor(context) {
@@ -37,7 +34,8 @@ class AddressInput {
     this.manualButton = context.querySelector(`.${classManualButton}`);
     this.form = context.closest('form');
     this.lang = document.documentElement.getAttribute('lang').toLowerCase();
-  
+    this.addressReplaceChars = [','];
+
     // State
     this.manualMode = true;
     this.currentQuery = null;
@@ -46,6 +44,7 @@ class AddressInput {
     this.errored = false;
     this.addressSelected = false;
     this.isEditable = context.querySelector(`.${classNotEditable}`) ? false : true;
+    this.isRhLookup = context.querySelector(`.${classRHLookup}`) ? true : false;
 
     // Initialise typeahead
     this.typeahead = new TypeaheadUI({
@@ -54,7 +53,7 @@ class AddressInput {
       onUnsetResult: this.onUnsetAddress.bind(this),
       suggestionFunction: this.suggestAddresses.bind(this),
       onError: this.onError.bind(this),
-      sanitisedQueryReplaceChars: addressReplaceChars,
+      sanitisedQueryReplaceChars: this.addressReplaceChars,
       resultLimit: 50,
       minChars: 5,
       suggestOnBoot: true,
@@ -79,12 +78,13 @@ class AddressInput {
     }
 
     this.searchButtonContainer.classList.remove('u-d-no');
-
+    
+    this.baseURL = 'https://whitelodge-ai-api.ai.census-gcp.onsdigital.uk/addresses/';
+    this.lookupURL = `${this.baseURL}eq?input=`;
+    this.retrieveURL = this.isRhLookup ? `${this.baseURL}rh/uprn/` : `${this.baseURL}eq/uprn/`;
+    
     this.user = 'equser';
     this.password = '$4c@ec1zLBu';
-    // this.user = process.env.AIMS_USER;
-    // this.password = process.env.AIMS_PASSWORD;
-    // console.log(this.user);
     this.auth = btoa(this.user + ':' + this.password);
     this.headers = new Headers({
       'Authorization': 'Basic ' + this.auth,
@@ -134,7 +134,7 @@ class AddressInput {
 
   findAddress(text) {
     return new Promise((resolve, reject) => {
-      const queryUrl = lookupURL + text + '&limit=100';
+      const queryUrl = this.lookupURL + text + '&limit=100';
       this.fetch = new AbortableFetch(queryUrl, {
         method: 'GET',
         headers: this.headers
@@ -174,7 +174,7 @@ class AddressInput {
       }  
 
       mappedResults = updatedResults.map(({ uprn, address }) => {
-        const sanitisedText = sanitiseTypeaheadText(address, addressReplaceChars);
+        const sanitisedText = sanitiseTypeaheadText(address, this.addressReplaceChars);
         return {
           'en-gb': address,
           sanitisedText,
@@ -195,7 +195,7 @@ class AddressInput {
 
   retrieveAddress(id) {
     return new Promise((resolve, reject) => {
-      const queryUrl = retrieveURL + id + '?addresstype=paf';
+      const queryUrl = this.retrieveURL + id + '?addresstype=paf';
       this.fetch = new AbortableFetch(queryUrl, {
         method: 'GET',
         headers: this.headers
@@ -247,6 +247,12 @@ class AddressInput {
               this.setAddress(data, resolve);
             } else {
               this.typeahead.input.value = selectedResult.displayText;
+              if (data.response.address.censusAddressType) {
+                const rhAddressTypeInput = this.context.querySelector('.js-rh-address-type');
+                const rhAddressCountryInput = this.context.querySelector('.js-rh-address-country');
+                rhAddressTypeInput.value = data.response.address.censusAddressType;
+                rhAddressCountryInput.value = data.response.address.countryCode;
+              }
             }
           })
           .catch(reject);
