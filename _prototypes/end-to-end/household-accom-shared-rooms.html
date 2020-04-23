@@ -80,6 +80,7 @@ noONSLogoLink: true
                     <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
                             type="submit" name="">Save and continue
                     </button>
+                    <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
                 </form>
             </main>
         </div>
@@ -103,4 +104,13 @@ noONSLogoLink: true
         window.location.href = '../household-accom-number-bedrooms';
         storageAPI.storePageData('/end-to-end/household-accom-number-bedrooms/', window.location.pathname);
     });
+
+    function updateAnswer() {
+        var answer = JSON.parse(window.sessionStorage.getItem('accommodation-shared-rooms'));
+        if (answer) {
+            $('input[type=radio][value="' + answer[1] +'"]').prop("checked", true);
+        }
+    }
+
+    $(updateAnswer);
 </script>

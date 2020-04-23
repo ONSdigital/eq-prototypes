@@ -130,6 +130,7 @@ noONSLogoLink: true
                     <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
                             type="submit" name="">Save and continue
                     </button>
+                    <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
                 </form>
             </main>
         </div>
@@ -142,22 +143,11 @@ noONSLogoLink: true
     var question = $('#question-title').html(),
         currentPage = '../household-accom-vehicles';
     window.sessionStorage.setItem('accommodation-completed-status', currentPage);
-/*
-    $(window).on('load', function() {
-        if ($('input[type=radio][id=5-or-more]').prop('checked')) {
-            $('#5-or-more-radio-wrap').removeClass('u-vh');
-        }
-    });
-*/
+
     $('#other-textbox').focus(function() {
         $('input[type=radio][id=5-or-more]').prop('checked', true);
-        //$('#5-or-more-radio-wrap').removeClass('u-vh');
     });
-/*
-    $('input[type=radio][id=5-or-more]').change(function() {
-        $('#5-or-more-radio-wrap').removeClass('u-vh');
-    });
-*/
+
     $('.qa-btn-submit').on('click', function (e) {
         var val = $('input[type=radio][name=no-of-vehicles]:checked').attr('value')
         question = question.trim();
@@ -175,4 +165,18 @@ noONSLogoLink: true
         window.location.href = '../hub';
         storageAPI.storePageData('/end-to-end/hub/', window.location.pathname);
     });
+
+    function updateAnswer() {
+        var answer = JSON.parse(window.sessionStorage.getItem('accommodation-no-of-vehicles'));
+        if (answer) {
+            if (answer[1] < 5) {
+                $('input[type=radio][value="' + answer[1] +'"]').prop("checked", true);
+            } else {
+                $('input[type=radio][value="5 or more"]').prop("checked", true);
+                $('input[type=text][id=other-textbox]').val(answer[1]);
+            }
+        }
+    }
+
+    $(updateAnswer);
 </script>

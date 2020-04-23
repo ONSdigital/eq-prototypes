@@ -76,9 +76,9 @@ noONSLogoLink: true
         e.preventDefault();
 
         if (personDetails.type === 'visitor'){
-            var url = '/individual-details-dob/';
+            var url = 'individual-details-dob/';
         } else {
-            var url = '/individual-decision/';
+            var url = 'individual-decision/';
         }
         window.location = '../' + url + '?person_id=' + personId;
         storageAPI.storePageData('/end-to-end/' + url, window.location.pathname);
