@@ -93,7 +93,19 @@ noONSLogoLink: true
               */
             $nodeEl.attr('id', '');
             $nodeEl.find('.js-question').html(sessionArray[0]);
-            $nodeEl.find('.js-answer').html(sessionArray[1]);
+
+            if (Array.isArray(sessionArray[1])){
+                var i, 
+                  answer = '';
+                for (i = 0; i < sessionArray[1].length; i++) {
+                answer += sessionArray[1][i] + ", ";
+                }
+                answer = answer.slice(0, -2);
+                $nodeEl.find('.js-answer').html(answer);
+            } else {
+                $nodeEl.find('.js-answer').html(sessionArray[1]);
+            }
+            
             $nodeEl.find('.js-link').attr('href', sessionArray[2]);
 
             return $nodeEl;
