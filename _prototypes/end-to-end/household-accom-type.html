@@ -125,4 +125,13 @@ noONSLogoLink: true
         }
     });
 
+    function updateAnswer() {
+        var answer = JSON.parse(window.sessionStorage.getItem('accommodation-type'));
+        if (answer) {
+            $('input[type=radio][value="' + answer[1] +'"]').prop("checked", true);
+        }
+    }
+
+    $(updateAnswer);
+
 </script>

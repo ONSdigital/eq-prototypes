@@ -217,4 +217,15 @@ noONSLogoLink: true
         window.location.href = '../household-accom-own-rent';
         storageAPI.storePageData('/end-to-end/household-accom-own-rent/', window.location.pathname);
     });
+
+    function updateAnswer() {
+        var answer = JSON.parse(window.sessionStorage.getItem('accommodation-heating-type'));
+        if (answer) {
+            var i;
+            for (i = 0; i < answer[1].length; i++) {
+                $('input[type=checkbox][value="' + answer[1][i] +'"]').prop("checked", true);
+            }
+        }
+    }
+    $(updateAnswer);
 </script>

@@ -78,4 +78,13 @@ noONSLogoLink: true
         window.location.href = '../household-accom-heating';
         storageAPI.storePageData('/end-to-end/household-accom-heating/', window.location.pathname);
     });
+
+    function updateAnswer() {
+        var answer = JSON.parse(window.sessionStorage.getItem('accommodation-bedrooms'));
+        if (answer) {
+            $('input[type=text]').val(answer[1]);
+        }
+    }
+
+    $(updateAnswer);
 </script>

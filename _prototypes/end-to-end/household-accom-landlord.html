@@ -140,4 +140,13 @@ noONSLogoLink: true
         window.location.href = '../household-accom-vehicles';
         storageAPI.storePageData('/end-to-end/household-accom-vehicles/', window.location.pathname);
     });
+
+    function updateAnswer() {
+        var answer = JSON.parse(window.sessionStorage.getItem('accommodation-landlord'));
+        if (answer) {
+            $('input[type=radio][value="' + answer[1] +'"]').prop("checked", true);
+        }
+    }
+
+    $(updateAnswer);
 </script>

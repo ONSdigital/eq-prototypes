@@ -60,7 +60,6 @@ noONSLogoLink: true
                                                             Including bedsits
                                                         </p>
                                                     </label>
-
                                                 </div>
                                                 <div class="field__item js-focusable-box">
                                                     <input autocomplete="new-password" class="input input--radio js-focusable"
@@ -119,7 +118,6 @@ noONSLogoLink: true
     window.sessionStorage.setItem('accommodation-completed-status', currentPage);
 
     $('.qa-btn-submit').click(function (e) {
-
         var val =$('input[type=radio][name=flat-type]:checked').attr('value');
         question = question.trim();
         window.sessionStorage.setItem('accommodation-flat-type', JSON.stringify([question, val, currentPage]));
@@ -127,6 +125,14 @@ noONSLogoLink: true
         window.location.href = '../household-accom-shared-rooms/';
     });
 
+    function updateAnswer() {
+        var answer = JSON.parse(window.sessionStorage.getItem('accommodation-flat-type'));
+        if (answer) {
+            $('input[type=radio][value="' + answer[1] +'"]').prop("checked", true);
+        }
+    }
+
     $('.js-previous').attr('href', '../household-accom-type');
 
+    $(updateAnswer);
 </script>
