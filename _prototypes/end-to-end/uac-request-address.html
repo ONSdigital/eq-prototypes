@@ -122,6 +122,8 @@ logoUrl: ../home
     var addressCountry = $('.js-rh-address-country').val();
 
     sessionStorage.setItem('address', document.getElementById('rh-proto-address').value);
+    sessionStorage.setItem('address-type', addressType);
+    sessionStorage.setItem('address-country', addressCountry);
     
     if(currentJourney === 'new-ir-uac'){
       window.location = '../confirm-rh-address/?' + 'previous=' + 'uac-request-address' + '&' + 'current-journey=' + currentJourney;
