@@ -216,7 +216,6 @@ class AddressInput {
   postcodeSearch(results, input) {
     const postcodeRegex = /([A-Za-z]{1,2}\d{1,2})(\s?(\d?\w{2}))?/;
     const testForPostcode = postcodeRegex.test(input);
-    
     if (testForPostcode) {
       const addressesByPostcode = new Map();
   
@@ -226,8 +225,7 @@ class AddressInput {
           addressesByPostcode.set(postcode[0], []);
         addressesByPostcode.get(postcode[0]).push(address);
       });
-  
-  
+
       const groups = Array.from(addressesByPostcode)
         .map(([postcode, addresses]) => ({
           address:  addresses[0].bestMatchAddress,
@@ -242,7 +240,7 @@ class AddressInput {
 
   onAddressSelect(selectedResult) {
     return new Promise((resolve, reject) => {
-      if (selectedResult.uprn && selectedResult.countAdjust === 0) {
+      if (selectedResult.uprn && (selectedResult.countAdjust === 0 || !selectedResult.countAdjust)) {
         this.retrieveAddress(selectedResult.uprn)
           .then(data => {
             if (this.isEditable) {
