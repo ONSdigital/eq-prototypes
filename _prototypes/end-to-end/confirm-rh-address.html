@@ -143,7 +143,7 @@ logoUrl: ../home
         if (previousPage === 'uac-entry') {
             $('.js-previous-link').hide();
         } else {
-            $('.js-previous-link').attr('href', '../' + previousPage + '?edit=true');
+            $('.js-previous-link').attr('href', '../' + previousPage + '?' + 'previous=' + 'uac-request-address' + '&current-journey=' + currentJourney + '&edit=true');
         }
     }
 

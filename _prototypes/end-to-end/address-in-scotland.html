@@ -50,7 +50,7 @@ logoUrl: ../home
     currentJourney = urlParams.get('current-journey');
 
     function updateAllcurrentJourneys() {
-        $('.js-previous-link').attr('href', '../' + previousPage + '?' + 'previous=' + previousPage + '&' + 'current-journey=' + currentJourney);
+        $('.js-previous-link').attr('href', '../' + previousPage + '?' + 'previous=' + 'uac-request-address' + '&' + 'current-journey=' + currentJourney);
     }
 
     $(updateAllcurrentJourneys);
