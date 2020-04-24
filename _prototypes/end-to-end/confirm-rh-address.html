@@ -45,7 +45,7 @@ logoUrl: ../home
                                                 <label class="label label--inline" for="address-correct-yes">Yes, this
                                                     address is correct</label>
                                             </div>
-                                            <div class="field__item js-focusable-box">
+                                            <div class="field__item js-change-address js-focusable-box">
                                                 <input autocomplete="new-password" class="input input--radio js-focusable" type="radio"
                                                        name="address-correct" id="address-correct-change">
                                                 <label class="label label--inline" for="address-correct-change">No, I need to make a change to this address</label>
@@ -84,6 +84,7 @@ logoUrl: ../home
     var previousPage = urlParams.get('previous');
     var currentJourney = urlParams.get('current-journey');
     var currentPage = 'confirm-rh-address';
+    var addressCountry = sessionStorage.getItem('address-country');
 
 	$('.qa-btn-submit').on('click', function (e) {
         e.preventDefault();
@@ -92,7 +93,9 @@ logoUrl: ../home
         * Routing
         */
         if (yesbox.checked) {
-            if (currentJourney === 'new-hh-paper') {
+            if (addressCountry === 'S') {
+                var url = '../address-in-scotland';
+            } else if (currentJourney === 'new-hh-paper') {
                 var url  = '../paper-request-hh-number';
             } else {
                 var url  = '../uac-request-method';
@@ -136,7 +139,7 @@ logoUrl: ../home
 		$('.one-week-ago').text(oneWeekAgo.toLocaleString('en-GB', options));
 	});
 
-    function updateAllcurrentJourneys() {
+    function updateAllLinks() {
         if (previousPage === 'uac-entry') {
             $('.js-previous-link').hide();
         } else {
@@ -144,5 +147,12 @@ logoUrl: ../home
         }
     }
 
-    $(updateAllcurrentJourneys);
+    function updateAnswer() {
+        if (addressCountry === 'S') {
+            $('.js-change-address').hide();
+        }
+    }
+
+    $(updateAllLinks);
+    $(updateAnswer);
 </script>
