@@ -8,7 +8,7 @@ export function sanitiseTypeaheadText(string, sanitisedQueryRemoveChars = [], sa
   sanitisedString = sanitisedString.replace(/\s\s+/g, ' ');
 
   if (sanitisedQuerySplitNumsChars) {
-    sanitisedString = sanitisedString.replace(/\d(?=[a-z]{2,})/gi, '$& ');
+    sanitisedString = sanitisedString.replace(/\d(?=[a-z]{3,})/gi, '$& ');
   }
 
   sanitisedString = trimEnd ? sanitisedString.trim() : sanitisedString.trimStart();
