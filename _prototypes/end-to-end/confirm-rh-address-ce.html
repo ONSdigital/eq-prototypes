@@ -28,7 +28,7 @@ logoUrl: ../home
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 class="question__title u-fs-xl">
-                                        Is this address correct?
+                                        Are you the manager of this establishment?
                                     </h1>
                                 </div>
 
@@ -42,18 +42,18 @@ logoUrl: ../home
                                             <div class="field__item js-focusable-box">
                                                 <input autocomplete="new-password" class="input input--radio js-focusable" type="radio"
                                                        name="address-correct" id="address-correct-yes">
-                                                <label class="label label--inline" for="address-correct-yes">Yes, this
-                                                    address is correct</label>
-                                            </div>
-                                            <div class="field__item js-change-address js-focusable-box">
-                                                <input autocomplete="new-password" class="input input--radio js-focusable" type="radio"
-                                                       name="address-correct" id="address-correct-change">
-                                                <label class="label label--inline" for="address-correct-change">No, I need to make a change to this address</label>
+                                                <label class="label label--inline" for="address-correct-yes">Yes, I am the manager</label>
                                             </div>
                                             <div class="field__item js-focusable-box">
                                                 <input autocomplete="new-password" class="input input--radio js-focusable" type="radio"
                                                        name="address-correct" id="address-correct-no">
-                                                <label class="label label--inline venus" for="address-correct-no">No, search for address again</label>
+                                                <label class="label label--inline venus" for="address-correct-no">
+                                                No
+                                                    <br>
+                                                    <span class="label__description label--negative">
+                                                        Includes residents and staff
+                                                    </span>
+                                                </label>
                                             </div>
                                         </fieldset>
                                     </div>
@@ -85,7 +85,6 @@ logoUrl: ../home
     var currentJourney = urlParams.get('current-journey');
     var currentPage = 'confirm-rh-address';
     var addressCountry = sessionStorage.getItem('address-country');
-    var addressType = sessionStorage.getItem('address-type');
 
 	$('.qa-btn-submit').on('click', function (e) {
         e.preventDefault();
@@ -96,8 +95,6 @@ logoUrl: ../home
         if (yesbox.checked) {
             if (addressCountry === 'S') {
                 var url = '../address-in-scotland';
-            } else if (addressCountry != 'S' && addressType === 'CE') {
-                var url = '../confirm-rh-address-ce';
             } else if (currentJourney === 'new-hh-paper') {
                 var url  = '../paper-request-hh-number';
             } else {
