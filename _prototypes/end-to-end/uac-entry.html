@@ -46,7 +46,7 @@ logoUrl: ../home
                                     <span class="label__description">Keep this code safe. You will need to enter it every time you access your census</span>
                                 </label>
                                 <input type="text" id="uac" class="input input--text input-type__input uac__input js-uac u-mb-xs" name="uac" maxlength="19" data-group-size="4" autocomplete="off" />
-                                <a href="#" class="u-fs-s">Where to find your access code</a>
+                                <a href="../where-to-find-your-access-code/?previous=uac-entry" class="u-fs-s">Where to find your access code</a>
                             </div>
                             <div class="uac__security u-mt-m">
                                 <div class="uac__icon"><span class="icon icon--lock"></span></div>
@@ -60,7 +60,7 @@ logoUrl: ../home
                     </div>
                     <div>
                         <h2 class="u-fs-m u-mt-xl">If you don't have a household access code</h2>
-                        <p>You can <a href="../uac-request-address/?previous=uac-entry&current-journey=new-hh-uac" class="f">request a new household access code</a> to start a new census if you have lost or not received an access code.</p>
+                        <p>You can <a href="../uac-request-address/?previous=uac-entry&current-journey=new-hh-uac">request a new household access code</a> to start a new census if you have lost or not received an access code.</p>
                     </div>
                     <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple js-visitor-definition u-mb-xs">
                         <div class="js-collapsible-content">
@@ -86,7 +86,6 @@ logoUrl: ../home
   document.dispatchEvent(new CustomEvent('UAC-READY'));
   var urlParams = new URLSearchParams(window.location.search);
   var previousPage = urlParams.get('previous');
-  var currentJourney = urlParams.get('current-journey');
   var redirect = urlParams.get('redirect');
 
   $('.btn-submit').click(function(e) {

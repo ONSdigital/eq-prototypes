@@ -53,9 +53,9 @@ logoUrl: ../home
     previousPage = urlParams.get('previous');
     currentJourney = urlParams.get('current-journey');
 
-    function updateAllcurrentJourneys() {
+    function updateAllLinks() {
         $('.js-previous-link').attr('href', '../' + previousPage + '?' + 'previous=' + previousPage + '&' + 'current-journey=' + currentJourney);
     }
 
-    $(updateAllcurrentJourneys);
+    $(updateAllLinks);
 </script>

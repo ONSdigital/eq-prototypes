@@ -113,6 +113,7 @@ logoUrl: ../home
   var urlParams = new URLSearchParams(window.location.search),
     previousPage = urlParams.get('previous'),
     currentJourney = urlParams.get('current-journey');
+    currentPage= 'uac-request-address';
 
   $('.btn-submit').click(function(e) {
     e.preventDefault(); // do not submit the form like usual
@@ -153,16 +154,16 @@ logoUrl: ../home
     }
   }
 
-  function updateAllcurrentJourneys() {
-      if (previousPage === 'home') {
-        $('.js-previous-link').attr('href', '../home');
+  function updateAllLinks() {
+      if (previousPage) {
+        $('.js-previous-link').attr('href', '../' + previousPage);
       } else {
         $('.js-previous-link').attr('href', '../uac-entry');
       }
   }
   document.dispatchEvent(new CustomEvent('TYPEAHEAD-READY'));
 
-  $(updateAllcurrentJourneys);
+  $(updateAllLinks);
   $(updateHelp);
 
 </script>
