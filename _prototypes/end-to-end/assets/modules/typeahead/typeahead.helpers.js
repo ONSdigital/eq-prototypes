@@ -1,4 +1,4 @@
-export function sanitiseTypeaheadText(string, sanitisedQueryRemoveChars = [], trimEnd = true) {
+export function sanitiseTypeaheadText(string, sanitisedQueryRemoveChars = [], sanitisedQuerySplitNumsChars = false, trimEnd = true) {
   let sanitisedString = string.toLowerCase();
 
   sanitisedQueryRemoveChars.forEach(char => {
@@ -6,6 +6,10 @@ export function sanitiseTypeaheadText(string, sanitisedQueryRemoveChars = [], tr
   });
 
   sanitisedString = sanitisedString.replace(/\s\s+/g, ' ');
+
+  if (sanitisedQuerySplitNumsChars) {
+    sanitisedString = sanitisedString.replace(/\d(?=[a-z]{2,})/gi, '$& ');
+  }
 
   sanitisedString = trimEnd ? sanitisedString.trim() : sanitisedString.trimStart();
 

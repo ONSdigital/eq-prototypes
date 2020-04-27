@@ -19,6 +19,7 @@ export default class TypeaheadUI {
     context,
     typeaheadData,
     sanitisedQueryReplaceChars,
+    sanitisedQuerySplitNumsChars,
     minChars,
     resultLimit,
     suggestOnBoot,
@@ -74,6 +75,7 @@ export default class TypeaheadUI {
     this.blurring = false;
     this.blurTimeout = null;
     this.sanitisedQueryReplaceChars = sanitisedQueryReplaceChars || [];
+    this.sanitisedQuerySplitNumsChars = sanitisedQuerySplitNumsChars || false;
 
     // Temporary fix as runner doesn't use full lang code
     if (this.lang === 'en') {
@@ -221,7 +223,7 @@ export default class TypeaheadUI {
   getSuggestions(force) {
     if (!this.settingResult) {
       const query = this.input.value;
-      const sanitisedQuery = sanitiseTypeaheadText(query, this.sanitisedQueryReplaceChars);
+      const sanitisedQuery = sanitiseTypeaheadText(query, this.sanitisedQueryReplaceChars, this.sanitisedQuerySplitNumsChars);
 
       if (sanitisedQuery !== this.sanitisedQuery || (force && !this.resultSelected)) {
         this.unsetResults();
@@ -229,7 +231,6 @@ export default class TypeaheadUI {
 
         this.query = query;
         this.sanitisedQuery = sanitisedQuery;
-
         if (this.sanitisedQuery.length >= this.minChars) {
             this.fetchSuggestions(this.sanitisedQuery, this.data)
               .then(this.handleResults.bind(this))

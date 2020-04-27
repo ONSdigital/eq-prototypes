@@ -35,6 +35,7 @@ class AddressInput {
     this.form = context.closest('form');
     this.lang = document.documentElement.getAttribute('lang').toLowerCase();
     this.addressReplaceChars = [','];
+    this.sanitisedQuerySplitNumsChars = true;
 
     // State
     this.manualMode = true;
@@ -54,7 +55,8 @@ class AddressInput {
       suggestionFunction: this.suggestAddresses.bind(this),
       onError: this.onError.bind(this),
       sanitisedQueryReplaceChars: this.addressReplaceChars,
-      resultLimit: 50,
+      sanitisedQuerySplitNumsChars: this.sanitisedQuerySplitNumsChars,
+      resultLimit: 10,
       minChars: 5,
       suggestOnBoot: true,
       handleUpdate: true
