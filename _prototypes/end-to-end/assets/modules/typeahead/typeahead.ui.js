@@ -298,8 +298,9 @@ export default class TypeaheadUI {
   }
 
   handleResults(result) {
+    this.resultLimit = result.limit ? result.limit : this.resultLimit;
     this.foundResults = result.totalResults;
-    if (result.results.length > 50) {
+    if (result.results.length > this.resultLimit) {
       result.results = result.results.slice(0, this.resultLimit);
     }
 
@@ -408,7 +409,6 @@ export default class TypeaheadUI {
         }
       }
     }
-
     this.ariaStatus.innerHTML = content;
   }
 

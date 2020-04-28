@@ -37,7 +37,7 @@ class AddressInput {
     this.addressReplaceChars = [','];
     this.sanitisedQuerySplitNumsChars = true;
 
-    // State
+    // State    
     this.manualMode = true;
     this.currentQuery = null;
     this.fetch = null;
@@ -56,7 +56,6 @@ class AddressInput {
       onError: this.onError.bind(this),
       sanitisedQueryReplaceChars: this.addressReplaceChars,
       sanitisedQuerySplitNumsChars: this.sanitisedQuerySplitNumsChars,
-      resultLimit: 10,
       minChars: 5,
       suggestOnBoot: true,
       handleUpdate: true
@@ -90,7 +89,7 @@ class AddressInput {
     this.auth = btoa(this.user + ':' + this.password);
     this.headers = new Headers({
       'Authorization': 'Basic ' + this.auth,
-    });
+    }); 
   }
 
   toggleMode(clearInputs = true) {
@@ -152,9 +151,11 @@ class AddressInput {
   }
 
   mapFindResults(results, input) {
-    let updatedResults, mappedResults;
+    let updatedResults, mappedResults, limit;
+    const originalLimit = 10;
+    
     let groups = results[0] && results[0].bestMatchAddress ? this.postcodeSearch(results, input) : null;
-
+    
     if (groups) {
       mappedResults = groups.map(({ address, count, postcode, uprn }) => {
         const countAdjust = count - 1;
@@ -163,18 +164,22 @@ class AddressInput {
           'en-gb': countAdjust === 0 ? address : address + ' <span class="group-text">(' + countAdjust + ' more ' + addressText + ')</span>',
           postcode,
           uprn,
-          countAdjust
+          countAdjust,
         };
       });
+
+      limit = originalLimit;
       this.currentResults = mappedResults.sort();
 
     } else if (results[0]) {
 
       if (results[0] && results[0].bestMatchAddress) {
         updatedResults = results.map(({ uprn, bestMatchAddress }) => ({ uprn: uprn, address: bestMatchAddress }));
+        limit = originalLimit;
 
       } else if (results[0] && results[0].formattedAddress) {
         updatedResults = results.map(({ uprn, formattedAddress }) => ({ uprn: uprn, address: formattedAddress }));
+        limit = 100;
       }  
 
       mappedResults = updatedResults.map(({ uprn, address }) => {
@@ -182,18 +187,21 @@ class AddressInput {
         return {
           'en-gb': address,
           sanitisedText,
-          uprn
+          uprn,
         };
       });
+    
       this.currentResults = mappedResults.sort();
 
     } else {
       this.currentResults = results;
+      limit = originalLimit;
     }
 
     return {
       results: this.currentResults,
-      totalResults: this.currentResults.length
+      totalResults: this.currentResults.length,
+      limit: limit
     };
   }
 
