@@ -136,7 +136,9 @@ class AddressInput {
 
   findAddress(text) {
     return new Promise((resolve, reject) => {
-      const queryUrl = this.lookupURL + text + '&limit=100';
+      const testInput = this.testFullPostcodeQuery(text);
+      let limit = testInput ? 100 : 10;
+      const queryUrl = this.lookupURL + text + '&limit=' + limit;
       this.fetch = new AbortableFetch(queryUrl, {
         method: 'GET',
         headers: this.headers
@@ -158,10 +160,10 @@ class AddressInput {
     const total = results.total;
     const originalLimit = 10;
 
-    let groups = addresses[0] && addresses[0].bestMatchAddress ? this.postcodeSearch(addresses, input) : null;
+    let groupPostcodes = addresses[0] && addresses[0].bestMatchAddress ? this.groupPostcodes(addresses, input) : null;
     
-    if (groups) {
-      mappedResults = groups.map(({ address, count, postcode, uprn }) => {
+    if (groupPostcodes) {
+      mappedResults = groupPostcodes.map(({ address, count, postcode, uprn }) => {
         const countAdjust = count - 1;
         const addressText = countAdjust === 1 ? 'address' : 'addresses';
         return {
@@ -227,7 +229,7 @@ class AddressInput {
     });
   }
 
-  postcodeSearch(results, input) {
+  groupPostcodes(results, input) {
     const postcodeRegex = /([A-Za-z]{1,2}\d{1,2})(\s?(\d?\w{2}))?/;
     const testForPostcode = postcodeRegex.test(input);
     if (testForPostcode) {
@@ -240,7 +242,7 @@ class AddressInput {
         addressesByPostcode.get(postcode[0]).push(address);
       });
 
-      const groups = Array.from(addressesByPostcode)
+      const groupPostcodes = Array.from(addressesByPostcode)
         .map(([postcode, addresses]) => ({
           address:  addresses[0].bestMatchAddress,
           count:    addresses.length,
@@ -248,7 +250,15 @@ class AddressInput {
           uprn: addresses[0].uprn
         }));
       
-      return groups;
+      return groupPostcodes;
+    }
+  }
+
+  testFullPostcodeQuery(input) {
+    const fullPostcodeRegex = /\b((?:(?:gir)|(?:[a-pr-uwyz])(?:(?:[0-9](?:[a-hjkpstuw]|[0-9])?)|(?:[a-hk-y][0-9](?:[0-9]|[abehmnprv-y])?)))) ?([0-9][abd-hjlnp-uw-z]{2})\b/i;
+    const testFullPostcode = fullPostcodeRegex.test(input);
+    if (testFullPostcode) {
+      return true;
     }
   }
 
