@@ -42,6 +42,7 @@ class AddressInput {
     this.currentQuery = null;
     this.fetch = null;
     this.currentResults = [];
+    this.totalResults = 0;
     this.errored = false;
     this.addressSelected = false;
     this.isEditable = context.querySelector(`.${classNotEditable}`) ? false : true;
@@ -143,7 +144,7 @@ class AddressInput {
       this.fetch
         .send()
         .then(async response => {
-          const data = (await response.json()).response.addresses;
+          const data = (await response.json()).response;
           resolve(this.mapFindResults(data, text));
         })
         .catch(reject);
@@ -152,9 +153,12 @@ class AddressInput {
 
   mapFindResults(results, input) {
     let updatedResults, mappedResults, limit;
+
+    const addresses = results.addresses;
+    const total = results.total;
     const originalLimit = 10;
-    
-    let groups = results[0] && results[0].bestMatchAddress ? this.postcodeSearch(results, input) : null;
+
+    let groups = addresses[0] && addresses[0].bestMatchAddress ? this.postcodeSearch(addresses, input) : null;
     
     if (groups) {
       mappedResults = groups.map(({ address, count, postcode, uprn }) => {
@@ -171,14 +175,14 @@ class AddressInput {
       limit = originalLimit;
       this.currentResults = mappedResults.sort();
 
-    } else if (results[0]) {
+    } else if (addresses[0]) {
 
-      if (results[0] && results[0].bestMatchAddress) {
-        updatedResults = results.map(({ uprn, bestMatchAddress }) => ({ uprn: uprn, address: bestMatchAddress }));
+      if (addresses[0] && addresses[0].bestMatchAddress) {
+        updatedResults = addresses.map(({ uprn, bestMatchAddress }) => ({ uprn: uprn, address: bestMatchAddress }));
         limit = originalLimit;
 
-      } else if (results[0] && results[0].formattedAddress) {
-        updatedResults = results.map(({ uprn, formattedAddress }) => ({ uprn: uprn, address: formattedAddress }));
+      } else if (addresses[0] && addresses[0].formattedAddress) {
+        updatedResults = addresses.map(({ uprn, formattedAddress }) => ({ uprn: uprn, address: formattedAddress }));
         limit = 100;
       }  
 
@@ -194,13 +198,13 @@ class AddressInput {
       this.currentResults = mappedResults.sort();
 
     } else {
-      this.currentResults = results;
+      this.currentResults = addresses;
       limit = originalLimit;
     }
 
     return {
       results: this.currentResults,
-      totalResults: this.currentResults.length,
+      totalResults: total,
       limit: limit
     };
   }
