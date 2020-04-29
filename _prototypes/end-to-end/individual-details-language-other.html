@@ -87,8 +87,8 @@ noONSLogoLink: true
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
-    var otherText = $('#language').val();
-    let url = '../individual-details-language-other/?person_id=' + personId + '&edit=true';
+    var otherText = $('#language').val(),
+      url = '../individual-details-language-other/?person_id=' + personId + '&edit=true';
     question = question.trim();
 
     storageAPI.addUpdateLanguageOther(personId, otherText, question, url);
@@ -118,7 +118,13 @@ noONSLogoLink: true
     }
   }
 
+  function updateAnswer() {
+    if (details && details.language) {
+        $('#language').val(details.language.other);
+    }
+  }
 
+  $(updateAnswer);
   $(updateQuestion);
   $(updateRouting);
 

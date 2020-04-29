@@ -145,12 +145,14 @@ noONSLogoLink: true
     }
   }
 
-  if (details && details['passport'] && details['passport'].otherText) {
-    $('#passport-country-other-input').val(details['passport'].otherText);
+  function updateAnswer() {
+    if (details && details.passport) {
+        $('#passport-country').val(details.passport.otherText);
+    }
   }
-
   document.dispatchEvent(new CustomEvent('TYPEAHEAD-READY'));
 
+  $(updateAnswer);
   $(updateQuestion);
   $(updateRouting);
 

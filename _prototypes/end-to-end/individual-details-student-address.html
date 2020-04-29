@@ -132,9 +132,7 @@ noONSLogoLink: true
                 personId + (surveyType ? '&survey=' + surveyType : '');
                 storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
 
-        }
-        
-        if(val === 'Home address' || val == null) {
+        } else if(val === 'Home address' || val == null) {
             window.location.href = '../individual-details-country/?person_id=' +
                 personId + (surveyType ? '&survey=' + surveyType : '');
                 storageAPI.storePageData('/end-to-end/individual-details-country/', window.location.pathname);
@@ -143,29 +141,34 @@ noONSLogoLink: true
             window.location.href = '../individual-details-student-address-other/?person_id=' +
                 personId + (surveyType ? '&survey=' + surveyType : '');
                 storageAPI.storePageData('/end-to-end/individual-details-student-address-other/', window.location.pathname);
-
         }
   }));
 
-  function updateAddress() {
-    var addressLines = (sessionStorage.getItem('address') || '').split(','),
-    addressLine1 = addressLines[0];
+    function updateAddress() {
+        var addressLines = (sessionStorage.getItem('address') || '').split(','),
+        addressLine1 = addressLines[0];
 
-    return addressLine1;
-  }
-
-  function updateQuestion() {
-    if(storageAPI.getAnsweringIndividualByProxy()) {
-        $('.js-heading').html('During term time, where does ' + '<em class="highlight">' + person.firstLastName + '</em>' +
-        ' usually live?');
-        $('.js-collapsible-body p').html('Their answer helps us produce an accurate count of the population during term time. These figures can be used to plan ' + 
-            'services such as healthcare and transport. This is particularly important in areas with large universities and ' +
-            'student populations.');
+        return addressLine1;
     }
-  }
 
-  $(updateAddress);
-  $(updateQuestion);
+    function updateQuestion() {
+        if(storageAPI.getAnsweringIndividualByProxy()) {
+            $('.js-heading').html('During term time, where does ' + '<em class="highlight">' + person.firstLastName + '</em>' +
+            ' usually live?');
+            $('.js-collapsible-body p').html('Their answer helps us produce an accurate count of the population during term time. These figures can be used to plan ' + 
+                'services such as healthcare and transport. This is particularly important in areas with large universities and ' +
+                'student populations.');
+        }
+    }
+    function updateAnswer() {
+        if (details && details.studentAddress) {
+            $('input[type=radio][value="' + details.studentAddress.val +'"]').prop("checked", true);
+        }
+    }
+
+    $(updateAnswer);
+    $(updateAddress);
+    $(updateQuestion);
 
   /**
    * Routing

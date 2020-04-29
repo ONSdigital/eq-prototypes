@@ -85,11 +85,22 @@ noONSLogoLink: true
                 $question = $nodeEl.find('.js-question');
 
             /**
-              * Manipulate DOM fragment
-              */
+            * Manipulate DOM fragment
+            */
+
+            if (Array.isArray(sessionItem)) {
+                var i, 
+                  answer = '';
+                for (i = 0; i < sessionItem.length; i++) {
+                answer += sessionItem[i] + ", ";
+                }
+                answer = answer.slice(0, -2);
+                $nodeEl.find('.js-answer').html(answer);
+            } else {
+                $nodeEl.find('.js-answer').html(sessionItem);
+            }
             $nodeEl.attr('id', '');
             $nodeEl.find('.js-question').html(question);
-            $nodeEl.find('.js-answer').html(sessionItem);
             $nodeEl.find('.js-link').attr('href', url);
 
             return $nodeEl;
@@ -104,6 +115,10 @@ noONSLogoLink: true
 
         if (individualDetails[person].dob) {
             $container.append(createListItem(individualDetails[person].dob.fullDate, individualDetails[person].dob.question, individualDetails[person].dob.url));
+        }
+
+        if (individualDetails[person].ageConfirm) {
+            $container.append(createListItem(individualDetails[person].ageConfirm.val, individualDetails[person].ageConfirm.question, individualDetails[person].ageConfirm.url));
         }
 
         if (individualDetails[person].sex) {
@@ -130,8 +145,8 @@ noONSLogoLink: true
             $container.append(createListItem(individualDetails[person].country.val, individualDetails[person].country.question, individualDetails[person].country.url));
         }
         
-        if (individualDetails[person].countryOther) {
-            $container.append(createListItem(individualDetails[person].countryOther.val, individualDetails[person].countryOther.question, individualDetails[person].countryOther.url));
+        if (individualDetails[person].country.valOther) {
+            $container.append(createListItem(individualDetails[person].countryOther.valOther, individualDetails[person].countryOther.questionOther, individualDetails[person].countryOther.urlOther));
         }
         
         if (individualDetails[person].dateArriveUk) {
@@ -147,36 +162,56 @@ noONSLogoLink: true
         }
         
         if (individualDetails[person].nationalIdentity) {
-            $container.append(createListItem(individualDetails[person].nationalIdentity.otherText, individualDetails[person].nationalIdentity.question, individualDetails[person].nationalIdentity.url));
+            $container.append(createListItem(individualDetails[person].nationalIdentity.collection, individualDetails[person].nationalIdentity.question, individualDetails[person].nationalIdentity.url));
         }
         
-        if (individualDetails[person].nationalIdentityOther) {
-            $container.append(createListItem(individualDetails[person].nationalIdentityOther.otherText, individualDetails[person].nationalIdentityOther.question, individualDetails[person].nationalIdentityOther.url));
+        if (individualDetails[person].nationalIdentity.niOther) {
+            $container.append(createListItem(individualDetails[person].nationalIdentity.niOther, individualDetails[person].nationalIdentity.questionOther, individualDetails[person].nationalIdentity.urlOther));
         }
 
         if (individualDetails[person].ethnicGroup) {
             $container.append(createListItem(individualDetails[person].ethnicGroup.otherText, individualDetails[person].ethnicGroup.question, individualDetails[person].ethnicGroup.url));
         }
 
+        if (individualDetails[person].ethnicGroup.description) {
+            $container.append(createListItem(individualDetails[person].ethnicGroup.description, individualDetails[person].ethnicGroup.questionDescription, individualDetails[person].ethnicGroup.urlDescription));
+        }
+
+        if (individualDetails[person].ethnicGroup.otherText) {
+            $container.append(createListItem(individualDetails[person].ethnicGroup.otherText, individualDetails[person].ethnicGroup.questionOther, individualDetails[person].ethnicGroup.urlOther));
+        }
+
         if (individualDetails[person].religion) {
             $container.append(createListItem(individualDetails[person].religion.description, individualDetails[person].religion.question, individualDetails[person].religion.url));
+        }
+
+        if (individualDetails[person].religion.other) {
+            $container.append(createListItem(individualDetails[person].religion.descriptionOther, individualDetails[person].religion.questionOther, individualDetails[person].religion.urlOther));
         }
         
         if (individualDetails[person].language) {
             $container.append(createListItem(individualDetails[person].language.lang, individualDetails[person].language.question, individualDetails[person].language.url));
         }
+
+        if (individualDetails[person].language.other) {
+            $container.append(createListItem(individualDetails[person].language.other, individualDetails[person].language.questionOther, individualDetails[person].language.urlOther));
+            $container.append(createListItem(individualDetails[person].language.english, individualDetails[person].language.questionEnglishLevel, individualDetails[person].language.urlEnglishLevel));
+        }
         
         if (individualDetails[person].passport) {
-            $container.append(createListItem(individualDetails[person].passport.otherText, individualDetails[person].passport.question, individualDetails[person].passport.url));
+            $container.append(createListItem(individualDetails[person].passport.countries, individualDetails[person].passport.question, individualDetails[person].passport.url));
         }
 
-        if (individualDetails[person].passportOther) {
-            $container.append(createListItem(individualDetails[person].passportOther.otherText, individualDetails[person].passportOther.question, individualDetails[person].passportOther.url));
+        if (individualDetails[person].passport.otherText) {
+            $container.append(createListItem(individualDetails[person].passport.otherText, individualDetails[person].passport.questionOther, individualDetails[person].passport.urlOther));
         }
         
         if (individualDetails[person].health) {
             $container.append(createListItem(individualDetails[person].health.val, individualDetails[person].health.question, individualDetails[person].health.url));
             $container.append(createListItem(individualDetails[person].health.conditions, individualDetails[person].health.questionConditions, individualDetails[person].health.urlConditions));
+            if (individualDetails[person].health.abilities) {
+                $container.append(createListItem(individualDetails[person].health.abilities, individualDetails[person].health.questionAbilities, individualDetails[person].health.urlAbilities));
+            }
             $container.append(createListItem(individualDetails[person].health.amount, individualDetails[person].health.questionSupport, individualDetails[person].health.urlSupport));
         }
         
@@ -232,10 +267,6 @@ noONSLogoLink: true
             $container.append(createListItem(individualDetails[person].yearAgoAddressCountry.value, individualDetails[person].yearAgoAddressCountry.question, individualDetails[person].yearAgoAddressCountry.url));
         }
         
-        if (individualDetails[person].ageConfirm) {
-            $container.append(createListItem(individualDetails[person].ageConfirm.val, individualDetails[person].ageConfirm.question, individualDetails[person].ageConfirm.url));
-        }
-        
         if (individualDetails[person].addressOutsideUk) {
             $container.append(createListItem(individualDetails[person].addressOutsideUk.val, individualDetails[person].addressOutsideUk.question, individualDetails[person].addressOutsideUk.url));
         }
@@ -249,11 +280,11 @@ noONSLogoLink: true
         }
         
         if (individualDetails[person].qualifications) {
-            $container.append(createListItem(individualDetails[person].qualifications.aboveDegree, individualDetails[person].qualifications.question, individualDetails[person].qualifications.url));
-            $container.append(createListItem(individualDetails[person].qualifications.nvqEquivalent, individualDetails[person].qualifications.question, individualDetails[person].qualifications.url));
-            $container.append(createListItem(individualDetails[person].qualifications.aLevels, individualDetails[person].qualifications.question, individualDetails[person].qualifications.url));
-            $container.append(createListItem(individualDetails[person].qualifications.gcses, individualDetails[person].qualifications.question, individualDetails[person].qualifications.url));
-            $container.append(createListItem(individualDetails[person].qualifications.othersWhere, individualDetails[person].qualifications.question, individualDetails[person].qualifications.url));
+            $container.append(createListItem(individualDetails[person].qualifications.aboveDegree, individualDetails[person].qualifications.questionAbove, individualDetails[person].qualifications.urlAbove));
+            $container.append(createListItem(individualDetails[person].qualifications.nvqEquivalent, individualDetails[person].qualifications.questionNvqEquivalent, individualDetails[person].qualifications.urlNvqEquivalent));
+            $container.append(createListItem(individualDetails[person].qualifications.aLevels, individualDetails[person].qualifications.questionALevel, individualDetails[person].qualifications.urlALevel));
+            $container.append(createListItem(individualDetails[person].qualifications.gcses, individualDetails[person].qualifications.questionGCSEs, individualDetails[person].qualifications.urlGCSEs));
+            $container.append(createListItem(individualDetails[person].qualifications.othersWhere, individualDetails[person].qualifications.questionOtherWhere, individualDetails[person].qualifications.urlOtherWhere));
         }
 
         if (individualDetails[person].armedForces) {
@@ -270,17 +301,16 @@ noONSLogoLink: true
             $container.append(createListItem(individualDetails[person].employment.status, individualDetails[person].employment.questionStatus, individualDetails[person].employment.urlStatus));
             $container.append(createListItem(individualDetails[person].employment.name, individualDetails[person].employment.questionName, individualDetails[person].employment.urlName));
             $container.append(createListItem(individualDetails[person].employment.jobTitle, individualDetails[person].employment.questionJobTitle, individualDetails[person].employment.urlJobTitle));
-            $container.append(createListItem(individualDetails[person].employment.jobDescription, individualDetails[person].employment.questionJobDescription, individualDetails[person].employment.ururlJobDescriptionl));
+            $container.append(createListItem(individualDetails[person].employment.jobDescription, individualDetails[person].employment.questionJobDescription, individualDetails[person].employment.urlJobDescription));
             $container.append(createListItem(individualDetails[person].employment.businessActivity, individualDetails[person].employment.questionBusinessActivity, individualDetails[person].employment.urlBusinessActivity));
             $container.append(createListItem(individualDetails[person].employment.responsibilities, individualDetails[person].employment.questionResponsibilities, individualDetails[person].employment.urlResponsibilities));
             $container.append(createListItem(individualDetails[person].employment.hours, individualDetails[person].employment.questionHoursWorked, individualDetails[person].employment.urlHoursWorked));
             $container.append(createListItem(individualDetails[person].employment.modeOfTravel, individualDetails[person].employment.questionEmploymentTravel, individualDetails[person].employment.urlEmploymentTravel));
             $container.append(createListItem(individualDetails[person].employment.mainlyWork, individualDetails[person].employment.questionMainlyWork, individualDetails[person].employment.urlMainlyWork));
             $container.append(createListItem(individualDetails[person].employment.workUK, individualDetails[person].employment.questionWorkUK, individualDetails[person].employment.urlWorkUK));
-            $container.append(createListItem(individualDetails[person].employment.workAddress, individualDetails[person].employment.questionWorkplaceAddress, individualDetails[person].employment.urlWorkplaceAddress));
+            $container.append(createListItem(individualDetails[person].employment.workOutsideUK, individualDetails[person].employment.questionWorkOutsideUK, individualDetails[person].employment.urlWorkOutsideUK));
+            $container.append(createListItem(individualDetails[person].employment.workAddress["address-line-1"], individualDetails[person].employment.questionWorkplaceAddress, individualDetails[person].employment.urlWorkplaceAddress));
         }
-        
-        
 
         return $container;
     }

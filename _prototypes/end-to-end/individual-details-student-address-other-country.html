@@ -87,17 +87,16 @@ noONSLogoLink: true
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
     e.preventDefault();
-    var value = $('#country-input').val();
+    var val = $('#country-input').val();
 
     let url = '../individual-details-student-address-other-country/?person_id=' + personId + '&edit=true';
     question = question.trim();
 
-    storageAPI.addUpdateStudentAddressCountry(personId, value, question, url);
+    storageAPI.addUpdateStudentAddressCountry(personId, val, question, url);
 
     if(isEditing) {
       window.location.href = '../individual-details-summary/?person_id=' + personId;
       storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
-
     } else {
       window.location.href = '../individual-details-country/?person_id=' + personId;
       storageAPI.storePageData('/end-to-end/individual-details-country/', window.location.pathname);
@@ -114,11 +113,13 @@ noONSLogoLink: true
     }
   }
 
-  if (details && details['AddressStudentCountry'] &&
-    details['AddressStudentCountry'].value) {
-    $('#country-input').val(details['AddressStudentCountry'].value);
+  function updateAnswer() {
+    if (details && details.AddressStudentCountry) {
+        $('#country-input').val(details.AddressStudentCountry.val);
+    }
   }
 
+  $(updateAnswer);
   $(updateQuestion);
 
   document.dispatchEvent(new CustomEvent('TYPEAHEAD-READY'));

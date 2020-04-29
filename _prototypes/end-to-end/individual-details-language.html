@@ -136,26 +136,31 @@ noONSLogoLink: true
     }
   }));
 
-  function updateQuestion() {
-    if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('What is ' + '<em class="highlight">' + person.firstLastName +
-      window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
-        ' main language?');
-    }  }
-
-  function updateHelp() {
+    function updateQuestion() {
         if(storageAPI.getAnsweringIndividualByProxy()) {
-        $('.js-help').html('This is the language they use most naturally. For example, it could be the language they use at home.');
+            $('.js-heading').html('What is ' + '<em class="highlight">' + person.firstLastName +
+            window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
+                ' main language?');
+        }
+    }
+
+    function updateHelp() {
+        if(storageAPI.getAnsweringIndividualByProxy()) {
+            $('.js-help').html('This is the language they use most naturally. For example, it could be the language they use at home.');
         }  
     }
     
-  function updateAnswers() {
+    function updateAnswers() {
         if(storageAPI.getAnsweringIndividualByProxy()) {
-        $('.js-answer').html('You can enter their main language on the next question');
-        }  
+            $('.js-answer').html('You can enter their main language on the next question');
+        }
+
+        if (details && details.language && details.language.lang) {
+            $('input[type=radio][value="' + details.language.lang +'"]').prop("checked", true);
+        }
     }
 
-    $(updateHelp);
+  $(updateHelp);
   $(updateQuestion);
   $(updateAnswers);
 

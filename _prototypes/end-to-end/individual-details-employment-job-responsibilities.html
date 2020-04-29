@@ -138,10 +138,13 @@ noONSLogoLink: true
     }
   }
 
-  if (details && details['employment']) {
-    $('#' + details['employment'].responsibilities).attr('checked', true);
-  }
+    function updateAnswer() {
+        if (details && details.employment) {
+            $('input[type=radio][value="' + details.employment.responsibilities +'"]').prop("checked", true);
+        }
+    }
 
+  $(updateAnswer);
   $(updateQuestion);
   $(updateRouting);
 

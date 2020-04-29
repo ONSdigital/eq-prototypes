@@ -83,13 +83,17 @@ noONSLogoLink: true
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     isEditing = urlParams.get('edit'),
     details = storageAPI.getPersonalDetailsFor(personId),
-    surveyType = urlParams.get('survey');
+    surveyType = urlParams.get('survey'),
+    question = $('#question-title').html();
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
     var otherText = $('#religion').val();
 
-    storageAPI.addUpdateReligionOther(personId, otherText);
+    let url = '../individual-details-religion-other/?person_id=' + personId + '&edit=true';
+    question = question.trim();
+
+    storageAPI.addUpdateReligionOther(personId, otherText, question, url);
     storageAPI.storePageData('/end-to-end/individual-details-language/', window.location.pathname);
 
     if(isEditing) {
@@ -121,6 +125,13 @@ noONSLogoLink: true
     }
   }
 
+  function updateAnswer() {
+    if (details && details.religion) {
+        $('#religion').val(details.religion.descriptionOther);
+    }
+  }
+
+  $(updateAnswer);
   $(updateQuestion);
   $(updateRouting);
 

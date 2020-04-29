@@ -141,10 +141,7 @@ noONSLogoLink: true
                     <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
                             type="submit" name="">Save and continue
                     </button>
-
-                    
-                        <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
-
+                    <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
                 </form>
             </main>
         </div>
@@ -154,62 +151,73 @@ noONSLogoLink: true
 <script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
-  var storageAPI = window.ONS.storage,
-    urlParams = new URLSearchParams(window.location.search),
-    personId = urlParams.get('person_id'),
-    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
-    isEditing = urlParams.get('edit'),
-    details = storageAPI.getPersonalDetailsFor(personId),
-    surveyType = urlParams.get('survey'),
-    question = $('#question-title').html();
+    var storageAPI = window.ONS.storage,
+        urlParams = new URLSearchParams(window.location.search),
+        personId = urlParams.get('person_id'),
+        person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+        isEditing = urlParams.get('edit'),
+        details = storageAPI.getPersonalDetailsFor(personId),
+        surveyType = urlParams.get('survey'),
+        question = $('#question-title').html();
 
-  $('.qa-btn-submit').on('click',
-    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+    $('.qa-btn-submit').on('click',
+        storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+        var val = [];
 
-    var val = $('[name="checkbox-group"]:checked').val();
+        $('[name="checkbox-group"]:checked').each(function(i, el) {
+            val.push($(el).val());
+        });
 
-    let url = '../individual-details-employment-seven-days-ago/?person_id=' + personId + '&edit=true';
-    question = question.trim();
+        let url = '../individual-details-employment-seven-days-ago/?person_id=' + personId + '&edit=true';
+        question = question.trim();
 
-    storageAPI.addUpdateLastSevenDays(personId, val, question, url);
-    window.location.href = '../individual-details-employment-main-job/?person_id=' + personId;
+        storageAPI.addUpdateLastSevenDays(personId, val, question, url);
+        window.location.href = '../individual-details-employment-main-job/?person_id=' + personId;
 
-    if(isEditing) {
-      e.preventDefault();
-        window.location.href = '../individual-details-summary/?person_id=' + personId +
-          (surveyType ? '&survey=' + surveyType : '');
-    storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
-    } else if (val === 'No'){
-        e.preventDefault();
-        window.location.href = '../individual-details-employment-seven-days-ago-description/?person_id=' + personId;
-        storageAPI.storePageData('/end-to-end/individual-details-employment-seven-days-ago-description/', window.location.pathname);
+        if(isEditing) {
+            e.preventDefault();
+                window.location.href = '../individual-details-summary/?person_id=' + personId +
+                (surveyType ? '&survey=' + surveyType : '');
+            storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+        } else if (val === 'No'){
+            e.preventDefault();
+            window.location.href = '../individual-details-employment-seven-days-ago-description/?person_id=' + personId;
+            storageAPI.storePageData('/end-to-end/individual-details-employment-seven-days-ago-description/', window.location.pathname);
+        }
+
+    }));
+
+    function updateRouting() {
+        if(surveyType) {
+            $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+        }
+        $('#survey-type').val(surveyType);
     }
 
-  }));
-
-  function updateRouting() {
-    if(surveyType) {
-      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    function updateQuestion() {
+        if(storageAPI.getAnsweringIndividualByProxy()) {
+        $('.js-heading').html('In the last seven days, was ' + '<em class="highlight">' + person.firstLastName + '</em>' +
+            ' doing any of the following?');
+        }
     }
-    $('#survey-type').val(surveyType);
-  }
 
-  function updateQuestion() {
-    if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('In the last seven days, was ' + '<em class="highlight">' + person.firstLastName + '</em>' +
-        ' doing any of the following?');
+    function updateAnswer() {
+        if (details && details.employment) {
+            var answer = details.employment.sevenDaysAgo;
+            if (answer) {
+                var i;
+                for (i = 0; i < answer.length; i++) {
+                    $('input[type=checkbox][value="' + answer[i] +'"]').prop("checked", true);
+                }
+            }
+        }
     }
-  }
+    $(updateAnswer);
+    $(updateQuestion);
+    $(updateRouting);
 
-  if (details && details['employment']) {
-    $('#' + details['employment'].sevenDaysAgo).attr('checked', true);
-  }
-
-  $(updateQuestion);
-  $(updateRouting);
-
-  /**
-   * Routing
-   */
-  $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
+    /**
+    * Routing
+    */
+    $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
 </script>

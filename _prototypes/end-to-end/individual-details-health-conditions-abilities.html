@@ -168,6 +168,13 @@ noONSLogoLink: true
         }
     }
 
+    function updateAnswer() {
+        if (details && details.health) {
+            $('input[type=radio][value="' + details.health.abilities +'"]').prop("checked", true);
+        }
+    }
+
+    $(updateAnswer);
     $(updateQuestion);
     $(updateHelp);
 

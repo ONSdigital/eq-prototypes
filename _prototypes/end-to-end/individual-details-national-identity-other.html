@@ -138,13 +138,14 @@ noONSLogoLink: true
       $('.js-help').html('Include all national identities. If they have more than one, enter them all separated by a comma.');
     }
   }
-                                      
-
-  if (details && details['nationalIdentity'] &&
-    details['nationalIdentity'].otherText) {
-    $('#national-identity-input').val(details['nationalIdentity'].otherText);
+  
+  function updateAnswer() {
+    if (details && details.nationalIdentityOther) {
+        $('#national-identity').val(details.nationalIdentityOther.otherText);
+    }
   }
 
+  $(updateAnswer);
   $(updateQuestion);
   $(updateRouting);
   $(updateHelp);

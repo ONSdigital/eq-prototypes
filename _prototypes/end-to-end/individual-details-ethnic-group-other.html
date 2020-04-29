@@ -81,13 +81,19 @@ noONSLogoLink: true
     isEditing = urlParams.get('edit'),
     ethnicGroup = urlParams.get('ethnic-group'),
     details = storageAPI.getPersonalDetailsFor(personId),
-    surveyType = urlParams.get('survey');
+    surveyType = urlParams.get('survey'),
+    question = $('#question-title').html();
+
+    storageAPI.personalBookmark(personId, window.location.href);
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
-    var otherText = $('#ethnic-group-input').val();
+    var otherText = $('#ethnic-group').val();
 
-    storageAPI.addUpdateEthnicGroupOther(personId, otherText);
+    let url = '../individual-details-ethnic-group-other/?person_id=' + personId + '&edit=true';
+    question = question.trim();
+
+    storageAPI.addUpdateEthnicGroupOther(personId, otherText, question, url);
     storageAPI.storePageData('/end-to-end/individual-details-religion-description/', window.location.pathname);
 
     if(isEditing) {
@@ -95,7 +101,6 @@ noONSLogoLink: true
       window.location.href = '../individual-details-summary/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
         storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
-
     }
   }));
 
@@ -108,6 +113,9 @@ noONSLogoLink: true
 
   function updateAnswer() {
     document.dispatchEvent(new CustomEvent('TYPEAHEAD-READY'));
+    if (details && details.ethnicGroupOther) {
+        $('#ethnic-group').val(details.ethnicGroupOther.otherText);
+    }
   }
 
   function updateQuestion() {
@@ -119,12 +127,11 @@ noONSLogoLink: true
       ' ethnic group or background?';
 
     $('.js-heading').html(str);
-  }
 
-  if (details && details['ethnicGroup'] &&
-    details['ethnicGroup'].otherText) {
-    $('#ethnic-group-input').val(details['ethnicGroup'].otherText);
-  } 
+    if (details && details.ethnicGroup) {
+        $('#ethnic-group').val(details.ethnicGroup.otherText);
+    }
+  }
 
   $(updateRouting);
   $(updateAnswer);

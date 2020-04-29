@@ -108,11 +108,13 @@ noONSLogoLink: true
     }
   }
 
-  if (details && details['countryOther'] &&
-    details['countryOther'].otherText) {
-    $('#country-of-birth').val(details['countryOther'].val);
+  function updateAnswer() {
+    if (details && details.country) {
+        $('#country-of-birth').val(details.country.valOther);
+    }
   }
 
+  $(updateAnswer);
   $(updateQuestion);
 
   document.dispatchEvent(new CustomEvent('TYPEAHEAD-READY'));

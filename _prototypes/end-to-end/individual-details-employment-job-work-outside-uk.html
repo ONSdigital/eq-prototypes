@@ -117,6 +117,13 @@ noONSLogoLink: true
     $('#country-input').val(details['EmploymentOutsideUK'].value);
   }
 
+    function updateAnswer() {
+        if (details && details.employment) {
+            $('#country-input').val(details.employment.workOutsideUK);
+        }
+    }
+
+  $(updateAnswer);
   $(updateQuestion);
 
   document.dispatchEvent(new CustomEvent('TYPEAHEAD-READY'));
