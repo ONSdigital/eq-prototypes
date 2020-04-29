@@ -336,7 +336,7 @@ const secureLinkTextMap = {
   }
 };
 
-function updateAllcurrentJourneys() {
+function updateAllLinks() {
   $('.js-previous-link').attr('href', document.referrer);
 }
 
@@ -821,7 +821,7 @@ $(updateHouseholdVisitorsNavigationItems);
 $(updateAddresses);
 $(updatePersonLink);
 $(tools);
-$(updateAllcurrentJourneys);
+$(updateAllLinks);
 $(updateBySurveyType);
 $(updateSignificantDate);
 $(updateHouseholdSummary);

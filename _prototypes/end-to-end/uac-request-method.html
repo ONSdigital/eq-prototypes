@@ -116,10 +116,10 @@ logoUrl: ../home
         }
     }
 
-    function updateAllcurrentJourneys() {
+    function updateAllLinks() {
         $('.js-previous-link').attr('href', '../' + previousPage + '?' + (previousPage ? 'previous=' + 'uac-request-method' : '') + (currentJourney ? '&current-journey=' + currentJourney : ''));
     }
 
     $(updateQuestion);
-    $(updateAllcurrentJourneys);
+    $(updateAllLinks);
 </script>

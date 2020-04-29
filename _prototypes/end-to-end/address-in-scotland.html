@@ -27,15 +27,11 @@ logoUrl: ../home
                 <div class="group">
                     <div class="block">
                         <section class="section">
-                            <h1 class="u-fs-xl">Add or change an address</h1>
+                            <h1 class="u-fs-xl">This address is not part of the census for England and Wales</h1>
 
-                            <!--<p>In this sub section, we’re going to
-                                ask you questions about <span class="js-person-name"></span>.
-                            </p>-->
-                            <p>If you can’t find your address or part of your address has changed, it may not be registered on our system.
+                            <p>You have selected an address in Scotland. Visit the <a href="https://www.scotlandscensus.gov.uk/2021">National Records of Scotland website</a> to find out how to take part in the census for Scotland.
                             </p>
-                            <p>To register your address, we need you to get in touch. You can call us free on 0800 141 2021 or <a href="#">choose another way to contact us</a>.
-                            </p>
+                            <p>Alternatively, you can <a href="#">contact us for help</a>.</p>
 
                         </section>
                     </div>
@@ -54,7 +50,7 @@ logoUrl: ../home
     currentJourney = urlParams.get('current-journey');
 
     function updateAllLinks() {
-        $('.js-previous-link').attr('href', '../' + previousPage + '?' + 'previous=' + previousPage + '&' + 'current-journey=' + currentJourney);
+        $('.js-previous-link').attr('href', '../' + previousPage + '?' + 'previous=' + 'uac-request-address' + '&' + 'current-journey=' + currentJourney);
     }
 
     $(updateAllLinks);

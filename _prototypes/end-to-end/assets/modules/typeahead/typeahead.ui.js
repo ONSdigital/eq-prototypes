@@ -19,6 +19,7 @@ export default class TypeaheadUI {
     context,
     typeaheadData,
     sanitisedQueryReplaceChars,
+    sanitisedQuerySplitNumsChars,
     minChars,
     resultLimit,
     suggestOnBoot,
@@ -74,6 +75,7 @@ export default class TypeaheadUI {
     this.blurring = false;
     this.blurTimeout = null;
     this.sanitisedQueryReplaceChars = sanitisedQueryReplaceChars || [];
+    this.sanitisedQuerySplitNumsChars = sanitisedQuerySplitNumsChars || false;
 
     // Temporary fix as runner doesn't use full lang code
     if (this.lang === 'en') {
@@ -83,13 +85,13 @@ export default class TypeaheadUI {
   }
 
   initialiseUI() {
-    this.input.setAttribute('aria-autocomplete', 'list');
+    this.input.setAttribute('aria-autocomplete', 'new-password');
     this.input.setAttribute('aria-controls', this.listbox.getAttribute('id'));
     this.input.setAttribute('aria-describedby', this.instructions.getAttribute('id'));
     this.input.setAttribute('aria-has-popup', true);
     this.input.setAttribute('aria-owns', this.listbox.getAttribute('id'));
     this.input.setAttribute('aria-expanded', false);
-    this.input.setAttribute('autocomplete', this.input.getAttribute('data-autocomplete'));
+    this.input.setAttribute('autocomplete', 'new-password');
     this.input.setAttribute('role', 'combobox');
 
     this.context.classList.add('typeahead-input--initialised');
@@ -221,7 +223,7 @@ export default class TypeaheadUI {
   getSuggestions(force) {
     if (!this.settingResult) {
       const query = this.input.value;
-      const sanitisedQuery = sanitiseTypeaheadText(query, this.sanitisedQueryReplaceChars);
+      const sanitisedQuery = sanitiseTypeaheadText(query, this.sanitisedQueryReplaceChars, this.sanitisedQuerySplitNumsChars);
 
       if (sanitisedQuery !== this.sanitisedQuery || (force && !this.resultSelected)) {
         this.unsetResults();
@@ -229,7 +231,6 @@ export default class TypeaheadUI {
 
         this.query = query;
         this.sanitisedQuery = sanitisedQuery;
-
         if (this.sanitisedQuery.length >= this.minChars) {
             this.fetchSuggestions(this.sanitisedQuery, this.data)
               .then(this.handleResults.bind(this))
@@ -297,8 +298,9 @@ export default class TypeaheadUI {
   }
 
   handleResults(result) {
+    this.resultLimit = result.limit ? result.limit : this.resultLimit;
     this.foundResults = result.totalResults;
-    if (result.results.length > 50) {
+    if (this.foundResults > this.resultLimit) {
       result.results = result.results.slice(0, this.resultLimit);
     }
 
@@ -407,7 +409,6 @@ export default class TypeaheadUI {
         }
       }
     }
-
     this.ariaStatus.innerHTML = content;
   }
 

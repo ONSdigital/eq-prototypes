@@ -35,12 +35,14 @@ class AddressInput {
     this.form = context.closest('form');
     this.lang = document.documentElement.getAttribute('lang').toLowerCase();
     this.addressReplaceChars = [','];
+    this.sanitisedQuerySplitNumsChars = true;
 
-    // State
+    // State    
     this.manualMode = true;
     this.currentQuery = null;
     this.fetch = null;
     this.currentResults = [];
+    this.totalResults = 0;
     this.errored = false;
     this.addressSelected = false;
     this.isEditable = context.querySelector(`.${classNotEditable}`) ? false : true;
@@ -54,7 +56,7 @@ class AddressInput {
       suggestionFunction: this.suggestAddresses.bind(this),
       onError: this.onError.bind(this),
       sanitisedQueryReplaceChars: this.addressReplaceChars,
-      resultLimit: 50,
+      sanitisedQuerySplitNumsChars: this.sanitisedQuerySplitNumsChars,
       minChars: 5,
       suggestOnBoot: true,
       handleUpdate: true
@@ -88,7 +90,7 @@ class AddressInput {
     this.auth = btoa(this.user + ':' + this.password);
     this.headers = new Headers({
       'Authorization': 'Basic ' + this.auth,
-    });
+    }); 
   }
 
   toggleMode(clearInputs = true) {
@@ -134,7 +136,9 @@ class AddressInput {
 
   findAddress(text) {
     return new Promise((resolve, reject) => {
-      const queryUrl = this.lookupURL + text + '&limit=100';
+      const testInput = this.testFullPostcodeQuery(text);
+      let limit = testInput ? 100 : 10;
+      const queryUrl = this.lookupURL + text + '&limit=' + limit;
       this.fetch = new AbortableFetch(queryUrl, {
         method: 'GET',
         headers: this.headers
@@ -142,7 +146,7 @@ class AddressInput {
       this.fetch
         .send()
         .then(async response => {
-          const data = (await response.json()).response.addresses;
+          const data = (await response.json()).response;
           resolve(this.mapFindResults(data, text));
         })
         .catch(reject);
@@ -150,27 +154,38 @@ class AddressInput {
   }
 
   mapFindResults(results, input) {
-    let updatedResults, mappedResults;
-    let groups = results[0] && results[0].bestMatchAddress ? this.postcodeSearch(results, input) : null;
+    let updatedResults, mappedResults, limit;
 
-    if (groups) {
-      mappedResults = groups.map(({ address, count, postcode }) => {
+    const addresses = results.addresses;
+    const total = results.total;
+    const originalLimit = 10;
+
+    let groupPostcodes = addresses[0] && addresses[0].bestMatchAddress ? this.groupPostcodes(addresses, input) : null;
+    
+    if (groupPostcodes) {
+      mappedResults = groupPostcodes.map(({ address, count, postcode, uprn }) => {
         const countAdjust = count - 1;
         const addressText = countAdjust === 1 ? 'address' : 'addresses';
         return {
           'en-gb': countAdjust === 0 ? address : address + ' <span class="group-text">(' + countAdjust + ' more ' + addressText + ')</span>',
-          postcode
+          postcode,
+          uprn,
+          countAdjust,
         };
       });
+
+      limit = originalLimit;
       this.currentResults = mappedResults.sort();
 
-    } else if (results[0]) {
+    } else if (addresses[0]) {
 
-      if (results[0] && results[0].bestMatchAddress) {
-        updatedResults = results.map(({ uprn, bestMatchAddress }) => ({ uprn: uprn, address: bestMatchAddress }));
+      if (addresses[0] && addresses[0].bestMatchAddress) {
+        updatedResults = addresses.map(({ uprn, bestMatchAddress }) => ({ uprn: uprn, address: bestMatchAddress }));
+        limit = originalLimit;
 
-      } else if (results[0] && results[0].formattedAddress) {
-        updatedResults = results.map(({ uprn, formattedAddress }) => ({ uprn: uprn, address: formattedAddress }));
+      } else if (addresses[0] && addresses[0].formattedAddress) {
+        updatedResults = addresses.map(({ uprn, formattedAddress }) => ({ uprn: uprn, address: formattedAddress }));
+        limit = 100;
       }  
 
       mappedResults = updatedResults.map(({ uprn, address }) => {
@@ -178,18 +193,21 @@ class AddressInput {
         return {
           'en-gb': address,
           sanitisedText,
-          uprn
+          uprn,
         };
       });
+    
       this.currentResults = mappedResults.sort();
 
     } else {
-      this.currentResults = results;
+      this.currentResults = addresses;
+      limit = originalLimit;
     }
 
     return {
       results: this.currentResults,
-      totalResults: this.currentResults.length
+      totalResults: total,
+      limit: limit
     };
   }
 
@@ -211,36 +229,42 @@ class AddressInput {
     });
   }
 
-  postcodeSearch(results, input) {
+  groupPostcodes(results, input) {
     const postcodeRegex = /([A-Za-z]{1,2}\d{1,2})(\s?(\d?\w{2}))?/;
     const testForPostcode = postcodeRegex.test(input);
-    
     if (testForPostcode) {
       const addressesByPostcode = new Map();
   
       results.forEach(address => {
         const postcode = address.bestMatchAddress.match(postcodeRegex);
-
         if (!addressesByPostcode.has(postcode[0]))
           addressesByPostcode.set(postcode[0], []);
         addressesByPostcode.get(postcode[0]).push(address);
       });
-  
-  
-      const groups = Array.from(addressesByPostcode)
+
+      const groupPostcodes = Array.from(addressesByPostcode)
         .map(([postcode, addresses]) => ({
           address:  addresses[0].bestMatchAddress,
           count:    addresses.length,
           postcode: postcode,
+          uprn: addresses[0].uprn
         }));
       
-      return groups;
+      return groupPostcodes;
+    }
+  }
+
+  testFullPostcodeQuery(input) {
+    const fullPostcodeRegex = /\b((?:(?:gir)|(?:[a-pr-uwyz])(?:(?:[0-9](?:[a-hjkpstuw]|[0-9])?)|(?:[a-hk-y][0-9](?:[0-9]|[abehmnprv-y])?)))) ?([0-9][abd-hjlnp-uw-z]{2})\b/i;
+    const testFullPostcode = fullPostcodeRegex.test(input);
+    if (testFullPostcode) {
+      return true;
     }
   }
 
   onAddressSelect(selectedResult) {
     return new Promise((resolve, reject) => {
-      if (selectedResult.uprn) {
+      if (selectedResult.uprn && (selectedResult.countAdjust === 0 || !selectedResult.countAdjust)) {
         this.retrieveAddress(selectedResult.uprn)
           .then(data => {
             if (this.isEditable) {
@@ -256,7 +280,7 @@ class AddressInput {
             }
           })
           .catch(reject);
-      } else if (selectedResult.postcode) {
+      } else if (selectedResult.postcode && selectedResult.countAdjust > 0) {
         const event = new Event('input', {
           'bubbles': true,
           'cancelable': true

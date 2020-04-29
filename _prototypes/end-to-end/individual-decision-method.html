@@ -155,7 +155,7 @@ noONSLogoLink: true
         window.location.href = url + '?person_id=' + personId + '&previous=' + previousPage;
     });
 
-    function updateAllcurrentJourneys() {
+    function updateAllLinks() {
         if (previousPage === 'cant-answer-for-others-who') {
             $('.js-previous-link').attr('href', '../cant-answer-for-others-who');
         } else if (previousPage === 'uac-question') {
@@ -165,5 +165,5 @@ noONSLogoLink: true
         }
     }
 
-    $(updateAllcurrentJourneys);
+    $(updateAllLinks);
 </script>
