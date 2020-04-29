@@ -10,14 +10,13 @@ noONSLogoLink: true
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
+        <a class="js-previous-link" href="#">Previous</a>
     </div>
 </div>
 
 <div class="page__container container">
     <div class="grid grid--reverse">
-        <div class="grid__col col-4@m">
-        </div>
+        <div class="grid__col col-4@m"></div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
                 <div class="panel panel--error u-mb-m js-error-box u-d-no">
@@ -26,22 +25,18 @@ noONSLogoLink: true
                     </div>
                     <div class="panel__body">
                         <p class="js-piping">This <strong>must be corrected</strong> to continue</p>
-                        <ol class="list list--bare">
-                        <li class="list__item js-personal-detail-dob-day u-d-no">
-                            1. <a href="#personal-detail-dob-day" class="list__link js-inpagelink js-error">
-                                Enter your date of birth
-                            </a>
-                        </li>
-                       </ol>
+                        <ul class="list list--bare">
+                          <li class="list__item js-personal-detail-dob-day u-d-no">
+                              1. <a href="#personal-detail-dob-day" class="list__link js-inpagelink js-error">Enter your date of birth</a>
+                          </li>
+                       </ul>
                     </div>
                 </div>
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password" novalidate=""
                       action="../individual-details-age-confirm">
-                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
-                           value="#"/>
-                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
-                           value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person" value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type" value="#"/>
                     <div class="group" id="rsi">
                         <div class="block" id="total-retail-turnover">
                             <section class="section">
@@ -50,44 +45,31 @@ noONSLogoLink: true
                                         class="question__title u-fs-xl js-heading">
                                         What is your date of birth?
                                     </h1>
-                                    <p class="question__description">
-                                      For example, 31 3 1980</p>
+                                    <p class="question__description">For example, 31 3 1980</p>
                                 </div>
-                            <div class="question__answers">
-                                <div class="question__answer">
-
-                                <div class="answer answer--date">
-                                    <div
-                                            class="answer__fields js-fields">
-                                        <fieldset
-                                                class="fieldgroup fieldgroup--inline fieldgroup--date" data-qa="widget-date">
-
-                                            <div class="fieldgroup__fields">
-                                                <div class="field field--input input--w-2">
-                                                    <label class="label" for="personal-detail-dob-day">
-                                                        Day
-                                                    </label>
-                                                    <input required type="text" data-error-msg="Enter your date of birth"  id="personal-detail-dob-day" class="input input--StringField input--text input-type__input  input--w-2" name="day" min="1" max="31" maxlength="2" pattern="[0-9]*" inputmode="numeric" autocomplete="bday-day" />
-                                                </div>
-
-                                                <div class="field field--select field--month">
-                                                    <label class="label" for="personal-detail-dob-month">
-                                                        Month
-                                                    </label>
-                                                    <input type="text" id="personal-detail-dob-month" class="input input--text input-type__input  input--w-2" name="month" min="1" max="12" maxlength="2" pattern="[0-9]*" inputmode="numeric" autocomplete="bday-month" />
-                                                </div>
-
-                                                <div class="field field--input field--year">
-                                                    <label class="label" for="personal-detail-dob-year">
-                                                        Year
-                                                    </label>
-                                                    <input type="text" id="personal-detail-dob-year" data-qa="input-StringField" class="input input--StringField input--text input-type__input input--w-4" name="year" min="1000" max="3000" maxlength="4" pattern="[0-9]*" inputmode="numeric" autocomplete="bday-year" />
-                                                </div>
+                                <div class="question__answers">
+                                    <div class="question__answer">
+                                        <div class="answer answer--date">
+                                            <div class="answer__fields js-fields">
+                                                <fieldset class="fieldgroup fieldgroup--inline fieldgroup--date" data-qa="widget-date">
+                                                    <div class="fieldgroup__fields">
+                                                        <div class="field field--input input--w-2">
+                                                            <label class="label" for="personal-detail-dob-day">Day</label>
+                                                            <input required type="text" data-error-msg="Enter your date of birth" id="personal-detail-dob-day" class="input input--StringField input--text input-type__input input--w-2" name="day" min="1" max="31" maxlength="2" pattern="[0-9]*" inputmode="numeric" />
+                                                        </div>
+                                                        <div class="field field--select field--month">
+                                                            <label class="label" for="personal-detail-dob-month">Month</label>
+                                                            <input required type="text" data-error-msg="Enter your date of birth" id="personal-detail-dob-month" class="input input--StringField input--text input-type__input input--w-2" name="month" min="1" max="12" maxlength="2" pattern="[0-9]*" inputmode="numeric"/>
+                                                        </div>
+                                                        <div class="field field--input field--year">
+                                                            <label class="label" for="personal-detail-dob-year">Year</label>
+                                                            <input required type="text" data-error-msg="Enter your date of birth" id="personal-detail-dob-year" data-qa="input-StringField" class="input input--StringField input--text input-type__input input--w-4" name="year" min="1000" max="3000" maxlength="4" pattern="[0-9]*" inputmode="numeric"/>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
                                             </div>
-                                        </fieldset>
+                                        </div>
                                     </div>
-                                </div>
-                                </div>
                                 </div>
                             </section>
                         </div>
