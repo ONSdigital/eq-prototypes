@@ -108,26 +108,30 @@ noONSLogoLink: true
     e.preventDefault();
     var question = 'You are ' + age + ' years old. Is this correct?';
     var route = '',
-      val = $('[name="age-confirm"]:checked').val();
-    let url = '../individual-details-age-confirm/?person_id=' + personId + '&edit=true';
+      val = $('[name="age-confirm"]:checked').val(),
+      url = '../individual-details-age-confirm/?person_id=' + personId + '&edit=true';
     question = question.trim();
     storageAPI.addUpdateAgeConfirm(personId, val, question, url);
 
-    if(isEditing) {
-      window.location.href = '../individual-details-summary/' + '?person_id=' + personId + (surveyType ? '&survey=' + surveyType :'');
-      storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
-
-    }
-    else if(isVisitor) {
+    if(isVisitor) {
       window.location.href = '../individual-details-dob/' + '?person_id=' + personId + (surveyType ? '&survey=' + surveyType :'');
       storageAPI.storePageData('/end-to-end/individual-details-dob/', window.location.pathname);
     }
-    else if(val === 'Yes'){
+    else if(val === 'Yes' && isEditing) {
+      window.location.href = '../individual-details-summary/' + '?person_id=' + personId + (surveyType ? '&survey=' + surveyType :'');
+      storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+    }
+    else if(val === 'Yes' && !(isEditing)){
       window.location.href = '../individual-details-sex/?person_id=' + personId + '&age=' + age;
       storageAPI.addUpdateAge(personId, ageYear);
       storageAPI.storePageData('/end-to-end/individual-details-sex/', window.location.pathname);
-    } 
-    else {
+    }
+    else if(val === 'No' && isEditing){
+      val = '';
+      storageAPI.addUpdateAgeConfirm(personId, val, question, url);
+      window.location.href = '../individual-details-dob/' + '?person_id=' + personId + '&edit=true' + (surveyType ? '&survey=' + surveyType :'');
+      storageAPI.storePageData('/end-to-end/individual-details-dob/', window.location.pathname);
+    } else {
       val = '';
       storageAPI.addUpdateAgeConfirm(personId, val, question, url);
       window.location.href = '../individual-details-dob/' + '?person_id=' + personId + (surveyType ? '&survey=' + surveyType :'');
@@ -186,10 +190,17 @@ noONSLogoLink: true
     }
   }
 
-  if (details && details['ageConfirm']) {
-    $('#' + details['ageConfirm'].val).attr('checked', true);
-  }
+    if (details && details['ageConfirm']) {
+      $('#' + details['ageConfirm'].val).attr('checked', true);
+    }
 
+    function updateAnswer() {
+        if (details && details.ageConfirm) {
+            $('input[type=radio][value="' + details.ageConfirm.val +'"]').prop("checked", true);
+        }
+    }
+
+  $(updateAnswer);
   $(updateQuestion);
   $(updateRouting);
 

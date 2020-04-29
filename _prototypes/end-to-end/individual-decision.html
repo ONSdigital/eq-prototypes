@@ -58,7 +58,8 @@ noONSLogoLink: true
                                                     <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
                                                            name="is-you"
-                                                           id="no" value="No">
+                                                           id="no"
+                                                           value="No">
                                                     <label class="label label--inline"
                                                            for="no">
                                                         No, I am answering on
@@ -93,7 +94,6 @@ noONSLogoLink: true
         yesbox = document.getElementById("yes"),
         surveyType = urlParams.get('survey');
         
-        
 	$('.qa-btn-submit').click(function(e) {
 	  var val = yesbox.checked;
       storageAPI.personalBookmark(personId, window.location.href);
@@ -110,18 +110,16 @@ noONSLogoLink: true
       $('.js-person-name').html('<em class="highlight">' + storageAPI.getHouseholdMemberByPersonId(personId)['@person'].fullName + '?</em>');
 	}
 
-	function updateSelected() {
-	  var answerVal = storageAPI.getAnsweringIndividualByProxy();
-
-      answerVal !== null &&
-        $('#' + (answerVal ? 'no' : 'yes')).attr('checked', true);
+    function updateAnswer() {
+        var answerVal = storageAPI.getAnsweringIndividualByProxy();
+        if (answerVal === true) {
+            $('input[type=radio][value="No"]').prop("checked", true);
+        } else if (answerVal === false) {
+            $('input[type=radio][value="Yes"]').prop("checked", true);
+        }
     }
 
-    function updateAllLinks() {
-        $('.js-previous-link').attr('href', '../individual-intro/?person_id=' + personId);
-    }
-
-    $(updateAllLinks);
+    $(updateAnswer);
 	$(updateName);
     $(updateRouting);
 </script>

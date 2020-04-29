@@ -88,7 +88,7 @@ noONSLogoLink: true
     e.preventDefault();
 
     var url = '';
-    let urlEdit = '../individual-details-employment-job-description' + '?edit=' + personId;
+    let urlEdit = '../individual-details-employment-job-description' + '?person_id=' + personId + '&edit=true';
     question = question.trim();
     storageAPI.addUpdateEmploymentJobDescription(personId, $('#text-input').val(), question, urlEdit);
 

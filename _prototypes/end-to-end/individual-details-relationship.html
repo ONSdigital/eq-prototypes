@@ -186,69 +186,70 @@ noONSLogoLink: true
 <script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
-  var storageAPI = window.ONS.storage,
-    urlParams = new URLSearchParams(window.location.search),
-    personId = urlParams.get('person_id'),
-    member = storageAPI.getHouseholdMemberByPersonId(personId),
-    person = member['@person'],
-    isEditing = urlParams.get('edit'),
-    isVisitor = storageAPI.isVisitor(member),
-    details = storageAPI.getPersonalDetailsFor(personId),
-    surveyType = urlParams.get('survey');
-    storageAPI.personalBookmark(personId, window.location.href),
-    question = 'what is your legal marital or registered civil partnership status?';
+    var storageAPI = window.ONS.storage,
+        urlParams = new URLSearchParams(window.location.search),
+        personId = urlParams.get('person_id'),
+        member = storageAPI.getHouseholdMemberByPersonId(personId),
+        person = member['@person'],
+        isEditing = urlParams.get('edit'),
+        isVisitor = storageAPI.isVisitor(member),
+        details = storageAPI.getPersonalDetailsFor(personId),
+        surveyType = urlParams.get('survey');
+        storageAPI.personalBookmark(personId, window.location.href),
+        question = 'What is your legal marital or registered civil partnership status?';
 
-  $('.qa-btn-submit').on('click',
-    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
-    let url = '../individual-details-relationship/?person_id=' + personId + '&edit=true';
-    question = question.trim();
-    var val = $('[name="marital-status"]:checked').val();
+    $('.qa-btn-submit').on('click',
+        storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+        let url = '../individual-details-relationship/?person_id=' + personId + '&edit=true';
+        question = question.trim();
+        var val = $('[name="marital-status"]:checked').val();
 
-    storageAPI.addUpdateMaritalStatus(personId,
-      $('[name="marital-status"]:checked').val(),
-      question,
-      url
-    );
-    storageAPI.storePageData('/end-to-end/individual-details-relationship-current-status/', window.location.pathname);
+        storageAPI.addUpdateMaritalStatus(personId,
+            $('[name="marital-status"]:checked').val(),
+            question,
+            url
+        );
+        storageAPI.storePageData('/end-to-end/individual-details-relationship-current-status/', window.location.pathname);
 
-    if(isEditing) {
-      e.preventDefault();
-      window.location.href = '../individual-details-summary/?person_id=' +
-        personId + (surveyType ? '&survey=' + surveyType : '');
-        storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+        if(isEditing) {
+            e.preventDefault();
+            window.location.href = '../individual-details-summary/?person_id=' +
+                personId + (surveyType ? '&survey=' + surveyType : '');
+                storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+        } else if(val === 'Never' || val === null) {
+        e.preventDefault();
+        window.location.href = '../individual-details-30-day-address/?person_id=' + personId;
+        storageAPI.storePageData('/end-to-end/individual-details-30-day-address/', window.location.pathname);
+        }
+    }));
+
+    function updateRouting() {
+        if(surveyType) {
+            $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+        }
+        $('#survey-type').val(surveyType);
     }
 
-    if(val === 'Never' || val === null) {
-      e.preventDefault();
-      window.location.href = '../individual-details-30-day-address/?person_id=' + personId;
-      storageAPI.storePageData('/end-to-end/individual-details-30-day-address/', window.location.pathname);
+    function updateQuestion() {
+        if(storageAPI.getAnsweringIndividualByProxy()) {
+            $('.js-heading').html('On <span class="js-significant-date">' + window.ONS.utils.getSignificant() + '</span>, what is ' + '<em class="highlight">' + person.firstLastName + 
+            window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
+            ' legal marital or registered civil partnership status?');
+        }
     }
-  }));
 
-  function updateRouting() {
-    if(surveyType) {
-      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    function updateAnswer() {
+        if (details && details.maritalStatus) {
+            $('input[type=radio][value="' + details.maritalStatus.val +'"]').prop("checked", true);
+        }
     }
-    $('#survey-type').val(surveyType);
-  }
 
-  function updateQuestion() {
-    if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('On <span class="js-significant-date">' + window.ONS.utils.getSignificant() + '</span>, what is ' + '<em class="highlight">' + person.firstLastName + 
-      window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
-        ' legal marital or registered civil partnership status?');
-    }
-  }
+    $(updateAnswer);
+    $(updateQuestion);
+    $(updateRouting);
 
-  if (details && details.maritalStatus) {
-    $('#' + details.maritalStatus.val).attr('checked', true);
-  }
-
-  $(updateQuestion);
-  $(updateRouting);
-
-  /**
-   * Routing
-   */
-  $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
+    /**
+    * Routing
+    */
+    $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
 </script>

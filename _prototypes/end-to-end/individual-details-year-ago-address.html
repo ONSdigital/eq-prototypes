@@ -49,7 +49,7 @@ noONSLogoLink: true
                                                            type="radio"
                                                            name="year-ago-address"
                                                            id="home-address"
-                                                           value="home-address">
+                                                           value="Home address">
                                                     <label class="label label--inline"
                                                            for="home-address"
                                                            id="home-address-label">
@@ -61,7 +61,7 @@ noONSLogoLink: true
                                                            type="radio"
                                                            name="year-ago-address"
                                                            id="student-address"
-                                                           value="student-address">
+                                                           value="Student address">
                                                     <label class="label label--inline"
                                                            for="student-address"
                                                            id="student-address-label">
@@ -73,7 +73,7 @@ noONSLogoLink: true
                                                            type="radio"
                                                            name="year-ago-address"
                                                            id="same-address"
-                                                           value="same-address">
+                                                           value="Same address">
                                                     <label class="label label--inline"
                                                            for="same-address"
                                                            id="same-address-label">
@@ -85,7 +85,7 @@ noONSLogoLink: true
                                                            type="radio"
                                                            name="year-ago-address"
                                                            id="another-uk-address"
-                                                           value="another-uk-address">
+                                                           value="Another UK address">
                                                     <label class="label label--inline"
                                                            for="another-uk-address"
                                                            id="another-uk-address-label">
@@ -97,7 +97,7 @@ noONSLogoLink: true
                                                            type="radio"
                                                            name="year-ago-address"
                                                            id="another-outside-uk-address"
-                                                           value="another-outside-uk-address">
+                                                           value="Another outside UK address">
                                                     <label class="label label--inline"
                                                            for="another-outside-uk-address"
                                                            id="another-outside-uk-address-label">
@@ -140,10 +140,8 @@ noONSLogoLink: true
     storageAPI.personalBookmark(personId, window.location.href),
     question = $('#question-title').html();
   
-  $('.qa-btn-submit').on('click',
-    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+    $('.qa-btn-submit').on('click', storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
         e.preventDefault();
-
         var val = $('[name="year-ago-address"]:checked').val();
         let url = '../individual-details-year-ago-address/?person_id=' + personId + '&edit=true';
         question = question.trim();
@@ -153,57 +151,61 @@ noONSLogoLink: true
             e.preventDefault();
             window.location.href = '../individual-details-summary/?person_id=' +
                 personId + (surveyType ? '&survey=' + surveyType : '');
-        }
-        
-        if(val === 'another-uk-address' || val === 'student-address') {
+        } else if(val === 'Another UK address' || val === 'Student address') {
             window.location.href = '../individual-details-year-ago-address-uk/?person_id=' + personId;
             storageAPI.storePageData('/end-to-end/individual-details-year-ago-address-uk/', window.location.pathname);
 
-        } else if (val === 'another-outside-uk-address'){
+        } else if (val === 'Another outside UK address'){
             window.location.href = '../individual-details-year-ago-address-outside-uk/?person_id=' + personId;
             storageAPI.storePageData('/end-to-end/individual-details-year-ago-address-outside-uk/', window.location.pathname);
 
         } else {
             window.location.href = '../individual-details-national-identity/?person_id=' + personId;
             storageAPI.storePageData('/end-to-end/individual-details-national-identity/', window.location.pathname);
-
         }
-  }));
+    }));
 
-  function updateAddresses() {
-    $('#home-address-label').text(sessionStorage.getItem('address'));
-    if(isVisitor) {
-        var visitors =
-        storageAPI.getAllHouseholdMembers().filter(storageAPI.isVisitor),
-        visitor1 = visitors[0],
-        visitor1Person = visitor1['@person'];
+    function updateAddresses() {
+        $('#home-address-label').text(sessionStorage.getItem('address'));
+        if(isVisitor) {
+            var visitors =
+            storageAPI.getAllHouseholdMembers().filter(storageAPI.isVisitor),
+            visitor1 = visitors[0],
+            visitor1Person = visitor1['@person'];
 
-        if((person.id !== visitor1Person.id) && visitors.length > 1) {
-            var name = 
-            $('#same-address-label').text("Same as " + visitor1Person.firstLastName + "'s address one year ago");
+            if((person.id !== visitor1Person.id) && visitors.length > 1) {
+                var name = 
+                $('#same-address-label').text("Same as " + visitor1Person.firstLastName + "'s address one year ago");
+            } else {
+                $('#same-address-field').remove();
+            }
+        }
+
+        else if (personId !== 'person_me' && storageAPI.getHouseholdMemberByPersonId('person_me')) {
+            $('#same-address-label').text("Same as " + storageAPI.getHouseholdMemberByPersonId('person_me')['@person'].firstLastName + "'s address one year ago");
         } else {
             $('#same-address-field').remove();
         }
     }
+
+    function updateQuestion() {
+        if(storageAPI.getAnsweringIndividualByProxy()) {
+            $('.js-heading').html('One year ago, what was ' + '<em class="highlight">' + person.firstLastName +
+            window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
+            ' usual address?');
+            $('.js-piping').html('If they had no usual address one year ago, select the address where they were staying');
+        }
+    }
     
-    else if (personId !== 'person_me' && storageAPI.getHouseholdMemberByPersonId('person_me')) {
-        $('#same-address-label').text("Same as " + storageAPI.getHouseholdMemberByPersonId('person_me')['@person'].firstLastName + "'s address one year ago");
-    } else {
-        $('#same-address-field').remove();
+    function updateAnswer() {
+        if (details && details.yearAgoAddress) {
+            $('input[type=radio][value="' + details.yearAgoAddress.val +'"]').prop("checked", true);
+        }
     }
-  }
 
-  function updateQuestion() {
-    if(storageAPI.getAnsweringIndividualByProxy()) {
-        $('.js-heading').html('One year ago, what was ' + '<em class="highlight">' + person.firstLastName +
-        window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
-        ' usual address?');
-        $('.js-piping').html('If they had no usual address one year ago, select the address where they were staying');
-    }
-  }
-
-  $(updateAddresses);
-  $(updateQuestion);
+    $(updateAnswer);
+    $(updateAddresses);
+    $(updateQuestion);
 
   /**
    * Routing

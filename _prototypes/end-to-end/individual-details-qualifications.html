@@ -41,43 +41,39 @@ noONSLogoLink: true
 <script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
-  var storageAPI = window.ONS.storage,
-    urlParams = new URLSearchParams(window.location.search),
-    personId = urlParams.get('person_id'),
-    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
-    surveyType = urlParams.get('survey'),
-    personDetails = storageAPI.getHouseholdMemberByPersonId(personId);
-    
-    $('.qa-btn-submit').on('click',
-        storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
-            window.location.href = '../individual-details-apprenticeship/?person_id=' +
-                personId + (surveyType ? '&survey=' + surveyType : '');
-                storageAPI.storePageData('/end-to-end/individual-details-apprenticeship/', window.location.pathname);
-
-    }));
-
-    $('.js-link-ir').click(function(e) {
-        e.preventDefault();
+    var storageAPI = window.ONS.storage,
+        urlParams = new URLSearchParams(window.location.search),
+        personId = urlParams.get('person_id'),
+        person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+        surveyType = urlParams.get('survey'),
+        personDetails = storageAPI.getHouseholdMemberByPersonId(personId);
         
-        window.location = '../cant-answer-for-others/?person_id=' + personId +
-        (surveyType ? '&survey=' + surveyType : '');
-    });
+        $('.qa-btn-submit').on('click',
+            storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+                window.location.href = '../individual-details-apprenticeship/?person_id=' +
+                    personId + (surveyType ? '&survey=' + surveyType : '');
+                    storageAPI.storePageData('/end-to-end/individual-details-apprenticeship/', window.location.pathname);
+        }));
 
-  function showIrDetails() {
-    if (personId !== 'person_me' && personDetails.type !== 'visitor') {
-        $('.js-collapsible').removeClass('u-vh');
+        $('.js-link-ir').click(function(e) {
+            e.preventDefault();
+            window.location = '../cant-answer-for-others/?person_id=' + personId +
+            (surveyType ? '&survey=' + surveyType : '');
+        });
+
+    function showIrDetails() {
+        if (personId !== 'person_me' && personDetails.type !== 'visitor') {
+            $('.js-collapsible').removeClass('u-vh');
+        }
     }
-  }
 
-  function updatePara() {
-    if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-text').html('The next set of questions is about any qualifications <em class="highlight">' + person.firstLastName +  
-      '</em> has ever achieved in Wales, England or worldwide, including equivalents, even if they are not using them now. ');
+    function updatePara() {
+        if(storageAPI.getAnsweringIndividualByProxy()) {
+            $('.js-text').html('The next set of questions is about any qualifications <em class="highlight">' + person.firstLastName +  
+            '</em> has ever achieved in Wales, England or worldwide, including equivalents, even if they are not using them now. ');
+        }
     }
-  }
 
-  $(updatePara);
-  $(showIrDetails);
-
-
+    $(updatePara);
+    $(showIrDetails);
 </script>

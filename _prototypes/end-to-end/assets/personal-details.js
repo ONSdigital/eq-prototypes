@@ -386,9 +386,10 @@ export function addUpdate30DayCountry(personId, value, question, url) {
 }
 
 export function addUpdateCountry(personId, val, question, url) {
-  return changeDetailsFor(personId, () =>
+  return changeDetailsFor(personId, details =>
     ({
       'country': {
+        ...(details['country'] || {}),
         val,
         question,
         url
@@ -396,14 +397,14 @@ export function addUpdateCountry(personId, val, question, url) {
     }));
 }
 
-export function addUpdateCountryOther(personId, val, question, url) {
+export function addUpdateCountryOther(personId, valOther, questionOther, urlOther) {
   return changeDetailsFor(personId, details =>
     ({
-      'countryOther': {
-        ...(details['countryOther'] || {}),
-        val,
-        question,
-        url
+      'country': {
+        ...(details['country'] || {}),
+        valOther,
+        questionOther,
+        urlOther
       }
     }));
 }
@@ -444,27 +445,27 @@ export function addUpdateCountryOtherStay(personId, val, question, url) {
     }));
 }
 
-export function addUpdateNationalIdentity(personId, collection, otherText, question, url) {
+export function addUpdateNationalIdentity(personId, collection, question, url) {
   return changeDetailsFor(personId, () =>
     ({
       'nationalIdentity': {
         collection,
-        ...(collection.find(val => val === 'other') ? { otherText } : {}),
         question,
         url
       }
     }));
 }
 
-export function addUpdateNationalIdentityOther(personId, otherText, question, url) {
-  return changeDetailsFor(personId, () =>
-    ({
-      'nationalIdentityOther': {
-        otherText,
-        question,
-        url
-      }
-    }));
+export function addUpdateNationalIdentityOther(personId, niOther, questionOther, urlOther) {
+  return changeDetailsFor(personId, details =>
+  ({
+    'nationalIdentity': {
+      ...(details['nationalIdentity'] || {}),
+      niOther,
+      questionOther,
+      urlOther
+    }
+  }));
 }
 
 export function addUpdateEthnicGroup(personId, val, question, url) {
@@ -478,26 +479,26 @@ export function addUpdateEthnicGroup(personId, val, question, url) {
     }));
 }
 
-export function addUpdateEthnicGroupDescription(personId, description, question, url) {
+export function addUpdateEthnicGroupDescription(personId, description, questionDescription, urlDescription) {
   return changeDetailsFor(personId, details =>
-    ({
-      'ethnicGroup': {
-        ...(details['ethnicGroup'] || {}),
-        ...{ description },
-        question,
-        url
-      }
-    }));
+  ({
+    'ethnicGroup': {
+      ...(details['ethnicGroup'] || {}),
+      description,
+      questionDescription,
+      urlDescription
+    }
+  }));
 }
 
-export function addUpdateEthnicGroupOther(personId, otherText, question, url) {
+export function addUpdateEthnicGroupOther(personId, otherText, questionOther, urlOther) {
   return changeDetailsFor(personId, details =>
     ({
       'ethnicGroup': {
         ...(details['ethnicGroup'] || {}),
-        ...{ otherText },
-        question,
-        url
+        otherText,
+        questionOther,
+        urlOther
       }
     }));
 }
@@ -514,20 +515,20 @@ export function addUpdateReligion(personId, description, question, url) {
     }));
 }
 
-export function addUpdateReligionOther(personId, otherText, question, url) {
+export function addUpdateReligionOther(personId, descriptionOther, questionOther, urlOther) {
   return changeDetailsFor(personId, details =>
     ({
       'religion': {
         ...(details['religion'] || {}),
-        ...{ otherText },
-        question,
-        url
+        ...{ descriptionOther },
+        questionOther,
+        urlOther
       }
     }));
 }
 
 export function addUpdateLanguage(personId, lang, question, url) {
-  return changeDetailsFor(personId, () =>
+  return changeDetailsFor(personId, details =>
   ({
     'language': {
       ...(details['language'] || {}),
@@ -538,52 +539,50 @@ export function addUpdateLanguage(personId, lang, question, url) {
   }));
 }
 
-export function addUpdateLanguageOther(personId, other, question, url) {
-  return changeDetailsFor(personId, () =>
+export function addUpdateLanguageOther(personId, other, questionOther, urlOther) {
+  return changeDetailsFor(personId, details =>
   ({
     'language': {
       ...(details['language'] || {}),
       ...{ other },
-      question,
-      url
+      questionOther,
+      urlOther
     }
   }));
 }
 
-export function addUpdateLanguageEnglish(personId, english, question, url) {
-  return changeDetailsFor(personId, () =>
+export function addUpdateLanguageEnglish(personId, english, questionEnglishLevel, urlEnglishLevel) {
+  return changeDetailsFor(personId, details =>
   ({
     'language': {
       ...(details['language'] || {}),
       ...{ english },
-      question,
-      url
+      questionEnglishLevel,
+      urlEnglishLevel
     }
   }));
 }
 
 export function addUpdatePassportCountry(personId, countries, question, url) {
-  //let countriesList = "";
-  //countries.forEach(element => countriesList = countriesList + ", " + element)
   return changeDetailsFor(personId, details =>
     ({
       'passport': {
         ...(details['passport'] || {}),
         countries,
-        //countriesList,
         question,
         url
       }
     }));
 }
 
-export function addUpdatePassportCountryOther(personId, otherText, question, url) {
-  return changeDetailsFor(personId, () =>
+export function addUpdatePassportCountryOther(personId, otherText, questionOther, urlOther) {
+  return changeDetailsFor(personId, details =>
     ({
-      'passportOther': {
+      'passport': {
+        ...(details['passport'] || {}),
         otherText,
-        question,
-        url
+        questionOther,
+        urlOther
       }
     }));
 }
@@ -737,12 +736,12 @@ export function addUpdateStudentAddressUk(personId, val, question, url) {
     }));
 }
 
-export function addUpdateStudentAddressCountry(personId, value, question, url) {
+export function addUpdateStudentAddressCountry(personId, val, question, url) {
   return changeDetailsFor(personId, details =>
     ({
       'AddressStudentCountry': {
         ...(details['AddressStudentCountry'] || {}),
-        value,
+        val,
         question,
         url
       }
@@ -917,7 +916,7 @@ export function addUpdateArmedForces(personId, val, question, url) {
 }
 
 export function addUpdateLastSevenDays(personId, sevenDaysAgo, question, url) {
-  return changeDetailsFor(personId, () =>
+  return changeDetailsFor(personId, details =>
     ({
       'employment': {
         ...(details['employment'] || {}),
@@ -929,7 +928,7 @@ export function addUpdateLastSevenDays(personId, sevenDaysAgo, question, url) {
 }
 
 export function addUpdateLastSevenDaysDescription(personId, description, questionSevenDaysDescription, urlSevenDaysDescription) {
-  return changeDetailsFor(personId, () =>
+  return changeDetailsFor(personId, details =>
     ({
       'employment': {
         ...(details['employment'] || {}),
@@ -941,7 +940,7 @@ export function addUpdateLastSevenDaysDescription(personId, description, questio
 }
 
 export function addUpdateEmploymentFourWeeks(personId, fourWeeksAgo, questionFourWeeks, urlFourWeeks) {
-  return changeDetailsFor(personId, () =>
+  return changeDetailsFor(personId, details =>
     ({
       'employment': {
         ...(details['employment'] || {}),
@@ -953,7 +952,7 @@ export function addUpdateEmploymentFourWeeks(personId, fourWeeksAgo, questionFou
 }
 
 export function addUpdateEmploymentAvailableTwoWeeks(personId, availableInTwoWeeks, questionAvailableTwoWeeks, urlAvailableTwoWeeks) {
-  return changeDetailsFor(personId, () =>
+  return changeDetailsFor(personId, details =>
     ({
       'employment': {
         ...(details['employment'] || {}),
@@ -965,7 +964,7 @@ export function addUpdateEmploymentAvailableTwoWeeks(personId, availableInTwoWee
 }
 
 export function addUpdateEmploymentPaidWorkConfirm(personId, paidWorkConfirm, questionPaidWorkConfirm, urlPaidWorkConfirm) {
-  return changeDetailsFor(personId, () =>
+  return changeDetailsFor(personId, details =>
     ({
       'employment': {
         ...(details['employment'] || {}),
@@ -977,7 +976,7 @@ export function addUpdateEmploymentPaidWorkConfirm(personId, paidWorkConfirm, qu
 }
 
 export function addUpdateEmploymentAcceptedJob(personId, acceptedJob, questionAcceptedJob, urlAcceptedJob) {
-  return changeDetailsFor(personId, () =>
+  return changeDetailsFor(personId, details =>
     ({
       'employment': {
         ...(details['employment'] || {}),
@@ -989,7 +988,7 @@ export function addUpdateEmploymentAcceptedJob(personId, acceptedJob, questionAc
 }
 
 export function addUpdateEmploymentStatus(personId, status, questionStatus, urlStatus) {
-  return changeDetailsFor(personId, () =>
+  return changeDetailsFor(personId, details =>
     ({
       'employment': {
         ...(details['employment'] || {}),
@@ -1001,7 +1000,7 @@ export function addUpdateEmploymentStatus(personId, status, questionStatus, urlS
 }
 
 export function addUpdateEmploymentName(personId, name, questionName, urlName) {
-  return changeDetailsFor(personId, () =>
+  return changeDetailsFor(personId, details =>
     ({
       'employment': {
         ...(details['employment'] || {}),
@@ -1013,7 +1012,7 @@ export function addUpdateEmploymentName(personId, name, questionName, urlName) {
 }
 
 export function addUpdateEmploymentJobTitle(personId, jobTitle, questionJobTitle, urlJobTitle) {
-  return changeDetailsFor(personId, () =>
+  return changeDetailsFor(personId, details =>
     ({
       'employment': {
         ...(details['employment'] || {}),
@@ -1025,7 +1024,7 @@ export function addUpdateEmploymentJobTitle(personId, jobTitle, questionJobTitle
 }
 
 export function addUpdateEmploymentJobDescription(personId, jobDescription, questionJobDescription, urlJobDescription) {
-  return changeDetailsFor(personId, () =>
+  return changeDetailsFor(personId, details =>
     ({
       'employment': {
         ...(details['employment'] || {}),
@@ -1037,7 +1036,7 @@ export function addUpdateEmploymentJobDescription(personId, jobDescription, ques
 }
 
 export function addUpdateEmploymentBusinessActivity(personId, businessActivity, questionBusinessActivity, urlBusinessActivity) {
-  return changeDetailsFor(personId, () =>
+  return changeDetailsFor(personId, details =>
     ({
       'employment': {
         ...(details['employment'] || {}),
@@ -1049,7 +1048,7 @@ export function addUpdateEmploymentBusinessActivity(personId, businessActivity, 
 }
 
 export function addUpdateEmploymentResponsibilities(personId, responsibilities, questionResponsibilities, urlResponsibilities) {
-  return changeDetailsFor(personId, () =>
+  return changeDetailsFor(personId, details =>
     ({
       'employment': {
         ...(details['employment'] || {}),
@@ -1061,7 +1060,7 @@ export function addUpdateEmploymentResponsibilities(personId, responsibilities, 
 }
 
 export function addUpdateEmploymentHoursWorked(personId, hours, questionHoursWorked, urlHoursWorked) {
-  return changeDetailsFor(personId, () =>
+  return changeDetailsFor(personId, details =>
     ({
       'employment': {
         ...(details['employment'] || {}),
@@ -1073,7 +1072,7 @@ export function addUpdateEmploymentHoursWorked(personId, hours, questionHoursWor
 }
 
 export function addUpdateEmploymentTravel(personId, modeOfTravel, questionEmploymentTravel, urlEmploymentTravel) {
-  return changeDetailsFor(personId, () =>
+  return changeDetailsFor(personId, details =>
     ({
       'employment': {
         ...(details['employment'] || {}),
@@ -1085,7 +1084,7 @@ export function addUpdateEmploymentTravel(personId, modeOfTravel, questionEmploy
 }
 
 export function addUpdateEmploymentMainlyWork(personId, mainlyWork, questionMainlyWork, urlMainlyWork) {
-  return changeDetailsFor(personId, () =>
+  return changeDetailsFor(personId, details =>
     ({
       'employment': {
         ...(details['employment'] || {}),
@@ -1098,7 +1097,7 @@ export function addUpdateEmploymentMainlyWork(personId, mainlyWork, questionMain
 }
 
 export function addUpdateEmploymentWorkUK(personId, workUK, questionWorkUK, urlWorkUK) {
-  return changeDetailsFor(personId, () =>
+  return changeDetailsFor(personId, details =>
     ({
       'employment': {
         ...(details['employment'] || {}),
@@ -1109,20 +1108,20 @@ export function addUpdateEmploymentWorkUK(personId, workUK, questionWorkUK, urlW
     }));
 }
 
-export function addUpdateEmploymentOutsideUK(personId, workOustideUK, questionWorkOustideUK, urlWorkOutsideUK) {
-  return changeDetailsFor(personId, () =>
+export function addUpdateEmploymentOutsideUK(personId, workOutsideUK, questionWorkOutsideUK, urlWorkOutsideUK) {
+  return changeDetailsFor(personId, details =>
     ({
       'employment': {
         ...(details['employment'] || {}),
-        workOustideUK,
-        questionWorkOustideUK,
+        workOutsideUK,
+        questionWorkOutsideUK,
         urlWorkOutsideUK
       }
     }));
 }
 
 export function addUpdateEmploymentWorkplaceAddress(personId, workAddress, questionWorkplaceAddress, urlWorkplaceAddress) {
-  return changeDetailsFor(personId, () =>
+  return changeDetailsFor(personId, details =>
     ({
       'employment': {
         ...(details['employment'] || {}),

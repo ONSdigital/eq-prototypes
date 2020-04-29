@@ -142,7 +142,6 @@ noONSLogoLink: true
     surveyType = urlParams.get('survey');
     storageAPI.personalBookmark(personId, window.location.href),
     question = $('#question-title').html();
-    console.log(details['age'])
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
@@ -197,7 +196,7 @@ noONSLogoLink: true
   }
 
   if (details && details.country && details.country.val) {
-    $('#' + details.country.val).attr('checked', true);
+    $('input[type=radio][value="' + details.country.val +'"]').prop("checked", true);
   }
 
   $(updateQuestion);

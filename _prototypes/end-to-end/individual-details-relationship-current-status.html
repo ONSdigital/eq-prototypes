@@ -156,6 +156,13 @@ noONSLogoLink: true
     }
   }
 
+    function updateAnswer() {
+        if (details && details.maritalStatus) {
+            $('input[type=radio][value="' + details.maritalStatus.val +'"]').prop("checked", true);
+        }
+    }
+
+  $(updateAnswer);
   $(updateQuestion);
   $(updateRouting);
 

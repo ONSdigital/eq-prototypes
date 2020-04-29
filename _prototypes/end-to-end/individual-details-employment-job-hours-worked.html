@@ -164,10 +164,13 @@ noONSLogoLink: true
     }
   }
 
-  if (details && details['employment']) {
-    $('#' + details['employment'].hours).attr('checked', true);
-  }
+    function updateAnswer() {
+        if (details && details.employment) {
+            $('input[type=radio][value="' + details.employment.hours +'"]').prop("checked", true);
+        }
+    }
 
+  $(updateAnswer);
   $(updateQuestion);
   $(updateRouting);
 

@@ -104,22 +104,20 @@ noONSLogoLink: true
 
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
+    var val = $('[name="schoolchild"]:checked').val();
     let url = '../individual-details-school/?person_id=' + personId + '&edit=true';
     question = question.trim();
 
-    storageAPI.addUpdateSchool(personId, $('[name="schoolchild"]:checked').val(), question, url);
+    storageAPI.addUpdateSchool(personId, val, question, url);
     storageAPI.storePageData('/end-to-end/individual-details-country/', window.location.pathname);
-
+    
     if(isEditing) {
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
         storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
-
-    }
-    
-    var val = $('[name="schoolchild"]:checked').val();
-    if(val === 'No' || val == null) {
+        
+    } else if(val === 'No' || val == null) {
       window.location.href = '../individual-details-country/?person_id=' + personId;
       storageAPI.storePageData('/end-to-end/individual-details-country/', window.location.pathname);
 
@@ -130,18 +128,25 @@ noONSLogoLink: true
     }
   });
 
-  function updateQuestion() {
-    if(storageAPI.getAnsweringIndividualByProxy()) {
-        $('.js-heading').html('Is ' + '<em class="highlight">' + person.firstLastName + '</em>' +
-        ' a schoolchild or student in full-time education?');
+    function updateQuestion() {
+        if(storageAPI.getAnsweringIndividualByProxy()) {
+            $('.js-heading').html('Is ' + '<em class="highlight">' + person.firstLastName + '</em>' +
+            ' a schoolchild or student in full-time education?');
+        }
+        if (details['age'] < 3 || details['age'] > 19) {
+            var replaceQuestion = $('.js-heading').html().replace('schoolchild or', '');
+            $('.js-heading').html(replaceQuestion);
+        }
     }
-    if (details['age'] < 3 || details['age'] > 19) {
-        var replaceQuestion = $('.js-heading').html().replace('schoolchild or', '');
-        $('.js-heading').html(replaceQuestion);
-    }
-  }
 
-  $(updateQuestion);
+    function updateAnswer() {
+        if (details && details.school) {
+            $('input[type=radio][value="' + details.school.val +'"]').prop("checked", true);
+        }
+    }
+
+    $(updateAnswer);
+    $(updateQuestion);
 
   /**
    * Routing

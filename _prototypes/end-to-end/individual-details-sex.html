@@ -174,7 +174,7 @@ noONSLogoLink: true
   }
 
   if (details && details.sex) {
-    $('#' + details.sex.val).attr('checked', true);
+    $('input[type=radio][value="' + details.sex.val +'"]').prop("checked", true);
   }
 
   $(updateQuestion);

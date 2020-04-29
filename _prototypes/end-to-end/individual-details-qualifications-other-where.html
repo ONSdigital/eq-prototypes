@@ -17,9 +17,6 @@ noONSLogoLink: true
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            <!--{% include navigation.html
-            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
-            nav-title-id="section-individual" %}-->
         </div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
@@ -117,69 +114,70 @@ noONSLogoLink: true
 <script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
-  var storageAPI = window.ONS.storage,
-    urlParams = new URLSearchParams(window.location.search),
-    personId = urlParams.get('person_id'),
-    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
-    isEditing = urlParams.get('edit'),
-    details = storageAPI.getPersonalDetailsFor(personId),
-    surveyType = urlParams.get('survey'),
-    question = $('#question-title').html();
+    var storageAPI = window.ONS.storage,
+      urlParams = new URLSearchParams(window.location.search),
+      personId = urlParams.get('person_id'),
+      person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+      isEditing = urlParams.get('edit'),
+      details = storageAPI.getPersonalDetailsFor(personId),
+      surveyType = urlParams.get('survey'),
+      question = $('#question-title').html();
 
-  $('.qa-btn-submit').on('click',
-    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
-    var collection = [];
+    $('.qa-btn-submit').on('click',
+      storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+      var collection = [];
 
-    $('[name="checkbox-answer"]:checked').each(function(i, el) {
-      collection.push($(el).val());
-    });
-
-    let url = '../individual-details-qualifications-other-where/?person_id=' + personId + '&edit=true';
-    question = question.trim();
-
-    storageAPI.addUpdateQualificationsOtherWhere(personId, collection, question, url);
-    storageAPI.storePageData('/end-to-end/individual-details-armed-forces/', window.location.pathname);
-
-    if(isEditing) {
-      e.preventDefault();
-      window.location.href = '../individual-details-summary/?person_id=' +
-        personId + (surveyType ? '&survey=' + surveyType : '');
-        storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
-
-    }
-  }));
-
-  function updateRouting() {
-    if(surveyType) {
-      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
-    }
-    $('#survey-type').val(surveyType);
-  }
-
-  function updateQuestion() {
-    if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('Has ' + '<em class="highlight">' + person.firstLastName + '</em>' +
-        ' achieved any other qualifications?');
-      $('.js-piping').html('This could be any qualifications they have ever achieved, even if they are not using them now');
-    }
-  }
-
-  (function () {
-    if (details && details['qualifications'] &&
-      details['qualifications'].othersWhere) {
-      var collection = details['qualifications'].othersWhere;
-
-      $.each(collection, function (i, val) {
-        $('#' + val).attr('checked', true);
+      $('[name="checkbox-answer"]:checked').each(function(i, el) {
+        collection.push($(el).val());
       });
+
+      let url = '../individual-details-qualifications-other-where/?person_id=' + personId + '&edit=true';
+      question = question.trim();
+
+      storageAPI.addUpdateQualificationsOtherWhere(personId, collection, question, url);
+      storageAPI.storePageData('/end-to-end/individual-details-armed-forces/', window.location.pathname);
+
+      if(isEditing) {
+        e.preventDefault();
+        window.location.href = '../individual-details-summary/?person_id=' +
+          personId + (surveyType ? '&survey=' + surveyType : '');
+          storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+
+      }
+    }));
+
+    function updateRouting() {
+      if(surveyType) {
+        $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+      }
+      $('#survey-type').val(surveyType);
     }
-  }());
 
-  $(updateQuestion);
-  $(updateRouting);
+    function updateQuestion() {
+      if(storageAPI.getAnsweringIndividualByProxy()) {
+        $('.js-heading').html('Has ' + '<em class="highlight">' + person.firstLastName + '</em>' +
+          ' achieved any other qualifications?');
+        $('.js-piping').html('This could be any qualifications they have ever achieved, even if they are not using them now');
+      }
+    }
 
-  /**
-   * Routing
-   */
-  $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
+    function updateAnswer() {
+        if (details && details.qualifications) {
+            var answer = details.qualifications.othersWhere;
+            if (answer) {
+                var i;
+                for (i = 0; i < answer.length; i++) {
+                    $('input[type=checkbox][value="' + answer[i] +'"]').prop("checked", true);
+                }
+            }
+        }
+    }
+    $(updateAnswer);
+    $(updateQuestion);
+    $(updateRouting);
+
+    /**
+    * Routing
+    */
+    $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
 </script>
