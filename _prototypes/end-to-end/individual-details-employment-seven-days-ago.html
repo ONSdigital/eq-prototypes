@@ -22,7 +22,7 @@ noONSLogoLink: true
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password"
-                      action="../individual-details-employment-main-job">
+                      action="#">
                     <input autocomplete="new-password" type="hidden" name="person_id" id="person"
                            value="#"/>
                     <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
@@ -172,17 +172,20 @@ noONSLogoLink: true
         question = question.trim();
 
         storageAPI.addUpdateLastSevenDays(personId, val, question, url);
-        window.location.href = '../individual-details-employment-main-job/?person_id=' + personId;
 
         if(isEditing) {
             e.preventDefault();
                 window.location.href = '../individual-details-summary/?person_id=' + personId +
                 (surveyType ? '&survey=' + surveyType : '');
             storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
-        } else if (val === 'No'){
+        } else if ($('#no:checked').length){
             e.preventDefault();
             window.location.href = '../individual-details-employment-seven-days-ago-description/?person_id=' + personId;
             storageAPI.storePageData('/end-to-end/individual-details-employment-seven-days-ago-description/', window.location.pathname);
+        } else {
+            e.preventDefault();
+            window.location.href = '../individual-details-employment-main-job/?person_id=' + personId;
+            storageAPI.storePageData('/end-to-end/individual-details-employment-main-job/', window.location.pathname);
         }
 
     }));

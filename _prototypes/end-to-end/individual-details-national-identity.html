@@ -127,7 +127,7 @@ noONSLogoLink: true
     let url = '../individual-details-national-identity/?person_id=' + personId + '&edit=true';
     question = question.trim();
     storageAPI.addUpdateNationalIdentity(personId, nationalIdentities, question, url);
-      storageAPI.storePageData('/end-to-end/individual-details-ethnic-group/', window.location.pathname);
+    storageAPI.storePageData('/end-to-end/individual-details-ethnic-group/', window.location.pathname);
 
     if(isEditing) {
       e.preventDefault();
