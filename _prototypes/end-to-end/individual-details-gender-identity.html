@@ -21,9 +21,6 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            <!--{% include navigation.html
-            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
-            nav-title-id="section-individual" %}-->
         </div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
@@ -98,14 +95,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                     <button class="btn btn--primary btn--lg qa-btn-submit u-mb-xl"
                             type="submit" name="">Save and continue
                     </button>
-
-                    
-                        <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
-
-                    <p class="u-mb-m"><span class="js-link-secure-label"></span><br />
-                        <a class="js-link-secure"
-                           href="#">Get a separate access code to submit an
-                            individual response</a></p>
+                    <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
+                    <p class="u-mb-m"><span class="js-link-secure-label"></span><br/>
+                        <a class="js-link-secure" href="#">Get a separate access code to submit an individual response</a>
+                    </p>
                 </form>
             </main>
         </div>
@@ -130,9 +123,10 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
             val = input.val(),
             textInput = $('#other-answer');
 
-        if(textInput.val()) {
+        if(textInput.val() && $('input[type=radio][value="Other"]').is(':checked')) {
             val = textInput.val();
         }
+
         let url = '../individual-details-gender-identity/?person_id=' + personId + '&edit=true';
         question = question.trim();
         storageAPI.addUpdateIdentity(personId, val, question, url);
@@ -156,7 +150,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('Is the gender '  + '<em class="highlight">' + 
+      $('.js-heading').html('Is the gender ' + '<em class="highlight">' + 
         person.firstLastName + '</em>' + ' identifies with the same as their sex registered at birth?');
     }
   }
@@ -165,10 +159,17 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     if(storageAPI.getAnsweringIndividualByProxy()) {
       $('.js-answer').html('Enter their gender');
     }
-  }
 
-  if (details && details.identity) {
-    $('#' + details.identity.val).attr('checked', true);
+    if(details && details.identity) {
+        if(details.identity.val === "Yes") {
+            $('input[type=radio][value="Yes"]').prop("checked", true);
+            $('.js-clear-btn').removeClass('u-vh');
+        } else {
+            $('input[type=radio][value="Other"]').prop("checked", true);
+            $('input[type=text][Id="other-answer"]').val(details.identity.val);
+            $('.js-clear-btn').removeClass('u-vh');
+        }
+    }
   }
 
   function clearRadios() {
@@ -178,6 +179,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 
         //uncheck val radio
         $("input:radio").attr("checked", false);
+        $(".input__text").val("");
         $('.js-clear-btn').addClass('u-vh');
     }));
 

@@ -171,23 +171,29 @@ noONSLogoLink: true
       storageAPI.clearPersonalBookmark(personId);
       window.location.href = '../hub';
       storageAPI.storePageData('/end-to-end/hub/', window.location.pathname);
-
     }
   }));
 
     function updateQuestion() {
         if(storageAPI.getAnsweringIndividualByProxy()) {
-        $('.js-heading').html('Does ' + '<em class="highlight">' + person.firstLastName + '</em>' +
-            ' look after, or give any help or support to, anyone because they have long-term physical or mental health conditions or illnesses, or problems related to old age?');
+            $('.js-heading').html('Does ' + '<em class="highlight">' + person.firstLastName + '</em>' +
+                ' look after, or give any help or support to, anyone because they have long-term physical or mental health conditions or illnesses, or problems related to old age?');
         }
     }
 
     function updateHelp() {
         if(storageAPI.getAnsweringIndividualByProxy()) {
-        $('.js-help').html('<p>Exclude anything they do as part of their paid employment</p>');
+            $('.js-help').html('<p>Exclude anything they do as part of their paid employment</p>');
         }
     }
-                                            
+
+    function updateAnswer() {
+        if (details && details.health) {
+            $('input[type=radio][value="' + details.health.amount +'"]').prop("checked", true);
+        }
+    }
+
+  $(updateAnswer);
   $(updateQuestion);
   $(updateHelp);
 

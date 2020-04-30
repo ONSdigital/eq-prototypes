@@ -215,6 +215,13 @@
     background: #d0d0d0;
     cursor: not-allowed;
   }
+  .typeahead-input__warning {
+    padding: 0.25rem 0.5rem;
+    background: #e6e6e6;
+    cursor: not-allowed;
+    border-bottom: 1px solid #222;
+    margin: 0;
+  }
   .typeahead-input self:not(.typeahead-input--initialised)__instructions, .typeahead-input:not(.typeahead-input--initialised)__listbox, .typeahead-input self:not(.typeahead-input--initialised)__status {
     display: none;
   }

@@ -45,35 +45,35 @@ noONSLogoLink: true
                                                 <legend class="field__legend u-fs-r--b">Select all that apply</legend>
                                                 <div class="field__item">
                                                     <input
-                                                            class="input input--checkbox" name="checkbox-answer" value="british" id="british" type="checkbox" />
+                                                            class="input input--checkbox" name="checkbox-answer" value="British" id="british" type="checkbox" />
                                                     <label class="label label--inline u-fs-r"
                                                            for="british">
                                                         British</label>
                                                 </div>
                                                 <div class="field__item">
                                                     <input
-                                                            class="input input--checkbox" name="checkbox-answer" value="english" id="english" type="checkbox" />
+                                                            class="input input--checkbox" name="checkbox-answer" value="English" id="english" type="checkbox" />
                                                     <label class="label label--inline u-fs-r"
                                                            for="english">
                                                         English</label>
                                                 </div>
                                                 <div class="field__item">
                                                     <input
-                                                            class="input input--checkbox" name="checkbox-answer" value="welsh" id="welsh" type="checkbox" />
+                                                            class="input input--checkbox" name="checkbox-answer" value="Welsh" id="welsh" type="checkbox" />
                                                     <label class="label label--inline u-fs-r"
                                                            for="welsh">
                                                         Welsh</label>
                                                 </div>
                                                 <div class="field__item">
                                                     <input
-                                                            class="input input--checkbox" name="checkbox-answer" value="scottish" id="scottish" type="checkbox" />
+                                                            class="input input--checkbox" name="checkbox-answer" value="Scottish" id="scottish" type="checkbox" />
                                                     <label class="label label--inline u-fs-r"
                                                            for="scottish">
                                                         Scottish</label>
                                                 </div>
                                                 <div class="field__item">
                                                     <input
-                                                            class="input input--checkbox" name="checkbox-answer" value="northern-irish" id="northern-irish" type="checkbox" />
+                                                            class="input input--checkbox" name="checkbox-answer" value="Northern Irish" id="northern-irish" type="checkbox" />
                                                     <label class="label label--inline u-fs-r"
                                                            for="northern-irish">
                                                         Northern Irish</label>
@@ -81,7 +81,7 @@ noONSLogoLink: true
                                                 <div class="field__item">
                                                     <input
                                                             id="other"
-                                                            name="checkbox-answer" value="other" data-qa="has-other-option" type="checkbox" class="input input--checkbox">
+                                                            name="checkbox-answer" value="Other" data-qa="has-other-option" type="checkbox" class="input input--checkbox">
                                                     <label id="label-checkbox-mandatory-answer-1" class="label label--inline u-fs-r" for="other">Other<br>
                                                         <span class="label__description label__inner label--negative u-fs-m js-answer">You can enter your national identity on the next question</span>
                                                     </label>
@@ -118,16 +118,15 @@ noONSLogoLink: true
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
-    var nationalIdentities = [],
-      otherText = $('#other-answer').val();
+    var nationalIdentities = [];
 
     $('[name="checkbox-answer"]:checked').each(function(i, el) {
       nationalIdentities.push($(el).val());
     });
+
     let url = '../individual-details-national-identity/?person_id=' + personId + '&edit=true';
     question = question.trim();
-    storageAPI.addUpdateNationalIdentity(personId, nationalIdentities,
-      otherText, question, url);
+    storageAPI.addUpdateNationalIdentity(personId, nationalIdentities, question, url);
       storageAPI.storePageData('/end-to-end/individual-details-ethnic-group/', window.location.pathname);
 
     if(isEditing) {
@@ -171,20 +170,18 @@ noONSLogoLink: true
   function updateAnswers() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
       $('.js-answer').html('You can enter their national identity on the next question');
+
+      if (details && details.nationalIdentity) {
+        var answer = details.nationalIdentity.collection;
+          if (answer) {
+              var i;
+              for (i = 0; i < answer.length; i++) {
+                  $('input[type=checkbox][value="' + answer[i] +'"]').prop("checked", true);
+              }
+          }
+      }
     }
   }
-
-  (function () {
-    if (details && details['nationalIdentity'] && details['nationalIdentity'].collection) {
-      var collection = details['nationalIdentity'].collection;
-
-      $.each(collection, function (i, val) {
-        $('#' + val).attr('checked', true);
-      });
-
-      $('#other-answer').val(details['nationalIdentity'].otherText);
-    }
-  }());
 
   $(updateQuestion);
   $(updateHelp);

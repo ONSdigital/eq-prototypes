@@ -103,48 +103,51 @@ noONSLogoLink: true
     surveyType = urlParams.get('survey'),
     question = $('#question-title').html();
 
-  $('.qa-btn-submit').on('click',
-    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
-    let url = '../individual-details-apprenticeship/?person_id=' + personId + '&edit=true';
-    question = question.trim();
-    storageAPI.addUpdateApprenticeship(personId,
-      $('[name="has-apprenticeship"]:checked').val(),
-      question,
-      url
-    );
-    
-    storageAPI.storePageData('/end-to-end/individual-details-qualifications-degree/', window.location.pathname);
-
-
-    if(isEditing) {
-      e.preventDefault();
-      window.location.href = '../individual-details-summary/?person_id=' +
-        personId + (surveyType ? '&survey=' + surveyType : '');
+    $('.qa-btn-submit').on('click',
+      storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+      let url = '../individual-details-apprenticeship/?person_id=' + personId + '&edit=true';
+      question = question.trim();
+      storageAPI.addUpdateApprenticeship(personId,
+        $('[name="has-apprenticeship"]:checked').val(),
+        question,
+        url
+      );
       
-      storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+      storageAPI.storePageData('/end-to-end/individual-details-qualifications-degree/', window.location.pathname);
+
+
+      if(isEditing) {
+        e.preventDefault();
+        window.location.href = '../individual-details-summary/?person_id=' +
+          personId + (surveyType ? '&survey=' + surveyType : '');
+        
+        storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+      }
+    }));
+
+    function updateRouting() {
+      if(surveyType) {
+        $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+      }
+      $('#survey-type').val(surveyType);
     }
-  }));
 
-  function updateRouting() {
-    if(surveyType) {
-      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    function updateQuestion() {
+      if(storageAPI.getAnsweringIndividualByProxy()) {
+        $('.js-heading').html('Has ' + '<em class="highlight">' + person.firstLastName + '</em>' +
+          ' completed an apprenticeship?');
+      }
     }
-    $('#survey-type').val(surveyType);
-  }
 
-  function updateQuestion() {
-    if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('Has ' + '<em class="highlight">' + person.firstLastName + '</em>' +
-        ' completed an apprenticeship?');
+    function updateAnswer() {
+        if (details && details.apprenticeship) {
+            $('input[type=radio][value="' + details.apprenticeship.hasApprenticeship +'"]').prop("checked", true);
+        }
     }
-  }
 
-  if (details && details['apprenticeship'] && details['apprenticeship'].hasApprenticeship) {
-    $('#' + details['apprenticeship'].hasApprenticeship).attr('checked', true);
-  }
-
-  $(updateQuestion);
-  $(updateRouting);
+    $(updateAnswer);
+    $(updateQuestion);
+    $(updateRouting);
 
   /**
    * Routing

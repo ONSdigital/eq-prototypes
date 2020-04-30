@@ -161,68 +161,69 @@ noONSLogoLink: true
 <script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
-  var storageAPI = window.ONS.storage,
-    urlParams = new URLSearchParams(window.location.search),
-    personId = urlParams.get('person_id'),
-    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
-    isEditing = urlParams.get('edit'),
-    details = storageAPI.getPersonalDetailsFor(personId),
-    surveyType = urlParams.get('survey'),
-    question = $('#question-title').html();
+    var storageAPI = window.ONS.storage,
+        urlParams = new URLSearchParams(window.location.search),
+        personId = urlParams.get('person_id'),
+        person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+        isEditing = urlParams.get('edit'),
+        details = storageAPI.getPersonalDetailsFor(personId),
+        surveyType = urlParams.get('survey'),
+        question = $('#question-title').html();
 
-  $('.qa-btn-submit').on('click',
-    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
-    var aLevels = [];
+    $('.qa-btn-submit').on('click',
+        storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+        var aLevels = [];
 
-    $('[name="checkbox-answer"]:checked').each(function(i, el) {
-      aLevels.push($(el).val());
-    });
+        $('[name="checkbox-answer"]:checked').each(function(i, el) {
+        aLevels.push($(el).val());
+        });
 
 
-    let url = '../individual-details-qualifications-a-level/?person_id=' + personId + '&edit=true';
-    question = question.trim();
+        let url = '../individual-details-qualifications-a-level/?person_id=' + personId + '&edit=true';
+        question = question.trim();
 
-    storageAPI.addUpdateQualificationsALevel(personId, aLevels, question, url);
-    storageAPI.storePageData('/end-to-end/individual-details-qualifications-gcse/', window.location.pathname);
+        storageAPI.addUpdateQualificationsALevel(personId, aLevels, question, url);
+        storageAPI.storePageData('/end-to-end/individual-details-qualifications-gcse/', window.location.pathname);
 
-    if(isEditing) {
-      e.preventDefault();
-      window.location.href = '../individual-details-summary/?person_id=' +
-        personId + (surveyType ? '&survey=' + surveyType : '');
-        storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+        if(isEditing) {
+        e.preventDefault();
+        window.location.href = '../individual-details-summary/?person_id=' +
+            personId + (surveyType ? '&survey=' + surveyType : '');
+            storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
 
+        }
+    }));
+
+    function updateRouting() {
+        if(surveyType) {
+        $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+        }
+        $('#survey-type').val(surveyType);
     }
-  }));
 
-  function updateRouting() {
-    if(surveyType) {
-      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    function updateQuestion() {
+        if(storageAPI.getAnsweringIndividualByProxy()) {
+            $('.js-heading').html('Has ' + '<em class="highlight">' + person.firstLastName + '</em>' +
+                ' achieved an AS, A level or equivalent qualification?');
+            $('.js-collapsible-body p:nth-child(2)').html('If they have achieved similar qualifications outside of England and Wales, choose the options they think are ' +
+                'the closest match.');
+        }
     }
-    $('#survey-type').val(surveyType);
-  }
 
-  function updateQuestion() {
-    if(storageAPI.getAnsweringIndividualByProxy()) {
-        $('.js-heading').html('Has ' + '<em class="highlight">' + person.firstLastName + '</em>' +
-            ' achieved an AS, A level or equivalent qualification?');
-        $('.js-collapsible-body p:nth-child(2)').html('If they have achieved similar qualifications outside of England and Wales, choose the options they think are ' +
-            'the closest match.');
+    function updateAnswer() {
+        if (details && details.qualifications) {
+            var answer = details.qualifications.aLevels;
+            if (answer) {
+                var i;
+                for (i = 0; i < answer.length; i++) {
+                    $('input[type=checkbox][value="' + answer[i] +'"]').prop("checked", true);
+                }
+            }
+        }
     }
-  }
-
-  (function () {
-    if (details && details['qualifications'] &&
-      details['qualifications'].aLevels) {
-      var collection = details['qualifications'].aLevels;
-
-      $.each(collection, function (i, val) {
-        $('#' + val).attr('checked', true);
-      });
-    }
-  }());
-
-  $(updateQuestion);
-  $(updateRouting);
+    $(updateAnswer);
+    $(updateQuestion);
+    $(updateRouting);
 
   /**
    * Routing

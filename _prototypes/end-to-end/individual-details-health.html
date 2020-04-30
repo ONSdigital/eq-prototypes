@@ -126,43 +126,49 @@ noONSLogoLink: true
 <script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
-  var storageAPI = window.ONS.storage,
-    urlParams = new URLSearchParams(window.location.search),
-    personId = urlParams.get('person_id'),
-    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
-    isEditing = urlParams.get('edit'),
-    details = storageAPI.getPersonalDetailsFor(personId),
-    surveyType = urlParams.get('survey'),
-    question = $('#question-title').html();
+    var storageAPI = window.ONS.storage,
+        urlParams = new URLSearchParams(window.location.search),
+        personId = urlParams.get('person_id'),
+        person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+        isEditing = urlParams.get('edit'),
+        details = storageAPI.getPersonalDetailsFor(personId),
+        surveyType = urlParams.get('survey'),
+        question = $('#question-title').html();
 
-  $('.qa-btn-submit').on('click',
-    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
-    let url = '../individual-details-health/?person_id=' + personId + '&edit=true';
-    question = question.trim();
-    var val = $('[name="health"]:checked').val();
-    storageAPI.addUpdateHealth(personId, val, question, url);
-    storageAPI.storePageData('/end-to-end/individual-details-health-conditions/', window.location.pathname);
+    $('.qa-btn-submit').on('click',
+        storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+        let url = '../individual-details-health/?person_id=' + personId + '&edit=true';
+        question = question.trim();
+        var val = $('[name="health"]:checked').val();
+        storageAPI.addUpdateHealth(personId, val, question, url);
+        storageAPI.storePageData('/end-to-end/individual-details-health-conditions/', window.location.pathname);
 
-    if(isEditing) {
-      e.preventDefault();
-      window.location.href = '../individual-details-summary/?person_id=' + personId;
-      storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+        if(isEditing) {
+            e.preventDefault();
+            window.location.href = '../individual-details-summary/?person_id=' + personId;
+            storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+        }
+    }));
 
-    }
-  }));
-
-  function updateQuestion() {
+    function updateQuestion() {
         if(storageAPI.getAnsweringIndividualByProxy()) {
-        $('.js-heading').html('How is ' + '<em class="highlight">' + person.firstLastName +
-            window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
-            ' health in general?');
+            $('.js-heading').html('How is ' + '<em class="highlight">' + person.firstLastName +
+                window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
+                ' health in general?');
         }
     }
 
-  $(updateQuestion);
+    function updateAnswer() {
+        if (details && details.health) {
+            $('input[type=radio][value="' + details.health.val +'"]').prop("checked", true);
+        }
+    }
 
-  /**
-   * Routing
-   */
-  $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
+    $(updateAnswer);
+    $(updateQuestion);
+
+    /**
+    * Routing
+    */
+    $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
 </script>

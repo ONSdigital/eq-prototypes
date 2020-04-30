@@ -110,9 +110,7 @@ noONSLogoLink: true
           (surveyType ? '&survey=' + surveyType : '');
           
         storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
-    }
-
-    if (val === 'No') {
+    } else if (val === 'No') {
         window.location.href = '../individual-details-employment-job-work-outside-uk/?person_id=' + personId +
           (surveyType ? '&survey=' + surveyType : '');
         storageAPI.storePageData('/end-to-end/individual-details-employment-job-work-outside-uk/', window.location.pathname);
@@ -149,10 +147,13 @@ noONSLogoLink: true
     }
   }
 
-  if (details && details['employment']) {
-    $('#' + details['employment'].workUK).attr('checked', true);
-  }
+    function updateAnswer() {
+        if (details && details.employment) {
+            $('input[type=radio][value="' + details.employment.workUK +'"]').prop("checked", true);
+        }
+    }
 
+  $(updateAnswer);
   $(updateQuestion);
   $(updateRouting);
 

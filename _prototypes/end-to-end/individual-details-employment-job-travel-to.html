@@ -241,10 +241,13 @@ noONSLogoLink: true
     }
   }
 
-  if (details && details['employment']) {
-    $('#' + details['employment'].modeOfTravel).attr('checked', true);
-  }
+    function updateAnswer() {
+        if (details && details.employment) {
+            $('input[type=radio][value="' + details.employment.modeOfTravel +'"]').prop("checked", true);
+        }
+    }
 
+  $(updateAnswer);
   $(updateQuestion);
   $(updateRouting);
 

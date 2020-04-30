@@ -298,8 +298,9 @@ export default class TypeaheadUI {
   }
 
   handleResults(result) {
+    this.resultLimit = result.limit ? result.limit : this.resultLimit;
     this.foundResults = result.totalResults;
-    if (result.results.length > 50) {
+    if (this.foundResults > this.resultLimit) {
       result.results = result.results.slice(0, this.resultLimit);
     }
 
@@ -352,6 +353,29 @@ export default class TypeaheadUI {
           listElement.setAttribute('aria-hidden', 'true');
           listElement.innerHTML = this.content.more_results;
           this.listbox.appendChild(listElement);
+        }
+
+        if (this.resultLimit === 100 && this.foundResults > this.resultLimit) {
+          const warningListElement = document.createElement('li');
+          const warningElement = document.createElement('div');
+          const warningSpanElement = document.createElement('span');
+          const warningBodyElement = document.createElement('div');
+
+          warningListElement.setAttribute('aria-hidden', 'true');
+          warningListElement.className = 'typeahead-input__warning';
+          warningElement.className = 'panel panel--warning panel--warning--small panel--simple';
+
+          warningSpanElement.className = 'panel__icon';
+          warningSpanElement.setAttribute('aria-hidden', 'true');
+          warningSpanElement.innerHTML = '!';
+          
+          warningBodyElement.className = 'panel__text';
+          warningBodyElement.innerHTML = this.foundResults + ' results found. Enter more of the address to improve results.';
+
+          warningElement.appendChild(warningSpanElement);
+          warningElement.appendChild(warningBodyElement);
+          warningListElement.appendChild(warningElement);
+          this.listbox.insertBefore(warningListElement, this.listbox.firstChild);
         }
 
         this.setHighlightedResult(null);
@@ -408,7 +432,6 @@ export default class TypeaheadUI {
         }
       }
     }
-
     this.ariaStatus.innerHTML = content;
   }
 

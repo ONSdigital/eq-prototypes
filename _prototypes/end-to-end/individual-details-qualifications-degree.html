@@ -110,58 +110,61 @@ noONSLogoLink: true
 <script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
-  var storageAPI = window.ONS.storage,
-    urlParams = new URLSearchParams(window.location.search),
-    personId = urlParams.get('person_id'),
-    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
-    isEditing = urlParams.get('edit'),
-    details = storageAPI.getPersonalDetailsFor(personId),
-    surveyType = urlParams.get('survey'),
-    question = $('#question-title').html();
+    var storageAPI = window.ONS.storage,
+        urlParams = new URLSearchParams(window.location.search),
+        personId = urlParams.get('person_id'),
+        person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+        isEditing = urlParams.get('edit'),
+        details = storageAPI.getPersonalDetailsFor(personId),
+        surveyType = urlParams.get('survey'),
+        question = $('#question-title').html();
 
-  $('.qa-btn-submit').on('click',
-    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
-    let url = '../individual-details-qualifications-degree/?person_id=' + personId + '&edit=true';
-    question = question.trim();
-    storageAPI.addUpdateHasQualificationAbove(personId,
-      $('[name="checkbox-answer"]:checked').val(),
-      question,
-      url
-    );
-    storageAPI.storePageData('/end-to-end/individual-details-qualifications-nvq-equivalent/', window.location.pathname);
+    $('.qa-btn-submit').on('click',
+        storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+        let url = '../individual-details-qualifications-degree/?person_id=' + personId + '&edit=true';
+        question = question.trim();
+        storageAPI.addUpdateHasQualificationAbove(personId,
+        $('[name="checkbox-answer"]:checked').val(),
+        question,
+        url
+        );
+        storageAPI.storePageData('/end-to-end/individual-details-qualifications-nvq-equivalent/', window.location.pathname);
 
-    if(isEditing) {
-      e.preventDefault();
-      window.location.href = '../individual-details-summary/?person_id=' +
-        personId + (surveyType ? '&survey=' + surveyType : '');
-        storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+        if(isEditing) {
+        e.preventDefault();
+        window.location.href = '../individual-details-summary/?person_id=' +
+            personId + (surveyType ? '&survey=' + surveyType : '');
+            storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
 
+        }
+    }));
+
+    function updateRouting() {
+        if(surveyType) {
+        $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+        }
+        $('#survey-type').val(surveyType);
     }
-  }));
 
-  function updateRouting() {
-    if(surveyType) {
-      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    function updateQuestion() {
+        if(storageAPI.getAnsweringIndividualByProxy()) {
+        $('.js-heading').html('Has ' + '<em class="highlight">' + person.firstLastName + '</em>' +
+            ' achieved a qualification at degree level or above?');
+        }
     }
-    $('#survey-type').val(surveyType);
-  }
 
-  function updateQuestion() {
-    if(storageAPI.getAnsweringIndividualByProxy()) {
-      $('.js-heading').html('Has ' + '<em class="highlight">' + person.firstLastName + '</em>' +
-        ' achieved a qualification at degree level or above?');
+    function updateAnswer() {
+        if (details && details.qualifications) {
+            $('input[type=radio][value="' + details.qualifications.aboveDegree +'"]').prop("checked", true);
+        }
     }
-  }
 
-  if (details && details['qualifications'] && details['qualifications'].aboveDegree) {
-    $('#' + details['qualifications'].aboveDegree).attr('checked', true);
-  }
+    $(updateAnswer);
+    $(updateQuestion);
+    $(updateRouting);
 
-  $(updateQuestion);
-  $(updateRouting);
-
-  /**
-   * Routing
-   */
-  $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
+    /**
+    * Routing
+    */
+    $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
 </script>

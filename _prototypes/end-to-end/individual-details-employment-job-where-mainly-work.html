@@ -155,14 +155,11 @@ noONSLogoLink: true
       window.location.href = '../individual-details-summary/?person_id=' + personId +
         (surveyType ? '&survey=' + surveyType : '');
     storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
-    }
-
-    if((val === 'At a workplace') || (val === 'Report to a depot')) {
+    } else if((val === 'At a workplace') || (val === 'Report to a depot')) {
         window.location.href = '../individual-details-employment-job-work-in-uk/?person_id=' + personId +
         (surveyType ? '&survey=' + surveyType : '');
         storageAPI.storePageData('/end-to-end/individual-details-employment-job-work-in-uk/', window.location.pathname);
-    }
-    else {
+    } else {
         storageAPI.clearPersonalBookmark(personId);
         window.location.href = '../hub/';
         storageAPI.storePageData('/end-to-end/hub/', window.location.pathname);
@@ -189,10 +186,13 @@ noONSLogoLink: true
     }
   }
 
-  if (details && details['employment']) {
-    $('#' + details['employment'].mainlyWork).attr('checked', true);
-  }
+    function updateAnswer() {
+        if (details && details.employment) {
+            $('input[type=radio][value="' + details.employment.mainlyWork +'"]').prop("checked", true);
+        }
+    }
 
+  $(updateAnswer);
   $(updateQuestion);
   $(updateRouting);
 

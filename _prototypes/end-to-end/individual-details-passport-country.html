@@ -183,16 +183,18 @@ noONSLogoLink: true
     }
   }
 
-  (function () {
-    if (details && details['passport'] && details['passport'].countries) {
-      var collection = details['passport'].countries;
-
-      $.each(collection, function (i, val) {
-        $('#' + val).attr('checked', true);
-      });
+    function updateAnswer() {
+      if (details && details.passport) {
+        var answer = details.passport.countries;
+        if (answer) {
+            var i;
+            for (i = 0; i < answer.length; i++) {
+                $('input[type=checkbox][value="' + answer[i] +'"]').prop("checked", true);
+            }
+        }
+      }
     }
-  }());
-
+  $(updateAnswer);
   $(updateQuestion);
   $(updateRouting);
 

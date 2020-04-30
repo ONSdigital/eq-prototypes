@@ -28,9 +28,6 @@ noONSLogoLink: true
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            <!--{% include navigation.html
-            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
-            nav-title-id="section-individual" %}-->
         </div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
@@ -72,10 +69,6 @@ noONSLogoLink: true
                                         <input type="text" id="address-town" class="input input--text input-type__input  js-address-town" name="address-town" />
                                       </p>
                                       <p class="field">
-                                        <label class="label" for="address-county">County</label>
-                                        <input type="text" id="address-county" class="input input--text input-type__input  js-address-county" name="address-county" />
-                                      </p>
-                                      <p class="field">
                                         <label class="label" for="address-postcode">Postcode</label>
                                         <input type="text" id="address-postcode" class="input input--text input-type__input  input--w-5 js-address-postcode" name="address-postcode" />
                                       </p>
@@ -106,16 +99,7 @@ noONSLogoLink: true
                     <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl u-mt-xl"
                             type="submit" name="">Save and continue
                     </button>
-
-                    
-                        <p><a href="../hub" class="js-choose-another-section">Choose another section and
-                            return
-                            to this question later</a></p>
-
-                    <!--<p class="u-mb-m"><span class="js-link-secure-label"></span><br />
-                        <a class="js-link-secure"
-                           href="#">Get a separate access code to submit an
-                            individual response</a></p>-->
+                    <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
                 </form>
             </main>
         </div>
@@ -155,7 +139,6 @@ noONSLogoLink: true
       document.getElementById('address-line-1').value,
       document.getElementById('address-line-2').value,
       document.getElementById('address-town').value,
-      document.getElementById('address-county').value,
       document.getElementById('address-postcode').value,
     ];
 
@@ -186,7 +169,6 @@ noONSLogoLink: true
       $('#address-line-1').val(details.Address30DayUK.addressLine1);
       $('#address-line-2').val(details.Address30DayUK.addressLine2);
       $('#address-town').val(details.Address30DayUK.addressTown);
-      $('#address-county').val(details.Address30DayUK.addressCounty);
       $('#address-postcode').val(details.Address30DayUK.addressPostcode);
     }
   }
