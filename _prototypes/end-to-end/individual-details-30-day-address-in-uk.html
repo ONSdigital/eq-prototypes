@@ -44,13 +44,11 @@ noONSLogoLink: true
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title u-fs-xl js-heading">
-                                       You selected &ldquo;Another address in the UK&rdquo;. Enter details of the other UK address where you stay for more than 30 days a year
+                                       What is the other UK address where you stay for more than 30 days a year?
                                     </h1>
                                 </div>
 
-                                <fieldset
-                                        class="question__fieldset js-question-fieldset">
-
+                                <fieldset class="question__fieldset js-question-fieldset">
                                     <legend class="u-vh">What is the first line of your address?
                                     </legend>
 
@@ -89,9 +87,8 @@ noONSLogoLink: true
                                           <div class="typeahead-input__status u-vh js-typeahead-aria-status" aria-live="polite" role="status" tabindex="-1"></div>
                                         </div>
                                       </p>
-                                      <a href="#" class="btn--link js-address-manual-btn">Manually enter address</a>                    </div>
+                                      <a href="#" class="btn--link js-address-manual-btn">Manually enter address</a></div>
                                   </div>
-
                                 </fieldset>
                             </section>
                         </div>
@@ -159,8 +156,8 @@ noONSLogoLink: true
 
   function updateQuestion() {
     if(storageAPI.getAnsweringIndividualByProxy()) {
-        $('.js-heading').html('You selected &ldquo;Another address in the UK&ldquo;. Enter details of the other UK address where ' + '<em class="highlight">' + person.firstLastName + '</em>' +
-        ' stays for more than 30 days a year');
+        $('.js-heading').html('What is the other UK address where ' + '<em class="highlight">' + person.firstLastName + '</em>' +
+        ' stays for more than 30 days a year?');
     }
   }
 
