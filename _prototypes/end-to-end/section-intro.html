@@ -50,8 +50,6 @@ noONSLogoLink: true
   $('.btn-submit').click(function(e) {
     e.preventDefault(); // do not submit the form like usual
     window.location = '../do-you-live-here/';
-    storageAPI.storePageData('/end-to-end/do-you-live-here', window.location.pathname);
-
   });
 
   $(function() {

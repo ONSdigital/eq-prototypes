@@ -4,7 +4,6 @@ import { sanitiseTypeaheadText } from '../typeahead/typeahead.helpers';
 import triggerChange from '../trigger-change-event';
 import AbortableFetch from './abortable-fetch';
 
-
 const classAddress = 'js-address';
 const baseClass = 'js-address-typeahead';
 const classOrganisation = 'js-address-organisation';
@@ -35,7 +34,7 @@ class AddressInput {
     this.addressReplaceChars = [','];
     this.sanitisedQuerySplitNumsChars = true;
 
-    // State    
+    // State
     this.manualMode = true;
     this.currentQuery = null;
     this.fetch = null;
@@ -58,7 +57,7 @@ class AddressInput {
       minChars: 5,
       suggestOnBoot: true,
       handleUpdate: true
-    });    
+    });
 
     // Bind Event Listeners
     if (this.searchButton) {
@@ -73,7 +72,7 @@ class AddressInput {
       this.form.addEventListener('submit', this.handleSubmit.bind(this));
     }
 
-    if (!(this.line1.value || this.line2.value || this.town.value )) {
+    if (!(this.line1.value || this.line2.value || this.town.value)) {
       this.toggleMode();
     }
 
