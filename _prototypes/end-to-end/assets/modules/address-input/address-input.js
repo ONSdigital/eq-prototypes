@@ -11,7 +11,6 @@ const classOrganisation = 'js-address-organisation';
 const classLine1 = 'js-address-line-1';
 const classLine2 = 'js-address-line-2';
 const classTown = 'js-address-town';
-const classCounty = 'js-address-county';
 const classPostcode = 'js-address-postcode';
 const classSearchButtonContainer = 'js-address-search-btn-container';
 const classSearchButton = 'js-address-search-btn';
@@ -26,9 +25,8 @@ class AddressInput {
     this.line1 = context.querySelector(`.${classLine1}`);
     this.line2 = context.querySelector(`.${classLine2}`);
     this.town = context.querySelector(`.${classTown}`);
-    this.county = context.querySelector(`.${classCounty}`);
     this.postcode = context.querySelector(`.${classPostcode}`);
-    this.manualInputs = [this.line1, this.line2, this.town, this.county, this.postcode];
+    this.manualInputs = [this.line1, this.line2, this.town, this.postcode];
     this.searchButtonContainer = context.querySelector(`.${classSearchButtonContainer}`);
     this.searchButton = context.querySelector(`.${classSearchButton}`);
     this.manualButton = context.querySelector(`.${classManualButton}`);
@@ -75,7 +73,7 @@ class AddressInput {
       this.form.addEventListener('submit', this.handleSubmit.bind(this));
     }
 
-    if (!(this.line1.value || this.line2.value || this.town.value || this.county.value || this.county.value)) {
+    if (!(this.line1.value || this.line2.value || this.town.value )) {
       this.toggleMode();
     }
 
@@ -296,9 +294,14 @@ class AddressInput {
   setAddress(data, resolve) {
     this.clearManualInputs(false);
     const value = data.response.address;
-    this.line1.value = value.addressLine1;
-    this.line2.value = value.addressLine2;
-    this.county.value = value.addressLine3;
+    if (value.addressLine3) {
+      this.line1.value = value.addressLine1 + ', ' + value.addressLine2;
+      this.line2.value = value.addressLine3;
+    } else {
+      this.line1.value = value.addressLine1;
+      this.line2.value = value.addressLine2;
+    }
+    
     this.town.value = value.townName;
     this.postcode.value = value.postcode;
 

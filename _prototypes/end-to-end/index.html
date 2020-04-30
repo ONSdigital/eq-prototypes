@@ -74,10 +74,6 @@ logoUrl: ../home
                         <input type="text" id="address-town" class="input input--text input-type__input  js-address-town" name="address-town" />
                       </p>
                       <p class="field">
-                        <label class="label" for="address-county">County</label>
-                        <input type="text" id="address-county" class="input input--text input-type__input  js-address-county" name="address-county" />
-                      </p>
-                      <p class="field">
                         <label class="label" for="address-postcode">Postcode</label>
                         <input type="text" id="address-postcode" class="input input--text input-type__input  input--w-5 js-address-postcode" name="address-postcode" />
                       </p>
@@ -128,7 +124,6 @@ logoUrl: ../home
     sessionStorage.setItem('address-line-1', document.getElementById('address-line-1').value);
     sessionStorage.setItem('address-line-2', document.getElementById('address-line-2').value);
     sessionStorage.setItem('address-town', document.getElementById('address-town').value);
-    sessionStorage.setItem('address-county', document.getElementById('address-county').value);
     sessionStorage.setItem('address-postcode', document.getElementById('address-postcode').value);
 
     window.location = '../home/';
@@ -140,7 +135,6 @@ logoUrl: ../home
       document.getElementById('address-line-1').value,
       document.getElementById('address-line-2').value,
       document.getElementById('address-town').value,
-      document.getElementById('address-county').value,
       document.getElementById('address-postcode').value,
 
     ];
@@ -156,7 +150,6 @@ logoUrl: ../home
       $('#address-line-1').val(sessionStorage.getItem('address-line-1'));
       $('#address-line-2').val(sessionStorage.getItem('address-line-2'));
       $('#address-town').val(sessionStorage.getItem('address-town'));
-      $('#address-county').val(sessionStorage.getItem('address-county'));
       $('#address-postcode').val(sessionStorage.getItem('address-postcode'));
     }
   $(updateEditableAddress);

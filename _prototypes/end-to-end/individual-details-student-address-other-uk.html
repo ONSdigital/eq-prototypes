@@ -72,10 +72,6 @@ noONSLogoLink: true
                                                         <input type="text" id="address-town" class="input input--text input-type__input  js-address-town" name="address-town" />
                                                       </p>
                                                       <p class="field">
-                                                        <label class="label" for="address-county">County</label>
-                                                        <input type="text" id="address-county" class="input input--text input-type__input  js-address-county" name="address-county" />
-                                                      </p>
-                                                      <p class="field">
                                                         <label class="label" for="address-postcode">Postcode</label>
                                                         <input type="text" id="address-postcode" class="input input--text input-type__input  input--w-5 js-address-postcode" name="address-postcode" />
                                                       </p>
@@ -156,7 +152,6 @@ noONSLogoLink: true
       document.getElementById('address-line-1').value,
       document.getElementById('address-line-2').value,
       document.getElementById('address-town').value,
-      document.getElementById('address-county').value,
       document.getElementById('address-postcode').value,
     ];
 
@@ -186,7 +181,6 @@ noONSLogoLink: true
       $('#address-line-1').val(details.AddressStudentUK.addressLine1);
       $('#address-line-2').val(details.AddressStudentUK.addressLine2);
       $('#address-town').val(details.AddressStudentUK.addressTown);
-      $('#address-county').val(details.AddressStudentUK.addressCounty);
       $('#address-postcode').val(details.AddressStudentUK.addressPostcode);
     }
   }
