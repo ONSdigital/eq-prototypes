@@ -218,8 +218,11 @@ noONSLogoLink: true
 
   $('.btn-submit').on('click', function(e) {
     e.preventDefault(); // do not submit the form like usual
-    window.ONS.utils.validateInputs();
+    const testFails = '';
+    window.ONS.utils.validateInputs(testFails, "input[id='first-name']");
+    window.ONS.utils.validateInputs(testFails, "input[id='last-name']");
     if (hasErrors) {
+      window.ONS.utils.calcErrors();
       hasErrors = false;
       return false;
     } else {

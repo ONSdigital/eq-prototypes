@@ -21,6 +21,19 @@ noONSLogoLink: true
         </div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
+                <div class="panel panel--error u-mb-m js-error-box u-d-no">
+                    <div class="panel__header">
+                        <div class="panel__title u-fs-r--b">This page has <span class="js-piping">{x} error{s}</span></div>
+                    </div>
+                    <div class="panel__body">
+                        <p class="js-piping">This <strong>must be corrected</strong> to continue</p>
+                        <ol class="list list--bare">
+                          <li class="list__item js-country-input u-d-no">
+                              1. <a href="#country-input" class="list__link js-inpagelink js-error">Enter a country</a>
+                          </li>
+                       </ol>
+                    </div>
+                </div>
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password" action="../individual-details-30-day-address-type">
                     <input autocomplete="new-password" type="hidden" name="person_id" id="person"
@@ -33,26 +46,30 @@ noONSLogoLink: true
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title u-fs-xl js-heading">
-                                            You selected &ldquo;Yes an address outside the UK&rdquo;. Which country outside the UK do you stay in for more than 30 days a year?                                    </h1>
+                                            You selected &ldquo;Yes an address outside the UK&rdquo;. Which country outside the UK do you stay in for more than 30 days a year?
+                                    </h1>
                                 </div>
 
                                 <div class="grid grid--gutterless">
-                                    <div class="grid__col col-8@m">
+                                    <div class="grid__col question__answer">
                                         <p class="field">
-                                          <label class="label" for="country-of-birth">Current name of country
+                                            <label class="label" for="country-of-birth">Current name of country
                                               <br>
                                               <span class="label__description u-no-js-hide">Enter your own answer or select from suggestions</span>
-                                          </label>
-
-                                          <div id="country-container" class="js-typeahead typeahead-input typeahead-input--initialised" data-content="{&quot;aria_no_results&quot;:&quot;No suggestions found for the query&quot;,&quot;aria_you_have_selected&quot;:&quot;You have selected&quot;,&quot;aria_found_by_alternative_name&quot;:&quot;found by alternative name&quot;,&quot;aria_min_chars&quot;:&quot;Type in 3 or more characters.&quot;,&quot;aria_one_result&quot;:&quot;There is one available.&quot;,&quot;aria_n_results&quot;:&quot;There are {n} available.&quot;,&quot;aria_limited_results&quot;:&quot;Results have been limited to 10. Type more characters to refine your search.&quot;,&quot;more_results&quot;:&quot;Continue entering to improve results&quot;,&quot;results_title&quot;:&quot;Suggestions&quot;}" data-instructions="Use up and down keys to navigate suggestions once you&#39;ve typed more than two characters. Use the enter key to select a suggestion. Touch device users, explore by touch or with swipe gestures." data-aria-you-have-selected="You have selected" data-aria-min-chars="Enter 3 or more characters for suggestions." data-aria-one-result="There is one suggestion available." data-aria-n-results="There are {n} suggestions available." data-aria-limited-results="Results have been limited to 10 suggestions. Type more characters to improve your search." data-more-results="Continue entering to improve suggestions" data-results-title="Suggestions" data-typeahead-data="https://gist.githubusercontent.com/rmccar/08794cd217fbc08b7c2a470371f0390d/raw/6fe79c0c082fd351b5e031db0dcdffd406f936b4/COB_FEL.json" data-no-results="No results found">
-                                              <input type="text" id="country-input" class="input input--text input-type__input  js-typeahead-input" autocomplete="off" aria-autocomplete="list" aria-controls="country-listbox" aria-describedby="country-instructions" aria-has-popup="true" aria-owns="country-listbox" aria-expanded="false" role="combobox">
-                                              <div class="typeahead-input__results js-typeahead-results">
-                                              <header class="typeahead-input__results-title u-fs-s">Suggestions</header>
-                                              <ul class="typeahead-input__listbox js-typeahead-listbox" role="listbox" id="country-listbox" tabindex="-1"></ul>
-                                              </div>
-                                              <div class="typeahead-input__instructions u-vh js-typeahead-instructions" id="country-instructions" tabindex="-1">Use up and down keys to navigate suggestions once you&#39;ve typed more than two characters. Use the enter key to select a suggestion. Touch device users, explore by touch or with swipe gestures.</div>
-                                              <div class="typeahead-input__status u-vh js-typeahead-aria-status" aria-live="polite" role="status" tabindex="-1"></div>
-                                          </div>
+                                            </label>
+                                            <fieldset class="fieldgroup fieldgroup--inline fieldgroup--date" data-qa="widget-date">
+                                                <div class="fieldgroup__fields">
+                                                    <div id="country-container" class="js-typeahead typeahead-input typeahead-input--initialised" data-content="{&quot;aria_no_results&quot;:&quot;No suggestions found for the query&quot;,&quot;aria_you_have_selected&quot;:&quot;You have selected&quot;,&quot;aria_found_by_alternative_name&quot;:&quot;found by alternative name&quot;,&quot;aria_min_chars&quot;:&quot;Type in 3 or more characters.&quot;,&quot;aria_one_result&quot;:&quot;There is one available.&quot;,&quot;aria_n_results&quot;:&quot;There are {n} available.&quot;,&quot;aria_limited_results&quot;:&quot;Results have been limited to 10. Type more characters to refine your search.&quot;,&quot;more_results&quot;:&quot;Continue entering to improve results&quot;,&quot;results_title&quot;:&quot;Suggestions&quot;}" data-instructions="Use up and down keys to navigate suggestions once you&#39;ve typed more than two characters. Use the enter key to select a suggestion. Touch device users, explore by touch or with swipe gestures." data-aria-you-have-selected="You have selected" data-aria-min-chars="Enter 3 or more characters for suggestions." data-aria-one-result="There is one suggestion available." data-aria-n-results="There are {n} suggestions available." data-aria-limited-results="Results have been limited to 10 suggestions. Type more characters to improve your search." data-more-results="Continue entering to improve suggestions" data-results-title="Suggestions" data-typeahead-data="https://gist.githubusercontent.com/rmccar/08794cd217fbc08b7c2a470371f0390d/raw/6fe79c0c082fd351b5e031db0dcdffd406f936b4/COB_FEL.json" data-no-results="No results found">
+                                                        <input required type="text" id="country-input" class="input input--text input-type__input  js-typeahead-input" autocomplete="off" aria-autocomplete="list" aria-controls="country-listbox" aria-describedby="country-instructions" aria-has-popup="true" aria-owns="country-listbox" aria-expanded="false" role="combobox" data-error-msg="Enter a country">
+                                                        <div class="typeahead-input__results js-typeahead-results">
+                                                        <header class="typeahead-input__results-title u-fs-s">Suggestions</header>
+                                                        <ul class="typeahead-input__listbox js-typeahead-listbox" role="listbox" id="country-listbox" tabindex="-1"></ul>
+                                                        </div>
+                                                        <div class="typeahead-input__instructions u-vh js-typeahead-instructions" id="country-instructions" tabindex="-1">Use up and down keys to navigate suggestions once you&#39;ve typed more than two characters. Use the enter key to select a suggestion. Touch device users, explore by touch or with swipe gestures.</div>
+                                                        <div class="typeahead-input__status u-vh js-typeahead-aria-status" aria-live="polite" role="status" tabindex="-1"></div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
                                         </p>
                                     </div>
                                 </div>
@@ -60,7 +77,7 @@ noONSLogoLink: true
                             </section>
                         </div>
                     </div>
-                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                    <button class="btn btn-submit btn--primary btn--lg qa-btn-submit venus u-mb-xl"
                             type="submit" name="">Save and continue
                     </button>
                     <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
@@ -79,26 +96,35 @@ noONSLogoLink: true
       person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
       isEditing = urlParams.get('edit'),
       details = storageAPI.getPersonalDetailsFor(personId),
-      question = $('#question-title').html();
+      question = $('#question-title').html(),
+      hasErrors = false;
 
       storageAPI.personalBookmark(personId, window.location.href);
 
     $('.qa-btn-submit').on('click',
       storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
-      e.preventDefault();
-      var value = $('#country-input').val();
-      let url = '../individual-details-30-day-address-country/?person_id=' + personId + '&edit=true';
-      question = question.trim();
+        e.preventDefault();
+        const testFails = '';
+        window.ONS.utils.validateInputs(testFails, "input[id='country-input']");
+        if (hasErrors) {
+            window.ONS.utils.calcErrors();
+            hasErrors = false;
+            return false;
+        } else {
+            var value = $('#country-input').val();
+            let url = '../individual-details-30-day-address-country/?person_id=' + personId + '&edit=true';
+            question = question.trim();
 
-      storageAPI.addUpdate30DayCountry(personId, value, question, url);
+            storageAPI.addUpdate30DayCountry(personId, value, question, url);
 
-      if(isEditing) {
-        window.location.href = '../individual-details-summary/?person_id=' + personId;
-        storageAPI.storePageData('/individual-details-summary/', window.location.pathname);
-      } else {
-        window.location.href = '../individual-details-30-day-address-type/?person_id=' + personId;
-        storageAPI.storePageData('/end-to-end/individual-details-30-day-address-type/', window.location.pathname);
-      }
+            if(isEditing) {
+                window.location.href = '../individual-details-summary/?person_id=' + personId;
+                storageAPI.storePageData('/individual-details-summary/', window.location.pathname);
+            } else {
+                window.location.href = '../individual-details-30-day-address-type/?person_id=' + personId;
+                storageAPI.storePageData('/end-to-end/individual-details-30-day-address-type/', window.location.pathname);
+            }
+        }
     }));
 
     function updateQuestion() {

@@ -20,66 +20,85 @@ noONSLogoLink: true
         </div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
-                <form id="form" name="trav" class="form qa-questionnaire-form"
-                      role="form" autocomplete="new-password"
-                      action="../individual-details-dob">
-                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
-                           value="#"/>
-                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
-                           value="#"/>
-                    <div class="group" id="rsi">
-                        <div class="block" id="total-retail-turnover">
-                            <section class="section">
-                                <div class="question u-mb-s">
-                                    <h1 id="question-title"
-                                        class="question__title u-fs-xl js-heading">
-                                        You are this many years old. Is this correct?
-                                    </h1>
-                                </div>
-
-                                <div class="answer">
-                                    <div class="answer__fields js-fields">
-                                        <div class="field field--radio field--multiplechoice ">
-                                            <fieldset class="u-mb-xl">
-                                                <div class="field__item js-focusable-box">
-                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
-                                                           type="radio"
-                                                           name="age-confirm"
-                                                           id="yes"
-                                                           value="Yes">
-                                                    <label class="label label--inline"
-                                                           for="yes"
-                                                           id="yes-label">
-                                                    </label>
-                                                </div>
-                                                <div class="field__item js-focusable-box">
-                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
-                                                           type="radio"
-                                                           name="age-confirm"
-                                                           id="no"
-                                                           value="No">
-                                                    <label class="label label--inline"
-                                                           for="no"
-                                                           id="no-label">
-                                                        No, I need to correct
-                                                        my date of birth
-                                                    </label>
-                                                </div>
-                                            </fieldset>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
+                <div class="feedback__inline js-feedback-inline is-collapsed">
+                        <div class="feedback__border">
                         </div>
                     </div>
-                    <button class="btn btn--primary btn--lg qa-btn-submit u-mb-xl"
-                            type="submit" name="">Save and continue
-                    </button>
+                    <div class="panel panel--error u-mb-m js-error-box u-d-no">
+                        <div class="panel__header">
+                            <div class="panel__title u-fs-r--b">This page has 
+                              <span class="js-piping">{x} error{s}</span>
+                            </div>
+                        </div>
+                        <div class="panel__body">
+                            <p class="js-piping">This <strong>must be corrected</strong> to continue</p>
+                            <ol class="list list--bare">
+                            <li class="list__item js-yes u-d-no">
+                                1. <a href="#radios" class="list__link js-inpagelink">
+                                    Select an option
+                                </a>
+                            </li>
+                          </ol>
+                        </div>
+                    </div>
+                    <form id="form" name="trav" class="form qa-questionnaire-form"
+                          role="form" autocomplete="new-password"
+                          action="#">
+                        <input autocomplete="new-password" type="hidden" name="person_id" id="person"
+                              value="#"/>
+                        <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
+                              value="#"/>
+                        <div class="group" id="rsi">
+                            <div class="block" id="total-retail-turnover">
+                                <section class="section">
+                                    <div class="question u-mb-s">
+                                        <h1 id="question-title"
+                                            class="question__title u-fs-xl js-heading">
+                                            You are this many years old. Is this correct?
+                                        </h1>
+                                    </div>
 
-                    
+                                    <div class="answer" id="radios">
+                                        <div class="answer__fields question__answer js-fields">
+                                            <div class="field field--radio field--multiplechoice">
+                                                <fieldset>
+                                                    <div class="field__item js-focusable-box">
+                                                        <input required autocomplete="new-password" data-error-msg="Select an option" class="input input--radio js-focusable"
+                                                              type="radio"
+                                                              name="age-confirm"
+                                                              id="yes"
+                                                              value="Yes"
+                                                              data-error-msg="Select an option">
+                                                        <label class="label label--inline"
+                                                              for="yes"
+                                                              id="yes-label">
+                                                        </label>
+                                                    </div>
+                                                    <div class="field__item js-focusable-box">
+                                                        <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                              type="radio"
+                                                              name="age-confirm"
+                                                              id="no"
+                                                              value="No">
+                                                        <label class="label label--inline"
+                                                              for="no"
+                                                              id="no-label">
+                                                            No, I need to correct
+                                                            my date of birth
+                                                        </label>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <button class="btn btn-submit btn--primary btn--lg qa-btn-submit u-mb-xl u-mt-xl"
+                                type="submit" name="">Save and continue
+                        </button>
                         <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
-
-                </form>
+                    </form>
             </main>
         </div>
     </div>
@@ -100,44 +119,51 @@ noONSLogoLink: true
     surveyType = urlParams.get('survey');
     storageAPI.personalBookmark(personId, window.location.href),
     age = '',
-    ageYear = '';
-
+    ageYear = '',
+    hasErrors = false;
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
     e.preventDefault();
-    var question = 'You are ' + age + ' years old. Is this correct?';
-    var route = '',
-      val = $('[name="age-confirm"]:checked').val(),
-      url = '../individual-details-age-confirm/?person_id=' + personId + '&edit=true';
-    question = question.trim();
-    storageAPI.addUpdateAgeConfirm(personId, val, question, url);
-
-    if(isVisitor) {
-      window.location.href = '../individual-details-dob/' + '?person_id=' + personId + (surveyType ? '&survey=' + surveyType :'');
-      storageAPI.storePageData('/end-to-end/individual-details-dob/', window.location.pathname);
-    }
-    else if(val === 'Yes' && isEditing) {
-      window.location.href = '../individual-details-summary/' + '?person_id=' + personId + (surveyType ? '&survey=' + surveyType :'');
-      storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
-    }
-    else if(val === 'Yes' && !(isEditing)){
-      window.location.href = '../individual-details-sex/?person_id=' + personId + '&age=' + age;
-      storageAPI.addUpdateAge(personId, ageYear);
-      storageAPI.storePageData('/end-to-end/individual-details-sex/', window.location.pathname);
-    }
-    else if(val === 'No' && isEditing){
-      val = '';
-      storageAPI.addUpdateAgeConfirm(personId, val, question, url);
-      window.location.href = '../individual-details-dob/' + '?person_id=' + personId + '&edit=true' + (surveyType ? '&survey=' + surveyType :'');
-      storageAPI.storePageData('/end-to-end/individual-details-dob/', window.location.pathname);
+    const testFails = ($('input[type=radio]:checked').size() === 0);
+    window.ONS.utils.validateInputs(testFails, "input[type=radio]");
+    if (hasErrors) {
+        window.ONS.utils.calcErrors();
+        hasErrors = false;
+            return false;
     } else {
-      val = '';
-      storageAPI.addUpdateAgeConfirm(personId, val, question, url);
-      window.location.href = '../individual-details-dob/' + '?person_id=' + personId + (surveyType ? '&survey=' + surveyType :'');
-      storageAPI.storePageData('/end-to-end/individual-details-dob/', window.location.pathname);
-    }
+        var question = 'You are ' + age + ' years old. Is this correct?';
+        var route = '',
+          val = $('[name="age-confirm"]:checked').val(),
+          url = '../individual-details-age-confirm/?person_id=' + personId + '&edit=true';
+        question = question.trim();
+        storageAPI.addUpdateAgeConfirm(personId, val, question, url);
 
+        if(isVisitor) {
+          window.location.href = '../individual-details-dob/' + '?person_id=' + personId + (surveyType ? '&survey=' + surveyType :'');
+          storageAPI.storePageData('/end-to-end/individual-details-dob/', window.location.pathname);
+        }
+        else if(val === 'Yes' && isEditing) {
+          window.location.href = '../individual-details-summary/' + '?person_id=' + personId + (surveyType ? '&survey=' + surveyType :'');
+          storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+        }
+        else if(val === 'Yes' && !(isEditing)){
+          window.location.href = '../individual-details-sex/?person_id=' + personId + '&age=' + age;
+          storageAPI.addUpdateAge(personId, ageYear);
+          storageAPI.storePageData('/end-to-end/individual-details-sex/', window.location.pathname);
+        }
+        else if(val === 'No' && isEditing){
+          val = '';
+          storageAPI.addUpdateAgeConfirm(personId, val, question, url);
+          window.location.href = '../individual-details-dob/' + '?person_id=' + personId + '&edit=true' + (surveyType ? '&survey=' + surveyType :'');
+          storageAPI.storePageData('/end-to-end/individual-details-dob/', window.location.pathname);
+        } else {
+          val = '';
+          storageAPI.addUpdateAgeConfirm(personId, val, question, url);
+          window.location.href = '../individual-details-dob/' + '?person_id=' + personId + (surveyType ? '&survey=' + surveyType :'');
+          storageAPI.storePageData('/end-to-end/individual-details-dob/', window.location.pathname);
+        }
+    }
   }));
 
   function updateRouting() {

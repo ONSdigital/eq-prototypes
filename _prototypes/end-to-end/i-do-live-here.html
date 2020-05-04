@@ -19,6 +19,27 @@ noONSLogoLink: true
         <div class="grid__col col-4@m"></div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
+                <div class="feedback__inline js-feedback-inline is-collapsed">
+                    <div class="feedback__border">
+                    </div>
+                </div>
+                <div class="panel panel--error u-mb-m js-error-box u-d-no">
+                    <div class="panel__header">
+                        <div class="panel__title u-fs-r--b">This page has 
+                            <span class="js-piping">{x} error{s}</span>
+                        </div>
+                    </div>
+                    <div class="panel__body">
+                        <p class="js-piping">This <strong>must be corrected</strong> to continue</p>
+                        <ol class="list list--bare">
+                        <li class="list__item js-family u-d-no">
+                            1. <a href="#checkboxes" class="list__link js-inpagelink">
+                                Select an option
+                            </a>
+                        </li>
+                        </ol>
+                    </div>
+                </div>
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password" novalidate="">
                     <input type="hidden" name="previous"
@@ -32,7 +53,7 @@ noONSLogoLink: true
                                     </h1>
                                 </div>
 
-                                  <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple u-mb-s">
+                                <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple u-mb-s">
                                     <div class="js-collapsible-content">
                                         <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Who to include">Who to include</h3>
                                         <div class="collapsible__body js-collapsible-body">
@@ -44,21 +65,21 @@ noONSLogoLink: true
                                                 <li><strong>people with a second address for work</strong>, if this is their home address</li>
                                                 <li><strong>armed forces members</strong>, if this is their home address</li>
                                             </ul>
-                                            <button
-                                                    class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="What does /"usually live/" mean?">Hide this</button>
+                                            <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="What does /"usually live/" mean?">Hide this</button>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="answer__fields js-fields">
+                                <div class="answer__fields js-fields question__answer" id="checkboxes">
                                     <div class="field field--checkbox field--multiplechoice">
-                                        <fieldset class="u-mb-xl">
+                                        <fieldset>
                                             <legend class="field__legend">Select all that apply. You can select more than one for each person</legend>
                                             <div class="field__item js-focusable-box">
-                                                <input autocomplete="new-password" class="input input--checkbox js-focusable"
+                                                <input required autocomplete="new-password" class="input input--checkbox js-focusable"
                                                       type="checkbox"
                                                       name="live-here"
-                                                      id="family">
+                                                      id="family"
+                                                      data-error-msg="Select an option">
                                                 <label class="label label--inline"
                                                       for="family">
                                                     Family members and partners
@@ -137,7 +158,7 @@ noONSLogoLink: true
                             </section>
                         </div>
                     </div>
-                    <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="">Save and continue</button>
+                    <button class="btn btn-submit btn--primary btn--lg qa-btn-submit venus u-mt-xl" type="submit" name="">Save and continue</button>
                 </form>
             </main>
         </div>
@@ -172,20 +193,31 @@ noONSLogoLink: true
 </script>
 
 <script>
-  var livingAwayBox = document.getElementById("temp-staying");
-  var otherbox = document.getElementById("none"),
+  var livingAwayBox = document.getElementById("temp-staying"),
+    otherbox = document.getElementById("none"),
+    hasErrors = false,
     storageAPI = window.ONS.storage;
+    
   $('.qa-btn-submit').click(function(e) {
-
+    e.preventDefault();
+    const testFails = ($('input[type=checkbox]:checked').size() === 0);
+    window.ONS.utils.validateInputs(testFails, "input[type=checkbox]");
+    if (hasErrors) {
+        window.ONS.utils.calcErrors();
+        hasErrors = false;
+            return false;
+    } else {
     /**
      * Routing
      */
-    if (!otherbox.checked) {
-      document.trav.action = "../who-else-to-add";
-      storageAPI.storePageData('/end-to-end/who-else-to-add/', window.location.pathname);
-      } else {
-        document.trav.action = "../people-count-confirmation";
-      }
+        if (!otherbox.checked) {
+            window.location.href = "../who-else-to-add";
+            storageAPI.storePageData('/end-to-end/who-else-to-add/', window.location.pathname);
+        } else {
+            window.location.href = "../people-count-confirmation";
+            storageAPI.storePageData('/end-to-end/people-count-confirmation/', window.location.pathname);
+        }
+    }
   });
 
 </script>

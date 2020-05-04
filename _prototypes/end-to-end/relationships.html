@@ -22,6 +22,27 @@ noONSLogoLink: true
         </div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
+                <div class="feedback__inline js-feedback-inline is-collapsed">
+                    <div class="feedback__border">
+                    </div>
+                </div>
+                <div class="panel panel--error u-mb-m js-error-box u-d-no">
+                    <div class="panel__header">
+                        <div class="panel__title u-fs-r--b">This page has 
+                          <span class="js-piping">{x} error{s}</span>
+                        </div>
+                    </div>
+                    <div class="panel__body">
+                        <p class="js-piping">This <strong>must be corrected</strong> to continue</p>
+                        <ol class="list list--bare">
+                        <li class="list__item js-husband-wife u-d-no">
+                            1. <a href="#radios" class="list__link js-inpagelink">
+                                Select an option
+                            </a>
+                        </li>
+                       </ol>
+                    </div>
+                </div>
                 <form name="trav" class="form qa-questionnaire-form" role="form"
                       autocomplete="new-password" novalidate="">
                     <div class="group">
@@ -36,16 +57,17 @@ noONSLogoLink: true
                                         the appropriate relationship
                                     </p>
 
-                                    <div class="answer__fields js-fields">
-                                        <div class="field field--radio field--multiplechoice u-mb-l">
+                                    <div class="answer__fields question__answer js-fields" id="radios">
+                                        <div class="field field--radio field--multiplechoice">
                                             <fieldset class="grid">
                                                 <div class="grid__col col-10@m">
                                                     <div class="field__item js-focusable-box">
-                                                        <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                        <input required autocomplete="new-password" class="input input--radio js-focusable"
                                                                type="radio"
                                                                name="relationship"
                                                                id="husband-wife"
-                                                               value="husband-wife"/>
+                                                               value="husband-wife"
+                                                               data-error-msg="Select an answer"/>
                                                         <label class="label label--inline u-width-fill venus"
                                                                for="husband-wife">Husband
                                                             or wife</label>
@@ -173,24 +195,25 @@ noONSLogoLink: true
                                                             <strong
                                                                     class="u-fs-r">
                                                                 Unrelated</strong>
-                                                            <p
-                                                                    class="u-fs-s u-db u-mb-no label--negative">Including foster child</p>
+                                                            <p class="u-fs-s u-db u-mb-no label--negative">Including foster child</p>
                                                         </label>
                                                     </div>
                                                 </div>
                                             </fieldset>
                                         </div>
-                                        <fieldset class="grid">
-                                            <div class="grid__col col-10@m">
-                                                <div class="js-relationship-answer-feedback u-mb-xl answer-feedback"></div>
-                                            </div>
-                                        </fieldset>
+                                        <div class="grid-answer-feedback u-mt-l">
+                                          <fieldset class="grid">
+                                              <div class="grid__col col-10@m">
+                                                  <div class="js-relationship-answer-feedback answer-feedback"></div>
+                                              </div>
+                                          </fieldset>
+                                        </div>
                                     </div>
                                 </div>
                             </section>
                         </div>
                     </div>
-                    <button class="btn btn--primary btn--lg qa-btn-submit venus"
+                    <button class="btn btn-submit btn--primary btn--lg qa-btn-submit venus u-mt-xl"
                             type="submit" name="">Save and continue
                     </button>
 
@@ -232,6 +255,7 @@ noONSLogoLink: true
   var storageAPI = window.ONS.storage,
     personIs,
     personTo,
+    hasErrors = false,
 
     urlParams = new URLSearchParams(window.location.search),
     editRelationshipId = urlParams.get('edit'),
@@ -355,8 +379,7 @@ noONSLogoLink: true
         personTo: personTo
       });
 
-      $('.qa-btn-submit')
-        .on('click', editSubmit_handler.bind(null, editRelationshipId));
+      $('.qa-btn-submit').on('click', editSubmit_handler.bind(null, editRelationshipId));
     }
     else {
       $('#question-area')
@@ -366,48 +389,57 @@ noONSLogoLink: true
 
   function editSubmit_handler(relationshipId, e) {
     e.preventDefault();
+    const testFails = ($('input[type=radio]:checked').size() === 0);
+    window.ONS.utils.validateInputs(testFails, "input[type=radio]");
+    if (hasErrors) {
+        window.ONS.utils.calcErrors();
+        hasErrors = false;
+        document.querySelector('.field--multiplechoice').parentNode.parentNode.parentNode.insertBefore(document.querySelector('.field--multiplechoice').parentNode.parentNode, document.querySelector('.grid-answer-feedback'));
+        return false;
+    } else {
 
-    var chosenItem = getChosenItem(),
-      relationshipDescriptionVal = chosenItem.val,
-      relationshipDescription = chosenItem.description,
-      aRelationshipPreviouslyInferredByThis = false;
+      var chosenItem = getChosenItem(),
+        relationshipDescriptionVal = chosenItem.val,
+        relationshipDescription = chosenItem.description,
+        aRelationshipPreviouslyInferredByThis = false;
 
-    if (!relationshipDescription) {
-      throw Error('Relationship description not found: ', relationshipDescription);
-    }
+      if (!relationshipDescription) {
+        throw Error('Relationship description not found: ', relationshipDescription);
+      }
 
-    storageAPI.editRelationship(relationshipId,
-      storageAPI.TYPES.relationship(
-        relationshipDescriptionVal,
-        editRelationshipFound.personIsId,
-        editRelationshipFound.personToId
-      )
-    );
+      storageAPI.editRelationship(relationshipId,
+        storageAPI.TYPES.relationship(
+          relationshipDescriptionVal,
+          editRelationshipFound.personIsId,
+          editRelationshipFound.personToId
+        )
+      );
 
-    /**
-     * Were there any relationships created by inference when
-     * previously creating this relationship
-     */
-    $.each(storageAPI.getAllRelationships().filter(storageAPI.isRelationshipInferred),
-      function(i, relationship) {
-        var isInferredByThis = !!_.find(relationship.inferredBy, function(id) {
-          return id+'' === relationshipId+'';
+      /**
+      * Were there any relationships created by inference when
+      * previously creating this relationship
+      */
+      $.each(storageAPI.getAllRelationships().filter(storageAPI.isRelationshipInferred),
+        function(i, relationship) {
+          var isInferredByThis = !!_.find(relationship.inferredBy, function(id) {
+            return id+'' === relationshipId+'';
+          });
+
+          if(isInferredByThis) {
+            storageAPI.deleteRelationship(relationship);
+            aRelationshipPreviouslyInferredByThis = true;
+          }
         });
 
-        if(isInferredByThis) {
-          storageAPI.deleteRelationship(relationship);
-          aRelationshipPreviouslyInferredByThis = true;
-        }
-      });
+      if(aRelationshipPreviouslyInferredByThis) {
+        dynamicRouting();
+      }
+      else {
+        window.location.href = '../relationships-summary-proxy/?noop=1' +
+          nextPageSurveyRouting;
+          storageAPI.storePageData('/end-to-end/relationships-summary-proxy/', window.location.pathname);
 
-    if(aRelationshipPreviouslyInferredByThis) {
-      dynamicRouting();
-    }
-    else {
-      window.location.href = '../relationships-summary-proxy/?noop=1' +
-        nextPageSurveyRouting;
-        storageAPI.storePageData('/end-to-end/relationships-summary-proxy/', window.location.pathname);
-
+      }
     }
   }
 
@@ -462,46 +494,55 @@ noONSLogoLink: true
 
   function missingSubmit_handler(e) {
     e.preventDefault();
+    const testFails = ($('input[type=radio]:checked').size() === 0);
+    window.ONS.utils.validateInputs(testFails, "input[type=radio]");
+    if (hasErrors) {
+        window.ONS.utils.calcErrors();
+        hasErrors = false;
+        document.querySelector('.field--multiplechoice').parentNode.parentNode.parentNode.insertBefore(document.querySelector('.field--multiplechoice').parentNode.parentNode, document.querySelector('.grid-answer-feedback'));
+        return false;
+    } else {
 
-    var nextMissingRelationship,
-      chosenItem = getChosenItem(),
-      relationshipDescriptionVal = chosenItem.val,
-      relationshipDescription = chosenItem.description,
-      newRelationship,
-      dbRelationshipId;
+      var nextMissingRelationship,
+        chosenItem = getChosenItem(),
+        relationshipDescriptionVal = chosenItem.val,
+        relationshipDescription = chosenItem.description,
+        newRelationship,
+        dbRelationshipId;
 
-    if (!relationshipDescription) {
-      throw Error('Relationship description not found: ', relationshipDescription);
-    }
+      if (!relationshipDescription) {
+        throw Error('Relationship description not found: ', relationshipDescription);
+      }
 
-    newRelationship = storageAPI.addRelationship(
-      storageAPI.TYPES.relationship(
-        relationshipDescriptionVal,
-        personIs['@person'].id,
-        personTo['@person'].id
-      )
-    );
+      newRelationship = storageAPI.addRelationship(
+        storageAPI.TYPES.relationship(
+          relationshipDescriptionVal,
+          personIs['@person'].id,
+          personTo['@person'].id
+        )
+      );
 
-    dbRelationshipId = newRelationship.id;
+      dbRelationshipId = newRelationship.id;
 
-    window.history.replaceState(null, '', '?edit=' + dbRelationshipId + nextPageSurveyRouting);
+      window.history.replaceState(null, '', '?edit=' + dbRelationshipId + nextPageSurveyRouting);
 
-    storageAPI.inferRelationships(newRelationship, personIs, personTo);
+      storageAPI.inferRelationships(newRelationship, personIs, personTo);
 
-    nextMissingRelationship = storageAPI.findNextMissingRelationship();
+      nextMissingRelationship = storageAPI.findNextMissingRelationship();
 
-    /**
-     * Routing
-     */
-    if(redirect) {
-      window.location.href = redirect;
-    }
-    else if (nextMissingRelationship) {
-      dynamicRouting();
-    }
-    else {
-      window.location.href = '../relationships-summary-proxy/?noop=1' +
-        nextPageSurveyRouting;
+      /**
+      * Routing
+      */
+      if(redirect) {
+        window.location.href = redirect;
+      }
+      else if (nextMissingRelationship) {
+        dynamicRouting();
+      }
+      else {
+        window.location.href = '../relationships-summary-proxy/?noop=1' +
+          nextPageSurveyRouting;
+      }
     }
   }
 

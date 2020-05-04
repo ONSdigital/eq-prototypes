@@ -101,9 +101,10 @@ noONSLogoLink: true
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
     const testFails = document.getElementById('job-field').value.length > 120 ? true : false;
-    window.ONS.utils.validateInputs(testFails);
+    window.ONS.utils.validateInputs(testFails, "input[id='job-field']");
     if (hasErrors) {
       e.preventDefault();
+      window.ONS.utils.calcErrors();
       hasErrors = false;
       return false;
     } else {

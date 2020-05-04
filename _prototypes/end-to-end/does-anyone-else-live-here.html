@@ -25,6 +25,27 @@ noONSLogoLink: true
         <div class="grid__col col-4@m"></div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
+                <div class="feedback__inline js-feedback-inline is-collapsed">
+                    <div class="feedback__border">
+                    </div>
+                </div>
+                <div class="panel panel--error u-mb-m js-error-box u-d-no">
+                    <div class="panel__header">
+                        <div class="panel__title u-fs-r--b">This page has 
+                          <span class="js-piping">{x} error{s}</span>
+                        </div>
+                    </div>
+                    <div class="panel__body">
+                        <p class="js-piping">This <strong>must be corrected</strong> to continue</p>
+                        <ol class="list list--bare">
+                        <li class="list__item js-yes-someone-else u-d-no">
+                            1. <a href="#radios" class="list__link js-inpagelink">
+                                Select an option
+                            </a>
+                        </li>
+                       </ol>
+                    </div>
+                </div>
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password" novalidate="">
                     <input type="hidden" name="previous"
@@ -53,15 +74,16 @@ noONSLogoLink: true
                                     </div>
                                 </div>
 
-                                <div class="answer__fields js-fields">
+                                <div class="answer__fields question__answer js-fields" id="radios">
                                     <div class="field field--radio field--multiplechoice ">
-                                        <fieldset class="u-mb-xl">
+                                        <fieldset>
                                             <div class="field__item js-focusable-box">
-                                                <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                <input required autocomplete="new-password" class="input input--radio js-focusable"
                                                        type="radio"
                                                        name="does-anyone-else-live-here"
                                                        id="yes-someone-else"
-                                                       value="Yes">
+                                                       value="Yes"
+                                                       data-error-msg="Select an answer">
                                                 <label class="label label--inline venus"
                                                        for="yes-someone-else"
                                                        id="yes-someone-else-label">
@@ -87,7 +109,7 @@ noONSLogoLink: true
                             </section>
                         </div>
                     </div>
-                    <button class="btn btn--primary btn--lg qa-btn-submit venus"
+                    <button class="btn btn-submit btn--primary btn--lg qa-btn-submit venus u-mt-xl"
                             type="submit" name="">Save and continue
                     </button>
                 </form>
@@ -100,22 +122,31 @@ noONSLogoLink: true
 
 <script>
   var yesbox = document.getElementById("yes-someone-else"),
+    hasErrors = false;
     storageAPI = window.ONS.storage;
   $('.qa-btn-submit').click(function(e) {
-
-    /**
-     * Routing
-     */
-    if (!yesbox.checked) {
-      if (window.location.search.match(/journey=visitors/)) {
-        document.trav.action = "../summary";
-      }
-      else {
-        document.trav.action = "../people-count-confirmation";
-      }
-
+    const testFails = ($('input[type=radio]:checked').size() === 0);
+    window.ONS.utils.validateInputs(testFails, "input[type=radio]");
+    if (hasErrors) {
+        window.ONS.utils.calcErrors();
+        hasErrors = false;
+        return false;
     } else {
-      document.trav.action = "../who-else-to-add";
+
+      /**
+      * Routing
+      */
+      if (!yesbox.checked) {
+        if (window.location.search.match(/journey=visitors/)) {
+          document.trav.action = "../summary";
+        }
+        else {
+          document.trav.action = "../people-count-confirmation";
+        }
+
+      } else {
+        document.trav.action = "../who-else-to-add";
+      }
     }
   });
 

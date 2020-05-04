@@ -558,63 +558,62 @@ function fieldItemDisplayHack() {
   $('.field__item').after('<br />');
 }
 
-function validateInputs(testFails) {
-  var inputs = Array.from(document.querySelectorAll('.input'));
-  inputs
-    .filter(function(input) { return input.required })
-    .forEach(function (input) {
-        var errorBox = document.querySelector('.js-error-box'),
-            listItem = document.querySelector('.js-' + input.id),
-            answer = input.closest('.question__answer'),
-            field = document.querySelector('.fieldgroup') ? input.closest('.fieldgroup') : input.closest('.field'),
-            errorMsg = input.getAttribute('data-error-msg');
-        if (input.value === testFails || testFails === true) {
-          hasErrors = true;
-          if (!listItem.classList.contains('js-visible')) { 
-            errorBox.classList.remove('u-d-no');
-            listItem.classList.remove('u-d-no'), 
-            listItem.classList.add('js-visible');
+function validateInputs(testFails, selector) {
+  var input = document.querySelector(selector),
+      errorBox = document.querySelector('.js-error-box'),
+      listItem = document.querySelector('.js-' + input.id),
+      answer = input.closest('.question__answer'),
+      field = document.querySelector('.fieldgroup') ? input.closest('.fieldgroup') : input.closest('.field'),
+      errorMsg = input.getAttribute('data-error-msg');
 
-            var inputErrorPanel = document.createElement('DIV'),
-                inputErrorBody = document.createElement('DIV'),
-                inputErrorP = document.createElement('P'),
-                inputErrorStrong = document.createElement('STRONG');
+  if (input.value === testFails || testFails === true) {
+    hasErrors = true;
+    if (!listItem.classList.contains('js-visible')) { 
+      errorBox.classList.remove('u-d-no');
+      listItem.classList.remove('u-d-no'), 
+      listItem.classList.add('js-visible');
 
-            inputErrorPanel.className = 'panel panel--error panel--simple';
-            inputErrorBody.className = 'panel__body';
-            inputErrorP.className = 'panel__error';
-            
-            inputErrorStrong.innerText = errorMsg;
-            inputErrorP.appendChild(inputErrorStrong);
-            inputErrorBody.appendChild(inputErrorP);
-            inputErrorBody.appendChild(field);
-            inputErrorPanel.appendChild(inputErrorBody);
-            answer.appendChild(inputErrorPanel);
-          }
-        } else {
-          var errorPanel = input.closest('.panel');
-          if (errorPanel) {
-            listItem.classList.add('u-d-no'), 
-            listItem.classList.remove('js-visible');
-            answer.appendChild(field);
-            answer.removeChild(errorPanel);
-          }
-        }
-    });
+      var inputErrorPanel = document.createElement('DIV'),
+          inputErrorBody = document.createElement('DIV'),
+          inputErrorP = document.createElement('P'),
+          inputErrorStrong = document.createElement('STRONG');
 
-    var errors = Array.from(document.querySelectorAll('.js-visible')).length,
-      pipingDestinations = document.querySelectorAll('.js-piping');
+      inputErrorPanel.className = 'panel panel--error panel--simple';
+      inputErrorBody.className = 'panel__body';
+      inputErrorP.className = 'panel__error';
+      inputErrorStrong.innerText = errorMsg;
+      inputErrorP.appendChild(inputErrorStrong);
+      inputErrorBody.appendChild(inputErrorP);
+      inputErrorBody.appendChild(field);
+      inputErrorPanel.appendChild(inputErrorBody);
+      answer.appendChild(inputErrorPanel);
+    }
+  } else {
+    var errorPanel = input.closest('.panel');
+    if (errorPanel) {
+      listItem.classList.add('u-d-no'), 
+      listItem.classList.remove('js-visible');
+      answer.appendChild(field);
+      answer.removeChild(errorPanel);
+    }
+  }
+  document.querySelector(".btn-submit").blur();
+}
 
-    pipingDestinations.forEach(function(pipingDestination) {
-      pipingDestination.innerText = pipingDestination.innerText
-        .replace('{x}', errors)
-        .replace('{s}', errors > 1 ? 's' : '')
-        .replace('2', errors === 1 ? "1" : "2")
-        .replace('1', errors > 1 ? "2" : "1")
-        .replace('This', errors > 1 ? "These" : "This")
-        .replace('These', errors === 1 ? "This" : "These");
-    });
+function calcErrors() {
+  var errors = Array.from(document.querySelectorAll('.js-visible')).length,
+    pipingDestinations = document.querySelectorAll('.js-piping');
 
+  pipingDestinations.forEach(function(pipingDestination) {
+    pipingDestination.innerText = pipingDestination.innerText
+      .replace('{x}', errors)
+      .replace('{s}', errors > 1 ? 's' : '')
+      .replace('errors', errors === 1 ? 'error' : 'errors')
+      .replace('2', errors === 1 ? "1" : "2")
+      .replace('1', errors > 1 ? "2" : "1")
+      .replace('This', errors > 1 ? "These" : "This")
+      .replace('These', errors === 1 ? "This" : "These");
+  });
 }
 
 function storePageData(url, previousUrl) {
@@ -812,7 +811,8 @@ window.ONS.utils = {
   precedingOrdinalWord,
   getSignificant,
   cleanHTMLPlaceholderStringReplacment,
-  validateInputs
+  validateInputs,
+  calcErrors
 };
 
 $(populateHouseholdList);

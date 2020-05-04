@@ -25,11 +25,11 @@ noONSLogoLink: true
                     </div>
                     <div class="panel__body">
                         <p class="js-piping">This <strong>must be corrected</strong> to continue</p>
-                        <ul class="list list--bare">
+                        <ol class="list list--bare">
                           <li class="list__item js-personal-detail-dob-day u-d-no">
                               1. <a href="#personal-detail-dob-day" class="list__link js-inpagelink js-error">Enter your date of birth</a>
                           </li>
-                       </ul>
+                       </ol>
                     </div>
                 </div>
                 <form id="form" name="trav" class="form qa-questionnaire-form"
@@ -85,7 +85,7 @@ noONSLogoLink: true
                           </div>
                       </div>
                     </div>
-                    <button class="btn btn--primary btn--lg qa-btn-submit u-mb-xl u-mt-xl"
+                    <button class="btn btn-submit btn--primary btn--lg qa-btn-submit u-mb-xl u-mt-xl"
                             type="submit" name="">Save and continue
                     </button>
                     <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
@@ -107,39 +107,39 @@ noONSLogoLink: true
     isVisitor = storageAPI.isVisitor(member),
     surveyType = urlParams.get('survey');
     storageAPI.personalBookmark(personId, window.location.href),
-    question = $('#question-title').html();
-  
-  var hasErrors = false;
+    question = $('#question-title').html(),
+    hasErrors = false;
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
       e.preventDefault();
       const testFails = '';
-      window.ONS.utils.validateInputs(testFails);
+      window.ONS.utils.validateInputs(testFails, "input[id='personal-detail-dob-day']");
       if (hasErrors) {
-        hasErrors = false;
-        return false;
-    } else {
-      window.location.href = '../individual-details-age-confirm/?person_id=' + personId + (isEditing ? '&edit=true' : '');
-      storageAPI.storePageData('/end-to-end/individual-details-age-confirm/', window.location.pathname);
+        window.ONS.utils.calcErrors();
+          hasErrors = false;
+          return false;
+      } else {
+        window.location.href = '../individual-details-age-confirm/?person_id=' + personId + (isEditing ? '&edit=true' : '');
+        storageAPI.storePageData('/end-to-end/individual-details-age-confirm/', window.location.pathname);
 
-      let url = '../individual-details-dob/?person_id=' + personId + '&edit=true';
-      question = question.trim();
-      storageAPI.addUpdatePersonalDetailsDOB(personId,
-        $('#personal-detail-dob-day').val(),
-        $('#personal-detail-dob-month').val(),
-        $('#personal-detail-dob-year').val(),
-        question,
-        url
-      );
+        let url = '../individual-details-dob/?person_id=' + personId + '&edit=true';
+        question = question.trim();
+        storageAPI.addUpdatePersonalDetailsDOB(personId,
+          $('#personal-detail-dob-day').val(),
+          $('#personal-detail-dob-month').val(),
+          $('#personal-detail-dob-year').val(),
+          question,
+          url
+        );
 
-      if(isVisitor){
-        e.preventDefault();
-        window.location.href = '../individual-details-sex/?person_id=' +
-          personId + (surveyType ? '&survey=' + surveyType : '');
-        storageAPI.storePageData('/end-to-end/individual-details-sex/', window.location.pathname);
+        if(isVisitor){
+          e.preventDefault();
+          window.location.href = '../individual-details-sex/?person_id=' +
+            personId + (surveyType ? '&survey=' + surveyType : '');
+          storageAPI.storePageData('/end-to-end/individual-details-sex/', window.location.pathname);
+        }
       }
-    }
   }));
 
   function updateRouting() {
