@@ -19,6 +19,27 @@ noONSLogoLink: true
         <div class="grid__col col-4@m"></div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
+                <div class="feedback__inline js-feedback-inline is-collapsed">
+                    <div class="feedback__border">
+                    </div>
+                </div>
+                <div class="panel panel--error u-mb-m js-error-box u-d-no">
+                    <div class="panel__header">
+                        <div class="panel__title u-fs-r--b">This page has 
+                          <span class="js-piping">{x} error{s}</span>
+                        </div>
+                    </div>
+                    <div class="panel__body">
+                        <p class="js-piping">This <strong>must be corrected</strong> to continue</p>
+                        <ol class="list list--bare">
+                        <li class="list__item js-owns u-d-no">
+                            1. <a href="#radios" class="list__link js-inpagelink">
+                                Select an option
+                            </a>
+                        </li>
+                       </ol>
+                    </div>
+                </div>
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password" action="../household-accom-vehicles">
                     <div class="group" id="accommodation">
@@ -30,16 +51,17 @@ noONSLogoLink: true
                                         Does your household own or rent <span class="full-address-text"></span>?
                                     </h1>
                                 </div>
-                                  <div class="answer">
-                                    <div class="answer__fields js-fields">
-                                        <div class="field field--radio field--multiplechoice ">
-                                            <fieldset class="u-mb-xl">
+                                  <div class="answer" id="radios">
+                                    <div class="answer__fields question__answer js-fields">
+                                        <div class="field field--radio field--multiplechoice">
+                                            <fieldset id="ownsRadios">
                                                 <div class="field__item js-focusable-box">
-                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                    <input required autocomplete="new-password" data-error-msg="Select an option" class="input input--radio js-focusable"
                                                            type="radio"
                                                            name="own-rent"
                                                            id="owns"
-                                                           value="Owns outright">
+                                                           value="Owns outright"
+                                                           required>
                                                     <label class="label label--inline"
                                                            for="owns"
                                                            id="owns-label">
@@ -51,7 +73,8 @@ noONSLogoLink: true
                                                            type="radio"
                                                            name="own-rent"
                                                            id="mortgage"
-                                                           value="Owns with a mortgage or loan">
+                                                           value="Owns with a mortgage or loan"
+                                                           required>
                                                     <label class="label label--inline"
                                                            for="mortgage"
                                                            id="mortgage-label">
@@ -63,7 +86,8 @@ noONSLogoLink: true
                                                            type="radio"
                                                            name="own-rent"
                                                            id="part"
-                                                           value="Part-owns and part-rents">
+                                                           value="Part-owns and part-rents"
+                                                           required>
                                                     <label class="label label--inline"
                                                            for="part"
                                                            id="part-label">
@@ -78,7 +102,8 @@ noONSLogoLink: true
                                                            type="radio"
                                                            name="own-rent"
                                                            id="rents"
-                                                           value="Rents">
+                                                           value="Rents"
+                                                           required>
                                                     <label class="label label--inline"
                                                            for="rents"
                                                            id="rents-label">
@@ -93,7 +118,8 @@ noONSLogoLink: true
                                                            type="radio"
                                                            name="own-rent"
                                                            id="rent-free"
-                                                           value="Lives here rent-free">
+                                                           value="Lives here rent-free"
+                                                           required>
                                                     <label class="label label--inline"
                                                            for="rent-free"
                                                            id="rent-free-label">
@@ -107,7 +133,7 @@ noONSLogoLink: true
                             </section>
                         </div>
                     </div>
-                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                    <button class="btn btn-submit btn--primary btn--lg qa-btn-submit venus u-mb-xl u-mt-xl"
                             type="submit" name="">Save and continue
                     </button>
                     <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
@@ -126,24 +152,34 @@ noONSLogoLink: true
 
     var storageAPI = window.ONS.storage,
         question = $('#question-title').html(),
-        currentPage = '../household-accom-own-rent';
+        currentPage = '../household-accom-own-rent',
+        hasErrors = false;
 
     window.sessionStorage.setItem('accommodation-completed-status', currentPage);
 
     $('.qa-btn-submit').click(function (e) {
-        var val = $('input[type=radio][name=own-rent]:checked').attr('value');
-        question = question.trim();
-        question = question.replace(/(<([^>]+)>)/ig,"");
-        window.sessionStorage.setItem('accommodation-own-rent', JSON.stringify([question, val, currentPage]));
         e.preventDefault();
+        const testFails = ($('input[type=radio]:checked').size() === 0);
+        window.ONS.utils.validateInputs(testFails, "input[type=radio]");
+        if (hasErrors) {
+            window.ONS.utils.calcErrors();
+            hasErrors = false;
+            return false;
+        } else {
+            var val = $('input[type=radio][name=own-rent]:checked').attr('value');
+            question = question.trim();
+            question = question.replace(/(<([^>]+)>)/ig,"");
+            window.sessionStorage.setItem('accommodation-own-rent', JSON.stringify([question, val, currentPage]));
+            e.preventDefault();
 
-        if((val === 'Part-owns and part-rents') || (val === 'Rents')) {
-            window.location.href = '../household-accom-landlord';
-            storageAPI.storePageData('/end-to-end/household-accom-landlord/', window.location.pathname);
-        }
-        else {
-            window.location.href = '../household-accom-vehicles';
-            storageAPI.storePageData('/end-to-end/household-accom-vehicles/', window.location.pathname);
+            if((val === 'Part-owns and part-rents') || (val === 'Rents')) {
+                window.location.href = '../household-accom-landlord';
+                storageAPI.storePageData('/end-to-end/household-accom-landlord/', window.location.pathname);
+            }
+            else {
+                window.location.href = '../household-accom-vehicles';
+                storageAPI.storePageData('/end-to-end/household-accom-vehicles/', window.location.pathname);
+            }
         }
     });
 

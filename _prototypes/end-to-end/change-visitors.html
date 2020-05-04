@@ -31,17 +31,17 @@ noONSLogoLink: true
                     <div class="panel__body">
                         <p class="js-piping">This <strong>must be corrected</strong> to continue</p>
                         <ol class="list list--bare">
-                        <li class="list__item js-first-name u-d-no">
-                            1. <a href="#first-name" class="list__link js-inpagelink">
-                                Enter a first name
-                            </a>
-                        </li>
-                        <li class="list__item js-last-name u-d-no">
-                            <span class="js-piping">2</span>. <a href="#last-name" class="list__link js-inpagelink">
-                                Enter a last name
-                            </a>
-                        </li>
-                       </ol>
+                          <li class="list__item js-first-name u-d-no">
+                              1. <a href="#first-name" class="list__link js-inpagelink">
+                                  Enter a first name
+                              </a>
+                          </li>
+                          <li class="list__item js-last-name u-d-no">
+                              <span class="js-piping">2</span>. <a href="#last-name" class="list__link js-inpagelink">
+                                  Enter a last name
+                              </a>
+                          </li>
+                        </ol>
                     </div>
                 </div>
 
@@ -211,8 +211,11 @@ noONSLogoLink: true
       
   $('.btn-submit').on('click', function(e) {
     e.preventDefault();
-    window.ONS.utils.validateInputs();
+    const testFails = '';
+    window.ONS.utils.validateInputs(testFails, "input[id='first-name']");
+    window.ONS.utils.validateInputs(testFails, "input[id='last-name']");
     if (hasErrors) {
+      window.ONS.utils.calcErrors();
       hasErrors = false;
       return false;
     } else {

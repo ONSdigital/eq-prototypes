@@ -77,9 +77,9 @@ noONSLogoLink: true
                                             First name
                                         </span>
                                     </label>
-                                    <input autocomplete="new-password" required data-error-msg="Enter a first name" class="input input--text"
+                                    <input required autocomplete="new-password" required data-error-msg="Enter a first name" class="input input--text"
                                            id="first-name"
-                                           data-qa="input-text" value=""/>
+                                           data-qa="input-text" value="" data-error-msg="Enter a first name"/>
                                   </p>
                                 </div>
 
@@ -90,9 +90,9 @@ noONSLogoLink: true
                                             Last name
                                         </span>
                                     </label>
-                                    <input autocomplete="new-password" required data-error-msg="Enter a last name" class="input input--text"
+                                    <input required autocomplete="new-password" required data-error-msg="Enter a last name" class="input input--text"
                                            id="last-name"
-                                           data-qa="input-text" value=""/>
+                                           data-qa="input-text" value="" data-error-msg="Enter a last name"/>
                                   </p>
                                 </div>
                             </div>
@@ -176,8 +176,11 @@ noONSLogoLink: true
   var hasErrors = false;
   $('.btn-submit').on('click', function(e) {
     e.preventDefault();
-    window.ONS.utils.validateInputs();
+    const testFails = '';
+    window.ONS.utils.validateInputs(testFails, "input[id='first-name']");
+    window.ONS.utils.validateInputs(testFails, "input[id='last-name']");
     if (hasErrors) {
+      window.ONS.utils.calcErrors();
       hasErrors = false;
       return false;
     } else { 
