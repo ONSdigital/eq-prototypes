@@ -45,20 +45,20 @@ logoUrl: ../home
                                         <input autocomplete="new-password" class="input input--radio js-focusable"
                                                name="radio-answer"
                                                value="Yes"
-                                               id="yes"
+                                               id="Yes"
                                                type="radio">
                                         <label class="label label--inline u-fs-r js-piping"
-                                               for="yes">
-                                            Yes, send the {y}</label>
+                                               for="Yes">
+                                            Yes, send the {y} by post</label>
                                     </div>
                                     <div class="field__item js-focusable-box">
                                         <input autocomplete="new-password" class="input input--radio js-focusable"
                                                name="radio-answer"
                                                value="No"
-                                               id="no"
+                                               id="No"
                                                type="radio">
                                         <label class="label label--inline u-fs-r no-answer"
-                                               for="no">
+                                               for="No">
                                             No, send it another way</label>
                                     </div>
                                 </fieldset>
@@ -110,7 +110,7 @@ logoUrl: ../home
         $('.no-answer').html('No, cancel and return');
         $('.js-panel').removeClass('u-d-no').html('Your individual paper questionnaire will arrive in a plain white envelope');
     } else {
-        var codeType = 'a household access code';
+        var codeType = 'a new household access code';
         var codeTypeShort = 'access code';
     }
 
@@ -131,10 +131,18 @@ logoUrl: ../home
         if ($('[name=radio-answer]:checked').val() === 'Yes') {
             var url = '../uac-request-confirm-address-sent/';
             if ($('.large-print-checkbox-answer').is(':checked')) {
-                var param = '&large-print=true';
+                var largePrint = 'true';
+            }
+        } else if ($('[name=radio-answer]:checked').val() === 'No') {
+            if (currentJourney === 'new-hh-paper' || currentJourney === 'new-ir-paper') {
+                var url = '../home/';
+                var previousPage = '';
+            } else if (currentJourney === 'new-hh-uac' || currentJourney === 'new-ir-uac') {
+                var url = '../uac-request-method/';
+                var previousPage = 'uac-request-address';
             }
         }
-        window.location.href = url + '?previous=' + previousPage + '&current-journey=' + currentJourney + param;
+        window.location.href = url + '?previous=' + previousPage + '&current-journey=' + currentJourney + (largePrint ? '&large-print=' + largePrint: '');
     
     });
     $(updateQuestion);

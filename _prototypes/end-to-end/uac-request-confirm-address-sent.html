@@ -4,7 +4,8 @@ project: End to end prototype
 globalcss: false
 layout: eq-default-extras
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
-noONSLogoLink: true
+hideSaveLater: true
+logoUrl: ../home
 ---
 
 <link rel="stylesheet" href="../style.css"/>
@@ -24,32 +25,24 @@ noONSLogoLink: true
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password"
                       action="../hub">
-                    <div class="group u-mb-l">
+                    <div class="group">
                         <section class="section">
                             <div class="question u-mb-s">
-                                <div class="panel panel--simple panel--success u-mb-m">
+                                <div class="panel panel--simple panel--success">
                                     <div class="panel__body">
                                         <h1 id="question-title" class="question__title u-mb-xs u-fs-l js-piping">
                                             A {z} has been sent to {x}
                                         </h1>
                                         <p class="js-piping js-panel">The letter with {y} access code should
-                                            arrive soon for you to complete the census.</p>
+                                            arrive soon for you to start the census</p>
                                     </div>
                                 </div>
                             </div>
                         </section>
                     </div>
-                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
-                            type="submit" name="">Continue
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mt-xl"
+                            type="submit" name="">Done
                     </button>
-
-                    <!--
-                        <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>-->
-
-                    <!--<p class="u-mb-m"><span class="js-link-secure-label"></span><br />
-                        <a class="js-link-secure"
-                           href="#">Get a separate access code to submit an
-                            individual response</a></p>-->
                 </form>
             </main>
         </div>
@@ -79,18 +72,18 @@ noONSLogoLink: true
     var modeType;
 
     if(currentJourney === 'new-ir-uac'){
-        var codeType = 'an individual'
-        var modeType = 'letter'
-    } else if (currentJourney === 'new-hh-paper' || 'new-ir-paper') {
+        var codeType = 'an individual';
+        var modeType = 'letter';
+    } else if(currentJourney === 'new-hh-paper' || currentJourney === 'new-ir-paper') {
         if (largePrint) {
-            var modeType = 'large print paper questionnaire'
+            var modeType = 'large print paper questionnaire';
         } else {
-            var modeType = 'paper questionnaire'
+            var modeType = 'paper questionnaire';
         }
-        $('.js-panel').html('This should arrive soon for you to complete your census.');
+        $('.js-panel').html('This should arrive soon for you to complete your census');
     } else {
-        var codeType = 'a household'
-        var modeType = 'letter'
+        var codeType = 'a new household';
+        var modeType = 'letter';
     }
 
     var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));

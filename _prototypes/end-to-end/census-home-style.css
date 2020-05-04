@@ -1,6 +1,6 @@
 .hero {
     padding: 2rem 0;
-    background: #93328e;
+    background: #fff;
 }
 
 .hero__content {
@@ -29,7 +29,7 @@
 .hero__img {
     position: relative;
     left: 50%;
-    transform: translate(-50%, 0);
+    transform: translate(-50%);
     max-width: none;
 }
 .hero__container {
