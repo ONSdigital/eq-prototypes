@@ -1237,7 +1237,9 @@ export function setProxy(personId, proxy) {
 }
 
 export function getProxyFor(personId) {
-  return getPersonalDetailsFor(personId)['proxy'];
+  if (getPersonalDetailsFor(personId)) {
+    return getPersonalDetailsFor(personId)['proxy'];
+  }
 }
 
 export function clearProxy(personId) {
