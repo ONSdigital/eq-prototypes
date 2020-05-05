@@ -471,7 +471,7 @@ export default class TypeaheadUI {
   }
 
   emboldenMatch(string, query) {
-    let reg = new RegExp(this.escapeRegExp(query).split('').join('\\s*'), 'gi');
+    let reg = new RegExp(this.escapeRegExp(query).split('').join('[\\s,]*'), 'gi');
     return string.replace(reg, '<strong>$&</strong>');
   }
 
