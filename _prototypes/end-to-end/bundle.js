@@ -18,6 +18,7 @@ import './assets/modules/address-input/address-input';
 import './assets/modules/uac/uac';
 import './assets/modules/character-check';
 import './assets/previous-link';
+import './assets/inpagelink';
 
 import {
   RELATIONSHIPS_STORAGE_KEY,
