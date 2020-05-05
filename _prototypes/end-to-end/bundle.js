@@ -547,11 +547,13 @@ function validateInputs(testFails, selector) {
       var inputErrorPanel = document.createElement('DIV'),
           inputErrorBody = document.createElement('DIV'),
           inputErrorP = document.createElement('P'),
-          inputErrorStrong = document.createElement('STRONG');
+          inputErrorStrong = document.createElement('STRONG'),
+          errors = Array.from(document.querySelectorAll('.js-visible')).length;
 
       inputErrorPanel.className = 'panel panel--error panel--simple';
       inputErrorBody.className = 'panel__body';
       inputErrorP.className = 'panel__error';
+      inputErrorP.id = 'error-message' + errors
       inputErrorStrong.innerText = errorMsg;
       inputErrorP.appendChild(inputErrorStrong);
       inputErrorBody.appendChild(inputErrorP);
@@ -582,7 +584,10 @@ function calcErrors() {
       .replace('is a', errors > 1 ? 'are' : 'is a')
       .replace('{s}', errors > 1 ? 's' : '')
       .replace('2', errors === 1 ? "1" : "2")
-      .replace('1', errors > 1 ? "2" : "1");
+      .replace('1', errors > 1 ? "2" : "1")
+      .replace('are', errors === 1 ? "is a" : "are")
+      .replace('problems', errors === 1 ? "problem" : "problems")
+      .replace('1 ', errors === 1 ? "" : "1 ");
   });
 }
 

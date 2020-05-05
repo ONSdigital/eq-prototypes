@@ -68,15 +68,9 @@ noONSLogoLink: true
     }
 
     function updatePara() {
-<<<<<<< HEAD
-        if(storageAPI.getAnsweringIndividualByProxy()) {
+        if(storageAPI.getAnsweringIndividualByProxy(personId)) {
             $('.js-text').html('The next set of questions is about any qualifications <strong>' + person.firstLastName +  
             '</strong> has ever achieved in Wales, England or worldwide, including equivalents, even if they are not using them now. ');
-=======
-        if(storageAPI.getProxyFor(personId)) {
-            $('.js-text').html('The next set of questions is about any qualifications <em class="highlight">' + person.firstLastName +  
-            '</em> has ever achieved in Wales, England or worldwide, including equivalents, even if they are not using them now. ');
->>>>>>> 58b9f93e1818236d9aecb2b8effae3acb9095261
         }
     }
 
