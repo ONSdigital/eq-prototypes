@@ -181,6 +181,10 @@ noONSLogoLink: true
         (surveyType ? '&survey=' + surveyType : '') +
         '&ethnic-group=' + val +
         (isEditing ? '&edit=true' : '');
+    } else if (val == undefined) {
+        e.preventDefault();
+        window.location.href = '../individual-details-religion-description/?person_id=' + personId;
+        storageAPI.storePageData('/end-to-end/individual-details-religion-description/', window.location.pathname);
     }
   }));
 
