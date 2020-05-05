@@ -165,22 +165,27 @@ noONSLogoLink: true
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
-    var val = $('[name="ethnic-group"]:checked').val();
+    if ($('input[type=radio]:checked').size() === 0) {
+        e.preventDefault();
+        window.location.href = '../individual-details-religion-description/?person_id=' + personId;
+    } else {
+        var val = $('[name="ethnic-group"]:checked').val();
 
-    let url = '../individual-details-ethnic-group/?person_id=' + personId + '&edit=true';
-    question = question.trim();
-    storageAPI.addUpdateEthnicGroup(personId, val, question, url);
-    storageAPI.storePageData('/end-to-end/individual-details-ethnic-group-description/', window.location.pathname);
+        let url = '../individual-details-ethnic-group/?person_id=' + personId + '&edit=true';
+        question = question.trim();
+        storageAPI.addUpdateEthnicGroup(personId, val, question, url);
+        storageAPI.storePageData('/end-to-end/individual-details-ethnic-group-description/', window.location.pathname);
 
-    /**
-     * Will always need to elaborate further on this question
-     */
-    if(isEditing) {
-      e.preventDefault();
-      window.location.href = '../individual-details-ethnic-group-description/?person_id=' + personId +
-        (surveyType ? '&survey=' + surveyType : '') +
-        '&ethnic-group=' + val +
-        (isEditing ? '&edit=true' : '');
+        /**
+        * Will always need to elaborate further on this question
+        */
+        if(isEditing) {
+        e.preventDefault();
+        window.location.href = '../individual-details-ethnic-group-description/?person_id=' + personId +
+            (surveyType ? '&survey=' + surveyType : '') +
+            '&ethnic-group=' + val +
+            (isEditing ? '&edit=true' : '');
+        }
     }
   }));
 
