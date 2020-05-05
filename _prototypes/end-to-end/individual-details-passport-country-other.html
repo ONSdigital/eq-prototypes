@@ -120,12 +120,12 @@ noONSLogoLink: true
     if(details && details.passport && details.passport.countries.length > 1) {
       $('.js-heading').html('You selected &ldquo;Other&rdquo;. What other passports do you hold?');
       $('.js-panel').html('Include all other passports. If you have more than one, enter them all separated by commas.');
-      if(storageAPI.getAnsweringIndividualByProxy()) {
+      if(storageAPI.getProxyFor(personId)) {
         $('.js-heading').html('You selected &ldquo;Other&rdquo;. What other passports does ' + '<em class="highlight">' + person.firstLastName + '</em>' +
           ' hold?');
         $('.js-panel').html('Include all other passports. If they have more than one, enter them all separated by commas.');
       }
-    } else if(storageAPI.getAnsweringIndividualByProxy()) {
+    } else if(storageAPI.getProxyFor(personId)) {
       $('.js-heading').html('You selected &ldquo;Other&rdquo;. What passports does ' + '<em class="highlight">' + person.firstLastName + '</em>' +
           ' hold?');
       $('.js-panel').html('Include all passports. If they have more than one, enter them all separated by commas.');

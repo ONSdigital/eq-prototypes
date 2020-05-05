@@ -183,7 +183,7 @@ noONSLogoLink: true
     }
 
     function updateQuestion() {
-        if(storageAPI.getAnsweringIndividualByProxy()) {
+        if(storageAPI.getProxyFor(personId)) {
             $('.js-heading').html('During term time, where does ' + '<em class="highlight">' + person.firstLastName + '</em>' +
             ' usually live?');
             $('.js-collapsible-body p').html('Their answer helps us produce an accurate count of the population during term time. These figures can be used to plan ' + 

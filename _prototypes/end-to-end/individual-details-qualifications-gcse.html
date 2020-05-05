@@ -212,7 +212,7 @@ noONSLogoLink: true
     }
 
     function updateQuestion() {
-        if(storageAPI.getAnsweringIndividualByProxy()) {
+        if(storageAPI.getProxyFor(personId)) {
             $('.js-heading').html('Has ' + '<em class="highlight">' + person.firstLastName + '</em>' +
                 ' achieved a GCSE or equivalent qualification?');
             $('.js-collapsible-body p').last().html('If they have achieved CSEs, O levels or any other similar qualifications outside of England and Wales, choose the ' +

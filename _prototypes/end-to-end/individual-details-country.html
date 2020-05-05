@@ -213,7 +213,7 @@ noONSLogoLink: true
   }
 
   function updateQuestion() {
-    if(storageAPI.getAnsweringIndividualByProxy()) {
+    if(storageAPI.getProxyFor(personId)) {
       $('.js-heading').html('What is ' + '<em class="highlight">' + person.firstLastName +
       window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
         ' country of birth?');
@@ -221,7 +221,7 @@ noONSLogoLink: true
   }
 
   function updateAnswers() {
-    if(storageAPI.getAnsweringIndividualByProxy()) {
+    if(storageAPI.getProxyFor(personId)) {
       $('.js-answer').html('You can enter their country of birth on the next question');
     }
   }

@@ -369,7 +369,7 @@ noONSLogoLink: true
 
     if(surveyStatus === 'not-started') {
       $nodeEl.find('.js-link').on('click', function () {
-        storageAPI.unsetAnsweringIndividualByProxy();
+        storageAPI.clearProxy(person.id);
       });
     }
 
@@ -379,9 +379,9 @@ noONSLogoLink: true
 
     $nodeEl.find('.js-link').on('click', function () {
       if(person.id === 'person_me') {
-        storageAPI.unsetAnsweringIndividualByProxy();
+        storageAPI.clearProxy(person.id);
       } else {
-        storageAPI.setAnsweringIndividualByProxy(true);
+        storageAPI.setProxy(person.id, true);
       }
      });
     
@@ -473,7 +473,7 @@ noONSLogoLink: true
           }
 
           if (nextBookmarkPersonId) {
-            storageAPI.setAnsweringIndividualByProxy(true);
+            storageAPI.personId(personDetails, true);
           }
 
           window.location.href = nextBookmarkPersonId

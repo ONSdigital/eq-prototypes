@@ -1228,3 +1228,26 @@ export function clearPersonalBookmark(personId) {
 
   return details;
 }
+
+export function setProxy(personId, proxy) {
+  return changeDetailsFor(personId, () =>
+    ({
+      proxy
+    }));
+}
+
+export function getProxyFor(personId) {
+  return getPersonalDetailsFor(personId)['proxy'];
+}
+
+export function clearProxy(personId) {
+  let details = getPersonalDetailsFor(personId);
+
+  delete details.proxy;
+
+  updatePersonalDetails(personId, {
+    ...details
+  });
+
+  return details;
+}

@@ -153,7 +153,7 @@ noONSLogoLink: true
   }
 
   function updateQuestion() {
-    if(storageAPI.getAnsweringIndividualByProxy()) {
+    if(storageAPI.getProxyFor(personId)) {
       $('.js-heading').html('How would you describe ' + '<em class="highlight">' + person.firstLastName +
         window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
         ' national identity?');
@@ -161,14 +161,14 @@ noONSLogoLink: true
   }
 
    function updateHelp() {
-    if(storageAPI.getAnsweringIndividualByProxy()) {
+    if(storageAPI.getProxyFor(personId)) {
       $('.js-question-guidance-line1').html('This relates to where they feel they belong, such as the country or countries they think of as home.');
       $('.js-question-guidance-line2').html('This could be different from their citizenship or ethnic group.');
     }
   }
 
   function updateAnswers() {
-    if(storageAPI.getAnsweringIndividualByProxy()) {
+    if(storageAPI.getProxyFor(personId)) {
       $('.js-answer').html('You can enter their national identity on the next question');
 
       if (details && details.nationalIdentity) {
