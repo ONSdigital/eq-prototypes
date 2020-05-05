@@ -68,7 +68,7 @@ noONSLogoLink: true
     }
 
     function updatePara() {
-        if(storageAPI.getAnsweringIndividualByProxy(personId)) {
+        if(storageAPI.getProxyFor(personId)) {
             $('.js-text').html('The next set of questions is about any qualifications <strong>' + person.firstLastName +  
             '</strong> has ever achieved in Wales, England or worldwide, including equivalents, even if they are not using them now. ');
         }
