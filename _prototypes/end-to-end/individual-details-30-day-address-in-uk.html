@@ -39,7 +39,7 @@ noONSLogoLink: true
                         
                         <ol class="list list--bare">
                           <li class="list__item js-address-field u-d-no">
-                              1. <a href="#address-field" class="list__link js-inpagelink js-error">Enter an address to continue</a>
+                              1. <a href="#error-message1" class="list__link js-inpagelink js-error">Enter an address to continue</a>
                           </li>
                        </ol>
                     </div>
@@ -133,7 +133,12 @@ noONSLogoLink: true
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
     const testFails = '';
-    window.ONS.utils.validateInputs(testFails, "input[id='address-field']");
+    if ($('#address').hasClass('addrees-input--search')) {
+      window.ONS.utils.validateInputs(testFails, "input[id='address-line-1']");
+    } else {
+      window.ONS.utils.validateInputs(testFails, "input[id='address-field']");
+    }
+    
     if (hasErrors) {
         window.ONS.utils.calcErrors();
         hasErrors = false;

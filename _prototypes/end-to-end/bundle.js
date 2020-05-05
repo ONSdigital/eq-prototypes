@@ -546,11 +546,13 @@ function validateInputs(testFails, selector) {
       var inputErrorPanel = document.createElement('DIV'),
           inputErrorBody = document.createElement('DIV'),
           inputErrorP = document.createElement('P'),
-          inputErrorStrong = document.createElement('STRONG');
+          inputErrorStrong = document.createElement('STRONG'),
+          errors = Array.from(document.querySelectorAll('.js-visible')).length;
 
       inputErrorPanel.className = 'panel panel--error panel--simple';
       inputErrorBody.className = 'panel__body';
       inputErrorP.className = 'panel__error';
+      inputErrorP.id = 'error-message' + errors
       inputErrorStrong.innerText = errorMsg;
       inputErrorP.appendChild(inputErrorStrong);
       inputErrorBody.appendChild(inputErrorP);
