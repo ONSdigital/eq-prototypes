@@ -161,7 +161,7 @@ noONSLogoLink: true
             $container.append(createListItem(individualDetails[person].stayInUk.val, individualDetails[person].stayInUk.question, individualDetails[person].stayInUk.url));
         }
         
-        if (individualDetails[person].nationalIdentity) {
+        if (individualDetails[person].nationalIdentity && individualDetails[person].nationalIdentity.collection.length !== 0) {
             $container.append(createListItem(individualDetails[person].nationalIdentity.collection, individualDetails[person].nationalIdentity.question, individualDetails[person].nationalIdentity.url));
         }
         
@@ -198,7 +198,7 @@ noONSLogoLink: true
             $container.append(createListItem(individualDetails[person].language.english, individualDetails[person].language.questionEnglishLevel, individualDetails[person].language.urlEnglishLevel));
         }
         
-        if (individualDetails[person].passport) {
+        if (individualDetails[person].passport && individualDetails[person].passport.countries.length !== 0) {
             $container.append(createListItem(individualDetails[person].passport.countries, individualDetails[person].passport.question, individualDetails[person].passport.url));
         }
 
