@@ -171,7 +171,7 @@ noONSLogoLink: true
   }
 
   function updateQuestion() {
-    if(storageAPI.getAnsweringIndividualByProxy() || isVisitor) {
+    if(storageAPI.getProxyFor(personId) || isVisitor) {
       $('.js-heading').html('What is ' + '<em class="highlight">' + person.firstLastName +
         window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' + ' usual address?');
     }

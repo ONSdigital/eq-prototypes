@@ -118,7 +118,7 @@ noONSLogoLink: true
      * Routing
      */
     if (yesbox.checked) {
-      storageAPI.setAnsweringIndividualByProxy(true);
+      storageAPI.personId(personId, true);
       document.trav.action = "../individual-details-dob";
     } else {
       document.trav.action = "../individual-decision-other-pin";

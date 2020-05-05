@@ -114,7 +114,7 @@ noONSLogoLink: true
   }
 
   function updateQuestion() {
-    if(storageAPI.getAnsweringIndividualByProxy()) {
+    if(storageAPI.getProxyFor(personId)) {
       $('.js-heading').html('Briefly describe what ' + '<em class="highlight">' + person.firstLastName + '</em>' +
         ' does in their main job');
     }

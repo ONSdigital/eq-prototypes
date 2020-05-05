@@ -185,7 +185,7 @@ noONSLogoLink: true
   }*/
 
   function updateQuestion() {
-    if(storageAPI.getAnsweringIndividualByProxy()) {
+    if(storageAPI.getProxyFor(personId)) {
       $('.js-success-panel').html('You have completed ' +
         person.fullName + window.ONS.utils.trailingNameS(person.fullName) +
         ' individual questions.');

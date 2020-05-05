@@ -27,7 +27,7 @@ noONSLogoLink: true
                            value="#"/>
                     <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
                            value="#"/>
-                    <div class="group u-mb-l">
+                    <div class="group">
                         <div class="block" id="total-retail-turnover">
                             <section class="section">
                                 <div class="question u-mb-s">
@@ -115,7 +115,7 @@ noONSLogoLink: true
                             </section>
                         </div>
                     </div>
-                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl u-mt-xl"
                             type="submit" name="">Save and continue
                     </button>
 
@@ -176,7 +176,7 @@ noONSLogoLink: true
   }
 
   function updateQuestion() {
-    if(storageAPI.getAnsweringIndividualByProxy()) {
+    if(storageAPI.getProxyFor(personId)) {
       $('.js-heading').html('What passports does ' + '<em class="highlight">' + person.firstLastName + '</em>' + ' hold?');
       $('.js-collapsible-body p').html('They may have other travel documents that show they are a citizen of a particular country. Please complete ' +
         'this question as if their travel documents are passports');

@@ -118,7 +118,7 @@ noONSLogoLink: true
   }
 
   function updateQuestion() {
-    if(storageAPI.getAnsweringIndividualByProxy()) {
+    if(storageAPI.getProxyFor(personId)) {
       $('.js-heading').html('You selected &ldquo;Any other religion&rdquo;. What is ' + '<em class="highlight">' + person.firstLastName +
         window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
         ' religion?');

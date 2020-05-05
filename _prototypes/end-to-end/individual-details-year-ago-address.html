@@ -189,7 +189,7 @@ noONSLogoLink: true
     }
 
     function updateQuestion() {
-        if(storageAPI.getAnsweringIndividualByProxy()) {
+        if(storageAPI.getProxyFor(personId)) {
             $('.js-heading').html('One year ago, what was ' + '<em class="highlight">' + person.firstLastName +
             window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
             ' usual address?');

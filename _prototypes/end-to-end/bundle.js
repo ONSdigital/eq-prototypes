@@ -167,7 +167,10 @@ import {
   personalBookmark,
   getBookmarkFor,
   clearPersonalBookmark,
-  personalQuestionSubmitDecorator
+  personalQuestionSubmitDecorator,
+  setProxy,
+  getProxyFor,
+  clearProxy
 } from './assets/personal-details';
 
 import { removeFromList, trailingNameS } from './assets/utils';
@@ -348,7 +351,7 @@ function updatePersonLink() {
       person = getHouseholdMemberByPersonId(personId)['@person'],
       pinObj = getPinFor(personId),
       secureLinkTextConfig = secureLinkTextMap[
-        (getAnsweringIndividualByProxy() ? 'question-proxy' : (pinObj && pinObj.pin ? 'pin-you' : 'question-you'))
+        (getProxyFor(personId) ? 'question-proxy' : (pinObj && pinObj.pin ? 'pin-you' : 'question-you'))
       ],
       linkHref = secureLinkTextConfig.link + '?person_id=' + personId +
         '&returnurl=' + window.location.pathname,
@@ -367,40 +370,6 @@ function updatePersonLink() {
       (surveyType ? '&survey=' + surveyType : ''));
   }
 }
-
-function updateBySurveyType() {
-  const urlParams = new URLSearchParams(window.location.search),
-    surveyType = urlParams.get('survey');
-
-  // if (surveyType) {
-  //   $('.js-header-title').html(surveyTypeConfig[surveyType].title);
-  //   $('#people-living-here').html(surveyTypeConfig[surveyType].householdSectionTitle);
-  //   $('#people-living-here').attr('href', surveyTypeConfig[surveyType].householdSectionLink);
-  //   $('#relationships-section').attr('href', surveyTypeConfig[surveyType].relationshipsSection);
-  //   $('title').html(surveyTypeConfig[surveyType].title);
-  // }
-}
-
-function setAnsweringIndividualByProxy(bool) {
-  sessionStorage.setItem(INDIVIDUAL_PROXY_STORAGE_KEY, JSON.stringify(bool));
-}
-
-function getAnsweringIndividualByProxy() {
-  return JSON.parse(sessionStorage.getItem(INDIVIDUAL_PROXY_STORAGE_KEY));
-}
-
-function unsetAnsweringIndividualByProxy() {
-  (getAnsweringIndividualByProxy() !== null) && sessionStorage.removeItem(INDIVIDUAL_PROXY_STORAGE_KEY);
-}
-
-const surveyTypeConfig = {
-  lms: {
-    title: 'Online Household Study',
-    householdSectionTitle: 'About your household',
-    householdSectionLink: '../summary/?survey=lms',
-    relationshipsSection: '../relationships/?survey=lms'
-  }
-};
 
 function doILiveHere() {
   return sessionStorage.getItem('lives-here') === 'yes';
@@ -567,6 +536,7 @@ function validateInputs(testFails, selector) {
       errorMsg = input.getAttribute('data-error-msg');
 
   if (input.value === testFails || testFails === true) {
+    window.scrollTo(0, 0);
     hasErrors = true;
     if (!listItem.classList.contains('js-visible')) { 
       errorBox.classList.remove('u-d-no');
@@ -606,13 +576,12 @@ function calcErrors() {
 
   pipingDestinations.forEach(function(pipingDestination) {
     pipingDestination.innerText = pipingDestination.innerText
-      .replace('{x}', errors)
+      .replace('{x}', errors === 1 ? '' : '1')
+      .replace('{x}', errors > 1 ? '2' : '')
+      .replace('is a', errors > 1 ? 'are' : 'is a')
       .replace('{s}', errors > 1 ? 's' : '')
-      .replace('errors', errors === 1 ? 'error' : 'errors')
       .replace('2', errors === 1 ? "1" : "2")
-      .replace('1', errors > 1 ? "2" : "1")
-      .replace('This', errors > 1 ? "These" : "This")
-      .replace('These', errors === 1 ? "This" : "These");
+      .replace('1', errors > 1 ? "2" : "1");
   });
 }
 
@@ -771,9 +740,9 @@ window.ONS.storage = {
   clearPersonalBookmark,
   personalQuestionSubmitDecorator,
 
-  setAnsweringIndividualByProxy,
-  getAnsweringIndividualByProxy,
-  unsetAnsweringIndividualByProxy,
+  setProxy,
+  getProxyFor,
+  clearProxy,
 
   doILiveHere,
   isMemberUser,
@@ -822,7 +791,6 @@ $(updateAddresses);
 $(updatePersonLink);
 $(tools);
 $(updateAllLinks);
-$(updateBySurveyType);
 $(updateSignificantDate);
 $(updateHouseholdSummary);
 $(updateVisitorsSummary);

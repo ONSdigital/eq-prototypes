@@ -152,7 +152,7 @@ noONSLogoLink: true
   }));
 
   function updateQuestion() {
-        if(storageAPI.getAnsweringIndividualByProxy()) {
+        if(storageAPI.getProxyFor(personId)) {
         $('.js-heading').html('Do any of ' + '<em class="highlight">' + person.firstLastName +
             window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
             ' conditions or illnesses reduce their ability to carry out day-to-day activities?');
@@ -160,7 +160,7 @@ noONSLogoLink: true
     }
 
   function updateHelp() {
-        if(storageAPI.getAnsweringIndividualByProxy()) {
+        if(storageAPI.getProxyFor(personId)) {
             $('.js-help-0').html('What we mean by &ldquo;reduce their ability&rdquo;');
             $('.js-help-1').html('This is about whether their health condition or illness currently affects their ability to carry out day-to-day activities.');
             $('.js-help-2').html('Consider whether they are still affected while receiving any treatment, medication or using any devices for their condition or illness. For example, if they use a hearing aid and are not restricted in carrying out their day-to-day activities when doing so, select &ldquo;Not at all&rdquo;.');

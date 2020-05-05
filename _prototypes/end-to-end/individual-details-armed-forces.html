@@ -153,7 +153,7 @@ noONSLogoLink: true
     }
 
     function updateQuestion() {
-        if(storageAPI.getAnsweringIndividualByProxy()) {
+        if(storageAPI.getProxyFor(personId)) {
         $('.js-heading').html('Has ' + '<em class="highlight">' + person.firstLastName + '</em>' +
             ' previously served in the UK Armed Forces?');
         $('.js-definition').html('Why their answer is important');
