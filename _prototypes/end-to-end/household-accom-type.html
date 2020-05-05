@@ -105,7 +105,7 @@ noONSLogoLink: true
     window.sessionStorage.setItem('accommodation-completed-status', currentPage);
 
     $('.qa-btn-submit').on('click', function (e) {
-        var val =$('input[type=radio][name=accommodation-type]:checked').attr('value')
+        var val = $('input[type=radio][name=accommodation-type]:checked').attr('value')
         question = question.trim();
         question = question.replace(/(<([^>]+)>)/ig,"");
         window.sessionStorage.setItem('accommodation-type', JSON.stringify([question, val, currentPage]));
