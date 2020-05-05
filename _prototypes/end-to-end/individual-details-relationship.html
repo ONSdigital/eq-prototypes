@@ -216,10 +216,14 @@ noONSLogoLink: true
             window.location.href = '../individual-details-summary/?person_id=' +
                 personId + (surveyType ? '&survey=' + surveyType : '');
                 storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
-        } else if(val === 'Never' || val === null) {
-        e.preventDefault();
-        window.location.href = '../individual-details-30-day-address/?person_id=' + personId;
-        storageAPI.storePageData('/end-to-end/individual-details-30-day-address/', window.location.pathname);
+        } else if(val === 'Never') {
+            e.preventDefault();
+            window.location.href = '../individual-details-30-day-address/?person_id=' + personId;
+            storageAPI.storePageData('/end-to-end/individual-details-30-day-address/', window.location.pathname);
+        } else if(!val) {
+            e.preventDefault();
+            window.location.href = '../individual-details-30-day-address/?person_id=' + personId;
+            storageAPI.storePageData('/end-to-end/individual-details-30-day-address/', window.location.pathname);
         }
     }));
 

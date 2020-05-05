@@ -19,15 +19,17 @@ noONSLogoLink: true
         <div class="grid__col col-4@m"></div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
-                <div class="panel panel--error u-mb-m js-error-box u-d-no"><div class="panel__header">
-                    <div class="panel__title u-fs-r--b">There 
-                            <span class="js-piping">is a {x} problem{s}</span> with your answer
-                        </div></div>
+                <div class="panel panel--error u-mb-m js-error-box u-d-no">
+                    <div class="panel__header">
+                      <div class="panel__title u-fs-r--b">There 
+                          <span class="js-piping">is a {x} problem{s}</span> with your answer
+                      </div>
+                    </div>
                     <div class="panel__body">
                         
                         <ol class="list list--bare">
                           <li class="list__item js-personal-detail-dob-day u-d-no">
-                              1. <a href="#personal-detail-dob-day" class="list__link js-inpagelink js-error">Enter your date of birth</a>
+                              1. <a href="#personal-detail-dob-day" class="list__link js-inpagelink js-error">Enter your date of birth to continue</a>
                           </li>
                        </ol>
                     </div>
@@ -167,8 +169,8 @@ noONSLogoLink: true
     if(storageAPI.getAnsweringIndividualByProxy() || isVisitor) {
       $('.js-heading').html('What is ' + '<em class="highlight">' + person.firstLastName +
         window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' + ' date of birth?');
-      $('.js-error').html('Enter their date of birth');
-      $('#personal-detail-dob-day').attr('data-error-msg', 'Enter their date of birth');
+      $('.js-error').html('Enter their date of birth to continue');
+      $('#personal-detail-dob-day').attr('data-error-msg', 'Enter their date of birth to continue');
     }
   }
   
