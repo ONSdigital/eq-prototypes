@@ -1,19 +1,18 @@
+import domready from '../../../_js/modules/domready';
 import {forEach} from 'lodash'
-import domready from './domready'
 
-export const classTrigger = 'js-inpagelink'
+domready(() => {
 
-export default function() {
-  return inPageLink()
-}
+const classTrigger = 'js-inpagelink'
 
-export function inPageLink() {
+
+function inPageLink() {
   const nodeList = document.getElementsByClassName(classTrigger)
   forEach(nodeList, applyInPageLink)
   return nodeList
 }
 
-export function applyInPageLink(elTrigger) {
+function applyInPageLink(elTrigger) {
   const elId = elTrigger.getAttribute('href').replace('#', '')
   elTrigger.addEventListener('click', (e) => {
     e.preventDefault()
@@ -24,8 +23,7 @@ export function applyInPageLink(elTrigger) {
 }
 
 function focusOnInput(elId) {
-  const container = document.getElementById(elId);
-  console.log(container);
+  const container = document.getElementById(elId).closest('.panel');
   container.scrollIntoView();
 
   const input = [
@@ -44,4 +42,6 @@ function focusOnInput(elId) {
   return elId;
 }
 
-domready(inPageLink)
+inPageLink();
+
+});
