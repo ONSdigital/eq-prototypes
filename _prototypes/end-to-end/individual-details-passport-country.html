@@ -176,7 +176,7 @@ noONSLogoLink: true
   }
 
   function updateQuestion() {
-    if(storageAPI.getAnsweringIndividualByProxy()) {
+    if(storageAPI.getProxyFor(personId)) {
       $('.js-heading').html('What passports does ' + '<em class="highlight">' + person.firstLastName + '</em>' + ' hold?');
       $('.js-collapsible-body p').html('They may have other travel documents that show they are a citizen of a particular country. Please complete ' +
         'this question as if their travel documents are passports');

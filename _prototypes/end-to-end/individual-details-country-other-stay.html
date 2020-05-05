@@ -126,7 +126,7 @@ noONSLogoLink: true
   });
 
   function updateQuestion() {
-    if(storageAPI.getAnsweringIndividualByProxy()) {
+    if(storageAPI.getProxyFor(personId)) {
         $('.js-heading').html('Including the time already spent here, how long does ' + '<em class="highlight">' + person.firstLastName + '</em>' +
         ' intend to stay in the United Kingdom?');
     }

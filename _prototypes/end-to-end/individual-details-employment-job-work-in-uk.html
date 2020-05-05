@@ -137,7 +137,7 @@ noONSLogoLink: true
   }
 
   function updateQuestion() {
-    if(storageAPI.getAnsweringIndividualByProxy()) {
+    if(storageAPI.getProxyFor(personId)) {
       $('.js-heading').html('Does ' + '<em class="highlight">' + person.firstLastName + '</em>' +
         ' mainly work in the UK?');
     }

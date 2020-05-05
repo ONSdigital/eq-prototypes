@@ -154,7 +154,7 @@ noONSLogoLink: true
     }
 
     function updateQuestion() {
-      if(storageAPI.getAnsweringIndividualByProxy()) {
+      if(storageAPI.getProxyFor(personId)) {
         $('.js-heading').html('Has ' + '<em class="highlight">' + person.firstLastName + '</em>' +
           ' achieved any other qualifications?');
         $('.js-piping').html('This could be any qualifications they have ever achieved, even if they are not using them now');

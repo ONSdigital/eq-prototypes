@@ -138,14 +138,14 @@ noONSLogoLink: true
     }));
 
     function updateQuestion() {
-        if(storageAPI.getAnsweringIndividualByProxy()) {
+        if(storageAPI.getProxyFor(personId)) {
         $('.js-heading').html('Does ' + '<em class="highlight">' + person.firstLastName + '</em>' +
             ' have any physical or mental health conditions or illnesses lasting or expected to last 12 months or more?');
         }
     }
 
     function updateHelp() {
-        if(storageAPI.getAnsweringIndividualByProxy()) {
+        if(storageAPI.getProxyFor(personId)) {
             $('.js-help-1').html('This is about health conditions, illnesses or impairments they may have.');
             $('.js-help-2').html('Consider conditions that always affect them and those that flare up from time to time.');
         }

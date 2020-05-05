@@ -178,11 +178,6 @@ noONSLogoLink: true
 
   function updateQuestion() {
     $('.js-person').html('<em class="highlight">' + person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName) + '<em>');
-
-    /*if(storageAPI.getAnsweringIndividualByProxy() || isVisitor) {
-      $('.js-heading').html('What is ' + '<em class="highlight">' + person.fullName +
-        window.ONS.utils.trailingNameS(person.fullName) + '</em>' + ' usual address?');
-    }*/
   }
 
   $(updateQuestion);

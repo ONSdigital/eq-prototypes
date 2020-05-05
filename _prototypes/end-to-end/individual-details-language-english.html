@@ -140,7 +140,7 @@ noONSLogoLink: true
   }));
 
     function updateQuestion() {
-        if(storageAPI.getAnsweringIndividualByProxy()) {
+        if(storageAPI.getProxyFor(personId)) {
         $('.js-heading').html('How well can ' + '<em class="highlight">' + person.firstLastName + '</em>' +
             ' speak English?');
         }

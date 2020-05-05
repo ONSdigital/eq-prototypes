@@ -97,7 +97,7 @@ noONSLogoLink: true
 	$('.qa-btn-submit').click(function(e) {
 	  var val = yesbox.checked;
       storageAPI.personalBookmark(personId, window.location.href);
-      storageAPI.setAnsweringIndividualByProxy(!val);
+      storageAPI.setProxy(personId, !val);
       document.trav.action = "../individual-details-dob";
 	});
 
@@ -111,7 +111,7 @@ noONSLogoLink: true
 	}
 
     function updateAnswer() {
-        var answerVal = storageAPI.getAnsweringIndividualByProxy();
+        var answerVal = storageAPI.getProxyFor(personId);
         if (answerVal === true) {
             $('input[type=radio][value="No"]').prop("checked", true);
         } else if (answerVal === false) {

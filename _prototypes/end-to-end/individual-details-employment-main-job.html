@@ -69,7 +69,7 @@ noONSLogoLink: true
   }
 
   function updatePara() {
-    if(storageAPI.getAnsweringIndividualByProxy()) {
+    if(storageAPI.getProxyFor(personId)) {
       $('.js-text').html('The next set of questions is about '  + '<strong>' + person.firstLastName +
       window.ONS.utils.trailingNameS(person.firstLastName) + '</strong>' + ' main job. Their main job is the job in which they usually work the most hours.');
     }
