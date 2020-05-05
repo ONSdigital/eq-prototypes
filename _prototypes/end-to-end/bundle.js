@@ -567,6 +567,7 @@ function validateInputs(testFails, selector) {
       errorMsg = input.getAttribute('data-error-msg');
 
   if (input.value === testFails || testFails === true) {
+    window.scrollTo(0, 0);
     hasErrors = true;
     if (!listItem.classList.contains('js-visible')) { 
       errorBox.classList.remove('u-d-no');
@@ -606,13 +607,12 @@ function calcErrors() {
 
   pipingDestinations.forEach(function(pipingDestination) {
     pipingDestination.innerText = pipingDestination.innerText
-      .replace('{x}', errors)
+      .replace('{x}', errors === 1 ? '' : '1')
+      .replace('{x}', errors > 1 ? '2' : '')
+      .replace('is a', errors > 1 ? 'are' : 'is a')
       .replace('{s}', errors > 1 ? 's' : '')
-      .replace('errors', errors === 1 ? 'error' : 'errors')
       .replace('2', errors === 1 ? "1" : "2")
-      .replace('1', errors > 1 ? "2" : "1")
-      .replace('This', errors > 1 ? "These" : "This")
-      .replace('These', errors === 1 ? "This" : "These");
+      .replace('1', errors > 1 ? "2" : "1");
   });
 }
 
