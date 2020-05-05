@@ -583,7 +583,10 @@ function calcErrors() {
       .replace('is a', errors > 1 ? 'are' : 'is a')
       .replace('{s}', errors > 1 ? 's' : '')
       .replace('2', errors === 1 ? "1" : "2")
-      .replace('1', errors > 1 ? "2" : "1");
+      .replace('1', errors > 1 ? "2" : "1")
+      .replace('are', errors === 1 ? "is a" : "are")
+      .replace('problems', errors === 1 ? "problem" : "problems")
+      .replace('1 ', errors === 1 ? "" : "1 ");
   });
 }
 
