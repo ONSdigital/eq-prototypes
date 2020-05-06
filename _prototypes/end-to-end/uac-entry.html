@@ -87,10 +87,16 @@ logoUrl: ../home
   var urlParams = new URLSearchParams(window.location.search);
   var previousPage = urlParams.get('previous');
   var redirect = urlParams.get('redirect');
+  var uacInput = document.getElementById('uac');
 
   $('.btn-submit').click(function(e) {
     e.preventDefault();
 
-    window.location = !redirect ? '../confirm-address/?previous=uac-entry' : redirect;
+    if (uacInput.value == 'unl1 nk3d acc3 55c0') {
+        window.location = '../uac-request-address/?previous=uac-entry&current-journey=unlinked-uac';
+    } else {
+        window.location = '../confirm-address/';
+    }
+    
   });
 </script>
