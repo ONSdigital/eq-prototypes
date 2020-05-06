@@ -133,11 +133,7 @@ noONSLogoLink: true
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
     const testFails = '';
-    if ($('#address').hasClass('addrees-input--search')) {
-      window.ONS.utils.validateInputs(testFails, "input[id='address-line-1']");
-    } else {
-      window.ONS.utils.validateInputs(testFails, "input[id='address-field']");
-    }
+    window.ONS.utils.validateInputs(testFails, "input[id='address-field']");
     
     if (hasErrors) {
         window.ONS.utils.calcErrors();
