@@ -254,8 +254,9 @@ noONSLogoLink: true
   }
 
   function updateAnswers() {
-    $('.js-other-piping').html('You can enter their religion on the next question');
-
+    if(storageAPI.getProxyFor(personId)) {
+      $('.js-other-piping').html('You can enter their religion on the next question');
+    }
     if (details && details.religion && details.religion.description) {
       $('input[type=radio][value="' + details.religion.description +'"]').prop("checked", true);
     }
