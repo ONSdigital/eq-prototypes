@@ -218,12 +218,6 @@ details summary:focus {
     color: #d0021b;
 }
 
-.panel--error .input--text:not(:focus) {
-    border-color: #d0021b;
-    outline: 1px solid #d0021b;
-    outline-offset: -2px;
-}
-
 .panel--warning {
     font-weight: 600;
     padding-top: .5rem;
