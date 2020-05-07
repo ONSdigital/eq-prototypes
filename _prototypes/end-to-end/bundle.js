@@ -541,7 +541,7 @@ function validateInputs(testFails, selector) {
     window.scrollTo(0, 0);
     hasErrors = true;
     input.classList.add('input--error');
-    if (!listItem.classList.contains('js-visible')) { 
+    if (!listItem.classList.contains('js-visible')) {
       errorBox.classList.remove('u-d-no');
       listItem.classList.remove('u-d-no');
       listItem.classList.add('js-visible');
