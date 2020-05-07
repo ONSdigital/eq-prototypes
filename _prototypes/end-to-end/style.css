@@ -291,8 +291,10 @@ p.field + p.field {
     border: 1px solid #222;
 }
 
-.input--error {
-    border: 2px solid #d0021b!important;
+.input--error:not(:focus) {
+    border: 1px solid #d0021b!important;
+    outline: 1px solid #d0021b;
+    outline-offset: -2px;
 }
 
 .input {
