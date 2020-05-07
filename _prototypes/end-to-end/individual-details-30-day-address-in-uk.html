@@ -27,30 +27,26 @@ noONSLogoLink: true
 
 <div class="page__container container">
     <div class="grid grid--reverse">
-        <div class="grid__col col-4@m">
-        </div>
+        <div class="grid__col col-4@m"></div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
-                <div class="panel panel--error u-mb-m js-error-box u-d-no"><div class="panel__header">
-                    <div class="panel__title u-fs-r--b">There 
-                            <span class="js-piping">is a {x} problem{s}</span> with your answer
-                        </div></div>
+                <div class="panel panel--error u-mb-m js-error-box u-d-no">
+                    <div class="panel__header">
+                        <div class="panel__title u-fs-r--b">There <span class="js-piping">is a {x} problem{s}</span> with your answer</div>
+                    </div>
                     <div class="panel__body">
-                        
                         <ol class="list list--bare">
-                          <li class="list__item js-address-field u-d-no">
-                              1. <a href="#error-message1" class="list__link js-inpagelink js-error">Enter an address to continue</a>
-                          </li>
-                       </ol>
+                            <li class="list__item js-address-field js-address-line-1 u-d-no">
+                                1. <a href="#error-message1" class="list__link js-inpagelink js-error">Enter an address to continue</a>
+                            </li>
+                        </ol>
                     </div>
                 </div>
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password"
                       action="../individual-details-30-day-address-type">
-                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
-                           value="#"/>
-                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
-                           value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person" value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type" value="#"/>
                     <div class="group">
                         <div class="block">
                             <section class="section">
@@ -60,32 +56,33 @@ noONSLogoLink: true
                                        What is the other UK address where you stay for more than 30 days a year?
                                     </h1>
                                 </div>
+
                                 <div class="question__answer">
                                   <fieldset class="question__fieldset js-question-fieldset">
                                       <legend class="u-vh">What is the first line of your address?</legend>
-
                                     <div id="address" class="field address-input js-address u-mt-s address-input--search">
                                       <div class="address-input__manual">
                                         <p class="field">
                                           <label class="label" for="address-line-1">Address line 1</label>
-                                          <input type="text" id="address-line-1" class="input input--text input-type__input  input--w-20@m js-address-line-1" name="address-line-1" />
+                                          <input type="text" id="address-line-1" class="input input--text input-type__input input--w-20@m js-address-line-1" name="address-line-1" data-error-msg="Enter an address to continue"/>
                                         </p>
                                         <p class="field">
                                           <label class="label" for="address-line-2">Address line 2</label>
-                                          <input type="text" id="address-line-2" class="input input--text input-type__input  input--w-20@m js-address-line-2" name="address-line-2" />
+                                          <input type="text" id="address-line-2" class="input input--text input-type__input input--w-20@m js-address-line-2" name="address-line-2"/>
                                         </p>
                                         <p class="field">
                                           <label class="label" for="address-town">Town or City</label>
-                                          <input type="text" id="address-town" class="input input--text input-type__input  js-address-town" name="address-town" />
+                                          <input type="text" id="address-town" class="input input--text input-type__input js-address-town" name="address-town" />
                                         </p>
                                         <p class="field">
                                           <label class="label" for="address-postcode">Postcode</label>
-                                          <input type="text" id="address-postcode" class="input input--text input-type__input  input--w-5 js-address-postcode" name="address-postcode" />
+                                          <input type="text" id="address-postcode" class="input input--text input-type__input input--w-5 js-address-postcode" name="address-postcode"/>
                                         </p>
                                         <div class="u-d-no u-mt-m js-address-search-btn-container">
                                           <a href="#" class="btn--link js-address-search-btn">Search for an address</a>
                                         </div>
                                       </div>
+
                                       <div class="address-input__search">
                                         <p class="field">
                                           <label class="label" for="address-field">Enter address or postcode and select from results</label>
@@ -128,22 +125,38 @@ noONSLogoLink: true
     details = storageAPI.getPersonalDetailsFor(personId);
     storageAPI.personalBookmark(personId, window.location.href),
     question = $('#question-title').html(),
-    hasErrors = false;
+    hasErrors = false,
+    addressLine2 = '',
+    addressCounty = '',
+    addressPostcode = '';
+
 
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
     const testFails = '';
-    window.ONS.utils.validateInputs(testFails, "input[id='address-field']");
+    if ($('#address').hasClass('address-input--search')) {
+      window.ONS.utils.validateInputs(testFails, "input[id='address-field']");
+    } else {
+      addressLine2 = document.getElementById('address-line-2').value;
+      addressCounty = document.getElementById('address-town').value;
+      addressPostcode = document.getElementById('address-postcode').value;
+      window.ONS.utils.validateInputs(testFails, "input[id='address-line-1']");
+    }
     
     if (hasErrors) {
         window.ONS.utils.calcErrors();
         hasErrors = false;
+        if (!$('#address').hasClass('address-input--search')) {
+            document.querySelector('.address-input__manual').insertBefore(document.querySelector('#address-line-1').parentNode, document.querySelector('#address-line-2').parentNode);
+            document.querySelector('.panel--simple').appendChild(document.querySelector('.question__fieldset'));
+        }
         return false;
     } else {
         let url = '../individual-details-30-day-address-in-uk/?person_id=' + personId + '&edit=true';
         question = question.trim();
-        storageAPI.addUpdate30DayAddressUk(personId, get30DayAddress(), question, url);
-
+        if (!$('#address').hasClass('address-input--search')) {
+          storageAPI.addUpdate30DayAddressUk(personId, get30DayAddress(), question, url);
+        }
         if(isEditing) {
           window.location.href = '../individual-details-summary/?person_id=' + personId;
         } else {
@@ -156,9 +169,9 @@ noONSLogoLink: true
   function get30DayAddress() {
     var array = [
       document.getElementById('address-line-1').value,
-      document.getElementById('address-line-2').value,
-      document.getElementById('address-town').value,
-      document.getElementById('address-postcode').value,
+      addressLine2,
+      addressCounty,
+      addressPostcode,
     ];
 
     var obj = {
