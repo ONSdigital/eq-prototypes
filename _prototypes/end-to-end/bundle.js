@@ -534,16 +534,17 @@ function validateInputs(testFails, selector) {
       listItem = document.querySelector('.js-' + input.id),
       answer = input.closest('.question__answer'),
       field = document.querySelector('.fieldgroup') ? input.closest('.fieldgroup') : input.closest('.field'),
+      fieldGroup = document.querySelector('.fieldgroup') ? true : false,
       errorMsg = input.getAttribute('data-error-msg');
 
   if (input.value === testFails || testFails === true) {
     window.scrollTo(0, 0);
     hasErrors = true;
+    input.classList.add('input--error');
     if (!listItem.classList.contains('js-visible')) { 
       errorBox.classList.remove('u-d-no');
-      listItem.classList.remove('u-d-no'), 
+      listItem.classList.remove('u-d-no');
       listItem.classList.add('js-visible');
-
       var inputErrorPanel = document.createElement('DIV'),
           inputErrorBody = document.createElement('DIV'),
           inputErrorP = document.createElement('P'),
@@ -561,14 +562,17 @@ function validateInputs(testFails, selector) {
       inputErrorPanel.appendChild(inputErrorBody);
       answer.appendChild(inputErrorPanel);
     }
-  } else {
+  } else if (!fieldGroup) {
     var errorPanel = input.closest('.panel');
     if (errorPanel) {
       listItem.classList.add('u-d-no'), 
       listItem.classList.remove('js-visible');
+      input.classList.remove('input--error');
       answer.appendChild(field);
       answer.removeChild(errorPanel);
     }
+  } else {
+    input.classList.remove('input--error');
   }
   document.querySelector(".btn-submit").blur();
 }
