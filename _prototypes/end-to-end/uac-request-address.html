@@ -48,7 +48,7 @@ logoUrl: ../home
 
                             <legend class="u-vh">What is your address?
                             </legend>
-                            <p class="js-piping">To request an access code, we need your address</p>
+                            <p class="js-piping js-question-description">To request an access code, we need your address</p>
 
                   <div id="address" class="field address-input js-address u-mt-s address-input--search">
                     <div class="address-input__manual">
@@ -128,6 +128,11 @@ logoUrl: ../home
       window.location = '../confirm-rh-address/?' + 'previous=' + 'uac-request-address' + '&' + 'current-journey=' + currentJourney;
     }
   });
+
+  if(currentJourney === 'unlinked-uac'){
+    $('.js-question-description').hide();
+    $('.js-previous-link').hide();
+  }
 
   if (window.location.search == '?edit=true') {
     function updateEditableAddress() {
