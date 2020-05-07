@@ -37,7 +37,7 @@ noONSLogoLink: true
                     <div class="panel__body">
                         <ol class="list list--bare">
                             <li class="list__item js-address-field js-address-line-1 u-d-no">
-                                1. <a href="#error-message1" class="list__link js-inpagelink js-error">Enter an address to continue</a>
+                                1. <a href="#error-message-1" class="list__link js-inpagelink js-error">Enter an address to continue</a>
                             </li>
                         </ol>
                     </div>
@@ -130,17 +130,16 @@ noONSLogoLink: true
     addressCounty = '',
     addressPostcode = '';
 
-
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
     const testFails = '';
     if ($('#address').hasClass('address-input--search')) {
-      window.ONS.utils.validateInputs(testFails, "input[id='address-field']");
+      window.ONS.utils.validateInputs(testFails, "input[id='address-field']", true);
     } else {
       addressLine2 = document.getElementById('address-line-2').value;
       addressCounty = document.getElementById('address-town').value;
       addressPostcode = document.getElementById('address-postcode').value;
-      window.ONS.utils.validateInputs(testFails, "input[id='address-line-1']");
+      window.ONS.utils.validateInputs(testFails, "input[id='address-line-1']", true);
     }
     
     if (hasErrors) {
