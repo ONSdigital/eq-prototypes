@@ -554,7 +554,7 @@ function validateInputs(testFails, selector) {
       inputErrorPanel.className = 'panel panel--error panel--simple';
       inputErrorBody.className = 'panel__body';
       inputErrorP.className = 'panel__error';
-      inputErrorP.id = 'error-message' + errors
+      inputErrorP.id = 'error-message' + errors;
       inputErrorStrong.innerText = errorMsg;
       inputErrorP.appendChild(inputErrorStrong);
       inputErrorBody.appendChild(inputErrorP);
