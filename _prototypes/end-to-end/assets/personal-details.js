@@ -131,7 +131,7 @@ export const personalDetailsEthnicGroupMap = {
       {
         val: 'Other',
         label: 'Any other White background',
-        description: 'You can enter an ethnic group or background on the next question'
+        description: 'You can enter your ethnic group or background on the next question'
       }
     ]
   },
@@ -152,7 +152,8 @@ export const personalDetailsEthnicGroupMap = {
       },
       {
         val: 'Other',
-        label: 'Any other Mixed or Multiple background'
+        label: 'Any other Mixed or Multiple background',
+        description: 'You can enter your ethnic group or background on the next question'
       }
     ]
   },
@@ -177,29 +178,32 @@ export const personalDetailsEthnicGroupMap = {
       },
       {
         val: 'Other',
-        label: 'Any other Asian ethnic group or background'
+        label: 'Any other Asian ethnic group or background',
+        description: 'You can enter your ethnic group or background on the next question'
       }
     ]
   },
   'Black': {
-    'question': 'Black, African, Caribbean or Black British',
+    'question': 'Black, Black British, Caribbean or African',
     'options': [
-      {
-        val: 'African',
-        label: 'African'
-      },
       {
         val: 'Caribbean',
         label: 'Caribbean'
       },
       {
+        val: 'African',
+        label: 'African',
+        description: 'You can enter your ethnic group or background on the next question'
+      },
+      {
         val: 'Other',
-        label: 'Any other Black, African or Caribbean background'
+        label: 'Any other Black, Black British or Caribbean background',
+        description: 'You can enter your ethnic group or background on the next question'
       }
     ]
   },
   'Other': {
-    'question': 'Other',
+    'question': 'other',
     'options': [
       {
         val: 'Arab',
@@ -207,7 +211,8 @@ export const personalDetailsEthnicGroupMap = {
       },
       {
         val: 'Other',
-        label: 'Any other ethnic group'
+        label: 'Any other ethnic group',
+        description: 'You can enter your ethnic group or background on the next question'
       }
     ]
   }
