@@ -41,6 +41,7 @@ noONSLogoLink: true
 
 <script>
   var urlParams = new URLSearchParams(window.location.search),
+    storageAPI = window.ONS.storage,
     surveyType = urlParams.get('survey'),
     nextPage = surveyType
       ? '../relationships/?survey=' + surveyType

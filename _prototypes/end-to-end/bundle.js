@@ -528,7 +528,7 @@ function fieldItemDisplayHack() {
   $('.field__item').after('<br />');
 }
 
-function validateInputs(testFails, selector) {
+function validateInputs(testFails, selector, address) {
   var input = document.querySelector(selector),
       errorBox = document.querySelector('.js-error-box'),
       listItem = document.querySelector('.js-' + input.id),
@@ -541,20 +541,24 @@ function validateInputs(testFails, selector) {
     window.scrollTo(0, 0);
     hasErrors = true;
     input.classList.add('input--error');
-    if (!listItem.classList.contains('js-visible')) { 
+    if (!listItem.classList.contains('js-visible')) {
       errorBox.classList.remove('u-d-no');
       listItem.classList.remove('u-d-no');
       listItem.classList.add('js-visible');
       var inputErrorPanel = document.createElement('DIV'),
           inputErrorBody = document.createElement('DIV'),
           inputErrorP = document.createElement('P'),
-          inputErrorStrong = document.createElement('STRONG'),
-          errors = Array.from(document.querySelectorAll('.js-visible')).length;
+          inputErrorStrong = document.createElement('STRONG');
 
       inputErrorPanel.className = 'panel panel--error panel--simple';
       inputErrorBody.className = 'panel__body';
       inputErrorP.className = 'panel__error';
-      inputErrorP.id = 'error-message' + errors
+      if (address) {
+        var errors = Array.from(document.querySelectorAll('.js-visible')).length;
+        inputErrorP.id = 'error-message-' + errors;
+      } else {
+        inputErrorP.id = 'error-message-' + input.id;
+      }
       inputErrorStrong.innerText = errorMsg;
       inputErrorP.appendChild(inputErrorStrong);
       inputErrorBody.appendChild(inputErrorP);
@@ -582,16 +586,22 @@ function calcErrors() {
     pipingDestinations = document.querySelectorAll('.js-piping');
 
   pipingDestinations.forEach(function(pipingDestination) {
-    pipingDestination.innerText = pipingDestination.innerText
-      .replace('{x}', errors === 1 ? '' : '1')
-      .replace('{x}', errors > 1 ? '2' : '')
-      .replace('is a', errors > 1 ? 'are' : 'is a')
-      .replace('{s}', errors > 1 ? 's' : '')
-      .replace('2', errors === 1 ? "1" : "2")
-      .replace('1', errors > 1 ? "2" : "1")
-      .replace('are', errors === 1 ? "is a" : "are")
-      .replace('problems', errors === 1 ? "problem" : "problems")
-      .replace('1 ', errors === 1 ? "" : "1 ");
+    if (errors === 1) {
+      pipingDestination.innerText = pipingDestination.innerText
+        .replace('{x}', '')
+        .replace('{s}', '')
+        .replace('2', "1")
+        .replace('are', "is a")
+        .replace('problems', "problem")
+        .replace('1 ', "");
+    } else if (errors > 1) {
+      pipingDestination.innerText = pipingDestination.innerText
+        .replace('{x}', '2')
+        .replace('is a', 'are')
+        .replace('{s}', 's')
+        .replace('1', "2")
+        .replace('are problem', "are 2 problems");
+    }
   });
 }
 

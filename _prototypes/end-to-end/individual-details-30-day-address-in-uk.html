@@ -27,8 +27,7 @@ noONSLogoLink: true
 
 <div class="page__container container">
     <div class="grid grid--reverse">
-        <div class="grid__col col-4@m">
-        </div>
+        <div class="grid__col col-4@m"></div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
                 <div class="panel panel--error u-mb-m js-error-box u-d-no"><div class="panel__header">
@@ -36,7 +35,6 @@ noONSLogoLink: true
                             <span class="js-piping">is a problem</span> with your answer
                         </div></div>
                     <div class="panel__body">
-                        
                         <ol class="list list--bare">
                           <li class="list__item js-address-field u-d-no">
                               1. <a href="#error-message1" class="list__link js-inpagelink js-error">Enter an address to continue</a>
@@ -50,10 +48,8 @@ noONSLogoLink: true
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password"
                       action="../individual-details-30-day-address-type">
-                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
-                           value="#"/>
-                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
-                           value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person" value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type" value="#"/>
                     <div class="group">
                         <div class="block">
                             <section class="section">
@@ -63,10 +59,10 @@ noONSLogoLink: true
                                        What is the other UK address where you stay for more than 30 days a year?
                                     </h1>
                                 </div>
+
                                 <div class="question__answer">
                                   <fieldset class="question__fieldset js-question-fieldset">
                                       <legend class="u-vh">What is the first line of your address?</legend>
-
                                     <div id="address" class="field address-input js-address u-mt-s address-input--search">
                                       <div class="address-input__manual">
                                         <div class="fieldgroup">
@@ -91,6 +87,7 @@ noONSLogoLink: true
                                           </div>
                                         </div>
                                       </div>
+
                                       <div class="address-input__search">
                                         <p class="field">
                                           <label class="label" for="address-field">Enter address or postcode and select from results</label>
@@ -161,12 +158,17 @@ noONSLogoLink: true
 
     if (hasErrors) {
         hasErrors = false;
+        if (!$('#address').hasClass('address-input--search')) {
+            document.querySelector('.address-input__manual').insertBefore(document.querySelector('#address-line-1').parentNode, document.querySelector('#address-line-2').parentNode);
+            document.querySelector('.panel--simple').appendChild(document.querySelector('.question__fieldset'));
+        }
         return false;
     } else {
         let url = '../individual-details-30-day-address-in-uk/?person_id=' + personId + '&edit=true';
         question = question.trim();
-        storageAPI.addUpdate30DayAddressUk(personId, get30DayAddress(), question, url);
-
+        if (!$('#address').hasClass('address-input--search')) {
+          storageAPI.addUpdate30DayAddressUk(personId, get30DayAddress(), question, url);
+        }
         if(isEditing) {
           window.location.href = '../individual-details-summary/?person_id=' + personId;
         } else {
@@ -179,9 +181,9 @@ noONSLogoLink: true
   function get30DayAddress() {
     var array = [
       document.getElementById('address-line-1').value,
-      document.getElementById('address-line-2').value,
-      document.getElementById('address-town').value,
-      document.getElementById('address-postcode').value,
+      addressLine2,
+      addressCounty,
+      addressPostcode,
     ];
 
     var obj = {

@@ -72,7 +72,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                            for="other"
                                                            id="other-label">
                                                         No<br>
-                                                        <span class="label__inner label--negative u-fs-s--b js-answer">Enter your gender</span>
+                                                        <span class="label__inner label--negative u-fs-s--b js-answer">Enter your gender identity</span>
                                                     </label>
                                                     
                                                     <div class="field__other field__other--open">
@@ -151,7 +151,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
   
   function updateAnswer() {
     if(storageAPI.getProxyFor(personId)) {
-      $('.js-answer').html('Enter their gender');
+      $('.js-answer').html('Enter their gender identity');
     }
 
     if(details && details.identity) {

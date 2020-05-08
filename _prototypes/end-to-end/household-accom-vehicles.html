@@ -19,6 +19,22 @@ noONSLogoLink: true
         <div class="grid__col col-4@m"></div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
+                <div class="panel panel--error u-mb-m js-error-box u-d-no">
+                    <div class="panel__header">
+                        <div class="panel__title u-fs-r--b">There 
+                            <span class="js-piping">is a {x} problem{s}</span> with your answer
+                        </div>
+                    </div>
+                    <div class="panel__body">
+                        <ol class="list list--bare">
+                            <li class="list__item js-other-textbox u-d-no">
+                                1. <a href="#error-message1" class="list__link js-inpagelink">
+                                    Enter a number that is less than or equal to 20 to continue
+                                </a>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password">
                     <div class="group" id="accommodation">
@@ -31,9 +47,9 @@ noONSLogoLink: true
                                     </h1>
                                 </div>
                                   <div class="answer">
-                                    <div class="answer__fields js-fields">
+                                    <div class="answer__fields question__answer js-fields">
                                         <div class="field field--radio field--multiplechoice ">
-                                            <fieldset class="u-mb-xl">
+                                            <fieldset>
                                                 <div class="field__item js-focusable-box">
                                                     <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
@@ -112,7 +128,8 @@ noONSLogoLink: true
                                                             <input
                                                                 type="text"
                                                                 id="other-textbox"
-                                                                class="input input--text input-type__input  input--w-2"
+                                                                class="input input--text input-type__input input--w-2 js-other"
+                                                                data-error-msg="Enter a number that is less than or equal to 20 to continue"
                                                                 name="other-answer"
                                                                 max="20"
                                                                 maxlength="2"
@@ -127,7 +144,7 @@ noONSLogoLink: true
                             </section>
                         </div>
                     </div>
-                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                    <button class="btn btn--primary btn--lg btn-submit u-mb-xl u-mt-xl"
                             type="submit" name="">Save and continue
                     </button>
                     <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
@@ -142,28 +159,40 @@ noONSLogoLink: true
 <script>
     var question = $('#question-title').html(),
         currentPage = '../household-accom-vehicles';
+        hasErrors = false;
     window.sessionStorage.setItem('accommodation-completed-status', currentPage);
 
     $('#other-textbox').focus(function() {
         $('input[type=radio][id=5-or-more]').prop('checked', true);
     });
 
-    $('.qa-btn-submit').on('click', function (e) {
-        var val = $('input[type=radio][name=no-of-vehicles]:checked').attr('value')
-        question = question.trim();
-
-        if(val === '5 or more') {
-            var otherVal = $("input[type=text][id=other-textbox]").val();
-            window.sessionStorage.setItem('accommodation-no-of-vehicles', JSON.stringify([question, otherVal, currentPage]));
+    $('.btn-submit').on('click', function (e) {
+        e.preventDefault();
+        const testFails = ($('.js-other').val() > 20);
+        window.ONS.utils.validateInputs(testFails, ".js-other");
+        if (hasErrors) {
+            window.ONS.utils.calcErrors();
+            hasErrors = false;
+            return false;
         } else {
-            window.sessionStorage.setItem('accommodation-no-of-vehicles', JSON.stringify([question, val, currentPage]));
+
+            var val = $('input[type=radio][name=no-of-vehicles]:checked').attr('value')
+            question = question.trim();
+
+            if(val === '5 or more') {
+                var otherVal = $("input[type=text][id=other-textbox]").val();
+                window.sessionStorage.setItem('accommodation-no-of-vehicles', JSON.stringify([question, otherVal, currentPage]));
+            } else {
+                window.sessionStorage.setItem('accommodation-no-of-vehicles', JSON.stringify([question, val, currentPage]));
+            }
+
+            window.sessionStorage.setItem('accommodation-completed-status', 'completed');
+            e.preventDefault();
+
+            window.location.href = '../hub';
+            storageAPI.storePageData('/end-to-end/hub/', window.location.pathname);
         }
 
-        window.sessionStorage.setItem('accommodation-completed-status', 'completed');
-        e.preventDefault();
-
-        window.location.href = '../hub';
-        storageAPI.storePageData('/end-to-end/hub/', window.location.pathname);
     });
 
     function updateAnswer() {

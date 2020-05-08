@@ -48,7 +48,7 @@ logoUrl: ../home
 
                             <legend class="u-vh">What is your address?
                             </legend>
-                            <p class="js-piping">To request an access code, we need your address.</p>
+                            <p class="js-piping js-question-description">To request an access code, we need your address</p>
 
                   <div id="address" class="field address-input js-address u-mt-s address-input--search">
                     <div class="address-input__manual">
@@ -61,7 +61,7 @@ logoUrl: ../home
                         <input type="text" id="address-line-2" class="input input--text input-type__input  input--w-20@m js-address-line-2" name="address-line-2" />
                       </p>
                       <p class="field">
-                        <label class="label" for="address-town">Town or City</label>
+                        <label class="label" for="address-town">Town or city</label>
                         <input type="text" id="address-town" class="input input--text input-type__input  js-address-town" name="address-town" />
                       </p>
                       <p class="field">
@@ -129,6 +129,11 @@ logoUrl: ../home
     }
   });
 
+  if(currentJourney === 'unlinked-uac'){
+    $('.js-question-description').hide();
+    $('.js-previous-link').hide();
+  }
+
   if (window.location.search == '?edit=true') {
     function updateEditableAddress() {
       $('#rh-proto-address').val(sessionStorage.getItem('address'));
@@ -144,9 +149,9 @@ logoUrl: ../home
 
   function updateHelp() {
     if (currentJourney === 'new-ir-uac') {
-      $('.js-piping').html('To request an individual access code, we need your address.');
+      $('.js-piping').html('To request an individual access code, we need your address');
     } else if (currentJourney === 'new-hh-paper') {
-      $('.js-piping').html('To send a paper questionnaire, we need your address.');
+      $('.js-piping').html('To send a paper questionnaire, we need your address');
     }
   }
 
