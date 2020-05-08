@@ -142,7 +142,7 @@ noONSLogoLink: true
             $('.js-heading').html('In their main job, what is ' + '<em class="highlight">' + person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
                 ' employment status?');
         }
-        if (details['employment'].sevenDaysAgo === 'No') {
+        if (details['employment'].sevenDaysAgo[0] === 'No') {
             var replaceQuestion = $('.js-heading').html().replace('is', 'was');
             $('.js-heading').html(replaceQuestion);
         }

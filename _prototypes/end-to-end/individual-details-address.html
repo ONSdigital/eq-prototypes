@@ -49,8 +49,7 @@ noONSLogoLink: true
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title saturn js-heading">
-                                        What is <span class="js-person"></span>
-                                        usual address?
+                                        What is <span class="js-person">your</span> usual address in the UK?
                                     </h1>
                                 </div>
                 <div class="panel panel--error u-mb-m js-error-box u-d-no"><div class="panel__header">
@@ -184,6 +183,7 @@ noONSLogoLink: true
     } else {
       let url = '../individual-details-address/?person_id=' + personId + '&edit=true';
       question = question.trim();
+
       storageAPI.addUpdateAddressIndividual(personId,
         {
           'address-line-1': $('#address-line-1').val(),

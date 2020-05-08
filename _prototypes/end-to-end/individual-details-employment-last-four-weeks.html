@@ -123,6 +123,13 @@ noONSLogoLink: true
         storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
     }
 
+    if (val === 'No') {
+        e.preventDefault();
+        window.location.href = '../individual-details-employment-seven-days-accepted-job/?person_id=' + personId;
+        storageAPI.storePageData('/end-to-end/individual-details-employment-seven-days-accepted-job/', window.location.pathname);
+
+    }
+
   }));
 
   function updateRouting() {

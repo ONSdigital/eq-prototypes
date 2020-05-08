@@ -158,7 +158,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         if(details.identity.val === "Yes") {
             $('input[type=radio][value="Yes"]').prop("checked", true);
             $('.js-clear-btn').removeClass('u-vh');
-        } else {
+        } else if(details.identity.val === "No"){
             $('input[type=radio][value="Other"]').prop("checked", true);
             $('input[type=text][Id="other-answer"]').val(details.identity.val);
             $('.js-clear-btn').removeClass('u-vh');

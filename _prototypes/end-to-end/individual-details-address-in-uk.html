@@ -46,7 +46,7 @@ noONSLogoLink: true
                                                            type="radio"
                                                            name="address-where"
                                                            id="in-uk"
-                                                           value="in-uk">
+                                                           value="An address in the UK">
                                                     <label class="label label--inline"
                                                            for="in-uk"
                                                            id="in-uk-label">
@@ -58,7 +58,7 @@ noONSLogoLink: true
                                                            type="radio"
                                                            name="address-where"
                                                            id="same-as-visitor1"
-                                                           value="same-as-visitor1">
+                                                           value="Same as visitor 1">
                                                     <label class="label label--inline js-extra-option-label"
                                                            for="same-as-visitor1"
                                                            id="same-as-visitor1-label">
@@ -68,7 +68,7 @@ noONSLogoLink: true
                                                 <div class="field__item js-focusable-box">
                                                     <input class="input input--radio js-focusable" 
                                                       name="address-where" 
-                                                      value="outside-uk" 
+                                                      value="An address outside the UK" 
                                                       id="outside-uk" 
                                                       type="radio" 
                                                       data-qa="has-other-option">
@@ -123,17 +123,15 @@ noONSLogoLink: true
     surveyType = urlParams.get('survey'),
     question = $('#question-title').html();
 
+  storageAPI.personalBookmark(personId, window.location.href);
+
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
     var val = $('[name="address-where"]:checked').val();
     let url = '../individual-details-address-in-uk/?person_id=' + personId + '&edit=true';
     question = question.trim();
-    storageAPI.addUpdateAddressWhere(personId, val, question, url);
-    storageAPI.storePageData('/end-to-end/individual-details-dob/', window.location.pathname);
 
-    if(val === 'outside-uk'){
-      storageAPI.addUpdateAddressOutsideUK(personId, $('#other-answer').val(), question, url);
-    }
+    storageAPI.addUpdateAddressWhere(personId, val, question, url);
 
     if(isEditing) {
       e.preventDefault();
@@ -153,14 +151,19 @@ noONSLogoLink: true
           url: '/end-to-end/individual-details-address/'
         },
         'outside-uk': {
-          url: '/end-to-end/hub/'
+          url: '/end-to-end/individual-details-country-other/'
         }
       };
-
+      if (val) {
       window.location.href = routeMap[val].url + 
         (personId ? '?person_id=' + personId : '');
+      storageAPI.storePageData(routeMap[val].url, window.location.pathname);
+      } else {
+      window.location.href = '/end-to-end/hub/' + 
+        (personId ? '?person_id=' + personId : '');
+      }
+
     }
-      storageAPI.storePageData(routseMap[val].url, window.location.pathname);
   }));  
 
   function updateRouting() {
@@ -186,6 +189,8 @@ noONSLogoLink: true
     if((person.id !== visitor1Person.id) && visitors.length > 1) {
       $('.js-extra-option').show();
       $('.js-extra-option-label').html('Same address as ' + visitor1Person.fullName);
+    } else {
+      $('.js-extra-option').hide();
     }
   }
 

@@ -180,7 +180,7 @@ noONSLogoLink: true
       $('.js-help-1').html('Their answer will help their community by allowing the government and councils to understand commuting patterns.');
       $('.js-help-2').html('Information about their workplace and how you travel to work are used together to work out local public transport needs, develop transport policies and plan services.');
     }
-    if (details['employment'].sevenDaysAgo === 'No') {
+    if (details['employment'].sevenDaysAgo[0]=== 'No') {
         var replaceQuestion = $('.js-heading').html().replace('does', 'did');
         $('.js-heading').html(replaceQuestion);
     }

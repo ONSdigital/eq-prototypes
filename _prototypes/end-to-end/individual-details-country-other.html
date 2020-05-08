@@ -80,6 +80,8 @@ noONSLogoLink: true
     personId = urlParams.get('person_id'),
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     isEditing = urlParams.get('edit'),
+    member = storageAPI.getHouseholdMemberByPersonId(personId),
+    isVisitor = storageAPI.isVisitor(member),
     details = storageAPI.getPersonalDetailsFor(personId),
     surveyType = urlParams.get('survey'),
     question = $('#question-title').html();
@@ -100,12 +102,26 @@ noONSLogoLink: true
         storageAPI.storePageData('/end-to-end/individual-details-country-other-arrive/', window.location.pathname);
 
     }
+
+    if(isVisitor) {
+        e.preventDefault();
+        window.location.href = '../hub/?person_id=' +
+        personId + (surveyType ? '&survey=' + surveyType : '');
+        question = 'What country do you usually live in?';
+        storageAPI.addUpdateCountryOther(personId, val, question, url);
+        storageAPI.storePageData('/end-to-end/hub/', window.location.pathname);
+    }
+
   }));
 
   function updateQuestion() {
-    if(storageAPI.getProxyFor(personId)) {
-      $('.js-heading').html('You selected &ldquo;Elsewhere&rdquo;. ' + 'What is ' + '<em class="highlight">' + person.firstLastName +
-        window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' + ' country of birth?</em>');
+    if(isVisitor) {
+        $('.js-heading').html('What country does ' + '<em class="highlight">' + person.firstLastName + '</em>' + ' usually live in?</em>');
+    } else {
+      if(storageAPI.getProxyFor(personId)) {
+        $('.js-heading').html('You selected &ldquo;Elsewhere&rdquo;. ' + 'What is ' + '<em class="highlight">' + person.firstLastName +
+          window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' + ' country of birth?</em>');
+      }
     }
   }
 

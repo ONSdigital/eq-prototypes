@@ -139,7 +139,7 @@ noONSLogoLink: true
       $('.js-piping p').html('For example, retail assistant, office cleaner, district nurse, primary school teacher. Do not state their grade or pay band');
     }
 
-    if (details['employment'].sevenDaysAgo === 'No') {
+    if (details['employment'].sevenDaysAgo[0]=== 'No') {
         var replaceQuestion = $('.js-heading').html().replace('is', 'was');
         $('.js-heading').html(replaceQuestion);
     }

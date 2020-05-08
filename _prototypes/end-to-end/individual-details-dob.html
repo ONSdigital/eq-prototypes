@@ -114,10 +114,16 @@ noONSLogoLink: true
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
       e.preventDefault();
-      const testFails = '';
-      window.ONS.utils.validateInputs(testFails, "input[id='personal-detail-dob-day']");
-      window.ONS.utils.validateInputs(testFails, "input[id='personal-detail-dob-month']");
-      window.ONS.utils.validateInputs(testFails, "input[id='personal-detail-dob-year']");
+      var day = $('#personal-detail-dob-day').val(),
+        month = $('#personal-detail-dob-month').val(),
+        year = $('#personal-detail-dob-year').val();
+
+      if (!isVisitor) {
+        const testFails = '';
+        window.ONS.utils.validateInputs(testFails, "input[id='personal-detail-dob-day']");
+        window.ONS.utils.validateInputs(testFails, "input[id='personal-detail-dob-month']");
+        window.ONS.utils.validateInputs(testFails, "input[id='personal-detail-dob-year']");
+      }
       if (hasErrors) {
           calcErrors();
           hasErrors = false;
@@ -128,13 +134,12 @@ noONSLogoLink: true
 
         let url = '../individual-details-dob/?person_id=' + personId + '&edit=true';
         question = question.trim();
-        storageAPI.addUpdatePersonalDetailsDOB(personId,
-          $('#personal-detail-dob-day').val(),
-          $('#personal-detail-dob-month').val(),
-          $('#personal-detail-dob-year').val(),
-          question,
-          url
-        );
+        if (day, month, year) {
+          storageAPI.addUpdatePersonalDetailsDOB(personId, day, month, year,
+            question,
+            url
+          );
+        }
 
         if(isVisitor){
           e.preventDefault();
@@ -148,9 +153,6 @@ noONSLogoLink: true
   function calcErrors() {
     var errorLink = document.querySelector('.js-error');
     var errorMessage = document.querySelector('.panel__error');
-    var day = $('#personal-detail-dob-day').val(),
-        month = $('#personal-detail-dob-month').val(),
-        year = $('#personal-detail-dob-year').val();
     
     if (day === '') {
       errorLink.innerText = 'Enter a day to continue';

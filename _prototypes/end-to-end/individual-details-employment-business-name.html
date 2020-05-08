@@ -133,7 +133,7 @@ noONSLogoLink: true
       $('.js-help').html('If they are self-employed in their own business, give the business name');
     }
 
-    if (details['employment'].sevenDaysAgo === 'No') {
+    if (details['employment'].sevenDaysAgo[0]=== 'No') {
         var replaceQuestion = $('.js-heading').html().replace('is', 'was');
         $('.js-heading').html(replaceQuestion);
         var replaceQuestion = $('.js-heading').html().replace('works', 'worked');

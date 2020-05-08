@@ -578,7 +578,6 @@ function validateInputs(testFails, selector, address) {
   } else {
     input.classList.remove('input--error');
   }
-  document.querySelector(".btn-submit").blur();
 }
 
 function calcErrors() {

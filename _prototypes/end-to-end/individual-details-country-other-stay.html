@@ -118,9 +118,9 @@ noONSLogoLink: true
         window.location.href = '../individual-details-national-identity/?person_id=' + personId;
         storageAPI.storePageData('/end-to-end/individual-details-national-identity/', window.location.pathname);
 
-    } else if ($('[name="stay-uk"]:checked').val() === 'Over 12 months')  {
+    } else {
         window.location.href = '../individual-details-year-ago-address/?person_id=' + personId;
-        storageAPI.storePageData('/end-to-end/individual-details-year-ago-addres/', window.location.pathname);
+        storageAPI.storePageData('/end-to-end/individual-details-year-ago-address/', window.location.pathname);
     }
     
   });

@@ -194,21 +194,9 @@ noONSLogoLink: true
             $('.js-answer').html('Enter their sexual orientation');
         }
 
-        if (details && details.orientation) {
+        if (details && details.orientation && details.orientation.val) {
             $('input[type=radio][value="' + details.orientation.val +'"]').prop("checked", true);
-        }
-
-        if(details && details.orientation) {
-            if(details.orientation.val === "Straight" ||
-                details.orientation.val === "Gay" ||
-                details.orientation.val === "Bisexual") {
-                $('input[type=radio][value="'+ details.orientation.val + '"]').prop("checked", true);
-                $('.js-clear-btn').removeClass('u-vh');
-            } else {
-                $('input[type=radio][value="Other"]').prop("checked", true);
-                $('input[type=text][Id="other-answer"]').val(details.identity.val);
-                $('.js-clear-btn').removeClass('u-vh');
-            }
+            $('.js-clear-btn').removeClass('u-vh');
         }
     }
 

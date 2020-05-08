@@ -39,14 +39,14 @@ logoUrl: ../home
                                 data-qa="question-title">
                                 Start census
                             </h1>
-                            <p class="field uac__field panel panel--info panel--simple">
-                                <label class="label" for="uac">Enter your 16 character access code
+                            <div class="field uac__field panel panel--info panel--simple">
+                                <label class="label" for="uac">Enter your 16-character access code
                                     <br>
                                     <span class="label__description">Keep this code safe. You will need to enter it every time you access your census</span>
                                 </label>
                                 <input type="text" id="uac" class="input input--text input-type__input uac__input js-uac u-mb-xs" name="uac" maxlength="19" data-group-size="4" autocomplete="off" />
-                                <span class="u-fs-s"><a href="#">Where to find your access code</a></span>
-                            </p>
+                                <a href="../where-to-find-your-access-code/?previous=uac-entry" class="u-fs-s">Where to find your access code</a>
+                            </div>
                             <div class="uac__security u-mt-m">
                                 <div class="uac__icon"><span class="icon icon--lock"></span></div>
                                 <p class="uac__message">Your personal information is protected by law and will be kept confidential.</p>
@@ -71,6 +71,8 @@ logoUrl: ../home
 <script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
+  document.dispatchEvent(new CustomEvent('UAC-READY'));
+
   $('.btn-submit').click(function(e) {
     e.preventDefault();
 

@@ -109,7 +109,7 @@ noONSLogoLink: true
           (surveyType ? '&survey=' + surveyType : '');
         storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
 
-    } else if(details['employment'].sevenDaysAgo === 'No') {
+    } else if(details['employment'].sevenDaysAgo[0]=== 'No') {
         storageAPI.clearPersonalBookmark(personId);
         window.location.href = '../hub/'
         storageAPI.storePageData('/end-to-end/hub/', window.location.pathname);
@@ -132,7 +132,7 @@ noONSLogoLink: true
       $('.js-heading').html('Does ' + '<em class="highlight">' + person.firstLastName + '</em>' +
         ' supervise or oversee the work of other employees on a day-to-day basis?');
     }
-    if (details['employment'].sevenDaysAgo === 'No') {
+    if (details['employment'].sevenDaysAgo[0]=== 'No') {
         var replaceQuestion = $('.js-heading').html().replace('Does', 'Did');
         $('.js-heading').html(replaceQuestion);
     }

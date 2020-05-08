@@ -145,7 +145,7 @@ noONSLogoLink: true
             $container.append(createListItem(individualDetails[person].country.val, individualDetails[person].country.question, individualDetails[person].country.url));
         }
         
-        if (individualDetails[person].country.valOther) {
+        if (individualDetails[person].country && individualDetails[person].country.valOther) {
             $container.append(createListItem(individualDetails[person].country.valOther, individualDetails[person].country.questionOther, individualDetails[person].country.urlOther));
         }
         
@@ -165,7 +165,7 @@ noONSLogoLink: true
             $container.append(createListItem(individualDetails[person].nationalIdentity.collection, individualDetails[person].nationalIdentity.question, individualDetails[person].nationalIdentity.url));
         }
         
-        if (individualDetails[person].nationalIdentity.niOther) {
+        if (individualDetails[person].nationalIdentity && individualDetails[person].nationalIdentity.niOther) {
             $container.append(createListItem(individualDetails[person].nationalIdentity.niOther, individualDetails[person].nationalIdentity.questionOther, individualDetails[person].nationalIdentity.urlOther));
         }
 
@@ -173,11 +173,11 @@ noONSLogoLink: true
             $container.append(createListItem(individualDetails[person].ethnicGroup.otherText, individualDetails[person].ethnicGroup.question, individualDetails[person].ethnicGroup.url));
         }
 
-        if (individualDetails[person].ethnicGroup.description) {
+        if (individualDetails[person].ethnicGroup && individualDetails[person].ethnicGroup.description) {
             $container.append(createListItem(individualDetails[person].ethnicGroup.description, individualDetails[person].ethnicGroup.questionDescription, individualDetails[person].ethnicGroup.urlDescription));
         }
 
-        if (individualDetails[person].ethnicGroup.otherText) {
+        if (individualDetails[person].ethnicGroup && individualDetails[person].ethnicGroup.otherText) {
             $container.append(createListItem(individualDetails[person].ethnicGroup.otherText, individualDetails[person].ethnicGroup.questionOther, individualDetails[person].ethnicGroup.urlOther));
         }
 
@@ -185,7 +185,7 @@ noONSLogoLink: true
             $container.append(createListItem(individualDetails[person].religion.description, individualDetails[person].religion.question, individualDetails[person].religion.url));
         }
 
-        if (individualDetails[person].religion.descriptionOther) {
+        if (individualDetails[person].religion && individualDetails[person].religion.descriptionOther) {
             $container.append(createListItem(individualDetails[person].religion.descriptionOther, individualDetails[person].religion.questionOther, individualDetails[person].religion.urlOther));
         }
         
@@ -193,7 +193,7 @@ noONSLogoLink: true
             $container.append(createListItem(individualDetails[person].language.lang, individualDetails[person].language.question, individualDetails[person].language.url));
         }
 
-        if (individualDetails[person].language.other) {
+        if (individualDetails[person].language && individualDetails[person].language.other) {
             $container.append(createListItem(individualDetails[person].language.other, individualDetails[person].language.questionOther, individualDetails[person].language.urlOther));
             $container.append(createListItem(individualDetails[person].language.english, individualDetails[person].language.questionEnglishLevel, individualDetails[person].language.urlEnglishLevel));
         }
@@ -202,7 +202,7 @@ noONSLogoLink: true
             $container.append(createListItem(individualDetails[person].passport.countries, individualDetails[person].passport.question, individualDetails[person].passport.url));
         }
 
-        if (individualDetails[person].passport.otherText) {
+        if (individualDetails[person].passport && individualDetails[person].passport.otherText) {
             $container.append(createListItem(individualDetails[person].passport.otherText, individualDetails[person].passport.questionOther, individualDetails[person].passport.urlOther));
         }
         
@@ -264,7 +264,7 @@ noONSLogoLink: true
         }
         
         if (individualDetails[person].yearAgoAddressCountry) {
-            $container.append(createListItem(individualDetails[person].yearAgoAddressCountry.value, individualDetails[person].yearAgoAddressCountry.question, individualDetails[person].yearAgoAddressCountry.url));
+            $container.append(createListItem(individualDetails[person].yearAgoAddressCountry.val, individualDetails[person].yearAgoAddressCountry.question, individualDetails[person].yearAgoAddressCountry.url));
         }
         
         if (individualDetails[person].addressOutsideUk) {

@@ -120,6 +120,10 @@ noONSLogoLink: true
         window.location.href = '../individual-details-year-ago-address/?person_id=' + personId;
         storageAPI.storePageData('/end-to-end/individual-details-year-ago-address/', window.location.pathname);
 
+    } else {
+        window.location.href = '../individual-details-country-other-stay/?person_id=' + personId;
+        storageAPI.storePageData('/end-to-end/individual-country-other-stay/', window.location.pathname);
+
     }
     
     
