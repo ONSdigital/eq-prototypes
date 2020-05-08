@@ -533,7 +533,7 @@ function validateInputs(testFails, selector) {
       errorBox = document.querySelector('.js-error-box'),
       listItem = document.querySelector('.js-' + input.id),
       answer = input.closest('.question__answer'),
-      field = document.querySelector('.fieldgroup') ? input.closest('.fieldgroup') : input.closest('.field'),
+      field = input.closest('.fieldgroup') ? input.closest('.fieldgroup') : input.closest('.field'),
       fieldGroup = document.querySelector('.fieldgroup') ? true : false,
       errorMsg = input.getAttribute('data-error-msg');
 

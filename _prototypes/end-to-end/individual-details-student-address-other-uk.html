@@ -52,6 +52,22 @@ noONSLogoLink: true
 
                                     <legend class="u-vh">What is the first line of your address?
                                     </legend>
+                                    <div class="panel panel--error u-mb-m js-error-box u-d-no"><div class="panel__header">
+                                        <div class="panel__title u-fs-r--b">There 
+                                                <span class="js-piping">is a problem</span> with your answer
+                                            </div></div>
+                                        <div class="panel__body">
+                                            
+                                            <ol class="list list--bare">
+                                              <li class="list__item js-address-field u-d-no">
+                                                  1. <a href="#error-message1" class="list__link js-inpagelink js-error">Enter an address to continue</a>
+                                              </li>
+                                              <li class="list__item js-address-line-1 js-address-line-2 js-address-town js-address-postcode u-d-no">
+                                                  1. <a href="#error-message1" class="list__link js-inpagelink js-error">Enter an address to continue</a>
+                                              </li>
+                                          </ol>
+                                        </div>
+                                    </div>
 
                                     <div class="question__answers">
                                         <div class="question__answer">
@@ -59,9 +75,10 @@ noONSLogoLink: true
                                                 <div class="answer__fields js-fields">
                                                   <div id="address" class="field address-input js-address u-mt-s address-input--search">
                                                     <div class="address-input__manual">
+                                                    <div class="fieldgroup">
                                                       <p class="field">
                                                         <label class="label" for="address-line-1">Address line 1</label>
-                                                        <input type="text" id="address-line-1" class="input input--text input-type__input  input--w-20@m js-address-line-1" name="address-line-1" />
+                                                        <input type="text" id="address-line-1" data-error-msg="Enter an address to continue" class="input input--text input-type__input  input--w-20@m js-address-line-1" name="address-line-1" />
                                                       </p>
                                                       <p class="field">
                                                         <label class="label" for="address-line-2">Address line 2</label>
@@ -79,11 +96,12 @@ noONSLogoLink: true
                                                         <a href="#" class="btn--link js-address-search-btn">Search for an address</a>
                                                       </div>
                                                     </div>
+                                                    </div>
                                                     <div class="address-input__search">
                                                       <p class="field">
                                                         <label class="label" for="address-field">Enter address or postcode and select from results</label>
                                                         <div id="address-typeahead-container" class="typeahead-input js-address-typeahead " data-content="{&quot;no_results&quot;:&quot;No results found. Try entering a different part of the address&quot;,&quot;aria_no_results&quot;:&quot;No addresses found for the query&quot;,&quot;aria_you_have_selected&quot;:&quot;You have selected&quot;,&quot;aria_found_by_alternative_name&quot;:&quot;found by alternative name&quot;,&quot;aria_min_chars&quot;:&quot;Type in 5 or more characters for addresses.&quot;,&quot;aria_one_result&quot;:&quot;There is one address available.&quot;,&quot;aria_n_results&quot;:&quot;There are {n} addresses available.&quot;,&quot;aria_limited_results&quot;:&quot;Results have been limited to 10 addresses. Type more characters to refine your search.&quot;,&quot;more_results&quot;:&quot;Continue entering to improve results&quot;,&quot;results_title&quot;:&quot;Select an address&quot;}" typeahead-data="">
-                                                          <input type="text" name="x15" id="address-field" class="input input--text input-type__input  address-input__typeahead js-typeahead-input input--w-50" />
+                                                          <input type="text" name="x7" data-error-msg="Enter an address to continue" id="address-field" class="input input--text input-type__input  address-input__typeahead js-typeahead-input input--w-50" />
                                                           <div class="typeahead-input__results js-typeahead-results">
                                                             <header class="typeahead-input__results-title u-fs-s">Select an address</header>
                                                             <ul class="typeahead-input__listbox js-typeahead-listbox" role="listbox" id="address-typeahead-listbox" tabindex="-1"></ul>
@@ -92,9 +110,9 @@ noONSLogoLink: true
                                                           <div class="typeahead-input__status u-vh js-typeahead-aria-status" aria-live="polite" role="status" tabindex="-1"></div>
                                                         </div>
                                                       </p>
-                                                      <a href="#" class="btn--link js-address-manual-btn">Manually enter address</a>                    </div>
+                                                      <a href="#" class="btn--link js-address-manual-btn">Manually enter address</a>                    
+                                                      </div>
                                                   </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -126,11 +144,37 @@ noONSLogoLink: true
     isVisitor = storageAPI.isVisitor(member),
     details = storageAPI.getPersonalDetailsFor(personId),
     surveyType = urlParams.get('survey'),
-    question = $('#question-title').html();
+    question = $('#question-title').html(),
+    hasErrors = false,
+    isManual = false;
+    
+  $('.address-input__manual input').prop('type', 'hidden');
+
+  $('.js-address-manual-btn').on('click', function (e) {
+    isManual = true;
+    $('.address-input__manual input').prop('type', 'text');
+  });
+
+  $('.js-address-search-btn').on('click', function (e) {
+    isManual = false;
+    $('.address-input__manual input').prop('type', 'hidden');
+  });
 
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
+    const testFails = '';
+    if (isManual === false) {
+      window.ONS.utils.validateInputs(testFails, "input[id='address-field']");
+    } else if (isManual === true) {
+      window.ONS.utils.validateInputs(testFails, "input[id='address-line-1']");
+      window.ONS.utils.validateInputs(testFails, "input[id='address-town']");
+      window.ONS.utils.validateInputs(testFails, "input[id='address-postcode']");
+    }
 
+    if (hasErrors) {
+        hasErrors = false;
+        return false;
+    } else {
     let url = '../individual-details-student-address-other-uk/?person_id=' + personId + '&edit=true';
     question = question.trim();
     storageAPI.addUpdateStudentAddressUk(personId, getStudentAddress(), question, url);
@@ -145,6 +189,7 @@ noONSLogoLink: true
     }
 
     storageAPI.clearPersonalBookmark(personId);
+    }
   });
 
   function getStudentAddress() {

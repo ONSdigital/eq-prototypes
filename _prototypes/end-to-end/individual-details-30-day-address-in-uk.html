@@ -33,12 +33,15 @@ noONSLogoLink: true
             <main role="main" id="main" class="page__main">
                 <div class="panel panel--error u-mb-m js-error-box u-d-no"><div class="panel__header">
                     <div class="panel__title u-fs-r--b">There 
-                            <span class="js-piping">is a {x} problem{s}</span> with your answer
+                            <span class="js-piping">is a problem</span> with your answer
                         </div></div>
                     <div class="panel__body">
                         
                         <ol class="list list--bare">
                           <li class="list__item js-address-field u-d-no">
+                              1. <a href="#error-message1" class="list__link js-inpagelink js-error">Enter an address to continue</a>
+                          </li>
+                          <li class="list__item js-address-line-1 js-address-line-2 js-address-town js-address-postcode u-d-no">
                               1. <a href="#error-message1" class="list__link js-inpagelink js-error">Enter an address to continue</a>
                           </li>
                        </ol>
@@ -66,24 +69,26 @@ noONSLogoLink: true
 
                                     <div id="address" class="field address-input js-address u-mt-s address-input--search">
                                       <div class="address-input__manual">
-                                        <p class="field">
-                                          <label class="label" for="address-line-1">Address line 1</label>
-                                          <input type="text" id="address-line-1" class="input input--text input-type__input  input--w-20@m js-address-line-1" name="address-line-1" />
-                                        </p>
-                                        <p class="field">
-                                          <label class="label" for="address-line-2">Address line 2</label>
-                                          <input type="text" id="address-line-2" class="input input--text input-type__input  input--w-20@m js-address-line-2" name="address-line-2" />
-                                        </p>
-                                        <p class="field">
-                                          <label class="label" for="address-town">Town or City</label>
-                                          <input type="text" id="address-town" class="input input--text input-type__input  js-address-town" name="address-town" />
-                                        </p>
-                                        <p class="field">
-                                          <label class="label" for="address-postcode">Postcode</label>
-                                          <input type="text" id="address-postcode" class="input input--text input-type__input  input--w-5 js-address-postcode" name="address-postcode" />
-                                        </p>
-                                        <div class="u-d-no u-mt-m js-address-search-btn-container">
-                                          <a href="#" class="btn--link js-address-search-btn">Search for an address</a>
+                                        <div class="fieldgroup">
+                                          <p class="field">
+                                            <label class="label" for="address-line-1">Address line 1</label>
+                                            <input type="text" id="address-line-1" data-error-msg="Enter an address to continue" class="input input--text input-type__input  input--w-20@m js-address-line-1" name="address-line-1" />
+                                          </p>
+                                          <p class="field">
+                                            <label class="label" for="address-line-2">Address line 2</label>
+                                            <input type="text" id="address-line-2" class="input input--text input-type__input  input--w-20@m js-address-line-2" name="address-line-2" />
+                                          </p>
+                                          <p class="field">
+                                            <label class="label" for="address-town">Town or City</label>
+                                            <input type="text" id="address-town" class="input input--text input-type__input  js-address-town" name="address-town" />
+                                          </p>
+                                          <p class="field">
+                                            <label class="label" for="address-postcode">Postcode</label>
+                                            <input type="text" id="address-postcode" class="input input--text input-type__input  input--w-5 js-address-postcode" name="address-postcode" />
+                                          </p>
+                                          <div class="u-d-no u-mt-m js-address-search-btn-container">
+                                            <a href="#" class="btn--link js-address-search-btn">Search for an address</a>
+                                          </div>
                                         </div>
                                       </div>
                                       <div class="address-input__search">
@@ -128,15 +133,33 @@ noONSLogoLink: true
     details = storageAPI.getPersonalDetailsFor(personId);
     storageAPI.personalBookmark(personId, window.location.href),
     question = $('#question-title').html(),
-    hasErrors = false;
+    hasErrors = false,
+    isManual = false;
+    
+  $('.address-input__manual input').prop('type', 'hidden');
 
+  $('.js-address-manual-btn').on('click', function (e) {
+    isManual = true;
+    $('.address-input__manual input').prop('type', 'text');
+  });
+
+  $('.js-address-search-btn').on('click', function (e) {
+    isManual = false;
+    $('.address-input__manual input').prop('type', 'hidden');
+  });
+  
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
     const testFails = '';
-    window.ONS.utils.validateInputs(testFails, "input[id='address-field']");
-    
+    if (isManual === false) {
+      window.ONS.utils.validateInputs(testFails, "input[id='address-field']");
+    } else if (isManual === true) {
+      window.ONS.utils.validateInputs(testFails, "input[id='address-line-1']");
+      window.ONS.utils.validateInputs(testFails, "input[id='address-town']");
+      window.ONS.utils.validateInputs(testFails, "input[id='address-postcode']");
+    }
+
     if (hasErrors) {
-        window.ONS.utils.calcErrors();
         hasErrors = false;
         return false;
     } else {
