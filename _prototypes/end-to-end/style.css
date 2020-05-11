@@ -481,6 +481,10 @@ p.field + p.field {
     background-color: #e4f972!important;
 }
 
+.btn {
+    width: auto;
+}
+
 .btn--secondary {
     background: #d0d0d0;
     color: #222;
