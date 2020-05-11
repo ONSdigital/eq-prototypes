@@ -333,6 +333,10 @@ p.field + p.field {
 .label {
     color: #222;
 }
+
+.label--inline {
+    padding: .6rem 1rem .6rem 2.45rem;
+}
  
 .label--negative {
     margin-left: -1.85rem;
