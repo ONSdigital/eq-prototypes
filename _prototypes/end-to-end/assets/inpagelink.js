@@ -24,6 +24,7 @@ function applyInPageLink(elTrigger) {
 
 function focusOnInput(elId) {
   const container = document.getElementById(elId).closest('.panel');
+  console.log(container);
   container.scrollIntoView();
 
   const input = [

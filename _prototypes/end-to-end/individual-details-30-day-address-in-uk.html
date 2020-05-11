@@ -37,10 +37,10 @@ noONSLogoLink: true
                     <div class="panel__body">
                         <ol class="list list--bare">
                           <li class="list__item js-address-field u-d-no">
-                              1. <a href="#error-message1" class="list__link js-inpagelink js-error">Enter an address to continue</a>
+                              1. <a href="#error-message-address-field" class="list__link js-inpagelink js-error">Enter an address to continue</a>
                           </li>
                           <li class="list__item js-address-line-1 js-address-line-2 js-address-town js-address-postcode u-d-no">
-                              1. <a href="#error-message1" class="list__link js-inpagelink js-error">Enter an address to continue</a>
+                              1. <a href="#error-message-address-line-1" class="list__link js-inpagelink js-error">Enter an address to continue</a>
                           </li>
                        </ol>
                     </div>
@@ -138,10 +138,15 @@ noONSLogoLink: true
 
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
-    const testFails = '';
     if ($('.address-input--search').length != 0) {
+      if ($("#address-field").val() == '' || $("#address-field").val() != '' ){
+        var testFails = true;
+      }
+      $('.address-input__manual input').prop('type', 'readonly');
       window.ONS.utils.validateInputs(testFails, "input[id='address-field']");
     } else if ($('.address-input--search').length === 0) {
+      var testFails = '';
+      $('.address-input__manual input').prop('type', 'text');
       window.ONS.utils.validateInputs(testFails, "input[id='address-line-1']");
       window.ONS.utils.validateInputs(testFails, "input[id='address-town']");
       window.ONS.utils.validateInputs(testFails, "input[id='address-postcode']");
