@@ -130,20 +130,11 @@ noONSLogoLink: true
 
     visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{n}', (numberOfVisitors) || 0);
 
-/*   if (//significantDate is before todaysDate) {
-      if (numberOfVisitors != 1) {
-        visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{t}', 'were');
-      } else {
-        visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{t}', 'was');
-      }
-    } else { 
-*/
       if (numberOfVisitors != 1) {
         visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{t}', 'are');
       } else {
         visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{t}', 'is');
       }
-//    } 
 
     $('.js-visitors-people-plural').each(function(i, el) {
       window.ONS.utils

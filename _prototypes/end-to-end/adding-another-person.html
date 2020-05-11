@@ -294,7 +294,6 @@ noONSLogoLink: true
         $('#last-name').val(person.lastName);
         $('#question-title').html('Change details for ' + person.fullName);
         $('#member-list').remove();
-        /*$('.js-remove-section').show();*/
       } else {
         $('#question-title').html('Member not found');
       }
@@ -347,8 +346,8 @@ noONSLogoLink: true
 
 	$(function () {
 	  if(sessionStorage.getItem('address-line-1')) {
-		$('.full-address-text').html((sessionStorage.getItem('address-line-1') || '').replace(/,/g, ''));
-      }
+		  $('.full-address-text').html((sessionStorage.getItem('address-line-1') || '').replace(/,/g, ''));
+    }
 	});
 
   function updateAllLinks() {
