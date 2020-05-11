@@ -189,10 +189,8 @@ export function getAddress() {
   return {
     addressLine1: addressLines[0],
     addressLine2: addressLines[1],
-    addressLine3: addressLines[2],
-    addressCounty: addressLines[4],
-    addressTownCity: addressLines[3],
-    addressPostcode: addressLines[5]
+    addressTownCity: addressLines[2],
+    addressPostcode: addressLines[3]
   }
 }
 
@@ -536,7 +534,6 @@ function validateInputs(testFails, selector, address) {
       field = input.closest('.fieldgroup') ? input.closest('.fieldgroup') : input.closest('.field'),
       fieldGroup = document.querySelector('.fieldgroup') ? true : false,
       errorMsg = input.getAttribute('data-error-msg');
-
   if (input.value === testFails || testFails === true) {
     window.scrollTo(0, 0);
     hasErrors = true;
