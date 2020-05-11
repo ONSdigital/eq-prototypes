@@ -136,16 +136,14 @@ noONSLogoLink: true
       /**
       * Routing
       */
-      if (!yesbox.checked) {
-        if (window.location.search.match(/journey=visitors/)) {
+      if (!yesbox.checked && window.location.search.match(/journey=visitors/)) {
           document.trav.action = "../summary";
-        }
-        else {
+      } else if (!yesbox.checked) {
           document.trav.action = "../people-count-confirmation";
-        }
-
+      } else if (yesbox.checked && window.location.search.match(/journey=visitors/)) {
+          document.trav.action = "../visitor-name";
       } else {
-        document.trav.action = "../who-else-to-add";
+          document.trav.action = "../who-else-to-add";
       }
     }
   });
