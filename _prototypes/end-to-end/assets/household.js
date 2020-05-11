@@ -46,7 +46,7 @@ export function person(opts, change) {
       firstName: opts.firstName,
       middleName: middleName,
       lastName: opts.lastName,
-      fullName: opts.firstName + ' ' + (opts.middleName !== '' ? opts.middleName + ' ' : '') + opts.lastName
+      fullName: opts.firstName + ' ' + opts.lastName
     };
   }
 }

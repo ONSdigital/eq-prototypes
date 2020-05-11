@@ -20,8 +20,7 @@ noONSLogoLink: true
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
                 <div class="feedback__inline js-feedback-inline is-collapsed">
-                    <div class="feedback__border">
-                    </div>
+                    <div class="feedback__border"></div>
                 </div>
                 <div class="panel panel--error u-mb-m js-error-box u-d-no">
                     <div class="panel__header">
@@ -30,13 +29,12 @@ noONSLogoLink: true
                         </div>
                     </div>
                     <div class="panel__body">
-                        
                         <ol class="list list--bare">
-                        <li class="list__item js-first-name u-d-no">
-                            1. <a href="#error-message-first-name" class="list__link js-inpagelink">
-                                Enter a first name to continue
-                            </a>
-                        </li>
+                          <li class="list__item js-first-name u-d-no">
+                              1. <a href="#error-message-first-name" class="list__link js-inpagelink">
+                                  Enter a first name to continue
+                              </a>
+                          </li>
                         <li class="list__item js-last-name u-d-no">
                             <span class="js-piping">2</span>. <a href="#error-message-last-name" class="list__link js-inpagelink">
                                 Enter a last name to continue
@@ -47,59 +45,56 @@ noONSLogoLink: true
                 </div>
                 <div class="group">
                     <div class="block">
-
                         <div class="question">
                             <h1 class="question__title u-fs-xl js-heading"
                                 data-qa="question-title">
                                 What is your name?
                             </h1>
 
-                            <fieldset
-                                    class="question__fieldset js-question-fieldset">
+                            <fieldset class="question__fieldset js-question-fieldset">
                                 <legend class="u-vh">What is your name?</legend>
+                                <div class="question__answers">
+                                    <div class="question__answer">
+                                      <p class="field">
+                                        <label class="label"
+                                              for="first-name">
+                                            <span class="label__inner">
+                                                First name
+                                            </span>
+                                        </label>
+                                        <input require data-error-msg="Enter a first name to continue" class="input input--text"
+                                              id="first-name"
+                                              data-qa="input-text" value=""/>
+                                      </p>
+                                    </div>
 
-                            <div class="question__answers">
-                                <div class="question__answer">
-                                  <p class="field">
-                                    <label class="label"
-                                           for="first-name">
-                                        <span class="label__inner">
-                                            First name
-                                        </span>
-                                    </label>
-                                    <input required autocomplete="new-password" data-error-msg="Enter a first name to continue" class="input input--text"
-                                           id="first-name"
-                                           data-qa="input-text" value=""/>
-                                  </p>
-                                </div>
+                                    <div class="question__answer">
+                                      <p class="field">
+                                        <label class="label" for="middle-name">
+                                            <span class="label__inner">
+                                                Middle names
+                                            </span>
+                                        </label>
+                                        <input class="input input--text"
+                                              id="middle-name"
+                                              data-qa="input-text" value=""/>
+                                      </p>
+                                    </div>
 
-                                <div class="question__answer">
-                                  <p class="field">
-                                    <label class="label" for="middle-name">
-                                        <span class="label__inner">
-                                            Middle names
-                                        </span>
-                                    </label>
-                                    <input autocomplete="new-password" class="input input--text"
-                                           id="middle-name"
-                                           data-qa="input-text" value=""/>
-                                  </p>
+                                    <div class="question__answer">
+                                      <p class="field">
+                                        <label class="label" for="last-name">
+                                            <span class="label__inner">
+                                                Last name
+                                            </span>
+                                        </label>
+                                        <input required data-error-msg="Enter a last name to continue" class="input input--text"
+                                              id="last-name"
+                                              data-qa="input-text" value=""/>
+                                      </p>
+                                    </div>
                                 </div>
-
-                                <div class="question__answer">
-                                  <p class="field">
-                                    <label class="label" for="last-name">
-                                        <span class="label__inner">
-                                            Last name
-                                        </span>
-                                    </label>
-                                    <input required autocomplete="new-password" data-error-msg="Enter a last name to continue" class="input input--text"
-                                           id="last-name"
-                                           data-qa="input-text" value=""/>
-                                  </p>
-                                </div>
-                            </div>
-                          </fieldset>
+                            </fieldset>
                         </div>
                     </div>
                 </div>

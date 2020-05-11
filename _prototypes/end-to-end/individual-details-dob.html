@@ -125,7 +125,7 @@ noONSLogoLink: true
         window.ONS.utils.validateInputs(testFails, "input[id='personal-detail-dob-year']");
       }
       if (hasErrors) {
-          calcErrors();
+          calcErrors(day, month, year);
           hasErrors = false;
           return false;
       } else {
@@ -150,7 +150,7 @@ noONSLogoLink: true
       }
   }));
 
-  function calcErrors() {
+  function calcErrors(day, month, year) {
     var errorLink = document.querySelector('.js-error');
     var errorMessage = document.querySelector('.panel__error');
     
