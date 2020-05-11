@@ -32,7 +32,18 @@ logoUrl: ../home
                         </form>
                     </div>
                 </div>
-
+                <div class="panel panel--error u-mb-m js-error-box u-d-no"><div class="panel__header">
+                    <div class="panel__title u-fs-r--b">There 
+                            <span class="js-piping">is a problem</span> with your answer
+                        </div></div>
+                    <div class="panel__body">
+                        <ol class="list list--bare">
+                        <li class="list__item js-uac u-d-no">
+                            1. <a href="#error-message-uac" class="list__link js-inpagelink js-error">Enter an access code to continue</a>
+                        </li>
+                    </ol>
+                    </div>
+                </div>
                 <div class="group" id="what-is-your-address-group">
                     <div class="block" id="what-is-your-address">
                         <div class="question">
@@ -40,13 +51,17 @@ logoUrl: ../home
                                 data-qa="question-title">
                                 Start census
                             </h1>
-                            <div class="field uac__field panel panel--info panel--simple">
-                                <label class="label" for="uac">Enter your 16-character access code
-                                    <br>
-                                    <span class="label__description">Keep this code safe. You will need to enter it every time you access your census</span>
-                                </label>
-                                <input type="text" id="uac" class="input input--text input-type__input uac__input js-uac u-mb-xs" name="uac" maxlength="19" data-group-size="4" autocomplete="off" />
-                                <a href="../where-to-find-your-access-code/?previous=uac-entry" class="u-fs-s">Where to find your access code</a>
+                            <div class="question__answer">
+                                <div class="fieldgroup">
+                                    <div class="field uac__field panel panel--info panel--simple">
+                                        <label class="label" for="uac">Enter your 16-character access code
+                                            <br>
+                                            <span class="label__description">Keep this code safe. You will need to enter it every time you access your census</span>
+                                        </label>
+                                        <input type="text" id="uac" class="input input--text input-type__input uac__input js-uac u-mb-xs" name="uac" maxlength="19" data-group-size="4" autocomplete="off" data-error-msg="Enter an access code to continue" />
+                                        <a href="../where-to-find-your-access-code/?previous=uac-entry" class="u-fs-s">Where to find your access code</a>
+                                    </div>
+                                </div>
                             </div>
                             <div class="uac__security u-mt-m">
                                 <div class="uac__icon"><span class="icon icon--lock"></span></div>
@@ -88,15 +103,22 @@ logoUrl: ../home
   var previousPage = urlParams.get('previous');
   var redirect = urlParams.get('redirect');
   var uacInput = document.getElementById('uac');
+  var hasErrors = false;
 
   $('.btn-submit').click(function(e) {
     e.preventDefault();
+    const testFails = '';
+    window.ONS.utils.validateInputs(testFails, "input[id='uac']");
 
-    if (uacInput.value == 'unl1 nk3d acc3 55c0') {
-        window.location = '../uac-request-address/?previous=uac-entry&current-journey=unlinked-uac';
+    if (hasErrors) {
+        hasErrors = false;
+        return false;
     } else {
-        window.location = '../confirm-address/';
+        if (uacInput.value == 'unl1 nk3d acc3 55c0') {
+            window.location = '../uac-request-address/?previous=uac-entry&current-journey=unlinked-uac';
+        } else {
+            window.location = '../confirm-address/';
+        }
     }
-    
   });
 </script>
