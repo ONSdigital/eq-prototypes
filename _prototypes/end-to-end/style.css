@@ -300,6 +300,7 @@ p.field + p.field {
 
 .input {
     border: 1px solid #222;
+    padding: .38911rem .5rem;
 }
 
 .input:focus {
