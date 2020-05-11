@@ -145,27 +145,18 @@ noONSLogoLink: true
     details = storageAPI.getPersonalDetailsFor(personId),
     surveyType = urlParams.get('survey'),
     question = $('#question-title').html(),
-    hasErrors = false,
-    isManual = false;
-    
-  $('.address-input__manual input').prop('type', 'hidden');
-
-  $('.js-address-manual-btn').on('click', function (e) {
-    isManual = true;
-    $('.address-input__manual input').prop('type', 'text');
-  });
+    hasErrors = false;
 
   $('.js-address-search-btn').on('click', function (e) {
-    isManual = false;
-    $('.address-input__manual input').prop('type', 'hidden');
+    window.location.href = '../individual-details-student-address-other-uk/?person_id=' + personId;
   });
 
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
     const testFails = '';
-    if (isManual === false) {
+    if ($('.address-input--search').length != 0) {
       window.ONS.utils.validateInputs(testFails, "input[id='address-field']");
-    } else if (isManual === true) {
+    } else if ($('.address-input--search').length === 0) {
       window.ONS.utils.validateInputs(testFails, "input[id='address-line-1']");
       window.ONS.utils.validateInputs(testFails, "input[id='address-town']");
       window.ONS.utils.validateInputs(testFails, "input[id='address-postcode']");
@@ -204,8 +195,7 @@ noONSLogoLink: true
       'addressLine1': array[0],
       'addressLine2': array[1],
       'addressTown': array[2],
-      'addressCounty': array[3],
-      'addressPostcode': array[4],
+      'addressPostcode': array[3],
       'address': array.filter(filterAddressLine).join(', '),
     };
     return obj;
