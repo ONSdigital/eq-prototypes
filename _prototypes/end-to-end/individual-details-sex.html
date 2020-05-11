@@ -112,7 +112,7 @@ noONSLogoLink: true
     surveyType = urlParams.get('survey');
     storageAPI.personalBookmark(personId, window.location.href),
     question = $('#question-title').html(),
-    age = urlParams.get('age');
+    age = urlParams.get('age').split(' ');
 
     if(isVisitor) {
       $('.panel').addClass('u-d-no');
@@ -133,26 +133,21 @@ noONSLogoLink: true
     if(isEditing) {
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person_id=' +
-        personId + (surveyType ? '&survey=' + surveyType : '');
+        personId;
         storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
 
-    }
-
-    if(isVisitor) {
+    } else if(isVisitor) {
       e.preventDefault();
       window.location.href = '../individual-details-address-in-uk/?person_id=' +
-        personId + (surveyType ? '&survey=' + surveyType : '');
+        personId;
         storageAPI.storePageData('/end-to-end/individual-details-address-in-uk/', window.location.pathname);
 
-    }
-
-    if(age < 16 && !isVisitor) {
+    } else if(ageCheck(age) && !isVisitor) {
       e.preventDefault();
       window.location.href = '../individual-details-30-day-address/?person_id=' +
-        personId + (surveyType ? '&survey=' + surveyType : '');
+        personId;
         $('.panel').addClass('u-d-no');
         storageAPI.storePageData('/end-to-end/individual-details-30-day-address/', window.location.pathname);
-
     }
   }));
 
@@ -168,9 +163,16 @@ noONSLogoLink: true
       $('.js-heading').html('What is ' + '<em class="highlight">' + person.firstLastName +
         window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' + ' sex?');
     }
-    if (details['age'] > 15) {
+    if (!ageCheck(age)) {
         $('.panel--simple').removeClass('u-vh');
     }
+  }
+
+  function ageCheck(age) {
+    if (age[1] === "years" && age[0] > 14) {
+      return false;
+    } else
+      return true
   }
 
   if (details && details.sex) {

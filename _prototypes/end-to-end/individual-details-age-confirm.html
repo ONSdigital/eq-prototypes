@@ -120,7 +120,8 @@ noONSLogoLink: true
     storageAPI.personalBookmark(personId, window.location.href),
     age = '',
     ageYear = '',
-    hasErrors = false;
+    hasErrors = false,
+    ageWithUnit = '';
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
@@ -148,7 +149,7 @@ noONSLogoLink: true
           storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
         }
         else if(val === 'Yes' && !(isEditing)){
-          window.location.href = '../individual-details-sex/?person_id=' + personId + '&age=' + age;
+          window.location.href = '../individual-details-sex/?person_id=' + personId + '&age=' + ageWithUnit;
           storageAPI.addUpdateAge(personId, ageYear);
           storageAPI.storePageData('/end-to-end/individual-details-sex/', window.location.pathname);
         }
@@ -196,6 +197,7 @@ noONSLogoLink: true
         }
       }
     }
+    ageWithUnit = age + ' ' + unit;
 
     if(!dob) {
       console.log('Unable to find date of birth for details: ', details);
@@ -203,16 +205,16 @@ noONSLogoLink: true
 
     if(storageAPI.getProxyFor(personId)) {
       $('.js-heading').html(
-        '<em class="highlight">' + person.firstLastName + '</em>' + ' is ' + age + ' ' + unit + ' old. Is this correct?'
+        '<em class="highlight">' + person.firstLastName + '</em>' + ' is ' + ageWithUnit + ' old. Is this correct?'
       );
       $('#yes-label').html(
-        'Yes, ' + person.firstLastName + ' is ' + age + ' ' + unit + ' old');
+        'Yes, ' + person.firstLastName + ' is ' + ageWithUnit + ' old');
 
       $('#no-label').html('No, I need to correct their date of birth');
     }
     else {
-      $('.js-heading').html('You are ' + age + ' ' + unit + ' old. Is this correct?');
-      $('#yes-label').html('Yes, I am ' + age + ' ' + unit + ' old');
+      $('.js-heading').html('You are ' + ageWithUnit + ' old. Is this correct?');
+      $('#yes-label').html('Yes, I am ' + ageWithUnit + ' old');
     }
   }
 
