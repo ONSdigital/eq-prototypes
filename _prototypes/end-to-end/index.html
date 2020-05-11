@@ -97,7 +97,7 @@ logoUrl: ../home
                         <input type="text" id="address-postcode" class="input input--text input-type__input  input--w-5 js-address-postcode" name="address-postcode" />
                       </p>
                       <div class="u-d-no u-mt-m js-address-search-btn-container">
-                        <a href="#" class="btn--link js-address-search-btn">Search for an address</a>
+                        <a href="../index" class="btn--link js-address-search-btn">Search for an address</a>
                       </div>
                     </div>
                     </div>
@@ -135,27 +135,14 @@ logoUrl: ../home
 
 <script>
   sessionStorage.clear();
-    var hasErrors = false,
-    isManual = false;
-    
-  $('.address-input__manual input').prop('type', 'hidden');
-
-  $('.js-address-manual-btn').on('click', function (e) {
-    isManual = true;
-    $('.address-input__manual input').prop('type', 'text');
-  });
-
-  $('.js-address-search-btn').on('click', function (e) {
-    isManual = false;
-    $('.address-input__manual input').prop('type', 'hidden');
-  });
+  var hasErrors = false;
   
   $('.btn-submit').on('click', function (e) {
     e.preventDefault();
     const testFails = '';
-    if (isManual === false) {
+    if ($('.address-input--search').length != 0) {
       window.ONS.utils.validateInputs(testFails, "input[id='address-field']");
-    } else if (isManual === true) {
+    } else if ($('.address-input--search').length === 0) {
       window.ONS.utils.validateInputs(testFails, "input[id='address-line-1']");
       window.ONS.utils.validateInputs(testFails, "input[id='address-town']");
       window.ONS.utils.validateInputs(testFails, "input[id='address-postcode']");
