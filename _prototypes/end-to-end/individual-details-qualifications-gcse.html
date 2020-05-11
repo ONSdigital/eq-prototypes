@@ -22,7 +22,7 @@ noONSLogoLink: true
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password"
-                      action="../individual-details-qualifications-other-where">
+                      action="#">
                     <input autocomplete="new-password" type="hidden" name="person_id" id="person"
                            value="#"/>
                     <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
@@ -181,32 +181,36 @@ noONSLogoLink: true
         surveyType = urlParams.get('survey'),
         question = $('#question-title').html();
 
-    $('.qa-btn-submit').on('click',
-        storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+    $('.qa-btn-submit').on('click', storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+        e.preventDefault();
         var collection = [];
 
         $('[name="checkbox-answer"]:checked').each(function(i, el) {
-        collection.push($(el).val());
+            collection.push($(el).val());
         });
 
         let url = '../individual-details-qualifications-gcse/?person_id=' + personId + '&edit=true';
         question = question.trim();
 
         storageAPI.addUpdateQualificationsGCSEs(personId, collection, question, url);
-        storageAPI.storePageData('/end-to-end/individual-details-qualifications-other-where/', window.location.pathname);
+
+        sessionStorage.setItem("bum", hasQualifications(collection))
 
         if(isEditing) {
-        e.preventDefault();
-        window.location.href = '../individual-details-summary/?person_id=' +
-            personId + (surveyType ? '&survey=' + surveyType : '');
+            window.location.href = '../individual-details-summary/?person_id=' + personId ;
             storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
-
+        } else if (hasQualifications(collection)) {
+            window.location.href = '../individual-details-armed-forces/?person_id=' + personId;
+            storageAPI.storePageData('/end-to-end/individual-details-armed-forces/', window.location.pathname);
+        } else {
+            window.location.href = '../individual-details-qualifications-other-where/?person_id=' + personId;
+            storageAPI.storePageData('/end-to-end/individual-details-qualifications-other-where/', window.location.pathname);
         }
     }));
 
     function updateRouting() {
         if(surveyType) {
-        $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+            $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
         }
         $('#survey-type').val(surveyType);
     }
@@ -231,6 +235,22 @@ noONSLogoLink: true
             }
         }
     }
+
+    function hasQualifications(gcses){
+        if (details && details.qualifications && details.apprenticeship) {
+            var apprenticeship = details.apprenticeship.hasApprenticeship,
+                degree = details.qualifications.aboveDegree,
+                nvq = details.qualifications.nvqEquivalent,
+                alevel = details.qualifications.aLevels;
+
+            if (apprenticeship === "No" && degree === "No" && nvq == "None" && alevel =="None" && gcses == "None") {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
     $(updateAnswer);
     $(updateQuestion);
     $(updateRouting);
