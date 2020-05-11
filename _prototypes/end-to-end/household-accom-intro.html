@@ -23,7 +23,7 @@ noONSLogoLink: true
                     <div class="block">
                         <section class="section">
                             <h1 class="u-fs-xl">Household and accommodation</h1>
-                            <p>In this section, we are going to ask you about the accommodation.</p>
+                            <p>In this section, we are going to ask you about the accommodation at <span class="address-line-1">Address not set</span>.
 
                             <h2 class="u-fs-l">You will need to know</h2>
                             <ul>
@@ -53,5 +53,11 @@ noONSLogoLink: true
         window.location = '../household-accom-type/';
         storageAPI.storePageData('/end-to-end/household-accom-type/', window.location.pathname);
     });
+
+    $(function () {
+	  if(sessionStorage.getItem('address-line-1')) {
+		$('.address-line-1').html((sessionStorage.getItem('address-line-1') || '').replace(/,/g, ''));
+      }
+	});
 
 </script>
