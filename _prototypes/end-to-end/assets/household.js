@@ -42,11 +42,11 @@ export function person(opts, change) {
     }
   } else {
     return {
-      fullName: fullName,
-      firstLastName: fullName,
+      firstLastName: opts.firstName + ' ' + opts.lastName,
       firstName: opts.firstName,
       middleName: middleName,
-      lastName: opts.lastName
+      lastName: opts.lastName,
+      fullName: opts.firstName + ' ' + (opts.middleName !== '' ? opts.middleName + ' ' : '') + opts.lastName
     };
   }
 }
