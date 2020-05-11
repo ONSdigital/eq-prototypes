@@ -26,13 +26,13 @@
     padding: 0;
     overflow: hidden;
 }
-.hero__img {
+.hero--with-image  .hero__img {
     position: relative;
     left: 50%;
     transform: translate(-50%);
     max-width: none;
 }
-.hero__container {
+.hero--with-image .hero__container {
     position: absolute;
     top: 0;
     left: 0;

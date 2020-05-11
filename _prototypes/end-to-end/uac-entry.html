@@ -58,7 +58,7 @@ logoUrl: ../home
                                             <br>
                                             <span class="label__description">Keep this code safe. You will need to enter it every time you access your census</span>
                                         </label>
-                                        <input type="text" id="uac" class="input input--text input-type__input uac__input js-uac u-mb-xs" name="uac" maxlength="19" data-group-size="4" autocomplete="off" data-error-msg="Enter an access code to continue" />
+                                        <input type="text" id="uac" class="input input--text input-type__input uac__input js-uac u-mb-xs" name="uac" maxlength="19" data-group-size="4" autocomplete="off" data-error-msg="Enter an access code to continue" autocapitalize="characters" />
                                         <a href="../where-to-find-your-access-code/?previous=uac-entry" class="u-fs-s">Where to find your access code</a>
                                     </div>
                                 </div>
@@ -104,7 +104,14 @@ logoUrl: ../home
   var redirect = urlParams.get('redirect');
   var uacInput = document.getElementById('uac');
   var hasErrors = false;
-
+    
+    var $input = $('input#uac');
+    $input.keyup(function(e) {
+        var max = 19;
+        if ($input.val().length > max) {
+            $input.val($input.val().substr(0, max));
+        }
+    });
   $('.btn-submit').click(function(e) {
     e.preventDefault();
     const testFails = '';

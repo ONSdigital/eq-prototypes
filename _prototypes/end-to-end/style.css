@@ -524,6 +524,15 @@ p.field + p.field {
     vertical-align: middle;
 }
 
+.btn--link.btn--ghost-blue .btn__inner:after, .btn--link.btn--ghost-blue:active .btn__inner:after, .btn--link.btn--ghost-blue:hover:focus .btn__inner:after {
+    display: inline-block;
+    width: .8rem;
+    height: .8rem;
+    background-image: url(/img/icons/icons--chevron-right-blue.svg);
+    background-repeat: no-repeat;
+    background-size: .8rem .8rem;
+}
+
 /**
  * Hub
 **/
@@ -719,7 +728,6 @@ hr {
     color: #4263c2;
     border-color: #334f9e;
     border-width: 2px;
-    padding: .5rem 1rem
 }
 
 .btn--ghost-blue:focus, .btn--ghost-blue:hover {
