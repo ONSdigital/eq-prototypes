@@ -12,6 +12,12 @@
   text-transform: uppercase;
 }
 
+.panel--error .uac__field {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}
+
 .uac__security {
   display: flex;
 }
