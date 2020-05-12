@@ -31,8 +31,16 @@
     left: 50%;
     transform: translate(-50%);
     max-width: none;
-    height: 400px;
+    height: 450px;
 }
+
+/* over 768px */
+@media only screen and (min-width: 769px) {
+    .hero--with-image  .hero__img {
+        height: 400px
+    }
+}
+
 .hero--with-image .hero__container {
     position: absolute;
     top: 0;
