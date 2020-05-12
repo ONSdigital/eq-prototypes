@@ -38,8 +38,17 @@
 
 @media only screen and (min-width: 375px) {
   .uac__input {
+    font-size: 20px;
+    letter-spacing: 0.14em;
+    width: 15.1em!important;
+  }
+}
+
+@media only screen and (min-width: 415px) {
+  .uac__input {
     font-size: 22px;
-    letter-spacing: 0.01em;
+    max-width: 14.9em;
+
   }
 }
 
@@ -48,6 +57,5 @@
       width: 14.9em!important;
       max-width: 14.9em;
       font-size: 24px;
-      letter-spacing: .14em;
   }
 }
