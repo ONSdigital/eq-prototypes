@@ -18,11 +18,7 @@ noONSLogoLink: true
 
 <div class="page__container container">
     <div class="grid grid--reverse">
-        <div class="grid__col col-4@m">
-            <!--{% include navigation.html
-            items=site.data.your-household-v6.navigationItemsRelationships
-            nav-title-id="section-address" %}-->
-        </div>
+        <div class="grid__col col-4@m"></div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
                 <form name="trav" class="form qa-questionnaire-form" role="form"
@@ -79,8 +75,7 @@ noONSLogoLink: true
                             </fieldset>
                         </div>
                     </div>
-                    <button
-                            class="btn btn--primary btn--lg qa-btn-submit js-submit"
+                    <button class="btn btn--primary btn--lg qa-btn-submit js-submit"
                       type="submit" name="">Save and continue
                     </button>
                 </form>
@@ -227,15 +222,14 @@ noONSLogoLink: true
 
       $('[name=related]:checked').each(function () {
         var relatedRadio = $(this).val();
-      
+
         if (relatedRadio === 'none') {
           return;
-        } else if (relatedRadio === 'no') {
+        } else if (relatedRadio === 'No') {
           $.each(
             remainingPersonIds.map(function (personId) {
               return storageAPI.getHouseholdMemberByPersonId(personId);
-            }
-          ), function (i, member) {
+            }), function (i, member) {
               newRelationshipsWithOtherPersonIds.push({
                 relationship: storageAPI.addRelationship(
                   storageAPI.TYPES.relationship(
@@ -246,60 +240,54 @@ noONSLogoLink: true
                 ),
                 otherId: member['@person'].id
               });
-                /**
-                * Avoid race conditions by doing inference separately
-                */
-                $.each(newRelationshipsWithOtherPersonIds, function (i, item) {
-                  storageAPI.inferRelationships(
-                    item.relationship,
-                    storageAPI.getHouseholdMemberByPersonId(personId),
-                    storageAPI.getHouseholdMemberByPersonId(item.otherId)
-                  );
-                });
-          });
-            sessionStorage.setItem('missingRelationshipsForPerson.length', storageAPI.getPeopleIdsMissingRelationshipsWithPerson(personId).length);
-            var relationshipsUrl = window.location.pathname;
-            window.history.replaceState(null, '', relationshipsUrl);
-
-            if(storageAPI.findNextMissingRelationship()) {
-
-              personId = storageAPI.getNextPersonId(personId);
-                //find next list of people to as if unrelated. If more than one go to relationships else 
-
-                $(updateList(false));
-                
-                  window.location.href = '../relationships-person-select/?person_id=' +
-                    personId + '&relationship-description=unrelated';
-                    storageAPI.storePageData('/end-to-end/relationships-person-select/', window.location.pathname);
-
-
+              /**
+              * Avoid race conditions by doing inference separately
+              */
+              $.each(newRelationshipsWithOtherPersonIds, function (i, item) {
+                storageAPI.inferRelationships(
+                  item.relationship,
+                  storageAPI.getHouseholdMemberByPersonId(personId),
+                  storageAPI.getHouseholdMemberByPersonId(item.otherId)
+                );
+              });
             }
-            else {
-              window.location.href = '../relationships-summary-proxy/' +
-                (surveyType ? '?survey=' + surveyType : '');
-                storageAPI.storePageData('/end-to-end/relationships-summary-proxy/', window.location.pathname);
-            }
+          );
+          sessionStorage.setItem('missingRelationshipsForPerson.length', storageAPI.getPeopleIdsMissingRelationshipsWithPerson(personId).length);
+          var relationshipsUrl = window.location.pathname;
+          window.history.replaceState(null, '', relationshipsUrl);
+
+          if(storageAPI.findNextMissingRelationship()) {
+
+            personId = storageAPI.getNextPersonId(personId);
+              //find next list of people to as if unrelated. If more than one go to relationships else 
+
+              $(updateList(false));
+              window.location.href = '../relationships-person-select/?person_id=' +
+                personId + '&relationship-description=unrelated';
+                storageAPI.storePageData('/end-to-end/relationships-person-select/', window.location.pathname);
+          } else {
+            window.location.href = '../relationships-summary-proxy/' +
+              (surveyType ? '?survey=' + surveyType : '');
+              storageAPI.storePageData('/end-to-end/relationships-summary-proxy/', window.location.pathname);
+          }
 
         } else {
-            
-            var relationshipsUrl = window.location.pathname
-              .replace('relationships-person-select', 'relationships')
-            window.history.replaceState(null, '', relationshipsUrl);
+          var relationshipsUrl = window.location.pathname
+            .replace('relationships-person-select', 'relationships')
+          window.history.replaceState(null, '', relationshipsUrl);
 
-            if(storageAPI.findNextMissingRelationship()) {
-              window.location.href = relationshipsUrl +
-                (surveyType ? '?survey=' + surveyType : '');
-                storageAPI.storePageData('/end-to-end/' + relationshipsUrl, window.location.pathname);
-
-            } else {
-              window.location.href = '../relationships-summary-proxy/' +
-                (surveyType ? '?survey=' + surveyType : '');
-                storageAPI.storePageData('/end-to-end/relationships-summary-proxy/', window.location.pathname);
-
-            }
+          if(storageAPI.findNextMissingRelationship()) {
+            window.location.href = relationshipsUrl +
+              (surveyType ? '?survey=' + surveyType : '');
+              storageAPI.storePageData('/end-to-end/' + relationshipsUrl, window.location.pathname);
+          } else {
+            window.location.href = '../relationships-summary-proxy/' +
+              (surveyType ? '?survey=' + surveyType : '');
+              storageAPI.storePageData('/end-to-end/relationships-summary-proxy/', window.location.pathname);
           }
-        });
+        }
       });
+    });
 
     $(updateList(true));
 </script>
