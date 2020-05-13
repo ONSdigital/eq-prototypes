@@ -112,7 +112,7 @@ noONSLogoLink: true
     storageAPI.addUpdateEthnicGroupDescription(personId, val, question, url);
     storageAPI.storePageData('/end-to-end/individual-details-religion-description/', window.location.pathname);
 
-    if(val === 'Other') {
+    if(val === 'Other' || val === 'African') {
       e.preventDefault();
       window.location.href =
         '../individual-details-ethnic-group-other/?person_id=' + personId +
