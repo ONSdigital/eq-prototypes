@@ -182,9 +182,9 @@ noONSLogoLink: true
 
       storageAPI.addUpdateAddressIndividual(personId,
         {
-          'address-line-1': $('#address-line-1').val(),
-          'address-line-2': $('#address-line-2').val(),
-          'town-city': $('#town-city').val(),
+          'addressLine1': $('#address-line-1').val(),
+          'addressLine2': $('#address-line-2').val(),
+          'townCity': $('#town-city').val(),
           'county': $('#county').val(),
           'postcode': $('#postcode').val()
         },
@@ -200,15 +200,13 @@ noONSLogoLink: true
         
         storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
 
-      }
-
-      if(isVisitor) {
+      } else if(isVisitor) {
         e.preventDefault();
         window.location.href = '../hub/' + (surveyType ? '?survey=' +
           surveyType : '');
         storageAPI.storePageData('/end-to-end/hub/', window.location.pathname);
       }
-      }
+    }
   }));
 
   function updateRouting() {
