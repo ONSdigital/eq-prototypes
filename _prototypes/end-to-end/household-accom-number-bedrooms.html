@@ -20,6 +20,23 @@ noONSLogoLink: true
         </div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
+                <div class="panel panel--error u-mb-m js-error-box u-d-no">
+                    <div class="panel__header">
+                        <div class="panel__title u-fs-r--b">There 
+                      <span class="js-piping">is a {x} problem{s}</span> with your answer
+                    </div>
+                    </div>
+                    <div class="panel__body">
+                        
+                        <ol class="list list--bare">
+                        <li class="list__item js-detail-number-bedrooms u-d-no">
+                            1. <a href="#error-message-detail-number-bedrooms" class="list__link js-inpagelink">
+                                Enter a number to continue
+                            </a>
+                        </li>
+                       </ol>
+                    </div>
+                </div>
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password" novalidate=""
                       action="../household-accom-heating">
@@ -37,13 +54,13 @@ noONSLogoLink: true
                                       Include all rooms built or converted for use as bedrooms
                                   </div>
                                 </div>
-                                <div class="answer answer--date">
-                                    <div class="fieldgroup__fields">
+                                <div class="answer question__answer answer--date">
+                                    <div class="fieldgroup__fields answer__fields js-fields">
                                       <div class="field field--input">
                                           <label class="label" for="detail-number-bedrooms">
                                               Number of bedrooms
                                           </label>
-                                          <input type="text" id="detail-number-bedrooms" class="input input--StringField input--text input-type__input input--w-2" name="bedrooms" min="1" max="31" maxlength="2" pattern="[0-9]*" inputmode="numeric" autocomplete="number-bedrooms"/>
+                                          <input type="text" id="detail-number-bedrooms" class="input input--StringField input--text input-type__input input--w-2 js-textfield" name="bedrooms" min="1" max="99" maxlength="2" pattern="[0-9]*" inputmode="numeric" autocomplete="number-bedrooms" data-error-msg="Enter a number to continue" />
                                       </div>
                                     </div>
                                 </div>
@@ -65,17 +82,26 @@ noONSLogoLink: true
 <script>
     var storageAPI = window.ONS.storage,
         question = $('#question-title').html(),
-        currentPage = '../household-accom-number-bedrooms';
+        currentPage = '../household-accom-number-bedrooms',
+        hasErrors = false;
 
     window.sessionStorage.setItem('accommodation-completed-status', currentPage);
 
     $('.qa-btn-submit').click(function (e) {
-        var val =$("#detail-number-bedrooms").val();
-        question = question.trim();
-        window.sessionStorage.setItem('accommodation-bedrooms', JSON.stringify([question, val, currentPage]));
         e.preventDefault();
-        window.location.href = '../household-accom-heating';
-        storageAPI.storePageData('/end-to-end/household-accom-heating/', window.location.pathname);
+        var val = $(".js-textfield").val();
+        const testFails = (isNaN($('#detail-number-bedrooms').val()));
+        window.ONS.utils.validateInputs(testFails, ".js-textfield");
+        if (hasErrors) {
+            window.ONS.utils.calcErrors();
+            hasErrors = false;
+            return false;
+        } else {
+            question = question.trim();
+            window.sessionStorage.setItem('accommodation-bedrooms', JSON.stringify([question, val, currentPage]));
+            window.location.href = '../household-accom-heating';
+            storageAPI.storePageData('/end-to-end/household-accom-heating/', window.location.pathname);
+        }
     });
 
     function updateAnswer() {
