@@ -261,9 +261,6 @@ export const personalDetailsALevelMap = {
   'a-level-1': {
     description: '1 AS level'
   },
-  'baccalaureate': {
-    description: 'Advanced Welsh Baccalaureate'
-  },
   'none': {
     description: 'None'
   }
@@ -278,12 +275,6 @@ export const personalDetailsGCSEMap = {
   },
   'basic-skills': {
     description: 'Basic skills course'
-  },
-  'national-baccalaureate': {
-    description: 'National Welsh Baccalaureate'
-  },
-  'foundation-baccalaureate': {
-    description: 'Foundation Welsh Baccalaureate'
   },
   'none': {
     description: 'None of these apply'
