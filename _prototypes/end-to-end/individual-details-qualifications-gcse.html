@@ -194,8 +194,6 @@ noONSLogoLink: true
 
         storageAPI.addUpdateQualificationsGCSEs(personId, collection, question, url);
 
-        sessionStorage.setItem("bum", hasQualifications(collection))
-
         if(isEditing) {
             window.location.href = '../individual-details-summary/?person_id=' + personId ;
             storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
