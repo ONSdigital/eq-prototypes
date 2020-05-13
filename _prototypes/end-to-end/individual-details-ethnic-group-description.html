@@ -97,8 +97,8 @@ noONSLogoLink: true
     personId = urlParams.get('person_id'),
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     isEditing = urlParams.get('edit'),
-    ethnicGroup = urlParams.get('ethnic-group'),
     details = storageAPI.getPersonalDetailsFor(personId),
+    ethnicGroup = (urlParams.get('ethnic-group') ? urlParams.get('ethnic-group') : details.ethnicGroup.val),
     surveyType = urlParams.get('survey'),
     question = $('#question-title').html();
 
@@ -121,8 +121,7 @@ noONSLogoLink: true
         (isEditing ? '&edit=true' : '');
         storageAPI.storePageData('/end-to-end/individual-details-ethnic-group-other/', window.location.pathname);
 
-    }
-    else if(isEditing) {
+    } else if(isEditing) {
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person_id=' + personId +
         (surveyType ? '&survey=' + surveyType : '');

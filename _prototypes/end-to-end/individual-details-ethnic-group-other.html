@@ -79,8 +79,8 @@ noONSLogoLink: true
     personId = urlParams.get('person_id'),
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     isEditing = urlParams.get('edit'),
-    ethnicGroup = urlParams.get('ethnic-group'),
     details = storageAPI.getPersonalDetailsFor(personId),
+    ethnicGroup = (urlParams.get('ethnic-group') ? urlParams.get('ethnic-group') : details.ethnicGroup.val),
     surveyType = urlParams.get('survey'),
     question = $('#question-title').html();
 
@@ -113,8 +113,8 @@ noONSLogoLink: true
 
   function updateAnswer() {
     document.dispatchEvent(new CustomEvent('TYPEAHEAD-READY'));
-    if (details && details.ethnicGroupOther) {
-        $('#ethnic-group').val(details.ethnicGroupOther.otherText);
+    if (details && details.ethnicGroup) {
+        $('#ethnic-group').val(details.ethnicGroup.otherText);
     }
   }
 
