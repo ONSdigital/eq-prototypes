@@ -112,11 +112,13 @@ noONSLogoLink: true
     surveyType = urlParams.get('survey');
     storageAPI.personalBookmark(personId, window.location.href),
     question = $('#question-title').html(),
-    age = urlParams.get('age').split(' ');
+    age = "";
 
     if(isVisitor) {
       $('.panel').addClass('u-d-no');
       $('.js-collapsible').removeClass('u-d-no');
+    } else {
+      age = urlParams.get('age').split(' ');
     }
   
   $('.qa-btn-submit').on('click',
