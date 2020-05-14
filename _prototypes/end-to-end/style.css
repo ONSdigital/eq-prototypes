@@ -334,7 +334,8 @@ p.field + p.field {
     color: #222;
 }
 
-.label.u-fs-r {
+.label.u-fs-r,
+.label > .u-fs-r {
     line-height: 1.6;
 }
 
@@ -343,8 +344,13 @@ p.field + p.field {
 }
  
 .label--negative {
+    display: block;
     margin-left: -1.85rem;
     margin-top: .25rem;
+}
+
+p.label--negative:empty {
+    margin-top: 0!important;
 }
 
 .label__description {
