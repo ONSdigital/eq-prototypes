@@ -259,6 +259,7 @@ noONSLogoLink: true
     }
     if (details && details.religion && details.religion.description) {
       $('input[type=radio][value="' + details.religion.description +'"]').prop("checked", true);
+      $('.js-clear-btn').removeClass('u-vh');
     }
   }
 
