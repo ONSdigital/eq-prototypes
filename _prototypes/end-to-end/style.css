@@ -189,10 +189,6 @@ a:focus:not(.btn--link):not(.btn--ghost):not(.js-clear-btn):not(.download__thumb
     margin-top: 0;
 }
 
-p.js-declaration {
-    margin-bottom: .5rem;
-}
-
 .collapsible__title {
     text-decoration: underline!important;
 }
