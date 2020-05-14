@@ -53,7 +53,7 @@ noONSLogoLink: true
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title u-fs-xl js-heading">
-                                        Have you ever done any paid work?    
+                                        Have you ever done any paid work?
                                     </h1>
                                 </div>
 
@@ -71,8 +71,7 @@ noONSLogoLink: true
                                                     <label class="label label--inline"
                                                            for="yes-12-months"
                                                            id="yes-12-months-label">
-                                                        <strong
-                                                                class="u-fs-r">Yes, in the last 12 months</strong>
+                                                        <strong class="u-fs-r">Yes, in the last 12 months</strong>
                                                     </label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
@@ -84,8 +83,7 @@ noONSLogoLink: true
                                                     <label class="label label--inline"
                                                            for="yes-over-12-months"
                                                            id="yes-over-12-months-label">
-                                                        <strong
-                                                                class="u-fs-r">Yes, but not in the last 12 months</strong>
+                                                        <strong class="u-fs-r">Yes, but not in the last 12 months</strong>
                                                     </label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
@@ -96,9 +94,8 @@ noONSLogoLink: true
                                                            value="No">
                                                     <label class="label label--inline"
                                                            for="no"
-                                                           id="no">
-                                                        <strong
-                                                                class="u-fs-r">No, I have never worked</strong>
+                                                           id="no-label">
+                                                        <strong class="u-fs-r">No, have never worked</strong>
                                                     </label>
                                                 </div>
                                             </fieldset>
@@ -141,9 +138,8 @@ noONSLogoLink: true
             hasErrors = false;
             return false;
         } else {
-          var val = $('[name="radio-group"]:checked').val();
-
-          let url = '../individual-details-employment-paid-work-confirm/?person_id=' + personId + '&edit=true';
+          var val = $('[name="radio-group"]:checked').val(),
+              url = '../individual-details-employment-paid-work-confirm/?person_id=' + personId + '&edit=true';
           question = question.trim();
           storageAPI.addUpdateEmploymentPaidWorkConfirm(personId, val, question, url);
           storageAPI.storePageData('/end-to-end/individual-details-last-main-job/', window.location.pathname);
@@ -161,7 +157,6 @@ noONSLogoLink: true
             storageAPI.storePageData('/end-to-end/hub/', window.location.pathname);
           }
         }
-
   }));
 
   function updateRouting() {
@@ -178,11 +173,20 @@ noONSLogoLink: true
     }
   }
 
+  function updateAnswers() {
+    if(storageAPI.getProxyFor(personId)) {
+      $("#no-label").text(function () {
+        return $(this).text().replace("have", "has")
+      })
+    }
+  }
+
   if (details && details['employment']) {
     $('#' + details['employment'].paidWorkConfirm).attr('checked', true);
   }
 
   $(updateQuestion);
+  $(updateAnswers);
   $(updateRouting);
 
   /**

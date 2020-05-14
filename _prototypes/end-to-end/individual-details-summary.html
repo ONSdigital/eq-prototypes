@@ -117,10 +117,6 @@ noONSLogoLink: true
             $container.append(createListItem(individualDetails[person].dob.fullDate, individualDetails[person].dob.question, individualDetails[person].dob.url));
         }
 
-        if (individualDetails[person].ageConfirm) {
-            $container.append(createListItem(individualDetails[person].ageConfirm.val, individualDetails[person].ageConfirm.question, individualDetails[person].ageConfirm.url));
-        }
-
         if (individualDetails[person].sex) {
             $container.append(createListItem(individualDetails[person].sex.val, individualDetails[person].sex.question, individualDetails[person].sex.url));
         }
