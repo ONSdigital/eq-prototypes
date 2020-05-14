@@ -94,20 +94,20 @@ noONSLogoLink: true
 
 <script>
     var storageAPI = window.ONS.storage,
-        question = $('#question-title').html(),
         currentPage = '../household-accom-type';
-
 
     if(sessionStorage.getItem('address-line-1')) {
         $('.full-address-text').html((sessionStorage.getItem('address-line-1') || '').replace(/,/g, ''));
     }
 
+    var question = $('#question-title').html();
     window.sessionStorage.setItem('accommodation-completed-status', currentPage);
 
     $('.qa-btn-submit').on('click', function (e) {
         var val = $('input[type=radio][name=accommodation-type]:checked').attr('value')
         question = question.trim();
         question = question.replace(/(<([^>]+)>)/ig,"");
+        sessionStorage.setItem("greg", question);
         window.sessionStorage.setItem('accommodation-type', JSON.stringify([question, val, currentPage]));
         e.preventDefault();
 

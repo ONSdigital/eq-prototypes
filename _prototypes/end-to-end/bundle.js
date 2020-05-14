@@ -472,8 +472,7 @@ function updateContinueNotice() {
   if (!isContinuing) {
     return false;
   }
-  
-  const member = storageAPI.getAllHouseholdMembers().filter(storageAPI.isVisitor);
+  const member = getHouseholdMemberByPersonId(personId);
   const link = isVisitor(member) ? '../visitor-intro/' : '../individual-intro/';
   const template = `<div class="panel panel--simple panel--info u-mb-s">
       <div class="panel__body">

@@ -60,7 +60,7 @@ noONSLogoLink: true
                                                            type="radio"
                                                            name="no-of-vehicles"
                                                            id="none"
-                                                           value="none">
+                                                           value="None">
                                                     <label class="label label--inline"
                                                            for="none"
                                                            id="none-label">
@@ -205,6 +205,8 @@ noONSLogoLink: true
         if (answer) {
             if (answer[1] < 5) {
                 $('input[type=radio][value="' + answer[1] +'"]').prop("checked", true);
+            } else if (answer[1] === 'None') {
+                $('input[type=radio][value="None"]').prop("checked", true);
             } else {
                 $('input[type=radio][value="5 or more"]').prop("checked", true);
                 $('input[type=text][id=other-textbox]').val(answer[1]);
