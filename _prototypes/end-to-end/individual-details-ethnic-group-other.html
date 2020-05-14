@@ -119,11 +119,22 @@ noONSLogoLink: true
   }
 
   function updateQuestion() {
-    var str = 'How would you describe ' + 
+    var questionText = storageAPI.personalDetailsEthnicGroupMap[ethnicGroup].question,
+      questionTextPt2 = storageAPI.personalDetailsEthnicGroupMap[ethnicGroup].options[storageAPI.personalDetailsEthnicGroupMap[ethnicGroup].options.length - 1].label;
+    if (details && details.ethnicGroup) {
+      if (details.ethnicGroup.description === "African") {
+        questionText = storageAPI.personalDetailsEthnicGroupMap[ethnicGroup].questionAfrican;
+        questionTextPt2 = "African";
+      } else if (ethnicGroup === "Black") {
+        questionText = storageAPI.personalDetailsEthnicGroupMap[ethnicGroup].questionWithoutAfrican;
+      }
+    }
+
+    var str = 'You selected "' + questionTextPt2 + '". How would you describe ' +
       (storageAPI.getProxyFor(personId)
         ? '<em class="highlight">' + person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName) + '</em>'
         : 'your') +
-      ' ' + storageAPI.personalDetailsEthnicGroupMap[ethnicGroup].question +
+      ' ' + questionText +
       ' ethnic group or background?';
 
     $('.js-heading').html(str);

@@ -185,6 +185,8 @@ export const personalDetailsEthnicGroupMap = {
   },
   'Black': {
     'question': 'Black, Black British, Caribbean or African',
+    'questionAfrican': 'African',
+    'questionWithoutAfrican': 'Black, Black British or Caribbean',
     'options': [
       {
         val: 'Caribbean',
