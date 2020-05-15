@@ -3,9 +3,11 @@
         <div class="container">
             <div class="header__grid-top grid grid--gutterless grid--flex grid--between grid--vertical-center grid--no-wrap">
                     <div class="logo">
-                        <img src="https://deploy-preview-129--sdc-global-design-patterns.netlify.com/assets/img/ons-logo-black-en.svg" alt="Office for National Statistics logo" class="logo__img header__logo--print">
                         {% unless page.noONSLogoLink %}<a href="{{ site.baseurl }}/">{% endunless %}
-                            <img src="https://deploy-preview-129--sdc-global-design-patterns.netlify.com/assets/img/ons-logo-pos.svg" alt="Office for National Statistics logo" class="logo__img header__logo print__hidden">
+                            <picture>
+                                <source media="(max-width: 550px)" srcset="/s/img/ons-logo-stacked.svg">
+                                <img class="logo__img header__logo print__hidden" src="https://deploy-preview-129--sdc-global-design-patterns.netlify.com/assets/img/ons-logo-pos.svg" alt="">
+                            </picture>
                         {% unless page.noONSLogoLink %}</a>{% endunless %}
                     </div>
                 <div class="header__links grid__col col-auto">
