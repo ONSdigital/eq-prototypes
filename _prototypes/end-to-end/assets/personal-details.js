@@ -1130,6 +1130,15 @@ export function addUpdateEmploymentWorkplaceAddress(personId, workAddress, quest
     }));
 }
 
+export function addUpdateVisitorComplete(personId, val) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'complete': {
+        val
+      }
+    }));
+}
+
 export function getPins() {
   return JSON.parse(sessionStorage.getItem(PERSONAL_PINS_KEY)) || {};
 }

@@ -159,6 +159,7 @@ import {
   personalDetailsGCSEMap,
   personalDetailsOtherWhere,
   personalDetailsEmploymentStatus,
+  addUpdateVisitorComplete,
 
   PERSONAL_DETAILS_KEY,
 
@@ -731,6 +732,7 @@ window.ONS.storage = {
   addUpdateEmploymentOutsideUK,
   addUpdateEmploymentWorkplaceAddress,
   addUpdateEmploymentAvailableTwoWeeks,
+  addUpdateVisitorComplete,
 
   personalDetailsMaritalStatusMap,
   personalDetailsCountryMap,
@@ -746,7 +748,7 @@ window.ONS.storage = {
   personalDetailsGCSEMap,
   personalDetailsOtherWhere,
   personalDetailsEmploymentStatus,
-
+  
   createPinFor,
   getPinFor,
   unsetPinFor,

@@ -157,6 +157,7 @@ noONSLogoLink: true
       window.location.href = '/end-to-end/hub/' + 
         (personId ? '?person_id=' + personId : '');
       }
+    storageAPI.addUpdateVisitorComplete(personId, true);
 
     }
   }));  

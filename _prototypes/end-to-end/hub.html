@@ -251,27 +251,7 @@ noONSLogoLink: true
 
   function isVisitorSectionComplete(personDetails) {
 
-    if(!personDetails.sex) {
-      return false;
-    }
-
-    if(!personDetails['dob']) {
-      return false;
-    }
-
-    if(!personDetails['addressWhere']) {
-      return false;
-    }
-
-    if(personDetails['addressWhere'] === 'in-uk' &&
-      !personDetails.address
-    ) {
-      return false;
-    }
-
-    if(personDetails['addressWhere'] === 'outside-uk' &&
-      !personDetails['addressOutsideUk']
-    ) {
+    if(!personDetails.complete) {
       return false;
     }
 
