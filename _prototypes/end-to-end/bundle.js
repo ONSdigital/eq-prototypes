@@ -77,6 +77,7 @@ import {
   getPersonalDetailsFor,
   removePersonalDetailsFor,
   addUpdateMaritalStatus,
+  addUpdateMaritalStatusWho,
   addUpdate30DayAddressUk,
   addUpdate30DayAddressType,
   addUpdate30DayCountry,
@@ -159,6 +160,7 @@ import {
   personalDetailsGCSEMap,
   personalDetailsOtherWhere,
   personalDetailsEmploymentStatus,
+  addUpdateVisitorComplete,
 
   PERSONAL_DETAILS_KEY,
 
@@ -664,6 +666,7 @@ window.ONS.storage = {
   getPersonalDetailsFor,
   removePersonalDetailsFor,
   addUpdateMaritalStatus,
+  addUpdateMaritalStatusWho,
   addUpdate30DayAddressType,
   addUpdate30DayAddressUk,
   addUpdate30DayCountry,
@@ -731,6 +734,7 @@ window.ONS.storage = {
   addUpdateEmploymentOutsideUK,
   addUpdateEmploymentWorkplaceAddress,
   addUpdateEmploymentAvailableTwoWeeks,
+  addUpdateVisitorComplete,
 
   personalDetailsMaritalStatusMap,
   personalDetailsCountryMap,
@@ -746,7 +750,7 @@ window.ONS.storage = {
   personalDetailsGCSEMap,
   personalDetailsOtherWhere,
   personalDetailsEmploymentStatus,
-
+  
   createPinFor,
   getPinFor,
   unsetPinFor,

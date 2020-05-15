@@ -347,6 +347,17 @@ export function addUpdateMaritalStatus(personId, val, question, url) {
     }));
 }
 
+export function addUpdateMaritalStatusWho(personId, val, question, url) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'maritalStatusWho': {
+        val,
+        question,
+        url
+      }
+    }));
+}
+
 export function addUpdate30DayAddressUk(personId, val, question, url) {
   let address = val.address
   return changeDetailsFor(personId, () =>
@@ -1126,6 +1137,15 @@ export function addUpdateEmploymentWorkplaceAddress(personId, workAddress, quest
         workAddress,
         questionWorkplaceAddress,
         urlWorkplaceAddress
+      }
+    }));
+}
+
+export function addUpdateVisitorComplete(personId, val) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'complete': {
+        val
       }
     }));
 }

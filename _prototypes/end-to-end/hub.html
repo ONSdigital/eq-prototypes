@@ -37,6 +37,8 @@ noONSLogoLink: true
     .summary__answer {
       font-weight: 300;
     }
+
+
 </style>
 
 <div class="page__container container">
@@ -160,12 +162,6 @@ noONSLogoLink: true
 </ul>
 
 <style>
-    @media only screen and (max-width:740px) {
-        .summary__link {
-            text-align: left;
-            justify-content: flex-start;
-        }
-    }
 
     .completed::before {
         width : 1rem;
@@ -220,7 +216,7 @@ noONSLogoLink: true
   if (accommodationStatus != null) {
     if (accommodationStatus === 'completed') {
       $('#accommodation-row').addClass('completed');
-      $('#accommodation').html('Completed');
+      $('#accommodation').html('&mdash; Completed');
       $('#accommodation-status').html('Completed');
       $('#accommodation-link').html('View answers');
       $('#accommodation-link').attr("href", "../household-accom-summary");
@@ -255,27 +251,7 @@ noONSLogoLink: true
 
   function isVisitorSectionComplete(personDetails) {
 
-    if(!personDetails.sex) {
-      return false;
-    }
-
-    if(!personDetails['dob']) {
-      return false;
-    }
-
-    if(!personDetails['addressWhere']) {
-      return false;
-    }
-
-    if(personDetails['addressWhere'] === 'in-uk' &&
-      !personDetails.address
-    ) {
-      return false;
-    }
-
-    if(personDetails['addressWhere'] === 'outside-uk' &&
-      !personDetails['addressOutsideUk']
-    ) {
+    if(!personDetails.complete) {
       return false;
     }
 

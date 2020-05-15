@@ -8,7 +8,11 @@ noONSLogoLink: true
 ---
 
 <link rel="stylesheet" href="../style.css"/>
-<div class="page__subheader"></div>
+<div class="page__subheader">
+    <div class="container">
+        <a href="../hub">Previous</a>
+    </div>
+</div>
 
 <div class="page__container container">
     <div class="grid grid--reverse">
@@ -27,7 +31,7 @@ noONSLogoLink: true
                                     </h1>
                                 </div>
                                 <div class="summary">
-                                    <h2 class="question__title u-fs-xl js-heading">
+                                    <h2 class="question__title u-fs-l js-heading">
                                         Personal details
                                     </h2>
                                     <div class="summary__block u-mb-s">
@@ -58,7 +62,7 @@ noONSLogoLink: true
                 </div>
             </div>
             <div class="grid__col col-8@xs col-3@s">
-                <div class="summary__answer js-answer u-d-no u-d-b@s">Answer</div>
+                <div class="summary__answer js-answer">Answer</div>
             </div>
             <div class="grid__col col-12@xs col-4@s">
                 <div class="summary__link">
@@ -123,6 +127,10 @@ noONSLogoLink: true
         
         if (individualDetails[person].maritalStatus) {
             $container.append(createListItem(individualDetails[person].maritalStatus.val, individualDetails[person].maritalStatus.question, individualDetails[person].maritalStatus.url));
+        }
+                
+        if (individualDetails[person].maritalStatusWho) {
+            $container.append(createListItem(individualDetails[person].maritalStatusWho.val, individualDetails[person].maritalStatusWho.question, individualDetails[person].maritalStatusWho.url));
         }
         
         if (individualDetails[person].Address30DayUK) {
