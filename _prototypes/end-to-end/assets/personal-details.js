@@ -347,6 +347,17 @@ export function addUpdateMaritalStatus(personId, val, question, url) {
     }));
 }
 
+export function addUpdateMaritalStatusWho(personId, val, question, url) {
+  return changeDetailsFor(personId, () =>
+    ({
+      'maritalStatusWho': {
+        val,
+        question,
+        url
+      }
+    }));
+}
+
 export function addUpdate30DayAddressUk(personId, val, question, url) {
   let address = val.address
   return changeDetailsFor(personId, () =>

@@ -124,6 +124,10 @@ noONSLogoLink: true
         if (individualDetails[person].maritalStatus) {
             $container.append(createListItem(individualDetails[person].maritalStatus.val, individualDetails[person].maritalStatus.question, individualDetails[person].maritalStatus.url));
         }
+                
+        if (individualDetails[person].maritalStatusWho) {
+            $container.append(createListItem(individualDetails[person].maritalStatusWho.val, individualDetails[person].maritalStatusWho.question, individualDetails[person].maritalStatusWho.url));
+        }
         
         if (individualDetails[person].Address30DayUK) {
             $container.append(createListItem(individualDetails[person].Address30DayUK.address, individualDetails[person].Address30DayUK.question, individualDetails[person].Address30DayUK.url));

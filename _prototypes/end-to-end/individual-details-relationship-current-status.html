@@ -105,7 +105,7 @@ noONSLogoLink: true
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
     let url = '../individual-details-relationship-current-status/?person_id=' + personId + '&edit=true';
     question = question.trim();
-    storageAPI.addUpdateMaritalStatus(personId,
+    storageAPI.addUpdateMaritalStatusWho(personId,
       $('[name="marital-status"]:checked').val(),
       question,
       url
