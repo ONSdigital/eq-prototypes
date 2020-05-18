@@ -66,7 +66,10 @@ noONSLogoLink: true
                                             <div class="field__item js-focusable-box">
                                                 <input autocomplete="new-password" class="input input--radio js-focusable" type="radio"
                                                        name="address-correct" id="address-correct-no">
-                                                <label class="label label--inline" for="address-correct-no">No, I need to make a change to this address</label>
+                                                <label class="label label--inline" for="address-correct-no">No, I need to make a change to this address
+                                                 <br>
+                                                <span class="label__description label--negative">For example, a house that has been separated into flats</span>
+                                                </label>
                                             </div>
                                         </fieldset>
                                     </div>
@@ -80,7 +83,7 @@ noONSLogoLink: true
     </div>
 
     <button class="qa-btn-submit btn btn-submit btn--primary btn--lg" data-qa="btn-submit" type="submit"
-            name="action[save_continue]">Save and continue
+            name="action[save_continue]">Continue
     </button>
 </div>
 
@@ -91,6 +94,7 @@ noONSLogoLink: true
 	var yesbox = document.getElementById("address-correct-yes");
     var nobox = document.getElementById("address-correct-no");
     var hasErrors = false;
+    var currentPage = 'confirm-address';
 
 	$('.qa-btn-submit').on('click', function (e) {
         e.preventDefault();
@@ -109,7 +113,7 @@ noONSLogoLink: true
                 var loc = "../uac-request-address/"
             }
             document.trav.action = loc;
-            window.location = loc;
+            window.location = loc + '?' + 'previous=' + currentPage;
         }
 	});
 </script>
