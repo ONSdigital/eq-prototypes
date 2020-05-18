@@ -224,7 +224,7 @@ noONSLogoLink: true
       $('#accommodation').html('Partially completed');
       $('#accommodation-status').html('Partially completed');
       $('#accommodation-link').html('Continue with section');
-      $('#accommodation-link').attr("href", accommodationStatus);
+      $('#accommodation-link').attr("href", accommodationStatus + "?continuing=true");
     }
   } else {
     $('#accommodation-link').attr("href", "../household-accom-intro");
