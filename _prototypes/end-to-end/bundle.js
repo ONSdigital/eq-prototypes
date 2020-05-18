@@ -475,14 +475,19 @@ function updateContinueNotice() {
     return false;
   }
   const member = getHouseholdMemberByPersonId(personId);
-  const link = isVisitor(member) ? '../visitor-intro/' : '../individual-intro/';
+  var link = '';
+  if (member) {
+    link = isVisitor(member) ? '../visitor-intro/?person_id=' + personId : '../individual-intro/?person_id=' + personId;
+  } else {
+    link = '../household-accom-intro/';
+  }
+  
   const template = `<div class="panel panel--simple panel--info u-mb-s">
       <div class="panel__body">
-          <strong>This was the last unanswered question
-              in the section</strong>
+          <strong>This is the last viewed question in this section</strong>
           <p>
-              <a href="${link}?person_id=${personId}">Go to the start 
-              of this section</a>
+              You can also <a href="${link}">go back to the start 
+              of the section</a>
           </p>
       </div>
   </div>`;

@@ -107,7 +107,6 @@ noONSLogoLink: true
         var val = $('input[type=radio][name=accommodation-type]:checked').attr('value')
         question = question.trim();
         question = question.replace(/(<([^>]+)>)/ig,"");
-        sessionStorage.setItem("greg", question);
         window.sessionStorage.setItem('accommodation-type', JSON.stringify([question, val, currentPage]));
         e.preventDefault();
 
