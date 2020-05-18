@@ -86,11 +86,11 @@ noONSLogoLink: true
 
 <script src='/js/compiled/end-to-end/bundle.js'></script>
 
-
 <script>
-	var yesbox = document.getElementById("address-correct-yes");
-    var nobox = document.getElementById("address-correct-no");
-    var hasErrors = false;
+	var yesbox = document.getElementById("address-correct-yes"),
+        nobox = document.getElementById("address-correct-no"),
+        hasErrors = false;
+    sessionStorage.setItem("wlh_bookmark" , window.location.pathname);
 
 	$('.qa-btn-submit').on('click', function (e) {
         e.preventDefault();
@@ -123,7 +123,6 @@ noONSLogoLink: true
         var address = JSON.parse(addressParam);
 
         var addressParts = [];
-        
 
         Object.keys(address)
             .filter(function(key) { return !!address[key] })

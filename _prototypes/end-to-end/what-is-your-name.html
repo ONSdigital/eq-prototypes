@@ -142,6 +142,8 @@ noONSLogoLink: true
     userAsMember = storageAPI.getUserAsHouseholdMember(),
     userPerson = userAsMember && userAsMember['@person'],
     hasErrors = false;
+  
+  sessionStorage.setItem("wlh_bookmark" , window.location.pathname);
 
   function removeMember_handler(member, e) {
     e.preventDefault();

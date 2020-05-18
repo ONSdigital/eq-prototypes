@@ -47,6 +47,8 @@ noONSLogoLink: true
 <script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
+  sessionStorage.setItem("wlh_bookmark" , window.location.pathname);
+
   $('.btn-submit').click(function(e) {
     e.preventDefault(); // do not submit the form like usual
     window.location = '../do-you-live-here/';

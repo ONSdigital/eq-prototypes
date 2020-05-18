@@ -186,6 +186,8 @@ noONSLogoLink: true
     urlParams = new URLSearchParams(window.location.search),
     surveyType = urlParams.get('survey');
   
+  sessionStorage.setItem("wlh_bookmark", window.location.pathname);
+  
   var cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people') || '[]');
   var relationships = JSON.parse(sessionStorage.getItem('relationships') || '[]');
 

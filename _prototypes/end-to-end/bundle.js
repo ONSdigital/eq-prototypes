@@ -478,6 +478,8 @@ function updateContinueNotice() {
   var link = '';
   if (member) {
     link = isVisitor(member) ? '../visitor-intro/?person_id=' + personId : '../individual-intro/?person_id=' + personId;
+  } else if (sessionStorage.getItem("wlh_bookmark")) {
+    link = '../confirm-address/';
   } else {
     link = '../household-accom-intro/';
   }
