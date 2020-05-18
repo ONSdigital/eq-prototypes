@@ -62,7 +62,7 @@ logoUrl: ../home
 <script>
     var storageAPI = window.ONS.storage;
     var urlParams = new URLSearchParams(window.location.search);
-    var addressLines = (sessionStorage.getItem('address-line-1') || '');
+    var addressLines = (sessionStorage.getItem('address') || '').split(',');
     var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
     var addresseeName = (sessionStorage.getItem('addressee-name') || '');
     var previousPage = urlParams.get('previous');
@@ -89,7 +89,7 @@ logoUrl: ../home
     var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
 
     pipingDestinations.forEach(function(pipingDestination) {
-        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', addresseeName + ' at ' + addressLines);
+        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', addresseeName + ' at ' + addressLines[0]);
         pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{y}', codeType);
         pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{z}', modeType);
     });
