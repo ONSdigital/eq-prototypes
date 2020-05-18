@@ -197,6 +197,8 @@ noONSLogoLink: true
     otherbox = document.getElementById("none"),
     hasErrors = false,
     storageAPI = window.ONS.storage;
+
+  sessionStorage.setItem("wlh_bookmark" , window.location.pathname);
     
   $('.qa-btn-submit').click(function(e) {
     e.preventDefault();

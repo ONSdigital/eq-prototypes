@@ -81,6 +81,7 @@ noONSLogoLink: true
     showPanel = urlParams.get('show-panel'),
     nextPage = !missingRelationship ? '../hub' : '../relationships-intro/';
 
+  sessionStorage.setItem("wlh_bookmark" , window.location.pathname);
 
   function updateHouseholdMembersVisitors() {
       var userMember = members.filter(isUser)[0],

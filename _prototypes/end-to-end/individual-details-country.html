@@ -197,6 +197,12 @@ noONSLogoLink: true
                     (surveyType ? '&survey=' + surveyType : '') +
                     (isEditing ? '&edit=true' : '');
                     storageAPI.storePageData('/end-to-end/individual-details-country-other/', window.location.pathname);
+            } else if(val === 'Republic of Ireland') {
+                e.preventDefault();
+                window.location.href = '../individual-details-country-other-arrive/?person_id=' + personId +
+                    (surveyType ? '&survey=' + surveyType : '') +
+                    (isEditing ? '&edit=true' : '');
+                    storageAPI.storePageData('/end-to-end/individual-details-country-other-arrive/', window.location.pathname);
             } else {
                 window.location.href = '../individual-details-year-ago-address/?person_id=' + personId +
                     (surveyType ? '&survey=' + surveyType : '') +

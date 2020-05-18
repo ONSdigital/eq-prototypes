@@ -157,6 +157,8 @@ noONSLogoLink: true
       ]
     };
 
+  sessionStorage.setItem("wlh_bookmark" , window.location.pathname);
+
   $('.qa-btn-submit').on('click', function(e) {
     e.preventDefault();
     const testFails = ($('input[type=radio]:checked').size() === 0);

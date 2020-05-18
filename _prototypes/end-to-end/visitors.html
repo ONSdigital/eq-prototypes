@@ -159,6 +159,8 @@ noONSLogoLink: true
   var nobox = document.getElementById("none"),
     hasErrors = false;
 
+  sessionStorage.setItem("wlh_bookmark" , window.location.pathname);
+
   $('.qa-btn-submit').click(function(e) {
     const testFails = ($('input[type=checkbox]:checked').size() === 0);
     window.ONS.utils.validateInputs(testFails, "input[type=checkbox]");

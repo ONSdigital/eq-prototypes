@@ -160,6 +160,8 @@ noONSLogoLink: true
     userLiveAtAddress = storageAPI.doILiveHere(),
     isLateAddition = !!urlParams.get('late-addition');
 
+  sessionStorage.setItem("wlh_bookmark" , window.location.pathname);
+
   if (editUserId) {
     memberFound = window.ONS.storage.getAllHouseholdMembers()
       .filter(function(member) {

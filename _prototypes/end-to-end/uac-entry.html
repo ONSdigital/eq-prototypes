@@ -25,9 +25,7 @@ logoUrl: ../home
                         <form id="feedback-form" method="POST"
                               class="feedback__form">
                             <div class="group">
-                                <div class="feedback__field">
-
-                                </div>
+                                <div class="feedback__field"></div>
                             </div>
                         </form>
                     </div>
@@ -38,10 +36,10 @@ logoUrl: ../home
                         </div></div>
                     <div class="panel__body">
                         <ol class="list list--bare">
-                        <li class="list__item js-uac u-d-no">
-                            1. <a href="#error-message-uac" class="list__link js-inpagelink js-error">Enter an access code to continue</a>
-                        </li>
-                    </ol>
+                            <li class="list__item js-uac u-d-no">
+                                1. <a href="#error-message-uac" class="list__link js-inpagelink js-error">Enter an access code to continue</a>
+                            </li>
+                        </ol>
                     </div>
                 </div>
                 <div class="group" id="what-is-your-address-group">
@@ -70,7 +68,7 @@ logoUrl: ../home
                             <button class="btn btn-submit btn--primary btn--lg"
                                     data-qa="btn-submit" type="submit"
                                     name="action[save_continue]">Access census
-                            </button>                        
+                            </button>
                         </div>
                     </div>
                     <div>
@@ -84,7 +82,7 @@ logoUrl: ../home
                                 <p class="u-mb-xs">If you need to answer separately from the people you live with, you can <a href="../uac-request-address?previous=uac-entry&current-journey=new-ir-uac" class="f">request an individual access code</a> to start a separate census.</p>
                                 <div class="panel panel--simple panel--warning js-panel-info u-mb-xs">
                                     <span class="panel__icon" aria-hidden="true">!</span><span class="panel__text">Someone in your household must still complete a census using a household access code</span>
-                                </div>                                
+                                </div>
                                 <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="What does /"usually live/" mean?">Hide this</button>                                           
                             </div>
                         </div>
@@ -123,6 +121,9 @@ logoUrl: ../home
     } else {
         if (uacInput.value == 'unl1 nk3d acc3 55c0') {
             window.location = '../uac-request-address/?previous=uac-entry&current-journey=unlinked-uac';
+        } else if (sessionStorage.getItem("wlh_bookmark")) {
+            var path = sessionStorage.getItem("wlh_bookmark");
+            window.location = '..' + path.replace("/end-to-end", "") + (path === "/end-to-end/hub/" ? "" : "?continuing=true");
         } else {
             window.location = '../confirm-address/';
         }

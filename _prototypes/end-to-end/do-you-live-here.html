@@ -121,6 +121,9 @@ noONSLogoLink: true
   var yesbox = document.getElementById("yes"),
     storageAPI = window.ONS.storage,
     hasErrors = false;
+
+  sessionStorage.setItem("wlh_bookmark" , window.location.pathname);
+
   $('.qa-btn-submit').click(function(e) {
     e.preventDefault();
     const testFails = ($('input[type=radio]:checked').size() === 0);

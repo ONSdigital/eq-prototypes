@@ -19,9 +19,6 @@ noONSLogoLink: true
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m">
-            <!--{% include navigation.html
-            items=site.data.your-household-v6.navigationItemsRelationships
-            nav-title-id="section-address" %}-->
         </div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
@@ -118,6 +115,8 @@ noONSLogoLink: true
 	  utils = window.ONS.utils,
       urlParams = new URLSearchParams(window.location.search),
       surveyType = urlParams.get('survey');
+
+    sessionStorage.setItem("wlh_bookmark" , window.location.pathname);
 
   function updateRouting() {
     $('#survey-type').val(surveyType);
