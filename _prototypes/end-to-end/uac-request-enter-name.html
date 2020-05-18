@@ -4,7 +4,8 @@ project: End to end prototype
 globalcss: false
 layout: eq-default-extras
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
-noONSLogoLink: true
+hideSaveLater: true
+logoUrl: ../home
 ---
 
 <link rel="stylesheet" href="../style.css"/>
@@ -68,19 +69,6 @@ noONSLogoLink: true
                                     <input required autocomplete="new-password" required data-error-msg="Enter a first name to continue" class="input input--text"
                                            id="first-name"
                                            data-qa="input-text" value="" data-error-msg="Enter a first name to continue"/>
-                                  </p>
-                                </div>
-
-                                <div class="question__answer">
-                                  <p class="field">
-                                    <label class="label" for="middle-name">
-                                        <span class="label__inner">
-                                            Middle names
-                                        </span>
-                                    </label>
-                                    <input autocomplete="new-password" class="input input--text"
-                                           id="middle-name"
-                                           data-qa="input-text" value=""/>
                                   </p>
                                 </div>
 
@@ -179,7 +167,6 @@ noONSLogoLink: true
 
       var newPersonObj = storageAPI.TYPES.person({
         firstName: document.getElementById('first-name').value.trim(),
-        middleName: document.getElementById('middle-name').value.trim(),
         lastName: document.getElementById('last-name').value.trim()
       });
 
@@ -225,7 +212,6 @@ noONSLogoLink: true
 
     if (userPerson) {
       $('#first-name').val(userPerson.firstName);
-      $('#middle-name').val(userPerson.middleName);
       $('#last-name').val(userPerson.lastName);
     }
   });
