@@ -376,12 +376,20 @@ function doILiveHere() {
   return sessionStorage.getItem('lives-here') === 'yes';
 }
 
-function getSignificant() {
-  return 'Sunday 5 April 2020';
+function getSignificant(type) {
+  if (type === 'withoutDay') {
+    return '21 March 2021';
+  } else {
+    return 'Sunday 21 March 2021';
+  }
 }
 
 function updateSignificantDate() {
   $('.js-significant-date').each((i, el) => cleanHTMLPlaceholderStringReplacment(el, getSignificant()));
+}
+
+function updateSignificantDateWithoutDay() {
+  $('.js-significant-date-without-day').each((i, el) => cleanHTMLPlaceholderStringReplacment(el, getSignificant("withoutDay")));
 }
 
 function personRecordTemplate() {
@@ -818,6 +826,7 @@ $(updatePersonLink);
 $(tools);
 $(updateAllLinks);
 $(updateSignificantDate);
+$(updateSignificantDateWithoutDay);
 $(updateHouseholdSummary);
 $(updateVisitorsSummary);
 $(updateContinueNotice);
