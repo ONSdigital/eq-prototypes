@@ -313,7 +313,9 @@ noONSLogoLink: true
             $container.append(createListItem(individualDetails[person].employment.mainlyWork, individualDetails[person].employment.questionMainlyWork, individualDetails[person].employment.urlMainlyWork));
             $container.append(createListItem(individualDetails[person].employment.workUK, individualDetails[person].employment.questionWorkUK, individualDetails[person].employment.urlWorkUK));
             $container.append(createListItem(individualDetails[person].employment.workOutsideUK, individualDetails[person].employment.questionWorkOutsideUK, individualDetails[person].employment.urlWorkOutsideUK));
-            $container.append(createListItem(individualDetails[person].employment.workAddress["address-line-1"], individualDetails[person].employment.questionWorkplaceAddress, individualDetails[person].employment.urlWorkplaceAddress));
+            if (individualDetails[person].employment.workAddress){
+                $container.append(createListItem(individualDetails[person].employment.workAddress["addressLine1"], individualDetails[person].employment.questionWorkplaceAddress, individualDetails[person].employment.urlWorkplaceAddress));
+            }
         }
 
         return $container;
