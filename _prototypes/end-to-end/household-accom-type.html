@@ -94,6 +94,8 @@ noONSLogoLink: true
 
 <script>
     var storageAPI = window.ONS.storage,
+        urlParams = new URLSearchParams(window.location.search),
+        isEditing = urlParams.get('edit'),
         currentPage = '../household-accom-type';
 
     if(sessionStorage.getItem('address-line-1')) {
@@ -110,17 +112,22 @@ noONSLogoLink: true
         window.sessionStorage.setItem('accommodation-type', JSON.stringify([question, val, currentPage]));
         e.preventDefault();
 
-        if(val === 'Whole house or bungalow') {
-            window.location.href = '../household-accom-house-type/';
-            storageAPI.storePageData('/end-to-end/household-accom-house-type/', window.location.pathname);
-        }
-        else if(val === 'Flat, maisonette or apartment') {
-            window.location.href = '../household-accom-flat-type/';
-            storageAPI.storePageData('/end-to-end/household-accom-house-type/', window.location.pathname);
-        }
-        else {
-            window.location.href = '../household-accom-shared-rooms/';
-            storageAPI.storePageData('/end-to-end/household-accom-house-type/', window.location.pathname);
+        if(isEditing) {
+            window.location.href = '../household-accom-summary/';
+            storageAPI.storePageData('/end-to-end/household-accom-summary/', window.location.pathname);
+        } else {
+            if(val === 'Whole house or bungalow') {
+                window.location.href = '../household-accom-house-type/';
+                storageAPI.storePageData('/end-to-end/household-accom-house-type/', window.location.pathname);
+            }
+            else if(val === 'Flat, maisonette or apartment') {
+                window.location.href = '../household-accom-flat-type/';
+                storageAPI.storePageData('/end-to-end/household-accom-house-type/', window.location.pathname);
+            }
+            else {
+                window.location.href = '../household-accom-shared-rooms/';
+                storageAPI.storePageData('/end-to-end/household-accom-house-type/', window.location.pathname);
+            }
         }
     });
 

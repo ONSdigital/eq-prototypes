@@ -100,8 +100,7 @@ noONSLogoLink: true
       e.preventDefault();
       window.location.href = '../individual-details-summary/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
-        storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
-
+      storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
     }
   }));
 

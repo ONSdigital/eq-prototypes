@@ -151,7 +151,9 @@ noONSLogoLink: true
     }
 
     var storageAPI = window.ONS.storage,
+        urlParams = new URLSearchParams(window.location.search),
         question = $('#question-title').html(),
+        isEditing = urlParams.get('edit'),
         currentPage = '../household-accom-own-rent',
         hasErrors = false;
 
@@ -172,13 +174,17 @@ noONSLogoLink: true
             window.sessionStorage.setItem('accommodation-own-rent', JSON.stringify([question, val, currentPage]));
             e.preventDefault();
 
-            if((val === 'Part-owns and part-rents') || (val === 'Rents')) {
-                window.location.href = '../household-accom-landlord';
-                storageAPI.storePageData('/end-to-end/household-accom-landlord/', window.location.pathname);
-            }
-            else {
-                window.location.href = '../household-accom-vehicles';
-                storageAPI.storePageData('/end-to-end/household-accom-vehicles/', window.location.pathname);
+            if(isEditing) {
+                window.location.href = '../household-accom-summary/';
+                storageAPI.storePageData('/end-to-end/household-accom-summary/', window.location.pathname);
+            } else {
+                if((val === 'Part-owns and part-rents') || (val === 'Rents')) {
+                    window.location.href = '../household-accom-landlord';
+                    storageAPI.storePageData('/end-to-end/household-accom-landlord/', window.location.pathname);
+                } else {
+                    window.location.href = '../household-accom-vehicles';
+                    storageAPI.storePageData('/end-to-end/household-accom-vehicles/', window.location.pathname);
+                }
             }
         }
     });

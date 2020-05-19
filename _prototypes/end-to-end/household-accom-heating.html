@@ -197,7 +197,9 @@ noONSLogoLink: true
     }
 
     var storageAPI = window.ONS.storage,
+        urlParams = new URLSearchParams(window.location.search),
         question = $('#question-title').html(),
+        isEditing = urlParams.get('edit'),
         currentPage = '../household-accom-heating';
 
     window.sessionStorage.setItem('accommodation-completed-status', currentPage);
@@ -207,15 +209,21 @@ noONSLogoLink: true
         question = question.trim();
         question = question.replace(/(<([^>]+)>)/ig,"");
         var heatingTypes = [];
+        e.preventDefault();
 
         $('input[type=checkbox][name=heating-type]:checked').each(function(i, el) {
             heatingTypes.push($(el).val());
         });
 
         window.sessionStorage.setItem('accommodation-heating-type', JSON.stringify([question, heatingTypes, currentPage]));
-        e.preventDefault();
-        window.location.href = '../household-accom-own-rent';
-        storageAPI.storePageData('/end-to-end/household-accom-own-rent/', window.location.pathname);
+
+        if(isEditing) {
+            window.location.href = '../household-accom-summary/';
+            storageAPI.storePageData('/end-to-end/household-accom-summary/', window.location.pathname);
+        } else {
+            window.location.href = '../household-accom-own-rent/';
+            storageAPI.storePageData('/end-to-end/household-accom-own-rent/', window.location.pathname);
+        }
     });
 
     function updateAnswer() {

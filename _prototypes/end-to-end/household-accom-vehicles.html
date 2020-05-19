@@ -163,6 +163,8 @@ noONSLogoLink: true
 
 <script>
     var question = $('#question-title').html(),
+        urlParams = new URLSearchParams(window.location.search),
+        isEditing = urlParams.get('edit'),
         currentPage = '../household-accom-vehicles';
         hasErrors = false;
     window.sessionStorage.setItem('accommodation-completed-status', currentPage);
@@ -184,20 +186,22 @@ noONSLogoLink: true
             var val = $('input[type=radio][name=no-of-vehicles]:checked').attr('value')
             question = question.trim();
 
-            if(val === '5 or more') {
-                var otherVal = $("input[type=text][id=other-textbox]").val();
-                window.sessionStorage.setItem('accommodation-no-of-vehicles', JSON.stringify([question, otherVal, currentPage]));
+            if(isEditing) {
+                window.location.href = '../household-accom-summary/';
+                storageAPI.storePageData('/end-to-end/household-accom-summary/', window.location.pathname);
             } else {
-                window.sessionStorage.setItem('accommodation-no-of-vehicles', JSON.stringify([question, val, currentPage]));
+                if(val === '5 or more') {
+                    var otherVal = $("input[type=text][id=other-textbox]").val();
+                    window.sessionStorage.setItem('accommodation-no-of-vehicles', JSON.stringify([question, otherVal, currentPage]));
+                } else {
+                    window.sessionStorage.setItem('accommodation-no-of-vehicles', JSON.stringify([question, val, currentPage]));
+                }
+                window.sessionStorage.setItem('accommodation-completed-status', 'completed');
+
+                window.location.href = '../hub';
+                storageAPI.storePageData('/end-to-end/hub/', window.location.pathname);
             }
-
-            window.sessionStorage.setItem('accommodation-completed-status', 'completed');
-            e.preventDefault();
-
-            window.location.href = '../hub';
-            storageAPI.storePageData('/end-to-end/hub/', window.location.pathname);
         }
-
     });
 
     function updateAnswer() {

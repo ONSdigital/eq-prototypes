@@ -90,7 +90,9 @@ noONSLogoLink: true
 
 <script>
     var storageAPI = window.ONS.storage,
+        urlParams = new URLSearchParams(window.location.search),
         question = $('#question-title').html(),
+        isEditing = urlParams.get('edit'),
         currentPage = '../household-accom-shared-rooms';
 
     window.sessionStorage.setItem('accommodation-completed-status', currentPage);
@@ -100,8 +102,14 @@ noONSLogoLink: true
         question = question.trim();
         window.sessionStorage.setItem('accommodation-shared-rooms', JSON.stringify([question, val, currentPage]));
         e.preventDefault();
-        window.location.href = '../household-accom-number-bedrooms';
-        storageAPI.storePageData('/end-to-end/household-accom-number-bedrooms/', window.location.pathname);
+
+        if(isEditing) {
+            window.location.href = '../household-accom-summary/';
+            storageAPI.storePageData('/end-to-end/household-accom-summary/', window.location.pathname);
+        } else {
+            window.location.href = '../household-accom-number-bedrooms';
+            storageAPI.storePageData('/end-to-end/household-accom-number-bedrooms/', window.location.pathname);
+        }
     });
 
     function updateAnswer() {
