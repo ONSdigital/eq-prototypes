@@ -6,6 +6,7 @@ export function sanitiseTypeaheadText(string, sanitisedQueryRemoveChars = [], sa
   });
 
   sanitisedString = sanitisedString.replace(/\s\s+/g, ' ');
+  sanitisedString = sanitisedString.replace('&', '%26');
 
   if (sanitisedQuerySplitNumsChars) {
     sanitisedString = sanitisedString.replace(/\d(?=[a-z]{3,})/gi, '$& ');
