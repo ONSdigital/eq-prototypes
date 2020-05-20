@@ -134,7 +134,12 @@ noONSLogoLink: true
     if (details && details.Address30DayUK) {
       $('.js-heading').html('What type of address is ' + '<em class="highlight">' + details.Address30DayUK.val.addressLine1 + '</em>' + '?');
     } else if (details && details.Address30DayCountry){
-      $('.js-heading').html('What type of address is your address in ' + '<em class="highlight">' + details.Address30DayCountry.value + '</em>' + '?');
+        if(storageAPI.getProxyFor(personId)) {
+            $('.js-heading').html('What type of address is ' + '<em class="highlight">' + person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName)
+             + '</em>' + ' address in ' + '<em class="highlight">' + details.Address30DayCountry.value + '</em>' + '?');
+        } else {
+            $('.js-heading').html('What type of address is your address in ' + '<em class="highlight">' + details.Address30DayCountry.value + '</em>' + '?');
+        }
     }
   }
 
@@ -142,7 +147,7 @@ noONSLogoLink: true
     if (details && details.Address30DayType) {
         $(details.Address30DayType.val).each(function(i, el) {
             $('#' + el).attr('checked', true);
-        });      
+        });
     }
   }
 

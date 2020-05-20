@@ -184,7 +184,9 @@ noONSLogoLink: true
       dobObj = createDataObj(dob.year, dob.month, dob.day);
     ageYear = moment().diff(dobObj, 'years');
     age = moment().diff(dobObj, 'years');
-    if (age === 0) {
+    if (age === 1) {
+      unit = 'year';
+    } else if (age === 0) {
       age = moment().diff(dobObj, 'months');
       unit = 'months';
       if (age === 1) {
