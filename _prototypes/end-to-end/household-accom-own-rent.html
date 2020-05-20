@@ -178,7 +178,7 @@ noONSLogoLink: true
                 window.location.href = '../household-accom-summary/';
                 storageAPI.storePageData('/end-to-end/household-accom-summary/', window.location.pathname);
             } else {
-                if((val === 'Part-owns and part-rents') || (val === 'Rents')) {
+                if((val === 'Part-owns and part-rents') || (val === 'Rents') || (val === 'Lives here rent-free')) {
                     window.location.href = '../household-accom-landlord';
                     storageAPI.storePageData('/end-to-end/household-accom-landlord/', window.location.pathname);
                 } else {
