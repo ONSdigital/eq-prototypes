@@ -46,7 +46,7 @@ noONSLogoLink: true
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title u-fs-xl js-heading">
-                                            In which country outside the UK do you stay in for more than 30 days a year?
+                                            In which country outside the UK do you stay for more than 30 days a year?
                                     </h1>
                                 </div>
 
@@ -129,8 +129,8 @@ noONSLogoLink: true
 
     function updateQuestion() {
       if(storageAPI.getProxyFor(personId)) {
-          $('.js-heading').html('You selected &ldquo;An address outside the UK&rdquo;. Which country outside the UK does ' + '<em class="highlight">' + person.firstLastName + '</em>' +
-          ' stay in for more than 30 days a year');
+          $('.js-heading').html('In which country outside the UK does ' + '<em class="highlight">' + person.firstLastName + '</em>' +
+          ' stay for more than 30 days a year');
       }
     }
 
