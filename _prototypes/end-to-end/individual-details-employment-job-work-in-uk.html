@@ -50,8 +50,7 @@ noONSLogoLink: true
                                                     <label class="label label--inline"
                                                            for="yes"
                                                            id="yes-label">
-                                                        <strong
-                                                                class="u-fs-r">Yes</strong>
+                                                        <strong class="u-fs-r">Yes</strong>
                                                     </label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
@@ -63,8 +62,7 @@ noONSLogoLink: true
                                                     <label class="label label--inline"
                                                            for="no"
                                                            id="no-label">
-                                                        <strong
-                                                                class="u-fs-r">No</strong>
+                                                        <strong class="u-fs-r">No</strong>
                                                     </label>
                                                 </div>
                                             </fieldset>
@@ -108,14 +106,12 @@ noONSLogoLink: true
     if(isEditing) {
         window.location.href = '../individual-details-summary/?person_id=' + personId +
           (surveyType ? '&survey=' + surveyType : '');
-          
         storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
     } else if (val === 'No') {
         window.location.href = '../individual-details-employment-job-work-outside-uk/?person_id=' + personId +
           (surveyType ? '&survey=' + surveyType : '');
         storageAPI.storePageData('/end-to-end/individual-details-employment-job-work-outside-uk/', window.location.pathname);
     } else {
-
         if(JSON.stringify(details.employment.mainlyWork) === '"At a workplace"') {
             window.location.href = '../individual-details-employment-address-workplace?person_id=' + personId +
             (surveyType ? '&survey=' + surveyType : '');
@@ -125,6 +121,10 @@ noONSLogoLink: true
             window.location.href = '../individual-details-employment-address-depot/?person_id=' + personId +
             (surveyType ? '&survey=' + surveyType : '');
              storageAPI.storePageData('/end-to-end/individual-details-employment-address-depot/', window.location.pathname);
+        } else {
+            storageAPI.clearPersonalBookmark(personId);
+            window.location.href = '../hub/';
+            storageAPI.storePageData('/end-to-end/hub/', window.location.pathname);
         }
     }
   }));
