@@ -60,8 +60,7 @@ noONSLogoLink: true
                                             <fieldset>
                                                 <legend class="field__legend u-fs-r--b">Select all that apply</legend>
                                                 <div class="field__item">
-                                                    <input
-                                                            class="input input--checkbox js-exclusive-group"
+                                                    <input class="input input--checkbox js-exclusive-group"
                                                             name="checkbox-answer"
                                                             value="5 GCSEs"
                                                             id="gcse-5"
@@ -69,9 +68,7 @@ noONSLogoLink: true
                                                     <label class="label label--inline u-fs-r "
                                                            for="gcse-5"
                                                            id="gcse-5-label">
-                                                        <strong
-                                                                class="u-fs-r">5 or more GCSEs grades A* to C or 9 to 4
-                                                        </strong>
+                                                        <strong class="u-fs-r">5 or more GCSEs grades A* to C or 9 to 4</strong>
                                                         <p class="u-fs-s u-db u-mb-no label--negative">
                                                             Include 5 or more O level passes or CSEs grades 1
                                                         </p>
@@ -124,7 +121,8 @@ noONSLogoLink: true
                                                     <span class="js-exclusive-alert u-vh"
                                                           role="alert"
                                                           aria-live="polite"
-                                                          data-adjective="deselected"></span>
+                                                          data-adjective="deselected">
+                                                    </span>
                                                 </div>
                                             </fieldset>
                                         </div>
@@ -217,7 +215,11 @@ noONSLogoLink: true
                 nvq = details.qualifications.nvqEquivalent,
                 alevel = details.qualifications.aLevels;
 
-            if (apprenticeship === "No" && degree === "No" && nvq == "None" && alevel =="None" && gcses == "None") {
+            if ((apprenticeship === "No" || apprenticeship === undefined) &&
+                (degree === "No" || degree === undefined) &&
+                (nvq == "None" || nvq == "") &&
+                (alevel =="None" || alevel == "") &&
+                (gcses == "None" || gcses == "")) {
                 return false;
             } else {
                 return true;
