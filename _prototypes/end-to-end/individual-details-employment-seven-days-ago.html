@@ -240,6 +240,10 @@ noONSLogoLink: true
                 }
             }
         }
+
+        if(storageAPI.getProxyFor(personId)) {
+            $('.js-answer').html('Freelance means that they are self-employed and work for different companies or people on particular pieces of work');
+        }
     }
     $(updateAnswer);
     $(updateQuestion);
