@@ -12,6 +12,9 @@ noONSLogoLink: true
 .field__other {
     background-color: transparent;
 }
+input:checked~.field__other {
+    background-color: #f5f5f5;
+}
 </style>
 <div class="page__subheader">
     <div class="container">
@@ -95,9 +98,9 @@ noONSLogoLink: true
                                                            for="other"
                                                            id="other-label">
                                                         Other sexual orientation<br>
-                                                        <span class="label__description label__inner label--negative u-fs-m js-answer">Enter your sexual orientation</span>
                                                     </label>
                                                     <div class="field__other field__other--open">
+                                                        <label class="label u-fs-s--b">Enter sexual orientation</label>
                                                         <input autocomplete="new-password" class="input input__text js-focusable" id="other-answer" name="orientation" type="text" data-qa="other-option">
                                                     </div>
                                                 </div>
@@ -190,10 +193,6 @@ noONSLogoLink: true
   }
 
     function updateAnswer() {
-        if(storageAPI.getProxyFor(personId)) {
-            $('.js-answer').html('Enter their sexual orientation');
-        }
-
         if (details && details.orientation && details.orientation.val) {
             $('input[type=radio][value="' + details.orientation.val +'"]').prop("checked", true);
             $('.js-clear-btn').removeClass('u-vh');
