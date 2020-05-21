@@ -75,8 +75,8 @@ noONSLogoLink: true
                                                         Address not set
                                                     </label>
                                                 </div>
-                                                <div class="field__item js-focusable-box">
-                                                    <input autocomplete="new-password" class="input input--radio js-focusable u-vh"
+                                                <div id="student-address-option" class="js-focusable-box u-vh">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
                                                            type="radio"
                                                            name="student-address"
                                                            id="student-address"
@@ -150,10 +150,12 @@ noONSLogoLink: true
   $('#home-address-label').text(updateAddress(sessionStorage.getItem("address")));
   if (details && details.Address30DayUK && details.Address30DayUK.address) {
       $('#student-address-label').text(updateAddress(details.Address30DayUK.address));
-      $('#student-address').removeClass('u-vh');
+      $('#student-address-option').removeClass('u-vh');
+      $('#student-address-option').addClass('field__item');
   } else if (details && details.Address30DayCountry && details.Address30DayCountry.value) {
       $('#student-address-label').text("The address in " + updateAddress(details.Address30DayCountry.value));
-      $('#student-address').removeClass('u-vh');
+      $('#student-address-option').removeClass('u-vh');
+      $('#student-address-option').addClass('field__item');
   }
   
 

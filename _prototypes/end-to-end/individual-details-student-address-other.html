@@ -110,15 +110,19 @@ noONSLogoLink: true
     var val = $('[name="other-address"]:checked').val();
 
     if(isEditing) {
-      window.location.href = '../individual-details-summary/?person_id=' +
-        personId + (surveyType ? '&survey=' + surveyType : '');
+        window.location.href = '../individual-details-summary/?person_id=' +
+            personId + (surveyType ? '&survey=' + surveyType : '');
         storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
-    } else if(val === 'No' || val == null) {
-      window.location.href = '../individual-details-student-address-other-country/?person_id=' + personId;
-      storageAPI.storePageData('/end-to-end/individual-student-address-other-country/', window.location.pathname);
+    } else if(val === 'No') {
+        window.location.href = '../individual-details-student-address-other-country/?person_id=' + personId;
+        storageAPI.storePageData('/end-to-end/individual-student-address-other-country/', window.location.pathname);
     } else if (val === 'Yes'){
-      window.location.href = '../individual-details-student-address-other-uk/?person_id=' + personId;
-      storageAPI.storePageData('/end-to-end/individual-details-student-address-other-uk/', window.location.pathname);
+        window.location.href = '../individual-details-student-address-other-uk/?person_id=' + personId;
+        storageAPI.storePageData('/end-to-end/individual-details-student-address-other-uk/', window.location.pathname);
+    } else if (val == null) {
+        storageAPI.clearPersonalBookmark(personId);
+        storageAPI.storePageData('/end-to-end/hub/', window.location.pathname);
+        window.location.href = '../hub';
     }
   });
 

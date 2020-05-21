@@ -16,17 +16,14 @@ noONSLogoLink: true
 
 <div class="page__container container">
     <div class="grid grid--reverse">
-        <div class="grid__col col-4@m">
-        </div>
+        <div class="grid__col col-4@m"></div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password" novalidate=""
                       action="../individual-details-country-other-arrive-census">
-                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
-                           value="#"/>
-                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
-                           value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person" value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type" value="#"/>
                     <div class="group" id="rsi">
                         <div class="block" id="total-retail-turnover">
                             <section class="section">
@@ -40,20 +37,15 @@ noONSLogoLink: true
                                 </div>
 
                                 <div class="answer answer--date">
-                                    <div
-                                            class="answer__fields js-fields u-mb-xl">
-                                        <fieldset
-                                                class="fieldgroup fieldgroup--inline fieldgroup--date" data-qa="widget-date">
-
+                                    <div class="answer__fields js-fields u-mb-xl">
+                                        <fieldset class="fieldgroup fieldgroup--inline fieldgroup--date" data-qa="widget-date">
                                             <div class="fieldgroup__fields">
-
                                                 <div class="field field--select field--month">
                                                     <label class="label" for="uk-arrive-month">
                                                         Month
                                                     </label>
                                                     <input type="text" id="uk-arrive-month" class="input input--text input-type__input  input--w-2" name="month" min="1" max="12" maxlength="2" pattern="[0-9]*" inputmode="numeric" autocomplete="bday-month" />
                                                 </div>
-
                                                 <div class="field field--input field--year">
                                                     <label class="label" for="uk-arrive-year">
                                                         Year
@@ -67,16 +59,8 @@ noONSLogoLink: true
                             </section>
                         </div>
                     </div>
-                    <button class="btn btn--primary btn--lg qa-btn-submit u-mb-xl"
-                            type="submit" name="">Save and continue
-                    </button>
-
-                    
-                        <p><a href="../hub"
-                           class="js-choose-another-section">Choose another
-                            section and
-                            return
-                            to this question later</a></p>
+                    <button class="btn btn--primary btn--lg qa-btn-submit u-mb-xl" type="submit" name="">Save and continue</button>
+                    <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
                 </form>
             </main>
         </div>
@@ -99,6 +83,7 @@ noONSLogoLink: true
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+    e.preventDefault();
     let url = '../individual-details-country-other-arrive/?person_id=' + personId + '&edit=true';
     question = question.trim();
     storageAPI.addUpdateCountryOtherArrive(personId,
@@ -109,7 +94,6 @@ noONSLogoLink: true
     );
 
     if(isEditing) {
-      e.preventDefault();
       window.location.href = '../individual-details-summary/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
     }
@@ -122,29 +106,25 @@ noONSLogoLink: true
       censusDateMinus1YearBeginingMonth.setFullYear(censusDateMinus1YearBeginingMonth.getFullYear() - 1);
       censusDateMinus1YearBeginingMonth.setDate(1);
 
-    if(dateEntered.getTime() === censusDateMinus1YearBeginingMonth.getTime()) {
-        e.preventDefault();
-        window.location.href = '../individual-details-country-other-arrive-census/?person_id=' +
-        personId + (surveyType ? '&survey=' + surveyType : '');
-        storageAPI.storePageData('/end-to-end/individual-details-country-other-arrive-census/', window.location.pathname);
-    } else if (dateEntered > censusDateMinus1Year){
-        e.preventDefault();
-        window.location.href = '../individual-details-country-other-stay/?person_id=' +
-        personId + (surveyType ? '&survey=' + surveyType : '');
-        storageAPI.storePageData('/end-to-end/individual-details-country-other-stay/', window.location.pathname);
-    } else {
-        e.preventDefault();
-        window.location.href = '../individual-details-country-other-arrive-census/?person_id=' +
-        personId + (surveyType ? '&survey=' + surveyType : '');
-        storageAPI.storePageData('/end-to-end/individual-details-year-ago-address/', window.location.pathname);
-    }
-
-    if(isVisitor){
-      e.preventDefault();
-      window.location.href = '../individual-details-country-other-arrive/?person_id=' +
-        personId + (surveyType ? '&survey=' + surveyType : '');
-        storageAPI.storePageData('/end-to-end/individual-details-country-other-arrive/', window.location.pathname);
-    }
+      if(!isVisitor){
+        if(dateEntered.getTime() === censusDateMinus1YearBeginingMonth.getTime()) {
+            window.location.href = '../individual-details-country-other-arrive-census/?person_id=' +
+            personId + (surveyType ? '&survey=' + surveyType : '');
+            storageAPI.storePageData('/end-to-end/individual-details-country-other-arrive-census/', window.location.pathname);
+        } else if (dateEntered > censusDateMinus1Year){
+            window.location.href = '../individual-details-country-other-stay/?person_id=' +
+            personId + (surveyType ? '&survey=' + surveyType : '');
+            storageAPI.storePageData('/end-to-end/individual-details-country-other-stay/', window.location.pathname);
+        } else {
+            window.location.href = '../individual-details-year-ago-address/?person_id=' +
+            personId + (surveyType ? '&survey=' + surveyType : '');
+            storageAPI.storePageData('/end-to-end/individual-details-year-ago-address/', window.location.pathname);
+        }
+      } else {
+          window.location.href = '../individual-details-country-other-arrive/?person_id=' +
+          personId + (surveyType ? '&survey=' + surveyType : '');
+          storageAPI.storePageData('/end-to-end/individual-details-country-other-arrive/', window.location.pathname);
+      }
   }));
 
   function updateRouting() {
