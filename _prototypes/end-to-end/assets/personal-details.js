@@ -113,7 +113,7 @@ export const personalDetailsEthnicGroupMap = {
     'question': 'White',
     'options': [
       {
-        val: 'British',
+        val: 'English, Welsh, Scottish, Northern Irish or British',
         label: 'English, Welsh, Scottish, Northern Irish or British'
       },
       {
@@ -121,7 +121,7 @@ export const personalDetailsEthnicGroupMap = {
         label: 'Irish'
       },
       {
-        val: 'Gypsy',
+        val: 'Gypsy or Irish Traveler',
         label: 'Gypsy or Irish Traveler'
       },
       {
@@ -205,7 +205,7 @@ export const personalDetailsEthnicGroupMap = {
     ]
   },
   'Other': {
-    'question': 'other',
+    'question': '',
     'options': [
       {
         val: 'Arab',
