@@ -175,7 +175,7 @@ noONSLogoLink: true
 
     $('.btn-submit').on('click', function (e) {
         e.preventDefault();
-        const testFails = ($('.js-other').val() > 20 || typeof $('.js-other').val() !== "number");
+        const testFails = ($('.js-other').val() !== "" && ($('.js-other').val() > 20 || isNaN($('.js-other').val())));
         window.ONS.utils.validateInputs(testFails, ".js-other");
         if (hasErrors) {
             window.ONS.utils.calcErrors();
