@@ -39,7 +39,7 @@ noONSLogoLink: true
                                 </div>
                                 <div class="panel panel--info panel--simple">
                                   <div class="panel__body">
-                                    <p class="js-panel-body">Include all {x} national identities. If you have more than one, enter them all separated by commas.</p>
+                                    <p class="js-panel-body js-help">Include all {x} national identities. If you have more than one, enter them all separated by commas.</p>
                                   </div>
                                 </div>
                                 <br>
@@ -114,9 +114,8 @@ noONSLogoLink: true
 
   function updateQuestion() {
     if(storageAPI.getProxyFor(personId)) {
-      $('.js-heading').html('You selected &ldquo;Other&rdquo;. How would you describe ' + '<em class="highlight">' + person.firstLastName +
-        window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
-        '{x} national identity?');
+      $('.js-heading').html('You selected &ldquo;Other&rdquo;. How would ' + '<em class="highlight">' + person.firstLastName + '</em>' +
+        ' describe their {x} national identity?');
     }
     if (details['nationalIdentity'].collection.length > 1) {
       var replacePanel = $('.js-panel-body').html().replace('{x}', ' other');
@@ -135,7 +134,7 @@ noONSLogoLink: true
 
   function updateHelp() {
     if(storageAPI.getProxyFor(personId)) {
-      $('.js-help').html('Include all national identities. If they have more than one, enter them all separated by commas.');
+      $('.js-help').html('Include all {x} national identities. If they have more than one, enter them all separated by commas.');
     }
   }
   
@@ -146,9 +145,10 @@ noONSLogoLink: true
   }
 
   $(updateAnswer);
+  $(updateHelp);
   $(updateQuestion);
   $(updateRouting);
-  $(updateHelp);
+
 
   document.dispatchEvent(new CustomEvent('TYPEAHEAD-READY'));
 

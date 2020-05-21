@@ -83,7 +83,7 @@ noONSLogoLink: true
                                                             id="other"
                                                             name="checkbox-answer" value="Other" data-qa="has-other-option" type="checkbox" class="input input--checkbox">
                                                     <label id="label-checkbox-mandatory-answer-1" class="label label--inline u-fs-r" for="other">Other<br>
-                                                        <span class="label__description label__inner label--negative u-fs-m js-answer">You can enter your national identity on the next question</span>
+                                                        <span class="label__description label__inner label--negative u-fs-m js-answer">You can describe your national identity on the next question</span>
                                                     </label>
                                                 </div>
                                             </fieldset>
@@ -154,9 +154,8 @@ noONSLogoLink: true
 
   function updateQuestion() {
     if(storageAPI.getProxyFor(personId)) {
-      $('.js-heading').html('How would you describe ' + '<em class="highlight">' + person.firstLastName +
-        window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
-        ' national identity?');
+      $('.js-heading').html('How would ' + '<em class="highlight">' + person.firstLastName + '</em>' +
+        ' describe their national identity?');
     }
   }
 
@@ -169,7 +168,7 @@ noONSLogoLink: true
 
   function updateAnswers() {
     if(storageAPI.getProxyFor(personId)) {
-      $('.js-answer').html('You can enter their national identity on the next question');
+      $('.js-answer').html('You can describe their national identity on the next question');
 
       if (details && details.nationalIdentity) {
         var answer = details.nationalIdentity.collection;
