@@ -70,8 +70,7 @@ noONSLogoLink: true
                                                     <label class="label label--inline u-fs-r "
                                                            for="a-level-2"
                                                            id="a-level-2-label">
-                                                        <strong
-                                                                class="u-fs-r">2 or more A levels</strong>
+                                                        <strong class="u-fs-r">2 or more A levels</strong>
                                                         <p class="u-fs-s u-db u-mb-no label--negative">
                                                             Include 4 or more AS levels
                                                         </p>
@@ -137,9 +136,7 @@ noONSLogoLink: true
                     <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
                             type="submit" name="">Save and continue
                     </button>
-
-                    
-                        <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
+                    <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
                 </form>
             </main>
         </div>
@@ -163,9 +160,8 @@ noONSLogoLink: true
         var aLevels = [];
 
         $('[name="checkbox-answer"]:checked').each(function(i, el) {
-        aLevels.push($(el).val());
+            aLevels.push($(el).val());
         });
-
 
         let url = '../individual-details-qualifications-a-level/?person_id=' + personId + '&edit=true';
         question = question.trim();
@@ -178,13 +174,12 @@ noONSLogoLink: true
         window.location.href = '../individual-details-summary/?person_id=' +
             personId + (surveyType ? '&survey=' + surveyType : '');
             storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
-
         }
     }));
 
     function updateRouting() {
         if(surveyType) {
-        $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+            $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
         }
         $('#survey-type').val(surveyType);
     }
