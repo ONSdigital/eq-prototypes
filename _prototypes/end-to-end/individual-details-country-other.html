@@ -116,7 +116,7 @@ noONSLogoLink: true
 
   function updateQuestion() {
     if(isVisitor) {
-        $('.js-heading').html('What country does ' + '<em class="highlight">' + person.firstLastName + '</em>' + ' usually live in?</em>');
+        $('.js-heading').html('In which country outside the UK does ' + '<em class="highlight">' + person.firstLastName + '</em>' + ' usually live?</em>');
     } else {
       if(storageAPI.getProxyFor(personId)) {
         $('.js-heading').html('You selected &ldquo;Elsewhere&rdquo;. ' + 'What is ' + '<em class="highlight">' + person.firstLastName +

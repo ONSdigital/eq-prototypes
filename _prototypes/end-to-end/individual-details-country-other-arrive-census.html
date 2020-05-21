@@ -133,9 +133,9 @@ noONSLogoLink: true
   function updateQuestion() {
     if(storageAPI.getProxyFor(personId)) {
         $('.js-heading').html('Did ' + '<em class="highlight">' + person.firstLastName + '</em>' +
-        ' arrive in the UK on or after ' + yearBeforeCensusDate);
+        ' arrive in the UK on or after ' + yearBeforeCensusDate + '?');
     } else {
-        $('.js-heading').html('Did you arrive in the UK on or after ' + yearBeforeCensusDate);
+        $('.js-heading').html('Did you arrive in the UK on or after ' + yearBeforeCensusDate + '?');
     }
   }
 

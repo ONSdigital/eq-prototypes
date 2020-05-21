@@ -33,7 +33,7 @@ noONSLogoLink: true
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title u-fs-xl js-heading">
-                                            Which country outside the UK do you mainly work in?
+                                            In which country outside the UK do you mainly work?
                                     </h1>
                                 </div>
 
@@ -107,8 +107,8 @@ noONSLogoLink: true
 
   function updateQuestion() {
     if(storageAPI.getProxyFor(personId)) {
-        $('.js-heading').html('Which country outside the UK does ' + '<em class="highlight">' + person.firstLastName + '</em>' +
-        ' mainly work in?');
+        $('.js-heading').html('In which country outside the UK does ' + '<em class="highlight">' + person.firstLastName + '</em>' +
+        ' mainly work?');
     }
   }
 

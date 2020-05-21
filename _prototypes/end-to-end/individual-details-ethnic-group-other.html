@@ -40,7 +40,7 @@ noONSLogoLink: true
                                 <div class="grid grid--gutterless">
                                     <div class="grid__col col-8@m">
                                         <p class="field">
-                                          <label class="label" for="ethnic-group">Ethnic group or background
+                                          <label class="label js-label" for="ethnic-group">Ethnic group or background
                                               <br>
                                               <span class="label__description u-no-js-hide">Enter your own answer or select from suggestions</span>
                                           </label>
@@ -114,7 +114,7 @@ noONSLogoLink: true
   function updateAnswer() {
     document.dispatchEvent(new CustomEvent('TYPEAHEAD-READY'));
     if (details && details.ethnicGroup) {
-        $('#ethnic-group').val(details.ethnicGroup.otherText);
+      $('#ethnic-group').val(details.ethnicGroup.otherText);
     }
   }
 
@@ -141,7 +141,10 @@ noONSLogoLink: true
         : 'your ')
        + questionText + ' ethnic group or background?';
 
+    var labelStr = questionText + ' ethnic group or background';
+
     $('.js-heading').html(str);
+    $('.js-label').html(labelStr + '<br>' + '<span class="label__description u-no-js-hide">Enter your own answer or select from suggestions</span>');
 
     if (details && details.ethnicGroup) {
         $('#ethnic-group').val(details.ethnicGroup.otherText);
