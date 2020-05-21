@@ -157,7 +157,8 @@ class AddressInput {
     const total = results.total;
     const originalLimit = 10;
 
-    let groupPostcodes = addresses[0] && addresses[0].bestMatchAddress ? this.groupPostcodes(addresses, input) : null;
+    // let groupPostcodes = addresses[0] && addresses[0].bestMatchAddress ? this.groupPostcodes(addresses, input) : null;
+    let groupPostcodes = null;
     
     if (groupPostcodes) {
       mappedResults = groupPostcodes.map(({ address, count, postcode, uprn }) => {
