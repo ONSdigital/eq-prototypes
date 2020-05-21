@@ -139,6 +139,10 @@ noONSLogoLink: true
         personId + (surveyType ? '&survey=' + surveyType : '') +
         (isEditing ? '&edit=true' : '');
         storageAPI.storePageData('/end-to-end/individual-details-national-identity-other/', window.location.pathname);
+    } else {
+      window.location.href = '../individual-details-ethnic-group/?person_id=' +
+        personId + (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end/individual-details-ethnic-group/', window.location.pathname);
     }
   }));
 
