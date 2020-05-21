@@ -36,7 +36,7 @@ noONSLogoLink: true
                                         In your main job, what is your employment status?
                                     </h1>
                                 </div>
-                                <p class="js-help">Your main job is the job in which you usually work the most hours</p>
+                                <p class="js-description js-piping">Your main job is the job in which you usually work the most hours</p>
                                 <div class="answer">
                                     <div class="answer__fields js-fields">
                                         <div class="field field--radio field--multiplechoice ">
@@ -66,7 +66,7 @@ noONSLogoLink: true
                                                         <strong
                                                                 class="u-fs-r">Self-employed or freelance without employees</strong>
                                                         <br>
-                                                        <span class="label__description label__inner label--negative u-fs-m js-answer">Freelance means that you are self-employed and work for different companies or people on particular pieces of work</span>
+                                                        <span class="label__description label__inner label--negative u-fs-m js-piping">Freelance means that you are self-employed and work for different companies or people on particular pieces of work</span>
                                                     </label>
                                                 </div>
                                                 <div class="field__item js-focusable-box">
@@ -109,7 +109,8 @@ noONSLogoLink: true
         isEditing = urlParams.get('edit'),
         details = storageAPI.getPersonalDetailsFor(personId),
         surveyType = urlParams.get('survey'),
-        question = $('#question-title').html();
+        question = $('#question-title').html(),
+        pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
 
     $('.qa-btn-submit').on('click',
         storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
@@ -142,9 +143,13 @@ noONSLogoLink: true
             $('.js-heading').html('In their main job, what is ' + '<em class="highlight">' + person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
                 ' employment status?');
         }
+        
         if (details['employment'].sevenDaysAgo[0] === 'No') {
-            var replaceQuestion = $('.js-heading').html().replace('is', 'was');
-            $('.js-heading').html(replaceQuestion);
+            pipingDestinations.forEach(function(pipingDestination) {
+                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('is', 'was');
+                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('are', 'were');
+                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('work', 'worked');
+            });
         }
     }
 
@@ -152,10 +157,25 @@ noONSLogoLink: true
         if (details && details.employment.status) {
             $('input[type=radio][value="' + details.employment.status +'"]').prop("checked", true);
         }
+        
+        if (details['employment'].sevenDaysAgo[0] === 'No') {
+            if(storageAPI.getProxyFor(personId)) {
+                $('.js-description').html('This is the most recent job they had. If they had more than one job at the same time, answer for the job in which they usually worked the most hours.');
+            } else {
+                $('.js-description').html('This is the most recent job you had. If you had more than one job at the same time, answer for the job in which you usually worked the most hours.');
+            }
+        }
+
+        if(storageAPI.getProxyFor(personId)) {
+            pipingDestinations.forEach(function(pipingDestination) {
+                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('you', 'they');
+                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('Your', 'Their');
+            });
+        }
     }
 
-    $(updateAnswer);
     $(updateQuestion);
+    $(updateAnswer);
     $(updateRouting);
 
     /**
