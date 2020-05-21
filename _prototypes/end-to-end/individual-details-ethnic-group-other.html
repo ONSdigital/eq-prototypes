@@ -130,12 +130,16 @@ noONSLogoLink: true
       }
     }
 
-    var str = 'You selected "' + questionTextPt2 + '". How would you describe ' +
+    var str = 'You selected &ldquo;' + questionTextPt2 + '&rdquo;. How would ' +
       (storageAPI.getProxyFor(personId)
-        ? '<em class="highlight">' + person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName) + '</em>'
-        : 'your') +
-      ' ' + questionText +
-      ' ethnic group or background?';
+        ? '<em class="highlight">' + person.firstLastName + '</em>'
+        : 'you') +
+      ' ' +
+      ' describe ' + 
+      (storageAPI.getProxyFor(personId)
+        ? 'their '
+        : 'your ')
+       + questionText + ' ethnic group or background?';
 
     $('.js-heading').html(str);
 
