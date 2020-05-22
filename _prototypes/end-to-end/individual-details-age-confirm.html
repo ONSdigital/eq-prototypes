@@ -143,17 +143,20 @@ noONSLogoLink: true
         if(isVisitor) {
           window.location.href = '../individual-details-dob/' + '?person_id=' + personId + (surveyType ? '&survey=' + surveyType :'');
           storageAPI.storePageData('/end-to-end/individual-details-dob/', window.location.pathname);
-        }
-        else if(val === 'Yes' && isEditing) {
+        } else if(val === 'Yes' && isEditing) {
           window.location.href = '../individual-details-summary/' + '?person_id=' + personId + (surveyType ? '&survey=' + surveyType :'');
           storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
-        }
-        else if(val === 'Yes' && !(isEditing)){
-          window.location.href = '../individual-details-sex/?person_id=' + personId + '&age=' + ageWithUnit;
-          storageAPI.addUpdateAge(personId, ageYear);
-          storageAPI.storePageData('/end-to-end/individual-details-sex/', window.location.pathname);
-        }
-        else if(val === 'No' && isEditing){
+        } else if(val === 'Yes' && !(isEditing)){
+          if (age < 15) {
+            window.location.href = '../individual-details-30-day-address/?person_id=' + personId;
+            storageAPI.addUpdateAge(personId, ageYear);
+            storageAPI.storePageData('/end-to-end/individual-details-30-day-address/', window.location.pathname);
+          } else {
+            window.location.href = '../individual-details-sex/?person_id=' + personId + '&age=' + ageWithUnit;
+            storageAPI.addUpdateAge(personId, ageYear);
+            storageAPI.storePageData('/end-to-end/individual-details-sex/', window.location.pathname);
+          }
+        } else if(val === 'No' && isEditing){
           val = '';
           storageAPI.addUpdateAgeConfirm(personId, val, question, url);
           window.location.href = '../individual-details-dob/' + '?person_id=' + personId + '&edit=true' + (surveyType ? '&survey=' + surveyType :'');
