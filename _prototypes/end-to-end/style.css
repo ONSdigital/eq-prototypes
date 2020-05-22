@@ -540,6 +540,39 @@ p.label--negative:empty {
     background-repeat: no-repeat;
     background-size: .8rem .8rem;
 }
+/**
+ * Navigation
+**/
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.breadcrumb__item {
+    display: inline-block;
+    margin: 0;
+    white-space: nowrap; 
+}
+
+.breadcrumb__item:not(:last-child):after {
+    display: inline-block;
+    height: .65rem;
+    background-image: url(/img/icons/icons--chevron-right-black.svg);
+    background-repeat: no-repeat;
+    background-size: .65rem .65rem;
+    content: '';
+    margin: 0;
+    vertical-align: middle;
+    /* We have to override the icon settings so it renders correctly in ie11 */
+    width: 1.25rem;
+    background-position: 50%;
+}
+
+.breadcrumb__item--current {
+    color: #222;
+}
 
 /**
  * Hub
