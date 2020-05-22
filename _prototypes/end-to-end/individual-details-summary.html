@@ -276,7 +276,7 @@ noONSLogoLink: true
         }
 
         if (individualDetails[person].address) {
-            $container.append(createListItem(individualDetails[person].address.val.addressLine1 ? individualDetails[person].val.addressLine1 : 'No answer provided', individualDetails[person].address.question, individualDetails[person].address.url));
+            $container.append(createListItem(individualDetails[person].address.val.addressLine1 ? individualDetails[person].address.val.addressLine1 : 'No answer provided', individualDetails[person].address.question, individualDetails[person].address.url));
         }
 
         if (individualDetails[person].apprenticeship) {

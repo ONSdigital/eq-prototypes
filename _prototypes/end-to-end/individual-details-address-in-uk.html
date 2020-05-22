@@ -184,6 +184,7 @@ noONSLogoLink: true
 
     if((person.id !== visitor1Person.id) && visitors.length > 1) {
       $('.js-extra-option').show();
+      $('#same-as-visitor1').val('Same address as ' + visitor1Person.fullName);
       $('.js-extra-option-label').html('Same address as ' + visitor1Person.fullName);
     } else {
       $('.js-extra-option').hide();

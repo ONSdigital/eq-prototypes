@@ -82,7 +82,8 @@ noONSLogoLink: true
     details = storageAPI.getPersonalDetailsFor(personId),
     ethnicGroup = (urlParams.get('ethnic-group') ? urlParams.get('ethnic-group') : details.ethnicGroup.val),
     surveyType = urlParams.get('survey'),
-    question = $('#question-title').html();
+    question = $('#question-title').html(),
+    secondPartOfLabel = ' ethnic group or background';
 
     storageAPI.personalBookmark(personId, window.location.href);
 
@@ -127,6 +128,7 @@ noONSLogoLink: true
         questionTextPt2 = "African";
       } else if (ethnicGroup === "Black") {
         questionText = storageAPI.personalDetailsEthnicGroupMap[ethnicGroup].questionWithoutAfrican;
+        secondPartOfLabel = ' background'
       }
     }
 
@@ -139,9 +141,9 @@ noONSLogoLink: true
       (storageAPI.getProxyFor(personId)
         ? 'their '
         : 'your ')
-       + questionText + ' ethnic group or background?';
+       + questionText + ' ' + secondPartOfLabel +'?';
 
-    var labelStr = questionText + ' ethnic group or background';
+    var labelStr = questionText + ' ' + secondPartOfLabel;
 
     $('.js-heading').html(str);
     $('.js-label').html(labelStr + '<br>' + '<span class="label__description u-no-js-hide">Enter your own answer or select from suggestions</span>');
