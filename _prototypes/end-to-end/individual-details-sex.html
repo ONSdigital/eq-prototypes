@@ -118,9 +118,9 @@ noONSLogoLink: true
       $('.panel').addClass('u-d-no');
       $('.js-collapsible').removeClass('u-d-no');
     } else {
-      age = details.age;
+      age = urlParams.get('age').split(' ');
     }
-  
+
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function(e) {
     let url = '../individual-details-sex/?person_id=' + personId + '&edit=true';
@@ -144,11 +144,15 @@ noONSLogoLink: true
         personId;
         storageAPI.storePageData('/end-to-end/individual-details-address-in-uk/', window.location.pathname);
 
-    } else if(ageCheck(age) && !isVisitor) {
+    } else if(ageCheck(age, 14) && !isVisitor) {
+      e.preventDefault();
+      window.location.href = '../individual-details-relationship/?person_id=' +
+        personId;
+        storageAPI.storePageData('/end-to-end/individual-details-relationship/', window.location.pathname);
+    } else if (!ageCheck(age, 14) && !isVisitor){
       e.preventDefault();
       window.location.href = '../individual-details-30-day-address/?person_id=' +
         personId;
-        $('.panel').addClass('u-d-no');
         storageAPI.storePageData('/end-to-end/individual-details-30-day-address/', window.location.pathname);
     }
   }));
@@ -165,16 +169,16 @@ noONSLogoLink: true
       $('.js-heading').html('What is ' + '<em class="highlight">' + person.firstLastName +
         window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' + ' sex?');
     }
-    if (!ageCheck(age)) {
+    if (ageCheck(age, 15)) {
         $('.panel--simple').removeClass('u-vh');
     }
   }
 
-  function ageCheck(age) {
-    if (age[1] === "years" && age[0] > 15) {
-      return false;
+  function ageCheck(age, agelimit) {
+    if (age[1] === "years" && age[0] > agelimit) {
+      return true;
     } else
-      return true
+      return false
   }
 
   if (details && details.sex) {
