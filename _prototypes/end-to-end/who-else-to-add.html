@@ -75,7 +75,7 @@ noONSLogoLink: true
                                            data-qa="input-text" value=""/>
                                   </p>
                                 </div>
-                                <div class="question__answer">
+                                <div id="middle-name-div" class="question__answer">
                                   <p class="field">
                                     <label class="label" for="middle-name">
                                         <span class="label__inner">
@@ -295,6 +295,8 @@ noONSLogoLink: true
         addressLine1 + ', ' + addressLine2 +
         ' who does not have another UK address?';
 
+    console.log(window.location.search.match(/journey=visitors/));
+
     if(editUserId) {
       if (memberFound) {
         person = memberFound['@person'];
@@ -304,13 +306,16 @@ noONSLogoLink: true
         $('#question-title').html('Change details for ' + person.fullName);
         $('#change-line').html('<p>If you have added this person by mistake or if circumstances have changed, you can <a href="../remove-household-member/?person_id=' + person.id +'">remove</a> them.<br>');
         $('#member-list').remove();
+        if (window.location.search.match(/journey=visitors/)) {
+          $('#middle-name-div').addClass('u-vh');
+        }
       } else {
         $('#question-title').html('Member not found');
       }
-    }
-    else if (window.location.search.match(/journey=visitors/)) {
+    } else if (window.location.search.match(/journey=visitors/)) {
       $('#question-title').html(overrideTitle);
       $('.js-visitor-definition').show();
+      $('#middle-name-div').addClass('u-vh');
     }
     else if (window.location.search.match(/journey=temp-living-here/)) {
       $('#question-title').html(overrideTitleStayingOutsideUK);
