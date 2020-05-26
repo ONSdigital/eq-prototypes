@@ -90,6 +90,10 @@ h4 {
     border-left: 1px solid #888;
 }
 
+.u-f-l {
+    float: left;
+}
+
 .page__subheader {
     padding: 1rem 0;
 }
@@ -267,6 +271,20 @@ details summary:focus {
 .panel--branded {
     background-color: rgba(227,77,219,.15);
     border-color: #93328e;
+}
+.icon:before {
+    display: inline-block;
+    background-repeat: no-repeat;
+    content: "";
+    vertical-align: middle;
+}
+
+.icon--tick:before {
+    width: 1.5rem;
+    height: 1.5rem;
+    background: url(https://sdc-global-design-patterns.netlify.com/assets/img/icons/icons--check-green.svg) no-repeat 50%;
+    background-size: 1.5rem 1.5rem;
+    margin: 0 .5rem 0 0;
 }
 
 .question {
@@ -536,9 +554,20 @@ p.label--negative:empty {
     display: inline-block;
     width: .8rem;
     height: .8rem;
-    background-image: url(/img/icons/icons--chevron-right-blue.svg);
     background-repeat: no-repeat;
     background-size: .8rem .8rem;
+}
+
+.btn--link.btn--ghost-blue .btn__inner:after, 
+.btn--link.btn--ghost-blue:active .btn__inner:after, 
+.btn--link.btn--ghost-blue:hover:focus .btn__inner:after {
+    background-image: url(/img/icons/icons--chevron-right-blue.svg);
+}
+
+.exit.btn--ghost-blue .btn__inner:after, 
+.exit.btn--ghost-blue:active .btn__inner:after, 
+.exit.btn--ghost-blue:hover:focus .btn__inner:after {
+    background-image: url(/img/icons/icons--exit-blue.svg);
 }
 /**
  * Navigation
@@ -796,9 +825,16 @@ hr {
     display: inline-block;
     width: .8rem;
     height: .8rem;
-    background-image: url(/img/icons/guidance-white.svg);
     background-repeat: no-repeat;
     background-size: .8rem .8rem;
     margin: 0 0 .2rem .5rem;
     vertical-align: middle;
+}
+
+.btn--ghost.exit:after {
+    background-image: url(/img/icons/icons--exit.svg);
+}
+
+.btn--ghost.complete-later:after {
+    background-image: url(/img/icons/guidance-white.svg);
 }

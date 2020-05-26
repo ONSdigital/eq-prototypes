@@ -35,11 +35,6 @@ exit: true
     margin-left: -0.2em;
 }
 
-.tick-spacing {
-    margin-left: 1.3em;
-    margin-bottom: 0.8em;
-}
-
 </style>
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v5.0"></script>
@@ -72,11 +67,13 @@ exit: true
                 </div>
                 <div class="panel panel--simple panel--success u-mb-m">
                     <div class="panel__body">
+                        <div class="pabel__icon u-f-l">
+                            <span class="icon icon--tick"></span>
+                        </div>
                         <h1 class="u-mb-xs">
                             Thank you for completing the census
                         </h1>
-                        <p class="u-mb-xs">Your census has been submitted for the household at:<br>
-                        <div class="full-address-text u-fs-r--b">Address not set</div>
+                        <p class="u-mb-xs">Your census has been submitted for the household at <span class="full-address-text u-fs-r--b">Address not set</span></p>
                     </div>
                 </div>
                 <p class="lock u-mb-l">Your personal information is protected by law and will be kept confidential</p>
@@ -145,7 +142,7 @@ exit: true
 
     $(function () {
 	  if(sessionStorage.getItem('address')) {
-		$('.full-address-text').html((sessionStorage.getItem('address') || '').replace(/,/g, '<br>'));
+		$('.full-address-text').html((sessionStorage.getItem('address-line-1') || ''));
       }
 	});
 
