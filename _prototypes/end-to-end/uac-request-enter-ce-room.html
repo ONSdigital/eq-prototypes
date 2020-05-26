@@ -1,0 +1,126 @@
+---
+title: Version 1
+project: End to end prototype
+globalcss: false
+layout: eq-default-extras
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+logoUrl: ../home
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../section-intro">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m"></div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <div class="group">
+                    <div class="block">
+
+                        <div class="question">
+                            <h1 class="question__title u-fs-xl js-heading"
+                                data-qa="question-title">
+                                What is your room name or number?
+                            </h1>
+
+                            <fieldset
+                                    class="question__fieldset js-question-fieldset">
+                                <legend class="u-vh">What is your name?</legend>
+
+                            <div class="question__answers">
+                                <div class="question__answer">
+                                  <p class="field">
+                                    <label class="label"
+                                           for="room-number">
+                                        <span class="label__inner">
+                                            Room name or number
+                                        </span>
+                                    </label>
+                                    <input required autocomplete="new-password" required data-error-msg="Enter a first name to continue" class="input input--text"
+                                           id="room-number"
+                                           data-qa="input-text" value="" data-error-msg="Enter a first name to continue"/>
+                                  </p>
+                                </div>
+                            </div>
+                          </fieldset>
+                          <p class="u-mt-s"><a class="js-na-link" href="#">I don't have a room name or number</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-submit btn--primary btn--lg u-mt-xl"
+                        data-qa="btn-submit" type="submit"
+                        name="action[save_continue]">
+                  Continue
+                </button>
+            </main>
+        </div>
+    </div>
+</div>
+
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+  var urlParams = new URLSearchParams(window.location.search),
+    isEditing = urlParams.get('edit') === 'true',
+    redirect = urlParams.get('redirect'),
+    livesHere = sessionStorage.getItem('lives-here') === 'yes',
+    storageAPI = window.ONS.storage,
+    userAsMember = storageAPI.getUserAsHouseholdMember(),
+    userPerson = userAsMember && userAsMember['@person'],
+    hasErrors = false;
+    var urlParams = new URLSearchParams(window.location.search);
+    var previousPage = urlParams.get('previous');
+    var currentJourney = urlParams.get('current-journey');
+    var currentPage = 'uac-request-enter-ce-room';
+
+
+  $('.btn-submit').on('click', function(e) {
+    e.preventDefault();
+    sessionStorage.setItem('ce-room-number', getRoomNumber());
+
+    if(currentJourney === 'new-hh-paper') {
+      var url = '../uac-request-confirm-address';
+    }
+    if(currentJourney === 'new-ir-paper') {
+      var url = '../uac-request-confirm-address/';
+    }
+    else {
+      var url = '../uac-request-enter-name/';
+    }
+
+    window.location.href = url + '?previous=' + currentPage + '&current-journey=' + currentJourney;
+
+  });
+
+  function getRoomNumber() {
+    return [
+      document.getElementById('room-number').value
+    ].filter(function(number) {
+      return number
+    });
+  }
+
+  $(function() {
+    var userPerson = storageAPI.getUserPerson();
+
+    if (userPerson) {
+      $('#first-name').val(userPerson.firstName);
+      $('#last-name').val(userPerson.lastName);
+    }
+  });
+
+  function updateAllLinks() {
+    $('.js-previous-link').attr('href', '../' + previousPage);
+    $('.js-na-link').attr('href', '../uac-request-enter-name/' + '?previous=' + currentPage + '&current-journey=' + currentJourney);
+  }
+
+  $(updateAllLinks);
+</script>

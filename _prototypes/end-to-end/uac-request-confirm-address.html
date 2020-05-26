@@ -33,7 +33,7 @@ logoUrl: ../home
                                 </h1>
                             </div>
                             <div class="u-mb-xs js-name-address"></div>
-                            <p class="u-mb-m"><a href="../uac-request-enter-name/?previous=uac-request-confirm-address">Change name</a></p>
+                            <p class="u-mb-m"><a id="change-name" href="">Change name</a><span id="change-ce-room-number-container"> | <a id="change-ce-room-number" href="">Change room name or number</a></span></p>
                             <div class="panel panel--simple panel--info u-mb-m js-panel u-d-no">
                                   <div class="panel__body">
                                       A letter with your individual access code will arrive in a plain white envelope
@@ -93,6 +93,7 @@ logoUrl: ../home
     var currentJourney = urlParams.get('current-journey');
     var codeType;
     var codeTypeShort;
+    var roomNumber;
 
     if(currentJourney === 'new-ir-uac'){
         var codeType = 'an individual access code'
@@ -115,7 +116,13 @@ logoUrl: ../home
     }
 
     function updateQuestion() {
-        $('.js-name-address').html('<strong>' + addresseeName + '</strong>' + ' <br> ' + addressLine1);
+        var roomNumber = (sessionStorage.getItem('ce-room-number') || '');
+        if (!roomNumber){
+            $('.js-name-address').html('<strong>' + addresseeName + '</strong>' + '<br>' + addressLine1);
+            $('#change-ce-room-number-container').hide();
+        } else {
+            $('.js-name-address').html('<strong>' + addresseeName + '</strong>' + '<br>' + roomNumber + '<br>' + addressLine1);
+        }
     }
 
     var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
