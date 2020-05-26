@@ -109,18 +109,27 @@ logoUrl: ../home
   }
 
   $(function() {
-    var userPerson = storageAPI.getUserPerson();
+    var roomNumber = (sessionStorage.getItem('ce-room-number') || '');
 
-    if (userPerson) {
-      $('#first-name').val(userPerson.firstName);
-      $('#last-name').val(userPerson.lastName);
+    if (roomNumber) {
+      $('#room-number').val(roomNumber);
     }
   });
 
   function updateAllLinks() {
     $('.js-previous-link').attr('href', '../' + previousPage);
-    $('.js-na-link').attr('href', '../uac-request-enter-name/' + '?previous=' + currentPage + '&current-journey=' + currentJourney);
   }
+
+  $('.js-na-link').on('click', function(e) {
+    e.preventDefault();
+    sessionStorage.removeItem('ce-room-number');
+
+    if (previousPage === 'uac-request-confirm-address') {
+      window.location.href = '../uac-request-confirm-address/' + '?previous=' + currentPage + '&current-journey=' + currentJourney;
+    } else {
+      window.location.href = '../uac-request-enter-name/' + '?previous=' + currentPage + '&current-journey=' + currentJourney;
+    }
+  });
 
   $(updateAllLinks);
 </script>

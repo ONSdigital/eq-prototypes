@@ -33,7 +33,7 @@ logoUrl: ../home
                                 </h1>
                             </div>
                             <div class="u-mb-xs js-name-address"></div>
-                            <p class="u-mb-m"><a id="change-name" href="">Change name</a><span id="change-ce-room-number-container"> | <a id="change-ce-room-number" href="">Change room name or number</a></span></p>
+                            <p class="u-mb-m"><a id="change-name" href="">Change name</a><span id="change-ce-room-number-container"> | <a id="js-change-ce-room-number-link" href="">Change room name or number</a></span></p>
                             <div class="panel panel--simple panel--info u-mb-m js-panel u-d-no">
                                   <div class="panel__body">
                                       A letter with your individual access code will arrive in a plain white envelope
@@ -91,6 +91,7 @@ logoUrl: ../home
     addresseeName = (sessionStorage.getItem('addressee-name') || '');
     var previousPage = urlParams.get('previous');
     var currentJourney = urlParams.get('current-journey');
+    var currentPage = 'uac-request-confirm-address';
     var codeType;
     var codeTypeShort;
     var roomNumber;
@@ -156,6 +157,7 @@ logoUrl: ../home
 
     function updateAllLinks() {
         $('.js-previous-link').attr('href', '../uac-request-method/' + (previousPage ? '&previous=' + previousPage : ''));
+        $('#js-change-ce-room-number-link').attr('href', '../uac-request-enter-ce-room/' + '?previous=' + currentPage + '&current-journey=' + currentJourney);
     }
 
     $(updateAllLinks);
