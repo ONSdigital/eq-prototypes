@@ -96,7 +96,7 @@ noONSLogoLink: true
     surveyType = urlParams.get('survey');
     storageAPI.personalBookmark(personId, window.location.href),
     question = $('#question-title').html();
-    var censusDate = window.ONS.utils.getSignificant();
+    var censusDate = window.ONS.utils.getSignificant("withoutDay");
     var censusDateYearBefore = (censusDate.slice(-4) -1);
     var yearBeforeCensusDate = censusDate.replace(/.{4}$/, censusDateYearBefore);
 
