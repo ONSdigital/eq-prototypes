@@ -24,7 +24,7 @@ noONSLogoLink: true
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password"
-                      action="../individual-details-orientation">
+                      action="#">
                     <input autocomplete="new-password" type="hidden" name="person_id" id="person"
                            value="#"/>
                     <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
@@ -153,24 +153,23 @@ noONSLogoLink: true
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
-
+    e.preventDefault();
     var val = $('[name="health-support"]:checked').val();
     let url = '../individual-details-health-support/?person_id=' + personId + '&edit=true';
     question = question.trim();
 
     storageAPI.addUpdateHealthSupport(personId, val, question, url);
-    storageAPI.storePageData('/end-to-end/individual-details-orientation/', window.location.pathname);
 
     if(isEditing) {
-      e.preventDefault();
       window.location.href = '../individual-details-summary/?person_id=' + personId;
       storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
-
     } else if(details['age'] < 16) {
-      e.preventDefault();
       storageAPI.clearPersonalBookmark(personId);
       window.location.href = '../hub';
       storageAPI.storePageData('/end-to-end/hub/', window.location.pathname);
+    } else {
+      window.location.href = '../individual-details-orientation?person_id=' + personId;
+      storageAPI.storePageData('/end-to-end/individual-details-orientation/', window.location.pathname);
     }
   }));
 
