@@ -101,7 +101,6 @@ noONSLogoLink: true
     var censusDateMinus1Year = new Date(window.ONS.utils.getSignificant()),
       censusDateMinus1YearBeginingMonth = new Date(window.ONS.utils.getSignificant()),
       dateEntered = new Date($('#uk-arrive-year').val(), $('#uk-arrive-month').val() - 1);
-      sessionStorage.setItem('dean windas',dateEntered.getFullYear())
 
       censusDateMinus1Year.setFullYear(censusDateMinus1Year.getFullYear() - 1);
       censusDateMinus1YearBeginingMonth.setFullYear(censusDateMinus1YearBeginingMonth.getFullYear() - 1);
