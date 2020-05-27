@@ -110,7 +110,6 @@ noONSLogoLink: true
       window.location.href = '../individual-details-summary/?person_id=' +
         personId + (surveyType ? '&survey=' + surveyType : '');
         storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
-
     }
 
     if ($('[name="arrive-census"]:checked').val() === 'Yes') {
@@ -123,11 +122,7 @@ noONSLogoLink: true
     } else {
         window.location.href = '../individual-details-country-other-stay/?person_id=' + personId;
         storageAPI.storePageData('/end-to-end/individual-country-other-stay/', window.location.pathname);
-
     }
-    
-    
-
   });
 
   function updateQuestion() {
