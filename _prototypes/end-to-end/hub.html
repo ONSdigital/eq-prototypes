@@ -318,7 +318,6 @@ noONSLogoLink: true
    * Create list item from state
    */
   function createListItem(person, surveyStatus, linkHref, isVisitor) {
-    console.log(person);
     var $nodeEl = $('#person-survey-item-template').clone(),
       $surveyStatus = $nodeEl.find('.js-survey-status'),
       $surveyQuestion = $nodeEl.find('.js-survey-question');

@@ -187,16 +187,16 @@ noONSLogoLink: true
                 window.location.href = '../individual-details-summary/?person_id=' +
                     personId + (surveyType ? '&survey=' + surveyType : '');
                     storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
-            } else if(details['age'] === 0) {
-                e.preventDefault();
-                window.location.href = '../individual-details-national-identity/?person_id=' + personId;
-                storageAPI.storePageData('/end-to-end/individual-details-national-identity/', window.location.pathname);
             } else if(val === 'Elsewhere') {
                 e.preventDefault();
                 window.location.href = '../individual-details-country-other/?person_id=' + personId +
                     (surveyType ? '&survey=' + surveyType : '') +
                     (isEditing ? '&edit=true' : '');
                     storageAPI.storePageData('/end-to-end/individual-details-country-other/', window.location.pathname);
+            } else if(details['age'] === 0) {
+                e.preventDefault();
+                window.location.href = '../individual-details-national-identity/?person_id=' + personId;
+                storageAPI.storePageData('/end-to-end/individual-details-national-identity/', window.location.pathname);
             } else if(val === 'Republic of Ireland') {
                 e.preventDefault();
                 window.location.href = '../individual-details-country-other-arrive/?person_id=' + personId +
