@@ -108,7 +108,7 @@ noONSLogoLink: true
       censusDateMinus1YearBeginingMonth.setDate(1);
 
       if(!isVisitor){
-        if(dateEntered.getTime() === censusDateMinus1YearBeginingMonth.getTime()) {
+        if(dateEntered.getTime() === censusDateMinus1YearBeginingMonth.getTime() || dateEntered.getFullYear() === 1899) {
             window.location.href = '../individual-details-country-other-arrive-census/?person_id=' +
             personId + (surveyType ? '&survey=' + surveyType : '');
             storageAPI.storePageData('/end-to-end/individual-details-country-other-arrive-census/', window.location.pathname);
@@ -146,7 +146,7 @@ noONSLogoLink: true
 
   function updateQuestion() {
     if(storageAPI.getProxyFor(personId) || isVisitor) {
-      $('.js-heading').html('When did ' + '<em class="highlight">' + person.firstLastName + '</em>' + ' recently arrive to live in the United Kingdom?');
+      $('.js-heading').html('When did ' + '<em class="highlight">' + person.firstLastName + '</em>' + ' most recently arrive to live in the United Kingdom?');
     }
   }
 

@@ -125,7 +125,7 @@ noONSLogoLink: true
                                             <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Why your answer is important">Hide this</button>
                                         </div>
                                     </div>
-                            </div>                            
+                            </div>
                         </div>
                     </div>
                     <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
@@ -161,24 +161,6 @@ noONSLogoLink: true
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function(e) {
     e.preventDefault();
-    if ($('.address-input--search').length != 0) {
-      if ($("#address-field").val() == '' || $("#address-field").val() != '' ){
-        var testFails = true;
-      }
-      $('.address-input__manual input').prop('type', 'readonly');
-      window.ONS.utils.validateInputs(testFails, "input[id='address-field']");
-    } else if ($('.address-input--search').length === 0) {
-      var testFails = '';
-      $('.address-input__manual input').prop('type', 'text');
-      window.ONS.utils.validateInputs(testFails, "input[id='address-line-1']");
-      window.ONS.utils.validateInputs(testFails, "input[id='address-town']");
-      window.ONS.utils.validateInputs(testFails, "input[id='address-postcode']");
-    }
-
-    if (hasErrors) {
-        hasErrors = false;
-        return false;
-    } else {
     let url = '../individual-details-employment-address-depot/?person_id=' + personId + '&edit=true';
     question = question.trim();
     storageAPI.addUpdateEmploymentWorkplaceAddress(personId,
@@ -194,7 +176,6 @@ noONSLogoLink: true
     storageAPI.clearPersonalBookmark(personId);
     storageAPI.storePageData('/end-to-end/hub/', window.location.pathname);
     window.location.href = '../hub';
-    }
   }));
 
   function updateRouting() {

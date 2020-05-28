@@ -332,8 +332,8 @@ noONSLogoLink: true
     $nodeEl.attr('id', '');
     $nodeEl.find('.js-person-name').html(
       personFullNameNoDoubleSpace +
-        (person.id === storageAPI.IDS.USER_HOUSEHOLD_MEMBER_ID ? '': '') +
-        (isVisitor ? ' (Visitor)': '')
+        (person.id === storageAPI.IDS.USER_HOUSEHOLD_MEMBER_ID ? '' : '') +
+        (isVisitor ? ' (Visitor)' : '') + (person.id === window.ONS.storage.IDS.USER_HOUSEHOLD_MEMBER_ID ? ' (You)' : '')
     );
 
     $nodeEl.find('.js-link').html(statusMap[surveyStatus].linkText);

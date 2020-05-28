@@ -113,7 +113,7 @@ noONSLogoLink: true
           (surveyType ? '&survey=' + surveyType : '');
         storageAPI.storePageData('/end-to-end/individual-details-employment-job-work-outside-uk/', window.location.pathname);
     } else {
-        if(JSON.stringify(details.employment.mainlyWork) === '"At a workplace"') {
+        if(JSON.stringify(details.employment.mainlyWork) === '"At a workplace"' || JSON.stringify(details.employment.mainlyWork) === undefined) {
             window.location.href = '../individual-details-employment-address-workplace?person_id=' + personId +
             (surveyType ? '&survey=' + surveyType : '');
              storageAPI.storePageData('/end-to-end/individual-details-employment-address-workplace/', window.location.pathname);

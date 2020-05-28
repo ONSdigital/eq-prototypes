@@ -182,12 +182,17 @@ noONSLogoLink: true
                     personId + (surveyType ? '&survey=' + surveyType : '');
                     storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
 
-            } else if(val === 'Home address' || val === 'Student address' || val == null) {
+            } else if(val === 'Home address' || val == null) {
                 window.location.href = '../individual-details-country/?person_id=' +
                     personId + (surveyType ? '&survey=' + surveyType : '');
                     storageAPI.storePageData('/end-to-end/individual-details-country/', window.location.pathname);
 
-            } else if (val === 'Another address'){
+            } else if ((val === 'Another address'|| val === 'Student address') && (details && details.Address30DayUK && details.Address30DayUK.address || details && details.Address30DayCountry && details.Address30DayCountry.value)){
+                window.location.href = '../hub/?person_id=' +
+                    personId + (surveyType ? '&survey=' + surveyType : '');
+                    storageAPI.storePageData('/end-to-end/hub/', window.location.pathname);
+
+            } else if (val === 'Another address') {
                 window.location.href = '../individual-details-student-address-other/?person_id=' +
                     personId + (surveyType ? '&survey=' + surveyType : '');
                     storageAPI.storePageData('/end-to-end/individual-details-student-address-other/', window.location.pathname);

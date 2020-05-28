@@ -256,7 +256,7 @@ function createListItemPerson(member) {
   return $('<li class="list__item">').addClass('mars').html(
     '<span class="list__item-name">' +
       member['@person'].fullName +
-      (member['@person'].id === USER_HOUSEHOLD_MEMBER_ID ? '' : '') +
+      (member['@person'].id === USER_HOUSEHOLD_MEMBER_ID ? ' (You)' : '') +
     '</span>'
   );
 }
@@ -423,6 +423,7 @@ function createMemberItem(member, { redirect } = { redirect: null }, noEdit) {
     $spacer.hide();
   } 
   else if (!noEdit && memberIsUser) {
+    personNameText += ' (You)';
     $editLink.html('Change');
     $removeLink.hide();
     $spacer.hide();
