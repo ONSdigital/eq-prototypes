@@ -23,6 +23,10 @@
     <div class="page__footer">
         {% if page.footer == "minimal" %}
             {% include footer-eq-default-minimal.html %}
+        {% elsif page.footer == "census-website" %}
+            {% include footer-census-website.html %}
+        {% elsif page.footer == "census-transactional" %}
+            {% include footer-census-transactional.html %}            
         {% else %}
             {% include footer-eq-default-transactional.html %}
         {% endif %}
