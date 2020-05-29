@@ -37,7 +37,7 @@ logoUrl: ../home
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title saturn js-piping">
-                                        How would you like to receive a new household access code?
+                                        How would you like to receive a new {x} access code?
                                     </h1>
                                 </div>
 
@@ -69,7 +69,7 @@ logoUrl: ../home
                                                            for="post">
                                                         Post
                                                         <br>
-                                                        <p class="radio__description label--negative u-fs-s u-mb-no">We can only send access codes to the registered household address</p>
+                                                        <p class="radio__description label--negative u-fs-s u-mb-no js-piping">We can only send access codes to the registered household address</p>
                                                     </label>
                                                 </div>
                                             </fieldset>
@@ -100,6 +100,7 @@ logoUrl: ../home
     var previousPage = searchParams.get('previous');
     var currentJourney = searchParams.get('current-journey');
     var form = document.querySelector('form');
+    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
 
     form.addEventListener('submit', function(event) {
         event.preventDefault();
@@ -112,9 +113,16 @@ logoUrl: ../home
     });
 
     function updateQuestion() {
-        if(currentJourney === 'new-ir-uac') {
-            $('.js-piping').html('How would you like to receive an individual access code?');
-        }
+        pipingDestinations.forEach(function(pipingDestination) {
+            if(currentJourney === 'new-ir-uac') {
+                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', 'individual');
+            } else if(currentJourney === 'new-ce-manager-uac') {
+                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', 'manager');
+                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('household', '');
+            } else {
+                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', 'household');
+            }
+        });
     }
 
     function updateAllLinks() {

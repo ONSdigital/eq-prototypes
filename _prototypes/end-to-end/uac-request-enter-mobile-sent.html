@@ -34,8 +34,8 @@ logoUrl: ../home
                                         <h1 id="question-title" class="question__title u-mb-xs u-fs-l js-piping">
                                             We have sent a text to {x}
                                         </h1>
-                                        <p class="js-piping">The text message with {y} access code should
-                                            arrive soon for you to complete your census</p>
+                                        <p class="js-piping">The text message with a new {y} access code should
+                                            arrive soon for you to start your census</p>
                                     </div>
                                 </div>
                             </div>
@@ -69,14 +69,18 @@ logoUrl: ../home
     mobileNo = urlParams.get('mobile'),
     currentJourney = urlParams.get('current-journey');
     var codeType;
+    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
 
     if(currentJourney === 'new-ir-uac'){
-        var codeType = 'an individual'
+        var codeType = 'individual';
+    } else if(currentJourney === 'new-ce-manager-uac'){
+        var codeType = 'manager';
+        pipingDestinations.forEach(function(pipingDestination) {
+            pipingDestination.innerHTML = pipingDestination.innerHTML.replace('your', 'the');
+        });
     } else {
-        var codeType = 'a household'
+        var codeType = 'household';
     }
-
-    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
 
     pipingDestinations.forEach(function(pipingDestination) {
         pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', mobileNo);

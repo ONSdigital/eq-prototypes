@@ -29,7 +29,7 @@ logoUrl: ../home
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 class="question__title u-fs-xl">
-                                        Are you a resident or manager of this accommodation?
+                                        Are you a resident or manager of this establishment?
                                     </h1>
                                 </div>
 
@@ -42,17 +42,17 @@ logoUrl: ../home
                                         <fieldset>
                                             <div class="field__item js-focusable-box">
                                                 <input autocomplete="new-password" class="input input--radio js-focusable" type="radio"
-                                                       name="address-correct" id="address-correct-yes">
-                                                <label class="label label--inline" for="address-correct-yes">Resident</label>
+                                                       name="address-correct" id="ce-resident">
+                                                <label class="label label--inline" for="ce-resident">Resident</label>
                                             </div>
                                             <div class="field__item js-focusable-box">
                                                 <input autocomplete="new-password" class="input input--radio js-focusable" type="radio"
-                                                       name="address-correct" id="address-correct-no">
-                                                <label class="label label--inline venus" for="address-correct-no">
+                                                       name="address-correct" id="ce-manager">
+                                                <label class="label label--inline venus" for="ce-manager">
                                                 Manager
                                                     <br>
                                                     <span class="label__description label--negative">
-                                                        This is the person responsible for answering questions about the accommodation
+                                                        A manager is responsible for completing the census for this establishment
                                                     </span>
                                                 </label>
                                             </div>
@@ -76,8 +76,8 @@ logoUrl: ../home
 
 
 <script>
-	var yesbox = document.getElementById("address-correct-yes");
-	var changebox = document.getElementById("address-correct-change");
+	var residentBox = document.getElementById("ce-resident");
+	var managerBox = document.getElementById("ce-manager");
     var urlParams = new URLSearchParams(window.location.search);
     var previousPage = urlParams.get('previous');
     var addressParam = urlParams.get('address');
@@ -93,13 +93,13 @@ logoUrl: ../home
         /**
         * Routing
         */
-        if (yesbox.checked) {
-            var url  = '../uac-request-enter-ce-room';
+        if (residentBox.checked) {
+            var currentPage = 'new-ir-uac';
         }
         else {
-            var url = '../paper-request-ce-managers';
+            var currentPage = 'new-ce-manager-uac';
         }
-        window.location.href = url + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney;
+        window.location.href = '../uac-request-method' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + 'new-ce-manager-uac';
     });
 
     if (addressParam) {
