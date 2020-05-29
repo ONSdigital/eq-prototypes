@@ -117,12 +117,15 @@ noONSLogoLink: true
     question = question.trim();
     storageAPI.addUpdateLanguage(personId, val, question, url);
 
-    if(val === 'Other' || val === undefined) {
+    if(val === 'Other') {
       window.location.href = '../individual-details-language-other/?person_id=' + personId + (isEditing ? '&edit=true' : '');
       storageAPI.storePageData('/end-to-end/individual-details-language-other/', window.location.pathname);
     } else if(isEditing) {
       window.location.href = '../individual-details-summary/?person_id=' + personId;
       storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+    } else if (val === undefined) {
+      window.location.href = '../individual-details-language-english/?person_id=' + personId;
+      storageAPI.storePageData('/end-to-end/individual-details-language-english/', window.location.pathname);
     } else {
       window.location.href = '../individual-details-passport-country/?person_id=' + personId;
       storageAPI.storePageData('/end-to-end/individual-details-passport-country/', window.location.pathname);
