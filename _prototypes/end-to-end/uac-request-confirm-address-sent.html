@@ -32,7 +32,7 @@ logoUrl: ../home
                                 <div class="panel panel--simple panel--success">
                                     <div class="panel__body">
                                         <h1 id="question-title" class="question__title u-mb-xs u-fs-l js-piping">
-                                            A {z} has been sent to {x}
+                                            A {z} will be sent to {x}
                                         </h1>
                                         <p class="js-piping js-panel">The letter with {y} access code should
                                             arrive soon for you to start the census</p>
@@ -72,10 +72,13 @@ logoUrl: ../home
     var codeType;
     var modeType;
 
-    if(currentJourney === 'new-ir-uac'){
-        var codeType = 'an individual';
+    if (currentJourney === 'new-ir-uac' || currentJourney === 'new-ce-resident-uac'){
+        var codeType = 'a new individual';
         var modeType = 'letter';
-    } else if(currentJourney === 'new-hh-paper' || currentJourney === 'new-ir-paper') {
+    } else if (currentJourney === 'new-ce-manager-uac') {
+        var codeType = 'a new manager';
+        var modeType = 'letter';        
+    } else if (currentJourney === 'new-hh-paper' || currentJourney === 'new-ir-paper' || currentJourney === 'new-ce-resident-paper') {
         if (largePrint) {
             var modeType = 'large print paper questionnaire';
         } else {

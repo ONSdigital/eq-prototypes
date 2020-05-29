@@ -99,6 +99,7 @@ logoUrl: ../home
     var postInput = document.getElementById('post');    
     var previousPage = searchParams.get('previous');
     var currentJourney = searchParams.get('current-journey');
+    var currentPage = 'uac-request-method';
     var form = document.querySelector('form');
     var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
 
@@ -114,9 +115,12 @@ logoUrl: ../home
 
     function updateQuestion() {
         pipingDestinations.forEach(function(pipingDestination) {
-            if(currentJourney === 'new-ir-uac') {
+            if (currentJourney === 'new-ir-uac') {
                 pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', 'individual');
-            } else if(currentJourney === 'new-ce-manager-uac') {
+            } else if (currentJourney === 'new-ce-resident-uac') {
+                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', 'individual');
+                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('household', '');
+            } else if (currentJourney === 'new-ce-manager-uac') {
                 pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', 'manager');
                 pipingDestination.innerHTML = pipingDestination.innerHTML.replace('household', '');
             } else {
@@ -126,7 +130,7 @@ logoUrl: ../home
     }
 
     function updateAllLinks() {
-        $('.js-previous-link').attr('href', '../' + previousPage + '?' + (previousPage ? 'previous=' + 'uac-request-method' : '') + (currentJourney ? '&current-journey=' + currentJourney : ''));
+        $('.js-previous-link').attr('href', '../' + previousPage + '?' + (currentPage ? 'previous=' + currentPage : '') + (currentJourney ? '&current-journey=' + currentJourney : ''));
     }
 
     $(updateQuestion);

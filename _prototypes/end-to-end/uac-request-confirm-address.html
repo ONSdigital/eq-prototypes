@@ -96,16 +96,22 @@ logoUrl: ../home
     var codeType;
     var codeTypeShort;
     var roomNumber;
+    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
 
-    if(currentJourney === 'new-ir-uac'){
+    if(currentJourney === 'new-ir-uac' || currentJourney === 'new-ce-resident-uac'){
         var codeType = 'an individual access code'
         var codeTypeShort = 'access code';
-        $('.js-panel').removeClass('u-d-no');
-    } else if(currentJourney === 'new-hh-paper') {
+        if(currentJourney === 'new-ir-uac') {
+            $('.js-panel').removeClass('u-d-no');
+        }
+    } else if(currentJourney === 'new-hh-paper' || currentJourney === 'new-ce-resident-paper') {
         var codeType = 'a paper questionnaire';
         var codeTypeShort = ' questionnaire';
         $('.large-print').removeClass('u-d-no');
         $('.no-answer').html('No, cancel and return');
+    } else if(currentJourney === 'new-ce-manager-uac') {
+        var codeType = 'a new manager access code';
+        var codeTypeShort = ' access code';       
     } else if(currentJourney === 'new-ir-paper') {
         var codeType = 'a paper questionnaire';
         var codeTypeShort = ' questionnaire';
@@ -127,8 +133,6 @@ logoUrl: ../home
         }
     }
 
-    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
-
     pipingDestinations.forEach(function(pipingDestination) {
         pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', codeType);
         pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{y}', codeTypeShort);
@@ -143,10 +147,10 @@ logoUrl: ../home
                 var largePrint = 'true';
             }
         } else if ($('[name=radio-answer]:checked').val() === 'No') {
-            if (currentJourney === 'new-hh-paper' || currentJourney === 'new-ir-paper') {
+            if (currentJourney === 'new-hh-paper' || currentJourney === 'new-ir-paper' || currentJourney === 'new-ce-resident-paper') {
                 var url = '../home/';
                 var previousPage = '';
-            } else if (currentJourney === 'new-hh-uac' || currentJourney === 'new-ir-uac') {
+            } else {
                 var url = '../uac-request-method/';
                 var previousPage = 'uac-request-address';
             }

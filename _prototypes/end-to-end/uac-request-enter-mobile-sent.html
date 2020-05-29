@@ -71,7 +71,7 @@ logoUrl: ../home
     var codeType;
     var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
 
-    if(currentJourney === 'new-ir-uac'){
+    if(currentJourney === 'new-ir-uac' || currentJourney === 'new-ce-resident-uac'){
         var codeType = 'individual';
     } else if(currentJourney === 'new-ce-manager-uac'){
         var codeType = 'manager';

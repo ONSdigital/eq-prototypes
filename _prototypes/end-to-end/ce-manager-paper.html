@@ -1,0 +1,60 @@
+---
+title: Version 1
+project: End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+logoUrl: ../home
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../hub">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            <!--{% include navigation.html
+            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
+            nav-title-id="section-individual" %}-->
+        </div>
+        <div class="grid__col col-8@l">
+            <main role="main" id="main" class="page__main">
+                <div class="group">
+                    <div class="block">
+                        <section class="section">
+                            <h1 class="u-fs-xl">We cannot send manager census forms by post</h1>
+
+                            <p>As an establishment manager, only your Census Officer can give you a manager form.</p>
+                            <p>If you don’t know who your Census Officer is, please <a href="#">contact us</a>.</p>
+                            
+                            <h2 class="u-fs-l u-mt-m">Completing online</h2>
+                            <p>If you are able to complete the census online, you can <a href="../uac-request-method?previous=ce-manager-paper&current-journey=new-ce-manager-uac">request a manager access code</a> to be sent by text message. As soon as the text arrives, you can start the census.</p>
+                        </section>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+    storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    previousPage = urlParams.get('previous');
+    currentJourney = urlParams.get('current-journey');
+    currentPage = 'ce-manager-paper';
+
+    function updateAllLinks() {
+        $('.js-previous-link').attr('href', '../' + previousPage + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney);
+    }
+
+    $(updateAllLinks);
+</script>

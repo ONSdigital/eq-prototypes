@@ -84,7 +84,7 @@ logoUrl: ../home
     var storageAPI = window.ONS.storage;
     var previousPage = urlParams.get('previous');
     var currentJourney = urlParams.get('current-journey');
-    var currentPage = 'confirm-rh-address';
+    var currentPage = 'confirm-rh-address-ce';
     var addressCountry = sessionStorage.getItem('address-country');
 
 	$('.qa-btn-submit').on('click', function (e) {
@@ -94,12 +94,24 @@ logoUrl: ../home
         * Routing
         */
         if (residentBox.checked) {
-            var currentPage = 'new-ir-uac';
+            if (currentJourney = 'new-hh-paper') {
+                var currentJourney = 'new-ce-resident-paper';
+                var url = '../uac-request-enter-name';
+            } else {
+                var currentJourney = 'new-ce-resident-uac';
+                var url = '../uac-request-method';
+            }
         }
         else {
-            var currentPage = 'new-ce-manager-uac';
+            if (currentJourney = 'new-hh-paper') {
+                var currentJourney = 'new-ce-manager-paper';
+                var url = '../ce-manager-paper';
+            } else {
+                var currentJourney = 'new-ce-manager-uac';
+                var url = '../uac-request-method';
+            }
         }
-        window.location.href = '../uac-request-method' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + 'new-ce-manager-uac';
+        window.location.href = url + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney;
     });
 
     if (addressParam) {
@@ -135,7 +147,7 @@ logoUrl: ../home
         if (previousPage === 'uac-entry') {
             $('.js-previous-link').hide();
         } else {
-            $('.js-previous-link').attr('href', '../' + previousPage + '?' + 'previous=' + 'uac-request-address' + '&current-journey=' + currentJourney + '&edit=true');
+            $('.js-previous-link').attr('href', '../' + previousPage + '?' + 'previous=' + currentPage + '&current-journey=' + currentJourney + '&edit=true');
         }
     }
 
