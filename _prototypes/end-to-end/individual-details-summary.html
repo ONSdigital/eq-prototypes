@@ -301,7 +301,9 @@ noONSLogoLink: true
             if (individualDetails[person].employment.questionSevenDaysDescription){
                 $container.append(createListItem(individualDetails[person].employment.description ? individualDetails[person].employment.description : 'No answer provided', individualDetails[person].employment.questionSevenDaysDescription, individualDetails[person].employment.urlSevenDaysDescription));
                 $container.append(createListItem(individualDetails[person].employment.fourWeeksAgo ? individualDetails[person].employment.fourWeeksAgo : 'No answer provided', individualDetails[person].employment.questionFourWeeks, individualDetails[person].employment.urlFourWeeks));
-                $container.append(createListItem(individualDetails[person].employment.availableInTwoWeeks ? individualDetails[person].employment.availableInTwoWeeks : 'No answer provided', individualDetails[person].employment.questionAvailableTwoWeeks, individualDetails[person].employment.urlAvailableTwoWeeks));
+                if (individualDetails[person].employment.questionAvailableTwoWeeks){
+                    $container.append(createListItem(individualDetails[person].employment.availableInTwoWeeks ? individualDetails[person].employment.availableInTwoWeeks : 'No answer provided', individualDetails[person].employment.questionAvailableTwoWeeks, individualDetails[person].employment.urlAvailableTwoWeeks));
+                }
                 $container.append(createListItem(individualDetails[person].employment.paidWorkConfirm ? individualDetails[person].employment.paidWorkConfirm : 'No answer provided', individualDetails[person].employment.questionPaidWorkConfirm, individualDetails[person].employment.urlPaidWorkConfirm));
                 $container.append(createListItem(individualDetails[person].employment.acceptedJob ? individualDetails[person].employment.acceptedJob : 'No answer provided', individualDetails[person].employment.questionAcceptedJob, individualDetails[person].employment.urlAcceptedJob));
             }
@@ -312,12 +314,18 @@ noONSLogoLink: true
                 $container.append(createListItem(individualDetails[person].employment.jobDescription ? individualDetails[person].employment.jobDescription : 'No answer provided', individualDetails[person].employment.questionJobDescription, individualDetails[person].employment.urlJobDescription));
                 $container.append(createListItem(individualDetails[person].employment.businessActivity ? individualDetails[person].employment.businessActivity : 'No answer provided', individualDetails[person].employment.questionBusinessActivity, individualDetails[person].employment.urlBusinessActivity));
                 $container.append(createListItem(individualDetails[person].employment.responsibilities ? individualDetails[person].employment.responsibilities : 'No answer provided', individualDetails[person].employment.questionResponsibilities, individualDetails[person].employment.urlResponsibilities));
-                $container.append(createListItem(individualDetails[person].employment.hours ? individualDetails[person].employment.hours : 'No answer provided', individualDetails[person].employment.questionHoursWorked, individualDetails[person].employment.urlHoursWorked));
+                if (individualDetails[person].employment.questionHoursWorked) {
+                    $container.append(createListItem(individualDetails[person].employment.hours ? individualDetails[person].employment.hours : 'No answer provided', individualDetails[person].employment.questionHoursWorked, individualDetails[person].employment.urlHoursWorked));
+                }
                 if (individualDetails[person].employment.questionEmploymentTravel){
                     $container.append(createListItem(individualDetails[person].employment.modeOfTravel ? individualDetails[person].employment.modeOfTravel : 'No answer provided', individualDetails[person].employment.questionEmploymentTravel, individualDetails[person].employment.urlEmploymentTravel));
                 }
-                $container.append(createListItem(individualDetails[person].employment.mainlyWork ? individualDetails[person].employment.mainlyWork : 'No answer provided', individualDetails[person].employment.questionMainlyWork, individualDetails[person].employment.urlMainlyWork));
-                $container.append(createListItem(individualDetails[person].employment.workUK ? individualDetails[person].employment.workUK : 'No answer provided', individualDetails[person].employment.questionWorkUK, individualDetails[person].employment.urlWorkUK));
+                if (individualDetails[person].employment.questionMainlyWork) {
+                    $container.append(createListItem(individualDetails[person].employment.mainlyWork ? individualDetails[person].employment.mainlyWork : 'No answer provided', individualDetails[person].employment.questionMainlyWork, individualDetails[person].employment.urlMainlyWork));
+                }
+                if (individualDetails[person].employment.questionWorkUK) {
+                    $container.append(createListItem(individualDetails[person].employment.workUK ? individualDetails[person].employment.workUK : 'No answer provided', individualDetails[person].employment.questionWorkUK, individualDetails[person].employment.urlWorkUK));
+                }
                 if (individualDetails[person].employment.questionWorkOutsideUK){
                     $container.append(createListItem(individualDetails[person].employment.workOutsideUK ? individualDetails[person].employment.workOutsideUK : 'No answer provided', individualDetails[person].employment.questionWorkOutsideUK, individualDetails[person].employment.urlWorkOutsideUK));
                 }
