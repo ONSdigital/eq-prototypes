@@ -28,9 +28,9 @@ logoUrl: ../home
                 <div class="group">
                     <div class="block">
                         <section class="section">
-                            <h1 class="u-fs-xl">Making changes to an address</h1>
+                            <h1 class="u-fs-xl">Register an address</h1>
 
-                            <p>If a significant part of your address has changed, for example, a house separated into flats, we need to register the new address on our system.
+                            <p>If you can’t find your address, it may not be registered on our system.
                             </p>
                             <p>To register your address, we need you to get in touch. You can call us free on 0800 141 2021 or <a href="#">choose another way to contact us</a>.
                             </p>
@@ -48,8 +48,8 @@ logoUrl: ../home
 <script>
     storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
-    previousPage = urlParams.get('previous');
-    currentJourney = urlParams.get('current-journey');
+    previousPage = urlParams.get('previous'),
+    currentJourney = urlParams.get('current-journey'),
     currentPage = 'address-register';
 
     function updateAllLinks() {
