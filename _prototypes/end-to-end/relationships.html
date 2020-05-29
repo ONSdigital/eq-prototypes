@@ -206,7 +206,6 @@ noONSLogoLink: true
                     <button class="btn btn--primary btn--lg qa-btn-submit venus u-mt-xl"
                             type="submit" name="">Save and continue
                     </button>
-
                 </form>
             </main>
         </div>
@@ -353,10 +352,8 @@ noONSLogoLink: true
       })[0];
 
     if (editRelationshipFound) {
-      personIs = storageAPI
-        .getHouseholdMemberByPersonId(editRelationshipFound.personIsId);
-      personTo = storageAPI
-        .getHouseholdMemberByPersonId(editRelationshipFound.personToId);
+      personIs = storageAPI.getHouseholdMemberByPersonId(editRelationshipFound.personIsId);
+      personTo = storageAPI.getHouseholdMemberByPersonId(editRelationshipFound.personToId);
 
       updateQuestion({
         personIs: personIs,
@@ -369,8 +366,7 @@ noONSLogoLink: true
       });
 
       $('.qa-btn-submit').on('click', editSubmit_handler.bind(null, editRelationshipId));
-    }
-    else {
+    } else {
       $('#question-area')
         .html('<h1 class="u-fs-xl">Relationship not found</h1>');
     }
@@ -399,7 +395,7 @@ noONSLogoLink: true
     $.each(storageAPI.getAllRelationships().filter(storageAPI.isRelationshipInferred),
       function(i, relationship) {
         var isInferredByThis = !!_.find(relationship.inferredBy, function(id) {
-          return id+'' === relationshipId+'';
+          return id + '' === relationshipId + '';
         });
 
         if(isInferredByThis) {
@@ -410,12 +406,9 @@ noONSLogoLink: true
 
     if(aRelationshipPreviouslyInferredByThis) {
       dynamicRouting();
-    }
-    else {
-      window.location.href = '../relationships-summary-proxy/?noop=1' +
-        nextPageSurveyRouting;
-        storageAPI.storePageData('/end-to-end/relationships-summary-proxy/', window.location.pathname);
-
+    } else {
+      window.location.href = '../relationships-summary-proxy/?noop=1' + nextPageSurveyRouting;
+      storageAPI.storePageData('/end-to-end/relationships-summary-proxy/', window.location.pathname);
     }
   }
 
@@ -441,21 +434,20 @@ noONSLogoLink: true
 
       /*calculate if current person is 2 from end*/
 
-    var allRelationships = storageAPI.getAllRelationships(),
+      var allRelationships = storageAPI.getAllRelationships(),
 
-      members = storageAPI.getAllHouseholdMembers().filter(function (member) {
-        return member.type === storageAPI.KEYS.HOUSEHOLD_MEMBER_TYPE;
-      }),
+        members = storageAPI.getAllHouseholdMembers().filter(function (member) {
+          return member.type === storageAPI.KEYS.HOUSEHOLD_MEMBER_TYPE;
+        }),
 
-      remainingPersonIds = members.map(function (member) {
-        return member['@person'].id;
-      });
-    
-    sessionStorage.setItem('currentHouseholders', remainingPersonIds);
+        remainingPersonIds = members.map(function (member) {
+          return member['@person'].id;
+        });
+      
+      sessionStorage.setItem('currentHouseholders', remainingPersonIds);
 
       $('.qa-btn-submit').on('click', missingSubmit_handler);
-    }
-    else {
+    } else {
       $('#question-area')
         .html('<h1 class="u-fs-xl">No missing relationships found</h1>');
       $('.qa-btn-submit').on('click', function(e) {
@@ -463,7 +455,6 @@ noONSLogoLink: true
 
         window.location.href = '../relationships-summary-proxy/?noop=1' + nextPageSurveyRouting;
         storageAPI.storePageData('/end-to-end/relationships-summary-proxy/', window.location.pathname);
-
       });
     }
   }
@@ -499,13 +490,10 @@ noONSLogoLink: true
     */
     if(redirect) {
       window.location.href = redirect;
-    }
-    else if (nextMissingRelationship) {
+    } else if (nextMissingRelationship) {
       dynamicRouting();
-    }
-    else {
-      window.location.href = '../relationships-summary-proxy/?noop=1' +
-        nextPageSurveyRouting;
+    } else {
+      window.location.href = '../relationships-summary-proxy/?noop=1' + nextPageSurveyRouting;
     }
   }
 
@@ -585,14 +573,12 @@ noONSLogoLink: true
   });
 
   $(function() {
-
     /**
      * Code branching - are we trying to edit or create a new relationship
      */
     if (editRelationshipId) {
       journeyEditRelationship();
-    }
-    else {
+    } else {
       journeyCreateNewRelationship();
     }
   });
