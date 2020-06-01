@@ -24,8 +24,22 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         <div class="grid__col col-4@m"></div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
+                <div class="panel panel--error u-mb-m js-error-box u-d-no">
+                    <div class="panel__header">
+                        <div class="panel__title u-fs-r--b">This page has an error</div>
+                    </div>
+                    <div class="panel__body">
+                        <ol class="list list--bare">
+                            <li class="list__item js-other-answer u-d-no">
+                                1. <a href="#error-message-other-answer" class="list__link js-inpagelink">
+                                    Your answer is too long, it has to be less than 100 characters.
+                                </a>
+                            </li>
+                       </ol>
+                    </div>
+                </div>
                 <form id="form" name="trav" class="form qa-questionnaire-form"
-                      role="form" autocomplete="new-password" action="../individual-details-qualifications">
+                      role="form" autocomplete="new-password" action="#">
                     <input autocomplete="new-password" type="hidden" name="person_id" id="person"
                            value="#"/>
                     <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
@@ -40,12 +54,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                     </h1>
                                 </div>
                                 <div class="panel panel--info panel--simple u-mb-m">
-                                <div class="panel__body">
-                                    <p>This question is <strong>voluntary</strong></p>
-                                </div>
+                                    <div class="panel__body">
+                                        <p>This question is <strong>voluntary</strong></p>
+                                    </div>
                                 </div>
                                 <div class="answer">
-                                    <div class="answer__fields js-fields">
+                                    <div class="answer__fields question__answer js-fields">
                                         <div class="field field--radio field--multiplechoice ">
                                             <fieldset class="u-mb-xl">
                                                 <div class="field__item js-focusable-box">
@@ -72,9 +86,9 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                                                         No<br>
                                                         <span class="label__inner label--negative u-fs-s--b">Enter gender identity</span>
                                                     </label>
-                                                    
+
                                                     <div class="field__other field__other--open">
-                                                        <input autocomplete="new-password" class="input input__text js-focusable" id="other-answer" name="orientation" type="text" data-qa="other-option" maxlength="100">
+                                                        <input autocomplete="new-password" class="input input__text input--text js-focusable" id="other-answer" name="orientation" type="text" data-qa="other-option" data-error-msg="Your answer is too long, it has to be less than 100 characters.">
                                                     </div>
                                                 </div>
                                                 <button type="submit" class="btn btn--secondary btn--small js-clear-btn u-mt-s u-db-no-js_enabled u-vh" name="clear-radios">
@@ -87,7 +101,7 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
                             </section>
                         </div>
                     </div>
-                    <button class="btn btn--primary btn--lg qa-btn-submit u-mb-xl"
+                    <button class="btn btn--primary btn--lg qa-btn-submit u-mb-xl u-mt-xl"
                             type="submit" name="">Save and continue
                     </button>
                     <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
@@ -107,10 +121,19 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     isEditing = urlParams.get('edit'),
     details = storageAPI.getPersonalDetailsFor(personId),
     surveyType = urlParams.get('survey'),
-    question = $('#question-title').html();
+    question = $('#question-title').html(),
+    hasErrors = false;
   
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+      e.preventDefault();
+      const testFails = ($('#other-answer').val().length > 99);
+      window.ONS.utils.validateInputs(testFails, "#other-answer");
+      if (hasErrors) {
+          window.ONS.utils.calcErrors();
+          hasErrors = false;
+          return false;
+      } else {
         var input = $('[name="identity"]:checked'),
             val = input.val(),
             textInput = $('#other-answer');
@@ -125,12 +148,13 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
         storageAPI.storePageData('/end-to-end/individual-details-qualifications/', window.location.pathname);
 
         if(isEditing) {
-        e.preventDefault();
-        window.location.href = '../individual-details-summary/?person_id=' +
-            personId + (surveyType ? '&survey=' + surveyType : '');
+            window.location.href = '../individual-details-summary/?person_id=' + personId;
             storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
-
+        } else {
+            window.location.href = '../individual-details-qualifications/?person_id=' + personId;
+            storageAPI.storePageData('/end-to-end/individual-details-qualifications/', window.location.pathname);
         }
+      }
   }));
 
   function updateRouting() {
@@ -153,13 +177,12 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
     }
 
     if(details && details.identity) {
+        $('.js-clear-btn').removeClass('u-vh');
         if(details.identity.val === "Yes") {
             $('input[type=radio][value="Yes"]').prop("checked", true);
-            $('.js-clear-btn').removeClass('u-vh');
         } else if(details.identity.val === "No"){
             $('input[type=radio][value="Other"]').prop("checked", true);
             $('input[type=text][Id="other-answer"]').val(details.identity.val);
-            $('.js-clear-btn').removeClass('u-vh');
         }
     }
   }

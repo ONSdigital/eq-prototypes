@@ -551,6 +551,7 @@ function validateInputs(testFails, selector, address) {
       field = input.closest('.fieldgroup') ? input.closest('.fieldgroup') : input.closest('.field'),
       fieldGroup = document.querySelector('.fieldgroup') ? true : false,
       errorMsg = input.getAttribute('data-error-msg');
+
   if (input.value === testFails || testFails === true) {
     window.scrollTo(0, 0);
     hasErrors = true;
@@ -573,6 +574,7 @@ function validateInputs(testFails, selector, address) {
       } else {
         inputErrorP.id = 'error-message-' + input.id;
       }
+
       inputErrorStrong.innerText = errorMsg;
       inputErrorP.appendChild(inputErrorStrong);
       inputErrorBody.appendChild(inputErrorP);
