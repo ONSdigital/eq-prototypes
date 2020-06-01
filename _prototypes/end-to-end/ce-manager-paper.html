@@ -50,7 +50,8 @@ logoUrl: ../home
     urlParams = new URLSearchParams(window.location.search),
     previousPage = urlParams.get('previous');
     currentJourney = urlParams.get('current-journey');
-    currentPage = 'ce-manager-paper';
+    pathArray = window.location.pathname.split('/'),
+    currentPage = pathArray.slice(-2)[0];
 
     function updateAllLinks() {
         $('.js-previous-link').attr('href', '../' + previousPage + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney);

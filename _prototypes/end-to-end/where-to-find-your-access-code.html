@@ -28,6 +28,7 @@ logoUrl: ../home
                 <div class="group">
                     <div class="block">
                         <section class="section">
+
                             <h1 class="u-fs-xl">Where to find your access code</h1>
 
                             <p>To start your census online, you will need your access code printed on the invitation letter we sent you. Your 16-character access code will be a combination of letters and numbers.</p>
@@ -40,7 +41,7 @@ logoUrl: ../home
                                 <span class="btn__inner icon--chevron-right-white">Start census</span>
                             </a>
                             <h2>If you don’t have an access code</h2>
-                            <p>You can <a href="../uac-request-address?previous=where-to-find-your-access-code&current-journey=new-hh-uac">request a new code</a> to start a new census if you have lost or not received an access code. This can be sent to you by text or post.</p>
+                            <p>You can <a class="js-request-uac" href="#">request a new code</a> to start a new census if you have lost or not received an access code. This can be sent to you by text or post.</p>
                             <p>Alternatively, you can <a href="#">contact us for help</a>.</p>
                         </section>
                     </div>
@@ -55,10 +56,14 @@ logoUrl: ../home
 <script>
     storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
-    previousPage = urlParams.get('previous');
+    previousPage = urlParams.get('previous'),
+    currentJourney = 'new-hh-uac',
+    pathArray = window.location.pathname.split('/'),
+    currentPage = pathArray.slice(-2)[0];
 
     function updateAllLinks() {
-        $('.js-previous-link').attr('href', '../' + previousPage);
+        $('.js-previous-link').attr('href', '../' + (previousPage ? previousPage : 'uac-entry'));
+        $('.js-request-uac').attr('href', '../uac-request-address?previous=' + currentPage + (currentJourney ? '&current-journey=' + currentJourney : ''));
     }
 
     $(updateAllLinks);

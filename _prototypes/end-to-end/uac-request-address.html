@@ -138,6 +138,16 @@ logoUrl: ../home
       } else {
         window.location = '../confirm-rh-address/?' + 'previous=' + 'uac-request-address' + '&' + 'current-journey=' + currentJourney;
       }
+
+      // Temporary manual update address type for CEs  
+      var address = document.getElementById('rh-proto-address').value;
+      if ($.inArray(address),[
+        'university', 
+        'care home', 
+        'caravan park'
+        ]) {
+        sessionStorage.setItem('address-type', 'CE');
+      }
     }
   });
 
@@ -174,6 +184,7 @@ logoUrl: ../home
         $('.js-previous-link').attr('href', '../uac-entry');
       }
   }
+
   document.dispatchEvent(new CustomEvent('TYPEAHEAD-READY'));
 
   $(updateAllLinks);
