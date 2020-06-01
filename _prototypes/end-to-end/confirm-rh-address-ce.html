@@ -94,24 +94,19 @@ logoUrl: ../home
         * Routing
         */
         if (residentBox.checked) {
-            if (currentJourney = 'new-hh-paper') {
-                var currentJourney = 'new-ce-resident-paper';
-                var url = '../uac-request-enter-name';
-            } else {
-                var currentJourney = 'new-ce-resident-uac';
-                var url = '../uac-request-method';
+            if (currentJourney === 'new-hh-paper' || currentJourney === 'new-ce-resident-paper' || currentJourney === 'new-ce-manager-paper') {
+                window.location.href = '../uac-request-enter-name' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + 'new-ce-resident-paper';
+            } else if (currentJourney === 'new-hh-uac'|| currentJourney === 'new-ce-resident-uac' || currentJourney === 'new-ce-manager-uac') {
+                window.location.href = '../uac-request-method' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + 'new-ce-resident-uac';
             }
         }
         else {
-            if (currentJourney = 'new-hh-paper') {
-                var currentJourney = 'new-ce-manager-paper';
-                var url = '../ce-manager-paper';
-            } else {
-                var currentJourney = 'new-ce-manager-uac';
-                var url = '../uac-request-method';
+            if (currentJourney === 'new-hh-paper' || currentJourney === 'new-ce-manager-paper' || currentJourney === 'new-ce-resident-paper') {
+                window.location.href = '../ce-manager-paper' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + 'new-ce-manager-paper';
+            } else if (currentJourney === 'new-hh-uac' || currentJourney === 'new-ce-manager-uac' || currentJourney === 'new-ce-resident-uac') {
+                window.location.href = '../uac-request-method' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + 'new-ce-manager-uac';
             }
         }
-        window.location.href = url + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney;
     });
 
     if (addressParam) {

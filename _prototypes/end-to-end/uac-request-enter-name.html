@@ -115,6 +115,7 @@ logoUrl: ../home
     hasErrors = false;
     var urlParams = new URLSearchParams(window.location.search);
     var previousPage = urlParams.get('previous');
+    var currentPage = 'uac-request-enter-name';
     var currentJourney = urlParams.get('current-journey');
     var householdNumber = urlParams.get('hh-members');
 
@@ -220,7 +221,7 @@ logoUrl: ../home
   $(updateQuestion);
 
   function updateAllLinks() {
-    $('.js-previous-link').attr('href', '../' + previousPage);
+    $('.js-previous-link').attr('href', '../' + previousPage + '?previous=' + currentPage + '&current-journey=' + currentJourney);
   }
 
   $(updateAllLinks);
