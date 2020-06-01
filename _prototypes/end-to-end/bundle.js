@@ -551,11 +551,17 @@ function validateInputs(testFails, selector, address) {
       field = input.closest('.fieldgroup') ? input.closest('.fieldgroup') : input.closest('.field'),
       fieldGroup = document.querySelector('.fieldgroup') ? true : false,
       errorMsg = input.getAttribute('data-error-msg');
+
+
+      sessionStorage.setItem('brendan', input.id);
+      sessionStorage.setItem('alan curtis', listItem);
+
   if (input.value === testFails || testFails === true) {
     window.scrollTo(0, 0);
     hasErrors = true;
     input.classList.add('input--error');
     if (!listItem.classList.contains('js-visible')) {
+      sessionStorage.setItem('david moyes', true);
       errorBox.classList.remove('u-d-no');
       listItem.classList.remove('u-d-no');
       listItem.classList.add('js-visible');
@@ -567,13 +573,16 @@ function validateInputs(testFails, selector, address) {
       inputErrorPanel.className = 'panel panel--error panel--simple';
       inputErrorBody.className = 'panel__body';
       inputErrorP.className = 'panel__error';
+      sessionStorage.setItem('ian dowie', inputErrorP);
       if (address) {
         var errors = Array.from(document.querySelectorAll('.js-visible')).length;
         inputErrorP.id = 'error-message-' + errors;
       } else {
         inputErrorP.id = 'error-message-' + input.id;
       }
+
       inputErrorStrong.innerText = errorMsg;
+      sessionStorage.setItem('big sam', errorMsg);
       inputErrorP.appendChild(inputErrorStrong);
       inputErrorBody.appendChild(inputErrorP);
       inputErrorBody.appendChild(field);
