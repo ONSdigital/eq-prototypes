@@ -33,15 +33,14 @@ logoUrl: ../home
 
                             <p>To start your census online, you will need your access code printed on the invitation letter we sent you. Your 16-character access code will be a combination of letters and numbers.</p>
                             <img src="/s/img/census-letter.svg" width="400" alt="An example of a census letter highlighting the access code displayed in four blocks of four characters">
-                            <div class="panel panel--simple panel--warning js-panel-info u-mb-l u-mt-s">
+                            <div class="panel panel--simple panel--warning js-panel-info u-mb-xl u-mt-s">
                                 <span class="panel__icon" aria-hidden="true">!</span><span class="panel__text">Keep this code safe. You will need to enter it every time you access your census.</span>
                             </div>
                             <h2 class="u-mb-m">Ready to start your census online?</h2>
                             <a href="../uac-entry/" role="button" class="btn btn--link u-mb-xl">
                                 <span class="btn__inner icon--chevron-right-white">Start census</span>
                             </a>
-                            <h2>If you don’t have an access code</h2>
-                            <p>You can <a class="js-request-uac" href="#">request a new code</a> to start a new census if you have lost or not received an access code. This can be sent to you by text or post.</p>
+                            {% include_relative partials/request-uac.html %}
                             <p>Alternatively, you can <a href="#">contact us for help</a>.</p>
                         </section>
                     </div>
