@@ -139,15 +139,17 @@ logoUrl: ../home
         window.location = '../confirm-rh-address/?' + 'previous=' + 'uac-request-address' + '&' + 'current-journey=' + currentJourney;
       }
 
-     // Temporary manual update address type for CEs  
-     // var address = document.getElementById('rh-proto-address').value;
-     // if ($.inArray(address),[
-     //   'university', 
-     //   'care home', 
-     //   'caravan park'
-     //   ]) {
-     //   sessionStorage.setItem('address-type', 'CE');
-     // 
+      // Temporary manual update address type for CEs  
+      var address = document.getElementById('rh-proto-address').value;
+      var lowerCaseAddress = address.toLowerCase();
+      var array = [
+        "university", 
+        "howden apartments",
+        "caravan park"
+        ];
+      if (array.some(val => lowerCaseAddress.includes(val))) {
+        sessionStorage.setItem('address-type', 'CE');
+      }
     }
   });
 
