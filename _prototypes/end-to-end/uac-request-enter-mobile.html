@@ -90,7 +90,13 @@ logoUrl: ../home
   });
 
     function updateAllLinks() {
-        $('.js-previous-link').attr('href', '../uac-request-method/');
+        if (currentJourney === 'new-ce-manager-uac') {
+            $('.js-previous-link').attr('href', '../uac-request-method/' + '?previous=' + 'confirm-rh-address-ce' + '&current-journey=' + currentJourney);
+        } else (currentJourney === 'new-ce-manager-paper') {
+            $('.js-previous-link').attr('href', '../uac-request-method/' + '?previous=' + 'ce-manager-paper' + '&current-journey=' + currentJourney);
+        } else {
+            $('.js-previous-link').attr('href', '../uac-request-method/' + '?previous=' + 'confirm-rh-address' + '&current-journey=' + currentJourney);
+        }
     }
 
     $(updateAllLinks);
