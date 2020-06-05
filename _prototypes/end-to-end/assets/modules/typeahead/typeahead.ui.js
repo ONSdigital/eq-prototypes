@@ -308,10 +308,11 @@ export default class TypeaheadUI {
     this.numberOfResults = Math.max(this.results.length, 0);
 
     if (!this.deleting || (this.numberOfResults && this.deleting)) {
-      if (this.numberOfResults === 1 && this.results[0].sanitisedText === this.sanitisedQuery) {
-        this.clearListbox(true);
-        this.selectResult(0);
-      } else {
+      //Comment out for testing of not clearing listbox when answer is fully typed
+      //if (this.numberOfResults === 1 && this.results[0].sanitisedText === this.sanitisedQuery) {
+        //this.clearListbox(true);
+        //this.selectResult(0);
+      //} else {
         this.listbox.innerHTML = '';
         this.resultOptions = this.results.map((result, index) => {
           let ariaLabel = result[this.lang];
@@ -382,7 +383,7 @@ export default class TypeaheadUI {
 
         this.input.setAttribute('aria-expanded', !!this.numberOfResults);
         this.context.classList[!!this.numberOfResults ? 'add' : 'remove'](classTypeaheadHasResults);
-      }
+      //}
     }
     if (this.numberOfResults === 0 && this.content.no_results) {
       this.context.classList.add(classTypeaheadHasResults);
