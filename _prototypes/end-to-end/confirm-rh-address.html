@@ -29,7 +29,7 @@ logoUrl: ../home
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 class="question__title u-fs-xl">
-                                        Is this address correct?
+                                        Is this the correct address?
                                     </h1>
                                 </div>
 
@@ -43,16 +43,8 @@ logoUrl: ../home
                                             <div class="field__item js-focusable-box">
                                                 <input autocomplete="new-password" class="input input--radio js-focusable" type="radio"
                                                        name="address-correct" id="address-correct-yes">
-                                                <label class="label label--inline" for="address-correct-yes">Yes, this
-                                                    address is correct</label>
-                                            </div>
-                                            <div class="field__item js-change-address js-focusable-box">
-                                                <input autocomplete="new-password" class="input input--radio js-focusable" type="radio"
-                                                       name="address-correct" id="address-correct-change">
-                                                <label class="label label--inline" for="address-correct-change">No, I need to make a change to this address
-                                                <br>
-                                                <span class="label__description label--negative">For example, a house that has been separated into flats</span>
-                                                </label>
+                                                <label class="label label--inline" for="address-correct-yes">Yes, this is the correct address
+                                                    </label>
                                             </div>
                                             <div class="field__item js-focusable-box">
                                                 <input autocomplete="new-password" class="input input--radio js-focusable" type="radio"
@@ -80,7 +72,6 @@ logoUrl: ../home
 
 <script>
 	var yesbox = document.getElementById("address-correct-yes");
-	var changebox = document.getElementById("address-correct-change");
     var urlParams = new URLSearchParams(window.location.search);
     var previousPage = urlParams.get('previous');
     var addressParam = urlParams.get('address');
@@ -110,9 +101,6 @@ logoUrl: ../home
                 var url  = '../uac-request-method';
             }
         }
-        else if (changebox.checked) {
-            var url = '../address-correction';
-        } 
         else {
             var url = '../uac-request-address';
         }
