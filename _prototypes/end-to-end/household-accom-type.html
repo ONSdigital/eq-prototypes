@@ -97,13 +97,9 @@ noONSLogoLink: true
     var storageAPI = window.ONS.storage,
         urlParams = new URLSearchParams(window.location.search),
         isEditing = urlParams.get('edit'),
-        currentPage = '../household-accom-type';
+        currentPage = '../household-accom-type',
+        question = $('#question-title').html();
 
-    if(sessionStorage.getItem('address-line-1')) {
-        $('.full-address-text').html((sessionStorage.getItem('address-line-1') || '').replace(/,/g, ''));
-    }
-
-    var question = $('#question-title').html();
     window.sessionStorage.setItem('accommodation-completed-status', currentPage);
 
     $('.qa-btn-submit').on('click', function (e) {
@@ -132,6 +128,10 @@ noONSLogoLink: true
         }
     });
 
+    function updatePipedAddress() {
+      $('.full-address-text').html(storageAPI.getPipedAddress());
+    };
+
     function updateAnswer() {
         var answer = JSON.parse(window.sessionStorage.getItem('accommodation-type'));
         if (answer) {
@@ -139,6 +139,7 @@ noONSLogoLink: true
         }
     }
 
+    $(updatePipedAddress);
     $(updateAnswer);
 
 </script>

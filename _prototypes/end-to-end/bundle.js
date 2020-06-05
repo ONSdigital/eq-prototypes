@@ -196,6 +196,14 @@ export function getAddress() {
   }
 }
 
+function getPipedAddress() {
+  let pipedAddress = "Address not set";
+  if(sessionStorage.getItem('address-line-1') && sessionStorage.getItem('address-line-2')) {
+    pipedAddress = sessionStorage.getItem('address-line-1') + ', ' + sessionStorage.getItem('address-line-2') || ''.replace(/,/g, '');
+  }
+  return pipedAddress;
+}
+
 /**
  * User
  */
@@ -632,6 +640,7 @@ window.ONS = window.ONS || {};
 window.ONS.storage = {
   storePageData,
   getAddress,
+  getPipedAddress,
   addHouseholdMember,
   updateHouseholdMember,
   deleteHouseholdMember,

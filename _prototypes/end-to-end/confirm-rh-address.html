@@ -120,10 +120,8 @@ logoUrl: ../home
     });
 
     if (addressParam) {
-        var address = JSON.parse(addressParam);
-
-        var addressParts = [];
-        
+        var address = JSON.parse(addressParam),
+            addressParts = [];
 
         Object.keys(address)
             .filter(function(key) { return !!address[key] })
@@ -131,7 +129,7 @@ logoUrl: ../home
                 sessionStorage.setItem(key, address[key]);
                 addressParts.push(address[key]);
             })
-        
+
         sessionStorage.setItem('address', addressParts.join(', '));
     }
 

@@ -163,15 +163,12 @@ noONSLogoLink: true
 
 
 <script>
-    var searchParams = new URLSearchParams(window.location.search);
-
-    var addressParam = searchParams.get('address');
+    var searchParams = new URLSearchParams(window.location.search),
+        addressParam = searchParams.get('address');
 
     if (addressParam) {
-        var address = JSON.parse(addressParam);
-
-        var addressParts = [];
-        
+        var address = JSON.parse(addressParam),
+            addressParts = [];
 
         Object.keys(address)
             .filter(function(key) { return !!address[key] })
@@ -179,15 +176,14 @@ noONSLogoLink: true
                 sessionStorage.setItem(key, address[key]);
                 addressParts.push(address[key]);
             })
-        
+
         sessionStorage.setItem('address', addressParts.join(', '));
     }
 
-	$(function () {
-	  if(sessionStorage.getItem('address-line-1')) {
-		$('.full-address-text').html((sessionStorage.getItem('address-line-1') || '').replace(/,/g, ''));
-      }
-	});
+    function updatePipedAddress() {
+        $('.full-address-text').html(storageAPI.getPipedAddress());
+    };
 
+    $(updatePipedAddress);
 
 </script>

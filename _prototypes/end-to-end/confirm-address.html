@@ -119,14 +119,13 @@ noONSLogoLink: true
 </script>
 
 <script>
-    var searchParams = new URLSearchParams(window.location.search);
-    var previousPage = searchParams.get('previous');
-    var addressParam = searchParams.get('address');
+    var searchParams = new URLSearchParams(window.location.search),
+        previousPage = searchParams.get('previous'),
+        addressParam = searchParams.get('address');
 
     if (addressParam) {
-        var address = JSON.parse(addressParam);
-
-        var addressParts = [];
+        var address = JSON.parse(addressParam),
+            addressParts = [];
 
         Object.keys(address)
             .filter(function(key) { return !!address[key] })
@@ -134,7 +133,7 @@ noONSLogoLink: true
                 sessionStorage.setItem(key, address[key]);
                 addressParts.push(address[key]);
             })
-        
+
         sessionStorage.setItem('address', addressParts.join(', '));
     }
 
@@ -143,9 +142,7 @@ noONSLogoLink: true
 		$('.full-address-text').html((sessionStorage.getItem('address') || '').replace(/,/g, '<br />'));
       }
 	});
-</script>
 
-<script>
 	$(function () {
 		var oneWeekAgo = new Date();
 		oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);

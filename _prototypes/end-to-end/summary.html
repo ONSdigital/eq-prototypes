@@ -79,8 +79,8 @@ noONSLogoLink: true
       missingRelationship = storageAPI.findNextMissingRelationship();
   
   var urlParams = new URLSearchParams(window.location.search),
-    showPanel = urlParams.get('show-panel'),
-    nextPage = !missingRelationship ? '../hub' : '../relationships-intro/';
+      showPanel = urlParams.get('show-panel'),
+      nextPage = !missingRelationship ? '../hub' : '../relationships-intro/';
 
   sessionStorage.setItem("wlh_bookmark" , window.location.pathname);
 
@@ -166,18 +166,14 @@ noONSLogoLink: true
     return member['@person'].id === window.ONS.storage.IDS.USER_HOUSEHOLD_MEMBER_ID;
   } 
 
-  function updateContent () {
-    var $addToHousehould = $('.js-add-to-household');
+  function updatePipedAddress() {
+    $('.full-address-text').html(storageAPI.getPipedAddress());
+  };
 
-	  if(sessionStorage.getItem('address-line-1')) {
-  		$('.full-address-text').html((sessionStorage.getItem('address-line-1') || '').replace(/,/g, ''));
-    }
-
-    if(showPanel) {
-      $('.js-panel').show();
-    }
+  if(showPanel) {
+    $('.js-panel').show();
   }
 
-  $(updateContent);
+  $(updatePipedAddress);
   $(updateHouseholdMembersVisitors);
 </script>
