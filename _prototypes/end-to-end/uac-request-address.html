@@ -140,8 +140,7 @@ logoUrl: ../home
       }
 
       // Temporary manual update address type for CEs  
-      var address = document.getElementById('rh-proto-address').value;
-      var lowerCaseAddress = address.toLowerCase();
+      var address = document.getElementById('rh-proto-address').value.toLowerCase();
       var array = [
         "university", 
         "howden apartments",
@@ -149,7 +148,7 @@ logoUrl: ../home
         "halls of residence",
         "hall of residence"
         ];
-      if (array.some(val => lowerCaseAddress.includes(val))) {
+      if (array.some(val => address.includes(val))) {
         sessionStorage.setItem('address-type', 'CE');
       }
     }
