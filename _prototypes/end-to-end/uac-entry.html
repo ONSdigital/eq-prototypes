@@ -76,15 +76,14 @@ logoUrl: ../home
                                 <div class="uac__icon"><span class="icon icon--lock"></span></div>
                                 <p class="uac__message">Your personal information is protected by law and will be kept confidential.</p>
                             </div>
-                            <button class="btn btn-submit btn--primary btn--lg"
+                            <button class="btn btn-submit btn--primary btn--lg u-mb-xl"
                                     data-qa="btn-submit" type="submit"
                                     name="action[save_continue]">Access census
                             </button>
                         </div>
                     </div>
                     <div>
-                        <h2 class="u-fs-m u-mt-xl">If you don't have an access code</h2>
-                        <p>You can <a href="../uac-request-address/?previous=uac-entry&current-journey=new-hh-uac">request a new access code</a> to start a new census if you have lost or not received an access code.</p>
+                        {% include_relative partials/request-uac.html %}
                     </div>
                     <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple js-visitor-definition u-mb-xs">
                         <div class="js-collapsible-content">
@@ -113,6 +112,9 @@ logoUrl: ../home
   var redirect = urlParams.get('redirect');
   var uacInput = document.getElementById('uac');
   var hasErrors = false;
+  var currentJourney = 'new-hh-uac';
+  var pathArray = window.location.pathname.split('/');
+  var currentPage = pathArray.slice(-2)[0];
     
     var $input = $('input#uac');
     $input.keyup(function(e) {
@@ -121,6 +123,7 @@ logoUrl: ../home
             $input.val($input.val().substr(0, max));
         }
     });
+
   $('.btn-submit').click(function(e) {
     e.preventDefault();
     const testFails = '';
@@ -140,4 +143,10 @@ logoUrl: ../home
         }
     }
   });
+
+    function updateAllLinks() {
+        $('.js-request-uac').attr('href', '../uac-request-address?previous=' + currentPage + (currentJourney ? '&current-journey=' + currentJourney : ''));
+    }
+
+    $(updateAllLinks);
 </script>

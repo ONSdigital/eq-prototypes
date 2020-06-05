@@ -140,12 +140,15 @@ logoUrl: ../home
       }
 
       // Temporary manual update address type for CEs  
-      var address = document.getElementById('rh-proto-address').value;
-      if ($.inArray(address),[
-        'university', 
-        'care home', 
-        'caravan park'
-        ]) {
+      var address = document.getElementById('rh-proto-address').value.toLowerCase();
+      var array = [
+        "university", 
+        "howden apartments",
+        "care home",
+        "halls of residence",
+        "hall of residence"
+        ];
+      if (array.some(val => address.includes(val))) {
         sessionStorage.setItem('address-type', 'CE');
       }
     }
