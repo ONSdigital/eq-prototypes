@@ -48,6 +48,8 @@ noONSLogoLink: true
 <script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
+  var storageAPI = window.ONS.storage;
+  
   sessionStorage.setItem("wlh_bookmark" , window.location.pathname);
 
   $('.btn-submit').click(function(e) {
@@ -62,13 +64,9 @@ noONSLogoLink: true
     $('.one-week-ago').text(oneWeekAgo.toLocaleString('en-GB', options));
   });
 
-</script>
+  function updatePipedAddress() {
+    $('.full-address-text').html(storageAPI.getPipedAddress());
+  };
 
-<script>
-
-	$(function () {
-	  if(sessionStorage.getItem('address')) {
-		$('.full-address-text').html((sessionStorage.getItem('address-line-1') || '').replace(/,/g, ''));
-      }
-	});
+  $(updatePipedAddress);
 </script>

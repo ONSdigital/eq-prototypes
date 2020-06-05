@@ -147,9 +147,6 @@ noONSLogoLink: true
 <script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
-    if(sessionStorage.getItem('address-line-1')) {
-        $('.full-address-text').html((sessionStorage.getItem('address-line-1') || '').replace(/,/g, ''));
-    }
 
     var storageAPI = window.ONS.storage,
         urlParams = new URLSearchParams(window.location.search),
@@ -190,6 +187,10 @@ noONSLogoLink: true
         }
     });
 
+    function updatePipedAddress() {
+        $('.full-address-text').html(storageAPI.getPipedAddress());
+    };
+
     function updateAnswer() {
         var answer = JSON.parse(window.sessionStorage.getItem('accommodation-own-rent'));
         if (answer) {
@@ -197,5 +198,6 @@ noONSLogoLink: true
         }
     }
 
+    $(updatePipedAddress);
     $(updateAnswer);
 </script>

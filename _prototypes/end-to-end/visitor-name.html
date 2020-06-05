@@ -297,41 +297,36 @@ noONSLogoLink: true
 </script>
 
 <script>
-    var searchParams = new URLSearchParams(window.location.search);
+  var searchParams = new URLSearchParams(window.location.search),
+      addressParam = searchParams.get('address');
 
-    var addressParam = searchParams.get('address');
+  if (addressParam) {
+      var address = JSON.parse(addressParam),
+          addressParts = [];
 
-    if (addressParam) {
-        var address = JSON.parse(addressParam);
+      Object.keys(address)
+          .filter(function(key) { return !!address[key] })
+          .forEach(function (key) {
+              sessionStorage.setItem(key, address[key]);
+              addressParts.push(address[key]);
+          })
 
-        var addressParts = [];
-        
+      sessionStorage.setItem('address', addressParts.join(', '));
+  }
 
-        Object.keys(address)
-            .filter(function(key) { return !!address[key] })
-            .forEach(function (key) {
-                sessionStorage.setItem(key, address[key]);
-                addressParts.push(address[key]);
-            })
-        
-        sessionStorage.setItem('address', addressParts.join(', '));
-    }
-
-	$(function () {
-	  if(sessionStorage.getItem('address-line-1')) {
-		$('.full-address-text').html((sessionStorage.getItem('address-line-1') || '').replace(/,/g, '<br />'));
-      }
-	});
+  function updatePipedAddress() {
+    $('.full-address-text').html(storageAPI.getPipedAddress());
+  };
 
   function updateAllLinks() {
     $('.js-previous-link').attr('href', document.referrer);
   }
 
-  $(updateAllLinks);
-
   function updateCancelLinks() {
     $('.js-cancel-return').attr('href', document.referrer);
   }
 
+  $(updatePipedAddress);
+  $(updateAllLinks);
   $(updateCancelLinks);
 </script>
