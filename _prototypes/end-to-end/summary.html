@@ -155,9 +155,7 @@ noONSLogoLink: true
     if (window.ONS.storage.getAllHouseholdMembers().length > 0) {
       window.location.href = nextPage;
       storageAPI.storePageData('/end-to-end/' + nextPage, window.location.pathname);
-
-    }
-    else {
+    } else {
       alert('Journey for less than one person in household, not yet implemented');
     }
   });

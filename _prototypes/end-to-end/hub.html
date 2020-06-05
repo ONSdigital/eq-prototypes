@@ -471,6 +471,27 @@ noONSLogoLink: true
     }
   }
 
+  function isUser(member) {
+    return member['@person'].id === window.ONS.storage.IDS.USER_HOUSEHOLD_MEMBER_ID;
+  } 
+
+  function showHideIRCollapseable () {
+    var members = storageAPI.getAllHouseholdMembers(),
+        userMember = members.filter(isUser)[0],
+        otherHouseholdMembers = members.filter(window.ONS.storage.isOtherHouseholdMember),
+        householdMembers = otherHouseholdMembers;
+
+    if (userMember) {
+      householdMembers = [userMember].concat(otherHouseholdMembers);
+    }
+
+
+    if (householdMembers.length < 2 && userMember) {
+      $('#individual-response-details').addClass('u-vh');
+    }
+  }
+console.log(storageAPI.getAllHouseholdMembers().filter(window.ONS.storage.isOtherHouseholdMember));
   $(updatePageState);
   $(updateLinks);
+  $(showHideIRCollapseable);
 </script>
