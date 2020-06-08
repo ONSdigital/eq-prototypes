@@ -81,6 +81,11 @@ logoUrl: ../home
     var currentPage = 'confirm-rh-address';
     var addressCountry = sessionStorage.getItem('address-country');
     var addressType = sessionStorage.getItem('address-type');
+    var addressLines = (sessionStorage.getItem('address') || '').split(',');
+    var addressLine1 = addressLines[0];
+    var addressLine2 = addressLines[1];
+    var addressLine3 = addressLines[2];
+    var addressLine4 = addressLines[3];
 
 	$('.qa-btn-submit').on('click', function (e) {
         e.preventDefault();
@@ -100,6 +105,10 @@ logoUrl: ../home
             } else {
                 var url  = '../uac-request-method';
             }
+            sessionStorage.setItem('address-line-1', addressLine1);
+            sessionStorage.setItem('address-line-2', addressLine2);
+            sessionStorage.setItem('address-town', addressLine3);
+            sessionStorage.setItem('address-postcode', addressLine4);
         }
         else {
             var url = '../uac-request-address';
@@ -124,6 +133,7 @@ logoUrl: ../home
 	$(function () {
 	  if(sessionStorage.getItem('address')) {
 		$('.full-address-text').html((sessionStorage.getItem('address') || '').replace(/,/g, '<br />'));
+
       }
 	});
 

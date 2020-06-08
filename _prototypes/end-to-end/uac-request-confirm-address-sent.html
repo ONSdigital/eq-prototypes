@@ -71,6 +71,7 @@ logoUrl: ../home
     var largePrint = urlParams.get('large-print');
     var codeType;
     var modeType;
+    var pipedAddress = storageAPI.getPipedAddress();
 
     if (currentJourney === 'new-ir-uac' || currentJourney === 'new-ce-resident-uac'){
         var codeType = 'a new individual';
@@ -93,7 +94,7 @@ logoUrl: ../home
     var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
 
     pipingDestinations.forEach(function(pipingDestination) {
-        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', addresseeName + ' at ' + addressLines[0]);
+        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', addresseeName + ' at ' + pipedAddress);
         pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{y}', codeType);
         pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{z}', modeType);
     });

@@ -66,8 +66,6 @@ noONSLogoLink: true
                                                 <input autocomplete="new-password" class="input input--radio js-focusable" type="radio"
                                                        name="address-correct" id="address-correct-no">
                                                 <label class="label label--inline" for="address-correct-no">No, this is not the correct address
-                                                 <br>
-                                                <span class="label__description label--negative">We will need to send you a new access code</span>
                                                 </label>
                                             </div>
                                         </fieldset>
@@ -108,12 +106,13 @@ noONSLogoLink: true
             if (yesbox.checked) {
                 var loc = "../section-intro";
             } else if (nobox.checked) {
-                var loc = "../uac-request-address/";
+                var loc = '../uac-request-address/';
+                var currentJourney = 'unlinked-uac';
             } else {
                 var loc = "../uac-request-address/"
             }
             document.trav.action = loc;
-            window.location = loc + '?' + 'previous=' + currentPage;
+            window.location = loc + '?' + 'previous=' + currentPage + '&current-journey=' + currentJourney;
         }
 	});
 </script>
