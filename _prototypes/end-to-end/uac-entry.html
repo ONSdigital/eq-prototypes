@@ -18,7 +18,7 @@ logoUrl: ../home
                 <a href="../home" class="breadcrumb__link">Home</a>
             </li>
             <li id="breadcrumb-3" class="breadcrumb__item u-fs-s breadcrumb__item--current">
-            Start census
+                Start census
             </li>
         </ol>
     </nav>
@@ -41,10 +41,10 @@ logoUrl: ../home
                         </form>
                     </div>
                 </div>
-                <div class="panel panel--error u-mb-m js-error-box u-d-no"><div class="panel__header">
-                    <div class="panel__title u-fs-r--b">There 
-                            <span class="js-piping">is a problem</span> with your answer
-                        </div></div>
+                <div class="panel panel--error u-mb-m js-error-box u-d-no">
+                    <div class="panel__header">
+                        <div class="panel__title u-fs-r--b">There <span class="js-piping">is a problem</span> with your answer</div>
+                    </div>
                     <div class="panel__body">
                         <ol class="list list--bare">
                             <li class="list__item js-uac u-d-no">
@@ -135,9 +135,6 @@ logoUrl: ../home
     } else {
         if (uacInput.value == 'unl1 nk3d acc3 55c0') {
             window.location = '../uac-request-address/?previous=uac-entry&current-journey=unlinked-uac';
-        } else if (sessionStorage.getItem("wlh_bookmark")) {
-            var path = sessionStorage.getItem("wlh_bookmark");
-            window.location = '..' + path.replace("/end-to-end", "") + (path === "/end-to-end/hub/" ? "" : "?continuing=true");
         } else {
             window.location = '../confirm-address/';
         }
