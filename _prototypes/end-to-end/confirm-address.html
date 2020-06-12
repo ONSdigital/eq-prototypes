@@ -87,14 +87,12 @@ noONSLogoLink: true
 <script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
-	var yesbox = document.getElementById("address-correct-yes");
-    var nobox = document.getElementById("address-correct-no");
-    var hasErrors = false;
-    var currentPage = 'confirm-address';
-    
-    sessionStorage.setItem("wlh_bookmark" , window.location.pathname);
+    var yesbox = document.getElementById("address-correct-yes"),
+        nobox = document.getElementById("address-correct-no"),
+        hasErrors = false,
+        currentPage = 'confirm-address';
 
-	$('.qa-btn-submit').on('click', function (e) {
+    $('.qa-btn-submit').on('click', function (e) {
         e.preventDefault();
         const testFails = ($('input[type=radio]:checked').size() === 0);
         window.ONS.utils.validateInputs(testFails, "input[type=radio]");
@@ -103,7 +101,10 @@ noONSLogoLink: true
             hasErrors = false;
             return false;
         } else {
-            if (yesbox.checked) {
+            if (yesbox.checked && sessionStorage.getItem("wlh_bookmark")) {
+                var path = sessionStorage.getItem("wlh_bookmark");
+                var loc = '..' + path.replace("/end-to-end", "") + (path === "/end-to-end/hub/" ? "" : "?continuing=true");
+            } else if (yesbox.checked) {
                 var loc = "../section-intro";
             } else if (nobox.checked) {
                 var loc = '../uac-request-address/';
