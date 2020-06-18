@@ -119,9 +119,12 @@ noONSLogoLink: true
       $('.js-heading').html('Briefly describe what ' + '<em class="highlight">' + person.firstLastName + '</em>' +
         ' does in their main job');
     }
-    if (details['employment'].sevenDaysAgo[0]=== 'No') {
-        var replaceQuestion = $('.js-heading').html().replace('do', 'did');
-        $('.js-heading').html(replaceQuestion);
+    if(details['employment'].sevenDaysAgo[0]=== 'No' && storageAPI.getProxyFor(personId)) {
+      var replaceQuestion = $('.js-heading').html().replace('Does', 'Did');
+      $('.js-heading').html(replaceQuestion);
+    } else if(details['employment'].sevenDaysAgo[0]=== 'No' && !storageAPI.getProxyFor(personId)) {
+      var replaceQuestion = $('.js-heading').html().replace('Do', 'Did');
+      $('.js-heading').html(replaceQuestion);
     }
   }
 
