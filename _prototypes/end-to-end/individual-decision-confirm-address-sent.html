@@ -72,12 +72,12 @@ noONSLogoLink: true
     urlParams = new URLSearchParams(window.location.search),
     personId = urlParams.get('person_id'),
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
-    addressLines = (sessionStorage.getItem('address-line-1') || '');
+    pipedAddress = storageAPI.getPipedAddress();
 
     var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
 
     pipingDestinations.forEach(function(pipingDestination) {
-        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', 'Individual Respondent' + ' at ' + addressLines);
+        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', 'Individual Respondent' + ' at ' + pipedAddress);
     });
 
   /**
