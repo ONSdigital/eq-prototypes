@@ -43,7 +43,12 @@ logoUrl: ../home
                                             <div class="field__item js-focusable-box">
                                                 <input autocomplete="new-password" class="input input--radio js-focusable" type="radio"
                                                        name="address-correct" id="ce-resident">
-                                                <label class="label label--inline" for="ce-resident">Resident</label>
+                                                <label class="label label--inline" for="ce-resident">
+                                                Resident
+                                                <br>
+                                                <span class="label__description label--negative">
+                                                    Residents are responsible for answering the census questions about themselves
+                                                </label>
                                             </div>
                                             <div class="field__item js-focusable-box">
                                                 <input autocomplete="new-password" class="input input--radio js-focusable" type="radio"
@@ -96,7 +101,9 @@ logoUrl: ../home
         if (residentBox.checked) {
             if (currentJourney === 'new-hh-paper' || currentJourney === 'new-ce-resident-paper' || currentJourney === 'new-ce-manager-paper') {
                 window.location.href = '../uac-request-enter-name' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + 'new-ce-resident-paper';
-            } else if (currentJourney === 'new-hh-uac'|| currentJourney === 'new-ce-resident-uac' || currentJourney === 'new-ce-manager-uac') {
+            } else if (currentJourney === 'new-ce-resident-uac') {
+                window.location.href = '../uac-request-enter-ce-room' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + 'new-ce-resident-uac';
+            } else if (currentJourney === 'new-hh-uac' || currentJourney === 'new-ce-manager-uac') {
                 window.location.href = '../uac-request-method' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + 'new-ce-resident-uac';
             }
         }

@@ -108,7 +108,7 @@ logoUrl: ../home
   var urlParams = new URLSearchParams(window.location.search),
     previousPage = urlParams.get('previous'),
     currentJourney = urlParams.get('current-journey'),
-    currentPage= 'uac-request-address',
+    currentPage = 'uac-request-address',
     hasErrors = false;
 
   $('.btn-submit').click(function(e) {
@@ -132,12 +132,7 @@ logoUrl: ../home
       sessionStorage.setItem('address', document.getElementById('rh-proto-address').value);
       sessionStorage.setItem('address-type', addressType);
       sessionStorage.setItem('address-country', addressCountry);
-      
-      if(currentJourney === 'new-ir-uac'){
-        window.location = '../confirm-rh-address/?' + 'previous=' + 'uac-request-address' + '&' + 'current-journey=' + currentJourney;
-      } else {
-        window.location = '../confirm-rh-address/?' + 'previous=' + 'uac-request-address' + '&' + 'current-journey=' + currentJourney;
-      }
+      sessionStorage.removeItem('ce-room-number');
 
       // Temporary manual update address type for CEs  
       var address = document.getElementById('rh-proto-address').value.toLowerCase();
@@ -148,9 +143,15 @@ logoUrl: ../home
         "halls of residence",
         "hall of residence"
         ];
+
       if (array.some(val => address.includes(val))) {
         sessionStorage.setItem('address-type', 'CE');
+        var currentJourney = 'new-ce-resident-uac';
+      } else {
+        var currentJourney = urlParams.get('current-journey');
       }
+
+      window.location = '../confirm-rh-address/?' + 'previous=' + 'uac-request-address' + '&' + 'current-journey=' + currentJourney;
     }
   });
 

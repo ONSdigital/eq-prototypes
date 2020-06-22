@@ -21,45 +21,58 @@ logoUrl: ../home
         <div class="grid__col col-4@m"></div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
-                <div class="group">
+                <div class="panel panel--error u-mb-m js-error-box u-d-no">
+                  <div class="panel__header">
+                      <div class="panel__title u-fs-r--b">There <span class="js-piping">is a problem</span> with your answer</div>
+                  </div>
+                  <div class="panel__body">
+                      <ol class="list list--bare">
+                          <li class="list__item js-room-number u-d-no">
+                              1. <a href="#error-message-room-number" class="list__link js-inpagelink js-error">You have entered too many characters. Enter up to 10 characters to continue.</a>
+                          </li>
+                      </ol>
+                  </div>
+                </div>
+                <div class="group u-mb-xl">
                     <div class="block">
 
                         <div class="question">
                             <h1 class="question__title u-fs-xl js-heading"
                                 data-qa="question-title">
-                                What is your room name or number?
+                                What is your flat or room number?
                             </h1>
 
                             <fieldset
                                     class="question__fieldset js-question-fieldset">
-                                <legend class="u-vh">What is your name?</legend>
+                                <legend class="u-vh">What is your flat or room number?</legend>
 
                             <div class="question__answers">
                                 <div class="question__answer">
-                                  <p class="field">
-                                    <label class="label"
-                                           for="room-number">
-                                        <span class="label__inner">
-                                            Room name or number
-                                        </span>
-                                    </label>
-                                    <input required autocomplete="new-password" required data-error-msg="Enter a first name to continue" class="input input--text"
-                                           id="room-number"
-                                           data-qa="input-text" value="" data-error-msg="Enter a first name to continue"/>
-                                  </p>
+                                  <div class="js-char-check">
+                                    <p class="field">
+                                      <label class="label" for="room-number">Flat or room number</label>
+                                      <input autocomplete="new-password" type="text" id="room-number" data-error-msg="You have entered too many characters. Enter up to 10 characters to continue." class="input input--text input-type__input input--w-6" data-char-check-ref="search-field-check-remaining" data-char-check-num="10" />
+                                      <span
+                                        id="search-field-check-remaining"
+                                        class="input__limit u-fs-s--b u-mt-xs u-d-no"
+                                        data-charcount-limit-singular="{x} character too many"
+                                        data-charcount-limit-plural="{x} characters too many">
+                                      </span>
+                                    </p>
+                                  </div>
                                 </div>
                             </div>
                           </fieldset>
-                          <p class="u-mt-s"><a class="js-na-link" href="#">I don't have a room name or number</a></p>
                         </div>
                     </div>
                 </div>
 
-                <button class="btn btn-submit btn--primary btn--lg u-mt-xl"
+                <button class="btn btn-submit btn--primary btn--lg u-mb-xl"
                         data-qa="btn-submit" type="submit"
                         name="action[save_continue]">
-                  Continue
+                  Save and continue
                 </button>
+                <p><a class="js-na-link" href="#">Cancel and return to the previous page</a></p>
             </main>
         </div>
     </div>
@@ -85,20 +98,16 @@ logoUrl: ../home
 
   $('.btn-submit').on('click', function(e) {
     e.preventDefault();
-    sessionStorage.setItem('ce-room-number', getRoomNumber());
+      const testFails = document.getElementById('room-number').value.length > 10 ? true : false;
+      window.ONS.utils.validateInputs(testFails, "input[id='room-number']");
 
-    if(currentJourney === 'new-hh-paper') {
-      var url = '../uac-request-confirm-address';
+    if (hasErrors) {
+      hasErrors = false;
+      return false;
+    } else {
+      sessionStorage.setItem('ce-room-number', getRoomNumber());
+      window.location.href = '../confirm-rh-address' + '?previous=' + currentPage + '&current-journey=' + currentJourney;
     }
-    if(currentJourney === 'new-ir-paper') {
-      var url = '../uac-request-confirm-address/';
-    }
-    else {
-      var url = '../uac-request-enter-name/';
-    }
-
-    window.location.href = url + '?previous=' + currentPage + '&current-journey=' + currentJourney;
-
   });
 
   function getRoomNumber() {
@@ -123,13 +132,7 @@ logoUrl: ../home
 
   $('.js-na-link').on('click', function(e) {
     e.preventDefault();
-    sessionStorage.removeItem('ce-room-number');
-
-    if (previousPage === 'uac-request-confirm-address') {
-      window.location.href = '../uac-request-confirm-address/' + '?previous=' + currentPage + '&current-journey=' + currentJourney;
-    } else {
-      window.location.href = '../uac-request-enter-name/' + '?previous=' + currentPage + '&current-journey=' + currentJourney;
-    }
+    window.location.href = '../confirm-rh-address/' + '?previous=' + currentPage + '&current-journey=' + currentJourney;
   });
 
   $(updateAllLinks);
