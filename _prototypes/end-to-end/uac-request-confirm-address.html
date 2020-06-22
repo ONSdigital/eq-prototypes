@@ -34,7 +34,7 @@ logoUrl: ../home
                                 </h1>
                             </div>
                             <div class="u-mb-xs js-name-address"></div>
-                            <p class="u-mb-m"><a id="js-change-name" href="">Change name</a><span id="change-ce-room-number-container"> | <a id="js-change-ce-room-number-link" href="">Change flat or room number</a></span></p>
+                            <p class="u-mb-m"><a id="js-change-name" href="">Change name</a><span id="change-ce-room-number-container" class="u-d-no"> | <a id="js-change-ce-room-number-link" href="">Change flat or room number</a></span></p>
                             <div class="panel panel--simple panel--info u-mb-m js-panel u-d-no">
                                   <div class="panel__body">
                                       A letter with your individual access code will arrive in a plain white envelope
@@ -124,12 +124,16 @@ logoUrl: ../home
     }
 
     function updateQuestion() {
+        var addressType = (sessionStorage.getItem('address-type') || '');
         var roomNumber = (sessionStorage.getItem('ce-room-number') || '');
-        if (!roomNumber){
-            $('.js-name-address').html('<strong>' + addresseeName + '</strong>' + '<br>' + addressLine1);
-            $('#change-ce-room-number-container').hide();
-        } else {
-            $('.js-name-address').html('<strong>' + addresseeName + '</strong>' + '<br>' + roomNumber + '<br>' + addressLine1);
+        if (addressType === 'CE') {
+            $('#change-ce-room-number-container').removeClass('u-d-no');
+            if (!roomNumber){
+                $('.js-name-address').html('<strong>' + addresseeName + '</strong>' + '<br>' + addressLine1);
+                $('#js-change-ce-room-number-link').html('Add flat or room number');
+            } else {
+                $('.js-name-address').html('<strong>' + addresseeName + '</strong>' + '<br>' + roomNumber + '<br>' + addressLine1);
+            }
         }
     }
 
