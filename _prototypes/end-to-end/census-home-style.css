@@ -25,6 +25,7 @@
     position: relative;
     padding: 0;
     overflow: hidden;
+    height: 400px;
 }
 .hero--with-image  .hero__img {
     position: relative;
@@ -34,10 +35,14 @@
     height: 450px;
 }
 
+.hero--with-image.expanded {
+    height: 530px;
+}
+
 /* over 768px */
 @media only screen and (min-width: 769px) {
     .hero--with-image  .hero__img {
-        height: 400px
+        height: 530px
     }
 }
 
