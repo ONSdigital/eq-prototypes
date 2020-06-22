@@ -94,7 +94,12 @@ logoUrl: ../home
     var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
 
     pipingDestinations.forEach(function(pipingDestination) {
-        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', addresseeName + ' at ' + pipedAddress);
+        var roomNumber = (sessionStorage.getItem('ce-room-number') || '');
+        if (roomNumber) {
+            pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', addresseeName + ' at ' + roomNumber + ', ' + pipedAddress);
+        } else {
+            pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', addresseeName + ' at ' + pipedAddress);
+        }
         pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{y}', codeType);
         pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{z}', modeType);
     });

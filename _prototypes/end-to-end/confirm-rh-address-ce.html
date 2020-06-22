@@ -101,9 +101,7 @@ logoUrl: ../home
         if (residentBox.checked) {
             if (currentJourney === 'new-hh-paper' || currentJourney === 'new-ce-resident-paper' || currentJourney === 'new-ce-manager-paper') {
                 window.location.href = '../uac-request-enter-name' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + 'new-ce-resident-paper';
-            } else if (currentJourney === 'new-ce-resident-uac') {
-                window.location.href = '../uac-request-enter-ce-room' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + 'new-ce-resident-uac';
-            } else if (currentJourney === 'new-hh-uac' || currentJourney === 'new-ce-manager-uac') {
+            } else if (currentJourney === 'new-ce-resident-uac' || currentJourney === 'new-hh-uac' || currentJourney === 'new-ce-manager-uac') {
                 window.location.href = '../uac-request-method' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + 'new-ce-resident-uac';
             }
         }

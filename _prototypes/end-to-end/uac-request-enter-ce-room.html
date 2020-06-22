@@ -104,6 +104,9 @@ logoUrl: ../home
     if (hasErrors) {
       hasErrors = false;
       return false;
+    } else if (previousPage === 'uac-request-confirm-address'){ 
+      sessionStorage.setItem('ce-room-number', getRoomNumber());
+      window.location.href = '../uac-request-confirm-address' + '?previous=' + currentPage + '&current-journey=' + currentJourney;
     } else {
       sessionStorage.setItem('ce-room-number', getRoomNumber());
       window.location.href = '../confirm-rh-address' + '?previous=' + currentPage + '&current-journey=' + currentJourney;
@@ -132,7 +135,11 @@ logoUrl: ../home
 
   $('.js-na-link').on('click', function(e) {
     e.preventDefault();
-    window.location.href = '../confirm-rh-address/' + '?previous=' + currentPage + '&current-journey=' + currentJourney;
+    if (previousPage === 'uac-request-confirm-address') {
+      window.location.href = '../uac-request-confirm-address/' + '?previous=' + currentPage + '&current-journey=' + currentJourney;
+    } else {
+      window.location.href = '../confirm-rh-address/' + '?previous=' + currentPage + '&current-journey=' + currentJourney;
+    }
   });
 
   $(updateAllLinks);
