@@ -36,10 +36,10 @@ logoUrl: ../home
                             <div class="u-mb-xs js-name-address"></div>
                             <p class="u-mb-m"><a id="js-change-name" href="">Change name</a><span id="change-ce-room-number-container" class="u-d-no"> | <a id="js-change-ce-room-number-link" href="">Change flat or room number</a></span></p>
                             <div class="panel panel--simple panel--info u-mb-m js-panel u-d-no">
-                                  <div class="panel__body">
-                                      A letter with your individual access code will arrive in a plain white envelope
-                                  </div>
+                                <div class="panel__body">
+                                    A letter with your individual access code will arrive in a plain white envelope
                                 </div>
+                            </div>
                             <div class="field field--radio field--multiplechoice">
                                 <fieldset>
                                     <div class="field__item js-focusable-box">
@@ -132,7 +132,7 @@ logoUrl: ../home
                 $('.js-name-address').html('<strong>' + addresseeName + '</strong>' + '<br>' + addressLine1);
                 $('#js-change-ce-room-number-link').html('Add flat or room number');
             } else {
-                $('.js-name-address').html('<strong>' + addresseeName + '</strong>' + '<br>' + roomNumber + '<br>' + addressLine1);
+                $('.js-name-address').html('<strong>' + addresseeName + '</strong>' + ' ' + roomNumber + '<br>' + addressLine1);
             }
         }
     }
