@@ -5,7 +5,6 @@ globalcss: false
 layout: eq-default-extras
 footer: census-transactional
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
-hideSaveLater: true
 logoUrl: ../home
 ---
 
@@ -130,7 +129,7 @@ logoUrl: ../home
         if (uacInput.value == 'unl1 nk3d acc3 55c0') {
             window.location = '../uac-request-address/?previous=uac-entry&current-journey=unlinked-uac';
         } else {
-            window.location = '../confirm-address/';
+            window.location = '../confirm-rh-address/?previous=uac-entry';
         }
     }
   });

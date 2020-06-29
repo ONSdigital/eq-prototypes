@@ -51,7 +51,7 @@ logoUrl: ../home
                                             <div class="field__item js-focusable-box">
                                                 <input autocomplete="new-password" class="input input--radio js-focusable" type="radio"
                                                        name="address-correct" id="address-correct-no">
-                                                <label class="label label--inline" for="address-correct-no">No, search for address again</label>
+                                                <label id="address-correct-no-label" class="label label--inline" for="address-correct-no">No, search for address again</label>
                                             </div>
                                         </fieldset>
                                     </div>
@@ -74,6 +74,7 @@ logoUrl: ../home
 
 <script>
 	var yesbox = document.getElementById("address-correct-yes");
+	var nobox = document.getElementById("address-correct-no");
     var urlParams = new URLSearchParams(window.location.search);
     var previousPage = urlParams.get('previous');
     var addressParam = urlParams.get('address');
@@ -89,34 +90,57 @@ logoUrl: ../home
     var addressLine3 = addressLines[2];
     var addressLine4 = addressLines[3];
     var roomNumber = (sessionStorage.getItem('ce-room-number') || '');
-
+console.log(currentJourney);
 	$('.qa-btn-submit').on('click', function (e) {
         e.preventDefault();
 
         /**
         * Routing
         */
+        // Correct address
         if (yesbox.checked) {
-            if (addressCountry === 'S') {
-                var url = '../address-in-scotland';
-            } else if (addressCountry != 'S' && addressType === 'CE') {
-                var url = '../confirm-rh-address-ce';
-            } else if (currentJourney === 'new-hh-paper') {
-                var url  = '../paper-request-hh-number';
-            } else if (currentJourney === 'unlinked-uac') {
-                var url  = '../section-intro';
-            } else {
-                var url  = '../uac-request-method';
+            // UAC entered
+            if (previousPage === 'uac-entry') {
+                var url = '../section-intro';
             }
-            sessionStorage.setItem('address-line-1', addressLine1);
-            sessionStorage.setItem('address-line-2', addressLine2);
-            sessionStorage.setItem('address-town', addressLine3);
-            sessionStorage.setItem('address-postcode', addressLine4);
-        }
-        else {
-            var url = '../uac-request-address';
-        }
+            // Fulfilment
+            else if (previousPage === 'uac-request-address' && currentJourney != 'address-correction') {
+                // Address in England or Wales
+                if (addressCountry === 'E' || addressCountry === 'W') {
+                    // CE address
+                    if (addressType === 'CE') {
+                        var url = '../confirm-rh-address-ce';
+                    }
+                    // Household address
+                    else {
+                        // HH Paper fulfilment
+                        if (currentJourney === 'new-hh-paper') {
+                            var url = '../paper-request-hh-number';
+                        // HH Code fulfilment
+                        } else {
+                            var url = '../uac-request-method';
+                        }
+                    }
+                }
+                // Address outside England or Wales
+                else {
+                    var url = '../address-in-scotland';
+                }
+            } else {
+                var url = '../section-intro';
+            }
+
+        sessionStorage.setItem('address-line-1', addressLine1);
+        sessionStorage.setItem('address-line-2', addressLine2);
+        sessionStorage.setItem('address-town', addressLine3);
+        sessionStorage.setItem('address-postcode', addressLine4);
+
         window.location.href = url + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney;
+        }
+        else if (nobox.checked) {
+            var url = '../uac-request-address';
+            window.location.href = url + '?' + 'previous=' + currentPage + '&' + 'current-journey=address-correction';
+        }
     });
 
     if (addressParam) {
@@ -169,12 +193,13 @@ logoUrl: ../home
         }
     }
 
-    function updateAnswer() {
-        if (addressCountry === 'S') {
-            $('.js-change-address').hide();
+    function updateTemplate() {
+        if (previousPage === 'uac-entry') {
+            $('#address-correct-no-label').html('No, this is not the correct address');
+           // $('.complete-later').hide();
         }
     }
 
     $(updateAllLinks);
-    $(updateAnswer);
+    $(updateTemplate);
 </script>

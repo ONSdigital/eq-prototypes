@@ -156,6 +156,22 @@ logoUrl: ../home
     sessionStorage.setItem('address-town', document.getElementById('address-town').value);
     sessionStorage.setItem('address-postcode', document.getElementById('address-postcode').value);
 
+    // Temporary manual update address type for CEs  
+    var addressLine1 = document.getElementById('address-line-1').value.toLowerCase();
+    var addressLine2 = document.getElementById('address-line-2').value.toLowerCase();
+    var address = addressLine1 + addressLine2;
+    var array = [
+    "university", 
+    "howden apartments",
+    "care home",
+    "halls of residence",
+    "hall of residence"
+    ];
+
+    if (array.some(val => address.includes(val))) {
+    sessionStorage.setItem('address-type', 'CE');
+    }
+
     window.location = '../home/';
     }
   });

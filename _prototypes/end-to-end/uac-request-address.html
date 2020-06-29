@@ -110,7 +110,7 @@ logoUrl: ../home
     currentJourney = urlParams.get('current-journey'),
     currentPage = 'uac-request-address',
     hasErrors = false;
-
+console.log(currentJourney);
   $('.btn-submit').click(function(e) {
     e.preventDefault(); // do not submit the form like usual
     if (($("input[id='rh-proto-address']").val() == '') || ($('#address-typeahead-listbox').html().length)) {
@@ -146,19 +146,11 @@ logoUrl: ../home
 
       if (array.some(val => address.includes(val))) {
         sessionStorage.setItem('address-type', 'CE');
-        var currentJourney = 'new-ce-resident-uac';
-      } else {
-        var currentJourney = urlParams.get('current-journey');
       }
 
       window.location = '../confirm-rh-address/?' + 'previous=' + 'uac-request-address' + '&' + 'current-journey=' + currentJourney;
     }
   });
-
-  if(currentJourney === 'unlinked-uac'){
-    $('.js-question-description').hide();
-    $('.js-previous-link').hide();
-  }
 
   if (window.location.search == '?edit=true') {
     function updateEditableAddress() {
@@ -182,6 +174,14 @@ logoUrl: ../home
   }
 
   function updateAllLinks() {
+
+    if(currentJourney === 'unlinked-uac'){
+      $('.js-question-description').hide();
+      $('.js-previous-link').hide();
+    } else if(currentJourney === 'address-correction'){
+      $('.js-question-description').hide();
+    }
+
       if (previousPage) {
         $('.js-previous-link').attr('href', '../' + previousPage);
       } else {
