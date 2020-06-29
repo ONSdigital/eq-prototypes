@@ -144,31 +144,26 @@ class AddressInput {
         .send()
         .then(async response => {
           const data = (await response.json()).response;
-          resolve(this.mapFindResults(data, text));
+          resolve(this.mapFindResults(data));
         })
         .catch(reject);
     });
   }
 
-  mapFindResults(results, input) {
+  mapFindResults(results) {
     let updatedResults, mappedResults, limit;
-
     const addresses = results.addresses;
     const total = results.total;
     const originalLimit = 10;
-
-    // let groupPostcodes = addresses[0] && addresses[0].bestMatchAddress ? this.groupPostcodes(addresses, input) : null;
-    let groupPostcodes = null;
-    
-    if (groupPostcodes) {
-      mappedResults = groupPostcodes.map(({ address, count, postcode, uprn }) => {
-        const countAdjust = count - 1;
-        const addressText = countAdjust === 1 ? 'address' : 'addresses';
+    if (results.partpostcode) {
+      const postcodeGroups = results.postcodes;
+      mappedResults = postcodeGroups.map(({ postcode, streetName, townName, addressCount, firstUprn }) => {
+        const addressText = addressCount === 1 ? 'address' : 'addresses';
         return {
-          'en-gb': countAdjust === 0 ? address : address + ' <span class="group-text">(' + countAdjust + ' more ' + addressText + ')</span>',
+          'en-gb': streetName + ', ' + townName  + ', ' + postcode + ' <span class="group-text">(' + addressCount + ' more ' + addressText + ')</span>',
           postcode,
-          uprn,
-          countAdjust,
+          firstUprn,
+          addressCount,
         };
       });
 
@@ -176,7 +171,6 @@ class AddressInput {
       this.currentResults = mappedResults.sort();
 
     } else if (addresses[0]) {
-
       if (addresses[0] && addresses[0].bestMatchAddress) {
         updatedResults = addresses.map(({ uprn, bestMatchAddress }) => ({ uprn: uprn, address: bestMatchAddress }));
         limit = originalLimit;
@@ -227,31 +221,6 @@ class AddressInput {
     });
   }
 
-  groupPostcodes(results, input) {
-    const postcodeRegex = /([A-Za-z]{1,2}\d{1,2})(\s?(\d?\w{2}))?/;
-    const testForPostcode = postcodeRegex.test(input);
-    if (testForPostcode) {
-      const addressesByPostcode = new Map();
-  
-      results.forEach(address => {
-        const postcode = address.bestMatchAddress.match(postcodeRegex);
-        if (!addressesByPostcode.has(postcode[0]))
-          addressesByPostcode.set(postcode[0], []);
-        addressesByPostcode.get(postcode[0]).push(address);
-      });
-
-      const groupPostcodes = Array.from(addressesByPostcode)
-        .map(([postcode, addresses]) => ({
-          address:  addresses[0].bestMatchAddress,
-          count:    addresses.length,
-          postcode: postcode,
-          uprn: addresses[0].uprn
-        }));
-      
-      return groupPostcodes;
-    }
-  }
-
   testFullPostcodeQuery(input) {
     const fullPostcodeRegex = /\b((?:(?:gir)|(?:[a-pr-uwyz])(?:(?:[0-9](?:[a-hjkpstuw]|[0-9])?)|(?:[a-hk-y][0-9](?:[0-9]|[abehmnprv-y])?)))) ?([0-9][abd-hjlnp-uw-z]{2})\b/i;
     const testFullPostcode = fullPostcodeRegex.test(input);
@@ -262,7 +231,7 @@ class AddressInput {
 
   onAddressSelect(selectedResult) {
     return new Promise((resolve, reject) => {
-      if (selectedResult.uprn && (selectedResult.countAdjust === 0 || !selectedResult.countAdjust)) {
+      if (selectedResult.uprn && !selectedResult.addressCount) {
         this.retrieveAddress(selectedResult.uprn)
           .then(data => {
             if (this.isEditable) {
@@ -278,7 +247,7 @@ class AddressInput {
             }
           })
           .catch(reject);
-      } else if (selectedResult.postcode && selectedResult.countAdjust > 0) {
+      } else if (selectedResult.postcode && selectedResult.addressCount > 0) {
         const event = new Event('input', {
           'bubbles': true,
           'cancelable': true
