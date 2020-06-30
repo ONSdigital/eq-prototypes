@@ -105,10 +105,10 @@ logoUrl: ../home
       hasErrors = false;
       return false;
     } else if (previousPage === 'uac-request-confirm-address'){ 
-      sessionStorage.setItem('ce-room-number', getRoomNumber());
+      sessionStorage.setItem('unit-name', getRoomNumber());
       window.location.href = '../uac-request-confirm-address' + '?previous=' + currentPage + '&current-journey=' + currentJourney;
     } else {
-      sessionStorage.setItem('ce-room-number', getRoomNumber());
+      sessionStorage.setItem('unit-name', getRoomNumber());
       window.location.href = '../confirm-rh-address' + '?previous=' + currentPage + '&current-journey=' + currentJourney;
     }
   });
@@ -122,7 +122,7 @@ logoUrl: ../home
   }
 
   $(function() {
-    var roomNumber = (sessionStorage.getItem('ce-room-number') || '');
+    var roomNumber = (sessionStorage.getItem('unit-name') || '');
 
     if (roomNumber) {
       $('#room-number').val(roomNumber);

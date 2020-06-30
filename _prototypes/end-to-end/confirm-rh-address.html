@@ -89,8 +89,7 @@ logoUrl: ../home
     var addressLine2 = addressLines[1];
     var addressLine3 = addressLines[2];
     var addressLine4 = addressLines[3];
-    var roomNumber = (sessionStorage.getItem('ce-room-number') || '');
-    var buildingName = (sessionStorage.getItem('hh-building-name') || '');
+    var unitName = (sessionStorage.getItem('unit-name') || '');
 
 	$('.qa-btn-submit').on('click', function (e) {
         e.preventDefault();
@@ -123,9 +122,13 @@ logoUrl: ../home
                         }
                     }
                 }
-                // Address outside England or Wales
-                else {
+                // Address in Scotland
+                else if (addressCountry === 'S') {
                     var url = '../address-in-scotland';
+                }
+                // Address in NI
+                else if (addressCountry === 'N') {
+                    var url = '../address-in-ni';
                 }
             } else {
                 var url = '../section-intro';
@@ -160,8 +163,8 @@ logoUrl: ../home
 
 	$(function getAddress() {
 	  if(sessionStorage.getItem('address')) {
-          if(roomNumber){
-            $('.full-address-text').html(roomNumber + '<br>' + (sessionStorage.getItem('address') || '').replace(/,/g, '<br />'));
+          if(unitName){
+            $('.full-address-text').html(unitName + '<br>' + (sessionStorage.getItem('address') || '').replace(/,/g, '<br />'));
           } else {
 		    $('.full-address-text').html((sessionStorage.getItem('address') || '').replace(/,/g, '<br />'));
           }
@@ -174,13 +177,13 @@ logoUrl: ../home
             if (addressType === 'CE') {
                 $('.js-add-unit').removeClass('u-d-no')
                 $('.js-add-unit a').attr('href', '../uac-request-enter-ce-room' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney);
-                if (roomNumber) {
+                if (unitName) {
                     $('.js-add-unit a').html('Change room number');
                 }
-            } else if (addressType === 'HH') {
+            } else if (addressType === 'HH' && previousPage === 'uac-entry') {
                 $('.js-add-unit').removeClass('u-d-no')
                 $('.js-add-unit a').attr('href', '../uac-request-enter-hh-building-name' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney);
-                if (!buildingName) {
+                if (!unitName) {
                     $('.js-add-unit a').html('Add building name');
                 } else {
                     $('.js-add-unit a').html('Change building name');

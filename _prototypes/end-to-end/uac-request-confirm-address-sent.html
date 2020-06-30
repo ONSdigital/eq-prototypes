@@ -94,7 +94,7 @@ logoUrl: ../home
     var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
 
     pipingDestinations.forEach(function(pipingDestination) {
-        var roomNumber = (sessionStorage.getItem('ce-room-number') || '');
+        var roomNumber = (sessionStorage.getItem('unit-name') || '');
         if (roomNumber) {
             pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', addresseeName + ' at ' + roomNumber + ', ' + pipedAddress);
         } else {

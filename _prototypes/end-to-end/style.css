@@ -176,10 +176,22 @@ a:focus:not(.btn--link):not(.btn--ghost):not(.js-clear-btn):not(.download__thumb
     text-decoration: none;
 }
 
-.icon--external-link:before,
-.icon--external-link:after {
-    top: 5px;
-    right: -0.2rem;
+.icon--external:before,
+.icon--external:after {
+    display: inline-block;
+    background-repeat: no-repeat;
+    content: '';
+    vertical-align: middle;
+}
+
+.icon--external:after {
+    width: 1rem;
+    height: 1rem;
+    background-image: url(/img/icons/external-link.svg);
+    background-size: 1rem 1rem;
+    margin: 0 0 0 .5rem;
+    -webkit-transform: none;
+    transform: none;
 }
 
 .collapsible {
