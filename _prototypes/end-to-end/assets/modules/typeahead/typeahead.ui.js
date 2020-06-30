@@ -371,7 +371,7 @@ export default class TypeaheadUI {
           warningSpanElement.innerHTML = '!';
           
           warningBodyElement.className = 'panel__text';
-          warningBodyElement.innerHTML = this.foundResults + ' results found. Enter more of the address to improve results.';
+          warningBodyElement.innerHTML = this.foundResults + ' results found. Enter more of the address to improve results';
 
           warningElement.appendChild(warningSpanElement);
           warningElement.appendChild(warningBodyElement);

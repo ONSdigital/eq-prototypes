@@ -160,7 +160,7 @@ class AddressInput {
       mappedResults = postcodeGroups.map(({ postcode, streetName, townName, addressCount, firstUprn }) => {
         const addressText = addressCount === 1 ? 'address' : 'addresses';
         return {
-          'en-gb': streetName + ', ' + townName  + ', ' + postcode + ' <span class="group-text">(' + addressCount + ' more ' + addressText + ')</span>',
+          'en-gb': streetName + ', ' + townName  + ', ' + postcode + ' (<span class="group-text">' + addressCount + ' ' + addressText + '</span>)',
           postcode,
           firstUprn,
           addressCount,
