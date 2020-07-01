@@ -90,6 +90,7 @@ logoUrl: ../home
     var addressLine3 = addressLines[2];
     var addressLine4 = addressLines[3];
     var unitName = (sessionStorage.getItem('unit-name') || '');
+    var fulfilmentJourney = (currentJourney === 'new-hh-uac' || currentJourney === 'new-ir-uac' || currentJourney === 'new-hh-paper');
 
 	$('.qa-btn-submit').on('click', function (e) {
         e.preventDefault();
@@ -99,12 +100,8 @@ logoUrl: ../home
         */
         // Correct address
         if (yesbox.checked) {
-            // UAC entered
-            if (previousPage === 'uac-entry') {
-                var url = '../section-intro';
-            }
             // Fulfilment
-            else if (previousPage === 'uac-request-address' && currentJourney != 'address-correction') {
+            if (fulfilmentJourney) {
                 // Address in England or Wales
                 if (addressCountry === 'E' || addressCountry === 'W') {
                     // CE address
