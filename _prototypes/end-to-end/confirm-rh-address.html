@@ -5,7 +5,7 @@ globalcss: false
 layout: eq-default-extras
 footer: census-transactional
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
-hideSaveLater: true
+exit: true
 logoUrl: ../home
 ---
 
@@ -139,8 +139,11 @@ logoUrl: ../home
         window.location.href = url + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney;
         }
         else if (nobox.checked) {
-            var url = '../uac-request-address';
-            window.location.href = url + '?' + 'previous=' + currentPage + '&' + 'current-journey=address-correction';
+            if (!fulfilmentJourney) {
+                window.location.href = '../uac-request-address' + '?' + 'previous=' + currentPage + '&' + 'current-journey=address-correction';
+            } else {
+                window.location.href = '../uac-request-address' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney;
+            }
         }
     });
 
@@ -201,6 +204,10 @@ logoUrl: ../home
             $('.js-previous-link').hide();
         } else {
             $('.js-previous-link').attr('href', '../' + previousPage + '?' + 'previous=' + 'uac-request-address' + '&current-journey=' + currentJourney + '&edit=true');
+        }
+
+        if (fulfilmentJourney) {
+            $('.exit').hide();
         }
     }
 
