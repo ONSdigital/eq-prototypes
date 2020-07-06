@@ -177,7 +177,7 @@ logoUrl: ../home
                 if (unitName) {
                     $('.js-add-unit a').html('Change room number');
                 }
-            } else if (addressType === 'HH' && previousPage === 'uac-entry') {
+            } else if (addressType === 'HH' && !fulfilmentJourney) {
                 $('.js-add-unit').removeClass('u-d-no')
                 $('.js-add-unit a').attr('href', '../uac-request-enter-hh-building-name' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney);
                 if (!unitName) {
