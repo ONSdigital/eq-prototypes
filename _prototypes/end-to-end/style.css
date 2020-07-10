@@ -864,7 +864,11 @@ hr {
 }
 
 .btn--ghost.exit:after {
-    background-image: url(/img/icons/icons--exit.svg);
+    background-image: url(/img/icons/icons--exit-white.svg);
+}
+
+.btn--ghost.exit:focus:after {
+    background-image: url(/img/icons/icons--exit-black.svg);
 }
 
 .btn--ghost.complete-later:after {
