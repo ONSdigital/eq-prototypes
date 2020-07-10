@@ -3,8 +3,8 @@ title: Version 1
 project: End to end prototype
 globalcss: false
 layout: eq-default-extras
-footer: census-transactional
 footer: census-website
+header: census-website
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 hideSaveLater: true
 logoUrl: ../home
@@ -22,11 +22,11 @@ logoUrl: ../home
         <div class="hero__container">
             <div class="hero__content grid grid--gutterless grid--flex grid--vertical-center">
                 <div class="container">
-                    <div class="grid__col col-8@m">
+                    <div class="grid__col col-7@m">
                         <header>
-                            <h1 class="hero__title u-fs-xl">Census 2021 is happening now</h1>
+                            <h1 class="hero__title u-fs-xxxl">Census 2021 is happening now</h1>
                             <h2 class="hero__subtitle u-fs-m u-mb-xs">Ready to start your census online?</h2>
-                            <p class="u-mb-m">You will need your 16<span aria-hidden="true">-<span>character access code</p>
+                            <p>You will need your 16<span aria-hidden="true">-<span>character access code</p>
                         </header>
                         <a href="../uac-entry/" role="button" class="btn btn--link">
                             <span class="btn__inner icon--chevron-right-white">Start census</span>
@@ -130,5 +130,11 @@ logoUrl: ../home
         $('.hero--with-image').toggleClass('expanded');
 
     });
-    
+
+    function activeNavItem() {
+        $('.header-nav__item:first-of-type').addClass('header-nav__item--active');
+    }
+
+    $(activeNavItem);
+
 </script>

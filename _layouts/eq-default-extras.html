@@ -16,7 +16,11 @@
             <a class="skip__link" href="#main">Skip to content</a>
         </div>
         <header class="page__header">
+        {% if page.header == "census-website" %}
+            {% include header-census.html %}
+        {% else %}
             {% include header-eq-default.html %}
+        {% endif %}
         </header>
         {{ content }}
     </div>

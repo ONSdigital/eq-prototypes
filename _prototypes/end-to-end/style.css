@@ -18,6 +18,17 @@ h3,
 h4 {
     font-weight: 600!important;
 }
+
+.u-fs-xxxl {
+    font-size: 1.77777778rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.u-fs-xxl {
+    font-size: 1.555555555rem;
+}
+
 .u-fs-xl, 
 h1 {
     font-size: 1.44444444rem;
@@ -55,6 +66,14 @@ h4 {
 
 /* over 740px */
 @media only screen and (min-width: 740px) {
+    .u-fs-xxxl {
+        font-size: 2.66666667rem;
+    }
+
+    .u-fs-xxl {
+        font-size: 2rem;
+    }
+
     .u-fs-xl,
     h1 {
         font-size: 1.66666667rem;
@@ -131,6 +150,82 @@ h4 {
 .header__title--nav-adj {
     padding-top: 0;
 }
+
+/* Header nav */
+.header__bottom {
+    background: #93328e;
+}
+
+.header-nav__list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+}
+.header-nav__item {
+      display: block;
+      margin: 0;
+      padding: 0.3rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.header-nav__link {
+    display: block;
+    margin: 0 .35rem;
+    padding: 0 .65rem;
+    color: #fff;
+    font-size: .9rem;
+    text-decoration: none;
+}
+
+.header-nav__link:focus, .header-nav__link:hover {
+    color: #c2ecff;
+    text-decoration: none;
+}
+
+.header-nav__item--active .header-nav__link {
+    font-weight: bold;
+}
+
+@media only screen and (min-width: 740px) {
+    .header-nav__item {
+        display: inline-block;
+        position: relative;
+        margin: 0 0 0 1rem;
+        padding: 0 0 .3rem;
+        border-top: 0;
+        border-bottom: 4px solid transparent;
+        text-align: center;
+    }
+
+    .header-nav__item:first-child {
+        margin-left: 0;
+    }
+
+    .header-nav__item--active, .header-nav__item:hover {
+        border-color: #fff;
+    }
+
+    .header-nav__link {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        font-size: 1rem;
+    }
+
+    .header-nav__link:focus, .header-nav__link:hover {
+        color: #fff;
+    }
+}
+
+/* 
+    &__item + &__item--secondary {
+      margin-top: 0.5rem;
+      border-top: 2px solid $color-white;
+    }
+    &__item--active &__link {
+      font-weight: bold;
+    }
+  } */
 
 .btn:not(.btn--ghost):not(.btn--ghost-blue) {
     -webkit-box-shadow: 0px 3px 0px 0px rgba(0,0,0,0.8);
