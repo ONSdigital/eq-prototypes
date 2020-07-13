@@ -110,7 +110,7 @@ logoUrl: ../home
     currentJourney = urlParams.get('current-journey'),
     currentPage = 'uac-request-address',
     hasErrors = false;
-console.log(currentJourney);
+
   $('.btn-submit').click(function(e) {
     e.preventDefault(); // do not submit the form like usual
     if (($("input[id='rh-proto-address']").val() == '') || ($('#address-typeahead-listbox').html().length)) {
