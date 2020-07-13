@@ -122,9 +122,10 @@ logoUrl: ../home
 
 </main>
 <script>
-    var trigger = document.getElementsByClassName('js-toggle');
+    var heroTwisty = document.getElementsByClassName('js-toggle');
+    var mobileNavBtn = document.getElementsByClassName('js-toggle-main');
 
-    $(trigger).click(function(e) {
+    $(heroTwisty).click(function(e) {
         e.preventDefault();
 
         $('.hero--with-image').toggleClass('expanded');
@@ -135,6 +136,15 @@ logoUrl: ../home
         $('.header-nav__item:first-of-type').addClass('header-nav__item--active');
     }
 
+    function mobileNav() {
+        $(mobileNavBtn).click(function(e) {
+            e.preventDefault();
+            $(this).toggleClass('js-nav-show');
+            $('#main-nav').toggle();
+        });
+    }
+
     $(activeNavItem);
+    $(mobileNav);
 
 </script>

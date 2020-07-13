@@ -22,9 +22,9 @@
     </div>
     <div class="header__main ">
         <div class="container">
-            <div class="grid grid--gutterless grid--align-mid u-cf">
-                <div class="grid__col ">
-                    {% if page.logoUrl %}<a href="{{ page.logoUrl }}">{% endif %}
+            <div class="grid grid--gutterless grid--flex grid--between grid--vertical-center grid--no-wrap">
+                <div class="grid__col col-auto u-flex-shrink">
+                    {% if page.logoUrl %}<a class="header__title-link" href="{{ page.logoUrl }}">{% endif %}
                     <h1
                             class="header__title header__title--nav-adj">
                         <span class="js-header-title">
@@ -34,16 +34,14 @@
                                 {{ site.title }}
                             {% endif %}
                         </span>
-                        {% unless page.hideSaveLater %}
-                                    {% if page.exit %}
-                                    <button class="btn btn--ghost u-fr u-d-no@xs@m exit">Exit</button>
-                                    {% else %}
-                                    <button class="btn btn--ghost u-fr u-d-no@xs@m complete-later">Save and sign out</button>
-                                    {% endif %}
-                        <!--<button class="btn btn&#45;&#45;ghost u-fr">Cadw a chwblhau'n ddiweddarach</button>-->
-                        {% endunless %}
                     </h1>
+                    <img class="header__title-logo" src="/img/icons/census-logo-en.svg" alt="Census 2021">
                     {% if page.logoUrl %}</a>{% endif %}
+                </div>
+                <div class="grid__col col-auto u-flex-no-shrink u-d-no@m">
+                  <button type="submit" class="btn btn--mobile u-ml-s js-toggle-main" aria-label="Toggle main navigation" aria-controls="main-nav" aria-haspopup="true" aria-expanded="false">
+                    <span class="btn__inner">Menu</span>
+                  </button>
                 </div>
             </div>
         </div>
@@ -60,6 +58,9 @@
 						</li>
 						<li class="header-nav__item ">
 							<a href="" class="header-nav__link" role="menuitem">Help with your census</a>
+						</li>
+                        <li class="header-nav__item ">
+							<a href="" class="header-nav__link" role="menuitem">Keeping your data safe</a>
 						</li>
 						<li class="header-nav__item ">
 							<a href="" class="header-nav__link" role="menuitem">Contact us</a>
