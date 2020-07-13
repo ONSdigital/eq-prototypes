@@ -3,7 +3,9 @@
     padding: 2rem 0;
     background: #fff;
 }
-
+.hero__title {
+    line-height: 1.2;
+}
 .hero__content {
     height: 100%;
 }
