@@ -22,9 +22,9 @@
     </div>
     <div class="header__main ">
         <div class="container">
-            <div class="grid grid--gutterless grid--align-mid u-cf">
-                <div class="grid__col ">
-                    {% if page.logoUrl %}<a href="{{ page.logoUrl }}">{% endif %}
+            <div class="grid grid--gutterless grid--flex grid--between grid--vertical-center grid--no-wrap">
+                <div class="grid__col col-auto u-flex-shrink">
+                    {% if page.logoUrl %}<a class="header__title-link" href="{{ page.logoUrl }}">{% endif %}
                     <h1
                             class="header__title header__title--nav-adj">
                         <span class="js-header-title">
@@ -34,17 +34,18 @@
                                 {{ site.title }}
                             {% endif %}
                         </span>
-                        {% unless page.hideSaveLater %}
-                                    {% if page.exit %}
-                                    <button class="btn btn--ghost u-fr u-d-no@xs@m exit">Exit</button>
-                                    {% else %}
-                                    <button class="btn btn--ghost u-fr u-d-no@xs@m complete-later">Save and sign out</button>
-                                    {% endif %}
-                        
-                        <!--<button class="btn btn&#45;&#45;ghost u-fr">Cadw a chwblhau'n ddiweddarach</button>-->
-                        {% endunless %}
                     </h1>
+                    <img class="header__title-logo" src="/img/icons/census-logo-en.svg" alt="Census 2021">
                     {% if page.logoUrl %}</a>{% endif %}
+                </div>
+                <div class="grid__col col-auto u-flex-no-shrink">
+                {% unless page.hideSaveLater %}
+                    {% if page.exit %}
+                    <button class="btn btn--ghost u-fr u-d-no@xs@m exit">Exit</button>
+                    {% else %}
+                    <button class="btn btn--ghost u-fr u-d-no@xs@m complete-later">Save and sign out</button>
+                    {% endif %}
+                {% endunless %}
                 </div>
             </div>
         </div>
