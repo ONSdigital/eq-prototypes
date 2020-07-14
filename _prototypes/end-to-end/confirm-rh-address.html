@@ -208,6 +208,11 @@ logoUrl: ../home
 
         if (fulfilmentJourney) {
             $('.exit').hide();
+        } else {
+            $('.exit').click(function(e) {
+                e.preventDefault();
+                window.location = '../uac-entry/';
+            });
         }
     }
 
