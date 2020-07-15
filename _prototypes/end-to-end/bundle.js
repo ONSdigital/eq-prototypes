@@ -198,7 +198,12 @@ export function getAddress() {
 
 function getPipedAddress() {
   let pipedAddress = "this accommodation";
-  if(sessionStorage.getItem('address-line-1') && sessionStorage.getItem('address-line-2') && sessionStorage.getItem('unit-name')) {
+  let addressLine2 = sessionStorage.getItem('address-line-2');
+  let transientAddress = addressLine2.includes("near");
+
+  if (transientAddress) {
+    pipedAddress = sessionStorage.getItem('address-line-1') + ' ' + sessionStorage.getItem('address-line-2') || ''.replace(/,/g, '');
+  } else if (sessionStorage.getItem('address-line-1') && sessionStorage.getItem('address-line-2') && sessionStorage.getItem('unit-name')) {
     pipedAddress = sessionStorage.getItem('unit-name') + ', ' + sessionStorage.getItem('address-line-1') || ''.replace(/,/g, '');
   } else {
     pipedAddress = sessionStorage.getItem('address-line-1') + ', ' + sessionStorage.getItem('address-line-2') || ''.replace(/,/g, '');

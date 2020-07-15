@@ -47,9 +47,9 @@ logoUrl: ../home
                                                     <div class="field__item js-focusable-box">
                                                         <input autocomplete="new-password" class="input input--radio js-focusable"
                                                             type="radio"
-                                                            name="does-anyone-else-live-here"
+                                                            name="radio-group"
                                                             id="barge"
-                                                            value="barge">
+                                                            value="barge or houseboat">
                                                         <label class="label label--inline"
                                                             for="barge"
                                                             id="no-label">
@@ -59,8 +59,8 @@ logoUrl: ../home
                                                     <div class="field__item js-focusable-box">
                                                         <input autocomplete="new-password" class="input input--radio js-focusable"
                                                             type="radio"
-                                                            name="does-anyone-else-live-here"
-                                                            id="caravan" value="caravan">
+                                                            name="radio-group"
+                                                            id="caravan" value="caravan or live-in vehicle">
                                                         <label class="label label--inline"
                                                             for="caravan">
                                                             Caravan or live-in vehicle
@@ -72,9 +72,9 @@ logoUrl: ../home
                                                     <div class="field__item js-focusable-box">
                                                         <input autocomplete="new-password" class="input input--radio js-focusable"
                                                             type="radio"
-                                                            name="does-anyone-else-live-here"
+                                                            name="radio-group"
                                                             id="tent"
-                                                            value="tent">
+                                                            value="tent or shelter">
                                                         <label class="label label--inline"
                                                             for="tent"
                                                             id="no-label">
@@ -103,19 +103,25 @@ logoUrl: ../home
 
 <script>
     var searchParams = new URLSearchParams(window.location.search);
-    var currentJourney = document.querySelector('.js-previous-link');
-    var phoneInput = document.getElementById('phone');
-    var postInput = document.getElementById('post');    
     var previousPage = searchParams.get('previous');
     var currentJourney = searchParams.get('current-journey');
-    var currentPage = 'uac-request-method';
+    var currentPage = 'uac-transient-accomm-type';
     var form = document.querySelector('form');
 
     form.addEventListener('submit', function(event) {
         event.preventDefault();
-        
-        window.location.href = '../section-intro/' + '?' + 'previous=' + 'uac-request-method' + '&' + 'current-journey=' + currentJourney;
+        sessionStorage.setItem('address-line-1', ('the' + ' ' + getTransientAccommodationType()));
+        window.location.href = '../section-intro/' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney;
+        storageAPI.storePageData('/end-to-end/section-intro/', window.location.pathname);
     });
+
+    function getTransientAccommodationType() {
+        return [
+            $('[name="radio-group"]:checked').val()
+        ].filter(function(number) {
+            return number
+        });
+    }
 
     function updateQuestion() {
    
