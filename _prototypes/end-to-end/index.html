@@ -30,21 +30,32 @@ logoUrl: ../home
 
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
-                <div class="panel panel--error u-mb-m js-error-box u-d-no">
-                    <div class="panel__header">
-                        <div class="panel__title u-fs-r--b">There 
-                        <span class="js-piping">is a problem</span> with your answer
-                        </div>
+                <div class="feedback__inline js-feedback-inline is-collapsed">
+                    <div class="feedback__border">
+                        <form id="feedback-form" method="POST"
+                              class="feedback__form">
+                            <div class="group">
+                                <div class="feedback__field"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="block" id="what-is-your-address">
+                    <div class="panel panel--error u-mb-m js-error-box u-d-no"><div class="panel__header">
+                        <div class="panel__title u-fs-r--b">There <span class="js-piping">is a problem</span> with your answer</div>
                     </div>
                     <div class="panel__body">
                         <ol class="list list--bare">
-                            <li class="list__item js-rh-proto-address u-d-no">
-                                1. <a href="#error-message-rh-proto-address" class="list__link js-inpagelink js-error">Select an address to continue</a>
+                            <li class="list__item js-address-field u-d-no">
+                                1. <a href="#error-message-address-field" class="list__link js-inpagelink js-error">Enter an address to continue</a>
+                            </li>
+                            <li class="list__item js-address-line-1 js-address-line-2 js-address-town js-address-postcode u-d-no">
+                                1. <a href="#error-message-address-line-1" class="list__link js-inpagelink js-error">Enter an address to continue</a>
                             </li>
                         </ol>
                     </div>
                 </div>
-                <div class="block" id="what-is-your-address">
 
                 <div class="question" id="what-is-your-address-question">
                     <h1 class="question__title u-fs-xl"
@@ -80,13 +91,11 @@ logoUrl: ../home
                                           </div>
                                       </div>
                                   </div>
-                                  <div class="address-input__search js-address-not-editable">
+                                  <div class="address-input__search">
                                       <p class="field">
-                                          <label class="label" for="rh-proto-address">Enter address or postcode and select from results</label>
+                                          <label class="label" for="address-field">Enter address or postcode and select from results</label>
                                           <div id="address-typeahead-container" class="typeahead-input js-address-typeahead " data-content="{&quot;no_results&quot;:&quot;No results found. Try entering a different part of the address&quot;,&quot;aria_no_results&quot;:&quot;No addresses found for the query&quot;,&quot;aria_you_have_selected&quot;:&quot;You have selected&quot;,&quot;aria_found_by_alternative_name&quot;:&quot;found by alternative name&quot;,&quot;aria_min_chars&quot;:&quot;Type in 5 or more characters for addresses.&quot;,&quot;aria_one_result&quot;:&quot;There is one address available.&quot;,&quot;aria_n_results&quot;:&quot;There are {n} addresses available.&quot;,&quot;aria_limited_results&quot;:&quot;Results have been limited to 10 addresses. Type more characters to refine your search.&quot;,&quot;more_results&quot;:&quot;Continue entering to improve results&quot;,&quot;results_title&quot;:&quot;Select an address&quot;}" typeahead-data="">
-                                              <input type="text" name="x2" id="rh-proto-address" class="input input--text input-type__input  address-input__typeahead js-typeahead-input js-rh-address-lookup input--w-50" data-error-msg="Enter an address to continue" maxlength="100"/>
-                                              <input type="hidden" class="js-rh-address-type" value="#"/>
-                                              <input type="hidden" class="js-rh-address-country" value="#"/>
+                                              <input type="text" name="x2" id="address-field" class="input input--text input-type__input  address-input__typeahead js-typeahead-input input--w-50" data-error-msg="Enter an address to continue" maxlength="100"/>
                                               <div class="typeahead-input__results js-typeahead-results">
                                                   <header class="typeahead-input__results-title u-fs-s">Select an address</header>
                                                   <ul class="typeahead-input__listbox js-typeahead-listbox" role="listbox" id="address-typeahead-listbox" tabindex="-1"></ul>
@@ -95,8 +104,8 @@ logoUrl: ../home
                                               <div class="typeahead-input__status u-vh js-typeahead-aria-status" aria-live="polite" role="status" tabindex="-1"></div>
                                           </div>
                                       </p>
+                                    <a href="#" class="btn--link js-address-manual-btn">Manually enter address</a>
                                   </div>
-                                  <a href="../home">No fixed address</a>
                               </div>
                           </div>
                     </fieldset>
@@ -117,32 +126,40 @@ logoUrl: ../home
   var hasErrors = false;
   
   $('.btn-submit').on('click', function (e) {
-    e.preventDefault(); // do not submit the form like usual
-    if (($("input[id='rh-proto-address']").val() == '') || ($('#address-typeahead-listbox').html().length)) {
-      var testFails = true
-    }
-    else {
+    e.preventDefault();
+    if ($('.address-input--search').length != 0) {
+      if ($("#address-field").val() == '' || $("#address-field").val() != '' ){
+        var testFails = true;
+      }
+      $('.address-input__manual input').prop('type', 'readonly');
+      window.ONS.utils.validateInputs(testFails, "input[id='address-field']");
+    } else if ($('.address-input--search').length === 0) {
       var testFails = '';
+      $('.address-input__manual input').prop('type', 'text');
+      window.ONS.utils.validateInputs(testFails, "input[id='address-line-1']");
+      window.ONS.utils.validateInputs(testFails, "input[id='address-town']");
+      window.ONS.utils.validateInputs(testFails, "input[id='address-postcode']");
     }
-    window.ONS.utils.validateInputs(testFails, "input[id='rh-proto-address']");
+
     if (hasErrors) {
-        window.ONS.utils.calcErrors();
         hasErrors = false;
         return false;
     } else {
 
     var isEditing =
       new URLSearchParams(window.location.search).get('edit') === 'true';
-    
-    var addressType = $('.js-rh-address-type').val();
-    var addressCountry = $('.js-rh-address-country').val();
 
-    sessionStorage.setItem('address', document.getElementById('rh-proto-address').value);
-    sessionStorage.setItem('address-country', addressCountry);
-    sessionStorage.setItem('address-type', addressType);
+    sessionStorage.setItem('address', getAddress());
+
+    sessionStorage.setItem('address-line-1', document.getElementById('address-line-1').value);
+    sessionStorage.setItem('address-line-2', document.getElementById('address-line-2').value);
+    sessionStorage.setItem('address-town', document.getElementById('address-town').value);
+    sessionStorage.setItem('address-postcode', document.getElementById('address-postcode').value);
 
     // Temporary manual update address type for CEs  
-    var address = document.getElementById('rh-proto-address').value.toLowerCase();
+    var addressLine1 = document.getElementById('address-line-1').value.toLowerCase();
+    var addressLine2 = document.getElementById('address-line-2').value.toLowerCase();
+    var address = addressLine1 + addressLine2;
     var array = [
     "university", 
     "howden apartments",
@@ -177,7 +194,10 @@ logoUrl: ../home
 
   if (window.location.search == '?edit=true') {
     function updateEditableAddress() {
-      $('#rh-proto-address').val(sessionStorage.getItem('address'));
+      $('#address-line-1').val(sessionStorage.getItem('address-line-1'));
+      $('#address-line-2').val(sessionStorage.getItem('address-line-2'));
+      $('#address-town').val(sessionStorage.getItem('address-town'));
+      $('#address-postcode').val(sessionStorage.getItem('address-postcode'));
     }
   $(updateEditableAddress);
   }
