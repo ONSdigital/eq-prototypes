@@ -1,0 +1,98 @@
+---
+title: COVID-19 test Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a href="../hub">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <div class="group">
+                    <div class="block">
+                        <section class="section">
+                            <h1 class="u-fs-xl">Coronavirus (COVID-19)</h1>
+                            <p><span class="js-person-name"></span> circumstances may have changed
+                                during the coronavirus pandemic. Answer all questions based on <span class="js-person-name"></span> situation
+                                as it is now.</p>
+                            
+
+                            <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple u-mt-m u-vh">
+                                <div class="js-collapsible-content">
+                                    <h2 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="If you can’t answer questions for this person">
+                                        If you can’t answer questions for this person
+                                    </h2>
+                                    <div class="collapsible__body js-collapsible-body">
+                                        <p>You can <strong>share your household access code</strong> with the people you live with so they can complete their own sections.</p>
+                                        <p>If this is not possible, there are <a class="js-link-ir" href="#">other ways each person can complete their own census</a>.</p>
+                                        <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Can’t answer someone else’s questions?">Hide this</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <button class="btn btn--primary btn--lg qa-btn-submit btn-submit u-mt-xl"
+                        type="submit" name="">Continue
+                </button>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end-covid/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person_id'),
+    surveyType = urlParams.get('survey');
+    personDetails = storageAPI.getHouseholdMemberByPersonId(personId);
+
+    $('.btn-submit').click(function(e) {
+        e.preventDefault();
+
+        if (personDetails.type === 'visitor'){
+            var url = 'individual-details-dob/';
+        } else {
+            var url = 'individual-decision/';
+        }
+        window.location = '../' + url + '?person_id=' + personId;
+        storageAPI.storePageData('/end-to-end-covid/' + url, window.location.pathname);
+    });
+
+    $('.js-link-ir').click(function(e) {
+        e.preventDefault();
+
+        window.location = '../cant-answer-for-others/?person_id=' + personId;
+        storageAPI.storePageData('/end-to-end-covid/cant-answer-for-others/', window.location.pathname);
+    });
+
+  function updateName() {
+    $('.js-person-name').html(person.firstLastName +
+        window.ONS.utils.trailingNameS(person.firstLastName));
+  }
+
+  function showIrDetails() {
+    if (personId !== 'person_me' && personDetails.type !== 'visitor') {
+        $('.js-collapsible').removeClass('u-vh');
+    }
+  }
+  $(updateName);
+  $(showIrDetails);
+
+</script>

@@ -1,0 +1,103 @@
+---
+title: COVID-19 test Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+logoUrl: ../home
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            <!--{% include navigation.html
+            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
+            nav-title-id="section-individual" %}-->
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password"
+                      action="../hub">
+                    <div class="group">
+                        <section class="section">
+                            <div class="question u-mb-s">
+                                <h1 id="question-title"
+                                    class="question__title u-fs-xl js-piping">
+                                    What is your mobile number?
+                                </h1>
+                            </div>
+
+                            <div class="field">
+                                <label class="label" for="mobile-number">
+                                    UK mobile number <br>
+                                <span class="label__description u-fs-s">This will not be stored and only used once to send the access code</span>
+                                </label>
+                                <input autocomplete="new-password" class="input input--text js-mobile-number" type="tel"
+                                       type="tel"
+                                       id="mobile-number"
+                                       value="" />
+                            </div>
+                        </section>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl u-mt-xl"
+                            type="submit" name="">Continue
+                    </button>
+
+                    <!--
+                        <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>-->
+
+                    <!--<p class="u-mb-m"><span class="js-link-secure-label"></span><br />
+                        <a class="js-link-secure"
+                           href="#">Get a separate access code to submit an
+                            individual response</a></p>-->
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<div style="display:none;">
+    <div id="member-checkbox-select-template" class="field__item">
+        <input autocomplete="new-password" class="input input--checkbox js-person-control"
+               name="checkbox-answer" type="checkbox">
+        <label class="label label--inline u-fs-r js-person-name"></label>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end-covid/bundle.js'></script>
+
+<script>
+    var storageAPI = window.ONS.storage;
+    var urlParams = new URLSearchParams(window.location.search);
+    var previousPage = urlParams.get('previous');
+    var currentJourney = urlParams.get('current-journey');
+    
+  $('.qa-btn-submit').on('click', function (e) {
+    e.preventDefault();
+    
+    var url = '../uac-request-enter-mobile-correct';
+    window.location.href = url + '?mobile=' + encodeURI($('#mobile-number').val() + '&previous=' + 'uac-request-enter-mobile' + '&current-journey=' + currentJourney);
+  });
+
+    function updateAllLinks() {
+        if (currentJourney === 'new-ce-manager-uac') {
+            $('.js-previous-link').attr('href', '../uac-request-method/' + '?previous=' + 'confirm-rh-address-ce' + '&current-journey=' + currentJourney);
+        } else if (currentJourney === 'new-ce-manager-paper') {
+            $('.js-previous-link').attr('href', '../uac-request-method/' + '?previous=' + 'ce-manager-paper' + '&current-journey=' + currentJourney);
+        } else {
+            $('.js-previous-link').attr('href', '../uac-request-method/' + '?previous=' + 'confirm-rh-address' + '&current-journey=' + currentJourney);
+        }
+    }
+
+    $(updateAllLinks);
+</script>

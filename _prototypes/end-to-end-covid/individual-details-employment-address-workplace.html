@@ -1,0 +1,194 @@
+---
+title: COVID-19 test Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<link rel="stylesheet" href="../assets/modules/typeahead/typeahead.css"/>
+
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link mars" href="../do-you-live-here">Previous</a>
+    </div>
+</div>
+
+<style>
+    .input--text-lg {
+        width : 100%;
+    }
+
+    .input--text-postcode {
+        max-width : 9.25rem;
+    }
+</style>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password"
+                      action="../hub/">
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
+                           value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group u-mb-xl">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title saturn js-heading">
+                                        What is the address of your workplace?
+                                    </h1>
+                                </div>
+
+                                <div class="question__answers">
+                                    <div class="question__answer">
+                                        <div class="answer answer--textfield"
+                                             id="container-address-line-1">
+                                            <div class="answer__fields js-fields">
+                                                <div id="address" class="field address-input js-address u-mt-s address-input--search">
+                                                  <div class="address-input__manual">
+                                                  <div class="fieldgroup">
+                                                    <p class="field">
+                                                      <label class="label" for="address-line-1">Address line 1</label>
+                                                      <input type="text" id="address-line-1" class="input input--text input-type__input input--w-20@m js-address-line-1" name="address-line-1" />
+                                                    </p>
+                                                    <p class="field">
+                                                      <label class="label" for="address-line-2">Address line 2</label>
+                                                      <input type="text" id="address-line-2" class="input input--text input-type__input  input--w-20@m js-address-line-2" name="address-line-2" />
+                                                    </p>
+                                                    <p class="field">
+                                                      <label class="label" for="address-town">Town or city</label>
+                                                      <input type="text" id="address-town" class="input input--text input-type__input  js-address-town" name="address-town" />
+                                                    </p>
+                                                    <p class="field">
+                                                      <label class="label" for="address-postcode">Postcode</label>
+                                                      <input type="text" id="address-postcode" class="input input--text input-type__input  input--w-5 js-address-postcode" name="address-postcode" />
+                                                    </p>
+                                                    <div class="u-d-no u-mt-m js-address-search-btn-container">
+                                                      <a href="#" class="btn--link js-address-search-btn">Search for an address</a>
+                                                    </div>
+                                                  </div>
+                                                  </div>
+                                                  <div class="address-input__search">
+                                                    <p class="field">
+                                                      <label class="label" for="address-field">Enter address or postcode and select from results</label>
+                                                      <div id="address-typeahead-container" class="typeahead-input js-address-typeahead " data-content="{&quot;no_results&quot;:&quot;No results found. Try entering a different part of the address&quot;,&quot;aria_no_results&quot;:&quot;No addresses found for the query&quot;,&quot;aria_you_have_selected&quot;:&quot;You have selected&quot;,&quot;aria_found_by_alternative_name&quot;:&quot;found by alternative name&quot;,&quot;aria_min_chars&quot;:&quot;Type in 5 or more characters for addresses.&quot;,&quot;aria_one_result&quot;:&quot;There is one address available.&quot;,&quot;aria_n_results&quot;:&quot;There are {n} addresses available.&quot;,&quot;aria_limited_results&quot;:&quot;Results have been limited to 10 addresses. Type more characters to refine your search.&quot;,&quot;more_results&quot;:&quot;Continue entering to improve results&quot;,&quot;results_title&quot;:&quot;Select an address&quot;}" typeahead-data="">
+                                                        <input type="text" name="x7" id="address-field" class="input input--text input-type__input address-input__typeahead js-typeahead-input input--w-50" maxlength="100"/>
+                                                        <div class="typeahead-input__results js-typeahead-results">
+                                                          <header class="typeahead-input__results-title u-fs-s">Select an address</header>
+                                                          <ul class="typeahead-input__listbox js-typeahead-listbox" role="listbox" id="address-typeahead-listbox" tabindex="-1"></ul>
+                                                        </div>
+                                                        <div class="typeahead-input__instructions u-vh js-typeahead-instructions" id="address-typeahead-instructions" tabindex="-1">Use up and down keys to navigate addresses once you&#39;ve typed more than two characters. Use the enter key to select a address. Touch device users, explore by touch or with swipe gestures.</div>
+                                                        <div class="typeahead-input__status u-vh js-typeahead-aria-status" aria-live="polite" role="status" tabindex="-1"></div>
+                                                      </div>
+                                                    </p>
+                                                    <a href="#" class="btn--link js-address-manual-btn">Manually enter address</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple">
+                                    <div class="js-collapsible-content">
+                                        <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b js-definition" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Why your answer is important">Why your answer is important</h3>
+                                        <div class="collapsible__body js-collapsible-body">
+                                            <p class="js-help-1">Your answer will help your community by allowing the government and councils to understand commuting patterns.</p>
+                                            <p class="js-help-2">Information about your workplace address and how you travel to work are used together to work out local public transport needs, develop transport policies and plan services.</p>
+                                            
+                                            <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Why your answer is important">Hide this</button>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+
+                    <p class="mars">
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end-covid/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person_id'),
+    member = storageAPI.getHouseholdMemberByPersonId(personId),
+    person = member['@person'],
+    isEditing = urlParams.get('edit'),
+    isVisitor = storageAPI.isVisitor(member),
+    details = storageAPI.getPersonalDetailsFor(personId),
+    surveyType = urlParams.get('survey'),
+    question = $('#question-title').html();
+  
+  $('.js-address-search-btn').on('click', function (e) {
+    window.location.href = '../individual-details-employment-address-workplace/?person_id=' + personId;
+  });
+
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function(e) {
+    e.preventDefault();
+
+    let url = '../individual-details-employment-address-workplace/?person_id=' + personId + '&edit=true';
+    question = question.trim();
+    storageAPI.addUpdateEmploymentWorkplaceAddress(personId,
+      {
+        'addressLine1': $('#address-line-1').val(),
+        'addressLine2': $('#address-line-2').val(),
+        'townCity': $('#address-town').val(),
+        'postcode': $('#address-postcode').val()
+      },
+      question,
+      url
+    );
+    storageAPI.clearPersonalBookmark(personId);
+    window.location.href = '../hub/';
+    storageAPI.storePageData('/end-to-end-covid/hub/', window.location.pathname);
+  }));
+
+  function updateRouting() {
+    if(surveyType) {
+      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    }
+    $('#survey-type').val(surveyType);
+  }
+
+  function updateQuestion() {
+    if(storageAPI.getProxyFor(personId)) {
+      $('.js-heading').html('What is the address of ' + '<em class="highlight">' + person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
+        ' workplace?');
+      $('.js-definition').html('Why their answer is important');
+      $('.js-help-1').html('Their answer will help their community by allowing the government and councils to understand commuting patterns.');
+      $('.js-help-2').html('Information about their workplace address and how they travel to work are used together to work out local public transport needs, develop transport policies and plan services.');                                  
+    }
+    if (details['employment'].sevenDaysAgo[0]=== 'No') {
+        var replaceQuestion = $('.js-heading').html().replace('is', 'was');
+        $('.js-heading').html(replaceQuestion);
+    }
+  }
+
+  $(updateQuestion);
+  $(updateRouting);
+
+  /**
+   * Routing
+   */
+  $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
+</script>
