@@ -91,7 +91,8 @@ logoUrl: ../home
     var addressLine4 = addressLines[3];
     var unitName = (sessionStorage.getItem('unit-name') || '');
     var fulfilmentJourney = (currentJourney === 'new-hh-uac' || currentJourney === 'new-ir-uac' || currentJourney === 'new-hh-paper');
-
+    var WLHBookmark = sessionStorage.getItem("wlh_bookmark");
+console.log(WLHBookmark);
 	$('.qa-btn-submit').on('click', function (e) {
         e.preventDefault();
 
@@ -128,7 +129,11 @@ logoUrl: ../home
                     var url = '../address-in-ni';
                 }
             } else {
-                var url = '../section-intro';
+                if (WLHBookmark != null) {
+                    var url = WLHBookmark;
+                } else {
+                    var url = '../section-intro-covid';
+                }
             }
 
         sessionStorage.setItem('address-line-1', addressLine1);

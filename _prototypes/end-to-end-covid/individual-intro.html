@@ -75,12 +75,7 @@ noONSLogoLink: true
 
     $('.btn-submit').click(function(e) {
         e.preventDefault();
-
-        if (personDetails.type === 'visitor'){
-            var url = 'individual-details-dob/';
-        } else {
-            var url = 'individual-decision/';
-        }
+        var url = 'individual-intro-covid/';
         window.location = '../' + url + '?person_id=' + personId;
         storageAPI.storePageData('/end-to-end-covid/' + url, window.location.pathname);
     });

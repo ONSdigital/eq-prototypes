@@ -197,7 +197,7 @@ noONSLogoLink: true
                     val.push($(el).val());
                 });
 
-                let url = '../individual-details-employment-seven-days-ago/?person_id=' + personId + '&edit=true';
+                let url = '../individual-details-employment-seven-days-ago-covid/?person_id=' + personId + '&edit=true';
                 question = question.trim();
 
                 storageAPI.addUpdateLastSevenDays(personId, val, question, url);
@@ -213,8 +213,8 @@ noONSLogoLink: true
                     storageAPI.storePageData('/end-to-end-covid/individual-details-employment-seven-days-ago-description/', window.location.pathname);
                 } else {
                     e.preventDefault();
-                    window.location.href = '../individual-details-employment-main-job/?person_id=' + personId;
-                    storageAPI.storePageData('/end-to-end-covid/individual-details-employment-main-job/', window.location.pathname);
+                    window.location.href = '../individual-details-employment-main-job-covid/?person_id=' + personId;
+                    storageAPI.storePageData('/end-to-end-covid/individual-details-employment-main-job-covid/', window.location.pathname);
                 }
             }
         }));

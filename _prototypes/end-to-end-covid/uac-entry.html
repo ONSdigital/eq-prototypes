@@ -107,6 +107,8 @@ hideSaveLater: true
   var currentJourney = 'new-hh-uac';
   var pathArray = window.location.pathname.split('/');
   var currentPage = pathArray.slice(-2)[0];
+  var wlhBoomark = sessionStorage.getItem("wlh_bookmark");
+  var transientUser = (uacInput.value === 'tran sien tuse ruac' || sessionStorage.getItem('address') === null);
     
     var $input = $('input#uac');
     $input.keyup(function(e) {
@@ -124,12 +126,14 @@ hideSaveLater: true
     if (hasErrors) {
         hasErrors = false;
         return false;
+    } else if (uacInput.value === 'expi reda cces scod') {
+        window.location = '../expired-uac/?previous=uac-entry';
+    } else if (wlhBoomark && !transientUser) {
+        window.location = '../confirm-rh-address/?previous=uac-entry';
     } else {
         if (uacInput.value == 'unl1 nk3d acc3 55c0' || uacInput.value == 'unli nked addr ess') {
             window.location = '../uac-request-address/?previous=uac-entry&current-journey=unlinked-uac';
-        } else if (uacInput.value === 'expi reda cces scod') {
-            window.location = '../expired-uac/?previous=uac-entry';
-        } else if (uacInput.value === 'tran sien tuse ruac' || sessionStorage.getItem('address') === null){
+        } else if (transientUser){
             window.location = '../uac-request-address/?previous=uac-entry&current-journey=transient';
         } else {
             window.location = '../confirm-rh-address/?previous=uac-entry';

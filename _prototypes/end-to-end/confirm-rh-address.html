@@ -128,7 +128,10 @@ logoUrl: ../home
                     var url = '../address-in-ni';
                 }
             } else {
-                var url = '../section-intro';
+                if (sessionStorage.getItem("wlh_bookmark")) {
+                    var url = sessionStorage.getItem("wlh_bookmark");
+                } else {
+                    var url = '../section-intro';
             }
 
         sessionStorage.setItem('address-line-1', addressLine1);

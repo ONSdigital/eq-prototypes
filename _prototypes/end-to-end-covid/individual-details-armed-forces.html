@@ -23,7 +23,7 @@ noONSLogoLink: true
             <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password"
-                      action="../individual-details-employment-seven-days-ago">
+                      action="../individual-details-employment-seven-days-ago-covid">
                     <input autocomplete="new-password" type="hidden" name="person_id" id="person"
                            value="#"/>
                     <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
@@ -138,7 +138,7 @@ noONSLogoLink: true
         question = question.trim();
 
         storageAPI.addUpdateArmedForces(personId, val, question, url);
-        storageAPI.storePageData('/end-to-end-covid/individual-details-employment-seven-days-ago/', window.location.pathname);
+        storageAPI.storePageData('/end-to-end-covid/individual-details-employment-seven-days-ago-covid/', window.location.pathname);
 
         if(isEditing) {
         e.preventDefault();
