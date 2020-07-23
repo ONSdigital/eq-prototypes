@@ -128,10 +128,11 @@ logoUrl: ../home
                     var url = '../address-in-ni';
                 }
             } else {
-                if (sessionStorage.getItem("wlh_bookmark")) {
-                    var url = sessionStorage.getItem("wlh_bookmark");
+                if (WLHBookmark != null) {
+                    var url = WLHBookmark;
                 } else {
-                    var url = '../section-intro';
+                    var url = '../section-intro-covid';
+                }
             }
 
         sessionStorage.setItem('address-line-1', addressLine1);
