@@ -1034,14 +1034,17 @@ hr {
     vertical-align: middle;
 }
 
+.btn--ghost.complete-later:after,
 .btn--ghost.exit:after {
     background-image: url(/img/icons/icons--exit-white.svg);
 }
 
+.btn--ghost.complete-later:focus:after,
 .btn--ghost.exit:focus:after {
     background-image: url(/img/icons/icons--exit-black.svg);
 }
-
+/*
 .btn--ghost.complete-later:after {
     background-image: url(/img/icons/guidance-white.svg);
 }
+*/
