@@ -110,7 +110,7 @@ exit: true
 
     form.addEventListener('submit', function(event) {
         event.preventDefault();
-        sessionStorage.setItem('address-line-1', ('&lsquo;' + 'the ' +  getTransientAccommodationType()));
+        sessionStorage.setItem('address-line-1', ('&ldquo;' + 'the ' +  getTransientAccommodationType()));
         window.location.href = '../section-intro/' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney;
         storageAPI.storePageData('/end-to-end/section-intro/', window.location.pathname);
     });

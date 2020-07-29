@@ -79,7 +79,7 @@ exit: true
 
   $('.qa-btn-submit').on('click', function(e) {
       e.preventDefault();
-      sessionStorage.setItem('address-line-2', ('near' + ' ' + getNearestTown() + '&rsquo;'));
+      sessionStorage.setItem('address-line-2', ('near' + ' ' + getNearestTown() + '&rdquo;'));
       window.location.href = '../uac-transient-accomm-type/' + '?previous=' + currentPage + '&current-journey=' + currentJourney;
       storageAPI.storePageData('/end-to-end/uac-transient-accomm-type/', window.location.pathname);
   });
