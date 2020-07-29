@@ -49,11 +49,11 @@ exit: true
                                                             type="radio"
                                                             name="radio-group"
                                                             id="barge"
-                                                            value="barge or houseboat">
+                                                            value="barge or boat">
                                                         <label class="label label--inline"
                                                             for="barge"
                                                             id="no-label">
-                                                            Barge or houseboat
+                                                            Barge or boat
                                                             </label>
                                                     </div>
                                                     <div class="field__item js-focusable-box">
@@ -110,7 +110,7 @@ exit: true
 
     form.addEventListener('submit', function(event) {
         event.preventDefault();
-        sessionStorage.setItem('address-line-1', ('the' + ' ' + getTransientAccommodationType()));
+        sessionStorage.setItem('address-line-1', ('&lsquo;' + 'the ' +  getTransientAccommodationType()));
         window.location.href = '../section-intro/' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney;
         storageAPI.storePageData('/end-to-end/section-intro/', window.location.pathname);
     });
