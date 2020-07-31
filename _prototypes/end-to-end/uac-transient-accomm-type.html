@@ -129,6 +129,12 @@ exit: true
 
     function updateAllLinks() {
         $('.js-previous-link').attr('href', '../' + previousPage + '?' + (currentPage ? 'previous=' + currentPage : '') + (currentJourney ? '&current-journey=' + currentJourney : ''));
+
+        $('.exit').click(function(e) {
+          e.preventDefault();
+          window.location = '../uac-entry/?previous=' + currentPage + '&currentJourney=' + currentJourney;
+        });
+
     }
 
     $(updateQuestion);

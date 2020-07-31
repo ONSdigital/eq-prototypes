@@ -57,7 +57,7 @@ noONSLogoLink: true
 
     $(function () {
 	  if(sessionStorage.getItem('address-line-1')) {
-		$('.address-line-1').html((sessionStorage.getItem('address-line-1') || '').replace(/,/g, ''));
+		$('.address-line-1').html((storageAPI.getPipedAddress()));
       }
 	});
 
