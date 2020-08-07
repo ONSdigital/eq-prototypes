@@ -1,0 +1,151 @@
+---
+title: COVID-19 test (round 3 - usual situation) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+exit: true
+---
+
+<style type="text/css">
+
+.page_line {
+    margin-top: 0.5em;
+      border: 0.02em solid #999;
+      width: 100%;
+    margin-bottom: 1.6em;
+}
+
+.title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+
+.person-count {
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: -0.2em;
+    margin-top: -0.3em;
+}
+
+.smalltext {
+    font-size: 0.4em;
+    font-weight: normal;
+    margin-left: -0.2em;
+}
+
+</style>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v5.0"></script>
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <div class="panel panel--error js-error-box u-mb-m u-d-no">
+                    <div class="panel__header">
+                        <div class="panel__title u-fs-r--b">There 
+                          <span class="js-piping">is a problem</span> with your answer
+                      </div>
+                    </div>
+                    <div class="panel__body">
+                        
+                        <ul class="list list--bare">
+                            <li class="list__item u-fs-r">
+                                1. <a class="js-inpagelink" href="#panel-error">Enter a valid email address, such as example@email.com</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel panel--simple panel--success u-pl-l u-mb-m">
+                    <div class="panel__body">
+                        <div class="panel__icon u-f-l" style="margin-left:-2rem;">
+                            <span class="icon icon--tick"></span>
+                        </div>
+                        <h1 class="u-mb-xs">
+                            Thank you for completing the census
+                        </h1>
+                        <p class="u-mb-xs">Your census has been submitted for the household at <span class="full-address-text u-fs-r--b">Address not set</span></p>
+                    </div>
+                </div>
+                <p class="lock u-mb-l">Your personal information is protected by law and will be kept confidential</p>
+                <h2>Get confirmation email</h2>
+                <p>If you would like to be sent confirmation that you have completed your census, enter your email address.</p>
+                <form action="../complete--confirmation-sent/">
+            
+                    <div id="email-field" class="field">
+                        <label class="label" for="email-address">
+                                Email address
+                                <br>
+                                <span class="label__description label__inner u-fs-m">This will not be stored and only used once to send your confirmation</span>
+                        </label>
+                        <input autocomplete="new-password" class="input input--text js-email-address"
+                                id="email-address"
+                                value="" />
+                    </div>
+
+                    <button type="submit" class="btn btn--small u-mb-l u-mt-s qa-btn-submit">
+                        <span class="btn__inner">Send confirmation</span>
+                    </button>
+                </form>
+                <div class="panel panel--simple panel--warning js-panel-info u-mb-m">
+                    <span class="panel__icon" aria-hidden="true">!</span><span class="panel__text">Make sure you <a class="exit" href="../home">leave this page</a> or close your browser if you are using a shared device</span>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end-post-covid/bundle.js'></script>
+
+<script>
+    var queryString = window.location.search,
+        searchParams = new URLSearchParams(queryString),
+        storageAPI = window.ONS.storage;
+
+
+    $('.qa-btn-submit').on('click', function (e) {
+        e.preventDefault();
+        if( !validateEmail($('#email-address').val()) || !$('#email-address').val()) {
+            window.location.href = '../complete/?invalid=true';
+        } else {
+            window.location.href = '../complete--confirmation-sent/?email=' + encodeURI($('#email-address').val());
+        }
+    });
+
+    $('.exit').on('click', function (e) {
+        e.preventDefault();
+        window.location.href = '../home/';
+        sessionStorage.clear();
+    });
+
+    function validateEmail($email) {
+        var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+        return emailReg.test( $email );
+    }
+
+    function checkErrors() {
+        if(searchParams.get('invalid')) {
+            let param = searchParams.get('true');
+            $('.js-error-box').removeClass('u-d-no');
+            $('#email-field').wrap( '<div class="panel panel--simple panel--error"><div class="panel__body"></div></div>' );
+            $('#email-field').before('<p id="panel-error" class="panel__error u-fs-r--b">Enter a valid email address, such as example@email.com</p>');
+        };
+    }
+
+    function updatePipedAddress() {
+        $('.full-address-text').html(storageAPI.getPipedAddress());
+    };
+
+    $(updatePipedAddress);
+    $(checkErrors);
+</script>

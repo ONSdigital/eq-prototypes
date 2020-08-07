@@ -1,0 +1,161 @@
+---
+title: COVID-19 test (round 3 - usual situation) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../individual-details-country-other">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m"></div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password" novalidate=""
+                      action="../individual-details-country-other-arrive-census">
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person" value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type" value="#"/>
+                    <div class="group" id="rsi">
+                        <div class="block" id="total-retail-turnover">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-xl js-heading">
+                                        When did you most recently arrive to live in the United Kingdom?
+                                    </h1>
+                                    <p class="question__description">
+                                      Do not count short visits away from the UK</p>
+                                </div>
+
+                                <div class="answer answer--date">
+                                    <div class="answer__fields js-fields u-mb-xl">
+                                        <fieldset class="fieldgroup fieldgroup--inline fieldgroup--date" data-qa="widget-date">
+                                            <div class="fieldgroup__fields">
+                                                <div class="field field--select field--month">
+                                                    <label class="label" for="uk-arrive-month">
+                                                        Month
+                                                    </label>
+                                                    <input type="text" id="uk-arrive-month" class="input input--text input-type__input  input--w-2" name="month" min="1" max="12" maxlength="2" pattern="[0-9]*" inputmode="numeric" autocomplete="bday-month" />
+                                                </div>
+                                                <div class="field field--input field--year">
+                                                    <label class="label" for="uk-arrive-year">
+                                                        Year
+                                                    </label>
+                                                    <input type="text" id="uk-arrive-year" data-qa="input-StringField" class="input input--StringField input--text input-type__input input--w-4" name="year" min="1000" max="3000" maxlength="4" pattern="[0-9]*" inputmode="numeric" autocomplete="bday-year" />
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit u-mb-xl" type="submit" name="">Save and continue</button>
+                    <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end-post-covid/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person_id'),
+    member = storageAPI.getHouseholdMemberByPersonId(personId),
+    person = member['@person'],
+    isEditing = urlParams.get('edit'),
+    isVisitor = storageAPI.isVisitor(member),
+    surveyType = urlParams.get('survey');
+    storageAPI.personalBookmark(personId, window.location.href),
+    question = $('#question-title').html();
+
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+    e.preventDefault();
+    let url = '../individual-details-country-other-arrive/?person_id=' + personId + '&edit=true';
+    question = question.trim();
+    storageAPI.addUpdateCountryOtherArrive(personId,
+      $('#uk-arrive-month').val(),
+      $('#uk-arrive-year').val(),
+      question,
+      url
+    );
+
+    if(isEditing) {
+      window.location.href = '../individual-details-summary/?person_id=' +
+        personId + (surveyType ? '&survey=' + surveyType : '');
+    }
+
+    var censusDateMinus1Year = new Date(window.ONS.utils.getSignificant()),
+      censusDateMinus1YearBeginingMonth = new Date(window.ONS.utils.getSignificant()),
+      dateEntered = new Date($('#uk-arrive-year').val(), $('#uk-arrive-month').val() - 1);
+
+      censusDateMinus1Year.setFullYear(censusDateMinus1Year.getFullYear() - 1);
+      censusDateMinus1YearBeginingMonth.setFullYear(censusDateMinus1YearBeginingMonth.getFullYear() - 1);
+      censusDateMinus1YearBeginingMonth.setDate(1);
+
+      if(!isVisitor){
+        if(dateEntered.getTime() === censusDateMinus1YearBeginingMonth.getTime() || dateEntered.getFullYear() === 1899) {
+            window.location.href = '../individual-details-country-other-arrive-census/?person_id=' +
+            personId + (surveyType ? '&survey=' + surveyType : '');
+            storageAPI.storePageData('/end-to-end-post-covid/individual-details-country-other-arrive-census/', window.location.pathname);
+        } else if (dateEntered > censusDateMinus1Year){
+            window.location.href = '../individual-details-country-other-stay/?person_id=' +
+            personId + (surveyType ? '&survey=' + surveyType : '');
+            storageAPI.storePageData('/end-to-end-post-covid/individual-details-country-other-stay/', window.location.pathname);
+        } else {
+            window.location.href = '../individual-details-year-ago-address/?person_id=' +
+            personId + (surveyType ? '&survey=' + surveyType : '');
+            storageAPI.storePageData('/end-to-end-post-covid/individual-details-year-ago-address/', window.location.pathname);
+        }
+      } else {
+          window.location.href = '../individual-details-country-other-arrive/?person_id=' +
+          personId + (surveyType ? '&survey=' + surveyType : '');
+          storageAPI.storePageData('/end-to-end-post-covid/individual-details-country-other-arrive/', window.location.pathname);
+      }
+  }));
+
+  function updateRouting() {
+    if(surveyType) {
+      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    }
+    $('#survey-type').val(surveyType);
+  }
+
+  function updateAnswer() {
+    var details = storageAPI.getPersonalDetailsFor(personId);
+
+    if (details && details.dateArriveUk) {
+      details.dateArriveUk.month && $('#uk-arrive-month').val(details.dateArriveUk.month);
+      details.dateArriveUk.year && $('#uk-arrive-year').val(details.dateArriveUk.year);
+    }
+  }
+
+  function updateQuestion() {
+    if(storageAPI.getProxyFor(personId) || isVisitor) {
+      $('.js-heading').html('When did ' + '<em class="highlight">' + person.firstLastName + '</em>' + ' most recently arrive to live in the United Kingdom?');
+    }
+  }
+
+  $(updateAnswer);
+  $(updateQuestion);
+  $(updateRouting);
+
+  /**
+   * Routing
+   */
+  $('#person').val(personId);
+</script>

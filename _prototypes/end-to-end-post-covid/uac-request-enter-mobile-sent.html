@@ -1,0 +1,110 @@
+---
+title: COVID-19 test (round 3 - usual situation) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+logoUrl: ../home
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            <!--{% include navigation.html
+            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
+            nav-title-id="section-individual" %}-->
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password"
+                      action="../hub">
+                    <div class="group">
+                        <section class="section">
+                            <div class="question u-mb-s">
+                                <div class="panel panel--simple panel--success u-pl-l u-mb-m">
+                                    <div class="panel__body">
+                                        <div class="panel__icon u-f-l" style="margin-left:-2rem;">
+                                            <span class="icon icon--tick"></span>
+                                        </div>
+                                        <h1 class="u-mb-xs u-fs-l js-piping">
+                                            We have sent a text to {x}
+                                        </h1>
+                                        <p class="js-piping">The text message with a new {y} access code should
+                                            arrive soon for you to start your census</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <h2 class="u-fs-m u-mb-xs">Didn’t receive a text?</h2>
+                            <p class="u-mb-l">It can take a few minutes for the text to arrive. If it doesn’t arrive, you can <a class="js-link" href="">request a new access code</a>.</p>
+                        </section>
+                    </div>
+                    <h2 class="js-uac-launcher u-mb-s u-fs-m">Ready to start your census online?</h2>
+                        <a href="../uac-entry/" role="button" class="btn btn--link u-mb-xl">
+                            <span class="btn__inner icon--chevron-right-white">Start census</span>
+                        </a>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<div style="display:none;">
+    <div id="member-checkbox-select-template" class="field__item">
+        <input autocomplete="new-password" class="input input--checkbox js-person-control"
+               name="checkbox-answer" type="checkbox">
+        <label class="label label--inline u-fs-r js-person-name"></label>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end-post-covid/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    mobileNo = urlParams.get('mobile'),
+    currentJourney = urlParams.get('current-journey');
+    var codeType;
+    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
+
+    if(currentJourney === 'new-ir-uac' || currentJourney === 'new-ce-resident-uac'){
+        var codeType = 'individual';
+    } else if(currentJourney === 'new-ce-manager-uac'){
+        var codeType = 'manager';
+        pipingDestinations.forEach(function(pipingDestination) {
+            pipingDestination.innerHTML = pipingDestination.innerHTML.replace('your', 'the');
+        });
+    } else {
+        var codeType = 'household';
+    }
+
+    pipingDestinations.forEach(function(pipingDestination) {
+        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', mobileNo);
+        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{y}', codeType);
+    });
+
+    $('.qa-btn-submit').on('click', function (e) {
+        e.preventDefault();
+        window.location.href = '../home/';
+    
+    });
+
+    $('.js-link').on('click', function (e) {
+        e.preventDefault();
+        var url = '../uac-request-enter-mobile';
+        window.location.href = url + '?' + 'current-journey=' + currentJourney;
+    });
+
+  function updateDescription () {
+    $('.js-mobile-no').html(mobileNo);
+  }
+
+  $(updateDescription);
+</script>

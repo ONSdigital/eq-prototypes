@@ -1,0 +1,184 @@
+---
+title: COVID-19 test (round 3 - usual situation) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password"
+                      action="../individual-details-employment-job-travel-to">
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
+                           value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-xl js-heading">
+                                        In your main job, how many hours a week do you usually work?
+                                    </h1>
+                                </div>
+                                <p>If the hours that you work vary, give the average weekly hours over the last 4 weeks.</p>
+                                <p>If you are on furlough, answer about the hours you were working before.</p>
+                                <div class="panel panel--simple panel--info u-mb-m">
+                                  <div class="panel__body">
+                                      Include paid and unpaid overtime
+                                  </div>
+                                </div>
+                                <div class="answer">
+                                    <div class="answer__fields js-fields">
+                                        <div class="field field--radio field--multiplechoice ">
+                                            <fieldset class="u-mb-xl">
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="radio-group"
+                                                           id="0-15"
+                                                           value="0 to 15 hours">
+                                                    <label class="label label--inline"
+                                                           for="0-15"
+                                                           id="0-15-label">
+                                                        <strong
+                                                                class="u-fs-r">0 to 15 hours</strong>
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="radio-group"
+                                                           id="16-30"
+                                                           value="16 to 30 hours">
+                                                    <label class="label label--inline"
+                                                           for="16-30"
+                                                           id="16-30-label">
+                                                        <strong
+                                                                class="u-fs-r">16 to 30 hours</strong>
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="radio-group"
+                                                           id="31-48"
+                                                           value="31 to 48 hours">
+                                                    <label class="label label--inline"
+                                                           for="31-48"
+                                                           id="31-48-label">
+                                                        <strong
+                                                                class="u-fs-r">31 to 48 hours</strong>
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="radio-group"
+                                                           id="49-more"
+                                                           value="49 hours or more">
+                                                    <label class="label label--inline"
+                                                           for="49-more"
+                                                           id="49-more-label">
+                                                        <strong
+                                                                class="u-fs-r">49 hours or more</strong>
+                                                    </label>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+                    <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end-post-covid/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person_id'),
+    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+    isEditing = urlParams.get('edit'),
+    details = storageAPI.getPersonalDetailsFor(personId),
+    surveyType = urlParams.get('survey'),
+    question = $('#question-title').html();
+
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+
+    var val = $('[name="radio-group"]:checked').val();
+    let url = '../individual-details-employment-job-hours-worked/?person_id=' + personId + '&edit=true';
+    question = question.trim();
+    storageAPI.addUpdateEmploymentHoursWorked(personId, val, question, url);
+    storageAPI.storePageData('/end-to-end-post-covid/individual-details-employment-job-travel-to/', window.location.pathname);
+
+    if(isEditing) {
+      e.preventDefault();
+        window.location.href = '../individual-details-summary/?person_id=' + personId +
+          (surveyType ? '&survey=' + surveyType : '');
+      
+      storageAPI.storePageData('/end-to-end-post-covid/individual-details-summary/', window.location.pathname);
+
+    }
+
+  }));
+
+  function updateRouting() {
+    if(surveyType) {
+      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    }
+    $('#survey-type').val(surveyType);
+  }
+
+  function updateQuestion() {
+    if(storageAPI.getProxyFor(personId)) {
+      $('.js-heading').html('In ' + '<em class="highlight">' + person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
+        ' main job, how many hours a week do they usually work?');
+    }
+    if (details['employment'].sevenDaysAgo[0]=== 'No') {
+        var replaceQuestion = $('.js-heading').html().replace('do', 'did');
+        $('.js-heading').html(replaceQuestion);
+    }
+  }
+
+    function updateAnswer() {
+        if (details && details.employment) {
+            $('input[type=radio][value="' + details.employment.hours +'"]').prop("checked", true);
+        }
+    }
+
+  $(updateAnswer);
+  $(updateQuestion);
+  $(updateRouting);
+
+  /**
+   * Routing
+   */
+  $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
+</script>

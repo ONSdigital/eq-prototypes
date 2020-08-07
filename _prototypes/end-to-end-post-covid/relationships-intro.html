@@ -1,0 +1,66 @@
+---
+title: COVID-19 test (round 3 - usual situation) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <div class="group u-mb-xl">
+                    <div class="block">
+                        <section class="section">
+                            <h1 class="u-fs-xl">Household relationships</h1>
+
+                            <p>In this section, we will ask you how the people who usually live in this household are related to each other.</p>
+
+                            <p>Select the appropriate relationship from the options shown. The selected relationship will display at the bottom of the page for you to check.</p>
+                        </section>
+                    </div>
+                </div>
+
+                <button class="btn btn--primary btn--lg qa-btn-submit btn-submit"
+                        type="submit" name="">Continue
+                </button>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end-post-covid/bundle.js'></script>
+
+<script>
+  var urlParams = new URLSearchParams(window.location.search),
+    storageAPI = window.ONS.storage,
+    surveyType = urlParams.get('survey'),
+    nextPage = surveyType
+      ? '../relationships/?survey=' + surveyType
+      : '../relationships';
+
+    sessionStorage.setItem("wlh_bookmark" , window.location.pathname);
+
+  $('.btn-submit').click(function(e) {
+    e.preventDefault(); // do not submit the form like usual
+    window.location.href = nextPage;
+    storageAPI.storePageData('/end-to-end-post-covid/' + nextPage, window.location.pathname);
+
+  });
+
+  $(function() {
+    var oneWeekAgo = new Date();
+    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+    var options = {year: 'numeric', month: 'long', day: 'numeric'};
+    $('.one-week-ago').text(oneWeekAgo.toLocaleString('en-GB', options));
+  });
+</script>

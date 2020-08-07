@@ -1,0 +1,187 @@
+---
+title: COVID-19 test (round 3 - usual situation) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../individual-details-health-conditions">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl u-d-no"
+            type="submit" name="">Save and continue
+        </button>
+        <div class="grid__col col-4@m"></div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password"
+                      action="../individual-details-health-support">
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
+                           value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group" id="rsi">
+                        <div class="block" id="total-retail-turnover">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-xl js-heading">
+                                        Do any of your conditions or illnesses reduce your ability to carry out day-to-day activities?
+                                    </h1>
+                                </div>
+                                <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple u-mb-m">
+                                    <div class="js-collapsible-content">
+                                        <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b js-help-0" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="What we mean by &ldquo;reduce your ability&rdquo;">
+                                        What we mean by &ldquo;reduce your ability&rdquo;</h3>
+                                        <div class="collapsible__body js-collapsible-body">
+                                            <p class="js-help-1">This is about whether your health condition or illness currently affects your ability to carry out day-to-day activities. 
+                                            </p> 
+                                            <p class="js-help-2">Consider whether you are still affected while receiving any treatment, medication or using any devices for your condition or illness. For example, if you use a hearing aid and are not restricted in carrying out your day-to-day activities when doing so, select “Not at all”.
+                                            </p>
+                                            <p class="js-help-3">You should select &ldquo;Yes, a lot&rdquo; if you usually need some level of support from family members, friends or personal social services for most normal daily activities.
+                                            </p>
+                                            <button
+                                                    class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="What we mean by &ldquo;reduce your ability&rdquo;">Hide this</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                  <div class="answer">
+                                    <div class="answer__fields js-fields">
+                                        <div class="field field--radio field--multiplechoice ">
+                                            <fieldset class="u-mb-xl">
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="health-conditions"
+                                                           id="yes-alot"
+                                                           value="Yes, a lot">
+                                                    <label class="label label--inline"
+                                                           for="yes-alot"
+                                                           id="yes-alot-label">
+                                                        Yes, a lot
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="health-conditions"
+                                                           id="yes-alittle"
+                                                           value="Yes, a little">
+                                                    <label class="label label--inline"
+                                                           for="yes-alittle"
+                                                           id="yes-alittle-label">
+                                                        Yes, a little
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="health-conditions"
+                                                           id="no"
+                                                           value="No">
+                                                    <label class="label label--inline"
+                                                           for="no"
+                                                           id="no-label">
+                                                        Not at all
+                                                    </label>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+
+                    <p>
+                        <a href="../hub" class="js-choose-another-section">Choose another section and
+                            return to this question later</a></p>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end-post-covid/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person_id'),
+    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+    isEditing = urlParams.get('edit'),
+    details = storageAPI.getPersonalDetailsFor(personId),
+    surveyType = urlParams.get('survey'),
+    question = $('#question-title').html();
+    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
+
+
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+
+    var val = $('[name="health-conditions"]:checked').val();
+    let url = '../individual-details-health-conditions-abilities/?person_id=' + personId + '&edit=true';
+    question = question.trim();
+    storageAPI.addUpdateHealthConditionsAbilities(personId, val, question, url);
+    storageAPI.storePageData('/end-to-end-post-covid/individual-details-health-support/', window.location.pathname);
+
+    if(isEditing) {
+      e.preventDefault();
+      window.location.href = '../individual-details-summary/?person_id=' + personId;
+      storageAPI.storePageData('/end-to-end-post-covid/individual-details-summary/', window.location.pathname);
+
+    } else if(details['age'] < 5) {
+      e.preventDefault();
+      storageAPI.clearPersonalBookmark(personId);
+      window.location.href = '../hub';
+      storageAPI.storePageData('/end-to-end-post-covid/hub/', window.location.pathname);
+
+    }
+  }));
+
+  function updateQuestion() {
+        if(storageAPI.getProxyFor(personId)) {
+        $('.js-heading').html('Do any of ' + '<em class="highlight">' + person.firstLastName +
+            window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
+            ' conditions or illnesses reduce their ability to carry out day-to-day activities?');
+        }
+    }
+
+  function updateHelp() {
+        if(storageAPI.getProxyFor(personId)) {
+            $('.js-help-0').html('What we mean by &ldquo;reduce their ability&rdquo;');
+            $('.js-help-1').html('This is about whether their health condition or illness currently affects their ability to carry out day-to-day activities.');
+            $('.js-help-2').html('Consider whether they are still affected while receiving any treatment, medication or using any devices for their condition or illness. For example, if they use a hearing aid and are not restricted in carrying out their day-to-day activities when doing so, select &ldquo;Not at all&rdquo;.');
+            $('.js-help-3').html('You should select &ldquo;Yes, a lot&rdquo; if they usually need some level of support from family members, friends or personal social services for most normal daily activities.');
+        }
+    }
+
+    function updateAnswer() {
+        if (details && details.health) {
+            $('input[type=radio][value="' + details.health.abilities +'"]').prop("checked", true);
+        }
+    }
+
+    $(updateAnswer);
+    $(updateQuestion);
+    $(updateHelp);
+
+
+  /**
+   * Routing
+   */
+  $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
+</script>

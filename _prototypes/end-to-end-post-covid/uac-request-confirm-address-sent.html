@@ -1,0 +1,120 @@
+---
+title: COVID-19 test (round 3 - usual situation) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+logoUrl: ../home
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            <!--{% include navigation.html
+            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
+            nav-title-id="section-individual" %}-->
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password"
+                      action="../hub">
+                    <div class="group">
+                        <section class="section">
+                            <div class="question u-mb-s">
+                                <div class="panel panel--simple panel--success u-pl-l">
+                                    <div class="panel__body">
+                                        <div class="panel__icon u-f-l" style="margin-left:-2rem;">
+                                            <span class="icon icon--tick"></span>
+                                        </div>
+                                        <h1 class="u-mb-xs u-fs-l js-piping">
+                                            A {z} will be sent to {x}
+                                        </h1>
+                                        <p class="js-piping js-panel">The letter with {y} access code should
+                                            arrive soon for you to start the census</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mt-xl"
+                            type="submit" name="">Done
+                    </button>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<div style="display:none;">
+    <div id="member-checkbox-select-template" class="field__item">
+        <input autocomplete="new-password" class="input input--checkbox js-person-control"
+               name="checkbox-answer" type="checkbox">
+        <label class="label label--inline u-fs-r js-person-name"></label>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end-post-covid/bundle.js'></script>
+
+<script>
+    var storageAPI = window.ONS.storage;
+    var urlParams = new URLSearchParams(window.location.search);
+    var addressLines = (sessionStorage.getItem('address') || '').split(',');
+    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
+    var addresseeName = (sessionStorage.getItem('addressee-name') || '');
+    var previousPage = urlParams.get('previous');
+    var currentJourney = urlParams.get('current-journey');
+    var largePrint = urlParams.get('large-print');
+    var codeType;
+    var modeType;
+    var pipedAddress = storageAPI.getPipedAddress();
+
+    if (currentJourney === 'new-ir-uac' || currentJourney === 'new-ce-resident-uac'){
+        var codeType = 'a new individual';
+        var modeType = 'letter';
+    } else if (currentJourney === 'new-ce-manager-uac') {
+        var codeType = 'a new manager';
+        var modeType = 'letter';        
+    } else if (currentJourney === 'new-hh-paper' || currentJourney === 'new-ir-paper' || currentJourney === 'new-ce-resident-paper') {
+        if (largePrint) {
+            var modeType = 'large-print paper questionnaire';
+        } else {
+            var modeType = 'paper questionnaire';
+        }
+        $('.js-panel').html('This should arrive soon for you to complete your census');
+    } else {
+        var codeType = 'a new household';
+        var modeType = 'letter';
+    }
+
+    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
+
+    pipingDestinations.forEach(function(pipingDestination) {
+        var roomNumber = (sessionStorage.getItem('unit-name') || '');
+        if (roomNumber) {
+            pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', addresseeName + ' at ' + roomNumber + ', ' + pipedAddress);
+        } else {
+            pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', addresseeName + ' at ' + pipedAddress);
+        }
+        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{y}', codeType);
+        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{z}', modeType);
+    });
+
+    $('.qa-btn-submit').on('click', function (e) {
+        e.preventDefault();
+        window.location.href = '../home/';
+    
+    });
+
+  /**
+   * Routing
+   */
+  $('#person').val(urlParams.get('person_id'));
+</script>
