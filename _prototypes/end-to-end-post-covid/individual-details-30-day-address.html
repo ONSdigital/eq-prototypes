@@ -47,7 +47,7 @@ noONSLogoLink: true
                                 </div>
                                 <p>This should be a single address and could be more than 30 days in a row or divided across the year.
                                 </p>
-                                <p>If you usually stay at another address but have not done so because of the pandemic, give the answer that best describes what you did before the pandemic.
+                                <p class="js-piping">If the coronavirus pandemic has affected where you usually stay, select the answer that best describes your usual circumstances.
                                 </p>
                                 <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple u-mb-m">
                                     <div class="js-collapsible-content">
@@ -132,7 +132,7 @@ noONSLogoLink: true
     details = storageAPI.getPersonalDetailsFor(personId),
     surveyType = urlParams.get('survey');
     storageAPI.personalBookmark(personId, window.location.href);
-
+    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
 
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
@@ -166,6 +166,16 @@ noONSLogoLink: true
     if(storageAPI.getProxyFor(personId)) {
         $('.js-heading').html('Does ' + '<em class="highlight">' + person.firstLastName + '</em>' +
         ' stay at another address for more than 30 days a year?');
+    }
+
+    if (storageAPI.getProxyFor(personId)) {
+        pipingDestinations.forEach(function(pipingDestination) {
+            pipingDestination.innerHTML = pipingDestination.innerHTML.replace('your', 'their');
+            pipingDestination.innerHTML = pipingDestination.innerHTML.replace('Your', 'Their');
+            pipingDestination.innerHTML = pipingDestination.innerHTML.replace('yours', 'theirs');
+            pipingDestination.innerHTML = pipingDestination.innerHTML.replace('you', 'they');
+            pipingDestination.innerHTML = pipingDestination.innerHTML.replace('You', 'They');
+        });
     }
   }
   $(updateQuestion);

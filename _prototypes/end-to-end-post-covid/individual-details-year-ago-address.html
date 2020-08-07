@@ -39,8 +39,8 @@ noONSLogoLink: true
                                     <p class="question__description js-piping">
                                         If you had no usual address one year ago, select the address where you were staying.
                                     </p>
-                                    <p>
-                                        If your usual address changed because of Coronavirus in March 2020, give the address that you would have usually been living at before the pandemic.
+                                    <p class="js-piping">
+                                        If the coronavirus pandemic affected your usual address one year ago, select where you were living before your circumstances changed.
                                     </p>
                                 </div>
 
@@ -139,6 +139,7 @@ noONSLogoLink: true
     surveyType = urlParams.get('survey');
     storageAPI.personalBookmark(personId, window.location.href),
     question = $('#question-title').html();
+    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
   
     $('.qa-btn-submit').on('click', storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
         e.preventDefault();
@@ -192,7 +193,16 @@ noONSLogoLink: true
             $('.js-heading').html('One year ago, what was ' + '<em class="highlight">' + person.firstLastName +
             window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
             ' usual address?');
-            $('.js-piping').html('If they had no usual address one year ago, select the address where they were staying');
+        }
+
+        if (storageAPI.getProxyFor(personId)) {
+            pipingDestinations.forEach(function(pipingDestination) {
+                pipingDestination.innerHTML = pipingDestination.innerHTML.replace(/your/g, 'their');
+                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('Your', 'Their');
+                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('yours', 'theirs');
+                pipingDestination.innerHTML = pipingDestination.innerHTML.replace(/you/g, 'they');
+                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('You', 'They');
+            });
         }
     }
     

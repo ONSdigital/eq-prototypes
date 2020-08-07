@@ -37,8 +37,7 @@ noONSLogoLink: true
                                         In your main job, how many hours a week do you usually work?
                                     </h1>
                                 </div>
-                                <p>If the hours that you work vary, give the average weekly hours over the last 4 weeks.</p>
-                                <p>If you are on furlough, answer about the hours you were working before.</p>
+                                <p class="js-piping">If you are on furlough, select the answer that best describes the hours you were working before being furloughed</p>
                                 <div class="panel panel--simple panel--info u-mb-m">
                                   <div class="panel__body">
                                       Include paid and unpaid overtime
@@ -128,6 +127,7 @@ noONSLogoLink: true
     details = storageAPI.getPersonalDetailsFor(personId),
     surveyType = urlParams.get('survey'),
     question = $('#question-title').html();
+    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
@@ -165,6 +165,16 @@ noONSLogoLink: true
         var replaceQuestion = $('.js-heading').html().replace('do', 'did');
         $('.js-heading').html(replaceQuestion);
     }
+
+    if (storageAPI.getProxyFor(personId)) {
+        pipingDestinations.forEach(function(pipingDestination) {
+            pipingDestination.innerHTML = pipingDestination.innerHTML.replace(/your/g, 'their');
+            pipingDestination.innerHTML = pipingDestination.innerHTML.replace('Your', 'Their');
+            pipingDestination.innerHTML = pipingDestination.innerHTML.replace('yours', 'theirs');
+            pipingDestination.innerHTML = pipingDestination.innerHTML.replace(/you/g, 'they');
+            pipingDestination.innerHTML = pipingDestination.innerHTML.replace('You', 'They');
+        });
+    }    
   }
 
     function updateAnswer() {

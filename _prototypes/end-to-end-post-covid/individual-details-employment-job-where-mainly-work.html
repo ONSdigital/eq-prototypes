@@ -37,7 +37,7 @@ noONSLogoLink: true
                                         Where do you mainly work?
                                     </h1>
                                 </div>
-                                <p>If where you mainly work has been affected by Coronavirus, give the answer that best describes what you think you will be doing after the pandemic.</p>
+                                <p class="js-piping">If the coronavirus pandemic has affected where you mainly work, select the answer that best describes what you think you will be doing <strong>after</strong> the pandemic</p>
                                 <div class="answer">
                                     <div class="answer__fields js-fields">
                                         <div class="field field--radio field--multiplechoice ">
@@ -140,6 +140,7 @@ noONSLogoLink: true
     details = storageAPI.getPersonalDetailsFor(personId),
     surveyType = urlParams.get('survey'),
     question = $('#question-title').html();
+    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));    
 
   $('.qa-btn-submit').on('click',
     storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
@@ -185,6 +186,16 @@ noONSLogoLink: true
         var replaceQuestion = $('.js-heading').html().replace('does', 'did');
         $('.js-heading').html(replaceQuestion);
     }
+
+    if (storageAPI.getProxyFor(personId)) {
+        pipingDestinations.forEach(function(pipingDestination) {
+            pipingDestination.innerHTML = pipingDestination.innerHTML.replace(/your/g, 'their');
+            pipingDestination.innerHTML = pipingDestination.innerHTML.replace('Your', 'Their');
+            pipingDestination.innerHTML = pipingDestination.innerHTML.replace('yours', 'theirs');
+            pipingDestination.innerHTML = pipingDestination.innerHTML.replace(/you/g, 'they');
+            pipingDestination.innerHTML = pipingDestination.innerHTML.replace('You', 'They');
+        });
+    }   
   }
 
     function updateAnswer() {

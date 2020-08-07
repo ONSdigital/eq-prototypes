@@ -59,7 +59,7 @@ noONSLogoLink: true
                                     </h1>
                                 </div>
                                 <p>This can be casual or temporary work, even if only for one hour.</p>
-                                <p>Workers on furlough and workers self-isolating should select ‘Temporarily away from work ill, on holiday or temporarily laid off’.</p> 
+                                <p class="js-piping">If you were on furlough or self-isolating, select &ldquo;Temporarily away from work ill, on holiday or temporarily laid off&rdquo;.</p> 
                                 <div class="answer" id="checkboxes">
                                     <div class="answer__fields question__answer js-fields">
                                         <div class="field field--checkbox field--multiplechoice field--exclusive">
@@ -175,6 +175,7 @@ noONSLogoLink: true
         surveyType = urlParams.get('survey'),
         question = $('#question-title').html(),
         hasErrors = false;
+    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
 
     $('.qa-btn-submit').on('click',
         storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
@@ -226,6 +227,16 @@ noONSLogoLink: true
         $('.js-heading').html('In the last seven days, was ' + '<em class="highlight">' + person.firstLastName + '</em>' +
             ' doing any of the following?');
         }
+
+        if (storageAPI.getProxyFor(personId)) {
+            pipingDestinations.forEach(function(pipingDestination) {
+                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('your', 'their');
+                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('Your', 'Their');
+                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('yours', 'theirs');
+                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('you', 'they');
+                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('You', 'They');
+            });
+        }        
     }
 
     function updateAnswer() {
