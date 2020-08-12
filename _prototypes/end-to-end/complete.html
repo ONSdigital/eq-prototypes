@@ -54,14 +54,14 @@ exit: true
                 <div class="panel panel--error js-error-box u-mb-m u-d-no">
                     <div class="panel__header">
                         <div class="panel__title u-fs-r--b">There 
-                          <span class="js-piping">is a problem</span> with your answer
+                          <span class="js-piping">is a problem</span> with this page
                       </div>
                     </div>
                     <div class="panel__body">
                         
                         <ul class="list list--bare">
                             <li class="list__item u-fs-r">
-                                1. <a class="js-inpagelink" href="#panel-error">Enter a valid email address, such as example@email.com</a>
+                                1. <a class="js-inpagelink" href="#panel-error"></a>
                             </li>
                         </ul>
                     </div>
@@ -111,12 +111,13 @@ exit: true
     var queryString = window.location.search,
         searchParams = new URLSearchParams(queryString),
         storageAPI = window.ONS.storage;
-
-
+        
     $('.qa-btn-submit').on('click', function (e) {
         e.preventDefault();
-        if( !validateEmail($('#email-address').val()) || !$('#email-address').val()) {
-            window.location.href = '../complete/?invalid=true';
+        if( !validateEmail($('#email-address').val()) ) {
+            window.location.href = '../complete/?invalid=true' + '&email=' + encodeURI($('#email-address').val());
+        } else if (!$('#email-address').val()) {
+            window.location.href = '../complete/?empty=true';
         } else {
             window.location.href = '../complete--confirmation-sent/?email=' + encodeURI($('#email-address').val());
         }
@@ -136,10 +137,21 @@ exit: true
     function checkErrors() {
         if(searchParams.get('invalid')) {
             let param = searchParams.get('true');
+            let email = searchParams.get('email');
             $('.js-error-box').removeClass('u-d-no');
+            $('.js-inpagelink').html('Enter an email address in a valid format, for example, name@example.com');
             $('#email-field').wrap( '<div class="panel panel--simple panel--error"><div class="panel__body"></div></div>' );
-            $('#email-field').before('<p id="panel-error" class="panel__error u-fs-r--b">Enter a valid email address, such as example@email.com</p>');
-        };
+            $('#email-field').before('<p id="panel-error" class="panel__error u-fs-r--b">Enter an email address in a valid format, for example, name@example.com</p>');
+            $('#email-address').val(email);
+            $('.js-inpagelink').focus();
+        } else if (searchParams.get('empty')) {
+            let param = searchParams.get('true');
+            $('.js-error-box').removeClass('u-d-no');
+            $('.js-inpagelink').html('Enter an email address to continue');
+            $('#email-field').wrap( '<div class="panel panel--simple panel--error"><div class="panel__body"></div></div>' );
+            $('#email-field').before('<p id="panel-error" class="panel__error u-fs-r--b">Enter an email address to continue</p>');
+                  
+        }
     }
 
     function updatePipedAddress() {

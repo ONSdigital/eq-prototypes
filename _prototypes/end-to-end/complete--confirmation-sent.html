@@ -67,10 +67,14 @@ exit: true
                 </div>
                 <div class="js-resend-confirmation">
                     <h2 class="u-fs-r--b u-mb-xs">Didn&rsquo;t receive an email?</h2>
-                    <p class="u-mb-m">It can take a few minutes for the email to arrive. If it doesn&rsquo;t arrive, you can <a class="js-resend-confirmation" href="../complete--confirmation-resend">send another confirmation email</a>.</p>
+                    <p class="u-mb-m">It can take a few minutes for the email to arrive. If it doesn&rsquo;t arrive, check your junk mail, or you can <a class="js-resend-confirmation" href="../complete--confirmation-resend">send another confirmation email</a>.</p>
                 </div>
                 <div class="panel panel--simple panel--warning js-panel-info u-mb-m">
                     <span class="panel__icon" aria-hidden="true">!</span><span class="panel__text">Make sure you <a class="exit" href="../home">leave this page</a> or close your browser if you are using a shared device</span>
+                </div>
+                <div class="js-resend-max-sent u-d-no">
+                    <h2 class="u-fs-r--b u-mb-xs">Didn&rsquo;t receive an email?</h2>
+                    <p class="u-mb-m">It can take a few minutes for the email to arrive. If it doesn&rsquo;t arrive, <a class="js-resend-confirmation" href="../complete--confirmation-resend">contact us</a>.</p>
                 </div>
             </main>
         </div>
@@ -93,7 +97,10 @@ exit: true
         var confirmationCounter = 1;
         sessionStorage.setItem('confirmationCounter', confirmationCounter);
     }
-    if (confirmationCounter > 2) { $('.js-resend-confirmation').hide() }
+    if (confirmationCounter > 9) { 
+        $('.js-resend-confirmation').hide();
+        $('.js-max-sent').show();
+    }
 
     pipingDestinations.forEach(function(pipingDestination) {
         pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', emailAddress);
