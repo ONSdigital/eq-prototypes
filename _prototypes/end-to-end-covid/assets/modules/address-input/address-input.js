@@ -80,7 +80,7 @@ class AddressInput {
     
     this.baseURL = 'https://whitelodge-ai-api.census-gcp.onsdigital.uk/addresses/';
     this.lookupURL = `${this.baseURL}eq?input=`;
-    this.retrieveURL = this.isRhLookup ? `${this.baseURL}rh/uprn/` : `${this.baseURL}eq/uprn/`;
+    this.retrieveURL = `${this.baseURL}rh/uprn/`;
     
     this.user = 'equser';
     this.password = '$4c@ec1zLBu';
@@ -238,12 +238,12 @@ class AddressInput {
               this.setAddress(data, resolve);
             } else {
               this.typeahead.input.value = selectedResult.displayText;
-              if (data.response.address.censusAddressType) {
-                const rhAddressTypeInput = this.context.querySelector('.js-rh-address-type');
-                const rhAddressCountryInput = this.context.querySelector('.js-rh-address-country');
-                rhAddressTypeInput.value = data.response.address.censusAddressType;
-                rhAddressCountryInput.value = data.response.address.countryCode;
-              }
+            }
+            if (data.response.address.censusAddressType) {
+              const rhAddressTypeInput = this.context.querySelector('.js-rh-address-type');
+              const rhAddressCountryInput = this.context.querySelector('.js-rh-address-country');
+              rhAddressTypeInput.value = data.response.address.censusAddressType;
+              rhAddressCountryInput.value = data.response.address.countryCode;
             }
           })
           .catch(reject);

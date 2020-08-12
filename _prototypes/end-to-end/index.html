@@ -1,5 +1,5 @@
 ---
-title: Household questionnaire (English)
+title: COVID-19 test (round 2 - pandemic situation) Household questionnaire (English)
 project: Census 2021 End to end prototype
 globalcss: false
 layout: eq-default-extras
@@ -95,6 +95,8 @@ logoUrl: ../home
                                       <p class="field">
                                           <label class="label" for="address-field">Enter address or postcode and select from results</label>
                                           <div id="address-typeahead-container" class="typeahead-input js-address-typeahead " data-content="{&quot;no_results&quot;:&quot;No results found. Try entering a different part of the address&quot;,&quot;aria_no_results&quot;:&quot;No addresses found for the query&quot;,&quot;aria_you_have_selected&quot;:&quot;You have selected&quot;,&quot;aria_found_by_alternative_name&quot;:&quot;found by alternative name&quot;,&quot;aria_min_chars&quot;:&quot;Type in 5 or more characters for addresses.&quot;,&quot;aria_one_result&quot;:&quot;There is one address available.&quot;,&quot;aria_n_results&quot;:&quot;There are {n} addresses available.&quot;,&quot;aria_limited_results&quot;:&quot;Results have been limited to 10 addresses. Type more characters to refine your search.&quot;,&quot;more_results&quot;:&quot;Continue entering to improve results&quot;,&quot;results_title&quot;:&quot;Select an address&quot;}" typeahead-data="">
+                                            <input type="hidden" class="js-rh-address-type" value="#"/>
+                                            <input type="hidden" class="js-rh-address-country" value="#"/>
                                               <input type="text" name="x2" id="address-field" class="input input--text input-type__input  address-input__typeahead js-typeahead-input input--w-50" data-error-msg="Enter an address to continue" maxlength="100"/>
                                               <div class="typeahead-input__results js-typeahead-results">
                                                   <header class="typeahead-input__results-title u-fs-s">Select an address</header>
@@ -120,7 +122,7 @@ logoUrl: ../home
     </div>
 </div>
 
-<script src='/js/compiled/end-to-end/bundle.js'></script>
+<script src='/js/compiled/end-to-end-covid/bundle.js'></script>
 
 <script>
   sessionStorage.clear();
@@ -157,6 +159,11 @@ logoUrl: ../home
     sessionStorage.setItem('address-town', document.getElementById('address-town').value);
     sessionStorage.setItem('address-postcode', document.getElementById('address-postcode').value);
 
+    var addressType = $('.js-rh-address-type').val();
+    var addressCountry = $('.js-rh-address-country').val();
+    sessionStorage.setItem('address-type', addressType);
+    sessionStorage.setItem('address-country', addressCountry);
+
     // Temporary manual update address type for CEs  
     var addressLine1 = document.getElementById('address-line-1').value.toLowerCase();
     var addressLine2 = document.getElementById('address-line-2').value.toLowerCase();
@@ -172,6 +179,7 @@ logoUrl: ../home
     if (array.some(val => address.includes(val))) {
     sessionStorage.setItem('address-type', 'CE');
     }
+    
 
     window.location = '../home/';
     }
