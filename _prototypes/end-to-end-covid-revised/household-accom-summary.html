@@ -1,0 +1,132 @@
+---
+title: COVID-19 test (round 4 - pandemic situation revised) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+
+<link rel="stylesheet" href="../style.css"/>
+
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="#">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m"></div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form name="trav" class="form qa-questionnaire-form" role="form"
+                      autocomplete="new-password" novalidate=""
+                      action="../hub">
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 class="question__title u-fs-xl js-heading">
+                                        Household accommodation
+                                    </h1>
+                                </div>
+                                <div class="summary">
+                                    <div class="summary__block u-mb-s">
+                                        <div id="accommodation-questions-answers"></div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg js-submit-btn u-mt-l"
+                            type="submit">Continue
+                    </button>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<ul style="display:none;">
+    <div id="accommodation-item-template" class="summary__item">
+        <div class="grid">
+            <div class="grid__col col-12@xs col-5@s">
+                <div class="summary__question js-question">
+                    Question
+                </div>
+            </div>
+            <div class="grid__col col-8@xs col-3@s">
+                <div class="summary__answer js-answer">Answer</div>
+            </div>
+            <div class="grid__col col-12@xs col-4@s">
+                <div class="summary__link">
+                    <a href="#" class="js-link">Change</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</ul>
+
+<script src='/js/compiled/end-to-end-covid-revised/bundle.js'></script>
+
+<script>
+    var storageAPI = window.ONS.storage;
+
+    /**
+      * Create list item from state
+      */
+    function createListItem(sessionItem) {
+        
+        if (sessionItem !== null) {
+            var sessionArray = JSON.parse(sessionItem);
+
+            var $nodeEl = $('#accommodation-item-template').clone(),
+                $answer = $nodeEl.find('.js-answer'),
+                $question = $nodeEl.find('.js-question');
+
+            /**
+              * Manipulate DOM fragment
+              */
+            $nodeEl.attr('id', '');
+            $nodeEl.find('.js-question').html(sessionArray[0]);
+
+            if (Array.isArray(sessionArray[1])){
+                var i, 
+                  answer = '';
+                for (i = 0; i < sessionArray[1].length; i++) {
+                answer += sessionArray[1][i] + ", ";
+                }
+                answer = answer.slice(0, -2);
+                $nodeEl.find('.js-answer').html(answer);
+            } else {
+                $nodeEl.find('.js-answer').html(sessionArray[1]);
+            }
+            
+            $nodeEl.find('.js-link').attr('href', sessionArray[2] + "?edit=true");
+
+            return $nodeEl;
+        }
+    }
+
+    function createList() {
+
+        var $container = $('<div></div>');
+
+        $container.append(createListItem(window.sessionStorage.getItem('accommodation-type')));
+        $container.append(createListItem(window.sessionStorage.getItem('accommodation-house-type')));
+        $container.append(createListItem(window.sessionStorage.getItem('accommodation-flat-type')));
+        $container.append(createListItem(window.sessionStorage.getItem('accommodation-shared-rooms')));
+        $container.append(createListItem(window.sessionStorage.getItem('accommodation-bedrooms')));
+        $container.append(createListItem(window.sessionStorage.getItem('accommodation-heating-type')));
+        $container.append(createListItem(window.sessionStorage.getItem('accommodation-own-rent')));
+        $container.append(createListItem(window.sessionStorage.getItem('accommodation-landlord')));
+        $container.append(createListItem(window.sessionStorage.getItem('accommodation-no-of-vehicles')));
+
+        return $container;
+    }
+
+    $('#accommodation-questions-answers').append(createList());
+
+</script>

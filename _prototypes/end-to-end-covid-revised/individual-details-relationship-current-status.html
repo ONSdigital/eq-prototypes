@@ -1,0 +1,174 @@
+---
+title: COVID-19 test (round 4 - pandemic situation revised) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../individual-details-relationship">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="off"
+                      action="../individual-details-30-day-address">
+                    <input type="hidden" name="person_id" id="person"
+                           value="#"/>
+                    <input type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-xl js-heading js-piping">
+                                        Who is your legal marriage to?
+                                    </h1>
+                                </div>
+
+                                <div class="answer">
+                                    <div class="answer__fields js-fields">
+                                        <div class="field field--radio field--multiplechoice ">
+                                            <fieldset class="u-mb-xl">
+                                                <div class="field__item js-focusable-box">
+                                                    <input class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="marital-status"
+                                                           id="opposite-sex"
+                                                           value="Opposite sex">
+                                                    <label class="label label--inline"
+                                                           for="opposite-sex"
+                                                           id="opposite-sex-label">
+                                                        Someone of the opposite sex
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="marital-status"
+                                                           id="same-sex"
+                                                           value="Same sex">
+                                                    <label class="label label--inline"
+                                                           for="same-sex"
+                                                           id="same-sex-label">
+                                                        Someone of the same sex
+                                                    </label>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+
+                    
+                        <p><a href="../hub" class="js-choose-another-section">Choose another section and
+                            return
+                            to this question later</a></p>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end-covid-revised/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person_id'),
+    member = storageAPI.getHouseholdMemberByPersonId(personId),
+    person = member['@person'],
+    isEditing = urlParams.get('edit'),
+    isVisitor = storageAPI.isVisitor(member),
+    details = storageAPI.getPersonalDetailsFor(personId),
+    surveyType = urlParams.get('survey');
+    storageAPI.personalBookmark(personId, window.location.href),
+    question = $('#question-title').html();
+
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+    let url = '../individual-details-relationship-current-status/?person_id=' + personId + '&edit=true';
+    question = question.trim();
+    storageAPI.addUpdateMaritalStatusWho(personId,
+      $('[name="marital-status"]:checked').val(),
+      question,
+      url
+    );
+    storageAPI.storePageData('/end-to-end-covid-revised/individual-details-30-day-address/', window.location.pathname);
+
+    if(isEditing) {
+      e.preventDefault();
+      window.location.href = '../individual-details-summary/?person_id=' +
+        personId + (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end-covid-revised/individual-details-summary/', window.location.pathname);
+    }
+  }));
+
+  function updateRouting() {
+    if(surveyType) {
+      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    }
+    $('#survey-type').val(surveyType);
+  }
+
+  function updateQuestion() {
+    var maritalStatus = urlParams.get('marital-status');
+
+    if(maritalStatus === 'Registered' || maritalStatus === 'Separated partnership'){
+        var maritalStatusHeading = "registered civil partnership";
+        var headingTense = "is";
+    } else if(maritalStatus === 'Former partnership' || maritalStatus === 'Surviving partner'){
+        var maritalStatusHeading = "registered civil partnership";
+        var headingTense = "was";
+    } else if(maritalStatus === 'Married' || maritalStatus === 'Separated married'){
+        var maritalStatusHeading = "legal marriage";
+        var headingTense = "is";
+    } else if(maritalStatus === 'Divorced' || maritalStatus === 'Widowed'){
+        var maritalStatusHeading = "legal marriage";
+        var headingTense = "was";
+    } else {
+        return null;
+    }
+
+    if(storageAPI.getProxyFor(personId)) {
+      $('.js-heading').html('Who ' + headingTense + ' <em class="highlight">' + person.firstLastName + 
+      window.ONS.utils.trailingNameS(person.firstLastName) + '</em> ' +
+        maritalStatusHeading + ' to?');
+    } else {
+      $('.js-heading').html('Who ' + headingTense + ' your ' +
+        maritalStatusHeading + ' to?');
+    }
+  }
+
+    function updateAnswer() {
+        if (details && details.maritalStatus) {
+            $('input[type=radio][value="' + details.maritalStatus.val +'"]').prop("checked", true);
+        }
+    }
+
+  $(updateAnswer);
+  $(updateQuestion);
+  $(updateRouting);
+
+  /**
+   * Routing
+   */
+  $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
+</script>

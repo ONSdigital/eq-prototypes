@@ -1,0 +1,160 @@
+---
+title: COVID-19 test (round 4 - pandemic situation revised) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+logoUrl: ../home
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../test-address?edit=true">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form name="trav" class="form qa-questionnaire-form u-mb-xl"
+                      role="form" autocomplete="new-password" novalidate="">
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 class="question__title u-fs-xl">
+                                        Are you a resident or manager of this establishment?
+                                    </h1>
+                                </div>
+
+                                <p for="address-correct-yes"><span
+                                        class="full-address-text">Address not
+                                    set</span></p>
+
+                                <div class="answer__fields js-fields">
+                                    <div class="field field--radio field--multiplechoice ">
+                                        <fieldset>
+                                            <div class="field__item js-focusable-box">
+                                                <input autocomplete="new-password" class="input input--radio js-focusable" type="radio"
+                                                       name="address-correct" id="ce-resident">
+                                                <label class="label label--inline" for="ce-resident">
+                                                Resident
+                                                <br>
+                                                <span class="label__description label--negative">
+                                                    Residents are responsible for answering the census questions about themselves
+                                                </label>
+                                            </div>
+                                            <div class="field__item js-focusable-box">
+                                                <input autocomplete="new-password" class="input input--radio js-focusable" type="radio"
+                                                       name="address-correct" id="ce-manager">
+                                                <label class="label label--inline venus" for="ce-manager">
+                                                Manager
+                                                    <br>
+                                                    <span class="label__description label--negative">
+                                                        A manager is responsible for answering the census questions about this establishment 
+                                                    </span>
+                                                </label>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="qa-btn-submit btn btn-submit btn--primary btn--lg u-mt-xl" data-qa="btn-submit" type="submit"
+                            name="action[save_continue]">Continue
+                    </button>
+                </form>
+            </main>
+        </div>
+    </div>
+
+</div>
+
+<script src='/js/compiled/end-to-end-covid-revised/bundle.js'></script>
+
+
+<script>
+	var residentBox = document.getElementById("ce-resident");
+	var managerBox = document.getElementById("ce-manager");
+    var urlParams = new URLSearchParams(window.location.search);
+    var previousPage = urlParams.get('previous');
+    var addressParam = urlParams.get('address');
+    var storageAPI = window.ONS.storage;
+    var previousPage = urlParams.get('previous');
+    var currentJourney = urlParams.get('current-journey');
+    var currentPage = 'confirm-rh-address-ce';
+    var addressCountry = sessionStorage.getItem('address-country');
+
+	$('.qa-btn-submit').on('click', function (e) {
+        e.preventDefault();
+
+        /**
+        * Routing
+        */
+        if (residentBox.checked) {
+            if (currentJourney === 'new-hh-paper' || currentJourney === 'new-ce-resident-paper' || currentJourney === 'new-ce-manager-paper') {
+                window.location.href = '../uac-request-enter-name' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + 'new-ce-resident-paper';
+            } else if (currentJourney === 'new-ce-resident-uac' || currentJourney === 'new-hh-uac' || currentJourney === 'new-ce-manager-uac' || currentJourney === 'new-ir-uac') {
+                window.location.href = '../uac-request-method' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + 'new-ce-resident-uac';
+            }
+        }
+        else {
+            if (currentJourney === 'new-hh-paper' || currentJourney === 'new-ce-manager-paper' || currentJourney === 'new-ce-resident-paper') {
+                window.location.href = '../ce-manager-paper' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + 'new-ce-manager-paper';
+            } else if (currentJourney === 'new-hh-uac' || currentJourney === 'new-ce-manager-uac' || currentJourney === 'new-ce-resident-uac' || currentJourney === 'new-ir-uac') {
+                window.location.href = '../uac-request-method' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + 'new-ce-manager-uac';
+            }
+        }
+    });
+
+    if (addressParam) {
+        var address = JSON.parse(addressParam),
+            addressParts = [];
+
+        Object.keys(address)
+            .filter(function(key) { return !!address[key] })
+            .forEach(function (key) {
+                sessionStorage.setItem(key, address[key]);
+                addressParts.push(address[key]);
+            })
+
+        sessionStorage.setItem('address', addressParts.join(', '));
+    }
+
+	$(function () {
+	  if(sessionStorage.getItem('address')) {
+		$('.full-address-text').html((sessionStorage.getItem('address') || '').replace(/,/g, '<br />'));
+      }
+	});
+
+	$(function () {
+		var oneWeekAgo = new Date();
+		oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+		var options = {year: 'numeric', month: 'long', day: 'numeric'};
+		$('.one-week-ago').text(oneWeekAgo.toLocaleString('en-GB', options));
+	});
+
+    function updateAllLinks() {
+        if (previousPage === 'uac-entry') {
+            $('.js-previous-link').hide();
+        } else {
+            $('.js-previous-link').attr('href', '../' + previousPage + '?' + 'previous=' + currentPage + '&current-journey=' + currentJourney + '&edit=true');
+        }
+    }
+
+    function updateAnswer() {
+        if (addressCountry === 'S') {
+            $('.js-change-address').hide();
+        }
+    }
+
+    $(updateAllLinks);
+    $(updateAnswer);
+</script>

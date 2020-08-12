@@ -1,0 +1,207 @@
+---
+title: COVID-19 test (round 4 - pandemic situation revised) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="" style="display:none;">Previous</a>
+    </div>
+
+</div>
+
+<style>
+    .list--records {
+        margin-right : .5rem;
+    }
+</style>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m"></div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password" novalidate="">
+                    <input type="hidden" name="previous"
+                           value="does-anyone-else-live-here"/>
+                    <div class="group" id="rsi">
+                        <div class="block" id="total-retail-turnover">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-xl">
+                                        Are there any other visitors staying overnight on <span class="js-significant-date"></span> at <span class="full-address-text">Address not set</span>?
+                                    </h1>
+                                </div>
+
+                                <ul style="display:none;"
+                                    class="list list--records list--people u-mb-s js-household-members-summary"
+                                    data-redirect="../does-anyone-else-live-here/"></ul>
+                                <ul style="display:none;"
+                                    class="list list--records list--people u-mb-s js-visitors-summary"
+                                    data-redirect="../does-anyone-else-live-here/"></ul>
+
+                                <div class="panel panel--simple panel--info u-mb-m js-visitor-panel" style="display: none">
+                                    <div class="panel__body">
+                                        <strong class="u-mb-xs u-d-b">Include</strong>
+                                        <ul class="js-visitor-includes"></ul>
+                                    </div>
+                                </div>
+
+                                <div class="answer__fields js-fields">
+                                    <div class="field field--radio field--multiplechoice ">
+                                        <fieldset class="u-mb-xl">
+                                            <div class="field__item js-focusable-box">
+                                                <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                       type="radio"
+                                                       name="does-anyone-else-live-here"
+                                                       id="yes-someone-else"
+                                                       value="Yes">
+                                                <label class="label label--inline venus"
+                                                       for="yes-someone-else"
+                                                       id="yes-someone-else-label">
+                                                    <strong
+                                                            class="yes-answer u-fs-r">
+                                                        Yes, I need to
+                                                        add another
+                                                        person</strong>
+                                                    <p
+                                                            class="u-fs-m u-db u-mb-no label--negative js-householdmembers-detail">Include partners,
+                                                        children, babies born on or before <span class="js-significant-date"></span>, housemates, tenants and lodgers, students and schoolchildren who live away from home during term time, where this is their permanent or family home</p>
+                                                </label>
+                                            </div>
+
+                                            <div class="field__item js-focusable-box">
+                                                <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                       type="radio"
+                                                       name="does-anyone-else-live-here"
+                                                       id="no" value="No">
+                                                <label class="label label--inline"
+                                                       for="no">No, I do not need to add anyone</label>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus"
+                            type="submit" name="">Save and continue
+                    </button>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end-covid-revised/bundle.js'></script>
+
+<script>
+  var yesbox = document.getElementById("yes-someone-else"),
+    storageAPI = window.ONS.storage;
+  $('.qa-btn-submit').click(function(e) {
+
+    /**
+     * Routing
+     */
+    if (!yesbox.checked) {
+      if (window.location.search.match(/journey=visitors/)) {
+        document.trav.action = "../summary";
+      }
+    } else {
+      document.trav.action = "../visitor-name/?journey=visitors";
+    }
+  });
+
+  $(function() {
+    var addressLines = (sessionStorage.getItem('address') || '').split(','),
+      addressLine1 = addressLines[0],
+      members = storageAPI.getAllHouseholdMembers(),
+      householdMembers = members.filter(storageAPI.isHouseholdMember),
+      visitors = members.filter(storageAPI.isVisitor),
+      nextPosition,
+      visitorTypesStr =
+        new URLSearchParams(window.location.search).get('visitor-types'),
+      isVisitorJourney = window.location.search.match(/journey=visitors/);
+
+    if (isVisitorJourney) {
+      nextPosition = visitors.length + 1;
+      $('#form').prepend("<input type='hidden' name='visitor-types' value='" + visitorTypesStr + "' />");
+      $('#form')
+        .prepend('<input type="hidden" name="journey" value="visitors" />');
+      $('.js-visitors-summary').show();
+
+      if (visitorTypesStr) {
+        var visitorTypes = JSON.parse(visitorTypesStr);
+
+        if (visitorTypes.length) {
+          document.querySelector('.js-visitor-panel').style.display = 'block';
+
+          var visitorIncludes = document.querySelector('.js-visitor-includes');
+
+          visitorTypes.forEach(function (type) {
+            var li = document.createElement('li');
+            li.className = 'list__item';
+
+            li.innerHTML = storageAPI.visitorQuestionSentenceMap[type];
+
+            visitorIncludes.appendChild(li);
+          });
+        }
+      }
+
+      $('.js-householdmembers-detail').hide();
+    }
+    else {
+      nextPosition = householdMembers.length + 1;
+      $('.js-household-members-summary').show();
+    }
+
+    if ((nextPosition) > 1) {
+      $('.yes-answer').html(
+        'Yes, I need to add ' + window.ONS.utils.precedingOrdinalWord(nextPosition) + ' ' +
+        window.ONS.utils.numberToPositionWord(nextPosition) +
+        ' ' + (isVisitorJourney ? 'visitor' : 'person')
+      );
+    }
+  });
+</script>
+
+<script>
+
+    var searchParams = new URLSearchParams(window.location.search),
+        addressParam = searchParams.get('address'),
+        storageAPI = window.ONS.storage;
+
+    if (addressParam) {
+        var address = JSON.parse(addressParam),
+            addressParts = [];
+
+        Object.keys(address)
+            .filter(function(key) { return !!address[key] })
+            .forEach(function (key) {
+                sessionStorage.setItem(key, address[key]);
+                addressParts.push(address[key]);
+            })
+        
+        sessionStorage.setItem('address', addressParts.join(', '));
+    }
+
+  function updatePipedAddress() {
+      $('.full-address-text').html(storageAPI.getPipedAddress());
+  };
+
+  function updateAllLinks() {
+    $('.js-previous-link').attr('href', document.referrer);
+  }
+
+  $(updatePipedAddress);
+  $(updateAllLinks);
+</script>

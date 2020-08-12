@@ -1,0 +1,164 @@
+---
+title: COVID-19 test (round 4 - pandemic situation revised) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../individual-details-employment-business-name">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password"
+                      action="../individual-details-employment-job-title">
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
+                           value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group" id="rsi">
+                        <div class="block" id="total-retail-turnover">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-xl js-heading">
+                                        What is the name of the organisation or business you work for?
+                                    </h1>
+                                </div>
+                                <p class="js-help">If you are self-employed in your own business, give the business name</p>
+                                <div class="answer">
+                                    <div class="answer__fields js-fields">
+                                        <div class="field field--multiplechoice field--exclusive u-fs-r">
+                                            <fieldset class="u-mb-xl">
+                                                    <p class="field">
+                                                        <label class="label"
+                                                            for="business-name">
+                                                            <span class="label__inner">
+                                                                Organisation or business name
+                                                            </span>
+                                                        </label>
+                                                        <input autocomplete="new-password" class="input input--text js-exclusive-group"
+                                                            id="business-name" name="business-name"
+                                                            data-qa="input-text" value=""/>
+                                                    </p>
+
+                                                <div class="field__label u-mt-s u-fs-r--b" aria-hidden="true">Or</div>
+                                                <div class="field__item">
+                                                    <input autocomplete="new-password" class="input input--checkbox js-exclusive-checkbox"
+                                                           type="checkbox"
+                                                           name="business-name-checkbox"
+                                                           id="business-name-checkbox"
+                                                           value="No organisation or work for a private individual" />
+                                                    <label class="label label--inline u-fs-r"
+                                                           for="business-name-checkbox">
+                                                        <span class="u-vh">Or,</span>
+                                                        No organisation or work for a private individual
+                                                    </label>
+                                                </div>
+                                                    <span class="js-exclusive-alert u-vh"
+                                                          role="alert"
+                                                          aria-live="polite"
+                                                          data-adjective="deselected"></span>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+                    <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end-covid-revised/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person_id'),
+    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+    isEditing = urlParams.get('edit'),
+    details = storageAPI.getPersonalDetailsFor(personId),
+    surveyType = urlParams.get('survey'),
+    question = $('#question-title').html();
+
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+    var val = $('#business-name').val();
+    if (val === '') {
+        val = $('[name="business-name-checkbox"]:checked').val();
+    }
+    let url = '../individual-details-employment-business-name/?person_id=' + personId + '&edit=true';
+    question = question.trim();
+    storageAPI.addUpdateEmploymentName(personId, val, question, url);
+    storageAPI.storePageData('/end-to-end-covid-revised/individual-details-employment-job-title/', window.location.pathname);
+
+    if(isEditing) {
+      e.preventDefault();
+        window.location.href = '../individual-details-summary/?person_id=' + personId +
+          (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end-covid-revised/individual-details-summary/', window.location.pathname);
+    }
+  }));
+
+  function updateRouting() {
+    if(surveyType) {
+      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    }
+    $('#survey-type').val(surveyType);
+  }
+
+  function updateQuestion() {
+    if(storageAPI.getProxyFor(personId)) {
+      $('.js-heading').html('What is the name of the organisation or business ' + '<em class="highlight">' + person.firstLastName + '</em> works for?');
+      $('.js-help').html('If they are self-employed in their own business, give the business name');
+    }
+
+    if (details['employment'].sevenDaysAgo[0]=== 'No') {
+        var replaceQuestion = $('.js-heading').html().replace('is', 'was');
+        $('.js-heading').html(replaceQuestion);
+        var replaceQuestion = $('.js-heading').html().replace('works', 'worked');
+        $('.js-heading').html(replaceQuestion);
+        var replaceHelp = $('.js-help').html().replace('are', 'were');
+        $('.js-help').html(replaceHelp);
+        var replaceAnswer = $('.label--inline').html().replace('work', 'worked');
+        $('.label--inline').html(replaceAnswer);
+    }
+  }
+  function updateAnswer() {
+    if (details && details.employment) {
+        if (details.employment.name === 'No organisation or work for a private individual') {
+            $('#business-name-checkbox').prop('checked', true);
+        } else {
+            $('#business-name').val(details.employment.name);
+        }
+    }
+  }
+
+  $(updateAnswer);
+  $(updateQuestion);
+  $(updateRouting);
+
+  /**
+   * Routing
+   */
+  $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
+</script>

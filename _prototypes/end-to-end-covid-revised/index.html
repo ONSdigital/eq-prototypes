@@ -1,0 +1,214 @@
+---
+title: COVID-19 test (round 4 - pandemic situation revised) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+logoUrl: ../home
+---
+
+<style>
+    .input--text-lg {
+        width : 100%;
+    }
+
+    .input--text-postcode {
+        max-width : 9.25rem;
+    }
+</style>
+
+<link rel="stylesheet" href="../style.css"/>
+<link rel="stylesheet" href="../assets/modules/typeahead/typeahead.css"/>
+
+<div class="page__subheader"></div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m"></div>
+
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <div class="feedback__inline js-feedback-inline is-collapsed">
+                    <div class="feedback__border">
+                        <form id="feedback-form" method="POST"
+                              class="feedback__form">
+                            <div class="group">
+                                <div class="feedback__field"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="block" id="what-is-your-address">
+                    <div class="panel panel--error u-mb-m js-error-box u-d-no"><div class="panel__header">
+                        <div class="panel__title u-fs-r--b">There <span class="js-piping">is a problem</span> with your answer</div>
+                    </div>
+                    <div class="panel__body">
+                        <ol class="list list--bare">
+                            <li class="list__item js-address-field u-d-no">
+                                1. <a href="#error-message-address-field" class="list__link js-inpagelink js-error">Enter an address to continue</a>
+                            </li>
+                            <li class="list__item js-address-line-1 js-address-line-2 js-address-town js-address-postcode u-d-no">
+                                1. <a href="#error-message-address-line-1" class="list__link js-inpagelink js-error">Enter an address to continue</a>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="question" id="what-is-your-address-question">
+                    <h1 class="question__title u-fs-xl"
+                        data-qa="question-title">
+                        Initiate prototype. Enter participant's address
+                    </h1>
+
+                    <fieldset class="question__fieldset js-question-fieldset">
+                        <legend class="u-vh">Initiate prototype. Enter participant's address</legend>
+                        <div class="question">
+                            <div class="question__answer">
+                              <div id="address" class="field address-input js-address u-mt-s address-input--search">
+                                  <div class="address-input__manual">
+                                      <div class="fieldgroup">
+                                          <p class="field">
+                                              <label class="label" for="address-line-1">Address line 1</label>
+                                              <input type="text" id="address-line-1" data-error-msg="Enter an address to continue"  class="input input--text input-type__input  input--w-20@m js-address-line-1" name="address-line-1" />
+                                          </p>
+                                          <p class="field">
+                                              <label class="label" for="address-line-2">Address line 2</label>
+                                              <input type="text" id="address-line-2" class="input input--text input-type__input  input--w-20@m js-address-line-2" name="address-line-2" />
+                                          </p>
+                                          <p class="field">
+                                              <label class="label" for="address-town">Town or city</label>
+                                              <input type="text" id="address-town" class="input input--text input-type__input  js-address-town" name="address-town" />
+                                          </p>
+                                          <p class="field">
+                                              <label class="label" for="address-postcode">Postcode</label>
+                                              <input type="text" id="address-postcode" class="input input--text input-type__input  input--w-5 js-address-postcode" name="address-postcode" />
+                                          </p>
+                                          <div class="u-d-no u-mt-m js-address-search-btn-container">
+                                              <a href="../index" class="btn--link js-address-search-btn">Search for an address</a>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="address-input__search">
+                                      <p class="field">
+                                          <label class="label" for="address-field">Enter address or postcode and select from results</label>
+                                          <div id="address-typeahead-container" class="typeahead-input js-address-typeahead " data-content="{&quot;no_results&quot;:&quot;No results found. Try entering a different part of the address&quot;,&quot;aria_no_results&quot;:&quot;No addresses found for the query&quot;,&quot;aria_you_have_selected&quot;:&quot;You have selected&quot;,&quot;aria_found_by_alternative_name&quot;:&quot;found by alternative name&quot;,&quot;aria_min_chars&quot;:&quot;Type in 5 or more characters for addresses.&quot;,&quot;aria_one_result&quot;:&quot;There is one address available.&quot;,&quot;aria_n_results&quot;:&quot;There are {n} addresses available.&quot;,&quot;aria_limited_results&quot;:&quot;Results have been limited to 10 addresses. Type more characters to refine your search.&quot;,&quot;more_results&quot;:&quot;Continue entering to improve results&quot;,&quot;results_title&quot;:&quot;Select an address&quot;}" typeahead-data="">
+                                            <input type="hidden" class="js-rh-address-type" value="#"/>
+                                            <input type="hidden" class="js-rh-address-country" value="#"/>
+                                              <input type="text" name="x2" id="address-field" class="input input--text input-type__input  address-input__typeahead js-typeahead-input input--w-50" data-error-msg="Enter an address to continue" maxlength="100"/>
+                                              <div class="typeahead-input__results js-typeahead-results">
+                                                  <header class="typeahead-input__results-title u-fs-s">Select an address</header>
+                                                  <ul class="typeahead-input__listbox js-typeahead-listbox" role="listbox" id="address-typeahead-listbox" tabindex="-1"></ul>
+                                              </div>
+                                              <div class="typeahead-input__instructions u-vh js-typeahead-instructions" id="address-typeahead-instructions" tabindex="-1">Use up and down keys to navigate addresses once you&#39;ve typed more than two characters. Use the enter key to select a address. Touch device users, explore by touch or with swipe gestures.</div>
+                                              <div class="typeahead-input__status u-vh js-typeahead-aria-status" aria-live="polite" role="status" tabindex="-1"></div>
+                                          </div>
+                                      </p>
+                                    <a href="#" class="btn--link js-address-manual-btn">Manually enter address</a>
+                                  </div>
+                              </div>
+                          </div>
+                    </fieldset>
+                </div>
+                <button class="btn btn-submit btn--primary btn--lg u-mt-xl"
+                        data-qa="btn-submit" type="submit"
+                        name="action[save_continue]">Save and launch prototype
+                </button>
+                <p class="u-mt-xl"><a href="../home">Participant has no fixed address</a></p>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end-covid-revised/bundle.js'></script>
+
+<script>
+  sessionStorage.clear();
+  var hasErrors = false;
+  
+  $('.btn-submit').on('click', function (e) {
+    e.preventDefault();
+    if ($('.address-input--search').length != 0) {
+      if ($("#address-field").val() == '' || $("#address-field").val() != '' ){
+        var testFails = true;
+      }
+      $('.address-input__manual input').prop('type', 'readonly');
+      window.ONS.utils.validateInputs(testFails, "input[id='address-field']");
+    } else if ($('.address-input--search').length === 0) {
+      var testFails = '';
+      $('.address-input__manual input').prop('type', 'text');
+      window.ONS.utils.validateInputs(testFails, "input[id='address-line-1']");
+      window.ONS.utils.validateInputs(testFails, "input[id='address-town']");
+      window.ONS.utils.validateInputs(testFails, "input[id='address-postcode']");
+    }
+
+    if (hasErrors) {
+        hasErrors = false;
+        return false;
+    } else {
+
+    var isEditing =
+      new URLSearchParams(window.location.search).get('edit') === 'true';
+
+    sessionStorage.setItem('address', getAddress());
+
+    sessionStorage.setItem('address-line-1', document.getElementById('address-line-1').value);
+    sessionStorage.setItem('address-line-2', document.getElementById('address-line-2').value);
+    sessionStorage.setItem('address-town', document.getElementById('address-town').value);
+    sessionStorage.setItem('address-postcode', document.getElementById('address-postcode').value);
+
+    var addressType = $('.js-rh-address-type').val();
+    var addressCountry = $('.js-rh-address-country').val();
+    sessionStorage.setItem('address-type', addressType);
+    sessionStorage.setItem('address-country', addressCountry);
+
+    // Temporary manual update address type for CEs  
+    var addressLine1 = document.getElementById('address-line-1').value.toLowerCase();
+    var addressLine2 = document.getElementById('address-line-2').value.toLowerCase();
+    var address = addressLine1 + addressLine2;
+    var array = [
+    "university", 
+    "howden apartments",
+    "care home",
+    "halls of residence",
+    "hall of residence"
+    ];
+
+    if (array.some(val => address.includes(val))) {
+    sessionStorage.setItem('address-type', 'CE');
+    }
+    
+
+    window.location = '../home/';
+    }
+  });
+
+  function getAddress() {
+    var array = [
+
+      document.getElementById('address-line-1').value,
+      document.getElementById('address-line-2').value,
+      document.getElementById('address-town').value,
+      document.getElementById('address-postcode').value,
+
+    ];
+    return array.filter(filterAddressLine).join(', ');
+  }
+
+  function filterAddressLine(value) {
+    return value;
+  }
+
+  if (window.location.search == '?edit=true') {
+    function updateEditableAddress() {
+      $('#address-line-1').val(sessionStorage.getItem('address-line-1'));
+      $('#address-line-2').val(sessionStorage.getItem('address-line-2'));
+      $('#address-town').val(sessionStorage.getItem('address-town'));
+      $('#address-postcode').val(sessionStorage.getItem('address-postcode'));
+    }
+  $(updateEditableAddress);
+  }
+
+</script>
