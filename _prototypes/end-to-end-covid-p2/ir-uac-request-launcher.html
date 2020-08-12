@@ -1,0 +1,74 @@
+---
+title: COVID-19 test (round 4 - pandemic situation revised) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+logoUrl: ../home
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../hub">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            <!--{% include navigation.html
+            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
+            nav-title-id="section-individual" %}-->
+        </div>
+        <div class="grid__col col-8@l">
+            <main role="main" id="main" class="page__main">
+                <div class="group">
+                    <div class="block">
+                        <section class="section">
+                            <h1 class="u-fs-xl">Request an individual access code</h1>
+                            <p>An individual access code lets you answer your census questions separately from the people you live with. You can choose to receive your new access code by text or post.</p>
+                            <div class="panel panel--simple panel--info u-mb-m">
+                                <div class="panel__body">
+                                    <p>No one in your household will be told that you have requested an individual access code.</p>
+                                </div>
+                            </div>
+                            <p>Your individual answers will take priority over any information submitted about you in the household census.</p>
+                        </section>
+                    </div>
+                </div>
+
+                <a href="#" role="button" class="btn btn--link js-btn-ir u-mb-m u-mt-s">
+                    <span class="btn__inner">Start</span>
+                </a>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end-covid-p2/bundle.js'></script>
+
+<script>
+    storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search);
+    var previousPage = urlParams.get('previous');
+    var currentJourney = urlParams.get('current-journey');
+    var currentPage = 'ir-uac-request-launcher';
+
+  $('.js-btn-ir').click(function(e) {
+    e.preventDefault();
+    if (currentJourney === 'new-hh-uac') {
+        window.location.href = '../uac-request-method' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + 'new-ir-uac';
+    } else {
+        window.location.href = '../uac-request-address' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney;
+    }
+  });
+
+    function updateAllLinks() {
+        $('.js-previous-link').attr('href', '../' + previousPage + '?' + 'current-journey=' + currentJourney);
+    }
+
+    $(updateAllLinks);
+</script>

@@ -1,0 +1,146 @@
+---
+title: COVID-19 test (round 4 - pandemic situation revised) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+logoUrl: ../home
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../section-intro">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m"></div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <div class="panel panel--error u-mb-m js-error-box u-d-no">
+                  <div class="panel__header">
+                      <div class="panel__title u-fs-r--b">There <span class="js-piping">is a problem</span> with your answer</div>
+                  </div>
+                  <div class="panel__body">
+                      <ol class="list list--bare">
+                          <li class="list__item js-building-name u-d-no">
+                              1. <a href="#error-message-building-name" class="list__link js-inpagelink js-error">You have entered too many characters. Enter up to 20 characters to continue.</a>
+                          </li>
+                      </ol>
+                  </div>
+                </div>
+                <div class="group u-mb-xl">
+                    <div class="block">
+
+                        <div class="question">
+                            <h1 class="question__title u-fs-xl js-heading"
+                                data-qa="question-title">
+                                What is your house name?
+                            </h1>
+
+                            <fieldset
+                                    class="question__fieldset js-question-fieldset">
+                                <legend class="u-vh">What is your house name?</legend>
+
+                            <div class="question__answers">
+                                <div class="question__answer">
+                                  <div class="js-char-check">
+                                    <p class="field">
+                                      <label class="label" for="building-name">House name</label>
+                                      <input autocomplete="new-password" type="text" id="building-name" data-error-msg="You have entered too many characters. Enter up to 20 characters to continue." class="input input--text input-type__input:" data-char-check-ref="search-field-check-remaining" data-char-check-num="20" />
+                                      <span
+                                        id="search-field-check-remaining"
+                                        class="input__limit u-fs-s--b u-mt-xs u-d-no"
+                                        data-charcount-limit-singular="{x} character too many"
+                                        data-charcount-limit-plural="{x} characters too many">
+                                      </span>
+                                    </p>
+                                  </div>
+                                </div>
+                            </div>
+                          </fieldset>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-submit btn--primary btn--lg u-mb-xl"
+                        data-qa="btn-submit" type="submit"
+                        name="action[save_continue]">
+                  Save and continue
+                </button>
+                <p><a class="js-na-link" href="#">Cancel and return to the previous page</a></p>
+            </main>
+        </div>
+    </div>
+</div>
+
+
+<script src='/js/compiled/end-to-end-covid-p2/bundle.js'></script>
+
+<script>
+  var urlParams = new URLSearchParams(window.location.search),
+    isEditing = urlParams.get('edit') === 'true',
+    redirect = urlParams.get('redirect'),
+    livesHere = sessionStorage.getItem('lives-here') === 'yes',
+    storageAPI = window.ONS.storage,
+    userAsMember = storageAPI.getUserAsHouseholdMember(),
+    userPerson = userAsMember && userAsMember['@person'],
+    hasErrors = false;
+    var urlParams = new URLSearchParams(window.location.search);
+    var previousPage = urlParams.get('previous');
+    var currentJourney = urlParams.get('current-journey');
+    var currentPage = 'uac-request-enter-ce-room';
+
+
+  $('.btn-submit').on('click', function(e) {
+    e.preventDefault();
+      const testFails = document.getElementById('building-name').value.length > 20 ? true : false;
+      window.ONS.utils.validateInputs(testFails, "input[id='building-name']");
+
+    if (hasErrors) {
+      hasErrors = false;
+      return false;
+    } else if (previousPage === 'uac-request-confirm-address'){ 
+      sessionStorage.setItem('unit-name', getRoomNumber());
+      window.location.href = '../uac-request-confirm-address' + '?previous=' + currentPage + '&current-journey=' + currentJourney;
+    } else {
+      sessionStorage.setItem('unit-name', getRoomNumber());
+      window.location.href = '../confirm-rh-address' + '?previous=' + currentPage + '&current-journey=' + currentJourney;
+    }
+  });
+
+  function getRoomNumber() {
+    return [
+      document.getElementById('building-name').value
+    ].filter(function(number) {
+      return number
+    });
+  }
+
+  $(function() {
+    var roomNumber = (sessionStorage.getItem('unit-name') || '');
+
+    if (roomNumber) {
+      $('#building-name').val(roomNumber);
+    }
+  });
+
+  function updateAllLinks() {
+    $('.js-previous-link').attr('href', '../' + previousPage);
+  }
+
+  $('.js-na-link').on('click', function(e) {
+    e.preventDefault();
+    if (previousPage === 'uac-request-confirm-address') {
+      window.location.href = '../uac-request-confirm-address/' + '?previous=' + currentPage + '&current-journey=' + currentJourney;
+    } else {
+      window.location.href = '../confirm-rh-address/' + '?previous=' + currentPage + '&current-journey=' + currentJourney;
+    }
+  });
+
+  $(updateAllLinks);
+</script>

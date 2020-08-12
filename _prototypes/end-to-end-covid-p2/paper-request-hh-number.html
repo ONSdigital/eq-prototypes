@@ -1,0 +1,101 @@
+---
+title: COVID-19 test (round 4 - pandemic situation revised) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+logoUrl: ../home
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            <!--{% include navigation.html
+            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
+            nav-title-id="section-individual" %}-->
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password"
+                      action="../hub">
+                    <div class="group">
+                        <section class="section">
+                            <div class="question u-mb-s">
+                                <h1 id="question-title"
+                                    class="question__title u-fs-xl js-piping">
+                                    How many people are in your household?
+                                </h1>
+                            </div>
+                            <p>This is to make sure we send you the right number of paper questionnaires</p>
+                            <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple js-visitor-definition u-mb-s">
+                                <div class="js-collapsible-content">
+                                    <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Need to answer separately from your household?">Need to answer separately from your household?</h3>
+                                    <div class="collapsible__body js-collapsible-body">
+                                        <p class="u-mb-xs">If you need to answer separately from the people you live with, you can <a class="js-link-ir" href="../uac-request-enter-name?previous=confirm-rh-address&current-journey=new-ir-paper">request an individual paper questionnaire</a> to fill in a separate census.</p>
+                                        <div class="panel panel--simple panel--warning js-panel-info u-mb-xs">
+                                            <span class="panel__icon" aria-hidden="true">!</span><span class="panel__text">Someone in your household must still complete a census using a household access code or by completing a household paper questionnaire</span>
+                                        </div>
+                                        <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Need to answer separately from your household?">Hide this</button>                                           
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label" for="mobile-number">
+                                    Number of people
+                                </label>
+                                <input autocomplete="new-password" class="input input--text input--w-2 js-hh-number"
+                                       id="hh-number"
+                                       value="" />
+                            </div>
+                        </section>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl u-mt-xl"
+                            type="submit" name="">Continue
+                    </button>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<div style="display:none;">
+    <div id="member-checkbox-select-template" class="field__item">
+        <input autocomplete="new-password" class="input input--checkbox js-person-control"
+               name="checkbox-answer" type="checkbox">
+        <label class="label label--inline u-fs-r js-person-name"></label>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end-covid-p2/bundle.js'></script>
+
+<script>
+    var storageAPI = window.ONS.storage;
+    var urlParams = new URLSearchParams(window.location.search);
+    var previousPage = urlParams.get('previous');
+    var currentJourney = urlParams.get('current-journey');
+    var currentPage = 'paper-request-hh-number';
+    
+  $('.qa-btn-submit').on('click', function (e) {
+    e.preventDefault();
+    
+    var url = '../uac-request-enter-name';
+    window.location.href = url + '?hh-members=' + encodeURI($('#hh-number').val() + '&previous=' + currentPage + '&current-journey=new-hh-paper');
+  });
+
+    function updateAllLinks() {
+        $('.js-previous-link').attr('href', '../' + previousPage + '?' + 'current-journey=' + currentJourney);
+        $('.js-ir-link').attr('href', '../' + previousPage + '?' + 'current-journey=new-ir-paper');
+    }
+
+    $(updateAllLinks);
+</script>

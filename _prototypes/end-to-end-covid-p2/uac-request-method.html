@@ -1,0 +1,164 @@
+---
+title: COVID-19 test (round 4 - pandemic situation revised) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+logoUrl: ../home
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link mars" href="../do-you-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            <!--{% include navigation.html
+            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
+            nav-title-id="section-individual" %}-->
+        </div>
+        <div class="grid__col col-8@l">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password" novalidate="">
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
+                           value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group" id="rsi">
+                        <div class="block" id="total-retail-turnover">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title saturn js-piping">
+                                        How would you like to receive a new {x} access code?
+                                    </h1>
+                                    <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple js-visitor-definition u-mb-s u-d-no">
+                                        <div class="js-collapsible-content">
+                                            <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Need to answer separately from your household?">Need to answer separately from your household?</h3>
+                                            <div class="collapsible__body js-collapsible-body">
+                                                <p class="u-mb-xs">If you need to answer separately from the people you live with, you can <a class="js-link-ir" href="../uac-request-method/?previous=confirm-rh-address&current-journey=new-hh-uac">request an individual access code</a> to start a separate census.</p>
+                                                <div class="panel panel--simple panel--warning js-panel-info u-mb-xs">
+                                                    <span class="panel__icon" aria-hidden="true">!</span><span class="panel__text">Someone in your household must still complete a census using a household access code</span>
+                                                </div>
+                                                <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Need to answer separately from your household?">Hide this</button>                                           
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="panel panel--simple panel--info u-mb-m js-panel u-d-no">
+                                        <div class="panel__body">
+                                            An individual access code lets you answer your questions separately from your household
+                                        </div>
+                                    </div> -->
+                                    <div class="answer">
+                                        <div class="answer__fields js-fields">
+                                            <div class="field field--radio field--multiplechoice ">
+                                                <fieldset class="u-mb-xl">
+                                                    <legend class="fieldset__legend">Select how to send access code</legend>
+                                                    <div class="field__item js-focusable-box">
+                                                        <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                            type="radio"
+                                                            name="does-anyone-else-live-here"
+                                                            id="phone"
+                                                            value="01234567890">
+                                                        <label class="label label--inline"
+                                                            for="phone"
+                                                            id="no-label">
+                                                            Text message
+                                                            <br>
+                                                            <p class="radio__description label--negative u-fs-s u-mb-no">We will need your mobile number for this</p>
+                                                        </label>
+                                                    </div>
+                                                    <div class="field__item js-focusable-box">
+                                                        <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                            type="radio"
+                                                            name="does-anyone-else-live-here"
+                                                            id="post" value="post">
+                                                        <label class="label label--inline"
+                                                            for="post">
+                                                            Post
+                                                            <br>
+                                                            <p class="radio__description label--negative u-fs-s u-mb-no js-piping">We can only send access codes to the registered household address</p>
+                                                        </label>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit u-mb-xl"
+                            type="submit" name="">Continue
+                    </button>
+                    <p>To request a census in a different format or for further help, please <a href="#">contact us</a></p>
+
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end-covid-p2/bundle.js'></script>
+
+<script>
+    var searchParams = new URLSearchParams(window.location.search);
+    var currentJourney = document.querySelector('.js-previous-link');
+    var phoneInput = document.getElementById('phone');
+    var postInput = document.getElementById('post');    
+    var previousPage = searchParams.get('previous');
+    var currentJourney = searchParams.get('current-journey');
+    var currentPage = 'uac-request-method';
+    var form = document.querySelector('form');
+    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        if (phoneInput.checked) {
+            var url = '../uac-request-enter-mobile';
+        } else if (postInput.checked) {
+            var url = '../uac-request-enter-name';
+        }
+        window.location.href = url + '?' + 'previous=' + 'uac-request-method' + '&' + 'current-journey=' + currentJourney;
+    });
+
+    function updateQuestion() {
+        if (currentJourney === 'new-hh-uac') {
+            $('.js-collapsible').removeClass('u-d-no');
+        }
+
+        pipingDestinations.forEach(function(pipingDestination) {
+            if (currentJourney === 'new-ir-uac') {
+                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', 'individual');
+            } else if (currentJourney === 'new-ce-resident-uac') {
+                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', 'individual');
+                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('household', '');
+            } else if (currentJourney === 'new-ce-manager-uac') {
+                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', 'manager');
+                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('household', '');
+            } else {
+                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', 'household');
+            }
+        });
+
+        if(currentJourney === 'new-ir-uac') {
+            $('.js-panel').removeClass('u-d-no');
+        }
+    }
+
+    function updateAllLinks() {
+        $('.js-previous-link').attr('href', '../' + previousPage + '?' + (currentPage ? 'previous=' + currentPage : '') + (currentJourney ? '&current-journey=' + currentJourney : ''));
+        
+        $('.js-link-ir').attr('href', ('../ir-uac-request-launcher' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + 'new-hh-uac'));
+    }
+
+    $(updateQuestion);
+    $(updateAllLinks);
+</script>

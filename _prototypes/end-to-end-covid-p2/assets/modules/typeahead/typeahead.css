@@ -1,0 +1,231 @@
+.address-input {
+    max-width: 580px
+}
+
+.address-input--search .address-input__manual, .address-input__search {
+    display: none
+}
+
+.address-input--search .address-input__search {
+    display: block
+}
+
+.address-input__typeahead .typeahead__combobox .typeahead__listbox {
+    width: 100%
+}
+
+.address-input__typeahead .typeahead__combobox {
+    display: block
+}
+
+.group-text {
+  color: #4263c2;
+  text-decoration: underline;
+}
+
+.typeahead-input__option--focused:not(.typeahead-input__option--no-results) .group-text, .typeahead-input__option:not(.typeahead-input__option--no-results):not(.typeahead-input__option--more-results):hover .group-text {
+    color: #fff;
+}
+
+.previous-link {
+    line-height: 1
+}
+
+.field__description {
+    margin-top: 1rem
+}
+
+.input {
+    z-index: 3;
+    display: block;
+    position: relative;
+    padding: rem-calc(rem-calc(rems(40px) - 1.444rem) / 2) 0.5rem;
+    width: 100%;
+    border: 1px solid #222;
+    border-radius: 3px;
+    color: inherit;
+    font-family: inherit;
+    font-size: 1rem;
+    line-height: 1rem;
+  }
+  .input::-ms-clear {
+    display: none;
+  }
+  .input--text, .input--textarea {
+    -webkit-appearance: none;
+  }
+  .input:focus {
+    outline: 1px solid #222;
+    outline-offset: -2px;
+    box-shadow: 0 0 0 3px #fd0;
+  }
+  .input--postcode {
+    width: 100%;
+    max-width: input-width-calc();
+  }
+  .input__helper {
+    margin-top: 0.2rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+  .input--select {
+    appearance: none;
+    padding: 0.5rem 2rem 0.5rem 0.5rem;
+    background: #fff url('../img/icons/icons--chevron-down.svg') no-repeat center right 10px;
+    background-size: 1rem;
+  }
+  .input--select::-ms-expand {
+    display: none;
+  }
+  .input--textarea {
+    width: 100%;
+    line-height: normal;
+    resize: vertical;
+  }
+  .input--block {
+    display: block;
+    width: 100%;
+  }
+  .input--placeholder {
+    background: transparent;
+  }
+  .input--placeholder::placeholder {
+    color: transparent;
+  }
+  .input--placeholder:valid {
+    background: #fff;
+  }
+  .input--placeholder:focus {
+    background: #fff;
+  }
+  .input--limit-reached {
+    border: 1px solid #d0021b;
+  }
+  .input--limit-reached:focus {
+    outline: 1px solid #d0021b;
+  }
+  .input__limit {
+    display: block;
+  }
+  .input__limit--reached {
+    color: #d0021b;
+  }
+  
+
+  .input-type {
+    display: block;
+  }
+  .input-type__inner {
+    display: inline-flex;
+    position: relative;
+  }
+  .input-type .input-type__input {
+    z-index: 1;
+    flex: 1 1 auto;
+    position: relative;
+  }
+  .input-type .input-type__input:focus {
+    box-shadow: none;
+  }
+  .input-type__type[title] {
+    display: block;
+    flex: 0 0 auto;
+    padding: rem-calc(rem-calc(rems(40px) - 1.444rem) / 2) 1rem;
+    border: 1px solid #222;
+    background-color: #f0f0f0;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: normal;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .input-type__input:focus + .input-type__type[title]:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 3px;
+    box-shadow: 0 0 0 3px #fd0;
+  }
+  .input-type self:not(.input-type--prefix)self__type[title] {
+    border-left: 0;
+    border-radius: 0 3px 3px 0;
+  }
+  .input-type self:not(.input-type--prefix)self__input {
+    border-radius: 3px 0 0 3px;
+  }
+  .input-type--prefix .input-type__type[title] {
+    order: 0;
+    border-right: 0;
+    border-radius: 3px 0 0 3px;
+  }
+  .input-type--prefix .input-type__input {
+    order: 1;
+    border-radius: 0 3px 3px 0;
+  }
+  
+
+  .typeahead-input {
+    position: relative;
+  }
+  .typeahead-input__combobox {
+    display: inline-block;
+    border-radius: 3px;
+  }
+  .typeahead-input__results {
+    display: none;
+    margin: 0.5rem 0 0;
+    padding: 0;
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid #222;
+    border-radius: 3px;
+  }
+  .typeahead-input__results-title {
+    padding: 0.25rem 0.5rem;
+    border-bottom: 1px solid #222;
+    background: #d0d0d0;
+  }
+  .typeahead-input__listbox {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background: #fff;
+  }
+  .typeahead-input__option {
+    margin: 0;
+    padding: 0.5rem;
+    outline: none;
+    cursor: pointer;
+  }
+  .typeahead-input__option:not(:last-child) {
+    border-bottom: 1px solid #222;
+  }
+  .typeahead-input__option:not(.typeahead-input__option--no-results):not(.typeahead-input__option--more-results):hover, .typeahead-input__option--focused:not(.typeahead-input__option--no-results) {
+    border-color: #4263c2;
+    background: #4263c2;
+    color: #fff;
+  }
+  .typeahead-input__option--no-results, .typeahead-input__option--more-results {
+    padding: 0.25rem 0.5rem;
+    background: #d0d0d0;
+    cursor: not-allowed;
+  }
+  .typeahead-input__warning {
+    padding: 0.25rem 0.5rem;
+    background: #e6e6e6;
+    cursor: not-allowed;
+    border-bottom: 1px solid #222;
+    margin: 0;
+  }
+  .typeahead-input self:not(.typeahead-input--initialised)__instructions, .typeahead-input:not(.typeahead-input--initialised)__listbox, .typeahead-input self:not(.typeahead-input--initialised)__status {
+    display: none;
+  }
+  .typeahead-input--has-results .typeahead-input__results {
+    display: block;
+  }
+  

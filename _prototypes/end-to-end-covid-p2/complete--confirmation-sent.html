@@ -1,0 +1,108 @@
+---
+title: COVID-19 test (round 4 - pandemic situation revised) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+exit: true
+---
+
+<style type="text/css">
+
+.page_line {
+    margin-top: 0.5em;
+      border: 0.02em solid #999;
+      width: 100%;
+    margin-bottom: 1.6em;
+}
+
+.title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+
+.person-count {
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: -0.2em;
+    margin-top: -0.3em;
+}
+
+.smalltext {
+    font-size: 0.4em;
+    font-weight: normal;
+    margin-left: -0.2em;
+}
+
+.tick-spacing {
+    margin-left: 1.3em;
+    margin-bottom: 0.8em;
+}
+
+</style>
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <div class="panel panel--simple panel--success u-mb-m u-pl-l">    
+                    <div class="panel__body">
+                        <div class="panel__icon u-f-l" style="margin-left:-2rem;">
+                            <span class="icon icon--tick"></span>
+                        </div>
+                        <h1 class="u-mb-xs u-fs-l js-piping">
+                            A confirmation email has been sent to {x}
+                        </h1>
+                    </div>
+                </div>
+                <div class="js-resend-confirmation">
+                    <h2 class="u-fs-r--b u-mb-xs">Didn't receive an email?</h2>
+                    <p class="u-mb-m">It can take a few minutes for the email to arrive. If it doesn't arrive, you can <a class="js-resend-confirmation" href="../complete--confirmation-resend">send another confirmation email</a>.</p>
+                </div>
+                <div class="panel panel--simple panel--warning js-panel-info u-mb-m">
+                    <span class="panel__icon" aria-hidden="true">!</span><span class="panel__text">Make sure you <a class="exit" href="../home">leave this page</a> or close your browser if you are using a shared device</span>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end-covid-p2/bundle.js'></script>
+
+<script>
+    var searchParams = new URLSearchParams(window.location.search);
+    var emailAddress = searchParams.get('email');
+    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
+    var confirmationCounter = sessionStorage.getItem('confirmationCounter');
+
+
+    if (confirmationCounter) { 
+        var confirmationCounter = parseInt(confirmationCounter) + 1;
+        sessionStorage.setItem('confirmationCounter', confirmationCounter);
+    } else { 
+        var confirmationCounter = 1;
+        sessionStorage.setItem('confirmationCounter', confirmationCounter);
+    }
+    if (confirmationCounter > 2) { $('.js-resend-confirmation').hide() }
+
+    pipingDestinations.forEach(function(pipingDestination) {
+        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', emailAddress);
+    });
+
+    $('.exit').on('click', function (e) {
+        e.preventDefault();
+        window.location.href = '../home/';
+        sessionStorage.clear();
+    });
+
+</script>
