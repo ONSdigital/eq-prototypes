@@ -147,9 +147,9 @@ exit: true
         } else if (searchParams.get('empty')) {
             let param = searchParams.get('true');
             $('.js-error-box').removeClass('u-d-no');
-            $('.js-inpagelink').html('Enter an email address to continue');
+            $('.js-inpagelink').html('Enter an email address');
             $('#email-field').wrap( '<div class="panel panel--simple panel--error"><div class="panel__body"></div></div>' );
-            $('#email-field').before('<p id="panel-error" class="panel__error u-fs-r--b">Enter an email address to continue</p>');
+            $('#email-field').before('<p id="panel-error" class="panel__error u-fs-r--b">Enter an email address</p>');
                   
         }
     }

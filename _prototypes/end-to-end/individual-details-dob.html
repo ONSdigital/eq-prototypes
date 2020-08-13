@@ -29,7 +29,7 @@ noONSLogoLink: true
                         
                         <ol class="list list--bare">
                           <li class="list__item js-personal-detail-dob-day js-personal-detail-dob-month js-personal-detail-dob-year u-d-no">
-                              1. <a href="#error-message-personal-detail-dob-day" class="list__link js-inpagelink js-error">Enter a {x} to continue</a>
+                              1. <a href="#error-message-personal-detail-dob-day" class="list__link js-inpagelink js-error">Enter a {x}</a>
                           </li>
                        </ol>
                     </div>
@@ -57,7 +57,7 @@ noONSLogoLink: true
                                                     <div class="fieldgroup__fields">
                                                         <div class="field field--input input--w-2">
                                                             <label class="label" for="personal-detail-dob-day">Day</label>
-                                                            <input required type="text" data-error-msg="Enter a {x} to continue" id="personal-detail-dob-day" class="input input--StringField input--text input-type__input input--w-2" name="day" min="1" max="31" maxlength="2" pattern="[0-9]*" inputmode="numeric" />
+                                                            <input required type="text" data-error-msg="Enter a {x}" id="personal-detail-dob-day" class="input input--StringField input--text input-type__input input--w-2" name="day" min="1" max="31" maxlength="2" pattern="[0-9]*" inputmode="numeric" />
                                                         </div>
                                                         <div class="field field--select field--month">
                                                             <label class="label" for="personal-detail-dob-month">Month</label>
@@ -156,22 +156,22 @@ noONSLogoLink: true
     var errorMessage = document.querySelector('.panel__error');
     
     if (day === '') {
-      errorLink.innerText = 'Enter a day to continue';
+      errorLink.innerText = 'Enter a day';
     } else if (month === '') {
-      errorLink.innerText = 'Enter a month to continue';
+      errorLink.innerText = 'Enter a month';
     } else if (year === '') {
-      errorLink.innerText = 'Enter a year to continue';
+      errorLink.innerText = 'Enter a year';
     }
 
 
     if (day === '' && month === '' && year === '') {
-      errorLink.innerText = 'Enter a date of birth to continue';
+      errorLink.innerText = 'Enter a date of birth';
     } else if (day === '' && month === '' && year !== '') {
-      errorLink.innerText = 'Enter a day and month to continue';
+      errorLink.innerText = 'Enter a day and month';
     } else if (day !== '' && month === '' && year === '') {
-      errorLink.innerText = 'Enter a month and year to continue';
+      errorLink.innerText = 'Enter a month and year';
     } else if (day === '' && month !== '' && year === '') {
-      errorLink.innerText = 'Enter a day and year to continue';
+      errorLink.innerText = 'Enter a day and year';
     }
 
     errorMessage.innerHTML = '<strong>' + errorLink.innerText + '</strong>';
@@ -202,8 +202,8 @@ noONSLogoLink: true
     if(storageAPI.getProxyFor(personId) || isVisitor) {
       $('.js-heading').html('What is ' + '<em class="highlight">' + person.firstLastName +
         window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' + ' date of birth?');
-      $('.js-error').html('Enter their date of birth to continue');
-      $('#personal-detail-dob-day').attr('data-error-msg', 'Enter their date of birth to continue');
+      $('.js-error').html('Enter their date of birth');
+      $('#personal-detail-dob-day').attr('data-error-msg', 'Enter their date of birth');
     }
   }
   

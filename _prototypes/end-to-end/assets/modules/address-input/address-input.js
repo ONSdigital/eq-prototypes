@@ -325,7 +325,7 @@ class AddressInput {
       window.DONT_SUBMIT = true;
 
       this.typeahead.showErrorPanel();
-      this.typeahead.setAriaStatus('There is an error. Select an address to continue');
+      this.typeahead.setAriaStatus('There is an error. Select an address');
     } else {
       window.DONT_SUBMIT = false;
     }
