@@ -12,7 +12,7 @@ logoUrl: ../home
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous-link mars" href="../do-you-live-here">Previous</a>
+        <a class="back-link js-previous-link mars" href="../do-you-live-here">Previous</a>
     </div>
 </div>
 
@@ -110,7 +110,7 @@ logoUrl: ../home
 
 <script>
     var searchParams = new URLSearchParams(window.location.search);
-    var currentJourney = document.querySelector('.js-previous-link');
+    var currentJourney = document.querySelector('.back-link js-previous-link');
     var phoneInput = document.getElementById('phone');
     var postInput = document.getElementById('post');    
     var previousPage = searchParams.get('previous');

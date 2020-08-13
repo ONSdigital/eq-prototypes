@@ -12,7 +12,7 @@ exit: true
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous-link" href="../confirm-address/?previous=test-address">Previous</a>
+        <a class="back-link js-previous-link" href="../confirm-address/?previous=test-address">Previous</a>
     </div>
 </div>
 
@@ -110,6 +110,7 @@ exit: true
       </main>
     </div>
   </div>
+  <p class="u-mt-l">If you have no fixed address, <a href="/contact-us">contact us to request an access code</a></p>
 </div>
 
 <script src='/js/compiled/end-to-end/bundle.js'></script>
@@ -197,20 +198,20 @@ exit: true
       $('.js-question-description').hide();
     }
 
-      if (previousPage) {
-        $('.js-previous-link').attr('href', '../' + previousPage);
-      } else {
-        $('.js-previous-link').attr('href', '../uac-entry');
-      }
+    if (previousPage) {
+      $('.js-previous-link').attr('href', '../' + previousPage);
+    } else {
+      $('.js-previous-link').attr('href', '../uac-entry');
+    }
 
-      if (fulfilmentJourney){
-        $('.exit').hide();
-      } else {
-        $('.exit').click(function(e) {
-          e.preventDefault();
-          window.location = '../uac-entry/?previous=' + currentPage + '&currentJourney=' + currentJourney;
-        });
-      }
+    if (fulfilmentJourney){
+      $('.exit').hide();
+    } else {
+      $('.exit').click(function(e) {
+        e.preventDefault();
+        window.location = '../uac-entry/?previous=' + currentPage + '&currentJourney=' + currentJourney;
+      });
+    }
   }
 
   document.dispatchEvent(new CustomEvent('TYPEAHEAD-READY'));

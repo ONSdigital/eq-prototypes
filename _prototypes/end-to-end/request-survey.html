@@ -11,7 +11,7 @@ noONSLogoLink: true
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="js-previous-link" href="../uac-question">Previous</a>
+        <a class="back-link js-previous-link" href="../uac-question">Previous</a>
     </div>
 </div>
 
@@ -48,7 +48,7 @@ noONSLogoLink: true
     var cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people') || '[]');
     var searchParams = new URLSearchParams(window.location.search);
     var personId = searchParams.get('person_id');
-    var currentJourney = document.querySelector('.js-previous-link');
+    var currentJourney = document.querySelector('.back-link js-previous-link');
     var input = document.getElementById('phone');
 
     if (!personId) {
