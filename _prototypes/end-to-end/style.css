@@ -441,7 +441,7 @@ p.field + p.field {
 
 .input--error.input--text:not(:focus),
 .input--error.input--textarea:not(:focus),
-.input:not(:focus) {
+.panel--error .input--text:not(:focus) {
     border: 1px solid #d0021b!important;
     outline: 1px solid #d0021b;
     outline-offset: -2px;
