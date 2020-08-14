@@ -705,6 +705,10 @@ p.label--negative:empty {
 /**
  * Navigation
 **/
+.back-link:before {
+    margin-right: .35rem!important;
+}
+
 .breadcrumb {
     display: flex;
     align-items: center;
@@ -764,7 +768,7 @@ p.label--negative:empty {
 
     .breadcrumb__item:not(:last-child):after {
         display: inline-block;
-        width: 0.65rem;
+        width: 1.25rem;
         height: 0.65rem;
         background-image: url(/img/icons/icons--chevron-right-black.svg);
         background-repeat: no-repeat;

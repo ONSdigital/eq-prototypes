@@ -419,8 +419,9 @@ details summary:focus {
     margin: 0 .5rem 0 0;
 }
 
-.question {
-    margin-bottom: 0;
+.question,
+.answer {
+    margin-bottom: 0!important;
 }
 
 p.field {
