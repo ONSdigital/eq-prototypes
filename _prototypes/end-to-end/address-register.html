@@ -5,8 +5,8 @@ globalcss: false
 layout: eq-default-extras
 footer: census-transactional
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
-hideSaveLater: true
-logoUrl: ../home
+noONSLogoLink: true
+exit: true
 ---
 
 <link rel="stylesheet" href="../style.css"/>
@@ -52,9 +52,20 @@ logoUrl: ../home
     currentJourney = urlParams.get('current-journey'),
     pathArray = window.location.pathname.split('/'),
     currentPage = pathArray.slice(-2)[0];
+    var fulfilmentJourney = (currentJourney === 'new-hh-uac' || currentJourney === 'new-ir-uac' || currentJourney === 'new-hh-paper');
 
     function updateAllLinks() {
         $('.js-previous-link').attr('href', '../' + previousPage + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney);
+        
+        if (fulfilmentJourney){
+            $('.exit').hide();
+        } else {
+            $('.exit').click(function(e) {
+                e.preventDefault();
+                window.location = '../uac-entry/?previous=' + currentPage + '&currentJourney=' + currentJourney;
+            });
+        }
+    
     }
 
     $(updateAllLinks);
