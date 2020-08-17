@@ -37,7 +37,7 @@ logoUrl: ../home
                             <p class="u-mb-m"><a id="js-change-name" href="">Change name</a><span id="change-unit-name-container" class="u-d-no"> | <a id="js-change-unit-name-link" href="">Change flat or room number</a></span></p>
                             <div class="panel panel--simple panel--info u-mb-m js-panel u-d-no">
                                 <div class="panel__body">
-                                    A letter with your individual access code will arrive in a plain white envelope
+                                    A letter with your individual access code will arrive in a brown unbranded envelope
                                 </div>
                             </div>
                             <div class="field field--radio field--multiplechoice">
@@ -111,13 +111,13 @@ logoUrl: ../home
         $('.no-answer').html('No, cancel and return');
     } else if(currentJourney === 'new-ce-manager-uac') {
         var codeType = 'a new manager access code';
-        var codeTypeShort = ' access code';       
+        var codeTypeShort = ' access code';
     } else if(currentJourney === 'new-ir-paper') {
         var codeType = 'a paper questionnaire';
         var codeTypeShort = ' questionnaire';
         $('.large-print').removeClass('u-d-no');
         $('.no-answer').html('No, cancel and return');
-        $('.js-panel').removeClass('u-d-no').html('Your individual paper questionnaire will arrive in a plain white envelope');
+        $('.js-panel').removeClass('u-d-no').html('Your individual paper questionnaire will arrive in a brown unbranded envelope');
     } else {
         var codeType = 'a new household access code';
         var codeTypeShort = 'access code';
@@ -129,13 +129,13 @@ logoUrl: ../home
         if (addressType === 'CE') {
             $('#change-unit-name-container').removeClass('u-d-no');
             if (!roomNumber){
-                $('.js-name-address').html('<strong>' + addresseeName + '</strong>' + '<br>' + addressLine1);
+                $('.js-name-address').html(addresseeName + '<br>' + addressLine1);
                 $('#js-change-unit-name-link').html('Add flat or room number');
             } else {
-                $('.js-name-address').html('<strong>' + addresseeName + '</strong>' + ', ' + roomNumber + '<br>' + addressLine1);
+                $('.js-name-address').html(addresseeName + ', ' + roomNumber + '<br>' + addressLine1);
             }
         } else {
-            $('.js-name-address').html('<strong>' + addresseeName + '</strong>' + '<br>' + addressLine1);
+            $('.js-name-address').html(addresseeName + '<br>' + addressLine1);
         }
     }
 
