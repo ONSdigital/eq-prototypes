@@ -693,15 +693,13 @@ p.label--negative:empty {
 
 .btn--link.btn--ghost-blue .btn__inner:after, 
 .btn--link.btn--ghost-blue:active .btn__inner:after, 
-.btn--link.btn--ghost-blue:hover:focus .btn__inner:after {
-    background-image: url(/img/icons/icons--chevron-right-blue.svg);
-}
-
+.btn--link.btn--ghost-blue:hover:focus .btn__inner:after,
 .exit.btn--ghost-blue .btn__inner:after, 
 .exit.btn--ghost-blue:active .btn__inner:after, 
 .exit.btn--ghost-blue:hover:focus .btn__inner:after {
     background-image: url(/img/icons/icons--exit-blue.svg);
 }
+
 /**
  * Navigation
 **/
