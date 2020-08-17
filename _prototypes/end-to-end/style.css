@@ -734,7 +734,7 @@ p.label--negative:empty {
     display: inline-block;
     width: 0.65rem;
     height: 0.65rem;
-    background-image: url(/img/icons/icons--chevron-right-black.svg);
+    background-image: url(/img/icons/icons--chevron-right.svg);
     background-repeat: no-repeat;
     size: 0.65rem 0.65rem;
     content: "";
@@ -747,7 +747,7 @@ p.label--negative:empty {
     display: inline-block;
     width: 0.65rem;
     height: 0.65rem;
-    background-image: url(/img/icons/icons--chevron-right-black.svg);
+    background-image: url(/img/icons/icons--chevron-right.svg);
     background-repeat: no-repeat;
     background-position: center center;
     size: 0.65rem 0.65rem;
@@ -770,12 +770,12 @@ p.label--negative:empty {
         display: inline-block;
         width: 1.25rem;
         height: 0.65rem;
-        background-image: url(/img/icons/icons--chevron-right-black.svg);
+        background-image: url(/img/icons/icons--chevron-right.svg);
         background-repeat: no-repeat;
         size: 0.65rem 0.65rem;
         content: "";
         margin: 0;
-        background-position: center center;
+        background-position: center 30%;
         vertical-align: middle;
     }
 }
