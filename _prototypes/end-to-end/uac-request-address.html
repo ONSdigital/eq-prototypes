@@ -206,6 +206,7 @@ exit: true
 
     if (fulfilmentJourney){
       $('.exit').hide();
+      $('.header__title').add('.header__title-logo').wrapAll('<a class="header__title-link" href="../home"></a>');
     } else {
       $('.exit').click(function(e) {
         e.preventDefault();
