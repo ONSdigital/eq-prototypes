@@ -488,6 +488,8 @@ noONSLogoLink: true
 
     if (householdMembers.length < 2 && userMember) {
       $('#individual-response-details').addClass('u-vh');
+    } else if (householdMembers.length == 0 && !userMember) {
+      $('#individual-response-details').addClass('u-vh');
     }
   }
 console.log(storageAPI.getAllHouseholdMembers().filter(window.ONS.storage.isOtherHouseholdMember));
