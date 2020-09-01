@@ -1,0 +1,224 @@
+---
+title: COVID-19 test (round 2 - pandemic situation) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+logoUrl: ../home
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../section-intro">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m"></div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <div class="feedback__inline js-feedback-inline is-collapsed">
+                    <div class="feedback__border">
+                    </div>
+                </div>
+                <div class="panel panel--error u-mb-m js-error-box u-d-no"><div class="panel__header">
+                    <div class="panel__title u-fs-r--b">There 
+                            <span class="js-piping">is a {x} problem{s}</span> with your answer
+                        </div></div>
+                    <div class="panel__body">
+                        
+                        <ol class="list list--bare">
+                        <li class="list__item js-first-name u-d-no">
+                            1. <a href="#error-message-first-name" class="list__link js-inpagelink">
+                                Enter a first name to continue
+                            </a>
+                        </li>
+                        <li class="list__item js-last-name u-d-no">
+                            <span class="js-piping">2</span>. <a href="#error-message-last-name" class="list__link js-inpagelink">
+                                Enter a last name to continue
+                            </a>
+                        </li>
+                       </ol>
+                    </div>
+                </div>                
+                <div class="group">
+                    <div class="block">
+
+                        <div class="question">
+                            <h1 class="question__title u-fs-xl js-heading"
+                                data-qa="question-title">
+                                What is your name?
+                            </h1>
+
+                            <fieldset
+                                    class="question__fieldset js-question-fieldset">
+                                <legend class="u-vh">What is your name?</legend>
+
+                            <div class="question__answers">
+                                <div class="question__answer">
+                                  <p class="field">
+                                    <label class="label"
+                                           for="first-name">
+                                        <span class="label__inner">
+                                            First name
+                                        </span>
+                                    </label>
+                                    <input required autocomplete="new-password" required data-error-msg="Enter a first name to continue" class="input input--text"
+                                           id="first-name"
+                                           data-qa="input-text" value="" data-error-msg="Enter a first name to continue"/>
+                                  </p>
+                                </div>
+
+                                <div class="question__answer">
+                                  <p class="field">
+                                    <label class="label" for="last-name">
+                                        <span class="label__inner">
+                                            Last name
+                                        </span>
+                                    </label>
+                                    <input required autocomplete="new-password" required data-error-msg="Enter a last name to continue" class="input input--text"
+                                           id="last-name"
+                                           data-qa="input-text" value="" data-error-msg="Enter a last name to continue"/>
+                                  </p>
+                                </div>
+                            </div>
+                          </fieldset>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-submit btn--primary btn--lg u-mt-xl"
+                        data-qa="btn-submit" type="submit"
+                        name="action[save_continue]">
+                  Continue
+                </button>
+            </main>
+        </div>
+    </div>
+</div>
+
+
+<script src='/js/compiled/end-to-end-covid-rd-2/bundle.js'></script>
+
+<script>
+  var urlParams = new URLSearchParams(window.location.search),
+    isEditing = urlParams.get('edit') === 'true',
+    redirect = urlParams.get('redirect'),
+    livesHere = sessionStorage.getItem('lives-here') === 'yes',
+    storageAPI = window.ONS.storage,
+    userAsMember = storageAPI.getUserAsHouseholdMember(),
+    userPerson = userAsMember && userAsMember['@person'],
+    hasErrors = false;
+    var urlParams = new URLSearchParams(window.location.search);
+    var previousPage = urlParams.get('previous');
+    var currentPage = 'uac-request-enter-name';
+    var currentJourney = urlParams.get('current-journey');
+    var householdNumber = urlParams.get('hh-members');
+
+  function removeMember_handler(member, e) {
+    e.preventDefault();
+    var modal = $('#modal'),
+      original = modal.find('.remove-member-button'),
+      newNode = original.clone();
+
+    newNode.on('click', confirmRemoveMember_handler.bind(null, member));
+    original.replaceWith(newNode);
+
+    modal.find('.js-person-name').html(member['@person'].fullName);
+
+    modal.show();
+  }
+
+  function confirmRemoveMember_handler(member) {
+    sessionStorage.setItem('lives-here', 'no');
+    storageAPI.deleteUserAsHouseholdMember();
+    storageAPI.deleteAllRelationshipsForMember(member['@person'].id);
+
+    window.location.href = redirect || '../summary/';
+  }
+
+  $('#modal .close-modal-button').on('click', function(e) {
+    e.preventDefault();
+    $('#modal').hide();
+  });
+
+  $('.js-remove-person').on('click', removeMember_handler.bind(null, userAsMember));
+
+  function updateQuestion() {
+    if(isEditing && userPerson) {
+      $('.js-heading').html('Change details for ' + userPerson.fullName + ' (You)');
+      $('.js-remove-section').show();
+    }
+  }
+      
+  $('.btn-submit').on('click', function(e) {
+    e.preventDefault();
+    const testFails = '';
+    window.ONS.utils.validateInputs(testFails, "input[id='first-name']");
+    window.ONS.utils.validateInputs(testFails, "input[id='last-name']");
+    if (hasErrors) {
+      window.ONS.utils.calcErrors();
+      hasErrors = false;
+      return false;
+    } else {
+      sessionStorage.setItem('addressee-name', getName());
+
+      var newPersonObj = storageAPI.TYPES.person({
+        firstName: document.getElementById('first-name').value.trim(),
+        lastName: document.getElementById('last-name').value.trim()
+      });
+
+      storageAPI.addUserPerson(newPersonObj);
+
+      if(isEditing || livesHere) {
+        storageAPI.updateUserAsHouseholdMember(
+          newPersonObj,
+          isEditing
+            ? userAsMember
+            : {
+              type: window.ONS.storage.KEYS.HOUSEHOLD_MEMBER_TYPE
+            }
+        );
+      }
+      else {
+        storageAPI.deleteUserAsHouseholdMember();
+      }
+
+      if(currentJourney === 'new-hh-paper' || currentJourney === 'new-ir-paper') {
+        window.location.href = '../uac-request-confirm-address/?' + 'hh-members=' + householdNumber + '&previous=' + currentPage + '&current-journey=' + currentJourney;
+      } else {
+        window.location.href = '../uac-request-confirm-address/?previous=' + currentPage + '&current-journey=' + currentJourney;
+      }
+    }
+  });
+
+  function getName() {
+    return [
+      document.getElementById('first-name').value,
+      document.getElementById('last-name').value
+    ].filter(function(name) {
+      return name
+    }).join(' ');
+  }
+
+  $(function() {
+    var userPerson = storageAPI.getUserPerson();
+
+    if (userPerson) {
+      $('#first-name').val(userPerson.firstName);
+      $('#last-name').val(userPerson.lastName);
+    }
+  });
+
+  $(updateQuestion);
+
+  function updateAllLinks() {
+    $('.js-previous-link').attr('href', '../' + previousPage + '?previous=' + currentPage + '&current-journey=' + currentJourney);
+  }
+
+  $(updateAllLinks);
+</script>

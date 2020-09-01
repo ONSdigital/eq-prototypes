@@ -1,0 +1,187 @@
+---
+title: COVID-19 test (round 3 - usual situation) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+<style>
+
+.covid {
+    display: block;
+    border-left: 8px solid black;
+    background-color: #fdfdbc;
+    padding: 1rem;
+}
+</style>
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../individual-details-relationship">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password"
+                      action="../individual-details-country">
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
+                           value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-xl js-heading">
+                                        Do you stay at another address for more than 30 days a year?
+                                    </h1>
+                                </div>
+                                <p>This should be a single address and could be more than 30 days in a row or divided across the year.
+                                </p>
+                                <p class="js-piping">If the coronavirus pandemic has changed where you usually stay, select the answer that best describes your usual circumstances.
+                                </p>
+                                <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple u-mb-m">
+                                    <div class="js-collapsible-content">
+                                        <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="What we mean by &ldquo;another address&rdquo;">
+                                        What we mean by &ldquo;another address&rdquo;</h3>
+                                        <div class="collapsible__body js-collapsible-body">
+                                            <p>This is a single address that is different to the one at the start of this questionnaire. This might be another parent or guardian’s address, a term-time address, a partner's address or a holiday home.
+                                            </p>
+                                            <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="What we mean by &ldquo;physical and mental health conditions or illnesses&rdquo;">Hide this</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="answer">
+                                    <div class="answer__fields js-fields">
+                                        <div class="field field--radio field--multiplechoice ">
+                                            <fieldset class="u-mb-xl">
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="30-day-address"
+                                                           id="no"
+                                                           value="No">
+                                                    <label class="label label--inline"
+                                                           for="no"
+                                                           id="no-label">
+                                                        No
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="30-day-address"
+                                                           id="yes-uk"
+                                                           value="Yes, in the UK">
+                                                    <label class="label label--inline"
+                                                           for="yes-uk"
+                                                           id="yes-uk-label">
+                                                        Yes, an address within the UK
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="30-day-address"
+                                                           id="yes-outside"
+                                                           value="Yes, outside the UK">
+                                                    <label class="label label--inline"
+                                                           for="yes-outside"
+                                                           id="yes-outside-label">
+                                                        Yes, an address outside the UK
+                                                    </label>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+
+                    <p><a href="../hub" class="js-choose-another-section">Choose another section and
+                        return to this question later</a></p>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end-covid-rd-3/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person_id'),
+    member = storageAPI.getHouseholdMemberByPersonId(personId),
+    person = member['@person'],
+    isEditing = urlParams.get('edit'),
+    isVisitor = storageAPI.isVisitor(member),
+    details = storageAPI.getPersonalDetailsFor(personId),
+    surveyType = urlParams.get('survey');
+    storageAPI.personalBookmark(personId, window.location.href);
+    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
+
+  $('.qa-btn-submit').on('click', function (e) {
+    e.preventDefault();
+
+    if(isEditing) {
+        window.location.href = '../individual-details-summary/?person_id=' +
+            personId + (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end-covid-rd-3/individual-details-summary/', window.location.pathname);
+    }
+    
+    var val = $('[name="30-day-address"]:checked').val();
+    if(val === 'No' || val == null) {
+      if (details['age'] < 4) {
+        window.location.href = '../individual-details-country/?person_id=' + personId;
+        storageAPI.storePageData('/end-to-end-covid-rd-3/individual-details-country/', window.location.pathname);
+
+      } else {
+        window.location.href = '../individual-details-school/?person_id=' + personId;
+        storageAPI.storePageData('/end-to-end-covid-rd-3/individual-details-school/', window.location.pathname);
+      }
+    } else if (val === 'Yes, in the UK'){
+        window.location.href = '../individual-details-30-day-address-in-uk/?person_id=' + personId;
+        storageAPI.storePageData('/end-to-end-covid-rd-3/individual-details-30-day-address-in-uk/', window.location.pathname);
+    } else if (val === 'Yes, outside the UK'){
+        window.location.href = '../individual-details-30-day-address-country/?person_id=' + personId;
+        storageAPI.storePageData('/end-to-end-covid-rd-3/individual-details-30-day-address-country/', window.location.pathname);
+    }
+  });
+
+  function updateQuestion() {
+    if(storageAPI.getProxyFor(personId)) {
+        $('.js-heading').html('Does ' + '<em class="highlight">' + person.firstLastName + '</em>' +
+        ' stay at another address for more than 30 days a year?');
+    }
+
+    if (storageAPI.getProxyFor(personId)) {
+        pipingDestinations.forEach(function(pipingDestination) {
+            pipingDestination.innerHTML = pipingDestination.innerHTML.replace('your', 'their');
+            pipingDestination.innerHTML = pipingDestination.innerHTML.replace('Your', 'Their');
+            pipingDestination.innerHTML = pipingDestination.innerHTML.replace('yours', 'theirs');
+            pipingDestination.innerHTML = pipingDestination.innerHTML.replace('you', 'they');
+            pipingDestination.innerHTML = pipingDestination.innerHTML.replace('You', 'They');
+        });
+    }
+  }
+  $(updateQuestion);
+
+  /**
+   * Routing
+   */
+  $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
+</script>

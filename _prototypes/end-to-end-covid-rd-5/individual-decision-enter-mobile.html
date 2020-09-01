@@ -1,0 +1,129 @@
+---
+title: COVID-19 test (round 5 - pandemic situation revised) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+
+<link rel="stylesheet" href="../../end-to-end/style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            <!--{% include navigation.html
+            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
+            nav-title-id="section-individual" %}-->
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password"
+                      action="../hub">
+                    <div class="group u-mb-l">
+                        <section class="section">
+                            <div class="question u-mb-s">
+                                <h1 id="question-title"
+                                    class="question__title u-fs-xl js-piping">
+                                    What is <em class="highlight">{x}{s}</em> mobile number?
+                                </h1>
+                            </div>
+
+                            <div class="field">
+                                <label class="label" for="mobile-number">
+                                        UK mobile number
+                                        <br>
+                                        <span class="label__description u-fs-s">This will not be stored and only used once to send the access code</span>
+                                </label>
+                                <input autocomplete="new-password" class="input input--text js-mobile-number" type="tel"
+                                       type="tel"
+                                       id="mobile-number"
+                                       value="" />
+                            </div>
+                        </section>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Continue
+                    </button>
+
+                    <!--
+                        <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>-->
+
+                    <!--<p class="u-mb-m"><span class="js-link-secure-label"></span><br />
+                        <a class="js-link-secure"
+                           href="#">Get a separate access code to submit an
+                            individual response</a></p>-->
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<div style="display:none;">
+    <div id="member-checkbox-select-template" class="field__item">
+        <input autocomplete="new-password" class="input input--checkbox js-person-control"
+               name="checkbox-answer" type="checkbox">
+        <label class="label label--inline u-fs-r js-person-name"></label>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end-covid-rd-5/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person_id'),
+    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'];
+
+    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
+    var possessive = person.fullName.slice(-1) === 's' ? "'" : "'s";
+
+    pipingDestinations.forEach(function(pipingDestination) {
+        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', person.fullName).replace('{s}', possessive);
+    });
+
+    var cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people', '') || '[]');
+    var cannotAnswerPerson = cannotAnswerPeople.find(function(p) {
+        return p.id === person.id;
+    });    
+    var cannotAnswerTel = cannotAnswerPerson.phoneNumber ? cannotAnswerPerson.phoneNumber : null;
+    if (cannotAnswerTel) {
+        var telInput = document.querySelector('.js-mobile-number');
+        telInput.value = cannotAnswerTel;
+    }
+    
+  $('.qa-btn-submit').on('click', function (e) {
+    e.preventDefault();
+
+    window.location.href = '../individual-decision-enter-mobile-correct/?person_id=' + personId + '&mobile=' + encodeURI($('#mobile-number').val());
+  });
+
+  /*function updateRouting() {
+    if(surveyType) {
+      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    }
+    $('#survey-type').val(surveyType);
+  }*/
+
+
+  //$(updateRouting);
+
+  /**
+   * Routing
+   */
+  $('#person').val(urlParams.get('person_id'));
+
+
+    function updateAllLinks() {
+        $('.js-previous-link').attr('href', '../individual-decision-method/?person_id=' + personId);
+    }
+
+    $(updateAllLinks);
+</script>

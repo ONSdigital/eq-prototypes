@@ -1,0 +1,143 @@
+---
+title: COVID-19 test (round 2 - pandemic situation) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password">
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
+                           value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group u-mb-l">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-xl js-heading">
+                                        Briefly describe what you do in your main job
+                                    </h1>
+                                </div>
+
+                                <div class="answer">
+                                    <div class="answer__fields js-fields">
+                                        <label class="label"
+                                               for="text-input"
+                                               id="label-lim">Job description
+                                        </label>
+
+                                        <textarea id="text-input"
+                                                  class="input input--textarea js-charlimit-input" cols="60"
+                                                  rows="3" id="textarea-answer-lim" name="textarea-answer-lim"
+                                                  maxlength="120"
+                                                  aria-describedby="description-question"
+                                                  data-maxlength="120"
+                                                  data-char-limit-ref="textarea-answer-lim-remaining"
+                                        ></textarea>
+                                        <div class="input__limit u-mt-xs u-fs-s--b" data-qa="textarea-with-limit" id="textarea-answer-lim-remaining" aria-live="polite"
+                                             data-charcount-singular="You have {x} character remaining"
+                                             data-charcount-plural="You have {x} characters remaining">
+                                            You have 120 characters remaining</div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+                        <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end-covid-rd-2/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    switchedFromUnemployed = urlParams.get(switchedFromUnemployed),
+    personId = urlParams.get('person_id'),
+    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+    isEditing = urlParams.get('edit'),
+    details = storageAPI.getPersonalDetailsFor(personId),
+    surveyType = urlParams.get('survey'),
+    question = $('#question-title').html();
+
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+    e.preventDefault();
+
+    var url = '';
+    let urlEdit = '../individual-details-employment-job-description' + '?person_id=' + personId + '&edit=true';
+    question = question.trim();
+    storageAPI.addUpdateEmploymentJobDescription(personId, $('#text-input').val(), question, urlEdit);
+
+    if(isEditing || switchedFromUnemployed) {
+      url += '../individual-details-summary/?person_id=';
+      storageAPI.storePageData('/end-to-end-covid-rd-2/individual-details-summary/', window.location.pathname);
+
+    }
+    else {
+      url += '../individual-details-employment-activity/?person_id=';
+      storageAPI.storePageData('/end-to-end-covid-rd-2/individual-details-employment-activity/', window.location.pathname);
+
+    }
+    url += personId + (surveyType ? ('&survey=' + surveyType) : '');
+    window.location.href = url;
+  }));
+
+  function updateRouting() {
+    if(surveyType) {
+      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    }
+    $('#survey-type').val(surveyType);
+  }
+
+  function updateQuestion() {
+    if(storageAPI.getProxyFor(personId)) {
+      $('.js-heading').html('Briefly describe what ' + '<em class="highlight">' + person.firstLastName + '</em>' +
+        ' does in their main job');
+    }
+    if(details['employment'].sevenDaysAgo[0]=== 'No' && storageAPI.getProxyFor(personId)) {
+      var replaceQuestion = $('.js-heading').html().replace('Does', 'Did');
+      $('.js-heading').html(replaceQuestion);
+    } else if(details['employment'].sevenDaysAgo[0]=== 'No' && !storageAPI.getProxyFor(personId)) {
+      var replaceQuestion = $('.js-heading').html().replace('Do', 'Did');
+      $('.js-heading').html(replaceQuestion);
+    }
+  }
+
+  if (details && details['employment'] &&
+    details['employment'].jobDescription) {
+    $('#text-input').val(details['employment'].jobDescription);
+  }
+
+  $(updateQuestion);
+  $(updateRouting);
+
+  /**
+   * Routing
+   */
+  $('#person').val(urlParams.get('person_id'));
+</script>

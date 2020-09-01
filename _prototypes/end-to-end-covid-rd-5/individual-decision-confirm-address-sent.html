@@ -1,0 +1,87 @@
+---
+title: COVID-19 test (round 5 - pandemic situation revised) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+
+<link rel="stylesheet" href="../../end-to-end/style.css"/>
+<div class="page__subheader">
+
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            <!--{% include navigation.html
+            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
+            nav-title-id="section-individual" %}-->
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password"
+                      action="../hub">
+                    <div class="group u-mb-l">
+                        <section class="section">
+                            <div class="question u-mb-s">
+                                <div class="panel panel--simple panel--success u-mb-m">
+                                    <div class="panel__body">
+                                        <h1 id="question-title" class="question__title u-mb-xs u-fs-l js-piping">
+                                            A letter has been sent to {x}
+                                        </h1>
+                                        <p>The letter with an individual access code should
+                                            arrive soon for them to complete their own census.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Continue
+                    </button>
+
+                    <!--
+                        <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>-->
+
+                    <!--<p class="u-mb-m"><span class="js-link-secure-label"></span><br />
+                        <a class="js-link-secure"
+                           href="#">Get a separate access code to submit an
+                            individual response</a></p>-->
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<div style="display:none;">
+    <div id="member-checkbox-select-template" class="field__item">
+        <input autocomplete="new-password" class="input input--checkbox js-person-control"
+               name="checkbox-answer" type="checkbox">
+        <label class="label label--inline u-fs-r js-person-name"></label>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end-covid-rd-5/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person_id'),
+    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+    pipedAddress = storageAPI.getPipedAddress();
+
+    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
+
+    pipingDestinations.forEach(function(pipingDestination) {
+        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', 'Individual Respondent' + ' at ' + pipedAddress);
+    });
+
+  /**
+   * Routing
+   */
+  $('#person').val(urlParams.get('person_id'));
+</script>

@@ -1,0 +1,224 @@
+---
+title: COVID-19 test (round 2 - pandemic situation) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<link rel="stylesheet" href="../assets/modules/typeahead/typeahead.css"/>
+
+<style>
+    .input--text-lg {
+        width : 100%;
+    }
+
+    .input--text-postcode {
+        max-width : 9.25rem;
+    }
+</style>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../individual-details-30-day-address">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m"></div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <div class="panel panel--error u-mb-m js-error-box u-d-no"><div class="panel__header">
+                    <div class="panel__title u-fs-r--b">There 
+                            <span class="js-piping">is a problem</span> with your answer
+                        </div></div>
+                    <div class="panel__body">
+                        <ol class="list list--bare">
+                          <li class="list__item js-address-field u-d-no">
+                              1. <a href="#error-message-address-field" class="list__link js-inpagelink js-error">Enter an address to continue</a>
+                          </li>
+                          <li class="list__item js-address-line-1 js-address-line-2 js-address-town js-address-postcode u-d-no">
+                              1. <a href="#error-message-address-line-1" class="list__link js-inpagelink js-error">Enter an address to continue</a>
+                          </li>
+                       </ol>
+                    </div>
+                </div>
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password"
+                      action="../individual-details-30-day-address-type">
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person" value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type" value="#"/>
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-xl js-heading">
+                                       What is the other UK address where you stay for more than 30 days a year?
+                                    </h1>
+                                </div>
+
+                                <div class="question__answer">
+                                  <fieldset class="question__fieldset js-question-fieldset">
+                                      <legend class="u-vh">What is the first line of your address?</legend>
+                                    <div id="address" class="field address-input js-address u-mt-s address-input--search">
+                                      <div class="address-input__manual">
+                                        <div class="fieldgroup">
+                                          <p class="field">
+                                            <label class="label" for="address-line-1">Address line 1</label>
+                                            <input type="text" id="address-line-1" data-error-msg="Enter an address to continue" class="input input--text input-type__input  input--w-20@m js-address-line-1" name="address-line-1" />
+                                          </p>
+                                          <p class="field">
+                                            <label class="label" for="address-line-2">Address line 2</label>
+                                            <input type="text" id="address-line-2" class="input input--text input-type__input  input--w-20@m js-address-line-2" name="address-line-2" />
+                                          </p>
+                                          <p class="field">
+                                            <label class="label" for="address-town">Town or city</label>
+                                            <input type="text" id="address-town" class="input input--text input-type__input  js-address-town" name="address-town" />
+                                          </p>
+                                          <p class="field">
+                                            <label class="label" for="address-postcode">Postcode</label>
+                                            <input type="text" id="address-postcode" class="input input--text input-type__input  input--w-5 js-address-postcode" name="address-postcode" />
+                                          </p>
+                                          <div class="u-d-no u-mt-m js-address-search-btn-container">
+                                            <a href="#" class="btn--link js-address-search-btn">Search for an address</a>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                      <div class="address-input__search">
+                                        <p class="field">
+                                          <label class="label" for="address-field">Enter address or postcode and select from results</label>
+                                          <div id="address-typeahead-container" class="typeahead-input js-address-typeahead " data-content="{&quot;no_results&quot;:&quot;No results found. Try entering a different part of the address&quot;,&quot;aria_no_results&quot;:&quot;No addresses found for the query&quot;,&quot;aria_you_have_selected&quot;:&quot;You have selected&quot;,&quot;aria_found_by_alternative_name&quot;:&quot;found by alternative name&quot;,&quot;aria_min_chars&quot;:&quot;Type in 5 or more characters for addresses.&quot;,&quot;aria_one_result&quot;:&quot;There is one address available.&quot;,&quot;aria_n_results&quot;:&quot;There are {n} addresses available.&quot;,&quot;aria_limited_results&quot;:&quot;Results have been limited to 10 addresses. Type more characters to refine your search.&quot;,&quot;more_results&quot;:&quot;Continue entering to improve results&quot;,&quot;results_title&quot;:&quot;Select an address&quot;}" typeahead-data="">
+                                            <input name="x3" required type="text" id="address-field" class="input input--text input-type__input address-input__typeahead js-typeahead-input input--w-50" data-error-msg="Enter an address to continue" maxlength="100"/>
+                                            <div class="typeahead-input__results js-typeahead-results">
+                                              <header class="typeahead-input__results-title u-fs-s">Select an address</header>
+                                              <ul class="typeahead-input__listbox js-typeahead-listbox" role="listbox" id="address-typeahead-listbox" tabindex="-1"></ul>
+                                            </div>
+                                            <div class="typeahead-input__instructions u-vh js-typeahead-instructions" id="address-typeahead-instructions" tabindex="-1">Use up and down keys to navigate addresses once you&#39;ve typed more than two characters. Use the enter key to select a address. Touch device users, explore by touch or with swipe gestures.</div>
+                                            <div class="typeahead-input__status u-vh js-typeahead-aria-status" aria-live="polite" role="status" tabindex="-1"></div>
+                                          </div>
+                                        </p>
+                                        <a href="#" class="btn--link js-address-manual-btn">Manually enter address</a></div>
+                                    </div>
+                                  </fieldset>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn-submit btn--primary btn--lg qa-btn-submit venus u-mb-xl u-mt-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+                    <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end-covid-rd-2/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person_id'),
+    member = storageAPI.getHouseholdMemberByPersonId(personId),
+    person = member['@person'],
+    isEditing = urlParams.get('edit'),
+    details = storageAPI.getPersonalDetailsFor(personId);
+    storageAPI.personalBookmark(personId, window.location.href),
+    question = $('#question-title').html(),
+    hasErrors = false;
+  
+  $('.js-address-search-btn').on('click', function (e) {
+    window.location.href = '../individual-details-30-day-address-in-uk/?person_id=' + personId;
+  });
+
+  $('.qa-btn-submit').on('click', function (e) {
+    e.preventDefault();
+    if ($('.address-input--search').length != 0) {
+      if ($("#address-field").val() == '' || $("#address-field").val() != '' ){
+        var testFails = true;
+      }
+      $('.address-input__manual input').prop('type', 'readonly');
+      window.ONS.utils.validateInputs(testFails, "input[id='address-field']");
+    } else if ($('.address-input--search').length === 0) {
+      var testFails = '';
+      $('.address-input__manual input').prop('type', 'text');
+      window.ONS.utils.validateInputs(testFails, "input[id='address-line-1']");
+      window.ONS.utils.validateInputs(testFails, "input[id='address-town']");
+      window.ONS.utils.validateInputs(testFails, "input[id='address-postcode']");
+    }
+
+    if (hasErrors) {
+        hasErrors = false;
+        if (!$('#address').hasClass('address-input--search')) {
+            document.querySelector('.address-input__manual').insertBefore(document.querySelector('#address-line-1').parentNode, document.querySelector('#address-line-2').parentNode);
+            document.querySelector('.panel--simple').appendChild(document.querySelector('.question__fieldset'));
+        }
+        return false;
+    } else {
+        let url = '../individual-details-30-day-address-in-uk/?person_id=' + personId + '&edit=true';
+        question = question.trim();
+        if (!$('#address').hasClass('address-input--search')) {
+          storageAPI.addUpdate30DayAddressUk(personId, get30DayAddress(), question, url);
+        }
+        if(isEditing) {
+          window.location.href = '../individual-details-summary/?person_id=' + personId;
+        } else {
+            window.location.href = '../individual-details-30-day-address-type/?person_id=' +
+            personId;
+        }
+    }
+  });
+
+  function get30DayAddress() {
+    var array = [
+      document.getElementById('address-line-1').value,
+      document.getElementById('address-line-2').value,
+      document.getElementById('address-town').value,
+      document.getElementById('address-postcode').value
+    ];
+
+    var obj = {
+      'addressLine1': array[0],
+      'addressLine2': array[1],
+      'addressTown': array[2],
+      'addressPostcode': array[3],
+      'address': array.filter(filterAddressLine).join(', '),
+    };
+    return obj;
+  }
+
+  function filterAddressLine(value) {
+    return value;
+  }
+
+  function updateQuestion() {
+    if(storageAPI.getProxyFor(personId)) {
+        $('.js-heading').html('What is the other UK address where ' + '<em class="highlight">' + person.firstLastName + '</em>' +
+        ' stays for more than 30 days a year?');
+    }
+  }
+
+  function updateAnswer() {
+    if (details && details.Address30DayUK) {
+      $('#address-line-1').val(details.Address30DayUK.addressLine1);
+      $('#address-line-2').val(details.Address30DayUK.addressLine2);
+      $('#address-town').val(details.Address30DayUK.addressTown);
+      $('#address-postcode').val(details.Address30DayUK.addressPostcode);
+    }
+  }
+
+  $(updateAnswer);
+  $(updateQuestion);
+
+
+  /**
+   * Routing
+   */
+  $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
+</script>

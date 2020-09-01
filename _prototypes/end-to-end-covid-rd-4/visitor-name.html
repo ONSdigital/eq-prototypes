@@ -1,0 +1,332 @@
+---
+title: COVID-19 test (round 4 - pandemic situation revised) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+
+<link rel="stylesheet" href="../../end-to-end/style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link"
+           href="../visitors">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m"></div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <div class="feedback__inline js-feedback-inline is-collapsed">
+                    <div class="feedback__border">
+                    </div>
+                </div>
+                <div class="panel panel--error u-mb-m js-error-box u-d-no"><div class="panel__header">
+                    <div class="panel__title u-fs-r--b">There 
+                            <span class="js-piping">is a {x} problem{s}</span> with your answer
+                        </div></div>
+                    <div class="panel__body">
+                        
+                        <ol class="list list--bare">
+                        <li class="list__item js-first-name u-d-no">
+                            1. <a href="#error-message-first-name" class="list__link js-inpagelink">
+                                Enter a first name to continue
+                            </a>
+                        </li>
+                        <li class="list__item js-last-name u-d-no">
+                            <span class="js-piping">2</span>. <a href="#error-message2" class="list__link js-inpagelink">
+                                Enter a last name to continue
+                            </a>
+                        </li>
+                       </ol>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="block">
+
+                        <div class="question">
+                            <h1 id="question-title"
+                                class="question__title u-fs-xl"
+                                data-qa="question-title">
+                                What is the name of the visitor staying overnight on <span class="js-significant-date"></span> at <span class="full-address-text">Address not set</span>?
+                            </h1>
+                        </div>
+
+                        <div class="panel panel--simple panel--info u-mb-m js-visitor-panel" style="display: none">
+                            <div class="panel__body">
+                                <strong class="u-mb-xs u-d-b">Include</strong>
+                                <ul class="js-visitor-includes"></ul>
+                            </div>
+                        </div>
+
+                        <div id="member-list"></div>
+
+                        <fieldset
+                                class="question__fieldset js-question-fieldset">
+                            <legend class="u-vh">Who do you need to add to <em class=”highlight”><span class="full-address-text">Address not set</span></em>?</legend>
+
+                            <div class="question__answers">
+                                <div class="question__answer">
+                                  <p class="field">
+                                    <label class="label"
+                                           for="first-name">
+                                        <span class="label__inner">
+                                            First name
+                                        </span>
+                                    </label>
+                                    <input required data-error-msg="Enter a first name to continue" class="input input--text"
+                                           id="first-name"
+                                           data-qa="input-text" value=""/>
+                                  </p>
+                                </div>
+
+                                <div class="question__answer">
+                                  <p class="field">
+                                    <label class="label" for="last-name">
+                                        <span class="label__inner">
+                                            Last name
+                                        </span>
+                                    </label>
+                                    <input required data-error-msg="Enter a last name to continue" class="input input--text"
+                                           id="last-name"
+                                           data-qa="input-text" value=""/>
+                                  </p>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+
+                <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple js-visitor-definition">
+                  <div class="js-collapsible-content">
+                      <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Why do I have to include visitors?">
+                      Why we ask about visitors
+                      </h3>
+                      <div class="collapsible__body js-collapsible-body">
+                          <p>This is to ensure that everyone is counted in the census. Add any visitors, even if they have been included on a census questionnaire at another address.</p>
+                          <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Why do I have to include visitors?">Hide this</button>
+                      </div>
+                  </div>
+                </div>
+                <button class="btn btn-submit btn--primary btn--lg u-mt-xl"
+                        data-qa="btn-submit" type="submit"
+                        name="action[save_continue]">
+                    Save and continue
+                </button>
+                <p class="u-mt-l"><a class="js-cancel-return" href="../visitors">Cancel and return to the previous page</a></p>
+            </main>
+        </div>
+    </div>
+</div>
+
+<div id="modal" class="modal" style="display: none;">
+    <div class="modal__window">
+        <h1 class="u-fs-xl">Are you sure you want to remove <span
+                class="js-person-name"></span>?</h1>
+        <p class="u-mb-m">All of the data associated with this person will be
+            deleted</p>
+
+        <div class="modal__buttons btn-group">
+            <div class="u-mb-xs">
+                <button class="btn btn-group__btn btn--danger remove-member-button">
+                    Yes, remove this person
+                </button>
+            </div>
+            <div>
+                <button class="btn btn-group__btn btn--secondary close-modal-button">
+                    No, cancel this
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end-covid-rd-4/bundle.js'></script>
+
+<script>
+  var urlParams = new URLSearchParams(window.location.search),
+    editUserId = urlParams.get('edit'),
+    previous = urlParams.get('previous'),
+    redirect = urlParams.get('redirect'),
+    storageAPI = window.ONS.storage,
+    memberFound = null,
+    userLiveAtAddress = storageAPI.doILiveHere(),
+    isLateAddition = !!urlParams.get('late-addition');
+  
+  sessionStorage.setItem("wlh_bookmark" , window.location.pathname);
+
+  if (editUserId) {
+    memberFound = window.ONS.storage.getAllHouseholdMembers()
+      .filter(function(member) {
+        return member['@person'].id === editUserId;
+      })[0];
+  }
+
+  if (editUserId && !memberFound) {
+    throw Error('Member not found');
+  }
+
+  var $removeLink = $('.js-remove-person');
+  $removeLink.attr(
+    'href', $removeLink.attr('href') + '?person_id=' + editUserId +
+    (redirect ? '&redirect=' + redirect : '')
+  );
+
+  var hasErrors = false;
+  $('.btn-submit').on('click', function(e) {
+    e.preventDefault();
+    const testFails = '';
+    window.ONS.utils.validateInputs(testFails, "input[id='first-name']");
+    window.ONS.utils.validateInputs(testFails, "input[id='last-name']");
+    if (hasErrors) {
+      window.ONS.utils.calcErrors();
+      hasErrors = false;
+      return false;
+    } else { 
+      var person = window.ONS.storage.TYPES.person({
+        firstName: document.getElementById('first-name').value,
+        lastName: document.getElementById('last-name').value
+      });
+
+      var personType = window.ONS.storage.KEYS[
+        window.location.search.match(/journey=visitors/) ? 'VISITOR_TYPE' : 'HOUSEHOLD_MEMBER_TYPE'
+        ];
+
+      if (editUserId && memberFound) {
+        person.id = editUserId;
+        window.ONS.storage['updateHouseholdMember'](person, {type: personType});
+      }
+      else {
+        window.ONS.storage['addHouseholdMember'](person, {type: personType});
+      }
+
+      /**
+      * Routing
+      */
+      if(redirect) {
+        window.location = redirect;
+        storageAPI.storePageData('/end-to-end-covid-rd-4/' + redirect, window.location.pathname);
+
+      } else if(editUserId) {
+        window.location = '../summary/';
+        storageAPI.storePageData('/end-to-end-covid-rd-4/summary', window.location.pathname);
+
+      } else if (window.location.search.match(/journey=temp-living-here/)) {
+        window.location = userLiveAtAddress
+          ? '../does-anyone-else-live-here/?redirect=../temp-living-here-feedback/'
+          : '../temp-living-here-feedback/';
+          storageAPI.storePageData('/end-to-end-covid-rd-4/temp-living-here-feedback', window.location.pathname);
+
+      } else if (window.location.search.match(/journey=temp-away-from-home/)) {
+        window.location = '../temp-away-from-home/';
+        storageAPI.storePageData('/end-to-end-covid-rd-4/temp-away-from-home/', window.location.pathname);
+
+      } else if (window.location.search.match(/journey=visitors/)) {
+        window.location =
+          '../does-anyone-else-live-here/?journey=visitors';
+          storageAPI.storePageData('/end-to-end-covid-rd-4/does-anyone-else-live-here/?journey=visitors', window.location.pathname);
+
+      } else {
+        window.location = userLiveAtAddress
+          ? '../does-anyone-else-live-here/?redirect=../does-anyone-else-live-here/'
+          : '../does-anyone-else-live-here/';
+          storageAPI.storePageData('/end-to-end-covid-rd-4/does-anyone-else-live-here', window.location.pathname);
+
+      }
+    }
+  });
+
+  $(function() {
+    var person,
+      addressLines = (sessionStorage.getItem('address') || '').split(','),
+      addressLine1 = addressLines[0],
+      addressLine2 = addressLines[1];
+      visitors = storageAPI.getAllHouseholdMembers()
+        .filter(storageAPI.isVisitor),
+      overrideTitle = 'What is the name of the ' +
+        (visitors.length > 0
+          ? window.ONS.utils.numberToPositionWord(visitors.length + 1) : '') +
+        ' visitor staying overnight on '
+        + window.ONS.utils.getSignificant() +
+        ' at ' +
+        addressLine1 + '?',
+
+      overrideTitleStayingOutsideUK = 'Who do you need to add to ' +
+        addressLine1 +
+        ' who does not have another UK address?';
+
+    if(editUserId) {
+      if (memberFound) {
+        person = memberFound['@person'];
+
+        $('#first-name').val(person.firstName);
+        $('#last-name').val(person.lastName);
+        $('#question-title').html('Change details for ' + person.fullName);
+        $('#member-list').remove();
+        /*$('.js-remove-section').show();*/
+      } else {
+        $('#question-title').html('Member not found');
+      }
+    }
+    else if (window.location.search.match(/journey=visitors/)) {
+      $('#question-title').html(overrideTitle);
+      $('.js-visitor-definition').show();
+    }
+    else if (window.location.search.match(/journey=temp-living-here/)) {
+      $('#question-title').html(overrideTitleStayingOutsideUK);
+    }
+
+    if(previous === 'people-count-confirmation' ||
+      previous === 'are-there-any-other-visitors' ||
+      previous === 'visitors' ||
+      previous === 'i-dont-live-here') {
+      $('.js-cancel-return').attr('href', '#');
+    }
+
+    if (memberFound) {
+      person = memberFound['@person'];
+
+      $('#first-name').val(person.firstName);
+      $('#last-name').val(person.lastName);
+    }
+  });
+</script>
+
+<script>
+  var searchParams = new URLSearchParams(window.location.search),
+      addressParam = searchParams.get('address');
+
+  if (addressParam) {
+      var address = JSON.parse(addressParam),
+          addressParts = [];
+
+      Object.keys(address)
+          .filter(function(key) { return !!address[key] })
+          .forEach(function (key) {
+              sessionStorage.setItem(key, address[key]);
+              addressParts.push(address[key]);
+          })
+
+      sessionStorage.setItem('address', addressParts.join(', '));
+  }
+
+  function updatePipedAddress() {
+    $('.full-address-text').html(storageAPI.getPipedAddress());
+  };
+
+  function updateAllLinks() {
+    $('.js-previous-link').attr('href', document.referrer);
+  }
+
+  function updateCancelLinks() {
+    $('.js-cancel-return').attr('href', document.referrer);
+  }
+
+  $(updatePipedAddress);
+  $(updateAllLinks);
+  $(updateCancelLinks);
+</script>

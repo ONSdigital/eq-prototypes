@@ -1,0 +1,259 @@
+---
+title: COVID-19 test (round 2 - pandemic situation) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <div class="feedback__inline js-feedback-inline is-collapsed">
+                    <div class="feedback__border">
+                    </div>
+                </div>
+                <div class="panel panel--error u-mb-m js-error-box u-d-no">
+                    <div class="panel__header">
+                        <div class="panel__title u-fs-r--b">There 
+                      <span class="js-piping">is a {x} problem{s}</span> with your answer
+                    </div>
+                    </div>
+                    <div class="panel__body">
+                        
+                        <ol class="list list--bare">
+                        <li class="list__item js-employee u-d-no">
+                            1. <a href="#error-message-employee" class="list__link js-inpagelink">
+                                Select  at least one answer to continue
+                            </a>
+                        </li>
+                       </ol>
+                    </div>
+                </div>
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password"
+                      action="#">
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
+                           value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-xl js-heading">
+                                        In the last seven days, were you doing any of the following?
+                                    </h1>
+                                </div>
+                                <p>This can be casual or temporary work, even if only for one hour </p>
+                                
+                                <div class="panel panel--simple panel--info u-mb-m">
+                                  <div class="panel__body">
+                                      <p>Workers on furlough should count themselves as employed</p> 
+                                  </div>
+                                </div>
+                                <div class="answer" id="checkboxes">
+                                    <div class="answer__fields question__answer js-fields">
+                                        <div class="field field--checkbox field--multiplechoice field--exclusive">
+                                            <fieldset>
+                                                <legend class="field__legend u-fs-r--b">Select all that apply</legend>
+                                                <div class="field__item js-focusable-box">
+                                                    <input required autocomplete="new-password" class="input input--checkbox js-exclusive-group"
+                                                           type="checkbox"
+                                                           name="checkbox-group"
+                                                           id="employee"
+                                                           value="Employee"
+                                                           data-error-msg="Select  at least one answer to continue">
+                                                    <label class="label label--inline"
+                                                           for="employee"
+                                                           id="employee-label">
+                                                        <strong class="u-fs-r">Working as an employee</strong>
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--checkbox js-exclusive-group"
+                                                           type="checkbox"
+                                                           name="checkbox-group"
+                                                           id="self-employed"
+                                                           value="Self employed">
+                                                    <label class="label label--inline"
+                                                           for="self-employed"
+                                                           id="self-employed-label">
+                                                        <strong class="u-fs-r">Self-employed or freelance</strong>
+                                                        <br>
+                                                        <span class="label__description label__inner label--negative u-fs-m js-answer">Freelance means that you are self-employed and work for different companies or people on particular pieces of work</span>
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--checkbox js-exclusive-group"
+                                                           type="checkbox"
+                                                           name="checkbox-group"
+                                                           id="temp-off"
+                                                           value="Temporarily off work">
+                                                    <label class="label label--inline"
+                                                           for="temp-off"
+                                                           id="temp-off-label">
+                                                        <strong class="u-fs-r">Temporarily away from work ill, on holiday or temporarily laid off</strong>
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--checkbox js-exclusive-group"
+                                                           type="checkbox"
+                                                           name="checkbox-group"
+                                                           id="mat-leave"
+                                                           value="On maternity or paternity leave">
+                                                    <label class="label label--inline"
+                                                           for="mat-leave"
+                                                           id="mat-leave-label">
+                                                        <strong class="u-fs-r">On maternity or paternity leave</strong>
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--checkbox js-exclusive-group"
+                                                           type="checkbox"
+                                                           name="checkbox-group"
+                                                           id="other-work"
+                                                           value="Other paid work">
+                                                    <label class="label label--inline"
+                                                           for="other-work"
+                                                           id="other-work-label">
+                                                        <strong class="u-fs-r">Doing any other kind of paid work</strong>
+                                                    </label>
+                                                </div>
+
+                                                <div class="field__label u-mt-s u-fs-r--b" aria-hidden="true">Or</div>
+                                                <div class="field__item">
+                                                    <input autocomplete="new-password" class="input input--checkbox js-exclusive-checkbox"
+                                                           type="checkbox"
+                                                           name="checkbox-group"
+                                                           id="no"
+                                                           value="No" />
+                                                    <label class="label label--inline"
+                                                           for="no">
+                                                        <span class="u-vh">Or,</span>
+                                                        None of these apply
+                                                    </label>
+                                                </div>
+                                                <span class="js-exclusive-alert u-vh"
+                                                        role="alert"
+                                                        aria-live="polite"
+                                                        data-adjective="deselected"></span>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn-submit btn--primary btn--lg qa-btn-submit venus u-mb-xl u-mt-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+                    <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end-covid-rd-2/bundle.js'></script>
+
+<script>
+    var storageAPI = window.ONS.storage,
+        urlParams = new URLSearchParams(window.location.search),
+        personId = urlParams.get('person_id'),
+        person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+        isEditing = urlParams.get('edit'),
+        details = storageAPI.getPersonalDetailsFor(personId),
+        surveyType = urlParams.get('survey'),
+        question = $('#question-title').html(),
+        hasErrors = false;
+
+    $('.qa-btn-submit').on('click',
+        storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+            e.preventDefault();
+            const testFails = ($('input[type=checkbox]:checked').size() === 0);
+            window.ONS.utils.validateInputs(testFails, "input[type=checkbox]");
+            if (hasErrors) {
+                window.ONS.utils.calcErrors();
+                hasErrors = false;
+                return false;
+            } else {
+                var val = [];
+
+                $('[name="checkbox-group"]:checked').each(function(i, el) {
+                    val.push($(el).val());
+                });
+
+                let url = '../individual-details-employment-seven-days-ago-covid/?person_id=' + personId + '&edit=true';
+                question = question.trim();
+
+                storageAPI.addUpdateLastSevenDays(personId, val, question, url);
+
+                if(isEditing) {
+                    e.preventDefault();
+                        window.location.href = '../individual-details-summary/?person_id=' + personId +
+                        (surveyType ? '&survey=' + surveyType : '');
+                    storageAPI.storePageData('/end-to-end-covid-rd-2/individual-details-summary/', window.location.pathname);
+                } else if ($('#no:checked').length){
+                    e.preventDefault();
+                    window.location.href = '../individual-details-employment-seven-days-ago-description/?person_id=' + personId;
+                    storageAPI.storePageData('/end-to-end-covid-rd-2/individual-details-employment-seven-days-ago-description/', window.location.pathname);
+                } else {
+                    e.preventDefault();
+                    window.location.href = '../individual-details-employment-main-job-covid/?person_id=' + personId;
+                    storageAPI.storePageData('/end-to-end-covid-rd-2/individual-details-employment-main-job-covid/', window.location.pathname);
+                }
+            }
+        }));
+
+    function updateRouting() {
+        if(surveyType) {
+            $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+        }
+        $('#survey-type').val(surveyType);
+    }
+
+    function updateQuestion() {
+        if(storageAPI.getProxyFor(personId)) {
+        $('.js-heading').html('In the last seven days, was ' + '<em class="highlight">' + person.firstLastName + '</em>' +
+            ' doing any of the following?');
+        }
+    }
+
+    function updateAnswer() {
+        if (details && details.employment) {
+            var answer = details.employment.sevenDaysAgo;
+            if (answer) {
+                var i;
+                for (i = 0; i < answer.length; i++) {
+                    $('input[type=checkbox][value="' + answer[i] +'"]').prop("checked", true);
+                }
+            }
+        }
+
+        if(storageAPI.getProxyFor(personId)) {
+            $('.js-answer').html('Freelance means that they are self-employed and work for different companies or people on particular pieces of work');
+        }
+    }
+    $(updateAnswer);
+    $(updateQuestion);
+    $(updateRouting);
+
+    /**
+    * Routing
+    */
+    $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
+</script>

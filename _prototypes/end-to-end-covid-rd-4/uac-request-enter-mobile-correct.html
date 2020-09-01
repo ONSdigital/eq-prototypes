@@ -1,0 +1,110 @@
+---
+title: COVID-19 test (round 4 - pandemic situation revised) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+logoUrl: ../home
+---
+
+<link rel="stylesheet" href="../../end-to-end/style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password"
+                      action="../uac-request-enter-mobile-correct/">
+                    <div class="group">
+                        <section class="section">
+                            <div class="question u-mb-s">
+                                <h1 id="question-title"
+                                    class="question__title u-fs-xl js-heading">
+                                    Is this mobile number correct?
+                                </h1>
+                                <p class="js-mobile-no"></p>
+                            </div>
+
+                            <div class="field field--radio field--multiplechoice">
+                                <fieldset>
+                                    <div class="field__item js-focusable-box">
+                                        <input autocomplete="new-password" class="input input--radio js-focusable"
+                                               name="radio-answer"
+                                               value="Yes"
+                                               id="yes"
+                                               type="radio">
+                                        <label class="label label--inline u-fs-r"
+                                               for="yes">
+                                            Yes, send the text</label>
+                                    </div>
+                                    <div class="field__item js-focusable-box">
+                                        <input autocomplete="new-password" class="input input--radio js-focusable"
+                                               name="radio-answer"
+                                               value="No"
+                                               id="no"
+                                               type="radio">
+                                        <label class="label label--inline u-fs-r "
+                                               for="no">
+                                            No, I need to change it</label>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </section>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl u-mt-xl"
+                            type="submit" name="">Continue
+                    </button>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<div style="display:none;">
+    <div id="member-checkbox-select-template" class="field__item">
+        <input autocomplete="new-password" class="input input--checkbox js-person-control"
+               name="checkbox-answer" type="checkbox">
+        <label class="label label--inline u-fs-r js-person-name"></label>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end-covid-rd-4/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    isEditing = urlParams.get('edit'),
+    mobileNo = urlParams.get('mobile');
+    var previousPage = urlParams.get('previous');
+    var currentJourney = urlParams.get('current-journey');
+    var currentPage = 'uac-request-enter-mobile-correct';
+
+  $('.qa-btn-submit').on('click', function (e) {
+    e.preventDefault();
+
+    window.location.href = $('[name=radio-answer]:checked').val() === 'Yes'
+      ? '../uac-request-enter-mobile-sent/?mobile=' + mobileNo + '&previous=' + currentPage + '&current-journey=' + currentJourney
+      : '../uac-request-enter-mobile/?mobile=' + mobileNo + '&previous=' + currentPage + '&current-journey=' + currentJourney;
+  });
+
+  function updateDescription () {
+    $('.js-mobile-no').html(mobileNo);
+  }
+
+  $(updateDescription);
+
+  /**
+   * Routing
+   */
+  $('#person').val(urlParams.get('person_id'));
+</script>

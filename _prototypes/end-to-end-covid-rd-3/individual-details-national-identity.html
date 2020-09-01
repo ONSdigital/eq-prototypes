@@ -1,0 +1,196 @@
+---
+title: COVID-19 test (round 3 - usual situation) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password" action="../individual-details-ethnic-group">
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
+                           value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group">
+                        <div class="block" id="total-retail-turnover">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-xl js-heading">
+                                        How would you describe your national identity?
+                                    </h1>
+                                </div>
+                                <p class="js-question-guidance-line1">This relates to where you feel you belong, such as the country or countries you think of as home.</p>
+                                <p class="js-question-guidance-line2">This could be different from your citizenship or ethnic group.</p>
+
+                                <div class="answer">
+                                    <div class="answer__fields js-fields">
+                                        <div class="field field--radio field--multiplechoice ">
+                                            <fieldset>
+                                                <legend class="field__legend u-fs-r--b">Select all that apply</legend>
+                                                <div class="field__item">
+                                                    <input
+                                                            class="input input--checkbox" name="checkbox-answer" value="British" id="british" type="checkbox" />
+                                                    <label class="label label--inline u-fs-r"
+                                                           for="british">
+                                                        British</label>
+                                                </div>
+                                                <div class="field__item">
+                                                    <input
+                                                            class="input input--checkbox" name="checkbox-answer" value="English" id="english" type="checkbox" />
+                                                    <label class="label label--inline u-fs-r"
+                                                           for="english">
+                                                        English</label>
+                                                </div>
+                                                <div class="field__item">
+                                                    <input
+                                                            class="input input--checkbox" name="checkbox-answer" value="Welsh" id="welsh" type="checkbox" />
+                                                    <label class="label label--inline u-fs-r"
+                                                           for="welsh">
+                                                        Welsh</label>
+                                                </div>
+                                                <div class="field__item">
+                                                    <input
+                                                            class="input input--checkbox" name="checkbox-answer" value="Scottish" id="scottish" type="checkbox" />
+                                                    <label class="label label--inline u-fs-r"
+                                                           for="scottish">
+                                                        Scottish</label>
+                                                </div>
+                                                <div class="field__item">
+                                                    <input
+                                                            class="input input--checkbox" name="checkbox-answer" value="Northern Irish" id="northern-irish" type="checkbox" />
+                                                    <label class="label label--inline u-fs-r"
+                                                           for="northern-irish">
+                                                        Northern Irish</label>
+                                                </div>
+                                                <div class="field__item">
+                                                    <input
+                                                            id="other"
+                                                            name="checkbox-answer" value="Other" data-qa="has-other-option" type="checkbox" class="input input--checkbox">
+                                                    <label id="label-checkbox-mandatory-answer-1" class="label label--inline u-fs-r" for="other">Other<br>
+                                                        <span class="label__description label__inner label--negative u-fs-m js-answer">You can describe your national identity on the next question</span>
+                                                    </label>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl u-mt-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+
+                    <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end-covid-rd-3/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person_id'),
+    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+    isEditing = urlParams.get('edit'),
+    details = storageAPI.getPersonalDetailsFor(personId),
+    surveyType = urlParams.get('survey'),
+    question = $('#question-title').html();
+
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+    e.preventDefault();
+    var nationalIdentities = [];
+
+    $('[name="checkbox-answer"]:checked').each(function(i, el) {
+      nationalIdentities.push($(el).val());
+    });
+
+    let url = '../individual-details-national-identity/?person_id=' + personId + '&edit=true';
+    question = question.trim();
+    storageAPI.addUpdateNationalIdentity(personId, nationalIdentities, question, url);
+    storageAPI.storePageData('/end-to-end-covid-rd-3/individual-details-ethnic-group/', window.location.pathname);
+
+    if(isEditing) {
+      window.location.href = '../individual-details-summary/?person_id=' +
+        personId + (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end-covid-rd-3/individual-details-summary/', window.location.pathname);
+    } else if($('#other:checked').length) {
+      window.location.href = '../individual-details-national-identity-other/?person_id=' +
+        personId + (surveyType ? '&survey=' + surveyType : '') +
+        (isEditing ? '&edit=true' : '');
+        storageAPI.storePageData('/end-to-end-covid-rd-3/individual-details-national-identity-other/', window.location.pathname);
+    } else {
+      window.location.href = '../individual-details-ethnic-group/?person_id=' +
+        personId + (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end-covid-rd-3/individual-details-ethnic-group/', window.location.pathname);
+    }
+  }));
+
+  function updateRouting() {
+    if(surveyType) {
+      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    }
+    $('#survey-type').val(surveyType);
+  }
+
+  function updateQuestion() {
+    if(storageAPI.getProxyFor(personId)) {
+      $('.js-heading').html('How would ' + '<em class="highlight">' + person.firstLastName + '</em>' +
+        ' describe their national identity?');
+    }
+  }
+
+   function updateHelp() {
+    if(storageAPI.getProxyFor(personId)) {
+      $('.js-question-guidance-line1').html('This relates to where they feel they belong, such as the country or countries they think of as home.');
+      $('.js-question-guidance-line2').html('This could be different from their citizenship or ethnic group.');
+    }
+  }
+
+  function updateAnswers() {
+    if(storageAPI.getProxyFor(personId)) {
+      $('.js-answer').html('You can describe their national identity on the next question');
+
+      if (details && details.nationalIdentity) {
+        var answer = details.nationalIdentity.collection;
+          if (answer) {
+              var i;
+              for (i = 0; i < answer.length; i++) {
+                  $('input[type=checkbox][value="' + answer[i] +'"]').prop("checked", true);
+              }
+          }
+      }
+    }
+  }
+
+  $(updateQuestion);
+  $(updateHelp);
+  $(updateAnswers);
+  $(updateRouting);
+
+  /**
+   * Routing
+   */
+  $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
+</script>
