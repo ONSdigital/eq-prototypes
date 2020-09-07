@@ -571,6 +571,7 @@ function validateInputs(testFails, selector, address) {
     window.scrollTo(0, 0);
     hasErrors = true;
     $('.js-feedback-link').removeClass('is-expanded');
+    $('.js-feedback-body').hide();
     input.classList.add('input--error');
     if (!listItem.classList.contains('js-visible')) {
       errorBox.classList.remove('u-d-no');
