@@ -12,7 +12,7 @@ logoUrl: ../home
 <link rel="stylesheet" href="../../end-to-end/style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="back-link js-previous-link" href="../confirm-address/?previous=test-address">Previous</a>
+        <a class="back-link js-previous-link" href="../confirm-address/?previous=test-address">Back</a>
     </div>
 </div>
 
@@ -190,10 +190,10 @@ logoUrl: ../home
 
   function updateAllLinks() {
 
-    if(currentJourney === 'unlinked-uac'){
+    if(currentJourney === 'unlinked-uac' || currentJourney === 'transient'){
       $('.js-question-description').hide();
       $('.js-previous-link').hide();
-    } else if(currentJourney === 'address-correction' || currentJourney === 'transient') {
+    } else if(currentJourney === 'address-correction') {
       $('.js-question-description').hide();
     }
 
