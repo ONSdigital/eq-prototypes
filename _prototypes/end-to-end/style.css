@@ -269,7 +269,7 @@ h4 {
     color: #222;
 }
 
-a {
+body a {
     color: #4263c2;
 }
 
@@ -338,6 +338,11 @@ details summary:focus {
     background-color: #fd0;
     box-shadow: 0 -2px #fd0, 0 4px #222;
     text-decoration: none;
+}
+
+.collapsible--footer .collapsible__body {
+    border-left: none;
+    padding-left: 0;
 }
 
 .input__text {
@@ -963,8 +968,8 @@ hr {
     margin-top: 2rem;
 }
 
-.footer__meta a {
-    color: #222;
+.footer a {
+    color: #595959;
 }
 
 /* over 740px */

@@ -570,6 +570,7 @@ function validateInputs(testFails, selector, address) {
   if (input.value === testFails || testFails === true) {
     window.scrollTo(0, 0);
     hasErrors = true;
+    $('.js-feedback-link').removeClass('is-expanded');
     input.classList.add('input--error');
     if (!listItem.classList.contains('js-visible')) {
       errorBox.classList.remove('u-d-no');
@@ -641,6 +642,32 @@ function storePageData(url, previousUrl) {
       ...(pageDataContents || {}),
       [url]: previousUrl
   }));
+}
+
+function toggleFeedback() {
+  $('.js-feedback-link').on('click', function(e) {
+    e.preventDefault();
+    $(this).toggleClass('is-expanded');
+    $('.js-feedback-body').toggle();
+  });
+}
+
+function submitFeedback() {
+  $('.feedback-btn-submit').on('click', function(e) {
+    e.preventDefault();
+    $('.js-feedback-success').show();
+    $('.js-feedback-body').hide();
+    $('.js-collapsible-title').hide();
+  });
+}
+
+function showFeedbackContextualAnswer(){
+  $('#census-questions').on('click', function(e) {
+    $('.js-question-topic').show();
+  })
+  $('#page-design, #general').on('click', function(e) {
+    $('.js-question-topic').hide();
+  })
 }
 
 window.ONS = window.ONS || {};
@@ -853,3 +880,6 @@ $(updateSaveAndCompleteLater);
 $(updateFoortListCol);
 $(sessionBookmark);
 $(fieldItemDisplayHack);
+$(toggleFeedback);
+$(submitFeedback);
+$(showFeedbackContextualAnswer);
