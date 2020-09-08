@@ -651,7 +651,7 @@ function toggleFeedback() {
 
     $('html, body').animate({
       scrollTop: $("#feedback").offset().top
-  }, 600);
+  }, 500);
 
 
 
@@ -671,10 +671,10 @@ function submitFeedback() {
 
 function showFeedbackContextualAnswer(){
   $('#census-questions').on('click', function(e) {
-    $('.js-question-topic').show();
+    $('.js-question-topic').slideDown('200').fadeIn('300');
   })
   $('#page-design, #general').on('click', function(e) {
-    $('.js-question-topic').hide();
+    $('.js-question-topic').slideUp('200').fadeOut('200');
   })
 }
 
