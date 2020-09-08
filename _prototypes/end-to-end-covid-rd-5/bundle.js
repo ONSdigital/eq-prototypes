@@ -648,6 +648,13 @@ function storePageData(url, previousUrl) {
 function toggleFeedback() {
   $('.js-feedback-link').on('click', function(e) {
     e.preventDefault();
+
+    $('html, body').animate({
+      scrollTop: $("#feedback").offset().top
+  }, 600);
+
+
+
     $(this).toggleClass('is-expanded');
     $('.js-feedback-body').toggle();
   });
