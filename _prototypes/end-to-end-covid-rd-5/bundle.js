@@ -662,9 +662,8 @@ function submitFeedback() {
   $('.feedback-btn-submit').on('click', function(e) {
     e.preventDefault();
     $('.js-collapsible-title').hide();
-    $('.feedback__controls').css({height:'93px'});
     $('.js-feedback-body').slideUp('100');
-    $('.js-feedback-success').delay('500').fadeIn('500');
+    $('.js-feedback-success').delay('500').slideDown('200').fadeIn('500').animate({opacity:1}, 'slow');
   });
 }
 
