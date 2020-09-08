@@ -651,12 +651,10 @@ function toggleFeedback() {
 
     $('html, body').animate({
       scrollTop: $("#feedback").offset().top
-  }, 500);
-
-
+    }, 300);
 
     $(this).toggleClass('is-expanded');
-    $('.js-feedback-body').toggle();
+    $('.js-feedback-body').slideToggle('300');
   });
 }
 
@@ -664,7 +662,7 @@ function submitFeedback() {
   $('.feedback-btn-submit').on('click', function(e) {
     e.preventDefault();
     $('.js-feedback-success').show();
-    $('.js-feedback-body').hide();
+    $('.js-feedback-body').slideUp('100');
     $('.js-collapsible-title').hide();
   });
 }
