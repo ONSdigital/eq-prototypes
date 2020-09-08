@@ -464,11 +464,12 @@ noONSLogoLink: true
   }
 
   function updateLinks () {
-    if (surveyType) {
-      $('.js-view-summary').attr('href', '../summary/?survey=' + surveyType);
-    } else {
-      $('.js-link-ir').attr('href', sessionStorage.getItem('lives-here') === 'yes' ? '../cant-answer-for-others/?person_id=person_me&previous=hub' : '../cant-answer-for-others/?previous=hub');
-    }
+    $('.js-link-ir').on('click', function (e) {
+      e.preventDefault();
+      $(this).attr('href', sessionStorage.getItem('lives-here') === 'yes' ? '../cant-answer-for-others/?person_id=person_me&previous=hub' : '../cant-answer-for-others/?previous=hub');
+      storageAPI.storePageData('/end-to-end/cant-answer-for-others/', window.location.pathname);
+      window.location.href = "../cant-answer-for-others/";
+    });
   }
 
   function isUser(member) {

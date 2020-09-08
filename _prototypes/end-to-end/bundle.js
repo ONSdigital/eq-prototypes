@@ -356,7 +356,12 @@ const secureLinkTextMap = {
 };
 
 function updateAllLinks() {
-  $('.js-previous-link').attr('href', document.referrer);
+  let urlParam = new URLSearchParams(window.location.search),
+    isEditing = urlParam.get('continuing');
+
+  if (isEditing) {
+    $('.back-link').html('Back');
+  }
 }
 
 function updatePersonLink() {

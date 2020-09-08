@@ -11,7 +11,7 @@ noONSLogoLink: true
 <link rel="stylesheet" href="../style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="back-link js-previous-link" href="../hub">Previous</a>
+        <a class="back-link js-previous-link" href="../hub">Back</a>
     </div>
 </div>
 
@@ -52,7 +52,7 @@ noONSLogoLink: true
 <script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
-    storageAPI = window.ONS.storage,
+    var storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
     personId = urlParams.get('person_id'),
     person = personId ? storageAPI.getHouseholdMemberByPersonId(personId)['@person'] : null,
@@ -64,48 +64,43 @@ noONSLogoLink: true
         return p.type !== 'visitor' && p['@person'].id !== 'person_me';
     });  
 
-  $('.btn--link').click(function(e) {
+    $('.btn--link').click(function(e) {
     e.preventDefault();
+    var irCounter = sessionStorage.getItem('ir-counter');
 
-    if (eligibleHouseholdMembers.length === 1 ||
-        personId && personId !== 'person_me') {
-        var eligibleHouseholdMember = eligibleHouseholdMembers.find(function(p) {
-            return eligibleHouseholdMembers.length > 1 ? p['@person'].id === personId : p['@person'].id;
-        });  
-
-        var cannotAnswerPeopleAlready = cannotAnswerPeople.findIndex((e) => e.id === eligibleHouseholdMember['@person'].id);
-        if (cannotAnswerPeopleAlready === -1) {
-            cannotAnswerPeople.push({
-                id: eligibleHouseholdMember['@person'].id,
-            });
-        } else {
-            cannotAnswerPeople[cannotAnswerPeopleAlready] = {
-                id: eligibleHouseholdMember['@person'].id,
-                responseOption: cannotAnswerPeople[cannotAnswerPeopleAlready].responseOption ? cannotAnswerPeople[cannotAnswerPeopleAlready].responseOption : null,
-                phoneNumber: cannotAnswerPeople[cannotAnswerPeopleAlready].phoneNumber ? cannotAnswerPeople[cannotAnswerPeopleAlready].phoneNumber : null,
-                emailAddress: cannotAnswerPeople[cannotAnswerPeopleAlready].emailAddress ? cannotAnswerPeople[cannotAnswerPeopleAlready].emailAddress : null,
-                postRequest: cannotAnswerPeople[cannotAnswerPeopleAlready].postRequest ? true : null,
-            };
-        }       
-        sessionStorage.setItem('cannot-answer-people', JSON.stringify(cannotAnswerPeople));
-        window.location = '../individual-decision-method/?person_id=' + eligibleHouseholdMember['@person'].id + (surveyType ? '&survey=' + surveyType : '') + (previousPage ? '&previous=' + previousPage : '');
-
+    if (irCounter > 9) {
+        window.location = '../ir-limit-reached';
     } else {
-            
-        window.location = '../cant-answer-for-others-who/' + (surveyType ? '&survey=' + surveyType : '') + (previousPage ? '?previous=' + previousPage : '');
-    }
+        if (eligibleHouseholdMembers.length === 1 ||
+            personId && personId !== 'person_me') {
+            var eligibleHouseholdMember = eligibleHouseholdMembers.find(function(p) {
+                return eligibleHouseholdMembers.length > 1 ? p['@person'].id === personId : p['@person'].id;
+            });  
 
-  });
+            var cannotAnswerPeopleAlready = cannotAnswerPeople.findIndex((e) => e.id === eligibleHouseholdMember['@person'].id);
+            if (cannotAnswerPeopleAlready === -1) {
+                cannotAnswerPeople.push({
+                    id: eligibleHouseholdMember['@person'].id,
+                });
+            } else {
+                cannotAnswerPeople[cannotAnswerPeopleAlready] = {
+                    id: eligibleHouseholdMember['@person'].id,
+                    responseOption: cannotAnswerPeople[cannotAnswerPeopleAlready].responseOption ? cannotAnswerPeople[cannotAnswerPeopleAlready].responseOption : null,
+                    phoneNumber: cannotAnswerPeople[cannotAnswerPeopleAlready].phoneNumber ? cannotAnswerPeople[cannotAnswerPeopleAlready].phoneNumber : null,
+                    emailAddress: cannotAnswerPeople[cannotAnswerPeopleAlready].emailAddress ? cannotAnswerPeople[cannotAnswerPeopleAlready].emailAddress : null,
+                    postRequest: cannotAnswerPeople[cannotAnswerPeopleAlready].postRequest ? true : null,
+                };
+            }       
+            sessionStorage.setItem('cannot-answer-people', JSON.stringify(cannotAnswerPeople));
+            window.location = '../individual-decision-method/?person_id=' + eligibleHouseholdMember['@person'].id + (surveyType ? '&survey=' + surveyType : '') + (previousPage ? '&previous=' + previousPage : '');
 
-    function updateAllLinks() {
-        if (previousPage === 'hub') {
-            $('.js-previous-link').attr('href', '../' + previousPage);
-        } else if (previousPage === 'remove-household-member') {
-            $('.js-previous-link').attr('href', '../' + previousPage + '?person_id=' + personId);
         } else {
-            $('.js-previous-link').attr('href', '../individual-intro/' + '?person_id=' + personId);
+            window.location = '../cant-answer-for-others-who/' + (surveyType ? '&survey=' + surveyType : '') + (previousPage ? '?previous=' + previousPage : '');
         }
     }
 
-    $(updateAllLinks);
+    });
+
+
+    console.log(previousPage);
 </script>

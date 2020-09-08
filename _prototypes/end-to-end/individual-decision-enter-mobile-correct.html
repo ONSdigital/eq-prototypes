@@ -93,7 +93,7 @@ noONSLogoLink: true
     var previousPage = urlParams.get('previous');
     var cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people', '') || '[]');
     var cannotAnswerPerson = cannotAnswerPeople.findIndex((e) => e.id === personId);
-
+  
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
 
@@ -112,10 +112,28 @@ noONSLogoLink: true
         : '../individual-decision-enter-mobile/?person_id=' + personId +
             '&remaining=' + encodeURI(urlParams.get('people')) + '&mobile=' + mobileNo + '&previous=' + previousPage;
     } else {
-        window.location.href = $('[name=radio-answer]:checked').val() === 'Yes'
-        ? '../individual-decision-enter-mobile-sent/?person_id=' + personId +
-            '&remaining=' + encodeURI(urlParams.get('people')) + '&mobile=' + mobileNo + '&previous=' + previousPage
-        : document.referrer;
+        if ($('#yes').is(':checked')) {
+            var irCounter = sessionStorage.getItem('ir-counter');
+
+            if (irCounter) { 
+                if (irCounter > 9) { 
+                    window.location = '../ir-limit-reached';
+                } else {
+                    var irCounter = parseInt(irCounter) + 1;
+                    sessionStorage.setItem('ir-counter', irCounter);
+                    window.location = '../individual-decision-enter-mobile-sent/?person_id=' + personId +
+                    '&remaining=' + encodeURI(urlParams.get('people')) + '&mobile=' + mobileNo + '&previous=' + previousPage;
+                }
+            } else { 
+                var irCounter = 1;
+                sessionStorage.setItem('ir-counter', irCounter);
+                window.location = '../individual-decision-enter-mobile-sent/?person_id=' + personId +
+                    '&remaining=' + encodeURI(urlParams.get('people')) + '&mobile=' + mobileNo + '&previous=' + previousPage;
+            }
+        } else {
+            window.location = '../individual-decision-enter-mobile/?person_id=' + personId +
+                '&remaining=' + encodeURI(urlParams.get('people')) + '&mobile=' + mobileNo + '&previous=' + previousPage;
+        }
     }
   });
 
