@@ -649,9 +649,9 @@ function toggleFeedback() {
   $('.js-feedback-link').on('click', function(e) {
     e.preventDefault();
 
-    $('html, body').animate({
-      scrollTop: $("#feedback").offset().top
-    }, 300);
+    // $('html, body').animate({
+    //   scrollTop: $("#feedback").offset().top
+    // }, 300);
 
     $(this).toggleClass('is-expanded');
     $('.js-feedback-body').slideToggle('300');
@@ -661,9 +661,10 @@ function toggleFeedback() {
 function submitFeedback() {
   $('.feedback-btn-submit').on('click', function(e) {
     e.preventDefault();
-    $('.js-feedback-success').show();
-    $('.js-feedback-body').slideUp('100');
     $('.js-collapsible-title').hide();
+    $('.feedback__controls').css({height:'93px'});
+    $('.js-feedback-body').slideUp('100');
+    $('.js-feedback-success').delay('500').fadeIn('500');
   });
 }
 
