@@ -949,6 +949,10 @@ hr {
 
 /* Feedbacken */
 
+.feedback {
+    border-bottom: 3px solid #93328e;
+}
+
 .feedback + .footer {
     margin-top: 0;
 }
@@ -956,25 +960,25 @@ hr {
 .feedback__controls {
     font-weight: normal;
     background-color: #93328e;
-    /*    border-bottom: 1px solid #ccc; */
-    padding: 0.75rem 0 0.4rem;
+    border-top: 1px solid #fff;
+    padding: 0.85rem 0 0.4rem;
+    color: #fff;
 }
 
 .feedback__controls .collapsible__title {
-    color: #222;
-    font-weight: normal!important;
+    color: #fff;
 }
 
 .feedback__controls .collapsible__title:hover {
-    color: #595959;
+    color: #dedede;
 }
 
 .feedback__controls .icon--collapsible-simple:before {
-    background-image: url(/img/icons/icons--chevron-right-black.svg);
+    background-image: url(/img/icons/icons--chevron-right-white.svg);
 }
 
 .feedback__controls .icon--collapsible-simple:after {
-    background-image: url(/img/icons/icons--chevron-right-black-hover.svg);
+    background-image: url(/img/icons/icons--chevron-right-white-hover.svg);
 }
 
 .feedback__controls-success-title-icon:before {
@@ -982,6 +986,7 @@ hr {
     height: 1.2rem;
     background-size: 1.2rem;
     transform: translateY(-.1rem);
+    background-image: url(/img/icons/icons--check-white.svg);
 }
 
 .feedback__controls-success-message {
