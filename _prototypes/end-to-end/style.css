@@ -947,10 +947,32 @@ hr {
     background : url('../img/icons/email.svg') no-repeat;
 }
 
+.leave-warning {
+    background: #dedede;
+    padding: .75rem 0;
+}
+
+.leave-warning + .footer {
+    margin-top:0!important;
+}
+
 /* Feedbacken */
 
-.feedback {
-    border-bottom: 3px solid #93328e;
+.feedback-block {
+    border: 3px solid #93328E;
+    padding: 1rem;
+}
+
+.feedback__footer {
+    line-height: 1;
+    width: 25.2611px;
+    margin-top: -3px;
+    margin-left: 1rem;
+}
+
+.feedback__body {
+    border-left: none;
+    padding-left: 0;
 }
 
 .feedback + .footer {
@@ -986,17 +1008,10 @@ hr {
     height: 1.2rem;
     background-size: 1.2rem;
     transform: translateY(-.1rem);
-    background-image: url(/img/icons/icons--check-white.svg);
 }
 
 .feedback__controls-success-message {
     margin-left: 1.7rem;
-}
-
-.feedback__body {
-    padding: 1.5rem 0 2rem;
-    color: #222;
-    border-left: none;
 }
 
 .footer .footer__poweredby-img {
@@ -1005,11 +1020,22 @@ hr {
 
 .footer-button {
     background-color: #93328e;
-    margin-top: 2.5rem;
+    margin-top: 2rem;
+}
+
+/* over 740px */
+@media only screen and (max-width: 740px) {
+    .footer-button {
+        margin-bottom: -2rem;
+    }
 }
 
 .feedback .collapsible {
     margin-top: 0;
+}
+
+.feedback__body .field__legend {
+    font-weight: 600!important;
 }
 
 .footer__crest-img {
@@ -1076,6 +1102,13 @@ hr {
  .btn--ghost {
     padding: .75rem 1rem;
  }
+
+.btn--ghost:focus {
+    color: #222;
+    background-color: #fd0;
+    border-color: #222;
+}
+
 .btn--ghost-blue {
     background-color: transparent;
     color: #4263c2;
@@ -1083,23 +1116,11 @@ hr {
     border-width: 2px;
 }
 
-.btn--ghost-blue:focus, .btn--ghost-blue:hover {
-    color: #4263c2;
-    background-color: transparent;
-    border-color: #4263c2;
-}
-
-.btn--ghost,
-.btn--ghost:focus, 
-.btn--ghost:hover {
+.btn--ghost {
     background-color: transparent;
     color: #fff;
     border-color: #fff;
     border-width: 2px;
-}
-
-.btn--ghost-blue:focus {
-    outline: 3px solid #fe781f
 }
 
 .btn--ghost.exit:after,

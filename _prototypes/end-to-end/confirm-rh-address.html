@@ -185,15 +185,16 @@ logoUrl: ../home
                 if (unitName) {
                     $('.js-add-unit a').html('Change flat or room number');
                 }
-            } else if (addressType === 'HH' && !fulfilmentJourney) {
-                $('.js-add-unit').removeClass('u-d-no')
-                $('.js-add-unit a').attr('href', '../uac-request-enter-hh-building-name' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney);
-                if (!unitName) {
-                    $('.js-add-unit a').html('Add house name');
-                } else {
-                    $('.js-add-unit a').html('Change house name');
-                }
-            }
+            } 
+            // else if (addressType === 'HH' && !fulfilmentJourney) {
+            //    $('.js-add-unit').removeClass('u-d-no')
+            //    $('.js-add-unit a').attr('href', '../uac-request-enter-hh-building-name' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney);
+            //    if (!unitName) {
+            //        $('.js-add-unit a').html('Add house name');
+            //    } else {
+            //        $('.js-add-unit a').html('Change house name');
+            //    }
+            //}
         }
 	});
 
