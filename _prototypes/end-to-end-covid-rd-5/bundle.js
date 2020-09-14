@@ -198,15 +198,21 @@ export function getAddress() {
 
 function getPipedAddress() {
   let pipedAddress = "this accommodation";
-  let addressLine2 = sessionStorage.getItem('address-line-2');
-  let transientAddress = addressLine2.includes("near");
+  let addressLine1 = (sessionStorage.getItem('address-line-1') || '').replace(/,/g, '');
+  let addressLine2 = (sessionStorage.getItem('address-line-2') || '').replace(/,/g, '');
+  let addressTownCity = (sessionStorage.getItem('address-town') || '').replace(/,/g, '');
+  let unitName = (sessionStorage.getItem('unit-name') || '');
 
-  if (transientAddress) {
-    pipedAddress = sessionStorage.getItem('address-line-1') + ' ' + sessionStorage.getItem('address-line-2') || ''.replace(/,/g, '');
-  } else if (sessionStorage.getItem('address-line-1') && sessionStorage.getItem('address-line-2') && sessionStorage.getItem('unit-name')) {
-    pipedAddress = sessionStorage.getItem('unit-name') + ', ' + sessionStorage.getItem('address-line-1') || ''.replace(/,/g, '');
+  if (addressLine2){
+    if (addressLine2.includes("near")) {
+      pipedAddress = addressLine1 + ' ' + addressLine2;
+    } else if (unitName) {
+      pipedAddress = unitName + ', ' + addressLine1;
+    } else {
+      pipedAddress = addressLine1 + ', ' + addressLine2;
+    }
   } else {
-    pipedAddress = sessionStorage.getItem('address-line-1') + ', ' + sessionStorage.getItem('address-line-2') || ''.replace(/,/g, '');
+    pipedAddress = addressLine1 + ', ' + addressTownCity;
   }
   return pipedAddress;
 }
@@ -648,11 +654,6 @@ function storePageData(url, previousUrl) {
 function toggleFeedback() {
   $('.js-feedback-link').on('click', function(e) {
     e.preventDefault();
-
-    // $('html, body').animate({
-    //   scrollTop: $("#feedback").offset().top
-    // }, 300);
-
     $(this).toggleClass('is-expanded');
     $('.js-feedback-body').slideToggle('300');
   });
@@ -661,8 +662,11 @@ function toggleFeedback() {
 function submitFeedback() {
   $('.feedback-btn-submit').on('click', function(e) {
     e.preventDefault();
-    $('.js-collapsible-title').hide();
+    $('.feedback__title, .feedback__message, .js-collapsible-title').hide();
     $('.js-feedback-body').slideUp('100');
+    $('html, body').animate({
+      scrollTop: $(".feedback-block").offset().top-18
+    }, 300);
     $('.js-feedback-success').delay('500').slideDown('200').fadeIn('500').animate({opacity:1}, 'slow');
   });
 }

@@ -1,0 +1,76 @@
+<div class="feedback-block u-mt-xl">
+    <h2 class="feedback__title u-fs-m u-mb-xs">What do you think about this service?</h2>
+    <p class="feedback__message">Your comments will help us to make improvements</p>
+    <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple js-visitor-definition u-mb-no u-mt-no">
+        <div class="js-collapsible-content">
+            <div class="feedback__controls-success js-feedback-success" style="display: none;">
+                <h3 class="feedback__controls-success-title u-mb-xs"><span class="feedback__controls-success-title-icon icon icon--tick u-fl"></span>Thank you for your feedback</h3>
+                <p class="feedback__controls-success-message u-mb-no">We are unable to respond to feedback, but your comments will help us to make improvements</p>
+            </div>
+            <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Give us feedback">
+            Give feedback</h3>
+            <div class="collapsible__body feedback__body js-collapsible-body js-feedback-body">
+                <form action="#feedback" method="get">
+                    <div class="question">
+                        <div class="answer__fields js-fields">
+                        <div class="field field--radio field--multiplechoice u-mb-s">
+                            <legend class="field__legend">Select what your feedback is about</legend>
+                            <fieldset>
+                                <div class="field__item js-focusable-box">
+                                    <input autocomplete="new-password" class="input input--radio js-focusable" type="radio"
+                                            name="address-correct" id="census-questions">
+                                    <label id="census-questions-label" class="label label--inline" for="census-questions">The census questions
+                                    <p class="u-fs-s u-db u-mb-no label--negative">For example, questions not clear, answer options not relevant</p>
+                                    </label>
+                                </div>
+                                <div class="field__item js-focusable-box">
+                                    <input autocomplete="new-password" class="input input--radio js-focusable" type="radio"
+                                            name="address-correct" id="page-design">
+                                    <label id="page-design-label" class="label label--inline" for="page-design">Page design and structure</label>
+                                </div>
+                                <div class="field__item js-focusable-box">
+                                    <input autocomplete="new-password" class="input input--radio js-focusable" type="radio"
+                                            name="address-correct" id="general">
+                                    <label id="general-label" class="label label--inline" for="general">General feedback about this service</label>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <fieldset>
+                            <div class="field u-mb-s js-question-topic" style="display:none;">
+                            <label class="label  " for="select">Question topic
+                            </label>
+                            <select id="select" name="select" class="input input--select" required>
+                                <option value="" selected disabled>Select an option</option>
+                                <option value="General">General</option>
+                                <option value="People who live here">People who live here</option>
+                                <option value="Visitors">Visitors</option>
+                                <option value="Household and accommodation">Household and accommodation</option>
+                                <option value="Personal details">Personal details</option>
+                                <option value="Health">Health</option>
+                                <option value="Qualifications">Qualifications</option>
+                                <option value="Employment">Employment</option>
+                            </select>
+                            </div>
+                            <label class="label" for="text-input" id="label-lim">
+                            Enter your feedback
+                            <p class="u-fs-s u-mb-no">Do not include confidential information, such as your contact details</p>
+                            </label>
+                            <textarea id="text-input" class="input input--textarea js-charlimit-input" rows="5" id="textarea-answer-lim" name="textarea-answer-lim" maxlength="1000" aria-describedby="description-question" data-maxlength="1000" data-char-limit-ref="textarea-answer-lim-remaining"></textarea>
+                            <div class="input__limit u-mt-xs u-fs-s--b" data-qa="textarea-with-limit" id="textarea-answer-lim-remaining" aria-live="polite"
+                                data-charcount-singular="You have {x} character remaining"
+                                data-charcount-plural="You have {x} characters remaining">
+                                You have 1000 characters remaining
+                            </div>
+                        </fieldset>
+                        </div>
+                        <button class="feedback-btn-submit btn btn--small btn--primary u-mt-m" type="submit">Send feedback
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="feedback__footer">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25.26 25.28"><polyline points="25.26 0 21 0 21 0 3 18 3 0 0 0 0 25.28" style="fill:#93328E"/><polygon points="3 0 21 0 3 18 3 0" style="fill:#fff"/></svg>
+</div>

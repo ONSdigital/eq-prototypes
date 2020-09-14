@@ -18,6 +18,15 @@
   </div>
 </div>
 {% endunless %}
+{% if page.leaveWarning %} 
+<div class="leave-warning u-mt-l@m">
+    <div class="container">
+        <div class="panel panel--simple panel--warning js-panel-info">
+            <span class="panel__icon" aria-hidden="true">!</span><span class="panel__text">Make sure you <a class="exit" href="../home">leave this page</a> or close your browser if you are using a shared device</span>
+        </div>
+    </div>
+</div>
+{% endif %}
 {% if page.feedback %}  
   <div id="feedback" class="feedback u-mt-xl@m">
       <div class="collapsible collapsible--simple collapsible--footer">
@@ -36,7 +45,7 @@
               <div class="grid__col col-8@m">
                 <div class="feedback__body js-feedback-body" style="display: none;">
                   <form action="#feedback" method="get">
-                    <div class="panel panel--simple panel--info u-mb-m">
+                    <div class="panel panel--simple panel--info u-mb-m u-mt-m">
                         <div class="panel__body">
                             <h3 class="u-mb-xs">Having technical issues?</h2>
                             <p>If you are having any technical issues or need help, please <a href="#">contact us</a></p>
@@ -97,7 +106,7 @@
                             </div>
                           </fieldset>
                         </div>
-                        <button class="feedback-btn-submit btn btn--primary u-mt-xl" type="submit">Send feedback
+                        <button class="feedback-btn-submit btn btn--primary u-mt-xl u-mb-l" type="submit">Send feedback
                         </button>
                     </div>
                   </form>
@@ -109,7 +118,7 @@
       </div>
   </div>
 {% endif %}
-<footer class="footer u-mt-xl@m u-mt-no@xs@s" data-analytics="footer">
+<footer class="footer u-mt-xl@m" data-analytics="footer">
   <div class="footer__body">
     <div class="container ">
       <div class="grid">

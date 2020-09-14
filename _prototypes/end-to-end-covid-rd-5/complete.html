@@ -6,38 +6,14 @@ layout: eq-default-extras
 footer: census-transactional
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 exit: true
-feedback: true
+leaveWarning: true
 ---
 
 <style type="text/css">
 
-.page_line {
-    margin-top: 0.5em;
-      border: 0.02em solid #999;
-      width: 100%;
-    margin-bottom: 1.6em;
-}
-
-.title {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-bottom: 1em;
-}
-
-.person-count {
-    font-size: 3em;
-    font-weight: bold;
-    margin-bottom: -0.2em;
-    margin-top: -0.3em;
-}
-
-.smalltext {
-    font-size: 0.4em;
-    font-weight: normal;
-    margin-left: -0.2em;
-}
 
 </style>
+
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v5.0"></script>
 <link rel="stylesheet" href="../../end-to-end/style.css"/>
@@ -78,11 +54,11 @@ feedback: true
                         <p class="u-mb-xs">Your census has been submitted for the household at <span class="full-address-text u-fs-r--b">Address not set</span></p>
                     </div>
                 </div>
-                <p class="lock u-mb-l">Your personal information is protected by law and will be kept confidential</p>
-                <h2>Get confirmation email</h2>
-                <p>If you would like to be sent confirmation that you have completed your census, enter your email address.</p>
+                <p class="lock u-mb-m">Your personal information is protected by law and will be kept confidential</p>
+                <hr>
+                <h2 class="u-mt-m">Get confirmation email</h2>
+                <p>If you would like to be sent confirmation that you have completed your census, enter your email address</p>
                 <form action="../complete--confirmation-sent/">
-            
                     <div id="email-field" class="field">
                         <label class="label" for="email-address">
                                 Email address
@@ -94,13 +70,11 @@ feedback: true
                                 value="" />
                     </div>
 
-                    <button type="submit" class="btn btn--small u-mb-l u-mt-s qa-btn-submit">
+                    <button type="submit" class="btn btn--small u-mb-no u-mt-m qa-btn-submit">
                         <span class="btn__inner">Send confirmation</span>
                     </button>
                 </form>
-                <div class="panel panel--simple panel--warning js-panel-info u-mb-m">
-                    <span class="panel__icon" aria-hidden="true">!</span><span class="panel__text">Make sure you <a class="exit" href="../home">leave this page</a> or close your browser if you are using a shared device</span>
-                </div>
+                {% include_relative partials/feedback.html %}
             </main>
         </div>
     </div>
