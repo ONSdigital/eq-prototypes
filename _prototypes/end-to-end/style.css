@@ -1023,13 +1023,6 @@ hr {
     margin-top: 2rem;
 }
 
-/* over 740px */
-@media only screen and (max-width: 740px) {
-    .footer-button {
-        margin-bottom: -2rem;
-    }
-}
-
 .feedback .collapsible {
     margin-top: 0;
 }
