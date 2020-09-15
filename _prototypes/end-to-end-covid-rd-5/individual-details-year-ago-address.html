@@ -37,15 +37,10 @@ noONSLogoLink: true
                                         One year ago, what was your usual address?
                                     </h1>
                                      <p class="question__description js-piping">
-                                        If you had no usual address one year ago, select the address where you were staying
+                                        If you had no usual address one year ago, select the address where you were staying.
                                     </p>
-                                    <div class="panel panel--simple panel--info u-mb-m">
-                                        <div class="panel__body">
-                                            <p class="js-piping">
-                                            If the <strong>coronavirus</strong> pandemic affected your usual address one year ago, select where you were living <strong>before your circumstances changed</strong>
-                                            </p>
-                                        </div>
-                                    </div>
+                                        If the <strong>coronavirus</strong> pandemic affected your usual address one year ago, select where you were living <strong>before your circumstances changed</strong>.
+                                    </p>
                                 </div>
                                 <div class="answer">
                                     <div class="answer__fields js-fields">
@@ -195,7 +190,8 @@ noONSLogoLink: true
             $('.js-heading').html('One year ago, what was ' + '<em class="highlight">' + person.firstLastName +
             window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
             ' usual address?');
-            $('.js-piping').html('If they had no usual address one year ago, select the address where they were staying');
+            $('.js-piping').html('If they had no usual address one year ago, select the address where they were staying.');
+            $('.js-panel').html('If the <strong>coronavirus</strong> pandemic affected their usual address one year ago, select where they were living <strong>before their circumstances changed</strong>.');
         }
     }
     

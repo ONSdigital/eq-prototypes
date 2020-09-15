@@ -57,12 +57,8 @@ noONSLogoLink: true
                                         class="question__title u-fs-xl js-heading">
                                         In the last seven days, were you doing any of the following?
                                     </h1>
-                                    <p>This can be casual or temporary work, even if only for one hour</p>
-                                    <div class="panel panel--simple panel--info u-mb-m">
-                                        <div class="panel__body">
-                                            <p class="js-piping">If you have a job but have been on <strong>furlough</strong>, in <strong>quarantine</strong> or <strong>self-isolating</strong>, select “Temporarily away from work ill, on holiday or temporarily laid off”</p>
-                                        </div>
-                                    </div>
+                                    <p>This can be casual or temporary work, even if only for one hour.</p>
+                                    <p class="js-piping">If you have a job but have been on <strong>furlough</strong>, in <strong>quarantine</strong> or <strong>self-isolating</strong>, select “Temporarily away from work ill, on holiday or temporarily laid off”.</p>
                                 </div>
                                 <div class="answer" id="checkboxes">
                                     <div class="answer__fields question__answer js-fields">
@@ -229,7 +225,7 @@ noONSLogoLink: true
         if(storageAPI.getProxyFor(personId)) {
             $('.js-heading').html('In the last seven days, was ' + '<em class="highlight">' + person.firstLastName + '</em>' +
                 ' doing any of the following?');
-            $('.js-piping').html('If they have a job but have been on <strong>furlough</strong>, in <strong>quarantine</strong> or <strong>self-isolating</strong>, select “Temporarily away from work ill, on holiday or temporarily laid off”');
+            $('.js-piping').html('If they have a job but have been on <strong>furlough</strong>, in <strong>quarantine</strong> or <strong>self-isolating</strong>, select “Temporarily away from work ill, on holiday or temporarily laid off”.');
         }
     }
 
