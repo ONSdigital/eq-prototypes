@@ -36,8 +36,12 @@ noONSLogoLink: true
                                         class="question__title u-fs-xl js-heading">
                                         In your main job, how many hours a week do you usually work?
                                     </h1>
-                                    <p>Include paid and unpaid overtime.</p>
-                                    <p>If the <strong>coronavirus</strong> pandemic has affected your working hours, select the answer that best describes your <strong>current circumstances</strong>.</p>
+                                </div>
+                                <p class="js-help">If the <strong>coronavirus</strong> pandemic has affected your working hours, select the answer that best describes your <strong>current circumstances</strong></p>
+                                <div class="panel panel--simple panel--info u-mb-m">
+                                  <div class="panel__body">
+                                      Include paid and unpaid overtime
+                                  </div>
                                 </div>
                                 <div class="answer">
                                     <div class="answer__fields js-fields">
@@ -153,8 +157,9 @@ noONSLogoLink: true
 
   function updateQuestion() {
     if(storageAPI.getProxyFor(personId)) {
-      $('.js-heading').html('In ' + '<em class="highlight">' + person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
+        $('.js-heading').html('In ' + '<em class="highlight">' + person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
         ' main job, how many hours a week do they usually work?');
+        $('.js-help').html('If the <strong>coronavirus</strong> pandemic has affected your working hours, select the answer that best describes your <strong>current circumstances</strong>');
     }
     if (details['employment'].sevenDaysAgo[0]=== 'No') {
         var replaceQuestion = $('.js-heading').html().replace('do', 'did');
