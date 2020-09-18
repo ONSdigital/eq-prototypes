@@ -22,6 +22,23 @@ logoUrl: ../home
         </div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main">
+                <div class="panel panel--error u-mb-m js-error-box u-d-no">
+                    <div class="panel__header">
+                        <div class="panel__title u-fs-r--b">There <span class="js-piping">is a problem</span> with your answer</div>
+                    </div>
+                    <div class="panel__body">
+                        <ol class="list list--bare">
+                            <li class="list__item js-yes u-d-no">
+                                1. <a href="#error-message-yes" class="list__link js-inpagelink js-error">
+                                    Select an answer
+                                        <span class="u-vh js-piping"> 
+                                            to 'Do you want to send {x} to this address?'
+                                        </span>
+                                    </a>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password"
                       action="../hub">
@@ -40,29 +57,33 @@ logoUrl: ../home
                                     A letter with your individual access code will arrive in a brown unbranded envelope
                                 </div>
                             </div>
-                            <div class="field field--radio field--multiplechoice">
-                                <fieldset>
-                                    <div class="field__item js-focusable-box">
-                                        <input autocomplete="new-password" class="input input--radio js-focusable"
-                                               name="radio-answer"
-                                               value="Yes"
-                                               id="Yes"
-                                               type="radio">
-                                        <label class="label label--inline u-fs-r js-piping"
-                                               for="Yes">
-                                            Yes, send the {y} by post</label>
-                                    </div>
-                                    <div class="field__item js-focusable-box">
-                                        <input autocomplete="new-password" class="input input--radio js-focusable"
-                                               name="radio-answer"
-                                               value="No"
-                                               id="No"
-                                               type="radio">
-                                        <label class="label label--inline u-fs-r no-answer"
-                                               for="No">
-                                            No, send it another way</label>
-                                    </div>
-                                </fieldset>
+
+                            <div class="answer__fields question__answer js-fields" id="radios">
+                                <div class="field field--radio field--multiplechoice">
+                                    <fieldset>
+                                        <div class="field__item js-focusable-box">
+                                            <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                name="radio"
+                                                value="Yes"
+                                                id="yes"
+                                                data-error-msg="Select an answer"
+                                                type="radio">
+                                            <label class="label label--inline u-fs-r js-piping"
+                                                for="yes">
+                                                Yes, send the {y} by post</label>
+                                        </div>
+                                        <div class="field__item js-focusable-box">
+                                            <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                name="radio"
+                                                value="No"
+                                                id="No"
+                                                type="radio">
+                                            <label class="label label--inline u-fs-r no-answer"
+                                                for="No">
+                                                No, send it another way</label>
+                                        </div>
+                                    </fieldset>
+                                </div>
                             </div>
                             <div class="large-print u-mt-l field field--checkbox field--multiplechoice u-d-no">
                                 <h2 class="u-fs-m">Large print</h2>
@@ -97,6 +118,7 @@ logoUrl: ../home
     var codeTypeShort;
     var roomNumber;
     var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
+    var hasErrors = false;
 
     if(currentJourney === 'new-ir-uac' || currentJourney === 'new-ce-resident-uac'){
         var codeType = 'an individual access code'
@@ -146,23 +168,29 @@ logoUrl: ../home
 
     $('.qa-btn-submit').on('click', function (e) {
         e.preventDefault();
-        
-        if ($('[name=radio-answer]:checked').val() === 'Yes') {
-            var url = '../uac-request-confirm-address-sent/';
-            if ($('.large-print-checkbox-answer').is(':checked')) {
-                var largePrint = 'true';
+        const testFails = ($('input[type=radio]:checked').size() === 0);
+        window.ONS.utils.validateInputs(testFails, "input[type=radio]");
+
+        if (hasErrors) {
+            hasErrors = false;
+            return false;
+        } else {
+            if ($('[name=radio]:checked').val() === 'Yes') {
+                var url = '../uac-request-confirm-address-sent/';
+                if ($('.large-print-checkbox-answer').is(':checked')) {
+                    var largePrint = 'true';
+                }
+            } else if ($('[name=radio]:checked').val() === 'No') {
+                if (currentJourney === 'new-hh-paper' || currentJourney === 'new-ir-paper' || currentJourney === 'new-ce-resident-paper') {
+                    var url = '../home/';
+                    var previousPage = '';
+                } else {
+                    var url = '../uac-request-method/';
+                    var previousPage = 'uac-request-address';
+                }
             }
-        } else if ($('[name=radio-answer]:checked').val() === 'No') {
-            if (currentJourney === 'new-hh-paper' || currentJourney === 'new-ir-paper' || currentJourney === 'new-ce-resident-paper') {
-                var url = '../home/';
-                var previousPage = '';
-            } else {
-                var url = '../uac-request-method/';
-                var previousPage = 'uac-request-address';
-            }
+            window.location.href = url + '?previous=' + previousPage + '&current-journey=' + currentJourney + (largePrint ? '&large-print=' + largePrint: '');
         }
-        window.location.href = url + '?previous=' + previousPage + '&current-journey=' + currentJourney + (largePrint ? '&large-print=' + largePrint: '');
-    
     });
     $(updateQuestion);
 
