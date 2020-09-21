@@ -1,0 +1,70 @@
+---
+title: Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+logoUrl: ../home
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="back-link js-previous-link" href="../hub">Back</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-12@l">
+            <main role="main" id="main" class="page__main">
+                <div class="group">
+                    <div class="block">
+                        <section class="section">
+                            <h1 class="u-fs-xl">Languages</h1>
+                            <h2>Europe</h2>
+                            <div class="grid">
+                                <div class="grid__col col-4@m">
+                                    <p><a href="../languages/albanian">Shqiptare (Albanian)</a></p>
+                                    <p><a href="../languages/albanian">Albanian (Polski)</a></p>
+                                </div>
+                                <div class="grid__col col-4@m">
+                                    <p><a href="../languages/albanian">Albanian (Polski)</a></p>
+                                    <p><a href="../languages/albanian">Albanian (Polski)</a></p>
+                                </div>
+                                <div class="grid__col col-4@m">
+                                    <p><a href="../languages/albanian">Albanian (Polski)</a></p>
+                                    <p><a href="../languages/albanian">Albanian (Polski)</a></p>
+                                </div>
+                            </div>
+                            <h2>Asia</h2>
+                            <p><a href="../languages/polish">Polish (Polski)</a></p>
+
+                        </section>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+    storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    previousPage = urlParams.get('previous');
+    currentJourney = urlParams.get('current-journey');
+    currentPath = window.location.pathname,
+    pathArray = window.location.pathname.split('/'),
+    currentPage = pathArray.slice(-2)[0];
+    var parentPage = pathArray.slice(-3)[0];
+
+    function updateAllLinks() {
+        $('.js-previous-link').attr('href', '../' + previousPage + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney);
+    }
+
+    $(updateAllLinks);
+</script>

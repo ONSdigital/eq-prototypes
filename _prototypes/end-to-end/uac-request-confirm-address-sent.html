@@ -84,9 +84,17 @@ logoUrl: ../home
         var modeType = 'letter';        
     } else if (currentJourney === 'new-hh-paper' || currentJourney === 'new-ir-paper' || currentJourney === 'new-ce-resident-paper') {
         if (largePrint) {
-            var modeType = 'large-print paper questionnaire';
+            if (currentJourney === 'new-ir-paper') {
+                var modeType = 'large-print individual paper questionnaire';
+            } else {
+                var modeType = 'large-print paper questionnaire';
+            }
         } else {
-            var modeType = 'paper questionnaire';
+            if (currentJourney === 'new-ir-paper') {
+                var modeType = 'individual paper questionnaire';
+            } else {
+                var modeType = 'paper questionnaire';
+            }
         }
         $('.js-panel').html('This should arrive soon for you to complete your census');
     } else {
