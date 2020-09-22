@@ -6,44 +6,13 @@ layout: eq-default-extras
 footer: census-transactional
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 exit: true
+leaveWarning: true
 ---
 
 <style type="text/css">
-
-.page_line {
-    margin-top: 0.5em;
-      border: 0.02em solid #999;
-      width: 100%;
-    margin-bottom: 1.6em;
-}
-
-.title {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-bottom: 1em;
-}
-
-.person-count {
-    font-size: 3em;
-    font-weight: bold;
-    margin-bottom: -0.2em;
-    margin-top: -0.3em;
-}
-
-.smalltext {
-    font-size: 0.4em;
-    font-weight: normal;
-    margin-left: -0.2em;
-}
-
-.tick-spacing {
-    margin-left: 1.3em;
-    margin-bottom: 0.8em;
-}
-
 </style>
 
-<link rel="stylesheet" href="../style.css"/>
+<link rel="stylesheet" href="../../end-to-end/style.css"/>
 <div class="page__subheader">
     <div class="container">
     </div>
@@ -67,15 +36,9 @@ exit: true
                 </div>
                 <div class="js-resend-confirmation">
                     <h2 class="u-fs-r--b u-mb-xs">Didn&rsquo;t receive an email?</h2>
-                    <p class="u-mb-m">It can take a few minutes for the email to arrive. If it doesn&rsquo;t arrive, check your junk mail, or you can <a class="js-resend-confirmation" href="../complete--confirmation-resend">send another confirmation email</a>.</p>
+                    <p class="u-mb-no">It can take a few minutes for the email to arrive. If it doesn&rsquo;t arrive, check your junk mail, or you can <a class="js-resend-confirmation" href="../complete--confirmation-resend">send another confirmation email</a>.</p>
                 </div>
-                <div class="panel panel--simple panel--warning js-panel-info u-mb-m">
-                    <span class="panel__icon" aria-hidden="true">!</span><span class="panel__text">Make sure you <a class="exit" href="../home">leave this page</a> or close your browser if you are using a shared device</span>
-                </div>
-                <div class="js-resend-max-sent u-d-no">
-                    <h2 class="u-fs-r--b u-mb-xs">Didn&rsquo;t receive an email?</h2>
-                    <p class="u-mb-m">It can take a few minutes for the email to arrive. If it doesn&rsquo;t arrive, <a class="js-resend-confirmation" href="../complete--confirmation-resend">contact us</a>.</p>
-                </div>
+                {% include_relative partials/feedback.html %}
             </main>
         </div>
     </div>

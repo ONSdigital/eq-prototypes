@@ -44,9 +44,10 @@ exit: true
 </style>
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v5.0"></script>
-<link rel="stylesheet" href="../style.css"/>
+<link rel="stylesheet" href="../../end-to-end/style.css"/>
 <div class="page__subheader">
     <div class="container">
+        <a class="back-link" href="../complete--confirmation-sent/">Back</a>
     </div>
 </div>
 
@@ -126,9 +127,9 @@ exit: true
         } else if (searchParams.get('empty')) {
             let param = searchParams.get('true');
             $('.js-error-box').removeClass('u-d-no');
-            $('.js-inpagelink').html('Enter an email address');
+            $('.js-inpagelink').html('Enter an email address to continue');
             $('#email-field').wrap( '<div class="panel panel--simple panel--error"><div class="panel__body"></div></div>' );
-            $('#email-field').before('<p id="panel-error" class="panel__error u-fs-r--b">Enter an email address</p>');
+            $('#email-field').before('<p id="panel-error" class="panel__error u-fs-r--b">Enter an email address to continue</p>');
         }
     }
 

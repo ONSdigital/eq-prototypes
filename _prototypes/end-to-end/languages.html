@@ -17,37 +17,23 @@ logoUrl: ../home
 </div>
 
 <div class="page__container container">
-    <div class="grid grid--reverse">
-        <div class="grid__col col-12@l">
-            <main role="main" id="main" class="page__main">
-                <div class="group">
-                    <div class="block">
-                        <section class="section">
-                            <h1 class="u-fs-xl">Languages</h1>
-                            <h2>Europe</h2>
-                            <div class="grid">
-                                <div class="grid__col col-4@m">
-                                    <p><a href="../languages/albanian">Shqiptare (Albanian)</a></p>
-                                    <p><a href="../languages/albanian">Albanian (Polski)</a></p>
-                                </div>
-                                <div class="grid__col col-4@m">
-                                    <p><a href="../languages/albanian">Albanian (Polski)</a></p>
-                                    <p><a href="../languages/albanian">Albanian (Polski)</a></p>
-                                </div>
-                                <div class="grid__col col-4@m">
-                                    <p><a href="../languages/albanian">Albanian (Polski)</a></p>
-                                    <p><a href="../languages/albanian">Albanian (Polski)</a></p>
-                                </div>
-                            </div>
-                            <h2>Asia</h2>
-                            <p><a href="../languages/polish">Polish (Polski)</a></p>
-
-                        </section>
+    <main role="main" id="main" class="page__main">
+        <div class="group">
+            <div class="block">
+                <section class="section">
+                <h1 class="u-fs-xl">Languages</h1>
+                    <div class="grid">
+                        <div class="grid__col col-6@m">
+                            <ol id="js-lang-list" class="list list--bare" style="padding:0;"></ol>
+                        </div>
+                        <div class="grid__col col-6@m" style="direction:rtl;">
+                            <ol id="js-rtl-lang-list" class="list list--bare" style="padding:0;"></ol>
+                        </div>
                     </div>
-                </div>
-            </main>
+                </section>
+            </div>
         </div>
-    </div>
+    </main>
 </div>
 
 <script src='/js/compiled/end-to-end/bundle.js'></script>
@@ -61,10 +47,96 @@ logoUrl: ../home
     pathArray = window.location.pathname.split('/'),
     currentPage = pathArray.slice(-2)[0];
     var parentPage = pathArray.slice(-3)[0];
+    var languages = [
+        'BSL (British Sign Language)',
+        'Cymraeg (Welsh)',
+        'اللغة العربية (Arabic)', 
+        'አማርኛ (Amharic)', 
+        'Shqiptare (Albanian)', 
+        'հայերեն (Armenian)',
+        'বাংলা (Bengali)',
+        'Bosanski (Bosnian)',
+        'български (Bulgarian)',
+        'မြန်မာဘာသာ (Burmese)',
+        '粵語 (Cantonese)',
+        'čeština (Czech)',
+        'فارسی (Farsi) RTL',
+        'Le français (French)',
+        'Deutsche (German)',
+        'Ελληνικά (Greek)',
+        'ગુજરાતી (Gujarati)',
+        'עִברִית (Hebrew) RTL',
+        'हिन्दी (Hindi)',
+        'Magyar (Hungarian)',
+        'Italiano (Italian)',
+        '日本人 (Japanese)',
+        '한국어 (Korean)',
+        'Kurdî (Kurdish)',
+        'Latvietis (Latvian)',
+        'Lingála (Lingala)',
+        'Lietuvis (Lithuanian)',
+        'മലയാളം (Malayalam)',
+        '普通話 (Mandarin)',
+        'नेपाली (Nepali)',
+        'Polskie (Polish)',
+        'Português (Portuguese)',
+        'پوٹھواری (Pothwari)',
+        '(Punjabi (Gurmukhi))',
+        'z(Romanian)',
+        'z(Russian)',
+        'z(Slovak)',
+        'z(Slovenian)',
+        'z(Somali)',
+        'z(Swahili)',
+        'z(Tagalog)',
+        'z(Tamil)',
+        'z(Tetum)',
+        'z(Thai)',
+        'z(Tigrinya)',
+        'z(Turkish)',
+        'z(Ukrainian)',
+        'z(Urdu)',
+        'z(Vietnamese)',
+        'z(Yiddish)'
+    ];
+    var rtlLanguages = [
+        'فارسی - fa (Farsi)',
+        '(Hebrew) he - עִברִית '
+    ]
 
     function updateAllLinks() {
         $('.js-previous-link').attr('href', '../' + previousPage + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney);
     }
 
+    function sortList() {
+        languages.sort(function (a, b) {
+            return a.localeCompare(b);
+        });
+        
+        var markup = '';
+        for (var i =0; i < languages.length; i++) {
+            markup += '<li class="list__item">' + '<a href="#">' + languages[i] + '</a>' + '</li>';
+        }
+        document.getElementById('js-lang-list').innerHTML = markup;
+    }
+
+    function sortRtlList() {
+        rtlLanguages.sort(function (a, b) {
+            return a.localeCompare(b);
+        });
+        
+        var markup = '';
+        for (var i =0; i < rtlLanguages.length; i++) {
+            markup += '<li class="list__item">' + '<a href="#">' + rtlLanguages[i] + '</a>' + '</li>';
+        }
+        document.getElementById('js-rtl-lang-list').innerHTML = markup;
+    }    
+
+    function updateListLinks() {
+        
+    }
+    sortRtlList();
+    sortList();
+    updateListLinks();
     $(updateAllLinks);
 </script>

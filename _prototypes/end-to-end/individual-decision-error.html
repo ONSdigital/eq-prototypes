@@ -64,7 +64,11 @@ noONSLogoLink: true
 
 
     function updateAllLinks() {
-        $('.js-retry').attr('href', '../individual-decision-enter-mobile-correct' + '?person_id=' + personId + '&mobile=' + mobileNo);
+        if (previousPage === 'individual-decision-confirm-address') {
+            $('.js-retry').attr('href', document.referrer + '?person_id=' + personId + '&mobile=' + mobileNo);
+        } else {
+            $('.js-retry').attr('href', document.referrer + '?person_id=' + personId);
+        }
     }
 
     $(updateAllLinks);
