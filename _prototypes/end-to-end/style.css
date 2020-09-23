@@ -841,6 +841,12 @@ p.label--negative:empty {
   margin-left : .5rem;
 }
 
+@media only screen and (min-width: 740px) {
+    .list--inline\@m .list__item {
+        margin: .25rem 1.5rem .25rem .5rem!important;
+    }
+}
+
 @media only screen and (min-width: 500px) {
     .list--inline\@s .list__item {
         margin: .25rem 1rem .25rem .5rem;
@@ -1032,7 +1038,7 @@ hr {
 }
 
 .footer--border {
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #acacac;
     padding: 2rem 0 0;
 }
 
