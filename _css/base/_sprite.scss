@@ -204,7 +204,7 @@
 
 .svg-icons--guidance {
 	@extend %svg-common;
-	background-position: 84.84848484848484% 34.437086092715234%;
+	background-position: 84.84848484848484% 46.688741721854306%;
 }
 
 .svg-icons--guidance-dims {
@@ -214,7 +214,7 @@
 
 .svg-icons--guidance-white {
 	@extend %svg-common;
-	background-position: 84.84848484848484% 58.94039735099338%;
+	background-position: 84.84848484848484% 34.437086092715234%;
 }
 
 .svg-icons--guidance-white-dims {
@@ -234,7 +234,7 @@
 
 .svg-icons--icons--check-white {
 	@extend %svg-common;
-	background-position: 99.809375% 28.382838283828384%;
+	background-position: 99.809375% 54.78547854785479%;
 }
 
 .svg-icons--icons--check-white-dims {
@@ -242,9 +242,19 @@
 	height: 36px;
 }
 
+.svg-icons--icons--chevron-down {
+	@extend %svg-common;
+	background-position: 57.676829268292686% 44.649517684887456%;
+}
+
+.svg-icons--icons--chevron-down-dims {
+	width: 32px;
+	height: 28px;
+}
+
 .svg-icons--icons--chevron-down-black {
 	@extend %svg-common;
-	background-position: 31.70731707317073% 16.720257234726688%;
+	background-position: 72.82012195121952% 78.09003215434083%;
 }
 
 .svg-icons--icons--chevron-down-black-dims {
@@ -254,7 +264,7 @@
 
 .svg-icons--icons--chevron-right {
 	@extend %svg-common;
-	background-position: 97.375% 54.180602006688964%;
+	background-position: 97.375% 28.762541806020067%;
 }
 
 .svg-icons--icons--chevron-right-dims {
@@ -264,7 +274,7 @@
 
 .svg-icons--icons--chevron-right-white {
 	@extend %svg-common;
-	background-position: 97.375% 40.802675585284284%;
+	background-position: 97.375% 42.14046822742475%;
 }
 
 .svg-icons--icons--chevron-right-white-dims {
@@ -274,7 +284,7 @@
 
 .svg-icons--icons--definition-arrow {
 	@extend %svg-common;
-	background-position: 86.41975308641975% 46.688741721854306%;
+	background-position: 86.41975308641975% 58.94039735099338%;
 }
 
 .svg-icons--icons--definition-arrow-dims {
@@ -310,6 +320,16 @@
 .svg-icons--icons--guidance-white-dims {
 	width: 45.95px;
 	height: 52px;
+}
+
+.svg-icons--icons--languages {
+	@extend %svg-common;
+	background-position: 32.098765432098766% 17.16171617161716%;
+}
+
+.svg-icons--icons--languages-dims {
+	width: 36px;
+	height: 36px;
 }
 
 .svg-icons--info {

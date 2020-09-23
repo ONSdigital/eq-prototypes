@@ -3,30 +3,53 @@ title: Household questionnaire (English)
 project: Census 2021 End to end prototype
 globalcss: false
 layout: eq-default-extras
-footer: census-transactional
+header: census-website
+footer: census-website
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 hideSaveLater: true
 logoUrl: ../home
 ---
 
 <link rel="stylesheet" href="../style.css"/>
-<div class="page__subheader">
-    <div class="container">
-        <a class="back-link js-previous-link" href="../hub">Back</a>
-    </div>
-</div>
 
 <div class="page__container container">
-    <main role="main" id="main" class="page__main">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol class="breadcrumb__items">
+            <li id="breadcrumb-1" class="breadcrumb__item u-fs-s">
+                <a href="../home" class="breadcrumb__link">Home</a>
+            </li>
+            <li id="breadcrumb-1" class="breadcrumb__item u-fs-s">
+                <a href="#" class="breadcrumb__link">Help with the census</a>
+            </li>
+        </ol>
+    </nav>
+
+    <main role="main" id="main" class="page__main u-mt-m">
         <div class="group">
             <div class="block">
                 <section class="section">
-                <h1 class="u-fs-xl">Languages</h1>
+                    <div class="grid grid--flex grid--between u-mb-l">
+                        <div class="grid__col grid__col--flex">
+                            <h1 class="u-fs-xxl u-mb-no">Languages</h1>
+                        </div>
+                        <div class="grid__col grid__col--flex">
+                            <div class="adv-filter__results-sort">
+                                <label class="label" for="sort">Sort by</label>
+                                <select class="input input--select" id="sort" name="sort" aria-controls="adv-filter-gallery" data-sort="true">
+                                    <option value="native">Native language</option>
+                                    <option value="english">English</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                     <div class="grid">
-                        <div class="grid__col col-6@m">
+                        <div class="grid__col col-4@m">
                             <ol id="js-lang-list" class="list list--bare" style="padding:0;"></ol>
                         </div>
-                        <div class="grid__col col-6@m" style="direction:rtl;">
+                        <div class="grid__col col-4@m">
+                            <ol id="js-non-latin-lang-list" class="list list--bare" style="padding:0;"></ol>
+                        </div>
+                        <div class="grid__col col-4@m">
                             <ol id="js-rtl-lang-list" class="list list--bare" style="padding:0;"></ol>
                         </div>
                     </div>
@@ -50,61 +73,63 @@ logoUrl: ../home
     var languages = [
         'BSL (British Sign Language)',
         'Cymraeg (Welsh)',
-        'اللغة العربية (Arabic)', 
-        'አማርኛ (Amharic)', 
         'Shqiptare (Albanian)', 
-        'հայերեն (Armenian)',
-        'বাংলা (Bengali)',
         'Bosanski (Bosnian)',
-        'български (Bulgarian)',
-        'မြန်မာဘာသာ (Burmese)',
-        '粵語 (Cantonese)',
         'čeština (Czech)',
-        'فارسی (Farsi) RTL',
         'Le français (French)',
         'Deutsche (German)',
-        'Ελληνικά (Greek)',
-        'ગુજરાતી (Gujarati)',
-        'עִברִית (Hebrew) RTL',
-        'हिन्दी (Hindi)',
         'Magyar (Hungarian)',
         'Italiano (Italian)',
-        '日本人 (Japanese)',
-        '한국어 (Korean)',
         'Kurdî (Kurdish)',
         'Latvietis (Latvian)',
         'Lingála (Lingala)',
         'Lietuvis (Lithuanian)',
+        'Polskie (Polish)',
+        'Português (Portuguese)',
+        'Română (Romanian)',
+        'Slovák (Slovak)',
+        'Slovenščina (Slovenian)',
+        'Soomaali (Somali)',
+        'Kiswahili (Swahili)',
+        'Tagalog',
+        'Tetum',
+        'Türk (Turkish)',
+        'Tiếng Việt (Vietnamese)'
+    ];
+    var rtlLanguages = [
+        'فارسی  (Farsi)',
+        'עִברִית (Hebrew)',
+        'اردو (Urdu)',
+        'יידיש (Yiddish)',
+        'عربى (Arabic)'
+    ]
+
+    var nonLatinLanguages = [
+        'አማርኛ (Amharic)', 
+        'հայերեն (Armenian)',
+        'বাংলা (Bengali)',
+        'български (Bulgarian)',
+        'မြန်မာဘာသာ (Burmese)',
+        '粵語 (Cantonese)',   
+        'Ελληνικά (Greek)',
+        'ગુજરાતી (Gujarati)',
+        'हिन्दी (Hindi)',
+        '日本人 (Japanese)',
+        '한국어 (Korean)',
         'മലയാളം (Malayalam)',
         '普通話 (Mandarin)',
         'नेपाली (Nepali)',
-        'Polskie (Polish)',
-        'Português (Portuguese)',
         'پوٹھواری (Pothwari)',
-        '(Punjabi (Gurmukhi))',
-        'z(Romanian)',
-        'z(Russian)',
-        'z(Slovak)',
-        'z(Slovenian)',
-        'z(Somali)',
-        'z(Swahili)',
-        'z(Tagalog)',
-        'z(Tamil)',
-        'z(Tetum)',
-        'z(Thai)',
-        'z(Tigrinya)',
-        'z(Turkish)',
-        'z(Ukrainian)',
-        'z(Urdu)',
-        'z(Vietnamese)',
-        'z(Yiddish)'
-    ];
-    var rtlLanguages = [
-        'فارسی - fa (Farsi)',
-        '(Hebrew) he - עִברִית '
+        'ਪੰਜਾਬੀ (Punjabi (Gurmukhi))',
+        'русский (Russian)',
+        'தமிழ் (Tamil)',
+        'ไทย (Thai)',
+        'ትግርኛ (Tigrinya)',
+        'Український (Ukrainian)'
     ]
 
     function updateAllLinks() {
+        $('#main-nav ul li:nth-child(3)').addClass('header-nav__item--active');
         $('.js-previous-link').attr('href', '../' + previousPage + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney);
     }
 
@@ -112,10 +137,10 @@ logoUrl: ../home
         languages.sort(function (a, b) {
             return a.localeCompare(b);
         });
-        
+
         var markup = '';
         for (var i =0; i < languages.length; i++) {
-            markup += '<li class="list__item">' + '<a href="#">' + languages[i] + '</a>' + '</li>';
+            markup += '<li class="list__item">' + '<a href="../language-help">' + languages[i] + '</a>' + '</li>';
         }
         document.getElementById('js-lang-list').innerHTML = markup;
     }
@@ -124,17 +149,32 @@ logoUrl: ../home
         rtlLanguages.sort(function (a, b) {
             return a.localeCompare(b);
         });
-        
+
         var markup = '';
         for (var i =0; i < rtlLanguages.length; i++) {
-            markup += '<li class="list__item">' + '<a href="#">' + rtlLanguages[i] + '</a>' + '</li>';
+            markup += '<li class="list__item">' + '<a href="../rtl-language-help">' + rtlLanguages[i] + '</a>' + '</li>';
         }
         document.getElementById('js-rtl-lang-list').innerHTML = markup;
-    }    
+        document.getElementById('js-rtl-lang-list').setAttribute('style', 'direction: rtl;');
+    }
+
+    function sortNonLatinList() {
+        nonLatinLanguages.sort(function (a, b) {
+            return a.localeCompare(b);
+        });
+
+        var markup = '';
+        for (var i =0; i < nonLatinLanguages.length; i++) {
+            markup += '<li class="list__item">' + '<a href="#">' + nonLatinLanguages[i] + '</a>' + '</li>';
+        }
+        document.getElementById('js-non-latin-lang-list').innerHTML = markup;
+    }
 
     function updateListLinks() {
-        
+
     }
+
+    sortNonLatinList()
     sortRtlList();
     sortList();
     updateListLinks();

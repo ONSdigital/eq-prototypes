@@ -1,0 +1,131 @@
+---
+title: Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+header: census-website
+footer: census-website
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+logoUrl: ../home
+---
+
+<link rel="stylesheet" href="../style.css"/>
+
+<div class="page__container container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol class="breadcrumb__items">
+            <li id="breadcrumb-1" class="breadcrumb__item u-fs-s">
+                <a href="../home" class="breadcrumb__link">Home</a>
+            </li>
+            <li id="breadcrumb-2" class="breadcrumb__item u-fs-s">
+                <a href="#" class="breadcrumb__link">Help with the census</a>
+            </li>
+            <li id="breadcrumb-3" class="breadcrumb__item u-fs-s">
+                <a href="../languages" class="breadcrumb__link">Languages</a>
+            </li>
+            <li id="breadcrumb-3" class="breadcrumb__item u-fs-s">
+                <a href="../languages" class="breadcrumb__link">Bosnian help and support</a>
+            </li>
+        </ol>
+    </nav>
+
+    <div class="grid">
+        <div class="grid__col col-7@m">
+            <main role="main" id="main" class="page__main u-mt-m">
+                <div class="group">
+                    <div class="block">
+                        <section class="section">
+                            <h1 class="u-mb-l">
+                                <span class="u-fs-m u-db u-mb-xs u-lighter">Bosnian help and support</span> 
+                                <span class="u-vh">: </span>
+                                <span class="u-fs-xxl u-db">Completing your census online</span>
+                            </h1>
+                            <aside class="toc-container" role="complementary">
+                                <nav class="toc" aria-label="Pages in this guide">
+                                    <h2 class="toc__title u-fs-r--b u-mb-s">Contents</h2>
+                                    <ol class="list list--dashed u-mb-m">
+                                        <li class="list__item "><a href="../language-help" class="list__link ">Overview</a></li>
+                                        <li class="list__item " aria-current="true">Completing your census online</li>
+                                        <li class="list__item "><a href="#" class="list__link ">Completing your census on paper</a></li>
+                                        <li class="list__item "><a href="#" class="list__link ">Getting support in your language</a></li>
+                                    </ol>
+                                </nav>
+                            </aside>
+
+                            <p class="u-mb-m">To start your census online, you will need your access code printed on the invitation letter we sent you. Your 16-character access code will be a combination of letters and numbers.</p>
+                            <img src="/s/img/census-letter.svg" width="400" alt="An example of a census letter highlighting the access code displayed in four blocks of four characters">
+                            <div class="panel panel--simple panel--warning js-panel-info u-mb-m u-mt-s">
+                                <span class="panel__icon" aria-hidden="true">!</span><span class="panel__text">Keep this code safe. You will need to enter it every time you access your census.</span>
+                            </div>
+
+                            <nav class="content-pagination" aria-label="Guide pagination">
+                            <ul class="content-pagination__list">
+                                <li class="content-pagination__item">
+                                    <a href="../language-help" class="content-pagination__link" rel="prev">
+                                        <span class="content-pagination__link-title">
+                                        <svg class="content-pagination__link-icon" xmlns="http://www.w3.org/2000/svg" height="13" width="17" viewBox="0 0 17 13">
+                                            <path fill="currentColor" d="m6.5938-0.0078125-6.7266 6.7266 6.7441 6.4062 1.377-1.449-4.1856-3.9768h12.896v-2h-12.984l4.2931-4.293-1.414-1.414z"></path>
+                                        </svg>
+                                        <span class="content-pagination__link-text">
+                                            Previous
+                                        </span>
+                                        </span>
+                                        <span class="content-pagination__link-divider u-vh">page in this guide is:</span>
+                                        <span class="content-pagination__link-label">Overview</span>
+                                    </a>
+                                </li>
+                                <li class="content-pagination__item">
+                                    <a href="../language-help-pg3" class="content-pagination__link" rel="next">
+                                        <span class="content-pagination__link-title">
+                                        <svg class="content-pagination__link-icon" xmlns="http://www.w3.org/2000/svg" height="13" width="17" viewBox="0 0 17 13">
+                                            <path fill="currentColor" d="m10.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
+                                        </svg>
+                                        <span class="content-pagination__link-text">
+                                            Next
+                                        </span>
+                                        </span>
+                                        <span class="content-pagination__link-divider u-vh">page in this guide is:</span>
+                                        <span class="content-pagination__link-label">Completing your census on paper</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            </nav>
+
+                        </section>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <div class="grid__col col-4@m push-1@m u-mt-m">
+            <div class="related-links">
+                <h2 class="related-links__title u-fs-r--b u-mb-xs" id="related-list-block">Related content</h2>
+                <nav class="related-links__navigation" aria-labelledby="related-list-block">
+                    <ul class="list list--bare">
+                        <li class="list__item">
+                            <a href="/contact-us" class="list__link">Contact us</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+    storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    previousPage = urlParams.get('previous');
+    currentJourney = urlParams.get('current-journey');
+    pathArray = window.location.pathname.split('/'),
+    currentPage = pathArray.slice(-2)[0];
+
+    function updateAllLinks() {
+        $('#main-nav ul li:nth-child(3)').addClass('header-nav__item--active');
+        $('.js-previous-link').attr('href', '../' + previousPage + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney);
+    }
+
+    $(updateAllLinks);
+</script>

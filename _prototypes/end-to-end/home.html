@@ -137,6 +137,7 @@ logoUrl: ../home
     });
 
     function updateAllLinks() {
+        $('#main-nav ul li:nth-child(1)').addClass('header-nav__item--active');
         $('.js-link-ir').attr('href', ('../ir-uac-request-launcher' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + 'new-ir-uac'));
     }
 
