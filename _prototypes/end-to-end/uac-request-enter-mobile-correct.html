@@ -91,7 +91,7 @@ logoUrl: ../home
 
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
-
+    window.open('../uac-request-text-inbox', '_blank');
     window.location.href = $('[name=radio-answer]:checked').val() === 'Yes'
       ? '../uac-request-enter-mobile-sent/?mobile=' + mobileNo + '&previous=' + currentPage + '&current-journey=' + currentJourney
       : '../uac-request-enter-mobile/?mobile=' + mobileNo + '&previous=' + currentPage + '&current-journey=' + currentJourney;
