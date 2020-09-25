@@ -91,10 +91,12 @@ logoUrl: ../home
 
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
-    window.open('https://www.sketch.com/s/fcd91d67-ce09-4389-ac27-36ab823ddae2/a/Al33xr/play', '_blank');
     window.location.href = $('[name=radio-answer]:checked').val() === 'Yes'
       ? '../uac-request-enter-mobile-sent/?mobile=' + mobileNo + '&previous=' + currentPage + '&current-journey=' + currentJourney
       : '../uac-request-enter-mobile/?mobile=' + mobileNo + '&previous=' + currentPage + '&current-journey=' + currentJourney;
+    if ($('[name=radio-answer]:checked').val() === 'Yes') {
+        window.open('https://www.sketch.com/s/62d157aa-5f89-4cfd-a81c-d0725b53900c/a/daA402/play', '_blank');
+    }
   });
 
   function updateDescription () {

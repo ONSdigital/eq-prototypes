@@ -198,11 +198,10 @@ exit: true
       $('.js-question-description').hide();
     }
 
-    if (previousPage) {
-      $('.js-previous-link').attr('href', '../' + previousPage);
-    } else {
-      $('.js-previous-link').attr('href', '../uac-entry');
-    }
+    $('.js-previous-link').click(function(e) {
+      e.preventDefault();
+      window.history.back();
+    });
 
     if (fulfilmentJourney){
       $('.exit').hide();

@@ -183,7 +183,7 @@
     color: #fff;
 }
 
-@media (min-width: 550px) {
+@media (min-width: 740px) {
     .hero--census .hero__title {
         font-size: 3rem;
     }
@@ -200,9 +200,9 @@
     }
 }
 
-@media (min-width: 740px) {
+@media (min-width: 980px) {
     .hero--census .hero__details {
-        padding-top: 2rem;
+        padding-right: 2.5rem;
     }
     .hero--census .hero__circle-image {
         top: -176px;
@@ -227,5 +227,43 @@
         right: 0;
         width: 243px;
         height: 243px;
+    }
+}
+
+.social-list--inline {
+    -webkit-box-align: center;
+    align-items: center;
+    display: -webkit-box;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.social-list {
+    margin: 0 -1rem -1rem;
+    padding-left: 0;
+}
+
+.social-list__item {
+    -webkit-box-align: center;
+    align-items: center;
+    display: -webkit-box;
+    display: flex;
+    margin: 0 1rem 1rem;
+}
+
+.social__icon {
+    fill: #222;
+    height: 32px;
+    width: 32px;
+}
+
+.fulfilment-help {
+    border-bottom: 1px solid #acacac;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 740px) {
+    .fulfilment-help {
+        border-bottom: none;
     }
 }

@@ -58,6 +58,7 @@ logoUrl: ../home
     var currentJourney = urlParams.get('current-journey');
     var currentPage = 'ir-uac-request-launcher';
     var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
+    var anchorID = 
 
   $('.js-btn-ir').click(function(e) {
     e.preventDefault();
@@ -80,7 +81,10 @@ logoUrl: ../home
   }
 
     function updateAllLinks() {
-        $('.js-previous-link').attr('href', '../' + previousPage + '?' + 'current-journey=' + currentJourney);
+        $('.js-previous-link').click(function(e) {
+            e.preventDefault();
+            window.history.back();
+        });
     }
 
     $(updateContent);

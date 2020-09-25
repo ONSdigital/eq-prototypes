@@ -98,7 +98,13 @@ exit: true
 
   function updateAllLinks() {
     $('.js-previous-link').attr('href', '../' + previousPage + '?' + (currentPage ? 'previous=' + currentPage : '') + (currentJourney ? '&current-journey=' + currentJourney : ''));
+    $('.exit').attr('href', '../' + 'uac-entry'); 
   }
+
+  $('.exit').on('click', function(e) {
+    e.preventDefault();
+    window.location.href = '../uac-entry';
+  });
 
   $(updateQuestion);
   $(updateAllLinks);
