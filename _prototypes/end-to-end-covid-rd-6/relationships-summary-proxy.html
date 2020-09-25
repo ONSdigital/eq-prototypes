@@ -1,0 +1,23 @@
+---
+title: COVID-19 test (round 5 - pandemic situation revised) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+householdMembers:
+visitors:
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+    var urlParams = new URLSearchParams(window.location.search),
+      surveyType = urlParams.get('survey'),
+      urlSuffix = surveyType ? '?survey=' + surveyType : '';
+
+    $(function () {
+      window.location.href = '../hub/' + urlSuffix;
+      storageAPI.storePageData('/end-to-end-covid-rd-6/hub/', window.location.pathname);
+
+    });
+</script>

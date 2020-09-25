@@ -1,0 +1,144 @@
+---
+title: COVID-19 test (round 5 - pandemic situation revised) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+
+<link rel="stylesheet" href="../../end-to-end/style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="back-link js-previous-link" href="../individual-details-country-other-arrive">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password"
+                      action="../individual-details-country-other-stay">
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
+                           value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-xl js-heading">
+                                        Did you arrive in the UK on or after 12 October 2021?
+                                    </h1>
+                                </div>
+
+                                <div class="answer">
+                                    <div class="answer__fields js-fields">
+                                        <div class="field field--radio field--multiplechoice ">
+                                            <fieldset class="u-mb-xl">
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="arrive-census"
+                                                           id="yes"
+                                                           value="Yes">
+                                                    <label class="label label--inline"
+                                                           for="yes"
+                                                           id="yes-label">
+                                                        Yes
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="arrive-census"
+                                                           id="no"
+                                                           value="No">
+                                                    <label class="label label--inline"
+                                                           for="no"
+                                                           id="no-label">
+                                                        No
+                                                    </label>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+                    <p><a href="../hub" class="js-choose-another-section">Choose another section and retur to this question later</a></p>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person_id'),
+    member = storageAPI.getHouseholdMemberByPersonId(personId),
+    person = member['@person'],
+    isEditing = urlParams.get('edit'),
+    isVisitor = storageAPI.isVisitor(member),
+    details = storageAPI.getPersonalDetailsFor(personId),
+    surveyType = urlParams.get('survey');
+    storageAPI.personalBookmark(personId, window.location.href),
+    question = $('#question-title').html();
+    var censusDate = window.ONS.utils.getSignificant("withoutDay");
+    var censusDateYearBefore = (censusDate.slice(-4) -1);
+    var yearBeforeCensusDate = censusDate.replace(/.{4}$/, censusDateYearBefore);
+
+  $('.qa-btn-submit').on('click', function (e) {
+    e.preventDefault();
+    let url = '../individual-details-country-other-arrive-census/?person_id=' + personId + '&edit=true';
+    question = question.trim();
+    storageAPI.addUpdateCountryOtherArriveCensus(personId, $('[name="arrive-census"]:checked').val()), question, url;
+
+    if(isEditing) {
+      window.location.href = '../individual-details-summary/?person_id=' +
+        personId + (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end-covid-rd-6/individual-details-summary/', window.location.pathname);
+    }
+
+    if ($('[name="arrive-census"]:checked').val() === 'Yes') {
+        window.location.href = '../individual-details-country-other-stay/?person_id=' + personId;
+        storageAPI.storePageData('/end-to-end-covid-rd-6/individual-country-other-stay/', window.location.pathname);
+    } else if ($('[name="arrive-census"]:checked').val() === 'No') {
+        window.location.href = '../individual-details-year-ago-address/?person_id=' + personId;
+        storageAPI.storePageData('/end-to-end-covid-rd-6/individual-details-year-ago-address/', window.location.pathname);
+
+    } else {
+        window.location.href = '../individual-details-country-other-stay/?person_id=' + personId;
+        storageAPI.storePageData('/end-to-end-covid-rd-6/individual-country-other-stay/', window.location.pathname);
+    }
+  });
+
+  function updateQuestion() {
+    if(storageAPI.getProxyFor(personId)) {
+        $('.js-heading').html('Did ' + '<em class="highlight">' + person.firstLastName + '</em>' +
+        ' arrive in the UK on or after ' + yearBeforeCensusDate + '?');
+    } else {
+        $('.js-heading').html('Did you arrive in the UK on or after ' + yearBeforeCensusDate + '?');
+    }
+  }
+
+  $(updateQuestion);
+
+  /**
+   * Routing
+   */
+  $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
+</script>
