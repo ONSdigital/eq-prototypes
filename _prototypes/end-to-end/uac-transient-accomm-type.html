@@ -36,7 +36,7 @@ exit: true
                             <section class="section">
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
-                                        class="question__title u-fs-xxl js-piping">
+                                        class="question__title u-fs-xl js-piping">
                                         Which of the following best describes your type of accommodation?
                                     </h1>
                                     <div class="answer">
@@ -110,7 +110,7 @@ exit: true
 
     form.addEventListener('submit', function(event) {
         event.preventDefault();
-        sessionStorage.setItem('address-line-1', ('&ldquo;' + 'the ' +  getTransientAccommodationType()));
+        sessionStorage.setItem('address-line-1', ('"' + 'the ' +  getTransientAccommodationType()));
         window.location.href = '../section-intro/' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney;
         storageAPI.storePageData('/end-to-end/section-intro/', window.location.pathname);
     });

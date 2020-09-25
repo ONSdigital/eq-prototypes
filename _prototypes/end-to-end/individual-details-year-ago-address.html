@@ -162,7 +162,7 @@ noONSLogoLink: true
     }));
 
     function updateAddresses() {
-        $('#home-address-label').text(sessionStorage.getItem('address'));
+        $('#home-address-label').text(storageAPI.getPipedAddress());
         if(isVisitor) {
             var visitors =
             storageAPI.getAllHouseholdMembers().filter(storageAPI.isVisitor),
