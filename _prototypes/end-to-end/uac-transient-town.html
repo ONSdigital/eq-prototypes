@@ -23,6 +23,20 @@ exit: true
         </div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main u-mt-m">
+                <div class="panel panel--error u-mb-m js-error-box u-d-no">
+                    <div class="panel__header">
+                        <div class="panel__title u-fs-r--b">There 
+                        <span class="js-piping">is a problem</span> with your answer
+                        </div>
+                    </div>
+                    <div class="panel__body">
+                        <ol class="list list--bare">
+                            <li class="list__item js-nearest-town u-d-no">
+                                1. <a href="#error-message-nearest-town" class="list__link js-inpagelink js-error">Select your nearest town or city</a>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password" action="../individual-details-language">
                     <div class="group">
@@ -33,28 +47,30 @@ exit: true
                                         class="question__title u-fs-xl js-heading">
                                         What is the nearest town or city to where you will be living on <span class="js-date"></span>? 
                                     </h1>
-                                </div>
-                                <div class="grid grid--gutterless">
-                                    <div class="grid__col col-8@m">
-                                        
-                                          <label class="label" for="religion">Enter a town or city and select from results
-                                          </label>
-
-                                          <div id="religion-container" class="js-typeahead typeahead-input typeahead-input--initialised" data-content="{&quot;aria_no_results&quot;:&quot;No suggestions found for the query&quot;,&quot;aria_you_have_selected&quot;:&quot;You have selected&quot;,&quot;aria_found_by_alternative_name&quot;:&quot;found by alternative name&quot;,&quot;aria_min_chars&quot;:&quot;Type in 5 or more characters for addresses.&quot;,&quot;aria_one_result&quot;:&quot;There is one address available.&quot;,&quot;aria_n_results&quot;:&quot;There are {n} addresses available.&quot;,&quot;aria_limited_results&quot;:&quot;Results have been limited to 10 addresses. Type more characters to refine your search.&quot;,&quot;more_results&quot;:&quot;Continue entering to improve results&quot;,&quot;results_title&quot;:&quot;Select an address&quot;}" data-instructions="Use up and down keys to navigate suggestions once you&#39;ve typed more than two characters. Use the enter key to select a suggestion. Touch device users, explore by touch or with swipe gestures." data-aria-you-have-selected="You have selected" data-aria-min-chars="Enter 3 or more characters for suggestions." data-aria-one-result="There is one suggestion available." data-aria-n-results="There are {n} suggestions available." data-aria-limited-results="Results have been limited to 10 suggestions. Type more characters to improve your search." data-more-results="Continue entering to improve suggestions" data-results-title="Suggestions" 
-                                          data-typeahead-data="https://gist.githubusercontent.com/jrbarnes9/7c21ae7e0dcde2b131350e5be932b91c/raw/f86e75e9a3034d052cb74195c08a5b4a3ecadd07/england-wales-towns-cities.json" 
-                                          data-no-results="No results found">
-                                              <input type="text" name="x13" id="nearest-town" class="input input--text input-type__input js-typeahead-input input--w-12" autocomplete="password" aria-autocomplete="list" aria-controls="religion-listbox" aria-describedby="religion-instructions" aria-has-popup="true" aria-owns="religion-listbox" aria-expanded="false" role="combobox" maxlength="100">
-                                              <div class="typeahead-input__results js-typeahead-results">
-                                                  <header class="typeahead-input__results-title u-fs-s">Select a town or city</header>
-                                                  <ul class="typeahead-input__listbox js-typeahead-listbox" role="listbox" id="religion-listbox" tabindex="-1"></ul>
-                                              </div>
-                                              <div class="typeahead-input__instructions u-vh js-typeahead-instructions" id="religion-instructions" tabindex="-1">Use up and down keys to navigate suggestions once you&#39;ve typed more than two characters. Use the enter key to select a suggestion. Touch device users, explore by touch or with swipe gestures.</div>
-                                              <div class="typeahead-input__status u-vh js-typeahead-aria-status" aria-live="polite" role="status" tabindex="-1"></div>
-                                          </div>
-                                        
+                                    <div class="question__answer">
+                                        <div class="grid grid--gutterless">
+                                            <div class="grid__col col-8@m">
+                                                <div class="fieldgroup">
+                                                    <p class="field">
+                                                        <label class="label" for="religion">Enter a town or city and select from results
+                                                        </label>
+                                                        <div id="religion-container" class="js-typeahead typeahead-input typeahead-input--initialised" data-content="{&quot;aria_no_results&quot;:&quot;No suggestions found for the query&quot;,&quot;aria_you_have_selected&quot;:&quot;You have selected&quot;,&quot;aria_found_by_alternative_name&quot;:&quot;found by alternative name&quot;,&quot;aria_min_chars&quot;:&quot;Type in 5 or more characters for addresses.&quot;,&quot;aria_one_result&quot;:&quot;There is one address available.&quot;,&quot;aria_n_results&quot;:&quot;There are {n} addresses available.&quot;,&quot;aria_limited_results&quot;:&quot;Results have been limited to 10 addresses. Type more characters to refine your search.&quot;,&quot;more_results&quot;:&quot;Continue entering to improve results&quot;,&quot;results_title&quot;:&quot;Select an address&quot;}" data-instructions="Use up and down keys to navigate suggestions once you&#39;ve typed more than two characters. Use the enter key to select a suggestion. Touch device users, explore by touch or with swipe gestures." data-aria-you-have-selected="You have selected" data-aria-min-chars="Enter 3 or more characters for suggestions." data-aria-one-result="There is one suggestion available." data-aria-n-results="There are {n} suggestions available." data-aria-limited-results="Results have been limited to 10 suggestions. Type more characters to improve your search." data-more-results="Continue entering to improve suggestions" data-results-title="Suggestions" 
+                                                        data-typeahead-data="https://gist.githubusercontent.com/jrbarnes9/7c21ae7e0dcde2b131350e5be932b91c/raw/f86e75e9a3034d052cb74195c08a5b4a3ecadd07/england-wales-towns-cities.json" 
+                                                        data-no-results="No results found">
+                                                            <input type="text" name="x13" id="nearest-town" class="input input--text input-type__input js-typeahead-input input--w-12" autocomplete="password" aria-autocomplete="list" aria-controls="religion-listbox" aria-describedby="religion-instructions" aria-has-popup="true" aria-owns="religion-listbox" aria-expanded="false" role="combobox" maxlength="100" data-error-msg="Select your nearest town or city">
+                                                            <div class="typeahead-input__results js-typeahead-results">
+                                                                <header class="typeahead-input__results-title u-fs-s">Select a town or city</header>
+                                                                <ul class="typeahead-input__listbox js-typeahead-listbox" role="listbox" id="typeahead-listbox" tabindex="-1"></ul>
+                                                            </div>
+                                                            <div class="typeahead-input__instructions u-vh js-typeahead-instructions" id="religion-instructions" tabindex="-1">Use up and down keys to navigate suggestions once you&#39;ve typed more than two characters. Use the enter key to select a suggestion. Touch device users, explore by touch or with swipe gestures.</div>
+                                                            <div class="typeahead-input__status u-vh js-typeahead-aria-status" aria-live="polite" role="status" tabindex="-1"></div>
+                                                        </div>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-
                             </section>
                         </div>
                         <!--<a href="" class="icon--location">Find using my current location</a>-->
@@ -76,12 +92,26 @@ exit: true
   var previousPage = searchParams.get('previous');
   var currentJourney = searchParams.get('current-journey');
   var currentPage = 'uac-transient-accomm-type';
+  var hasErrors = false;
 
   $('.qa-btn-submit').on('click', function(e) {
-      e.preventDefault();
-      sessionStorage.setItem('address-line-2', ('near' + ' ' + getNearestTown() + '"'));
-      window.location.href = '../uac-transient-accomm-type/' + '?previous=' + currentPage + '&current-journey=' + currentJourney;
-      storageAPI.storePageData('/end-to-end/uac-transient-accomm-type/', window.location.pathname);
+    e.preventDefault();
+    if (($("input[id='nearest-town']").val() == '') || ($('#typeahead-listbox').html().length)) {
+      var testFails = true;
+    }
+    else {
+      var testFails = '';
+    }
+    window.ONS.utils.validateInputs(testFails, "input[id='nearest-town']");
+    if (hasErrors) {
+        window.ONS.utils.calcErrors();
+        hasErrors = false;
+        return false;
+    } else {
+        sessionStorage.setItem('address-line-2', ('near' + ' ' + getNearestTown() + '"'));
+        window.location.href = '../uac-transient-accomm-type/' + '?previous=' + currentPage + '&current-journey=' + currentJourney;
+        storageAPI.storePageData('/end-to-end/uac-transient-accomm-type/', window.location.pathname);
+    }
   });
 
   function getNearestTown() {

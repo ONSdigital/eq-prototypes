@@ -1426,3 +1426,10 @@ hr {
     padding: 1rem 0;
     border-top: 5px solid #93328e;
 }
+
+#dummy-address {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: .5rem;
+}

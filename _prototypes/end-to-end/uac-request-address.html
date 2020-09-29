@@ -160,7 +160,7 @@ exit: true
         sessionStorage.setItem('address-type', 'CE');
       }
 
-      window.location = '../confirm-rh-address/?' + 'previous=' + 'uac-request-address' + '&' + 'current-journey=' + currentJourney;
+      window.location = '../confirm-rh-address/?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney;
     }
   });
 
@@ -171,10 +171,24 @@ exit: true
   $(updateEditableAddress);
   }
 
+  function storeDummyAddress() {
+    sessionStorage.setItem('address-line-1', '68 Abingdon Road');
+    sessionStorage.setItem('address-line-2', 'Goathill');
+    sessionStorage.setItem('address-town', 'Chesterton');
+    sessionStorage.setItem('address-postcode', 'CH13 1PD');
+    sessionStorage.setItem('address-country', 'E');
+    sessionStorage.setItem('address-type', 'HH');
+    sessionStorage.setItem('address', '68 Abingdon Road, Goathill, Chesterton, CH13 1PD');
+  }
+
+ function showDummyAddressLink() {
+   $('#dummy-address').removeClass('u-d-no');
+ }
+
   $('.js-link').click(function(e) {
     e.preventDefault();
 
-    window.location = '../address-register/?' + 'previous=' + 'uac-request-address' + '&' + 'current-journey=' + currentJourney;
+    window.location = '../address-register/?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney;
   });
 
   function updateHelp() {
@@ -184,7 +198,7 @@ exit: true
       $('.js-question-description-piping').html('To send a paper questionnaire, we need your address');
     } else if (currentJourney === 'transient') {
       $('.js-no-fixed-address').show();
-      $('.js-no-fixed-location-link').attr('href', '../uac-transient-town/')
+      $('.js-no-fixed-location-link').attr('href', '../uac-transient-town/?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney)
     }
     
   }
@@ -213,11 +227,19 @@ exit: true
         window.location = '../uac-entry/?previous=' + currentPage + '&currentJourney=' + currentJourney;
       });
     }
+
+    $('.js-dummy-address').click(function(e) {
+      e.preventDefault();
+      $(storeDummyAddress);
+      window.location.href = '../confirm-rh-address/?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney;
+    });
+
   }
 
   document.dispatchEvent(new CustomEvent('TYPEAHEAD-READY'));
 
   $(updateAllLinks);
   $(updateHelp);
+  $(showDummyAddressLink);
 
 </script>
