@@ -189,7 +189,8 @@ h4 {
     background: url(/img/icons/icons--chevron-down-black.svg) no-repeat 50%;
 }
 
-.btn--mobile.js-nav-show:before {
+.btn--mobile.js-nav-show:before,
+.btn--mobile.js-nav-show:focus:before {
     transform: rotate(180deg);
 }
 
