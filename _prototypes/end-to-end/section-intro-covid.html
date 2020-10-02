@@ -1,5 +1,5 @@
 ---
-title: Household questionnaire (English)
+title: COVID-19 test (round 6 - pandemic situation revised - no furlough) Household questionnaire (English)
 project: Census 2021 End to end prototype
 globalcss: false
 layout: eq-default-extras
@@ -8,25 +8,25 @@ assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 noONSLogoLink: true
 ---
 
-<link rel="stylesheet" href="../style.css"/>
+<link rel="stylesheet" href="../../end-to-end/style.css"/>
 <div class="page__subheader">
+
 </div>
 
 <div class="page__container container">
     <div class="grid grid--reverse">
-        <div class="grid__col col-4@m">
-        </div>
+        <div class="grid__col col-4@m"></div>
         <div class="grid__col col-8@m">
-            <main role="main" id="main" class="page__main u-mt-m">
+            <main role="main" id="main" class="page__main">
                 <div class="group u-mb-l">
                     <div class="block">
                         <section class="section">
-                            <h1 class="u-fs-xl">Household relationships</h1>
 
-                            <p>In this section, we will ask you how the people who usually live in this household are related to each other.</p>
-
-                            <p>Select the appropriate relationship from the options shown. The selected relationship will display at the bottom of the page for you to check.</p>
-                        </section>
+                            <h1 class="u-fs-xl">Coronavirus (COVID-19) and Census 2021</h1>
+                            <p>Circumstances may have changed
+                                during the coronavirus pandemic. Answer all questions based on the situation
+                                as it is now.</p>
+                            </section>
                     </div>
                 </div>
 
@@ -41,20 +41,13 @@ noONSLogoLink: true
 <script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
-  var urlParams = new URLSearchParams(window.location.search),
-    storageAPI = window.ONS.storage,
-    surveyType = urlParams.get('survey'),
-    nextPage = surveyType
-      ? '../relationships/?survey=' + surveyType
-      : '../relationships';
-
-    sessionStorage.setItem("wlh_bookmark" , window.location.pathname);
+  var storageAPI = window.ONS.storage;
+  
+  sessionStorage.setItem("wlh_bookmark" , window.location.pathname);
 
   $('.btn-submit').click(function(e) {
     e.preventDefault(); // do not submit the form like usual
-    window.location.href = nextPage;
-    storageAPI.storePageData('/end-to-end/' + nextPage, window.location.pathname);
-
+    window.location = '../section-intro/';
   });
 
   $(function() {
@@ -63,4 +56,10 @@ noONSLogoLink: true
     var options = {year: 'numeric', month: 'long', day: 'numeric'};
     $('.one-week-ago').text(oneWeekAgo.toLocaleString('en-GB', options));
   });
+
+  function updatePipedAddress() {
+    $('.full-address-text').html(storageAPI.getPipedAddress());
+  };
+
+  $(updatePipedAddress);
 </script>

@@ -9,9 +9,6 @@ noONSLogoLink: true
 ---
 
 <link rel="stylesheet" href="../style.css"/>
-<div class="page__subheader">
-</div>
-
 <style>
     .completed {
         position: relative;
@@ -303,7 +300,7 @@ noONSLogoLink: true
     return status === 'in-progress'
       ? storageAPI.getBookmarkFor(person.id) + '&continuing=true'
       : (status === 'completed'
-        ? '../individual-details-summary/' : '../individual-intro/'
+        ? '../individual-details-summary/' : '../individual-intro-covid/'
       ) + '?person_id=' + person.id;
   }
 
@@ -423,7 +420,9 @@ noONSLogoLink: true
         e.preventDefault();
 
         if (window.sessionStorage.getItem("accommodation-completed-status") !== "completed") {
-          window.location.href = "../household-accom-intro/"
+          var url = 'household-accom-intro';
+          window.location.href = '../' + url;
+          storageAPI.storePageData('/end-to-end/' + url , window.location.pathname);
         } else {
 
           var nextStartPersonId;
@@ -457,7 +456,7 @@ noONSLogoLink: true
 
           window.location.href = nextBookmarkPersonId
             ? storageAPI.getBookmarkFor(nextBookmarkPersonId) + '&continuing=true'
-            : '../individual-intro/?person_id=' + nextStartPersonId;
+            : '../individual-intro-covid/?person_id=' + nextStartPersonId;
         }
       });
     }

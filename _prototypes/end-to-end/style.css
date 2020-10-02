@@ -1046,13 +1046,18 @@ hr {
     margin-left: 1.7rem;
 }
 
+.footer,
+.footer .footer__heading,
+.footer .footer__license {
+    margin-top: 0;
+}
+
 .footer .footer__poweredby-img {
     width: 220px;
 }
 
 .footer-button {
     background-color: #93328e;
-    margin-top: 2rem;
 }
 
 .feedback .collapsible {
@@ -1109,7 +1114,7 @@ hr {
 }
 
 .page__content {
-    padding-bottom: .5rem;
+    padding-bottom: 3rem;
 }
 
 .ghost-link {
