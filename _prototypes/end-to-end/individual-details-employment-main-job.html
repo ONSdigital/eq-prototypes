@@ -20,14 +20,17 @@ noONSLogoLink: true
         <div class="grid__col col-4@m">
         </div>
         <div class="grid__col col-8@m">
-            <main role="main" id="main" class="page__main u-mt-m">
+            <main role="main" id="main" class="page__main">
                 <div class="group">
                     <div class="block">
                         <section class="section">
                             <h1 class="u-fs-xl">Main job</h1>
 
-                            <p class="js-text">The next set of questions is about your main job. Your main job is the job in which you usually work the most hours.                            </p>
-
+                            <p class="js-text">The next set of questions is about your main job. Your main job is the job in which you work the most hours.</p>
+                            <h2>Coronavirus (COVID-19)</h2>
+                            <p class="js-piping">Your circumstances may have changed
+                                during the coronavirus pandemic. Answer all questions based on your situation
+                                as it is now.</p>
                         </section>
                     </div>
                 </div>
@@ -48,6 +51,7 @@ noONSLogoLink: true
     person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
     surveyType = urlParams.get('survey'),
     personDetails = storageAPI.getHouseholdMemberByPersonId(personId);
+    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
     
     $('.qa-btn-submit').on('click',
         storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
@@ -71,8 +75,13 @@ noONSLogoLink: true
 
   function updatePara() {
     if(storageAPI.getProxyFor(personId)) {
-      $('.js-text').html('The next set of questions is about '  + '<strong>' + person.firstLastName +
-      window.ONS.utils.trailingNameS(person.firstLastName) + '</strong>' + ' main job. Their main job is the job in which they usually work the most hours.');
+        $('.js-text').html('The next set of questions is about '  + '<strong>' + person.firstLastName +
+        window.ONS.utils.trailingNameS(person.firstLastName) + '</strong>' + ' main job. Their main job is the job in which they usually work the most hours.');
+
+        pipingDestinations.forEach(function(pipingDestination) {
+            pipingDestination.innerHTML = pipingDestination.innerHTML.replace('your', 'their');
+            pipingDestination.innerHTML = pipingDestination.innerHTML.replace('Your', 'Their');
+        });
     }
   }
 

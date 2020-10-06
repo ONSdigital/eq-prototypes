@@ -1,5 +1,5 @@
 ---
-title: COVID-19 test (round 6 - pandemic situation revised - no furlough) Household questionnaire (English)
+title: COVID-19 test (round 5 - pandemic situation revised) Household questionnaire (English)
 project: Census 2021 End to end prototype
 globalcss: false
 layout: eq-default-extras
@@ -204,15 +204,15 @@ noONSLogoLink: true
                     e.preventDefault();
                         window.location.href = '../individual-details-summary/?person_id=' + personId +
                         (surveyType ? '&survey=' + surveyType : '');
-                    storageAPI.storePageData('/end-to-end-covid-rd-6/individual-details-summary/', window.location.pathname);
+                    storageAPI.storePageData('/end-to-end-covid-rd-5/individual-details-summary/', window.location.pathname);
                 } else if ($('#no:checked').length){
                     e.preventDefault();
                     window.location.href = '../individual-details-employment-seven-days-ago-description/?person_id=' + personId;
-                    storageAPI.storePageData('/end-to-end-covid-rd-6/individual-details-employment-seven-days-ago-description/', window.location.pathname);
+                    storageAPI.storePageData('/end-to-end-covid-rd-5/individual-details-employment-seven-days-ago-description/', window.location.pathname);
                 } else {
                     e.preventDefault();
                     window.location.href = '../individual-details-employment-main-job/?person_id=' + personId;
-                    storageAPI.storePageData('/end-to-end-covid-rd-6/individual-details-employment-main-job/', window.location.pathname);
+                    storageAPI.storePageData('/end-to-end-covid-rd-5/individual-details-employment-main-job/', window.location.pathname);
                 }
             }
         }));

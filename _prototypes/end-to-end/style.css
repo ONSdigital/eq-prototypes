@@ -466,6 +466,14 @@ p.field+p.field {
 
 .field--multiplechoice .field__item {
     border: 1px solid #222;
+    width: 100%;
+}
+
+@media (min-width: 500px) {
+    .field--multiplechoice .field__item {
+        width: auto;
+        min-width: 20rem;
+    }
 }
 
 .input--error.input--text:not(:focus),
@@ -557,7 +565,8 @@ p.label--negative:empty {
 }
 
 .input--checkbox:checked,
-.input--checkbox:focus {
+.input--checkbox:focus,
+.input--radio:focus {
     border-color: #222;
     outline: none;
     box-shadow: none;
@@ -888,13 +897,13 @@ p.label--negative:empty {
 
 @media only screen and (min-width: 740px) {
     .list--inline\@m .list__item {
-        margin: .25rem 1.5rem .25rem .5rem!important;
+        margin: .25rem 1.5rem .25rem 0rem!important;
     }
 }
 
 @media only screen and (min-width: 500px) {
     .list--inline\@s .list__item {
-        margin: .25rem 1rem .25rem .5rem;
+        margin: .25rem 1rem .25rem 0rem;
     }
 }
 
@@ -908,9 +917,13 @@ hr {
     height: 1px;
     overflow: visible;
     border: 0;
-    border-bottom: 1px solid #acacac;
+    border-bottom: 1px solid #888;
     border-style: solid;
     margin: 0;
+}
+
+footer hr {
+    border-color: #acacac;
 }
 
 .list.list--records .list__item {
@@ -930,6 +943,8 @@ hr {
 
 .list.list--people {
     list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 0;
 }
 
 .list.list--people .list__item {
@@ -1092,7 +1107,7 @@ hr {
 
 .footer--border {
     border-top: 1px solid #acacac;
-    padding: 2rem 0 0;
+    padding: 1.5rem 0 0;
 }
 
 .footer__meta {
@@ -1436,8 +1451,8 @@ hr {
     display: inline-block;
     margin-right: 1rem;
     overflow: hidden;
-    vertical-align: top;
     white-space: normal;
+    vertical-align: bottom;
 }
 
 .list__link .svg-icon {

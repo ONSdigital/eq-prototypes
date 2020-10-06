@@ -20,7 +20,7 @@ noONSLogoLink: true
         <div class="grid__col col-4@m">
         </div>
         <div class="grid__col col-8@m">
-            <main role="main" id="main" class="page__main u-mt-m">
+            <main role="main" id="main" class="page__main">
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password"
                       action="../individual-details-employment-job-travel-to">
@@ -37,6 +37,7 @@ noONSLogoLink: true
                                         In your main job, how many hours a week do you usually work?
                                     </h1>
                                 </div>
+                                <p class="js-help">If the <strong>coronavirus</strong> pandemic has affected your working hours, select the answer that best describes your <strong>current circumstances</strong></p>
                                 <div class="panel panel--simple panel--info u-mb-m">
                                   <div class="panel__body">
                                       Include paid and unpaid overtime
@@ -156,8 +157,9 @@ noONSLogoLink: true
 
   function updateQuestion() {
     if(storageAPI.getProxyFor(personId)) {
-      $('.js-heading').html('In ' + '<em class="highlight">' + person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
+        $('.js-heading').html('In ' + '<em class="highlight">' + person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
         ' main job, how many hours a week do they usually work?');
+        $('.js-help').html('If the <strong>coronavirus</strong> pandemic has affected their working hours, select the answer that best describes their <strong>current circumstances</strong>');
     }
     if (details['employment'].sevenDaysAgo[0]=== 'No') {
         var replaceQuestion = $('.js-heading').html().replace('do', 'did');

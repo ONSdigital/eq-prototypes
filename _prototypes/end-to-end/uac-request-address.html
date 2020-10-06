@@ -21,7 +21,7 @@ exit: true
     <div class="grid__col col-4@m">
     </div>
     <div class="grid__col col-8@m">
-      <main role="main" id="main" class="page__main u-mt-m">
+      <main role="main" id="main" class="page__main u-mt-m@m">
         <div class="panel panel--error u-mb-m js-error-box u-d-no">
           <div class="panel__header">
             <div class="panel__title u-fs-r--b">There 
@@ -220,7 +220,11 @@ exit: true
       $('.exit').hide();
       $('.header__title').add('.header__title-logo').wrapAll('<a class="header__title-link" href="../home"></a>');
       $('.js-no-fixed-address').show();
-      $('.js-no-fixed-address .js-transient-help').addClass('js-no-fixed-fulfilment').html('If you have no fixed address, <a href="../contact-us">contact us to request an access code</a>');
+      if (currentJourney === 'new-hh-paper') {
+        $('.js-no-fixed-address .js-transient-help').addClass('js-no-fixed-fulfilment').html('If you have no fixed address, <a href="../contact-us">contact us to request a paper census questionnaire</a>');
+      } else {
+        $('.js-no-fixed-address .js-transient-help').addClass('js-no-fixed-fulfilment').html('If you have no fixed address, <a href="../contact-us">contact us to request an access code</a>');
+      }
 
     } else {
       $('.js-no-fixed-fulfilment ').hide();

@@ -7,6 +7,7 @@ footer: census-transactional
 assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
 hideSaveLater: true
 logoUrl: ../home
+languages: true
 ---
 
 <link rel="stylesheet" href="../style.css"/>
@@ -21,7 +22,7 @@ logoUrl: ../home
         <div class="grid__col col-4@m">
         </div>
         <div class="grid__col col-8@m">
-            <main role="main" id="main" class="page__main u-mt-m">
+            <main role="main" id="main" class="page__main u-mt-m@m">
                 <div class="panel panel--error u-mb-m js-error-box u-d-no">
                     <div class="panel__header">
                         <div class="panel__title u-fs-r--b">There <span class="js-piping">is a problem</span> with your answer</div>
@@ -53,7 +54,7 @@ logoUrl: ../home
                             <div class="u-mb-xs js-name-address"></div>
                             <p class="u-mb-m"><a id="js-change-name" href="">Change name</a><span id="change-unit-name-container" class="u-d-no"> | <a id="js-change-unit-name-link" href="">Change flat or room number</a></span></p>
                             <div class="panel panel--simple panel--info u-mb-m js-panel u-d-no">
-                                <div class="panel__body">
+                                <div class="panel__body js-piping">
                                     A letter with your individual access code will arrive in a brown unbranded envelope
                                 </div>
                             </div>
@@ -139,7 +140,7 @@ logoUrl: ../home
         var codeTypeShort = ' questionnaire';
         $('.large-print').removeClass('u-d-no');
         $('.no-answer').html('No, cancel and return');
-        $('.js-panel').removeClass('u-d-no').html('Your individual paper questionnaire will arrive in a brown unbranded envelope');
+        $('.js-panel').removeClass('u-d-no').html('Your individual paper questionnaire will arrive in a white unbranded envelope');
     } else {
         var codeType = 'a new household access code';
         var codeTypeShort = 'access code';

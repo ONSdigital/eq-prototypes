@@ -20,7 +20,7 @@ noONSLogoLink: true
         <div class="grid__col col-4@m">
         </div>
         <div class="grid__col col-8@m">
-            <main role="main" id="main" class="page__main u-mt-m">
+            <main role="main" id="main" class="page__main">
                 <div class="feedback__inline js-feedback-inline is-collapsed">
                     <div class="feedback__border">
                     </div>
@@ -36,7 +36,7 @@ noONSLogoLink: true
                         <ol class="list list--bare">
                         <li class="list__item js-employee u-d-no">
                             1. <a href="#error-message-employee" class="list__link js-inpagelink">
-                                Select  at least one answer
+                                Select  at least one answer to continue
                             </a>
                         </li>
                        </ol>
@@ -57,11 +57,12 @@ noONSLogoLink: true
                                         class="question__title u-fs-xl js-heading">
                                         In the last seven days, were you doing any of the following?
                                     </h1>
-                                </div>
-                                <div class="panel panel--simple panel--info u-mb-m">
-                                  <div class="panel__body">
-                                      Include any casual or temporary work, even if only for one hour 
-                                  </div>
+                                    <p class="js-piping">If you have a job but have been off work in <strong>quarantine</strong> or <strong>self-isolating</strong>, select “Temporarily away from work ill, on holiday or temporarily laid off”</p>
+                                    <div class="panel panel--simple panel--info u-mb-m">
+                                        <div class="panel__body">
+                                            Include any casual or temporary work, even if only for one hour 
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="answer" id="checkboxes">
                                     <div class="answer__fields question__answer js-fields">
@@ -69,12 +70,12 @@ noONSLogoLink: true
                                             <fieldset>
                                                 <legend class="field__legend u-fs-r--b">Select all that apply</legend>
                                                 <div class="field__item js-focusable-box">
-                                                    <input required autocomplete="new-password" class="input input--checkbox js-exclusive-group"
+                                                    <input autocomplete="new-password" class="input input--checkbox js-exclusive-group"
                                                            type="checkbox"
                                                            name="checkbox-group"
                                                            id="employee"
                                                            value="Employee"
-                                                           data-error-msg="Select  at least one answer">
+                                                           data-error-msg="Select  at least one answer to continue">
                                                     <label class="label label--inline"
                                                            for="employee"
                                                            id="employee-label">
@@ -156,7 +157,7 @@ noONSLogoLink: true
                             </section>
                         </div>
                     </div>
-                    <button class="btn btn-submit btn--primary btn--lg qa-btn-submit venus u-mb-xl u-mt-l"
+                    <button class="btn btn-submit btn--primary btn--lg qa-btn-submit venus u-mb-xl u-mt-xl"
                             type="submit" name="">Save and continue
                     </button>
                     <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
@@ -226,8 +227,9 @@ noONSLogoLink: true
 
     function updateQuestion() {
         if(storageAPI.getProxyFor(personId)) {
-        $('.js-heading').html('In the last seven days, was ' + '<em class="highlight">' + person.firstLastName + '</em>' +
-            ' doing any of the following?');
+            $('.js-heading').html('In the last seven days, was ' + '<em class="highlight">' + person.firstLastName + '</em>' +
+                ' doing any of the following?');
+            $('.js-piping').html('If they have a job but have been on <strong>furlough</strong>, in <strong>quarantine</strong> or <strong>self-isolating</strong>, select “Temporarily away from work ill, on holiday or temporarily laid off”');
         }
     }
 
