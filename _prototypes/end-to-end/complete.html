@@ -51,7 +51,7 @@ leaveWarning: true
                         <p class="u-mb-xs">Your census has been submitted for the household at <span class="full-address-text u-fs-r--b">Address not set</span></p>
                     </div>
                 </div>
-                <p class="lock u-mb-m">Your personal information is protected by law and will be kept confidential</p>
+                <p class="icon--lock u-mb-m">Your personal information is protected by law and will be kept confidential</p>
                 <hr>
                 <h2 class="u-mt-m">Get confirmation email</h2>
                 <p>If you would like to be sent confirmation that you have completed your census, enter your email address</p>
@@ -119,9 +119,9 @@ leaveWarning: true
         } else if (searchParams.get('empty')) {
             let param = searchParams.get('true');
             $('.js-error-box').removeClass('u-d-no');
-            $('.js-inpagelink').html('Enter an email address to continue');
+            $('.js-inpagelink').html('Enter an email address ');
             $('#email-field').wrap( '<div class="panel panel--simple panel--error"><div class="panel__body"></div></div>' );
-            $('#email-field').before('<p id="panel-error" class="panel__error u-fs-r--b">Enter an email address to continue</p>');
+            $('#email-field').before('<p id="panel-error" class="panel__error u-fs-r--b">Enter an email address </p>');
         }
     }
 
