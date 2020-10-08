@@ -22,6 +22,22 @@ logoUrl: ../home
         </div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main u-mt-m@m">
+                <div class="panel panel--error u-mb-m js-error-box u-d-no">
+                    <div class="panel__header">
+                        <div class="panel__title u-fs-r--b">There 
+                      <span class="js-piping">is a {x} problem{s}</span> with your answer
+                    </div>
+                    </div>
+                    <div class="panel__body">
+                        <ol class="list list--bare">
+                          <li class="list__item js-address-correct-yes u-d-no">
+                              1. <a href="#error-message-address-correct-yes" class="list__link js-inpagelink">
+                                  Select an answer
+                              </a>
+                          </li>
+                       </ol>
+                    </div>
+                </div>
                 <form name="trav" class="form qa-questionnaire-form u-mb-xl"
                       role="form" autocomplete="new-password" novalidate="">
                     <div class="group">
@@ -39,21 +55,23 @@ logoUrl: ../home
 
                                 <p class="js-add-unit u-mb-m u-d-no"><a href="#">Add flat or room number</a></p>
 
-                                <div class="answer__fields js-fields">
-                                    <div class="field field--radio field--multiplechoice ">
-                                        <fieldset>
-                                            <div class="field__item js-focusable-box">
-                                                <input autocomplete="new-password" class="input input--radio js-focusable" type="radio"
-                                                       name="address-correct" id="address-correct-yes">
-                                                <label class="label label--inline" for="address-correct-yes">Yes, this is the correct address
-                                                    </label>
-                                            </div>
-                                            <div class="field__item js-focusable-box">
-                                                <input autocomplete="new-password" class="input input--radio js-focusable" type="radio"
-                                                       name="address-correct" id="address-correct-no">
-                                                <label id="address-correct-no-label" class="label label--inline" for="address-correct-no">No, search for address again</label>
-                                            </div>
-                                        </fieldset>
+                                <div class="answer question__answer">
+                                    <div class="answer__fields fieldgroup js-fields">
+                                        <div class="field field--radio field--multiplechoice ">
+                                            <fieldset>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable" type="radio"
+                                                        name="address-correct" id="address-correct-yes" data-error-msg="Select an answer">
+                                                    <label class="label label--inline" for="address-correct-yes">Yes, this is the correct address
+                                                        </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable" type="radio"
+                                                        name="address-correct" id="address-correct-no">
+                                                    <label id="address-correct-no-label" class="label label--inline" for="address-correct-no">No, search for address again</label>
+                                                </div>
+                                            </fieldset>
+                                        </div>
                                     </div>
                                 </div>
                             </section>
@@ -92,62 +110,70 @@ logoUrl: ../home
     var unitName = (sessionStorage.getItem('unit-name') || '');
     var fulfilmentJourney = (currentJourney === 'new-hh-uac' || currentJourney === 'new-ir-uac' || currentJourney === 'new-hh-paper');
     var WLHBookmark = sessionStorage.getItem("wlh_bookmark");
+    var hasErrors = false;
 
 	$('.qa-btn-submit').on('click', function (e) {
         e.preventDefault();
-
-        /**
-        * Routing
-        */
-        // Correct address
-        if (yesbox.checked) {
-            // Fulfilment
-            if (fulfilmentJourney) {
-                // Address in England or Wales
-                if (addressCountry === 'E' || addressCountry === 'W') {
-                    // CE address
-                    if (addressType === 'CE') {
-                        var url = '../confirm-rh-address-ce';
-                    }
-                    // Household address
-                    else {
-                        // HH Paper fulfilment
-                        if (currentJourney === 'new-hh-paper') {
-                            var url = '../paper-request-hh-number';
-                        // HH Code fulfilment
-                        } else {
-                            var url = '../uac-request-method';
+        const testFails = ($('input[type=radio]:checked').size() === 0);
+        window.ONS.utils.validateInputs(testFails, "input[type=radio]");
+        if (hasErrors) {
+            window.ONS.utils.calcErrors();
+            hasErrors = false;
+            return false;
+        } else {
+            /**
+            * Routing
+            */
+            // Correct address
+            if (yesbox.checked) {
+                // Fulfilment
+                if (fulfilmentJourney) {
+                    // Address in England or Wales
+                    if (addressCountry === 'E' || addressCountry === 'W') {
+                        // CE address
+                        if (addressType === 'CE') {
+                            var url = '../confirm-rh-address-ce';
+                        }
+                        // Household address
+                        else {
+                            // HH Paper fulfilment
+                            if (currentJourney === 'new-hh-paper') {
+                                var url = '../paper-request-hh-number';
+                            // HH Code fulfilment
+                            } else {
+                                var url = '../uac-request-method';
+                            }
                         }
                     }
-                }
-                // Address in Scotland
-                else if (addressCountry === 'S') {
-                    var url = '../address-in-scotland';
-                }
-                // Address in NI
-                else if (addressCountry === 'N') {
-                    var url = '../address-in-ni';
-                }
-            } else {
-                if (WLHBookmark != null) {
-                    var url = WLHBookmark;
+                    // Address in Scotland
+                    else if (addressCountry === 'S') {
+                        var url = '../address-in-scotland';
+                    }
+                    // Address in NI
+                    else if (addressCountry === 'N') {
+                        var url = '../address-in-ni';
+                    }
                 } else {
-                    var url = '../section-intro-covid';
+                    if (WLHBookmark != null) {
+                        var url = WLHBookmark;
+                    } else {
+                        var url = '../section-intro-covid';
+                    }
                 }
+
+            sessionStorage.setItem('address-line-1', addressLine1);
+            sessionStorage.setItem('address-line-2', addressLine2);
+            sessionStorage.setItem('address-town', addressLine3);
+            sessionStorage.setItem('address-postcode', addressLine4);
+
+            window.location.href = url + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney;
             }
-
-        sessionStorage.setItem('address-line-1', addressLine1);
-        sessionStorage.setItem('address-line-2', addressLine2);
-        sessionStorage.setItem('address-town', addressLine3);
-        sessionStorage.setItem('address-postcode', addressLine4);
-
-        window.location.href = url + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney;
-        }
-        else if (nobox.checked) {
-            if (!fulfilmentJourney) {
-                window.location.href = '../uac-request-address' + '?' + 'previous=' + currentPage + '&' + 'current-journey=address-correction';
-            } else {
-                window.location.href = '../uac-request-address' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney;
+            else if (nobox.checked) {
+                if (!fulfilmentJourney) {
+                    window.location.href = '../uac-request-address' + '?' + 'previous=' + currentPage + '&' + 'current-journey=address-correction';
+                } else {
+                    window.location.href = '../uac-request-address' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney;
+                }
             }
         }
     });

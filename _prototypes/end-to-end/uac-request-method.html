@@ -54,7 +54,7 @@ languages: true
                                 <div class="question u-mb-s">
                                     <h1 id="question-title"
                                         class="question__title u-fs-xxl js-piping">
-                                        How would you like to receive a new {x} access code?
+                                        How would you like to receive a new {y} access code?
                                     </h1>
                                     <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple js-visitor-definition u-mb-s u-d-no">
                                         <div class="js-collapsible-content">
@@ -164,15 +164,15 @@ languages: true
 
         pipingDestinations.forEach(function(pipingDestination) {
             if (currentJourney === 'new-ir-uac') {
-                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', 'individual');
+                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{y}', 'individual');
             } else if (currentJourney === 'new-ce-resident-uac') {
-                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', 'individual');
+                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{y}', 'individual');
                 pipingDestination.innerHTML = pipingDestination.innerHTML.replace('household', '');
             } else if (currentJourney === 'new-ce-manager-uac') {
-                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', 'manager');
+                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{y}', 'manager');
                 pipingDestination.innerHTML = pipingDestination.innerHTML.replace('household', '');
             } else {
-                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', 'household');
+                pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{y}', 'household');
             }
         });
 
