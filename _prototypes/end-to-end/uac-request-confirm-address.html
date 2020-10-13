@@ -81,7 +81,7 @@ languages: true
                                                 type="radio">
                                             <label class="label label--inline u-fs-r no-answer"
                                                 for="No">
-                                                No, send it another way</label>
+                                                No, send it by text message</label>
                                         </div>
                                     </fieldset>
                                 </div>
@@ -186,8 +186,8 @@ languages: true
                     var url = '../home/';
                     var previousPage = '';
                 } else {
-                    var url = '../uac-request-method/';
-                    var previousPage = 'uac-request-address';
+                    var url = '../uac-request-enter-mobile/';
+                    var previousPage = 'uac-request-confirm-address';
                 }
             }
             window.location.href = url + '?previous=' + previousPage + '&current-journey=' + currentJourney + (largePrint ? '&large-print=' + largePrint: '');
