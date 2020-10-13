@@ -4,12 +4,20 @@
             <div class="header__grid-top grid grid--gutterless grid--flex grid--between grid--vertical-center grid--no-wrap">
                     <div class="logo">
                         {% unless page.noONSLogoLink %}<a href="{{ site.baseurl }}/">{% endunless %}
+                            {% if page.nisra %}
+                            <picture>
+                                <source media="(max-width: 550px)" srcset="https://ons-design-system.netlify.app/img/nisra-logo-en.svg">
+                                <img class="logo__img header__logo print__hidden" width="170" src="https://ons-design-system.netlify.app/img/nisra-logo-en.svg" alt="NISRA logo">
+                            </picture>
+                            {% else %}
                             <picture>
                                 <source media="(max-width: 550px)" srcset="/s/img/ons-logo-stacked.svg">
-                                <img class="logo__img header__logo print__hidden" src="https://deploy-preview-129--sdc-global-design-patterns.netlify.com/assets/img/ons-logo-pos.svg" alt="">
+                                <img class="logo__img header__logo print__hidden" src="https://ons-design-system.netlify.app/img/ons-logo-pos-en.svg" alt="Office for National Statistics logo">
                             </picture>
+                            {% endif %}
                         {% unless page.noONSLogoLink %}</a>{% endunless %}
                     </div>
+                {% unless page.nisra %}
                 <div class="header__links grid__col col-auto">
                     <div class="grid__col col-auto">
                         <ul class="language-links">
@@ -17,7 +25,8 @@
                         </ul>
                     </div>
                 </div>
-            </div>        
+                {% endunless %}
+            </div>
         </div>
     </div>
     <div class="header__main ">
