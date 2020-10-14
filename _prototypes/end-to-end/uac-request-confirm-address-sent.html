@@ -74,6 +74,15 @@ languages: true
     var codeType;
     var modeType;
     var pipedAddress = storageAPI.getPipedAddress();
+    var fulfilmentCounter = sessionStorage.getItem('fulfilmentCounter');
+
+    if (fulfilmentCounter) { 
+        var fulfilmentCounter = parseInt(fulfilmentCounter) + 1;
+        sessionStorage.setItem('fulfilmentCounter', fulfilmentCounter);
+    } else { 
+        var fulfilmentCounter = 1;
+        sessionStorage.setItem('fulfilmentCounter', fulfilmentCounter);
+    }
 
     if (currentJourney === 'new-ir-uac' || currentJourney === 'new-ce-resident-uac'){
         var codeType = 'a new individual';

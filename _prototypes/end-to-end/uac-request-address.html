@@ -93,7 +93,7 @@ exit: true
               <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple js-no-fixed-address u-mt-m"
                     style="display:none;">
                 <div class="js-collapsible-content">
-                    <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="I have no fixed address">I have no fixed address</h3>
+                    <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="I have no fixed address">I don't live at a fixed address</h3>
                     <div class="collapsible__body js-collapsible-body">
                         <p class="js-transient-help">If you live somewhere that is mobile, such as a canal boat or motorhome, there are <a class="js-no-fixed-location-link" href="#">other ways you can let us know where you live</a>.</p>
                         <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="I have no fixed address">Hide this</button>
@@ -221,9 +221,9 @@ exit: true
       $('.header__title').add('.header__title-logo').wrapAll('<a class="header__title-link" href="../home"></a>');
       $('.js-no-fixed-address').show();
       if (currentJourney === 'new-hh-paper') {
-        $('.js-no-fixed-address .js-transient-help').addClass('js-no-fixed-fulfilment').html('If you have no fixed address, <a href="../contact-us">contact us to request a paper census questionnaire</a>');
+        $('.js-no-fixed-address .js-transient-help').addClass('js-no-fixed-fulfilment').html('If you live somewhere that is mobile, such as a canal boat or motorhome, <a href="../contact-us">contact us to request a paper census questionnaire</a>');
       } else {
-        $('.js-no-fixed-address .js-transient-help').addClass('js-no-fixed-fulfilment').html('If you have no fixed address, <a href="../contact-us">contact us to request an access code</a>');
+        $('.js-no-fixed-address .js-transient-help').addClass('js-no-fixed-fulfilment').html('If you live somewhere that is mobile, such as a canal boat or motorhome, <a href="../contact-us">contact us to request an access code</a>');
       }
 
     } else {

@@ -73,6 +73,15 @@ languages: true
     currentJourney = urlParams.get('current-journey');
     var codeType;
     var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
+    var fulfilmentCounter = sessionStorage.getItem('fulfilmentCounter');
+
+    if (fulfilmentCounter) { 
+        var fulfilmentCounter = parseInt(fulfilmentCounter) + 1;
+        sessionStorage.setItem('fulfilmentCounter', fulfilmentCounter);
+    } else { 
+        var fulfilmentCounter = 1;
+        sessionStorage.setItem('fulfilmentCounter', fulfilmentCounter);
+    }
 
     if(currentJourney === 'new-ir-uac' || currentJourney === 'new-ce-resident-uac'){
         var codeType = 'individual';
