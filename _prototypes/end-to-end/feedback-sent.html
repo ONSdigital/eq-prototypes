@@ -1,0 +1,59 @@
+---
+title: Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+exit: true
+leaveWarning: true
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="back-link js-previous-link" href="../complete">Back
+        </a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m"></div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main u-mt-m@m">
+                <div class="panel panel--simple panel--success u-pl-l u-mb-m">
+                    <div class="panel__body">
+                        <div class="panel__icon u-f-l" style="margin-left:-2rem;">
+                            <span class="icon icon--tick"></span>
+                        </div>
+                        <h1 class="u-mb-xs">
+                            Thank you for your feedback
+                        </h1>
+                        <p class="u-mb-xs">Your comments will help us make improvements to our surveys. We are not able to reply to comments, but we appreciate your feedback.</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+<style>
+    .label .label--negative {
+        margin-left: -1.9rem;
+    }
+</style>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+  var urlParams = new URLSearchParams(window.location.search),
+    previousPage = urlParams.get('previous');
+    var emailAddress = urlParams.get('email');
+
+    $('.js-previous-link').click(function(e) {
+        e.preventDefault();
+        window.location.href = '../' + previousPage + '?email=' + emailAddress;;
+    });
+</script>

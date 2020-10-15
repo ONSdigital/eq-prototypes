@@ -82,7 +82,8 @@ leaveWarning: true
 <script>
     var queryString = window.location.search,
         searchParams = new URLSearchParams(queryString),
-        storageAPI = window.ONS.storage;
+        storageAPI = window.ONS.storage,
+        currentPage = 'complete';
 
     $('.qa-btn-submit').on('click', function (e) {
         e.preventDefault();
@@ -99,6 +100,11 @@ leaveWarning: true
         e.preventDefault();
         window.location.href = '../home/';
         sessionStorage.clear();
+    });
+
+    $('.js-feedback-link').on('click', function (e) {
+        e.preventDefault();
+        window.location.href = '../feedback/' + '?previous=' + currentPage;
     });
 
     function validateEmail($email) {

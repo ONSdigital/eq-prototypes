@@ -48,7 +48,7 @@ leaveWarning: true
     var emailAddress = searchParams.get('email');
     var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
     var confirmationCounter = sessionStorage.getItem('confirmationCounter');
-
+    var currentPage = 'complete--confirmation-sent';
 
     if (confirmationCounter) { 
         var confirmationCounter = parseInt(confirmationCounter) + 1;
@@ -61,6 +61,11 @@ leaveWarning: true
         $('.js-resend-confirmation').hide();
         $('.js-max-sent').show();
     }
+
+    $('.js-feedback-link').on('click', function (e) {
+        e.preventDefault();
+        window.location.href = '../feedback/' + '?previous=' + currentPage + '&email=' + emailAddress;
+    });    
 
     pipingDestinations.forEach(function(pipingDestination) {
         pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', emailAddress);
