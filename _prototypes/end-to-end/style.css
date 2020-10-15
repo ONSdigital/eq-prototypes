@@ -110,7 +110,7 @@ h4 {
 }
 
 .header__main {
-    background: #93328e!important;
+    background: #902082!important;
 }
 
 .header {
@@ -144,7 +144,7 @@ h4 {
 }
 
 .header__bottom {
-    background: #93328e;
+    background: #902082;
 }
 
 .header-nav__list {
@@ -423,7 +423,7 @@ details summary:focus {
 
 .panel--branded {
     background-color: rgba(227, 77, 219, .15);
-    border-color: #93328e;
+    border-color: #902082;
 }
 
 .icon:before {
@@ -1018,7 +1018,7 @@ footer hr {
 /* Feedbacken */
 
 .feedback-block {
-    border: 3px solid #93328E;
+    border: 3px solid #902082;
     padding: 1rem;
 }
 
@@ -1040,7 +1040,7 @@ footer hr {
 
 .feedback__controls {
     font-weight: normal;
-    background-color: #93328e;
+    background-color: #902082;
     border-top: 1px solid #fff;
     padding: 0.85rem 0 0.4rem;
     color: #fff;
@@ -1084,7 +1084,7 @@ footer hr {
 }
 
 .footer-button {
-    background-color: #93328e;
+    background-color: #902082;
 }
 
 .feedback .collapsible {
@@ -1518,7 +1518,7 @@ footer hr {
 
 .related-links {
     padding: 1rem 0;
-    border-top: 5px solid #93328e;
+    border-top: 5px solid #902082;
 }
 
 #dummy-address {
