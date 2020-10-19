@@ -1014,8 +1014,12 @@ footer hr {
     margin-top: 0!important;
 }
 
+.leave-warning a {
+    color: #595959;
+}
 
-/* Feedbacken */
+
+/* Feedenbacken */
 
 .feedback-block {
     border: 3px solid #902082;
