@@ -9,21 +9,15 @@ noONSLogoLink: true
 exit: true
 leaveWarning: true
 ---
-
 <link rel="stylesheet" href="../style.css"/>
-<div class="page__subheader">
-    <div class="container">
-        <a class="back-link js-previous-link" href="../complete">Back
-        </a>
-    </div>
-</div>
+
 
 <div class="page__container container">
     <div class="grid grid--reverse">
         <div class="grid__col col-4@m"></div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main u-mt-m@m">
-                <div class="panel panel--simple panel--success u-pl-l u-mb-m">
+                <div class="panel panel--simple panel--success u-pl-l u-mb-l">
                     <div class="panel__body">
                         <div class="panel__icon u-f-l" style="margin-left:-2rem;">
                             <span class="icon icon--tick"></span>
@@ -34,6 +28,9 @@ leaveWarning: true
                         <p class="u-mb-xs">Your comments will help us make improvements to our surveys. We are not able to reply to comments, but we appreciate your feedback.</p>
                     </div>
                 </div>
+                <a href="../complete/" role="button" class="btn btn--link js-previous-link">
+                    <span class="btn__inner icon--chevron-right-white">Done</span>
+                </a>
             </main>
         </div>
     </div>
@@ -54,6 +51,6 @@ leaveWarning: true
 
     $('.js-previous-link').click(function(e) {
         e.preventDefault();
-        window.location.href = '../' + previousPage + '?email=' + emailAddress;;
+        window.location.href = '../' + 'complete' + '?email=' + emailAddress;;
     });
 </script>
