@@ -101,7 +101,7 @@
 .hero--census {
     display: flex;
     position: relative;
-    margin-top: 2px;
+    margin: 2px 0;
     padding: 0;
     overflow: hidden;
     background-image: linear-gradient(46deg, #3c388e 0%, #902082 100%);
