@@ -129,74 +129,87 @@ languages: true
   sessionStorage.clear();
   var hasErrors = false;
   
-  $('.btn-submit').on('click', function (e) {
-    e.preventDefault();
-    if ($('.address-input--search').length != 0) {
-      if ($("#address-field").val() == '' || $("#address-field").val() != '' ){
-        var testFails = true;
-      }
-      $('.address-input__manual input').prop('type', 'readonly');
-      window.ONS.utils.validateInputs(testFails, "input[id='address-field']");
-    } else if ($('.address-input--search').length === 0) {
-      var testFails = '';
-      $('.address-input__manual input').prop('type', 'text');
-      window.ONS.utils.validateInputs(testFails, "input[id='address-line-1']");
-      window.ONS.utils.validateInputs(testFails, "input[id='address-town']");
-      window.ONS.utils.validateInputs(testFails, "input[id='address-postcode']");
-    }
+    $('.btn-submit').on('click', function (e) {
+        e.preventDefault();
+        if ($('.address-input--search').length != 0) {
+            if ($("#address-field").val() == '' || $("#address-field").val() != '' ){
+                var testFails = true;
+            }
+            $('.address-input__manual input').prop('type', 'readonly');
+            window.ONS.utils.validateInputs(testFails, "input[id='address-field']");
+        } else if ($('.address-input--search').length === 0) {
+            var testFails = '';
+            $('.address-input__manual input').prop('type', 'text');
+            window.ONS.utils.validateInputs(testFails, "input[id='address-line-1']");
+            window.ONS.utils.validateInputs(testFails, "input[id='address-town']");
+            window.ONS.utils.validateInputs(testFails, "input[id='address-postcode']");
+        }
 
-    if (hasErrors) {
-        hasErrors = false;
-        return false;
-    } else {
+        if (hasErrors) {
+            hasErrors = false;
+            return false;
+        } else {
 
-    var isEditing =
-      new URLSearchParams(window.location.search).get('edit') === 'true';
+        var isEditing =
+        new URLSearchParams(window.location.search).get('edit') === 'true';
 
-    sessionStorage.setItem('address', getAddress());
+        sessionStorage.setItem('address', getAddress());
 
-    sessionStorage.setItem('address-line-1', document.getElementById('address-line-1').value);
-    sessionStorage.setItem('address-line-2', document.getElementById('address-line-2').value);
-    sessionStorage.setItem('address-town', document.getElementById('address-town').value);
-    sessionStorage.setItem('address-postcode', document.getElementById('address-postcode').value);
+        sessionStorage.setItem('address-line-1', document.getElementById('address-line-1').value);
+        sessionStorage.setItem('address-line-2', document.getElementById('address-line-2').value);
+        sessionStorage.setItem('address-town', document.getElementById('address-town').value);
+        sessionStorage.setItem('address-postcode', document.getElementById('address-postcode').value);
 
-    var addressType = $('.js-rh-address-type').val();
-    var addressCountry = $('.js-rh-address-country').val();
-    sessionStorage.setItem('address-type', addressType);
-    sessionStorage.setItem('address-country', addressCountry);
+        var addressType = $('.js-rh-address-type').val();
+        var addressCountry = $('.js-rh-address-country').val();
+        sessionStorage.setItem('address-type', addressType);
+        sessionStorage.setItem('address-country', addressCountry);
 
-    // Temporary manual update address type for CEs  
-    var addressLine1 = document.getElementById('address-line-1').value.toLowerCase();
-    var addressLine2 = document.getElementById('address-line-2').value.toLowerCase();
-    var address = addressLine1 + addressLine2;
-    var array = [
-    "university", 
-    "howden apartments",
-    "care home",
-    "halls of residence",
-    "hall of residence"
-    ];
+        // Temporary manual update address type for CEs  
+        var addressLine1 = document.getElementById('address-line-1').value.toLowerCase();
+        var addressLine2 = document.getElementById('address-line-2').value.toLowerCase();
+        var address = addressLine1 + addressLine2;
+        var array = [
+        "university", 
+        "howden apartments",
+        "care home",
+        "halls of residence",
+        "hall of residence"
+        ];
 
-    if (array.some(val => address.includes(val))) {
-    sessionStorage.setItem('address-type', 'CE');
-    }
+        if (array.some(val => address.includes(val))) {
+        sessionStorage.setItem('address-type', 'CE');
+        }
     
+        window.location = '../home/';
+        }
+    });
 
-    window.location = '../home/';
+    function storeDummyAddress() {
+        sessionStorage.setItem('address-line-1', '68 Abingdon Road');
+        sessionStorage.setItem('address-line-2', 'Goathill');
+        sessionStorage.setItem('address-town', 'Chesterton');
+        sessionStorage.setItem('address-postcode', 'CH13 1PD');
+        sessionStorage.setItem('address-country', 'E');
+        sessionStorage.setItem('address-type', 'HH');
+        sessionStorage.setItem('address', '68 Abingdon Road, Goathill, Chesterton, CH13 1PD');
     }
-  });
 
-  function getAddress() {
+    function showDummyAddressLink() {
+        $('#dummy-address').removeClass('u-d-no');
+    }
+
+    function getAddress() {
     var array = [
 
-      document.getElementById('address-line-1').value,
-      document.getElementById('address-line-2').value,
-      document.getElementById('address-town').value,
-      document.getElementById('address-postcode').value,
+        document.getElementById('address-line-1').value,
+        document.getElementById('address-line-2').value,
+        document.getElementById('address-town').value,
+        document.getElementById('address-postcode').value,
 
     ];
     return array.filter(filterAddressLine).join(', ');
-  }
+    }
 
   function filterAddressLine(value) {
     return value;
@@ -211,5 +224,16 @@ languages: true
     }
   $(updateEditableAddress);
   }
+
+    function updateAllLinks() {
+        $('.js-dummy-address').click(function(e) {
+            e.preventDefault();
+            $(storeDummyAddress);
+            window.location.href = '../home/';
+        });
+    }
+
+    $(showDummyAddressLink);
+    $(updateAllLinks);
 
 </script>

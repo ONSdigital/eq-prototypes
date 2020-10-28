@@ -125,6 +125,7 @@
 }
 
 .hero--census .hero__circle-image {
+    background-color: #fff;
     z-index: 2;
     top: -117px;
     right: -8px;
@@ -134,9 +135,9 @@
 }
 
 .hero--census .hero__circle-image img {
+    border-radius: 50%;
     display: block;
     height: 100%;
-    clip-path: circle(191px at center);
 }
 
 .hero--census .hero__circle-gradient {
@@ -210,9 +211,6 @@
         margin: auto;
         width: 558px;
         height: 558px;
-    }
-    .hero--census .hero__circle-image img {
-        clip-path: circle(279px at center);
     }
     .hero--census .hero__circle-gradient {
         right: -171px;
