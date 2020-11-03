@@ -1368,6 +1368,14 @@ footer hr {
     align-items: center;
 }
 
+.grid--flex.grid--vertical-bottom {
+    align-items: flex-end;
+}
+
+.grid--flex .grid__col--align-right {
+    align-self: flex-end;
+}
+
 
 /* Table of Contents */
 

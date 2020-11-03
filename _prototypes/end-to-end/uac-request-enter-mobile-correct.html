@@ -95,7 +95,7 @@ languages: true
     window.location.href = $('[name=radio-answer]:checked').val() === 'Yes'
       ? '../uac-request-enter-mobile-sent/?mobile=' + mobileNo + '&previous=' + currentPage + '&current-journey=' + currentJourney
       : '../uac-request-enter-mobile/?mobile=' + mobileNo + '&previous=' + currentPage + '&current-journey=' + currentJourney;
-    if ($('[name=radio-answer]:checked').val() === 'Yes') {
+    if ($('[name=radio-answer]:checked').val() === 'Yes' && currentJourney === 'new-ir-uac') {
         window.open('https://www.sketch.com/s/62d157aa-5f89-4cfd-a81c-d0725b53900c/a/daA402/play', '_blank');
     }
   });

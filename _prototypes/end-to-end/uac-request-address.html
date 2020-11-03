@@ -44,7 +44,7 @@ exit: true
               </h1>
               <fieldset class="question__fieldset js-question-fieldset">
                 <legend class="u-vh">What is your address?</legend>
-                <p class="js-question-description-piping js-question-description">To request an access code, we need your address. A new access code will start a new census.</p>
+                <p class="js-question-description-piping js-question-description">To request an access code, we need your address. <!--A new access code will start a new census.--></p>
                 <div class="question">
                   <div class="question__answer">
                     <div id="address" class="field address-input js-address address-input--search">
@@ -195,6 +195,8 @@ exit: true
       $('.js-question-description-piping').html('To request an individual access code, we need your address');
     } else if (currentJourney === 'new-hh-paper') {
       $('.js-question-description-piping').html('To send a paper questionnaire, we need your address');
+    } else if (currentJourney === 'continuation-form') {
+      $('.js-question-description-piping').html('To send a continuation questionnaire, we need your address');
     } else if (currentJourney === 'transient') {
       $('.js-no-fixed-address').show();
       $('.js-no-fixed-location-link').attr('href', '../uac-transient-town/?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney)

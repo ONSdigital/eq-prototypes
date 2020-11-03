@@ -108,7 +108,7 @@ logoUrl: ../home
     var addressLine3 = addressLines[2];
     var addressLine4 = addressLines[3];
     var unitName = (sessionStorage.getItem('unit-name') || '');
-    var fulfilmentJourney = (currentJourney === 'new-hh-uac' || currentJourney === 'new-ir-uac' || currentJourney === 'new-hh-paper');
+    var fulfilmentJourney = (currentJourney === 'new-hh-uac' || currentJourney === 'new-ir-uac' || currentJourney === 'new-hh-paper' || currentJourney === 'continuation-form');
     var WLHBookmark = sessionStorage.getItem("wlh_bookmark");
     var hasErrors = false;
 
@@ -138,10 +138,15 @@ logoUrl: ../home
                         else {
                             // HH Paper fulfilment
                             if (currentJourney === 'new-hh-paper') {
-                                var url = '../paper-request-hh-number';
+                                var url = '../hh-paper-request-launcher';
                             // HH Code fulfilment
+                            } else if (currentJourney === 'new-hh-uac'){
+                                var url = '../hh-uac-request-launcher';
+                            // HH Continuation forms
+                            } else if (currentJourney === 'continuation-form'){
+                                var url = '../paper-request-continuation-number';
                             } else {
-                                var url = '../uac-request-method';
+                                var url = '../ir-uac-request-launcher';
                             }
                         }
                     }
