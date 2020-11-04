@@ -141,6 +141,10 @@ languages: true
         $('.large-print').removeClass('u-d-no');
         $('.no-answer').html('No, cancel and return');
         $('.js-panel').removeClass('u-d-no').html('Your individual paper questionnaire will arrive in a white unbranded envelope');
+    } else if(currentJourney === 'continuation-form') {
+        var codeType = 'a continuation questionnaire';
+        var codeTypeShort = ' questionnaire';
+        $('.no-answer').html('No, cancel and return');
     } else {
         var codeType = 'a new household access code';
         var codeTypeShort = 'access code';

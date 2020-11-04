@@ -1458,7 +1458,7 @@ footer hr {
     margin-right: 1rem;
     overflow: hidden;
     white-space: normal;
-    vertical-align: bottom;
+    vertical-align: top;
 }
 
 .list__link .svg-icon {

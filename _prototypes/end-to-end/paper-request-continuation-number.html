@@ -26,6 +26,20 @@ languages: true
         </div>
         <div class="grid__col col-8@m">
             <main role="main" id="main" class="page__main u-mt-m@m">
+                <div class="panel panel--error u-mb-m js-error-box u-d-no">
+                    <div class="panel__header">
+                        <div class="panel__title u-fs-r--b">There <span class="js-piping">is a {x} problem{s}</span> with your answer</div>
+                    </div>
+                    <div class="panel__body">
+                        <ol class="list list--bare">
+                            <li class="list__item js-hh-number u-d-no">
+                                1. <a href="#error-message-hh-number" class="list__link js-inpagelink">
+                                    Total number of people must be more than 5 to need a continuation questionnaire
+                                </a>
+                            </li>
+                       </ol>
+                    </div>
+                </div>
                 <form id="form" name="trav" class="form qa-questionnaire-form"
                       role="form" autocomplete="new-password"
                       action="../hub">
@@ -53,7 +67,7 @@ languages: true
                                 </div>
                             </div>
                             -->
-                            <div class="question__answers">
+                            <div class="answer__fields question__answers">
                                 <div class="question__answer">
                                     <div class="field">
                                         <label class="label" for="mobile-number">
@@ -61,7 +75,9 @@ languages: true
                                         </label>
                                         <input autocomplete="new-password" class="input input--text input--w-2 js-hh-number"
                                             id="hh-number"
-                                            value="" />
+                                            value=""
+                                            min="5"
+                                            data-error-msg="Total number of people must be more than 5 to need a continuation questionnaire" />
                                     </div>
                                 </div>
                             </div>
@@ -71,6 +87,7 @@ languages: true
                             type="submit" name="">Continue
                     </button>
                 </form>
+                <p>If you've made mistakes on your form you can <a href="#">request a new household questionnaire</a></p>
             </main>
         </div>
     </div>
@@ -92,12 +109,20 @@ languages: true
     var previousPage = urlParams.get('previous');
     var currentJourney = urlParams.get('current-journey');
     var currentPage = 'paper-request-hh-number';
+    var hasErrors = false;
     
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
-    
-    var url = '../uac-request-enter-name';
-    window.location.href = url + '?hh-members=' + encodeURI($('#hh-number').val() + '&previous=' + currentPage + '&current-journey=new-hh-paper');
+    const testFails = ($("input[id='hh-number']").val() < 6);
+    window.ONS.utils.validateInputs(testFails, "input[id='hh-number']");
+    if (hasErrors) {
+        window.ONS.utils.calcErrors();
+        hasErrors = false;
+        return false;
+    } else {
+        var url = '../uac-request-enter-name';
+        window.location.href = url + '?hh-members=' + encodeURI($('#hh-number').val() + '&previous=' + currentPage + '&current-journey=' + currentJourney);
+    }
   });
 
     function updateAllLinks() {

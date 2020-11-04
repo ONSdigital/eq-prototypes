@@ -105,6 +105,9 @@ languages: true
             }
         }
         $('.js-panel').html('This should arrive soon for you to complete your census');
+    } else if (currentJourney === 'continuation-form') {
+        var modeType = 'continuation questionnaire';
+        $('.js-panel').html('This should arrive soon for you to complete your census');
     } else {
         var codeType = 'a new household';
         var modeType = 'letter';
