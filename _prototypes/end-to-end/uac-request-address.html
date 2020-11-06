@@ -120,7 +120,7 @@ exit: true
     currentJourney = urlParams.get('current-journey'),
     currentPage = 'uac-request-address',
     hasErrors = false;
-    var fulfilmentJourney = (currentJourney === 'new-hh-uac' || currentJourney === 'new-ir-uac' || currentJourney === 'new-hh-paper');
+    var fulfilmentJourney = (currentJourney === 'new-hh-uac' || currentJourney === 'new-ir-uac' || currentJourney === 'new-hh-paper' || currentJourney === 'continuation-form');
 
   $('.btn-submit').click(function(e) {
     e.preventDefault(); // do not submit the form like usual
@@ -201,7 +201,6 @@ exit: true
       $('.js-no-fixed-address').show();
       $('.js-no-fixed-location-link').attr('href', '../uac-transient-town/?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney)
     }
-    
   }
 
   function updateAllLinks() {
@@ -224,6 +223,8 @@ exit: true
       $('.js-no-fixed-address').show();
       if (currentJourney === 'new-hh-paper') {
         $('.js-no-fixed-address .js-transient-help').addClass('js-no-fixed-fulfilment').html('If you live somewhere that is mobile, such as a canal boat or motorhome, <a href="../contact-us">contact us to request a paper census questionnaire</a>');
+      } else if (currentJourney === 'continuation-form') {
+        $('.js-no-fixed-address .js-transient-help').addClass('js-no-fixed-fulfilment').html('If you live somewhere that is mobile, such as a canal boat or motorhome, <a href="../contact-us">contact us to request a continuation form</a>');
       } else {
         $('.js-no-fixed-address .js-transient-help').addClass('js-no-fixed-fulfilment').html('If you live somewhere that is mobile, such as a canal boat or motorhome, <a href="../contact-us">contact us to request an access code</a>');
       }

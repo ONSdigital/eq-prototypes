@@ -34,7 +34,7 @@ languages: true
                         <ol class="list list--bare">
                             <li class="list__item js-hh-number u-d-no">
                                 1. <a href="#error-message-hh-number" class="list__link js-inpagelink">
-                                    Total number of people must be more than 5 to need a continuation questionnaire
+                                    Enter number of people to add
                                 </a>
                             </li>
                        </ol>
@@ -48,10 +48,10 @@ languages: true
                             <div class="question u-mb-s">
                                 <h1 id="question-title"
                                     class="question__title u-fs-xxl js-piping">
-                                    In total, how many people are in your household?
+                                    How many people do you need to add to your household questionnaire?
                                 </h1>
                             </div>
-                            <p>If there are more than five people in your household, we will use this to send you the right number of continuation questionnaires</p>
+                            <p>This is to make sure we send you the right number of continuation questionnaires</p>
                             <!--
                             <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple js-visitor-definition u-mb-s">
                                 <div class="js-collapsible-content">
@@ -71,13 +71,13 @@ languages: true
                                 <div class="question__answer">
                                     <div class="field">
                                         <label class="label" for="mobile-number">
-                                            Total number of people
+                                            Number of people to add
                                         </label>
                                         <input autocomplete="new-password" class="input input--text input--w-2 js-hh-number"
                                             id="hh-number"
                                             value=""
                                             min="5"
-                                            data-error-msg="Total number of people must be more than 5 to need a continuation questionnaire" />
+                                            data-error-msg="Enter number of people to add" />
                                     </div>
                                 </div>
                             </div>
@@ -113,7 +113,7 @@ languages: true
     
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
-    const testFails = ($("input[id='hh-number']").val() < 6);
+    const testFails = ($("input[id='hh-number']").val() == "" || $("input[id='hh-number']").val() === "0");
     window.ONS.utils.validateInputs(testFails, "input[id='hh-number']");
     if (hasErrors) {
         window.ONS.utils.calcErrors();
