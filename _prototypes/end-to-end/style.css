@@ -1461,6 +1461,10 @@ footer hr {
     vertical-align: top;
 }
 
+.footer__meta .list__link {
+    vertical-align: bottom;
+}
+
 .list__link .svg-icon {
     margin-top: 0.2rem;
     width: 0.8rem;
