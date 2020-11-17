@@ -1,5 +1,5 @@
 ---
-title: Household questionnaire (English)
+title: Census Household questionnaire (English)
 project: Census 2021 End to end prototype
 globalcss: false
 layout: eq-default-extras
@@ -16,11 +16,14 @@ languages: true
 <div class="page__container container">
     <nav class="breadcrumb" aria-label="Breadcrumb">
         <ol class="breadcrumb__items">
-            <li id="breadcrumb-1" class="breadcrumb__item u-fs-s">
+            <li id="breadcrumb-0" class="breadcrumb__item u-fs-s">
                 <a href="../home" class="breadcrumb__link">Home</a>
             </li>
+            <li id="breadcrumb-1" class="breadcrumb__item u-fs-s">
+                <a href="https://deploy-preview-118--sdc-prototypes.netlify.app/prototypes/census-website-respond/help/" class="breadcrumb__link">Help with the census</a>
+            </li>
             <li id="breadcrumb-2" class="breadcrumb__item u-fs-s">
-                <a href="#" class="breadcrumb__link">Help with the census</a>
+                <a href="https://deploy-preview-118--sdc-prototypes.netlify.app/prototypes/census-website-respond/help/languages-and-accessibility/" class="breadcrumb__link">Languages and accessibility</a>
             </li>
             <li id="breadcrumb-3" class="breadcrumb__item u-fs-s">
                 <a href="../languages-copy" class="breadcrumb__link">Languages</a>
@@ -136,7 +139,7 @@ languages: true
     currentPage = pathArray.slice(-2)[0];
 
     function updateAllLinks() {
-        $('#main-nav ul li:nth-child(3)').addClass('header-nav__item--active');
+        $('#main-nav ul li:nth-child(4)').addClass('header-nav__item--active');
         $('.js-previous-link').attr('href', '../' + previousPage + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney);
     }
 

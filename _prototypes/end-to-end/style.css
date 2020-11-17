@@ -891,7 +891,7 @@ p.label--negative:empty {
 
 @media only screen and (min-width: 740px) {
     .list--inline\@m .list__item {
-        margin: .25rem 1.5rem .25rem 0rem!important;
+        margin: .25rem 0 .25rem 0rem!important;
     }
 }
 
