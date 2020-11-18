@@ -201,7 +201,7 @@ noONSLogoLink: true
   function personWording(numberOfPeople, type) {
     if (window.ONS.utils.numberToWordsStyleguide(numberOfPeople)) {
       var numberOfPeople = getNumberInHousehold().length
-      var questionPersonWordingText = '<em class="highlight">' + numberOfPeople + "</em> people live"
+      var questionPersonWordingText = '<em class="highlight">' + numberOfPeople + ”</em> people live"
       var answerPersonWordingText = window.ONS.utils.numberToWordsStyleguide(numberOfPeople) + " people live"
       if (numberOfPeople == 1) {
         questionPersonWordingText = '<em class="highlight">1</em> person lives'
