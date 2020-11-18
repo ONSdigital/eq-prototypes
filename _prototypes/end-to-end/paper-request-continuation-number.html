@@ -34,7 +34,7 @@ languages: true
                         <ol class="list list--bare">
                             <li class="list__item js-hh-number u-d-no">
                                 1. <a href="#error-message-hh-number" class="list__link js-inpagelink">
-                                    Enter number of people to add
+                                    Enter a number greater than 5
                                 </a>
                             </li>
                        </ol>
@@ -47,11 +47,11 @@ languages: true
                         <section class="section">
                             <div class="question u-mb-s">
                                 <h1 id="question-title"
-                                    class="question__title u-fs-xxl js-piping">
-                                    How many people do you need to add to your household questionnaire?
+                                    class="question__title u-fs-xxl">
+                                    How many people are in your household?
                                 </h1>
                             </div>
-                            <p>This is to make sure we send you the right number of continuation questionnaires</p>
+                            <p>This is to make sure we send you the right number of continuation questionnaires if there are more than 5 people in your household</p>
                             <!--
                             <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple js-visitor-definition u-mb-s">
                                 <div class="js-collapsible-content">
@@ -71,13 +71,13 @@ languages: true
                                 <div class="question__answer">
                                     <div class="field">
                                         <label class="label" for="mobile-number">
-                                            Number of people to add
+                                            Number of people
                                         </label>
                                         <input autocomplete="new-password" class="input input--text input--w-2 js-hh-number"
                                             id="hh-number"
                                             value=""
                                             min="5"
-                                            data-error-msg="Enter number of people to add" />
+                                            data-error-msg="Enter a number greater than 5" />
                                     </div>
                                 </div>
                             </div>
@@ -87,7 +87,7 @@ languages: true
                             type="submit" name="">Continue
                     </button>
                 </form>
-                <p>If you've made mistakes on your form you can <a href="#">request a new household questionnaire</a></p>
+                <p>If you don't already have a paper census for your household, you will need to <a href="../hh-paper-request-launcher/?previous=paper-request-continuation-number&current-journey=new-hh-paper">request a household paper questionnaire</a>.</p>
             </main>
         </div>
     </div>
@@ -113,7 +113,7 @@ languages: true
     
   $('.qa-btn-submit').on('click', function (e) {
     e.preventDefault();
-    const testFails = ($("input[id='hh-number']").val() == "" || $("input[id='hh-number']").val() === "0");
+    const testFails = ($("input[id='hh-number']").val() < "6" || $("input[id='hh-number']").val() === "0");
     window.ONS.utils.validateInputs(testFails, "input[id='hh-number']");
     if (hasErrors) {
         window.ONS.utils.calcErrors();
