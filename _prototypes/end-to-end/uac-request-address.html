@@ -44,7 +44,7 @@ exit: true
               </h1>
               <fieldset class="question__fieldset js-question-fieldset">
                 <legend class="u-vh">What is your address?</legend>
-                <p class="js-question-description-piping js-question-description">To request an access code, we need your address. <!--A new access code will start a new census.--></p>
+                <p class="js-question-description-piping js-question-description">To request an access code, we need your address <!--A new access code will start a new census.--></p>
                 <div class="question">
                   <div class="question__answer">
                     <div id="address" class="field address-input js-address address-input--search">
@@ -194,7 +194,7 @@ exit: true
     if (currentJourney === 'new-ir-uac') {
       $('.js-question-description-piping').html('To request an individual access code, we need your address');
     } else if (currentJourney === 'new-hh-paper') {
-      $('.js-question-description-piping').html('To send a paper questionnaire, we need your address');
+      $('.js-question-description-piping').html('To send a paper census questionnaire, we need your address');
     } else if (currentJourney === 'continuation-form') {
       $('.js-question-description-piping').html('To send a continuation questionnaire, we need your address');
     } else if (currentJourney === 'transient') {
@@ -222,11 +222,11 @@ exit: true
       $('.header__title').add('.header__title-logo').wrapAll('<a class="header__title-link" href="../home"></a>');
       $('.js-no-fixed-address').show();
       if (currentJourney === 'new-hh-paper') {
-        $('.js-no-fixed-address .js-transient-help').addClass('js-no-fixed-fulfilment').html('If you live somewhere that is mobile, such as a canal boat or motorhome, <a href="../contact-us">contact us to request a paper census questionnaire</a>');
+        $('.js-no-fixed-address .js-transient-help').addClass('js-no-fixed-fulfilment').html('If you live somewhere that is mobile, such as a canal boat or motorhome, <a href="../contact-us">contact us to request a paper census questionnaire</a>.');
       } else if (currentJourney === 'continuation-form') {
-        $('.js-no-fixed-address .js-transient-help').addClass('js-no-fixed-fulfilment').html('If you live somewhere that is mobile, such as a canal boat or motorhome, <a href="../contact-us">contact us to request a continuation form</a>');
+        $('.js-no-fixed-address .js-transient-help').addClass('js-no-fixed-fulfilment').html('If you live somewhere that is mobile, such as a canal boat or motorhome, <a href="../contact-us">contact us to request a continuation questionnaire</a>.');
       } else {
-        $('.js-no-fixed-address .js-transient-help').addClass('js-no-fixed-fulfilment').html('If you live somewhere that is mobile, such as a canal boat or motorhome, <a href="../contact-us">contact us to request an access code</a>');
+        $('.js-no-fixed-address .js-transient-help').addClass('js-no-fixed-fulfilment').html('If you live somewhere that is mobile, such as a canal boat or motorhome, <a href="../contact-us">contact us to request an access code</a>.');
       }
 
     } else {
