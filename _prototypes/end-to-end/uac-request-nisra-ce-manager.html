@@ -32,7 +32,7 @@ nisra: true
                         <section class="section">
                             <h1 class="u-fs-xxl">You need to visit the Communal Establishment Portal</h1>
 
-                            <p>Visit the <a href="https://respond.nisra.gov.uk/census-ce/">Communal Establishment Portal website</a> to request a manager access code.</p>
+                            <p class="js-piping">Visit the <a href="https://nisra.gov.uk/census-ce/">Communal Establishment Portal website</a> to request a manager access code.</p>
                             <p>Alternatively, you can <a href="../ni/contact-us">contact us</a> for help.</p>
 
                         </section>
@@ -53,6 +53,10 @@ nisra: true
 
     function updateAllLinks() {
         $('.js-previous-link').attr('href', '../' + previousPage + '?' + 'previous=' + 'uac-request-address' + '&' + 'current-journey=' + currentJourney);
+    
+        if (currentJourney === 'ce-manager-paper') {
+            $('.js-piping').html('Visit the <a href="https://nisra.gov.uk/census-ce/">Communal Establishment Portal website</a> to request a manager form.');
+        }
     }
 
     $(updateAllLinks);
