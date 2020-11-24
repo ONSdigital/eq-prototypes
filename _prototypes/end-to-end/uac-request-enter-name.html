@@ -53,7 +53,7 @@ languages: true
                                 data-qa="question-title">
                                 What is your name?
                             </h1>
-                            <p>This is who the {x} will be addressed to</p>
+                            <p class="js-piping">This is who the {y} will be addressed to</p>
                             <fieldset
                                     class="question__fieldset js-question-fieldset">
                                 <legend class="u-vh">What is your name?</legend>
@@ -118,6 +118,7 @@ languages: true
     var currentPage = 'uac-request-enter-name';
     var currentJourney = urlParams.get('current-journey');
     var householdNumber = urlParams.get('hh-members');
+    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
 
   $('.btn-submit').on('click', function(e) {
     e.preventDefault();
@@ -164,9 +165,20 @@ languages: true
     }
   });
 
+  function updateQuestion() {
+    pipingDestinations.forEach(function(pipingDestination) {
+      if (currentJourney === 'new-hh-paper' || currentJourney === 'continuation-form' || currentJourney === 'new-ir-paper' || currentJourney === 'new-ce-resident-paper') {
+        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{y}', 'questionnaire');
+      } else {
+        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{y}', 'letter');
+      }
+    });
+  }
+
   function updateAllLinks() {
     $('.js-previous-link').attr('href', '../' + previousPage + '?previous=' + currentPage + '&current-journey=' + currentJourney);
   }
 
+  $(updateQuestion);
   $(updateAllLinks);
 </script>
