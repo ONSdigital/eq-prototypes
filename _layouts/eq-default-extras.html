@@ -12,10 +12,8 @@
 <body>
 <div class="page">
     <div class="page__content">
-        <div class="skip">
-            <a class="skip__link" href="#main">Skip to content</a>
-        </div>
-        <header class="page__header">
+        <a class="skip__link" href="#main-content">Skip to content</a>
+        <header class="header" role="banner">
         {% if page.header == "census-website" %}
             {% include header-census.html %}
         {% else %}
@@ -24,7 +22,7 @@
         </header>
         {{ content }}
     </div>
-    <div class="page__footer">
+    <footer class="footer">
         {% if page.footer == "minimal" %}
             {% include footer-eq-default-minimal.html %}
         {% elsif page.footer == "census-website" %}

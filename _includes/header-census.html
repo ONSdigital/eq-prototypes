@@ -1,86 +1,99 @@
-<header class="header">
-    <div class="header__top" role="banner">
-        <div class="container">
-            <div class="header__grid-top grid grid--gutterless grid--flex grid--between grid--vertical-center grid--no-wrap">
-                <div class="logo">
-                    {% unless page.noONSLogoLink %}<a href="{{ site.baseurl }}/">{% endunless %}
-                        {% if page.nisra %}
-                            <picture>
-                                <source media="(max-width: 550px)" srcset="https://ons-design-system.netlify.app/img/nisra-logo-en.svg">
-                                <img class="logo__img header__logo print__hidden" src="https://ons-design-system.netlify.app/img/nisra-logo-en.svg" alt="NISRA logo">
-                            </picture>
-                        {% else %}
-                            <picture>
-                                <source media="(max-width: 550px)" srcset="https://ons-design-system.netlify.app/img/ons-logo-stacked-pos-en.svg">
-                                <img class="logo__img header__logo print__hidden" src="https://ons-design-system.netlify.app/img/ons-logo-pos-en.svg" alt="Office for National Statistics logo">
-                            </picture>
-                        {% endif %}
-                    {% unless page.noONSLogoLink %}</a>{% endunless %}
-                </div>
-                {% unless page.nisra %}
-                <div class="header__links grid__col col-auto">
-                    <div class="grid__col col-auto">
-                        <ul class="language-links">
-                            <li class="language-links__item"><a href="#" lang="cy" data-ga-element="language">Cymraeg</a></li>
-                            <!-- <li class="language-links__item">
-                                <a class="icon--other-langs" href="../languages" data-ga-element="language">
-                                    <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><g><path d="m496 0h-240c-8.284 0-15 6.716-15 15v147h-225c-8.284 0-15 6.716-15 15v320c0 6.067 3.654 11.537 9.26 13.858 1.855.769 3.805 1.142 5.737 1.142 3.903 0 7.74-1.524 10.609-4.394l55.607-55.606h173.787c8.284 0 15-6.716 15-15v-147h158.787l55.606 55.606c2.869 2.87 6.706 4.394 10.609 4.394 1.933 0 3.882-.374 5.737-1.142 5.605-2.322 9.26-7.792 9.26-13.858v-320c.001-8.284-6.715-15-14.999-15zm-255 422h-165c-3.979 0-7.794 1.581-10.606 4.394l-34.394 34.393v-268.787h210zm240-123.213-34.394-34.393c-2.812-2.813-6.627-4.394-10.606-4.394h-165v-230h210z"/><path d="m311 130h10.978c3.123 23.867 13.59 45.455 29.054 62.414-10.69 4.857-22.545 7.586-35.032 7.586-8.284 0-15 6.716-15 15s6.716 15 15 15c21.972 0 42.521-6.198 60-16.931 17.479 10.733 38.029 16.931 60 16.931 8.284 0 15-6.716 15-15s-6.716-15-15-15c-12.487 0-24.342-2.729-35.032-7.586 15.464-16.959 25.932-38.547 29.054-62.414h10.978c8.284 0 15-6.716 15-15s-6.716-15-15-15h-50v-25c0-8.284-6.716-15-15-15s-15 6.716-15 15v25h-50c-8.284 0-15 6.716-15 15s6.716 15 15 15zm65 45.148c-12.068-12.039-20.523-27.681-23.648-45.148h47.295c-3.124 17.467-11.579 33.11-23.647 45.148z"/><path d="m153.209 233.669c-.053-.138-.106-.276-.163-.413-2.815-6.84-9.41-11.256-16.806-11.256-.006 0-.014 0-.021 0-7.402.008-13.997 4.44-16.8 11.292-.047.113-.092.227-.135.34l-52.568 138.029c-2.948 7.742.938 16.408 8.679 19.356 7.746 2.95 16.408-.938 19.356-8.679l9.413-24.715h63.757l9.311 24.673c2.268 6.007 7.975 9.708 14.037 9.708 1.759 0 3.55-.312 5.293-.97 7.751-2.925 11.663-11.579 8.738-19.33zm-37.619 93.955 20.599-54.086 20.411 54.086z"/></g></svg>
-                                </a>
-                            </li> -->
-                        </ul>
-                    </div>
-                </div>
+<div class="header__top">
+    <div class="container">
+        <div class="header__grid-top grid grid--gutterless grid--flex grid--between grid--vertical-center grid--no-wrap">
+            <div class="grid__col col-auto">
+                {% unless page.noONSLogoLink %}
+                <a class="header__logo-link" href="{{ site.baseurl }}/">
+                {% endunless %}
+                    {% if page.nisra %}
+                        <picture>
+                            <source media="(max-width: 499px)" srcset="https://ons-design-system.netlify.app/img/nisra-logo-en.svg">
+                            <img class="header__logo" src="https://ons-design-system.netlify.app/img/nisra-logo-en.svg" alt="NISRA logo">
+                        </picture>
+                    {% else %}
+                        <picture>
+                            <source media="(max-width: 499px)" srcset="https://cdn.ons.gov.uk/sdc/design-system/28.0.1/img/ons-logo-stacked-pos-en.svg">
+                            <img class="header__logo" src="https://cdn.ons.gov.uk/sdc/design-system/28.0.1/img/ons-logo-pos-en.svg" alt="Office for National Statistics logo">
+                        </picture>
+                    {% endif %}
+                {% unless page.noONSLogoLink %}
+                </a>
                 {% endunless %}
             </div>
+            {% unless page.nisra %}
+            <div class="header__links grid__col col-auto">
+                <div class="grid__col col-auto">
+                    <ul class="language-links">
+                        <li class="language-links__item">
+                            <a href="#0" lang="cy" data-ga-element="language">Cymraeg</a>
+                        </li>
+                    </ul>
+                </div>
+                {% if page.languages %}
+                <div class="grid__col col-auto">
+                    <ul class="other-languages">
+                        <li class="other-languages__item">
+                            <a class="other-languages__link" href="../languages-copy" lang="cy" data-ga-element="language">
+                                <svg class="svg-icon" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2.31939,5.14422 L5.45949,5.14422 C5.72679,3.78342 6.13719,2.55402 6.68619,1.63962 C4.83219,2.22372 3.27699,3.49002 2.31939,5.14422 L2.31939,5.14422 Z M6.75909,5.14422 L11.24109,5.14422 C10.71909,2.69172 9.75699,1.28502 9.00009,1.28502 C8.24409,1.28502 7.28019,2.69172 6.75909,5.14422 L6.75909,5.14422 Z M12.53979,5.14422 L15.68169,5.14422 C14.72229,3.49002 13.16799,2.22372 11.31399,1.63962 C11.86299,2.55402 12.27429,3.78252 12.53979,5.14422 L12.53979,5.14422 Z M1.71819,11.54952 L5.25339,11.54952 C5.15079,10.71432 5.09859,9.85122 5.09859,9.00072 C5.09859,8.14122 5.15169,7.27182 5.25609,6.42942 L1.72539,6.42942 C1.44009,7.23312 1.28529,8.09982 1.28529,9.00072 C1.28529,9.89352 1.43739,10.75122 1.71819,11.54952 L1.71819,11.54952 Z M6.53859,11.54952 L11.46069,11.54952 C11.56059,10.77372 11.61639,9.92142 11.61639,9.00072 C11.61639,8.07012 11.55879,7.21062 11.45799,6.42942 L6.54219,6.42942 C6.44139,7.21062 6.38379,8.07012 6.38379,9.00072 C6.38379,9.92142 6.43959,10.77372 6.53859,11.54952 L6.53859,11.54952 Z M12.74769,11.54952 L16.28199,11.54952 C16.56189,10.75122 16.71489,9.89352 16.71489,9.00072 C16.71489,8.09982 16.55919,7.23312 16.27479,6.42942 L12.74499,6.42942 C12.84849,7.27182 12.90159,8.14122 12.90159,9.00072 C12.90159,9.85122 12.84849,10.71432 12.74769,11.54952 L12.74769,11.54952 Z M2.30769,12.83472 C3.26439,14.49972 4.82409,15.77412 6.68619,16.36092 C6.13449,15.44112 5.72229,14.20362 5.45589,12.83472 L2.30769,12.83472 Z M12.54339,12.83472 C12.27789,14.20362 11.86479,15.44112 11.31399,16.36092 C13.17609,15.77412 14.73579,14.49972 15.69159,12.83472 L12.54339,12.83472 Z M6.75459,12.83472 C7.27479,15.29982 8.24229,16.71462 9.00009,16.71462 C9.75879,16.71462 10.72539,15.29982 11.24559,12.83472 L6.75459,12.83472 Z M9.00009,17.99982 C4.03749,17.99982 9e-05,13.96332 9e-05,9.00072 C9e-05,7.64892 0.29889,6.36642 0.83529,5.21532 L0.86859,5.14422 C2.31489,2.10582 5.41629,-0.00018 9.00009,-0.00018 C13.96359,-0.00018 18.00009,4.03722 18.00009,9.00072 C18.00009,13.96332 13.96359,17.99982 9.00009,17.99982 L9.00009,17.99982 Z" id="Fill-1" fill="#000000" mask="url(#mask-2)"></path>
+                                </svg>
+                                <span class="u-ml-xs u-d-no@xs@m">Other languages</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+            {% endunless %}
         </div>
     </div>
-    <div class="header__main ">
-        <div class="container">
-            <div class="grid grid--gutterless grid--flex grid--between grid--vertical-center grid--no-wrap">
-                <div class="grid__col col-auto u-flex-shrink">
-                    {% if page.logoUrl %}<a class="header__title-link" href="{{ page.logoUrl }}">{% endif %}
-                    <h1
-                            class="header__title header__title--nav-adj">
-                        <span class="js-header-title">
-                            {% if page.title %}
-                                {{ page.title }}
-                            {% else %}
-                                {{ site.title }}
-                            {% endif %}
-                        </span>
-                    </h1>
-                    <img class="header__title-logo" src="/img/icons/census-logo-en.svg" alt="Census 2021">
-                    {% if page.logoUrl %}</a>{% endif %}
-                </div>
-                <div class="grid__col col-auto u-flex-no-shrink u-d-no@m">
-                  <button type="submit" class="btn btn--mobile u-ml-s js-toggle-main" aria-label="Toggle main navigation" aria-controls="main-nav" aria-haspopup="true" aria-expanded="false">
-                    <span class="btn__inner">Menu</span>
-                  </button>
-                </div>
+</div>
+<div class="header__main ">
+    <div class="container">
+        <div class="grid grid--gutterless grid--flex grid--between grid--vertical-center grid--no-wrap">
+            <div class="grid__col col-auto u-flex-shrink">
+                {% if page.logoUrl %}<a class="header__title-link" href="{{ page.logoUrl }}">{% endif %}
+                <h1
+                        class="header__title header__title--nav-adj">
+                    <span class="js-header-title">
+                        {% if page.title %}
+                            {{ page.title }}
+                        {% else %}
+                            {{ site.title }}
+                        {% endif %}
+                    </span>
+                </h1>
+                <img class="header__title-logo" src="/img/icons/census-logo-en.svg" alt="Census 2021">
+                {% if page.logoUrl %}</a>{% endif %}
+            </div>
+            <div class="grid__col col-auto u-flex-no-shrink u-d-no@m">
+                <button type="submit" class="btn btn--mobile u-ml-s js-toggle-main" aria-label="Toggle main navigation" aria-controls="main-nav" aria-haspopup="true" aria-expanded="false">
+                <span class="btn__inner">Menu</span>
+                </button>
             </div>
         </div>
     </div>
-		<div class="header__bottom">
-			<div class="container container--gutterless@xs@m">
-				<nav class="header-nav js-header-nav" id="main-nav" aria-label="Main menu" data-analytics="header-navigation">
-					<ul class="header-nav__list" aria-label="" role="menubar">
-						<li class="header-nav__item ">
-							<a href="../home" class="header-nav__link" role="menuitem">Home</a>
-						</li>
-						<li class="header-nav__item ">
-							<a href="https://deploy-preview-118--sdc-prototypes.netlify.app/prototypes/census-website-respond/about-the-census/" class="header-nav__link" role="menuitem">About the census</a>
-						</li>
-                        <li class="header-nav__item ">
-							<a href="https://deploy-preview-118--sdc-prototypes.netlify.app/prototypes/census-website-respond/your-data-and-security/" class="header-nav__link" role="menuitem">Your data and security</a>
-						</li>
-						<li class="header-nav__item ">
-							<a href="https://deploy-preview-118--sdc-prototypes.netlify.app/prototypes/census-website-respond/help/" class="header-nav__link" role="menuitem">Help</a>
-						</li>
-						<li class="header-nav__item ">
-							<a href="https://deploy-preview-118--sdc-prototypes.netlify.app/prototypes/census-website-respond/contact-us/" class="header-nav__link" role="menuitem">Contact us</a>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</div>
-</header>
+</div>
+    <div class="header__bottom">
+        <div class="container container--gutterless@xs@m">
+            <nav class="header-nav js-header-nav" id="main-nav" aria-label="Main menu" data-analytics="header-navigation">
+                <ul class="header-nav__list" aria-label="" role="menubar">
+                    <li class="header-nav__item ">
+                        <a href="../home" class="header-nav__link" role="menuitem">Home</a>
+                    </li>
+                    <li class="header-nav__item ">
+                        <a href="https://deploy-preview-118--sdc-prototypes.netlify.app/prototypes/census-website-respond/about-the-census/" class="header-nav__link" role="menuitem">About the census</a>
+                    </li>
+                    <li class="header-nav__item ">
+                        <a href="https://deploy-preview-118--sdc-prototypes.netlify.app/prototypes/census-website-respond/your-data-and-security/" class="header-nav__link" role="menuitem">Your data and security</a>
+                    </li>
+                    <li class="header-nav__item ">
+                        <a href="https://deploy-preview-118--sdc-prototypes.netlify.app/prototypes/census-website-respond/help/" class="header-nav__link" role="menuitem">Help</a>
+                    </li>
+                    <li class="header-nav__item ">
+                        <a href="https://deploy-preview-118--sdc-prototypes.netlify.app/prototypes/census-website-respond/contact-us/" class="header-nav__link" role="menuitem">Contact us</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>

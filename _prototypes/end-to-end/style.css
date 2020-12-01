@@ -1,7 +1,26 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700,800&display=swap');
-html,
+@font-face {
+    font-family: OpenSans;
+    font-weight: 400;
+    src: url(https://cdn.ons.gov.uk/sdc/design-system/28.0.3/fonts/opensans-regular.woff2) format("woff2"), url(../fonts/opensans-regular.woff) format("woff")
+}
+
+@font-face {
+    font-family: OpenSans;
+    font-weight: 600;
+    src: url(https://cdn.ons.gov.uk/sdc/design-system/28.0.3/fonts/opensans-bold.woff2)
+}
+
+html {}
+
 body {
-    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'OpenSans', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.page {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
 }
 
 h1,
@@ -50,6 +69,13 @@ h4 {
     width: 100%;
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+    border-style: none;
+}
+
 
 /* over 740px */
 
@@ -83,6 +109,142 @@ h4 {
 }
 
 
+/* DS v2 Grid */
+
+.grid {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-left: -1rem;
+    font-size: 0;
+}
+
+.grid--float {
+    letter-spacing: 0;
+}
+
+.grid--center {
+    text-align: center;
+}
+
+.grid--center .grid__col {
+    text-align: left;
+}
+
+.grid--center-all {
+    text-align: center;
+}
+
+.grid--reverse {
+    direction: rtl;
+}
+
+.grid--reverse .grid__col {
+    direction: ltr;
+}
+
+.grid--spaced .grid__col {
+    margin-bottom: 1rem;
+}
+
+.grid--spaced.grid--tight .grid__col {
+    margin-bottom: 0.5rem;
+}
+
+.grid--align-mid .grid__col {
+    vertical-align: middle;
+}
+
+.grid--stagger-align .grid__col:nth-of-type(1n) {
+    text-align: right;
+}
+
+.grid--stagger-align .grid__col:nth-of-type(2n) {
+    text-align: left;
+}
+
+.grid--tight {
+    margin-left: -0.5rem;
+}
+
+.grid--tight .grid__col {
+    padding-left: 0.5rem;
+}
+
+.grid--loose {
+    margin-left: -2rem;
+}
+
+.grid--gutterless {
+    margin-left: 0;
+}
+
+.grid--gutterless .grid__col {
+    padding-left: 0;
+}
+
+.grid--pixelgutter {
+    margin-left: 1px;
+}
+
+.grid--pixelgutter .grid__col {
+    padding-left: 1px;
+    margin-bottom: 1px;
+}
+
+.grid--flex {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-flow: row wrap;
+}
+
+.grid--flex.grid--center {
+    justify-content: center;
+}
+
+.grid--flex.grid--between {
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.grid--flex.grid--vertical-center {
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.grid--flex.grid--vertical-bottom {
+    align-items: flex-end;
+}
+
+.grid--flex .grid__col {
+    width: 100%;
+}
+
+.grid--flex .grid__col--align-right {
+    align-self: flex-end;
+}
+
+.grid--no-wrap,
+.grid--no-wrap\@xs {
+    flex-wrap: nowrap;
+}
+
+.grid__col {
+    display: inline-block;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding-left: 1rem;
+    width: 100%;
+    min-width: 0;
+    vertical-align: top;
+    background-clip: content-box;
+    -ms-flex: unset;
+    flex: unset;
+    font-size: 1rem;
+}
+
+
 /* Utility classes */
 
 .u-bb {
@@ -105,16 +267,68 @@ h4 {
     padding: 1rem 0;
 }
 
+
+/* Header */
+
+.skip__link {
+    display: block;
+    top: 0;
+    width: unset;
+    position: unset;
+    -webkit-text-size-adjust: unset;
+    height: 1px;
+    overflow: hidden;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background: none;
+}
+
+.skip__link:focus {
+    padding: 1rem;
+    height: auto;
+    max-height: 20em;
+    outline: none;
+    background-color: #fd0;
+    -webkit-box-shadow: 0;
+    box-shadow: 0;
+    color: #222;
+    text-decoration: underline;
+}
+
 .header {
-    margin-bottom: 0;
+    margin: 0;
+}
+
+.header__logo-link:focus {
+    outline: 3px solid transparent;
+    background-color: #fd0;
+    -webkit-box-shadow: 0 -2px #fd0, 0 4px #222;
+    box-shadow: 0 -2px #fd0, 0 4px #222;
+    color: #222;
+    outline-offset: unset;
 }
 
 .header__main {
     background: #902082!important;
 }
 
-.header {
-    margin-bottom: 0!important;
+.header__top {
+    width: 100%;
+    background: #fff;
+    padding: unset;
+    line-height: 1.6;
+}
+
+.header__top .grid__col {
+    -webkit-box-align: center;
+    align-items: center;
+    display: -webkit-box;
+    display: flex;
+}
+
+.header__logo {
+    display: block;
+    height: unset;
 }
 
 .header__title-link:focus {
@@ -136,8 +350,15 @@ h4 {
     padding-top: 0;
 }
 
+.header__grid-top {
+    height: 54px;
+}
 
-/* Header nav */
+@media (min-width: 500px) {
+    .header__grid-top {
+        height: 46px;
+    }
+}
 
 .header-nav {
     display: none;
@@ -285,7 +506,7 @@ a:hover {
     color: #222;
 }
 
-a:focus:not(.btn--link):not(.btn--ghost):not(.js-clear-btn):not(.download__thumbnail--link):not(.header__logo-link):not(.header__title-link):not(.tab--row) {
+a:focus:not(.btn--link):not(.btn--ghost):not(.js-clear-btn):not(.download__thumbnail--link):not(.header__logo-link):not(.header__title-link):not(.tab--row):not(.skip__link) {
     outline: 3px solid transparent;
     color: #222;
     background-color: #fd0;
@@ -907,17 +1128,13 @@ p.label--negative:empty {
  */
 
 hr {
-    box-sizing: content-box;
-    height: 1px;
-    overflow: visible;
+    margin: 2rem 0 0;
     border: 0;
-    border-bottom: 1px solid #888;
-    border-style: solid;
-    margin: 0;
-}
-
-footer hr {
-    border-color: #acacac;
+    border-top: 1px solid #888;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible;
 }
 
 .list.list--records .list__item {
@@ -1145,7 +1362,16 @@ footer hr {
 }
 
 .page__content {
-    padding-bottom: 3rem;
+    -webkit-box-flex: 1;
+    flex: 1 0 auto;
+    position: relative;
+    padding-bottom: 1px;
+    overflow-x: hidden;
+}
+
+.page__main {
+    margin-top: 2.5rem;
+    margin-bottom: 4.5rem;
 }
 
 .ghost-link {
@@ -1221,6 +1447,34 @@ footer hr {
 
 /* Languages */
 
+.other-languages {
+    border-left: 1px solid #888;
+    margin: 0 0 0 1rem;
+    padding: 0 0 0 1rem;
+}
+
+.other-languages__item {
+    display: block;
+    margin-bottom: 0;
+}
+
+.other-languages__link {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+.svg-icon {
+    width: 1rem;
+    height: 1rem;
+    vertical-align: middle;
+}
+
 @media only screen and (min-width: 740px) {
     .adv-filter__results-sort {
         float: right;
@@ -1267,113 +1521,6 @@ footer hr {
 .list__link:hover svg,
 .list__link:focus svg {
     fill: #222;
-}
-
-
-/* DS v2 Grid */
-
-.grid {
-    box-sizing: border-box;
-    margin-left: -1rem;
-    font-size: 0;
-}
-
-.grid--float {
-    letter-spacing: 0;
-}
-
-.grid--center {
-    text-align: center;
-}
-
-.grid--center .grid__col {
-    text-align: left;
-}
-
-.grid--center-all {
-    text-align: center;
-}
-
-.grid--reverse {
-    direction: rtl;
-}
-
-.grid--reverse .grid__col {
-    direction: ltr;
-}
-
-.grid--spaced .grid__col {
-    margin-bottom: 1rem;
-}
-
-.grid--spaced.grid--tight .grid__col {
-    margin-bottom: 0.5rem;
-}
-
-.grid--align-mid .grid__col {
-    vertical-align: middle;
-}
-
-.grid--stagger-align .grid__col:nth-of-type(1n) {
-    text-align: right;
-}
-
-.grid--stagger-align .grid__col:nth-of-type(2n) {
-    text-align: left;
-}
-
-.grid--tight {
-    margin-left: -0.5rem;
-}
-
-.grid--tight .grid__col {
-    padding-left: 0.5rem;
-}
-
-.grid--loose {
-    margin-left: -2rem;
-}
-
-.grid--gutterless {
-    margin-left: 0;
-}
-
-.grid--gutterless .grid__col {
-    padding-left: 0;
-}
-
-.grid--pixelgutter {
-    margin-left: 1px;
-}
-
-.grid--pixelgutter .grid__col {
-    padding-left: 1px;
-    margin-bottom: 1px;
-}
-
-.grid--flex {
-    flex-flow: row wrap;
-    display: flex;
-}
-
-.grid--flex.grid--center {
-    justify-content: center;
-}
-
-.grid--flex.grid--between {
-    justify-content: space-between;
-}
-
-.grid--flex.grid--vertical-center {
-    align-items: center;
-}
-
-.grid--flex.grid--vertical-bottom {
-    align-items: flex-end;
-}
-
-.grid--flex .grid__col--align-right {
-    align-self: flex-end;
 }
 
 
