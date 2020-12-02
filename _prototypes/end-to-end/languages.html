@@ -16,11 +16,14 @@ languages: true
 <div class="page__container container">
     <nav class="breadcrumb" aria-label="Breadcrumb">
         <ol class="breadcrumb__items u-fs-s">
-            <li id="breadcrumb-1" class="breadcrumb__item">
+            <li id="breadcrumb-0" class="breadcrumb__item">
                 <a href="../home" class="breadcrumb__link">Home</a>
             </li>
             <li id="breadcrumb-1" class="breadcrumb__item">
                 <a href="https://deploy-preview-118--sdc-prototypes.netlify.app/prototypes/census-website-respond/help/" class="breadcrumb__link">Help with the census</a>
+            </li>
+            <li id="breadcrumb-2" class="breadcrumb__item">
+                <a href="https://deploy-preview-118--sdc-prototypes.netlify.app/prototypes/census-website-respond/help/languages-and-accessibility/" class="breadcrumb__link">Languages and accessibility</a>
             </li>
         </ol>
     </nav>
@@ -29,15 +32,20 @@ languages: true
         <div class="group">
             <div class="block">
                 <section class="section">
-                    <div class="grid">
-                        <div class="grid__col col-7@m">
-                            <h1 class="u-fs-xxl">Languages</h1>
-                            <p>Translation support is available for the following languages.</p>
-                            <p>If you can’t find your language, or need more help, please call our free language helpline on <strong>0800 587 2021</strong>.</p>
+                    <h1 class="u-mb-l u-fs-xxl">Languages</h1>
+                    <div class="panel panel--simple panel--info u-mb-m">
+                        <div class="panel__body">
+                            <p>Os oes angen y wefan hon arnoch yn Gymraeg, ewch i <a href="https://cyfrifiad.gov.uk/">www.cyfrifiad.gov.uk</a></p>
                         </div>
-                        <div class="grid__col col-5@m">
-                            <div class="adv-filter__results-sort u-f-r@m">
-                                <label class="label" for="sort">Sort lists by</label>
+                    </div>
+                    <div class="grid grid--flex grid--vertical-bottom u-mb-m">
+                        <div class="grid__col col-7@m">
+                            <p>Translation support is available for the following languages.</p>
+                            <p class="u-mb-no">If you can’t find your language, or need more help, please call our free language helpline on <strong>0800 587 2021</strong>.</p>
+                        </div>
+                        <div class="grid__col grid__col--align-right col-5@m">
+                            <div class="adv-filter__results-sort u-f-r@m u-mt-s">
+                                <label class="label" for="sort">Sort languages by</label>
                                 <select class="input input--select" id="sort" name="sort" aria-controls="adv-filter-gallery" data-sort="true">
                                     <option value="native">Native language</option>
                                     <option value="english">English</option>
@@ -45,7 +53,8 @@ languages: true
                             </div>
                         </div>
                     </div>
-                    <div class="grid u-mt-s">
+                    <hr>
+                    <div class="grid u-mt-m">
                         <div class="grid__col col-4@m">
                             <ol id="js-lang-list" class="list list--bare" style="padding:0;"></ol>
                         </div>
@@ -65,7 +74,6 @@ languages: true
 <script src='/js/compiled/end-to-end/bundle.js'></script>
 
 <script>
-    storageAPI = window.ONS.storage,
     urlParams = new URLSearchParams(window.location.search),
     previousPage = urlParams.get('previous');
     currentJourney = urlParams.get('current-journey');
@@ -75,7 +83,6 @@ languages: true
     var parentPage = pathArray.slice(-3)[0];
     var languages = [
         'BSL (British Sign Language)',
-        'Cymraeg (Welsh)',
         'Shqiptare (Albanian)', 
         'Bosanski (Bosnian)',
         'čeština (Czech)',
@@ -168,7 +175,7 @@ languages: true
 
         var markup = '';
         for (var i =0; i < nonLatinLanguages.length; i++) {
-            markup += '<li class="list__item">' + '<a href="#">' + nonLatinLanguages[i] + '</a>' + '</li>';
+            markup += '<li class="list__item">' + '<a href="../non-latin-language-help">' + nonLatinLanguages[i] + '</a>' + '</li>';
         }
         document.getElementById('js-non-latin-lang-list').innerHTML = markup;
     }
