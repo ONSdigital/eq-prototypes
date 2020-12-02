@@ -216,10 +216,12 @@ languages: true
     </section>
 
 </main>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
 <script>
     var urlParams = new URLSearchParams(window.location.search);
     var heroTwisty = document.getElementsByClassName('js-toggle');
-    var mobileNavBtn = document.getElementsByClassName('js-toggle-main');
     var previousPage = urlParams.get('previous');
     var currentPage = 'home';
     var currentJourney = urlParams.get('current-journey');
@@ -260,14 +262,6 @@ languages: true
 
     function activeNavItem() {
         $('.header-nav__item:first-of-type').addClass('header-nav__item--active');
-    }
-
-    function mobileNav() {
-        $(mobileNavBtn).click(function(e) {
-            e.preventDefault();
-            $(this).toggleClass('js-nav-show');
-            $('#main-nav').toggle();
-        });
     }
 
     $(updateAllLinks);

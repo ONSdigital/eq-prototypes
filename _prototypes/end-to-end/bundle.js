@@ -679,6 +679,16 @@ function showFeedbackContextualAnswer() {
     })
 }
 
+function mobileNav() {
+    var mobileNavBtn = document.getElementsByClassName('js-toggle-main');
+
+    $(mobileNavBtn).click(function(e) {
+        e.preventDefault();
+        $(this).toggleClass('js-nav-show');
+        $('#main-nav').toggle();
+    });
+}
+
 window.ONS = window.ONS || {};
 window.ONS.storage = {
     storePageData,
@@ -892,3 +902,4 @@ $(fieldItemDisplayHack);
 $(toggleFeedback);
 $(submitFeedback);
 $(showFeedbackContextualAnswer);
+$(mobileNav);
