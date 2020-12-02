@@ -218,7 +218,7 @@ img {
 }
 
 .grid--flex .grid__col {
-    width: 100%;
+    width: auto;
 }
 
 .grid--flex .grid__col--align-right {
@@ -400,8 +400,21 @@ img {
     font-weight: bold;
 }
 
+.btn--mobile {
+    padding: .45rem 2.15rem .45rem .6rem;
+}
+
 .btn--mobile:before {
-    top: 14px;
+    background: url(/img/icons/icons--chevron-down-white.svg) no-repeat 50%;
+    margin: 0 0 .1rem .5rem;
+    width: .8rem;
+    height: .8rem;
+    vertical-align: middle;
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: absolute;
+    top: 12px;
+    right: 12px;
 }
 
 .btn--mobile:focus:before {
@@ -410,7 +423,7 @@ img {
 
 .btn--mobile.js-nav-show:before,
 .btn--mobile.js-nav-show:focus:before {
-    transform: rotate(180deg);
+    transform: rotate(-90deg);
 }
 
 @media only screen and (min-width: 740px) {
@@ -841,7 +854,7 @@ p.label--negative:empty {
     font-size: .7rem;
     display: block;
     background: #d0d0d0;
-    padding: 0.25rem 0.5rem;
+    padding: .25rem .5rem;
 }
 
 .typeahead__option:not(:last-child) {
@@ -971,7 +984,9 @@ p.label--negative:empty {
 }
 
 .breadcrumb {
+    display: -webkit-box;
     display: flex;
+    -webkit-box-align: center;
     align-items: center;
     padding: 1rem 0;
 }
@@ -979,6 +994,7 @@ p.label--negative:empty {
 .breadcrumb__items {
     margin: 0;
     padding: 0;
+    line-height: 1;
 }
 
 .breadcrumb__item {
@@ -993,13 +1009,13 @@ p.label--negative:empty {
 
 .breadcrumb__item:before {
     display: inline-block;
-    width: 0.65rem;
-    height: 0.65rem;
+    width: .65rem;
+    height: .65rem;
     background-image: url(/img/icons/icons--chevron-right.svg);
     background-repeat: no-repeat;
-    size: 0.65rem 0.65rem;
+    size: .65rem .65rem;
     content: "";
-    margin: 0 0.2rem 0 -0.14rem;
+    margin: 0 .2rem 0 -0.14rem;
     vertical-align: middle;
 }
 
@@ -1010,14 +1026,14 @@ p.label--negative:empty {
 .breadcrumb__item:first-child:nth-last-child(1):before,
 .back-link:before {
     display: inline-block;
-    width: 0.65rem;
-    height: 0.65rem;
+    width: .65rem;
+    height: .65rem;
     background-image: url(/img/icons/icons--chevron-right.svg);
     background-repeat: no-repeat;
     background-position: center center;
-    size: 0.65rem 0.65rem;
+    size: .65rem .65rem;
     content: "";
-    margin: 0 0.2rem 0 0;
+    margin: 0 .2rem 0 0;
     vertical-align: middle;
     transform: rotate(180deg);
 }
@@ -1031,13 +1047,13 @@ p.label--negative:empty {
     }
     .breadcrumb__item:not(:last-child):after {
         display: inline-block;
-        width: 1.25rem;
-        height: 0.65rem;
+        width: .65rem;
+        height: .65rem;
         background-image: url(/img/icons/icons--chevron-right.svg);
         background-repeat: no-repeat;
-        size: 0.65rem 0.65rem;
+        size: .65rem .65rem;
         content: "";
-        margin: 0;
+        margin: 0 .2rem;
         background-position: center 30%;
         vertical-align: middle;
     }
@@ -1263,7 +1279,7 @@ hr {
     font-weight: normal;
     background-color: #902082;
     border-top: 1px solid #fff;
-    padding: 0.85rem 0 0.4rem;
+    padding: 0.85rem 0 .4rem;
     color: #fff;
 }
 
@@ -1372,6 +1388,12 @@ hr {
 .page__main {
     margin-top: 2.5rem;
     margin-bottom: 4.5rem;
+}
+
+@media (max-width: 740px) {
+    .page__main {
+        margin-top: 1.5rem;
+    }
 }
 
 .ghost-link {
@@ -1596,7 +1618,7 @@ svg:not(:root) {
 
 .list__prefix {
     float: left;
-    margin: 0 0.5rem 0 0;
+    margin: 0 .5rem 0 0;
     font-family: "OpenSansMono", "Helvetica Neue", Arial, sans-serif;
 }
 
@@ -1613,9 +1635,9 @@ svg:not(:root) {
 }
 
 .list__link .svg-icon {
-    margin-top: 0.2rem;
-    width: 0.8rem;
-    height: 0.8rem;
+    margin-top: .2rem;
+    width: .8rem;
+    height: .8rem;
 }
 
 
@@ -1655,7 +1677,7 @@ svg:not(:root) {
 
 .content-pagination__link-icon {
     width: 1.2rem;
-    height: 0.9rem;
+    height: .9rem;
 }
 
 .content-pagination__link-title {
@@ -1663,7 +1685,7 @@ svg:not(:root) {
 }
 
 .content-pagination__link-text {
-    margin: 0 0 0 0.5rem;
+    margin: 0 0 0 .5rem;
     font-size: 1.2rem;
     font-weight: 700;
     line-height: normal;
@@ -1672,7 +1694,7 @@ svg:not(:root) {
 .content-pagination__link-label {
     display: inline-block;
     margin: 0 0 0 2rem;
-    font-size: 0.9rem;
+    font-size: .9rem;
     text-decoration: underline;
 }
 
