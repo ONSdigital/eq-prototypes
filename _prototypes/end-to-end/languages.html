@@ -38,13 +38,13 @@ languages: true
                             <p>Os oes angen y wefan hon arnoch yn Gymraeg, ewch i <a href="https://cyfrifiad.gov.uk/">www.cyfrifiad.gov.uk</a></p>
                         </div>
                     </div>
-                    <div class="grid grid--flex grid--vertical-bottom u-mb-m">
+                    <div class="grid grid--flex grid--vertical-top grid--between u-mb-m">
                         <div class="grid__col col-7@m">
                             <p>Translation support is available for the following languages.</p>
-                            <p class="u-mb-no">If you can’t find your language, or need more help, please call our free language helpline on <strong>0800 587 2021</strong>.</p>
+                            <p class="u-mb-no@m">If you can’t find your language, or need more help, please call our free language helpline on <strong>0800 587 2021</strong>.</p>
                         </div>
-                        <div class="grid__col grid__col--align-right col-5@m">
-                            <div class="adv-filter__results-sort u-f-r@m u-mt-s">
+                        <div class="grid__col col-5@m">
+                            <div class="adv-filter__results-sort">
                                 <label class="label" for="sort">Sort languages by</label>
                                 <select class="input input--select" id="sort" name="sort" aria-controls="adv-filter-gallery" data-sort="true">
                                     <option value="native">Native language</option>
@@ -54,15 +54,24 @@ languages: true
                         </div>
                     </div>
                     <hr>
-                    <div class="grid u-mt-m">
-                        <div class="grid__col col-4@m">
-                            <ol id="js-lang-list" class="list list--bare" style="padding:0;"></ol>
+                    <div id="native-lists">
+                        <div class="grid u-mt-m">
+                            <div class="grid__col col-4@m">
+                                <ol id="js-lang-list" class="list list--bare" style="padding:0;"></ol>
+                            </div>
+                            <div class="grid__col col-4@m">
+                                <ol id="js-non-latin-lang-list" class="list list--bare" style="padding:0;"></ol>
+                            </div>
+                            <div class="grid__col col-4@m">
+                                <ol id="js-rtl-lang-list" class="list list--bare" style="padding:0;"></ol>
+                            </div>
                         </div>
-                        <div class="grid__col col-4@m">
-                            <ol id="js-non-latin-lang-list" class="list list--bare" style="padding:0;"></ol>
-                        </div>
-                        <div class="grid__col col-4@m">
-                            <ol id="js-rtl-lang-list" class="list list--bare" style="padding:0;"></ol>
+                    </div>
+                    <div id="english-lists">
+                        <div class="grid u-mt-m">
+                            <div class="grid__col">
+                                <ol id="js-eng-lang-list" class="list list--bare" style="padding:0;"></ol>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -82,7 +91,7 @@ languages: true
     currentPage = pathArray.slice(-2)[0];
     var parentPage = pathArray.slice(-3)[0];
     var languages = [
-        'BSL (British Sign Language)',
+        'BSL - British Sign Language',
         'Shqiptare (Albanian)', 
         'Bosanski (Bosnian)',
         'čeština (Czech)',
@@ -106,6 +115,7 @@ languages: true
         'Türk (Turkish)',
         'Tiếng Việt (Vietnamese)'
     ];
+
     var rtlLanguages = [
         'فارسی  (Farsi)',
         'עִברִית (Hebrew)',
@@ -138,7 +148,62 @@ languages: true
         'Український (Ukrainian)'
     ]
 
+    var languagesEn = [
+        'Albanian (Shqiptare)',
+        'Amharic (አማርኛ)',
+        'Arabic (عربى)',
+        'Armenian (հայերեն)',
+        'Bengali (বাংলা)',
+        'Bosnian (Bosanski)',
+        'BSL - British Sign Language',
+        'Bulgarian (български)',
+        'Burmese (မြန်မာဘာသာ)',
+        'Cantonese (粵語)',
+        'Czech (čeština)',
+        'Farsi (فارسی)',
+        'French (Le français)',
+        'German (Deutsche)',
+        'Greek (Ελληνικά)',
+        'Gujarati (ગુજરાતી)',
+        'Hebrew (עִברִית)',
+        'Hindi (हिन्दी)',
+        'Hungarian (Magyar)',
+        'Italian (Italiano)',
+        'Japanese (日本人)',
+        'Korean (한국어)',
+        'Kurdish (Kurdî)',
+        'Latvian (Latvietis)',
+        'Lingala (Lingála)',
+        'Lithuanians (Lietuvi)',
+        'Malayalam (മലയാളം)',
+        'Mandarin (普通話)',
+        'Nepali (नेपाली)',
+        'Polish (Polskie)',
+        'Portuguese (Português)',
+        'Pothwari (پوٹھواری)',
+        'Punjabi (Gurmukhi) (ਪੰਜਾਬੀ)',
+        'Romanian (Română)',
+        'Russian (русский)',
+        'Slovak (Slovák)',
+        'Slovenian (Slovenščina)',
+        'Somali (Soomaali)',
+        'Swahili (Kiswahili)',
+        'Tamil (தமிழ்)',
+        'Tagalog',
+        'Tetum',
+        'Thai (ไทย)',
+        'Tigrinya (ትግርኛ)',
+        'Turkish (Türk)',
+        'Ukrainian (Український)',
+        'Urdu (اردو)',
+        'Vietnamese (Tiếng Việt)',
+        'Yiddish (יידיש)'
+    ]
+
     function updateAllLinks() {
+        $('a:contains("Bosnian")').attr('href', '../language-help');
+        $('a:contains("BSL")').attr('href', 'https://deploy-preview-118--sdc-prototypes.netlify.app/prototypes/census-website-respond/help/languages-and-accessibility/accessibility/british-sign-language/');
+        $('a:contains("Greek")').attr('href', '../non-latin-language-help');
         $('#main-nav ul li:nth-child(4)').addClass('header-nav__item--active');
         $('.js-previous-link').attr('href', '../' + previousPage + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney);
     }
@@ -150,7 +215,7 @@ languages: true
 
         var markup = '';
         for (var i =0; i < languages.length; i++) {
-            markup += '<li class="list__item">' + '<a href="../language-help">' + languages[i] + '</a>' + '</li>';
+            markup += '<li class="list__item">' + '<a href="#0">' + languages[i] + '</a>' + '</li>';
         }
         document.getElementById('js-lang-list').innerHTML = markup;
     }
@@ -162,7 +227,7 @@ languages: true
 
         var markup = '';
         for (var i =0; i < rtlLanguages.length; i++) {
-            markup += '<li class="list__item">' + '<a href="../rtl-language-help">' + rtlLanguages[i] + '</a>' + '</li>';
+            markup += '<li class="list__item">' + '<a href="#0">' + rtlLanguages[i] + '</a>' + '</li>';
         }
         document.getElementById('js-rtl-lang-list').innerHTML = markup;
         document.getElementById('js-rtl-lang-list').setAttribute('style', 'direction: rtl;');
@@ -175,18 +240,46 @@ languages: true
 
         var markup = '';
         for (var i =0; i < nonLatinLanguages.length; i++) {
-            markup += '<li class="list__item">' + '<a href="../non-latin-language-help">' + nonLatinLanguages[i] + '</a>' + '</li>';
+            markup += '<li class="list__item">' + '<a href="#0">' + nonLatinLanguages[i] + '</a>' + '</li>';
         }
         document.getElementById('js-non-latin-lang-list').innerHTML = markup;
     }
 
-    function updateListLinks() {
+    function sortEnglishList() {
+        languagesEn.sort(function (a, b) {
+            return a.localeCompare(b);
+        });
 
+        var markup = '';
+        for (var i =0; i < languagesEn.length; i++) {
+            markup += '<li class="list__item">' + '<a href="#0">' + languagesEn[i] + '</a>' + '</li>';
+        }
+        document.getElementById('js-eng-lang-list').innerHTML = markup;
+    }
+
+    $(document).ready(function() {
+        var sortByOption = $('#sort').val();
+        showLists(sortByOption);
+    
+        $("#sort").change(function() {
+            var val = $(this).val();
+            showLists(val);
+        });
+    });
+
+    function showLists(sortByOption){
+        if (sortByOption === "native") {
+            $("#english-lists").hide();
+            $("#native-lists").show();
+        } else if (sortByOption === "english") {
+            $("#native-lists").hide();
+            $("#english-lists").show();
+        }
     }
 
     sortNonLatinList()
     sortRtlList();
     sortList();
-    updateListLinks();
+    sortEnglishList();
     $(updateAllLinks);
 </script>
