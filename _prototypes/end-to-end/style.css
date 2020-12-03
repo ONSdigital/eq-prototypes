@@ -1516,9 +1516,10 @@ svg:not(:root) {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    padding: .5rem 2rem .5rem .5rem;
+    padding: .5rem 2.4rem .5rem .5rem;
     background: #fff url(/img/icons/icons--chevron-down.svg) no-repeat center right 10px;
     background-size: 1rem;
+    line-height: 1.4;
 }
 
 .list__link svg {
