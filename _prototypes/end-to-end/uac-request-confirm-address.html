@@ -127,8 +127,13 @@ languages: true
         if (currentJourney === 'new-ir-uac' || currentJourney === 'new-ce-resident-uac') {
             $('.js-panel').removeClass('u-d-no');
         }
-    } else if(currentJourney === 'new-hh-paper' || currentJourney === 'new-ce-resident-paper') {
-        var codeType = 'a paper questionnaire';
+    } else if(currentJourney === 'new-hh-paper') {
+        var codeType = 'a household paper questionnaire';
+        var codeTypeShort = ' questionnaire';
+        $('.large-print').removeClass('u-d-no');
+        $('.no-answer').html('No, cancel and return');
+    } else if(currentJourney === 'new-ce-resident-paper') {
+        var codeType = 'an individual paper questionnaire';
         var codeTypeShort = ' questionnaire';
         $('.large-print').removeClass('u-d-no');
         $('.no-answer').html('No, cancel and return');
