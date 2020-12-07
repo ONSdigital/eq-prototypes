@@ -1516,6 +1516,8 @@ hr {
 /* Languages */
 
 .other-languages {
+    display: -webkit-box;
+    display: flex;
     border-left: 1px solid #888;
     margin: 0 0 0 1rem;
     padding: 0 0 0 1rem;
@@ -1531,6 +1533,12 @@ hr {
     display: flex;
     -webkit-box-align: center;
     align-items: center;
+}
+
+.other-languages__item:not(:first-child) {
+    border-left: 1px solid #888;
+    margin-left: 1rem;
+    padding-left: 1rem;
 }
 
 svg:not(:root) {
