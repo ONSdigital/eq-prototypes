@@ -1,144 +1,49 @@
 
 {% unless page.hideSaveLater %}
-<div class="footer-button u-d-no@m">
-  <div class="container">
-    <div class="grid">
-      <div class="grid__col u-mb-m u-mt-m">
-      {% if page.exit %}
-        <a href="#" role="button" class="btn btn--ghost exit">
-          <span class="btn__inner">Exit</span>
-        </a>
-      {% else %}
-        <a href="#" role="button" class="btn btn--ghost complete-later">
-          <span class="btn__inner">Save and sign out</span>
-        </a>
-      {% endif %}
-      </div>
-    </div>
-  </div>
+<div class="footer__button-container u-d-no@m">
+  {% if page.exit %}
+    <a href="#" role="button" class="btn btn--ghost exit">
+      <span class="btn__inner">Exit</span>
+    </a>
+  {% else %}
+    <a href="#" role="button" class="btn btn--ghost complete-later">
+      <span class="btn__inner">Save and sign out</span>
+    </a>
+  {% endif %}
 </div>
 {% endunless %}
 {% if page.leaveWarning %} 
-<div class="leave-warning u-mt-l@m">
+<div class="footer__warning">
     <div class="container">
-        <div class="panel panel--simple panel--warning js-panel-info">
-            <span class="panel__icon" aria-hidden="true">!</span><span class="panel__text">Make sure you <a class="exit" href="../home">leave this page</a> or close your browser if you are using a shared device</span>
+        <div class="panel panel--warn panel--no-title panel--warn--footer js-panel-info">
+            <span class="panel__icon" aria-hidden="true">!</span>
+            <div class="panel__body">Make sure you <a class="exit" href="../home">leave this page</a> or close your browser if you are using a shared device</div>
         </div>
     </div>
 </div>
 {% endif %}
-{% if page.feedback %}  
-  <div id="feedback" class="feedback u-mt-xl@m">
-      <div class="collapsible collapsible--simple collapsible--footer">
-        <div class="js-collapsible-content">
-          <div class="feedback__controls">
-            <div class="container">
-              <h3 class="feedback__controls-title collapsible__title js-collapsible-title icon--collapsible-simple js-feedback-link u-fs-r" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Give feedback about this service">Give feedback about this service</h3>
-              <div class="feedback__controls-success js-feedback-success" style="display: none;">
-                <h3 class="feedback__controls-success-title u-mb-no u-pt-xs"><span class="feedback__controls-success-title-icon icon icon--tick"></span>Thank you for your feedback</h3>
-                <p class="feedback__controls-success-message u-mb-no u-pb-xs">We are unable to respond to feedback, but your comments will help us to make improvements</p>
-              </div>
-            </div>
-          </div>
-          <div class="container">
-            <div class="grid">
-              <div class="grid__col col-8@m">
-                <div class="feedback__body js-feedback-body" style="display: none;">
-                  <form action="#feedback" method="get">
-                    <div class="panel panel--simple panel--info u-mb-m u-mt-m">
-                        <div class="panel__body">
-                            <h3 class="u-mb-xs">Having technical issues?</h2>
-                            <p>If you are having any technical issues or need help, please <a href="#">contact us</a></p>
-                        </div>
-                    </div>
-                    <div class="question u-mb-s">
-                        <h3 class="question__title u-fs-l">
-                            What is your feedback about?
-                        </h3>
-                        <p>We are unable to respond to feedback, but your comments will help us to make improvements</p>
-                        <div class="answer__fields js-fields">
-                          <div class="field field--radio field--multiplechoice u-mb-m">
-                            <fieldset required>
-                                <div class="field__item js-focusable-box">
-                                    <input autocomplete="new-password" class="input input--radio js-focusable" type="radio"
-                                            name="address-correct" id="census-questions">
-                                    <label id="census-questions-label" class="label label--inline" for="census-questions">The census questions
-                                      <p class="u-fs-s u-db u-mb-no label--negative">For example, questions not clear, answer options not relevant</p>
-                                    </label>
-                                </div>
-                                <div class="field__item js-focusable-box">
-                                    <input autocomplete="new-password" class="input input--radio js-focusable" type="radio"
-                                            name="address-correct" id="page-design">
-                                    <label id="page-design-label" class="label label--inline" for="page-design">Page design and structure</label>
-                                </div>
-                                <div class="field__item js-focusable-box">
-                                    <input autocomplete="new-password" class="input input--radio js-focusable" type="radio"
-                                            name="address-correct" id="general">
-                                    <label id="general-label" class="label label--inline" for="general">General feedback about this service</label>
-                                </div>
-                            </fieldset>
-                          </div>
-                          <fieldset>
-                            <div class="field u-mb-s js-question-topic" style="display:none;">
-                              <label class="label  " for="select">Question topic
-                              </label>
-                              <select id="select" name="select" class="input input--select" required>
-                                <option value="" selected disabled>Select an option</option>
-                                <option value="General">General</option>
-                                <option value="People who live here">People who live here</option>
-                                <option value="Visitors">Visitors</option>
-                                <option value="Household and accommodation">Household and accommodation</option>
-                                <option value="Personal details">Personal details</option>
-                                <option value="Health">Health</option>
-                                <option value="Qualifications">Qualifications</option>
-                                <option value="Employment">Employment</option>
-                              </select>
-                            </div>
-                            <label class="label" for="text-input" id="label-lim">
-                            Enter your feedback
-                            <p class="u-fs-s u-mb-no">Do not include confidential information, such as your contact details</p>
-                            </label>
-                            <textarea id="text-input" class="input input--textarea js-charlimit-input" rows="5" id="textarea-answer-lim" name="textarea-answer-lim" maxlength="1000" aria-describedby="description-question" data-maxlength="1000" data-char-limit-ref="textarea-answer-lim-remaining"></textarea>
-                            <div class="input__limit u-mt-xs u-fs-s--b" data-qa="textarea-with-limit" id="textarea-answer-lim-remaining" aria-live="polite"
-                                  data-charcount-singular="You have {x} character remaining"
-                                  data-charcount-plural="You have {x} characters remaining">
-                                You have 1000 characters remaining
-                            </div>
-                          </fieldset>
-                        </div>
-                        <button class="feedback-btn-submit btn btn--primary u-mt-xl u-mb-l" type="submit">Send feedback
-                        </button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+<div class="footer__body">
+  <div class="container ">
+    <div class="grid">
+      <div class="grid__col ">
+        <ul class="list list--bare list--inline u-mb-no">
+          <li class="list__item ">
+            <a href="https://deploy-preview-118--sdc-prototypes.netlify.app/prototypes/census-website-respond/help/" class="list__link">
+              Help
+            </a>
+          </li>
+          <li class="list__item ">
+            <a href="https://deploy-preview-118--sdc-prototypes.netlify.app/prototypes/census-website-respond/contact-us/" class="list__link ">
+              Contact us
+            </a>
+          </li>
+        </ul>
       </div>
-  </div>
-{% endif %}
-<footer class="footer u-mt-l@m" data-analytics="footer">
-  <div class="footer__body">
-    <div class="container ">
-      <div class="grid">
-        <div class="grid__col ">
-          <ul class="list list--bare list--inline@s u-mb-no">
-            <li class="list__item ">
-              <a href="../help/" class="list__link">
-                Help
-              </a>
-            </li>
-            <li class="list__item ">
-              <a href="../contact-us" class="list__link ">
-                Contact us
-              </a>
-            </li>
-          </ul>
-        </div>
+      <div class="grid__col u-mb-m">
+        <hr class="footer__hr">
       </div>
-      {% include footer-meta.html %}
     </div>
+    {% include footer-meta.html %}
   </div>
-  <div id="dummy-address" class="u-d-no"><a class="js-dummy-address" href="#">Use dummy address</a></div>
-</footer>
+</div>
+<div id="dummy-address" class="u-d-no"><a class="js-dummy-address" href="#">Use dummy address</a></div>

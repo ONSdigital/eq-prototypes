@@ -58,7 +58,7 @@ noONSLogoLink: true
                                         Choose another section to complete
                                     </h1>
                                 </div>
-                                <div class="panel panel--simple panel--warning js-panel-info u-mb-m" style="display: none;">
+                                <div class="panel panel--simple panel--warn js-panel-info u-mb-m" style="display: none;">
                                 </div>
                                 <div class="summary">
                                     <div class="summary__block u-mb-s">
@@ -415,7 +415,7 @@ noONSLogoLink: true
     if (peopleIdsToComplete.length === 0 && sessionStorage.getItem('accommodation-completed-status') === 'completed') {
       $('.js-submit-btn').html('Submit census');
       $('.js-heading').html('Submit census');
-      $('.js-panel-info').show().html('<span class="panel__icon" aria-hidden="true">!</span><span class="panel__text">You must submit this census to complete it</span>');
+      $('.js-panel-info').show().html('<span class="panel__icon" aria-hidden="true">!</span><div class="panel__body">You must submit this census to complete it</div>');
       $('.js-declaration').show().html('By submitting this census you are confirming that, to the best of your knowledge and belief, the details provided are correct.')
     }
     else {

@@ -67,11 +67,12 @@
     padding: 1rem 0;
 }
 
-.warning .panel--warning .panel__text {
+.warning .panel--warn .panel__body {
     color: #fff;
+    padding-top: 0;
 }
 
-.warning .panel--warning .panel__icon {
+.warning .panel--warn .panel__icon {
     background: #fff;
     border: 3px solid #fff;
     color: #3C388E;
