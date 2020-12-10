@@ -676,7 +676,7 @@ details summary:focus {
 }
 
 .panel--warn .panel__body {
-    padding: .222rem 0 0 1.8rem;
+    padding: 0 0 0 1.8rem;
     min-height: 2rem;
     font-weight: 600;
 }
