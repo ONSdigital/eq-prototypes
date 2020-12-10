@@ -1,4 +1,5 @@
 <div class="grid grid--flex grid--vertical-top grid--between">
+    <!-- Legal -->
     <div class="grid__col">
         <ul class="list list--bare list--inline u-mb-m">
             <!-- {% if page.languages %}
@@ -31,7 +32,16 @@
             <img src="/img/ons-logo-black-inline.svg" alt="Office for National Statistics">
         </div>
     </div>
-    <div class="grid__col grid__col--flex u-ml-s u-mb-s u-p-no">
+    <!-- Crest -->
+    <div class="grid__col">
         <img src="/img/logo-crest.svg" alt="Office for National Statistics" class="footer__crest-img ">
     </div>
 </div>
+{% unless page.notAuthenticated or page.footer == "census-website" %}
+<!-- Copyright -->
+<div class="grid">
+    <div class="grid__col u-mt-s">
+        <p class="u-fs-s u-mb-no">&copy; Crown copyright and database rights 2020 OS 100019153. <br> Use of address data is subject to the <a href="https://deploy-preview-118--sdc-prototypes.netlify.app/prototypes/census-website-respond/terms-and-conditions" target="_blank" rel="noopener">terms and conditions</a>.</p>
+    </div>
+</div>
+{% endunless %}
