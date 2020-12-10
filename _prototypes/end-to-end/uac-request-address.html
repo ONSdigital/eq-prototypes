@@ -221,8 +221,12 @@ languages: true
 
     if (fulfilmentJourney){
       $('.exit').hide();
+      $('.footer__body .list__link').removeAttr('target');
+      $('.js-new-tab-warning').hide();
       $('.header__title').add('.header__title-logo').wrapAll('<a class="header__title-link" href="../home"></a>');
       $('.js-no-fixed-address').show();
+      $('.footer__body .list__link').removeAttr('target');
+      $('.js-new-tab-warning').hide();
       if (currentJourney === 'new-hh-paper') {
         $('.js-no-fixed-address .js-transient-help').addClass('js-no-fixed-fulfilment').html('If you live somewhere that is mobile, such as a canal boat or motorhome, <a href="../contact-us">contact us to request a paper census questionnaire</a>.');
       } else if (currentJourney === 'continuation-form') {
@@ -230,7 +234,6 @@ languages: true
       } else {
         $('.js-no-fixed-address .js-transient-help').addClass('js-no-fixed-fulfilment').html('If you live somewhere that is mobile, such as a canal boat or motorhome, <a href="../contact-us">contact us to request an access code</a>.');
       }
-
     } else {
       $('.js-no-fixed-fulfilment ').hide();
       $('.exit').click(function(e) {

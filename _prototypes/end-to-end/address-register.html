@@ -61,6 +61,8 @@ languages: true
         
         if (fulfilmentJourney){
             $('.exit').hide();
+            $('.footer__body .list__link').removeAttr('target');
+            $('.js-new-tab-warning').hide();
         } else {
             $('.exit').click(function(e) {
                 e.preventDefault();
