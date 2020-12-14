@@ -1621,10 +1621,6 @@ svg:not(:root) {
     padding: 0 0 0 1.5rem;
 }
 
-.list__item {
-    white-space: nowrap;
-}
-
 .list__item:last-child {
     margin: 0;
 }
