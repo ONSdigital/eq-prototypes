@@ -1675,6 +1675,10 @@ svg:not(:root) {
     height: .8rem;
 }
 
+footer .list__item .list__link {
+    margin-right: 0;
+}
+
 
 /* Pagination */
 
