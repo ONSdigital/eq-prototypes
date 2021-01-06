@@ -173,14 +173,14 @@ noONSLogoLink: true
 
             if((person.id !== visitor1Person.id) && visitors.length > 1) {
                 var name = 
-                $('#same-address-label').text("Same as " + visitor1Person.firstLastName + "'s address one year ago");
+                $('#same-address-label').text("Same as " + visitor1Person.firstLastName + "’s address one year ago");
             } else {
                 $('#same-address-field').remove();
             }
         }
 
         else if (personId !== 'person_me' && storageAPI.getHouseholdMemberByPersonId('person_me')) {
-            $('#same-address-label').text("Same as " + storageAPI.getHouseholdMemberByPersonId('person_me')['@person'].firstLastName + "'s address one year ago");
+            $('#same-address-label').text("Same as " + storageAPI.getHouseholdMemberByPersonId('person_me')['@person'].firstLastName + "’s address one year ago");
         } else {
             $('#same-address-field').remove();
         }
