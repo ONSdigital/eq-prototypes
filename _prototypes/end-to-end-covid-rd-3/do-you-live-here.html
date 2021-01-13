@@ -1,0 +1,189 @@
+---
+title: COVID-19 test (round 3 - usual situation) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+
+<link rel="stylesheet" href="../../end-to-end/style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link mars" href="../what-is-your-name">Previous
+        </a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m"></div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <div class="feedback__inline js-feedback-inline is-collapsed">
+                    <div class="feedback__border">
+                    </div>
+                </div>
+                <div class="panel panel--error u-mb-m js-error-box u-d-no">
+                    <div class="panel__header">
+                        <div class="panel__title u-fs-r--b">There 
+                      <span class="js-piping">is a {x} problem{s}</span> with your answer
+                    </div>
+                    </div>
+                    <div class="panel__body">
+                        
+                        <ol class="list list--bare">
+                        <li class="list__item js-yes u-d-no">
+                            1. <a href="#error-message-yes" class="list__link js-inpagelink">
+                                Select an answer to continue
+                            </a>
+                        </li>
+                       </ol>
+                    </div>
+                </div>
+                <form name="trav" class="form qa-questionnaire-form" role="form"
+                      autocomplete="new-password" novalidate="">
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question">
+                                    <h1 class="question__title u-fs-xl">
+                                        Do you usually live at <span class="full-address-text">Address not set</span>?
+                                    </h1>
+                                    <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple u-mb-s">
+                                        <div class="js-collapsible-content">
+                                            <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="What does &ldquo;usually live&rdquo; mean?">What we mean by &ldquo;usually live&rdquo;</h3>
+                                            <div class="collapsible__body js-collapsible-body">
+                                                <p>This is often your permanent or family home.</p>
+                                                <p>If you have more than one address, include yourself at the home address where you generally spend most of your time. If you split your time equally then use the home address where you are staying overnight on <span class="js-significant-date"></span>.</p>
+                                                <ul class="list list--bare u-mb-s">
+                                                    <li class="list__item"><strong>Students,</strong> include yourself  at both your term-time and out of term-time addresses.</li>
+                                                    <li class="list__item"><strong>People with a second address for work,</strong> include yourself  at your home address.</li>
+                                                    <li class="list__item"><strong>Armed forces members,</strong> include yourself at your home address if you have one.</li>
+                                                </ul>
+                                                <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="What does \"usually live\" mean?">Hide this</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="answer__fields question__answer js-fields" id="radios">
+                                        <div class="field field--radio field--multiplechoice">
+                                            <fieldset>
+                                                <div class="field__item js-focusable-box">
+                                                    <input required autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="live-here"
+                                                           id="yes"
+                                                           data-error-msg="Select an answer to continue">
+                                                    <label class="label label--inline"
+                                                           for="yes">
+                                                        Yes, I usually live here
+                                                    </label>
+                                                </div>
+
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="live-here"
+                                                           id="no">
+                                                    <label class="label label--inline"
+                                                           for="no">
+                                                        No, I don&rsquo;t
+                                                        usually live
+                                                        here
+                                                    </label>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn-submit btn--primary btn--lg qa-btn-submit u-mt-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<style>
+    .label .label--negative {
+        margin-left: -1.9rem;
+    }
+</style>
+
+<script src='/js/compiled/end-to-end-covid/bundle.js'></script>
+
+<script>
+  var yesbox = document.getElementById("yes"),
+    storageAPI = window.ONS.storage,
+    hasErrors = false;
+
+  sessionStorage.setItem("wlh_bookmark" , window.location.pathname);
+
+  $('.qa-btn-submit').click(function(e) {
+    e.preventDefault();
+    const testFails = ($('input[type=radio]:checked').size() === 0);
+    window.ONS.utils.validateInputs(testFails, "input[type=radio]");
+    if (hasErrors) {
+        window.ONS.utils.calcErrors();
+        hasErrors = false;
+        return false;
+    } else {
+        var loc;
+
+        if (yesbox.checked) {
+
+        sessionStorage.setItem('lives-here', 'yes');
+        document.trav.action = loc = "../what-is-your-name/";
+
+        } else {
+        window.ONS.storage.deleteUserAsHouseholdMember();
+
+        sessionStorage.setItem('lives-here', 'no');
+        document.trav.action = loc = "../i-dont-live-here";
+        }
+
+        window.location = loc;
+        storageAPI.storePageData('/end-to-end-covid-rd-3/what-is-your-name/', window.location.pathname);
+    }
+ });
+
+  $(function() {
+    var oneWeekAgo = new Date();
+    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+    var options = {year: 'numeric', month: 'long', day: 'numeric'};
+    $('.one-week-ago').text(oneWeekAgo.toLocaleString('en-GB', options));
+  });
+</script>
+
+
+<script>
+    var searchParams = new URLSearchParams(window.location.search),
+        addressParam = searchParams.get('address');
+
+    if (addressParam) {
+        var address = JSON.parse(addressParam),
+            addressParts = [];
+
+        Object.keys(address)
+            .filter(function(key) { return !!address[key] })
+            .forEach(function (key) {
+                sessionStorage.setItem(key, address[key]);
+                addressParts.push(address[key]);
+            })
+
+        sessionStorage.setItem('address', addressParts.join(', '));
+    }
+
+    function updatePipedAddress() {
+        $('.full-address-text').html(storageAPI.getPipedAddress());
+    };
+
+    $(updatePipedAddress);
+
+</script>

@@ -1,0 +1,343 @@
+---
+title: COVID-19 test (round 5 - pandemic situation revised) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+
+<link rel="stylesheet" href="../../end-to-end/style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="back-link" href="../hub">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m"></div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form name="trav" class="form qa-questionnaire-form u-mb-no" role="form"
+                      autocomplete="new-password" novalidate=""
+                      action="../hub">
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 class="question__title u-fs-xl">
+                                        <span class="js-person-fullname-from-url-id"></span>
+                                    </h1>
+                                </div>
+                                <div class="summary">
+                                    <h2 class="question__title u-fs-l js-heading">
+                                        Personal details
+                                    </h2>
+                                    <div class="summary__block u-mb-s">
+                                        <div id="individual-questions-answers"></div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="submit-notice">
+                      <p class="js-declaration"></p>
+                        <button class="btn btn--primary btn--lg js-submit-btn u-mt-xs"
+                                type="submit">Continue
+                        </button>
+                    </div>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<ul style="display:none;">
+    <div id="individual-item-template" class="summary__item">
+        <div class="grid">
+            <div class="grid__col col-12@xs col-5@s">
+                <div class="summary__question js-question">
+                    Question
+                </div>
+            </div>
+            <div class="grid__col col-8@xs col-3@s">
+                <div class="summary__answer js-answer">Answer</div>
+            </div>
+            <div class="grid__col col-12@xs col-4@s">
+                <div class="summary__link">
+                    <a href="#" class="js-link">Change</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</ul>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+    var storageAPI = window.ONS.storage;
+
+    /**
+      * Create list item from state
+      */
+    function createListItem(sessionItem, question, url) {
+        if (sessionItem) {
+            
+            var $nodeEl = $('#individual-item-template').clone(),
+                $answer = $nodeEl.find('.js-answer'),
+                $question = $nodeEl.find('.js-question');
+
+            /**
+            * Manipulate DOM fragment
+            */
+
+            if (Array.isArray(sessionItem)) {
+                var i, 
+                  answer = '';
+                for (i = 0; i < sessionItem.length; i++) {
+                answer += sessionItem[i] + ", ";
+                }
+                answer = answer.slice(0, -2);
+                $nodeEl.find('.js-answer').html(answer);
+            } else {
+                $nodeEl.find('.js-answer').html(sessionItem);
+            }
+            $nodeEl.attr('id', '');
+            $nodeEl.find('.js-question').html(question);
+            $nodeEl.find('.js-link').attr('href', url);
+
+            return $nodeEl;
+        }
+    }
+
+    function createList() {
+        var urlParams = new URLSearchParams(window.location.search),
+            person = urlParams.get('person_id'),
+            $container = $('<div></div>'),
+            individualDetails = JSON.parse(window.sessionStorage.getItem('individual-details'));
+
+        if (individualDetails[person].dob) {
+            $container.append(createListItem(individualDetails[person].dob.fullDate ? individualDetails[person].dob.fullDate : 'No answer provided', individualDetails[person].dob.question, individualDetails[person].dob.url));
+        }
+
+        if (individualDetails[person].sex) {
+            $container.append(createListItem(individualDetails[person].sex.val ? individualDetails[person].sex.val : 'No answer provided', individualDetails[person].sex.question, individualDetails[person].sex.url));
+        }
+        
+        if (individualDetails[person].maritalStatus) {
+            $container.append(createListItem(individualDetails[person].maritalStatus.val ? individualDetails[person].maritalStatus.val : 'No answer provided', individualDetails[person].maritalStatus.question, individualDetails[person].maritalStatus.url));
+        }
+
+        if (individualDetails[person].maritalStatusWho) {
+            $container.append(createListItem(individualDetails[person].maritalStatusWho.val ? individualDetails[person].maritalStatusWho.val : 'No answer provided', individualDetails[person].maritalStatusWho.question, individualDetails[person].maritalStatusWho.url));
+        }
+
+        if (individualDetails[person].Address30DayUK) {
+            $container.append(createListItem(individualDetails[person].Address30DayUK.address ? individualDetails[person].Address30DayUK.address : 'No answer provided', individualDetails[person].Address30DayUK.question, individualDetails[person].Address30DayUK.url));
+        }
+
+        if (individualDetails[person].Address30DayType) {
+            $container.append(createListItem(individualDetails[person].Address30DayType.val ? individualDetails[person].Address30DayType.val : 'No answer provided', individualDetails[person].Address30DayType.question, individualDetails[person].Address30DayType.url));
+        }
+
+        if (individualDetails[person].Address30DayCountry) {
+            $container.append(createListItem(individualDetails[person].Address30DayCountry.val ? individualDetails[person].Address30DayCountry.val : 'No answer provided', individualDetails[person].Address30DayCountry.question, individualDetails[person].Address30DayCountry.url));
+        }
+        
+        if (individualDetails[person].country) {
+            $container.append(createListItem(individualDetails[person].country.val ? individualDetails[person].country.val : 'No answer provided', individualDetails[person].country.question, individualDetails[person].country.url));
+        }
+
+        if (individualDetails[person].country && individualDetails[person].country.valOther) {
+            $container.append(createListItem(individualDetails[person].country.valOther ? individualDetails[person].country.valOther : 'No answer provided', individualDetails[person].country.questionOther, individualDetails[person].country.urlOther));
+        }
+
+        if (individualDetails[person].dateArriveUk) {
+            $container.append(createListItem(individualDetails[person].dateArriveUk.val ? individualDetails[person].dateArriveUk.val : 'No answer provided', individualDetails[person].dateArriveUk.question, individualDetails[person].dateArriveUk.url));
+        }
+
+        if (individualDetails[person].arriveCensusDay) {
+            $container.append(createListItem(individualDetails[person].arriveCensusDay.val ? individualDetails[person].arriveCensusDay.val : 'No answer provided', individualDetails[person].arriveCensusDay.question, individualDetails[person].arriveCensusDay.url));
+        }
+
+        if (individualDetails[person].stayInUk) {
+            $container.append(createListItem(individualDetails[person].stayInUk.val ? individualDetails[person].stayInUk.val : 'No answer provided', individualDetails[person].stayInUk.question, individualDetails[person].stayInUk.url));
+        }
+
+        if (individualDetails[person].nationalIdentity && individualDetails[person].nationalIdentity.collection.length !== 0) {
+            $container.append(createListItem(individualDetails[person].nationalIdentity.collection ? individualDetails[person].nationalIdentity.collection : 'No answer provided', individualDetails[person].nationalIdentity.question, individualDetails[person].nationalIdentity.url));
+        }
+
+        if (individualDetails[person].nationalIdentity && individualDetails[person].nationalIdentity.niOther) {
+            $container.append(createListItem(individualDetails[person].nationalIdentity.niOther ? individualDetails[person].nationalIdentity.niOther : 'No answer provided', individualDetails[person].nationalIdentity.questionOther, individualDetails[person].nationalIdentity.urlOther));
+        }
+
+        if (individualDetails[person].ethnicGroup) {
+            $container.append(createListItem(individualDetails[person].ethnicGroup.otherText ? individualDetails[person].ethnicGroup.otherText : 'No answer provided', individualDetails[person].ethnicGroup.question, individualDetails[person].ethnicGroup.url));
+        }
+
+        if (individualDetails[person].ethnicGroup && individualDetails[person].ethnicGroup.description) {
+            $container.append(createListItem(individualDetails[person].ethnicGroup.description ? individualDetails[person].ethnicGroup.description : 'No answer provided', individualDetails[person].ethnicGroup.questionDescription, individualDetails[person].ethnicGroup.urlDescription));
+        }
+
+        if (individualDetails[person].ethnicGroup && individualDetails[person].ethnicGroup.otherText) {
+            $container.append(createListItem(individualDetails[person].ethnicGroup.otherText ? individualDetails[person].ethnicGroup.otherText : 'No answer provided', individualDetails[person].ethnicGroup.questionOther, individualDetails[person].ethnicGroup.urlOther));
+        }
+
+        if (individualDetails[person].religion) {
+            $container.append(createListItem(individualDetails[person].religion.description ? individualDetails[person].religion.description : 'No answer provided', individualDetails[person].religion.question, individualDetails[person].religion.url));
+        }
+
+        if (individualDetails[person].religion && individualDetails[person].religion.descriptionOther) {
+            $container.append(createListItem(individualDetails[person].religion.descriptionOther ? individualDetails[person].religion.descriptionOther : 'No answer provided', individualDetails[person].religion.questionOther, individualDetails[person].religion.urlOther));
+        }
+
+        if (individualDetails[person].language) {
+            $container.append(createListItem(individualDetails[person].language.lang ? individualDetails[person].language.lang : 'No answer provided', individualDetails[person].language.question, individualDetails[person].language.url));
+        }
+
+        if (individualDetails[person].language && individualDetails[person].language.other) {
+            $container.append(createListItem(individualDetails[person].language.other ? individualDetails[person].language.other : 'No answer provided', individualDetails[person].language.questionOther, individualDetails[person].language.urlOther));
+            $container.append(createListItem(individualDetails[person].language.english ? individualDetails[person].language.english : 'No answer provided', individualDetails[person].language.questionEnglishLevel, individualDetails[person].language.urlEnglishLevel));
+        }
+
+        if (individualDetails[person].passport && individualDetails[person].passport.countries.length !== 0) {
+            $container.append(createListItem(individualDetails[person].passport.countries ? individualDetails[person].passport.countries : 'No answer provided', individualDetails[person].passport.question, individualDetails[person].passport.url));
+        }
+
+        if (individualDetails[person].passport && individualDetails[person].passport.otherText) {
+            $container.append(createListItem(individualDetails[person].passport.otherText ? individualDetails[person].passport.otherText : 'No answer provided', individualDetails[person].passport.questionOther, individualDetails[person].passport.urlOther));
+        }
+
+        if (individualDetails[person].health) {
+            $container.append(createListItem(individualDetails[person].health.val ? individualDetails[person].health.val : 'No answer provided', individualDetails[person].health.question, individualDetails[person].health.url));
+            $container.append(createListItem(individualDetails[person].health.conditions ? individualDetails[person].health.conditions : 'No answer provided', individualDetails[person].health.questionConditions, individualDetails[person].health.urlConditions));
+            if (individualDetails[person].health.abilities) {
+                $container.append(createListItem(individualDetails[person].health.abilities ? individualDetails[person].health.abilities : 'No answer provided', individualDetails[person].health.questionAbilities, individualDetails[person].health.urlAbilities));
+            }
+            $container.append(createListItem(individualDetails[person].health.amount ? individualDetails[person].health.amount : 'No answer provided', individualDetails[person].health.questionSupport, individualDetails[person].health.urlSupport));
+        }
+
+        if (individualDetails[person].orientation) {
+            $container.append(createListItem(individualDetails[person].orientation.val ? individualDetails[person].orientation.val : 'No answer provided', individualDetails[person].orientation.question, individualDetails[person].orientation.url));
+        }
+
+        if (individualDetails[person].identity) {
+            $container.append(createListItem(individualDetails[person].identity.val ? individualDetails[person].identity.val : 'No answer provided', individualDetails[person].identity.question, individualDetails[person].identity.url));
+        }
+
+        if (individualDetails[person].salary) {
+            $container.append(createListItem(individualDetails[person].salary.val ? individualDetails[person].salary.val : 'No answer provided', individualDetails[person].salary.question, individualDetails[person].salary.url));
+        }
+
+        if (individualDetails[person].school) {
+            $container.append(createListItem(individualDetails[person].school.val ? individualDetails[person].school.val : 'No answer provided', individualDetails[person].school.question, individualDetails[person].school.url));
+        }
+
+        if (individualDetails[person].student) {
+            $container.append(createListItem(individualDetails[person].student.val ? individualDetails[person].student.val : 'No answer provided', individualDetails[person].student.question, individualDetails[person].student.url));
+        }
+
+        if (individualDetails[person].studentAddress) {
+            $container.append(createListItem(individualDetails[person].studentAddress.val ? individualDetails[person].studentAddress.val : 'No answer provided', individualDetails[person].studentAddress.question, individualDetails[person].studentAddress.url));
+        }
+
+        if (individualDetails[person].studentAddressInUK) {
+            $container.append(createListItem(individualDetails[person].studentAddressInUK.val ? individualDetails[person].studentAddressInUK.val : 'No answer provided', individualDetails[person].studentAddressInUK.question, individualDetails[person].studentAddressInUK.url));
+        }
+
+        if (individualDetails[person].AddressStudentUK) {
+            $container.append(createListItem(individualDetails[person].AddressStudentUK.address ? individualDetails[person].AddressStudentUK.address : 'No answer provided', individualDetails[person].AddressStudentUK.question, individualDetails[person].AddressStudentUK.url));
+        }
+
+        if (individualDetails[person].AddressStudentCountry) {
+            $container.append(createListItem(individualDetails[person].AddressStudentCountry.val ? individualDetails[person].AddressStudentCountry.val : 'No answer provided', individualDetails[person].AddressStudentCountry.question, individualDetails[person].AddressStudentCountry.url));
+        }
+
+        if (individualDetails[person].addressWhere) {
+            $container.append(createListItem(individualDetails[person].addressWhere.val ? individualDetails[person].addressWhere.val : 'No answer provided', individualDetails[person].addressWhere.question, individualDetails[person].addressWhere.url));
+        }
+
+        if (individualDetails[person].yearAgoAddress) {
+            $container.append(createListItem(individualDetails[person].yearAgoAddress.val ? individualDetails[person].yearAgoAddress.val : 'No answer provided', individualDetails[person].yearAgoAddress.question, individualDetails[person].yearAgoAddress.url));
+        }
+
+        if (individualDetails[person].yearAgoAddressUK) {
+            $container.append(createListItem(individualDetails[person].yearAgoAddressUK.val ? individualDetails[person].yearAgoAddressUK.val : 'No answer provided', individualDetails[person].yearAgoAddressUK.question, individualDetails[person].yearAgoAddressUK.url));
+        }
+
+        if (individualDetails[person].yearAgoAddressCountry) {
+            $container.append(createListItem(individualDetails[person].yearAgoAddressCountry.val ? individualDetails[person].yearAgoAddressCountry.val : 'No answer provided', individualDetails[person].yearAgoAddressCountry.question, individualDetails[person].yearAgoAddressCountry.url));
+        }
+
+        if (individualDetails[person].addressOutsideUk) {
+            $container.append(createListItem(individualDetails[person].addressOutsideUk.val ? individualDetails[person].addressOutsideUk.val : 'No answer provided', individualDetails[person].addressOutsideUk.question, individualDetails[person].addressOutsideUk.url));
+        }
+
+        if (individualDetails[person].address) {
+            $container.append(createListItem(individualDetails[person].address.val.addressLine1 ? individualDetails[person].address.val.addressLine1 : 'No answer provided', individualDetails[person].address.question, individualDetails[person].address.url));
+        }
+
+        if (individualDetails[person].apprenticeship) {
+            $container.append(createListItem(individualDetails[person].apprenticeship.hasApprenticeship ? individualDetails[person].apprenticeship.hasApprenticeship : 'No answer provided', individualDetails[person].apprenticeship.question, individualDetails[person].apprenticeship.url));
+        }
+
+        if (individualDetails[person].qualifications) {
+            $container.append(createListItem(individualDetails[person].qualifications.aboveDegree ? individualDetails[person].qualifications.aboveDegree : 'No answer provided', individualDetails[person].qualifications.questionAbove, individualDetails[person].qualifications.urlAbove));
+            $container.append(createListItem(individualDetails[person].qualifications.nvqEquivalent === [] ? individualDetails[person].qualifications.nvqEquivalent : 'No answer provided', individualDetails[person].qualifications.questionNvqEquivalent, individualDetails[person].qualifications.urlNvqEquivalent));
+            $container.append(createListItem(individualDetails[person].qualifications.aLevels === [] ? individualDetails[person].qualifications.aLevels : 'No answer provided', individualDetails[person].qualifications.questionALevel, individualDetails[person].qualifications.urlALevel));
+            $container.append(createListItem(individualDetails[person].qualifications.gcses === [] ? individualDetails[person].qualifications.gcses : 'No answer provided', individualDetails[person].qualifications.questionGCSEs, individualDetails[person].qualifications.urlGCSEs));
+            $container.append(createListItem(individualDetails[person].qualifications.othersWhere === [] ? individualDetails[person].qualifications.othersWhere : 'No answer provided', individualDetails[person].qualifications.questionOtherWhere, individualDetails[person].qualifications.urlOtherWhere));
+        }
+
+        if (individualDetails[person].armedForces) {
+            $container.append(createListItem(individualDetails[person].armedForces.val ? individualDetails[person].armedForces.val : 'No answer provided', individualDetails[person].armedForces.question, individualDetails[person].armedForces.url));
+        }
+
+        if (individualDetails[person].employment) {
+            $container.append(createListItem(individualDetails[person].employment.sevenDaysAgo ? individualDetails[person].employment.sevenDaysAgo : 'No answer provided', individualDetails[person].employment.question, individualDetails[person].employment.url));
+            if (individualDetails[person].employment.questionSevenDaysDescription){
+                $container.append(createListItem(individualDetails[person].employment.description ? individualDetails[person].employment.description : 'No answer provided', individualDetails[person].employment.questionSevenDaysDescription, individualDetails[person].employment.urlSevenDaysDescription));
+                $container.append(createListItem(individualDetails[person].employment.fourWeeksAgo ? individualDetails[person].employment.fourWeeksAgo : 'No answer provided', individualDetails[person].employment.questionFourWeeks, individualDetails[person].employment.urlFourWeeks));
+                if (individualDetails[person].employment.questionAvailableTwoWeeks){
+                    $container.append(createListItem(individualDetails[person].employment.availableInTwoWeeks ? individualDetails[person].employment.availableInTwoWeeks : 'No answer provided', individualDetails[person].employment.questionAvailableTwoWeeks, individualDetails[person].employment.urlAvailableTwoWeeks));
+                }
+                $container.append(createListItem(individualDetails[person].employment.paidWorkConfirm ? individualDetails[person].employment.paidWorkConfirm : 'No answer provided', individualDetails[person].employment.questionPaidWorkConfirm, individualDetails[person].employment.urlPaidWorkConfirm));
+                $container.append(createListItem(individualDetails[person].employment.acceptedJob ? individualDetails[person].employment.acceptedJob : 'No answer provided', individualDetails[person].employment.questionAcceptedJob, individualDetails[person].employment.urlAcceptedJob));
+            }
+            if (individualDetails[person].employment.questionStatus){
+                $container.append(createListItem(individualDetails[person].employment.status ? individualDetails[person].employment.status : 'No answer provided', individualDetails[person].employment.questionStatus, individualDetails[person].employment.urlStatus));
+                $container.append(createListItem(individualDetails[person].employment.name ? individualDetails[person].employment.name : 'No answer provided', individualDetails[person].employment.questionName, individualDetails[person].employment.urlName));
+                $container.append(createListItem(individualDetails[person].employment.jobTitle ? individualDetails[person].employment.jobTitle : 'No answer provided', individualDetails[person].employment.questionJobTitle, individualDetails[person].employment.urlJobTitle));
+                $container.append(createListItem(individualDetails[person].employment.jobDescription ? individualDetails[person].employment.jobDescription : 'No answer provided', individualDetails[person].employment.questionJobDescription, individualDetails[person].employment.urlJobDescription));
+                $container.append(createListItem(individualDetails[person].employment.businessActivity ? individualDetails[person].employment.businessActivity : 'No answer provided', individualDetails[person].employment.questionBusinessActivity, individualDetails[person].employment.urlBusinessActivity));
+                $container.append(createListItem(individualDetails[person].employment.responsibilities ? individualDetails[person].employment.responsibilities : 'No answer provided', individualDetails[person].employment.questionResponsibilities, individualDetails[person].employment.urlResponsibilities));
+                if (individualDetails[person].employment.questionHoursWorked) {
+                    $container.append(createListItem(individualDetails[person].employment.hours ? individualDetails[person].employment.hours : 'No answer provided', individualDetails[person].employment.questionHoursWorked, individualDetails[person].employment.urlHoursWorked));
+                }
+                if (individualDetails[person].employment.questionEmploymentTravel){
+                    $container.append(createListItem(individualDetails[person].employment.modeOfTravel ? individualDetails[person].employment.modeOfTravel : 'No answer provided', individualDetails[person].employment.questionEmploymentTravel, individualDetails[person].employment.urlEmploymentTravel));
+                }
+                if (individualDetails[person].employment.questionMainlyWork) {
+                    $container.append(createListItem(individualDetails[person].employment.mainlyWork ? individualDetails[person].employment.mainlyWork : 'No answer provided', individualDetails[person].employment.questionMainlyWork, individualDetails[person].employment.urlMainlyWork));
+                }
+                if (individualDetails[person].employment.questionWorkUK) {
+                    $container.append(createListItem(individualDetails[person].employment.workUK ? individualDetails[person].employment.workUK : 'No answer provided', individualDetails[person].employment.questionWorkUK, individualDetails[person].employment.urlWorkUK));
+                }
+                if (individualDetails[person].employment.questionWorkOutsideUK){
+                    $container.append(createListItem(individualDetails[person].employment.workOutsideUK ? individualDetails[person].employment.workOutsideUK : 'No answer provided', individualDetails[person].employment.questionWorkOutsideUK, individualDetails[person].employment.urlWorkOutsideUK));
+                }
+                if (individualDetails[person].employment.questionWorkplaceAddress){
+                    $container.append(createListItem(individualDetails[person].employment.workAddress["addressLine1"] ? individualDetails[person].employment.workAddress["addressLine1"] : 'No answer provided', individualDetails[person].employment.questionWorkplaceAddress, individualDetails[person].employment.urlWorkplaceAddress));
+                }
+            }
+        }
+
+        return $container;
+    }
+
+    $('#individual-questions-answers').append(createList());
+
+</script>

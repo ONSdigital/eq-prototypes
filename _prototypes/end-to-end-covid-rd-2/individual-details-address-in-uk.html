@@ -1,0 +1,211 @@
+---
+title: COVID-19 test (round 2 - pandemic situation) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+
+<link rel="stylesheet" href="../../end-to-end/style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password"
+                      action="../individual-details-dob">
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
+                           value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-xl js-heading">
+                                        What is your usual address?
+                                    </h1>
+                                </div>
+
+                                <div class="answer">
+                                    <div class="answer__fields js-fields">
+                                        <div class="field field--radio field--multiplechoice ">
+                                            <fieldset>
+                                                <div class="field__item js-focusable-box js-extra-option">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="address-where"
+                                                           id="same-as-visitor1"
+                                                           value="Same as visitor 1">
+                                                    <label class="label label--inline js-extra-option-label"
+                                                           for="same-as-visitor1"
+                                                           id="same-as-visitor1-label">
+                                                        Address not set
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="address-where"
+                                                           id="in-uk"
+                                                           value="An address in the UK">
+                                                    <label class="label label--inline"
+                                                           for="in-uk"
+                                                           id="in-uk-label">
+                                                        An address in the UK
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input class="input input--radio js-focusable" 
+                                                      name="address-where" 
+                                                      value="An address outside the UK" 
+                                                      id="outside-uk" 
+                                                      type="radio" 
+                                                      data-qa="has-other-option">
+                                                    <label class="label label--inline u-fs-r " 
+                                                      for="outside-uk" 
+                                                      id="label-radio-answer-other">
+                                                        An address outside the UK
+                                                    </label>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple u-mt-m u-d-no">
+                                <div class="js-collapsible-content">
+                                    <h2 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="If you can’t answer questions for this person">
+                                        Why we ask for visitor details
+                                    </h2>
+                                    <div class="collapsible__body js-collapsible-body">
+                                        <p>Your answer helps to ensure that everyone is counted in the census. Add visitor details, even if you think they have been included on a census questionnaire at another address.</p>
+                                        <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Can’t answer someone else’s questions?">Hide this</button>
+                                    </div>
+                                </div>
+                              </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit u-mb-xl u-mt-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+                    <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person_id'),
+    member = storageAPI.getHouseholdMemberByPersonId(personId),
+    person = member['@person'],
+    isEditing = urlParams.get('edit'),
+    isVisitor = storageAPI.isVisitor(member),
+    details = storageAPI.getPersonalDetailsFor(personId),
+    surveyType = urlParams.get('survey'),
+    question = $('#question-title').html();
+
+  storageAPI.personalBookmark(personId, window.location.href);
+
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+    var val = $('[name="address-where"]:checked').val();
+    let url = '../individual-details-address-in-uk/?person_id=' + personId + '&edit=true';
+    question = question.trim();
+
+    storageAPI.addUpdateAddressWhere(personId, val, question, url);
+
+    if(isEditing) {
+      e.preventDefault();
+      window.location.href = '../individual-details-summary/?person_id=' +
+        personId + (surveyType ? '&survey=' + surveyType : '');
+      storageAPI.storePageData('/end-to-end-covid-rd-2/individual-details-summary/', window.location.pathname);
+    } else if(isVisitor) {
+      e.preventDefault();
+
+      var routeMap = {
+        'Same as visitor 1': {
+          url: '/end-to-end-covid-rd-2/hub/'
+        },
+        'An address in the UK': {
+          url: '/end-to-end-covid-rd-2/individual-details-address/'
+        },
+        'An address outside the UK': {
+          url: '/end-to-end-covid-rd-2/individual-details-country-other/'
+        }
+      };
+      if (val) {
+      window.location.href = routeMap[val].url + 
+        (personId ? '?person_id=' + personId : '');
+      storageAPI.storePageData(routeMap[val].url, window.location.pathname);
+      } else {
+      window.location.href = '/end-to-end-covid-rd-2/hub/' + 
+        (personId ? '?person_id=' + personId : '');
+      }
+    storageAPI.addUpdateVisitorComplete(personId, true);
+
+    }
+  }));  
+
+  function updateRouting() {
+    if(surveyType) {
+      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    }
+    $('#survey-type').val(surveyType);
+  }
+
+  function updateQuestion() {
+    if(storageAPI.getProxyFor(personId) || isVisitor) {
+      $('.js-heading').html('What is ' + '<em class="highlight">' + person.firstLastName +
+        window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' + ' usual address?');
+    }
+  }
+
+  function updateAnswer() {
+    var visitors =
+      storageAPI.getAllHouseholdMembers().filter(storageAPI.isVisitor),
+      visitor1 = visitors[0],
+      visitor1Person = visitor1['@person'];
+
+    if((person.id !== visitor1Person.id) && visitors.length > 1) {
+      $('.js-extra-option').show();
+      $('#same-as-visitor1').val('Same address as ' + visitor1Person.fullName);
+      $('.js-extra-option-label').html('Same address as ' + visitor1Person.fullName);
+    } else {
+      $('.js-extra-option').hide();
+    }
+  }
+
+  if (details && details.country) {
+    $('#' + details.country.val).attr('checked', true);
+  }
+
+  if(isVisitor) {
+    $('.js-collapsible').removeClass('u-d-no');
+  }
+
+  $(updateQuestion);
+  $(updateAnswer);
+  $(updateRouting);
+
+  /**
+   * Routing
+   */
+  $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
+</script>

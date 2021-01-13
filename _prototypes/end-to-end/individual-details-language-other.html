@@ -1,0 +1,138 @@
+---
+title: Census Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+
+<link rel="stylesheet" href="../assets/modules/typeahead/typeahead.css"/>
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="back-link js-previous-link" href="../individual-details-language">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main u-mt-m@m">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password" action="../individual-details-language-english">
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
+                           value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-xl js-heading">
+                                        You selected &ldquo;Other, including British Sign Language&rdquo;. What is  your main language?
+                                    </h1>
+                                </div>
+
+                                <div class="grid grid--gutterless">
+                                    <div class="grid__col col-8@m">
+                                        <p class="field">
+                                          <label class="label" for="language">Main language
+                                              <br>
+                                              <span class="label__description u-no-js-hide">Enter your own answer or select from suggestions</span>
+                                          </label>
+
+                                          <div id="language-container" class="js-typeahead typeahead-input typeahead-input--initialised" data-content="{&quot;aria_no_results&quot;:&quot;No suggestions found for the query&quot;,&quot;aria_you_have_selected&quot;:&quot;You have selected&quot;,&quot;aria_found_by_alternative_name&quot;:&quot;found by alternative name&quot;,&quot;aria_min_chars&quot;:&quot;Type in 5 or more characters for addresses.&quot;,&quot;aria_one_result&quot;:&quot;There is one address available.&quot;,&quot;aria_n_results&quot;:&quot;There are {n} addresses available.&quot;,&quot;aria_limited_results&quot;:&quot;Results have been limited to 10 addresses. Type more characters to refine your search.&quot;,&quot;more_results&quot;:&quot;Continue entering to improve results&quot;,&quot;results_title&quot;:&quot;Select an address&quot;}" data-instructions="Use up and down keys to navigate suggestions once you&#39;ve typed more than two characters. Use the enter key to select a suggestion. Touch device users, explore by touch or with swipe gestures." data-aria-you-have-selected="You have selected" data-aria-min-chars="Enter 3 or more characters for suggestions." data-aria-one-result="There is one suggestion available." data-aria-n-results="There are {n} suggestions available." data-aria-limited-results="Results have been limited to 10 suggestions. Type more characters to improve your search." data-more-results="Continue entering to improve suggestions" data-results-title="Suggestions" data-typeahead-data="https://gist.githubusercontent.com/rmccar/f0227f56d2a16cb1ca6079be656c6a84/raw/3184d7ad817ba7fd51b1cda989ca112c51e2a324/Main_Language_FEL.json" data-no-results="No results found">
+                                              <input type="text" name="x10" id="language" class="input input--text input-type__input js-typeahead-input" autocomplete="off" aria-autocomplete="list" aria-controls="language-listbox" aria-describedby="language-instructions" aria-has-popup="true" aria-owns="language-listbox" aria-expanded="false" role="combobox" maxlength="100">
+                                              <div class="typeahead-input__results js-typeahead-results">
+                                                  <header class="typeahead-input__results-title u-fs-s">Suggestions</header>
+                                                  <ul class="typeahead-input__listbox js-typeahead-listbox" role="listbox" id="language-listbox" tabindex="-1"></ul>
+                                              </div>
+                                              <div class="typeahead-input__instructions u-vh js-typeahead-instructions" id="language-instructions" tabindex="-1">Use up and down keys to navigate suggestions once you&#39;ve typed more than two characters. Use the enter key to select a suggestion. Touch device users, explore by touch or with swipe gestures.</div>
+                                              <div class="typeahead-input__status u-vh js-typeahead-aria-status" aria-live="polite" role="status" tabindex="-1"></div>
+                                          </div>
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit u-mt-l u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+
+                    <p><a href="../hub" class="js-choose-another-section">Choose another section and
+                            return to this question later</a></p>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person_id'),
+    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+    isEditing = urlParams.get('edit'),
+    details = storageAPI.getPersonalDetailsFor(personId),
+    surveyType = urlParams.get('survey'),
+    question = $('#question-title').html();
+
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+    var otherText = $('#language').val(),
+      url = '../individual-details-language-other/?person_id=' + personId + '&edit=true';
+    question = question.trim();
+
+    storageAPI.addUpdateLanguageOther(personId, otherText, question, url);
+    storageAPI.storePageData('/end-to-end/individual-details-language-english/', window.location.pathname);
+
+    if(isEditing) {
+      e.preventDefault();
+      window.location.href = '../individual-details-summary/?person_id=' +
+        personId + (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+
+    }
+  }));
+
+  function updateRouting() {
+    if(surveyType) {
+      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    }
+    $('#survey-type').val(surveyType);
+  }
+
+  function updateQuestion() {
+    if(storageAPI.getProxyFor(personId)) {
+      $('.js-heading').html('You selected &ldquo;Other, including British Sign Language&rdquo;. What is ' + '<em class="highlight">' + person.firstLastName +
+        window.ONS.utils.trailingNameS(person.firstLastName) + '</em>' +
+        ' main language?');
+    }
+  }
+
+  function updateAnswer() {
+    if (details && details.language) {
+        $('#language').val(details.language.other);
+    }
+  }
+
+  $(updateAnswer);
+  $(updateQuestion);
+  $(updateRouting);
+
+  document.dispatchEvent(new CustomEvent('TYPEAHEAD-READY'));
+
+  /**
+   * Routing
+   */
+  $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
+</script>

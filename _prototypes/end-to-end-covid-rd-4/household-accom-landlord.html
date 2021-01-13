@@ -1,0 +1,161 @@
+---
+title: COVID-19 test (round 4 - pandemic situation revised) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+
+<link rel="stylesheet" href="../../end-to-end/style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="#">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m"></div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password" action="../household-accom-vehicles">
+                    <div class="group" id="accommodation">
+                        <div class="block" id="landlord">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-xl js-heading">
+                                        Who is your landlord?
+                                    </h1>
+                                </div>
+                                  <div class="answer">
+                                    <div class="answer__fields js-fields">
+                                        <div class="field field--radio field--multiplechoice ">
+                                            <fieldset class="u-mb-xl">
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="landlord"
+                                                           id="housing-association"
+                                                           value="Housing association, housing co-operative, charitable trust, registered social landlord">
+                                                    <label class="label label--inline"
+                                                           for="housing-association"
+                                                           id="housing-association-label">
+                                                        Housing association, housing co-operative, charitable trust, registered social landlord
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="landlord"
+                                                           id="council"
+                                                           value="Council or local authority">
+                                                    <label class="label label--inline"
+                                                           for="council"
+                                                           id="council-label">
+                                                        Council or local authority
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="landlord"
+                                                           id="private"
+                                                           value="Private landlord or letting agency">
+                                                    <label class="label label--inline"
+                                                           for="private"
+                                                           id="private-label">
+                                                        Private landlord or letting agency
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="landlord"
+                                                           id="employer"
+                                                           value="Employer of a household member">
+                                                    <label class="label label--inline"
+                                                           for="employer"
+                                                           id="employer-label">
+                                                        Employer of a household member
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="landlord"
+                                                           id="relative"
+                                                           value="Relative or friend of a household member">
+                                                    <label class="label label--inline"
+                                                           for="relative"
+                                                           id="relative-label">
+                                                        Relative or friend of a household member
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="landlord"
+                                                           id="other"
+                                                           value="Other">
+                                                    <label class="label label--inline"
+                                                           for="other"
+                                                           id="other-label">
+                                                        Other
+                                                    </label>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+                    <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+    var storageAPI = window.ONS.storage,
+        urlParams = new URLSearchParams(window.location.search),
+        question = $('#question-title').html(),
+        isEditing = urlParams.get('edit'),
+        currentPage = '../household-accom-landlord';
+
+    window.sessionStorage.setItem('accommodation-completed-status', currentPage);
+
+    $('.qa-btn-submit').click(function (e) {
+        var val = $('input[type=radio][name=landlord]:checked').attr('value');
+        question = question.trim();
+        window.sessionStorage.setItem('accommodation-landlord', JSON.stringify([question, val, currentPage]));
+        e.preventDefault();
+
+        if(isEditing) {
+            window.location.href = '../household-accom-summary/';
+            storageAPI.storePageData('/end-to-end-covid-rd-4/household-accom-summary/', window.location.pathname);
+        } else {
+            window.location.href = '../household-accom-vehicles';
+            storageAPI.storePageData('/end-to-end-covid-rd-4/household-accom-vehicles/', window.location.pathname);
+        }
+    });
+
+    function updateAnswer() {
+        var answer = JSON.parse(window.sessionStorage.getItem('accommodation-landlord'));
+        if (answer) {
+            $('input[type=radio][value="' + answer[1] +'"]').prop("checked", true);
+        }
+    }
+
+    $(updateAnswer);
+</script>

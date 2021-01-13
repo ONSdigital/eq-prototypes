@@ -1,0 +1,211 @@
+---
+title: COVID-19 test (round 4 - pandemic situation revised) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+
+<link rel="stylesheet" href="../../end-to-end/style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password"
+                      action="../individual-details-religion-description">
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
+                           value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group" id="rsi">
+                        <div class="block" id="total-retail-turnover">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-xl js-heading">
+                                        Which one best describes your ethnic group or background?
+                                    </h1>
+                                </div>
+
+                                <div class="answer">
+                                    <div class="answer__fields js-fields">
+                                        <div class="field field--radio field--multiplechoice ">
+                                            <fieldset
+                                                      id="radio-placeholder">
+                                            </fieldset>
+                                        </div>
+                                        <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple">
+                                                <div class="js-collapsible-content">
+                                                    <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b js-definition js-piping" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Why your answer is important">Why your answer is important</h3>
+                                                    <div class="collapsible__body js-collapsible-body js-piping">
+                                                        <p>Your answer will provide a better understanding of your community and help to support equality and fairness. For example, councils and government use information on ethnic group to make sure they</p>
+                                                        <ul>
+                                                            <li>provide services and share funding fairly</li>
+                                                            <li>understand and represent everyone's interests</li>
+                                                        </ul>
+                                                        <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Why your answer is important">Hide this</button>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit u-mb-xl u-mt-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+                    <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<div class="field__item js-focusable-box js-radio-template"
+     style="display:none;">
+    <input autocomplete="new-password" class="input input--radio js-focusable js-radio-input"
+           type="radio"
+           name="ethnic-description"
+           id=""
+           value="">
+    <label class="label label--inline js-radio-label"
+           for=""
+           id="-label">
+        <strong class="u-fs-r js-radio-label-strong"></strong>
+        <p class="u-fs-s u-db u-mb-no label--negative js-radio-description js-piping">
+        </p>
+    </label>
+</div>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person_id'),
+    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+    isEditing = urlParams.get('edit'),
+    details = storageAPI.getPersonalDetailsFor(personId),
+    ethnicGroup = (urlParams.get('ethnic-group') ? urlParams.get('ethnic-group') : details.ethnicGroup.val),
+    surveyType = urlParams.get('survey'),
+    question = $('#question-title').html();
+
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+    var val = $('[name="ethnic-description"]:checked').val();
+
+    let url = '../individual-details-ethnic-group-description/?person_id=' + personId + '&edit=true';
+    question = question.trim();
+
+    storageAPI.addUpdateEthnicGroupDescription(personId, val, question, url);
+    storageAPI.storePageData('/end-to-end-covid-rd-4/individual-details-religion-description/', window.location.pathname);
+
+    if(val === 'Other' || val === 'African') {
+      e.preventDefault();
+      window.location.href =
+        '../individual-details-ethnic-group-other/?person_id=' + personId +
+        (surveyType ? '&survey=' + surveyType : '') +
+        (ethnicGroup ? '&ethnic-group=' + ethnicGroup : '') +
+        (isEditing ? '&edit=true' : '');
+        storageAPI.storePageData('/end-to-end-covid-rd-4/individual-details-ethnic-group-other/', window.location.pathname);
+
+    } else if(isEditing) {
+      e.preventDefault();
+      window.location.href = '../individual-details-summary/?person_id=' + personId +
+        (surveyType ? '&survey=' + surveyType : '');
+        storageAPI.storePageData('/end-to-end-covid-rd-4/individual-details-summary/', window.location.pathname);
+    }
+  }));
+
+  function updateRouting() {
+    if(surveyType) {
+      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    }
+    $('#survey-type').val(surveyType);
+  }
+
+  function updateQuestion() {
+    var str = 'Which one best describes ' + 
+      (storageAPI.getProxyFor(personId)
+        ? '<em class="highlight">' + person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName) + '</em>'
+        : 'your') +
+      ' ' + storageAPI.personalDetailsEthnicGroupMap[ethnicGroup].question +
+      ' ethnic group or background?';
+
+    $('.js-heading').html(str);
+  }
+
+  var $fieldEls =
+    storageAPI.personalDetailsEthnicGroupMap[ethnicGroup].options.map(function (item) {
+    var $template = $('.js-radio-template').clone(),
+      $radioInput = $template.find('.js-radio-input'),
+      $label = $template.find('.js-radio-label');
+      $description = $template.find('.js-radio-description');
+
+    $template.attr('id', '');
+    $template.find('.js-radio-label-strong').html(item.label);
+    $template.css('display', '');
+
+    $radioInput.attr('id', item.val);
+    $radioInput.attr('value', item.val);
+
+    if(item.val === details['ethnicGroup']) {
+      $radioInput.attr('checked', true);
+    }
+
+    $label.attr('id', item.val + '-label');
+    $label.attr('for', item.val);
+
+    $description.html(item.description);
+
+    return $template;
+  });
+
+  function updateAnswer() {
+    $('#radio-placeholder').append(
+      /**
+       * Interlace break tags - temp fix for double banking display issues
+       */
+      _.flatten(
+        _.zip($fieldEls, _.range($fieldEls.length).map(function (){
+          return $('<br />');
+        }))
+      )
+    );
+
+    if (details && details.ethnicGroup) {
+        $('input[type=radio][value="' + details.ethnicGroup.description +'"]').prop("checked", true);
+    }
+
+    if(storageAPI.getProxyFor(personId)) {
+      var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
+
+      pipingDestinations.forEach(function(pipingDestination) {
+        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('your', 'their');
+        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('Your', 'Their');
+      });
+    }
+  }
+
+  $(updateQuestion);
+  $(updateRouting);
+  $(updateAnswer);
+
+  /**
+   * Routing
+   */
+  $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
+</script>

@@ -1,0 +1,169 @@
+---
+title: COVID-19 test (round 4 - pandemic situation revised) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+
+<link rel="stylesheet" href="../../end-to-end/style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../individual-details-school">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m"></div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <div class="feedback__inline js-feedback-inline is-collapsed">
+                    <div class="feedback__border">
+                    </div>
+                </div>
+                <div class="panel panel--error u-mb-m js-error-box u-d-no">
+                    <div class="panel__header">
+                        <div class="panel__title u-fs-r--b">There 
+                      <span class="js-piping">is a {x} problem{s}</span> with your answer
+                    </div>
+                    </div>
+                    <div class="panel__body">
+                        
+                        <ol class="list list--bare">
+                        <li class="list__item js-yes u-d-no">
+                            1. <a href="#error-message-yes" class="list__link js-inpagelink">
+                                Select an answer to continue
+                            </a>
+                        </li>
+                       </ol>
+                    </div>
+                </div>
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password"
+                      action="../individual-details-country">
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
+                           value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-xl js-heading">
+                                        Are you a student in full-time education?
+                                    </h1>
+                                </div>
+
+                                <div class="answer" id="radios">
+                                    <div class="answer__fields question__answer js-fields">
+                                        <div class="field field--radio field--multiplechoice ">
+                                            <fieldset>
+                                                <div class="field__item js-focusable-box">
+                                                    <input required autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="student"
+                                                           id="yes"
+                                                           value="Yes"
+                                                           data-error-msg="Select an answer to continue">
+                                                    <label class="label label--inline"
+                                                           for="yes"
+                                                           id="yes-label">
+                                                        Yes
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="student"
+                                                           id="no"
+                                                           value="No">
+                                                    <label class="label label--inline"
+                                                           for="no"
+                                                           id="no-label">
+                                                        No
+                                                    </label>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn-submit btn--primary btn--lg qa-btn-submit venus u-mb-xl u-mt-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+                    <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person_id'),
+    member = storageAPI.getHouseholdMemberByPersonId(personId),
+    person = member['@person'],
+    isEditing = urlParams.get('edit'),
+    isVisitor = storageAPI.isVisitor(member),
+    details = storageAPI.getPersonalDetailsFor(personId),
+    surveyType = urlParams.get('survey');
+    storageAPI.personalBookmark(personId, window.location.href),
+    question = $('#question-title').html(),
+    hasErrors = false;
+
+  $('.qa-btn-submit').on('click', function (e) {
+    e.preventDefault();
+    const testFails = ($('input[type=radio]:checked').size() === 0);
+    window.ONS.utils.validateInputs(testFails, "input[type=radio]");
+    if (hasErrors) {
+        window.ONS.utils.calcErrors();
+        hasErrors = false;
+        return false;
+    } else {
+        let url = '../individual-details-student/?person_id=' + personId + '&edit=true';
+        question = question.trim();
+
+        storageAPI.addUpdateStudent(personId, $('[name="student"]:checked').val(), question, url);
+
+        if(isEditing) {
+            e.preventDefault();
+            window.location.href = '../individual-details-summary/?person_id=' +
+            personId + (surveyType ? '&survey=' + surveyType : '');
+            storageAPI.storePageData('/end-to-end-covid-rd-4/individual-details-summary/', window.location.pathname);
+        } else {
+            var val = $('[name="student"]:checked').val();
+            if(val === 'no' || val == null) {
+                window.location.href = '../individual-details-country/?person_id=' + personId;
+                storageAPI.storePageData('/end-to-end-covid-rd-4/individual-details-country/', window.location.pathname);
+
+            } else if (val === 'yes') {
+                window.location.href = '../individual-details-student-address/?person_id=' + personId;
+                storageAPI.storePageData('/end-to-end-covid-rd-4/individual-details-student-address/', window.location.pathname);
+            }
+        }
+    }
+  });
+
+  function updateQuestion() {
+    if(storageAPI.getProxyFor(personId)) {
+        $('.js-heading').html('Is ' + '<em class="highlight">' + person.firstLastName + '</em>' +
+        ' a student in full-time education?');
+    }
+  }
+
+  $(updateQuestion);
+
+  /**
+   * Routing
+   */
+  $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
+</script>

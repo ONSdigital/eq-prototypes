@@ -5698,6 +5698,12 @@ input:checked ~ .label {
   height: auto;
 }
 
+@media only screen and (max-width: 550px) {
+  .logo__img {
+    width: 150px;
+  }
+}
+
 .nav {
   display: block;
   padding: 0;

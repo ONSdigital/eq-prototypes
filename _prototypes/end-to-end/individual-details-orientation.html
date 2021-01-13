@@ -1,0 +1,262 @@
+---
+title: Census Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<style>
+.field__other {
+    background-color: transparent;
+}
+input:checked~.field__other {
+    background-color: #f5f5f5;
+}
+</style>
+<div class="page__subheader">
+    <div class="container">
+        <a class="back-link js-previous-link" href="#">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m"></div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main u-mt-m@m">
+                <div class="panel panel--error u-mb-m js-error-box u-d-no">
+                    <div class="panel__header">
+                        <div class="panel__title u-fs-r--b">This page has an error</div>
+                    </div>
+                    <div class="panel__body">
+                        <ol class="list list--bare">
+                            <li class="list__item js-other-answer u-d-no">
+                                1. <a href="#error-message-other-answer" class="list__link js-inpagelink">
+                                    Your answer is too long, it has to be less than 100 characters.
+                                </a>
+                            </li>
+                       </ol>
+                    </div>
+                </div>
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password" action="#">
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
+                           value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-xl js-heading">
+                                        Which of the following best describes your sexual orientation?
+                                    </h1>
+                                </div>
+                                <div class="panel panel--info panel--simple u-mb-m">
+                                    <div class="panel__body">
+                                        <p>This question is <strong>voluntary</strong></p>
+                                    </div>
+                                </div>
+                                <div class="answer">
+                                    <div class="answer__fields question__answer js-fields">
+                                        <div class="field field--radio field--multiplechoice ">
+                                            <fieldset>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="orientation"
+                                                           id="straight"
+                                                           value="Straight">
+                                                    <label class="label label--inline"
+                                                           for="straight"
+                                                           id="straight-label">
+                                                        Straight or Heterosexual
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="orientation"
+                                                           id="gay"
+                                                           value="Gay">
+                                                    <label class="label label--inline"
+                                                           for="gay"
+                                                           id="gay-label">
+                                                        Gay or Lesbian
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="orientation"
+                                                           id="bisexual"
+                                                           value="Bisexual">
+                                                    <label class="label label--inline"
+                                                           for="bisexual"
+                                                           id="bisexual-label">
+                                                        Bisexual
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="orientation"
+                                                           id="other"
+                                                           value="Other">
+                                                    <label class="label label--inline"
+                                                           for="other"
+                                                           id="other-label">
+                                                        Other sexual orientation<br>
+                                                    </label>
+                                                    <div class="field__other field__other--open">
+                                                        <label class="label u-fs-s--b">Enter sexual orientation</label>
+                                                        <input autocomplete="new-password" class="input input--text input__text js-focusable" id="other-answer" name="orientation" type="text" data-qa="other-option" data-error-msg="Your answer is too long, it has to be less than 100 characters.">
+                                                    </div>
+                                                </div>
+
+                                                <button type="submit" class="btn btn--secondary btn--small js-clear-btn u-mt-s u-db-no-js_enabled u-vh" name="clear-radios">
+                                                    <span class="btn__inner">Clear selection</span>
+                                                </button>
+                                            </fieldset>
+                                        </div>
+                                        <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple">
+                                            <div class="js-collapsible-content">
+                                                <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Why your answer is important">Why your answer is important</h3>
+                                                <div class="collapsible__body js-collapsible-body">
+                                                    <p>Your answer will help your local community by providing organisations, such as charities, with an understanding of 
+                                                    the services people might need.</p>
+                                                    <p>Councils and government will use this information to</p>
+                                                    <ul>
+                                                        <li>monitor equality to ensure that everyone is treated fairly</li>
+                                                        <li>provide services and share funding</li>
+                                                    </ul>
+                                                    <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Why your answer is important">Hide this</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit u-mb-xl u-mt-l"
+                            type="submit" name="">Save and continue
+                    </button>
+                    <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person_id'),
+    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+    isEditing = urlParams.get('edit'),
+    details = storageAPI.getPersonalDetailsFor(personId),
+    surveyType = urlParams.get('survey'),
+    question = $('#question-title').html(),
+    hasErrors = false;
+  
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+      e.preventDefault();
+      const testFails = ($('#other-answer').val().length > 99);
+      window.ONS.utils.validateInputs(testFails, "#other-answer");
+      if (hasErrors) {
+          window.ONS.utils.calcErrors();
+          hasErrors = false;
+          return false;
+      } else {
+        var input = $('[name="orientation"]:checked'),
+            val = input.val(),
+            textInput = $('#other-answer');
+
+        if(textInput.val() && $('input[type=radio][value="Other"]').is(':checked')) {
+            val = textInput.val();
+        }
+        let url = '../individual-details-orientation/?person_id=' + personId + '&edit=true';
+        question = question.trim();
+        storageAPI.addUpdateOrientation(personId, val, question, url);
+        storageAPI.storePageData('/end-to-end/individual-details-gender-identity/', window.location.pathname);
+
+        if(isEditing) {
+            window.location.href = '../individual-details-summary/?person_id=' + personId;
+            storageAPI.storePageData('/end-to-end/individual-details-summary/', window.location.pathname);
+        } else {
+            window.location.href = '../individual-details-gender-identity/?person_id=' + personId;
+            storageAPI.storePageData('/end-to-end/individual-details-gender-identity/', window.location.pathname);
+        }
+      }
+  }));
+
+  function updateRouting() {
+    if(surveyType) {
+      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    }
+    $('#survey-type').val(surveyType);
+  }
+
+  function updateQuestion() {
+    if(storageAPI.getProxyFor(personId)) {
+        $('.js-heading').html('Which of the following best describes '  + '<em class="highlight">' + 
+            person.firstLastName + window.ONS.utils.trailingNameS(person.firstLastName)
+            + '</em>' + ' sexual orientation?');
+        $('.js-collapsible-content h3').html('Why their answer is important');
+        $('.js-collapsible-body p').first().html('Their answer will help your local community by providing organisations, such as charities, with an understanding of ' +
+            'the services people might need.');
+    }
+  }
+
+    function updateAnswer() {
+        if (details && details.orientation && details.orientation.val) {
+            $('input[type=radio][value="' + details.orientation.val +'"]').prop("checked", true);
+            $('.js-clear-btn').removeClass('u-vh');
+        }
+    }
+
+  function clearRadios() {
+    $('.js-clear-btn').on('click',
+        storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+        e.preventDefault();
+
+        //uncheck val radio
+        $("input:radio").prop("checked", false);
+        $(".input__text").val("");
+        $('.js-clear-btn').addClass('u-vh');
+    }));
+
+    $('.input').on('click',
+        storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+        $('.js-clear-btn').removeClass('u-vh');
+    }));
+  }
+
+  function checkRadios() {
+    $('.input__text').on('click',
+        storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+        $("#other").prop("checked", true);
+    }));
+  }
+
+
+  $(updateQuestion);
+  $(updateAnswer);
+  $(updateRouting);
+  $(clearRadios);
+  $(checkRadios);
+
+  /**
+   * Routing
+   */
+  $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
+</script>

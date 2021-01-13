@@ -1,0 +1,72 @@
+---
+title: Census Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+header: census-website
+footer: census-website
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+logoUrl: ../home
+
+---
+
+<link rel="stylesheet" href="../style.css"/>
+
+<div class="page__container container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol class="breadcrumb__items">
+            <li id="breadcrumb-1" class="breadcrumb__item u-fs-s">
+                <a href="../home" class="breadcrumb__link">Home</a>
+            </li>
+        </ol>
+    </nav>
+
+    <div class="grid">
+        <div class="grid__col col-7@m">
+            <main role="main" id="main" class="page__main u-mt-m@m">
+                <div class="group">
+                    <div class="block">
+                        <section class="section">
+                            <h1 class="u-mb-l">
+                                Contact us
+                            </h1>
+
+
+                        </section>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <div class="grid__col col-4@m push-1@m u-mt-m">
+            <div class="related-links">
+                <h2 class="related-links__title u-fs-r--b u-mb-xs" id="related-list-block">Related content</h2>
+                <nav class="related-links__navigation" aria-labelledby="related-links">
+                    <ul class="list list--bare">
+                        <li class="list__item"><a href="../languages">Languages</a></li>
+                        <li class="list__item"><a href="#">Find a support centre</a></li>
+                        <li class="list__item"><a href="#">Accessible formats and guidance</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+    storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    previousPage = urlParams.get('previous');
+    currentJourney = urlParams.get('current-journey');
+    pathArray = window.location.pathname.split('/'),
+    currentPage = pathArray.slice(-2)[0];
+
+    function updateAllLinks() {
+        $('#main-nav ul li:nth-child(5)').addClass('header-nav__item--active');
+        $('.js-previous-link').attr('href', '../' + previousPage + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney);
+    }
+
+    $(updateAllLinks);
+</script>

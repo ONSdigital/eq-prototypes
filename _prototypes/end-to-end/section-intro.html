@@ -1,0 +1,82 @@
+---
+title: Census Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+
+<link rel="stylesheet" href="../style.css"/>
+
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m"></div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main u-mt-m@m u-mt-s@xs">
+                <div class="group">
+                    <div class="block">
+                        <section class="section">
+
+                            <h1 class="u-fs-xl">People who live in this household at <span class="full-address-text">Address not set</span></h2>
+
+                            <p>In this section, we are counting the people in this household at <span class="full-address-text">Address not set</span> on <strong><span class="js-significant-date"></span></strong>.</p>
+
+                            <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple u-mb-m u-mt-s">
+                              <div class="js-collapsible-content">
+                                  <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="What we mean by /"household/"">What we mean by “this household”</h3>
+                                  <div class="collapsible__body js-collapsible-body">
+                                      <p>This is one person living alone or a group of people, not necessarily related, living at the same address, who share cooking facilities <strong>and</strong> share a living room <strong>or</strong> sitting room <strong>or</strong> dining area.</p>
+                                      <p>Any other household at this address will need to request a new household access code to start their own census.</p>
+                                      <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="What we mean by /"household/"">Hide this</button>
+                                  </div>
+                              </div>
+                            </div>
+
+                            <h2 class="u-fs-l">You will need to know</h2>
+                            <ul>
+                                <li>names of people living in this household, including anyone currently away</li>
+                                <li>names of visitors staying overnight in this household on <span class="js-significant-date-without-day"></span></li>
+                            </ul>
+
+                            <p class="u-mt-m">The Householder is responsible for ensuring that this questionnaire is completed and submitted.</p>
+
+                        </section>
+                    </div>
+                </div>
+
+                <button class="btn btn--primary btn--lg qa-btn-submit btn-submit u-mt-m"
+                        type="submit" name="">Continue
+                </button>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage;
+  
+  sessionStorage.setItem("wlh_bookmark" , window.location.pathname);
+
+  $('.btn-submit').click(function(e) {
+    e.preventDefault(); // do not submit the form like usual
+    window.location = '../do-you-live-here/';
+  });
+
+  $(function() {
+    var oneWeekAgo = new Date();
+    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+    var options = {year: 'numeric', month: 'long', day: 'numeric'};
+    $('.one-week-ago').text(oneWeekAgo.toLocaleString('en-GB', options));
+  });
+
+  function updatePipedAddress() {
+    $('.full-address-text').html(storageAPI.getPipedAddress());
+  };
+
+  $(updatePipedAddress);
+</script>

@@ -1,0 +1,225 @@
+---
+title: COVID-19 test (round 3 - usual situation) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+---
+
+<link rel="stylesheet" href="../../end-to-end/style.css"/>
+<style>
+.field__other {
+    background-color: transparent;
+}
+</style>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../individual-details-orientation">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m"></div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <div class="panel panel--error u-mb-m js-error-box u-d-no">
+                    <div class="panel__header">
+                        <div class="panel__title u-fs-r--b">This page has an error</div>
+                    </div>
+                    <div class="panel__body">
+                        <ol class="list list--bare">
+                            <li class="list__item js-other-answer u-d-no">
+                                1. <a href="#error-message-other-answer" class="list__link js-inpagelink">
+                                    Your answer is too long, it has to be less than 100 characters.
+                                </a>
+                            </li>
+                       </ol>
+                    </div>
+                </div>
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password" action="#">
+                    <input autocomplete="new-password" type="hidden" name="person_id" id="person"
+                           value="#"/>
+                    <input autocomplete="new-password" type="hidden" name="survey" id="survey-type"
+                           value="#"/>
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-xl js-heading">
+                                        Is the gender you identify with the same as your sex registered at birth?
+                                    </h1>
+                                </div>
+                                <div class="panel panel--info panel--simple u-mb-m">
+                                    <div class="panel__body">
+                                        <p>This question is <strong>voluntary</strong></p>
+                                    </div>
+                                </div>
+                                <div class="answer">
+                                    <div class="answer__fields question__answer js-fields">
+                                        <div class="field field--radio field--multiplechoice ">
+                                            <fieldset>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="identity"
+                                                           id="yes"
+                                                           value="Yes">
+                                                    <label class="label label--inline"
+                                                           for="yes"
+                                                           id="yes-label">
+                                                        Yes
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="identity"
+                                                           id="other"
+                                                           value="Other">
+                                                    <label class="label label--inline"
+                                                           for="other"
+                                                           id="other-label">
+                                                        No<br>
+                                                        <span class="label__inner label--negative u-fs-s--b">Enter gender identity</span>
+                                                    </label>
+
+                                                    <div class="field__other field__other--open">
+                                                        <input autocomplete="new-password" class="input input__text input--text js-focusable" id="other-answer" name="orientation" type="text" data-qa="other-option" data-error-msg="Your answer is too long, it has to be less than 100 characters.">
+                                                    </div>
+                                                </div>
+                                                <button type="submit" class="btn btn--secondary btn--small js-clear-btn u-mt-s u-db-no-js_enabled u-vh" name="clear-radios">
+                                                    <span class="btn__inner">Clear selection</span>
+                                                </button>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit u-mb-xl u-mt-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+                    <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end-covid/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person_id'),
+    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'],
+    isEditing = urlParams.get('edit'),
+    details = storageAPI.getPersonalDetailsFor(personId),
+    surveyType = urlParams.get('survey'),
+    question = $('#question-title').html(),
+    hasErrors = false;
+  
+  $('.qa-btn-submit').on('click',
+    storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+      e.preventDefault();
+      const testFails = ($('#other-answer').val().length > 99);
+      window.ONS.utils.validateInputs(testFails, "#other-answer");
+      if (hasErrors) {
+          window.ONS.utils.calcErrors();
+          hasErrors = false;
+          return false;
+      } else {
+        var input = $('[name="identity"]:checked'),
+            val = input.val(),
+            textInput = $('#other-answer');
+
+        if(textInput.val() && $('input[type=radio][value="Other"]').is(':checked')) {
+            val = textInput.val();
+        }
+
+        let url = '../individual-details-gender-identity/?person_id=' + personId + '&edit=true';
+        question = question.trim();
+        storageAPI.addUpdateIdentity(personId, val, question, url);
+        storageAPI.storePageData('/end-to-end-covid-rd-3/individual-details-qualifications/', window.location.pathname);
+
+        if(isEditing) {
+            window.location.href = '../individual-details-summary/?person_id=' + personId;
+            storageAPI.storePageData('/end-to-end-covid-rd-3/individual-details-summary/', window.location.pathname);
+        } else {
+            window.location.href = '../individual-details-qualifications/?person_id=' + personId;
+            storageAPI.storePageData('/end-to-end-covid-rd-3/individual-details-qualifications/', window.location.pathname);
+        }
+      }
+  }));
+
+  function updateRouting() {
+    if(surveyType) {
+      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    }
+    $('#survey-type').val(surveyType);
+  }
+
+  function updateQuestion() {
+    if(storageAPI.getProxyFor(personId)) {
+      $('.js-heading').html('Is the gender ' + '<em class="highlight">' + 
+        person.firstLastName + '</em>' + ' identifies with the same as their sex registered at birth?');
+    }
+  }
+  
+  function updateAnswer() {
+    if(storageAPI.getProxyFor(personId)) {
+      $('.js-answer').html('Enter their gender identity');
+    }
+
+    if(details && details.identity) {
+        $('.js-clear-btn').removeClass('u-vh');
+        if(details.identity.val === "Yes") {
+            $('input[type=radio][value="Yes"]').prop("checked", true);
+        } else if(details.identity.val === "No"){
+            $('input[type=radio][value="Other"]').prop("checked", true);
+            $('input[type=text][Id="other-answer"]').val(details.identity.val);
+        }
+    }
+  }
+
+  function clearRadios() {
+    $('.js-clear-btn').on('click',
+        storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+        e.preventDefault();
+
+        //uncheck val radio
+        $("input:radio").attr("checked", false);
+        $(".input__text").val("");
+        $('.js-clear-btn').addClass('u-vh');
+    }));
+
+    $('.input').on('click',
+        storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+        $('.js-clear-btn').removeClass('u-vh');
+    }));
+  }
+
+  function checkRadios() {
+    $('.input__text').on('click',
+        storageAPI.personalQuestionSubmitDecorator.bind(null, personId, function (e) {
+        $("#other").attr("checked", true);
+    }));
+  }
+
+
+  $(updateQuestion);
+  $(updateAnswer);
+  $(updateRouting);
+  $(clearRadios);
+  $(checkRadios);
+
+  /**
+   * Routing
+   */
+  $('#person').val(new URLSearchParams(window.location.search).get('person_id'));
+</script>

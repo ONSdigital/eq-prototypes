@@ -1,0 +1,142 @@
+---
+title: COVID-19 test (round 2 - pandemic situation) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+
+<link rel="stylesheet" href="../../end-to-end/style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            <!--{% include navigation.html
+            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
+            nav-title-id="section-individual" %}-->
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <div class="panel panel--error u-mb-m">
+                    <div class="panel__header">
+                        <div class="panel__title u-fs-r--b">There 
+                          <span class="js-piping">is a {x} problem{s}</span> with your answer
+                      </div>
+                    </div>
+                    <div class="panel__body">
+                        
+                        <ul class="list list--bare">
+                        <li class="list__item ">
+                            1. <a href="#email-address" class="list__link js-inpagelink">
+                                Enter an email address in the correct format, such as name@example.com
+                            </a>
+                        </li>
+                        </ul>
+                    </div>
+                </div>
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password"
+                      action="../hub">
+                    <div class="group u-mb-l">
+                        <section class="section">
+                            <div class="question u-mb-s">
+                                <h1 id="question-title"
+                                    class="question__title u-fs-xl js-piping">
+                                    What is <em class="highlight">{x}{s}</em> email address?
+                                </h1>
+                            </div>
+                            <div id="email-address-error" class="panel panel--error panel--simple">
+                                <div class="panel__body">
+                                    <p class="panel__error">
+                                    <strong>Enter an email address in the correct format, such as name@example.com</strong>
+                                    </p>
+                                    <div class="field">
+                                        <label class="label" for="email-address">
+                                                Email address
+
+                                        </label>
+                                        <input autocomplete="new-password" class="input input--text"
+                                            id="email-address"
+                                            value="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit venus u-mb-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+                    <p>To request a census in a different format or for further help, please <a href="/">contact us</a></p>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<div style="display:none;">
+    <div id="member-checkbox-select-template" class="field__item">
+        <input autocomplete="new-password" class="input input--checkbox js-person-control"
+               name="checkbox-answer" type="checkbox">
+        <label class="label label--inline u-fs-r js-person-name"></label>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    personId = urlParams.get('person_id'),
+    person = storageAPI.getHouseholdMemberByPersonId(personId)['@person'];
+    var previousPage = urlParams.get('previous');
+
+    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
+    var possessive = person.fullName.slice(-1) === 's' ? "'" : "'s";
+
+    pipingDestinations.forEach(function(pipingDestination) {
+        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('{x}', person.fullName).replace('{s}', possessive);
+    });
+
+    $('.qa-btn-submit').on('click', function (e) {
+        e.preventDefault();
+
+        if( !validateEmail($('#email-address').val())) {
+            window.location.href = '../individual-decision-enter-email-failed/?person_id=' + personId + '&email=' + encodeURI($('#email-address').val() + (previousPage ? '&previous=' + previousPage : ''));
+        } else {
+            window.location.href = '../individual-decision-enter-email-correct/?person_id=' + personId + '&email=' + encodeURI($('#email-address').val() + (previousPage ? '&previous=' + previousPage : ''));
+        }
+    });
+
+    function validateEmail($email) {
+        var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+        return emailReg.test( $email );
+    }
+  /*function updateRouting() {
+    if(surveyType) {
+      $('.js-choose-another-section').attr('href', '../hub/?survey=' + surveyType);
+    }
+    $('#survey-type').val(surveyType);
+  }*/
+
+
+  //$(updateRouting);
+
+  /**
+   * Routing
+   */
+  $('#person').val(urlParams.get('person_id'));
+
+
+    function updateAllLinks() {
+        $('.js-previous-link').attr('href', '../individual-decision-method/?person_id=' + personId + (previousPage ? '&previous=' + previousPage : ''));
+    }
+
+    $(updateAllLinks);
+</script>

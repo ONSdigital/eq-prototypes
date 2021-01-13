@@ -1,0 +1,223 @@
+---
+title: COVID-19 test (round 4 - pandemic situation revised) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+
+<link rel="stylesheet" href="../../end-to-end/style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="#">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m"></div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main">
+                <div class="panel panel--error u-mb-m js-error-box u-d-no">
+                    <div class="panel__header">
+                        <div class="panel__title u-fs-r--b">There 
+                            <span class="js-piping">is a {x} problem{s}</span> with your answer
+                        </div>
+                    </div>
+                    <div class="panel__body">
+                        <ol class="list list--bare">
+                            <li class="list__item js-other-textbox u-d-no">
+                                1. <a href="#error-message-other-textbox" class="list__link js-inpagelink">
+                                    Enter a number that is less than or equal to 20 to continue
+                                </a>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password">
+                    <div class="group" id="accommodation">
+                        <div class="block" id="vehicles">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 id="question-title"
+                                        class="question__title u-fs-xl js-heading">
+                                        In total, how many cars or vans are owned, or available for use, by members of this household?
+                                    </h1>
+                                </div>
+                                <div class="panel panel--info panel--simple u-mb-m">
+                                    <div class="panel__body">
+                                        <p>Include any company cars or vans available for private use</p>
+                                    </div>
+                                </div>
+                                  <div class="answer">
+                                    <div class="answer__fields question__answer js-fields">
+                                        <div class="field field--radio field--multiplechoice ">
+                                            <fieldset>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="no-of-vehicles"
+                                                           id="none"
+                                                           value="None">
+                                                    <label class="label label--inline"
+                                                           for="none"
+                                                           id="none-label">
+                                                        None
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="no-of-vehicles"
+                                                           id="1"
+                                                           value="1">
+                                                    <label class="label label--inline"
+                                                           for="1"
+                                                           id="1-label">
+                                                        1
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="no-of-vehicles"
+                                                           id="2"
+                                                           value="2">
+                                                    <label class="label label--inline"
+                                                           for="2"
+                                                           id="2-label">
+                                                        2
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="no-of-vehicles"
+                                                           id="3"
+                                                           value="3">
+                                                    <label class="label label--inline"
+                                                           for="3"
+                                                           id="3-label">
+                                                        3
+                                                    </label>
+                                                </div>
+                                                <div class="field__item js-focusable-box">
+                                                    <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                           type="radio"
+                                                           name="no-of-vehicles"
+                                                           id="4"
+                                                           value="4">
+                                                    <label class="label label--inline"
+                                                           for="4"
+                                                           id="4-label">
+                                                        4
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <span id="5-or-more-radio-wrap-field" class="field__item js-focusable-box">
+                                                        <input autocomplete="new-password" class="input input--radio js-focusable"
+                                                            type="radio"
+                                                            name="no-of-vehicles"
+                                                            id="5-or-more"
+                                                            value="5 or more">
+                                                        <label class="label label--inline"
+                                                            for="5-or-more"
+                                                            id="5-or-more-label">
+                                                            5 or more
+                                                        </label>
+                                                        <span class="radio__other js-radio-other" id="5-or-more-radio-wrap">
+                                                            <label id="5-or-more-radio-wrap-label" class="label u-fs-s--b"
+                                                                for="other-textbox">Enter the number of cars or vans</label>
+                                                            <input
+                                                                type="text"
+                                                                id="other-textbox"
+                                                                class="input input--text input-type__input input--w-2 js-other"
+                                                                data-error-msg="Enter a number that is less than or equal to 20 to continue"
+                                                                name="other-answer"
+                                                                max="20"
+                                                                maxlength="2"
+                                                            />
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg btn-submit u-mb-xl u-mt-xl"
+                            type="submit" name="">Save and continue
+                    </button>
+                    <p><a href="../hub" class="js-choose-another-section">Choose another section and return to this question later</a></p>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+    var question = $('#question-title').html(),
+        urlParams = new URLSearchParams(window.location.search),
+        isEditing = urlParams.get('edit'),
+        currentPage = '../household-accom-vehicles';
+        hasErrors = false;
+    window.sessionStorage.setItem('accommodation-completed-status', currentPage);
+
+    $('#other-textbox').focus(function() {
+        $('input[type=radio][id=5-or-more]').prop('checked', true);
+    });
+
+    $('.btn-submit').on('click', function (e) {
+        e.preventDefault();
+        const testFails = ($('.js-other').val() !== "" && ($('.js-other').val() > 20 || isNaN($('.js-other').val())));
+        window.ONS.utils.validateInputs(testFails, ".js-other");
+        if (hasErrors) {
+            window.ONS.utils.calcErrors();
+            hasErrors = false;
+            return false;
+        } else {
+
+            var val = $('input[type=radio][name=no-of-vehicles]:checked').attr('value')
+            question = question.trim();
+
+            if(isEditing) {
+                window.location.href = '../household-accom-summary/';
+                storageAPI.storePageData('/end-to-end-covid-rd-4/household-accom-summary/', window.location.pathname);
+            } else {
+                if(val === '5 or more') {
+                    var otherVal = $("input[type=text][id=other-textbox]").val();
+                    window.sessionStorage.setItem('accommodation-no-of-vehicles', JSON.stringify([question, otherVal, currentPage]));
+                } else {
+                    window.sessionStorage.setItem('accommodation-no-of-vehicles', JSON.stringify([question, val, currentPage]));
+                }
+                window.sessionStorage.setItem('accommodation-completed-status', 'completed');
+
+                window.location.href = '../hub';
+                storageAPI.storePageData('/end-to-end-covid-rd-4/hub/', window.location.pathname);
+            }
+        }
+    });
+
+    function updateAnswer() {
+        var answer = JSON.parse(window.sessionStorage.getItem('accommodation-no-of-vehicles'));
+        if (answer) {
+            if (answer[1] < 5) {
+                $('input[type=radio][value="' + answer[1] +'"]').prop("checked", true);
+            } else if (answer[1] === 'None') {
+                $('input[type=radio][value="None"]').prop("checked", true);
+            } else {
+                $('input[type=radio][value="5 or more"]').prop("checked", true);
+                $('input[type=text][id=other-textbox]').val(answer[1]);
+            }
+        }
+    }
+
+    $(updateAnswer);
+</script>

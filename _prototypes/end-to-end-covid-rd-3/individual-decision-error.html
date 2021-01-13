@@ -1,0 +1,71 @@
+---
+title: COVID-19 test (round 3 - usual situation) Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+
+<link rel="stylesheet" href="../../end-to-end/style.css"/>
+<div class="page__subheader">
+
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            <!--{% include navigation.html
+            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
+            nav-title-id="section-individual" %}-->
+        </div>
+        <div class="grid__col col-8@l">
+            <main role="main" id="main" class="page__main">
+                <h1>
+                    Sorry, there was a problem sending the code
+                </h1>
+                <p>
+                    You can try to <a class="js-retry" href="#">request a new code again</a>.
+                </p>
+                <p>
+                    If this problem keeps happening, please <a href="#">contact us</a> for help.
+                </p>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end-covid/bundle.js'></script>
+
+<script>
+    var cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people') || '[]');
+    var searchParams = new URLSearchParams(window.location.search);
+    var personId = searchParams.get('person_id');
+    var currentJourney = document.querySelector('.js-previous-link');
+    var phoneInput = document.getElementById('phone');
+    var phoneInputOther = document.getElementById('phone-other');
+    var emailInput = document.getElementById('email');
+    var emailInputOther = document.getElementById('email-other');
+    var previousPage = searchParams.get('previous');
+    var mobileNo = searchParams.get('mobile');
+
+    if (!personId) {
+        personId = cannotAnswerPeople[0].id;
+    }
+
+    var person = JSON.parse(sessionStorage.getItem('household-members')).find(function(person) { 
+        return person['@person'].id === personId;
+    })['@person'];
+
+    var cannotAnswerPerson = cannotAnswerPeople.find(function(p) {
+        return p.id === person.id;
+    });
+
+
+    function updateAllLinks() {
+        $('.js-retry').attr('href', '../individual-decision-enter-mobile-correct' + '?person_id=' + personId + '&mobile=' + mobileNo);
+    }
+
+    $(updateAllLinks);
+</script>

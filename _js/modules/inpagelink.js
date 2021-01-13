@@ -24,9 +24,24 @@ export function applyInPageLink(elTrigger) {
 }
 
 function focusOnInput(elId) {
-  const elIdInput = document.getElementById(elId).querySelectorAll('.input')[0]
-  elIdInput.focus()
-  return elId
+  const container = document.getElementById(elId);
+  console.log(container);
+  container.scrollIntoView();
+
+  const input = [
+    ...container.getElementsByTagName('INPUT'),
+    ...container.getElementsByTagName('TEXTAREA'),
+    ...container.getElementsByTagName('SELECT'),
+  ].filter(input => {
+    const type = input.getAttribute('type');
+
+    return type !== 'readonly' && type !== 'hidden' && type !== 'checkbox' && type !== 'radio';
+  })[0];
+
+  if (input) {
+    input.focus();
+  }
+  return elId;
 }
 
 domready(inPageLink)
