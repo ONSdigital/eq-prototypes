@@ -41,6 +41,15 @@
     height: 530px;
 }
 
+.ni-redirect {
+    background: #f0f0f0;
+    padding: 1rem 0;
+}
+
+.ni-redirect a {
+    color: #595959;
+}
+
 
 /* over 768px */
 
