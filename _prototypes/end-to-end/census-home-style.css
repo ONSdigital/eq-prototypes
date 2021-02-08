@@ -229,7 +229,7 @@
     }
 }
 
-.social-list--inline {
+.list--inline {
     -webkit-box-align: center;
     align-items: center;
     display: -webkit-box;
@@ -237,23 +237,17 @@
     flex-wrap: wrap;
 }
 
-.social-list {
-    margin: 0 -1rem -1rem;
-    padding-left: 0;
-}
-
-.social-list__item {
-    -webkit-box-align: center;
-    align-items: center;
+.list--icons .list__item {
     display: -webkit-box;
     display: flex;
-    margin: 0 1rem 1rem;
+    -webkit-box-align: center;
+    align-items: center;
+    margin: 0 0 .5rem 0;
 }
 
-.social__icon {
-    fill: #222;
-    height: 32px;
-    width: 32px;
+.svg-icon--xxl {
+    width: 2rem;
+    height: 2rem;
 }
 
 .fulfilment-help {

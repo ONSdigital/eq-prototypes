@@ -283,6 +283,12 @@ img {
     padding: 1rem 0;
 }
 
+@media (min-width: 740px) {
+    .u-pl-m\@m {
+        padding-left: 2rem;
+    }
+}
+
 
 /* Header */
 
