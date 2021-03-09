@@ -68,7 +68,7 @@ leaveWarning: true
                     </div>
 
                     <button type="submit" class="btn u-mb-no u-mt-m qa-btn-submit">
-                        <span class="btn__inner">Send confirmation</span>
+                        <span class="btn__inner">Continue</span>
                     </button>
                 </form>
                 {% include_relative partials/feedback.html %}
@@ -92,7 +92,7 @@ leaveWarning: true
         } else if (!$('#email-address').val()) {
             window.location.href = '../complete/?empty=true';
         } else {
-            window.location.href = '../complete--confirmation-sent/?email=' + encodeURI($('#email-address').val());
+            window.location.href = '../complete--confirm-email/?email=' + encodeURI($('#email-address').val());
         }
     });
 
