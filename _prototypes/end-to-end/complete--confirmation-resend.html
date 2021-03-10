@@ -133,11 +133,19 @@ exit: true
         }
     }
 
+    function emailToCorrect() {
+        if (emailAddress) {
+            var emailInput = document.querySelector('#email-address');
+            emailInput.value = emailAddress;
+        }
+    }
+
     $('.exit').on('click', function (e) {
         e.preventDefault();
         window.location.href = '../home/';
         sessionStorage.clear();
-    });    
+    });
 
     $(checkErrors);
+    $(emailToCorrect);
 </script>
