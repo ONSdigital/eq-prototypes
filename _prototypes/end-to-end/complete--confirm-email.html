@@ -93,7 +93,7 @@ exit: true
                                                     data-error-msg="Select an answer">
                                                 <label class="label label--inline u-fs-r"
                                                     for="yes">
-                                                    Yes, send the email now</label>
+                                                    Yes, send the confirmation email</label>
                                             </div>
                                             <div class="field__item js-focusable-box">
                                                 <input autocomplete="new-password" class="input input--radio js-focusable"
@@ -103,7 +103,7 @@ exit: true
                                                     type="radio">
                                                 <label class="label label--inline u-fs-r "
                                                     for="no">
-                                                    No, I need to change it</label>
+                                                    No, I need to correct it</label>
                                             </div>
                                         </fieldset>
                                     </div>
@@ -127,7 +127,8 @@ exit: true
     var searchParams = new URLSearchParams(queryString);
     var emailAddress = searchParams.get('email');
     var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
-    hasErrors = false;
+    var yesbox = document.getElementById("yes");
+    var hasErrors = false;
 
     $('.qa-btn-submit').on('click', function (e) {
         e.preventDefault();
@@ -138,7 +139,12 @@ exit: true
             hasErrors = false;
             return false;
         } else {
-            window.location.href = '../complete--confirmation-sent/?email=' + emailAddress;
+            var loc;
+            if (yesbox.checked) {
+                window.location.href = '../complete--confirmation-sent/?email=' + emailAddress;
+            } else {
+                window.location.href = '../complete--confirmation-resend/?email=' + emailAddress;
+            }
         }
     });
 

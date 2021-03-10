@@ -72,7 +72,7 @@ exit: true
                         </ul>
                     </div>
                 </div>
-                <h1 class="u-fs-xxl">Send a confirmation email</h1>
+                <h1 class="u-fs-xl">Send a confirmation email</h1>
             
                 <form action="../complete--confirmation-sent/">
                     <div id="email-field" class="field">
@@ -86,7 +86,7 @@ exit: true
                                 value="" />
                     </div>
                     <button type="submit" class="btn u-mb-l u-mt-s qa-btn-submit u-mt-l">
-                        <span class="btn__inner">Send confirmation</span>
+                        <span class="btn__inner">Continue</span>
                     </button>
                 </form>
             </main>
@@ -99,7 +99,7 @@ exit: true
 <script>
     var queryString = window.location.search;
     var searchParams = new URLSearchParams(queryString);
-
+    var emailAddress = searchParams.get('email');
 
     $('.qa-btn-submit').on('click', function (e) {
         e.preventDefault();
@@ -108,7 +108,7 @@ exit: true
         } else if (!$('#email-address').val()) {
             window.location.href = '../complete--confirmation-resend/?empty=true';
         } else {
-            window.location.href = '../complete--confirmation-sent/?email=' + encodeURI($('#email-address').val());
+            window.location.href = '../complete--confirm-email/?email=' + encodeURI($('#email-address').val());
         }
     });
 
