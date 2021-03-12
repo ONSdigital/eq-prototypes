@@ -47,7 +47,7 @@ exit: true
 <link rel="stylesheet" href="../../end-to-end/style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="back-link" href="../complete/">Back</a>
+        <a class="back-link js-previous-link" href="../complete/">Back</a>
     </div>
 </div>
 
@@ -129,6 +129,9 @@ exit: true
     var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
     var yesbox = document.getElementById("yes");
     var hasErrors = false;
+    var previousPage = searchParams.get('previous');
+    var currentPage = 'complete--confirm-email';
+
 
     $('.qa-btn-submit').on('click', function (e) {
         e.preventDefault();
@@ -143,7 +146,7 @@ exit: true
             if (yesbox.checked) {
                 window.location.href = '../complete--confirmation-sent/?email=' + emailAddress;
             } else {
-                window.location.href = '../complete--confirmation-resend/?email=' + emailAddress;
+                window.location.href = '../complete--confirmation-resend/?email=' + emailAddress + '&previous=' + currentPage;
             }
         }
     });
@@ -177,7 +180,18 @@ exit: true
         e.preventDefault();
         window.location.href = '../home/';
         sessionStorage.clear();
-    });    
+    });
 
+    function updateAllLinks() {
+        if (previousPage === 'complete') {
+            $('.js-previous-link').attr('href', '../' + previousPage);
+        } else if (previousPage === 'complete--confirmation-sent') {
+            $('.js-previous-link').attr('href', '../' + previousPage + '?' + 'previous=' + currentPage);
+        } else if (previousPage === null) {
+            $('.js-previous-link').attr('href', '../' + 'complete');
+        }
+    }
+
+    $(updateAllLinks);
     $(checkErrors);
 </script>

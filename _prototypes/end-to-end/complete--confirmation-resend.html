@@ -47,7 +47,7 @@ exit: true
 <link rel="stylesheet" href="../../end-to-end/style.css"/>
 <div class="page__subheader">
     <div class="container">
-        <a class="back-link" href="../complete--confirmation-sent/">Back</a>
+        <a class="back-link js-previous-link" href="../complete--confirmation-sent/">Back</a>
     </div>
 </div>
 
@@ -86,7 +86,7 @@ exit: true
                                 value="" />
                     </div>
                     <button type="submit" class="btn u-mb-l u-mt-s qa-btn-submit u-mt-l">
-                        <span class="btn__inner">Continue</span>
+                        <span class="btn__inner">Send confirmation</span>
                     </button>
                 </form>
             </main>
@@ -100,6 +100,8 @@ exit: true
     var queryString = window.location.search;
     var searchParams = new URLSearchParams(queryString);
     var emailAddress = searchParams.get('email');
+    var previousPage = searchParams.get('previous');
+    var currentPage = 'complete--confirmation-resend';
 
     $('.qa-btn-submit').on('click', function (e) {
         e.preventDefault();
@@ -108,7 +110,7 @@ exit: true
         } else if (!$('#email-address').val()) {
             window.location.href = '../complete--confirmation-resend/?empty=true';
         } else {
-            window.location.href = '../complete--confirm-email/?email=' + encodeURI($('#email-address').val());
+            window.location.href = '../complete--confirmation-sent/?email=' + encodeURI($('#email-address').val()) + '&previous=' + currentPage;
         }
     });
 
@@ -146,6 +148,15 @@ exit: true
         sessionStorage.clear();
     });
 
+    function updateAllLinks() {
+        if (previousPage === 'complete--confirm-email') {
+            $('.js-previous-link').attr('href', '../' + previousPage + '?email=' + emailAddress);
+        } else if (previousPage === 'complete--confirmation-sent') {
+            $('.js-previous-link').attr('href', '../' + previousPage + '?email=' + emailAddress + '&previous=' + currentPage);
+        }
+    }
+
+    $(updateAllLinks);
     $(checkErrors);
     $(emailToCorrect);
 </script>

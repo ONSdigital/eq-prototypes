@@ -48,6 +48,7 @@ leaveWarning: true
     var emailAddress = searchParams.get('email');
     var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
     var confirmationCounter = sessionStorage.getItem('confirmationCounter');
+    var previousPage = searchParams.get('previous');
     var currentPage = 'complete--confirmation-sent';
 
     if (confirmationCounter) { 
@@ -64,7 +65,7 @@ leaveWarning: true
 
     $('.js-feedback-link').on('click', function (e) {
         e.preventDefault();
-        window.location.href = '../feedback/' + '?previous=' + currentPage + '&email=' + emailAddress;
+        window.location.href = '../feedback/' + '?email=' + emailAddress + '&previous=' + currentPage;
     });    
 
     pipingDestinations.forEach(function(pipingDestination) {
@@ -76,5 +77,11 @@ leaveWarning: true
         window.location.href = '../home/';
         sessionStorage.clear();
     });
+
+    function updateAllLinks() {
+        $('.js-resend-confirmation').attr('href', '../' + 'complete--confirmation-resend' + '?' + 'email=' + emailAddress + '&previous=' + currentPage);
+    }
+
+    $(updateAllLinks);
 
 </script>

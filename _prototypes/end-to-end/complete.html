@@ -52,6 +52,7 @@ leaveWarning: true
                     </div>
                 </div>
                 <p class="icon--lock u-mb-m">Your personal information is protected by law and will be kept confidential</p>
+                <div class="confirmation-container">
                 <hr>
                 <h2 class="u-mt-m">Get confirmation email</h2>
                 <p>If you would like to be sent confirmation that you have completed your census, enter your email address</p>
@@ -68,9 +69,10 @@ leaveWarning: true
                     </div>
 
                     <button type="submit" class="btn u-mb-no u-mt-m qa-btn-submit">
-                        <span class="btn__inner">Continue</span>
+                        <span class="btn__inner">Send confirmation</span>
                     </button>
                 </form>
+                </div>
                 {% include_relative partials/feedback.html %}
             </main>
         </div>
@@ -83,7 +85,8 @@ leaveWarning: true
     var queryString = window.location.search,
         searchParams = new URLSearchParams(queryString),
         storageAPI = window.ONS.storage,
-        currentPage = 'complete';
+        currentPage = 'complete',
+        confirmationCounter = sessionStorage.getItem('confirmationCounter');
 
     $('.qa-btn-submit').on('click', function (e) {
         e.preventDefault();
@@ -92,7 +95,7 @@ leaveWarning: true
         } else if (!$('#email-address').val()) {
             window.location.href = '../complete/?empty=true';
         } else {
-            window.location.href = '../complete--confirm-email/?email=' + encodeURI($('#email-address').val());
+            window.location.href = '../complete--confirm-email/?email=' + encodeURI($('#email-address').val()) + '&previous=' + currentPage;
         }
     });
 
@@ -135,6 +138,13 @@ leaveWarning: true
         $('.full-address-text').html(storageAPI.getPipedAddress());
     };
 
+    function rateLimiter() {
+        if(confirmationCounter > 9) {
+            $('.confirmation-container').hide();
+        }
+    }
+
+    $(rateLimiter);
     $(updatePipedAddress);
     $(checkErrors);
 </script>
