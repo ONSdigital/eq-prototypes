@@ -1,0 +1,64 @@
+
+{% unless page.hideSaveLater %}
+<div class="footer__button-container u-d-no@m">
+  {% if page.exit %}
+    <a href="#" role="button" class="btn btn--ghost exit">
+      <span class="btn__inner">Exit</span>
+    </a>
+  {% else %}
+    <a href="#" role="button" class="btn btn--ghost complete-later">
+      <span class="btn__inner">Save and sign out</span>
+    </a>
+  {% endif %}
+</div>
+{% endunless %}
+{% if page.leaveWarning %} 
+<div class="footer__warning">
+    <div class="container">
+        <div class="panel panel--warn panel--no-title panel--warn--footer js-panel-info">
+            <span class="panel__icon" aria-hidden="true">!</span>
+            <div class="panel__body">Make sure you <a class="exit" href="../home">leave this page</a> or close your browser if you are using a shared device</div>
+        </div>
+    </div>
+</div>
+{% endif %}
+<div class="footer__body">
+  <div class="container ">
+    <div class="grid">
+      {% unless page.notAuthenticated or page.footer == "census-website" %}
+      <div class="grid__col">
+        <p class="u-fs-s u-mb-m js-new-tab-warning">The following links open in a new tab</p>
+      </div>
+      {% endunless %}
+      <div class="grid__col ">
+        <ul class="list list--bare list--inline u-mb-no">
+          <li class="list__item ">
+            <a href="https://deploy-preview-118--sdc-prototypes.netlify.app/prototypes/census-website-respond/help/how-to-answer-questions/online/" class="list__link" {% unless page.notAuthenticated or page.footer == "census-website" %}target="_blank"{% endunless %}>
+              Help
+            </a>
+          </li>
+          <li class="list__item ">
+            <a href="https://deploy-preview-118--sdc-prototypes.netlify.app/prototypes/census-website-respond/contact-us/" class="list__link" {% unless page.notAuthenticated or page.footer == "census-website" %}target="_blank"{% endunless %}>
+              Contact us
+            </a>
+          </li>
+          <li class="list__item ">
+            <a href="../languages" class="list__link" {% unless page.notAuthenticated or page.footer == "census-website" %}target="_blank"{% endunless %}>
+              Languages
+            </a>
+          </li>
+          <li class="list__item ">
+            <a href="https://deploy-preview-118--sdc-prototypes.netlify.app/prototypes/census-website-respond/help/languages-and-accessibility/accessibility/british-sign-language/" class="list__link" {% unless page.notAuthenticated or page.footer == "census-website" %}target="_blank"{% endunless %}>
+              BSL and audio videos
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="grid__col u-mb-m">
+        <hr class="footer__hr">
+      </div>
+    </div>
+    {% include footer-meta.html %}
+  </div>
+</div>
+<div id="dummy-address" class="u-d-no"><a class="js-dummy-address" href="#">Use dummy address</a></div>

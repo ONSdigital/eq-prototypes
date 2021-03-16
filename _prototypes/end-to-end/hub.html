@@ -1,0 +1,502 @@
+---
+title: Census Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+noONSLogoLink: true
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<style>
+    .completed {
+        position: relative;
+    }
+
+    .completed::before {
+        z-index:2;
+        content:"";
+        background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAbCAYAAAAZMl2nAAAABGdBTUEAALGPC/xhBQAAAjtJREFUSA29l0FLW0EQx2f2NWDSQ196sFBELKFfwVMPNcmLFZV68eRFPBd6K4IexKT0IHjpqdDi0aMg5iCKUvDkqdBDQYiKIIJY0oO1wZhMd0L3+V6yz+TlrZ1DNjOzM/9f9u1uEoD/aH3Lk/EgORGUMB1/VHDeXf4u7z9ZyvXqeqMuaDqWLGTf1Ov0sdEX8UdMWJmLuc0zr869g9iL2RlC+gwEHi08eCB60j/nN04VjCepQuZGe9GZJqAvANS6BRBKIobp8uz2CSu2TjDEcScEaxCk6Jq+2h9eDbB7LyBtIVhZGgEMQLVaXKAFYfzRdArBIFL8EgWOlOe394yCdAvBUBa/NNvTT+MJa7B/rSf7/KyyUzpuzuv8KBDcr2WPMMTV+Z+i3O2jUKtt2O+Hh3TC3lhUCO7lezQuBNFLJYSAV2BZY7/mNndVzDuagOB+7oroIHiCXJkE1G+Kj/NOjn2vmYLgng2QIAglSgTxGtB6spAbVzGTENwTiQiTeWdLfvKMEgkcEaqAYgrr8DDwxmwq9h7RppTPFYhIKGgFEGu+jM4hiAHRqmkIlmoc38rO0fdE5llJfi+9ljF33+hY/uV9m1w3r9OVULXuPRISRtVrx7AQ3MQFYccETDcQLSBRYbqF0IJ0CxMFIhAkLExUiDtBOoUxAdEWxAdDOCF9qXtrpiC4o+/U3Er43/Fpig+lTuQ9zPdMA8YkBKt1BMITK7uH3xLp1Ln8eTdqGoL7hzY777yV/1NehC5sU/AXb484yamkz/AAAAAASUVORK5CYII=") no-repeat 50%;
+        background-size:1rem;
+        position:absolute;
+        left:9px;left:-1.5rem;
+        width:1.2em;
+        height:1.2em;
+        bottom:0;
+        top:0;
+        margin-top:0.3rem;
+    }
+
+    .btn--primary[disabled] {
+        opacity: .5;
+    }
+
+    .summary__answer {
+      font-weight: 300;
+    }
+
+
+</style>
+<div class="page__subheader">
+    <div class="container">
+    </div>
+</div>
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m"></div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main u-mt-m@m">
+                <form name="trav" class="form qa-questionnaire-form u-mb-no" role="form"
+                      autocomplete="new-password" novalidate=""
+                      action="../complete">
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 class="question__title u-fs-xl js-heading">
+                                        Choose another section to complete
+                                    </h1>
+                                </div>
+                                <div class="panel panel--simple panel--warn js-panel-info u-mb-m" style="display: none;">
+                                </div>
+                                <div class="summary">
+                                    <div class="summary__block u-mb-s">
+                                        <div class="summary__item">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-5@s">
+                                                    <div class="summary__question completed">
+                                                        <strong>
+                                                            People who live
+                                                            here
+                                                        </strong>
+                                                        <span class="u-d-no@s">&mdash; Completed</span>
+                                                    </div>
+                                                </div>
+                                                <div class="grid__col col-3@xs col-3@s">
+                                                    <div class="summary__answer u-d-no u-d-b@s">Completed</div>
+                                                </div>
+                                                <div class="grid__col col-12@xs col-4@s">
+                                                    <div class="summary__link">
+                                                        <a href="../summary/?show-panel=true" class="js-view-summary u-fr@m">
+                                                            View answers
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="summary__item">
+                                            <div class="grid">
+                                                <div class="grid__col col-12@xs col-5@s">
+                                                    <div id='accommodation-row' class="summary__question">
+                                                        <strong>
+                                                            Household accommodation
+                                                        </strong>
+                                                        <span id='accommodation' class="u-d-no@s">&mdash; Not started</span>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                        class="grid__col col-3@xs col-3@s">
+                                                    <div id='accommodation-status' class="summary__answer u-d-no u-d-b@s">Not started</div>
+                                                </div>
+                                                <div
+                                                        class="grid__col col-12@xs col-4@s">
+                                                    <div class="summary__link">
+                                                        <a id='accommodation-link'href="../household-accom-summary" class="js-view-summary u-fr@m">
+                                                            Start section
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="household-member-surveys"></div>
+                                        <div id="visitor-surveys" class="u-d-no"></div>
+                                    </div>
+                                </div>
+                                <div id="individual-response-details" class="collapsible collapsible--simple js-collapsible js-collapsible-simple u-mt-s">
+                                  <div class="js-collapsible-content">
+                                    <span class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="If you can’t answer someone else’s questions">
+                                      If you can’t answer someone else’s questions
+                                    </span>
+                                    <div class="collapsible__body js-collapsible-body">
+                                        <p>You can <strong>share your household access code</strong> with the people you live with so they can complete their own sections.</p>
+                                        <p>If this is not possible, there are <a class="js-link-ir" href="#">other ways each person can do their own census</a>.</p>
+                                        <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Can’t answer someone else’s questions?">Hide this</button>
+                                    </div>
+                                  </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="hub-btn-container u-mt-l">
+                      <p class="js-declaration u-mb-s"></p>
+                        <button class="btn btn--primary btn--lg js-submit-btn u-mt-no"
+                                type="submit">Continue
+                        </button>
+                    </div>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<ul style="display:none;">
+    <div id="person-survey-item-template" class="summary__item">
+        <div class="grid">
+            <div class="grid__col col-12@xs col-5@s">
+                <div class="summary__question js-survey-question">
+                    <strong class="js-person-name"></strong>
+                    <span class="u-d-no@s">&mdash;
+                        <span class="js-survey-status">Not started</span></span>
+                </div>
+            </div>
+            <div class="grid__col col-8@xs col-3@s">
+                <div class="summary__answer js-survey-status u-d-no u-d-b@s">Not started</div>
+            </div>
+            <div class="grid__col col-12@xs col-4@s">
+                <div class="summary__link">
+                    <a href="#" class="js-link"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</ul>
+
+<style>
+
+    .completed::before {
+        width : 1rem;
+        height : 1rem;
+        background: url('https://sdc-global-design-patterns.netlify.com/assets/img/icons/icons--check-green.svg') no-repeat 50%;
+    }
+
+    .summary__question.completed {
+        padding-left : 1.5rem;
+    }
+
+    .summary__question.completed::before {
+        left : 0;
+    }
+    
+</style>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+  var storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    surveyType = urlParams.get('survey');
+  
+  sessionStorage.setItem("wlh_bookmark", window.location.pathname);
+  
+  var cannotAnswerPeople = JSON.parse(sessionStorage.getItem('cannot-answer-people') || '[]');
+  var relationships = JSON.parse(sessionStorage.getItem('relationships') || '[]');
+
+  var statusMap = {
+    'not-started': {
+      label: 'Not started',
+      linkText: 'Start section',
+    },
+    'in-progress': {
+      label: 'Partially completed',
+      linkText: 'Continue with section'
+    },
+    'completed': {
+      label: 'Completed',
+      linkText: 'View answers'
+    },
+    'private': {
+      label: 'Private',
+      linkText: null
+    },
+    'seperate-survey-requested': {
+      label: 'Separate census requested',
+      linkText: 'Change or resend'
+    }
+  };
+
+  var accommodationStatus = window.sessionStorage.getItem('accommodation-completed-status');
+  if (accommodationStatus != null) {
+    if (accommodationStatus === 'completed') {
+      $('#accommodation-row').addClass('completed');
+      $('#accommodation').html('&mdash; Completed');
+      $('#accommodation-status').html('Completed');
+      $('#accommodation-link').html('View answers');
+      $('#accommodation-link').attr("href", "../household-accom-summary");
+    } else {
+      $('#accommodation').html('Partially completed');
+      $('#accommodation-status').html('Partially completed');
+      $('#accommodation-link').html('Continue with section');
+      $('#accommodation-link').attr("href", accommodationStatus + "?continuing=true");
+    }
+  } else {
+    $('#accommodation-link').attr("href", "../household-accom-intro");
+  }
+
+  var allHouseholdMembers = storageAPI.getAllHouseholdMembers(),
+
+    people = allHouseholdMembers.filter(storageAPI.isHouseholdMember),
+    visitors = allHouseholdMembers.filter(storageAPI.isVisitor),
+
+    peopleIds = _.flatten([
+      _.pluck(people.map(function (member) { return member['@person']; }), 'id'),
+      _.pluck(visitors.map(function (member) { return member['@person']; }), 'id')
+    ]),
+
+    peopleIdsToComplete = [].concat(peopleIds);
+  
+  var nextPageSurvey = surveyType ? '&survey=' + surveyType : '';
+
+  function isHouseholdMemberSectionComplete(personDetails) {
+    return personDetails &&
+      !(!!personDetails._bookmark && !!personDetails._bookmark.page);
+  }
+
+  function isVisitorSectionComplete(personDetails) {
+
+    if(!personDetails.complete) {
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   * Get state
+   */
+  function getSurveyStatus(personDetails, personPin, isVisitor, personId) {
+    var status;
+
+    if (personPin && personPin.exported) {
+      status = 'private';
+    }
+    else if(
+      personId &&
+      cannotAnswerPeople.find(function(person) { return person.id === personId}) &&
+      cannotAnswerPeople.find(function(person) { return person.id === personId}).responseOption === 'new-survey') {
+      status = 'seperate-survey-requested';
+    }
+    else if (!personDetails ||
+      personId &&
+      cannotAnswerPeople.find(function(person) { return person.id === personId}) &&
+      cannotAnswerPeople.find(function(person) { return person.id === personId}).responseOption === 'give-code') {
+      status = 'not-started';
+    }
+    else if (
+      !isVisitor
+        ? isHouseholdMemberSectionComplete(personDetails)
+        : isVisitorSectionComplete(personDetails)
+    ) {
+      status = 'completed';
+    }
+    else {
+      status = 'in-progress';
+    }
+
+    return status;
+  }
+
+  /**
+   * Link routing
+   */
+  function getLinkHrefHouseholdMember(person, status) {
+    return status === 'in-progress'
+      ? storageAPI.getBookmarkFor(person.id) + '&continuing=true'
+      : (status === 'completed'
+        ? '../individual-details-summary/' : '../individual-intro-covid/'
+      ) + '?person_id=' + person.id;
+  }
+
+  function getLinkHrefVisitor(person, status) {
+    return status === 'in-progress'
+      ? storageAPI.getBookmarkFor(person.id) + '&continuing=true'
+      : (status === 'completed'
+        ? '../individual-details-summary/' : '../visitor-intro/'
+      ) + '?person_id=' + person.id;
+  }
+
+  /**
+   * Create list item from state
+   */
+  function createListItem(person, surveyStatus, linkHref, isVisitor) {
+    var $nodeEl = $('#person-survey-item-template').clone(),
+      $surveyStatus = $nodeEl.find('.js-survey-status'),
+      $surveyQuestion = $nodeEl.find('.js-survey-question');
+
+    /**
+     * Manipulate DOM fragment
+     */
+     var personFullName = person.firstName + ' ' + person.middleName + ' ' + person.lastName
+     var personFullNameNoDoubleSpace = personFullName.replace(/  +/g, ' ');
+      
+    $nodeEl.attr('id', '');
+    $nodeEl.find('.js-person-name').html(
+      personFullNameNoDoubleSpace +
+        (person.id === storageAPI.IDS.USER_HOUSEHOLD_MEMBER_ID ? '' : '') +
+        (isVisitor ? ' (Visitor)' : '') + (person.id === window.ONS.storage.IDS.USER_HOUSEHOLD_MEMBER_ID ? ' (You)' : '')
+    );
+
+    $nodeEl.find('.js-link').html(statusMap[surveyStatus].linkText);
+    $surveyStatus.html(statusMap[surveyStatus].label);
+
+    surveyStatus === 'private'
+      ? $nodeEl.find('.js-link').hide()
+      : $nodeEl.find('.js-link').attr('href', linkHref);
+
+    (surveyStatus === 'completed' || surveyStatus === 'seperate-survey-requested')
+    && $surveyQuestion.addClass('completed');
+
+    if(surveyStatus === 'not-started') {
+      $nodeEl.find('.js-link').on('click', function () {
+        storageAPI.clearProxy(person.id);
+      });
+    }
+
+    if (surveyStatus === 'seperate-survey-requested') {
+      $nodeEl.find('.js-link').attr('href', '../uac-question?person_id=' + person.id);
+    }
+
+    $nodeEl.find('.js-link').on('click', function () {
+      if(person.id === 'person_me') {
+        storageAPI.clearProxy(person.id);
+      } else {
+        storageAPI.setProxy(person.id, true);
+      }
+     });
+    
+    return $nodeEl;
+  }
+
+  function createList(data) {
+    var $container = $('<div></div>');
+
+    var mappedList = data.map(function (member, index) {
+      var person = member['@person'];
+      var isVisitor = storageAPI.isVisitor(member);
+
+      var personDetails = storageAPI.getPersonalDetailsFor(person.id),
+        personPin = storageAPI.getPinFor(person.id);
+
+      var surveyStatus = getSurveyStatus(personDetails, personPin, isVisitor, person.id);
+      var linkHref = !isVisitor
+        ? getLinkHrefHouseholdMember(person, surveyStatus, personPin)
+        : getLinkHrefVisitor(person, surveyStatus);
+
+      if((surveyStatus === 'completed') || (surveyStatus === 'seperate-survey-requested')) {
+        window.ONS.utils.removeFromList(peopleIdsToComplete, person.id);
+      }
+
+      linkHref += nextPageSurvey;
+
+      return {
+        person: person,
+        surveyStatus: surveyStatus,
+        linkHref: linkHref,
+        isVisitor: isVisitor
+      }
+    });
+
+
+    mappedList.forEach(function(item) {
+      $container.append(createListItem(item.person, item.surveyStatus, item.linkHref, item.isVisitor));
+    });
+
+    return $container;
+  }
+
+  function updatePageState() {
+    $('#household-member-surveys').append(createList(people));
+    if (visitors.length) {
+      $('#visitor-surveys').removeClass('u-d-no').append(createList(visitors));
+    }
+    if (allHouseholdMembers.length === 1 && sessionStorage.getItem('lives-here') === 'yes') {
+        $('.js-collapsible-simple').hide();
+    } 
+    if (peopleIdsToComplete.length === 0 && sessionStorage.getItem('accommodation-completed-status') === 'completed') {
+      $('.js-submit-btn').html('Submit census');
+      $('.js-heading').html('Submit census');
+      $('.js-panel-info').show().html('<span class="panel__icon" aria-hidden="true">!</span><div class="panel__body">You must submit this census to complete it</div>');
+      $('.js-declaration').show().html('By submitting this census you are confirming that, to the best of your knowledge and belief, the details provided are correct.')
+    }
+    else {
+      $('.js-submit-btn').on('click', function (e) {
+        e.preventDefault();
+
+        if (window.sessionStorage.getItem("accommodation-completed-status") !== "completed") {
+          var url = 'household-accom-intro';
+          window.location.href = '../' + url;
+          storageAPI.storePageData('/end-to-end/' + url , window.location.pathname);
+        } else {
+
+          var nextStartPersonId;
+
+          /**
+          * Attempt to find next bookmark
+          */
+          var nextBookmarkPersonId = _.find(peopleIds, function (personId) {
+            var personalDetails = storageAPI.getPersonalDetailsFor(personId);
+
+            return personalDetails && personalDetails['_bookmark'];
+          });
+
+          /**
+          * If no bookmark is found, attempt to find next section to start
+          */
+          if (!nextBookmarkPersonId) {
+            nextStartPersonId = _.find(allHouseholdMembers, function(member) {
+              var person = member['@person'];
+              var personDetails = storageAPI.getPersonalDetailsFor(person.id);
+              var status = getSurveyStatus(personDetails, null, storageAPI.isVisitor(member), person.id);
+
+              return status === 'not-started';
+
+            })['@person'].id;
+          }
+
+          if (nextBookmarkPersonId) {
+            storageAPI.personId(personDetails, true);
+          }
+
+          window.location.href = nextBookmarkPersonId
+            ? storageAPI.getBookmarkFor(nextBookmarkPersonId) + '&continuing=true'
+            : '../individual-intro-covid/?person_id=' + nextStartPersonId;
+        }
+      });
+    }
+  }
+
+  function updateLinks () {
+    $('.js-link-ir').on('click', function (e) {
+      e.preventDefault();
+      $(this).attr('href', sessionStorage.getItem('lives-here') === 'yes' ? '../cant-answer-for-others/?person_id=person_me&previous=hub' : '../cant-answer-for-others/?previous=hub');
+      storageAPI.storePageData('/end-to-end/cant-answer-for-others/', window.location.pathname);
+      window.location.href = "../cant-answer-for-others/";
+    });
+  }
+
+  function isUser(member) {
+    return member['@person'].id === window.ONS.storage.IDS.USER_HOUSEHOLD_MEMBER_ID;
+  } 
+
+  function showHideIRCollapseable () {
+    var members = storageAPI.getAllHouseholdMembers(),
+        userMember = members.filter(isUser)[0],
+        otherHouseholdMembers = members.filter(window.ONS.storage.isOtherHouseholdMember),
+        householdMembers = otherHouseholdMembers;
+
+    if (userMember) {
+      householdMembers = [userMember].concat(otherHouseholdMembers);
+    }
+
+
+    if (householdMembers.length < 2 && userMember) {
+      $('#individual-response-details').addClass('u-vh');
+    } else if (householdMembers.length == 0 && !userMember) {
+      $('#individual-response-details').addClass('u-vh');
+    }
+  }
+console.log(storageAPI.getAllHouseholdMembers().filter(window.ONS.storage.isOtherHouseholdMember));
+  $(updatePageState);
+  $(updateLinks);
+  $(showHideIRCollapseable);
+</script>

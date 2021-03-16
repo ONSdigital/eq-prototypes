@@ -1,0 +1,104 @@
+---
+title: Census Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+header: census-website
+footer: census-website
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+logoUrl: ../home
+languages: true
+notAuthenticated: true
+---
+
+<link rel="stylesheet" href="../style.css"/>
+
+<div class="page__container container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol class="breadcrumb__items u-fs-s">
+            <li id="breadcrumb-1" class="breadcrumb__item">
+                <a href="../home" class="breadcrumb__link">Home</a>
+            </li>
+        </ol>
+    </nav>
+</div>
+
+<div class="page__container container">
+    <div class="grid">
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main u-mt-m@m">
+                <div class="group">
+                    <div class="block">
+                        <section class="section">
+
+                            <h1 class="u-fs-xxl u-mb-l">Where to find your access code</h1>
+
+                            <p>To start your census online, you will need your access code printed on the letter we sent you. Your 16-character access code will be a combination of letters and numbers.</p>
+                            <img class="u-mt-s" src="/img/census-letter-ons.svg" alt="An example of the census letter showing that the access code is in the centre of the letter">
+                            <div class="panel panel--simple panel--warn js-panel-info u-mb-m u-mt-s">
+                                <span class="panel__icon" aria-hidden="true">!</span><div class="panel__body">Keep this code safe. You will need to enter it every time you access your census.</div>
+                            </div>
+                            <h2>Access codes requested for you</h2>
+                            <p>Someone you live with can request an access code for you, which can be sent by text message or post.</p>
+                            <p>The text will be sent from <strong><strong>Census2021</strong></strong>, and includes your 16-character access code. The letter with your code will be addressed to "Individual Resident".</p>
+                            <h2 class="u-mt-l u-mb-m">Ready to start your census online?</h2>
+                            <a href="../uac-entry/" role="button" class="btn btn--link u-mb-xl">
+                                <span class="btn__inner icon--chevron-right-white">Start census</span>
+                            </a>
+                            {% include_relative partials/request-uac.html %}
+                            <p>A new access code will start a new census, and you will lose any answers entered using a previous access code.</p>
+                            <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple js-visitor-definition u-mb-m">
+                                <div class="js-collapsible-content">
+                                    <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Why do I have to include visitors?">Need to answer separately from your household?</h3>
+                                    <div class="collapsible__body js-collapsible-body">
+                                        <p class="u-mb-xs">If you need to answer separately from the people you live with, you can <a class="js-link-ir" href="../ir-uac-request-launcher?previous=uac-entry&current-journey=new-ir-uac">request an individual access code</a> to start a separate census.</p>
+                                        <div class="panel panel--simple panel--warn js-panel-info u-mb-xs">
+                                            <span class="panel__icon" aria-hidden="true">!</span><div class="panel__body">Someone in your household must still complete a census using a household access code</div>
+                                        </div>
+                                        <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="What does /"usually live/" mean?">Hide this</button>                                           
+                                    </div>
+                                </div>
+                            </div>
+                            <p>To request a census in a different format or for further help, please <a href="/">contact us</a></p>
+                        </section>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <div class="grid__col col-4@m">
+            <div class="related-links u-mt-l">
+                <h2 class="related-links__title u-fs-r--b u-mb-xs" id="related-links">Related content</h2>
+                <nav class="related-links__navigation" aria-labelledby="related-links">
+                  <ul class="list list--bare">
+                    <li class="list__item "><a href="/prototypes/census-website-respond/help/get-an-access-code-or-paper-census/" class="list__link ">Get a new access code or paper form</a></li>
+                    <!-- TO DO: Add related link to website repo:
+                             '/your-data-and-security/how-we-will-contact-or-visit-you',
+                                    "text": 'How we will contact or visit you'
+                                },
+                    -->
+                    <li class="list__item "><a href="/prototypes/census-website-respond/help/contact-us" class="list__link ">Contact us</a></li>
+                  </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+    storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    previousPage = urlParams.get('previous'),
+    currentJourney = 'new-hh-uac',
+    pathArray = window.location.pathname.split('/'),
+    currentPage = pathArray.slice(-2)[0];
+
+    function updateAllLinks() {
+        $('.js-previous-link').attr('href', '../' + (previousPage ? previousPage : 'uac-entry'));
+        $('.js-request-uac').attr('href', '../uac-request-address?previous=' + currentPage + (currentJourney ? '&current-journey=' + currentJourney : ''));
+    }
+
+    $(updateAllLinks);
+</script>

@@ -1,0 +1,60 @@
+---
+title: Census Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+logoUrl: ../home
+languages: true
+nisra: true
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="back-link js-previous-link" href="../hub">Back</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            <!--{% include navigation.html
+            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
+            nav-title-id="section-individual" %}-->
+        </div>
+        <div class="grid__col col-8@l">
+            <main role="main" id="main" class="page__main u-mt-m@m">
+                <div class="group">
+                    <div class="block">
+                        <section class="section">
+                            <h1 class="u-fs-xxl">This access code is not part of the census for Northern Ireland</h1>
+
+                            <p>You have entered an access code for the census in England and Wales.</p>
+                            <p>The Office for National Statistics (ONS) runs the census in England and Wales. Visit the <a href="../home">Office for National Statistics census website</a> to find out how to take part in the census for England and Wales.</p>
+                            <p>Alternatively, you can <a href="../ni/contact-us">contact us</a> for help.</p>
+
+                        </section>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+    storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search),
+    previousPage = urlParams.get('previous');
+    currentJourney = urlParams.get('current-journey');
+
+    function updateAllLinks() {
+        $('.js-previous-link').attr('href', '../' + previousPage + '?' + 'previous=' + 'uac-request-address' + '&' + 'current-journey=' + currentJourney);
+    }
+
+    $(updateAllLinks);
+</script>

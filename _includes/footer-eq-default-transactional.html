@@ -1,18 +1,67 @@
-<footer class="footer u-mt-xl u-pt-xl" role="contentinfo">
-    <div class="container">
-        <div class="grid">
-            <div class="grid__col col-12@m">
-                <ul class="list list--bare">
-                    <li><a href="/contact-us" class="footer__link footer__link--inline" target="_blank">Contact us</a></li><li><a href="/cookies-privacy" class="footer__link footer__link--inline" target="_blank">Cookies and privacy</a></li>
-                </ul>
-            </div>
-            <div class="grid__col col-12@m">
-                <div class="footer__license footer__license--border">
-                    <img alt="OGL" class="footer__ogl-img" src="https://cdn.ons.gov.uk/sdc/{% if page.cdn %}{{ page.cdn }}{% else %}v1.0.0{% endif %}/img/UKOpenGovernmentLicence-grey.svg"> All content is available under the
-                    <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" class="footer__link">Open Government
-                        Licence v3.0</a>, except where otherwise stated
-                </div>
-            </div>
+<footer class="footer " data-analytics="footer">
+  <div class="footer__body">
+    <div class="container ">
+      <div class="grid">
+        {% unless page.hideSaveLater %}
+          <div class="grid__col u-mb-m u-d-no@m">
+          {% if page.exit %}
+            <a href="#" role="button" class="btn btn--ghost-blue btn--link exit">
+              <span class="btn__inner">Exit</span>
+            </a>
+          {% else %}
+            <a href="#" role="button" class="btn btn--ghost-blue btn--link complete-later">
+              <span class="btn__inner">Save and sign out</span>
+            </a>
+          {% endif %}
+          </div>
+        {% endunless %}
+        <div class="grid__col ">
+          <ul class="list list--bare list--inline@s u-mb-m">
+            <li class="list__item ">
+              <a href="../help/" class="list__link">
+                Help
+              </a>
+            </li>
+            <li class="list__item ">
+              <a href="../contact-us/" class="list__link ">
+                Contact us
+              </a>
+            </li>
+            <li class="list__item ">
+              <a href="#" class="list__link icon--external" target="_blank">
+                Web chat
+              </a>
+            </li>
+          </ul>
         </div>
+        <div class="grid__col u-mb-m">
+          <hr class="footer__hr">
+        </div>
+      </div>
+      <div class="grid grid--flex grid--vertical-center grid--between">
+        <div class="grid__col  u-mb-s u-mr-m">
+          <ul class="list list--bare list--inline@s u-mb-no">
+            <li class="list__item ">
+              <a href="#" class="list__link ">
+                Cookies
+              </a>
+            </li>
+            <li class="list__item ">
+              <a href="#" class="list__link ">
+                Accessibility
+              </a>
+            </li>
+            <li class="list__item ">
+              <a href="#" class="list__link ">
+                Privacy and data protection
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="grid__col grid__col--flex u-ml-s u-mb-s u-p-no">
+          <img src="/img/logo-crest.svg" alt="Office for National Statistics" class="footer__crest-img ">
+        </div>
+      </div>
     </div>
+  </div>
 </footer>

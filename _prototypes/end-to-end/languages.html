@@ -1,0 +1,285 @@
+---
+title: Census Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+header: census-website
+footer: census-website
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+logoUrl: ../home
+languages: true
+---
+
+<link rel="stylesheet" href="../style.css"/>
+
+<div class="page__container container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol class="breadcrumb__items u-fs-s">
+            <li id="breadcrumb-0" class="breadcrumb__item">
+                <a href="../home" class="breadcrumb__link">Home</a>
+            </li>
+            <li id="breadcrumb-1" class="breadcrumb__item">
+                <a href="https://deploy-preview-118--sdc-prototypes.netlify.app/prototypes/census-website-respond/help/" class="breadcrumb__link">Help with the census</a>
+            </li>
+            <li id="breadcrumb-2" class="breadcrumb__item">
+                <a href="https://deploy-preview-118--sdc-prototypes.netlify.app/prototypes/census-website-respond/help/languages-and-accessibility/" class="breadcrumb__link">Languages and accessibility</a>
+            </li>
+        </ol>
+    </nav>
+
+    <main role="main" id="main" class="page__main u-mt-m@m">
+        <div class="group">
+            <div class="block">
+                <section class="section">
+                    <h1 class="u-mb-l u-fs-xxl">Languages</h1>
+                    <div class="panel panel--simple panel--info u-mb-m">
+                        <div class="panel__body">
+                            <p>Os oes angen y wefan hon arnoch yn Gymraeg, ewch i <a href="https://cyfrifiad.gov.uk/">cyfrifiad.gov.uk</a></p>
+                        </div>
+                    </div>
+                    <div class="grid grid--flex grid--vertical-top grid--between u-mb-m">
+                        <div class="grid__col col-7@m">
+                            <p>Translation support is available for the following languages.</p>
+                            <p class="u-mb-no@m">If you can’t find your language, or need more help, please call our free language helpline on <strong>0800 587 2021</strong>.</p>
+                        </div>
+                        <div class="grid__col col-5@m">
+                            <div class="adv-filter__results-sort">
+                                <label class="label" for="sort">Sort languages by</label>
+                                <select class="input input--select" id="sort" name="sort" aria-controls="adv-filter-gallery" data-sort="true">
+                                    <option value="native">Native language</option>
+                                    <option value="english">English</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div id="native-lists">
+                        <div class="grid u-mt-m">
+                            <div class="grid__col col-4@m">
+                                <ol id="js-lang-list" class="list list--bare" style="padding:0;"></ol>
+                            </div>
+                            <div class="grid__col col-4@m">
+                                <ol id="js-non-latin-lang-list" class="list list--bare" style="padding:0;"></ol>
+                            </div>
+                            <div class="grid__col col-4@m">
+                                <ol id="js-rtl-lang-list" class="list list--bare" style="padding:0;"></ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="english-lists">
+                        <div class="grid u-mt-m">
+                            <div class="grid__col">
+                                <ol id="js-eng-lang-list" class="list list--bare" style="padding:0;"></ol>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+    urlParams = new URLSearchParams(window.location.search),
+    previousPage = urlParams.get('previous');
+    currentJourney = urlParams.get('current-journey');
+    currentPath = window.location.pathname,
+    pathArray = window.location.pathname.split('/'),
+    currentPage = pathArray.slice(-2)[0];
+    var parentPage = pathArray.slice(-3)[0];
+    var languages = [
+        'Shqiptare (Albanian)', 
+        'Bosanski (Bosnian)',
+        'British Sign Language - BSL',
+        'čeština (Czech)',
+        'Le français (French)',
+        'Deutsche (German)',
+        'Magyar (Hungarian)',
+        'Italiano (Italian)',
+        'Kurdî (Kurdish)',
+        'Latvietis (Latvian)',
+        'Lingála (Lingala)',
+        'Lietuvis (Lithuanian)',
+        'Polskie (Polish)',
+        'Português (Portuguese)',
+        'Română (Romanian)',
+        'Slovák (Slovak)',
+        'Slovenščina (Slovenian)',
+        'Soomaali (Somali)',
+        'Kiswahili (Swahili)',
+        'Tagalog',
+        'Tetum',
+        'Türk (Turkish)',
+        'Tiếng Việt (Vietnamese)'
+    ];
+
+    var rtlLanguages = [
+        'فارسی  (Farsi)',
+        'עִברִית (Hebrew)',
+        'اردو (Urdu)',
+        'יידיש (Yiddish)',
+        'عربى (Arabic)'
+    ]
+
+    var nonLatinLanguages = [
+        'አማርኛ (Amharic)', 
+        'հայերեն (Armenian)',
+        'বাংলা (Bengali)',
+        'български (Bulgarian)',
+        'မြန်မာဘာသာ (Burmese)',
+        '粵語 (Cantonese)',   
+        'Ελληνικά (Greek)',
+        'ગુજરાતી (Gujarati)',
+        'हिन्दी (Hindi)',
+        '日本人 (Japanese)',
+        '한국어 (Korean)',
+        'മലയാളം (Malayalam)',
+        '普通話 (Mandarin)',
+        'नेपाली (Nepali)',
+        'پوٹھواری (Pothwari)',
+        'ਪੰਜਾਬੀ (Punjabi (Gurmukhi))',
+        'русский (Russian)',
+        'தமிழ் (Tamil)',
+        'ไทย (Thai)',
+        'ትግርኛ (Tigrinya)',
+        'Український (Ukrainian)'
+    ]
+
+    var languagesEn = [
+        'Albanian (Shqiptare)',
+        'Amharic (አማርኛ)',
+        'Arabic (عربى)',
+        'Armenian (հայերեն)',
+        'Bengali (বাংলা)',
+        'Bosnian (Bosanski)',
+        'Bulgarian (български)',
+        'Burmese (မြန်မာဘာသာ)',
+        'British Sign Language - BSL',
+        'Cantonese (粵語)',
+        'Czech (čeština)',
+        'Farsi (فارسی)',
+        'French (Le français)',
+        'German (Deutsche)',
+        'Greek (Ελληνικά)',
+        'Gujarati (ગુજરાતી)',
+        'Hebrew (עִברִית)',
+        'Hindi (हिन्दी)',
+        'Hungarian (Magyar)',
+        'Italian (Italiano)',
+        'Japanese (日本人)',
+        'Korean (한국어)',
+        'Kurdish (Kurdî)',
+        'Latvian (Latvietis)',
+        'Lingala (Lingála)',
+        'Lithuanians (Lietuvi)',
+        'Malayalam (മലയാളം)',
+        'Mandarin (普通話)',
+        'Nepali (नेपाली)',
+        'Polish (Polskie)',
+        'Portuguese (Português)',
+        'Pothwari (پوٹھواری)',
+        'Punjabi (Gurmukhi) (ਪੰਜਾਬੀ)',
+        'Romanian (Română)',
+        'Russian (русский)',
+        'Slovak (Slovák)',
+        'Slovenian (Slovenščina)',
+        'Somali (Soomaali)',
+        'Swahili (Kiswahili)',
+        'Tamil (தமிழ்)',
+        'Tagalog',
+        'Tetum',
+        'Thai (ไทย)',
+        'Tigrinya (ትግርኛ)',
+        'Turkish (Türk)',
+        'Ukrainian (Український)',
+        'Urdu (اردو)',
+        'Vietnamese (Tiếng Việt)',
+        'Yiddish (יידיש)'
+    ]
+
+    function updateAllLinks() {
+        $('a:contains("Bosnian")').attr('href', '../language-help');
+        $('a:contains("BSL")').attr('href', 'https://deploy-preview-118--sdc-prototypes.netlify.app/prototypes/census-website-respond/help/languages-and-accessibility/accessibility/british-sign-language/');
+        $('a:contains("Greek")').attr('href', '../non-latin-language-help');
+        $('#main-nav ul li:nth-child(4)').addClass('header-nav__item--active');
+        $('.js-previous-link').attr('href', '../' + previousPage + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney);
+    }
+
+    function sortList() {
+        languages.sort(function (a, b) {
+            return a.localeCompare(b);
+        });
+
+        var markup = '';
+        for (var i =0; i < languages.length; i++) {
+            markup += '<li class="list__item">' + '<a href="#0">' + languages[i] + '</a>' + '</li>';
+        }
+        document.getElementById('js-lang-list').innerHTML = markup;
+    }
+
+    function sortRtlList() {
+        rtlLanguages.sort(function (a, b) {
+            return a.localeCompare(b);
+        });
+
+        var markup = '';
+        for (var i =0; i < rtlLanguages.length; i++) {
+            markup += '<li class="list__item">' + '<a href="#0">' + rtlLanguages[i] + '</a>' + '</li>';
+        }
+        document.getElementById('js-rtl-lang-list').innerHTML = markup;
+        document.getElementById('js-rtl-lang-list').setAttribute('style', 'direction: rtl;');
+    }
+
+    function sortNonLatinList() {
+        nonLatinLanguages.sort(function (a, b) {
+            return a.localeCompare(b);
+        });
+
+        var markup = '';
+        for (var i =0; i < nonLatinLanguages.length; i++) {
+            markup += '<li class="list__item">' + '<a href="#0">' + nonLatinLanguages[i] + '</a>' + '</li>';
+        }
+        document.getElementById('js-non-latin-lang-list').innerHTML = markup;
+    }
+
+    function sortEnglishList() {
+        languagesEn.sort(function (a, b) {
+            return a.localeCompare(b);
+        });
+
+        var markup = '';
+        for (var i =0; i < languagesEn.length; i++) {
+            markup += '<li class="list__item">' + '<a href="#0">' + languagesEn[i] + '</a>' + '</li>';
+        }
+        document.getElementById('js-eng-lang-list').innerHTML = markup;
+    }
+
+    $(document).ready(function() {
+        var sortByOption = $('#sort').val();
+        showLists(sortByOption);
+    
+        $("#sort").change(function() {
+            var val = $(this).val();
+            showLists(val);
+        });
+    });
+
+    function showLists(sortByOption){
+        if (sortByOption === "native") {
+            $("#english-lists").hide();
+            $("#native-lists").show();
+        } else if (sortByOption === "english") {
+            $("#native-lists").hide();
+            $("#english-lists").show();
+        }
+    }
+
+    sortNonLatinList()
+    sortRtlList();
+    sortList();
+    sortEnglishList();
+    $(updateAllLinks);
+</script>

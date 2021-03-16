@@ -1,0 +1,100 @@
+---
+title: Census Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+logoUrl: ../home
+languages: true
+notAuthenticated: true
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a href="../home" class="back-link js-previous-link">Back</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            <!--{% include navigation.html
+            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
+            nav-title-id="section-individual" %}-->
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main u-mt-m@m">
+                <div class="group">
+                    <div class="block">
+                        <section class="section">
+                            <h1 class="u-fs-xxl js-piping">Request a household paper questionnaire</h1>
+                            <p class="js-piping">A household paper questionnaire lets you fill in a new census for your household and the people who live there.</p>
+                            <p>All households should complete the census on <strong>Sunday 21 March 2021</strong> or as soon as possible after. </p>
+                            <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple js-visitor-definition u-mb-s">
+                                <div class="js-collapsible-content">
+                                    <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Why do I have to include visitors?">Need to answer separately from your household?</h3>
+                                    <div class="collapsible__body js-collapsible-body">
+                                        <p class="u-mb-xs">If you need to answer separately from the people you live with, you can request an individual paper questionnaire to fill in a separate census.</p>
+                                        <p><a class="js-link-ir" href="../ir-uac-request-launcher?previous=hh-paper-request-launcher&current-journey=new-ir-paper">Request individual paper questionnaire</a></p>
+                                        <div class="panel panel--simple panel--warn js-panel-info u-mb-s">
+                                            <span class="panel__icon" aria-hidden="true">!</span><div class="panel__body">Someone in your household must still complete a census using a household access code or by completing a household paper questionnaire</div>
+                                        </div>
+                                        <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="What does /"usually live/" mean?">Hide this</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <a href="#" role="button" class="btn btn--link js-btn-ir u-mb-m u-mt-l">
+                    <span class="btn__inner">Continue</span>
+                </a>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+    storageAPI = window.ONS.storage,
+    urlParams = new URLSearchParams(window.location.search);
+    var previousPage = urlParams.get('previous');
+    var currentJourney = urlParams.get('current-journey');
+    var currentPage = 'hh-paper-request-launcher';
+    var pipingDestinations = Array.from(document.querySelectorAll('.js-piping'));
+
+  $('.js-btn-ir').click(function(e) {
+    e.preventDefault();
+    if (currentJourney === 'new-hh-paper') {
+        window.location.href = '../paper-request-hh-number' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + 'new-hh-uac';
+    } else if (currentJourney === 'new-ir-paper') {
+        window.location.href = '../uac-request-enter-name' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney;
+    } else {
+        window.location.href = '../uac-request-address' + '?' + 'previous=' + currentPage + '&' + 'current-journey=' + currentJourney;
+    }
+  });
+
+  function updateContent() {
+      if (currentJourney === 'new-ir-paper') {
+        $('.js-access-code').hide();
+        pipingDestinations.forEach(function(pipingDestination) {
+        pipingDestination.innerHTML = pipingDestination.innerHTML.replace('access code', 'paper questionnaire');
+        });
+      }
+  }
+
+    function updateAllLinks() {
+        $('.js-previous-link').click(function(e) {
+            e.preventDefault();
+            window.history.back();
+        });
+    }
+
+    $(updateContent);
+    $(updateAllLinks);
+</script>

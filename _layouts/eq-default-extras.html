@@ -12,23 +12,33 @@
 <body>
 <div class="page">
     <div class="page__content">
-        <div class="skip">
-            <a class="skip__link" href="#main">Skip to content</a>
-        </div>
-        <header class="page__header">
+        <a class="skip__link" href="#main-content">Skip to content</a>
+        <header class="header" role="banner">
+        {% if page.header == "census-website" %}
+            {% include header-census.html %}
+        {% else %}
             {% include header-eq-default.html %}
+        {% endif %}
         </header>
         {{ content }}
     </div>
-    <div class="page__footer">
+    <footer class="footer">
         {% if page.footer == "minimal" %}
             {% include footer-eq-default-minimal.html %}
+        {% elsif page.footer == "census-website" %}
+            {% include footer-census-website.html %}
+        {% elsif page.footer == "census-transactional" %}
+            {% include footer-census-transactional-basic.html %}            
         {% else %}
             {% include footer-eq-default-transactional.html %}
         {% endif %}
     </div>
 </div>
+{% if page.assetPrefixUrl %}
+<script src="{{ page.assetPrefixUrl }}/assets/scripts/bundle.js"></script>
+{% else %}
 <script src="https://cdn.ons.gov.uk/sdc/{% if page.cdn %}{{ page.cdn }}{% else %}v1.0.0{% endif %}/scripts/bundle.js"></script>
+{% endif %}
 
 </body>
 </html>

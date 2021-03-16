@@ -1,0 +1,135 @@
+---
+title: Census Household questionnaire (English)
+project: Census 2021 End to end prototype
+globalcss: false
+layout: eq-default-extras
+footer: census-transactional
+assetPrefixUrl: https://sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+logoUrl: ../home
+languages: true
+notAuthenticated: true
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="back-link js-previous-link" href="../do-you-live-here">Back</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            <!--{% include navigation.html
+            items=site.data.your-household-v6.yourHouseholdV4_navigationItemsPersonalDetails
+            nav-title-id="section-individual" %}-->
+        </div>
+        <div class="grid__col col-8@m">
+            <main role="main" id="main" class="page__main u-mt-m@m">
+                <div class="panel panel--error u-mb-m js-error-box u-d-no">
+                    <div class="panel__header">
+                        <div class="panel__title u-fs-r--b">There <span class="js-piping">is a {x} problem{s}</span> with your answer</div>
+                    </div>
+                    <div class="panel__body">
+                        <ol class="list list--bare">
+                            <li class="list__item js-hh-number u-d-no">
+                                1. <a href="#error-message-hh-number" class="list__link js-inpagelink">
+                                    Enter a number greater than 5
+                                </a>
+                            </li>
+                       </ol>
+                    </div>
+                </div>
+                <form id="form" name="trav" class="form qa-questionnaire-form"
+                      role="form" autocomplete="new-password"
+                      action="../hub">
+                    <div class="group">
+                        <section class="section">
+                            <div class="question u-mb-s">
+                                <h1 id="question-title"
+                                    class="question__title u-fs-xxl">
+                                    How many people are in your household?
+                                </h1>
+                            </div>
+                            <p>This is to make sure we send you the right number of continuation questionnaires if there are more than 5 people in your household</p>
+                            <!--
+                            <div class="collapsible collapsible--simple js-collapsible js-collapsible-simple js-visitor-definition u-mb-s">
+                                <div class="js-collapsible-content">
+                                    <h3 class="collapsible__title js-collapsible-title icon--collapsible-simple u-fs-r--b" data-ga="click" data-ga-category="definition" data-ga-action="Open panel" data-ga-label="Need to answer separately from your household?">Need to answer separately from your household?</h3>
+                                    <div class="collapsible__body js-collapsible-body">
+                                        <p class="u-mb-xs">If you need to answer separately from the people you live with, you can request an individual paper questionnaire to fill in a separate census.</p>
+                                        <p><a class="js-link-ir u-fs-r--b" href="../ir-uac-request-launcher?previous=confirm-rh-address&current-journey=new-ir-paper">Request individual paper questionnaire</a></p>
+                                        <div class="panel panel--simple panel--warn js-panel-info u-mb-xs">
+                                            <span class="panel__icon" aria-hidden="true">!</span><div class="panel__body">Someone in your household must still complete a census using a household access code or by completing a household paper questionnaire</div>
+                                        </div>
+                                        <button class="btn btn--secondary btn--small js-collapsible-close u-no-js-hide" data-ga="click" data-ga-category="definition" data-ga-action="Close panel" data-ga-label="Need to answer separately from your household?">Hide this</button>
+                                    </div>
+                                </div>
+                            </div>
+                            -->
+                            <div class="answer__fields question__answers">
+                                <div class="question__answer">
+                                    <div class="field">
+                                        <label class="label" for="mobile-number">
+                                            Number of people
+                                        </label>
+                                        <input autocomplete="new-password" class="input input--text input--w-2 js-hh-number"
+                                            id="hh-number"
+                                            value=""
+                                            min="5"
+                                            data-error-msg="Enter a number greater than 5" />
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit u-mb-xl u-mt-l"
+                            type="submit" name="">Continue
+                    </button>
+                </form>
+                <p>If you don’t already have a paper census for your household, you will need to <a href="../hh-paper-request-launcher/?previous=paper-request-continuation-number&current-journey=new-hh-paper">request a household paper questionnaire</a>.</p>
+            </main>
+        </div>
+    </div>
+</div>
+
+<div style="display:none;">
+    <div id="member-checkbox-select-template" class="field__item">
+        <input autocomplete="new-password" class="input input--checkbox js-person-control"
+               name="checkbox-answer" type="checkbox">
+        <label class="label label--inline u-fs-r js-person-name"></label>
+    </div>
+</div>
+
+<script src='/js/compiled/end-to-end/bundle.js'></script>
+
+<script>
+    var storageAPI = window.ONS.storage;
+    var urlParams = new URLSearchParams(window.location.search);
+    var previousPage = urlParams.get('previous');
+    var currentJourney = urlParams.get('current-journey');
+    var currentPage = 'paper-request-hh-number';
+    var hasErrors = false;
+    
+  $('.qa-btn-submit').on('click', function (e) {
+    e.preventDefault();
+    const testFails = ($("input[id='hh-number']").val() < "6" || $("input[id='hh-number']").val() === "0");
+    window.ONS.utils.validateInputs(testFails, "input[id='hh-number']");
+    if (hasErrors) {
+        window.ONS.utils.calcErrors();
+        hasErrors = false;
+        return false;
+    } else {
+        var url = '../uac-request-enter-name';
+        window.location.href = url + '?hh-members=' + encodeURI($('#hh-number').val() + '&previous=' + currentPage + '&current-journey=' + currentJourney);
+    }
+  });
+
+    function updateAllLinks() {
+        $('.js-previous-link').attr('href', '../' + previousPage + '?' + 'current-journey=' + currentJourney);
+        $('.js-ir-link').attr('href', '../' + previousPage + '?' + 'current-journey=new-ir-paper');
+    }
+
+    $(updateAllLinks);
+</script>
