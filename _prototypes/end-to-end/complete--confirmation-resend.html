@@ -110,7 +110,7 @@ exit: true
         } else if (!$('#email-address').val()) {
             window.location.href = '../complete--confirmation-resend/?empty=true';
         } else {
-            window.location.href = '../complete--confirmation-sent/?email=' + encodeURI($('#email-address').val()) + '&previous=' + currentPage;
+            window.location.href = '../complete--confirm-email/?email=' + encodeURI($('#email-address').val()) + '&previous=' + currentPage;
         }
     });
 
