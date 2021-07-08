@@ -1,0 +1,136 @@
+---
+title: Language switches
+project: your-household
+globalcss: false
+layout: eq-default-extras-language-switcher
+cdn: v1.8.4
+language: welsh
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link mars" href="../section-intro">Yn flaenorol</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@m">
+            <!--{% include navigation.html
+            items=site.data.your-household-v6.navigationItemsHousehold
+            nav-title-id="section-address" %}-->
+        </div>
+
+        <div class="grid__col col-7@m pull-1@m">
+            <main role="main" id="main" class="page__main">
+                <div class="feedback__inline js-feedback-inline is-collapsed">
+                    <div class="feedback__border">
+                    </div>
+                </div>
+
+                <div class="group">
+                    <div class="block">
+
+                        <div class="question">
+                            <h1 class="question__title saturn"
+                                data-qa="question-title">
+                                Beth yw eich enw?
+                            </h1>
+
+                            <fieldset
+                                    class="question__fieldset u-mb-xl js-question-fieldset">
+                                <legend class="u-vh">Beth yw eich enw?</legend>
+
+                                <div class="question__answers">
+                                    <div class="question__answer">
+                                        <label class="label venus"
+                                               for="first-name">
+                                            <div class="label__inner">
+                                                Enw Cyntaf
+                                            </div>
+                                        </label>
+                                        <input class="input input--text "
+                                               id="first-name"
+                                               data-qa="input-text" value=""/>
+                                    </div>
+
+                                    <div class="question__answer">
+                                        <label class="label venus ">
+                                            <div class="label__inner">
+                                                Cyfenw
+                                            </div>
+                                        </label>
+                                        <input class="input input--text "
+                                               id="last-name"
+                                               data-qa="input-text" value=""/>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-submit btn--primary btn--lg"
+                        data-qa="btn-submit" type="submit"
+                        name="action[save_continue]">
+                    Cadw a pharhau
+                </button>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/your-household-v9-cy/bundle.js'></script>
+
+<script>
+    console.log(window.ONS.storage.getUserPerson());
+
+  $('.btn-submit').click(function(e) {
+    e.preventDefault(); // do not submit the form like usual
+    sessionStorage.setItem('name', getName());
+
+    window.ONS.storage.addUserPerson(window.ONS.storage.TYPES.person({
+      firstName: document.getElementById('first-name').value,
+      lastName: document.getElementById('last-name').value
+    }));
+
+    if (sessionStorage.getItem('lives-here') === 'yes') {
+        var personUser = window.ONS.storage.getUserPerson();
+
+        /**
+         * Add member to household
+         */
+        window.ONS.storage.updateUserAsHouseholdMember(
+            personUser,
+            {
+            type: window.ONS.storage.KEYS.HOUSEHOLD_MEMBER_TYPE
+            }
+        );
+    } else {
+        window.ONS.storage.deleteUserAsHouseholdMember();
+    }
+
+    window.location =  (isEditing ? '../summary-cy/' : '../do-you-live-here-cy/') +
+      (window.languageSwitcherActive ? '?language-switcher=true' : '');
+  });
+
+  function getName() {
+    return [
+      document.getElementById('first-name').value,
+      document.getElementById('last-name').value
+    ].filter(function(name) {
+      return name
+    }).join(' ')
+  }
+
+  $(function() {
+    var userPerson = window.ONS.storage.getUserPerson();
+
+    if (userPerson) {
+      $('#first-name').val(userPerson.firstName);
+      $('#last-name').val(userPerson.lastName);
+    }
+  });
+</script>
+

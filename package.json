@@ -67,6 +67,7 @@
     "watchify": "^3.9.0"
   },
   "dependencies": {
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "url-search-params-polyfill": "^5.1.0"
   }
 }
