@@ -1,0 +1,238 @@
+---
+title: Census Coverage Survey v10
+project: your-household
+globalcss: false
+layout: eq-default-extras
+cdn: v2.0.0
+assetPrefixUrl: https://deploy-preview-214--sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+footer: minimal
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../visitors">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@l">
+            <!--{% include navigation.html
+            items=site.data.your-household-v6.navigationItemsHousehold
+            nav-title-id="section-address" %}-->
+        </div>
+        <div class="grid__col col-7@l pull-1@l">
+            <main role="main" id="main" class="page__main">
+                <form name="trav" class="form qa-questionnaire-form" role="form"
+                      autocomplete="off" novalidate="">
+                    <div class="group">
+                        <div class="block">
+                            <section class="section">
+                                <div class="question u-mb-s">
+                                    <h1 class="question__title u-fs-l js-heading">
+                                        People who live here and overnight
+                                        visitors
+                                    </h1>
+                                </div>
+
+                                <h2
+                                        class="u-fs-m js-household-people-list">You&rsquo;ve added <span class="highlight">{n}</span> household member<span class="js-household-people-plural" style="display: none">s</span></h2>
+                                <ul id="household-members-summary"
+                                    class="list list--records list--people u-mb-s js-records"></ul>
+                                <p id="nobody-notice"
+                                   style="display:none;">Nobody usually
+                                    lives here</p>
+                                <p class="u-mb-xl">
+                                    <a
+                                            href="../who-else-to-add/?redirect=../summary/"
+                                       class="js-add-to-household">
+                                        Add someone to this household</a>
+                                </p>
+
+                                <div class="js-visitors-people-list">
+                                    <h2 class="u-fs-m js-visitors-people-title">You&rsquo;ve added <span class="highlight">{n}</span> visitor<span class="js-visitors-people-plural" style="display: none">s</span> staying
+                                        overnight on <span class="js-significant-date"></span></h2>
+                                    <ul id="visitors-summary"
+                                        class="list list--records list--people u-mb-s js-records"></ul>
+                                    <p id="nobody-visitor-notice"
+                                       style="display:none;">There are no
+                                        visitors staying overnight on
+                                        <span class="js-significant-date"></span>.</p>
+                                    <p class="u-mb-xl"><a
+                                            href="../who-else-to-add?journey=visitors&redirect=../summary/">Add a visitor</a>
+                                    </p>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg qa-btn-submit"
+                            type="submit" name="">Continue
+                    </button>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<ul style="display:none;">
+    <li id="person-record-template" class="list__item">
+        <span class="list__item-name js-person-name"></span>
+        <div class="list__item-actions u-fr">
+            <span class="list__item-action">
+                <a class="js-record-edit" href="#">Change or remove</a>
+            </span>
+        </div>
+    </li>
+</ul>
+
+<script src='/js/compiled/your-household-v10/bundle.js'></script>
+
+<style>
+    .list.list--records {
+        border-top: 1px solid #ccc;
+    }
+
+    .list.list--records .list__item {
+        margin-bottom: 0;
+        padding: 1rem 0;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .list.list--people {
+        list-style-type: none;
+    }
+
+    .list.list--people .list__item {
+        background: url(/img/icons/person.svg) 0 1.3rem no-repeat;
+    }
+
+    .list.list--people .list__item-name {
+        padding-left: 2rem;
+    }
+
+    .list.list--people .list__item-actions {
+        margin-top: -4px;
+    }
+
+    .list.list--people .list__item-action + .list__item-action {
+        margin-left: .5rem;
+    }
+</style>
+
+<script>
+  var urlParams = new URLSearchParams(window.location.search),
+    surveyType = urlParams.get('survey'),
+    nextPage = surveyType
+      ? '../hub/?survey=' + surveyType
+      : '../hub/',
+    altPage = surveyType && surveyType === 'lms' ? surveyType + '/' : '';
+
+  function createMemberItem(member) {
+    var $nodeEl = $('#person-record-template').clone(),
+      personNameText = member['@person'].fullName,
+      memberIsUser = isUser(member);
+
+    if (memberIsUser) {
+      personNameText += ' (You)';
+    }
+
+    $nodeEl.attr('id', '');
+    $nodeEl.find('.js-person-name').html(personNameText);
+
+    $nodeEl.find('.js-record-edit').attr('href', (
+      memberIsUser
+        ? '../' + altPage + 'what-is-your-name/?edit=true'
+        : '../' + altPage + 'who-else-to-add/?edit=' + member['@person'].id +
+          (member.type === window.ONS.storage.KEYS.VISITOR_TYPE ?
+           '&journey=visitors' : '')
+    ));
+
+    return $nodeEl;
+  }
+
+  function updateHouseholdMembersVisitors() {
+    var members = window.ONS.storage.getAllHouseholdMembers(),
+      userMember = members.filter(isUser)[0],
+      otherHouseholdMembers = members.filter(window.ONS.storage.isOtherHouseholdMember),
+      visitors = members.filter(window.ONS.storage.isVisitor),
+      householdMembers = otherHouseholdMembers;
+
+    $('#household-members-summary').html('');
+    $('#visitors-summary').html('');
+
+    if (userMember) {
+      householdMembers = [userMember].concat(otherHouseholdMembers);
+    }
+
+    $.each(householdMembers, function(i, member) {
+      $('#household-members-summary').append(createMemberItem(member));
+    });
+
+    const numberOfHouseholdMembers = householdMembers.length;
+    const peopleListTitle = document.querySelector('.js-household-people-list');
+    peopleListTitle.innerHTML = peopleListTitle.innerHTML.replace('{n}',
+      window.ONS.utils.numberToWordsStyleguide(numberOfHouseholdMembers) || 0);
+
+    if(!numberOfHouseholdMembers) {
+      $('#nobody-notice').show();
+    }
+    
+    if (numberOfHouseholdMembers !== 1) {
+        document.querySelector('.js-household-people-plural').style.display = 'inline';
+    }
+
+    const numberOfVisitors = visitors.length;
+
+    if(!numberOfVisitors) {
+      $('#nobody-visitor-notice').show();
+    }
+
+    $.each(visitors, function(i, member) {
+        $('#visitors-summary').append(createMemberItem(member));
+    });
+
+    const visitorsListTitle = document.querySelector('.js-visitors-people-list');
+
+    visitorsListTitle.innerHTML = visitorsListTitle.innerHTML.replace('{n}',
+      window.ONS.utils.numberToWordsStyleguide(numberOfVisitors) || 0);
+
+    if (numberOfVisitors > 1) {
+      document.querySelector('.js-visitors-people-plural').style.display =
+       'inline';
+    }
+  }
+
+  $('#modal .close-modal-button').on('click', function(e) {
+    e.preventDefault();
+    $('#modal').hide();
+  });
+
+  $('.qa-btn-submit').on('click', function(e) {
+    e.preventDefault();
+
+    if (window.ONS.storage.getAllHouseholdMembers().length > 0) {
+      window.location.href = nextPage;
+    }
+    else {
+      alert('Journey for less than one person in household, not yet implemented');
+    }
+  });
+
+  function isUser(member) {
+    return member['@person'].id === window.ONS.storage.IDS.USER_HOUSEHOLD_MEMBER_ID;
+  } 
+
+  function updateContent () {
+    var $addToHousehould = $('.js-add-to-household');
+
+    if (surveyType === 'lms') {
+      $('.js-heading').html('About your household');
+      $addToHousehould.attr('href', '../lms/who-else-to-add/');
+    }
+  }
+
+  $(updateContent);
+  $(updateHouseholdMembersVisitors);
+</script>

@@ -1,0 +1,65 @@
+---
+title: Census Coverage Survey v10
+project: your-household
+globalcss: false
+layout: eq-default-extras
+cdn: v2.0.0
+assetPrefixUrl: https://deploy-preview-214--sdc-global-design-patterns.netlify.com
+hideSaveLater: true
+footer: minimal
+---
+
+<link rel="stylesheet" href="../style.css"/>
+<div class="page__subheader">
+    <div class="container">
+        <a class="js-previous-link" href="../do-you-live-here">Previous</a>
+    </div>
+</div>
+
+<div class="page__container container">
+    <div class="grid grid--reverse">
+        <div class="grid__col col-4@l">
+            <!--{% include navigation.html
+            items=site.data.your-household-v6.navigationItemsHousehold
+            nav-title-id="section-address" %}-->
+        </div>
+
+        <div class="grid__col col-7@l pull-1@l">
+            <main role="main" id="main" class="page__main">
+                <div class="group u-mb-s">
+                    <div class="block">
+
+                        <div class="question">
+                            <h1 class="question__title u-fs-l js-heading"
+                                data-qa="question-title">
+                                Resident not at address on Census night
+                            </h1>
+
+                            <p>If the respondent was not living at the property on Census night, but other occupants were, you will need to speak to those occupants next.</p>
+                            <p>If those occupants are unavailable, you will need to return to the address to interview them at a later date.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-submit btn--primary btn--lg u-mt-xl"
+                        data-qa="btn-submit" type="submit"
+                        name="action[save_continue]">
+                    Continue
+                </button>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src='/js/compiled/your-household-interview-led-v10/bundle.js'></script>
+
+<script>
+  $('.btn-submit').click(function(e) {
+    e.preventDefault(); // do not submit the form like usual
+  
+
+    window.location = '../what-is-your-name/';
+  });
+
+</script>
+
